@@ -1,0 +1,823 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Admin Reports API",
+    "description": "Allows the administrators of Google Apps customers to fetch reports about the usage, collaboration, security and risk for their users.",
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "version": "reports_v1"
+  },
+  "host": "www.googleapis.com",
+  "basePath": "/admin/reports/v1",
+  "schemes": [
+    "https"
+  ],
+  "externalDocs": {
+    "url": "https://developers.google.com/admin-sdk/reports/"
+  },
+  "paths": {
+    "/activity/users/{userKey}/applications/{applicationName}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves a list of activities for a specific customer and application.",
+        "operationId": "reports.activities.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Activities"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "actorIpAddress",
+            "in": "query",
+            "description": "IP Address of host where the event was performed. Supports both IPv4 and IPv6 addresses.",
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "Application name for which the events are to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerId",
+            "in": "query",
+            "description": "Represents the customer for which the data is to be fetched.",
+            "type": "string"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "Return events which occured at or before this time.",
+            "type": "string"
+          },
+          {
+            "name": "eventName",
+            "in": "query",
+            "description": "Name of the event being queried.",
+            "type": "string"
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "description": "Event parameters in the form [parameter1 name][operator][parameter1 value],[parameter2 name][operator][parameter2 value],...",
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Number of activity records to be shown in each page.",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Token to specify next page.",
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Return events which occured at or after this time.",
+            "type": "string"
+          },
+          {
+            "name": "userKey",
+            "in": "path",
+            "description": "Represents the profile id or the user email for which the data should be filtered. When 'all' is specified as the userKey, it returns usageReports for all users.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/activity/users/{userKey}/applications/{applicationName}/watch": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Push changes to activities",
+        "operationId": "reports.activities.watch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "actorIpAddress",
+            "in": "query",
+            "description": "IP Address of host where the event was performed. Supports both IPv4 and IPv6 addresses.",
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "Application name for which the events are to be retrieved.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerId",
+            "in": "query",
+            "description": "Represents the customer for which the data is to be fetched.",
+            "type": "string"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "Return events which occured at or before this time.",
+            "type": "string"
+          },
+          {
+            "name": "eventName",
+            "in": "query",
+            "description": "Name of the event being queried.",
+            "type": "string"
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "description": "Event parameters in the form [parameter1 name][operator][parameter1 value],[parameter2 name][operator][parameter2 value],...",
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Number of activity records to be shown in each page.",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Token to specify next page.",
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Return events which occured at or after this time.",
+            "type": "string"
+          },
+          {
+            "name": "userKey",
+            "in": "path",
+            "description": "Represents the profile id or the user email for which the data should be filtered. When 'all' is specified as the userKey, it returns usageReports for all users.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "//admin/reports_v1/channels/stop": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Stop watching resources through this channel",
+        "operationId": "admin.channels.stop",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
+      }
+    },
+    "/usage/dates/{date}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves a report which is a collection of properties / statistics for a specific customer.",
+        "operationId": "reports.customerUsageReports.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/UsageReports"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "query",
+            "description": "Represents the customer for which the data is to be fetched.",
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "description": "Represents the date in yyyy-mm-dd format for which the data is to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Token to specify next page.",
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "query",
+            "description": "Represents the application name, parameter name pairs to fetch in csv as app_name1:param_name1, app_name2:param_name2.",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/usage/users/{userKey}/dates/{date}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves a report which is a collection of properties / statistics for a set of users.",
+        "operationId": "reports.userUsageReport.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/UsageReports"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "query",
+            "description": "Represents the customer for which the data is to be fetched.",
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "description": "Represents the date in yyyy-mm-dd format for which the data is to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "description": "Represents the set of filters including parameter operator value.",
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of results to return. Maximum allowed is 1000",
+            "type": "integer",
+            "maximum": 1000
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Token to specify next page.",
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "query",
+            "description": "Represents the application name, parameter name pairs to fetch in csv as app_name1:param_name1, app_name2:param_name2.",
+            "type": "string"
+          },
+          {
+            "name": "userKey",
+            "in": "path",
+            "description": "Represents the profile id or the user email for which the data should be filtered.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Activities": {
+      "id": "Activities",
+      "type": "object",
+      "description": "JSON template for a collection of activites.",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "ETag of the resource."
+        },
+        "items": {
+          "type": "array",
+          "description": "Each record in read response.",
+          "items": {
+            "$ref": "#/definitions/Activity"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of list response this is.",
+          "default": "admin#reports#activities"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "Token for retrieving the next page"
+        }
+      }
+    },
+    "Activity": {
+      "id": "Activity",
+      "type": "object",
+      "description": "JSON template for the activity resource.",
+      "properties": {
+        "actor": {
+          "type": "object",
+          "description": "User doing the action.",
+          "properties": {
+            "callerType": {
+              "type": "string",
+              "description": "User or OAuth 2LO request."
+            },
+            "email": {
+              "type": "string",
+              "description": "Email address of the user."
+            },
+            "key": {
+              "type": "string",
+              "description": "For OAuth 2LO API requests, consumer_key of the requestor."
+            },
+            "profileId": {
+              "type": "string",
+              "description": "Obfuscated user id of the user."
+            }
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag of the entry."
+        },
+        "events": {
+          "type": "array",
+          "description": "Activity events.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Name of event."
+              },
+              "parameters": {
+                "type": "array",
+                "description": "Parameter value pairs for various applications.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "boolValue": {
+                      "type": "boolean",
+                      "description": "Boolean value of the parameter."
+                    },
+                    "intValue": {
+                      "type": "string",
+                      "description": "Integral value of the parameter.",
+                      "format": "int64"
+                    },
+                    "multiIntValue": {
+                      "type": "array",
+                      "description": "Multi-int value of the parameter.",
+                      "items": {
+                        "type": "string",
+                        "format": "int64"
+                      }
+                    },
+                    "multiValue": {
+                      "type": "array",
+                      "description": "Multi-string value of the parameter.",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "The name of the parameter."
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "String value of the parameter."
+                    }
+                  }
+                }
+              },
+              "type": {
+                "type": "string",
+                "description": "Type of event."
+              }
+            }
+          }
+        },
+        "id": {
+          "type": "object",
+          "description": "Unique identifier for each activity record.",
+          "properties": {
+            "applicationName": {
+              "type": "string",
+              "description": "Application name to which the event belongs."
+            },
+            "customerId": {
+              "type": "string",
+              "description": "Obfuscated customer ID of the source customer."
+            },
+            "time": {
+              "type": "string",
+              "description": "Time of occurrence of the activity.",
+              "format": "date-time"
+            },
+            "uniqueQualifier": {
+              "type": "string",
+              "description": "Unique qualifier if multiple events have the same time.",
+              "format": "int64"
+            }
+          }
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "IP Address of the user doing the action."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource this is.",
+          "default": "admin#reports#activity"
+        },
+        "ownerDomain": {
+          "type": "string",
+          "description": "Domain of source customer."
+        }
+      }
+    },
+    "Channel": {
+      "id": "Channel",
+      "type": "object",
+      "description": "An notification channel used to watch for resource changes.",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "The address where notifications are delivered for this channel."
+        },
+        "expiration": {
+          "type": "string",
+          "description": "Date and time of notification channel expiration, expressed as a Unix timestamp, in milliseconds. Optional.",
+          "format": "int64"
+        },
+        "id": {
+          "type": "string",
+          "description": "A UUID or similar unique string that identifies this channel."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this as a notification channel used to watch for changes to a resource. Value: the fixed string \"api#channel\".",
+          "default": "api#channel"
+        },
+        "params": {
+          "type": "object",
+          "description": "Additional parameters controlling delivery channel behavior. Optional.",
+          "additionalProperties": {
+            "type": "string",
+            "description": "Declares a new parameter by name."
+          }
+        },
+        "payload": {
+          "type": "boolean",
+          "description": "A Boolean value to indicate whether payload is wanted. Optional."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "An opaque ID that identifies the resource being watched on this channel. Stable across different API versions."
+        },
+        "resourceUri": {
+          "type": "string",
+          "description": "A version-specific identifier for the watched resource."
+        },
+        "token": {
+          "type": "string",
+          "description": "An arbitrary string delivered to the target address with each notification delivered over this channel. Optional."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of delivery mechanism used for this channel."
+        }
+      }
+    },
+    "UsageReport": {
+      "id": "UsageReport",
+      "type": "object",
+      "description": "JSON template for a usage report.",
+      "properties": {
+        "date": {
+          "type": "string",
+          "description": "The date to which the record belongs.",
+          "readOnly": true
+        },
+        "entity": {
+          "type": "object",
+          "description": "Information about the type of the item.",
+          "readOnly": true,
+          "properties": {
+            "customerId": {
+              "type": "string",
+              "description": "Obfuscated customer id for the record.",
+              "readOnly": true
+            },
+            "profileId": {
+              "type": "string",
+              "description": "Obfuscated user id for the record.",
+              "readOnly": true
+            },
+            "type": {
+              "type": "string",
+              "description": "The type of item, can be a customer or user.",
+              "readOnly": true
+            },
+            "userEmail": {
+              "type": "string",
+              "description": "user's email.",
+              "readOnly": true
+            }
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag of the resource."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of object.",
+          "default": "admin#reports#usageReport"
+        },
+        "parameters": {
+          "type": "array",
+          "description": "Parameter value pairs for various applications.",
+          "readOnly": true,
+          "items": {
+            "type": "object",
+            "properties": {
+              "boolValue": {
+                "type": "boolean",
+                "description": "Boolean value of the parameter.",
+                "readOnly": true
+              },
+              "datetimeValue": {
+                "type": "string",
+                "description": "RFC 3339 formatted value of the parameter.",
+                "format": "date-time",
+                "readOnly": true
+              },
+              "intValue": {
+                "type": "string",
+                "description": "Integral value of the parameter.",
+                "format": "int64",
+                "readOnly": true
+              },
+              "msgValue": {
+                "type": "array",
+                "description": "Nested message value of the parameter.",
+                "readOnly": true,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": {}
+                }
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the parameter."
+              },
+              "stringValue": {
+                "type": "string",
+                "description": "String value of the parameter.",
+                "readOnly": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "UsageReports": {
+      "id": "UsageReports",
+      "type": "object",
+      "description": "JSON template for a collection of usage reports.",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "ETag of the resource."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of object.",
+          "default": "admin#reports#usageReports"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "Token for retrieving the next page"
+        },
+        "usageReports": {
+          "type": "array",
+          "description": "Various application parameter records.",
+          "items": {
+            "$ref": "#/definitions/UsageReport"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings if any.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Machine readable code / warning type."
+              },
+              "data": {
+                "type": "array",
+                "description": "Key-Value pairs to give detailed information on the warning.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "description": "Key associated with a key-value pair to give detailed information on the warning."
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "Value associated with a key-value pair to give detailed information on the warning."
+                    }
+                  }
+                }
+              },
+              "message": {
+                "type": "string",
+                "description": "Human readable message for the warning."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "alt": {
+      "name": "alt",
+      "in": "query",
+      "description": "Data format for the response.",
+      "default": "json",
+      "type": "string",
+      "enum": [
+        "json"
+      ]
+    },
+    "fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Selector specifying which fields to include in a partial response.",
+      "type": "string"
+    },
+    "key": {
+      "name": "key",
+      "in": "query",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    "oauth_token": {
+      "name": "oauth_token",
+      "in": "query",
+      "description": "OAuth 2.0 token for the current user.",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "name": "prettyPrint",
+      "in": "query",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "true",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "name": "quotaUser",
+      "in": "query",
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "type": "string"
+    },
+    "userIp": {
+      "name": "userIp",
+      "in": "query",
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "type": "string"
+    }
+  }
+}

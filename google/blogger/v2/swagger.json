@@ -1,0 +1,1097 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Blogger API",
+    "description": "API for access to the data within Blogger.",
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "version": "v2"
+  },
+  "host": "www.googleapis.com",
+  "basePath": "/blogger/v2",
+  "schemes": [
+    "https"
+  ],
+  "externalDocs": {
+    "url": "https://developers.google.com/blogger/docs/2.0/json/getting_started"
+  },
+  "paths": {
+    "/blogs/{blogId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Gets one blog by id.",
+        "operationId": "blogger.blogs.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Blog"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "blogId",
+            "in": "path",
+            "description": "The ID of the blog to get.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/blogs/{blogId}/posts/{postId}/comments/{commentId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Gets one comment by id.",
+        "operationId": "blogger.comments.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "blogId",
+            "in": "path",
+            "description": "ID of the blog to containing the comment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "commentId",
+            "in": "path",
+            "description": "The ID of the comment to get.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "ID of the post to fetch posts from.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/blogs/{blogId}/posts/{postId}/comments": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves the comments for a blog, possibly filtered.",
+        "operationId": "blogger.comments.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/CommentList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "blogId",
+            "in": "path",
+            "description": "ID of the blog to fetch comments from.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fetchBodies",
+            "in": "query",
+            "description": "Whether the body content of the comments is included.",
+            "type": "boolean"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of comments to include in the result.",
+            "type": "integer"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Continuation token if request is paged.",
+            "type": "string"
+          },
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "ID of the post to fetch posts from.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Earliest date of comment to fetch, a date-time with RFC 3339 formatting.",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/blogs/{blogId}/pages/{pageId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Gets one blog page by id.",
+        "operationId": "blogger.pages.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Page"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "blogId",
+            "in": "path",
+            "description": "ID of the blog containing the page.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pageId",
+            "in": "path",
+            "description": "The ID of the page to get.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/blogs/{blogId}/pages": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves pages for a blog, possibly filtered.",
+        "operationId": "blogger.pages.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/PageList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "blogId",
+            "in": "path",
+            "description": "ID of the blog to fetch pages from.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fetchBodies",
+            "in": "query",
+            "description": "Whether to retrieve the Page bodies.",
+            "type": "boolean"
+          }
+        ]
+      }
+    },
+    "/blogs/{blogId}/posts/{postId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Get a post by id.",
+        "operationId": "blogger.posts.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "blogId",
+            "in": "path",
+            "description": "ID of the blog to fetch the post from.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "postId",
+            "in": "path",
+            "description": "The ID of the post",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/blogs/{blogId}/posts": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves a list of posts, possibly filtered.",
+        "operationId": "blogger.posts.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/PostList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "blogId",
+            "in": "path",
+            "description": "ID of the blog to fetch posts from.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fetchBodies",
+            "in": "query",
+            "description": "Whether the body content of posts is included.",
+            "type": "boolean"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of posts to fetch.",
+            "type": "integer"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Continuation token if the request is paged.",
+            "type": "string"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Earliest post date to fetch, a date-time with RFC 3339 formatting.",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/users/{userId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Gets one user by id.",
+        "operationId": "blogger.users.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user to get.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/users/{userId}/blogs": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves a list of blogs, possibly filtered.",
+        "operationId": "blogger.users.blogs.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/BlogList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Blog": {
+      "id": "Blog",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of this blog. This is displayed underneath the title."
+        },
+        "id": {
+          "type": "string",
+          "description": "The identifier for this resource.",
+          "format": "int64"
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of this entry. Always blogger#blog",
+          "default": "blogger#blog"
+        },
+        "locale": {
+          "type": "object",
+          "description": "The locale this Blog is set to.",
+          "properties": {
+            "country": {
+              "type": "string",
+              "description": "The country this blog's locale is set to."
+            },
+            "language": {
+              "type": "string",
+              "description": "The language this blog is authored in."
+            },
+            "variant": {
+              "type": "string",
+              "description": "The language variant this blog is authored in."
+            }
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of this blog. This is displayed as the title."
+        },
+        "pages": {
+          "type": "object",
+          "description": "The container of pages in this blog.",
+          "properties": {
+            "selfLink": {
+              "type": "string",
+              "description": "The URL of the container for pages in this blog."
+            },
+            "totalItems": {
+              "type": "integer",
+              "description": "The count of pages in this blog.",
+              "format": "int32"
+            }
+          }
+        },
+        "posts": {
+          "type": "object",
+          "description": "The container of posts in this blog.",
+          "properties": {
+            "selfLink": {
+              "type": "string",
+              "description": "The URL of the container for posts in this blog."
+            },
+            "totalItems": {
+              "type": "integer",
+              "description": "The count of posts in this blog.",
+              "format": "int32"
+            }
+          }
+        },
+        "published": {
+          "type": "string",
+          "description": "RFC 3339 date-time when this blog was published.",
+          "format": "date-time"
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "The API REST URL to fetch this resource from."
+        },
+        "updated": {
+          "type": "string",
+          "description": "RFC 3339 date-time when this blog was last updated.",
+          "format": "date-time"
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL where this blog is published."
+        }
+      }
+    },
+    "BlogList": {
+      "id": "BlogList",
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "The list of Blogs this user has Authorship or Admin rights over.",
+          "items": {
+            "$ref": "#/definitions/Blog"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of this entity. Always blogger#blogList",
+          "default": "blogger#blogList"
+        }
+      }
+    },
+    "Comment": {
+      "id": "Comment",
+      "type": "object",
+      "properties": {
+        "author": {
+          "type": "object",
+          "description": "The author of this Comment.",
+          "properties": {
+            "displayName": {
+              "type": "string",
+              "description": "The display name."
+            },
+            "id": {
+              "type": "string",
+              "description": "The identifier of the Comment creator."
+            },
+            "image": {
+              "type": "object",
+              "description": "The comment creator's avatar.",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "description": "The comment creator's avatar URL."
+                }
+              }
+            },
+            "url": {
+              "type": "string",
+              "description": "The URL of the Comment creator's Profile page."
+            }
+          }
+        },
+        "blog": {
+          "type": "object",
+          "description": "Data about the blog containing this comment.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The identifier of the blog containing this comment.",
+              "format": "int64"
+            }
+          }
+        },
+        "content": {
+          "type": "string",
+          "description": "The actual content of the comment. May include HTML markup."
+        },
+        "id": {
+          "type": "string",
+          "description": "The identifier for this resource.",
+          "format": "int64"
+        },
+        "inReplyTo": {
+          "type": "object",
+          "description": "Data about the comment this is in reply to.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The identified of the parent of this comment.",
+              "format": "int64"
+            }
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of this entry. Always blogger#comment",
+          "default": "blogger#comment"
+        },
+        "post": {
+          "type": "object",
+          "description": "Data about the post containing this comment.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The identifier of the post containing this comment.",
+              "format": "int64"
+            }
+          }
+        },
+        "published": {
+          "type": "string",
+          "description": "RFC 3339 date-time when this comment was published.",
+          "format": "date-time"
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "The API REST URL to fetch this resource from."
+        },
+        "updated": {
+          "type": "string",
+          "description": "RFC 3339 date-time when this comment was last updated.",
+          "format": "date-time"
+        }
+      }
+    },
+    "CommentList": {
+      "id": "CommentList",
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "The List of Comments for a Post.",
+          "items": {
+            "$ref": "#/definitions/Comment"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of this entry. Always blogger#commentList",
+          "default": "blogger#commentList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "Pagination token to fetch the next page, if one exists."
+        },
+        "prevPageToken": {
+          "type": "string",
+          "description": "Pagination token to fetch the previous page, if one exists."
+        }
+      }
+    },
+    "Page": {
+      "id": "Page",
+      "type": "object",
+      "properties": {
+        "author": {
+          "type": "object",
+          "description": "The author of this Page.",
+          "properties": {
+            "displayName": {
+              "type": "string",
+              "description": "The display name."
+            },
+            "id": {
+              "type": "string",
+              "description": "The identifier of the Page creator."
+            },
+            "image": {
+              "type": "object",
+              "description": "The page author's avatar.",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "description": "The page author's avatar URL."
+                }
+              }
+            },
+            "url": {
+              "type": "string",
+              "description": "The URL of the Page creator's Profile page."
+            }
+          }
+        },
+        "blog": {
+          "type": "object",
+          "description": "Data about the blog containing this Page.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The identifier of the blog containing this page.",
+              "format": "int64"
+            }
+          }
+        },
+        "content": {
+          "type": "string",
+          "description": "The body content of this Page, in HTML."
+        },
+        "id": {
+          "type": "string",
+          "description": "The identifier for this resource.",
+          "format": "int64"
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of this entity. Always blogger#page",
+          "default": "blogger#page"
+        },
+        "published": {
+          "type": "string",
+          "description": "RFC 3339 date-time when this Page was published.",
+          "format": "date-time"
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "The API REST URL to fetch this resource from."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of this entity. This is the name displayed in the Admin user interface."
+        },
+        "updated": {
+          "type": "string",
+          "description": "RFC 3339 date-time when this Page was last updated.",
+          "format": "date-time"
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL that this Page is displayed at."
+        }
+      }
+    },
+    "PageList": {
+      "id": "PageList",
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "The list of Pages for a Blog.",
+          "items": {
+            "$ref": "#/definitions/Page"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of this entity. Always blogger#pageList",
+          "default": "blogger#pageList"
+        }
+      }
+    },
+    "Post": {
+      "id": "Post",
+      "type": "object",
+      "properties": {
+        "author": {
+          "type": "object",
+          "description": "The author of this Post.",
+          "properties": {
+            "displayName": {
+              "type": "string",
+              "description": "The display name."
+            },
+            "id": {
+              "type": "string",
+              "description": "The identifier of the Post creator."
+            },
+            "image": {
+              "type": "object",
+              "description": "The Post author's avatar.",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "description": "The Post author's avatar URL."
+                }
+              }
+            },
+            "url": {
+              "type": "string",
+              "description": "The URL of the Post creator's Profile page."
+            }
+          }
+        },
+        "blog": {
+          "type": "object",
+          "description": "Data about the blog containing this Post.",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "The identifier of the Blog that contains this Post.",
+              "format": "int64"
+            }
+          }
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the Post. May contain HTML markup."
+        },
+        "id": {
+          "type": "string",
+          "description": "The identifier of this Post.",
+          "format": "int64"
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of this entity. Always blogger#post",
+          "default": "blogger#post"
+        },
+        "labels": {
+          "type": "array",
+          "description": "The list of labels this Post was tagged with.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "published": {
+          "type": "string",
+          "description": "RFC 3339 date-time when this Post was published.",
+          "format": "date-time"
+        },
+        "replies": {
+          "type": "object",
+          "description": "The container of comments on this Post.",
+          "properties": {
+            "selfLink": {
+              "type": "string",
+              "description": "The URL of the comments on this post."
+            },
+            "totalItems": {
+              "type": "string",
+              "description": "The count of comments on this post.",
+              "format": "int64"
+            }
+          }
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "The API REST URL to fetch this resource from."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of the Post."
+        },
+        "updated": {
+          "type": "string",
+          "description": "RFC 3339 date-time when this Post was last updated.",
+          "format": "date-time"
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL where this Post is displayed."
+        }
+      }
+    },
+    "PostList": {
+      "id": "PostList",
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "The list of Posts for this Blog.",
+          "items": {
+            "$ref": "#/definitions/Post"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of this entity. Always blogger#postList",
+          "default": "blogger#postList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "Pagination token to fetch the next page, if one exists."
+        },
+        "prevPageToken": {
+          "type": "string",
+          "description": "Pagination token to fetch the previous page, if one exists."
+        }
+      }
+    },
+    "User": {
+      "id": "User",
+      "type": "object",
+      "properties": {
+        "about": {
+          "type": "string",
+          "description": "Profile summary information."
+        },
+        "blogs": {
+          "type": "object",
+          "description": "The container of blogs for this user.",
+          "properties": {
+            "selfLink": {
+              "type": "string",
+              "description": "The URL of the Blogs for this user."
+            }
+          }
+        },
+        "created": {
+          "type": "string",
+          "description": "The timestamp of when this profile was created, in seconds since epoch.",
+          "format": "date-time"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name."
+        },
+        "id": {
+          "type": "string",
+          "description": "The identifier for this User."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of this entity. Always blogger#user",
+          "default": "blogger#user"
+        },
+        "locale": {
+          "type": "object",
+          "description": "This user's locale",
+          "properties": {
+            "country": {
+              "type": "string",
+              "description": "The user's country setting."
+            },
+            "language": {
+              "type": "string",
+              "description": "The user's language setting."
+            },
+            "variant": {
+              "type": "string",
+              "description": "The user's language variant setting."
+            }
+          }
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "The API REST URL to fetch this resource from."
+        },
+        "url": {
+          "type": "string",
+          "description": "The user's profile page."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "alt": {
+      "name": "alt",
+      "in": "query",
+      "description": "Data format for the response.",
+      "default": "json",
+      "type": "string",
+      "enum": [
+        "json"
+      ]
+    },
+    "fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Selector specifying which fields to include in a partial response.",
+      "type": "string"
+    },
+    "key": {
+      "name": "key",
+      "in": "query",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    "oauth_token": {
+      "name": "oauth_token",
+      "in": "query",
+      "description": "OAuth 2.0 token for the current user.",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "name": "prettyPrint",
+      "in": "query",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "true",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "name": "quotaUser",
+      "in": "query",
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "type": "string"
+    },
+    "userIp": {
+      "name": "userIp",
+      "in": "query",
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "type": "string"
+    }
+  }
+}

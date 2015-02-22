@@ -1,0 +1,216 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Google Play Android Developer API",
+    "description": "Lets Android application developers access their Google Play accounts.",
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "version": "v1"
+  },
+  "host": "www.googleapis.com",
+  "basePath": "/androidpublisher/v1/applications",
+  "schemes": [
+    "https"
+  ],
+  "externalDocs": {
+    "url": "https://developers.google.com/android-publisher"
+  },
+  "paths": {
+    "/{packageName}/subscriptions/{subscriptionId}/purchases/{token}/cancel": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Cancels a user's subscription purchase. The subscription remains valid until its expiration time.",
+        "operationId": "androidpublisher.purchases.cancel",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "The package name of the application for which this subscription was purchased (for example, 'com.some.thing').",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The purchased subscription ID (for example, 'monthly001').",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "description": "The token provided to the user's device when the subscription was purchased.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/subscriptions/{subscriptionId}/purchases/{token}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Checks whether a user's subscription purchase is valid and returns its expiry time.",
+        "operationId": "androidpublisher.purchases.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionPurchase"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "The package name of the application for which this subscription was purchased (for example, 'com.some.thing').",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The purchased subscription ID (for example, 'monthly001').",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "description": "The token provided to the user's device when the subscription was purchased.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "SubscriptionPurchase": {
+      "id": "SubscriptionPurchase",
+      "type": "object",
+      "description": "A SubscriptionPurchase resource indicates the status of a user's subscription purchase.",
+      "properties": {
+        "autoRenewing": {
+          "type": "boolean",
+          "description": "Whether the subscription will automatically be renewed when it reaches its current expiry time."
+        },
+        "initiationTimestampMsec": {
+          "type": "string",
+          "description": "Time at which the subscription was granted, in milliseconds since Epoch.",
+          "format": "int64"
+        },
+        "kind": {
+          "type": "string",
+          "description": "This kind represents a subscriptionPurchase object in the androidpublisher service.",
+          "default": "androidpublisher#subscriptionPurchase"
+        },
+        "validUntilTimestampMsec": {
+          "type": "string",
+          "description": "Time at which the subscription will expire, in milliseconds since Epoch.",
+          "format": "int64"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "alt": {
+      "name": "alt",
+      "in": "query",
+      "description": "Data format for the response.",
+      "default": "json",
+      "type": "string",
+      "enum": [
+        "json"
+      ]
+    },
+    "fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Selector specifying which fields to include in a partial response.",
+      "type": "string"
+    },
+    "key": {
+      "name": "key",
+      "in": "query",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    "oauth_token": {
+      "name": "oauth_token",
+      "in": "query",
+      "description": "OAuth 2.0 token for the current user.",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "name": "prettyPrint",
+      "in": "query",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "true",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "name": "quotaUser",
+      "in": "query",
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "type": "string"
+    },
+    "userIp": {
+      "name": "userIp",
+      "in": "query",
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,769 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "YouTube Analytics API",
+    "description": "Retrieve your YouTube Analytics reports.",
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "version": "v1"
+  },
+  "host": "www.googleapis.com",
+  "basePath": "/youtube/analytics/v1",
+  "schemes": [
+    "https"
+  ],
+  "externalDocs": {
+    "url": "http://developers.google.com/youtube/analytics/"
+  },
+  "paths": {
+    "/batchReportDefinitions": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves a list of available batch report definitions.",
+        "operationId": "youtubeAnalytics.batchReportDefinitions.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/BatchReportDefinitionList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "onBehalfOfContentOwner",
+            "in": "query",
+            "description": "The onBehalfOfContentOwner parameter identifies the content owner that the user is acting on behalf of.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/batchReports": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves a list of processed batch reports.",
+        "operationId": "youtubeAnalytics.batchReports.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/BatchReportList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "batchReportDefinitionId",
+            "in": "query",
+            "description": "The batchReportDefinitionId parameter specifies the ID of the batch reportort definition for which you are retrieving reports.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onBehalfOfContentOwner",
+            "in": "query",
+            "description": "The onBehalfOfContentOwner parameter identifies the content owner that the user is acting on behalf of.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/groupItems": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Removes an item from a group.",
+        "operationId": "youtubeAnalytics.groupItems.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The id parameter specifies the YouTube group item ID for the group that is being deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onBehalfOfContentOwner",
+            "in": "query",
+            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
+            "type": "string"
+          }
+        ]
+      },
+      "post": {
+        "description": "Creates a group item.",
+        "operationId": "youtubeAnalytics.groupItems.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/GroupItem"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "onBehalfOfContentOwner",
+            "in": "query",
+            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Returns a collection of group items that match the API request parameters.",
+        "operationId": "youtubeAnalytics.groupItems.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/GroupItemListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "query",
+            "description": "The id parameter specifies the unique ID of the group for which you want to retrieve group items.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onBehalfOfContentOwner",
+            "in": "query",
+            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/groups": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes a group.",
+        "operationId": "youtubeAnalytics.groups.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The id parameter specifies the YouTube group ID for the group that is being deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onBehalfOfContentOwner",
+            "in": "query",
+            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
+            "type": "string"
+          }
+        ]
+      },
+      "post": {
+        "description": "Creates a group.",
+        "operationId": "youtubeAnalytics.groups.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Group"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "onBehalfOfContentOwner",
+            "in": "query",
+            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Returns a collection of groups that match the API request parameters. For example, you can retrieve all groups that the authenticated user owns, or you can retrieve one or more groups by their unique IDs.",
+        "operationId": "youtubeAnalytics.groups.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/GroupListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The id parameter specifies a comma-separated list of the YouTube group ID(s) for the resource(s) that are being retrieved. In a group resource, the id property specifies the group's YouTube group ID.",
+            "type": "string"
+          },
+          {
+            "name": "mine",
+            "in": "query",
+            "description": "Set this parameter's value to true to instruct the API to only return groups owned by the authenticated user.",
+            "type": "boolean"
+          },
+          {
+            "name": "onBehalfOfContentOwner",
+            "in": "query",
+            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "description": "Modifies a group. For example, you could change a group's title.",
+        "operationId": "youtubeAnalytics.groups.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Group"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "onBehalfOfContentOwner",
+            "in": "query",
+            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/reports": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieve your YouTube Analytics reports.",
+        "operationId": "youtubeAnalytics.reports.query",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ResultTable"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dimensions",
+            "in": "query",
+            "description": "A comma-separated list of YouTube Analytics dimensions, such as views or ageGroup,gender. See the Available Reports document for a list of the reports that you can retrieve and the dimensions used for those reports. Also see the Dimensions document for definitions of those dimensions.",
+            "type": "string"
+          },
+          {
+            "name": "end-date",
+            "in": "query",
+            "description": "The end date for fetching YouTube Analytics data. The value should be in YYYY-MM-DD format.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "description": "A list of filters that should be applied when retrieving YouTube Analytics data. The Available Reports document identifies the dimensions that can be used to filter each report, and the Dimensions document defines those dimensions. If a request uses multiple filters, join them together with a semicolon (;), and the returned result table will satisfy both filters. For example, a filters parameter value of video==dMH0bHeiRNg;country==IT restricts the result set to include data for the given video in Italy.",
+            "type": "string"
+          },
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "Identifies the YouTube channel or content owner for which you are retrieving YouTube Analytics data.\n- To request data for a YouTube user, set the ids parameter value to channel==CHANNEL_ID, where CHANNEL_ID specifies the unique YouTube channel ID.\n- To request data for a YouTube CMS content owner, set the ids parameter value to contentOwner==OWNER_NAME, where OWNER_NAME is the CMS name of the content owner.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "max-results",
+            "in": "query",
+            "description": "The maximum number of rows to include in the response.",
+            "type": "integer",
+            "minimum": 1
+          },
+          {
+            "name": "metrics",
+            "in": "query",
+            "description": "A comma-separated list of YouTube Analytics metrics, such as views or likes,dislikes. See the Available Reports document for a list of the reports that you can retrieve and the metrics available in each report, and see the Metrics document for definitions of those metrics.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "A comma-separated list of dimensions or metrics that determine the sort order for YouTube Analytics data. By default the sort order is ascending. The '-' prefix causes descending sort order.",
+            "type": "string"
+          },
+          {
+            "name": "start-date",
+            "in": "query",
+            "description": "The start date for fetching YouTube Analytics data. The value should be in YYYY-MM-DD format.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "start-index",
+            "in": "query",
+            "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter (one-based, inclusive).",
+            "type": "integer",
+            "minimum": 1
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "BatchReport": {
+      "id": "BatchReport",
+      "type": "object",
+      "description": "Contains single batchReport resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID that YouTube assigns and uses to uniquely identify the report."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This value specifies the type of data of this item. For batch report the kind property value is youtubeAnalytics#batchReport.",
+          "default": "youtubeAnalytics#batchReport"
+        },
+        "outputs": {
+          "type": "array",
+          "description": "Report outputs.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "downloadUrl": {
+                "type": "string",
+                "description": "Cloud storage URL to download this report. This URL is valid for 30 minutes."
+              },
+              "format": {
+                "type": "string",
+                "description": "Format of the output."
+              },
+              "type": {
+                "type": "string",
+                "description": "Type of the output.",
+                "default": "cloudStorageOutput"
+              }
+            }
+          }
+        },
+        "reportId": {
+          "type": "string",
+          "description": "The ID of the the report definition."
+        },
+        "timeSpan": {
+          "type": "object",
+          "description": "Period included in the report. For reports containing all entities endTime is not set. Both startTime and endTime are inclusive.",
+          "properties": {
+            "endTime": {
+              "type": "string",
+              "description": "End of the period included in the report. Inclusive. For reports containing all entities endTime is not set.",
+              "format": "date-time"
+            },
+            "startTime": {
+              "type": "string",
+              "description": "Start of the period included in the report. Inclusive.",
+              "format": "date-time"
+            }
+          }
+        },
+        "timeUpdated": {
+          "type": "string",
+          "description": "The time when the report was updated.",
+          "format": "date-time"
+        }
+      }
+    },
+    "BatchReportDefinition": {
+      "id": "BatchReportDefinition",
+      "type": "object",
+      "description": "Contains single batchReportDefinition resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID that YouTube assigns and uses to uniquely identify the report definition."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This value specifies the type of data of this item. For batch report definition the kind property value is youtubeAnalytics#batchReportDefinition.",
+          "default": "youtubeAnalytics#batchReportDefinition"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the report definition."
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the report definition."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the report definition."
+        }
+      }
+    },
+    "BatchReportDefinitionList": {
+      "id": "BatchReportDefinitionList",
+      "type": "object",
+      "description": "A paginated list of batchReportDefinition resources returned in response to a youtubeAnalytics.batchReportDefinitions.list request.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "A list of batchReportDefinition resources that match the request criteria.",
+          "items": {
+            "$ref": "#/definitions/BatchReportDefinition"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "This value specifies the type of data included in the API response. For the list method, the kind property value is youtubeAnalytics#batchReportDefinitionList.",
+          "default": "youtubeAnalytics#batchReportDefinitionList"
+        }
+      }
+    },
+    "BatchReportList": {
+      "id": "BatchReportList",
+      "type": "object",
+      "description": "A paginated list of batchReport resources returned in response to a youtubeAnalytics.batchReport.list request.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "A list of batchReport resources that match the request criteria.",
+          "items": {
+            "$ref": "#/definitions/BatchReport"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "This value specifies the type of data included in the API response. For the list method, the kind property value is youtubeAnalytics#batchReportList.",
+          "default": "youtubeAnalytics#batchReportList"
+        }
+      }
+    },
+    "Group": {
+      "id": "Group",
+      "type": "object",
+      "properties": {
+        "contentDetails": {
+          "type": "object",
+          "properties": {
+            "itemCount": {
+              "type": "string",
+              "format": "uint64"
+            },
+            "itemType": {
+              "type": "string"
+            }
+          }
+        },
+        "etag": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string",
+          "default": "youtube#group"
+        },
+        "snippet": {
+          "type": "object",
+          "properties": {
+            "publishedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "title": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "GroupItem": {
+      "id": "GroupItem",
+      "type": "object",
+      "properties": {
+        "etag": {
+          "type": "string"
+        },
+        "groupId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string",
+          "default": "youtube#groupItem"
+        },
+        "resource": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "GroupItemListResponse": {
+      "id": "GroupItemListResponse",
+      "type": "object",
+      "description": "A paginated list of grouList resources returned in response to a youtubeAnalytics.groupApi.list request.",
+      "properties": {
+        "etag": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupItem"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "default": "youtube#groupItemListResponse"
+        }
+      }
+    },
+    "GroupListResponse": {
+      "id": "GroupListResponse",
+      "type": "object",
+      "description": "A paginated list of grouList resources returned in response to a youtubeAnalytics.groupApi.list request.",
+      "properties": {
+        "etag": {
+          "type": "string"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Group"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "default": "youtube#groupListResponse"
+        }
+      }
+    },
+    "ResultTable": {
+      "id": "ResultTable",
+      "type": "object",
+      "description": "Contains a single result table. The table is returned as an array of rows that contain the values for the cells of the table. Depending on the metric or dimension, the cell can contain a string (video ID, country code) or a number (number of views or number of likes).",
+      "properties": {
+        "columnHeaders": {
+          "type": "array",
+          "description": "This value specifies information about the data returned in the rows fields. Each item in the columnHeaders list identifies a field returned in the rows value, which contains a list of comma-delimited data. The columnHeaders list will begin with the dimensions specified in the API request, which will be followed by the metrics specified in the API request. The order of both dimensions and metrics will match the ordering in the API request. For example, if the API request contains the parameters dimensions=ageGroup,gender&metrics=viewerPercentage, the API response will return columns in this order: ageGroup,gender,viewerPercentage.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "columnType": {
+                "type": "string",
+                "description": "The type of the column (DIMENSION or METRIC)."
+              },
+              "dataType": {
+                "type": "string",
+                "description": "The type of the data in the column (STRING, INTEGER, FLOAT, etc.)."
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the dimension or metric."
+              }
+            }
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "This value specifies the type of data included in the API response. For the query method, the kind property value will be youtubeAnalytics#resultTable.",
+          "default": "youtubeAnalytics#resultTable"
+        },
+        "rows": {
+          "type": "array",
+          "description": "The list contains all rows of the result table. Each item in the list is an array that contains comma-delimited data corresponding to a single row of data. The order of the comma-delimited data fields will match the order of the columns listed in the columnHeaders field. If no data is available for the given query, the rows element will be omitted from the response. The response for a query with the day dimension will not contain rows for the most recent days.",
+          "items": {
+            "type": "array",
+            "items": {}
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "alt": {
+      "name": "alt",
+      "in": "query",
+      "description": "Data format for the response.",
+      "default": "json",
+      "type": "string",
+      "enum": [
+        "csv",
+        "json"
+      ]
+    },
+    "fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Selector specifying which fields to include in a partial response.",
+      "type": "string"
+    },
+    "key": {
+      "name": "key",
+      "in": "query",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    "oauth_token": {
+      "name": "oauth_token",
+      "in": "query",
+      "description": "OAuth 2.0 token for the current user.",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "name": "prettyPrint",
+      "in": "query",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "true",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "name": "quotaUser",
+      "in": "query",
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "type": "string"
+    },
+    "userIp": {
+      "name": "userIp",
+      "in": "query",
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "type": "string"
+    }
+  }
+}

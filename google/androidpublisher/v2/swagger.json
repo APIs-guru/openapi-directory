@@ -1,0 +1,3335 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Google Play Android Developer API",
+    "description": "Lets Android application developers access their Google Play accounts.",
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "version": "v2"
+  },
+  "host": "www.googleapis.com",
+  "basePath": "/androidpublisher/v2/applications",
+  "schemes": [
+    "https"
+  ],
+  "externalDocs": {
+    "url": "https://developers.google.com/android-publisher"
+  },
+  "paths": {
+    "/{packageName}/edits/{editId}:commit": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Commits/applies the changes made in this edit back to the app.",
+        "operationId": "androidpublisher.edits.commit",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AppEdit"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/edits/{editId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes an edit for an app. Creating a new edit will automatically delete any of your previous edits so this method need only be called if you want to preemptively abandon an edit.",
+        "operationId": "androidpublisher.edits.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Returns information about the edit specified. Calls will fail if the edit is no long active (e.g. has been deleted, superseded or expired).",
+        "operationId": "androidpublisher.edits.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AppEdit"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/edits": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates a new edit for an app, populated with the app's current state.",
+        "operationId": "androidpublisher.edits.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AppEdit"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/edits/{editId}:validate": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Checks that the edit can be successfully committed. The edit's changes are not applied to the live app.",
+        "operationId": "androidpublisher.edits.validate",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AppEdit"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/edits/{editId}/apks/{apkVersionCode}/listings/{language}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes the APK-specific localized listing for a specified APK and language code.",
+        "operationId": "androidpublisher.edits.apklistings.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "apkVersionCode",
+            "in": "path",
+            "description": "The APK version code whose APK-specific listings should be read or modified.",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "path",
+            "description": "The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Fetches the APK-specific localized listing for a specified APK and language code.",
+        "operationId": "androidpublisher.edits.apklistings.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ApkListing"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "apkVersionCode",
+            "in": "path",
+            "description": "The APK version code whose APK-specific listings should be read or modified.",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "path",
+            "description": "The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Updates or creates the APK-specific localized listing for a specified APK and language code. This method supports patch semantics.",
+        "operationId": "androidpublisher.edits.apklistings.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ApkListing"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "apkVersionCode",
+            "in": "path",
+            "description": "The APK version code whose APK-specific listings should be read or modified.",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "path",
+            "description": "The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "description": "Updates or creates the APK-specific localized listing for a specified APK and language code.",
+        "operationId": "androidpublisher.edits.apklistings.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ApkListing"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "apkVersionCode",
+            "in": "path",
+            "description": "The APK version code whose APK-specific listings should be read or modified.",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "path",
+            "description": "The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/edits/{editId}/apks/{apkVersionCode}/listings": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes all the APK-specific localized listings for a specified APK.",
+        "operationId": "androidpublisher.edits.apklistings.deleteall",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "apkVersionCode",
+            "in": "path",
+            "description": "The APK version code whose APK-specific listings should be read or modified.",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Lists all the APK-specific localized listings for a specified APK.",
+        "operationId": "androidpublisher.edits.apklistings.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ApkListingsListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "apkVersionCode",
+            "in": "path",
+            "description": "The APK version code whose APK-specific listings should be read or modified.",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/edits/{editId}/apks/externallyHosted": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates a new APK without uploading the APK itself to Google Play, instead hosting the APK at a specified URL. This function is only available to enterprises using Android for Work, for applications distributed within the enterprise Private Channel.",
+        "operationId": "androidpublisher.edits.apks.addexternallyhosted",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ApksAddExternallyHostedResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/edits/{editId}/apks": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "operationId": "androidpublisher.edits.apks.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ApksListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "post": {
+        "operationId": "androidpublisher.edits.apks.upload",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Apk"
+            }
+          }
+        },
+        "consumes": [
+          "application/octet-stream",
+          "application/vnd.android.package-archive"
+        ],
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/edits/{editId}/details": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Fetches app details for this edit. This includes the default language and developer support contact information.",
+        "operationId": "androidpublisher.edits.details.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AppDetails"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Updates app details for this edit. This method supports patch semantics.",
+        "operationId": "androidpublisher.edits.details.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AppDetails"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "description": "Updates app details for this edit.",
+        "operationId": "androidpublisher.edits.details.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AppDetails"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/edits/{editId}/apks/{apkVersionCode}/expansionFiles/{expansionFileType}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Fetches the Expansion File configuration for the APK specified.",
+        "operationId": "androidpublisher.edits.expansionfiles.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ExpansionFile"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "apkVersionCode",
+            "in": "path",
+            "description": "The version code of the APK whose Expansion File configuration is being read or modified.",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "expansionFileType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "main",
+              "patch"
+            ]
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Updates the APK's Expansion File configuration to reference another APK's Expansion Files. To add a new Expansion File use the Upload method. This method supports patch semantics.",
+        "operationId": "androidpublisher.edits.expansionfiles.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ExpansionFile"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "apkVersionCode",
+            "in": "path",
+            "description": "The version code of the APK whose Expansion File configuration is being read or modified.",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "expansionFileType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "main",
+              "patch"
+            ]
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "description": "Updates the APK's Expansion File configuration to reference another APK's Expansion Files. To add a new Expansion File use the Upload method.",
+        "operationId": "androidpublisher.edits.expansionfiles.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ExpansionFile"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "apkVersionCode",
+            "in": "path",
+            "description": "The version code of the APK whose Expansion File configuration is being read or modified.",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "expansionFileType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "main",
+              "patch"
+            ]
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "post": {
+        "description": "Uploads and attaches a new Expansion File to the APK specified.",
+        "operationId": "androidpublisher.edits.expansionfiles.upload",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ExpansionFilesUploadResponse"
+            }
+          }
+        },
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "name": "apkVersionCode",
+            "in": "path",
+            "description": "The version code of the APK whose Expansion File configuration is being read or modified.",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "expansionFileType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "main",
+              "patch"
+            ]
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/edits/{editId}/listings/{language}/{imageType}/{imageId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes the image (specified by id) from the edit.",
+        "operationId": "androidpublisher.edits.images.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "imageId",
+            "in": "path",
+            "description": "Unique identifier an image within the set of images attached to this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "imageType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "featureGraphic",
+              "icon",
+              "phoneScreenshots",
+              "promoGraphic",
+              "sevenInchScreenshots",
+              "tenInchScreenshots",
+              "tvBanner",
+              "tvScreenshots"
+            ]
+          },
+          {
+            "name": "language",
+            "in": "path",
+            "description": "The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass \"de-AT\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/edits/{editId}/listings/{language}/{imageType}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes all images for the specified language and image type.",
+        "operationId": "androidpublisher.edits.images.deleteall",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ImagesDeleteAllResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "imageType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "featureGraphic",
+              "icon",
+              "phoneScreenshots",
+              "promoGraphic",
+              "sevenInchScreenshots",
+              "tenInchScreenshots",
+              "tvBanner",
+              "tvScreenshots"
+            ]
+          },
+          {
+            "name": "language",
+            "in": "path",
+            "description": "The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass \"de-AT\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Lists all images for the specified language and image type.",
+        "operationId": "androidpublisher.edits.images.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ImagesListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "imageType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "featureGraphic",
+              "icon",
+              "phoneScreenshots",
+              "promoGraphic",
+              "sevenInchScreenshots",
+              "tenInchScreenshots",
+              "tvBanner",
+              "tvScreenshots"
+            ]
+          },
+          {
+            "name": "language",
+            "in": "path",
+            "description": "The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass \"de-AT\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "post": {
+        "description": "Uploads a new image and adds it to the list of images for the specified language and image type.",
+        "operationId": "androidpublisher.edits.images.upload",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ImagesUploadResponse"
+            }
+          }
+        },
+        "consumes": [
+          "image/bmp",
+          "image/cgm",
+          "image/fits",
+          "image/g3fax",
+          "image/gif",
+          "image/ief",
+          "image/jp2",
+          "image/jpeg",
+          "image/jpm",
+          "image/jpx",
+          "image/ktx",
+          "image/naplps",
+          "image/pjpeg",
+          "image/png",
+          "image/prs.btif",
+          "image/prs.pti",
+          "image/pwg-raster",
+          "image/sgi",
+          "image/svg+xml",
+          "image/t38",
+          "image/tiff",
+          "image/tiff-fx",
+          "image/vnd.adobe.photoshop",
+          "image/vnd.airzip.accelerator.azv",
+          "image/vnd.cns.inf2",
+          "image/vnd.dece.graphic",
+          "image/vnd.djvu",
+          "image/vnd.dvb.subtitle",
+          "image/vnd.dwg",
+          "image/vnd.dxf",
+          "image/vnd.fastbidsheet",
+          "image/vnd.fpx",
+          "image/vnd.fst",
+          "image/vnd.fujixerox.edmics-mmr",
+          "image/vnd.fujixerox.edmics-rlc",
+          "image/vnd.globalgraphics.pgb",
+          "image/vnd.microsoft.icon",
+          "image/vnd.mix",
+          "image/vnd.ms-modi",
+          "image/vnd.ms-photo",
+          "image/vnd.net-fpx",
+          "image/vnd.radiance",
+          "image/vnd.sealed.png",
+          "image/vnd.sealedmedia.softseal.gif",
+          "image/vnd.sealedmedia.softseal.jpg",
+          "image/vnd.svf",
+          "image/vnd.tencent.tap",
+          "image/vnd.valve.source.texture",
+          "image/vnd.wap.wbmp",
+          "image/vnd.xiff",
+          "image/webp",
+          "image/x-3ds",
+          "image/x-cmu-raster",
+          "image/x-cmx",
+          "image/x-freehand",
+          "image/x-icon",
+          "image/x-mrsid-image",
+          "image/x-pcx",
+          "image/x-pict",
+          "image/x-portable-anymap",
+          "image/x-portable-bitmap",
+          "image/x-portable-graymap",
+          "image/x-portable-pixmap",
+          "image/x-rgb",
+          "image/x-tga",
+          "image/x-xbitmap",
+          "image/x-xcf",
+          "image/x-xpixmap",
+          "image/x-xwindowdump"
+        ],
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "imageType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "featureGraphic",
+              "icon",
+              "phoneScreenshots",
+              "promoGraphic",
+              "sevenInchScreenshots",
+              "tenInchScreenshots",
+              "tvBanner",
+              "tvScreenshots"
+            ]
+          },
+          {
+            "name": "language",
+            "in": "path",
+            "description": "The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass \"de-AT\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/edits/{editId}/listings/{language}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes the specified localized store listing from an edit.",
+        "operationId": "androidpublisher.edits.listings.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "path",
+            "description": "The language code (a BCP-47 language tag) of the localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Fetches information about a localized store listing.",
+        "operationId": "androidpublisher.edits.listings.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Listing"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "path",
+            "description": "The language code (a BCP-47 language tag) of the localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Creates or updates a localized store listing. This method supports patch semantics.",
+        "operationId": "androidpublisher.edits.listings.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Listing"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "path",
+            "description": "The language code (a BCP-47 language tag) of the localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "description": "Creates or updates a localized store listing.",
+        "operationId": "androidpublisher.edits.listings.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Listing"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "path",
+            "description": "The language code (a BCP-47 language tag) of the localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/edits/{editId}/listings": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes all localized listings from an edit.",
+        "operationId": "androidpublisher.edits.listings.deleteall",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Returns all of the localized store listings attached to this edit.",
+        "operationId": "androidpublisher.edits.listings.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ListingsListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/edits/{editId}/testers/{track}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "operationId": "androidpublisher.edits.testers.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Testers"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "track",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "alpha",
+              "beta",
+              "production",
+              "rollout"
+            ]
+          }
+        ]
+      },
+      "patch": {
+        "operationId": "androidpublisher.edits.testers.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Testers"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "track",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "alpha",
+              "beta",
+              "production",
+              "rollout"
+            ]
+          }
+        ]
+      },
+      "put": {
+        "operationId": "androidpublisher.edits.testers.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Testers"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "track",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "alpha",
+              "beta",
+              "production",
+              "rollout"
+            ]
+          }
+        ]
+      }
+    },
+    "/{packageName}/edits/{editId}/tracks/{track}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Fetches the track configuration for the specified track type. Includes the APK version codes that are in this track.",
+        "operationId": "androidpublisher.edits.tracks.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Track"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "track",
+            "in": "path",
+            "description": "The track type to read or modify.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "alpha",
+              "beta",
+              "production",
+              "rollout"
+            ]
+          }
+        ]
+      },
+      "patch": {
+        "description": "Updates the track configuration for the specified track type. When halted, the rollout track cannot be updated without adding new APKs, and adding new APKs will cause it to resume. This method supports patch semantics.",
+        "operationId": "androidpublisher.edits.tracks.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Track"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "track",
+            "in": "path",
+            "description": "The track type to read or modify.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "alpha",
+              "beta",
+              "production",
+              "rollout"
+            ]
+          }
+        ]
+      },
+      "put": {
+        "description": "Updates the track configuration for the specified track type. When halted, the rollout track cannot be updated without adding new APKs, and adding new APKs will cause it to resume.",
+        "operationId": "androidpublisher.edits.tracks.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Track"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "track",
+            "in": "path",
+            "description": "The track type to read or modify.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "alpha",
+              "beta",
+              "production",
+              "rollout"
+            ]
+          }
+        ]
+      }
+    },
+    "/{packageName}/edits/{editId}/tracks": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Lists all the track configurations for this edit.",
+        "operationId": "androidpublisher.edits.tracks.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TracksListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "editId",
+            "in": "path",
+            "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/inappproducts/batch": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "operationId": "androidpublisher.inappproducts.batch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/InappproductsBatchResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{packageName}/inappproducts/{sku}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Delete an in-app product for an app.",
+        "operationId": "androidpublisher.inappproducts.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app with the in-app product; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sku",
+            "in": "path",
+            "description": "Unique identifier for the in-app product.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Returns information about the in-app product specified.",
+        "operationId": "androidpublisher.inappproducts.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/InAppProduct"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "packageName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sku",
+            "in": "path",
+            "description": "Unique identifier for the in-app product.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Updates the details of an in-app product. This method supports patch semantics.",
+        "operationId": "androidpublisher.inappproducts.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/InAppProduct"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "autoConvertMissingPrices",
+            "in": "query",
+            "description": "If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.",
+            "type": "boolean"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app with the in-app product; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sku",
+            "in": "path",
+            "description": "Unique identifier for the in-app product.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "description": "Updates the details of an in-app product.",
+        "operationId": "androidpublisher.inappproducts.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/InAppProduct"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "autoConvertMissingPrices",
+            "in": "query",
+            "description": "If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.",
+            "type": "boolean"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app with the in-app product; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sku",
+            "in": "path",
+            "description": "Unique identifier for the in-app product.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/inappproducts": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates a new in-app product for an app.",
+        "operationId": "androidpublisher.inappproducts.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/InAppProduct"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "autoConvertMissingPrices",
+            "in": "query",
+            "description": "If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.",
+            "type": "boolean"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "List all the in-app products for an Android app, both subscriptions and managed in-app products..",
+        "operationId": "androidpublisher.inappproducts.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/InappproductsListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "maxResults",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app with in-app products; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startIndex",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/purchases/products/{productId}/tokens/{token}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Checks the purchase and consumption status of an inapp item.",
+        "operationId": "androidpublisher.purchases.products.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ProductPurchase"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "The package name of the application the inapp product was sold in (for example, 'com.some.thing').",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "productId",
+            "in": "path",
+            "description": "The inapp product SKU (for example, 'com.some.thing.inapp1').",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "description": "The token provided to the user's device when the inapp product was purchased.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:cancel": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Cancels a user's subscription purchase. The subscription remains valid until its expiration time.",
+        "operationId": "androidpublisher.purchases.subscriptions.cancel",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "The package name of the application for which this subscription was purchased (for example, 'com.some.thing').",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The purchased subscription ID (for example, 'monthly001').",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "description": "The token provided to the user's device when the subscription was purchased.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:defer": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Defers a user's subscription purchase until a specified future expiration time.",
+        "operationId": "androidpublisher.purchases.subscriptions.defer",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionPurchasesDeferResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "The package name of the application for which this subscription was purchased (for example, 'com.some.thing').",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The purchased subscription ID (for example, 'monthly001').",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "description": "The token provided to the user's device when the subscription was purchased.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Checks whether a user's subscription purchase is valid and returns its expiry time.",
+        "operationId": "androidpublisher.purchases.subscriptions.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionPurchase"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "The package name of the application for which this subscription was purchased (for example, 'com.some.thing').",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The purchased subscription ID (for example, 'monthly001').",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "description": "The token provided to the user's device when the subscription was purchased.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:refund": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Refunds a user's subscription purchase, but the subscription remains valid until its expiration time and it will continue to recur.",
+        "operationId": "androidpublisher.purchases.subscriptions.refund",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "The package name of the application for which this subscription was purchased (for example, 'com.some.thing').",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The purchased subscription ID (for example, 'monthly001').",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "description": "The token provided to the user's device when the subscription was purchased.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:revoke": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Refunds and immediately revokes a user's subscription purchase. Access to the subscription will be terminated immediately and it will stop recurring.",
+        "operationId": "androidpublisher.purchases.subscriptions.revoke",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "The package name of the application for which this subscription was purchased (for example, 'com.some.thing').",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The purchased subscription ID (for example, 'monthly001').",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "in": "path",
+            "description": "The token provided to the user's device when the subscription was purchased.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Apk": {
+      "id": "Apk",
+      "type": "object",
+      "properties": {
+        "binary": {
+          "$ref": "#/definitions/ApkBinary",
+          "description": "Information about the binary payload of this APK."
+        },
+        "versionCode": {
+          "type": "integer",
+          "description": "The version code of the APK, as specified in the APK's manifest file.",
+          "format": "int32"
+        }
+      }
+    },
+    "ApkBinary": {
+      "id": "ApkBinary",
+      "type": "object",
+      "description": "Represents the binary payload of an APK.",
+      "properties": {
+        "sha1": {
+          "type": "string",
+          "description": "A sha1 hash of the APK payload, encoded as a hex string and matching the output of the sha1sum command."
+        }
+      }
+    },
+    "ApkListing": {
+      "id": "ApkListing",
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string",
+          "description": "The language code, in BCP 47 format (eg \"en-US\")."
+        },
+        "recentChanges": {
+          "type": "string",
+          "description": "Describe what's new in your APK."
+        }
+      }
+    },
+    "ApkListingsListResponse": {
+      "id": "ApkListingsListResponse",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"androidpublisher#apkListingsListResponse\".",
+          "default": "androidpublisher#apkListingsListResponse"
+        },
+        "listings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApkListing"
+          }
+        }
+      }
+    },
+    "ApksAddExternallyHostedRequest": {
+      "id": "ApksAddExternallyHostedRequest",
+      "type": "object",
+      "properties": {
+        "externallyHostedApk": {
+          "$ref": "#/definitions/ExternallyHostedApk",
+          "description": "The definition of the externally-hosted APK and where it is located."
+        }
+      }
+    },
+    "ApksAddExternallyHostedResponse": {
+      "id": "ApksAddExternallyHostedResponse",
+      "type": "object",
+      "properties": {
+        "externallyHostedApk": {
+          "$ref": "#/definitions/ExternallyHostedApk",
+          "description": "The definition of the externally-hosted APK and where it is located."
+        }
+      }
+    },
+    "ApksListResponse": {
+      "id": "ApksListResponse",
+      "type": "object",
+      "properties": {
+        "apks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Apk"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"androidpublisher#apksListResponse\".",
+          "default": "androidpublisher#apksListResponse"
+        }
+      }
+    },
+    "AppDetails": {
+      "id": "AppDetails",
+      "type": "object",
+      "properties": {
+        "contactEmail": {
+          "type": "string",
+          "description": "The user-visible support email for this app."
+        },
+        "contactPhone": {
+          "type": "string",
+          "description": "The user-visible support telephone number for this app."
+        },
+        "contactWebsite": {
+          "type": "string",
+          "description": "The user-visible website for this app."
+        },
+        "defaultLanguage": {
+          "type": "string",
+          "description": "Default language code, in BCP 47 format (eg \"en-US\")."
+        }
+      }
+    },
+    "AppEdit": {
+      "id": "AppEdit",
+      "type": "object",
+      "description": "Represents an edit of an app. An edit allows clients to make multiple changes before committing them in one operation.",
+      "properties": {
+        "expiryTimeSeconds": {
+          "type": "string",
+          "description": "The time at which the edit will expire and will be no longer valid for use in any subsequent API calls (encoded as seconds since the Epoch)."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the edit that can be used in subsequent API calls."
+        }
+      }
+    },
+    "ExpansionFile": {
+      "id": "ExpansionFile",
+      "type": "object",
+      "properties": {
+        "fileSize": {
+          "type": "string",
+          "description": "If set this field indicates that this APK has an Expansion File uploaded to it: this APK does not reference another APK's Expansion File. The field's value is the size of the uploaded Expansion File in bytes.",
+          "format": "int64"
+        },
+        "referencesVersion": {
+          "type": "integer",
+          "description": "If set this APK's Expansion File references another APK's Expansion File. The file_size field will not be set.",
+          "format": "int32"
+        }
+      }
+    },
+    "ExpansionFilesUploadResponse": {
+      "id": "ExpansionFilesUploadResponse",
+      "type": "object",
+      "properties": {
+        "expansionFile": {
+          "$ref": "#/definitions/ExpansionFile"
+        }
+      }
+    },
+    "ExternallyHostedApk": {
+      "id": "ExternallyHostedApk",
+      "type": "object",
+      "description": "Defines an APK available for this application that is hosted externally and not uploaded to Google Play. This function is only available to enterprises who are using Android for Work, and whos application is restricted to the enterprise private channel",
+      "properties": {
+        "applicationLabel": {
+          "type": "string",
+          "description": "The application label."
+        },
+        "certificateBase64s": {
+          "type": "array",
+          "description": "A certificate (or array of certificates if a certificate-chain is used) used to signed this APK, represented as a base64 encoded byte array.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "externallyHostedUrl": {
+          "type": "string",
+          "description": "The URL at which the APK is hosted. This must be an https URL."
+        },
+        "fileSha1Base64": {
+          "type": "string",
+          "description": "The SHA1 checksum of this APK, represented as a base64 encoded byte array."
+        },
+        "fileSha256Base64": {
+          "type": "string",
+          "description": "The SHA256 checksum of this APK, represented as a base64 encoded byte array."
+        },
+        "fileSize": {
+          "type": "string",
+          "description": "The file size in bytes of this APK.",
+          "format": "int64"
+        },
+        "iconBase64": {
+          "type": "string",
+          "description": "The icon image from the APK, as a base64 encoded byte array."
+        },
+        "maximumSdk": {
+          "type": "integer",
+          "description": "The maximum SDK supported by this APK (optional).",
+          "format": "int32"
+        },
+        "minimumSdk": {
+          "type": "integer",
+          "description": "The minimum SDK targeted by this APK.",
+          "format": "int32"
+        },
+        "nativeCodes": {
+          "type": "array",
+          "description": "The native code environments supported by this APK (optional).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "packageName": {
+          "type": "string",
+          "description": "The package name."
+        },
+        "usesFeatures": {
+          "type": "array",
+          "description": "The features required by this APK (optional).",
+          "items": {
+            "type": "string"
+          }
+        },
+        "usesPermissions": {
+          "type": "array",
+          "description": "The permissions requested by this APK.",
+          "items": {
+            "$ref": "#/definitions/ExternallyHostedApkUsesPermission"
+          }
+        },
+        "versionCode": {
+          "type": "integer",
+          "description": "The version code of this APK.",
+          "format": "int32"
+        },
+        "versionName": {
+          "type": "string",
+          "description": "The version name of this APK."
+        }
+      }
+    },
+    "ExternallyHostedApkUsesPermission": {
+      "id": "ExternallyHostedApkUsesPermission",
+      "type": "object",
+      "description": "A permission used by this APK.",
+      "properties": {
+        "maxSdkVersion": {
+          "type": "integer",
+          "description": "Optionally, the maximum SDK version for which the permission is required.",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the permission requested."
+        }
+      }
+    },
+    "Image": {
+      "id": "Image",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique id representing this image."
+        },
+        "sha1": {
+          "type": "string",
+          "description": "A sha1 hash of the image that was uploaded."
+        },
+        "url": {
+          "type": "string",
+          "description": "A URL that will serve a preview of the image."
+        }
+      }
+    },
+    "ImagesDeleteAllResponse": {
+      "id": "ImagesDeleteAllResponse",
+      "type": "object",
+      "properties": {
+        "deleted": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Image"
+          }
+        }
+      }
+    },
+    "ImagesListResponse": {
+      "id": "ImagesListResponse",
+      "type": "object",
+      "properties": {
+        "images": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Image"
+          }
+        }
+      }
+    },
+    "ImagesUploadResponse": {
+      "id": "ImagesUploadResponse",
+      "type": "object",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/Image"
+        }
+      }
+    },
+    "InAppProduct": {
+      "id": "InAppProduct",
+      "type": "object",
+      "properties": {
+        "defaultLanguage": {
+          "type": "string",
+          "description": "The default language of the localized data, as defined by BCP 47. e.g. \"en-US\", \"en-GB\"."
+        },
+        "defaultPrice": {
+          "$ref": "#/definitions/Price",
+          "description": "Default price cannot be zero. In-app products can never be free. Default price is always in the developer's Checkout merchant currency."
+        },
+        "listings": {
+          "type": "object",
+          "description": "List of localized title and description data.",
+          "additionalProperties": {
+            "$ref": "#/definitions/InAppProductListing",
+            "description": "The language of the localized data, as defined by BCP 47. i.e.: \"en-US\", \"en-GB\"."
+          }
+        },
+        "packageName": {
+          "type": "string",
+          "description": "The package name of the parent app."
+        },
+        "prices": {
+          "type": "object",
+          "description": "Prices per buyer region. None of these prices should be zero. In-app products can never be free.",
+          "additionalProperties": {
+            "$ref": "#/definitions/Price",
+            "description": "Region code, as defined by ISO 3166-2."
+          }
+        },
+        "purchaseType": {
+          "type": "string",
+          "description": "Purchase type enum value. Unmodifiable after creation."
+        },
+        "season": {
+          "$ref": "#/definitions/Season",
+          "description": "Definition of a season for a seasonal subscription. Can be defined only for yearly subscriptions."
+        },
+        "sku": {
+          "type": "string",
+          "description": "The stock-keeping-unit (SKU) of the product, unique within an app."
+        },
+        "status": {
+          "type": "string"
+        },
+        "subscriptionPeriod": {
+          "type": "string",
+          "description": "The period of the subscription (if any), i.e. period at which payments must happen. Defined as ISO 8601 duration, i.e. \"P1M\" for 1 month period."
+        },
+        "trialPeriod": {
+          "type": "string",
+          "description": "Trial period, specified in ISO 8601 format. Acceptable values are anything between \"P7D\" (seven days) and \"P999D\" (999 days). Seasonal subscriptions cannot have a trial period."
+        }
+      }
+    },
+    "InAppProductListing": {
+      "id": "InAppProductListing",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "InappproductsBatchRequest": {
+      "id": "InappproductsBatchRequest",
+      "type": "object",
+      "properties": {
+        "entrys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InappproductsBatchRequestEntry"
+          }
+        }
+      }
+    },
+    "InappproductsBatchRequestEntry": {
+      "id": "InappproductsBatchRequestEntry",
+      "type": "object",
+      "properties": {
+        "batchId": {
+          "type": "integer",
+          "format": "uint32"
+        },
+        "inappproductsinsertrequest": {
+          "$ref": "#/definitions/InappproductsInsertRequest"
+        },
+        "inappproductsupdaterequest": {
+          "$ref": "#/definitions/InappproductsUpdateRequest"
+        },
+        "methodName": {
+          "type": "string"
+        }
+      }
+    },
+    "InappproductsBatchResponse": {
+      "id": "InappproductsBatchResponse",
+      "type": "object",
+      "properties": {
+        "entrys": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InappproductsBatchResponseEntry"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"androidpublisher#inappproductsBatchResponse\".",
+          "default": "androidpublisher#inappproductsBatchResponse"
+        }
+      }
+    },
+    "InappproductsBatchResponseEntry": {
+      "id": "InappproductsBatchResponseEntry",
+      "type": "object",
+      "properties": {
+        "batchId": {
+          "type": "integer",
+          "format": "uint32"
+        },
+        "inappproductsinsertresponse": {
+          "$ref": "#/definitions/InappproductsInsertResponse"
+        },
+        "inappproductsupdateresponse": {
+          "$ref": "#/definitions/InappproductsUpdateResponse"
+        }
+      }
+    },
+    "InappproductsInsertRequest": {
+      "id": "InappproductsInsertRequest",
+      "type": "object",
+      "properties": {
+        "inappproduct": {
+          "$ref": "#/definitions/InAppProduct"
+        }
+      }
+    },
+    "InappproductsInsertResponse": {
+      "id": "InappproductsInsertResponse",
+      "type": "object",
+      "properties": {
+        "inappproduct": {
+          "$ref": "#/definitions/InAppProduct"
+        }
+      }
+    },
+    "InappproductsListResponse": {
+      "id": "InappproductsListResponse",
+      "type": "object",
+      "properties": {
+        "inappproduct": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InAppProduct"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"androidpublisher#inappproductsListResponse\".",
+          "default": "androidpublisher#inappproductsListResponse"
+        },
+        "pageInfo": {
+          "$ref": "#/definitions/PageInfo"
+        },
+        "tokenPagination": {
+          "$ref": "#/definitions/TokenPagination"
+        }
+      }
+    },
+    "InappproductsUpdateRequest": {
+      "id": "InappproductsUpdateRequest",
+      "type": "object",
+      "properties": {
+        "inappproduct": {
+          "$ref": "#/definitions/InAppProduct"
+        }
+      }
+    },
+    "InappproductsUpdateResponse": {
+      "id": "InappproductsUpdateResponse",
+      "type": "object",
+      "properties": {
+        "inappproduct": {
+          "$ref": "#/definitions/InAppProduct"
+        }
+      }
+    },
+    "Listing": {
+      "id": "Listing",
+      "type": "object",
+      "properties": {
+        "fullDescription": {
+          "type": "string",
+          "description": "Full description of the app; this may be up to 4000 characters in length."
+        },
+        "language": {
+          "type": "string",
+          "description": "Language localization code (for example, \"de-AT\" for Austrian German)."
+        },
+        "shortDescription": {
+          "type": "string",
+          "description": "Short description of the app (previously known as promo text); this may be up to 80 characters in length."
+        },
+        "title": {
+          "type": "string",
+          "description": "App's localized title."
+        },
+        "video": {
+          "type": "string",
+          "description": "URL of a promotional YouTube video for the app."
+        }
+      }
+    },
+    "ListingsListResponse": {
+      "id": "ListingsListResponse",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"androidpublisher#listingsListResponse\".",
+          "default": "androidpublisher#listingsListResponse"
+        },
+        "listings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Listing"
+          }
+        }
+      }
+    },
+    "MonthDay": {
+      "id": "MonthDay",
+      "type": "object",
+      "properties": {
+        "day": {
+          "type": "integer",
+          "description": "Day of a month, value in [1, 31] range. Valid range depends on the specified month.",
+          "format": "uint32"
+        },
+        "month": {
+          "type": "integer",
+          "description": "Month of a year. e.g. 1 = JAN, 2 = FEB etc.",
+          "format": "uint32"
+        }
+      }
+    },
+    "PageInfo": {
+      "id": "PageInfo",
+      "type": "object",
+      "properties": {
+        "resultPerPage": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "startIndex": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "totalResults": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Price": {
+      "id": "Price",
+      "type": "object",
+      "properties": {
+        "currency": {
+          "type": "string",
+          "description": "3 letter Currency code, as defined by ISO 4217."
+        },
+        "priceMicros": {
+          "type": "string",
+          "description": "The price in millionths of the currency base unit represented as a string."
+        }
+      }
+    },
+    "ProductPurchase": {
+      "id": "ProductPurchase",
+      "type": "object",
+      "description": "A ProductPurchase resource indicates the status of a user's inapp product purchase.",
+      "properties": {
+        "consumptionState": {
+          "type": "integer",
+          "description": "The consumption state of the inapp product. Possible values are:  \n- Yet to be consumed \n- Consumed",
+          "format": "int32"
+        },
+        "developerPayload": {
+          "type": "string",
+          "description": "A developer-specified string that contains supplemental information about an order."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This kind represents an inappPurchase object in the androidpublisher service.",
+          "default": "androidpublisher#productPurchase"
+        },
+        "purchaseState": {
+          "type": "integer",
+          "description": "The purchase state of the order. Possible values are:  \n- Purchased \n- Cancelled",
+          "format": "int32"
+        },
+        "purchaseTimeMillis": {
+          "type": "string",
+          "description": "The time the product was purchased, in milliseconds since the epoch (Jan 1, 1970).",
+          "format": "int64"
+        }
+      }
+    },
+    "Season": {
+      "id": "Season",
+      "type": "object",
+      "properties": {
+        "end": {
+          "$ref": "#/definitions/MonthDay",
+          "description": "Inclusive end date of the recurrence period."
+        },
+        "start": {
+          "$ref": "#/definitions/MonthDay",
+          "description": "Inclusive start date of the recurrence period."
+        }
+      }
+    },
+    "SubscriptionDeferralInfo": {
+      "id": "SubscriptionDeferralInfo",
+      "type": "object",
+      "description": "A SubscriptionDeferralInfo contains the data needed to defer a subscription purchase to a future expiry time.",
+      "properties": {
+        "desiredExpiryTimeMillis": {
+          "type": "string",
+          "description": "The desired next expiry time for the subscription in milliseconds since Epoch. The given time must be after the current expiry time for the subscription.",
+          "format": "int64"
+        },
+        "expectedExpiryTimeMillis": {
+          "type": "string",
+          "description": "The expected expiry time for the subscription. If the current expiry time for the subscription is not the value specified here, the deferral will not occur.",
+          "format": "int64"
+        }
+      }
+    },
+    "SubscriptionPurchase": {
+      "id": "SubscriptionPurchase",
+      "type": "object",
+      "description": "A SubscriptionPurchase resource indicates the status of a user's subscription purchase.",
+      "properties": {
+        "autoRenewing": {
+          "type": "boolean",
+          "description": "Whether the subscription will automatically be renewed when it reaches its current expiry time."
+        },
+        "expiryTimeMillis": {
+          "type": "string",
+          "description": "Time at which the subscription will expire, in milliseconds since Epoch.",
+          "format": "int64"
+        },
+        "kind": {
+          "type": "string",
+          "description": "This kind represents a subscriptionPurchase object in the androidpublisher service.",
+          "default": "androidpublisher#subscriptionPurchase"
+        },
+        "startTimeMillis": {
+          "type": "string",
+          "description": "Time at which the subscription was granted, in milliseconds since Epoch.",
+          "format": "int64"
+        }
+      }
+    },
+    "SubscriptionPurchasesDeferRequest": {
+      "id": "SubscriptionPurchasesDeferRequest",
+      "type": "object",
+      "properties": {
+        "deferralInfo": {
+          "$ref": "#/definitions/SubscriptionDeferralInfo",
+          "description": "The information about the new desired expiry time for the subscription."
+        }
+      }
+    },
+    "SubscriptionPurchasesDeferResponse": {
+      "id": "SubscriptionPurchasesDeferResponse",
+      "type": "object",
+      "properties": {
+        "newExpiryTimeMillis": {
+          "type": "string",
+          "description": "The new expiry time for the subscription in milliseconds since the Epoch.",
+          "format": "int64"
+        }
+      }
+    },
+    "Testers": {
+      "id": "Testers",
+      "type": "object",
+      "properties": {
+        "googleGroups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "googlePlusCommunities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TokenPagination": {
+      "id": "TokenPagination",
+      "type": "object",
+      "properties": {
+        "nextPageToken": {
+          "type": "string"
+        },
+        "previousPageToken": {
+          "type": "string"
+        }
+      }
+    },
+    "Track": {
+      "id": "Track",
+      "type": "object",
+      "properties": {
+        "track": {
+          "type": "string"
+        },
+        "userFraction": {
+          "type": "number",
+          "format": "double"
+        },
+        "versionCodes": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      }
+    },
+    "TracksListResponse": {
+      "id": "TracksListResponse",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"androidpublisher#tracksListResponse\".",
+          "default": "androidpublisher#tracksListResponse"
+        },
+        "tracks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Track"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "alt": {
+      "name": "alt",
+      "in": "query",
+      "description": "Data format for the response.",
+      "default": "json",
+      "type": "string",
+      "enum": [
+        "json"
+      ]
+    },
+    "fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Selector specifying which fields to include in a partial response.",
+      "type": "string"
+    },
+    "key": {
+      "name": "key",
+      "in": "query",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    "oauth_token": {
+      "name": "oauth_token",
+      "in": "query",
+      "description": "OAuth 2.0 token for the current user.",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "name": "prettyPrint",
+      "in": "query",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "true",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "name": "quotaUser",
+      "in": "query",
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "type": "string"
+    },
+    "userIp": {
+      "name": "userIp",
+      "in": "query",
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "type": "string"
+    }
+  }
+}

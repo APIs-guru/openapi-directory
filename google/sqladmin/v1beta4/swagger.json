@@ -1,0 +1,2753 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Cloud SQL Administration API",
+    "description": "API for Cloud SQL database instance management.",
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "version": "v1beta4"
+  },
+  "host": "www.googleapis.com",
+  "basePath": "/sql/v1beta4",
+  "schemes": [
+    "https"
+  ],
+  "externalDocs": {
+    "url": "https://developers.google.com/cloud-sql/docs/admin-api/"
+  },
+  "paths": {
+    "/projects/{project}/instances/{instance}/backupRuns/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves a resource containing information about a backup run.",
+        "operationId": "sql.backupRuns.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/BackupRun"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of this Backup Run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project}/instances/{instance}/backupRuns": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Lists all backup runs associated with a given instance and configuration in the reverse chronological order of the enqueued time.",
+        "operationId": "sql.backupRuns.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/BackupRunsListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of backup runs per response.",
+            "type": "integer"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "A previously-returned page token representing part of the larger set of results to view.",
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project}/instances/{instance}/databases/{database}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes a resource containing information about a database inside a Cloud SQL instance.",
+        "operationId": "sql.databases.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "database",
+            "in": "path",
+            "description": "Name of the database to be deleted in the instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Database instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Retrieves a resource containing information about a database inside a Cloud SQL instance.",
+        "operationId": "sql.databases.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "database",
+            "in": "path",
+            "description": "Name of the database in the instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Database instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Updates a resource containing information about a database inside a Cloud SQL instance. This method supports patch semantics.",
+        "operationId": "sql.databases.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "database",
+            "in": "path",
+            "description": "Name of the database to be updated in the instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Database instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "description": "Updates a resource containing information about a database inside a Cloud SQL instance.",
+        "operationId": "sql.databases.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "database",
+            "in": "path",
+            "description": "Name of the database to be updated in the instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Database instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project}/instances/{instance}/databases": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Inserts a resource containing information about a database inside a Cloud SQL instance.",
+        "operationId": "sql.databases.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Database instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Lists databases in the specified Cloud SQL instance.",
+        "operationId": "sql.databases.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/DatabasesListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project for which to list Cloud SQL instances.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/flags": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "List all available database flags for Google Cloud SQL instances.",
+        "operationId": "sql.flags.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/FlagsListResponse"
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project}/instances/{instance}/clone": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates a Cloud SQL instance as a clone of the source instance.",
+        "operationId": "sql.instances.clone",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "The ID of the Cloud SQL instance to be cloned (source). This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the source as well as the clone Cloud SQL instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project}/instances/{instance}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes a Cloud SQL instance.",
+        "operationId": "sql.instances.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance to be deleted.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Retrieves a resource containing information about a Cloud SQL instance.",
+        "operationId": "sql.instances.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/DatabaseInstance"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Database instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Updates settings of a Cloud SQL instance. Caution: This is not a partial update, so you must include values for all the settings that you want to retain. For partial updates, use patch.. This method supports patch semantics.",
+        "operationId": "sql.instances.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "description": "Updates settings of a Cloud SQL instance. Caution: This is not a partial update, so you must include values for all the settings that you want to retain. For partial updates, use patch.",
+        "operationId": "sql.instances.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project}/instances/{instance}/export": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Exports data from a Cloud SQL instance to a Google Cloud Storage bucket as a MySQL dump file.",
+        "operationId": "sql.instances.export",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance to be exported.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project}/instances/{instance}/import": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Imports data into a Cloud SQL instance from a MySQL dump file in Google Cloud Storage.",
+        "operationId": "sql.instances.import",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project}/instances": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates a new Cloud SQL instance.",
+        "operationId": "sql.instances.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project to which the newly created Cloud SQL instances should belong.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Lists instances under a given project in the alphabetical order of the instance name.",
+        "operationId": "sql.instances.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/InstancesListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "The maximum number of results to return per response.",
+            "type": "integer"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "A previously-returned page token representing part of the larger set of results to view.",
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project for which to list Cloud SQL instances.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project}/instances/{instance}/promoteReplica": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Promotes the read replica instance to be a stand-alone Cloud SQL instance.",
+        "operationId": "sql.instances.promoteReplica",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Cloud SQL read replica instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "ID of the project that contains the read replica.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project}/instances/{instance}/resetSslConfig": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Deletes all client certificates and generates a new server SSL certificate for the instance. The changes will not take effect until the instance is restarted. Existing instances without a server certificate will need to call this once to set a server certificate.",
+        "operationId": "sql.instances.resetSslConfig",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project}/instances/{instance}/restart": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Restarts a Cloud SQL instance.",
+        "operationId": "sql.instances.restart",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance to be restarted.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project}/instances/{instance}/restoreBackup": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Restores a backup of a Cloud SQL instance.",
+        "operationId": "sql.instances.restoreBackup",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project}/instances/{instance}/startReplica": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Starts the replication in the read replica instance.",
+        "operationId": "sql.instances.startReplica",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Cloud SQL read replica instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "ID of the project that contains the read replica.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project}/instances/{instance}/stopReplica": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Stops the replication in the read replica instance.",
+        "operationId": "sql.instances.stopReplica",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Cloud SQL read replica instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "ID of the project that contains the read replica.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project}/operations/{operation}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves an instance operation that has been performed on an instance.",
+        "operationId": "sql.operations.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "operation",
+            "in": "path",
+            "description": "Instance operation ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project}/operations": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Lists all instance operations that have been performed on the given Cloud SQL instance in the reverse chronological order of the start time.",
+        "operationId": "sql.operations.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OperationsListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "query",
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of operations per response.",
+            "type": "integer"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "A previously-returned page token representing part of the larger set of results to view.",
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project}/instances/{instance}/sslCerts/{sha1Fingerprint}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes the SSL certificate. The change will not take effect until the instance is restarted.",
+        "operationId": "sql.sslCerts.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sha1Fingerprint",
+            "in": "path",
+            "description": "Sha1 FingerPrint.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Retrieves a particular SSL certificate. Does not include the private key (required for usage). The private key must be saved from the response to initial creation.",
+        "operationId": "sql.sslCerts.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SslCert"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sha1Fingerprint",
+            "in": "path",
+            "description": "Sha1 FingerPrint.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project}/instances/{instance}/sslCerts": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates an SSL certificate and returns it along with the private key and server certificate authority. The new certificate will not be usable until the instance is restarted.",
+        "operationId": "sql.sslCerts.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SslCertsInsertResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project to which the newly created Cloud SQL instances should belong.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Lists all of the current SSL certificates for the instance.",
+        "operationId": "sql.sslCerts.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SslCertsListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project for which to list Cloud SQL instances.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project}/tiers": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Lists all available service tiers for Google Cloud SQL, for example D1, D2. For related information, see Pricing.",
+        "operationId": "sql.tiers.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TiersListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project for which to list tiers.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/projects/{project}/instances/{instance}/users": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes a user from a Cloud SQL instance.",
+        "operationId": "sql.users.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "host",
+            "in": "query",
+            "description": "Host of the user in the instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Database instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Name of the user in the instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "post": {
+        "description": "Creates a new user in a Cloud SQL instance.",
+        "operationId": "sql.users.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Database instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Lists users in the specified Cloud SQL instance.",
+        "operationId": "sql.users.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/UsersListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Database instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "description": "Updates an existing user in a Cloud SQL instance.",
+        "operationId": "sql.users.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "host",
+            "in": "query",
+            "description": "Host of the user in the instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instance",
+            "in": "path",
+            "description": "Database instance ID. This does not include the project ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Name of the user in the instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of the project that contains the instance.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "AclEntry": {
+      "id": "AclEntry",
+      "type": "object",
+      "description": "An entry for an Access Control list.",
+      "properties": {
+        "expirationTime": {
+          "type": "string",
+          "description": "The time when this access control entry expires in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.",
+          "format": "date-time"
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#aclEntry.",
+          "default": "sql#aclEntry"
+        },
+        "name": {
+          "type": "string",
+          "description": "An optional label to identify this entry."
+        },
+        "value": {
+          "type": "string",
+          "description": "The whitelisted value for the access control list."
+        }
+      }
+    },
+    "BackupConfiguration": {
+      "id": "BackupConfiguration",
+      "type": "object",
+      "description": "Database instance backup configuration.",
+      "properties": {
+        "binaryLogEnabled": {
+          "type": "boolean",
+          "description": "Whether binary log is enabled. If backup configuration is disabled, binary log must be disabled as well."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether this configuration is enabled."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#backupConfiguration.",
+          "default": "sql#backupConfiguration"
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Start time for the daily backup configuration in UTC timezone in the 24 hour format - HH:MM."
+        }
+      }
+    },
+    "BackupRun": {
+      "id": "BackupRun",
+      "type": "object",
+      "description": "A database instance backup run resource.",
+      "properties": {
+        "endTime": {
+          "type": "string",
+          "description": "The time the backup operation completed in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.",
+          "format": "date-time"
+        },
+        "enqueuedTime": {
+          "type": "string",
+          "description": "The time the run was enqueued in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.",
+          "format": "date-time"
+        },
+        "error": {
+          "$ref": "#/definitions/OperationError",
+          "description": "Information about why the backup operation failed. This is only present if the run has the FAILED status."
+        },
+        "id": {
+          "type": "string",
+          "description": "A unique identifier for this backup run. Note that this is unique only within the scope of a particular Cloud SQL instance.",
+          "format": "int64"
+        },
+        "instance": {
+          "type": "string",
+          "description": "Name of the database instance."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#backupRun.",
+          "default": "sql#backupRun"
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "The URI of this resource."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The time the backup operation actually started in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of this run."
+        },
+        "windowStartTime": {
+          "type": "string",
+          "description": "The start time of the backup window during which this the backup was attempted in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.",
+          "format": "date-time"
+        }
+      }
+    },
+    "BackupRunsListResponse": {
+      "id": "BackupRunsListResponse",
+      "type": "object",
+      "description": "Backup run list results.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "A list of backup runs in reverse chronological order of the enqueued time.",
+          "items": {
+            "$ref": "#/definitions/BackupRun"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#backupRunsList.",
+          "default": "sql#backupRunsList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results."
+        }
+      }
+    },
+    "BinLogCoordinates": {
+      "id": "BinLogCoordinates",
+      "type": "object",
+      "description": "Binary log coordinates.",
+      "properties": {
+        "binLogFileName": {
+          "type": "string",
+          "description": "Name of the binary log file for a Cloud SQL instance."
+        },
+        "binLogPosition": {
+          "type": "string",
+          "description": "Position (offset) within the binary log file.",
+          "format": "int64"
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#binLogCoordinates.",
+          "default": "sql#binLogCoordinates"
+        }
+      }
+    },
+    "CloneContext": {
+      "id": "CloneContext",
+      "type": "object",
+      "description": "Database instance clone context.",
+      "properties": {
+        "binLogCoordinates": {
+          "$ref": "#/definitions/BinLogCoordinates",
+          "description": "Binary log coordinates, if specified, indentify the the position up to which the source instance should be cloned. If not specified, the source instance is cloned up to the most recent binary log coordintes."
+        },
+        "destinationInstanceName": {
+          "type": "string",
+          "description": "Name of the Cloud SQL instance to be created as a clone."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#cloneContext.",
+          "default": "sql#cloneContext"
+        }
+      }
+    },
+    "Database": {
+      "id": "Database",
+      "type": "object",
+      "description": "A database resource inside a Cloud SQL instance.",
+      "properties": {
+        "charset": {
+          "type": "string",
+          "description": "The MySQL charset value."
+        },
+        "collation": {
+          "type": "string",
+          "description": "The MySQL collation value."
+        },
+        "etag": {
+          "type": "string",
+          "description": "HTTP 1.1 Entity tag for the resource."
+        },
+        "instance": {
+          "type": "string",
+          "description": "The name of the Cloud SQL instance. This does not include the project ID.",
+          "annotations": {
+            "required": [
+              "sql.databases.delete",
+              "sql.databases.insert",
+              "sql.databases.update"
+            ]
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#database.",
+          "default": "sql#database"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the database in the Cloud SQL instance. This does not include the project ID or instance name.",
+          "annotations": {
+            "required": [
+              "sql.databases.delete",
+              "sql.databases.insert",
+              "sql.databases.update"
+            ]
+          }
+        },
+        "project": {
+          "type": "string",
+          "description": "The project ID of the project containing the Cloud SQL database. The Google apps domain is prefixed if applicable.",
+          "annotations": {
+            "required": [
+              "sql.databases.delete",
+              "sql.databases.insert",
+              "sql.databases.update"
+            ]
+          }
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "The URI of this resource."
+        }
+      }
+    },
+    "DatabaseFlags": {
+      "id": "DatabaseFlags",
+      "type": "object",
+      "description": "MySQL flags for Cloud SQL instances.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the flag. These flags are passed at instance startup, so include both MySQL server options and MySQL system variables. Flags should be specified with underscores, not hyphens. Refer to the official MySQL documentation on server options and system variables for descriptions of what these flags do. Acceptable values are:  character_set_server utf8 or utf8mb4 event_scheduler on or off (Note: The event scheduler will only work reliably if the instance activationPolicy is set to ALWAYS) general_log on or off group_concat_max_len 4..17179869184 innodb_flush_log_at_trx_commit 0..2 innodb_lock_wait_timeout 1..1073741824 log_bin_trust_function_creators on or off log_output Can be either TABLE or NONE, FILE is not supported log_queries_not_using_indexes on or off long_query_time 0..30000000 lower_case_table_names 0..2 max_allowed_packet 16384..1073741824 read_only on or off skip_show_database on or off slow_query_log on or off. If set to on, you must also set the log_output flag to TABLE to receive logs. wait_timeout 1..31536000"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the flag. Booleans should be set using 1 for true, and 0 for false. This field must be omitted if the flag doesn't take a value."
+        }
+      }
+    },
+    "DatabaseInstance": {
+      "id": "DatabaseInstance",
+      "type": "object",
+      "description": "A Cloud SQL instance resource.",
+      "properties": {
+        "currentDiskSize": {
+          "type": "string",
+          "description": "The current disk usage of the instance in bytes.",
+          "format": "int64"
+        },
+        "databaseVersion": {
+          "type": "string",
+          "description": "The database engine type and version. Can be MYSQL_5_5 or MYSQL_5_6. Defaults to MYSQL_5_5. The databaseVersion can not be changed after instance creation."
+        },
+        "etag": {
+          "type": "string",
+          "description": "HTTP 1.1 Entity tag for the resource."
+        },
+        "instanceType": {
+          "type": "string",
+          "description": "The instance type. This can be one of the following.\nCLOUD_SQL_INSTANCE: A Cloud SQL instance that is not replicating from a master.\nREAD_REPLICA_INSTANCE: A Cloud SQL instance configured as a read-replica."
+        },
+        "ipAddresses": {
+          "type": "array",
+          "description": "The assigned IP addresses for the instance.",
+          "items": {
+            "$ref": "#/definitions/IpMapping"
+          }
+        },
+        "ipv6Address": {
+          "type": "string",
+          "description": "The IPv6 address assigned to the instance."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#instance.",
+          "default": "sql#instance"
+        },
+        "masterInstanceName": {
+          "type": "string",
+          "description": "The name of the instance which will act as master in the replication setup."
+        },
+        "maxDiskSize": {
+          "type": "string",
+          "description": "The maximum disk size of the instance in bytes.",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the Cloud SQL instance. This does not include the project ID.",
+          "annotations": {
+            "required": [
+              "sql.instances.insert"
+            ]
+          }
+        },
+        "project": {
+          "type": "string",
+          "description": "The project ID of the project containing the Cloud SQL instance. The Google apps domain is prefixed if applicable."
+        },
+        "region": {
+          "type": "string",
+          "description": "The geographical region. Can be us-central, asia-east1 or europe-west1. Defaults to us-central. The region can not be changed after instance creation."
+        },
+        "replicaNames": {
+          "type": "array",
+          "description": "The replicas of the instance.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "The URI of this resource."
+        },
+        "serverCaCert": {
+          "$ref": "#/definitions/SslCert",
+          "description": "SSL configuration."
+        },
+        "serviceAccountEmailAddress": {
+          "type": "string",
+          "description": "The service account email address assigned to the instance."
+        },
+        "settings": {
+          "$ref": "#/definitions/Settings",
+          "description": "The user settings.",
+          "annotations": {
+            "required": [
+              "sql.instances.insert",
+              "sql.instances.update"
+            ]
+          }
+        },
+        "state": {
+          "type": "string",
+          "description": "The current serving state of the Cloud SQL instance. This can be one of the following.\nRUNNABLE: The instance is running, or is ready to run when accessed.\nSUSPENDED: The instance is not available, for example due to problems with billing.\nPENDING_CREATE: The instance is being created.\nMAINTENANCE: The instance is down for maintenance.\nUNKNOWN_STATE: The state of the instance is unknown."
+        }
+      }
+    },
+    "DatabasesListResponse": {
+      "id": "DatabasesListResponse",
+      "type": "object",
+      "description": "Database list response.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "List of database resources in the instance.",
+          "items": {
+            "$ref": "#/definitions/Database"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#databasesList.",
+          "default": "sql#databasesList"
+        }
+      }
+    },
+    "ExportContext": {
+      "id": "ExportContext",
+      "type": "object",
+      "description": "Database instance export context.",
+      "properties": {
+        "csvExportOptions": {
+          "type": "object",
+          "description": "Options for exporting data as CSV.",
+          "properties": {
+            "selectQuery": {
+              "type": "string",
+              "description": "The select query used to extract the data."
+            }
+          }
+        },
+        "databases": {
+          "type": "array",
+          "description": "Databases (for example, guestbook) from which the export is made. If fileType is SQL and no database is specified, all databases are exported. If fileType is CSV, you can optionally specify at most one database to export. If csvExportOptions.selectQuery also specifies the database, this field will be ignored.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fileType": {
+          "type": "string",
+          "description": "The file type for the specified uri.\nSQL: The file contains SQL statements.\nCSV: The file contains CSV data."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#exportContext.",
+          "default": "sql#exportContext"
+        },
+        "sqlExportOptions": {
+          "type": "object",
+          "description": "Options for exporting data as SQL statements.",
+          "properties": {
+            "tables": {
+              "type": "array",
+              "description": "Tables to export, or that were exported, from the specified database. If you specify tables, specify one and only one database.",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "uri": {
+          "type": "string",
+          "description": "The path to the file in Google Cloud Storage where the export will be stored. The URI is in the form gs://bucketName/fileName. If the file already exists, the operation fails. If fileType is SQL and the filename ends with .gz, the contents are compressed."
+        }
+      }
+    },
+    "Flag": {
+      "id": "Flag",
+      "type": "object",
+      "description": "A Google Cloud SQL service flag resource.",
+      "properties": {
+        "allowedStringValues": {
+          "type": "array",
+          "description": "For STRING flags, a list of strings that the value can be set to.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "appliesTo": {
+          "type": "array",
+          "description": "The database version this flag applies to. Currently this can only be [MYSQL_5_5].",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#flag.",
+          "default": "sql#flag"
+        },
+        "maxValue": {
+          "type": "string",
+          "description": "For INTEGER flags, the maximum allowed value.",
+          "format": "int64"
+        },
+        "minValue": {
+          "type": "string",
+          "description": "For INTEGER flags, the minimum allowed value.",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string",
+          "description": "This is the name of the flag. Flag names always use underscores, not hyphens, e.g. max_allowed_packet"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the flag. Flags are typed to being BOOLEAN, STRING, INTEGER or NONE. NONE is used for flags which do not take a value, such as skip_grant_tables."
+        }
+      }
+    },
+    "FlagsListResponse": {
+      "id": "FlagsListResponse",
+      "type": "object",
+      "description": "Flags list response.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "List of flags.",
+          "items": {
+            "$ref": "#/definitions/Flag"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#flagsList.",
+          "default": "sql#flagsList"
+        }
+      }
+    },
+    "ImportContext": {
+      "id": "ImportContext",
+      "type": "object",
+      "description": "Database instance import context.",
+      "properties": {
+        "csvImportOptions": {
+          "type": "object",
+          "description": "Options for importing data as CSV.",
+          "properties": {
+            "columns": {
+              "type": "array",
+              "description": "The columns to which CSV data is imported. If not specified, all columns of the database table are loaded with CSV data.",
+              "items": {
+                "type": "string"
+              }
+            },
+            "table": {
+              "type": "string",
+              "description": "The table to which CSV data is imported."
+            }
+          }
+        },
+        "database": {
+          "type": "string",
+          "description": "The database (for example, guestbook) to which the import is made. If fileType is SQL and no database is specified, it is assumed that the database is specified in the file to be imported. If fileType is CSV, it must be specified."
+        },
+        "fileType": {
+          "type": "string",
+          "description": "The file type for the specified uri.\nSQL: The file contains SQL statements.\nCSV: The file contains CSV data."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#importContext.",
+          "default": "sql#importContext"
+        },
+        "uri": {
+          "type": "string",
+          "description": "A path to the file in Google Cloud Storage from which the import is made. The URI is in the form gs://bucketName/fileName. Compressed gzip files (.gz) are supported when fileType is SQL."
+        }
+      }
+    },
+    "InstancesCloneRequest": {
+      "id": "InstancesCloneRequest",
+      "type": "object",
+      "description": "Database instance clone request.",
+      "properties": {
+        "cloneContext": {
+          "$ref": "#/definitions/CloneContext",
+          "description": "Contains details about the clone operation."
+        }
+      }
+    },
+    "InstancesExportRequest": {
+      "id": "InstancesExportRequest",
+      "type": "object",
+      "description": "Database instance export request.",
+      "properties": {
+        "exportContext": {
+          "$ref": "#/definitions/ExportContext",
+          "description": "Contains details about the export operation."
+        }
+      }
+    },
+    "InstancesImportRequest": {
+      "id": "InstancesImportRequest",
+      "type": "object",
+      "description": "Database instance import request.",
+      "properties": {
+        "importContext": {
+          "$ref": "#/definitions/ImportContext",
+          "description": "Contains details about the import operation."
+        }
+      }
+    },
+    "InstancesListResponse": {
+      "id": "InstancesListResponse",
+      "type": "object",
+      "description": "Database instances list response.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "List of database instance resources.",
+          "items": {
+            "$ref": "#/definitions/DatabaseInstance"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#instancesList.",
+          "default": "sql#instancesList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results."
+        }
+      }
+    },
+    "InstancesRestoreBackupRequest": {
+      "id": "InstancesRestoreBackupRequest",
+      "type": "object",
+      "description": "Database instance restore backup request.",
+      "properties": {
+        "restoreBackupContext": {
+          "$ref": "#/definitions/RestoreBackupContext",
+          "description": "Parameters required to perform the restore backup operation."
+        }
+      }
+    },
+    "IpConfiguration": {
+      "id": "IpConfiguration",
+      "type": "object",
+      "description": "IP Management configuration.",
+      "properties": {
+        "authorizedNetworks": {
+          "type": "array",
+          "description": "The list of external networks that are allowed to connect to the instance using the IP. In CIDR notation, also known as 'slash' notation (e.g. 192.168.100.0/24).",
+          "items": {
+            "$ref": "#/definitions/AclEntry"
+          }
+        },
+        "ipv4Enabled": {
+          "type": "boolean",
+          "description": "Whether the instance should be assigned an IP address or not."
+        },
+        "requireSsl": {
+          "type": "boolean",
+          "description": "Whether the mysqld should default to 'REQUIRE X509' for users connecting over IP."
+        }
+      }
+    },
+    "IpMapping": {
+      "id": "IpMapping",
+      "type": "object",
+      "description": "Database instance IP Mapping.",
+      "properties": {
+        "ipAddress": {
+          "type": "string",
+          "description": "The IP address assigned."
+        },
+        "timeToRetire": {
+          "type": "string",
+          "description": "The due time for this IP to be retired in RFC 3339 format, for example 2012-11-15T16:19:00.094Z. This field is only available when the IP is scheduled to be retired.",
+          "format": "date-time"
+        }
+      }
+    },
+    "LocationPreference": {
+      "id": "LocationPreference",
+      "type": "object",
+      "description": "Preferred location. This specifies where a Cloud SQL instance should preferably be located, either in a specific Compute Engine zone, or co-located with an App Engine application. Note that if the preferred location is not available, the instance will be located as close as possible within the region. Only one location may be specified.",
+      "properties": {
+        "followGaeApplication": {
+          "type": "string",
+          "description": "The AppEngine application to follow, it must be in the same region as the Cloud SQL instance."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#locationPreference.",
+          "default": "sql#locationPreference"
+        },
+        "zone": {
+          "type": "string",
+          "description": "The preferred Compute Engine zone (e.g. us-centra1-a, us-central1-b, etc.)."
+        }
+      }
+    },
+    "Operation": {
+      "id": "Operation",
+      "type": "object",
+      "description": "An Operations resource contains information about database instance operations such as create, delete, and restart. Operations resources are created in response to operations that were initiated; you never create them directly.",
+      "properties": {
+        "endTime": {
+          "type": "string",
+          "description": "The time this operation finished in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.",
+          "format": "date-time"
+        },
+        "error": {
+          "type": "object",
+          "description": "If errors occurred during processing of this operation, this field will be populated.",
+          "properties": {
+            "errors": {
+              "type": "array",
+              "description": "The list of errors encountered while processing this operation.",
+              "items": {
+                "$ref": "#/definitions/OperationError"
+              }
+            }
+          }
+        },
+        "exportContext": {
+          "$ref": "#/definitions/ExportContext",
+          "description": "The context for export operation, if applicable."
+        },
+        "importContext": {
+          "$ref": "#/definitions/ImportContext",
+          "description": "The context for import operation, if applicable."
+        },
+        "insertTime": {
+          "type": "string",
+          "description": "The time this operation was enqueued in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.",
+          "format": "date-time"
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#instanceOperation.",
+          "default": "sql#operation"
+        },
+        "name": {
+          "type": "string",
+          "description": "An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation."
+        },
+        "operationType": {
+          "type": "string",
+          "description": "TODO(b/18431310): update this list to reflect current values. The type of the operation. Valid values are CREATE, DELETE, UPDATE, RESTART, IMPORT, EXPORT, BACKUP_VOLUME, RESTORE_VOLUME."
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "The URI of this resource."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "The time this operation actually started in UTC timezone in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of an operation. Valid values are PENDING, RUNNING, DONE, UNKNOWN."
+        },
+        "targetId": {
+          "type": "string",
+          "description": "Name of the database instance related to this operation."
+        },
+        "targetLink": {
+          "type": "string",
+          "description": "The URI of the instance related to the operation."
+        },
+        "targetProject": {
+          "type": "string",
+          "description": "The project ID of the target instance related to this operation."
+        },
+        "user": {
+          "type": "string",
+          "description": "The email address of the user who initiated this operation."
+        }
+      }
+    },
+    "OperationError": {
+      "id": "OperationError",
+      "type": "object",
+      "description": "Database instance operation error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Identifies the specific error that occurred."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#operationError.",
+          "default": "sql#operationError"
+        },
+        "message": {
+          "type": "string",
+          "description": "Additional information about the error encountered."
+        }
+      }
+    },
+    "OperationsListResponse": {
+      "id": "OperationsListResponse",
+      "type": "object",
+      "description": "Database instance list operations response.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "List of operation resources.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#operationsList.",
+          "default": "sql#operationsList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results."
+        }
+      }
+    },
+    "RestoreBackupContext": {
+      "id": "RestoreBackupContext",
+      "type": "object",
+      "description": "Database instance restore from backup context.",
+      "properties": {
+        "backupRunId": {
+          "type": "string",
+          "description": "The ID of the backup run to restore from.",
+          "format": "int64"
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#restoreBackupContext.",
+          "default": "sql#restoreBackupContext"
+        }
+      }
+    },
+    "Settings": {
+      "id": "Settings",
+      "type": "object",
+      "description": "Database instance settings.",
+      "properties": {
+        "activationPolicy": {
+          "type": "string",
+          "description": "The activation policy for this instance. This specifies when the instance should be activated and is applicable only when the instance state is RUNNABLE. This can be one of the following.\nALWAYS: The instance should always be active.\nNEVER: The instance should never be activated.\nON_DEMAND: The instance is activated upon receiving requests."
+        },
+        "authorizedGaeApplications": {
+          "type": "array",
+          "description": "The App Engine app IDs that can access this instance.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "backupConfiguration": {
+          "$ref": "#/definitions/BackupConfiguration",
+          "description": "The daily backup configuration for the instance."
+        },
+        "databaseFlags": {
+          "type": "array",
+          "description": "The database flags passed to the instance at startup.",
+          "items": {
+            "$ref": "#/definitions/DatabaseFlags"
+          }
+        },
+        "databaseReplicationEnabled": {
+          "type": "boolean",
+          "description": "Configuration specific to read replica instances. Indicates whether replication is enabled or not."
+        },
+        "ipConfiguration": {
+          "$ref": "#/definitions/IpConfiguration",
+          "description": "The settings for IP Management. This allows to enable or disable the instance IP and manage which external networks can connect to the instance."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#settings.",
+          "default": "sql#settings"
+        },
+        "locationPreference": {
+          "$ref": "#/definitions/LocationPreference",
+          "description": "The location preference settings. This allows the instance to be located as near as possible to either an App Engine app or GCE zone for better performance."
+        },
+        "pricingPlan": {
+          "type": "string",
+          "description": "The pricing plan for this instance. This can be either PER_USE or PACKAGE."
+        },
+        "replicationType": {
+          "type": "string",
+          "description": "The type of replication this instance uses. This can be either ASYNCHRONOUS or SYNCHRONOUS."
+        },
+        "settingsVersion": {
+          "type": "string",
+          "description": "The version of instance settings. This is a required field for update method to make sure concurrent updates are handled properly. During update, use the most recent settingsVersion value for this instance and do not try to update this value.",
+          "format": "int64",
+          "annotations": {
+            "required": [
+              "sql.instances.update"
+            ]
+          }
+        },
+        "tier": {
+          "type": "string",
+          "description": "The tier of service for this instance, for example D1, D2. For more information, see pricing.",
+          "annotations": {
+            "required": [
+              "sql.instances.insert",
+              "sql.instances.update"
+            ]
+          }
+        }
+      }
+    },
+    "SslCert": {
+      "id": "SslCert",
+      "type": "object",
+      "description": "SslCerts Resource",
+      "properties": {
+        "cert": {
+          "type": "string",
+          "description": "PEM representation."
+        },
+        "certSerialNumber": {
+          "type": "string",
+          "description": "Serial number, as extracted from the certificate."
+        },
+        "commonName": {
+          "type": "string",
+          "description": "User supplied name. Constrained to [a-zA-Z.-_ ]+."
+        },
+        "createTime": {
+          "type": "string",
+          "description": "The time when the certificate was created in RFC 3339 format, for example 2012-11-15T16:19:00.094Z",
+          "format": "date-time"
+        },
+        "expirationTime": {
+          "type": "string",
+          "description": "The time when the certificate expires in RFC 3339 format, for example 2012-11-15T16:19:00.094Z.",
+          "format": "date-time"
+        },
+        "instance": {
+          "type": "string",
+          "description": "Name of the database instance."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#sslCert.",
+          "default": "sql#sslCert"
+        },
+        "selfLink": {
+          "type": "string"
+        },
+        "sha1Fingerprint": {
+          "type": "string",
+          "description": "Sha1 Fingerprint."
+        }
+      }
+    },
+    "SslCertDetail": {
+      "id": "SslCertDetail",
+      "type": "object",
+      "description": "SslCertDetail.",
+      "properties": {
+        "certInfo": {
+          "$ref": "#/definitions/SslCert",
+          "description": "The public information about the cert."
+        },
+        "certPrivateKey": {
+          "type": "string",
+          "description": "The private key for the client cert, in pem format. Keep private in order to protect your security."
+        }
+      }
+    },
+    "SslCertsInsertRequest": {
+      "id": "SslCertsInsertRequest",
+      "type": "object",
+      "description": "SslCerts insert request.",
+      "properties": {
+        "commonName": {
+          "type": "string",
+          "description": "User supplied name. Must be a distinct name from the other certificates for this instance. New certificates will not be usable until the instance is restarted."
+        }
+      }
+    },
+    "SslCertsInsertResponse": {
+      "id": "SslCertsInsertResponse",
+      "type": "object",
+      "description": "SslCert insert response.",
+      "properties": {
+        "clientCert": {
+          "$ref": "#/definitions/SslCertDetail",
+          "description": "The new client certificate and private key. The new certificate will not work until the instance is restarted."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#sslCertsInsert.",
+          "default": "sql#sslCertsInsert"
+        },
+        "serverCaCert": {
+          "$ref": "#/definitions/SslCert",
+          "description": "The server Certificate Authority's certificate. If this is missing you can force a new one to be generated by calling resetSslConfig method on instances resource."
+        }
+      }
+    },
+    "SslCertsListResponse": {
+      "id": "SslCertsListResponse",
+      "type": "object",
+      "description": "SslCerts list response.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "List of client certificates for the instance.",
+          "items": {
+            "$ref": "#/definitions/SslCert"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#sslCertsList.",
+          "default": "sql#sslCertsList"
+        }
+      }
+    },
+    "Tier": {
+      "id": "Tier",
+      "type": "object",
+      "description": "A Google Cloud SQL service tier resource.",
+      "properties": {
+        "DiskQuota": {
+          "type": "string",
+          "description": "The maximum disk size of this tier in bytes.",
+          "format": "int64"
+        },
+        "RAM": {
+          "type": "string",
+          "description": "The maximum RAM usage of this tier in bytes.",
+          "format": "int64"
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#tier.",
+          "default": "sql#tier"
+        },
+        "region": {
+          "type": "array",
+          "description": "The applicable regions for this tier. Can be us-east1, europe-west1 or asia-east1.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tier": {
+          "type": "string",
+          "description": "An identifier for the service tier, for example D1, D2 etc. For related information, see Pricing."
+        }
+      }
+    },
+    "TiersListResponse": {
+      "id": "TiersListResponse",
+      "type": "object",
+      "description": "Tiers list response.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "List of tiers.",
+          "items": {
+            "$ref": "#/definitions/Tier"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#tiersList.",
+          "default": "sql#tiersList"
+        }
+      }
+    },
+    "User": {
+      "id": "User",
+      "type": "object",
+      "description": "A Cloud SQL user resource.",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "HTTP 1.1 Entity tag for the resource."
+        },
+        "host": {
+          "type": "string",
+          "description": "The host name from which the user can connect. For insert operations, host is set to '%'. For update operations, host is specified as part of the request URL. The host name is not mutable with this API."
+        },
+        "instance": {
+          "type": "string",
+          "description": "The name of the Cloud SQL instance. This does not include the project ID. Can be omitted for update since it is already specified on the URL."
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#user.",
+          "default": "sql#user"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the user in the Cloud SQL instance. Can be omitted for update since it is already specified on the URL."
+        },
+        "password": {
+          "type": "string",
+          "description": "The password for the user."
+        },
+        "project": {
+          "type": "string",
+          "description": "The project ID of the project containing the Cloud SQL database. The Google apps domain is prefixed if applicable. Can be omitted for update since it is already specified on the URL."
+        }
+      }
+    },
+    "UsersListResponse": {
+      "id": "UsersListResponse",
+      "type": "object",
+      "description": "User list response.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "List of user resources in the instance.",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "This is always sql#usersList.",
+          "default": "sql#usersList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "alt": {
+      "name": "alt",
+      "in": "query",
+      "description": "Data format for the response.",
+      "default": "json",
+      "type": "string",
+      "enum": [
+        "json"
+      ]
+    },
+    "fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Selector specifying which fields to include in a partial response.",
+      "type": "string"
+    },
+    "key": {
+      "name": "key",
+      "in": "query",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    "oauth_token": {
+      "name": "oauth_token",
+      "in": "query",
+      "description": "OAuth 2.0 token for the current user.",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "name": "prettyPrint",
+      "in": "query",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "true",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "name": "quotaUser",
+      "in": "query",
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "type": "string"
+    },
+    "userIp": {
+      "name": "userIp",
+      "in": "query",
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "type": "string"
+    }
+  }
+}

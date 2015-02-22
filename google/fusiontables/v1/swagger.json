@@ -1,0 +1,2000 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Fusion Tables API",
+    "description": "API for working with Fusion Tables data.",
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "version": "v1"
+  },
+  "host": "www.googleapis.com",
+  "basePath": "/fusiontables/v1",
+  "schemes": [
+    "https"
+  ],
+  "externalDocs": {
+    "url": "https://developers.google.com/fusiontables"
+  },
+  "paths": {
+    "/tables/{tableId}/columns/{columnId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes the column.",
+        "operationId": "fusiontables.column.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "columnId",
+            "in": "path",
+            "description": "Name or identifier for the column being deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table from which the column is being deleted.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Retrieves a specific column by its id.",
+        "operationId": "fusiontables.column.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Column"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "columnId",
+            "in": "path",
+            "description": "Name or identifier for the column that is being requested.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table to which the column belongs.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Updates the name or type of an existing column. This method supports patch semantics.",
+        "operationId": "fusiontables.column.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Column"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "columnId",
+            "in": "path",
+            "description": "Name or identifier for the column that is being updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table for which the column is being updated.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "description": "Updates the name or type of an existing column.",
+        "operationId": "fusiontables.column.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Column"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "columnId",
+            "in": "path",
+            "description": "Name or identifier for the column that is being updated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table for which the column is being updated.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/tables/{tableId}/columns": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Adds a new column to the table.",
+        "operationId": "fusiontables.column.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Column"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table for which a new column is being added.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Retrieves a list of columns.",
+        "operationId": "fusiontables.column.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ColumnList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of columns to return. Optional. Default is 5.",
+            "type": "integer",
+            "minimum": 0
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Continuation token specifying which result page to return. Optional.",
+            "type": "string"
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table whose columns are being listed.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/query": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Executes an SQL SELECT/INSERT/UPDATE/DELETE/SHOW/DESCRIBE/CREATE statement.",
+        "operationId": "fusiontables.query.sql",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Sqlresponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "hdrs",
+            "in": "query",
+            "description": "Should column names be included (in the first row)?. Default is true.",
+            "type": "boolean"
+          },
+          {
+            "name": "sql",
+            "in": "query",
+            "description": "An SQL SELECT/SHOW/DESCRIBE/INSERT/UPDATE/DELETE/CREATE statement.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "typed",
+            "in": "query",
+            "description": "Should typed values be returned in the (JSON) response -- numbers for numeric values and parsed geometries for KML values? Default is true.",
+            "type": "boolean"
+          }
+        ]
+      },
+      "get": {
+        "description": "Executes an SQL SELECT/SHOW/DESCRIBE statement.",
+        "operationId": "fusiontables.query.sqlGet",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Sqlresponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "hdrs",
+            "in": "query",
+            "description": "Should column names be included (in the first row)?. Default is true.",
+            "type": "boolean"
+          },
+          {
+            "name": "sql",
+            "in": "query",
+            "description": "An SQL SELECT/SHOW/DESCRIBE statement.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "typed",
+            "in": "query",
+            "description": "Should typed values be returned in the (JSON) response -- numbers for numeric values and parsed geometries for KML values? Default is true.",
+            "type": "boolean"
+          }
+        ]
+      }
+    },
+    "/tables/{tableId}/styles/{styleId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes a style.",
+        "operationId": "fusiontables.style.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "styleId",
+            "in": "path",
+            "description": "Identifier (within a table) for the style being deleted",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table from which the style is being deleted",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Gets a specific style.",
+        "operationId": "fusiontables.style.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/StyleSetting"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "styleId",
+            "in": "path",
+            "description": "Identifier (integer) for a specific style in a table",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table to which the requested style belongs",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Updates an existing style. This method supports patch semantics.",
+        "operationId": "fusiontables.style.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/StyleSetting"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "styleId",
+            "in": "path",
+            "description": "Identifier (within a table) for the style being updated.",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table whose style is being updated.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "description": "Updates an existing style.",
+        "operationId": "fusiontables.style.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/StyleSetting"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "styleId",
+            "in": "path",
+            "description": "Identifier (within a table) for the style being updated.",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table whose style is being updated.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/tables/{tableId}/styles": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Adds a new style for the table.",
+        "operationId": "fusiontables.style.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/StyleSetting"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table for which a new style is being added",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Retrieves a list of styles.",
+        "operationId": "fusiontables.style.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/StyleSettingList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of styles to return. Optional. Default is 5.",
+            "type": "integer",
+            "minimum": 0
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Continuation token specifying which result page to return. Optional.",
+            "type": "string"
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table whose styles are being listed",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/tables/{tableId}/copy": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Copies a table.",
+        "operationId": "fusiontables.table.copy",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "copyPresentation",
+            "in": "query",
+            "description": "Whether to also copy tabs, styles, and templates. Default is false.",
+            "type": "boolean"
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "ID of the table that is being copied.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/tables/{tableId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes a table.",
+        "operationId": "fusiontables.table.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "ID of the table that is being deleted.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Retrieves a specific table by its id.",
+        "operationId": "fusiontables.table.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Identifier(ID) for the table being requested.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Updates an existing table. Unless explicitly requested, only the name, description, and attribution will be updated. This method supports patch semantics.",
+        "operationId": "fusiontables.table.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "replaceViewDefinition",
+            "in": "query",
+            "description": "Should the view definition also be updated? The specified view definition replaces the existing one. Only a view can be updated with a new definition.",
+            "type": "boolean"
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "ID of the table that is being updated.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "description": "Updates an existing table. Unless explicitly requested, only the name, description, and attribution will be updated.",
+        "operationId": "fusiontables.table.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "replaceViewDefinition",
+            "in": "query",
+            "description": "Should the view definition also be updated? The specified view definition replaces the existing one. Only a view can be updated with a new definition.",
+            "type": "boolean"
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "ID of the table that is being updated.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/tables/{tableId}/import": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Import more rows into a table.",
+        "operationId": "fusiontables.table.importRows",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Import"
+            }
+          }
+        },
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "name": "delimiter",
+            "in": "query",
+            "description": "The delimiter used to separate cell values. This can only consist of a single character. Default is ','.",
+            "type": "string"
+          },
+          {
+            "name": "encoding",
+            "in": "query",
+            "description": "The encoding of the content. Default is UTF-8. Use 'auto-detect' if you are unsure of the encoding.",
+            "type": "string"
+          },
+          {
+            "name": "endLine",
+            "in": "query",
+            "description": "The index of the last line from which to start importing, exclusive. Thus, the number of imported lines is endLine - startLine. If this parameter is not provided, the file will be imported until the last line of the file. If endLine is negative, then the imported content will exclude the last endLine lines. That is, if endline is negative, no line will be imported whose index is greater than N + endLine where N is the number of lines in the file, and the number of imported lines will be N + endLine - startLine.",
+            "type": "integer"
+          },
+          {
+            "name": "isStrict",
+            "in": "query",
+            "description": "Whether the CSV must have the same number of values for each row. If false, rows with fewer values will be padded with empty values. Default is true.",
+            "type": "boolean"
+          },
+          {
+            "name": "startLine",
+            "in": "query",
+            "description": "The index of the first line from which to start importing, inclusive. Default is 0.",
+            "type": "integer"
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "The table into which new rows are being imported.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/tables/import": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Import a new table.",
+        "operationId": "fusiontables.table.importTable",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        },
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "name": "delimiter",
+            "in": "query",
+            "description": "The delimiter used to separate cell values. This can only consist of a single character. Default is ','.",
+            "type": "string"
+          },
+          {
+            "name": "encoding",
+            "in": "query",
+            "description": "The encoding of the content. Default is UTF-8. Use 'auto-detect' if you are unsure of the encoding.",
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The name to be assigned to the new table.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/tables": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates a new table.",
+        "operationId": "fusiontables.table.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieves a list of tables a user owns.",
+        "operationId": "fusiontables.table.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TableList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of styles to return. Optional. Default is 5.",
+            "type": "integer",
+            "minimum": 0
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Continuation token specifying which result page to return. Optional.",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/tables/{tableId}/tasks/{taskId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes the task, unless already started.",
+        "operationId": "fusiontables.task.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table from which the task is being deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Retrieves a specific task by its id.",
+        "operationId": "fusiontables.task.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table to which the task belongs.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/tables/{tableId}/tasks": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves a list of tasks.",
+        "operationId": "fusiontables.task.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TaskList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of columns to return. Optional. Default is 5.",
+            "type": "integer",
+            "minimum": 0
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "startIndex",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table whose tasks are being listed.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/tables/{tableId}/templates/{templateId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes a template",
+        "operationId": "fusiontables.template.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table from which the template is being deleted",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "Identifier for the template which is being deleted",
+            "required": true,
+            "type": "integer"
+          }
+        ]
+      },
+      "get": {
+        "description": "Retrieves a specific template by its id",
+        "operationId": "fusiontables.template.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table to which the template belongs",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "Identifier for the template that is being requested",
+            "required": true,
+            "type": "integer"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Updates an existing template. This method supports patch semantics.",
+        "operationId": "fusiontables.template.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table to which the updated template belongs",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "Identifier for the template that is being updated",
+            "required": true,
+            "type": "integer"
+          }
+        ]
+      },
+      "put": {
+        "description": "Updates an existing template",
+        "operationId": "fusiontables.template.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table to which the updated template belongs",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "Identifier for the template that is being updated",
+            "required": true,
+            "type": "integer"
+          }
+        ]
+      }
+    },
+    "/tables/{tableId}/templates": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates a new template for the table.",
+        "operationId": "fusiontables.template.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table for which a new template is being created",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Retrieves a list of templates.",
+        "operationId": "fusiontables.template.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TemplateList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of templates to return. Optional. Default is 5.",
+            "type": "integer",
+            "minimum": 0
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Continuation token specifying which results page to return. Optional.",
+            "type": "string"
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Identifier for the table whose templates are being requested",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Bucket": {
+      "id": "Bucket",
+      "type": "object",
+      "description": "Specifies the minimum and maximum values, the color, opacity, icon and weight of a bucket within a StyleSetting.",
+      "properties": {
+        "color": {
+          "type": "string",
+          "description": "Color of line or the interior of a polygon in #RRGGBB format."
+        },
+        "icon": {
+          "type": "string",
+          "description": "Icon name used for a point."
+        },
+        "max": {
+          "type": "number",
+          "description": "Maximum value in the selected column for a row to be styled according to the bucket color, opacity, icon, or weight.",
+          "format": "double"
+        },
+        "min": {
+          "type": "number",
+          "description": "Minimum value in the selected column for a row to be styled according to the bucket color, opacity, icon, or weight.",
+          "format": "double"
+        },
+        "opacity": {
+          "type": "number",
+          "description": "Opacity of the color: 0.0 (transparent) to 1.0 (opaque).",
+          "format": "double"
+        },
+        "weight": {
+          "type": "integer",
+          "description": "Width of a line (in pixels).",
+          "format": "int32"
+        }
+      }
+    },
+    "Column": {
+      "id": "Column",
+      "type": "object",
+      "description": "Specifies the id, name and type of a column in a table.",
+      "properties": {
+        "baseColumn": {
+          "type": "object",
+          "description": "Optional identifier of the base column. If present, this column is derived from the specified base column.",
+          "properties": {
+            "columnId": {
+              "type": "integer",
+              "description": "The id of the column in the base table from which this column is derived.",
+              "format": "int32"
+            },
+            "tableIndex": {
+              "type": "integer",
+              "description": "Offset to the entry in the list of base tables in the table definition.",
+              "format": "int32"
+            }
+          }
+        },
+        "columnId": {
+          "type": "integer",
+          "description": "Identifier for the column.",
+          "format": "int32"
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional column description."
+        },
+        "graph_predicate": {
+          "type": "string",
+          "description": "Optional column predicate. Used to map table to graph data model (subject,predicate,object) See http://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/#data-model"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Type name: a template for an individual column.",
+          "default": "fusiontables#column"
+        },
+        "name": {
+          "type": "string",
+          "description": "Required name of the column.",
+          "annotations": {
+            "required": [
+              "fusiontables.column.insert"
+            ]
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "Required type of the column.",
+          "annotations": {
+            "required": [
+              "fusiontables.column.insert"
+            ]
+          }
+        }
+      }
+    },
+    "ColumnList": {
+      "id": "ColumnList",
+      "type": "object",
+      "description": "Represents a list of columns in a table.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "List of all requested columns.",
+          "items": {
+            "$ref": "#/definitions/Column"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Type name: a list of all columns.",
+          "default": "fusiontables#columnList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "Token used to access the next page of this result. No token is displayed if there are no more tokens left."
+        },
+        "totalItems": {
+          "type": "integer",
+          "description": "Total number of columns for the table.",
+          "format": "int32"
+        }
+      }
+    },
+    "Geometry": {
+      "id": "Geometry",
+      "type": "object",
+      "description": "Represents a Geometry object.",
+      "properties": {
+        "geometries": {
+          "type": "array",
+          "description": "The list of geometries in this geometry collection.",
+          "items": {}
+        },
+        "geometry": {},
+        "type": {
+          "type": "string",
+          "description": "Type: A collection of geometries.",
+          "default": "GeometryCollection"
+        }
+      }
+    },
+    "Import": {
+      "id": "Import",
+      "type": "object",
+      "description": "Represents an import request.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Type name: a template for an import request.",
+          "default": "fusiontables#import"
+        },
+        "numRowsReceived": {
+          "type": "string",
+          "description": "The number of rows received from the import request.",
+          "format": "int64"
+        }
+      }
+    },
+    "Line": {
+      "id": "Line",
+      "type": "object",
+      "description": "Represents a line geometry.",
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "description": "The coordinates that define the line.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            }
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "Type: A line geometry.",
+          "default": "LineString"
+        }
+      }
+    },
+    "LineStyle": {
+      "id": "LineStyle",
+      "type": "object",
+      "description": "Represents a LineStyle within a StyleSetting",
+      "properties": {
+        "strokeColor": {
+          "type": "string",
+          "description": "Color of the line in #RRGGBB format."
+        },
+        "strokeColorStyler": {
+          "$ref": "#/definitions/StyleFunction",
+          "description": "Column-value, gradient or buckets styler that is used to determine the line color and opacity."
+        },
+        "strokeOpacity": {
+          "type": "number",
+          "description": "Opacity of the line : 0.0 (transparent) to 1.0 (opaque).",
+          "format": "double"
+        },
+        "strokeWeight": {
+          "type": "integer",
+          "description": "Width of the line in pixels.",
+          "format": "int32"
+        },
+        "strokeWeightStyler": {
+          "$ref": "#/definitions/StyleFunction",
+          "description": "Column-value or bucket styler that is used to determine the width of the line."
+        }
+      }
+    },
+    "Point": {
+      "id": "Point",
+      "type": "object",
+      "description": "Represents a point object.",
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "description": "The coordinates that define the point.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "Point: A point geometry.",
+          "default": "Point"
+        }
+      }
+    },
+    "PointStyle": {
+      "id": "PointStyle",
+      "type": "object",
+      "description": "Represents a PointStyle within a StyleSetting",
+      "properties": {
+        "iconName": {
+          "type": "string",
+          "description": "Name of the icon. Use values defined in http://www.google.com/fusiontables/DataSource?dsrcid=308519"
+        },
+        "iconStyler": {
+          "$ref": "#/definitions/StyleFunction",
+          "description": "Column or a bucket value from which the icon name is to be determined."
+        }
+      }
+    },
+    "Polygon": {
+      "id": "Polygon",
+      "type": "object",
+      "description": "Represents a polygon object.",
+      "properties": {
+        "coordinates": {
+          "type": "array",
+          "description": "The coordinates that define the polygon.",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "format": "double"
+              }
+            }
+          }
+        },
+        "type": {
+          "type": "string",
+          "description": "Type: A polygon geometry.",
+          "default": "Polygon"
+        }
+      }
+    },
+    "PolygonStyle": {
+      "id": "PolygonStyle",
+      "type": "object",
+      "description": "Represents a PolygonStyle within a StyleSetting",
+      "properties": {
+        "fillColor": {
+          "type": "string",
+          "description": "Color of the interior of the polygon in #RRGGBB format."
+        },
+        "fillColorStyler": {
+          "$ref": "#/definitions/StyleFunction",
+          "description": "Column-value, gradient, or bucket styler that is used to determine the interior color and opacity of the polygon."
+        },
+        "fillOpacity": {
+          "type": "number",
+          "description": "Opacity of the interior of the polygon: 0.0 (transparent) to 1.0 (opaque).",
+          "format": "double"
+        },
+        "strokeColor": {
+          "type": "string",
+          "description": "Color of the polygon border in #RRGGBB format."
+        },
+        "strokeColorStyler": {
+          "$ref": "#/definitions/StyleFunction",
+          "description": "Column-value, gradient or buckets styler that is used to determine the border color and opacity."
+        },
+        "strokeOpacity": {
+          "type": "number",
+          "description": "Opacity of the polygon border: 0.0 (transparent) to 1.0 (opaque).",
+          "format": "double"
+        },
+        "strokeWeight": {
+          "type": "integer",
+          "description": "Width of the polyon border in pixels.",
+          "format": "int32"
+        },
+        "strokeWeightStyler": {
+          "$ref": "#/definitions/StyleFunction",
+          "description": "Column-value or bucket styler that is used to determine the width of the polygon border."
+        }
+      }
+    },
+    "Sqlresponse": {
+      "id": "Sqlresponse",
+      "type": "object",
+      "description": "Represents a response to an sql statement.",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "description": "Columns in the table.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Type name: a template for an individual table.",
+          "default": "fusiontables#sqlresponse"
+        },
+        "rows": {
+          "type": "array",
+          "description": "The rows in the table. For each cell we print out whatever cell value (e.g., numeric, string) exists. Thus it is important that each cell contains only one value.",
+          "items": {
+            "type": "array",
+            "items": {}
+          }
+        }
+      }
+    },
+    "StyleFunction": {
+      "id": "StyleFunction",
+      "type": "object",
+      "description": "Represents a StyleFunction within a StyleSetting",
+      "properties": {
+        "buckets": {
+          "type": "array",
+          "description": "Bucket function that assigns a style based on the range a column value falls into.",
+          "items": {
+            "$ref": "#/definitions/Bucket"
+          }
+        },
+        "columnName": {
+          "type": "string",
+          "description": "Name of the column whose value is used in the style.",
+          "annotations": {
+            "required": [
+              "fusiontables.style.insert"
+            ]
+          }
+        },
+        "gradient": {
+          "type": "object",
+          "description": "Gradient function that interpolates a range of colors based on column value.",
+          "properties": {
+            "colors": {
+              "type": "array",
+              "description": "Array with two or more colors.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "color": {
+                    "type": "string",
+                    "description": "Color in #RRGGBB format."
+                  },
+                  "opacity": {
+                    "type": "number",
+                    "description": "Opacity of the color: 0.0 (transparent) to 1.0 (opaque).",
+                    "format": "double"
+                  }
+                }
+              }
+            },
+            "max": {
+              "type": "number",
+              "description": "Higher-end of the interpolation range: rows with this value will be assigned to colors[n-1].",
+              "format": "double"
+            },
+            "min": {
+              "type": "number",
+              "description": "Lower-end of the interpolation range: rows with this value will be assigned to colors[0].",
+              "format": "double"
+            }
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Stylers can be one of three kinds: \"fusiontables#fromColumn\" if the column value is to be used as is, i.e., the column values can have colors in #RRGGBBAA format or integer line widths or icon names; \"fusiontables#gradient\" if the styling of the row is to be based on applying the gradient function on the column value; or \"fusiontables#buckets\" if the styling is to based on the bucket into which the the column value falls."
+        }
+      }
+    },
+    "StyleSetting": {
+      "id": "StyleSetting",
+      "type": "object",
+      "description": "Represents a complete StyleSettings object. The primary key is a combination of the tableId and a styleId.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Type name: an individual style setting. A StyleSetting contains the style defintions for points, lines, and polygons in a table. Since a table can have any one or all of them, a style definition can have point, line and polygon style definitions.",
+          "default": "fusiontables#styleSetting"
+        },
+        "markerOptions": {
+          "$ref": "#/definitions/PointStyle",
+          "description": "Style definition for points in the table."
+        },
+        "name": {
+          "type": "string",
+          "description": "Optional name for the style setting."
+        },
+        "polygonOptions": {
+          "$ref": "#/definitions/PolygonStyle",
+          "description": "Style definition for polygons in the table."
+        },
+        "polylineOptions": {
+          "$ref": "#/definitions/LineStyle",
+          "description": "Style definition for lines in the table."
+        },
+        "styleId": {
+          "type": "integer",
+          "description": "Identifier for the style setting (unique only within tables).",
+          "format": "int32"
+        },
+        "tableId": {
+          "type": "string",
+          "description": "Identifier for the table."
+        }
+      }
+    },
+    "StyleSettingList": {
+      "id": "StyleSettingList",
+      "type": "object",
+      "description": "Represents a list of styles for a given table.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "All requested style settings.",
+          "items": {
+            "$ref": "#/definitions/StyleSetting"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Type name: in this case, a list of style settings.",
+          "default": "fusiontables#styleSettingList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "Token used to access the next page of this result. No token is displayed if there are no more styles left."
+        },
+        "totalItems": {
+          "type": "integer",
+          "description": "Total number of styles for the table.",
+          "format": "int32"
+        }
+      }
+    },
+    "Table": {
+      "id": "Table",
+      "type": "object",
+      "description": "Represents a table. Specifies the name, whether it is exportable, description, attribution, and attribution link.",
+      "properties": {
+        "attribution": {
+          "type": "string",
+          "description": "Optional attribution assigned to the table."
+        },
+        "attributionLink": {
+          "type": "string",
+          "description": "Optional link for attribution."
+        },
+        "baseTableIds": {
+          "type": "array",
+          "description": "Optional base table identifier if this table is a view or merged table.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "columns": {
+          "type": "array",
+          "description": "Columns in the table.",
+          "items": {
+            "$ref": "#/definitions/Column"
+          },
+          "annotations": {
+            "required": [
+              "fusiontables.table.insert",
+              "fusiontables.table.update"
+            ]
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description assigned to the table."
+        },
+        "isExportable": {
+          "type": "boolean",
+          "description": "Variable for whether table is exportable.",
+          "annotations": {
+            "required": [
+              "fusiontables.table.insert",
+              "fusiontables.table.update"
+            ]
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Type name: a template for an individual table.",
+          "default": "fusiontables#table"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name assigned to a table.",
+          "annotations": {
+            "required": [
+              "fusiontables.table.insert",
+              "fusiontables.table.update"
+            ]
+          }
+        },
+        "sql": {
+          "type": "string",
+          "description": "Optional sql that encodes the table definition for derived tables."
+        },
+        "tableId": {
+          "type": "string",
+          "description": "Encrypted unique alphanumeric identifier for the table."
+        }
+      }
+    },
+    "TableList": {
+      "id": "TableList",
+      "type": "object",
+      "description": "Represents a list of tables.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "List of all requested tables.",
+          "items": {
+            "$ref": "#/definitions/Table"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Type name: a list of all tables.",
+          "default": "fusiontables#tableList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "Token used to access the next page of this result. No token is displayed if there are no more tokens left."
+        }
+      }
+    },
+    "Task": {
+      "id": "Task",
+      "type": "object",
+      "description": "Specifies the id, name and type of a task in a table.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Type name: a template for an individual task.",
+          "default": "fusiontables#task"
+        },
+        "progress": {
+          "type": "string",
+          "description": "An indication of task progress."
+        },
+        "started": {
+          "type": "boolean",
+          "description": "False while the table is busy with some other task."
+        },
+        "taskId": {
+          "type": "string",
+          "description": "Identifier for the task.",
+          "format": "int64"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "TaskList": {
+      "id": "TaskList",
+      "type": "object",
+      "description": "Represents a list of tasks in a table.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "List of all requested tasks.",
+          "items": {
+            "$ref": "#/definitions/Task"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Type name: a list of all tasks.",
+          "default": "fusiontables#taskList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "Token used to access the next page of this result. No token is displayed if there are no more tokens left."
+        },
+        "totalItems": {
+          "type": "integer",
+          "description": "Total number of tasks for the table.",
+          "format": "int32"
+        }
+      }
+    },
+    "Template": {
+      "id": "Template",
+      "type": "object",
+      "description": "Represents the contents of InfoWindow templates.",
+      "properties": {
+        "automaticColumnNames": {
+          "type": "array",
+          "description": "List of columns from which the template is to be automatically constructed. Only one of body or automaticColumns can be specified.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "body": {
+          "type": "string",
+          "description": "Body of the template. It contains HTML with {column_name} to insert values from a particular column. The body is sanitized to remove certain tags, e.g., script. Only one of body or automaticColumns can be specified."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Type name: a template for the info window contents. The template can either include an HTML body or a list of columns from which the template is computed automatically.",
+          "default": "fusiontables#template"
+        },
+        "name": {
+          "type": "string",
+          "description": "Optional name assigned to a template."
+        },
+        "tableId": {
+          "type": "string",
+          "description": "Identifier for the table for which the template is defined."
+        },
+        "templateId": {
+          "type": "integer",
+          "description": "Identifier for the template, unique within the context of a particular table.",
+          "format": "int32"
+        }
+      }
+    },
+    "TemplateList": {
+      "id": "TemplateList",
+      "type": "object",
+      "description": "Represents a list of templates for a given table.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "List of all requested templates.",
+          "items": {
+            "$ref": "#/definitions/Template"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Type name: a list of all templates.",
+          "default": "fusiontables#templateList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "Token used to access the next page of this result. No token is displayed if there are no more tokens left."
+        },
+        "totalItems": {
+          "type": "integer",
+          "description": "Total number of templates for the table.",
+          "format": "int32"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "alt": {
+      "name": "alt",
+      "in": "query",
+      "description": "Data format for the response.",
+      "default": "json",
+      "type": "string",
+      "enum": [
+        "csv",
+        "json"
+      ]
+    },
+    "fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Selector specifying which fields to include in a partial response.",
+      "type": "string"
+    },
+    "key": {
+      "name": "key",
+      "in": "query",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    "oauth_token": {
+      "name": "oauth_token",
+      "in": "query",
+      "description": "OAuth 2.0 token for the current user.",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "name": "prettyPrint",
+      "in": "query",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "true",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "name": "quotaUser",
+      "in": "query",
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "type": "string"
+    },
+    "userIp": {
+      "name": "userIp",
+      "in": "query",
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "type": "string"
+    }
+  }
+}

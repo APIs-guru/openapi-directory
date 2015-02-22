@@ -1,0 +1,868 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Webmaster Tools API",
+    "description": "Lets you view Google Webmaster Tools data for your verified sites.",
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "version": "v3"
+  },
+  "host": "www.googleapis.com",
+  "basePath": "/webmasters/v3",
+  "schemes": [
+    "https"
+  ],
+  "externalDocs": {
+    "url": "https://developers.google.com/webmaster-tools/v3/welcome"
+  },
+  "paths": {
+    "/sites/{siteUrl}/sitemaps/{feedpath}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes a sitemap from this site.",
+        "operationId": "webmasters.sitemaps.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "feedpath",
+            "in": "path",
+            "description": "The URL of the actual sitemap (for example http://www.example.com/sitemap.xml).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteUrl",
+            "in": "path",
+            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Retrieves information about a specific sitemap.",
+        "operationId": "webmasters.sitemaps.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/WmxSitemap"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "feedpath",
+            "in": "path",
+            "description": "The URL of the actual sitemap (for example http://www.example.com/sitemap.xml).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteUrl",
+            "in": "path",
+            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "description": "Submits a sitemap for a site.",
+        "operationId": "webmasters.sitemaps.submit",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "feedpath",
+            "in": "path",
+            "description": "The URL of the sitemap to add.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteUrl",
+            "in": "path",
+            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/sites/{siteUrl}/sitemaps": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Lists sitemaps uploaded to the site.",
+        "operationId": "webmasters.sitemaps.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SitemapsListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "siteUrl",
+            "in": "path",
+            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sitemapIndex",
+            "in": "query",
+            "description": "A URL of a site's sitemap index.",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/sites/{siteUrl}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "put": {
+        "description": "Adds a site to the set of the user's sites in Webmaster Tools.",
+        "operationId": "webmasters.sites.add",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "siteUrl",
+            "in": "path",
+            "description": "The URL of the site to add.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "delete": {
+        "description": "Removes a site from the set of the user's Webmaster Tools sites.",
+        "operationId": "webmasters.sites.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "siteUrl",
+            "in": "path",
+            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Retrieves information about specific site.",
+        "operationId": "webmasters.sites.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/WmxSite"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "siteUrl",
+            "in": "path",
+            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/sites": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Lists your Webmaster Tools sites.",
+        "operationId": "webmasters.sites.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SitesListResponse"
+            }
+          }
+        }
+      }
+    },
+    "/sites/{siteUrl}/urlCrawlErrorsCounts/query": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves a time series of the number of URL crawl errors per error category and platform.",
+        "operationId": "webmasters.urlcrawlerrorscounts.query",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/UrlCrawlErrorsCountsQueryResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "The crawl error category, for example 'serverError'. If not specified, we return results for all categories.",
+            "type": "string",
+            "enum": [
+              "authPermissions",
+              "manyToOneRedirect",
+              "notFollowed",
+              "notFound",
+              "other",
+              "roboted",
+              "serverError",
+              "soft404"
+            ]
+          },
+          {
+            "name": "latestCountsOnly",
+            "in": "query",
+            "description": "If true, returns only the latest crawl error counts.",
+            "default": "true",
+            "type": "boolean"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "description": "The user agent type (platform) that made the request, for example 'web'. If not specified, we return results for all platforms.",
+            "type": "string",
+            "enum": [
+              "mobile",
+              "smartphoneOnly",
+              "web"
+            ]
+          },
+          {
+            "name": "siteUrl",
+            "in": "path",
+            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/sites/{siteUrl}/urlCrawlErrorsSamples/{url}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves details about crawl errors for a site's sample URL.",
+        "operationId": "webmasters.urlcrawlerrorssamples.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/UrlCrawlErrorsSample"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "The crawl error category, for example 'authPermissions'",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "authPermissions",
+              "manyToOneRedirect",
+              "notFollowed",
+              "notFound",
+              "other",
+              "roboted",
+              "serverError",
+              "soft404"
+            ]
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "description": "The user agent type (platform) that made the request, for example 'web'",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "mobile",
+              "smartphoneOnly",
+              "web"
+            ]
+          },
+          {
+            "name": "siteUrl",
+            "in": "path",
+            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "path",
+            "description": "The relative path (without the site) of the sample URL; must be one of the URLs returned by list",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "delete": {
+        "description": "Marks the provided site's sample URL as fixed, and removes it from the samples list.",
+        "operationId": "webmasters.urlcrawlerrorssamples.markAsFixed",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "The crawl error category, for example 'authPermissions'",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "authPermissions",
+              "manyToOneRedirect",
+              "notFollowed",
+              "notFound",
+              "other",
+              "roboted",
+              "serverError",
+              "soft404"
+            ]
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "description": "The user agent type (platform) that made the request, for example 'web'",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "mobile",
+              "smartphoneOnly",
+              "web"
+            ]
+          },
+          {
+            "name": "siteUrl",
+            "in": "path",
+            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "path",
+            "description": "The relative path (without the site) of the sample URL; must be one of the URLs returned by list",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/sites/{siteUrl}/urlCrawlErrorsSamples": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Lists a site's sample URLs for the specified crawl error category and platform.",
+        "operationId": "webmasters.urlcrawlerrorssamples.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/UrlCrawlErrorsSamplesListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "The crawl error category, for example 'authPermissions'",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "authPermissions",
+              "manyToOneRedirect",
+              "notFollowed",
+              "notFound",
+              "other",
+              "roboted",
+              "serverError",
+              "soft404"
+            ]
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "description": "The user agent type (platform) that made the request, for example 'web'",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "mobile",
+              "smartphoneOnly",
+              "web"
+            ]
+          },
+          {
+            "name": "siteUrl",
+            "in": "path",
+            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "SitemapsListResponse": {
+      "id": "SitemapsListResponse",
+      "type": "object",
+      "description": "List of sitemaps.",
+      "properties": {
+        "sitemap": {
+          "type": "array",
+          "description": "Information about a sitemap entry.",
+          "items": {
+            "$ref": "#/definitions/WmxSitemap"
+          }
+        }
+      }
+    },
+    "SitesListResponse": {
+      "id": "SitesListResponse",
+      "type": "object",
+      "description": "List of sites with access level information.",
+      "properties": {
+        "siteEntry": {
+          "type": "array",
+          "description": "Access level information for a Webmaster Tools site.",
+          "items": {
+            "$ref": "#/definitions/WmxSite"
+          }
+        }
+      }
+    },
+    "UrlCrawlErrorCount": {
+      "id": "UrlCrawlErrorCount",
+      "type": "object",
+      "description": "An entry in a URL crawl errors time series.",
+      "properties": {
+        "count": {
+          "type": "string",
+          "description": "The error count at the given timestamp.",
+          "format": "int64"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "The time (well, date) when errors were detected, in RFC 3339 format.",
+          "format": "date-time"
+        }
+      }
+    },
+    "UrlCrawlErrorCountsPerType": {
+      "id": "UrlCrawlErrorCountsPerType",
+      "type": "object",
+      "description": "Number of errors per day for a specific error type (defined by platform and category).",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "The crawl error type."
+        },
+        "entries": {
+          "type": "array",
+          "description": "The error count entries time series.",
+          "items": {
+            "$ref": "#/definitions/UrlCrawlErrorCount"
+          }
+        },
+        "platform": {
+          "type": "string",
+          "description": "Corresponding to the user agent that made the request."
+        }
+      }
+    },
+    "UrlCrawlErrorsCountsQueryResponse": {
+      "id": "UrlCrawlErrorsCountsQueryResponse",
+      "type": "object",
+      "description": "A time series of the number of URL crawl errors per error category and platform.",
+      "properties": {
+        "countPerTypes": {
+          "type": "array",
+          "description": "The time series of the number of URL crawl errors for per error category and platform.",
+          "items": {
+            "$ref": "#/definitions/UrlCrawlErrorCountsPerType"
+          }
+        }
+      }
+    },
+    "UrlCrawlErrorsSample": {
+      "id": "UrlCrawlErrorsSample",
+      "type": "object",
+      "properties": {
+        "first_detected": {
+          "type": "string",
+          "description": "The time the error was first detected, in RFC 3339 format.",
+          "format": "date-time"
+        },
+        "last_crawled": {
+          "type": "string",
+          "description": "The time when the URL was last crawled, in RFC 3339 format.",
+          "format": "date-time"
+        },
+        "pageUrl": {
+          "type": "string",
+          "description": "The URL of an error, relative to the site."
+        },
+        "responseCode": {
+          "type": "integer",
+          "description": "The HTTP response code, if any.",
+          "format": "int32"
+        },
+        "urlDetails": {
+          "$ref": "#/definitions/UrlSampleDetails",
+          "description": "Additional details about the URL, set only when calling get()."
+        }
+      }
+    },
+    "UrlCrawlErrorsSamplesListResponse": {
+      "id": "UrlCrawlErrorsSamplesListResponse",
+      "type": "object",
+      "description": "List of crawl error samples.",
+      "properties": {
+        "urlCrawlErrorSample": {
+          "type": "array",
+          "description": "Information about the sample URL and its crawl error.",
+          "items": {
+            "$ref": "#/definitions/UrlCrawlErrorsSample"
+          }
+        }
+      }
+    },
+    "UrlSampleDetails": {
+      "id": "UrlSampleDetails",
+      "type": "object",
+      "description": "Additional details about the URL, set only when calling get().",
+      "properties": {
+        "containingSitemaps": {
+          "type": "array",
+          "description": "List of sitemaps pointing at this URL.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "linkedFromUrls": {
+          "type": "array",
+          "description": "A sample set of URLs linking to this URL.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WmxSite": {
+      "id": "WmxSite",
+      "type": "object",
+      "description": "Access level information for a Webmaster Tools site.",
+      "properties": {
+        "permissionLevel": {
+          "type": "string",
+          "description": "The user's permission level for the site."
+        },
+        "siteUrl": {
+          "type": "string",
+          "description": "The URL of the site."
+        }
+      }
+    },
+    "WmxSitemap": {
+      "id": "WmxSitemap",
+      "type": "object",
+      "properties": {
+        "contents": {
+          "type": "array",
+          "description": "The various content types in the sitemap.",
+          "items": {
+            "$ref": "#/definitions/WmxSitemapContent"
+          }
+        },
+        "errors": {
+          "type": "string",
+          "description": "Number of errors in the sitemap - issues with the sitemap itself, that needs to be fixed before it can be processed correctly.",
+          "format": "int64"
+        },
+        "isPending": {
+          "type": "boolean",
+          "description": "If true, the sitemap has not been processed."
+        },
+        "isSitemapsIndex": {
+          "type": "boolean",
+          "description": "If true, the sitemap is a collection of sitemaps."
+        },
+        "lastDownloaded": {
+          "type": "string",
+          "description": "Date & time in which this sitemap was last downloaded. Date format is in RFC 3339 format (yyyy-mm-dd).",
+          "format": "date-time"
+        },
+        "lastSubmitted": {
+          "type": "string",
+          "description": "Date & time in which this sitemap was submitted. Date format is in RFC 3339 format (yyyy-mm-dd).",
+          "format": "date-time"
+        },
+        "path": {
+          "type": "string",
+          "description": "The url of the sitemap."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the sitemap (for example \"sitemap\")."
+        },
+        "warnings": {
+          "type": "string",
+          "description": "Number of warnings for the sitemap - issues with URLs in the sitemaps.",
+          "format": "int64"
+        }
+      }
+    },
+    "WmxSitemapContent": {
+      "id": "WmxSitemapContent",
+      "type": "object",
+      "description": "Information about the various content types in the sitemap.",
+      "properties": {
+        "indexed": {
+          "type": "string",
+          "description": "The number of URLs from the sitemap that were indexed (of the content type).",
+          "format": "int64"
+        },
+        "submitted": {
+          "type": "string",
+          "description": "The number of URLs in the sitemap (of the content type).",
+          "format": "int64"
+        },
+        "type": {
+          "type": "string",
+          "description": "The specific type of content in this sitemap (for example \"web\", \"images\")."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "alt": {
+      "name": "alt",
+      "in": "query",
+      "description": "Data format for the response.",
+      "default": "json",
+      "type": "string",
+      "enum": [
+        "json"
+      ]
+    },
+    "fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Selector specifying which fields to include in a partial response.",
+      "type": "string"
+    },
+    "key": {
+      "name": "key",
+      "in": "query",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    "oauth_token": {
+      "name": "oauth_token",
+      "in": "query",
+      "description": "OAuth 2.0 token for the current user.",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "name": "prettyPrint",
+      "in": "query",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "true",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "name": "quotaUser",
+      "in": "query",
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "type": "string"
+    },
+    "userIp": {
+      "name": "userIp",
+      "in": "query",
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,459 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Google Analytics API",
+    "description": "View and manage your Google Analytics data",
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "version": "v2.4"
+  },
+  "host": "www.googleapis.com",
+  "basePath": "/analytics/v2.4",
+  "schemes": [
+    "https"
+  ],
+  "externalDocs": {
+    "url": "https://developers.google.com/analytics/"
+  },
+  "paths": {
+    "/data": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Returns Analytics report data for a view (profile).",
+        "operationId": "analytics.data.get",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "dimensions",
+            "in": "query",
+            "description": "A comma-separated list of Analytics dimensions. E.g., 'ga:browser,ga:city'.",
+            "type": "string"
+          },
+          {
+            "name": "end-date",
+            "in": "query",
+            "description": "End date for fetching report data. All requests should specify an end date formatted as YYYY-MM-DD.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "description": "A comma-separated list of dimension or metric filters to be applied to the report data.",
+            "type": "string"
+          },
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "Unique table ID for retrieving report data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "max-results",
+            "in": "query",
+            "description": "The maximum number of entries to include in this feed.",
+            "type": "integer"
+          },
+          {
+            "name": "metrics",
+            "in": "query",
+            "description": "A comma-separated list of Analytics metrics. E.g., 'ga:sessions,ga:pageviews'. At least one metric must be specified to retrieve a valid Analytics report.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "segment",
+            "in": "query",
+            "description": "An Analytics advanced segment to be applied to the report data.",
+            "type": "string"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "A comma-separated list of dimensions or metrics that determine the sort order for the report data.",
+            "type": "string"
+          },
+          {
+            "name": "start-date",
+            "in": "query",
+            "description": "Start date for fetching report data. All requests should specify a start date formatted as YYYY-MM-DD.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "start-index",
+            "in": "query",
+            "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
+            "type": "integer",
+            "minimum": 1
+          }
+        ]
+      }
+    },
+    "/management/accounts": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Lists all accounts to which the user has access.",
+        "operationId": "analytics.management.accounts.list",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "max-results",
+            "in": "query",
+            "description": "The maximum number of accounts to include in this response.",
+            "type": "integer"
+          },
+          {
+            "name": "start-index",
+            "in": "query",
+            "description": "An index of the first account to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
+            "type": "integer",
+            "minimum": 1
+          }
+        ]
+      }
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/goals": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Lists goals to which the user has access.",
+        "operationId": "analytics.management.goals.list",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "Account ID to retrieve goals for. Can either be a specific account ID or '~all', which refers to all the accounts that user has access to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "max-results",
+            "in": "query",
+            "description": "The maximum number of goals to include in this response.",
+            "type": "integer"
+          },
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "View (Profile) ID to retrieve goals for. Can either be a specific view (profile) ID or '~all', which refers to all the views (profiles) that user has access to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "start-index",
+            "in": "query",
+            "description": "An index of the first goal to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
+            "type": "integer",
+            "minimum": 1
+          },
+          {
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property ID to retrieve goals for. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Lists views (profiles) to which the user has access.",
+        "operationId": "analytics.management.profiles.list",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "Account ID for the views (profiles) to retrieve. Can either be a specific account ID or '~all', which refers to all the accounts to which the user has access.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "max-results",
+            "in": "query",
+            "description": "The maximum number of views (profiles) to include in this response.",
+            "type": "integer"
+          },
+          {
+            "name": "start-index",
+            "in": "query",
+            "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
+            "type": "integer",
+            "minimum": 1
+          },
+          {
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property ID for the views (profiles) to retrieve. Can either be a specific web property ID or '~all', which refers to all the web properties to which the user has access.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/management/segments": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Lists advanced segments to which the user has access.",
+        "operationId": "analytics.management.segments.list",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "max-results",
+            "in": "query",
+            "description": "The maximum number of advanced segments to include in this response.",
+            "type": "integer"
+          },
+          {
+            "name": "start-index",
+            "in": "query",
+            "description": "An index of the first advanced segment to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
+            "type": "integer",
+            "minimum": 1
+          }
+        ]
+      }
+    },
+    "/management/accounts/{accountId}/webproperties": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Lists web properties to which the user has access.",
+        "operationId": "analytics.management.webproperties.list",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "Account ID to retrieve web properties for. Can either be a specific account ID or '~all', which refers to all the accounts that user has access to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "max-results",
+            "in": "query",
+            "description": "The maximum number of web properties to include in this response.",
+            "type": "integer"
+          },
+          {
+            "name": "start-index",
+            "in": "query",
+            "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
+            "type": "integer",
+            "minimum": 1
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "alt": {
+      "name": "alt",
+      "in": "query",
+      "description": "Data format for the response.",
+      "default": "atom",
+      "type": "string",
+      "enum": [
+        "atom"
+      ]
+    },
+    "fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Selector specifying which fields to include in a partial response.",
+      "type": "string"
+    },
+    "key": {
+      "name": "key",
+      "in": "query",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    "oauth_token": {
+      "name": "oauth_token",
+      "in": "query",
+      "description": "OAuth 2.0 token for the current user.",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "name": "prettyPrint",
+      "in": "query",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "false",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "name": "quotaUser",
+      "in": "query",
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "type": "string"
+    },
+    "userIp": {
+      "name": "userIp",
+      "in": "query",
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "type": "string"
+    }
+  }
+}

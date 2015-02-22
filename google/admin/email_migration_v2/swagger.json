@@ -1,0 +1,166 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Email Migration API v2",
+    "description": "Email Migration API lets you migrate emails of users to Google backends.",
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "version": "email_migration_v2"
+  },
+  "host": "www.googleapis.com",
+  "basePath": "/email/v2/users",
+  "schemes": [
+    "https"
+  ],
+  "externalDocs": {
+    "url": "https://developers.google.com/admin-sdk/email-migration/v2/"
+  },
+  "paths": {
+    "/{userKey}/mail": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Insert Mail into Google's Gmail backends",
+        "operationId": "emailMigration.mail.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "consumes": [
+          "message/rfc822"
+        ],
+        "parameters": [
+          {
+            "name": "userKey",
+            "in": "path",
+            "description": "The email or immutable id of the user",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "MailItem": {
+      "id": "MailItem",
+      "type": "object",
+      "description": "JSON template for MailItem object in Email Migration API.",
+      "properties": {
+        "isDeleted": {
+          "type": "boolean",
+          "description": "Boolean indicating if the mail is deleted (used in Vault)"
+        },
+        "isDraft": {
+          "type": "boolean",
+          "description": "Boolean indicating if the mail is draft"
+        },
+        "isInbox": {
+          "type": "boolean",
+          "description": "Boolean indicating if the mail is in inbox"
+        },
+        "isSent": {
+          "type": "boolean",
+          "description": "Boolean indicating if the mail is in 'sent mails'"
+        },
+        "isStarred": {
+          "type": "boolean",
+          "description": "Boolean indicating if the mail is starred"
+        },
+        "isTrash": {
+          "type": "boolean",
+          "description": "Boolean indicating if the mail is in trash"
+        },
+        "isUnread": {
+          "type": "boolean",
+          "description": "Boolean indicating if the mail is unread"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of resource this is.",
+          "default": "mailItem"
+        },
+        "labels": {
+          "type": "array",
+          "description": "List of labels (strings)",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "alt": {
+      "name": "alt",
+      "in": "query",
+      "description": "Data format for the response.",
+      "default": "json",
+      "type": "string",
+      "enum": [
+        "json"
+      ]
+    },
+    "fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Selector specifying which fields to include in a partial response.",
+      "type": "string"
+    },
+    "key": {
+      "name": "key",
+      "in": "query",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    "oauth_token": {
+      "name": "oauth_token",
+      "in": "query",
+      "description": "OAuth 2.0 token for the current user.",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "name": "prettyPrint",
+      "in": "query",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "true",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "name": "quotaUser",
+      "in": "query",
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "type": "string"
+    },
+    "userIp": {
+      "name": "userIp",
+      "in": "query",
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "type": "string"
+    }
+  }
+}

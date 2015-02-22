@@ -1,0 +1,2477 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Google Mirror API",
+    "description": "API for interacting with Glass users via the timeline.",
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "version": "v1"
+  },
+  "host": "www.googleapis.com",
+  "basePath": "/mirror/v1",
+  "schemes": [
+    "https"
+  ],
+  "externalDocs": {
+    "url": "https://developers.google.com/glass"
+  },
+  "paths": {
+    "/accounts/{userToken}/{accountType}/{accountName}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Inserts a new account for a user",
+        "operationId": "mirror.accounts.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of the account to be passed to the Android Account Manager.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accountType",
+            "in": "path",
+            "description": "Account type to be passed to Android Account Manager.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userToken",
+            "in": "path",
+            "description": "The ID for the user.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/contacts/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes a contact.",
+        "operationId": "mirror.contacts.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the contact.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Gets a single contact by ID.",
+        "operationId": "mirror.contacts.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the contact.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Updates a contact in place. This method supports patch semantics.",
+        "operationId": "mirror.contacts.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the contact.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "description": "Updates a contact in place.",
+        "operationId": "mirror.contacts.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the contact.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/contacts": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Inserts a new contact.",
+        "operationId": "mirror.contacts.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieves a list of contacts for the authenticated user.",
+        "operationId": "mirror.contacts.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ContactsListResponse"
+            }
+          }
+        }
+      }
+    },
+    "/locations/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Gets a single location by ID.",
+        "operationId": "mirror.locations.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Location"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the location or latest for the last known location.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/locations": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves a list of locations for the user.",
+        "operationId": "mirror.locations.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/LocationsListResponse"
+            }
+          }
+        }
+      }
+    },
+    "/settings/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Gets a single setting by ID.",
+        "operationId": "mirror.settings.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Setting"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the setting. The following IDs are valid: \n- locale - The key to the user’s language/locale (BCP 47 identifier) that Glassware should use to render localized content. \n- timezone - The key to the user’s current time zone region as defined in the tz database. Example: America/Los_Angeles.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/subscriptions/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes a subscription.",
+        "operationId": "mirror.subscriptions.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the subscription.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "description": "Updates an existing subscription in place.",
+        "operationId": "mirror.subscriptions.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the subscription.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/subscriptions": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates a new subscription.",
+        "operationId": "mirror.subscriptions.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieves a list of subscriptions for the authenticated user and service.",
+        "operationId": "mirror.subscriptions.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionsListResponse"
+            }
+          }
+        }
+      }
+    },
+    "/timeline/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes a timeline item.",
+        "operationId": "mirror.timeline.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the timeline item.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Gets a single timeline item by ID.",
+        "operationId": "mirror.timeline.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TimelineItem"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the timeline item.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Updates a timeline item in place. This method supports patch semantics.",
+        "operationId": "mirror.timeline.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TimelineItem"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the timeline item.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "description": "Updates a timeline item in place.",
+        "operationId": "mirror.timeline.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TimelineItem"
+            }
+          }
+        },
+        "consumes": [
+          "audio/1d-interleaved-parityfec",
+          "audio/32kadpcm",
+          "audio/3gpp",
+          "audio/3gpp2",
+          "audio/ac3",
+          "audio/adpcm",
+          "audio/amr",
+          "audio/amr-wb",
+          "audio/amr-wb+",
+          "audio/aptx",
+          "audio/asc",
+          "audio/atrac-advanced-lossless",
+          "audio/atrac-x",
+          "audio/atrac3",
+          "audio/basic",
+          "audio/bv16",
+          "audio/bv32",
+          "audio/clearmode",
+          "audio/cn",
+          "audio/dat12",
+          "audio/dls",
+          "audio/dsr-es201108",
+          "audio/dsr-es202050",
+          "audio/dsr-es202211",
+          "audio/dsr-es202212",
+          "audio/dv",
+          "audio/dvi4",
+          "audio/eac3",
+          "audio/encaprtp",
+          "audio/evrc",
+          "audio/evrc-qcp",
+          "audio/evrc0",
+          "audio/evrc1",
+          "audio/evrcb",
+          "audio/evrcb0",
+          "audio/evrcb1",
+          "audio/evrcnw",
+          "audio/evrcnw0",
+          "audio/evrcnw1",
+          "audio/evrcwb",
+          "audio/evrcwb0",
+          "audio/evrcwb1",
+          "audio/fwdred",
+          "audio/g719",
+          "audio/g722",
+          "audio/g7221",
+          "audio/g723",
+          "audio/g726-16",
+          "audio/g726-24",
+          "audio/g726-32",
+          "audio/g726-40",
+          "audio/g728",
+          "audio/g729",
+          "audio/g7291",
+          "audio/g729d",
+          "audio/g729e",
+          "audio/gsm",
+          "audio/gsm-efr",
+          "audio/gsm-hr-08",
+          "audio/ilbc",
+          "audio/isac",
+          "audio/l16",
+          "audio/l20",
+          "audio/l24",
+          "audio/l8",
+          "audio/lpc",
+          "audio/midi",
+          "audio/mobile-xmf",
+          "audio/mp4",
+          "audio/mp4a-latm",
+          "audio/mpa",
+          "audio/mpa-robust",
+          "audio/mpeg",
+          "audio/mpeg4-generic",
+          "audio/musepack",
+          "audio/ogg",
+          "audio/opus",
+          "audio/parityfec",
+          "audio/pcma",
+          "audio/pcma-wb",
+          "audio/pcmu",
+          "audio/pcmu-wb",
+          "audio/prs.sid",
+          "audio/qcelp",
+          "audio/raptorfec",
+          "audio/red",
+          "audio/rtp-enc-aescm128",
+          "audio/rtp-midi",
+          "audio/rtploopback",
+          "audio/rtx",
+          "audio/s3m",
+          "audio/silk",
+          "audio/smv",
+          "audio/smv-qcp",
+          "audio/smv0",
+          "audio/sp-midi",
+          "audio/speex",
+          "audio/t140c",
+          "audio/t38",
+          "audio/telephone-event",
+          "audio/tone",
+          "audio/uemclip",
+          "audio/ulpfec",
+          "audio/vdvi",
+          "audio/vmr-wb",
+          "audio/vnd.3gpp.iufp",
+          "audio/vnd.4sb",
+          "audio/vnd.audiokoz",
+          "audio/vnd.celp",
+          "audio/vnd.cisco.nse",
+          "audio/vnd.cmles.radio-events",
+          "audio/vnd.cns.anp1",
+          "audio/vnd.cns.inf1",
+          "audio/vnd.dece.audio",
+          "audio/vnd.digital-winds",
+          "audio/vnd.dlna.adts",
+          "audio/vnd.dolby.heaac.1",
+          "audio/vnd.dolby.heaac.2",
+          "audio/vnd.dolby.mlp",
+          "audio/vnd.dolby.mps",
+          "audio/vnd.dolby.pl2",
+          "audio/vnd.dolby.pl2x",
+          "audio/vnd.dolby.pl2z",
+          "audio/vnd.dolby.pulse.1",
+          "audio/vnd.dra",
+          "audio/vnd.dts",
+          "audio/vnd.dts.hd",
+          "audio/vnd.dvb.file",
+          "audio/vnd.everad.plj",
+          "audio/vnd.hns.audio",
+          "audio/vnd.lucent.voice",
+          "audio/vnd.ms-playready.media.pya",
+          "audio/vnd.nokia.mobile-xmf",
+          "audio/vnd.nortel.vbk",
+          "audio/vnd.nuera.ecelp4800",
+          "audio/vnd.nuera.ecelp7470",
+          "audio/vnd.nuera.ecelp9600",
+          "audio/vnd.octel.sbc",
+          "audio/vnd.qcelp",
+          "audio/vnd.rhetorex.32kadpcm",
+          "audio/vnd.rip",
+          "audio/vnd.rn-realaudio",
+          "audio/vnd.sealedmedia.softseal.mpeg",
+          "audio/vnd.vmx.cvsd",
+          "audio/vnd.wave",
+          "audio/vorbis",
+          "audio/vorbis-config",
+          "audio/webm",
+          "audio/x-aac",
+          "audio/x-aiff",
+          "audio/x-caf",
+          "audio/x-flac",
+          "audio/x-matroska",
+          "audio/x-mpegurl",
+          "audio/x-ms-wax",
+          "audio/x-ms-wma",
+          "audio/x-pn-realaudio",
+          "audio/x-pn-realaudio-plugin",
+          "audio/x-tta",
+          "audio/x-wav",
+          "audio/xm",
+          "image/bmp",
+          "image/cgm",
+          "image/fits",
+          "image/g3fax",
+          "image/gif",
+          "image/ief",
+          "image/jp2",
+          "image/jpeg",
+          "image/jpm",
+          "image/jpx",
+          "image/ktx",
+          "image/naplps",
+          "image/pjpeg",
+          "image/png",
+          "image/prs.btif",
+          "image/prs.pti",
+          "image/pwg-raster",
+          "image/sgi",
+          "image/svg+xml",
+          "image/t38",
+          "image/tiff",
+          "image/tiff-fx",
+          "image/vnd.adobe.photoshop",
+          "image/vnd.airzip.accelerator.azv",
+          "image/vnd.cns.inf2",
+          "image/vnd.dece.graphic",
+          "image/vnd.djvu",
+          "image/vnd.dvb.subtitle",
+          "image/vnd.dwg",
+          "image/vnd.dxf",
+          "image/vnd.fastbidsheet",
+          "image/vnd.fpx",
+          "image/vnd.fst",
+          "image/vnd.fujixerox.edmics-mmr",
+          "image/vnd.fujixerox.edmics-rlc",
+          "image/vnd.globalgraphics.pgb",
+          "image/vnd.microsoft.icon",
+          "image/vnd.mix",
+          "image/vnd.ms-modi",
+          "image/vnd.ms-photo",
+          "image/vnd.net-fpx",
+          "image/vnd.radiance",
+          "image/vnd.sealed.png",
+          "image/vnd.sealedmedia.softseal.gif",
+          "image/vnd.sealedmedia.softseal.jpg",
+          "image/vnd.svf",
+          "image/vnd.tencent.tap",
+          "image/vnd.valve.source.texture",
+          "image/vnd.wap.wbmp",
+          "image/vnd.xiff",
+          "image/webp",
+          "image/x-3ds",
+          "image/x-cmu-raster",
+          "image/x-cmx",
+          "image/x-freehand",
+          "image/x-icon",
+          "image/x-mrsid-image",
+          "image/x-pcx",
+          "image/x-pict",
+          "image/x-portable-anymap",
+          "image/x-portable-bitmap",
+          "image/x-portable-graymap",
+          "image/x-portable-pixmap",
+          "image/x-rgb",
+          "image/x-tga",
+          "image/x-xbitmap",
+          "image/x-xcf",
+          "image/x-xpixmap",
+          "image/x-xwindowdump",
+          "video/1d-interleaved-parityfec",
+          "video/3gpp",
+          "video/3gpp-tt",
+          "video/3gpp2",
+          "video/bmpeg",
+          "video/bt656",
+          "video/celb",
+          "video/dv",
+          "video/h261",
+          "video/h263",
+          "video/h263-1998",
+          "video/h263-2000",
+          "video/h264",
+          "video/h264-rcdo",
+          "video/h264-svc",
+          "video/jpeg",
+          "video/jpeg2000",
+          "video/jpm",
+          "video/mj2",
+          "video/mp1s",
+          "video/mp2p",
+          "video/mp2t",
+          "video/mp4",
+          "video/mp4v-es",
+          "video/mpeg",
+          "video/mpeg4-generic",
+          "video/mpv",
+          "video/nv",
+          "video/ogg",
+          "video/parityfec",
+          "video/pointer",
+          "video/quicktime",
+          "video/raw",
+          "video/rtp-enc-aescm128",
+          "video/rtx",
+          "video/smpte292m",
+          "video/ulpfec",
+          "video/vc1",
+          "video/vnd.cctv",
+          "video/vnd.dece.hd",
+          "video/vnd.dece.mobile",
+          "video/vnd.dece.mp4",
+          "video/vnd.dece.pd",
+          "video/vnd.dece.sd",
+          "video/vnd.dece.video",
+          "video/vnd.directv.mpeg",
+          "video/vnd.directv.mpeg-tts",
+          "video/vnd.dlna.mpeg-tts",
+          "video/vnd.dvb.file",
+          "video/vnd.fvt",
+          "video/vnd.hns.video",
+          "video/vnd.iptvforum.1dparityfec-1010",
+          "video/vnd.iptvforum.1dparityfec-2005",
+          "video/vnd.iptvforum.2dparityfec-1010",
+          "video/vnd.iptvforum.2dparityfec-2005",
+          "video/vnd.iptvforum.ttsavc",
+          "video/vnd.iptvforum.ttsmpeg2",
+          "video/vnd.motorola.video",
+          "video/vnd.motorola.videop",
+          "video/vnd.mpegurl",
+          "video/vnd.ms-playready.media.pyv",
+          "video/vnd.nokia.interleaved-multimedia",
+          "video/vnd.nokia.videovoip",
+          "video/vnd.objectvideo",
+          "video/vnd.sealed.mpeg1",
+          "video/vnd.sealed.mpeg4",
+          "video/vnd.sealed.swf",
+          "video/vnd.sealedmedia.softseal.mov",
+          "video/vnd.uvvu.mp4",
+          "video/vnd.vivo",
+          "video/webm",
+          "video/x-f4v",
+          "video/x-fli",
+          "video/x-flv",
+          "video/x-m4v",
+          "video/x-matroska",
+          "video/x-mng",
+          "video/x-ms-asf",
+          "video/x-ms-vob",
+          "video/x-ms-wm",
+          "video/x-ms-wmv",
+          "video/x-ms-wmx",
+          "video/x-ms-wvx",
+          "video/x-msvideo",
+          "video/x-sgi-movie",
+          "video/x-smv"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the timeline item.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/timeline": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Inserts a new item into the timeline.",
+        "operationId": "mirror.timeline.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TimelineItem"
+            }
+          }
+        },
+        "consumes": [
+          "audio/1d-interleaved-parityfec",
+          "audio/32kadpcm",
+          "audio/3gpp",
+          "audio/3gpp2",
+          "audio/ac3",
+          "audio/adpcm",
+          "audio/amr",
+          "audio/amr-wb",
+          "audio/amr-wb+",
+          "audio/aptx",
+          "audio/asc",
+          "audio/atrac-advanced-lossless",
+          "audio/atrac-x",
+          "audio/atrac3",
+          "audio/basic",
+          "audio/bv16",
+          "audio/bv32",
+          "audio/clearmode",
+          "audio/cn",
+          "audio/dat12",
+          "audio/dls",
+          "audio/dsr-es201108",
+          "audio/dsr-es202050",
+          "audio/dsr-es202211",
+          "audio/dsr-es202212",
+          "audio/dv",
+          "audio/dvi4",
+          "audio/eac3",
+          "audio/encaprtp",
+          "audio/evrc",
+          "audio/evrc-qcp",
+          "audio/evrc0",
+          "audio/evrc1",
+          "audio/evrcb",
+          "audio/evrcb0",
+          "audio/evrcb1",
+          "audio/evrcnw",
+          "audio/evrcnw0",
+          "audio/evrcnw1",
+          "audio/evrcwb",
+          "audio/evrcwb0",
+          "audio/evrcwb1",
+          "audio/fwdred",
+          "audio/g719",
+          "audio/g722",
+          "audio/g7221",
+          "audio/g723",
+          "audio/g726-16",
+          "audio/g726-24",
+          "audio/g726-32",
+          "audio/g726-40",
+          "audio/g728",
+          "audio/g729",
+          "audio/g7291",
+          "audio/g729d",
+          "audio/g729e",
+          "audio/gsm",
+          "audio/gsm-efr",
+          "audio/gsm-hr-08",
+          "audio/ilbc",
+          "audio/isac",
+          "audio/l16",
+          "audio/l20",
+          "audio/l24",
+          "audio/l8",
+          "audio/lpc",
+          "audio/midi",
+          "audio/mobile-xmf",
+          "audio/mp4",
+          "audio/mp4a-latm",
+          "audio/mpa",
+          "audio/mpa-robust",
+          "audio/mpeg",
+          "audio/mpeg4-generic",
+          "audio/musepack",
+          "audio/ogg",
+          "audio/opus",
+          "audio/parityfec",
+          "audio/pcma",
+          "audio/pcma-wb",
+          "audio/pcmu",
+          "audio/pcmu-wb",
+          "audio/prs.sid",
+          "audio/qcelp",
+          "audio/raptorfec",
+          "audio/red",
+          "audio/rtp-enc-aescm128",
+          "audio/rtp-midi",
+          "audio/rtploopback",
+          "audio/rtx",
+          "audio/s3m",
+          "audio/silk",
+          "audio/smv",
+          "audio/smv-qcp",
+          "audio/smv0",
+          "audio/sp-midi",
+          "audio/speex",
+          "audio/t140c",
+          "audio/t38",
+          "audio/telephone-event",
+          "audio/tone",
+          "audio/uemclip",
+          "audio/ulpfec",
+          "audio/vdvi",
+          "audio/vmr-wb",
+          "audio/vnd.3gpp.iufp",
+          "audio/vnd.4sb",
+          "audio/vnd.audiokoz",
+          "audio/vnd.celp",
+          "audio/vnd.cisco.nse",
+          "audio/vnd.cmles.radio-events",
+          "audio/vnd.cns.anp1",
+          "audio/vnd.cns.inf1",
+          "audio/vnd.dece.audio",
+          "audio/vnd.digital-winds",
+          "audio/vnd.dlna.adts",
+          "audio/vnd.dolby.heaac.1",
+          "audio/vnd.dolby.heaac.2",
+          "audio/vnd.dolby.mlp",
+          "audio/vnd.dolby.mps",
+          "audio/vnd.dolby.pl2",
+          "audio/vnd.dolby.pl2x",
+          "audio/vnd.dolby.pl2z",
+          "audio/vnd.dolby.pulse.1",
+          "audio/vnd.dra",
+          "audio/vnd.dts",
+          "audio/vnd.dts.hd",
+          "audio/vnd.dvb.file",
+          "audio/vnd.everad.plj",
+          "audio/vnd.hns.audio",
+          "audio/vnd.lucent.voice",
+          "audio/vnd.ms-playready.media.pya",
+          "audio/vnd.nokia.mobile-xmf",
+          "audio/vnd.nortel.vbk",
+          "audio/vnd.nuera.ecelp4800",
+          "audio/vnd.nuera.ecelp7470",
+          "audio/vnd.nuera.ecelp9600",
+          "audio/vnd.octel.sbc",
+          "audio/vnd.qcelp",
+          "audio/vnd.rhetorex.32kadpcm",
+          "audio/vnd.rip",
+          "audio/vnd.rn-realaudio",
+          "audio/vnd.sealedmedia.softseal.mpeg",
+          "audio/vnd.vmx.cvsd",
+          "audio/vnd.wave",
+          "audio/vorbis",
+          "audio/vorbis-config",
+          "audio/webm",
+          "audio/x-aac",
+          "audio/x-aiff",
+          "audio/x-caf",
+          "audio/x-flac",
+          "audio/x-matroska",
+          "audio/x-mpegurl",
+          "audio/x-ms-wax",
+          "audio/x-ms-wma",
+          "audio/x-pn-realaudio",
+          "audio/x-pn-realaudio-plugin",
+          "audio/x-tta",
+          "audio/x-wav",
+          "audio/xm",
+          "image/bmp",
+          "image/cgm",
+          "image/fits",
+          "image/g3fax",
+          "image/gif",
+          "image/ief",
+          "image/jp2",
+          "image/jpeg",
+          "image/jpm",
+          "image/jpx",
+          "image/ktx",
+          "image/naplps",
+          "image/pjpeg",
+          "image/png",
+          "image/prs.btif",
+          "image/prs.pti",
+          "image/pwg-raster",
+          "image/sgi",
+          "image/svg+xml",
+          "image/t38",
+          "image/tiff",
+          "image/tiff-fx",
+          "image/vnd.adobe.photoshop",
+          "image/vnd.airzip.accelerator.azv",
+          "image/vnd.cns.inf2",
+          "image/vnd.dece.graphic",
+          "image/vnd.djvu",
+          "image/vnd.dvb.subtitle",
+          "image/vnd.dwg",
+          "image/vnd.dxf",
+          "image/vnd.fastbidsheet",
+          "image/vnd.fpx",
+          "image/vnd.fst",
+          "image/vnd.fujixerox.edmics-mmr",
+          "image/vnd.fujixerox.edmics-rlc",
+          "image/vnd.globalgraphics.pgb",
+          "image/vnd.microsoft.icon",
+          "image/vnd.mix",
+          "image/vnd.ms-modi",
+          "image/vnd.ms-photo",
+          "image/vnd.net-fpx",
+          "image/vnd.radiance",
+          "image/vnd.sealed.png",
+          "image/vnd.sealedmedia.softseal.gif",
+          "image/vnd.sealedmedia.softseal.jpg",
+          "image/vnd.svf",
+          "image/vnd.tencent.tap",
+          "image/vnd.valve.source.texture",
+          "image/vnd.wap.wbmp",
+          "image/vnd.xiff",
+          "image/webp",
+          "image/x-3ds",
+          "image/x-cmu-raster",
+          "image/x-cmx",
+          "image/x-freehand",
+          "image/x-icon",
+          "image/x-mrsid-image",
+          "image/x-pcx",
+          "image/x-pict",
+          "image/x-portable-anymap",
+          "image/x-portable-bitmap",
+          "image/x-portable-graymap",
+          "image/x-portable-pixmap",
+          "image/x-rgb",
+          "image/x-tga",
+          "image/x-xbitmap",
+          "image/x-xcf",
+          "image/x-xpixmap",
+          "image/x-xwindowdump",
+          "video/1d-interleaved-parityfec",
+          "video/3gpp",
+          "video/3gpp-tt",
+          "video/3gpp2",
+          "video/bmpeg",
+          "video/bt656",
+          "video/celb",
+          "video/dv",
+          "video/h261",
+          "video/h263",
+          "video/h263-1998",
+          "video/h263-2000",
+          "video/h264",
+          "video/h264-rcdo",
+          "video/h264-svc",
+          "video/jpeg",
+          "video/jpeg2000",
+          "video/jpm",
+          "video/mj2",
+          "video/mp1s",
+          "video/mp2p",
+          "video/mp2t",
+          "video/mp4",
+          "video/mp4v-es",
+          "video/mpeg",
+          "video/mpeg4-generic",
+          "video/mpv",
+          "video/nv",
+          "video/ogg",
+          "video/parityfec",
+          "video/pointer",
+          "video/quicktime",
+          "video/raw",
+          "video/rtp-enc-aescm128",
+          "video/rtx",
+          "video/smpte292m",
+          "video/ulpfec",
+          "video/vc1",
+          "video/vnd.cctv",
+          "video/vnd.dece.hd",
+          "video/vnd.dece.mobile",
+          "video/vnd.dece.mp4",
+          "video/vnd.dece.pd",
+          "video/vnd.dece.sd",
+          "video/vnd.dece.video",
+          "video/vnd.directv.mpeg",
+          "video/vnd.directv.mpeg-tts",
+          "video/vnd.dlna.mpeg-tts",
+          "video/vnd.dvb.file",
+          "video/vnd.fvt",
+          "video/vnd.hns.video",
+          "video/vnd.iptvforum.1dparityfec-1010",
+          "video/vnd.iptvforum.1dparityfec-2005",
+          "video/vnd.iptvforum.2dparityfec-1010",
+          "video/vnd.iptvforum.2dparityfec-2005",
+          "video/vnd.iptvforum.ttsavc",
+          "video/vnd.iptvforum.ttsmpeg2",
+          "video/vnd.motorola.video",
+          "video/vnd.motorola.videop",
+          "video/vnd.mpegurl",
+          "video/vnd.ms-playready.media.pyv",
+          "video/vnd.nokia.interleaved-multimedia",
+          "video/vnd.nokia.videovoip",
+          "video/vnd.objectvideo",
+          "video/vnd.sealed.mpeg1",
+          "video/vnd.sealed.mpeg4",
+          "video/vnd.sealed.swf",
+          "video/vnd.sealedmedia.softseal.mov",
+          "video/vnd.uvvu.mp4",
+          "video/vnd.vivo",
+          "video/webm",
+          "video/x-f4v",
+          "video/x-fli",
+          "video/x-flv",
+          "video/x-m4v",
+          "video/x-matroska",
+          "video/x-mng",
+          "video/x-ms-asf",
+          "video/x-ms-vob",
+          "video/x-ms-wm",
+          "video/x-ms-wmv",
+          "video/x-ms-wmx",
+          "video/x-ms-wvx",
+          "video/x-msvideo",
+          "video/x-sgi-movie",
+          "video/x-smv"
+        ]
+      },
+      "get": {
+        "description": "Retrieves a list of timeline items for the authenticated user.",
+        "operationId": "mirror.timeline.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TimelineListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "bundleId",
+            "in": "query",
+            "description": "If provided, only items with the given bundleId will be returned.",
+            "type": "string"
+          },
+          {
+            "name": "includeDeleted",
+            "in": "query",
+            "description": "If true, tombstone records for deleted items will be returned.",
+            "type": "boolean"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "The maximum number of items to include in the response, used for paging.",
+            "type": "integer"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Controls the order in which timeline items are returned.",
+            "type": "string",
+            "enum": [
+              "displayTime",
+              "writeTime"
+            ]
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Token for the page of results to return.",
+            "type": "string"
+          },
+          {
+            "name": "pinnedOnly",
+            "in": "query",
+            "description": "If true, only pinned items will be returned.",
+            "type": "boolean"
+          },
+          {
+            "name": "sourceItemId",
+            "in": "query",
+            "description": "If provided, only items with the given sourceItemId will be returned.",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/timeline/{itemId}/attachments/{attachmentId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes an attachment from a timeline item.",
+        "operationId": "mirror.timeline.attachments.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "attachmentId",
+            "in": "path",
+            "description": "The ID of the attachment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "The ID of the timeline item the attachment belongs to.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Retrieves an attachment on a timeline item by item ID and attachment ID.",
+        "operationId": "mirror.timeline.attachments.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Attachment"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "attachmentId",
+            "in": "path",
+            "description": "The ID of the attachment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "The ID of the timeline item the attachment belongs to.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/timeline/{itemId}/attachments": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Adds a new attachment to a timeline item.",
+        "operationId": "mirror.timeline.attachments.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Attachment"
+            }
+          }
+        },
+        "consumes": [
+          "audio/1d-interleaved-parityfec",
+          "audio/32kadpcm",
+          "audio/3gpp",
+          "audio/3gpp2",
+          "audio/ac3",
+          "audio/adpcm",
+          "audio/amr",
+          "audio/amr-wb",
+          "audio/amr-wb+",
+          "audio/aptx",
+          "audio/asc",
+          "audio/atrac-advanced-lossless",
+          "audio/atrac-x",
+          "audio/atrac3",
+          "audio/basic",
+          "audio/bv16",
+          "audio/bv32",
+          "audio/clearmode",
+          "audio/cn",
+          "audio/dat12",
+          "audio/dls",
+          "audio/dsr-es201108",
+          "audio/dsr-es202050",
+          "audio/dsr-es202211",
+          "audio/dsr-es202212",
+          "audio/dv",
+          "audio/dvi4",
+          "audio/eac3",
+          "audio/encaprtp",
+          "audio/evrc",
+          "audio/evrc-qcp",
+          "audio/evrc0",
+          "audio/evrc1",
+          "audio/evrcb",
+          "audio/evrcb0",
+          "audio/evrcb1",
+          "audio/evrcnw",
+          "audio/evrcnw0",
+          "audio/evrcnw1",
+          "audio/evrcwb",
+          "audio/evrcwb0",
+          "audio/evrcwb1",
+          "audio/fwdred",
+          "audio/g719",
+          "audio/g722",
+          "audio/g7221",
+          "audio/g723",
+          "audio/g726-16",
+          "audio/g726-24",
+          "audio/g726-32",
+          "audio/g726-40",
+          "audio/g728",
+          "audio/g729",
+          "audio/g7291",
+          "audio/g729d",
+          "audio/g729e",
+          "audio/gsm",
+          "audio/gsm-efr",
+          "audio/gsm-hr-08",
+          "audio/ilbc",
+          "audio/isac",
+          "audio/l16",
+          "audio/l20",
+          "audio/l24",
+          "audio/l8",
+          "audio/lpc",
+          "audio/midi",
+          "audio/mobile-xmf",
+          "audio/mp4",
+          "audio/mp4a-latm",
+          "audio/mpa",
+          "audio/mpa-robust",
+          "audio/mpeg",
+          "audio/mpeg4-generic",
+          "audio/musepack",
+          "audio/ogg",
+          "audio/opus",
+          "audio/parityfec",
+          "audio/pcma",
+          "audio/pcma-wb",
+          "audio/pcmu",
+          "audio/pcmu-wb",
+          "audio/prs.sid",
+          "audio/qcelp",
+          "audio/raptorfec",
+          "audio/red",
+          "audio/rtp-enc-aescm128",
+          "audio/rtp-midi",
+          "audio/rtploopback",
+          "audio/rtx",
+          "audio/s3m",
+          "audio/silk",
+          "audio/smv",
+          "audio/smv-qcp",
+          "audio/smv0",
+          "audio/sp-midi",
+          "audio/speex",
+          "audio/t140c",
+          "audio/t38",
+          "audio/telephone-event",
+          "audio/tone",
+          "audio/uemclip",
+          "audio/ulpfec",
+          "audio/vdvi",
+          "audio/vmr-wb",
+          "audio/vnd.3gpp.iufp",
+          "audio/vnd.4sb",
+          "audio/vnd.audiokoz",
+          "audio/vnd.celp",
+          "audio/vnd.cisco.nse",
+          "audio/vnd.cmles.radio-events",
+          "audio/vnd.cns.anp1",
+          "audio/vnd.cns.inf1",
+          "audio/vnd.dece.audio",
+          "audio/vnd.digital-winds",
+          "audio/vnd.dlna.adts",
+          "audio/vnd.dolby.heaac.1",
+          "audio/vnd.dolby.heaac.2",
+          "audio/vnd.dolby.mlp",
+          "audio/vnd.dolby.mps",
+          "audio/vnd.dolby.pl2",
+          "audio/vnd.dolby.pl2x",
+          "audio/vnd.dolby.pl2z",
+          "audio/vnd.dolby.pulse.1",
+          "audio/vnd.dra",
+          "audio/vnd.dts",
+          "audio/vnd.dts.hd",
+          "audio/vnd.dvb.file",
+          "audio/vnd.everad.plj",
+          "audio/vnd.hns.audio",
+          "audio/vnd.lucent.voice",
+          "audio/vnd.ms-playready.media.pya",
+          "audio/vnd.nokia.mobile-xmf",
+          "audio/vnd.nortel.vbk",
+          "audio/vnd.nuera.ecelp4800",
+          "audio/vnd.nuera.ecelp7470",
+          "audio/vnd.nuera.ecelp9600",
+          "audio/vnd.octel.sbc",
+          "audio/vnd.qcelp",
+          "audio/vnd.rhetorex.32kadpcm",
+          "audio/vnd.rip",
+          "audio/vnd.rn-realaudio",
+          "audio/vnd.sealedmedia.softseal.mpeg",
+          "audio/vnd.vmx.cvsd",
+          "audio/vnd.wave",
+          "audio/vorbis",
+          "audio/vorbis-config",
+          "audio/webm",
+          "audio/x-aac",
+          "audio/x-aiff",
+          "audio/x-caf",
+          "audio/x-flac",
+          "audio/x-matroska",
+          "audio/x-mpegurl",
+          "audio/x-ms-wax",
+          "audio/x-ms-wma",
+          "audio/x-pn-realaudio",
+          "audio/x-pn-realaudio-plugin",
+          "audio/x-tta",
+          "audio/x-wav",
+          "audio/xm",
+          "image/bmp",
+          "image/cgm",
+          "image/fits",
+          "image/g3fax",
+          "image/gif",
+          "image/ief",
+          "image/jp2",
+          "image/jpeg",
+          "image/jpm",
+          "image/jpx",
+          "image/ktx",
+          "image/naplps",
+          "image/pjpeg",
+          "image/png",
+          "image/prs.btif",
+          "image/prs.pti",
+          "image/pwg-raster",
+          "image/sgi",
+          "image/svg+xml",
+          "image/t38",
+          "image/tiff",
+          "image/tiff-fx",
+          "image/vnd.adobe.photoshop",
+          "image/vnd.airzip.accelerator.azv",
+          "image/vnd.cns.inf2",
+          "image/vnd.dece.graphic",
+          "image/vnd.djvu",
+          "image/vnd.dvb.subtitle",
+          "image/vnd.dwg",
+          "image/vnd.dxf",
+          "image/vnd.fastbidsheet",
+          "image/vnd.fpx",
+          "image/vnd.fst",
+          "image/vnd.fujixerox.edmics-mmr",
+          "image/vnd.fujixerox.edmics-rlc",
+          "image/vnd.globalgraphics.pgb",
+          "image/vnd.microsoft.icon",
+          "image/vnd.mix",
+          "image/vnd.ms-modi",
+          "image/vnd.ms-photo",
+          "image/vnd.net-fpx",
+          "image/vnd.radiance",
+          "image/vnd.sealed.png",
+          "image/vnd.sealedmedia.softseal.gif",
+          "image/vnd.sealedmedia.softseal.jpg",
+          "image/vnd.svf",
+          "image/vnd.tencent.tap",
+          "image/vnd.valve.source.texture",
+          "image/vnd.wap.wbmp",
+          "image/vnd.xiff",
+          "image/webp",
+          "image/x-3ds",
+          "image/x-cmu-raster",
+          "image/x-cmx",
+          "image/x-freehand",
+          "image/x-icon",
+          "image/x-mrsid-image",
+          "image/x-pcx",
+          "image/x-pict",
+          "image/x-portable-anymap",
+          "image/x-portable-bitmap",
+          "image/x-portable-graymap",
+          "image/x-portable-pixmap",
+          "image/x-rgb",
+          "image/x-tga",
+          "image/x-xbitmap",
+          "image/x-xcf",
+          "image/x-xpixmap",
+          "image/x-xwindowdump",
+          "video/1d-interleaved-parityfec",
+          "video/3gpp",
+          "video/3gpp-tt",
+          "video/3gpp2",
+          "video/bmpeg",
+          "video/bt656",
+          "video/celb",
+          "video/dv",
+          "video/h261",
+          "video/h263",
+          "video/h263-1998",
+          "video/h263-2000",
+          "video/h264",
+          "video/h264-rcdo",
+          "video/h264-svc",
+          "video/jpeg",
+          "video/jpeg2000",
+          "video/jpm",
+          "video/mj2",
+          "video/mp1s",
+          "video/mp2p",
+          "video/mp2t",
+          "video/mp4",
+          "video/mp4v-es",
+          "video/mpeg",
+          "video/mpeg4-generic",
+          "video/mpv",
+          "video/nv",
+          "video/ogg",
+          "video/parityfec",
+          "video/pointer",
+          "video/quicktime",
+          "video/raw",
+          "video/rtp-enc-aescm128",
+          "video/rtx",
+          "video/smpte292m",
+          "video/ulpfec",
+          "video/vc1",
+          "video/vnd.cctv",
+          "video/vnd.dece.hd",
+          "video/vnd.dece.mobile",
+          "video/vnd.dece.mp4",
+          "video/vnd.dece.pd",
+          "video/vnd.dece.sd",
+          "video/vnd.dece.video",
+          "video/vnd.directv.mpeg",
+          "video/vnd.directv.mpeg-tts",
+          "video/vnd.dlna.mpeg-tts",
+          "video/vnd.dvb.file",
+          "video/vnd.fvt",
+          "video/vnd.hns.video",
+          "video/vnd.iptvforum.1dparityfec-1010",
+          "video/vnd.iptvforum.1dparityfec-2005",
+          "video/vnd.iptvforum.2dparityfec-1010",
+          "video/vnd.iptvforum.2dparityfec-2005",
+          "video/vnd.iptvforum.ttsavc",
+          "video/vnd.iptvforum.ttsmpeg2",
+          "video/vnd.motorola.video",
+          "video/vnd.motorola.videop",
+          "video/vnd.mpegurl",
+          "video/vnd.ms-playready.media.pyv",
+          "video/vnd.nokia.interleaved-multimedia",
+          "video/vnd.nokia.videovoip",
+          "video/vnd.objectvideo",
+          "video/vnd.sealed.mpeg1",
+          "video/vnd.sealed.mpeg4",
+          "video/vnd.sealed.swf",
+          "video/vnd.sealedmedia.softseal.mov",
+          "video/vnd.uvvu.mp4",
+          "video/vnd.vivo",
+          "video/webm",
+          "video/x-f4v",
+          "video/x-fli",
+          "video/x-flv",
+          "video/x-m4v",
+          "video/x-matroska",
+          "video/x-mng",
+          "video/x-ms-asf",
+          "video/x-ms-vob",
+          "video/x-ms-wm",
+          "video/x-ms-wmv",
+          "video/x-ms-wmx",
+          "video/x-ms-wvx",
+          "video/x-msvideo",
+          "video/x-sgi-movie",
+          "video/x-smv"
+        ],
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "The ID of the timeline item the attachment belongs to.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Returns a list of attachments for a timeline item.",
+        "operationId": "mirror.timeline.attachments.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AttachmentsListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "The ID of the timeline item whose attachments should be listed.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Account": {
+      "id": "Account",
+      "type": "object",
+      "description": "Represents an account passed into the Account Manager on Glass.",
+      "properties": {
+        "authTokens": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthToken"
+          }
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "password": {
+          "type": "string"
+        },
+        "userData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserData"
+          }
+        }
+      }
+    },
+    "Attachment": {
+      "id": "Attachment",
+      "type": "object",
+      "description": "Represents media content, such as a photo, that can be attached to a timeline item.",
+      "properties": {
+        "contentType": {
+          "type": "string",
+          "description": "The MIME type of the attachment."
+        },
+        "contentUrl": {
+          "type": "string",
+          "description": "The URL for the content."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the attachment."
+        },
+        "isProcessingContent": {
+          "type": "boolean",
+          "description": "Indicates that the contentUrl is not available because the attachment content is still being processed. If the caller wishes to retrieve the content, it should try again later."
+        }
+      }
+    },
+    "AttachmentsListResponse": {
+      "id": "AttachmentsListResponse",
+      "type": "object",
+      "description": "A list of Attachments. This is the response from the server to GET requests on the attachments collection.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "The list of attachments.",
+          "items": {
+            "$ref": "#/definitions/Attachment"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "The type of resource. This is always mirror#attachmentsList.",
+          "default": "mirror#attachmentsList"
+        }
+      }
+    },
+    "AuthToken": {
+      "id": "AuthToken",
+      "type": "object",
+      "properties": {
+        "authToken": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "Command": {
+      "id": "Command",
+      "type": "object",
+      "description": "A single menu command that is part of a Contact.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of operation this command corresponds to. Allowed values are:  \n- TAKE_A_NOTE - Shares a timeline item with the transcription of user speech from the \"Take a note\" voice menu command.  \n- POST_AN_UPDATE - Shares a timeline item with the transcription of user speech from the \"Post an update\" voice menu command.",
+          "annotations": {
+            "required": [
+              "mirror.contacts.insert",
+              "mirror.contacts.update"
+            ]
+          }
+        }
+      }
+    },
+    "Contact": {
+      "id": "Contact",
+      "type": "object",
+      "description": "A person or group that can be used as a creator or a contact.",
+      "properties": {
+        "acceptCommands": {
+          "type": "array",
+          "description": "A list of voice menu commands that a contact can handle. Glass shows up to three contacts for each voice menu command. If there are more than that, the three contacts with the highest priority are shown for that particular command.",
+          "items": {
+            "$ref": "#/definitions/Command"
+          }
+        },
+        "acceptTypes": {
+          "type": "array",
+          "description": "A list of MIME types that a contact supports. The contact will be shown to the user if any of its acceptTypes matches any of the types of the attachments on the item. If no acceptTypes are given, the contact will be shown for all items.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name to display for this contact.",
+          "annotations": {
+            "required": [
+              "mirror.contacts.insert",
+              "mirror.contacts.update"
+            ]
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "An ID for this contact. This is generated by the application and is treated as an opaque token.",
+          "annotations": {
+            "required": [
+              "mirror.contacts.insert",
+              "mirror.contacts.update"
+            ]
+          }
+        },
+        "imageUrls": {
+          "type": "array",
+          "description": "Set of image URLs to display for a contact. Most contacts will have a single image, but a \"group\" contact may include up to 8 image URLs and they will be resized and cropped into a mosaic on the client.",
+          "items": {
+            "type": "string"
+          },
+          "annotations": {
+            "required": [
+              "mirror.contacts.insert",
+              "mirror.contacts.update"
+            ]
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "The type of resource. This is always mirror#contact.",
+          "default": "mirror#contact"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "Primary phone number for the contact. This can be a fully-qualified number, with country calling code and area code, or a local number."
+        },
+        "priority": {
+          "type": "integer",
+          "description": "Priority for the contact to determine ordering in a list of contacts. Contacts with higher priorities will be shown before ones with lower priorities.",
+          "format": "uint32"
+        },
+        "sharingFeatures": {
+          "type": "array",
+          "description": "A list of sharing features that a contact can handle. Allowed values are:  \n- ADD_CAPTION",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source": {
+          "type": "string",
+          "description": "The ID of the application that created this contact. This is populated by the API"
+        },
+        "speakableName": {
+          "type": "string",
+          "description": "Name of this contact as it should be pronounced. If this contact's name must be spoken as part of a voice disambiguation menu, this name is used as the expected pronunciation. This is useful for contact names with unpronounceable characters or whose display spelling is otherwise not phonetic."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type for this contact. This is used for sorting in UIs. Allowed values are:  \n- INDIVIDUAL - Represents a single person. This is the default. \n- GROUP - Represents more than a single person."
+        }
+      }
+    },
+    "ContactsListResponse": {
+      "id": "ContactsListResponse",
+      "type": "object",
+      "description": "A list of Contacts representing contacts. This is the response from the server to GET requests on the contacts collection.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Contact list.",
+          "items": {
+            "$ref": "#/definitions/Contact"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "The type of resource. This is always mirror#contacts.",
+          "default": "mirror#contacts"
+        }
+      }
+    },
+    "Location": {
+      "id": "Location",
+      "type": "object",
+      "description": "A geographic location that can be associated with a timeline item.",
+      "properties": {
+        "accuracy": {
+          "type": "number",
+          "description": "The accuracy of the location fix in meters.",
+          "format": "double"
+        },
+        "address": {
+          "type": "string",
+          "description": "The full address of the location."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name to be displayed. This may be a business name or a user-defined place, such as \"Home\"."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the location."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The type of resource. This is always mirror#location.",
+          "default": "mirror#location"
+        },
+        "latitude": {
+          "type": "number",
+          "description": "The latitude, in degrees.",
+          "format": "double"
+        },
+        "longitude": {
+          "type": "number",
+          "description": "The longitude, in degrees.",
+          "format": "double"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "The time at which this location was captured, formatted according to RFC 3339.",
+          "format": "date-time"
+        }
+      }
+    },
+    "LocationsListResponse": {
+      "id": "LocationsListResponse",
+      "type": "object",
+      "description": "A list of Locations. This is the response from the server to GET requests on the locations collection.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "The list of locations.",
+          "items": {
+            "$ref": "#/definitions/Location"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "The type of resource. This is always mirror#locationsList.",
+          "default": "mirror#locationsList"
+        }
+      }
+    },
+    "MenuItem": {
+      "id": "MenuItem",
+      "type": "object",
+      "description": "A custom menu item that can be presented to the user by a timeline item.",
+      "properties": {
+        "action": {
+          "type": "string",
+          "description": "Controls the behavior when the user picks the menu option. Allowed values are:  \n- CUSTOM - Custom action set by the service. When the user selects this menuItem, the API triggers a notification to your callbackUrl with the userActions.type set to CUSTOM and the userActions.payload set to the ID of this menu item. This is the default value. \n- Built-in actions:  \n- REPLY - Initiate a reply to the timeline item using the voice recording UI. The creator attribute must be set in the timeline item for this menu to be available. \n- REPLY_ALL - Same behavior as REPLY. The original timeline item's recipients will be added to the reply item. \n- DELETE - Delete the timeline item. \n- SHARE - Share the timeline item with the available contacts. \n- READ_ALOUD - Read the timeline item's speakableText aloud; if this field is not set, read the text field; if none of those fields are set, this menu item is ignored. \n- GET_MEDIA_INPUT - Allow users to provide media payloads to Glassware from a menu item (currently, only transcribed text from voice input is supported). Subscribe to notifications when users invoke this menu item to receive the timeline item ID. Retrieve the media from the timeline item in the payload property. \n- VOICE_CALL - Initiate a phone call using the timeline item's creator.phoneNumber attribute as recipient. \n- NAVIGATE - Navigate to the timeline item's location. \n- TOGGLE_PINNED - Toggle the isPinned state of the timeline item. \n- OPEN_URI - Open the payload of the menu item in the browser. \n- PLAY_VIDEO - Open the payload of the menu item in the Glass video player. \n- SEND_MESSAGE - Initiate sending a message to the timeline item's creator:  \n- If the creator.phoneNumber is set and Glass is connected to an Android phone, the message is an SMS. \n- Otherwise, if the creator.email is set, the message is an email."
+        },
+        "contextual_command": {
+          "type": "string",
+          "description": "The ContextualMenus.Command associated with this MenuItem (e.g. READ_ALOUD). The voice label for this command will be displayed in the voice menu and the touch label will be displayed in the touch menu. Note that the default menu value's display name will be overriden if you specify this property. Values that do not correspond to a ContextualMenus.Command name will be ignored."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID for this menu item. This is generated by the application and is treated as an opaque token."
+        },
+        "payload": {
+          "type": "string",
+          "description": "A generic payload whose meaning changes depending on this MenuItem's action.  \n- When the action is OPEN_URI, the payload is the URL of the website to view. \n- When the action is PLAY_VIDEO, the payload is the streaming URL of the video \n- When the action is GET_MEDIA_INPUT, the payload is the text transcription of a user's speech input"
+        },
+        "removeWhenSelected": {
+          "type": "boolean",
+          "description": "If set to true on a CUSTOM menu item, that item will be removed from the menu after it is selected."
+        },
+        "values": {
+          "type": "array",
+          "description": "For CUSTOM items, a list of values controlling the appearance of the menu item in each of its states. A value for the DEFAULT state must be provided. If the PENDING or CONFIRMED states are missing, they will not be shown.",
+          "items": {
+            "$ref": "#/definitions/MenuValue"
+          }
+        }
+      }
+    },
+    "MenuValue": {
+      "id": "MenuValue",
+      "type": "object",
+      "description": "A single value that is part of a MenuItem.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The name to display for the menu item. If you specify this property for a built-in menu item, the default contextual voice command for that menu item is not shown."
+        },
+        "iconUrl": {
+          "type": "string",
+          "description": "URL of an icon to display with the menu item."
+        },
+        "state": {
+          "type": "string",
+          "description": "The state that this value applies to. Allowed values are:  \n- DEFAULT - Default value shown when displayed in the menuItems list. \n- PENDING - Value shown when the menuItem has been selected by the user but can still be cancelled. \n- CONFIRMED - Value shown when the menuItem has been selected by the user and can no longer be cancelled."
+        }
+      }
+    },
+    "Notification": {
+      "id": "Notification",
+      "type": "object",
+      "description": "A notification delivered by the API.",
+      "properties": {
+        "collection": {
+          "type": "string",
+          "description": "The collection that generated the notification."
+        },
+        "itemId": {
+          "type": "string",
+          "description": "The ID of the item that generated the notification."
+        },
+        "operation": {
+          "type": "string",
+          "description": "The type of operation that generated the notification."
+        },
+        "userActions": {
+          "type": "array",
+          "description": "A list of actions taken by the user that triggered the notification.",
+          "items": {
+            "$ref": "#/definitions/UserAction"
+          }
+        },
+        "userToken": {
+          "type": "string",
+          "description": "The user token provided by the service when it subscribed for notifications."
+        },
+        "verifyToken": {
+          "type": "string",
+          "description": "The secret verify token provided by the service when it subscribed for notifications."
+        }
+      }
+    },
+    "NotificationConfig": {
+      "id": "NotificationConfig",
+      "type": "object",
+      "description": "Controls how notifications for a timeline item are presented to the user.",
+      "properties": {
+        "deliveryTime": {
+          "type": "string",
+          "description": "The time at which the notification should be delivered.",
+          "format": "date-time"
+        },
+        "level": {
+          "type": "string",
+          "description": "Describes how important the notification is. Allowed values are:  \n- DEFAULT - Notifications of default importance. A chime will be played to alert users."
+        }
+      }
+    },
+    "Setting": {
+      "id": "Setting",
+      "type": "object",
+      "description": "A setting for Glass.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The setting's ID. The following IDs are valid:  \n- locale - The key to the user’s language/locale (BCP 47 identifier) that Glassware should use to render localized content.  \n- timezone - The key to the user’s current time zone region as defined in the tz database. Example: America/Los_Angeles."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The type of resource. This is always mirror#setting.",
+          "default": "mirror#setting"
+        },
+        "value": {
+          "type": "string",
+          "description": "The setting value, as a string."
+        }
+      }
+    },
+    "Subscription": {
+      "id": "Subscription",
+      "type": "object",
+      "description": "A subscription to events on a collection.",
+      "properties": {
+        "callbackUrl": {
+          "type": "string",
+          "description": "The URL where notifications should be delivered (must start with https://).",
+          "annotations": {
+            "required": [
+              "mirror.subscriptions.insert",
+              "mirror.subscriptions.update"
+            ]
+          }
+        },
+        "collection": {
+          "type": "string",
+          "description": "The collection to subscribe to. Allowed values are:  \n- timeline - Changes in the timeline including insertion, deletion, and updates. \n- locations - Location updates. \n- settings - Settings updates.",
+          "annotations": {
+            "required": [
+              "mirror.subscriptions.insert",
+              "mirror.subscriptions.update"
+            ]
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the subscription."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The type of resource. This is always mirror#subscription.",
+          "default": "mirror#subscription"
+        },
+        "notification": {
+          "$ref": "#/definitions/Notification",
+          "description": "Container object for notifications. This is not populated in the Subscription resource."
+        },
+        "operation": {
+          "type": "array",
+          "description": "A list of operations that should be subscribed to. An empty list indicates that all operations on the collection should be subscribed to. Allowed values are:  \n- UPDATE - The item has been updated. \n- INSERT - A new item has been inserted. \n- DELETE - The item has been deleted. \n- MENU_ACTION - A custom menu item has been triggered by the user.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "updated": {
+          "type": "string",
+          "description": "The time at which this subscription was last modified, formatted according to RFC 3339.",
+          "format": "date-time"
+        },
+        "userToken": {
+          "type": "string",
+          "description": "An opaque token sent to the subscriber in notifications so that it can determine the ID of the user."
+        },
+        "verifyToken": {
+          "type": "string",
+          "description": "A secret token sent to the subscriber in notifications so that it can verify that the notification was generated by Google."
+        }
+      }
+    },
+    "SubscriptionsListResponse": {
+      "id": "SubscriptionsListResponse",
+      "type": "object",
+      "description": "A list of Subscriptions. This is the response from the server to GET requests on the subscription collection.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "The list of subscriptions.",
+          "items": {
+            "$ref": "#/definitions/Subscription"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "The type of resource. This is always mirror#subscriptionsList.",
+          "default": "mirror#subscriptionsList"
+        }
+      }
+    },
+    "TimelineItem": {
+      "id": "TimelineItem",
+      "type": "object",
+      "description": "Each item in the user's timeline is represented as a TimelineItem JSON structure, described below.",
+      "properties": {
+        "attachments": {
+          "type": "array",
+          "description": "A list of media attachments associated with this item. As a convenience, you can refer to attachments in your HTML payloads with the attachment or cid scheme. For example:  \n- attachment: <img src=\"attachment:attachment_index\"> where attachment_index is the 0-based index of this array. \n- cid: <img src=\"cid:attachment_id\"> where attachment_id is the ID of the attachment.",
+          "items": {
+            "$ref": "#/definitions/Attachment"
+          }
+        },
+        "bundleId": {
+          "type": "string",
+          "description": "The bundle ID for this item. Services can specify a bundleId to group many items together. They appear under a single top-level item on the device."
+        },
+        "canonicalUrl": {
+          "type": "string",
+          "description": "A canonical URL pointing to the canonical/high quality version of the data represented by the timeline item."
+        },
+        "created": {
+          "type": "string",
+          "description": "The time at which this item was created, formatted according to RFC 3339.",
+          "format": "date-time"
+        },
+        "creator": {
+          "$ref": "#/definitions/Contact",
+          "description": "The user or group that created this item."
+        },
+        "displayTime": {
+          "type": "string",
+          "description": "The time that should be displayed when this item is viewed in the timeline, formatted according to RFC 3339. This user's timeline is sorted chronologically on display time, so this will also determine where the item is displayed in the timeline. If not set by the service, the display time defaults to the updated time.",
+          "format": "date-time"
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag for this item."
+        },
+        "html": {
+          "type": "string",
+          "description": "HTML content for this item. If both text and html are provided for an item, the html will be rendered in the timeline.\nAllowed HTML elements - You can use these elements in your timeline cards.\n \n- Headers: h1, h2, h3, h4, h5, h6 \n- Images: img \n- Lists: li, ol, ul \n- HTML5 semantics: article, aside, details, figure, figcaption, footer, header, nav, section, summary, time \n- Structural: blockquote, br, div, hr, p, span \n- Style: b, big, center, em, i, u, s, small, strike, strong, style, sub, sup \n- Tables: table, tbody, td, tfoot, th, thead, tr  \nBlocked HTML elements: These elements and their contents are removed from HTML payloads.\n \n- Document headers: head, title \n- Embeds: audio, embed, object, source, video \n- Frames: frame, frameset \n- Scripting: applet, script  \nOther elements: Any elements that aren't listed are removed, but their contents are preserved."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the timeline item. This is unique within a user's timeline."
+        },
+        "inReplyTo": {
+          "type": "string",
+          "description": "If this item was generated as a reply to another item, this field will be set to the ID of the item being replied to. This can be used to attach a reply to the appropriate conversation or post."
+        },
+        "isBundleCover": {
+          "type": "boolean",
+          "description": "Whether this item is a bundle cover.\n\nIf an item is marked as a bundle cover, it will be the entry point to the bundle of items that have the same bundleId as that item. It will be shown only on the main timeline — not within the opened bundle.\n\nOn the main timeline, items that are shown are:  \n- Items that have isBundleCover set to true  \n- Items that do not have a bundleId  In a bundle sub-timeline, items that are shown are:  \n- Items that have the bundleId in question AND isBundleCover set to false"
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "description": "When true, indicates this item is deleted, and only the ID property is set."
+        },
+        "isPinned": {
+          "type": "boolean",
+          "description": "When true, indicates this item is pinned, which means it's grouped alongside \"active\" items like navigation and hangouts, on the opposite side of the home screen from historical (non-pinned) timeline items. You can allow the user to toggle the value of this property with the TOGGLE_PINNED built-in menu item."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The type of resource. This is always mirror#timelineItem.",
+          "default": "mirror#timelineItem"
+        },
+        "location": {
+          "$ref": "#/definitions/Location",
+          "description": "The geographic location associated with this item."
+        },
+        "menuItems": {
+          "type": "array",
+          "description": "A list of menu items that will be presented to the user when this item is selected in the timeline.",
+          "items": {
+            "$ref": "#/definitions/MenuItem"
+          }
+        },
+        "notification": {
+          "$ref": "#/definitions/NotificationConfig",
+          "description": "Controls how notifications for this item are presented on the device. If this is missing, no notification will be generated."
+        },
+        "pinScore": {
+          "type": "integer",
+          "description": "For pinned items, this determines the order in which the item is displayed in the timeline, with a higher score appearing closer to the clock. Note: setting this field is currently not supported.",
+          "format": "int32"
+        },
+        "recipients": {
+          "type": "array",
+          "description": "A list of users or groups that this item has been shared with.",
+          "items": {
+            "$ref": "#/definitions/Contact"
+          }
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "A URL that can be used to retrieve this item."
+        },
+        "sourceItemId": {
+          "type": "string",
+          "description": "Opaque string you can use to map a timeline item to data in your own service."
+        },
+        "speakableText": {
+          "type": "string",
+          "description": "The speakable version of the content of this item. Along with the READ_ALOUD menu item, use this field to provide text that would be clearer when read aloud, or to provide extended information to what is displayed visually on Glass.\n\nGlassware should also specify the speakableType field, which will be spoken before this text in cases where the additional context is useful, for example when the user requests that the item be read aloud following a notification."
+        },
+        "speakableType": {
+          "type": "string",
+          "description": "A speakable description of the type of this item. This will be announced to the user prior to reading the content of the item in cases where the additional context is useful, for example when the user requests that the item be read aloud following a notification.\n\nThis should be a short, simple noun phrase such as \"Email\", \"Text message\", or \"Daily Planet News Update\".\n\nGlassware are encouraged to populate this field for every timeline item, even if the item does not contain speakableText or text so that the user can learn the type of the item without looking at the screen."
+        },
+        "text": {
+          "type": "string",
+          "description": "Text content of this item."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of this item."
+        },
+        "updated": {
+          "type": "string",
+          "description": "The time at which this item was last modified, formatted according to RFC 3339.",
+          "format": "date-time"
+        }
+      }
+    },
+    "TimelineListResponse": {
+      "id": "TimelineListResponse",
+      "type": "object",
+      "description": "A list of timeline items. This is the response from the server to GET requests on the timeline collection.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Items in the timeline.",
+          "items": {
+            "$ref": "#/definitions/TimelineItem"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "The type of resource. This is always mirror#timeline.",
+          "default": "mirror#timeline"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "The next page token. Provide this as the pageToken parameter in the request to retrieve the next page of results."
+        }
+      }
+    },
+    "UserAction": {
+      "id": "UserAction",
+      "type": "object",
+      "description": "Represents an action taken by the user that triggered a notification.",
+      "properties": {
+        "payload": {
+          "type": "string",
+          "description": "An optional payload for the action.\n\nFor actions of type CUSTOM, this is the ID of the custom menu item that was selected."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of action. The value of this can be:  \n- SHARE - the user shared an item. \n- REPLY - the user replied to an item. \n- REPLY_ALL - the user replied to all recipients of an item. \n- CUSTOM - the user selected a custom menu item on the timeline item. \n- DELETE - the user deleted the item. \n- PIN - the user pinned the item. \n- UNPIN - the user unpinned the item. \n- LAUNCH - the user initiated a voice command.  In the future, additional types may be added. UserActions with unrecognized types should be ignored."
+        }
+      }
+    },
+    "UserData": {
+      "id": "UserData",
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "alt": {
+      "name": "alt",
+      "in": "query",
+      "description": "Data format for the response.",
+      "default": "json",
+      "type": "string",
+      "enum": [
+        "json"
+      ]
+    },
+    "fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Selector specifying which fields to include in a partial response.",
+      "type": "string"
+    },
+    "key": {
+      "name": "key",
+      "in": "query",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    "oauth_token": {
+      "name": "oauth_token",
+      "in": "query",
+      "description": "OAuth 2.0 token for the current user.",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "name": "prettyPrint",
+      "in": "query",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "true",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "name": "quotaUser",
+      "in": "query",
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "type": "string"
+    },
+    "userIp": {
+      "name": "userIp",
+      "in": "query",
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "type": "string"
+    }
+  }
+}

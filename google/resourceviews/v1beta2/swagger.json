@@ -1,0 +1,1165 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Resource Views API",
+    "description": "The Resource View API allows users to create and manage logical sets of Google Compute Engine instances.",
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "version": "v1beta2"
+  },
+  "host": "www.googleapis.com",
+  "basePath": "/resourceviews/v1beta2/projects",
+  "schemes": [
+    "https"
+  ],
+  "externalDocs": {
+    "url": "https://developers.google.com/compute/"
+  },
+  "paths": {
+    "/{project}/zones/{zone}/operations/{operation}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves the specified zone-specific operation resource.",
+        "operationId": "resourceviews.zoneOperations.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "operation",
+            "in": "path",
+            "description": "Name of the operation resource to return.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Name of the project scoping this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "Name of the zone scoping this request.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{project}/zones/{zone}/operations": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves the list of operation resources contained within the specified zone.",
+        "operationId": "resourceviews.zoneOperations.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Optional. Filter expression for filtering listed resources.",
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.",
+            "default": "500",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 500
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.",
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Name of the project scoping this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "Name of the zone scoping this request.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{project}/zones/{zone}/resourceViews/{resourceView}/addResources": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Add resources to the view.",
+        "operationId": "resourceviews.zoneViews.addResources",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "The project name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceView",
+            "in": "path",
+            "description": "The name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "The zone name of the resource view.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{project}/zones/{zone}/resourceViews/{resourceView}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Delete a resource view.",
+        "operationId": "resourceviews.zoneViews.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "The project name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceView",
+            "in": "path",
+            "description": "The name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "The zone name of the resource view.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Get the information of a zonal resource view.",
+        "operationId": "resourceviews.zoneViews.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ResourceView"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "The project name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceView",
+            "in": "path",
+            "description": "The name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "The zone name of the resource view.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{project}/zones/{zone}/resourceViews/{resourceView}/getService": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Get the service information of a resource view or a resource.",
+        "operationId": "resourceviews.zoneViews.getService",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ZoneViewsGetServiceResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "The project name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "query",
+            "description": "The name of the resource if user wants to get the service information of the resource.",
+            "type": "string"
+          },
+          {
+            "name": "resourceView",
+            "in": "path",
+            "description": "The name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "The zone name of the resource view.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{project}/zones/{zone}/resourceViews": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Create a resource view.",
+        "operationId": "resourceviews.zoneViews.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "The project name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "The zone name of the resource view.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "List resource views.",
+        "operationId": "resourceviews.zoneViews.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ZoneViewsList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum count of results to be returned. Acceptable values are 0 to 5000, inclusive. (Default: 5000)",
+            "default": "5000",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 5000
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.",
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "The project name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "The zone name of the resource view.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{project}/zones/{zone}/resourceViews/{resourceView}/resources": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "List the resources of the resource view.",
+        "operationId": "resourceviews.zoneViews.listResources",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ZoneViewsListResourcesResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "description": "The requested format of the return value. It can be URL or URL_PORT. A JSON object will be included in the response based on the format. The default format is NONE, which results in no JSON in the response.",
+            "type": "string",
+            "enum": [
+              "NONE",
+              "URL",
+              "URL_PORT"
+            ]
+          },
+          {
+            "name": "listState",
+            "in": "query",
+            "description": "The state of the instance to list. By default, it lists all instances.",
+            "default": "ALL",
+            "type": "string",
+            "enum": [
+              "ALL",
+              "RUNNING"
+            ]
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum count of results to be returned. Acceptable values are 0 to 5000, inclusive. (Default: 5000)",
+            "default": "5000",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 5000
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.",
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "The project name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceView",
+            "in": "path",
+            "description": "The name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceName",
+            "in": "query",
+            "description": "The service name to return in the response. It is optional and if it is not set, all the service end points will be returned.",
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "The zone name of the resource view.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{project}/zones/{zone}/resourceViews/{resourceView}/removeResources": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Remove resources from the view.",
+        "operationId": "resourceviews.zoneViews.removeResources",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "The project name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceView",
+            "in": "path",
+            "description": "The name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "The zone name of the resource view.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{project}/zones/{zone}/resourceViews/{resourceView}/setService": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Update the service information of a resource view or a resource.",
+        "operationId": "resourceviews.zoneViews.setService",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "The project name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceView",
+            "in": "path",
+            "description": "The name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "The zone name of the resource view.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Label": {
+      "id": "Label",
+      "type": "object",
+      "description": "The Label to be applied to the resource views.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Key of the label."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the label."
+        }
+      }
+    },
+    "ListResourceResponseItem": {
+      "id": "ListResourceResponseItem",
+      "type": "object",
+      "description": "The list response item that contains the resource and end points information.",
+      "properties": {
+        "endpoints": {
+          "type": "object",
+          "description": "The list of service end points on the resource.",
+          "additionalProperties": {
+            "type": "array",
+            "description": "The name of the service end point.",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "resource": {
+          "type": "string",
+          "description": "The full URL of the resource."
+        }
+      }
+    },
+    "Operation": {
+      "id": "Operation",
+      "type": "object",
+      "description": "An operation resource, used to manage asynchronous API requests.",
+      "properties": {
+        "clientOperationId": {
+          "type": "string",
+          "description": "[Output only] An optional identifier specified by the client when the mutation was initiated. Must be unique for all operation resources in the project."
+        },
+        "creationTimestamp": {
+          "type": "string",
+          "description": "[Output Only] The time that this operation was requested, in RFC3339 text format."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "[Output Only] The time that this operation was completed, in RFC3339 text format."
+        },
+        "error": {
+          "type": "object",
+          "description": "[Output Only] If errors occurred during processing of this operation, this field will be populated.",
+          "properties": {
+            "errors": {
+              "type": "array",
+              "description": "[Output Only] The array of errors encountered while processing this operation.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "[Output Only] The error type identifier for this error."
+                  },
+                  "location": {
+                    "type": "string",
+                    "description": "[Output Only] Indicates the field in the request which caused the error. This property is optional."
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "[Output Only] An optional, human-readable error message."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "httpErrorMessage": {
+          "type": "string",
+          "description": "[Output only] If operation fails, the HTTP error message returned."
+        },
+        "httpErrorStatusCode": {
+          "type": "integer",
+          "description": "[Output only] If operation fails, the HTTP error status code returned.",
+          "format": "int32"
+        },
+        "id": {
+          "type": "string",
+          "description": "[Output Only] Unique identifier for the resource, generated by the server.",
+          "format": "uint64"
+        },
+        "insertTime": {
+          "type": "string",
+          "description": "[Output Only] The time that this operation was requested, in RFC3339 text format."
+        },
+        "kind": {
+          "type": "string",
+          "description": "[Output only] Type of the resource.",
+          "default": "resourceviews#operation"
+        },
+        "name": {
+          "type": "string",
+          "description": "[Output Only] Name of the resource."
+        },
+        "operationType": {
+          "type": "string",
+          "description": "[Output only] Type of the operation. Operations include insert, update, and delete."
+        },
+        "progress": {
+          "type": "integer",
+          "description": "[Output only] An optional progress indicator that ranges from 0 to 100. There is no requirement that this be linear or support any granularity of operations. This should not be used to guess at when the operation will be complete. This number should be monotonically increasing as the operation progresses.",
+          "format": "int32"
+        },
+        "region": {
+          "type": "string",
+          "description": "[Output Only] URL of the region where the operation resides. Only available when performing regional operations."
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "[Output Only] Server-defined fully-qualified URL for this resource."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "[Output Only] The time that this operation was started by the server, in RFC3339 text format."
+        },
+        "status": {
+          "type": "string",
+          "description": "[Output Only] Status of the operation."
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "[Output Only] An optional textual description of the current status of the operation."
+        },
+        "targetId": {
+          "type": "string",
+          "description": "[Output Only] Unique target ID which identifies a particular incarnation of the target.",
+          "format": "uint64"
+        },
+        "targetLink": {
+          "type": "string",
+          "description": "[Output only] URL of the resource the operation is mutating."
+        },
+        "user": {
+          "type": "string",
+          "description": "[Output Only] User who requested the operation, for example: user@example.com."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "[Output Only] If there are issues with this operation, a warning is returned.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "[Output only] The warning type identifier for this warning."
+              },
+              "data": {
+                "type": "array",
+                "description": "[Output only] Metadata for this warning in key:value format.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "description": "[Output Only] Metadata key for this warning."
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "[Output Only] Metadata value for this warning."
+                    }
+                  }
+                }
+              },
+              "message": {
+                "type": "string",
+                "description": "[Output only] Optional human-readable details for this warning."
+              }
+            }
+          }
+        },
+        "zone": {
+          "type": "string",
+          "description": "[Output Only] URL of the zone where the operation resides. Only available when performing per-zone operations."
+        }
+      }
+    },
+    "OperationList": {
+      "id": "OperationList",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the resource; defined by the server (output only)."
+        },
+        "items": {
+          "type": "array",
+          "description": "The operation resources.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Type of resource.",
+          "default": "resourceviews#operationList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token used to continue a truncated list request (output only)."
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "Server defined URL for this resource (output only)."
+        }
+      }
+    },
+    "ResourceView": {
+      "id": "ResourceView",
+      "type": "object",
+      "description": "The resource view object.",
+      "properties": {
+        "creationTimestamp": {
+          "type": "string",
+          "description": "The creation time of the resource view."
+        },
+        "description": {
+          "type": "string",
+          "description": "The detailed description of the resource view."
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "Services endpoint information.",
+          "items": {
+            "$ref": "#/definitions/ServiceEndpoint"
+          }
+        },
+        "fingerprint": {
+          "type": "string",
+          "description": "The fingerprint of the service endpoint information."
+        },
+        "id": {
+          "type": "string",
+          "description": "[Output Only] The ID of the resource view."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Type of the resource.",
+          "default": "resourceviews#resourceView"
+        },
+        "labels": {
+          "type": "array",
+          "description": "The labels for events.",
+          "items": {
+            "$ref": "#/definitions/Label"
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource view."
+        },
+        "network": {
+          "type": "string",
+          "description": "The URL of a Compute Engine network to which the resources in the view belong."
+        },
+        "resources": {
+          "type": "array",
+          "description": "A list of all resources in the resource view.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "[Output Only] A self-link to the resource view."
+        },
+        "size": {
+          "type": "integer",
+          "description": "The total number of resources in the resource view.",
+          "format": "uint32"
+        }
+      }
+    },
+    "ServiceEndpoint": {
+      "id": "ServiceEndpoint",
+      "type": "object",
+      "description": "The service endpoint that may be started in a VM.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the service endpoint."
+        },
+        "port": {
+          "type": "integer",
+          "description": "The port of the service endpoint.",
+          "format": "int32"
+        }
+      }
+    },
+    "ZoneViewsAddResourcesRequest": {
+      "id": "ZoneViewsAddResourcesRequest",
+      "type": "object",
+      "description": "The request to add resources to the resource view.",
+      "properties": {
+        "resources": {
+          "type": "array",
+          "description": "The list of resources to be added.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ZoneViewsGetServiceResponse": {
+      "id": "ZoneViewsGetServiceResponse",
+      "type": "object",
+      "properties": {
+        "endpoints": {
+          "type": "array",
+          "description": "The service information.",
+          "items": {
+            "$ref": "#/definitions/ServiceEndpoint"
+          }
+        },
+        "fingerprint": {
+          "type": "string",
+          "description": "The fingerprint of the service information."
+        }
+      }
+    },
+    "ZoneViewsList": {
+      "id": "ZoneViewsList",
+      "type": "object",
+      "description": "The response to a list request.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "The result that contains all resource views that meet the criteria.",
+          "items": {
+            "$ref": "#/definitions/ResourceView"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Type of resource.",
+          "default": "resourceviews#zoneViewsList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token used for pagination."
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "Server defined URL for this resource (output only)."
+        }
+      }
+    },
+    "ZoneViewsListResourcesResponse": {
+      "id": "ZoneViewsListResourcesResponse",
+      "type": "object",
+      "description": "The response to a list resource request.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "The formatted JSON that is requested by the user.",
+          "items": {
+            "$ref": "#/definitions/ListResourceResponseItem"
+          }
+        },
+        "network": {
+          "type": "string",
+          "description": "The URL of a Compute Engine network to which the resources in the view belong."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token used for pagination."
+        }
+      }
+    },
+    "ZoneViewsRemoveResourcesRequest": {
+      "id": "ZoneViewsRemoveResourcesRequest",
+      "type": "object",
+      "description": "The request to remove resources from the resource view.",
+      "properties": {
+        "resources": {
+          "type": "array",
+          "description": "The list of resources to be removed.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ZoneViewsSetServiceRequest": {
+      "id": "ZoneViewsSetServiceRequest",
+      "type": "object",
+      "properties": {
+        "endpoints": {
+          "type": "array",
+          "description": "The service information to be updated.",
+          "items": {
+            "$ref": "#/definitions/ServiceEndpoint"
+          }
+        },
+        "fingerprint": {
+          "type": "string",
+          "description": "Fingerprint of the service information; a hash of the contents. This field is used for optimistic locking when updating the service entries."
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "The name of the resource if user wants to update the service information of the resource."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "alt": {
+      "name": "alt",
+      "in": "query",
+      "description": "Data format for the response.",
+      "default": "json",
+      "type": "string",
+      "enum": [
+        "json"
+      ]
+    },
+    "fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Selector specifying which fields to include in a partial response.",
+      "type": "string"
+    },
+    "key": {
+      "name": "key",
+      "in": "query",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    "oauth_token": {
+      "name": "oauth_token",
+      "in": "query",
+      "description": "OAuth 2.0 token for the current user.",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "name": "prettyPrint",
+      "in": "query",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "true",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "name": "quotaUser",
+      "in": "query",
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "type": "string"
+    },
+    "userIp": {
+      "name": "userIp",
+      "in": "query",
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,2483 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Google+ Domains API",
+    "description": "The Google+ API enables developers to build on top of the Google+ platform.",
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "version": "v1"
+  },
+  "host": "www.googleapis.com",
+  "basePath": "/plusDomains/v1",
+  "schemes": [
+    "https"
+  ],
+  "externalDocs": {
+    "url": "https://developers.google.com/+/domains/"
+  },
+  "paths": {
+    "/activities/{activityId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Get an activity.",
+        "operationId": "plusDomains.activities.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Activity"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "activityId",
+            "in": "path",
+            "description": "The ID of the activity to get.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/people/{userId}/activities": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Create a new activity for the authenticated user.",
+        "operationId": "plusDomains.activities.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Activity"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "preview",
+            "in": "query",
+            "description": "If \"true\", extract the potential media attachments for a URL. The response will include all possible attachments for a URL, including video, photos, and articles based on the content of the page.",
+            "type": "boolean"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user to create the activity on behalf of. Its value should be \"me\", to indicate the authenticated user.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/people/{userId}/activities/{collection}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "List all of the activities in the specified collection for a particular user.",
+        "operationId": "plusDomains.activities.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ActivityFeed"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "path",
+            "description": "The collection of activities to list.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "user"
+            ]
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "The maximum number of activities to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.",
+            "default": "20",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user to get activities for. The special value \"me\" can be used to indicate the authenticated user.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/people/{userId}/audiences": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "List all of the audiences to which a user can share.",
+        "operationId": "plusDomains.audiences.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AudiencesFeed"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "The maximum number of circles to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.",
+            "default": "20",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user to get audiences for. The special value \"me\" can be used to indicate the authenticated user.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/circles/{circleId}/people": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "put": {
+        "description": "Add a person to a circle. Google+ limits certain circle operations, including the number of circle adds. Learn More.",
+        "operationId": "plusDomains.circles.addPeople",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Circle"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "circleId",
+            "in": "path",
+            "description": "The ID of the circle to add the person to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "description": "Email of the people to add to the circle. Optional, can be repeated.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "IDs of the people to add to the circle. Optional, can be repeated.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ]
+      },
+      "delete": {
+        "description": "Remove a person from a circle.",
+        "operationId": "plusDomains.circles.removePeople",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "circleId",
+            "in": "path",
+            "description": "The ID of the circle to remove the person from.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "description": "Email of the people to add to the circle. Optional, can be repeated.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "IDs of the people to remove from the circle. Optional, can be repeated.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ]
+      },
+      "get": {
+        "description": "List all of the people who are members of a circle.",
+        "operationId": "plusDomains.people.listByCircle",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/PeopleFeed"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "circleId",
+            "in": "path",
+            "description": "The ID of the circle to get the members of.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.",
+            "default": "20",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/circles/{circleId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Get a circle.",
+        "operationId": "plusDomains.circles.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Circle"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "circleId",
+            "in": "path",
+            "description": "The ID of the circle to get.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Update a circle's description. This method supports patch semantics.",
+        "operationId": "plusDomains.circles.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Circle"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "circleId",
+            "in": "path",
+            "description": "The ID of the circle to update.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "delete": {
+        "description": "Delete a circle.",
+        "operationId": "plusDomains.circles.remove",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "circleId",
+            "in": "path",
+            "description": "The ID of the circle to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "description": "Update a circle's description.",
+        "operationId": "plusDomains.circles.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Circle"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "circleId",
+            "in": "path",
+            "description": "The ID of the circle to update.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/people/{userId}/circles": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Create a new circle for the authenticated user.",
+        "operationId": "plusDomains.circles.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Circle"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user to create the circle on behalf of. The value \"me\" can be used to indicate the authenticated user.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "List all of the circles for a user.",
+        "operationId": "plusDomains.circles.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/CircleFeed"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "The maximum number of circles to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.",
+            "default": "20",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user to get circles for. The special value \"me\" can be used to indicate the authenticated user.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/comments/{commentId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Get a comment.",
+        "operationId": "plusDomains.comments.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "commentId",
+            "in": "path",
+            "description": "The ID of the comment to get.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/activities/{activityId}/comments": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Create a new comment in reply to an activity.",
+        "operationId": "plusDomains.comments.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "activityId",
+            "in": "path",
+            "description": "The ID of the activity to reply to.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "List all of the comments for an activity.",
+        "operationId": "plusDomains.comments.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/CommentFeed"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "activityId",
+            "in": "path",
+            "description": "The ID of the activity to get comments for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "The maximum number of comments to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.",
+            "default": "20",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 500
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "type": "string"
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "The order in which to sort the list of comments.",
+            "default": "ascending",
+            "type": "string",
+            "enum": [
+              "ascending",
+              "descending"
+            ]
+          }
+        ]
+      }
+    },
+    "/people/{userId}/media/{collection}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Add a new media item to an album. The current upload size limitations are 36MB for a photo and 1GB for a video. Uploads do not count against quota if photos are less than 2048 pixels on their longest side or videos are less than 15 minutes in length.",
+        "operationId": "plusDomains.media.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Media"
+            }
+          }
+        },
+        "consumes": [
+          "image/bmp",
+          "image/cgm",
+          "image/fits",
+          "image/g3fax",
+          "image/gif",
+          "image/ief",
+          "image/jp2",
+          "image/jpeg",
+          "image/jpm",
+          "image/jpx",
+          "image/ktx",
+          "image/naplps",
+          "image/pjpeg",
+          "image/png",
+          "image/prs.btif",
+          "image/prs.pti",
+          "image/pwg-raster",
+          "image/sgi",
+          "image/svg+xml",
+          "image/t38",
+          "image/tiff",
+          "image/tiff-fx",
+          "image/vnd.adobe.photoshop",
+          "image/vnd.airzip.accelerator.azv",
+          "image/vnd.cns.inf2",
+          "image/vnd.dece.graphic",
+          "image/vnd.djvu",
+          "image/vnd.dvb.subtitle",
+          "image/vnd.dwg",
+          "image/vnd.dxf",
+          "image/vnd.fastbidsheet",
+          "image/vnd.fpx",
+          "image/vnd.fst",
+          "image/vnd.fujixerox.edmics-mmr",
+          "image/vnd.fujixerox.edmics-rlc",
+          "image/vnd.globalgraphics.pgb",
+          "image/vnd.microsoft.icon",
+          "image/vnd.mix",
+          "image/vnd.ms-modi",
+          "image/vnd.ms-photo",
+          "image/vnd.net-fpx",
+          "image/vnd.radiance",
+          "image/vnd.sealed.png",
+          "image/vnd.sealedmedia.softseal.gif",
+          "image/vnd.sealedmedia.softseal.jpg",
+          "image/vnd.svf",
+          "image/vnd.tencent.tap",
+          "image/vnd.valve.source.texture",
+          "image/vnd.wap.wbmp",
+          "image/vnd.xiff",
+          "image/webp",
+          "image/x-3ds",
+          "image/x-cmu-raster",
+          "image/x-cmx",
+          "image/x-freehand",
+          "image/x-icon",
+          "image/x-mrsid-image",
+          "image/x-pcx",
+          "image/x-pict",
+          "image/x-portable-anymap",
+          "image/x-portable-bitmap",
+          "image/x-portable-graymap",
+          "image/x-portable-pixmap",
+          "image/x-rgb",
+          "image/x-tga",
+          "image/x-xbitmap",
+          "image/x-xcf",
+          "image/x-xpixmap",
+          "image/x-xwindowdump",
+          "video/1d-interleaved-parityfec",
+          "video/3gpp",
+          "video/3gpp-tt",
+          "video/3gpp2",
+          "video/bmpeg",
+          "video/bt656",
+          "video/celb",
+          "video/dv",
+          "video/h261",
+          "video/h263",
+          "video/h263-1998",
+          "video/h263-2000",
+          "video/h264",
+          "video/h264-rcdo",
+          "video/h264-svc",
+          "video/jpeg",
+          "video/jpeg2000",
+          "video/jpm",
+          "video/mj2",
+          "video/mp1s",
+          "video/mp2p",
+          "video/mp2t",
+          "video/mp4",
+          "video/mp4v-es",
+          "video/mpeg",
+          "video/mpeg4-generic",
+          "video/mpv",
+          "video/nv",
+          "video/ogg",
+          "video/parityfec",
+          "video/pointer",
+          "video/quicktime",
+          "video/raw",
+          "video/rtp-enc-aescm128",
+          "video/rtx",
+          "video/smpte292m",
+          "video/ulpfec",
+          "video/vc1",
+          "video/vnd.cctv",
+          "video/vnd.dece.hd",
+          "video/vnd.dece.mobile",
+          "video/vnd.dece.mp4",
+          "video/vnd.dece.pd",
+          "video/vnd.dece.sd",
+          "video/vnd.dece.video",
+          "video/vnd.directv.mpeg",
+          "video/vnd.directv.mpeg-tts",
+          "video/vnd.dlna.mpeg-tts",
+          "video/vnd.dvb.file",
+          "video/vnd.fvt",
+          "video/vnd.hns.video",
+          "video/vnd.iptvforum.1dparityfec-1010",
+          "video/vnd.iptvforum.1dparityfec-2005",
+          "video/vnd.iptvforum.2dparityfec-1010",
+          "video/vnd.iptvforum.2dparityfec-2005",
+          "video/vnd.iptvforum.ttsavc",
+          "video/vnd.iptvforum.ttsmpeg2",
+          "video/vnd.motorola.video",
+          "video/vnd.motorola.videop",
+          "video/vnd.mpegurl",
+          "video/vnd.ms-playready.media.pyv",
+          "video/vnd.nokia.interleaved-multimedia",
+          "video/vnd.nokia.videovoip",
+          "video/vnd.objectvideo",
+          "video/vnd.sealed.mpeg1",
+          "video/vnd.sealed.mpeg4",
+          "video/vnd.sealed.swf",
+          "video/vnd.sealedmedia.softseal.mov",
+          "video/vnd.uvvu.mp4",
+          "video/vnd.vivo",
+          "video/webm",
+          "video/x-f4v",
+          "video/x-fli",
+          "video/x-flv",
+          "video/x-m4v",
+          "video/x-matroska",
+          "video/x-mng",
+          "video/x-ms-asf",
+          "video/x-ms-vob",
+          "video/x-ms-wm",
+          "video/x-ms-wmv",
+          "video/x-ms-wmx",
+          "video/x-ms-wvx",
+          "video/x-msvideo",
+          "video/x-sgi-movie",
+          "video/x-smv"
+        ],
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "cloud"
+            ]
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user to create the activity on behalf of.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/people/{userId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Get a person's profile.",
+        "operationId": "plusDomains.people.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Person"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the person to get the profile for. The special value \"me\" can be used to indicate the authenticated user.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/people/{userId}/people/{collection}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "List all of the people in the specified collection.",
+        "operationId": "plusDomains.people.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/PeopleFeed"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "path",
+            "description": "The collection of people to list.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "circled"
+            ]
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.",
+            "default": "100",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "The order to return people in.",
+            "type": "string",
+            "enum": [
+              "alphabetical",
+              "best"
+            ]
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Get the collection of people for the person identified. Use \"me\" to indicate the authenticated user.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/activities/{activityId}/people/{collection}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "List all of the people in the specified collection for a particular activity.",
+        "operationId": "plusDomains.people.listByActivity",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/PeopleFeed"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "activityId",
+            "in": "path",
+            "description": "The ID of the activity to get the list of people for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collection",
+            "in": "path",
+            "description": "The collection of people to list.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "plusoners",
+              "resharers",
+              "sharedto"
+            ]
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.",
+            "default": "20",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Acl": {
+      "id": "Acl",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the access granted, suitable for display."
+        },
+        "domainRestricted": {
+          "type": "boolean",
+          "description": "Whether access is restricted to the domain."
+        },
+        "items": {
+          "type": "array",
+          "description": "The list of access entries.",
+          "items": {
+            "$ref": "#/definitions/PlusDomainsAclentryResource"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this resource as a collection of access controls. Value: \"plus#acl\".",
+          "default": "plus#acl"
+        }
+      }
+    },
+    "Activity": {
+      "id": "Activity",
+      "type": "object",
+      "properties": {
+        "access": {
+          "$ref": "#/definitions/Acl",
+          "description": "Identifies who has access to see this activity."
+        },
+        "actor": {
+          "type": "object",
+          "description": "The person who performed this activity.",
+          "properties": {
+            "displayName": {
+              "type": "string",
+              "description": "The name of the actor, suitable for display."
+            },
+            "id": {
+              "type": "string",
+              "description": "The ID of the actor's Person resource."
+            },
+            "image": {
+              "type": "object",
+              "description": "The image representation of the actor.",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "description": "The URL of the actor's profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side."
+                }
+              }
+            },
+            "name": {
+              "type": "object",
+              "description": "An object representation of the individual components of name.",
+              "properties": {
+                "familyName": {
+                  "type": "string",
+                  "description": "The family name (\"last name\") of the actor."
+                },
+                "givenName": {
+                  "type": "string",
+                  "description": "The given name (\"first name\") of the actor."
+                }
+              }
+            },
+            "url": {
+              "type": "string",
+              "description": "The link to the actor's Google profile."
+            }
+          }
+        },
+        "address": {
+          "type": "string",
+          "description": "Street address where this activity occurred."
+        },
+        "annotation": {
+          "type": "string",
+          "description": "Additional content added by the person who shared this activity, applicable only when resharing an activity."
+        },
+        "crosspostSource": {
+          "type": "string",
+          "description": "If this activity is a crosspost from another system, this property specifies the ID of the original activity."
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag of this response for caching purposes."
+        },
+        "geocode": {
+          "type": "string",
+          "description": "Latitude and longitude where this activity occurred. Format is latitude followed by longitude, space separated."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of this activity."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this resource as an activity. Value: \"plus#activity\".",
+          "default": "plus#activity"
+        },
+        "location": {
+          "$ref": "#/definitions/Place",
+          "description": "The location where this activity occurred."
+        },
+        "object": {
+          "type": "object",
+          "description": "The object of this activity.",
+          "properties": {
+            "actor": {
+              "type": "object",
+              "description": "If this activity's object is itself another activity, such as when a person reshares an activity, this property specifies the original activity's actor.",
+              "properties": {
+                "displayName": {
+                  "type": "string",
+                  "description": "The original actor's name, which is suitable for display."
+                },
+                "id": {
+                  "type": "string",
+                  "description": "ID of the original actor."
+                },
+                "image": {
+                  "type": "object",
+                  "description": "The image representation of the original actor.",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "description": "A URL that points to a thumbnail photo of the original actor."
+                    }
+                  }
+                },
+                "url": {
+                  "type": "string",
+                  "description": "A link to the original actor's Google profile."
+                }
+              }
+            },
+            "attachments": {
+              "type": "array",
+              "description": "The media objects attached to this activity.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "content": {
+                    "type": "string",
+                    "description": "If the attachment is an article, this property contains a snippet of text from the article. It can also include descriptions for other types."
+                  },
+                  "displayName": {
+                    "type": "string",
+                    "description": "The title of the attachment, such as a photo caption or an article title."
+                  },
+                  "embed": {
+                    "type": "object",
+                    "description": "If the attachment is a video, the embeddable link.",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "description": "Media type of the link."
+                      },
+                      "url": {
+                        "type": "string",
+                        "description": "URL of the link."
+                      }
+                    }
+                  },
+                  "fullImage": {
+                    "type": "object",
+                    "description": "The full image URL for photo attachments.",
+                    "properties": {
+                      "height": {
+                        "type": "integer",
+                        "description": "The height, in pixels, of the linked resource.",
+                        "format": "uint32"
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "Media type of the link."
+                      },
+                      "url": {
+                        "type": "string",
+                        "description": "URL of the image."
+                      },
+                      "width": {
+                        "type": "integer",
+                        "description": "The width, in pixels, of the linked resource.",
+                        "format": "uint32"
+                      }
+                    }
+                  },
+                  "id": {
+                    "type": "string",
+                    "description": "The ID of the attachment."
+                  },
+                  "image": {
+                    "type": "object",
+                    "description": "The preview image for photos or videos.",
+                    "properties": {
+                      "height": {
+                        "type": "integer",
+                        "description": "The height, in pixels, of the linked resource.",
+                        "format": "uint32"
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "Media type of the link."
+                      },
+                      "url": {
+                        "type": "string",
+                        "description": "Image URL."
+                      },
+                      "width": {
+                        "type": "integer",
+                        "description": "The width, in pixels, of the linked resource.",
+                        "format": "uint32"
+                      }
+                    }
+                  },
+                  "objectType": {
+                    "type": "string",
+                    "description": "The type of media object. Possible values include, but are not limited to, the following values:  \n- \"photo\" - A photo. \n- \"album\" - A photo album. \n- \"video\" - A video. \n- \"article\" - An article, specified by a link."
+                  },
+                  "previewThumbnails": {
+                    "type": "array",
+                    "description": "When previewing, these are the optional thumbnails for the post. When posting an article, choose one by setting the attachment.image.url property. If you don't choose one, one will be chosen for you.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "url": {
+                          "type": "string",
+                          "description": "URL of the thumbnail image."
+                        }
+                      }
+                    }
+                  },
+                  "thumbnails": {
+                    "type": "array",
+                    "description": "If the attachment is an album, this property is a list of potential additional thumbnails from the album.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "description": {
+                          "type": "string",
+                          "description": "Potential name of the thumbnail."
+                        },
+                        "image": {
+                          "type": "object",
+                          "description": "Image resource.",
+                          "properties": {
+                            "height": {
+                              "type": "integer",
+                              "description": "The height, in pixels, of the linked resource.",
+                              "format": "uint32"
+                            },
+                            "type": {
+                              "type": "string",
+                              "description": "Media type of the link."
+                            },
+                            "url": {
+                              "type": "string",
+                              "description": "Image url."
+                            },
+                            "width": {
+                              "type": "integer",
+                              "description": "The width, in pixels, of the linked resource.",
+                              "format": "uint32"
+                            }
+                          }
+                        },
+                        "url": {
+                          "type": "string",
+                          "description": "URL of the webpage containing the image."
+                        }
+                      }
+                    }
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "The link to the attachment, which should be of type text/html."
+                  }
+                }
+              }
+            },
+            "content": {
+              "type": "string",
+              "description": "The HTML-formatted content, which is suitable for display."
+            },
+            "id": {
+              "type": "string",
+              "description": "The ID of the object. When resharing an activity, this is the ID of the activity that is being reshared."
+            },
+            "objectType": {
+              "type": "string",
+              "description": "The type of the object. Possible values include, but are not limited to, the following values:  \n- \"note\" - Textual content. \n- \"activity\" - A Google+ activity."
+            },
+            "originalContent": {
+              "type": "string",
+              "description": "The content (text) as provided by the author, which is stored without any HTML formatting. When creating or updating an activity, this value must be supplied as plain text in the request."
+            },
+            "plusoners": {
+              "type": "object",
+              "description": "People who +1'd this activity.",
+              "properties": {
+                "selfLink": {
+                  "type": "string",
+                  "description": "The URL for the collection of people who +1'd this activity."
+                },
+                "totalItems": {
+                  "type": "integer",
+                  "description": "Total number of people who +1'd this activity.",
+                  "format": "uint32"
+                }
+              }
+            },
+            "replies": {
+              "type": "object",
+              "description": "Comments in reply to this activity.",
+              "properties": {
+                "selfLink": {
+                  "type": "string",
+                  "description": "The URL for the collection of comments in reply to this activity."
+                },
+                "totalItems": {
+                  "type": "integer",
+                  "description": "Total number of comments on this activity.",
+                  "format": "uint32"
+                }
+              }
+            },
+            "resharers": {
+              "type": "object",
+              "description": "People who reshared this activity.",
+              "properties": {
+                "selfLink": {
+                  "type": "string",
+                  "description": "The URL for the collection of resharers."
+                },
+                "totalItems": {
+                  "type": "integer",
+                  "description": "Total number of people who reshared this activity.",
+                  "format": "uint32"
+                }
+              }
+            },
+            "statusForViewer": {
+              "type": "object",
+              "description": "Status of the activity as seen by the viewer.",
+              "properties": {
+                "canComment": {
+                  "type": "boolean",
+                  "description": "Whether the viewer can comment on the activity."
+                },
+                "canPlusone": {
+                  "type": "boolean",
+                  "description": "Whether the viewer can +1 the activity."
+                },
+                "canUpdate": {
+                  "type": "boolean",
+                  "description": "Whether the viewer can edit or delete the activity."
+                },
+                "isPlusOned": {
+                  "type": "boolean",
+                  "description": "Whether the viewer has +1'd the activity."
+                },
+                "resharingDisabled": {
+                  "type": "boolean",
+                  "description": "Whether reshares are disabled for the activity."
+                }
+              }
+            },
+            "url": {
+              "type": "string",
+              "description": "The URL that points to the linked resource."
+            }
+          }
+        },
+        "placeId": {
+          "type": "string",
+          "description": "ID of the place where this activity occurred."
+        },
+        "placeName": {
+          "type": "string",
+          "description": "Name of the place where this activity occurred."
+        },
+        "provider": {
+          "type": "object",
+          "description": "The service provider that initially published this activity.",
+          "properties": {
+            "title": {
+              "type": "string",
+              "description": "Name of the service provider."
+            }
+          }
+        },
+        "published": {
+          "type": "string",
+          "description": "The time at which this activity was initially published. Formatted as an RFC 3339 timestamp.",
+          "format": "date-time"
+        },
+        "radius": {
+          "type": "string",
+          "description": "Radius, in meters, of the region where this activity occurred, centered at the latitude and longitude identified in geocode."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of this activity."
+        },
+        "updated": {
+          "type": "string",
+          "description": "The time at which this activity was last updated. Formatted as an RFC 3339 timestamp.",
+          "format": "date-time"
+        },
+        "url": {
+          "type": "string",
+          "description": "The link to this activity."
+        },
+        "verb": {
+          "type": "string",
+          "description": "This activity's verb, which indicates the action that was performed. Possible values include, but are not limited to, the following values:  \n- \"post\" - Publish content to the stream. \n- \"share\" - Reshare an activity."
+        }
+      }
+    },
+    "ActivityFeed": {
+      "id": "ActivityFeed",
+      "type": "object",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "ETag of this response for caching purposes."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of this collection of activities. Deprecated."
+        },
+        "items": {
+          "type": "array",
+          "description": "The activities in this page of results.",
+          "items": {
+            "$ref": "#/definitions/Activity"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this resource as a collection of activities. Value: \"plus#activityFeed\".",
+          "default": "plus#activityFeed"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of activities."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results."
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "Link to this activity resource."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of this collection of activities, which is a truncated portion of the content."
+        },
+        "updated": {
+          "type": "string",
+          "description": "The time at which this collection of activities was last updated. Formatted as an RFC 3339 timestamp.",
+          "format": "date-time"
+        }
+      }
+    },
+    "Audience": {
+      "id": "Audience",
+      "type": "object",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "ETag of this response for caching purposes."
+        },
+        "item": {
+          "$ref": "#/definitions/PlusDomainsAclentryResource",
+          "description": "The access control list entry."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this resource as an audience. Value: \"plus#audience\".",
+          "default": "plus#audience"
+        },
+        "memberCount": {
+          "type": "integer",
+          "description": "The number of people in this circle. This only applies if entity_type is CIRCLE.",
+          "format": "uint32"
+        },
+        "visibility": {
+          "type": "string",
+          "description": "The circle members' visibility as chosen by the owner of the circle. This only applies for items with \"item.type\" equals \"circle\". Possible values are:  \n- \"public\" - Members are visible to the public. \n- \"limited\" - Members are visible to a limited audience. \n- \"private\" - Members are visible to the owner only."
+        }
+      }
+    },
+    "AudiencesFeed": {
+      "id": "AudiencesFeed",
+      "type": "object",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "ETag of this response for caching purposes."
+        },
+        "items": {
+          "type": "array",
+          "description": "The audiences in this result.",
+          "items": {
+            "$ref": "#/definitions/Audience"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this resource as a collection of audiences. Value: \"plus#audienceFeed\".",
+          "default": "plus#audiencesFeed"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results."
+        },
+        "totalItems": {
+          "type": "integer",
+          "description": "The total number of ACL entries. The number of entries in this response may be smaller due to paging.",
+          "format": "int32"
+        }
+      }
+    },
+    "Circle": {
+      "id": "Circle",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description of this circle."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The circle name."
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag of this response for caching purposes."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the circle."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this resource as a circle. Value: \"plus#circle\".",
+          "default": "plus#circle"
+        },
+        "people": {
+          "type": "object",
+          "description": "The people in this circle.",
+          "properties": {
+            "totalItems": {
+              "type": "integer",
+              "description": "The total number of people in this circle.",
+              "format": "uint32"
+            }
+          }
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "Link to this circle resource"
+        }
+      }
+    },
+    "CircleFeed": {
+      "id": "CircleFeed",
+      "type": "object",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "ETag of this response for caching purposes."
+        },
+        "items": {
+          "type": "array",
+          "description": "The circles in this page of results.",
+          "items": {
+            "$ref": "#/definitions/Circle"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this resource as a collection of circles. Value: \"plus#circleFeed\".",
+          "default": "plus#circleFeed"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of circles."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results."
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "Link to this page of circles."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of this list of resources."
+        },
+        "totalItems": {
+          "type": "integer",
+          "description": "The total number of circles. The number of circles in this response may be smaller due to paging.",
+          "format": "int32"
+        }
+      }
+    },
+    "Comment": {
+      "id": "Comment",
+      "type": "object",
+      "properties": {
+        "actor": {
+          "type": "object",
+          "description": "The person who posted this comment.",
+          "properties": {
+            "displayName": {
+              "type": "string",
+              "description": "The name of this actor, suitable for display."
+            },
+            "id": {
+              "type": "string",
+              "description": "The ID of the actor."
+            },
+            "image": {
+              "type": "object",
+              "description": "The image representation of this actor.",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "description": "The URL of the actor's profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side."
+                }
+              }
+            },
+            "url": {
+              "type": "string",
+              "description": "A link to the Person resource for this actor."
+            }
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag of this response for caching purposes."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of this comment."
+        },
+        "inReplyTo": {
+          "type": "array",
+          "description": "The activity this comment replied to.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The ID of the activity."
+              },
+              "url": {
+                "type": "string",
+                "description": "The URL of the activity."
+              }
+            }
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this resource as a comment. Value: \"plus#comment\".",
+          "default": "plus#comment"
+        },
+        "object": {
+          "type": "object",
+          "description": "The object of this comment.",
+          "properties": {
+            "content": {
+              "type": "string",
+              "description": "The HTML-formatted content, suitable for display."
+            },
+            "objectType": {
+              "type": "string",
+              "description": "The object type of this comment. Possible values are:  \n- \"comment\" - A comment in reply to an activity.",
+              "default": "comment"
+            },
+            "originalContent": {
+              "type": "string",
+              "description": "The content (text) as provided by the author, stored without any HTML formatting. When creating or updating a comment, this value must be supplied as plain text in the request."
+            }
+          }
+        },
+        "plusoners": {
+          "type": "object",
+          "description": "People who +1'd this comment.",
+          "properties": {
+            "totalItems": {
+              "type": "integer",
+              "description": "Total number of people who +1'd this comment.",
+              "format": "uint32"
+            }
+          }
+        },
+        "published": {
+          "type": "string",
+          "description": "The time at which this comment was initially published. Formatted as an RFC 3339 timestamp.",
+          "format": "date-time"
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "Link to this comment resource."
+        },
+        "updated": {
+          "type": "string",
+          "description": "The time at which this comment was last updated. Formatted as an RFC 3339 timestamp.",
+          "format": "date-time"
+        },
+        "verb": {
+          "type": "string",
+          "description": "This comment's verb, indicating what action was performed. Possible values are:  \n- \"post\" - Publish content to the stream.",
+          "default": "post"
+        }
+      }
+    },
+    "CommentFeed": {
+      "id": "CommentFeed",
+      "type": "object",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "ETag of this response for caching purposes."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of this collection of comments."
+        },
+        "items": {
+          "type": "array",
+          "description": "The comments in this page of results.",
+          "items": {
+            "$ref": "#/definitions/Comment"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this resource as a collection of comments. Value: \"plus#commentFeed\".",
+          "default": "plus#commentFeed"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of activities."
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of this collection of comments."
+        },
+        "updated": {
+          "type": "string",
+          "description": "The time at which this collection of comments was last updated. Formatted as an RFC 3339 timestamp.",
+          "format": "date-time"
+        }
+      }
+    },
+    "Media": {
+      "id": "Media",
+      "type": "object",
+      "properties": {
+        "author": {
+          "type": "object",
+          "description": "The person who uploaded this media.",
+          "properties": {
+            "displayName": {
+              "type": "string",
+              "description": "The author's name."
+            },
+            "id": {
+              "type": "string",
+              "description": "ID of the author."
+            },
+            "image": {
+              "type": "object",
+              "description": "The author's Google profile image.",
+              "properties": {
+                "url": {
+                  "type": "string",
+                  "description": "The URL of the author's profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side."
+                }
+              }
+            },
+            "url": {
+              "type": "string",
+              "description": "A link to the author's Google profile."
+            }
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name for this media."
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag of this response for caching purposes."
+        },
+        "exif": {
+          "type": "object",
+          "description": "Exif information of the media item.",
+          "properties": {
+            "time": {
+              "type": "string",
+              "description": "The time the media was captured. Formatted as an RFC 3339 timestamp.",
+              "format": "date-time"
+            }
+          }
+        },
+        "height": {
+          "type": "integer",
+          "description": "The height in pixels of the original image.",
+          "format": "uint32"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of this media, which is generated by the API."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The type of resource.",
+          "default": "plus#media"
+        },
+        "mediaCreatedTime": {
+          "type": "string",
+          "description": "The time at which this media was originally created in UTC. Formatted as an RFC 3339 timestamp that matches this example: 2010-11-25T14:30:27.655Z",
+          "format": "date-time"
+        },
+        "mediaUrl": {
+          "type": "string",
+          "description": "The URL of this photo or video's still image."
+        },
+        "published": {
+          "type": "string",
+          "description": "The time at which this media was uploaded. Formatted as an RFC 3339 timestamp.",
+          "format": "date-time"
+        },
+        "sizeBytes": {
+          "type": "string",
+          "description": "The size in bytes of this video.",
+          "format": "int64"
+        },
+        "streams": {
+          "type": "array",
+          "description": "The list of video streams for this video. There might be several different streams available for a single video, either Flash or MPEG, of various sizes",
+          "items": {
+            "$ref": "#/definitions/Videostream"
+          }
+        },
+        "summary": {
+          "type": "string",
+          "description": "A description, or caption, for this media."
+        },
+        "updated": {
+          "type": "string",
+          "description": "The time at which this media was last updated. This includes changes to media metadata. Formatted as an RFC 3339 timestamp.",
+          "format": "date-time"
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL for the page that hosts this media."
+        },
+        "videoDuration": {
+          "type": "string",
+          "description": "The duration in milliseconds of this video.",
+          "format": "int64"
+        },
+        "videoStatus": {
+          "type": "string",
+          "description": "The encoding status of this video. Possible values are:  \n- \"UPLOADING\" - Not all the video bytes have been received. \n- \"PENDING\" - Video not yet processed. \n- \"FAILED\" - Video processing failed. \n- \"READY\" - A single video stream is playable. \n- \"FINAL\" - All video streams are playable."
+        },
+        "width": {
+          "type": "integer",
+          "description": "The width in pixels of the original image.",
+          "format": "uint32"
+        }
+      }
+    },
+    "PeopleFeed": {
+      "id": "PeopleFeed",
+      "type": "object",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "ETag of this response for caching purposes."
+        },
+        "items": {
+          "type": "array",
+          "description": "The people in this page of results. Each item includes the id, displayName, image, and url for the person. To retrieve additional profile data, see the people.get method.",
+          "items": {
+            "$ref": "#/definitions/Person"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this resource as a collection of people. Value: \"plus#peopleFeed\".",
+          "default": "plus#peopleFeed"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "The continuation token, which is used to page through large result sets. Provide this value in a subsequent request to return the next page of results."
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "Link to this resource."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of this collection of people."
+        },
+        "totalItems": {
+          "type": "integer",
+          "description": "The total number of people available in this list. The number of people in a response might be smaller due to paging. This might not be set for all collections.",
+          "format": "int32"
+        }
+      }
+    },
+    "Person": {
+      "id": "Person",
+      "type": "object",
+      "properties": {
+        "aboutMe": {
+          "type": "string",
+          "description": "A short biography for this person."
+        },
+        "birthday": {
+          "type": "string",
+          "description": "The person's date of birth, represented as YYYY-MM-DD."
+        },
+        "braggingRights": {
+          "type": "string",
+          "description": "The \"bragging rights\" line of this person."
+        },
+        "circledByCount": {
+          "type": "integer",
+          "description": "For followers who are visible, the number of people who have added this person or page to a circle.",
+          "format": "int32"
+        },
+        "cover": {
+          "type": "object",
+          "description": "The cover photo content.",
+          "properties": {
+            "coverInfo": {
+              "type": "object",
+              "description": "Extra information about the cover photo.",
+              "properties": {
+                "leftImageOffset": {
+                  "type": "integer",
+                  "description": "The difference between the left position of the cover image and the actual displayed cover image. Only valid for banner layout.",
+                  "format": "int32"
+                },
+                "topImageOffset": {
+                  "type": "integer",
+                  "description": "The difference between the top position of the cover image and the actual displayed cover image. Only valid for banner layout.",
+                  "format": "int32"
+                }
+              }
+            },
+            "coverPhoto": {
+              "type": "object",
+              "description": "The person's primary cover image.",
+              "properties": {
+                "height": {
+                  "type": "integer",
+                  "description": "The height of the image.",
+                  "format": "int32"
+                },
+                "url": {
+                  "type": "string",
+                  "description": "The URL of the image."
+                },
+                "width": {
+                  "type": "integer",
+                  "description": "The width of the image.",
+                  "format": "int32"
+                }
+              }
+            },
+            "layout": {
+              "type": "string",
+              "description": "The layout of the cover art. Possible values include, but are not limited to, the following values:  \n- \"banner\" - One large image banner."
+            }
+          }
+        },
+        "currentLocation": {
+          "type": "string",
+          "description": "(this field is not currently used)"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The name of this person, which is suitable for display."
+        },
+        "domain": {
+          "type": "string",
+          "description": "The hosted domain name for the user's Google Apps account. For instance, example.com. The plus.profile.emails.read or email scope is needed to get this domain name."
+        },
+        "emails": {
+          "type": "array",
+          "description": "A list of email addresses that this person has, including their Google account email address, and the public verified email addresses on their Google+ profile. The plus.profile.emails.read scope is needed to retrieve these email addresses, or the email scope can be used to retrieve just the Google account email address.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "The type of address. Possible values include, but are not limited to, the following values:  \n- \"account\" - Google account email address. \n- \"home\" - Home email address. \n- \"work\" - Work email address. \n- \"other\" - Other."
+              },
+              "value": {
+                "type": "string",
+                "description": "The email address."
+              }
+            }
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag of this response for caching purposes."
+        },
+        "gender": {
+          "type": "string",
+          "description": "The person's gender. Possible values include, but are not limited to, the following values:  \n- \"male\" - Male gender. \n- \"female\" - Female gender. \n- \"other\" - Other."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of this person."
+        },
+        "image": {
+          "type": "object",
+          "description": "The representation of the person's profile photo.",
+          "properties": {
+            "isDefault": {
+              "type": "boolean",
+              "description": "Whether the person's profile photo is the default one"
+            },
+            "url": {
+              "type": "string",
+              "description": "The URL of the person's profile photo. To resize the image and crop it to a square, append the query string ?sz=x, where x is the dimension in pixels of each side."
+            }
+          }
+        },
+        "isPlusUser": {
+          "type": "boolean",
+          "description": "Whether this user has signed up for Google+."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this resource as a person. Value: \"plus#person\".",
+          "default": "plus#person"
+        },
+        "name": {
+          "type": "object",
+          "description": "An object representation of the individual components of a person's name.",
+          "properties": {
+            "familyName": {
+              "type": "string",
+              "description": "The family name (last name) of this person."
+            },
+            "formatted": {
+              "type": "string",
+              "description": "The full name of this person, including middle names, suffixes, etc."
+            },
+            "givenName": {
+              "type": "string",
+              "description": "The given name (first name) of this person."
+            },
+            "honorificPrefix": {
+              "type": "string",
+              "description": "The honorific prefixes (such as \"Dr.\" or \"Mrs.\") for this person."
+            },
+            "honorificSuffix": {
+              "type": "string",
+              "description": "The honorific suffixes (such as \"Jr.\") for this person."
+            },
+            "middleName": {
+              "type": "string",
+              "description": "The middle name of this person."
+            }
+          }
+        },
+        "nickname": {
+          "type": "string",
+          "description": "The nickname of this person."
+        },
+        "objectType": {
+          "type": "string",
+          "description": "Type of person within Google+. Possible values include, but are not limited to, the following values:  \n- \"person\" - represents an actual person. \n- \"page\" - represents a page."
+        },
+        "occupation": {
+          "type": "string",
+          "description": "The occupation of this person."
+        },
+        "organizations": {
+          "type": "array",
+          "description": "A list of current or past organizations with which this person is associated.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "department": {
+                "type": "string",
+                "description": "The department within the organization. Deprecated."
+              },
+              "description": {
+                "type": "string",
+                "description": "A short description of the person's role in this organization. Deprecated."
+              },
+              "endDate": {
+                "type": "string",
+                "description": "The date that the person left this organization."
+              },
+              "location": {
+                "type": "string",
+                "description": "The location of this organization. Deprecated."
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the organization."
+              },
+              "primary": {
+                "type": "boolean",
+                "description": "If \"true\", indicates this organization is the person's primary one, which is typically interpreted as the current one."
+              },
+              "startDate": {
+                "type": "string",
+                "description": "The date that the person joined this organization."
+              },
+              "title": {
+                "type": "string",
+                "description": "The person's job title or role within the organization."
+              },
+              "type": {
+                "type": "string",
+                "description": "The type of organization. Possible values include, but are not limited to, the following values:  \n- \"work\" - Work. \n- \"school\" - School."
+              }
+            }
+          }
+        },
+        "placesLived": {
+          "type": "array",
+          "description": "A list of places where this person has lived.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "primary": {
+                "type": "boolean",
+                "description": "If \"true\", this place of residence is this person's primary residence."
+              },
+              "value": {
+                "type": "string",
+                "description": "A place where this person has lived. For example: \"Seattle, WA\", \"Near Toronto\"."
+              }
+            }
+          }
+        },
+        "plusOneCount": {
+          "type": "integer",
+          "description": "If a Google+ Page, the number of people who have +1'd this page.",
+          "format": "int32"
+        },
+        "relationshipStatus": {
+          "type": "string",
+          "description": "The person's relationship status. Possible values include, but are not limited to, the following values:  \n- \"single\" - Person is single. \n- \"in_a_relationship\" - Person is in a relationship. \n- \"engaged\" - Person is engaged. \n- \"married\" - Person is married. \n- \"its_complicated\" - The relationship is complicated. \n- \"open_relationship\" - Person is in an open relationship. \n- \"widowed\" - Person is widowed. \n- \"in_domestic_partnership\" - Person is in a domestic partnership. \n- \"in_civil_union\" - Person is in a civil union."
+        },
+        "skills": {
+          "type": "string",
+          "description": "The person's skills."
+        },
+        "tagline": {
+          "type": "string",
+          "description": "The brief description (tagline) of this person."
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL of this person's profile."
+        },
+        "urls": {
+          "type": "array",
+          "description": "A list of URLs for this person.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string",
+                "description": "The label of the URL."
+              },
+              "type": {
+                "type": "string",
+                "description": "The type of URL. Possible values include, but are not limited to, the following values:  \n- \"otherProfile\" - URL for another profile. \n- \"contributor\" - URL to a site for which this person is a contributor. \n- \"website\" - URL for this Google+ Page's primary website. \n- \"other\" - Other URL."
+              },
+              "value": {
+                "type": "string",
+                "description": "The URL value."
+              }
+            }
+          }
+        },
+        "verified": {
+          "type": "boolean",
+          "description": "Whether the person or Google+ Page has been verified."
+        }
+      }
+    },
+    "Place": {
+      "id": "Place",
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "object",
+          "description": "The physical address of the place.",
+          "properties": {
+            "formatted": {
+              "type": "string",
+              "description": "The formatted address for display."
+            }
+          }
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the place."
+        },
+        "id": {
+          "type": "string",
+          "description": "The id of the place."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this resource as a place. Value: \"plus#place\".",
+          "default": "plus#place"
+        },
+        "position": {
+          "type": "object",
+          "description": "The position of the place.",
+          "properties": {
+            "latitude": {
+              "type": "number",
+              "description": "The latitude of this position.",
+              "format": "double"
+            },
+            "longitude": {
+              "type": "number",
+              "description": "The longitude of this position.",
+              "format": "double"
+            }
+          }
+        }
+      }
+    },
+    "PlusDomainsAclentryResource": {
+      "id": "PlusDomainsAclentryResource",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "A descriptive name for this entry. Suitable for display."
+        },
+        "id": {
+          "type": "string",
+          "description": "The ID of the entry. For entries of type \"person\" or \"circle\", this is the ID of the resource. For other types, this property is not set."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of entry describing to whom access is granted. Possible values are:  \n- \"person\" - Access to an individual. \n- \"circle\" - Access to members of a circle. \n- \"myCircles\" - Access to members of all the person's circles. \n- \"extendedCircles\" - Access to members of all the person's circles, plus all of the people in their circles. \n- \"domain\" - Access to members of the person's Google Apps domain. \n- \"public\" - Access to anyone on the web."
+        }
+      }
+    },
+    "Videostream": {
+      "id": "Videostream",
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "integer",
+          "description": "The height, in pixels, of the video resource.",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string",
+          "description": "MIME type of the video stream."
+        },
+        "url": {
+          "type": "string",
+          "description": "URL of the video stream."
+        },
+        "width": {
+          "type": "integer",
+          "description": "The width, in pixels, of the video resource.",
+          "format": "int32"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "alt": {
+      "name": "alt",
+      "in": "query",
+      "description": "Data format for the response.",
+      "default": "json",
+      "type": "string",
+      "enum": [
+        "json"
+      ]
+    },
+    "fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Selector specifying which fields to include in a partial response.",
+      "type": "string"
+    },
+    "key": {
+      "name": "key",
+      "in": "query",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    "oauth_token": {
+      "name": "oauth_token",
+      "in": "query",
+      "description": "OAuth 2.0 token for the current user.",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "name": "prettyPrint",
+      "in": "query",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "true",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "name": "quotaUser",
+      "in": "query",
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "type": "string"
+    },
+    "userIp": {
+      "name": "userIp",
+      "in": "query",
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,1300 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Google Maps Coordinate API",
+    "description": "Lets you view and manage jobs in a Coordinate team.",
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "version": "v1"
+  },
+  "host": "www.googleapis.com",
+  "basePath": "/coordinate/v1",
+  "schemes": [
+    "https"
+  ],
+  "externalDocs": {
+    "url": "https://developers.google.com/coordinate/"
+  },
+  "paths": {
+    "/teams/{teamId}/custom_fields": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves a list of custom field definitions for a team.",
+        "operationId": "coordinate.customFieldDef.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/CustomFieldDefListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/teams/{teamId}/jobs/{jobId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves a job, including all the changes made to the job.",
+        "operationId": "coordinate.jobs.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Job number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Updates a job. Fields that are set in the job state will be updated. This method supports patch semantics.",
+        "operationId": "coordinate.jobs.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "address",
+            "in": "query",
+            "description": "Job address as newline (Unix) separated string",
+            "type": "string"
+          },
+          {
+            "name": "assignee",
+            "in": "query",
+            "description": "Assignee email address, or empty string to unassign.",
+            "type": "string"
+          },
+          {
+            "name": "customField",
+            "in": "query",
+            "description": "Sets the value of custom fields. To set a custom field, pass the field id (from /team/teamId/custom_fields), a URL escaped '=' character, and the desired value as a parameter. For example, customField=12%3DAlice. Repeat the parameter for each custom field. Note that '=' cannot appear in the parameter value. Specifying an invalid, or inactive enum field will result in an error 500.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "customerName",
+            "in": "query",
+            "description": "Customer name",
+            "type": "string"
+          },
+          {
+            "name": "customerPhoneNumber",
+            "in": "query",
+            "description": "Customer phone number",
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Job number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "The latitude coordinate of this job's location.",
+            "type": "number"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "The longitude coordinate of this job's location.",
+            "type": "number"
+          },
+          {
+            "name": "note",
+            "in": "query",
+            "description": "Job note as newline (Unix) separated string",
+            "type": "string"
+          },
+          {
+            "name": "progress",
+            "in": "query",
+            "description": "Job progress",
+            "type": "string",
+            "enum": [
+              "COMPLETED",
+              "IN_PROGRESS",
+              "NOT_ACCEPTED",
+              "NOT_STARTED",
+              "OBSOLETE"
+            ]
+          },
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "description": "Job title",
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "description": "Updates a job. Fields that are set in the job state will be updated.",
+        "operationId": "coordinate.jobs.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "address",
+            "in": "query",
+            "description": "Job address as newline (Unix) separated string",
+            "type": "string"
+          },
+          {
+            "name": "assignee",
+            "in": "query",
+            "description": "Assignee email address, or empty string to unassign.",
+            "type": "string"
+          },
+          {
+            "name": "customField",
+            "in": "query",
+            "description": "Sets the value of custom fields. To set a custom field, pass the field id (from /team/teamId/custom_fields), a URL escaped '=' character, and the desired value as a parameter. For example, customField=12%3DAlice. Repeat the parameter for each custom field. Note that '=' cannot appear in the parameter value. Specifying an invalid, or inactive enum field will result in an error 500.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "customerName",
+            "in": "query",
+            "description": "Customer name",
+            "type": "string"
+          },
+          {
+            "name": "customerPhoneNumber",
+            "in": "query",
+            "description": "Customer phone number",
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Job number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "The latitude coordinate of this job's location.",
+            "type": "number"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "The longitude coordinate of this job's location.",
+            "type": "number"
+          },
+          {
+            "name": "note",
+            "in": "query",
+            "description": "Job note as newline (Unix) separated string",
+            "type": "string"
+          },
+          {
+            "name": "progress",
+            "in": "query",
+            "description": "Job progress",
+            "type": "string",
+            "enum": [
+              "COMPLETED",
+              "IN_PROGRESS",
+              "NOT_ACCEPTED",
+              "NOT_STARTED",
+              "OBSOLETE"
+            ]
+          },
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "description": "Job title",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/teams/{teamId}/jobs": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Inserts a new job. Only the state field of the job should be set.",
+        "operationId": "coordinate.jobs.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "address",
+            "in": "query",
+            "description": "Job address as newline (Unix) separated string",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "assignee",
+            "in": "query",
+            "description": "Assignee email address, or empty string to unassign.",
+            "type": "string"
+          },
+          {
+            "name": "customField",
+            "in": "query",
+            "description": "Sets the value of custom fields. To set a custom field, pass the field id (from /team/teamId/custom_fields), a URL escaped '=' character, and the desired value as a parameter. For example, customField=12%3DAlice. Repeat the parameter for each custom field. Note that '=' cannot appear in the parameter value. Specifying an invalid, or inactive enum field will result in an error 500.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "customerName",
+            "in": "query",
+            "description": "Customer name",
+            "type": "string"
+          },
+          {
+            "name": "customerPhoneNumber",
+            "in": "query",
+            "description": "Customer phone number",
+            "type": "string"
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "The latitude coordinate of this job's location.",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "The longitude coordinate of this job's location.",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "note",
+            "in": "query",
+            "description": "Job note as newline (Unix) separated string",
+            "type": "string"
+          },
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "description": "Job title",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Retrieves jobs created or modified since the given timestamp.",
+        "operationId": "coordinate.jobs.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/JobListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of results to return in one page.",
+            "type": "integer"
+          },
+          {
+            "name": "minModifiedTimestampMs",
+            "in": "query",
+            "description": "Minimum time a job was modified in milliseconds since epoch.",
+            "type": "string"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Continuation token",
+            "type": "string"
+          },
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/teams/{teamId}/workers/{workerEmail}/locations": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves a list of locations for a worker.",
+        "operationId": "coordinate.location.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/LocationListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of results to return in one page.",
+            "type": "integer"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Continuation token",
+            "type": "string"
+          },
+          {
+            "name": "startTimestampMs",
+            "in": "query",
+            "description": "Start timestamp in milliseconds since the epoch.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerEmail",
+            "in": "path",
+            "description": "Worker email address.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/teams/{teamId}/jobs/{jobId}/schedule": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves the schedule for a job.",
+        "operationId": "coordinate.schedule.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Job number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Replaces the schedule of a job with the provided schedule. This method supports patch semantics.",
+        "operationId": "coordinate.schedule.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "allDay",
+            "in": "query",
+            "description": "Whether the job is scheduled for the whole day. Time of day in start/end times is ignored if this is true.",
+            "type": "boolean"
+          },
+          {
+            "name": "duration",
+            "in": "query",
+            "description": "Job duration in milliseconds.",
+            "type": "string"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "Scheduled end time in milliseconds since epoch.",
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Job number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Scheduled start time in milliseconds since epoch.",
+            "type": "string"
+          },
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "put": {
+        "description": "Replaces the schedule of a job with the provided schedule.",
+        "operationId": "coordinate.schedule.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "allDay",
+            "in": "query",
+            "description": "Whether the job is scheduled for the whole day. Time of day in start/end times is ignored if this is true.",
+            "type": "boolean"
+          },
+          {
+            "name": "duration",
+            "in": "query",
+            "description": "Job duration in milliseconds.",
+            "type": "string"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "Scheduled end time in milliseconds since epoch.",
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Job number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Scheduled start time in milliseconds since epoch.",
+            "type": "string"
+          },
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/teams": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves a list of teams for a user.",
+        "operationId": "coordinate.team.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TeamListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "admin",
+            "in": "query",
+            "description": "Whether to include teams for which the user has the Admin role.",
+            "type": "boolean"
+          },
+          {
+            "name": "dispatcher",
+            "in": "query",
+            "description": "Whether to include teams for which the user has the Dispatcher role.",
+            "type": "boolean"
+          },
+          {
+            "name": "worker",
+            "in": "query",
+            "description": "Whether to include teams for which the user has the Worker role.",
+            "type": "boolean"
+          }
+        ]
+      }
+    },
+    "/teams/{teamId}/workers": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Retrieves a list of workers in a team.",
+        "operationId": "coordinate.worker.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/WorkerListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CustomField": {
+      "id": "CustomField",
+      "type": "object",
+      "description": "Custom field.",
+      "properties": {
+        "customFieldId": {
+          "type": "string",
+          "description": "Custom field id.",
+          "format": "int64"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this object as a custom field.",
+          "default": "coordinate#customField"
+        },
+        "value": {
+          "type": "string",
+          "description": "Custom field value."
+        }
+      }
+    },
+    "CustomFieldDef": {
+      "id": "CustomFieldDef",
+      "type": "object",
+      "description": "Custom field definition.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the field is enabled."
+        },
+        "enumitems": {
+          "type": "array",
+          "description": "List of enum items for this custom field. Populated only if the field type is enum. Enum fields appear as 'lists' in the Coordinate web and mobile UI.",
+          "items": {
+            "$ref": "#/definitions/EnumItemDef"
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "Custom field id.",
+          "format": "int64"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this object as a custom field definition.",
+          "default": "coordinate#customFieldDef"
+        },
+        "name": {
+          "type": "string",
+          "description": "Custom field name."
+        },
+        "requiredForCheckout": {
+          "type": "boolean",
+          "description": "Whether the field is required for checkout."
+        },
+        "type": {
+          "type": "string",
+          "description": "Custom field type."
+        }
+      }
+    },
+    "CustomFieldDefListResponse": {
+      "id": "CustomFieldDefListResponse",
+      "type": "object",
+      "description": "Collection of custom field definitions for a team.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Collection of custom field definitions in a team.",
+          "items": {
+            "$ref": "#/definitions/CustomFieldDef"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this object as a collection of custom field definitions in a team.",
+          "default": "coordinate#customFieldDefList"
+        }
+      }
+    },
+    "CustomFields": {
+      "id": "CustomFields",
+      "type": "object",
+      "description": "Collection of custom fields.",
+      "properties": {
+        "customField": {
+          "type": "array",
+          "description": "Collection of custom fields.",
+          "items": {
+            "$ref": "#/definitions/CustomField"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this object as a collection of custom fields.",
+          "default": "coordinate#customFields"
+        }
+      }
+    },
+    "EnumItemDef": {
+      "id": "EnumItemDef",
+      "type": "object",
+      "description": "Enum Item definition.",
+      "properties": {
+        "active": {
+          "type": "boolean",
+          "description": "Whether the enum item is active. Jobs may contain inactive enum values; however, setting an enum to an inactive value when creating or updating a job will result in a 500 error."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this object as an enum item definition.",
+          "default": "coordinate#enumItemDef"
+        },
+        "value": {
+          "type": "string",
+          "description": "Custom field value."
+        }
+      }
+    },
+    "Job": {
+      "id": "Job",
+      "type": "object",
+      "description": "A job.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Job id.",
+          "format": "uint64"
+        },
+        "jobChange": {
+          "type": "array",
+          "description": "List of job changes since it was created. The first change corresponds to the state of the job when it was created.",
+          "items": {
+            "$ref": "#/definitions/JobChange"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this object as a job.",
+          "default": "coordinate#job"
+        },
+        "state": {
+          "$ref": "#/definitions/JobState",
+          "description": "Current job state."
+        }
+      }
+    },
+    "JobChange": {
+      "id": "JobChange",
+      "type": "object",
+      "description": "Change to a job. For example assigning the job to a different worker.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Identifies this object as a job change.",
+          "default": "coordinate#jobChange"
+        },
+        "state": {
+          "$ref": "#/definitions/JobState",
+          "description": "Change applied to the job. Only the fields that were changed are set."
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "Time at which this change was applied.",
+          "format": "uint64"
+        }
+      }
+    },
+    "JobListResponse": {
+      "id": "JobListResponse",
+      "type": "object",
+      "description": "Response from a List Jobs request.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Jobs in the collection.",
+          "items": {
+            "$ref": "#/definitions/Job"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this object as a list of jobs.",
+          "default": "coordinate#jobList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token to provide to get the next page of results."
+        }
+      }
+    },
+    "JobState": {
+      "id": "JobState",
+      "type": "object",
+      "description": "Current state of a job.",
+      "properties": {
+        "assignee": {
+          "type": "string",
+          "description": "Email address of the assignee, or the string \"DELETED_USER\" if the account is no longer available."
+        },
+        "customFields": {
+          "$ref": "#/definitions/CustomFields",
+          "description": "Custom fields."
+        },
+        "customerName": {
+          "type": "string",
+          "description": "Customer name."
+        },
+        "customerPhoneNumber": {
+          "type": "string",
+          "description": "Customer phone number."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this object as a job state.",
+          "default": "coordinate#jobState"
+        },
+        "location": {
+          "$ref": "#/definitions/Location",
+          "description": "Job location."
+        },
+        "note": {
+          "type": "array",
+          "description": "Note added to the job.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "progress": {
+          "type": "string",
+          "description": "Job progress."
+        },
+        "title": {
+          "type": "string",
+          "description": "Job title."
+        }
+      }
+    },
+    "Location": {
+      "id": "Location",
+      "type": "object",
+      "description": "Location of a job.",
+      "properties": {
+        "addressLine": {
+          "type": "array",
+          "description": "Address.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this object as a location.",
+          "default": "coordinate#location"
+        },
+        "lat": {
+          "type": "number",
+          "description": "Latitude.",
+          "format": "double"
+        },
+        "lng": {
+          "type": "number",
+          "description": "Longitude.",
+          "format": "double"
+        }
+      }
+    },
+    "LocationListResponse": {
+      "id": "LocationListResponse",
+      "type": "object",
+      "description": "Response from a List Locations request.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Locations in the collection.",
+          "items": {
+            "$ref": "#/definitions/LocationRecord"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this object as a list of locations.",
+          "default": "coordinate#locationList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token to provide to get the next page of results."
+        },
+        "tokenPagination": {
+          "$ref": "#/definitions/TokenPagination",
+          "description": "Pagination information for token pagination."
+        }
+      }
+    },
+    "LocationRecord": {
+      "id": "LocationRecord",
+      "type": "object",
+      "description": "Recorded location of a worker.",
+      "properties": {
+        "collectionTime": {
+          "type": "string",
+          "description": "The collection time in milliseconds since the epoch.",
+          "format": "int64"
+        },
+        "confidenceRadius": {
+          "type": "number",
+          "description": "The location accuracy in meters. This is the radius of a 95% confidence interval around the location measurement.",
+          "format": "double"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this object as a location.",
+          "default": "coordinate#locationRecord"
+        },
+        "latitude": {
+          "type": "number",
+          "description": "Latitude.",
+          "format": "double"
+        },
+        "longitude": {
+          "type": "number",
+          "description": "Longitude.",
+          "format": "double"
+        }
+      }
+    },
+    "Schedule": {
+      "id": "Schedule",
+      "type": "object",
+      "description": "Job schedule.",
+      "properties": {
+        "allDay": {
+          "type": "boolean",
+          "description": "Whether the job is scheduled for the whole day. Time of day in start/end times is ignored if this is true."
+        },
+        "duration": {
+          "type": "string",
+          "description": "Job duration in milliseconds.",
+          "format": "uint64"
+        },
+        "endTime": {
+          "type": "string",
+          "description": "Scheduled end time in milliseconds since epoch.",
+          "format": "uint64"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this object as a job schedule.",
+          "default": "coordinate#schedule"
+        },
+        "startTime": {
+          "type": "string",
+          "description": "Scheduled start time in milliseconds since epoch.",
+          "format": "uint64"
+        }
+      }
+    },
+    "Team": {
+      "id": "Team",
+      "type": "object",
+      "description": "A Coordinate team.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Team id, as found in a coordinate team url e.g. https://coordinate.google.com/f/xyz where \"xyz\" is the team id."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this object as a team.",
+          "default": "coordinate#team"
+        },
+        "name": {
+          "type": "string",
+          "description": "Team name"
+        }
+      }
+    },
+    "TeamListResponse": {
+      "id": "TeamListResponse",
+      "type": "object",
+      "description": "Response from a List Teams request.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Teams in the collection.",
+          "items": {
+            "$ref": "#/definitions/Team"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this object as a list of teams.",
+          "default": "coordinate#teamList"
+        }
+      }
+    },
+    "TokenPagination": {
+      "id": "TokenPagination",
+      "type": "object",
+      "description": "Pagination information.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Identifies this object as pagination information.",
+          "default": "coordinate#tokenPagination"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token to provide to get the next page of results."
+        },
+        "previousPageToken": {
+          "type": "string",
+          "description": "A token to provide to get the previous page of results."
+        }
+      }
+    },
+    "Worker": {
+      "id": "Worker",
+      "type": "object",
+      "description": "A worker in a Coordinate team.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Worker email address. If a worker has been deleted from your team, the email address will appear as DELETED_USER."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this object as a worker.",
+          "default": "coordinate#worker"
+        }
+      }
+    },
+    "WorkerListResponse": {
+      "id": "WorkerListResponse",
+      "type": "object",
+      "description": "Response from a List Workers request.",
+      "properties": {
+        "items": {
+          "type": "array",
+          "description": "Workers in the collection.",
+          "items": {
+            "$ref": "#/definitions/Worker"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies this object as a list of workers.",
+          "default": "coordinate#workerList"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "alt": {
+      "name": "alt",
+      "in": "query",
+      "description": "Data format for the response.",
+      "default": "json",
+      "type": "string",
+      "enum": [
+        "json"
+      ]
+    },
+    "fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Selector specifying which fields to include in a partial response.",
+      "type": "string"
+    },
+    "key": {
+      "name": "key",
+      "in": "query",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    "oauth_token": {
+      "name": "oauth_token",
+      "in": "query",
+      "description": "OAuth 2.0 token for the current user.",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "name": "prettyPrint",
+      "in": "query",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "true",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "name": "quotaUser",
+      "in": "query",
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "type": "string"
+    },
+    "userIp": {
+      "name": "userIp",
+      "in": "query",
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "type": "string"
+    }
+  }
+}

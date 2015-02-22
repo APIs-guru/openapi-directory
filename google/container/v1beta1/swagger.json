@@ -1,0 +1,710 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Google Container Engine API",
+    "description": "The Google Container Engine API is used for building and managing container based applications, powered by the open source Kubernetes technology.",
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "version": "v1beta1"
+  },
+  "host": "www.googleapis.com",
+  "basePath": "/container/v1beta1/projects",
+  "schemes": [
+    "https"
+  ],
+  "externalDocs": {
+    "url": "https://cloud.google.com/container-engine/docs/v1beta1/"
+  },
+  "paths": {
+    "/{projectId}/clusters": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Lists all clusters owned by a project across all zones.",
+        "operationId": "container.projects.clusters.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ListAggregatedClustersResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The Google Developers Console project ID or  project number.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{projectId}/operations": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Lists all operations in a project, across all zones.",
+        "operationId": "container.projects.operations.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ListAggregatedOperationsResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The Google Developers Console project ID or  project number.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{projectId}/zones/{zoneId}/clusters": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates a cluster, consisting of the specified number and type of Google Compute Engine instances, plus a Kubernetes master instance.\n\nThe cluster is created in the project's default network.\n\nA firewall is added that allows traffic into port 443 on the master, which enables HTTPS. A firewall and a route is added for each node to allow the containers on that node to communicate with all other instances in the cluster.\n\nFinally, a route named k8s-iproute-10-xx-0-0 is created to track that the cluster's 10.xx.0.0/16 CIDR has been assigned.",
+        "operationId": "container.projects.zones.clusters.create",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The Google Developers Console project ID or  project number.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zoneId",
+            "in": "path",
+            "description": "The name of the Google Compute Engine zone in which the cluster resides.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Lists all clusters owned by a project in the specified zone.",
+        "operationId": "container.projects.zones.clusters.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ListClustersResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The Google Developers Console project ID or  project number.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zoneId",
+            "in": "path",
+            "description": "The name of the Google Compute Engine zone in which the cluster resides.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{projectId}/zones/{zoneId}/clusters/{clusterId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "delete": {
+        "description": "Deletes the cluster, including the Kubernetes master and all worker nodes.\n\nFirewalls and routes that were configured at cluster creation are also deleted.",
+        "operationId": "container.projects.zones.clusters.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "clusterId",
+            "in": "path",
+            "description": "The name of the cluster to delete.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The Google Developers Console project ID or  project number.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zoneId",
+            "in": "path",
+            "description": "The name of the Google Compute Engine zone in which the cluster resides.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "get": {
+        "description": "Gets a specific cluster.",
+        "operationId": "container.projects.zones.clusters.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "clusterId",
+            "in": "path",
+            "description": "The name of the cluster to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The Google Developers Console project ID or  project number.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zoneId",
+            "in": "path",
+            "description": "The name of the Google Compute Engine zone in which the cluster resides.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{projectId}/zones/{zoneId}/operations/{operationId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Gets the specified operation.",
+        "operationId": "container.projects.zones.operations.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The server-assigned name of the operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The Google Developers Console project ID or  project number.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zoneId",
+            "in": "path",
+            "description": "The name of the Google Compute Engine zone in which the operation resides. This is always the same zone as the cluster with which the operation is associated.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/{projectId}/zones/{zoneId}/operations": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Lists all operations in a project in a specific zone.",
+        "operationId": "container.projects.zones.operations.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ListOperationsResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The Google Developers Console project ID or  project number.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zoneId",
+            "in": "path",
+            "description": "The name of the Google Compute Engine zone to return operations for.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "Cluster": {
+      "id": "Cluster",
+      "type": "object",
+      "properties": {
+        "clusterApiVersion": {
+          "type": "string",
+          "description": "The API version of the Kubernetes master and kubelets running in this cluster. Leave blank to pick up the latest stable release, or specify a version of the form \"x.y.z\". The Google Container Engine release notes lists the currently supported versions. If an incorrect version is specified, the server returns an error listing the currently supported versions."
+        },
+        "containerIpv4Cidr": {
+          "type": "string",
+          "description": "[Output only] The IP addresses of the container pods in this cluster, in  CIDR notation (e.g. 1.2.3.4/29)."
+        },
+        "creationTimestamp": {
+          "type": "string",
+          "description": "[Output only] The time the cluster was created, in RFC3339 text format."
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional description of this cluster."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "[Output only] The IP address of this cluster's Kubernetes master. The endpoint can be accessed from the internet at https://username:password@endpoint/.\n\nSee the masterAuth property of this resource for username and password information."
+        },
+        "masterAuth": {
+          "$ref": "#/definitions/MasterAuth",
+          "description": "The HTTP basic authentication information for accessing the master. Because the master endpoint is open to the internet, you should create a strong password."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of this cluster. The name must be unique within this project and zone, and can be up to 40 characters with the following restrictions:  \n- Lowercase letters, numbers, and hyphens only.\n- Must start with a letter.\n- Must end with a number or a letter."
+        },
+        "network": {
+          "type": "string",
+          "description": "The name of the Google Compute Engine network to which the cluster is connected."
+        },
+        "nodeConfig": {
+          "$ref": "#/definitions/NodeConfig",
+          "description": "The machine type and image to use for all nodes in this cluster. See the descriptions of the child properties of nodeConfig."
+        },
+        "nodeRoutingPrefixSize": {
+          "type": "integer",
+          "description": "[Output only] The size of the address space on each node for hosting containers.",
+          "format": "int32"
+        },
+        "numNodes": {
+          "type": "integer",
+          "description": "The number of nodes to create in this cluster. You must ensure that your Compute Engine resource quota is sufficient for this number of instances plus one (to include the master). You must also have available firewall and routes quota.",
+          "format": "int32"
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "[Output only] Server-defined URL for the resource."
+        },
+        "servicesIpv4Cidr": {
+          "type": "string",
+          "description": "[Output only] The IP addresses of the Kubernetes services in this cluster, in  CIDR notation (e.g. 1.2.3.4/29). Service addresses are always in the 10.0.0.0/16 range."
+        },
+        "status": {
+          "type": "string",
+          "description": "[Output only] The current status of this cluster.",
+          "enum": [
+            "error",
+            "provisioning",
+            "running",
+            "stopping"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "[Output only] Additional information about the current status of this cluster, if available."
+        },
+        "zone": {
+          "type": "string",
+          "description": "[Output only] The name of the Google Compute Engine zone in which the cluster resides."
+        }
+      }
+    },
+    "CreateClusterRequest": {
+      "id": "CreateClusterRequest",
+      "type": "object",
+      "properties": {
+        "cluster": {
+          "$ref": "#/definitions/Cluster",
+          "description": "A cluster resource."
+        }
+      }
+    },
+    "ListAggregatedClustersResponse": {
+      "id": "ListAggregatedClustersResponse",
+      "type": "object",
+      "properties": {
+        "clusters": {
+          "type": "array",
+          "description": "A list of clusters in the project, across all zones.",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          }
+        }
+      }
+    },
+    "ListAggregatedOperationsResponse": {
+      "id": "ListAggregatedOperationsResponse",
+      "type": "object",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "description": "A list of operations in the project, across all zones.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        }
+      }
+    },
+    "ListClustersResponse": {
+      "id": "ListClustersResponse",
+      "type": "object",
+      "properties": {
+        "clusters": {
+          "type": "array",
+          "description": "A list of clusters in the project in the specified zone.",
+          "items": {
+            "$ref": "#/definitions/Cluster"
+          }
+        }
+      }
+    },
+    "ListOperationsResponse": {
+      "id": "ListOperationsResponse",
+      "type": "object",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "description": "A list of operations in the project in the specified zone.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        }
+      }
+    },
+    "MasterAuth": {
+      "id": "MasterAuth",
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "The password to use when accessing the Kubernetes master endpoint."
+        },
+        "user": {
+          "type": "string",
+          "description": "The username to use when accessing the Kubernetes master endpoint."
+        }
+      }
+    },
+    "NodeConfig": {
+      "id": "NodeConfig",
+      "type": "object",
+      "properties": {
+        "machineType": {
+          "type": "string",
+          "description": "The name of a Google Compute Engine machine type (e.g. n1-standard-1).\n\nIf unspecified, the default machine type is n1-standard-1."
+        },
+        "serviceAccounts": {
+          "type": "array",
+          "description": "The optional list of ServiceAccounts, each with their specified scopes, to be made available on all of the node VMs. In addition to the service accounts and scopes specified, the \"default\" account will always be created with the following scopes to ensure the correct functioning of the cluster:  \n- https://www.googleapis.com/auth/compute,\n- https://www.googleapis.com/auth/devstorage.read_only",
+          "items": {
+            "$ref": "#/definitions/ServiceAccount"
+          }
+        },
+        "sourceImage": {
+          "type": "string",
+          "description": "The fully-specified name of a Google Compute Engine image. For example: https://www.googleapis.com/compute/v1/projects/debian-cloud/global/images/backports-debian-7-wheezy-vYYYYMMDD (where YYYMMDD is the version date).\n\nIf specifying an image, you are responsible for ensuring its compatibility with the Debian 7 backports image. We recommend leaving this field blank to accept the default backports-debian-7-wheezy value."
+        }
+      }
+    },
+    "Operation": {
+      "id": "Operation",
+      "type": "object",
+      "description": "Defines the operation resource. All fields are output only.",
+      "properties": {
+        "errorMessage": {
+          "type": "string",
+          "description": "If an error has occurred, a textual description of the error."
+        },
+        "name": {
+          "type": "string",
+          "description": "The server-assigned ID for this operation. If the operation is fulfilled upfront, it may not have a resource name."
+        },
+        "operationType": {
+          "type": "string",
+          "description": "The operation type.",
+          "enum": [
+            "createCluster",
+            "deleteCluster"
+          ],
+          "enumDescriptions": [
+            "",
+            ""
+          ]
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "Server-defined URL for the resource."
+        },
+        "status": {
+          "type": "string",
+          "description": "The current status of the operation.",
+          "enum": [
+            "done",
+            "pending",
+            "running"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            ""
+          ]
+        },
+        "target": {
+          "type": "string",
+          "description": "[Optional] The URL of the cluster resource that this operation is associated with."
+        },
+        "targetLink": {
+          "type": "string",
+          "description": "Server-defined URL for the target of the operation."
+        },
+        "zone": {
+          "type": "string",
+          "description": "The name of the Google Compute Engine zone in which the operation is taking place."
+        }
+      }
+    },
+    "ServiceAccount": {
+      "id": "ServiceAccount",
+      "type": "object",
+      "description": "A Compute Engine service account.",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Email address of the service account."
+        },
+        "scopes": {
+          "type": "array",
+          "description": "The list of scopes to be made available for this service account.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "alt": {
+      "name": "alt",
+      "in": "query",
+      "description": "Data format for the response.",
+      "default": "json",
+      "type": "string",
+      "enum": [
+        "json"
+      ]
+    },
+    "fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Selector specifying which fields to include in a partial response.",
+      "type": "string"
+    },
+    "key": {
+      "name": "key",
+      "in": "query",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    "oauth_token": {
+      "name": "oauth_token",
+      "in": "query",
+      "description": "OAuth 2.0 token for the current user.",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "name": "prettyPrint",
+      "in": "query",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "true",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "name": "quotaUser",
+      "in": "query",
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "type": "string"
+    },
+    "userIp": {
+      "name": "userIp",
+      "in": "query",
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "type": "string"
+    }
+  }
+}

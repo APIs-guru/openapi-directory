@@ -1,0 +1,416 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Drive API",
+    "description": "The API to interact with Drive.",
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "version": "v1"
+  },
+  "host": "www.googleapis.com",
+  "basePath": "/drive/v1",
+  "schemes": [
+    "https"
+  ],
+  "externalDocs": {
+    "url": "https://developers.google.com/drive/"
+  },
+  "paths": {
+    "/files/{id}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "get": {
+        "description": "Gets a file's metadata by id.",
+        "operationId": "drive.files.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/File"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id for the file in question.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projection",
+            "in": "query",
+            "description": "This parameter is deprecated and has no function.",
+            "type": "string",
+            "enum": [
+              "BASIC",
+              "FULL"
+            ]
+          },
+          {
+            "name": "updateViewedDate",
+            "in": "query",
+            "description": "Whether to update the view date after successfully retrieving the file.",
+            "default": "true",
+            "type": "boolean"
+          }
+        ]
+      },
+      "patch": {
+        "description": "Updates file metadata and/or content. This method supports patch semantics.",
+        "operationId": "drive.files.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/File"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id for the file in question.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "newRevision",
+            "in": "query",
+            "description": "Whether a blob upload should create a new revision. If false, the blob data in the current head revision is replaced. If true or not set, a new blob is created as head revision, and previous revisions are preserved (causing increased use of the user's data storage quota).",
+            "default": "true",
+            "type": "boolean"
+          },
+          {
+            "name": "updateModifiedDate",
+            "in": "query",
+            "description": "Controls updating the modified date of the file. If true, the modified date will be updated to the current time, regardless of whether other changes are being made. If false, the modified date will only be updated to the current time if other changes are also being made (changing the title, for example).",
+            "default": "false",
+            "type": "boolean"
+          },
+          {
+            "name": "updateViewedDate",
+            "in": "query",
+            "description": "Whether to update the view date after successfully updating the file.",
+            "default": "true",
+            "type": "boolean"
+          }
+        ]
+      },
+      "put": {
+        "description": "Updates file metadata and/or content",
+        "operationId": "drive.files.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/File"
+            }
+          }
+        },
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id for the file in question.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "newRevision",
+            "in": "query",
+            "description": "Whether a blob upload should create a new revision. If false, the blob data in the current head revision is replaced. If true or not set, a new blob is created as head revision, and previous revisions are preserved (causing increased use of the user's data storage quota).",
+            "default": "true",
+            "type": "boolean"
+          },
+          {
+            "name": "updateModifiedDate",
+            "in": "query",
+            "description": "Controls updating the modified date of the file. If true, the modified date will be updated to the current time, regardless of whether other changes are being made. If false, the modified date will only be updated to the current time if other changes are also being made (changing the title, for example).",
+            "default": "false",
+            "type": "boolean"
+          },
+          {
+            "name": "updateViewedDate",
+            "in": "query",
+            "description": "Whether to update the view date after successfully updating the file.",
+            "default": "true",
+            "type": "boolean"
+          }
+        ]
+      }
+    },
+    "/files": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Inserts a file, and any settable metadata or blob content sent with the request.",
+        "operationId": "drive.files.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/File"
+            }
+          }
+        },
+        "consumes": [
+          "application/octet-stream"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "File": {
+      "id": "File",
+      "type": "object",
+      "description": "The metadata for a file.",
+      "properties": {
+        "createdDate": {
+          "type": "string",
+          "description": "Create time for this file (formatted RFC 3339 timestamp).",
+          "format": "date-time"
+        },
+        "description": {
+          "type": "string",
+          "description": "A short description of the file"
+        },
+        "downloadUrl": {
+          "type": "string",
+          "description": "Short term download URL for the file. This will only be populated on files with content stored in Drive."
+        },
+        "etag": {
+          "type": "string",
+          "description": "ETag of the file."
+        },
+        "fileExtension": {
+          "type": "string",
+          "description": "The file extension used when downloading this file. This field is read only. To set the extension, include it on title when creating the file. This will only be populated on files with content stored in Drive."
+        },
+        "fileSize": {
+          "type": "string",
+          "description": "The size of the file in bytes. This will only be populated on files with content stored in Drive.",
+          "format": "int64"
+        },
+        "id": {
+          "type": "string",
+          "description": "The id of the file."
+        },
+        "indexableText": {
+          "type": "object",
+          "description": "Indexable text attributes for the file (can only be written)",
+          "properties": {
+            "text": {
+              "type": "string",
+              "description": "The text to be indexed for this file"
+            }
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "The type of file. This is always drive#file",
+          "default": "drive#file"
+        },
+        "labels": {
+          "type": "object",
+          "description": "Labels for the file.",
+          "properties": {
+            "hidden": {
+              "type": "boolean",
+              "description": "Whether this file is hidden from the user"
+            },
+            "starred": {
+              "type": "boolean",
+              "description": "Whether this file is starred by the user."
+            },
+            "trashed": {
+              "type": "boolean",
+              "description": "Whether this file has been trashed."
+            }
+          }
+        },
+        "lastViewedDate": {
+          "type": "string",
+          "description": "Last time this file was viewed by the user (formatted RFC 3339 timestamp).",
+          "format": "date-time"
+        },
+        "md5Checksum": {
+          "type": "string",
+          "description": "An MD5 checksum for the content of this file. This will only be populated on files with content stored in Drive."
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "The mimetype of the file"
+        },
+        "modifiedByMeDate": {
+          "type": "string",
+          "description": "Last time this file was modified by the user (formatted RFC 3339 timestamp).",
+          "format": "date-time"
+        },
+        "modifiedDate": {
+          "type": "string",
+          "description": "Last time this file was modified by anyone (formatted RFC 3339 timestamp).",
+          "format": "date-time"
+        },
+        "parentsCollection": {
+          "type": "array",
+          "description": "Collection of parent folders which contain this file.\nOn insert, setting this field will put the file in all of the provided folders. If no folders are provided, the file will be placed in the default root folder. On update, this field is ignored.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The id of this parent"
+              },
+              "parentLink": {
+                "type": "string",
+                "description": "A link to get the metadata for this parent"
+              }
+            }
+          }
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "A link back to this file."
+        },
+        "title": {
+          "type": "string",
+          "description": "The title of this file."
+        },
+        "userPermission": {
+          "$ref": "#/definitions/Permission",
+          "description": "The permissions for the authenticated user on this file."
+        }
+      }
+    },
+    "Permission": {
+      "id": "Permission",
+      "type": "object",
+      "description": "A single permission for a file.",
+      "properties": {
+        "additionalRoles": {
+          "type": "array",
+          "description": "Any additional roles that this permission describes.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "An etag for this permission."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of this permission. This is always drive#permission",
+          "default": "drive#permission"
+        },
+        "role": {
+          "type": "string",
+          "description": "The role that this permission describes. (For example: reader, writer, owner)"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of permission (For example: user, group etc)."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "alt": {
+      "name": "alt",
+      "in": "query",
+      "description": "Data format for the response.",
+      "default": "json",
+      "type": "string",
+      "enum": [
+        "json"
+      ]
+    },
+    "fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Selector specifying which fields to include in a partial response.",
+      "type": "string"
+    },
+    "key": {
+      "name": "key",
+      "in": "query",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    "oauth_token": {
+      "name": "oauth_token",
+      "in": "query",
+      "description": "OAuth 2.0 token for the current user.",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "name": "prettyPrint",
+      "in": "query",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "true",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "name": "quotaUser",
+      "in": "query",
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "type": "string"
+    },
+    "userIp": {
+      "name": "userIp",
+      "in": "query",
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "type": "string"
+    }
+  }
+}
