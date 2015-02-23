@@ -75,6 +75,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
+          }
         ]
       }
     },
@@ -135,6 +143,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
+          }
         ]
       },
       "get": {
@@ -169,6 +185,15 @@
             "description": "The name of the zone in which the instance group manager resides.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute",
+              "https://www.googleapis.com/auth/compute.readonly"
+            ]
           }
         ]
       }
@@ -229,6 +254,14 @@
             "description": "The name of the zone in which the instance group manager resides.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
           }
         ]
       }
@@ -291,6 +324,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
+          }
         ]
       },
       "get": {
@@ -339,6 +380,15 @@
             "description": "The name of the zone in which the instance group manager resides.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute",
+              "https://www.googleapis.com/auth/compute.readonly"
+            ]
           }
         ]
       }
@@ -399,6 +449,14 @@
             "description": "The name of the zone in which the instance group manager resides.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
           }
         ]
       }
@@ -468,6 +526,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
+          }
         ]
       }
     },
@@ -527,6 +593,14 @@
             "description": "The name of the zone in which the instance group manager resides.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
           }
         ]
       }
@@ -588,6 +662,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
+          }
         ]
       }
     },
@@ -647,6 +729,14 @@
             "description": "Name of the zone scoping this request.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
           }
         ]
       }
@@ -721,6 +811,14 @@
             "description": "Name of the zone scoping this request.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
           }
         ]
       }
@@ -1160,6 +1258,19 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/cloud-platform": "View and manage your data across Google Cloud Platform services",
+        "https://www.googleapis.com/auth/compute": "View and manage your Google Compute Engine resources",
+        "https://www.googleapis.com/auth/compute.readonly": "View your Google Compute Engine resources"
+      }
     }
   }
 }

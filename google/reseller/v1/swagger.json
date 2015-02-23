@@ -61,6 +61,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order",
+              "https://www.googleapis.com/auth/apps.order.readonly"
+            ]
+          }
         ]
       },
       "patch": {
@@ -82,6 +90,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order"
+            ]
+          }
         ]
       },
       "put": {
@@ -102,6 +117,13 @@
             "description": "Id of the Customer",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order"
+            ]
           }
         ]
       }
@@ -147,6 +169,13 @@
             "in": "query",
             "description": "An auth token needed for inserting a customer for which domain already exists. Can be generated at https://www.google.com/a/cpanel//TransferToken. Optional.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order"
+            ]
           }
         ]
       }
@@ -201,6 +230,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order"
+            ]
+          }
         ]
       }
     },
@@ -253,6 +289,13 @@
             "description": "Id of the subscription, which is unique for a customer",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order"
+            ]
           }
         ]
       }
@@ -307,6 +350,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order"
+            ]
+          }
         ]
       }
     },
@@ -359,6 +409,13 @@
             "description": "Id of the subscription, which is unique for a customer",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order"
+            ]
           }
         ]
       }
@@ -423,6 +480,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order"
+            ]
+          }
         ]
       },
       "get": {
@@ -450,6 +514,14 @@
             "description": "Id of the subscription, which is unique for a customer",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order",
+              "https://www.googleapis.com/auth/apps.order.readonly"
+            ]
           }
         ]
       }
@@ -502,6 +574,13 @@
             "description": "Id of the Customer",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order"
+            ]
           }
         ]
       }
@@ -574,6 +653,14 @@
             "description": "Token to specify next page in the list",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order",
+              "https://www.googleapis.com/auth/apps.order.readonly"
+            ]
+          }
         ]
       }
     },
@@ -627,6 +714,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order"
+            ]
+          }
         ]
       }
     },
@@ -679,6 +773,13 @@
             "description": "Id of the subscription, which is unique for a customer",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order"
+            ]
           }
         ]
       }
@@ -1020,6 +1121,18 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/apps.order": "Manage users on your domain",
+        "https://www.googleapis.com/auth/apps.order.readonly": "Manage users on your domain"
+      }
     }
   }
 }

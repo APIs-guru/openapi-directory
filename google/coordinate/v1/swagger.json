@@ -61,6 +61,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/coordinate",
+              "https://www.googleapis.com/auth/coordinate.readonly"
+            ]
+          }
         ]
       }
     },
@@ -113,6 +121,14 @@
             "description": "Team ID",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/coordinate",
+              "https://www.googleapis.com/auth/coordinate.readonly"
+            ]
           }
         ]
       },
@@ -213,6 +229,13 @@
             "description": "Job title",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/coordinate"
+            ]
+          }
         ]
       },
       "put": {
@@ -311,6 +334,13 @@
             "in": "query",
             "description": "Job title",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/coordinate"
+            ]
           }
         ]
       }
@@ -420,6 +450,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/coordinate"
+            ]
+          }
         ]
       },
       "get": {
@@ -458,6 +495,14 @@
             "description": "Team ID",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/coordinate",
+              "https://www.googleapis.com/auth/coordinate.readonly"
+            ]
           }
         ]
       }
@@ -531,6 +576,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/coordinate",
+              "https://www.googleapis.com/auth/coordinate.readonly"
+            ]
+          }
         ]
       }
     },
@@ -584,6 +637,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/coordinate",
+              "https://www.googleapis.com/auth/coordinate.readonly"
+            ]
+          }
         ]
       },
       "patch": {
@@ -636,6 +697,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/coordinate"
+            ]
+          }
         ]
       },
       "put": {
@@ -687,6 +755,13 @@
             "description": "Team ID",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/coordinate"
+            ]
           }
         ]
       }
@@ -745,6 +820,14 @@
             "description": "Whether to include teams for which the user has the Worker role.",
             "type": "boolean"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/coordinate",
+              "https://www.googleapis.com/auth/coordinate.readonly"
+            ]
+          }
         ]
       }
     },
@@ -790,6 +873,14 @@
             "description": "Team ID",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/coordinate",
+              "https://www.googleapis.com/auth/coordinate.readonly"
+            ]
           }
         ]
       }
@@ -1295,6 +1386,18 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/coordinate": "View and manage your Google Maps Coordinate jobs",
+        "https://www.googleapis.com/auth/coordinate.readonly": "View your Google Coordinate jobs"
+      }
     }
   }
 }

@@ -116,6 +116,14 @@
             "type": "integer",
             "minimum": 1
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
+          }
         ]
       }
     },
@@ -164,6 +172,14 @@
             "description": "An index of the first account to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       }
@@ -235,6 +251,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
+          }
         ]
       }
     },
@@ -298,6 +322,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
+          }
         ]
       }
     },
@@ -346,6 +378,14 @@
             "description": "An index of the first advanced segment to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       }
@@ -403,6 +443,14 @@
             "type": "integer",
             "minimum": 1
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
+          }
         ]
       }
     }
@@ -454,6 +502,18 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/analytics": "View and manage your Google Analytics data",
+        "https://www.googleapis.com/auth/analytics.readonly": "View your Google Analytics data"
+      }
     }
   }
 }

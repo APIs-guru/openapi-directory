@@ -58,6 +58,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tasks"
+            ]
+          }
         ]
       },
       "get": {
@@ -78,6 +85,14 @@
             "description": "Task list identifier.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tasks",
+              "https://www.googleapis.com/auth/tasks.readonly"
+            ]
           }
         ]
       },
@@ -100,6 +115,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tasks"
+            ]
+          }
         ]
       },
       "put": {
@@ -120,6 +142,13 @@
             "description": "Task list identifier.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tasks"
+            ]
           }
         ]
       }
@@ -158,7 +187,14 @@
               "$ref": "#/definitions/TaskList"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tasks"
+            ]
+          }
+        ]
       },
       "get": {
         "description": "Returns all the authenticated user's task lists.",
@@ -183,6 +219,14 @@
             "in": "query",
             "description": "Token specifying the result page to return. Optional.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tasks",
+              "https://www.googleapis.com/auth/tasks.readonly"
+            ]
           }
         ]
       }
@@ -226,6 +270,13 @@
             "description": "Task list identifier.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tasks"
+            ]
           }
         ]
       }
@@ -277,6 +328,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tasks"
+            ]
+          }
         ]
       },
       "get": {
@@ -304,6 +362,14 @@
             "description": "Task list identifier.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tasks",
+              "https://www.googleapis.com/auth/tasks.readonly"
+            ]
           }
         ]
       },
@@ -333,6 +399,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tasks"
+            ]
+          }
         ]
       },
       "put": {
@@ -360,6 +433,13 @@
             "description": "Task list identifier.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tasks"
+            ]
           }
         ]
       }
@@ -418,6 +498,13 @@
             "description": "Task list identifier.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tasks"
+            ]
           }
         ]
       },
@@ -500,6 +587,14 @@
             "description": "Lower bound for a task's last modification time (as a RFC 3339 timestamp) to filter by. Optional. The default is not to filter by last modification time.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tasks",
+              "https://www.googleapis.com/auth/tasks.readonly"
+            ]
+          }
         ]
       }
     },
@@ -564,6 +659,13 @@
             "description": "Task list identifier.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tasks"
+            ]
           }
         ]
       }
@@ -789,6 +891,18 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/tasks": "Manage your tasks",
+        "https://www.googleapis.com/auth/tasks.readonly": "View your tasks"
+      }
     }
   }
 }

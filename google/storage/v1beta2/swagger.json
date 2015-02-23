@@ -65,6 +65,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control"
+            ]
+          }
         ]
       },
       "get": {
@@ -92,6 +99,13 @@
             "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control"
+            ]
           }
         ]
       },
@@ -121,6 +135,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control"
+            ]
+          }
         ]
       },
       "put": {
@@ -148,6 +169,13 @@
             "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control"
+            ]
           }
         ]
       }
@@ -195,6 +223,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control"
+            ]
+          }
         ]
       },
       "get": {
@@ -215,6 +250,13 @@
             "description": "Name of a bucket.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control"
+            ]
           }
         ]
       }
@@ -271,6 +313,14 @@
             "description": "Makes the return of the bucket metadata conditional on whether the bucket's current metageneration does not match the given value.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_write"
+            ]
+          }
         ]
       },
       "get": {
@@ -312,6 +362,15 @@
             "enum": [
               "full",
               "noAcl"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_only",
+              "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
         ]
@@ -357,6 +416,14 @@
               "noAcl"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_write"
+            ]
+          }
         ]
       },
       "put": {
@@ -398,6 +465,14 @@
             "enum": [
               "full",
               "noAcl"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
         ]
@@ -456,6 +531,14 @@
               "noAcl"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_write"
+            ]
+          }
         ]
       },
       "get": {
@@ -500,6 +583,15 @@
               "noAcl"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_only",
+              "https://www.googleapis.com/auth/devstorage.read_write"
+            ]
+          }
         ]
       }
     },
@@ -534,7 +626,16 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_only",
+              "https://www.googleapis.com/auth/devstorage.read_write"
+            ]
+          }
+        ]
       }
     },
     "/b/{bucket}/defaultObjectAcl/{entity}": {
@@ -584,6 +685,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control"
+            ]
+          }
         ]
       },
       "get": {
@@ -611,6 +719,13 @@
             "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control"
+            ]
           }
         ]
       },
@@ -640,6 +755,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control"
+            ]
+          }
         ]
       },
       "put": {
@@ -667,6 +789,13 @@
             "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control"
+            ]
           }
         ]
       }
@@ -714,6 +843,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control"
+            ]
+          }
         ]
       },
       "get": {
@@ -746,6 +882,13 @@
             "in": "query",
             "description": "If present, only return default ACL listing if the bucket's current metageneration does not match the given value.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control"
+            ]
           }
         ]
       }
@@ -810,6 +953,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control"
+            ]
+          }
         ]
       },
       "get": {
@@ -850,6 +1000,13 @@
             "description": "Name of the object.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control"
+            ]
           }
         ]
       },
@@ -892,6 +1049,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control"
+            ]
+          }
         ]
       },
       "put": {
@@ -932,6 +1096,13 @@
             "description": "Name of the object.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control"
+            ]
           }
         ]
       }
@@ -992,6 +1163,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control"
+            ]
+          }
         ]
       },
       "get": {
@@ -1025,6 +1203,13 @@
             "description": "Name of the object.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control"
+            ]
           }
         ]
       }
@@ -1090,6 +1275,14 @@
             "in": "query",
             "description": "Makes the operation conditional on whether the object's current metageneration matches the given value.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_write"
+            ]
           }
         ]
       }
@@ -1222,6 +1415,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_write"
+            ]
+          }
         ]
       }
     },
@@ -1302,6 +1503,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_write"
+            ]
+          }
         ]
       },
       "get": {
@@ -1368,6 +1577,15 @@
             "enum": [
               "full",
               "noAcl"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_only",
+              "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
         ]
@@ -1438,6 +1656,14 @@
               "noAcl"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_write"
+            ]
+          }
         ]
       },
       "put": {
@@ -1504,6 +1730,14 @@
             "enum": [
               "full",
               "noAcl"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
         ]
@@ -1595,6 +1829,14 @@
               "noAcl"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_write"
+            ]
+          }
         ]
       },
       "get": {
@@ -1656,6 +1898,15 @@
             "in": "query",
             "description": "If true, lists all versions of a file as distinct results.",
             "type": "boolean"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_only",
+              "https://www.googleapis.com/auth/devstorage.read_write"
+            ]
           }
         ]
       }
@@ -1743,6 +1994,15 @@
             "in": "query",
             "description": "If true, lists all versions of a file as distinct results.",
             "type": "boolean"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_only",
+              "https://www.googleapis.com/auth/devstorage.read_write"
+            ]
           }
         ]
       }
@@ -2453,6 +2713,19 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/devstorage.full_control": "Manage your data and permissions in Google Cloud Storage",
+        "https://www.googleapis.com/auth/devstorage.read_only": "View your data in Google Cloud Storage",
+        "https://www.googleapis.com/auth/devstorage.read_write": "Manage your data in Google Cloud Storage"
+      }
     }
   }
 }

@@ -75,6 +75,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/replicapool"
+            ]
+          }
         ]
       }
     },
@@ -135,6 +143,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/replicapool",
+              "https://www.googleapis.com/auth/replicapool.readonly"
+            ]
+          }
         ]
       }
     },
@@ -187,6 +204,14 @@
             "description": "The name of the zone in which the update's target resides.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/replicapool"
+            ]
           }
         ]
       },
@@ -242,6 +267,15 @@
             "description": "The name of the zone in which the update's target resides.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/replicapool",
+              "https://www.googleapis.com/auth/replicapool.readonly"
+            ]
           }
         ]
       }
@@ -324,6 +358,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/replicapool",
+              "https://www.googleapis.com/auth/replicapool.readonly"
+            ]
+          }
         ]
       }
     },
@@ -383,6 +426,14 @@
             "description": "The name of the zone in which the update's target resides.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/replicapool"
+            ]
           }
         ]
       }
@@ -444,6 +495,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/replicapool"
+            ]
+          }
         ]
       }
     },
@@ -503,6 +562,14 @@
             "description": "The name of the zone in which the update's target resides.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/replicapool"
+            ]
           }
         ]
       }
@@ -564,6 +631,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/replicapool"
+            ]
+          }
         ]
       }
     }
@@ -576,7 +651,7 @@
       "properties": {
         "error": {
           "type": "object",
-          "description": "Errors that occurred during the instance update. Setting (api.field).field_number manually is a workaround for b/16512602.",
+          "description": "Errors that occurred during the instance update.",
           "properties": {
             "errors": {
               "type": "array",
@@ -786,11 +861,11 @@
     "RollingUpdate": {
       "id": "RollingUpdate",
       "type": "object",
-      "description": "Resource describing a single update (rollout) of a group of instances to the given template.",
+      "description": "The following represents a resource describing a single update (rollout) of a group of instances to the given template.",
       "properties": {
         "actionType": {
           "type": "string",
-          "description": "Action to be performed for each instance. Possible values are:  \n- \"RECREATE\": Instance will be recreated. Only for managed instance groups. \n- \"REBOOT\": Soft reboot will be performed on an instance. Only for non-managed instance groups."
+          "description": "Specifies the action to take for each instance within the instance group. This can be RECREATE which will recreate each instance and is only available for managed instance groups. It can also be REBOOT which performs a soft reboot for each instance and is only available for regular (non-managed) instance groups."
         },
         "creationTimestamp": {
           "type": "string",
@@ -800,21 +875,48 @@
           "type": "string",
           "description": "An optional textual description of the resource; provided by the client when the resource is created."
         },
+        "error": {
+          "type": "object",
+          "description": "[Output Only] Errors that occurred during rolling update.",
+          "properties": {
+            "errors": {
+              "type": "array",
+              "description": "[Output Only] The array of errors encountered while processing this operation.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "[Output Only] The error type identifier for this error."
+                  },
+                  "location": {
+                    "type": "string",
+                    "description": "[Output Only] Indicates the field in the request which caused the error. This property is optional."
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "[Output Only] An optional, human-readable error message."
+                  }
+                }
+              }
+            }
+          }
+        },
         "id": {
           "type": "string",
           "description": "[Output Only] Unique identifier for the resource; defined by the server."
         },
         "instanceGroup": {
           "type": "string",
-          "description": "URL of an instance group being updated. Exactly one of instance_group_manager and instance_group must be set."
+          "description": "Fully-qualified URL of an instance group being updated. Exactly one of instanceGroupManager and instanceGroup must be set."
         },
         "instanceGroupManager": {
           "type": "string",
-          "description": "URL of an instance group manager being updated. Exactly one of instance_group_manager and instance_group must be set."
+          "description": "Fully-qualified URL of an instance group manager being updated. Exactly one of instanceGroupManager and instanceGroup must be set."
         },
         "instanceTemplate": {
           "type": "string",
-          "description": "URL of an instance template to apply."
+          "description": "Fully-qualified URL of an instance template to apply."
         },
         "kind": {
           "type": "string",
@@ -823,8 +925,13 @@
         },
         "policy": {
           "type": "object",
-          "description": "Parameters of the update process. Setting (api.field).field_number manually is a workaround for b/16512602.",
+          "description": "Parameters of the update process.",
           "properties": {
+            "autoPauseAfterInstances": {
+              "type": "integer",
+              "description": "Number of instances updated before the update gets automatically paused.",
+              "format": "int32"
+            },
             "canary": {
               "type": "object",
               "description": "Parameters of a canary phase. If absent, canary will NOT be performed.",
@@ -836,14 +943,29 @@
                 }
               }
             },
+            "instanceStartupTimeoutSec": {
+              "type": "integer",
+              "description": "Maximum amount of time we will wait after finishing all steps until we receive HEALTHY state for instance. If this deadline is exceeded instance update is considered as failed.",
+              "format": "int32"
+            },
             "maxNumConcurrentInstances": {
               "type": "integer",
               "description": "Maximum number of instances that can be updated simultaneously (concurrently). An update of an instance starts when the instance is about to be restarted and finishes after the instance has been restarted and the sleep period (defined by sleepAfterInstanceRestartSec) has passed.",
               "format": "int32"
             },
+            "maxNumFailedInstances": {
+              "type": "integer",
+              "description": "Maximum number of instance updates that can fail without failing the group update. Instance update is considered failed if any of it's update actions (e.g. Stop call on Instance resource in Rolling Reboot) failed with permanent failure, or if after finishing all update actions this instance is in UNHEALTHY state.",
+              "format": "int32"
+            },
+            "minInstanceUpdateTimeSec": {
+              "type": "integer",
+              "description": "Specifies minimum amount of time we will spend on updating single instance, measuring at the start of the first update action (e.g. Recreate call on Instance Group Manager or Stop call on Instance resource). If actual instance update takes less time we will simply sleep before proceeding with next instance.",
+              "format": "int32"
+            },
             "sleepAfterInstanceRestartSec": {
               "type": "integer",
-              "description": "The number of seconds to wait between when the instance has been successfully updated and restarted, to when it is marked as done.",
+              "description": "Time period after the instance has been restarted but before marking the update of this instance as done. This field is deprecated and ignored by Rolling Updater.",
               "format": "int32"
             }
           }
@@ -946,6 +1068,19 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/cloud-platform": "View and manage your data across Google Cloud Platform services",
+        "https://www.googleapis.com/auth/replicapool": "View and manage replica pools",
+        "https://www.googleapis.com/auth/replicapool.readonly": "View replica pools"
+      }
     }
   }
 }

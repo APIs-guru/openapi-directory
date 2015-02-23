@@ -74,6 +74,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
         ]
       }
     },
@@ -137,6 +145,14 @@
               "READER"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
         ]
       }
     },
@@ -192,6 +208,14 @@
               "ADMIN",
               "AUTHOR",
               "READER"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
         ]
@@ -287,6 +311,14 @@
               "READER"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
         ]
       }
     },
@@ -347,6 +379,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
         ]
       }
     },
@@ -404,6 +443,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
         ]
       },
       "get": {
@@ -448,6 +494,14 @@
               "ADMIN",
               "AUTHOR",
               "READER"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
         ]
@@ -559,6 +613,14 @@
               "READER"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
         ]
       }
     },
@@ -650,6 +712,14 @@
             },
             "collectionFormat": "multi"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
         ]
       }
     },
@@ -709,6 +779,13 @@
             "description": "The ID of the Post.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
           }
         ]
       }
@@ -770,6 +847,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
         ]
       }
     },
@@ -830,6 +914,13 @@
             },
             "collectionFormat": "multi"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
         ]
       }
     },
@@ -880,6 +971,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
         ]
       },
       "get": {
@@ -916,6 +1014,14 @@
               "ADMIN",
               "AUTHOR",
               "READER"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
         ]
@@ -958,6 +1064,13 @@
             "description": "Whether a revert action should be performed when the page is updated (default: false).",
             "type": "boolean"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
         ]
       },
       "put": {
@@ -997,6 +1110,13 @@
             "in": "query",
             "description": "Whether a revert action should be performed when the page is updated (default: false).",
             "type": "boolean"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
           }
         ]
       }
@@ -1049,6 +1169,13 @@
             "in": "query",
             "description": "Whether to create the page as a draft (default: false).",
             "type": "boolean"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
           }
         ]
       },
@@ -1113,6 +1240,14 @@
               "READER"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
         ]
       }
     },
@@ -1166,6 +1301,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
         ]
       }
     },
@@ -1218,6 +1360,13 @@
             "description": "The ID of the page.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
           }
         ]
       }
@@ -1284,6 +1433,14 @@
             "description": "ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
           }
         ]
       }
@@ -1411,6 +1568,14 @@
               "READER"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
         ]
       }
     },
@@ -1460,6 +1625,13 @@
             "description": "The ID of the Post.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
           }
         ]
       },
@@ -1517,6 +1689,14 @@
               "ADMIN",
               "AUTHOR",
               "READER"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
         ]
@@ -1578,6 +1758,13 @@
             "description": "Whether a revert action should be performed when the post is updated (default: false).",
             "type": "boolean"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
         ]
       },
       "put": {
@@ -1636,6 +1823,13 @@
             "in": "query",
             "description": "Whether a revert action should be performed when the post is updated (default: false).",
             "type": "boolean"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
           }
         ]
       }
@@ -1707,6 +1901,14 @@
               "READER"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
         ]
       }
     },
@@ -1771,6 +1973,13 @@
             "in": "query",
             "description": "Whether to create the post as a draft (default: false).",
             "type": "boolean"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
           }
         ]
       },
@@ -1873,6 +2082,14 @@
               "READER"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
         ]
       }
     },
@@ -1932,6 +2149,13 @@
             "description": "Optional date and time to schedule the publishing of the Blog. If no publishDate parameter is given, the post is either published at the a previously saved schedule date (if present), or the current time. If a future date is given, the post will be scheduled to be published.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
         ]
       }
     },
@@ -1984,6 +2208,13 @@
             "description": "The ID of the Post.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
           }
         ]
       }
@@ -2056,6 +2287,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
         ]
       }
     },
@@ -2101,6 +2340,14 @@
             "description": "The ID of the user to get.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
           }
         ]
       }
@@ -2915,6 +3162,18 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/blogger": "Manage your Blogger account",
+        "https://www.googleapis.com/auth/blogger.readonly": "View your Blogger account"
+      }
     }
   }
 }

@@ -72,6 +72,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.cloudman",
+              "https://www.googleapis.com/auth/replicapool"
+            ]
+          }
         ]
       },
       "get": {
@@ -106,6 +115,17 @@
             "description": "The zone for this replica pool.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.cloudman",
+              "https://www.googleapis.com/auth/ndev.cloudman.readonly",
+              "https://www.googleapis.com/auth/replicapool",
+              "https://www.googleapis.com/auth/replicapool.readonly"
+            ]
           }
         ]
       }
@@ -160,6 +180,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.cloudman",
+              "https://www.googleapis.com/auth/replicapool"
+            ]
+          }
         ]
       },
       "get": {
@@ -202,6 +231,17 @@
             "description": "The zone for this replica pool.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.cloudman",
+              "https://www.googleapis.com/auth/ndev.cloudman.readonly",
+              "https://www.googleapis.com/auth/replicapool",
+              "https://www.googleapis.com/auth/replicapool.readonly"
+            ]
           }
         ]
       }
@@ -269,6 +309,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.cloudman",
+              "https://www.googleapis.com/auth/replicapool"
+            ]
+          }
         ]
       }
     },
@@ -325,6 +374,15 @@
             "description": "The zone for this replica pool.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.cloudman",
+              "https://www.googleapis.com/auth/replicapool"
+            ]
           }
         ]
       }
@@ -393,6 +451,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.cloudman",
+              "https://www.googleapis.com/auth/replicapool"
+            ]
+          }
         ]
       },
       "get": {
@@ -434,6 +501,17 @@
             "description": "The zone where the replica lives.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.cloudman",
+              "https://www.googleapis.com/auth/ndev.cloudman.readonly",
+              "https://www.googleapis.com/auth/replicapool",
+              "https://www.googleapis.com/auth/replicapool.readonly"
+            ]
           }
         ]
       }
@@ -510,6 +588,17 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.cloudman",
+              "https://www.googleapis.com/auth/ndev.cloudman.readonly",
+              "https://www.googleapis.com/auth/replicapool",
+              "https://www.googleapis.com/auth/replicapool.readonly"
+            ]
+          }
         ]
       }
     },
@@ -576,6 +665,15 @@
             "description": "The zone where the replica lives.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.cloudman",
+              "https://www.googleapis.com/auth/replicapool"
+            ]
           }
         ]
       }
@@ -1189,6 +1287,21 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/cloud-platform": "View and manage your data across Google Cloud Platform services",
+        "https://www.googleapis.com/auth/ndev.cloudman": "View and manage your Google Cloud Platform management resources and deployment status information",
+        "https://www.googleapis.com/auth/ndev.cloudman.readonly": "View your Google Cloud Platform management resources and deployment status information",
+        "https://www.googleapis.com/auth/replicapool": "View and manage replica pools",
+        "https://www.googleapis.com/auth/replicapool.readonly": "View replica pools"
+      }
     }
   }
 }

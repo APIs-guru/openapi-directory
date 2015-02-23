@@ -69,6 +69,13 @@
             "minimum": 0,
             "maximum": 3
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/appstate"
+            ]
+          }
         ]
       }
     },
@@ -114,6 +121,13 @@
             "minimum": 0,
             "maximum": 3
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/appstate"
+            ]
+          }
         ]
       },
       "get": {
@@ -136,6 +150,13 @@
             "type": "integer",
             "minimum": 0,
             "maximum": 3
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/appstate"
+            ]
           }
         ]
       },
@@ -165,6 +186,13 @@
             "type": "integer",
             "minimum": 0,
             "maximum": 3
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/appstate"
+            ]
           }
         ]
       }
@@ -211,6 +239,13 @@
             "description": "Whether to include the full data in addition to the version number",
             "default": "false",
             "type": "boolean"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/appstate"
+            ]
           }
         ]
       }
@@ -351,6 +386,17 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/appstate": "View and manage your data for this application"
+      }
     }
   }
 }

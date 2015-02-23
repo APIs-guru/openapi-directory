@@ -65,6 +65,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/webmasters"
+            ]
+          }
         ]
       },
       "get": {
@@ -93,6 +100,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/webmasters",
+              "https://www.googleapis.com/auth/webmasters.readonly"
+            ]
+          }
         ]
       },
       "put": {
@@ -117,6 +132,13 @@
             "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/webmasters"
+            ]
           }
         ]
       }
@@ -170,6 +192,14 @@
             "description": "A URL of a site's sitemap index.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/webmasters",
+              "https://www.googleapis.com/auth/webmasters.readonly"
+            ]
+          }
         ]
       }
     },
@@ -213,6 +243,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/webmasters"
+            ]
+          }
         ]
       },
       "delete": {
@@ -230,6 +267,13 @@
             "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/webmasters"
+            ]
           }
         ]
       },
@@ -251,6 +295,14 @@
             "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/webmasters",
+              "https://www.googleapis.com/auth/webmasters.readonly"
+            ]
           }
         ]
       }
@@ -289,7 +341,15 @@
               "$ref": "#/definitions/SitesListResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/webmasters",
+              "https://www.googleapis.com/auth/webmasters.readonly"
+            ]
+          }
+        ]
       }
     },
     "/sites/{siteUrl}/urlCrawlErrorsCounts/query": {
@@ -368,6 +428,14 @@
             "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/webmasters",
+              "https://www.googleapis.com/auth/webmasters.readonly"
+            ]
           }
         ]
       }
@@ -451,6 +519,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/webmasters",
+              "https://www.googleapis.com/auth/webmasters.readonly"
+            ]
+          }
         ]
       },
       "delete": {
@@ -504,6 +580,13 @@
             "description": "The relative path (without the site) of the sample URL; must be one of the URLs returned by list",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/webmasters"
+            ]
           }
         ]
       }
@@ -579,6 +662,14 @@
             "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/webmasters",
+              "https://www.googleapis.com/auth/webmasters.readonly"
+            ]
           }
         ]
       }
@@ -863,6 +954,18 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/webmasters": "View and modify Webmaster Tools data for your verified sites",
+        "https://www.googleapis.com/auth/webmasters.readonly": "View Webmaster Tools data for your verified sites"
+      }
     }
   }
 }

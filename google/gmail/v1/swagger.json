@@ -62,6 +62,16 @@
             "default": "me",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.compose",
+              "https://www.googleapis.com/auth/gmail.modify",
+              "https://www.googleapis.com/auth/gmail.readonly"
+            ]
+          }
         ]
       }
     },
@@ -112,6 +122,15 @@
             "default": "me",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.compose",
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
+          }
         ]
       },
       "get": {
@@ -146,6 +165,16 @@
             "required": true,
             "default": "me",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.compose",
+              "https://www.googleapis.com/auth/gmail.modify",
+              "https://www.googleapis.com/auth/gmail.readonly"
+            ]
           }
         ]
       }
@@ -198,6 +227,15 @@
             "default": "me",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.compose",
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
+          }
         ]
       },
       "get": {
@@ -240,6 +278,16 @@
             "default": "me",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.compose",
+              "https://www.googleapis.com/auth/gmail.modify",
+              "https://www.googleapis.com/auth/gmail.readonly"
+            ]
+          }
         ]
       },
       "put": {
@@ -271,6 +319,15 @@
             "required": true,
             "default": "me",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.compose",
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
           }
         ]
       }
@@ -321,6 +378,15 @@
             "required": true,
             "default": "me",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.compose",
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
           }
         ]
       }
@@ -394,6 +460,15 @@
             "default": "me",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify",
+              "https://www.googleapis.com/auth/gmail.readonly"
+            ]
+          }
         ]
       }
     },
@@ -441,6 +516,14 @@
             "default": "me",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
+          }
         ]
       },
       "get": {
@@ -462,6 +545,15 @@
             "required": true,
             "default": "me",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify",
+              "https://www.googleapis.com/auth/gmail.readonly"
+            ]
           }
         ]
       }
@@ -514,6 +606,14 @@
             "default": "me",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
+          }
         ]
       },
       "get": {
@@ -542,6 +642,15 @@
             "required": true,
             "default": "me",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify",
+              "https://www.googleapis.com/auth/gmail.readonly"
+            ]
           }
         ]
       },
@@ -572,6 +681,14 @@
             "default": "me",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
+          }
         ]
       },
       "put": {
@@ -600,6 +717,14 @@
             "required": true,
             "default": "me",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
           }
         ]
       }
@@ -652,6 +777,13 @@
             "default": "me",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/"
+            ]
+          }
         ]
       },
       "get": {
@@ -703,6 +835,15 @@
             "required": true,
             "default": "me",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify",
+              "https://www.googleapis.com/auth/gmail.readonly"
+            ]
           }
         ]
       }
@@ -786,6 +927,14 @@
             "default": "me",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
+          }
         ]
       }
     },
@@ -847,6 +996,14 @@
             "default": "me",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
+          }
         ]
       },
       "get": {
@@ -905,6 +1062,15 @@
             "default": "me",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify",
+              "https://www.googleapis.com/auth/gmail.readonly"
+            ]
+          }
         ]
       }
     },
@@ -959,6 +1125,14 @@
             "default": "me",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
+          }
         ]
       }
     },
@@ -1008,6 +1182,15 @@
             "required": true,
             "default": "me",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.compose",
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
           }
         ]
       }
@@ -1063,6 +1246,14 @@
             "default": "me",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
+          }
         ]
       }
     },
@@ -1116,6 +1307,14 @@
             "required": true,
             "default": "me",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
           }
         ]
       }
@@ -1178,6 +1377,15 @@
             "default": "me",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify",
+              "https://www.googleapis.com/auth/gmail.readonly"
+            ]
+          }
         ]
       }
     },
@@ -1229,6 +1437,13 @@
             "default": "me",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/"
+            ]
+          }
         ]
       },
       "get": {
@@ -1279,6 +1494,15 @@
             "required": true,
             "default": "me",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify",
+              "https://www.googleapis.com/auth/gmail.readonly"
+            ]
           }
         ]
       }
@@ -1363,6 +1587,15 @@
             "default": "me",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify",
+              "https://www.googleapis.com/auth/gmail.readonly"
+            ]
+          }
         ]
       }
     },
@@ -1416,6 +1649,14 @@
             "required": true,
             "default": "me",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
           }
         ]
       }
@@ -1471,6 +1712,14 @@
             "default": "me",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
+          }
         ]
       }
     },
@@ -1524,6 +1773,14 @@
             "required": true,
             "default": "me",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
           }
         ]
       }
@@ -2032,6 +2289,20 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://mail.google.com/": "View and manage your mail",
+        "https://www.googleapis.com/auth/gmail.compose": "Manage drafts and send emails",
+        "https://www.googleapis.com/auth/gmail.modify": "View and modify but not delete your email",
+        "https://www.googleapis.com/auth/gmail.readonly": "View your emails messages and settings"
+      }
     }
   }
 }

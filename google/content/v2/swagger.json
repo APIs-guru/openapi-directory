@@ -52,7 +52,14 @@
               "$ref": "#/definitions/AccountsCustomBatchResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ]
       }
     },
     "/{merchantId}/accounts/{accountId}": {
@@ -102,6 +109,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
         ]
       },
       "get": {
@@ -129,6 +143,13 @@
             "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
           }
         ]
       },
@@ -158,6 +179,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
         ]
       },
       "put": {
@@ -185,6 +213,13 @@
             "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
           }
         ]
       }
@@ -232,6 +267,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
         ]
       },
       "get": {
@@ -264,6 +306,13 @@
             "in": "query",
             "description": "The token returned by the previous request.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
           }
         ]
       }
@@ -302,7 +351,14 @@
               "$ref": "#/definitions/AccountshippingCustomBatchResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ]
       }
     },
     "/{merchantId}/accountshipping/{accountId}": {
@@ -355,6 +411,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
         ]
       },
       "patch": {
@@ -383,6 +446,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
         ]
       },
       "put": {
@@ -410,6 +480,13 @@
             "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
           }
         ]
       }
@@ -469,6 +546,13 @@
             "description": "The token returned by the previous request.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
         ]
       }
     },
@@ -505,7 +589,14 @@
               "$ref": "#/definitions/AccountstatusesCustomBatchResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ]
       }
     },
     "/{merchantId}/accountstatuses/{accountId}": {
@@ -557,6 +648,13 @@
             "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
           }
         ]
       }
@@ -616,6 +714,13 @@
             "description": "The token returned by the previous request.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
         ]
       }
     },
@@ -653,7 +758,14 @@
               "$ref": "#/definitions/AccounttaxCustomBatchResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ]
       }
     },
     "/{merchantId}/accounttax/{accountId}": {
@@ -706,6 +818,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
         ]
       },
       "patch": {
@@ -734,6 +853,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
         ]
       },
       "put": {
@@ -761,6 +887,13 @@
             "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
           }
         ]
       }
@@ -820,6 +953,13 @@
             "description": "The token returned by the previous request.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
         ]
       }
     },
@@ -856,7 +996,14 @@
               "$ref": "#/definitions/DatafeedsCustomBatchResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ]
       }
     },
     "/{merchantId}/datafeeds/{datafeedId}": {
@@ -904,6 +1051,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
         ]
       },
       "get": {
@@ -929,6 +1083,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
           }
         ]
       },
@@ -956,6 +1117,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
         ]
       },
       "put": {
@@ -981,6 +1149,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
           }
         ]
       }
@@ -1027,6 +1202,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
         ]
       },
       "get": {
@@ -1059,6 +1241,13 @@
             "in": "query",
             "description": "The token returned by the previous request.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
           }
         ]
       }
@@ -1096,7 +1285,14 @@
               "$ref": "#/definitions/DatafeedstatusesCustomBatchResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ]
       }
     },
     "/{merchantId}/datafeedstatuses/{datafeedId}": {
@@ -1146,6 +1342,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
           }
         ]
       }
@@ -1205,6 +1408,13 @@
             "description": "The token returned by the previous request.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
         ]
       }
     },
@@ -1242,7 +1452,14 @@
               "$ref": "#/definitions/InventoryCustomBatchResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ]
       }
     },
     "/{merchantId}/inventory/{storeCode}/products/{productId}": {
@@ -1302,6 +1519,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
         ]
       }
     },
@@ -1346,6 +1570,13 @@
             "in": "query",
             "description": "Flag to run the request in dry-run mode.",
             "type": "boolean"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
           }
         ]
       }
@@ -1403,6 +1634,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
         ]
       },
       "get": {
@@ -1430,6 +1668,13 @@
             "description": "The ID of the product.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
           }
         ]
       }
@@ -1483,6 +1728,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
         ]
       },
       "get": {
@@ -1515,6 +1767,13 @@
             "in": "query",
             "description": "The token returned by the previous request.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
           }
         ]
       }
@@ -1553,7 +1812,14 @@
               "$ref": "#/definitions/ProductstatusesCustomBatchResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ]
       }
     },
     "/{merchantId}/productstatuses/{productId}": {
@@ -1605,6 +1871,13 @@
             "description": "The ID of the product.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
           }
         ]
       }
@@ -1663,6 +1936,13 @@
             "in": "query",
             "description": "The token returned by the previous request.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
           }
         ]
       }
@@ -3463,6 +3743,30 @@
             "$ref": "#/definitions/ProductDestination"
           }
         },
+        "displayAdsId": {
+          "type": "string",
+          "description": "An identifier for an item for dynamic remarketing campaigns."
+        },
+        "displayAdsLink": {
+          "type": "string",
+          "description": "URL directly to your item's landing page for dynamic remarketing campaigns."
+        },
+        "displayAdsSimilarIds": {
+          "type": "array",
+          "description": "Advertiser-specified recommendations.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "displayAdsTitle": {
+          "type": "string",
+          "description": "Title of an item for dynamic remarketing campaigns."
+        },
+        "displayAdsValue": {
+          "type": "number",
+          "description": "Offer margin for dynamic remarketing campaigns.",
+          "format": "double"
+        },
         "energyEfficiencyClass": {
           "type": "string",
           "description": "The energy efficiency class as defined in EU directive 2010/30/EU."
@@ -3859,6 +4163,10 @@
           "type": "string",
           "description": "The attribute name that is relevant for the issue."
         },
+        "severity": {
+          "type": "string",
+          "description": "The severity of the data quality issue."
+        },
         "timestamp": {
           "type": "string",
           "description": "The time stamp of the data quality issue."
@@ -4231,6 +4539,17 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/content": "Manage your product listings and accounts for Google Shopping"
+      }
     }
   }
 }

@@ -84,7 +84,14 @@
               "$ref": "#/definitions/Url"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/urlshortener"
+            ]
+          }
+        ]
       }
     },
     "/url/history": {
@@ -138,6 +145,13 @@
             "in": "query",
             "description": "Token for requesting successive pages of results.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/urlshortener"
+            ]
           }
         ]
       }
@@ -340,6 +354,17 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/urlshortener": "Manage your goo.gl short URLs"
+      }
     }
   }
 }

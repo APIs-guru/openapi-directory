@@ -61,6 +61,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.seller",
+              "https://www.googleapis.com/auth/adexchange.seller.readonly"
+            ]
+          }
         ]
       }
     },
@@ -113,6 +121,14 @@
             "in": "query",
             "description": "A continuation token, used to page through accounts. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.seller",
+              "https://www.googleapis.com/auth/adexchange.seller.readonly"
+            ]
           }
         ]
       }
@@ -174,6 +190,14 @@
             "description": "A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.seller",
+              "https://www.googleapis.com/auth/adexchange.seller.readonly"
+            ]
+          }
         ]
       }
     },
@@ -225,6 +249,14 @@
             "in": "query",
             "description": "The locale to use for translating alert messages. The account locale will be used if this is not supplied. The AdSense default (English) will be used if the supplied locale is invalid or unsupported.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.seller",
+              "https://www.googleapis.com/auth/adexchange.seller.readonly"
+            ]
           }
         ]
       }
@@ -285,6 +317,14 @@
             "description": "Custom channel to retrieve.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.seller",
+              "https://www.googleapis.com/auth/adexchange.seller.readonly"
+            ]
           }
         ]
       }
@@ -353,6 +393,14 @@
             "description": "A continuation token, used to page through custom channels. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.seller",
+              "https://www.googleapis.com/auth/adexchange.seller.readonly"
+            ]
+          }
         ]
       }
     },
@@ -399,6 +447,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.seller",
+              "https://www.googleapis.com/auth/adexchange.seller.readonly"
+            ]
+          }
         ]
       }
     },
@@ -444,6 +500,14 @@
             "description": "Account with visibility to the metrics.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.seller",
+              "https://www.googleapis.com/auth/adexchange.seller.readonly"
+            ]
           }
         ]
       }
@@ -498,6 +562,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.seller",
+              "https://www.googleapis.com/auth/adexchange.seller.readonly"
+            ]
+          }
         ]
       }
     },
@@ -543,6 +615,14 @@
             "description": "Account owning the deals.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.seller",
+              "https://www.googleapis.com/auth/adexchange.seller.readonly"
+            ]
           }
         ]
       }
@@ -666,6 +746,14 @@
             "minimum": 0,
             "maximum": 5000
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.seller",
+              "https://www.googleapis.com/auth/adexchange.seller.readonly"
+            ]
+          }
         ]
       }
     },
@@ -741,6 +829,14 @@
             "minimum": 0,
             "maximum": 5000
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.seller",
+              "https://www.googleapis.com/auth/adexchange.seller.readonly"
+            ]
+          }
         ]
       }
     },
@@ -800,6 +896,14 @@
             "in": "query",
             "description": "A continuation token, used to page through saved reports. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.seller",
+              "https://www.googleapis.com/auth/adexchange.seller.readonly"
+            ]
           }
         ]
       }
@@ -867,6 +971,14 @@
             "in": "query",
             "description": "A continuation token, used to page through URL channels. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.seller",
+              "https://www.googleapis.com/auth/adexchange.seller.readonly"
+            ]
           }
         ]
       }
@@ -1422,6 +1534,18 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/adexchange.seller": "View and manage your Ad Exchange data",
+        "https://www.googleapis.com/auth/adexchange.seller.readonly": "View your Ad Exchange data"
+      }
     }
   }
 }

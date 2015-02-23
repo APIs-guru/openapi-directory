@@ -75,6 +75,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfareporting"
+            ]
+          }
         ]
       }
     },
@@ -127,6 +134,13 @@
             "description": "The ID of the report.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfareporting"
+            ]
           }
         ]
       }
@@ -222,6 +236,13 @@
               "DESCENDING"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfareporting"
+            ]
+          }
         ]
       }
     },
@@ -272,6 +293,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfareporting"
+            ]
+          }
         ]
       },
       "get": {
@@ -299,6 +327,13 @@
             "description": "The ID of the report.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfareporting"
+            ]
           }
         ]
       },
@@ -328,6 +363,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfareporting"
+            ]
+          }
         ]
       },
       "put": {
@@ -355,6 +397,13 @@
             "description": "The ID of the report.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfareporting"
+            ]
           }
         ]
       }
@@ -401,6 +450,13 @@
             "description": "The DFA user profile ID.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfareporting"
+            ]
           }
         ]
       },
@@ -471,6 +527,13 @@
               "DESCENDING"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfareporting"
+            ]
+          }
         ]
       }
     },
@@ -530,6 +593,13 @@
             "description": "If set and true, tries to run the report synchronously.",
             "type": "boolean"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfareporting"
+            ]
+          }
         ]
       }
     },
@@ -575,6 +645,13 @@
             "description": "The DFA user profile ID.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfareporting"
+            ]
           }
         ]
       }
@@ -635,6 +712,13 @@
             "description": "The ID of the report.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfareporting"
+            ]
           }
         ]
       }
@@ -725,6 +809,13 @@
               "DESCENDING"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfareporting"
+            ]
+          }
         ]
       }
     },
@@ -771,6 +862,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfareporting"
+            ]
+          }
         ]
       }
     },
@@ -808,7 +906,14 @@
               "$ref": "#/definitions/UserProfileList"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfareporting"
+            ]
+          }
+        ]
       }
     }
   },
@@ -2059,6 +2164,17 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/dfareporting": "View and manage DoubleClick for Advertisers reports"
+      }
     }
   }
 }

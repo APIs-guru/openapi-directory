@@ -74,6 +74,14 @@
             "description": "The token returned by the previous request.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -133,6 +141,14 @@
             "required": true,
             "type": "integer",
             "minimum": 1
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -212,6 +228,14 @@
               "UNLOCKED"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -257,6 +281,14 @@
             "description": "The ID of the achievement used by this method.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -312,6 +344,14 @@
             "type": "integer",
             "minimum": 1
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -358,6 +398,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -395,7 +443,15 @@
               "$ref": "#/definitions/AchievementUpdateMultipleResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/applications/{applicationId}": {
@@ -458,6 +514,14 @@
               "WEB_APP"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -492,7 +556,15 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/events": {
@@ -551,6 +623,14 @@
             "description": "The token returned by the previous request.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       },
       "post": {
@@ -570,6 +650,14 @@
             "in": "query",
             "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -630,6 +718,14 @@
             "description": "The token returned by the previous request.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -681,6 +777,14 @@
             "description": "The ID of the leaderboard.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -741,6 +845,14 @@
             "description": "The token returned by the previous request.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -778,7 +890,15 @@
               "$ref": "#/definitions/MetagameConfig"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/players/{playerId}/categories/{collection}": {
@@ -854,6 +974,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -905,6 +1033,14 @@
             "description": "A player ID. A value of me may be used in place of the authenticated player's ID.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -976,6 +1112,14 @@
             "description": "The token returned by the previous request.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -1010,7 +1154,15 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/pushtokens": {
@@ -1044,7 +1196,15 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/quests/{questId}/milestones/{milestoneId}/claim": {
@@ -1101,6 +1261,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -1152,6 +1320,14 @@
             "description": "The ID of the quest.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -1219,6 +1395,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -1265,6 +1449,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -1309,6 +1501,14 @@
             "in": "query",
             "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -1362,6 +1562,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -1404,6 +1612,14 @@
             "description": "The ID of the room.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -1457,6 +1673,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -1509,6 +1733,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -1560,6 +1792,14 @@
             "description": "The ID of the room.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -1620,6 +1860,14 @@
             "description": "The token returned by the previous request.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -1671,6 +1919,14 @@
             "description": "The ID of the room.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -1769,6 +2025,14 @@
               "WEEKLY"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -1856,6 +2120,14 @@
               "ALL_TIME",
               "DAILY",
               "WEEKLY"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
             ]
           }
         ]
@@ -1959,6 +2231,14 @@
               "WEEKLY"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -2024,6 +2304,14 @@
             "description": "Additional information about the score you're submitting. Values must contain no more than 64 URI-safe characters as defined by section 2.3 of RFC 3986.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -2068,6 +2356,14 @@
             "in": "query",
             "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -2120,6 +2416,15 @@
             "description": "The ID of the snapshot.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -2187,6 +2492,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -2229,6 +2543,14 @@
             "description": "The ID of the match.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -2274,6 +2596,14 @@
             "in": "query",
             "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -2327,6 +2657,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -2369,6 +2707,14 @@
             "description": "The ID of the match.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -2421,6 +2767,14 @@
             "description": "The ID of the match.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -2480,6 +2834,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -2532,6 +2894,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -2583,6 +2953,14 @@
             "description": "The ID of the match.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -2648,6 +3026,14 @@
             "in": "query",
             "description": "The ID of another participant who should take their turn next. If not set, the match will wait for other player(s) to join via automatching; this is only valid if automatch criteria is set on the match with remaining slots for automatched players.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -2722,6 +3108,14 @@
             "description": "The token returned by the previous request.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -2779,6 +3173,14 @@
             "in": "query",
             "description": "A randomly generated numeric ID for each request specified by the caller. This number is used at the server to ensure that the request is handled correctly across retries.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -2853,6 +3255,14 @@
             "description": "The token returned by the previous request.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -2904,6 +3314,14 @@
             "description": "The ID of the match.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -5845,6 +6263,19 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/drive.appdata": "View and manage its own configuration data in your Google Drive",
+        "https://www.googleapis.com/auth/games": "Share your Google+ profile information and view and manage your game activity",
+        "https://www.googleapis.com/auth/plus.login": "Know your basic profile info and list of people in your circles."
+      }
     }
   }
 }

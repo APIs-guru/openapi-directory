@@ -52,7 +52,14 @@
               "$ref": "#/definitions/AnnotationSet"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
+        ]
       }
     },
     "/annotationSets/{annotationSetId}": {
@@ -95,6 +102,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
         ]
       },
       "get": {
@@ -115,6 +129,14 @@
             "description": "The ID of the annotation set to be retrieved.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
           }
         ]
       },
@@ -137,6 +159,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
         ]
       },
       "put": {
@@ -157,6 +186,13 @@
             "description": "The ID of the annotation set to be updated.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
           }
         ]
       }
@@ -195,7 +231,15 @@
               "$ref": "#/definitions/SearchAnnotationSetsResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
+        ]
       }
     },
     "/annotations": {
@@ -232,7 +276,14 @@
               "$ref": "#/definitions/Annotation"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
+        ]
       }
     },
     "/annotations/{annotationId}": {
@@ -275,6 +326,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
         ]
       },
       "get": {
@@ -295,6 +353,14 @@
             "description": "The ID of the annotation set to be retrieved.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
           }
         ]
       },
@@ -317,6 +383,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
         ]
       },
       "put": {
@@ -337,6 +410,13 @@
             "description": "The ID of the annotation set to be updated.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
           }
         ]
       }
@@ -375,7 +455,15 @@
               "$ref": "#/definitions/SearchAnnotationsResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
+        ]
       }
     },
     "/callsets": {
@@ -412,7 +500,14 @@
               "$ref": "#/definitions/CallSet"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
+        ]
       }
     },
     "/callsets/{callSetId}": {
@@ -455,6 +550,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
         ]
       },
       "get": {
@@ -475,6 +577,14 @@
             "description": "The ID of the call set.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
           }
         ]
       },
@@ -497,6 +607,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
         ]
       },
       "put": {
@@ -517,6 +634,13 @@
             "description": "The ID of the call set to be updated.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
           }
         ]
       }
@@ -555,7 +679,15 @@
               "$ref": "#/definitions/SearchCallSetsResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
+        ]
       }
     },
     "/datasets": {
@@ -592,7 +724,14 @@
               "$ref": "#/definitions/Dataset"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
+        ]
       },
       "get": {
         "description": "Lists all datasets.",
@@ -624,6 +763,14 @@
             "in": "query",
             "description": "Only return datasets which belong to this Google Developers Console project. Only accepts project numbers. Returns all public projects if no project number is specified.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
           }
         ]
       }
@@ -668,6 +815,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
         ]
       },
       "get": {
@@ -688,6 +842,14 @@
             "description": "The ID of the dataset.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
           }
         ]
       },
@@ -710,6 +872,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
         ]
       },
       "put": {
@@ -730,6 +899,13 @@
             "description": "The ID of the dataset to be updated.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
           }
         ]
       }
@@ -777,6 +953,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
         ]
       }
     },
@@ -814,7 +997,15 @@
               "$ref": "#/definitions/ExperimentalCreateJobResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.read_write",
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
+        ]
       }
     },
     "/jobs/{jobId}/cancel": {
@@ -856,6 +1047,13 @@
             "description": "Required. The ID of the job.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
           }
         ]
       }
@@ -903,6 +1101,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
         ]
       }
     },
@@ -940,7 +1146,15 @@
               "$ref": "#/definitions/SearchJobsResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
+        ]
       }
     },
     "/readgroupsets/align": {
@@ -977,7 +1191,15 @@
               "$ref": "#/definitions/AlignReadGroupSetsResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.read_write",
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
+        ]
       }
     },
     "/readgroupsets/call": {
@@ -1014,7 +1236,15 @@
               "$ref": "#/definitions/CallReadGroupSetsResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.read_write",
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
+        ]
       }
     },
     "/readgroupsets/{readGroupSetId}": {
@@ -1057,6 +1287,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
         ]
       },
       "get": {
@@ -1077,6 +1314,14 @@
             "description": "The ID of the read group set.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
           }
         ]
       },
@@ -1099,6 +1344,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
         ]
       },
       "put": {
@@ -1119,6 +1371,13 @@
             "description": "The ID of the read group set to be updated. The caller must have WRITE permissions to the dataset associated with this read group set.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
           }
         ]
       }
@@ -1157,7 +1416,15 @@
               "$ref": "#/definitions/ExportReadGroupSetsResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.read_write",
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
+        ]
       }
     },
     "/readgroupsets/import": {
@@ -1194,7 +1461,15 @@
               "$ref": "#/definitions/ImportReadGroupSetsResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.read_write",
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
+        ]
       }
     },
     "/readgroupsets/search": {
@@ -1231,7 +1506,15 @@
               "$ref": "#/definitions/SearchReadGroupSetsResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
+        ]
       }
     },
     "/readgroupsets/{readGroupSetId}/coveragebuckets": {
@@ -1314,6 +1597,14 @@
             "description": "The desired width of each reported coverage bucket in base pairs. This will be rounded down to the nearest precomputed bucket width; the value of which is returned as bucketWidth in the response. Defaults to infinity (each bucket spans an entire reference sequence) or the length of the target range, if specified. The smallest precomputed bucketWidth is currently 2048 base pairs; this is subject to change.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
         ]
       }
     },
@@ -1351,7 +1642,15 @@
               "$ref": "#/definitions/SearchReadsResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
+        ]
       }
     },
     "/references/{referenceId}": {
@@ -1397,6 +1696,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
         ]
       }
     },
@@ -1434,7 +1741,15 @@
               "$ref": "#/definitions/SearchReferencesResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
+        ]
       }
     },
     "/references/{referenceId}/bases": {
@@ -1505,6 +1820,14 @@
             "description": "The start position (0-based) of this query. Defaults to 0.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
         ]
       }
     },
@@ -1551,6 +1874,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
         ]
       }
     },
@@ -1588,7 +1919,15 @@
               "$ref": "#/definitions/SearchReferenceSetsResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
+        ]
       }
     },
     "/variants": {
@@ -1625,7 +1964,14 @@
               "$ref": "#/definitions/Variant"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
+        ]
       }
     },
     "/variants/{variantId}": {
@@ -1668,6 +2014,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
         ]
       },
       "get": {
@@ -1689,6 +2042,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
         ]
       },
       "put": {
@@ -1709,6 +2070,13 @@
             "description": "The ID of the variant to be updated.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
           }
         ]
       }
@@ -1747,7 +2115,15 @@
               "$ref": "#/definitions/SearchVariantsResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
+        ]
       }
     },
     "/variantsets/{variantSetId}": {
@@ -1790,6 +2166,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
         ]
       },
       "get": {
@@ -1810,6 +2193,14 @@
             "description": "Required. The ID of the variant set.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
           }
         ]
       },
@@ -1832,6 +2223,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
         ]
       },
       "put": {
@@ -1852,6 +2250,13 @@
             "description": "The ID of the variant to be updated.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
           }
         ]
       }
@@ -1899,6 +2304,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
         ]
       }
     },
@@ -1945,6 +2358,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.read_write",
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
         ]
       }
     },
@@ -1988,6 +2409,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
         ]
       }
     },
@@ -2025,7 +2453,15 @@
               "$ref": "#/definitions/SearchVariantSetsResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
+        ]
       }
     }
   },
@@ -4318,6 +4754,20 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/bigquery": "View and manage your data in Google BigQuery",
+        "https://www.googleapis.com/auth/devstorage.read_write": "Manage your data in Google Cloud Storage",
+        "https://www.googleapis.com/auth/genomics": "View and manage Genomics data",
+        "https://www.googleapis.com/auth/genomics.readonly": "View Genomics data"
+      }
     }
   }
 }

@@ -58,6 +58,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/siteverification"
+            ]
+          }
         ]
       },
       "get": {
@@ -78,6 +85,13 @@
             "description": "The id of a verified site or domain.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/siteverification"
+            ]
           }
         ]
       },
@@ -100,6 +114,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/siteverification"
+            ]
+          }
         ]
       },
       "put": {
@@ -120,6 +141,13 @@
             "description": "The id of a verified site or domain.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/siteverification"
+            ]
           }
         ]
       }
@@ -158,7 +186,15 @@
               "$ref": "#/definitions/SiteVerificationWebResourceGettokenResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/siteverification",
+              "https://www.googleapis.com/auth/siteverification.verify_only"
+            ]
+          }
+        ]
       }
     },
     "/webResource": {
@@ -204,6 +240,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/siteverification",
+              "https://www.googleapis.com/auth/siteverification.verify_only"
+            ]
+          }
         ]
       },
       "get": {
@@ -216,7 +260,14 @@
               "$ref": "#/definitions/SiteVerificationWebResourceListResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/siteverification"
+            ]
+          }
+        ]
       }
     }
   },
@@ -351,6 +402,18 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/siteverification": "Manage the list of sites and domains you control",
+        "https://www.googleapis.com/auth/siteverification.verify_only": "Manage your new site verifications with Google"
+      }
     }
   }
 }

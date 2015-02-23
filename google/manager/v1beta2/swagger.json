@@ -69,6 +69,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.cloudman"
+            ]
+          }
         ]
       },
       "get": {
@@ -100,6 +108,15 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.cloudman",
+              "https://www.googleapis.com/auth/ndev.cloudman.readonly"
+            ]
           }
         ]
       }
@@ -152,6 +169,17 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/appengine.admin",
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute",
+              "https://www.googleapis.com/auth/devstorage.read_write",
+              "https://www.googleapis.com/auth/ndev.cloudman"
+            ]
+          }
         ]
       },
       "get": {
@@ -192,6 +220,15 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.cloudman",
+              "https://www.googleapis.com/auth/ndev.cloudman.readonly"
+            ]
           }
         ]
       }
@@ -241,6 +278,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.cloudman"
+            ]
+          }
         ]
       },
       "get": {
@@ -266,6 +311,15 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.cloudman",
+              "https://www.googleapis.com/auth/ndev.cloudman.readonly"
+            ]
           }
         ]
       }
@@ -312,6 +366,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.cloudman"
+            ]
+          }
         ]
       },
       "get": {
@@ -346,6 +408,15 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.cloudman",
+              "https://www.googleapis.com/auth/ndev.cloudman.readonly"
+            ]
           }
         ]
       }
@@ -1189,6 +1260,22 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/appengine.admin": "View and manage your applications deployed on Google App Engine",
+        "https://www.googleapis.com/auth/cloud-platform": "View and manage your data across Google Cloud Platform services",
+        "https://www.googleapis.com/auth/compute": "View and manage your Google Compute Engine resources",
+        "https://www.googleapis.com/auth/devstorage.read_write": "Manage your data in Google Cloud Storage",
+        "https://www.googleapis.com/auth/ndev.cloudman": "View and manage your Google Cloud Platform management resources and deployment status information",
+        "https://www.googleapis.com/auth/ndev.cloudman.readonly": "View your Google Cloud Platform management resources and deployment status information"
+      }
     }
   }
 }

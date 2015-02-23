@@ -61,6 +61,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me"
+            ]
+          }
         ]
       }
     },
@@ -131,6 +139,14 @@
             "description": "The ID of the user to get activities for. The special value \"me\" can be used to indicate the authenticated user.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me"
+            ]
           }
         ]
       }
@@ -211,6 +227,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me"
+            ]
+          }
         ]
       }
     },
@@ -256,6 +280,14 @@
             "description": "The ID of the comment to get.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me"
+            ]
           }
         ]
       }
@@ -329,6 +361,14 @@
               "descending"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me"
+            ]
+          }
         ]
       }
     },
@@ -391,6 +431,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me"
+            ]
+          }
         ]
       },
       "get": {
@@ -449,6 +497,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me"
+            ]
+          }
         ]
       }
     },
@@ -491,6 +547,13 @@
             "description": "The ID of the moment to delete.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -537,6 +600,16 @@
             "description": "The ID of the person to get the profile for. The special value \"me\" can be used to indicate the authenticated user.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me",
+              "https://www.googleapis.com/auth/userinfo.email",
+              "https://www.googleapis.com/auth/userinfo.profile"
+            ]
           }
         ]
       }
@@ -620,6 +693,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me"
+            ]
+          }
         ]
       }
     },
@@ -692,6 +773,14 @@
             "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me"
+            ]
+          }
         ]
       }
     },
@@ -759,6 +848,14 @@
             "description": "Specify a query string for full text search of public text in all profiles.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me"
+            ]
           }
         ]
       }
@@ -2145,6 +2242,20 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/plus.login": "Know your basic profile info and list of people in your circles.",
+        "https://www.googleapis.com/auth/plus.me": "Know who you are on Google",
+        "https://www.googleapis.com/auth/userinfo.email": "View your email address",
+        "https://www.googleapis.com/auth/userinfo.profile": "View your basic profile info"
+      }
     }
   }
 }

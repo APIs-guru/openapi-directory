@@ -61,6 +61,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
         ]
       }
     },
@@ -120,6 +127,13 @@
             "description": "ID of the post to fetch posts from.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
           }
         ]
       }
@@ -198,6 +212,13 @@
             "description": "Earliest date of comment to fetch, a date-time with RFC 3339 formatting.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
         ]
       }
     },
@@ -251,6 +272,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
         ]
       }
     },
@@ -302,6 +330,13 @@
             "in": "query",
             "description": "Whether to retrieve the Page bodies.",
             "type": "boolean"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
           }
         ]
       }
@@ -355,6 +390,13 @@
             "description": "The ID of the post",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
           }
         ]
       }
@@ -426,6 +468,13 @@
             "description": "Earliest post date to fetch, a date-time with RFC 3339 formatting.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
         ]
       }
     },
@@ -472,6 +521,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
         ]
       }
     },
@@ -517,6 +573,13 @@
             "description": "ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
           }
         ]
       }
@@ -1092,6 +1155,17 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/blogger": "Manage your Blogger account"
+      }
     }
   }
 }

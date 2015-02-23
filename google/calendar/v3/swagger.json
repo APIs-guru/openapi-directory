@@ -65,6 +65,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
+          }
         ]
       },
       "get": {
@@ -92,6 +99,14 @@
             "description": "ACL rule identifier.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar",
+              "https://www.googleapis.com/auth/calendar.readonly"
+            ]
           }
         ]
       },
@@ -121,6 +136,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
+          }
         ]
       },
       "put": {
@@ -148,6 +170,13 @@
             "description": "ACL rule identifier.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
           }
         ]
       }
@@ -195,6 +224,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
+          }
         ]
       },
       "get": {
@@ -240,6 +276,13 @@
             "in": "query",
             "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All entries deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
           }
         ]
       }
@@ -312,6 +355,13 @@
             "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All entries deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
+          }
         ]
       }
     },
@@ -355,6 +405,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
+          }
         ]
       },
       "get": {
@@ -375,6 +432,14 @@
             "description": "Calendar identifier.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar",
+              "https://www.googleapis.com/auth/calendar.readonly"
+            ]
           }
         ]
       },
@@ -403,6 +468,13 @@
             "description": "Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.",
             "type": "boolean"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
+          }
         ]
       },
       "put": {
@@ -429,6 +501,13 @@
             "in": "query",
             "description": "Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.",
             "type": "boolean"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
           }
         ]
       }
@@ -474,6 +553,13 @@
             "in": "query",
             "description": "Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.",
             "type": "boolean"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
           }
         ]
       },
@@ -531,6 +617,14 @@
             "in": "query",
             "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. If only read-only fields such as calendar properties or ACLs have changed, the entry won't be returned. All entries deleted and hidden since the previous list request will always be in the result set and it is not allowed to set showDeleted neither showHidden to False.\nTo ensure client state consistency minAccessRole query parameter cannot be specified together with nextSyncToken.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar",
+              "https://www.googleapis.com/auth/calendar.readonly"
+            ]
           }
         ]
       }
@@ -614,6 +708,14 @@
             "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. If only read-only fields such as calendar properties or ACLs have changed, the entry won't be returned. All entries deleted and hidden since the previous list request will always be in the result set and it is not allowed to set showDeleted neither showHidden to False.\nTo ensure client state consistency minAccessRole query parameter cannot be specified together with nextSyncToken.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar",
+              "https://www.googleapis.com/auth/calendar.readonly"
+            ]
+          }
         ]
       }
     },
@@ -656,6 +758,13 @@
             "description": "Calendar identifier.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
           }
         ]
       }
@@ -700,6 +809,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
+          }
         ]
       },
       "get": {
@@ -720,6 +836,14 @@
             "description": "Calendar identifier.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar",
+              "https://www.googleapis.com/auth/calendar.readonly"
+            ]
           }
         ]
       },
@@ -742,6 +866,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
+          }
         ]
       },
       "put": {
@@ -762,6 +893,13 @@
             "description": "Calendar identifier.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
           }
         ]
       }
@@ -800,7 +938,14 @@
               "$ref": "#/definitions/Calendar"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
+          }
+        ]
       }
     },
     "/channels/stop": {
@@ -834,7 +979,15 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar",
+              "https://www.googleapis.com/auth/calendar.readonly"
+            ]
+          }
+        ]
       }
     },
     "/colors": {
@@ -871,7 +1024,15 @@
               "$ref": "#/definitions/Colors"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar",
+              "https://www.googleapis.com/auth/calendar.readonly"
+            ]
+          }
+        ]
       }
     },
     "/calendars/{calendarId}/events/{eventId}": {
@@ -927,6 +1088,13 @@
             "description": "Whether to send notifications about the deletion of the event. Optional. The default is False.",
             "type": "boolean"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
+          }
         ]
       },
       "get": {
@@ -973,6 +1141,14 @@
             "in": "query",
             "description": "Time zone used in the response. Optional. The default is the time zone of the calendar.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar",
+              "https://www.googleapis.com/auth/calendar.readonly"
+            ]
           }
         ]
       },
@@ -1021,6 +1197,13 @@
             "description": "Whether to send notifications about the event update (e.g. attendee's responses, title changes, etc.). Optional. The default is False.",
             "type": "boolean"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
+          }
         ]
       },
       "put": {
@@ -1068,6 +1251,13 @@
             "description": "Whether to send notifications about the event update (e.g. attendee's responses, title changes, etc.). Optional. The default is False.",
             "type": "boolean"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
+          }
         ]
       }
     },
@@ -1113,6 +1303,13 @@
             "description": "Calendar identifier.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
           }
         ]
       }
@@ -1172,6 +1369,13 @@
             "in": "query",
             "description": "Whether to send notifications about the creation of the new event. Optional. The default is False.",
             "type": "boolean"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
           }
         ]
       },
@@ -1310,6 +1514,14 @@
             "description": "Lower bound for an event's last modification time (as a RFC 3339 timestamp) to filter by. When specified, entries deleted since this time will always be included regardless of showDeleted. Optional. The default is not to filter by last modification time.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar",
+              "https://www.googleapis.com/auth/calendar.readonly"
+            ]
+          }
         ]
       }
     },
@@ -1419,6 +1631,14 @@
             "description": "Time zone used in the response. Optional. The default is the time zone of the calendar.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar",
+              "https://www.googleapis.com/auth/calendar.readonly"
+            ]
+          }
         ]
       }
     },
@@ -1485,6 +1705,13 @@
             "description": "Whether to send notifications about the change of the event's organizer. Optional. The default is False.",
             "type": "boolean"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
+          }
         ]
       }
     },
@@ -1543,6 +1770,13 @@
             "description": "The text describing the event to be created.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
           }
         ]
       }
@@ -1706,6 +1940,14 @@
             "description": "Lower bound for an event's last modification time (as a RFC 3339 timestamp) to filter by. When specified, entries deleted since this time will always be included regardless of showDeleted. Optional. The default is not to filter by last modification time.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar",
+              "https://www.googleapis.com/auth/calendar.readonly"
+            ]
+          }
         ]
       }
     },
@@ -1743,7 +1985,15 @@
               "$ref": "#/definitions/FreeBusyResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar",
+              "https://www.googleapis.com/auth/calendar.readonly"
+            ]
+          }
+        ]
       }
     },
     "/users/me/settings/{setting}": {
@@ -1788,6 +2038,14 @@
             "description": "The id of the user setting.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar",
+              "https://www.googleapis.com/auth/calendar.readonly"
+            ]
           }
         ]
       }
@@ -1847,6 +2105,14 @@
             "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar",
+              "https://www.googleapis.com/auth/calendar.readonly"
+            ]
+          }
         ]
       }
     },
@@ -1904,6 +2170,14 @@
             "in": "query",
             "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar",
+              "https://www.googleapis.com/auth/calendar.readonly"
+            ]
           }
         ]
       }
@@ -3023,6 +3297,18 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/calendar": "Manage your calendars",
+        "https://www.googleapis.com/auth/calendar.readonly": "View your calendars"
+      }
     }
   }
 }

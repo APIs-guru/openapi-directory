@@ -74,6 +74,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
         ]
       }
     },
@@ -125,6 +132,13 @@
             "description": "ID of user for whom to retrieve bookshelves.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -205,6 +219,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
         ]
       }
     },
@@ -267,6 +288,13 @@
             "in": "query",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
         ]
       }
     },
@@ -310,6 +338,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
         ]
       }
     },
@@ -347,7 +382,14 @@
               "$ref": "#/definitions/BooksCloudloadingResource"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
+        ]
       }
     },
     "/dictionary/listOfflineMetadata": {
@@ -392,6 +434,13 @@
             "description": "The device/version ID from which to request the data.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -457,6 +506,13 @@
             "description": "The volume to retrieve layers for.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -529,6 +585,13 @@
             "description": "The volume to retrieve layers for.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -633,6 +696,13 @@
             "in": "query",
             "description": "The requested pixel width for any images. If width is provided height must also be provided.",
             "type": "integer"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -761,6 +831,13 @@
             "description": "The requested pixel width for any images. If width is provided height must also be provided.",
             "type": "integer"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
         ]
       }
     },
@@ -832,6 +909,13 @@
             "description": "The volume to retrieve annotations for.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -967,6 +1051,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
         ]
       }
     },
@@ -1004,7 +1095,14 @@
               "$ref": "#/definitions/Usersettings"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
+        ]
       }
     },
     "/myconfig/releaseDownloadAccess": {
@@ -1072,6 +1170,13 @@
               "type": "string"
             },
             "collectionFormat": "multi"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -1156,6 +1261,13 @@
             "description": "The volume to request concurrent/download restrictions for.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -1252,6 +1364,13 @@
             },
             "collectionFormat": "multi"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
         ]
       }
     },
@@ -1289,7 +1408,14 @@
               "$ref": "#/definitions/Usersettings"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
+        ]
       }
     },
     "/mylibrary/annotations/{annotationId}": {
@@ -1338,6 +1464,13 @@
             "description": "String to identify the originator of this request.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
         ]
       },
       "get": {
@@ -1365,6 +1498,13 @@
             "description": "String to identify the originator of this request.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
         ]
       },
       "put": {
@@ -1391,6 +1531,13 @@
             "in": "query",
             "description": "String to identify the originator of this request.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -1448,6 +1595,13 @@
             "in": "query",
             "description": "String to identify the originator of this request.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       },
@@ -1539,6 +1693,13 @@
             "description": "The volume to restrict annotations to.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
         ]
       }
     },
@@ -1595,6 +1756,13 @@
             "description": "Volume id to get the summary for.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -1663,6 +1831,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
         ]
       }
     },
@@ -1711,6 +1886,13 @@
             "in": "query",
             "description": "String to identify the originator of this request.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -1764,6 +1946,13 @@
             "description": "String to identify the originator of this request.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
         ]
       }
     },
@@ -1808,6 +1997,13 @@
             "in": "query",
             "description": "String to identify the originator of this request.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -1871,6 +2067,13 @@
             "description": "Position on shelf to move the item (0 puts the item before the current first item, 1 puts it between the first and the second and so on.)",
             "required": true,
             "type": "integer"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -1936,6 +2139,13 @@
             "description": "ID of volume to remove.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -2031,6 +2241,13 @@
             "type": "integer",
             "minimum": 0
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
         ]
       }
     },
@@ -2088,6 +2305,13 @@
             "description": "ID of volume for which to retrieve a reading position.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -2178,6 +2402,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
         ]
       }
     },
@@ -2222,6 +2453,13 @@
             "in": "query",
             "description": "ISO-639-1 language and ISO-3166-1 country code. Default is en-US if unset.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -2289,6 +2527,13 @@
             "in": "query",
             "description": "The value of the nextToken from the previous page.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -2373,6 +2618,13 @@
             "description": "Volume id to exercise the offer",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
         ]
       }
     },
@@ -2451,6 +2703,13 @@
             "description": "device serial",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
         ]
       }
     },
@@ -2525,6 +2784,13 @@
             "in": "query",
             "description": "device serial",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -2604,6 +2870,13 @@
             "description": "ID of volume to retrieve.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -2753,6 +3026,13 @@
             "type": "integer",
             "minimum": 0
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
         ]
       }
     },
@@ -2821,6 +3101,13 @@
             "description": "ID of the source volume.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -2922,6 +3209,13 @@
             "type": "integer",
             "minimum": 0
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
         ]
       }
     },
@@ -2972,6 +3266,13 @@
             "in": "query",
             "description": "String to identify the originator of this request.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -3041,6 +3342,13 @@
             "description": "ID of the source volume.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -3132,6 +3440,13 @@
               "type": "string"
             },
             "collectionFormat": "multi"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
           }
         ]
       }
@@ -5046,6 +5361,17 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/books": "Manage your books"
+      }
     }
   }
 }

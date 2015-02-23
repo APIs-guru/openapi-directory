@@ -75,6 +75,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
         ]
       }
     },
@@ -140,6 +148,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
         ]
       }
     },
@@ -200,6 +216,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
         ]
       },
       "get": {
@@ -234,6 +258,14 @@
             "description": "Project ID of the project that contains the instance.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
           }
         ]
       },
@@ -270,6 +302,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
         ]
       },
       "put": {
@@ -304,6 +344,14 @@
             "description": "Project ID of the project that contains the instance.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
           }
         ]
       }
@@ -358,6 +406,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
         ]
       },
       "get": {
@@ -385,6 +441,14 @@
             "description": "Project ID of the project for which to list Cloud SQL instances.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
           }
         ]
       }
@@ -423,7 +487,15 @@
               "$ref": "#/definitions/FlagsListResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
+        ]
       }
     },
     "/projects/{project}/instances/{instance}/clone": {
@@ -475,6 +547,14 @@
             "description": "Project ID of the source as well as the clone Cloud SQL instance.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
           }
         ]
       }
@@ -529,6 +609,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
         ]
       },
       "get": {
@@ -556,6 +644,14 @@
             "description": "Project ID of the project that contains the instance.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
           }
         ]
       },
@@ -585,6 +681,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
         ]
       },
       "put": {
@@ -612,6 +716,14 @@
             "description": "Project ID of the project that contains the instance.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
           }
         ]
       }
@@ -666,6 +778,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
         ]
       }
     },
@@ -719,6 +838,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
         ]
       }
     },
@@ -765,6 +891,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
         ]
       },
       "get": {
@@ -797,6 +931,14 @@
             "description": "Project ID of the project for which to list Cloud SQL instances.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
           }
         ]
       }
@@ -851,6 +993,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
         ]
       }
     },
@@ -903,6 +1053,14 @@
             "description": "Project ID of the project that contains the instance.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
           }
         ]
       }
@@ -957,6 +1115,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
         ]
       }
     },
@@ -1009,6 +1175,14 @@
             "description": "Project ID of the project that contains the instance.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
           }
         ]
       }
@@ -1063,6 +1237,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
         ]
       }
     },
@@ -1116,6 +1298,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
         ]
       }
     },
@@ -1168,6 +1358,14 @@
             "description": "Project ID of the project that contains the instance.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
           }
         ]
       }
@@ -1234,6 +1432,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
         ]
       }
     },
@@ -1294,6 +1500,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
         ]
       },
       "get": {
@@ -1328,6 +1542,14 @@
             "description": "Sha1 FingerPrint.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
           }
         ]
       }
@@ -1382,6 +1604,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
         ]
       },
       "get": {
@@ -1409,6 +1639,14 @@
             "description": "Project ID of the project for which to list Cloud SQL instances.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
           }
         ]
       }
@@ -1455,6 +1693,14 @@
             "description": "Project ID of the project for which to list tiers.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
           }
         ]
       }
@@ -1523,6 +1769,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
         ]
       },
       "post": {
@@ -1551,6 +1805,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
         ]
       },
       "get": {
@@ -1578,6 +1840,14 @@
             "description": "Project ID of the project that contains the instance.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
           }
         ]
       },
@@ -1620,6 +1890,14 @@
             "description": "Project ID of the project that contains the instance.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
           }
         ]
       }
@@ -2748,6 +3026,18 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/cloud-platform": "View and manage your data across Google Cloud Platform services",
+        "https://www.googleapis.com/auth/sqlservice.admin": "Manage your Google SQL Service instances"
+      }
     }
   }
 }

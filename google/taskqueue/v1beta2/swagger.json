@@ -74,6 +74,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/taskqueue",
+              "https://www.googleapis.com/auth/taskqueue.consumer"
+            ]
+          }
         ]
       }
     },
@@ -131,6 +139,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/taskqueue",
+              "https://www.googleapis.com/auth/taskqueue.consumer"
+            ]
+          }
         ]
       },
       "get": {
@@ -165,6 +181,14 @@
             "description": "The taskqueue in which the task belongs.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/taskqueue",
+              "https://www.googleapis.com/auth/taskqueue.consumer"
+            ]
           }
         ]
       },
@@ -206,6 +230,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/taskqueue",
+              "https://www.googleapis.com/auth/taskqueue.consumer"
+            ]
+          }
         ]
       },
       "post": {
@@ -245,6 +277,14 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/taskqueue",
+              "https://www.googleapis.com/auth/taskqueue.consumer"
+            ]
           }
         ]
       }
@@ -299,6 +339,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/taskqueue",
+              "https://www.googleapis.com/auth/taskqueue.consumer"
+            ]
+          }
         ]
       },
       "get": {
@@ -326,6 +374,14 @@
             "description": "The id of the taskqueue to list tasks from.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/taskqueue",
+              "https://www.googleapis.com/auth/taskqueue.consumer"
+            ]
           }
         ]
       }
@@ -405,6 +461,14 @@
             "description": "The taskqueue to lease a task from.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/taskqueue",
+              "https://www.googleapis.com/auth/taskqueue.consumer"
+            ]
           }
         ]
       }
@@ -610,6 +674,18 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/taskqueue": "Manage your Tasks and Taskqueues",
+        "https://www.googleapis.com/auth/taskqueue.consumer": "Consume Tasks from your Taskqueues"
+      }
     }
   }
 }

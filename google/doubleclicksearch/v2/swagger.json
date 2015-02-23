@@ -133,6 +133,13 @@
             "required": true,
             "type": "integer"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/doubleclicksearch"
+            ]
+          }
         ]
       }
     },
@@ -170,7 +177,14 @@
               "$ref": "#/definitions/ConversionList"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/doubleclicksearch"
+            ]
+          }
+        ]
       },
       "patch": {
         "description": "Updates a batch of conversions in DoubleClick Search. This method supports patch semantics.",
@@ -239,6 +253,13 @@
             "required": true,
             "type": "integer"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/doubleclicksearch"
+            ]
+          }
         ]
       },
       "put": {
@@ -251,7 +272,14 @@
               "$ref": "#/definitions/ConversionList"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/doubleclicksearch"
+            ]
+          }
+        ]
       }
     },
     "/conversion/updateAvailability": {
@@ -288,7 +316,14 @@
               "$ref": "#/definitions/UpdateAvailabilityResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/doubleclicksearch"
+            ]
+          }
+        ]
       }
     },
     "/reports/generate": {
@@ -325,7 +360,14 @@
               "$ref": "#/definitions/Report"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/doubleclicksearch"
+            ]
+          }
+        ]
       }
     },
     "/reports/{reportId}": {
@@ -370,6 +412,13 @@
             "description": "ID of the report request being polled.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/doubleclicksearch"
+            ]
           }
         ]
       }
@@ -422,6 +471,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/doubleclicksearch"
+            ]
+          }
         ]
       }
     },
@@ -459,7 +515,14 @@
               "$ref": "#/definitions/Report"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/doubleclicksearch"
+            ]
+          }
+        ]
       }
     },
     "/agency/{agencyId}/advertiser/{advertiserId}/savedcolumns": {
@@ -511,6 +574,13 @@
             "description": "DS ID of the agency.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/doubleclicksearch"
+            ]
           }
         ]
       }
@@ -1193,6 +1263,17 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/doubleclicksearch": "View and manage your advertising data in DoubleClick Search"
+      }
     }
   }
 }

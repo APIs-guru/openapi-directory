@@ -61,6 +61,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/prediction"
+            ]
+          }
         ]
       }
     },
@@ -104,6 +111,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/prediction"
+            ]
+          }
         ]
       },
       "get": {
@@ -125,6 +139,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/prediction"
+            ]
+          }
         ]
       },
       "put": {
@@ -145,6 +166,13 @@
             "description": "The unique name for the predictive model.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/prediction"
+            ]
           }
         ]
       }
@@ -183,7 +211,17 @@
               "$ref": "#/definitions/Training"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_only",
+              "https://www.googleapis.com/auth/devstorage.read_write",
+              "https://www.googleapis.com/auth/prediction"
+            ]
+          }
+        ]
       }
     },
     "/trainedmodels/{id}/predict": {
@@ -228,6 +266,13 @@
             "description": "The unique name for the predictive model.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/prediction"
+            ]
           }
         ]
       }
@@ -477,6 +522,20 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/devstorage.full_control": "Manage your data and permissions in Google Cloud Storage",
+        "https://www.googleapis.com/auth/devstorage.read_only": "View your data in Google Cloud Storage",
+        "https://www.googleapis.com/auth/devstorage.read_write": "Manage your data in Google Cloud Storage",
+        "https://www.googleapis.com/auth/prediction": "Manage your data in the Google Prediction API"
+      }
     }
   }
 }

@@ -74,6 +74,17 @@
             "description": "Change ID to start counting from when calculating number of remaining change IDs",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
+          }
         ]
       }
     },
@@ -119,6 +130,18 @@
             "description": "The ID of the app.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.apps.readonly",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
           }
         ]
       }
@@ -179,6 +202,13 @@
             "description": "A language or locale code, as defined by BCP 47, with some extensions from Unicode's LDML format (http://www.unicode.org/reports/tr35/).",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive.apps.readonly"
+            ]
+          }
         ]
       }
     },
@@ -224,6 +254,18 @@
             "description": "The ID of the change.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.apps.readonly",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
           }
         ]
       }
@@ -298,6 +340,18 @@
             "description": "Change ID to start listing changes from.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.apps.readonly",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
+          }
         ]
       }
     },
@@ -371,6 +425,18 @@
             "description": "Change ID to start listing changes from.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.apps.readonly",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
+          }
         ]
       }
     },
@@ -405,7 +471,19 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.apps.readonly",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
+          }
+        ]
       }
     },
     "/files/{folderId}/children/{childId}": {
@@ -455,6 +533,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       },
       "get": {
@@ -482,6 +568,17 @@
             "description": "The ID of the folder.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
           }
         ]
       }
@@ -529,6 +626,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       },
       "get": {
@@ -569,6 +675,17 @@
             "in": "query",
             "description": "Query string for searching children.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
           }
         ]
       }
@@ -620,6 +737,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
+          }
         ]
       },
       "get": {
@@ -655,6 +781,15 @@
             "default": "false",
             "type": "boolean"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
+          }
         ]
       },
       "patch": {
@@ -683,6 +818,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       },
       "put": {
@@ -710,6 +853,14 @@
             "description": "The ID of the file.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
           }
         ]
       }
@@ -756,6 +907,14 @@
             "description": "The ID of the file.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
           }
         ]
       },
@@ -805,6 +964,15 @@
             "in": "query",
             "description": "Only discussions that were updated after this timestamp will be returned. Formatted as an RFC 3339 timestamp.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
           }
         ]
       }
@@ -902,6 +1070,16 @@
               "PRIVATE"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.apps.readonly",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       }
     },
@@ -944,6 +1122,15 @@
             "description": "The ID of the file to delete.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
           }
         ]
       },
@@ -989,6 +1176,18 @@
             "description": "Whether to update the view date after successfully retrieving the file.",
             "default": "false",
             "type": "boolean"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.apps.readonly",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
           }
         ]
       },
@@ -1089,6 +1288,17 @@
             "description": "Whether to use the content as indexable text.",
             "default": "false",
             "type": "boolean"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.apps.readonly",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.scripts"
+            ]
           }
         ]
       },
@@ -1193,6 +1403,17 @@
             "default": "false",
             "type": "boolean"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.apps.readonly",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.scripts"
+            ]
+          }
         ]
       }
     },
@@ -1227,7 +1448,14 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive"
+            ]
+          }
+        ]
       }
     },
     "/files": {
@@ -1326,6 +1554,16 @@
               "PRIVATE"
             ]
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.apps.readonly",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       },
       "get": {
@@ -1380,6 +1618,18 @@
             "description": "Query string for searching files.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.apps.readonly",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
+          }
         ]
       }
     },
@@ -1425,6 +1675,16 @@
             "description": "The ID of the file to update.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.apps.readonly",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
           }
         ]
       }
@@ -1472,6 +1732,16 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.apps.readonly",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       }
     },
@@ -1517,6 +1787,16 @@
             "description": "The ID of the file to untrash.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.apps.readonly",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
           }
         ]
       }
@@ -1588,6 +1868,18 @@
             "default": "false",
             "type": "boolean"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.apps.readonly",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
+          }
         ]
       }
     },
@@ -1638,6 +1930,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       },
       "get": {
@@ -1665,6 +1965,17 @@
             "description": "The ID of the parent.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
           }
         ]
       }
@@ -1712,6 +2023,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       },
       "get": {
@@ -1732,6 +2052,17 @@
             "description": "The ID of the file.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
           }
         ]
       }
@@ -1783,6 +2114,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       },
       "get": {
@@ -1810,6 +2149,16 @@
             "description": "The ID for the permission.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
           }
         ]
       },
@@ -1846,6 +2195,14 @@
             "default": "false",
             "type": "boolean"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       },
       "put": {
@@ -1880,6 +2237,14 @@
             "description": "Whether changing a role to 'owner' should also downgrade the current owners to writers.",
             "default": "false",
             "type": "boolean"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
           }
         ]
       }
@@ -1926,6 +2291,18 @@
             "description": "The email address for which to return a permission ID",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.apps.readonly",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
           }
         ]
       }
@@ -1986,6 +2363,14 @@
             "default": "true",
             "type": "boolean"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       },
       "get": {
@@ -2006,6 +2391,16 @@
             "description": "The ID for the file.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
           }
         ]
       }
@@ -2064,6 +2459,15 @@
             "default": "private",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       },
       "get": {
@@ -2098,6 +2502,17 @@
             "description": "The visibility of the property.",
             "default": "private",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
           }
         ]
       },
@@ -2134,6 +2549,15 @@
             "default": "private",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       },
       "put": {
@@ -2168,6 +2592,15 @@
             "description": "The visibility of the property.",
             "default": "private",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
           }
         ]
       }
@@ -2215,6 +2648,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       },
       "get": {
@@ -2235,6 +2677,17 @@
             "description": "The ID of the file.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
           }
         ]
       }
@@ -2286,6 +2739,15 @@
             "type": "integer",
             "minimum": 1
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
+          }
         ]
       },
       "put": {
@@ -2312,6 +2774,14 @@
             "description": "The ID of the file that the Realtime API data model is associated with.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
           }
         ]
       }
@@ -2370,6 +2840,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       },
       "get": {
@@ -2412,6 +2890,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
+          }
         ]
       },
       "patch": {
@@ -2447,6 +2934,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       },
       "put": {
@@ -2481,6 +2976,14 @@
             "description": "The ID of the reply.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
           }
         ]
       }
@@ -2535,6 +3038,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       },
       "get": {
@@ -2584,6 +3095,15 @@
             "in": "query",
             "description": "The continuation token, used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
           }
         ]
       }
@@ -2635,6 +3155,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       },
       "get": {
@@ -2662,6 +3191,17 @@
             "description": "The ID of the revision.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
           }
         ]
       },
@@ -2691,6 +3231,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       },
       "put": {
@@ -2718,6 +3267,15 @@
             "description": "The ID for the revision.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
           }
         ]
       }
@@ -2764,6 +3322,17 @@
             "description": "The ID of the file.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
           }
         ]
       }
@@ -4436,6 +5005,23 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/drive": "View and manage the files in your Google Drive",
+        "https://www.googleapis.com/auth/drive.appdata": "View and manage its own configuration data in your Google Drive",
+        "https://www.googleapis.com/auth/drive.apps.readonly": "View your Google Drive apps",
+        "https://www.googleapis.com/auth/drive.file": "View and manage Google Drive files that you have opened or created with this app",
+        "https://www.googleapis.com/auth/drive.metadata.readonly": "View metadata for files in your Google Drive",
+        "https://www.googleapis.com/auth/drive.readonly": "View the files in your Google Drive",
+        "https://www.googleapis.com/auth/drive.scripts": "Modify your Google Apps Script scripts' behavior"
+      }
     }
   }
 }

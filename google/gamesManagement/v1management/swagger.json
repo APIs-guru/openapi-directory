@@ -61,6 +61,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -98,7 +106,15 @@
               "$ref": "#/definitions/AchievementResetAllResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/achievements/resetAllForAllPlayers": {
@@ -132,7 +148,15 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/achievements/{achievementId}/resetForAllPlayers": {
@@ -175,6 +199,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -209,7 +241,15 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/applications/{applicationId}/players/hidden": {
@@ -269,6 +309,14 @@
             "description": "The token returned by the previous request.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -312,6 +360,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -346,7 +402,15 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/events/resetAllForAllPlayers": {
@@ -380,7 +444,15 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/events/{eventId}/resetForAllPlayers": {
@@ -423,6 +495,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -457,7 +537,15 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/applications/{applicationId}/players/hidden/{playerId}": {
@@ -507,6 +595,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       },
       "delete": {
@@ -531,6 +627,14 @@
             "description": "A player ID. A value of me may be used in place of the authenticated player's ID.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -575,6 +679,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -609,7 +721,15 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/quests/resetAllForAllPlayers": {
@@ -643,7 +763,15 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/quests/{questId}/resetForAllPlayers": {
@@ -686,6 +814,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -720,7 +856,15 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/rooms/reset": {
@@ -754,7 +898,15 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/rooms/resetForAllPlayers": {
@@ -788,7 +940,15 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/leaderboards/{leaderboardId}/scores/reset": {
@@ -834,6 +994,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -871,7 +1039,15 @@
               "$ref": "#/definitions/PlayerScoreResetAllResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/scores/resetAllForAllPlayers": {
@@ -905,7 +1081,15 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/leaderboards/{leaderboardId}/scores/resetForAllPlayers": {
@@ -948,6 +1132,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       }
     },
@@ -982,7 +1174,15 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/turnbasedmatches/reset": {
@@ -1016,7 +1216,15 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     },
     "/turnbasedmatches/resetForAllPlayers": {
@@ -1050,7 +1258,15 @@
           "200": {
             "description": "Successful response"
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ]
       }
     }
   },
@@ -1421,6 +1637,18 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/games": "Share your Google+ profile information and view and manage your game activity",
+        "https://www.googleapis.com/auth/plus.login": "Know your basic profile info and list of people in your circles."
+      }
     }
   }
 }

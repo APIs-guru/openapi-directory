@@ -61,6 +61,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/monitoring"
+            ]
+          }
         ]
       },
       "get": {
@@ -102,6 +109,13 @@
             "in": "query",
             "description": "The query used to search against existing metrics. Separate keywords with a space; the service joins all keywords with AND, meaning that all keywords must match for a metric to be returned. If this field is omitted, all metrics are returned. If an empty string is passed with this field, no metrics are returned.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/monitoring"
+            ]
           }
         ]
       }
@@ -155,6 +169,13 @@
             "description": "The project ID to which the metric belongs.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/monitoring"
+            ]
           }
         ]
       }
@@ -271,6 +292,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/monitoring"
+            ]
+          }
         ]
       }
     },
@@ -316,6 +344,13 @@
             "description": "The project ID. The value can be the numeric project ID or string-based project name.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/monitoring"
+            ]
           }
         ]
       }
@@ -431,6 +466,13 @@
             "description": "End of the time interval (inclusive), which is expressed as an RFC 3339 timestamp.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/monitoring"
+            ]
           }
         ]
       }
@@ -903,6 +945,17 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/monitoring": "View and write monitoring data for all of your Google and third-party Cloud and API projects"
+      }
     }
   }
 }

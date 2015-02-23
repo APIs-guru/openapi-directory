@@ -140,6 +140,14 @@
             "type": "integer",
             "minimum": 1
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
+          }
         ]
       }
     },
@@ -249,6 +257,14 @@
             "type": "integer",
             "minimum": 1
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
+          }
         ]
       }
     },
@@ -326,6 +342,14 @@
             "description": "A comma-separated list of dimensions or metrics that determine the sort order for real time data.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
+          }
         ]
       }
     },
@@ -378,6 +402,14 @@
             "type": "integer",
             "minimum": 1
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
+          }
         ]
       }
     },
@@ -428,6 +460,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.manage.users"
+            ]
+          }
         ]
       },
       "put": {
@@ -455,6 +494,13 @@
             "description": "Link ID to update the account-user link for.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.manage.users"
+            ]
           }
         ]
       }
@@ -502,6 +548,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.manage.users"
+            ]
+          }
         ]
       },
       "get": {
@@ -535,6 +588,14 @@
             "description": "An index of the first account-user link to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.manage.users",
+              "https://www.googleapis.com/auth/analytics.manage.users.readonly"
+            ]
           }
         ]
       }
@@ -587,6 +648,15 @@
             "description": "An index of the first account to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       }
@@ -655,6 +725,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
+          }
         ]
       }
     },
@@ -715,6 +794,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
+          }
         ]
       },
       "patch": {
@@ -757,6 +844,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "put": {
@@ -798,6 +892,13 @@
             "description": "Web property ID for the custom dimension to update.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
           }
         ]
       }
@@ -852,6 +953,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "get": {
@@ -892,6 +1000,14 @@
             "description": "Web property ID for the custom dimensions to retrieve.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       }
@@ -953,6 +1069,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
+          }
         ]
       },
       "patch": {
@@ -995,6 +1119,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "put": {
@@ -1036,6 +1167,13 @@
             "description": "Web property ID for the custom metric to update.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
           }
         ]
       }
@@ -1090,6 +1228,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "get": {
@@ -1130,6 +1275,14 @@
             "description": "Web property ID for the custom metrics to retrieve.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       }
@@ -1204,6 +1357,14 @@
             "description": "Web property Id associated with daily upload delete.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
           }
         ]
       }
@@ -1292,6 +1453,14 @@
             "description": "Web property Id for the daily uploads to retrieve.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       }
@@ -1389,6 +1558,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       }
     },
@@ -1453,6 +1630,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "get": {
@@ -1494,6 +1679,15 @@
             "description": "Web property ID to retrieve the experiment for.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       },
@@ -1537,6 +1731,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "put": {
@@ -1578,6 +1780,14 @@
             "description": "Web property ID of the experiment to update.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
           }
         ]
       }
@@ -1639,6 +1849,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "get": {
@@ -1686,6 +1904,15 @@
             "description": "Web property ID to retrieve experiments for.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       }
@@ -1740,6 +1967,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "get": {
@@ -1767,6 +2001,14 @@
             "description": "Filter ID to retrieve filters for.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       },
@@ -1796,6 +2038,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "put": {
@@ -1823,6 +2072,13 @@
             "description": "ID of the filter to be updated.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
           }
         ]
       }
@@ -1870,6 +2126,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "get": {
@@ -1903,6 +2166,14 @@
             "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       }
@@ -1971,6 +2242,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
+          }
         ]
       },
       "patch": {
@@ -2013,6 +2292,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "put": {
@@ -2054,6 +2340,13 @@
             "description": "Web property ID to update the goal.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
           }
         ]
       }
@@ -2115,6 +2408,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "get": {
@@ -2162,6 +2462,15 @@
             "description": "Web property ID to retrieve goals for. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       }
@@ -2227,6 +2536,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "get": {
@@ -2268,6 +2584,14 @@
             "description": "Web property Id to retrieve profile filter link for.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       },
@@ -2311,6 +2635,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "put": {
@@ -2352,6 +2683,13 @@
             "description": "Web property Id to which profile filter link belongs",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
           }
         ]
       }
@@ -2413,6 +2751,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "get": {
@@ -2460,6 +2805,14 @@
             "description": "Web property Id for profile filter links for. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       }
@@ -2525,6 +2878,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.manage.users"
+            ]
+          }
         ]
       },
       "put": {
@@ -2566,6 +2926,13 @@
             "description": "Web Property ID to update the user link for.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.manage.users"
+            ]
           }
         ]
       }
@@ -2627,6 +2994,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.manage.users"
+            ]
+          }
         ]
       },
       "get": {
@@ -2674,6 +3048,14 @@
             "description": "Web Property ID which the given view (profile) belongs to. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.manage.users",
+              "https://www.googleapis.com/auth/analytics.manage.users.readonly"
+            ]
           }
         ]
       }
@@ -2732,6 +3114,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "get": {
@@ -2766,6 +3155,14 @@
             "description": "Web property ID to retrieve the goal for.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       },
@@ -2802,6 +3199,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "put": {
@@ -2836,6 +3240,13 @@
             "description": "Web property ID to which the view (profile) belongs",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
           }
         ]
       }
@@ -2890,6 +3301,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "get": {
@@ -2930,6 +3348,15 @@
             "description": "Web property ID for the views (profiles) to retrieve. Can either be a specific web property ID or '~all', which refers to all the web properties to which the user has access.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       }
@@ -2982,6 +3409,15 @@
             "description": "An index of the first segment to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       }
@@ -3050,6 +3486,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
+          }
         ]
       }
     },
@@ -3110,6 +3555,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "get": {
@@ -3157,6 +3610,15 @@
             "description": "Web property ID to retrieve unsampled reports for. Must be a specific web property ID, ~all is not supported.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       }
@@ -3214,6 +3676,14 @@
             "description": "Web property Id for the uploads to be deleted.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
           }
         ]
       }
@@ -3281,6 +3751,15 @@
             "description": "Web property Id for the upload to retrieve.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       }
@@ -3356,6 +3835,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
+          }
         ]
       },
       "post": {
@@ -3393,6 +3881,14 @@
             "description": "Web property UA-string associated with the upload.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
           }
         ]
       }
@@ -3451,6 +3947,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       }
     },
@@ -3508,6 +4012,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "get": {
@@ -3542,6 +4053,14 @@
             "description": "Web property ID to retrieve the AdWords link for.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       },
@@ -3578,6 +4097,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "put": {
@@ -3612,6 +4138,13 @@
             "description": "Web property ID to retrieve the AdWords link for.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
           }
         ]
       }
@@ -3666,6 +4199,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "get": {
@@ -3706,6 +4246,14 @@
             "description": "Web property ID to retrieve the AdWords links for.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       }
@@ -3760,6 +4308,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
+          }
         ]
       },
       "patch": {
@@ -3788,6 +4344,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "put": {
@@ -3815,6 +4378,13 @@
             "description": "Web property ID",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
           }
         ]
       }
@@ -3862,6 +4432,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.edit"
+            ]
+          }
         ]
       },
       "get": {
@@ -3895,6 +4472,15 @@
             "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
           }
         ]
       }
@@ -3953,6 +4539,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.manage.users"
+            ]
+          }
         ]
       },
       "put": {
@@ -3987,6 +4580,13 @@
             "description": "Web property ID to update the account-user link for.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.manage.users"
+            ]
           }
         ]
       }
@@ -4041,6 +4641,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.manage.users"
+            ]
+          }
         ]
       },
       "get": {
@@ -4081,6 +4688,14 @@
             "description": "Web Property ID for the webProperty-user links to retrieve. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.manage.users",
+              "https://www.googleapis.com/auth/analytics.manage.users.readonly"
+            ]
           }
         ]
       }
@@ -4128,6 +4743,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
+          }
         ]
       }
     },
@@ -4165,7 +4789,14 @@
               "$ref": "#/definitions/AccountTicket"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/analytics.provision"
+            ]
+          }
+        ]
       }
     }
   },
@@ -7550,6 +8181,22 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/analytics": "View and manage your Google Analytics data",
+        "https://www.googleapis.com/auth/analytics.edit": "Edit Google Analytics management entities",
+        "https://www.googleapis.com/auth/analytics.manage.users": "Manage Google Analytics Account users by email address",
+        "https://www.googleapis.com/auth/analytics.manage.users.readonly": "View Google Analytics user permissions",
+        "https://www.googleapis.com/auth/analytics.provision": "Create a new Google Analytics account along with its default property and view",
+        "https://www.googleapis.com/auth/analytics.readonly": "View your Google Analytics data"
+      }
     }
   }
 }

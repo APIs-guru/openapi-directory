@@ -71,6 +71,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
         ]
       },
       "get": {
@@ -98,6 +106,14 @@
             "description": "Project ID of the requested dataset",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
           }
         ]
       },
@@ -127,6 +143,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
         ]
       },
       "put": {
@@ -154,6 +178,14 @@
             "description": "Project ID of the dataset being updated",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
           }
         ]
       }
@@ -201,6 +233,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
         ]
       },
       "get": {
@@ -239,6 +279,14 @@
             "description": "Project ID of the datasets to be listed",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
           }
         ]
       }
@@ -292,6 +340,14 @@
             "description": "Project ID of the requested job",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
           }
         ]
       }
@@ -370,6 +426,14 @@
             "description": "How long to wait for the query to complete, in milliseconds, before returning. Default is to return immediately. If the timeout passes before the job completes, the request will fail with a TIMEOUT error",
             "type": "integer"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
         ]
       }
     },
@@ -418,6 +482,17 @@
             "description": "Project ID of the project that will be billed for the job",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_only",
+              "https://www.googleapis.com/auth/devstorage.read_write"
+            ]
           }
         ]
       },
@@ -483,6 +558,14 @@
             },
             "collectionFormat": "multi"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
         ]
       }
     },
@@ -528,6 +611,14 @@
             "description": "Project ID of the project billed for the query",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
           }
         ]
       }
@@ -579,6 +670,14 @@
             "in": "query",
             "description": "Page token, returned by a previous call, to request the next page of results",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
           }
         ]
       }
@@ -639,6 +738,15 @@
             "description": "Table ID of the destination table.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/bigquery.insertdata",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
           }
         ]
       }
@@ -718,6 +826,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
         ]
       }
     },
@@ -775,6 +891,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
         ]
       },
       "get": {
@@ -809,6 +933,14 @@
             "description": "Table ID of the requested table",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
           }
         ]
       },
@@ -845,6 +977,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
         ]
       },
       "put": {
@@ -879,6 +1019,14 @@
             "description": "Table ID of the table to update",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
           }
         ]
       }
@@ -933,6 +1081,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
         ]
       },
       "get": {
@@ -972,6 +1128,14 @@
             "description": "Project ID of the tables to list",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
           }
         ]
       }
@@ -2234,6 +2398,22 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/bigquery": "View and manage your data in Google BigQuery",
+        "https://www.googleapis.com/auth/bigquery.insertdata": "Insert data into Google BigQuery",
+        "https://www.googleapis.com/auth/cloud-platform": "View and manage your data across Google Cloud Platform services",
+        "https://www.googleapis.com/auth/devstorage.full_control": "Manage your data and permissions in Google Cloud Storage",
+        "https://www.googleapis.com/auth/devstorage.read_only": "View your data in Google Cloud Storage",
+        "https://www.googleapis.com/auth/devstorage.read_write": "Manage your data in Google Cloud Storage"
+      }
     }
   }
 }

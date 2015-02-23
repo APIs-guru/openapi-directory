@@ -58,6 +58,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidpublisher"
+            ]
+          }
         ]
       },
       "get": {
@@ -78,6 +85,13 @@
             "description": "The ID of the achievement used by this method.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidpublisher"
+            ]
           }
         ]
       },
@@ -100,6 +114,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidpublisher"
+            ]
+          }
         ]
       },
       "put": {
@@ -120,6 +141,13 @@
             "description": "The ID of the achievement used by this method.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidpublisher"
+            ]
           }
         ]
       }
@@ -167,6 +195,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidpublisher"
+            ]
+          }
         ]
       },
       "get": {
@@ -201,6 +236,13 @@
             "in": "query",
             "description": "The token returned by the previous request.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidpublisher"
+            ]
           }
         ]
       }
@@ -330,6 +372,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidpublisher"
+            ]
+          }
         ]
       }
     },
@@ -373,6 +422,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidpublisher"
+            ]
+          }
         ]
       },
       "get": {
@@ -393,6 +449,13 @@
             "description": "The ID of the leaderboard.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidpublisher"
+            ]
           }
         ]
       },
@@ -415,6 +478,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidpublisher"
+            ]
+          }
         ]
       },
       "put": {
@@ -435,6 +505,13 @@
             "description": "The ID of the leaderboard.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidpublisher"
+            ]
           }
         ]
       }
@@ -482,6 +559,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidpublisher"
+            ]
+          }
         ]
       },
       "get": {
@@ -516,6 +600,13 @@
             "in": "query",
             "description": "The token returned by the previous request.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidpublisher"
+            ]
           }
         ]
       }
@@ -880,6 +971,17 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/androidpublisher": "View and manage your Google Play Android Developer account"
+      }
     }
   }
 }

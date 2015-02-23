@@ -78,6 +78,13 @@
             "default": "true",
             "type": "boolean"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       },
       "patch": {
@@ -119,6 +126,13 @@
             "description": "Whether to update the view date after successfully updating the file.",
             "default": "true",
             "type": "boolean"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive.file"
+            ]
           }
         ]
       },
@@ -165,6 +179,13 @@
             "default": "true",
             "type": "boolean"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       }
     },
@@ -205,6 +226,13 @@
         },
         "consumes": [
           "application/octet-stream"
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
         ]
       }
     }
@@ -411,6 +439,17 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/drive.file": "View and manage Google Drive files that you have opened or created with this app"
+      }
     }
   }
 }

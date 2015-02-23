@@ -61,6 +61,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
+          }
         ]
       }
     },
@@ -110,6 +117,13 @@
               "type": "string"
             },
             "collectionFormat": "multi"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
           }
         ]
       }
@@ -163,6 +177,13 @@
             "description": "Ad client to get.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
           }
         ]
       }
@@ -224,6 +245,13 @@
             "description": "A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
+          }
         ]
       }
     },
@@ -284,6 +312,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
+          }
         ]
       },
       "get": {
@@ -318,6 +353,13 @@
             "description": "Ad unit to get.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
           }
         ]
       }
@@ -389,6 +431,13 @@
             },
             "collectionFormat": "multi"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
+          }
         ]
       }
     },
@@ -442,6 +491,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
+          }
         ]
       },
       "get": {
@@ -490,6 +546,13 @@
             "description": "A continuation token, used to page through ad units. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
+          }
         ]
       },
       "patch": {
@@ -525,6 +588,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
+          }
         ]
       },
       "put": {
@@ -552,6 +622,13 @@
             "description": "Ad client which contains the ad unit.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
           }
         ]
       }
@@ -675,6 +752,13 @@
             "minimum": 0,
             "maximum": 5000
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
+          }
         ]
       }
     },
@@ -720,6 +804,13 @@
             "description": "Ad client to get.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
           }
         ]
       }
@@ -773,6 +864,13 @@
             "in": "query",
             "description": "A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
           }
         ]
       }
@@ -850,6 +948,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
+          }
         ]
       }
     },
@@ -895,6 +1000,13 @@
             "description": "The token returned to the association callback URL.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
           }
         ]
       }
@@ -949,6 +1061,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
+          }
         ]
       },
       "get": {
@@ -976,6 +1095,13 @@
             "description": "Custom channel to get.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
           }
         ]
       }
@@ -1023,6 +1149,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
+          }
         ]
       },
       "get": {
@@ -1058,6 +1191,13 @@
             "description": "A continuation token, used to page through custom channels. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
+          }
         ]
       },
       "patch": {
@@ -1086,6 +1226,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
+          }
         ]
       },
       "put": {
@@ -1106,6 +1253,13 @@
             "description": "Ad client in which the custom channel will be updated.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
           }
         ]
       }
@@ -1222,6 +1376,13 @@
             "minimum": 0,
             "maximum": 5000
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
+          }
         ]
       }
     },
@@ -1275,6 +1436,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
+          }
         ]
       }
     },
@@ -1321,6 +1489,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
+          }
         ]
       },
       "get": {
@@ -1355,6 +1530,13 @@
             "in": "query",
             "description": "A continuation token, used to page through URL channels. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsensehost"
+            ]
           }
         ]
       }
@@ -1897,6 +2079,17 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/adsensehost": "View and manage your AdSense host data and associated accounts"
+      }
     }
   }
 }

@@ -61,6 +61,13 @@
             "required": true,
             "type": "integer"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
         ]
       },
       "patch": {
@@ -82,6 +89,13 @@
             "required": true,
             "type": "integer"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
         ]
       },
       "put": {
@@ -102,6 +116,13 @@
             "description": "The account id",
             "required": true,
             "type": "integer"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
           }
         ]
       }
@@ -140,7 +161,14 @@
               "$ref": "#/definitions/AccountsList"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ]
       }
     },
     "/creatives/{accountId}/{buyerCreativeId}": {
@@ -193,6 +221,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
         ]
       }
     },
@@ -230,7 +265,14 @@
               "$ref": "#/definitions/Creative"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ]
       },
       "get": {
         "description": "Retrieves a list of the authenticated user's active creatives. A creative will be available 30-40 minutes after submission.",
@@ -267,6 +309,13 @@
               "approved",
               "disapproved",
               "not_checked"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
         ]
@@ -603,6 +652,17 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/adexchange.buyer": "Manage your Ad Exchange buyer account configuration"
+      }
     }
   }
 }

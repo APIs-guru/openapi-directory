@@ -68,6 +68,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
+            ]
+          }
         ]
       },
       "get": {
@@ -123,6 +131,15 @@
             "in": "query",
             "description": "Sorting order direction: 'ascending' or 'descending'.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.clouddns.readonly",
+              "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
+            ]
           }
         ]
       }
@@ -184,6 +201,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.clouddns.readonly",
+              "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
+            ]
+          }
         ]
       }
     },
@@ -230,6 +256,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
+            ]
+          }
         ]
       },
       "get": {
@@ -262,6 +296,15 @@
             "description": "Identifies the project addressed by this request.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.clouddns.readonly",
+              "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
+            ]
           }
         ]
       }
@@ -313,6 +356,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
+            ]
+          }
         ]
       },
       "get": {
@@ -340,6 +391,15 @@
             "description": "Identifies the project addressed by this request.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.clouddns.readonly",
+              "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
+            ]
           }
         ]
       }
@@ -386,6 +446,15 @@
             "description": "Identifies the project addressed by this request.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.clouddns.readonly",
+              "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
+            ]
           }
         ]
       }
@@ -463,6 +532,15 @@
             "in": "query",
             "description": "Restricts the list to return only records of this type. If present, the \"name\" parameter must also be present.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/ndev.clouddns.readonly",
+              "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
+            ]
           }
         ]
       }
@@ -765,6 +843,19 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/cloud-platform": "View and manage your data across Google Cloud Platform services",
+        "https://www.googleapis.com/auth/ndev.clouddns.readonly": "View your DNS records hosted by Google Cloud DNS",
+        "https://www.googleapis.com/auth/ndev.clouddns.readwrite": "View and manage your DNS records hosted by Google Cloud DNS"
+      }
     }
   }
 }

@@ -65,6 +65,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
+          }
         ]
       },
       "get": {
@@ -92,6 +99,14 @@
             "description": "Table to which the column belongs.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables",
+              "https://www.googleapis.com/auth/fusiontables.readonly"
+            ]
           }
         ]
       },
@@ -121,6 +136,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
+          }
         ]
       },
       "put": {
@@ -148,6 +170,13 @@
             "description": "Table for which the column is being updated.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
           }
         ]
       }
@@ -195,6 +224,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
+          }
         ]
       },
       "get": {
@@ -228,6 +264,14 @@
             "description": "Table whose columns are being listed.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables",
+              "https://www.googleapis.com/auth/fusiontables.readonly"
+            ]
           }
         ]
       }
@@ -287,6 +331,14 @@
             "description": "Should typed values be returned in the (JSON) response -- numbers for numeric values and parsed geometries for KML values? Default is true.",
             "type": "boolean"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables",
+              "https://www.googleapis.com/auth/fusiontables.readonly"
+            ]
+          }
         ]
       },
       "get": {
@@ -319,6 +371,14 @@
             "in": "query",
             "description": "Should typed values be returned in the (JSON) response -- numbers for numeric values and parsed geometries for KML values? Default is true.",
             "type": "boolean"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables",
+              "https://www.googleapis.com/auth/fusiontables.readonly"
+            ]
           }
         ]
       }
@@ -370,6 +430,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
+          }
         ]
       },
       "get": {
@@ -397,6 +464,14 @@
             "description": "Table to which the requested style belongs",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables",
+              "https://www.googleapis.com/auth/fusiontables.readonly"
+            ]
           }
         ]
       },
@@ -426,6 +501,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
+          }
         ]
       },
       "put": {
@@ -453,6 +535,13 @@
             "description": "Table whose style is being updated.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
           }
         ]
       }
@@ -500,6 +589,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
+          }
         ]
       },
       "get": {
@@ -533,6 +629,14 @@
             "description": "Table whose styles are being listed",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables",
+              "https://www.googleapis.com/auth/fusiontables.readonly"
+            ]
           }
         ]
       }
@@ -586,6 +690,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables",
+              "https://www.googleapis.com/auth/fusiontables.readonly"
+            ]
+          }
         ]
       }
     },
@@ -629,6 +741,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
+          }
         ]
       },
       "get": {
@@ -649,6 +768,14 @@
             "description": "Identifier(ID) for the table being requested.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables",
+              "https://www.googleapis.com/auth/fusiontables.readonly"
+            ]
           }
         ]
       },
@@ -677,6 +804,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
+          }
         ]
       },
       "put": {
@@ -703,6 +837,13 @@
             "description": "ID of the table that is being updated.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
           }
         ]
       }
@@ -783,6 +924,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
+          }
         ]
       }
     },
@@ -844,6 +992,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
+          }
         ]
       }
     },
@@ -881,7 +1036,14 @@
               "$ref": "#/definitions/Table"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
+          }
+        ]
       },
       "get": {
         "description": "Retrieves a list of tables a user owns.",
@@ -907,6 +1069,14 @@
             "in": "query",
             "description": "Continuation token specifying which result page to return. Optional.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables",
+              "https://www.googleapis.com/auth/fusiontables.readonly"
+            ]
           }
         ]
       }
@@ -987,6 +1157,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
+          }
         ]
       }
     },
@@ -1036,6 +1213,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
+          }
         ]
       },
       "get": {
@@ -1062,6 +1246,14 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables",
+              "https://www.googleapis.com/auth/fusiontables.readonly"
+            ]
           }
         ]
       }
@@ -1128,6 +1320,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables",
+              "https://www.googleapis.com/auth/fusiontables.readonly"
+            ]
+          }
         ]
       }
     },
@@ -1178,6 +1378,13 @@
             "required": true,
             "type": "integer"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
+          }
         ]
       },
       "get": {
@@ -1205,6 +1412,14 @@
             "description": "Identifier for the template that is being requested",
             "required": true,
             "type": "integer"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables",
+              "https://www.googleapis.com/auth/fusiontables.readonly"
+            ]
           }
         ]
       },
@@ -1234,6 +1449,13 @@
             "required": true,
             "type": "integer"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
+          }
         ]
       },
       "put": {
@@ -1261,6 +1483,13 @@
             "description": "Identifier for the template that is being updated",
             "required": true,
             "type": "integer"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
           }
         ]
       }
@@ -1308,6 +1537,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
+          }
         ]
       },
       "get": {
@@ -1341,6 +1577,14 @@
             "description": "Identifier for the table whose templates are being requested",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables",
+              "https://www.googleapis.com/auth/fusiontables.readonly"
+            ]
           }
         ]
       }
@@ -2112,6 +2356,18 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/fusiontables": "Manage your Fusion Tables",
+        "https://www.googleapis.com/auth/fusiontables.readonly": "View your Fusion Tables"
+      }
     }
   }
 }

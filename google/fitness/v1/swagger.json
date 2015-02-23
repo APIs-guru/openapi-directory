@@ -61,6 +61,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fitness.activity.write",
+              "https://www.googleapis.com/auth/fitness.body.write",
+              "https://www.googleapis.com/auth/fitness.location.write"
+            ]
+          }
         ]
       },
       "get": {
@@ -91,6 +100,18 @@
             "description": "List data sources for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fitness.activity.read",
+              "https://www.googleapis.com/auth/fitness.activity.write",
+              "https://www.googleapis.com/auth/fitness.body.read",
+              "https://www.googleapis.com/auth/fitness.body.write",
+              "https://www.googleapis.com/auth/fitness.location.read",
+              "https://www.googleapis.com/auth/fitness.location.write"
+            ]
           }
         ]
       }
@@ -145,6 +166,18 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fitness.activity.read",
+              "https://www.googleapis.com/auth/fitness.activity.write",
+              "https://www.googleapis.com/auth/fitness.body.read",
+              "https://www.googleapis.com/auth/fitness.body.write",
+              "https://www.googleapis.com/auth/fitness.location.read",
+              "https://www.googleapis.com/auth/fitness.location.write"
+            ]
+          }
         ]
       },
       "patch": {
@@ -173,6 +206,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fitness.activity.write",
+              "https://www.googleapis.com/auth/fitness.body.write",
+              "https://www.googleapis.com/auth/fitness.location.write"
+            ]
+          }
         ]
       },
       "put": {
@@ -200,6 +242,15 @@
             "description": "Update the data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fitness.activity.write",
+              "https://www.googleapis.com/auth/fitness.body.write",
+              "https://www.googleapis.com/auth/fitness.location.write"
+            ]
           }
         ]
       }
@@ -270,6 +321,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fitness.activity.write",
+              "https://www.googleapis.com/auth/fitness.body.write",
+              "https://www.googleapis.com/auth/fitness.location.write"
+            ]
+          }
         ]
       },
       "get": {
@@ -317,6 +377,18 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fitness.activity.read",
+              "https://www.googleapis.com/auth/fitness.activity.write",
+              "https://www.googleapis.com/auth/fitness.body.read",
+              "https://www.googleapis.com/auth/fitness.body.write",
+              "https://www.googleapis.com/auth/fitness.location.read",
+              "https://www.googleapis.com/auth/fitness.location.write"
+            ]
+          }
         ]
       },
       "patch": {
@@ -357,6 +429,15 @@
             "description": "Patch a dataset for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fitness.activity.write",
+              "https://www.googleapis.com/auth/fitness.body.write",
+              "https://www.googleapis.com/auth/fitness.location.write"
+            ]
           }
         ]
       }
@@ -414,6 +495,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fitness.activity.write"
+            ]
+          }
         ]
       },
       "put": {
@@ -447,6 +535,13 @@
             "description": "Create sessions for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fitness.activity.write"
+            ]
           }
         ]
       }
@@ -518,6 +613,18 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fitness.activity.read",
+              "https://www.googleapis.com/auth/fitness.activity.write",
+              "https://www.googleapis.com/auth/fitness.body.read",
+              "https://www.googleapis.com/auth/fitness.body.write",
+              "https://www.googleapis.com/auth/fitness.location.read",
+              "https://www.googleapis.com/auth/fitness.location.write"
+            ]
+          }
         ]
       }
     }
@@ -545,7 +652,7 @@
         },
         "packageName": {
           "type": "string",
-          "description": "Package name for this application. This is used as a unique identifier when creaed by Android applications, but cannot be specified by REST clients. REST clients will have their developer project number reflected into the Data Source data stream IDs, instead of the packageName."
+          "description": "Package name for this application. This is used as a unique identifier when created by Android applications, but cannot be specified by REST clients. REST clients will have their developer project number reflected into the Data Source data stream IDs, instead of the packageName."
         },
         "version": {
           "type": "string",
@@ -754,6 +861,9 @@
               "fitness.users.dataSources.update"
             ]
           }
+        },
+        "optional": {
+          "type": "boolean"
         }
       }
     },
@@ -1057,6 +1167,22 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/fitness.activity.read": "View your activity information in Google Fit",
+        "https://www.googleapis.com/auth/fitness.activity.write": "View and store your activity information in Google Fit",
+        "https://www.googleapis.com/auth/fitness.body.read": "View body sensor information in Google Fit",
+        "https://www.googleapis.com/auth/fitness.body.write": "View and store body sensor data in Google Fit",
+        "https://www.googleapis.com/auth/fitness.location.read": "View your stored location data in Google Fit",
+        "https://www.googleapis.com/auth/fitness.location.write": "View and store your location data in Google Fit"
+      }
     }
   }
 }

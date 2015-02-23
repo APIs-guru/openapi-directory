@@ -61,6 +61,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/datastore",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
         ]
       }
     },
@@ -106,6 +115,15 @@
             "description": "Identifies the dataset.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/datastore",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
           }
         ]
       }
@@ -153,6 +171,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/datastore",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
         ]
       }
     },
@@ -198,6 +225,15 @@
             "description": "Identifies the dataset.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/datastore",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
           }
         ]
       }
@@ -245,6 +281,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/datastore",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
         ]
       }
     },
@@ -291,6 +336,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/datastore",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
         ]
       }
     },
@@ -336,6 +390,15 @@
             "description": "Identifies the dataset.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/datastore",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
           }
         ]
       }
@@ -1089,6 +1152,19 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/cloud-platform": "View and manage your data across Google Cloud Platform services",
+        "https://www.googleapis.com/auth/datastore": "View and manage your Google Cloud Datastore data",
+        "https://www.googleapis.com/auth/userinfo.email": "View your email address"
+      }
     }
   }
 }

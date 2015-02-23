@@ -118,6 +118,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
+          }
         ]
       },
       "get": {
@@ -138,6 +145,13 @@
             "description": "The ID of the contact.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
           }
         ]
       },
@@ -160,6 +174,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
+          }
         ]
       },
       "put": {
@@ -180,6 +201,13 @@
             "description": "The ID of the contact.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
           }
         ]
       }
@@ -218,7 +246,14 @@
               "$ref": "#/definitions/Contact"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
+          }
+        ]
       },
       "get": {
         "description": "Retrieves a list of contacts for the authenticated user.",
@@ -230,7 +265,14 @@
               "$ref": "#/definitions/ContactsListResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
+          }
+        ]
       }
     },
     "/locations/{id}": {
@@ -276,6 +318,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.location",
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
+          }
         ]
       }
     },
@@ -313,7 +363,15 @@
               "$ref": "#/definitions/LocationsListResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.location",
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
+          }
+        ]
       }
     },
     "/settings/{id}": {
@@ -359,6 +417,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
+          }
         ]
       }
     },
@@ -402,6 +467,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
+          }
         ]
       },
       "put": {
@@ -422,6 +494,13 @@
             "description": "The ID of the subscription.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
           }
         ]
       }
@@ -460,7 +539,14 @@
               "$ref": "#/definitions/Subscription"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
+          }
+        ]
       },
       "get": {
         "description": "Retrieves a list of subscriptions for the authenticated user and service.",
@@ -472,7 +558,14 @@
               "$ref": "#/definitions/SubscriptionsListResponse"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
+          }
+        ]
       }
     },
     "/timeline/{id}": {
@@ -515,6 +608,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.location",
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
+          }
         ]
       },
       "get": {
@@ -536,6 +637,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.location",
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
+          }
         ]
       },
       "patch": {
@@ -556,6 +665,14 @@
             "description": "The ID of the timeline item.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.location",
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
           }
         ]
       },
@@ -895,6 +1012,14 @@
             "description": "The ID of the timeline item.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.location",
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
           }
         ]
       }
@@ -1251,6 +1376,14 @@
           "video/x-msvideo",
           "video/x-sgi-movie",
           "video/x-smv"
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.location",
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
+          }
         ]
       },
       "get": {
@@ -1311,6 +1444,14 @@
             "description": "If provided, only items with the given sourceItemId will be returned.",
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.location",
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
+          }
         ]
       }
     },
@@ -1361,6 +1502,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
+          }
         ]
       },
       "get": {
@@ -1388,6 +1536,13 @@
             "description": "The ID of the timeline item the attachment belongs to.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
           }
         ]
       }
@@ -1753,6 +1908,13 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
+          }
         ]
       },
       "get": {
@@ -1773,6 +1935,13 @@
             "description": "The ID of the timeline item whose attachments should be listed.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/glass.timeline"
+            ]
           }
         ]
       }
@@ -2472,6 +2641,18 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/glass.location": "View your location",
+        "https://www.googleapis.com/auth/glass.timeline": "View and manage your Glass timeline"
+      }
     }
   }
 }

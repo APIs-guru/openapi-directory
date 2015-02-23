@@ -61,6 +61,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me",
+              "https://www.googleapis.com/auth/plus.stream.read"
+            ]
+          }
         ]
       }
     },
@@ -112,6 +121,15 @@
             "description": "The ID of the user to create the activity on behalf of. Its value should be \"me\", to indicate the authenticated user.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me",
+              "https://www.googleapis.com/auth/plus.stream.write"
+            ]
           }
         ]
       }
@@ -184,6 +202,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me",
+              "https://www.googleapis.com/auth/plus.stream.read"
+            ]
+          }
         ]
       }
     },
@@ -244,6 +271,15 @@
             "description": "The ID of the user to get audiences for. The special value \"me\" can be used to indicate the authenticated user.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.circles.read",
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me"
+            ]
           }
         ]
       }
@@ -311,6 +347,14 @@
             },
             "collectionFormat": "multi"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.circles.write",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       },
       "delete": {
@@ -349,6 +393,14 @@
             },
             "collectionFormat": "multi"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.circles.write",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       },
       "get": {
@@ -384,6 +436,14 @@
             "in": "query",
             "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.circles.read",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -431,6 +491,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.circles.read",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       },
       "patch": {
@@ -452,6 +520,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.circles.write",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
         ]
       },
       "delete": {
@@ -469,6 +545,14 @@
             "description": "The ID of the circle to delete.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.circles.write",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       },
@@ -490,6 +574,14 @@
             "description": "The ID of the circle to update.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.circles.write",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
           }
         ]
       }
@@ -537,6 +629,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.circles.write",
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me"
+            ]
+          }
         ]
       },
       "get": {
@@ -572,6 +673,15 @@
             "description": "The ID of the user to get circles for. The special value \"me\" can be used to indicate the authenticated user.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.circles.read",
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me"
+            ]
           }
         ]
       }
@@ -619,6 +729,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.stream.read"
+            ]
+          }
         ]
       }
     },
@@ -665,6 +783,14 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.stream.write"
+            ]
+          }
         ]
       },
       "get": {
@@ -710,6 +836,14 @@
             "enum": [
               "ascending",
               "descending"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.stream.read"
             ]
           }
         ]
@@ -924,6 +1058,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me",
+              "https://www.googleapis.com/auth/plus.media.upload"
+            ]
+          }
         ]
       }
     },
@@ -969,6 +1112,17 @@
             "description": "The ID of the person to get the profile for. The special value \"me\" can be used to indicate the authenticated user.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me",
+              "https://www.googleapis.com/auth/plus.profiles.read",
+              "https://www.googleapis.com/auth/userinfo.email",
+              "https://www.googleapis.com/auth/userinfo.profile"
+            ]
           }
         ]
       }
@@ -1051,6 +1205,15 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.circles.read",
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.me"
+            ]
+          }
         ]
       }
     },
@@ -1123,6 +1286,14 @@
             "in": "query",
             "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.",
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/plus.login",
+              "https://www.googleapis.com/auth/plus.stream.read"
+            ]
           }
         ]
       }
@@ -2478,6 +2649,26 @@
       "in": "query",
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/plus.circles.read": "View your circles and the people and pages in them",
+        "https://www.googleapis.com/auth/plus.circles.write": "Manage your circles and add people and pages. People and pages you add to your circles will be notified. Others may see this information publicly. People you add to circles can use Hangouts with you.",
+        "https://www.googleapis.com/auth/plus.login": "Know your basic profile info and list of people in your circles.",
+        "https://www.googleapis.com/auth/plus.me": "Know who you are on Google",
+        "https://www.googleapis.com/auth/plus.media.upload": "Send your photos and videos to Google+",
+        "https://www.googleapis.com/auth/plus.profiles.read": "View your own Google+ profile and profiles visible to you",
+        "https://www.googleapis.com/auth/plus.stream.read": "View your Google+ posts, comments, and stream",
+        "https://www.googleapis.com/auth/plus.stream.write": "Manage your Google+ posts, comments, and stream",
+        "https://www.googleapis.com/auth/userinfo.email": "View your email address",
+        "https://www.googleapis.com/auth/userinfo.profile": "View your basic profile info"
+      }
     }
   }
 }
