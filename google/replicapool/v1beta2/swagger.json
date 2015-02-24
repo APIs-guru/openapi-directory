@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/abandonInstances": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "post": {
         "description": "Removes the specified instances from the managed instance group, and from any target pools of which they were members, without deleting the instances.",
         "operationId": "replicapool.instanceGroupManagers.abandonInstances",
@@ -83,10 +60,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instanceGroupManagers"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -109,7 +87,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}": {
       "delete": {
         "description": "Deletes the instance group manager and all instances contained within. If you'd like to delete the manager without deleting the instances, you must first abandon the instances to remove them from the group.",
         "operationId": "replicapool.instanceGroupManagers.delete",
@@ -151,6 +131,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instanceGroupManagers"
         ]
       },
       "get": {
@@ -195,10 +178,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "instanceGroupManagers"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/deleteInstances": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -221,7 +205,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/deleteInstances": {
       "post": {
         "description": "Deletes the specified instances. The instances are removed from the instance group and any target pools of which they are a member, then deleted. The targetSize of the instance group manager is reduced by the number of instances deleted.",
         "operationId": "replicapool.instanceGroupManagers.deleteInstances",
@@ -263,10 +249,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instanceGroupManagers"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instanceGroupManagers": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -289,7 +276,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instanceGroupManagers": {
       "post": {
         "description": "Creates an instance group manager, as well as the instance group and the specified number of instances.",
         "operationId": "replicapool.instanceGroupManagers.insert",
@@ -332,6 +321,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instanceGroupManagers"
         ]
       },
       "get": {
@@ -390,10 +382,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "instanceGroupManagers"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/recreateInstances": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -416,7 +409,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/recreateInstances": {
       "post": {
         "description": "Recreates the specified instances. The instances are deleted, then recreated using the instance group manager's current instance template.",
         "operationId": "replicapool.instanceGroupManagers.recreateInstances",
@@ -458,10 +453,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instanceGroupManagers"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resize": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -484,7 +480,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/resize": {
       "post": {
         "description": "Resizes the managed instance group up or down. If resized up, new instances are created using the current instance template. If resized down, instances are removed in the order outlined in Resizing a managed instance group.",
         "operationId": "replicapool.instanceGroupManagers.resize",
@@ -534,10 +532,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instanceGroupManagers"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/setInstanceTemplate": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -560,7 +559,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/setInstanceTemplate": {
       "post": {
         "description": "Sets the instance template to use when creating new instances in this group. Existing instances are not affected.",
         "operationId": "replicapool.instanceGroupManagers.setInstanceTemplate",
@@ -602,10 +603,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instanceGroupManagers"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/setTargetPools": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -628,7 +630,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instanceGroupManagers/{instanceGroupManager}/setTargetPools": {
       "post": {
         "description": "Modifies the target pools to which all new instances in this group are assigned. Existing instances in the group are not affected.",
         "operationId": "replicapool.instanceGroupManagers.setTargetPools",
@@ -670,10 +674,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instanceGroupManagers"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/operations/{operation}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -696,7 +701,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/operations/{operation}": {
       "get": {
         "description": "Retrieves the specified zone-specific operation resource.",
         "operationId": "replicapool.zoneOperations.get",
@@ -738,10 +745,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "zoneOperations"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/operations": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -764,7 +772,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/operations": {
       "get": {
         "description": "Retrieves the list of operation resources contained within the specified zone.",
         "operationId": "replicapool.zoneOperations.list",
@@ -820,8 +830,34 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "zoneOperations"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

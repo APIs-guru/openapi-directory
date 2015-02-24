@@ -19,29 +19,6 @@
   },
   "paths": {
     "/projects/{project}/instances/{instance}/backupRuns/{backupConfiguration}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Retrieves information about a specified backup run for a Cloud SQL instance.",
         "operationId": "sql.backupRuns.get",
@@ -90,10 +67,11 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "backupRuns"
         ]
-      }
-    },
-    "/projects/{project}/instances/{instance}/backupRuns": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -116,7 +94,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{project}/instances/{instance}/backupRuns": {
       "get": {
         "description": "Lists all backup runs associated with a Cloud SQL instance.",
         "operationId": "sql.backupRuns.list",
@@ -170,10 +150,11 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "backupRuns"
         ]
-      }
-    },
-    "/flags": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -196,7 +177,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/flags": {
       "get": {
         "description": "Lists all database flags that can be set for Google Cloud SQL instances.",
         "operationId": "sql.flags.list",
@@ -215,10 +198,11 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "flags"
         ]
-      }
-    },
-    "/projects/{project}/instances/clone": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -241,7 +225,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{project}/instances/clone": {
       "post": {
         "description": "Creates a Cloud SQL instance as a clone of a source instance.",
         "operationId": "sql.instances.clone",
@@ -269,10 +255,11 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/projects/{project}/instances/{instance}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -295,7 +282,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{project}/instances/{instance}": {
       "delete": {
         "description": "Deletes a Cloud SQL instance.",
         "operationId": "sql.instances.delete",
@@ -330,6 +319,9 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
       },
       "get": {
@@ -366,6 +358,9 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
       },
       "patch": {
@@ -402,6 +397,9 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
       },
       "put": {
@@ -438,10 +436,11 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/projects/{project}/instances/{instance}/export": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -464,7 +463,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{project}/instances/{instance}/export": {
       "post": {
         "description": "Exports data from a Cloud SQL instance to a Google Cloud Storage bucket as a MySQL dump file.",
         "operationId": "sql.instances.export",
@@ -498,10 +499,11 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/projects/{project}/instances/{instance}/import": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -524,7 +526,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{project}/instances/{instance}/import": {
       "post": {
         "description": "Imports data into a Cloud SQL instance from a MySQL dump file stored in a Google Cloud Storage bucket.",
         "operationId": "sql.instances.import",
@@ -558,10 +562,11 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/projects/{project}/instances": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -584,7 +589,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{project}/instances": {
       "post": {
         "description": "Creates a new Cloud SQL instance.",
         "operationId": "sql.instances.insert",
@@ -612,6 +619,9 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
       },
       "get": {
@@ -653,10 +663,11 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/projects/{project}/instances/{instance}/promoteReplica": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -679,7 +690,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{project}/instances/{instance}/promoteReplica": {
       "post": {
         "description": "Promotes the read replica instance to be a stand-alone Cloud SQL instance.",
         "operationId": "sql.instances.promoteReplica",
@@ -714,10 +727,11 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/projects/{project}/instances/{instance}/resetSslConfig": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -740,7 +754,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{project}/instances/{instance}/resetSslConfig": {
       "post": {
         "description": "Deletes all client certificates and generates a new server SSL certificate for a Cloud SQL instance.",
         "operationId": "sql.instances.resetSslConfig",
@@ -775,10 +791,11 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/projects/{project}/instances/{instance}/restart": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -801,7 +818,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{project}/instances/{instance}/restart": {
       "post": {
         "description": "Restarts a Cloud SQL instance.",
         "operationId": "sql.instances.restart",
@@ -836,10 +855,11 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/projects/{project}/instances/{instance}/restoreBackup": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -862,7 +882,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{project}/instances/{instance}/restoreBackup": {
       "post": {
         "description": "Restores a backup of a Cloud SQL instance.",
         "operationId": "sql.instances.restoreBackup",
@@ -911,10 +933,11 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/projects/{project}/instances/{instance}/setRootPassword": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -937,7 +960,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{project}/instances/{instance}/setRootPassword": {
       "post": {
         "description": "Sets the password for the root user of the specified Cloud SQL instance.",
         "operationId": "sql.instances.setRootPassword",
@@ -972,10 +997,11 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/projects/{project}/instances/{instance}/operations/{operation}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -998,7 +1024,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{project}/instances/{instance}/operations/{operation}": {
       "get": {
         "description": "Retrieves information about a specific operation that was performed on a Cloud SQL instance.",
         "operationId": "sql.operations.get",
@@ -1040,10 +1068,11 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "operations"
         ]
-      }
-    },
-    "/projects/{project}/instances/{instance}/operations": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1066,7 +1095,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{project}/instances/{instance}/operations": {
       "get": {
         "description": "Lists all operations that have been performed on a Cloud SQL instance.",
         "operationId": "sql.operations.list",
@@ -1113,10 +1144,11 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "operations"
         ]
-      }
-    },
-    "/projects/{project}/instances/{instance}/sslCerts/{sha1Fingerprint}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1139,7 +1171,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{project}/instances/{instance}/sslCerts/{sha1Fingerprint}": {
       "delete": {
         "description": "Deletes an SSL certificate from a Cloud SQL instance.",
         "operationId": "sql.sslCerts.delete",
@@ -1181,6 +1215,9 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "sslCerts"
         ]
       },
       "get": {
@@ -1224,10 +1261,11 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "sslCerts"
         ]
-      }
-    },
-    "/projects/{project}/instances/{instance}/sslCerts": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1250,7 +1288,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{project}/instances/{instance}/sslCerts": {
       "post": {
         "description": "Creates an SSL certificate and returns the certificate, the associated private key, and the server certificate authority.",
         "operationId": "sql.sslCerts.insert",
@@ -1285,6 +1325,9 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "sslCerts"
         ]
       },
       "get": {
@@ -1321,10 +1364,11 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "sslCerts"
         ]
-      }
-    },
-    "/projects/{project}/tiers": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1347,7 +1391,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{project}/tiers": {
       "get": {
         "description": "Lists service tiers that can be used to create Google Cloud SQL instances.",
         "operationId": "sql.tiers.list",
@@ -1375,8 +1421,34 @@
               "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
+        ],
+        "tags": [
+          "tiers"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

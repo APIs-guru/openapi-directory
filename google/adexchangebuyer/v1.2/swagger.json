@@ -19,29 +19,6 @@
   },
   "paths": {
     "/accounts/{id}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Gets one account by ID.",
         "operationId": "adexchangebuyer.accounts.get",
@@ -68,6 +45,9 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
       },
       "patch": {
@@ -96,6 +76,9 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
       },
       "put": {
@@ -124,10 +107,11 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
-      }
-    },
-    "/accounts": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -150,7 +134,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts": {
       "get": {
         "description": "Retrieves the authenticated user's list of accounts.",
         "operationId": "adexchangebuyer.accounts.list",
@@ -168,10 +154,11 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
-      }
-    },
-    "/creatives/{accountId}/{buyerCreativeId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -194,7 +181,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/creatives/{accountId}/{buyerCreativeId}": {
       "get": {
         "description": "Gets the status for a single creative. A creative will be available 30-40 minutes after submission.",
         "operationId": "adexchangebuyer.creatives.get",
@@ -228,10 +217,11 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "creatives"
         ]
-      }
-    },
-    "/creatives": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -254,7 +244,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/creatives": {
       "post": {
         "description": "Submit a new creative.",
         "operationId": "adexchangebuyer.creatives.insert",
@@ -272,6 +264,9 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "creatives"
         ]
       },
       "get": {
@@ -318,8 +313,34 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "creatives"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

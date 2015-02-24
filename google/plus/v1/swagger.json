@@ -19,29 +19,6 @@
   },
   "paths": {
     "/activities/{activityId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Get an activity.",
         "operationId": "plus.activities.get",
@@ -69,10 +46,11 @@
               "https://www.googleapis.com/auth/plus.me"
             ]
           }
+        ],
+        "tags": [
+          "activities"
         ]
-      }
-    },
-    "/people/{userId}/activities/{collection}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -95,7 +73,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/people/{userId}/activities/{collection}": {
       "get": {
         "description": "List all of the activities in the specified collection for a particular user.",
         "operationId": "plus.activities.list",
@@ -148,10 +128,11 @@
               "https://www.googleapis.com/auth/plus.me"
             ]
           }
+        ],
+        "tags": [
+          "activities"
         ]
-      }
-    },
-    "/activities": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -174,7 +155,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/activities": {
       "get": {
         "description": "Search public activities.",
         "operationId": "plus.activities.search",
@@ -235,10 +218,11 @@
               "https://www.googleapis.com/auth/plus.me"
             ]
           }
+        ],
+        "tags": [
+          "activities"
         ]
-      }
-    },
-    "/comments/{commentId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -261,7 +245,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/comments/{commentId}": {
       "get": {
         "description": "Get a comment.",
         "operationId": "plus.comments.get",
@@ -289,10 +275,11 @@
               "https://www.googleapis.com/auth/plus.me"
             ]
           }
+        ],
+        "tags": [
+          "comments"
         ]
-      }
-    },
-    "/activities/{activityId}/comments": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -315,7 +302,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/activities/{activityId}/comments": {
       "get": {
         "description": "List all of the comments for an activity.",
         "operationId": "plus.comments.list",
@@ -369,10 +358,11 @@
               "https://www.googleapis.com/auth/plus.me"
             ]
           }
+        ],
+        "tags": [
+          "comments"
         ]
-      }
-    },
-    "/people/{userId}/moments/{collection}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -395,7 +385,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/people/{userId}/moments/{collection}": {
       "post": {
         "description": "Record a moment representing a user's action such as making a purchase or commenting on a blog.",
         "operationId": "plus.moments.insert",
@@ -439,6 +431,9 @@
               "https://www.googleapis.com/auth/plus.me"
             ]
           }
+        ],
+        "tags": [
+          "moments"
         ]
       },
       "get": {
@@ -505,10 +500,11 @@
               "https://www.googleapis.com/auth/plus.me"
             ]
           }
+        ],
+        "tags": [
+          "moments"
         ]
-      }
-    },
-    "/moments/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -531,7 +527,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/moments/{id}": {
       "delete": {
         "description": "Delete a moment.",
         "operationId": "plus.moments.remove",
@@ -555,10 +553,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "moments"
         ]
-      }
-    },
-    "/people/{userId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -581,7 +580,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/people/{userId}": {
       "get": {
         "description": "Get a person's profile. If your app uses scope https://www.googleapis.com/auth/plus.login, this method is guaranteed to return ageRange and language.",
         "operationId": "plus.people.get",
@@ -611,10 +612,11 @@
               "https://www.googleapis.com/auth/userinfo.profile"
             ]
           }
+        ],
+        "tags": [
+          "people"
         ]
-      }
-    },
-    "/people/{userId}/people/{collection}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -637,7 +639,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/people/{userId}/people/{collection}": {
       "get": {
         "description": "List all of the people in the specified collection.",
         "operationId": "plus.people.list",
@@ -701,10 +705,11 @@
               "https://www.googleapis.com/auth/plus.me"
             ]
           }
+        ],
+        "tags": [
+          "people"
         ]
-      }
-    },
-    "/activities/{activityId}/people/{collection}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -727,7 +732,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/activities/{activityId}/people/{collection}": {
       "get": {
         "description": "List all of the people in the specified collection for a particular activity.",
         "operationId": "plus.people.listByActivity",
@@ -781,10 +788,11 @@
               "https://www.googleapis.com/auth/plus.me"
             ]
           }
+        ],
+        "tags": [
+          "people"
         ]
-      }
-    },
-    "/people": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -807,7 +815,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/people": {
       "get": {
         "description": "Search all public profiles.",
         "operationId": "plus.people.search",
@@ -857,8 +867,34 @@
               "https://www.googleapis.com/auth/plus.me"
             ]
           }
+        ],
+        "tags": [
+          "people"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

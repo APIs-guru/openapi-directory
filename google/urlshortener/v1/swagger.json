@@ -19,29 +19,6 @@
   },
   "paths": {
     "/url": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Expands a short URL or gets creation time and analytics.",
         "operationId": "urlshortener.url.get",
@@ -72,6 +49,9 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "tags": [
+          "url"
         ]
       },
       "post": {
@@ -91,10 +71,11 @@
               "https://www.googleapis.com/auth/urlshortener"
             ]
           }
+        ],
+        "tags": [
+          "url"
         ]
-      }
-    },
-    "/url/history": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -117,7 +98,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/url/history": {
       "get": {
         "description": "Retrieves a list of URLs shortened by a user.",
         "operationId": "urlshortener.url.list",
@@ -153,8 +136,34 @@
               "https://www.googleapis.com/auth/urlshortener"
             ]
           }
+        ],
+        "tags": [
+          "url"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

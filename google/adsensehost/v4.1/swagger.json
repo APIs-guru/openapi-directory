@@ -19,29 +19,6 @@
   },
   "paths": {
     "/accounts/{accountId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Get information about the selected associated AdSense account.",
         "operationId": "adsensehost.accounts.get",
@@ -68,10 +45,11 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
-      }
-    },
-    "/accounts": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -94,7 +72,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts": {
       "get": {
         "description": "List hosted accounts associated with this AdSense account by ad client id.",
         "operationId": "adsensehost.accounts.list",
@@ -125,10 +105,11 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/adclients/{adClientId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -151,7 +132,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/adclients/{adClientId}": {
       "get": {
         "description": "Get information about one of the ad clients in the specified publisher's AdSense account.",
         "operationId": "adsensehost.accounts.adclients.get",
@@ -185,10 +168,12 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "adclients",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/adclients": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -211,7 +196,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/adclients": {
       "get": {
         "description": "List all hosted ad clients in the specified hosted account.",
         "operationId": "adsensehost.accounts.adclients.list",
@@ -252,10 +239,12 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "adclients",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -278,7 +267,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}": {
       "delete": {
         "description": "Delete the specified ad unit from the specified publisher AdSense account.",
         "operationId": "adsensehost.accounts.adunits.delete",
@@ -319,6 +310,10 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "adunits",
+          "accounts"
         ]
       },
       "get": {
@@ -361,10 +356,12 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "adunits",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/adcode": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -387,7 +384,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/adcode": {
       "get": {
         "description": "Get ad code for the specified ad unit, attaching the specified host custom channels.",
         "operationId": "adsensehost.accounts.adunits.getAdCode",
@@ -438,10 +437,12 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "adunits",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/adclients/{adClientId}/adunits": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -464,7 +465,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/adclients/{adClientId}/adunits": {
       "post": {
         "description": "Insert the supplied ad unit into the specified publisher AdSense account.",
         "operationId": "adsensehost.accounts.adunits.insert",
@@ -498,6 +501,10 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "adunits",
+          "accounts"
         ]
       },
       "get": {
@@ -553,6 +560,10 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "adunits",
+          "accounts"
         ]
       },
       "patch": {
@@ -595,6 +606,10 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "adunits",
+          "accounts"
         ]
       },
       "put": {
@@ -630,10 +645,12 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "adunits",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/reports": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -656,7 +673,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/reports": {
       "get": {
         "description": "Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify \"alt=csv\" as a query parameter.",
         "operationId": "adsensehost.accounts.reports.generate",
@@ -759,10 +778,12 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "reports",
+          "accounts"
         ]
-      }
-    },
-    "/adclients/{adClientId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -785,7 +806,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/adclients/{adClientId}": {
       "get": {
         "description": "Get information about one of the ad clients in the Host AdSense account.",
         "operationId": "adsensehost.adclients.get",
@@ -812,10 +835,11 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "adclients"
         ]
-      }
-    },
-    "/adclients": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -838,7 +862,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/adclients": {
       "get": {
         "description": "List all host ad clients in this AdSense account.",
         "operationId": "adsensehost.adclients.list",
@@ -872,10 +898,11 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "adclients"
         ]
-      }
-    },
-    "/associationsessions/start": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -898,7 +925,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/associationsessions/start": {
       "get": {
         "description": "Create an association session for initiating an association with an AdSense user.",
         "operationId": "adsensehost.associationsessions.start",
@@ -955,10 +984,11 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "associationsessions"
         ]
-      }
-    },
-    "/associationsessions/verify": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -981,7 +1011,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/associationsessions/verify": {
       "get": {
         "description": "Verify an association session after the association callback returns from AdSense signup.",
         "operationId": "adsensehost.associationsessions.verify",
@@ -1008,10 +1040,11 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "associationsessions"
         ]
-      }
-    },
-    "/adclients/{adClientId}/customchannels/{customChannelId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1034,7 +1067,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/adclients/{adClientId}/customchannels/{customChannelId}": {
       "delete": {
         "description": "Delete a specific custom channel from the host AdSense account.",
         "operationId": "adsensehost.customchannels.delete",
@@ -1068,6 +1103,9 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "customchannels"
         ]
       },
       "get": {
@@ -1103,10 +1141,11 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "customchannels"
         ]
-      }
-    },
-    "/adclients/{adClientId}/customchannels": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1129,7 +1168,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/adclients/{adClientId}/customchannels": {
       "post": {
         "description": "Add a new custom channel to the host AdSense account.",
         "operationId": "adsensehost.customchannels.insert",
@@ -1156,6 +1197,9 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "customchannels"
         ]
       },
       "get": {
@@ -1198,6 +1242,9 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "customchannels"
         ]
       },
       "patch": {
@@ -1233,6 +1280,9 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "customchannels"
         ]
       },
       "put": {
@@ -1261,10 +1311,11 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "customchannels"
         ]
-      }
-    },
-    "/reports": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1287,7 +1338,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/reports": {
       "get": {
         "description": "Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify \"alt=csv\" as a query parameter.",
         "operationId": "adsensehost.reports.generate",
@@ -1383,10 +1436,11 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
-      }
-    },
-    "/adclients/{adClientId}/urlchannels/{urlChannelId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1409,7 +1463,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/adclients/{adClientId}/urlchannels/{urlChannelId}": {
       "delete": {
         "description": "Delete a URL channel from the host AdSense account.",
         "operationId": "adsensehost.urlchannels.delete",
@@ -1443,10 +1499,11 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "urlchannels"
         ]
-      }
-    },
-    "/adclients/{adClientId}/urlchannels": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1469,7 +1526,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/adclients/{adClientId}/urlchannels": {
       "post": {
         "description": "Add a new URL channel to the host AdSense account.",
         "operationId": "adsensehost.urlchannels.insert",
@@ -1496,6 +1555,9 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "urlchannels"
         ]
       },
       "get": {
@@ -1538,8 +1600,34 @@
               "https://www.googleapis.com/auth/adsensehost"
             ]
           }
+        ],
+        "tags": [
+          "urlchannels"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

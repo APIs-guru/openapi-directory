@@ -19,29 +19,6 @@
   },
   "paths": {
     "/projects/{projectId}/datasets/{datasetId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "delete": {
         "description": "Deletes the dataset specified by the datasetId value. Before you can delete a dataset, you must delete all its tables, either manually or by specifying deleteContents. Immediately after deletion, you can create another dataset with the same name.",
         "operationId": "bigquery.datasets.delete",
@@ -79,6 +56,9 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "datasets"
         ]
       },
       "get": {
@@ -115,6 +95,9 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "datasets"
         ]
       },
       "patch": {
@@ -151,6 +134,9 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "datasets"
         ]
       },
       "put": {
@@ -187,10 +173,11 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "datasets"
         ]
-      }
-    },
-    "/projects/{projectId}/datasets": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -213,7 +200,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{projectId}/datasets": {
       "post": {
         "description": "Creates a new empty dataset.",
         "operationId": "bigquery.datasets.insert",
@@ -241,6 +230,9 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "datasets"
         ]
       },
       "get": {
@@ -288,10 +280,11 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "datasets"
         ]
-      }
-    },
-    "/projects/{projectId}/jobs/{jobId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -314,7 +307,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{projectId}/jobs/{jobId}": {
       "get": {
         "description": "Retrieves the specified job by ID.",
         "operationId": "bigquery.jobs.get",
@@ -349,10 +344,11 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "jobs"
         ]
-      }
-    },
-    "/projects/{projectId}/queries/{jobId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -375,7 +371,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{projectId}/queries/{jobId}": {
       "get": {
         "description": "Retrieves the results of a query job.",
         "operationId": "bigquery.jobs.getQueryResults",
@@ -434,10 +432,11 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "jobs"
         ]
-      }
-    },
-    "/projects/{projectId}/jobs": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -460,7 +459,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{projectId}/jobs": {
       "post": {
         "description": "Starts a new asynchronous job.",
         "operationId": "bigquery.jobs.insert",
@@ -494,6 +495,9 @@
               "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
+        ],
+        "tags": [
+          "jobs"
         ]
       },
       "get": {
@@ -566,10 +570,11 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "jobs"
         ]
-      }
-    },
-    "/projects/{projectId}/queries": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -592,7 +597,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{projectId}/queries": {
       "post": {
         "description": "Runs a BigQuery SQL query synchronously and returns query results if the query completes within a specified timeout.",
         "operationId": "bigquery.jobs.query",
@@ -620,10 +627,11 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "jobs"
         ]
-      }
-    },
-    "/projects": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -646,7 +654,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects": {
       "get": {
         "description": "Lists the projects to which you have at least read access.",
         "operationId": "bigquery.projects.list",
@@ -679,10 +689,11 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "projects"
         ]
-      }
-    },
-    "/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/insertAll": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -705,7 +716,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/insertAll": {
       "post": {
         "description": "Streams data into BigQuery one record at a time without needing to run a load job.",
         "operationId": "bigquery.tabledata.insertAll",
@@ -748,10 +761,11 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "tabledata"
         ]
-      }
-    },
-    "/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/data": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -774,7 +788,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/data": {
       "get": {
         "description": "Retrieves table data from a specified set of rows.",
         "operationId": "bigquery.tabledata.list",
@@ -834,10 +850,11 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "tabledata"
         ]
-      }
-    },
-    "/projects/{projectId}/datasets/{datasetId}/tables/{tableId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -860,7 +877,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{projectId}/datasets/{datasetId}/tables/{tableId}": {
       "delete": {
         "description": "Deletes the table specified by tableId from the dataset. If the table contains data, all the data will be deleted.",
         "operationId": "bigquery.tables.delete",
@@ -899,6 +918,9 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "tables"
         ]
       },
       "get": {
@@ -942,6 +964,9 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "tables"
         ]
       },
       "patch": {
@@ -985,6 +1010,9 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "tables"
         ]
       },
       "put": {
@@ -1028,10 +1056,11 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "tables"
         ]
-      }
-    },
-    "/projects/{projectId}/datasets/{datasetId}/tables": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1054,7 +1083,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{projectId}/datasets/{datasetId}/tables": {
       "post": {
         "description": "Creates a new, empty table in the dataset.",
         "operationId": "bigquery.tables.insert",
@@ -1089,6 +1120,9 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "tables"
         ]
       },
       "get": {
@@ -1137,8 +1171,34 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "tables"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

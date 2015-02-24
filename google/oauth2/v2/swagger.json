@@ -19,29 +19,6 @@
   },
   "paths": {
     "/oauth2/v2/certs": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "operationId": "oauth2.getCertForOpenIdConnect",
         "responses": {
@@ -52,9 +29,7 @@
             }
           }
         }
-      }
-    },
-    "/oauth2/v2/tokeninfo": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -77,7 +52,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/oauth2/v2/tokeninfo": {
       "post": {
         "operationId": "oauth2.tokeninfo",
         "responses": {
@@ -100,9 +77,7 @@
             "type": "string"
           }
         ]
-      }
-    },
-    "/oauth2/v2/userinfo": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -125,7 +100,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/oauth2/v2/userinfo": {
       "get": {
         "operationId": "oauth2.userinfo.get",
         "responses": {
@@ -145,10 +122,11 @@
               "https://www.googleapis.com/auth/userinfo.profile"
             ]
           }
+        ],
+        "tags": [
+          "userinfo"
         ]
-      }
-    },
-    "/userinfo/v2/me": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -171,7 +149,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userinfo/v2/me": {
       "get": {
         "operationId": "oauth2.userinfo.v2.me.get",
         "responses": {
@@ -191,8 +171,36 @@
               "https://www.googleapis.com/auth/userinfo.profile"
             ]
           }
+        ],
+        "tags": [
+          "me",
+          "v2",
+          "userinfo"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{project}/hostedmodels/{hostedModelName}/predict": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "post": {
         "description": "Submit input and request an output against a hosted model.",
         "operationId": "prediction.hostedmodels.predict",
@@ -75,10 +52,11 @@
               "https://www.googleapis.com/auth/prediction"
             ]
           }
+        ],
+        "tags": [
+          "hostedmodels"
         ]
-      }
-    },
-    "/{project}/trainedmodels/{id}/analyze": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -101,7 +79,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/trainedmodels/{id}/analyze": {
       "get": {
         "description": "Get analysis of the model and the data the model was trained on.",
         "operationId": "prediction.trainedmodels.analyze",
@@ -135,10 +115,11 @@
               "https://www.googleapis.com/auth/prediction"
             ]
           }
+        ],
+        "tags": [
+          "trainedmodels"
         ]
-      }
-    },
-    "/{project}/trainedmodels/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -161,7 +142,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/trainedmodels/{id}": {
       "delete": {
         "description": "Delete a trained model.",
         "operationId": "prediction.trainedmodels.delete",
@@ -192,6 +175,9 @@
               "https://www.googleapis.com/auth/prediction"
             ]
           }
+        ],
+        "tags": [
+          "trainedmodels"
         ]
       },
       "get": {
@@ -227,6 +213,9 @@
               "https://www.googleapis.com/auth/prediction"
             ]
           }
+        ],
+        "tags": [
+          "trainedmodels"
         ]
       },
       "put": {
@@ -262,10 +251,11 @@
               "https://www.googleapis.com/auth/prediction"
             ]
           }
+        ],
+        "tags": [
+          "trainedmodels"
         ]
-      }
-    },
-    "/{project}/trainedmodels": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -288,7 +278,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/trainedmodels": {
       "post": {
         "description": "Train a Prediction API model.",
         "operationId": "prediction.trainedmodels.insert",
@@ -318,10 +310,11 @@
               "https://www.googleapis.com/auth/prediction"
             ]
           }
+        ],
+        "tags": [
+          "trainedmodels"
         ]
-      }
-    },
-    "/{project}/trainedmodels/list": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -344,7 +337,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/trainedmodels/list": {
       "get": {
         "description": "List available models.",
         "operationId": "prediction.trainedmodels.list",
@@ -384,10 +379,11 @@
               "https://www.googleapis.com/auth/prediction"
             ]
           }
+        ],
+        "tags": [
+          "trainedmodels"
         ]
-      }
-    },
-    "/{project}/trainedmodels/{id}/predict": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -410,7 +406,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/trainedmodels/{id}/predict": {
       "post": {
         "description": "Submit model id and request a prediction.",
         "operationId": "prediction.trainedmodels.predict",
@@ -444,8 +442,34 @@
               "https://www.googleapis.com/auth/prediction"
             ]
           }
+        ],
+        "tags": [
+          "trainedmodels"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

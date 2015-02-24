@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{project}/zones/{zone}/rollingUpdates/{rollingUpdate}/cancel": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "post": {
         "description": "Cancels an update. The update must be PAUSED before it can be cancelled. This has no effect if the update is already CANCELLED.",
         "operationId": "replicapoolupdater.rollingUpdates.cancel",
@@ -83,10 +60,11 @@
               "https://www.googleapis.com/auth/replicapool"
             ]
           }
+        ],
+        "tags": [
+          "rollingUpdates"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/rollingUpdates/{rollingUpdate}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -109,7 +87,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/rollingUpdates/{rollingUpdate}": {
       "get": {
         "description": "Returns information about an update.",
         "operationId": "replicapoolupdater.rollingUpdates.get",
@@ -152,10 +132,11 @@
               "https://www.googleapis.com/auth/replicapool.readonly"
             ]
           }
+        ],
+        "tags": [
+          "rollingUpdates"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/rollingUpdates": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -178,7 +159,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/rollingUpdates": {
       "post": {
         "description": "Inserts and starts a new update.",
         "operationId": "replicapoolupdater.rollingUpdates.insert",
@@ -213,6 +196,9 @@
               "https://www.googleapis.com/auth/replicapool"
             ]
           }
+        ],
+        "tags": [
+          "rollingUpdates"
         ]
       },
       "get": {
@@ -277,10 +263,11 @@
               "https://www.googleapis.com/auth/replicapool.readonly"
             ]
           }
+        ],
+        "tags": [
+          "rollingUpdates"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/rollingUpdates/{rollingUpdate}/instanceUpdates": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -303,7 +290,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/rollingUpdates/{rollingUpdate}/instanceUpdates": {
       "get": {
         "description": "Lists the current status for each instance within a given update.",
         "operationId": "replicapoolupdater.rollingUpdates.listInstanceUpdates",
@@ -367,10 +356,11 @@
               "https://www.googleapis.com/auth/replicapool.readonly"
             ]
           }
+        ],
+        "tags": [
+          "rollingUpdates"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/rollingUpdates/{rollingUpdate}/pause": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -393,7 +383,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/rollingUpdates/{rollingUpdate}/pause": {
       "post": {
         "description": "Pauses the update in state from ROLLING_FORWARD or ROLLING_BACK. Has no effect if invoked when the state of the update is PAUSED.",
         "operationId": "replicapoolupdater.rollingUpdates.pause",
@@ -435,10 +427,11 @@
               "https://www.googleapis.com/auth/replicapool"
             ]
           }
+        ],
+        "tags": [
+          "rollingUpdates"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/rollingUpdates/{rollingUpdate}/resume": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -461,7 +454,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/rollingUpdates/{rollingUpdate}/resume": {
       "post": {
         "description": "Continues an update in PAUSED state. Has no effect if invoked when the state of the update is ROLLED_OUT.",
         "operationId": "replicapoolupdater.rollingUpdates.resume",
@@ -503,10 +498,11 @@
               "https://www.googleapis.com/auth/replicapool"
             ]
           }
+        ],
+        "tags": [
+          "rollingUpdates"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/rollingUpdates/{rollingUpdate}/rollback": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -529,7 +525,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/rollingUpdates/{rollingUpdate}/rollback": {
       "post": {
         "description": "Rolls back the update in state from ROLLING_FORWARD or PAUSED. Has no effect if invoked when the state of the update is ROLLED_BACK.",
         "operationId": "replicapoolupdater.rollingUpdates.rollback",
@@ -571,10 +569,11 @@
               "https://www.googleapis.com/auth/replicapool"
             ]
           }
+        ],
+        "tags": [
+          "rollingUpdates"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/operations/{operation}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -597,7 +596,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/operations/{operation}": {
       "get": {
         "description": "Retrieves the specified zone-specific operation resource.",
         "operationId": "replicapoolupdater.zoneOperations.get",
@@ -639,8 +640,34 @@
               "https://www.googleapis.com/auth/replicapool"
             ]
           }
+        ],
+        "tags": [
+          "zoneOperations"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

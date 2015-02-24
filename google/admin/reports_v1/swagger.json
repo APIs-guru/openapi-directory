@@ -19,29 +19,6 @@
   },
   "paths": {
     "/activity/users/{userKey}/applications/{applicationName}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Retrieves a list of activities for a specific customer and application.",
         "operationId": "reports.activities.list",
@@ -125,10 +102,11 @@
               "https://www.googleapis.com/auth/admin.reports.audit.readonly"
             ]
           }
+        ],
+        "tags": [
+          "activities"
         ]
-      }
-    },
-    "/activity/users/{userKey}/applications/{applicationName}/watch": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -151,7 +129,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/activity/users/{userKey}/applications/{applicationName}/watch": {
       "post": {
         "description": "Push changes to activities",
         "operationId": "reports.activities.watch",
@@ -235,10 +215,11 @@
               "https://www.googleapis.com/auth/admin.reports.audit.readonly"
             ]
           }
+        ],
+        "tags": [
+          "activities"
         ]
-      }
-    },
-    "//admin/reports_v1/channels/stop": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -261,7 +242,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "//admin/reports_v1/channels/stop": {
       "post": {
         "description": "Stop watching resources through this channel",
         "operationId": "admin.channels.stop",
@@ -276,10 +259,11 @@
               "https://www.googleapis.com/auth/admin.reports.audit.readonly"
             ]
           }
+        ],
+        "tags": [
+          "channels"
         ]
-      }
-    },
-    "/usage/dates/{date}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -302,7 +286,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/usage/dates/{date}": {
       "get": {
         "description": "Retrieves a report which is a collection of properties / statistics for a specific customer.",
         "operationId": "reports.customerUsageReports.get",
@@ -347,10 +333,11 @@
               "https://www.googleapis.com/auth/admin.reports.usage.readonly"
             ]
           }
+        ],
+        "tags": [
+          "customerUsageReports"
         ]
-      }
-    },
-    "/usage/users/{userKey}/dates/{date}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -373,7 +360,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/usage/users/{userKey}/dates/{date}": {
       "get": {
         "description": "Retrieves a report which is a collection of properties / statistics for a set of users.",
         "operationId": "reports.userUsageReport.get",
@@ -438,8 +427,34 @@
               "https://www.googleapis.com/auth/admin.reports.usage.readonly"
             ]
           }
+        ],
+        "tags": [
+          "userUsageReport"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

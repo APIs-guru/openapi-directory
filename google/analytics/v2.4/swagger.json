@@ -19,29 +19,6 @@
   },
   "paths": {
     "/data": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Returns Analytics report data for a view (profile).",
         "operationId": "analytics.data.get",
@@ -124,10 +101,11 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "data"
         ]
-      }
-    },
-    "/management/accounts": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -150,7 +128,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts": {
       "get": {
         "description": "Lists all accounts to which the user has access.",
         "operationId": "analytics.management.accounts.list",
@@ -181,10 +161,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "accounts",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/goals": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -207,7 +189,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/goals": {
       "get": {
         "description": "Lists goals to which the user has access.",
         "operationId": "analytics.management.goals.list",
@@ -259,10 +243,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "goals",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -285,7 +271,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles": {
       "get": {
         "description": "Lists views (profiles) to which the user has access.",
         "operationId": "analytics.management.profiles.list",
@@ -330,10 +318,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "profiles",
+          "management"
         ]
-      }
-    },
-    "/management/segments": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -356,7 +346,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/segments": {
       "get": {
         "description": "Lists advanced segments to which the user has access.",
         "operationId": "analytics.management.segments.list",
@@ -387,10 +379,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "segments",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -413,7 +407,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties": {
       "get": {
         "description": "Lists web properties to which the user has access.",
         "operationId": "analytics.management.webproperties.list",
@@ -451,8 +447,35 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "webproperties",
+          "management"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "parameters": {

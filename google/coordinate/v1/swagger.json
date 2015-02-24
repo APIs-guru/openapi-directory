@@ -19,29 +19,6 @@
   },
   "paths": {
     "/teams/{teamId}/custom_fields": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Retrieves a list of custom field definitions for a team.",
         "operationId": "coordinate.customFieldDef.list",
@@ -69,10 +46,11 @@
               "https://www.googleapis.com/auth/coordinate.readonly"
             ]
           }
+        ],
+        "tags": [
+          "customFieldDef"
         ]
-      }
-    },
-    "/teams/{teamId}/jobs/{jobId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -95,7 +73,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/teams/{teamId}/jobs/{jobId}": {
       "get": {
         "description": "Retrieves a job, including all the changes made to the job.",
         "operationId": "coordinate.jobs.get",
@@ -130,6 +110,9 @@
               "https://www.googleapis.com/auth/coordinate.readonly"
             ]
           }
+        ],
+        "tags": [
+          "jobs"
         ]
       },
       "patch": {
@@ -236,6 +219,9 @@
               "https://www.googleapis.com/auth/coordinate"
             ]
           }
+        ],
+        "tags": [
+          "jobs"
         ]
       },
       "put": {
@@ -342,10 +328,11 @@
               "https://www.googleapis.com/auth/coordinate"
             ]
           }
+        ],
+        "tags": [
+          "jobs"
         ]
-      }
-    },
-    "/teams/{teamId}/jobs": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -368,7 +355,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/teams/{teamId}/jobs": {
       "post": {
         "description": "Inserts a new job. Only the state field of the job should be set.",
         "operationId": "coordinate.jobs.insert",
@@ -457,6 +446,9 @@
               "https://www.googleapis.com/auth/coordinate"
             ]
           }
+        ],
+        "tags": [
+          "jobs"
         ]
       },
       "get": {
@@ -504,10 +496,11 @@
               "https://www.googleapis.com/auth/coordinate.readonly"
             ]
           }
+        ],
+        "tags": [
+          "jobs"
         ]
-      }
-    },
-    "/teams/{teamId}/workers/{workerEmail}/locations": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -530,7 +523,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/teams/{teamId}/workers/{workerEmail}/locations": {
       "get": {
         "description": "Retrieves a list of locations for a worker.",
         "operationId": "coordinate.location.list",
@@ -584,10 +579,11 @@
               "https://www.googleapis.com/auth/coordinate.readonly"
             ]
           }
+        ],
+        "tags": [
+          "location"
         ]
-      }
-    },
-    "/teams/{teamId}/jobs/{jobId}/schedule": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -610,7 +606,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/teams/{teamId}/jobs/{jobId}/schedule": {
       "get": {
         "description": "Retrieves the schedule for a job.",
         "operationId": "coordinate.schedule.get",
@@ -645,6 +643,9 @@
               "https://www.googleapis.com/auth/coordinate.readonly"
             ]
           }
+        ],
+        "tags": [
+          "schedule"
         ]
       },
       "patch": {
@@ -704,6 +705,9 @@
               "https://www.googleapis.com/auth/coordinate"
             ]
           }
+        ],
+        "tags": [
+          "schedule"
         ]
       },
       "put": {
@@ -763,10 +767,11 @@
               "https://www.googleapis.com/auth/coordinate"
             ]
           }
+        ],
+        "tags": [
+          "schedule"
         ]
-      }
-    },
-    "/teams": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -789,7 +794,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/teams": {
       "get": {
         "description": "Retrieves a list of teams for a user.",
         "operationId": "coordinate.team.list",
@@ -828,10 +835,11 @@
               "https://www.googleapis.com/auth/coordinate.readonly"
             ]
           }
+        ],
+        "tags": [
+          "team"
         ]
-      }
-    },
-    "/teams/{teamId}/workers": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -854,7 +862,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/teams/{teamId}/workers": {
       "get": {
         "description": "Retrieves a list of workers in a team.",
         "operationId": "coordinate.worker.list",
@@ -882,8 +892,34 @@
               "https://www.googleapis.com/auth/coordinate.readonly"
             ]
           }
+        ],
+        "tags": [
+          "worker"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

@@ -19,29 +19,6 @@
   },
   "paths": {
     "/createAuthUri": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "post": {
         "description": "Creates the URI used by the IdP to authenticate the user.",
         "operationId": "identitytoolkit.relyingparty.createAuthUri",
@@ -52,10 +29,11 @@
               "$ref": "#/definitions/CreateAuthUriResponse"
             }
           }
-        }
-      }
-    },
-    "/deleteAccount": {
+        },
+        "tags": [
+          "relyingparty"
+        ]
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -78,7 +56,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/deleteAccount": {
       "post": {
         "description": "Delete user account.",
         "operationId": "identitytoolkit.relyingparty.deleteAccount",
@@ -89,10 +69,11 @@
               "$ref": "#/definitions/DeleteAccountResponse"
             }
           }
-        }
-      }
-    },
-    "/downloadAccount": {
+        },
+        "tags": [
+          "relyingparty"
+        ]
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -115,7 +96,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/downloadAccount": {
       "post": {
         "description": "Batch download user accounts.",
         "operationId": "identitytoolkit.relyingparty.downloadAccount",
@@ -126,10 +109,11 @@
               "$ref": "#/definitions/DownloadAccountResponse"
             }
           }
-        }
-      }
-    },
-    "/getAccountInfo": {
+        },
+        "tags": [
+          "relyingparty"
+        ]
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -152,7 +136,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/getAccountInfo": {
       "post": {
         "description": "Returns the account info.",
         "operationId": "identitytoolkit.relyingparty.getAccountInfo",
@@ -163,10 +149,11 @@
               "$ref": "#/definitions/GetAccountInfoResponse"
             }
           }
-        }
-      }
-    },
-    "/getOobConfirmationCode": {
+        },
+        "tags": [
+          "relyingparty"
+        ]
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -189,7 +176,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/getOobConfirmationCode": {
       "post": {
         "description": "Get a code for user action confirmation.",
         "operationId": "identitytoolkit.relyingparty.getOobConfirmationCode",
@@ -200,10 +189,11 @@
               "$ref": "#/definitions/GetOobConfirmationCodeResponse"
             }
           }
-        }
-      }
-    },
-    "/publicKeys": {
+        },
+        "tags": [
+          "relyingparty"
+        ]
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -226,7 +216,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/publicKeys": {
       "get": {
         "description": "Get token signing public key.",
         "operationId": "identitytoolkit.relyingparty.getPublicKeys",
@@ -237,10 +229,11 @@
               "$ref": "#/definitions/IdentitytoolkitRelyingpartyGetPublicKeysResponse"
             }
           }
-        }
-      }
-    },
-    "/resetPassword": {
+        },
+        "tags": [
+          "relyingparty"
+        ]
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -263,7 +256,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/resetPassword": {
       "post": {
         "description": "Reset password for a user.",
         "operationId": "identitytoolkit.relyingparty.resetPassword",
@@ -274,10 +269,11 @@
               "$ref": "#/definitions/ResetPasswordResponse"
             }
           }
-        }
-      }
-    },
-    "/setAccountInfo": {
+        },
+        "tags": [
+          "relyingparty"
+        ]
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -300,7 +296,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/setAccountInfo": {
       "post": {
         "description": "Set account info for a user.",
         "operationId": "identitytoolkit.relyingparty.setAccountInfo",
@@ -311,10 +309,11 @@
               "$ref": "#/definitions/SetAccountInfoResponse"
             }
           }
-        }
-      }
-    },
-    "/uploadAccount": {
+        },
+        "tags": [
+          "relyingparty"
+        ]
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -337,7 +336,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/uploadAccount": {
       "post": {
         "description": "Batch upload existing user accounts.",
         "operationId": "identitytoolkit.relyingparty.uploadAccount",
@@ -348,10 +349,11 @@
               "$ref": "#/definitions/UploadAccountResponse"
             }
           }
-        }
-      }
-    },
-    "/verifyAssertion": {
+        },
+        "tags": [
+          "relyingparty"
+        ]
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -374,7 +376,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/verifyAssertion": {
       "post": {
         "description": "Verifies the assertion returned by the IdP.",
         "operationId": "identitytoolkit.relyingparty.verifyAssertion",
@@ -385,10 +389,11 @@
               "$ref": "#/definitions/VerifyAssertionResponse"
             }
           }
-        }
-      }
-    },
-    "/verifyPassword": {
+        },
+        "tags": [
+          "relyingparty"
+        ]
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -411,7 +416,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/verifyPassword": {
       "post": {
         "description": "Verifies the user entered password.",
         "operationId": "identitytoolkit.relyingparty.verifyPassword",
@@ -422,8 +429,34 @@
               "$ref": "#/definitions/VerifyPasswordResponse"
             }
           }
+        },
+        "tags": [
+          "relyingparty"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
         }
-      }
+      ]
     }
   },
   "definitions": {

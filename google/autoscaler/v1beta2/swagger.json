@@ -19,29 +19,6 @@
   },
   "paths": {
     "/projects/{project}/zones/{zone}/autoscalers/{autoscaler}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "delete": {
         "description": "Deletes the specified Autoscaler resource.",
         "operationId": "autoscaler.autoscalers.delete",
@@ -82,6 +59,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "autoscalers"
         ]
       },
       "get": {
@@ -125,6 +105,9 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "autoscalers"
         ]
       },
       "patch": {
@@ -167,6 +150,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "autoscalers"
         ]
       },
       "put": {
@@ -209,10 +195,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "autoscalers"
         ]
-      }
-    },
-    "/projects/{project}/zones/{zone}/autoscalers": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -235,7 +222,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/projects/{project}/zones/{zone}/autoscalers": {
       "post": {
         "description": "Adds new Autoscaler resource.",
         "operationId": "autoscaler.autoscalers.insert",
@@ -269,6 +258,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "autoscalers"
         ]
       },
       "get": {
@@ -323,10 +315,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "autoscalers"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/operations/{operation}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -349,7 +342,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/operations/{operation}": {
       "delete": {
         "description": "Deletes the specified zone-specific operation resource.",
         "operationId": "autoscaler.zoneOperations.delete",
@@ -384,6 +379,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "zoneOperations"
         ]
       },
       "get": {
@@ -424,10 +422,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "zoneOperations"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/operations": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -450,7 +449,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/operations": {
       "get": {
         "description": "Retrieves the list of operation resources contained within the specified zone.",
         "operationId": "autoscaler.zoneOperations.list",
@@ -501,10 +502,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "zoneOperations"
         ]
-      }
-    },
-    "/{project}/zones": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -527,7 +529,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones": {
       "get": {
         "description": "",
         "operationId": "autoscaler.zones.list",
@@ -572,8 +576,34 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "zones"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

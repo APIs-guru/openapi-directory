@@ -19,29 +19,6 @@
   },
   "paths": {
     "/webResource/{id}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "delete": {
         "description": "Relinquish ownership of a website or domain.",
         "operationId": "siteVerification.webResource.delete",
@@ -65,6 +42,9 @@
               "https://www.googleapis.com/auth/siteverification"
             ]
           }
+        ],
+        "tags": [
+          "webResource"
         ]
       },
       "get": {
@@ -93,6 +73,9 @@
               "https://www.googleapis.com/auth/siteverification"
             ]
           }
+        ],
+        "tags": [
+          "webResource"
         ]
       },
       "patch": {
@@ -121,6 +104,9 @@
               "https://www.googleapis.com/auth/siteverification"
             ]
           }
+        ],
+        "tags": [
+          "webResource"
         ]
       },
       "put": {
@@ -149,10 +135,11 @@
               "https://www.googleapis.com/auth/siteverification"
             ]
           }
+        ],
+        "tags": [
+          "webResource"
         ]
-      }
-    },
-    "/token": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -175,7 +162,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/token": {
       "post": {
         "description": "Get a verification token for placing on a website or domain.",
         "operationId": "siteVerification.webResource.getToken",
@@ -194,10 +183,11 @@
               "https://www.googleapis.com/auth/siteverification.verify_only"
             ]
           }
+        ],
+        "tags": [
+          "webResource"
         ]
-      }
-    },
-    "/webResource": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -220,7 +210,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/webResource": {
       "post": {
         "description": "Attempt verification of a website or domain.",
         "operationId": "siteVerification.webResource.insert",
@@ -248,6 +240,9 @@
               "https://www.googleapis.com/auth/siteverification.verify_only"
             ]
           }
+        ],
+        "tags": [
+          "webResource"
         ]
       },
       "get": {
@@ -267,8 +262,34 @@
               "https://www.googleapis.com/auth/siteverification"
             ]
           }
+        ],
+        "tags": [
+          "webResource"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

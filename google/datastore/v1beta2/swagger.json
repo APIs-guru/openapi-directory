@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{datasetId}/allocateIds": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "post": {
         "description": "Allocate IDs for incomplete keys (useful for referencing an entity before it is inserted).",
         "operationId": "datastore.datasets.allocateIds",
@@ -70,10 +47,11 @@
               "https://www.googleapis.com/auth/userinfo.email"
             ]
           }
+        ],
+        "tags": [
+          "datasets"
         ]
-      }
-    },
-    "/{datasetId}/beginTransaction": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -96,7 +74,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{datasetId}/beginTransaction": {
       "post": {
         "description": "Begin a new transaction.",
         "operationId": "datastore.datasets.beginTransaction",
@@ -125,10 +105,11 @@
               "https://www.googleapis.com/auth/userinfo.email"
             ]
           }
+        ],
+        "tags": [
+          "datasets"
         ]
-      }
-    },
-    "/{datasetId}/commit": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -151,7 +132,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{datasetId}/commit": {
       "post": {
         "description": "Commit a transaction, optionally creating, deleting or modifying some entities.",
         "operationId": "datastore.datasets.commit",
@@ -180,10 +163,11 @@
               "https://www.googleapis.com/auth/userinfo.email"
             ]
           }
+        ],
+        "tags": [
+          "datasets"
         ]
-      }
-    },
-    "/{datasetId}/lookup": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -206,7 +190,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{datasetId}/lookup": {
       "post": {
         "description": "Look up some entities by key.",
         "operationId": "datastore.datasets.lookup",
@@ -235,10 +221,11 @@
               "https://www.googleapis.com/auth/userinfo.email"
             ]
           }
+        ],
+        "tags": [
+          "datasets"
         ]
-      }
-    },
-    "/{datasetId}/rollback": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -261,7 +248,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{datasetId}/rollback": {
       "post": {
         "description": "Roll back a transaction.",
         "operationId": "datastore.datasets.rollback",
@@ -290,10 +279,11 @@
               "https://www.googleapis.com/auth/userinfo.email"
             ]
           }
+        ],
+        "tags": [
+          "datasets"
         ]
-      }
-    },
-    "/{datasetId}/runQuery": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -316,7 +306,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{datasetId}/runQuery": {
       "post": {
         "description": "Query for entities.",
         "operationId": "datastore.datasets.runQuery",
@@ -345,8 +337,34 @@
               "https://www.googleapis.com/auth/userinfo.email"
             ]
           }
+        ],
+        "tags": [
+          "datasets"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

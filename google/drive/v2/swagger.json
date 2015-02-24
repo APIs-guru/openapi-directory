@@ -19,29 +19,6 @@
   },
   "paths": {
     "/about": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Gets the information about the current user along with Drive API settings",
         "operationId": "drive.about.get",
@@ -85,10 +62,11 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "about"
         ]
-      }
-    },
-    "/apps/{appId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -111,7 +89,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/apps/{appId}": {
       "get": {
         "description": "Gets a specific app.",
         "operationId": "drive.apps.get",
@@ -143,10 +123,11 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "apps"
         ]
-      }
-    },
-    "/apps": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -169,7 +150,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/apps": {
       "get": {
         "description": "Lists a user's installed apps.",
         "operationId": "drive.apps.list",
@@ -209,10 +192,11 @@
               "https://www.googleapis.com/auth/drive.apps.readonly"
             ]
           }
+        ],
+        "tags": [
+          "apps"
         ]
-      }
-    },
-    "/changes/{changeId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -235,7 +219,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/changes/{changeId}": {
       "get": {
         "description": "Gets a specific change.",
         "operationId": "drive.changes.get",
@@ -267,10 +253,11 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "changes"
         ]
-      }
-    },
-    "/changes": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -293,7 +280,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/changes": {
       "get": {
         "description": "Lists the changes for a user.",
         "operationId": "drive.changes.list",
@@ -352,10 +341,11 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "changes"
         ]
-      }
-    },
-    "/changes/watch": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -378,7 +368,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/changes/watch": {
       "post": {
         "description": "Subscribe to changes for a user.",
         "operationId": "drive.changes.watch",
@@ -437,10 +429,11 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "changes"
         ]
-      }
-    },
-    "/channels/stop": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -463,7 +456,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/channels/stop": {
       "post": {
         "description": "Stop watching resources through this channel",
         "operationId": "drive.channels.stop",
@@ -483,10 +478,11 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "channels"
         ]
-      }
-    },
-    "/files/{folderId}/children/{childId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -509,7 +505,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{folderId}/children/{childId}": {
       "delete": {
         "description": "Removes a child from a folder.",
         "operationId": "drive.children.delete",
@@ -541,6 +539,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "children"
         ]
       },
       "get": {
@@ -580,10 +581,11 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "children"
         ]
-      }
-    },
-    "/files/{folderId}/children": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -606,7 +608,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{folderId}/children": {
       "post": {
         "description": "Inserts a file into a folder.",
         "operationId": "drive.children.insert",
@@ -635,6 +639,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "children"
         ]
       },
       "get": {
@@ -687,10 +694,11 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "children"
         ]
-      }
-    },
-    "/files/{fileId}/comments/{commentId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -713,7 +721,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{fileId}/comments/{commentId}": {
       "delete": {
         "description": "Deletes a comment.",
         "operationId": "drive.comments.delete",
@@ -746,6 +756,9 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "comments"
         ]
       },
       "get": {
@@ -790,6 +803,9 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "comments"
         ]
       },
       "patch": {
@@ -826,6 +842,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "comments"
         ]
       },
       "put": {
@@ -862,10 +881,11 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "comments"
         ]
-      }
-    },
-    "/files/{fileId}/comments": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -888,7 +908,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{fileId}/comments": {
       "post": {
         "description": "Creates a new comment on the given file.",
         "operationId": "drive.comments.insert",
@@ -916,6 +938,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "comments"
         ]
       },
       "get": {
@@ -974,10 +999,11 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "comments"
         ]
-      }
-    },
-    "/files/{fileId}/copy": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1000,7 +1026,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{fileId}/copy": {
       "post": {
         "description": "Creates a copy of the specified file.",
         "operationId": "drive.files.copy",
@@ -1080,10 +1108,11 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "files"
         ]
-      }
-    },
-    "/files/{fileId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1106,7 +1135,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{fileId}": {
       "delete": {
         "description": "Permanently deletes a file by ID. Skips the trash.",
         "operationId": "drive.files.delete",
@@ -1132,6 +1163,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "files"
         ]
       },
       "get": {
@@ -1189,6 +1223,9 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "files"
         ]
       },
       "patch": {
@@ -1300,6 +1337,9 @@
               "https://www.googleapis.com/auth/drive.scripts"
             ]
           }
+        ],
+        "tags": [
+          "files"
         ]
       },
       "put": {
@@ -1414,10 +1454,11 @@
               "https://www.googleapis.com/auth/drive.scripts"
             ]
           }
+        ],
+        "tags": [
+          "files"
         ]
-      }
-    },
-    "/files/trash": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1440,7 +1481,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/trash": {
       "delete": {
         "description": "Permanently deletes all of the user's trashed files.",
         "operationId": "drive.files.emptyTrash",
@@ -1455,10 +1498,11 @@
               "https://www.googleapis.com/auth/drive"
             ]
           }
+        ],
+        "tags": [
+          "files"
         ]
-      }
-    },
-    "/files": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1481,7 +1525,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files": {
       "post": {
         "description": "Insert a new file.",
         "operationId": "drive.files.insert",
@@ -1564,6 +1610,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "files"
         ]
       },
       "get": {
@@ -1630,10 +1679,11 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "files"
         ]
-      }
-    },
-    "/files/{fileId}/touch": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1656,7 +1706,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{fileId}/touch": {
       "post": {
         "description": "Set the file's updated time to the current server time.",
         "operationId": "drive.files.touch",
@@ -1686,10 +1738,11 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "files"
         ]
-      }
-    },
-    "/files/{fileId}/trash": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1712,7 +1765,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{fileId}/trash": {
       "post": {
         "description": "Moves a file to the trash.",
         "operationId": "drive.files.trash",
@@ -1742,10 +1797,11 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "files"
         ]
-      }
-    },
-    "/files/{fileId}/untrash": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1768,7 +1824,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{fileId}/untrash": {
       "post": {
         "description": "Restores a file from the trash.",
         "operationId": "drive.files.untrash",
@@ -1798,10 +1856,11 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "files"
         ]
-      }
-    },
-    "/files/{fileId}/watch": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1824,7 +1883,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{fileId}/watch": {
       "post": {
         "description": "Subscribe to changes on a file",
         "operationId": "drive.files.watch",
@@ -1880,10 +1941,11 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "files"
         ]
-      }
-    },
-    "/files/{fileId}/parents/{parentId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1906,7 +1968,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{fileId}/parents/{parentId}": {
       "delete": {
         "description": "Removes a parent from a file.",
         "operationId": "drive.parents.delete",
@@ -1938,6 +2002,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "parents"
         ]
       },
       "get": {
@@ -1977,10 +2044,11 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "parents"
         ]
-      }
-    },
-    "/files/{fileId}/parents": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2003,7 +2071,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{fileId}/parents": {
       "post": {
         "description": "Adds a parent folder for a file.",
         "operationId": "drive.parents.insert",
@@ -2032,6 +2102,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "parents"
         ]
       },
       "get": {
@@ -2064,10 +2137,11 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "parents"
         ]
-      }
-    },
-    "/files/{fileId}/permissions/{permissionId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2090,7 +2164,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{fileId}/permissions/{permissionId}": {
       "delete": {
         "description": "Deletes a permission from a file.",
         "operationId": "drive.permissions.delete",
@@ -2122,6 +2198,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "permissions"
         ]
       },
       "get": {
@@ -2160,6 +2239,9 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "permissions"
         ]
       },
       "patch": {
@@ -2203,6 +2285,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "permissions"
         ]
       },
       "put": {
@@ -2246,10 +2331,11 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "permissions"
         ]
-      }
-    },
-    "/permissionIds/{email}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2272,7 +2358,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/permissionIds/{email}": {
       "get": {
         "description": "Returns the permission ID for an email address.",
         "operationId": "drive.permissions.getIdForEmail",
@@ -2304,10 +2392,11 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "permissions"
         ]
-      }
-    },
-    "/files/{fileId}/permissions": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2330,7 +2419,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{fileId}/permissions": {
       "post": {
         "description": "Inserts a permission for a file.",
         "operationId": "drive.permissions.insert",
@@ -2371,6 +2462,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "permissions"
         ]
       },
       "get": {
@@ -2402,10 +2496,11 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "permissions"
         ]
-      }
-    },
-    "/files/{fileId}/properties/{propertyKey}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2428,7 +2523,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{fileId}/properties/{propertyKey}": {
       "delete": {
         "description": "Deletes a property.",
         "operationId": "drive.properties.delete",
@@ -2468,6 +2565,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "properties"
         ]
       },
       "get": {
@@ -2514,6 +2614,9 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "properties"
         ]
       },
       "patch": {
@@ -2558,6 +2661,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "properties"
         ]
       },
       "put": {
@@ -2602,10 +2708,11 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "properties"
         ]
-      }
-    },
-    "/files/{fileId}/properties": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2628,7 +2735,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{fileId}/properties": {
       "post": {
         "description": "Adds a property to a file.",
         "operationId": "drive.properties.insert",
@@ -2657,6 +2766,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "properties"
         ]
       },
       "get": {
@@ -2689,10 +2801,11 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "properties"
         ]
-      }
-    },
-    "/files/{fileId}/realtime": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2715,7 +2828,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{fileId}/realtime": {
       "get": {
         "description": "Exports the contents of the Realtime API data model associated with this file as JSON.",
         "operationId": "drive.realtime.get",
@@ -2748,6 +2863,9 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "realtime"
         ]
       },
       "put": {
@@ -2783,10 +2901,11 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "realtime"
         ]
-      }
-    },
-    "/files/{fileId}/comments/{commentId}/replies/{replyId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2809,7 +2928,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{fileId}/comments/{commentId}/replies/{replyId}": {
       "delete": {
         "description": "Deletes a reply.",
         "operationId": "drive.replies.delete",
@@ -2848,6 +2969,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "replies"
         ]
       },
       "get": {
@@ -2899,6 +3023,9 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "replies"
         ]
       },
       "patch": {
@@ -2942,6 +3069,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "replies"
         ]
       },
       "put": {
@@ -2985,10 +3115,11 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "replies"
         ]
-      }
-    },
-    "/files/{fileId}/comments/{commentId}/replies": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3011,7 +3142,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{fileId}/comments/{commentId}/replies": {
       "post": {
         "description": "Creates a new reply to the given comment.",
         "operationId": "drive.replies.insert",
@@ -3046,6 +3179,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "replies"
         ]
       },
       "get": {
@@ -3105,10 +3241,11 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "replies"
         ]
-      }
-    },
-    "/files/{fileId}/revisions/{revisionId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3131,7 +3268,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{fileId}/revisions/{revisionId}": {
       "delete": {
         "description": "Removes a revision.",
         "operationId": "drive.revisions.delete",
@@ -3164,6 +3303,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "revisions"
         ]
       },
       "get": {
@@ -3203,6 +3345,9 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "revisions"
         ]
       },
       "patch": {
@@ -3240,6 +3385,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "revisions"
         ]
       },
       "put": {
@@ -3277,10 +3425,11 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "revisions"
         ]
-      }
-    },
-    "/files/{fileId}/revisions": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3303,7 +3452,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files/{fileId}/revisions": {
       "get": {
         "description": "Lists a file's revisions.",
         "operationId": "drive.revisions.list",
@@ -3334,8 +3485,34 @@
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
+        ],
+        "tags": [
+          "revisions"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {
@@ -5014,12 +5191,12 @@
       "flow": "implicit",
       "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
       "scopes": {
-        "https://www.googleapis.com/auth/drive": "View and manage the files in your Google Drive",
+        "https://www.googleapis.com/auth/drive": "View and manage the files and documents in your Google Drive",
         "https://www.googleapis.com/auth/drive.appdata": "View and manage its own configuration data in your Google Drive",
         "https://www.googleapis.com/auth/drive.apps.readonly": "View your Google Drive apps",
         "https://www.googleapis.com/auth/drive.file": "View and manage Google Drive files that you have opened or created with this app",
-        "https://www.googleapis.com/auth/drive.metadata.readonly": "View metadata for files in your Google Drive",
-        "https://www.googleapis.com/auth/drive.readonly": "View the files in your Google Drive",
+        "https://www.googleapis.com/auth/drive.metadata.readonly": "View metadata for files and documents in your Google Drive",
+        "https://www.googleapis.com/auth/drive.readonly": "View the files and documents in your Google Drive",
         "https://www.googleapis.com/auth/drive.scripts": "Modify your Google Apps Script scripts' behavior"
       }
     }

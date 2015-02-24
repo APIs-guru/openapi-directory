@@ -19,29 +19,6 @@
   },
   "paths": {
     "/accounts/{accountId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Gets a GTM Account.",
         "operationId": "tagmanager.accounts.get",
@@ -70,6 +47,9 @@
               "https://www.googleapis.com/auth/tagmanager.readonly"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
       },
       "put": {
@@ -104,10 +84,11 @@
               "https://www.googleapis.com/auth/tagmanager.manage.accounts"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
-      }
-    },
-    "/accounts": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -130,7 +111,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts": {
       "get": {
         "description": "Lists all GTM Accounts that a user has access to.",
         "operationId": "tagmanager.accounts.list",
@@ -150,10 +133,11 @@
               "https://www.googleapis.com/auth/tagmanager.readonly"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/containers": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -176,7 +160,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/containers": {
       "post": {
         "description": "Creates a Container.",
         "operationId": "tagmanager.accounts.containers.create",
@@ -203,6 +189,10 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containers"
             ]
           }
+        ],
+        "tags": [
+          "containers",
+          "accounts"
         ]
       },
       "get": {
@@ -232,10 +222,12 @@
               "https://www.googleapis.com/auth/tagmanager.readonly"
             ]
           }
+        ],
+        "tags": [
+          "containers",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/containers/{containerId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -258,7 +250,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/containers/{containerId}": {
       "delete": {
         "description": "Deletes a Container.",
         "operationId": "tagmanager.accounts.containers.delete",
@@ -289,6 +283,10 @@
               "https://www.googleapis.com/auth/tagmanager.delete.containers"
             ]
           }
+        ],
+        "tags": [
+          "containers",
+          "accounts"
         ]
       },
       "get": {
@@ -325,6 +323,10 @@
               "https://www.googleapis.com/auth/tagmanager.readonly"
             ]
           }
+        ],
+        "tags": [
+          "containers",
+          "accounts"
         ]
       },
       "put": {
@@ -366,10 +368,12 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containers"
             ]
           }
+        ],
+        "tags": [
+          "containers",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/containers/{containerId}/macros": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -392,7 +396,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/containers/{containerId}/macros": {
       "post": {
         "description": "Creates a GTM Macro.",
         "operationId": "tagmanager.accounts.containers.macros.create",
@@ -426,6 +432,11 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containers"
             ]
           }
+        ],
+        "tags": [
+          "macros",
+          "containers",
+          "accounts"
         ]
       },
       "get": {
@@ -462,10 +473,13 @@
               "https://www.googleapis.com/auth/tagmanager.readonly"
             ]
           }
+        ],
+        "tags": [
+          "macros",
+          "containers",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/containers/{containerId}/macros/{macroId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -488,7 +502,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/containers/{containerId}/macros/{macroId}": {
       "delete": {
         "description": "Deletes a GTM Macro.",
         "operationId": "tagmanager.accounts.containers.macros.delete",
@@ -526,6 +542,11 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containers"
             ]
           }
+        ],
+        "tags": [
+          "macros",
+          "containers",
+          "accounts"
         ]
       },
       "get": {
@@ -569,6 +590,11 @@
               "https://www.googleapis.com/auth/tagmanager.readonly"
             ]
           }
+        ],
+        "tags": [
+          "macros",
+          "containers",
+          "accounts"
         ]
       },
       "put": {
@@ -617,10 +643,13 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containers"
             ]
           }
+        ],
+        "tags": [
+          "macros",
+          "containers",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/containers/{containerId}/rules": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -643,7 +672,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/containers/{containerId}/rules": {
       "post": {
         "description": "Creates a GTM Rule.",
         "operationId": "tagmanager.accounts.containers.rules.create",
@@ -677,6 +708,11 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containers"
             ]
           }
+        ],
+        "tags": [
+          "rules",
+          "containers",
+          "accounts"
         ]
       },
       "get": {
@@ -713,10 +749,13 @@
               "https://www.googleapis.com/auth/tagmanager.readonly"
             ]
           }
+        ],
+        "tags": [
+          "rules",
+          "containers",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/containers/{containerId}/rules/{ruleId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -739,7 +778,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/containers/{containerId}/rules/{ruleId}": {
       "delete": {
         "description": "Deletes a GTM Rule.",
         "operationId": "tagmanager.accounts.containers.rules.delete",
@@ -777,6 +818,11 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containers"
             ]
           }
+        ],
+        "tags": [
+          "rules",
+          "containers",
+          "accounts"
         ]
       },
       "get": {
@@ -820,6 +866,11 @@
               "https://www.googleapis.com/auth/tagmanager.readonly"
             ]
           }
+        ],
+        "tags": [
+          "rules",
+          "containers",
+          "accounts"
         ]
       },
       "put": {
@@ -868,10 +919,13 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containers"
             ]
           }
+        ],
+        "tags": [
+          "rules",
+          "containers",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/containers/{containerId}/tags": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -894,7 +948,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/containers/{containerId}/tags": {
       "post": {
         "description": "Creates a GTM Tag.",
         "operationId": "tagmanager.accounts.containers.tags.create",
@@ -928,6 +984,11 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containers"
             ]
           }
+        ],
+        "tags": [
+          "tags",
+          "containers",
+          "accounts"
         ]
       },
       "get": {
@@ -964,10 +1025,13 @@
               "https://www.googleapis.com/auth/tagmanager.readonly"
             ]
           }
+        ],
+        "tags": [
+          "tags",
+          "containers",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/containers/{containerId}/tags/{tagId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -990,7 +1054,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/containers/{containerId}/tags/{tagId}": {
       "delete": {
         "description": "Deletes a GTM Tag.",
         "operationId": "tagmanager.accounts.containers.tags.delete",
@@ -1028,6 +1094,11 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containers"
             ]
           }
+        ],
+        "tags": [
+          "tags",
+          "containers",
+          "accounts"
         ]
       },
       "get": {
@@ -1071,6 +1142,11 @@
               "https://www.googleapis.com/auth/tagmanager.readonly"
             ]
           }
+        ],
+        "tags": [
+          "tags",
+          "containers",
+          "accounts"
         ]
       },
       "put": {
@@ -1119,10 +1195,13 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containers"
             ]
           }
+        ],
+        "tags": [
+          "tags",
+          "containers",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/containers/{containerId}/triggers": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1145,7 +1224,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/containers/{containerId}/triggers": {
       "post": {
         "description": "Creates a GTM Trigger.",
         "operationId": "tagmanager.accounts.containers.triggers.create",
@@ -1179,6 +1260,11 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containers"
             ]
           }
+        ],
+        "tags": [
+          "triggers",
+          "containers",
+          "accounts"
         ]
       },
       "get": {
@@ -1215,10 +1301,13 @@
               "https://www.googleapis.com/auth/tagmanager.readonly"
             ]
           }
+        ],
+        "tags": [
+          "triggers",
+          "containers",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/containers/{containerId}/triggers/{triggerId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1241,7 +1330,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/containers/{containerId}/triggers/{triggerId}": {
       "delete": {
         "description": "Deletes a GTM Trigger.",
         "operationId": "tagmanager.accounts.containers.triggers.delete",
@@ -1279,6 +1370,11 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containers"
             ]
           }
+        ],
+        "tags": [
+          "triggers",
+          "containers",
+          "accounts"
         ]
       },
       "get": {
@@ -1322,6 +1418,11 @@
               "https://www.googleapis.com/auth/tagmanager.readonly"
             ]
           }
+        ],
+        "tags": [
+          "triggers",
+          "containers",
+          "accounts"
         ]
       },
       "put": {
@@ -1370,10 +1471,13 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containers"
             ]
           }
+        ],
+        "tags": [
+          "triggers",
+          "containers",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/containers/{containerId}/variables": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1396,7 +1500,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/containers/{containerId}/variables": {
       "post": {
         "description": "Creates a GTM Variable.",
         "operationId": "tagmanager.accounts.containers.variables.create",
@@ -1430,6 +1536,11 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containers"
             ]
           }
+        ],
+        "tags": [
+          "variables",
+          "containers",
+          "accounts"
         ]
       },
       "get": {
@@ -1466,10 +1577,13 @@
               "https://www.googleapis.com/auth/tagmanager.readonly"
             ]
           }
+        ],
+        "tags": [
+          "variables",
+          "containers",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/containers/{containerId}/variables/{variableId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1492,7 +1606,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/containers/{containerId}/variables/{variableId}": {
       "delete": {
         "description": "Deletes a GTM Variable.",
         "operationId": "tagmanager.accounts.containers.variables.delete",
@@ -1530,6 +1646,11 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containers"
             ]
           }
+        ],
+        "tags": [
+          "variables",
+          "containers",
+          "accounts"
         ]
       },
       "get": {
@@ -1573,6 +1694,11 @@
               "https://www.googleapis.com/auth/tagmanager.readonly"
             ]
           }
+        ],
+        "tags": [
+          "variables",
+          "containers",
+          "accounts"
         ]
       },
       "put": {
@@ -1621,10 +1747,13 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containers"
             ]
           }
+        ],
+        "tags": [
+          "variables",
+          "containers",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/containers/{containerId}/versions": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1647,7 +1776,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/containers/{containerId}/versions": {
       "post": {
         "description": "Creates a Container Version.",
         "operationId": "tagmanager.accounts.containers.versions.create",
@@ -1681,6 +1812,11 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containerversions"
             ]
           }
+        ],
+        "tags": [
+          "versions",
+          "containers",
+          "accounts"
         ]
       },
       "get": {
@@ -1725,10 +1861,13 @@
               "https://www.googleapis.com/auth/tagmanager.readonly"
             ]
           }
+        ],
+        "tags": [
+          "versions",
+          "containers",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/containers/{containerId}/versions/{containerVersionId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1751,7 +1890,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/containers/{containerId}/versions/{containerVersionId}": {
       "delete": {
         "description": "Deletes a Container Version.",
         "operationId": "tagmanager.accounts.containers.versions.delete",
@@ -1789,6 +1930,11 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containerversions"
             ]
           }
+        ],
+        "tags": [
+          "versions",
+          "containers",
+          "accounts"
         ]
       },
       "get": {
@@ -1833,6 +1979,11 @@
               "https://www.googleapis.com/auth/tagmanager.readonly"
             ]
           }
+        ],
+        "tags": [
+          "versions",
+          "containers",
+          "accounts"
         ]
       },
       "put": {
@@ -1881,10 +2032,13 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containerversions"
             ]
           }
+        ],
+        "tags": [
+          "versions",
+          "containers",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/containers/{containerId}/versions/{containerVersionId}/publish": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1907,7 +2061,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/containers/{containerId}/versions/{containerVersionId}/publish": {
       "post": {
         "description": "Publishes a Container Version.",
         "operationId": "tagmanager.accounts.containers.versions.publish",
@@ -1954,10 +2110,13 @@
               "https://www.googleapis.com/auth/tagmanager.publish"
             ]
           }
+        ],
+        "tags": [
+          "versions",
+          "containers",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/containers/{containerId}/versions/{containerVersionId}/restore": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1980,7 +2139,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/containers/{containerId}/versions/{containerVersionId}/restore": {
       "post": {
         "description": "Restores a Container Version. This will overwrite the container's current configuration (including its macros, rules and tags). The operation will not have any effect on the version that is being served (i.e. the published version).",
         "operationId": "tagmanager.accounts.containers.versions.restore",
@@ -2021,10 +2182,13 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containers"
             ]
           }
+        ],
+        "tags": [
+          "versions",
+          "containers",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/containers/{containerId}/versions/{containerVersionId}/undelete": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2047,7 +2211,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/containers/{containerId}/versions/{containerVersionId}/undelete": {
       "post": {
         "description": "Undeletes a Container Version.",
         "operationId": "tagmanager.accounts.containers.versions.undelete",
@@ -2088,10 +2254,13 @@
               "https://www.googleapis.com/auth/tagmanager.edit.containerversions"
             ]
           }
+        ],
+        "tags": [
+          "versions",
+          "containers",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/permissions": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2114,7 +2283,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/permissions": {
       "post": {
         "description": "Creates a user's Account & Container Permissions.",
         "operationId": "tagmanager.accounts.permissions.create",
@@ -2141,6 +2312,10 @@
               "https://www.googleapis.com/auth/tagmanager.manage.users"
             ]
           }
+        ],
+        "tags": [
+          "permissions",
+          "accounts"
         ]
       },
       "get": {
@@ -2169,10 +2344,12 @@
               "https://www.googleapis.com/auth/tagmanager.manage.users"
             ]
           }
+        ],
+        "tags": [
+          "permissions",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/permissions/{permissionId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2195,7 +2372,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/permissions/{permissionId}": {
       "delete": {
         "description": "Removes a user from the account, revoking access to it and all of its containers.",
         "operationId": "tagmanager.accounts.permissions.delete",
@@ -2226,6 +2405,10 @@
               "https://www.googleapis.com/auth/tagmanager.manage.users"
             ]
           }
+        ],
+        "tags": [
+          "permissions",
+          "accounts"
         ]
       },
       "get": {
@@ -2261,6 +2444,10 @@
               "https://www.googleapis.com/auth/tagmanager.manage.users"
             ]
           }
+        ],
+        "tags": [
+          "permissions",
+          "accounts"
         ]
       },
       "put": {
@@ -2296,8 +2483,35 @@
               "https://www.googleapis.com/auth/tagmanager.manage.users"
             ]
           }
+        ],
+        "tags": [
+          "permissions",
+          "accounts"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

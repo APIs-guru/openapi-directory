@@ -19,29 +19,6 @@
   },
   "paths": {
     "/files/{id}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Gets a file's metadata by id.",
         "operationId": "drive.files.get",
@@ -85,6 +62,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "files"
         ]
       },
       "patch": {
@@ -134,6 +114,9 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "files"
         ]
       },
       "put": {
@@ -186,10 +169,11 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "files"
         ]
-      }
-    },
-    "/files": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -212,7 +196,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/files": {
       "post": {
         "description": "Inserts a file, and any settable metadata or blob content sent with the request.",
         "operationId": "drive.files.insert",
@@ -233,8 +219,34 @@
               "https://www.googleapis.com/auth/drive.file"
             ]
           }
+        ],
+        "tags": [
+          "files"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{project}/aggregated/addresses": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Retrieves the list of addresses grouped by scope.",
         "operationId": "compute.addresses.aggregatedList",
@@ -91,10 +68,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "addresses"
         ]
-      }
-    },
-    "/{project}/regions/{region}/addresses/{address}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -117,7 +95,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/regions/{region}/addresses/{address}": {
       "delete": {
         "description": "Deletes the specified address resource.",
         "operationId": "compute.addresses.delete",
@@ -159,6 +139,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "addresses"
         ]
       },
       "get": {
@@ -203,10 +186,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "addresses"
         ]
-      }
-    },
-    "/{project}/regions/{region}/addresses": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -229,7 +213,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/regions/{region}/addresses": {
       "post": {
         "description": "Creates an address resource in the specified project using the data included in the request.",
         "operationId": "compute.addresses.insert",
@@ -264,6 +250,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "addresses"
         ]
       },
       "get": {
@@ -322,10 +311,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "addresses"
         ]
-      }
-    },
-    "/{project}/global/backendServices/{backendService}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -348,7 +338,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/backendServices/{backendService}": {
       "delete": {
         "description": "Deletes the specified BackendService resource.",
         "operationId": "compute.backendServices.delete",
@@ -383,6 +375,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "backendServices"
         ]
       },
       "get": {
@@ -420,6 +415,9 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "backendServices"
         ]
       },
       "patch": {
@@ -456,6 +454,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "backendServices"
         ]
       },
       "put": {
@@ -492,10 +493,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "backendServices"
         ]
-      }
-    },
-    "/{project}/global/backendServices/{backendService}/getHealth": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -518,7 +520,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/backendServices/{backendService}/getHealth": {
       "post": {
         "description": "Gets the most recent health check results for this BackendService.",
         "operationId": "compute.backendServices.getHealth",
@@ -553,10 +557,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "backendServices"
         ]
-      }
-    },
-    "/{project}/global/backendServices": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -579,7 +584,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/backendServices": {
       "post": {
         "description": "Creates a BackendService resource in the specified project using the data included in the request.",
         "operationId": "compute.backendServices.insert",
@@ -607,6 +614,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "backendServices"
         ]
       },
       "get": {
@@ -658,10 +668,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "backendServices"
         ]
-      }
-    },
-    "/{project}/aggregated/diskTypes": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -684,7 +695,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/aggregated/diskTypes": {
       "get": {
         "description": "Retrieves the list of disk type resources grouped by scope.",
         "operationId": "compute.diskTypes.aggregatedList",
@@ -734,10 +747,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "diskTypes"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/diskTypes/{diskType}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -760,7 +774,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/diskTypes/{diskType}": {
       "get": {
         "description": "Returns the specified disk type resource.",
         "operationId": "compute.diskTypes.get",
@@ -803,10 +819,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "diskTypes"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/diskTypes": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -829,7 +846,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/diskTypes": {
       "get": {
         "description": "Retrieves the list of disk type resources available to the specified project.",
         "operationId": "compute.diskTypes.list",
@@ -886,10 +905,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "diskTypes"
         ]
-      }
-    },
-    "/{project}/aggregated/disks": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -912,7 +932,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/aggregated/disks": {
       "get": {
         "description": "Retrieves the list of disks grouped by scope.",
         "operationId": "compute.disks.aggregatedList",
@@ -962,10 +984,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "disks"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/disks/{disk}/createSnapshot": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -988,7 +1011,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/disks/{disk}/createSnapshot": {
       "post": {
         "operationId": "compute.disks.createSnapshot",
         "responses": {
@@ -1029,10 +1054,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "disks"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/disks/{disk}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1055,7 +1081,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/disks/{disk}": {
       "delete": {
         "description": "Deletes the specified persistent disk resource.",
         "operationId": "compute.disks.delete",
@@ -1097,6 +1125,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "disks"
         ]
       },
       "get": {
@@ -1141,10 +1172,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "disks"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/disks": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1167,7 +1199,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/disks": {
       "post": {
         "description": "Creates a persistent disk resource in the specified project using the data included in the request.",
         "operationId": "compute.disks.insert",
@@ -1208,6 +1242,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "disks"
         ]
       },
       "get": {
@@ -1266,10 +1303,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "disks"
         ]
-      }
-    },
-    "/{project}/global/firewalls/{firewall}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1292,7 +1330,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/firewalls/{firewall}": {
       "delete": {
         "description": "Deletes the specified firewall resource.",
         "operationId": "compute.firewalls.delete",
@@ -1327,6 +1367,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "firewalls"
         ]
       },
       "get": {
@@ -1364,6 +1407,9 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "firewalls"
         ]
       },
       "patch": {
@@ -1400,6 +1446,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "firewalls"
         ]
       },
       "put": {
@@ -1436,10 +1485,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "firewalls"
         ]
-      }
-    },
-    "/{project}/global/firewalls": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1462,7 +1512,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/firewalls": {
       "post": {
         "description": "Creates a firewall resource in the specified project using the data included in the request.",
         "operationId": "compute.firewalls.insert",
@@ -1490,6 +1542,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "firewalls"
         ]
       },
       "get": {
@@ -1541,10 +1596,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "firewalls"
         ]
-      }
-    },
-    "/{project}/aggregated/forwardingRules": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1567,7 +1623,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/aggregated/forwardingRules": {
       "get": {
         "description": "Retrieves the list of forwarding rules grouped by scope.",
         "operationId": "compute.forwardingRules.aggregatedList",
@@ -1617,10 +1675,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "forwardingRules"
         ]
-      }
-    },
-    "/{project}/regions/{region}/forwardingRules/{forwardingRule}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1643,7 +1702,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/regions/{region}/forwardingRules/{forwardingRule}": {
       "delete": {
         "description": "Deletes the specified ForwardingRule resource.",
         "operationId": "compute.forwardingRules.delete",
@@ -1685,6 +1746,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "forwardingRules"
         ]
       },
       "get": {
@@ -1729,10 +1793,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "forwardingRules"
         ]
-      }
-    },
-    "/{project}/regions/{region}/forwardingRules": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1755,7 +1820,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/regions/{region}/forwardingRules": {
       "post": {
         "description": "Creates a ForwardingRule resource in the specified project and region using the data included in the request.",
         "operationId": "compute.forwardingRules.insert",
@@ -1790,6 +1857,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "forwardingRules"
         ]
       },
       "get": {
@@ -1848,10 +1918,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "forwardingRules"
         ]
-      }
-    },
-    "/{project}/regions/{region}/forwardingRules/{forwardingRule}/setTarget": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1874,7 +1945,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/regions/{region}/forwardingRules/{forwardingRule}/setTarget": {
       "post": {
         "description": "Changes target url for forwarding rule.",
         "operationId": "compute.forwardingRules.setTarget",
@@ -1916,10 +1989,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "forwardingRules"
         ]
-      }
-    },
-    "/{project}/global/addresses/{address}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1942,7 +2016,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/addresses/{address}": {
       "delete": {
         "description": "Deletes the specified address resource.",
         "operationId": "compute.globalAddresses.delete",
@@ -1977,6 +2053,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "globalAddresses"
         ]
       },
       "get": {
@@ -2014,10 +2093,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "globalAddresses"
         ]
-      }
-    },
-    "/{project}/global/addresses": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2040,7 +2120,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/addresses": {
       "post": {
         "description": "Creates an address resource in the specified project using the data included in the request.",
         "operationId": "compute.globalAddresses.insert",
@@ -2068,6 +2150,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "globalAddresses"
         ]
       },
       "get": {
@@ -2119,10 +2204,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "globalAddresses"
         ]
-      }
-    },
-    "/{project}/global/forwardingRules/{forwardingRule}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2145,7 +2231,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/forwardingRules/{forwardingRule}": {
       "delete": {
         "description": "Deletes the specified ForwardingRule resource.",
         "operationId": "compute.globalForwardingRules.delete",
@@ -2180,6 +2268,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "globalForwardingRules"
         ]
       },
       "get": {
@@ -2217,10 +2308,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "globalForwardingRules"
         ]
-      }
-    },
-    "/{project}/global/forwardingRules": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2243,7 +2335,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/forwardingRules": {
       "post": {
         "description": "Creates a ForwardingRule resource in the specified project and region using the data included in the request.",
         "operationId": "compute.globalForwardingRules.insert",
@@ -2271,6 +2365,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "globalForwardingRules"
         ]
       },
       "get": {
@@ -2322,10 +2419,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "globalForwardingRules"
         ]
-      }
-    },
-    "/{project}/global/forwardingRules/{forwardingRule}/setTarget": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2348,7 +2446,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/forwardingRules/{forwardingRule}/setTarget": {
       "post": {
         "description": "Changes target url for forwarding rule.",
         "operationId": "compute.globalForwardingRules.setTarget",
@@ -2383,10 +2483,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "globalForwardingRules"
         ]
-      }
-    },
-    "/{project}/aggregated/operations": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2409,7 +2510,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/aggregated/operations": {
       "get": {
         "description": "Retrieves the list of all operations grouped by scope.",
         "operationId": "compute.globalOperations.aggregatedList",
@@ -2459,10 +2562,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "globalOperations"
         ]
-      }
-    },
-    "/{project}/global/operations/{operation}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2485,7 +2589,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/operations/{operation}": {
       "delete": {
         "description": "Deletes the specified operation resource.",
         "operationId": "compute.globalOperations.delete",
@@ -2517,6 +2623,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "globalOperations"
         ]
       },
       "get": {
@@ -2554,10 +2663,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "globalOperations"
         ]
-      }
-    },
-    "/{project}/global/operations": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2580,7 +2690,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/operations": {
       "get": {
         "description": "Retrieves the list of operation resources contained within the specified project.",
         "operationId": "compute.globalOperations.list",
@@ -2630,10 +2742,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "globalOperations"
         ]
-      }
-    },
-    "/{project}/global/httpHealthChecks/{httpHealthCheck}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2656,7 +2769,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/httpHealthChecks/{httpHealthCheck}": {
       "delete": {
         "description": "Deletes the specified HttpHealthCheck resource.",
         "operationId": "compute.httpHealthChecks.delete",
@@ -2691,6 +2806,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "httpHealthChecks"
         ]
       },
       "get": {
@@ -2728,6 +2846,9 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "httpHealthChecks"
         ]
       },
       "patch": {
@@ -2764,6 +2885,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "httpHealthChecks"
         ]
       },
       "put": {
@@ -2800,10 +2924,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "httpHealthChecks"
         ]
-      }
-    },
-    "/{project}/global/httpHealthChecks": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2826,7 +2951,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/httpHealthChecks": {
       "post": {
         "description": "Creates a HttpHealthCheck resource in the specified project using the data included in the request.",
         "operationId": "compute.httpHealthChecks.insert",
@@ -2854,6 +2981,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "httpHealthChecks"
         ]
       },
       "get": {
@@ -2905,10 +3035,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "httpHealthChecks"
         ]
-      }
-    },
-    "/{project}/global/images/{image}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2931,7 +3062,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/images/{image}": {
       "delete": {
         "description": "Deletes the specified image resource.",
         "operationId": "compute.images.delete",
@@ -2966,6 +3099,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "images"
         ]
       },
       "get": {
@@ -3003,10 +3139,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "images"
         ]
-      }
-    },
-    "/{project}/global/images/{image}/deprecate": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3029,7 +3166,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/images/{image}/deprecate": {
       "post": {
         "description": "Sets the deprecation status of an image. If no message body is given, clears the deprecation status instead.",
         "operationId": "compute.images.deprecate",
@@ -3064,10 +3203,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "images"
         ]
-      }
-    },
-    "/{project}/global/images": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3090,7 +3230,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/images": {
       "post": {
         "description": "Creates an image resource in the specified project using the data included in the request.",
         "operationId": "compute.images.insert",
@@ -3121,6 +3263,9 @@
               "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
+        ],
+        "tags": [
+          "images"
         ]
       },
       "get": {
@@ -3172,10 +3317,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "images"
         ]
-      }
-    },
-    "/{project}/global/instanceTemplates/{instanceTemplate}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3198,7 +3344,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/instanceTemplates/{instanceTemplate}": {
       "delete": {
         "description": "Deletes the specified instance template resource.",
         "operationId": "compute.instanceTemplates.delete",
@@ -3233,6 +3381,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instanceTemplates"
         ]
       },
       "get": {
@@ -3270,10 +3421,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "instanceTemplates"
         ]
-      }
-    },
-    "/{project}/global/instanceTemplates": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3296,7 +3448,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/instanceTemplates": {
       "post": {
         "description": "Creates an instance template resource in the specified project using the data included in the request.",
         "operationId": "compute.instanceTemplates.insert",
@@ -3324,6 +3478,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instanceTemplates"
         ]
       },
       "get": {
@@ -3375,10 +3532,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "instanceTemplates"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instances/{instance}/addAccessConfig": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3401,7 +3559,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instances/{instance}/addAccessConfig": {
       "post": {
         "description": "Adds an access config to an instance's network interface.",
         "operationId": "compute.instances.addAccessConfig",
@@ -3450,10 +3610,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/{project}/aggregated/instances": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3476,7 +3637,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/aggregated/instances": {
       "get": {
         "operationId": "compute.instances.aggregatedList",
         "responses": {
@@ -3525,10 +3688,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instances/{instance}/attachDisk": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3551,7 +3715,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instances/{instance}/attachDisk": {
       "post": {
         "description": "Attaches a disk resource to an instance.",
         "operationId": "compute.instances.attachDisk",
@@ -3593,10 +3759,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instances/{instance}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3619,7 +3786,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instances/{instance}": {
       "delete": {
         "description": "Deletes the specified instance resource.",
         "operationId": "compute.instances.delete",
@@ -3661,6 +3830,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
       },
       "get": {
@@ -3705,10 +3877,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instances/{instance}/deleteAccessConfig": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3731,7 +3904,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instances/{instance}/deleteAccessConfig": {
       "post": {
         "description": "Deletes an access config from an instance's network interface.",
         "operationId": "compute.instances.deleteAccessConfig",
@@ -3787,10 +3962,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instances/{instance}/detachDisk": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3813,7 +3989,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instances/{instance}/detachDisk": {
       "post": {
         "description": "Detaches a disk from an instance.",
         "operationId": "compute.instances.detachDisk",
@@ -3862,10 +4040,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instances/{instance}/serialPort": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3888,7 +4067,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instances/{instance}/serialPort": {
       "get": {
         "description": "Returns the specified instance's serial port output.",
         "operationId": "compute.instances.getSerialPortOutput",
@@ -3931,10 +4112,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instances": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3957,7 +4139,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instances": {
       "post": {
         "description": "Creates an instance resource in the specified project using the data included in the request.",
         "operationId": "compute.instances.insert",
@@ -3992,6 +4176,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
       },
       "get": {
@@ -4050,10 +4237,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instances/{instance}/reset": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4076,7 +4264,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instances/{instance}/reset": {
       "post": {
         "description": "Performs a hard reset on the instance.",
         "operationId": "compute.instances.reset",
@@ -4118,10 +4308,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instances/{instance}/setDiskAutoDelete": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4144,7 +4335,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instances/{instance}/setDiskAutoDelete": {
       "post": {
         "description": "Sets the auto-delete flag for a disk attached to an instance",
         "operationId": "compute.instances.setDiskAutoDelete",
@@ -4200,10 +4393,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instances/{instance}/setMetadata": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4226,7 +4420,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instances/{instance}/setMetadata": {
       "post": {
         "description": "Sets metadata for the specified instance to the data included in the request.",
         "operationId": "compute.instances.setMetadata",
@@ -4268,10 +4464,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instances/{instance}/setScheduling": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4294,7 +4491,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instances/{instance}/setScheduling": {
       "post": {
         "description": "Sets an instance's scheduling options.",
         "operationId": "compute.instances.setScheduling",
@@ -4336,10 +4535,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instances/{instance}/setTags": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4362,7 +4562,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instances/{instance}/setTags": {
       "post": {
         "description": "Sets tags for the specified instance to the data included in the request.",
         "operationId": "compute.instances.setTags",
@@ -4404,10 +4606,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instances/{instance}/start": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4430,7 +4633,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instances/{instance}/start": {
       "post": {
         "description": "Starts an instance",
         "operationId": "compute.instances.start",
@@ -4472,10 +4677,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/instances/{instance}/stop": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4498,7 +4704,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/instances/{instance}/stop": {
       "post": {
         "description": "Stops an instance",
         "operationId": "compute.instances.stop",
@@ -4540,10 +4748,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "instances"
         ]
-      }
-    },
-    "/{project}/global/licenses/{license}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4566,7 +4775,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/licenses/{license}": {
       "get": {
         "description": "Returns the specified license resource.",
         "operationId": "compute.licenses.get",
@@ -4602,10 +4813,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "licenses"
         ]
-      }
-    },
-    "/{project}/aggregated/machineTypes": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4628,7 +4840,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/aggregated/machineTypes": {
       "get": {
         "description": "Retrieves the list of machine type resources grouped by scope.",
         "operationId": "compute.machineTypes.aggregatedList",
@@ -4678,10 +4892,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "machineTypes"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/machineTypes/{machineType}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4704,7 +4919,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/machineTypes/{machineType}": {
       "get": {
         "description": "Returns the specified machine type resource.",
         "operationId": "compute.machineTypes.get",
@@ -4747,10 +4964,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "machineTypes"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/machineTypes": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4773,7 +4991,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/machineTypes": {
       "get": {
         "description": "Retrieves the list of machine type resources available to the specified project.",
         "operationId": "compute.machineTypes.list",
@@ -4830,10 +5050,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "machineTypes"
         ]
-      }
-    },
-    "/{project}/global/networks/{network}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4856,7 +5077,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/networks/{network}": {
       "delete": {
         "description": "Deletes the specified network resource.",
         "operationId": "compute.networks.delete",
@@ -4891,6 +5114,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "networks"
         ]
       },
       "get": {
@@ -4928,10 +5154,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "networks"
         ]
-      }
-    },
-    "/{project}/global/networks": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4954,7 +5181,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/networks": {
       "post": {
         "description": "Creates a network resource in the specified project using the data included in the request.",
         "operationId": "compute.networks.insert",
@@ -4982,6 +5211,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "networks"
         ]
       },
       "get": {
@@ -5033,10 +5265,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "networks"
         ]
-      }
-    },
-    "/{project}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -5059,7 +5292,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}": {
       "get": {
         "description": "Returns the specified project resource.",
         "operationId": "compute.projects.get",
@@ -5088,10 +5323,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "projects"
         ]
-      }
-    },
-    "/{project}/setCommonInstanceMetadata": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -5114,7 +5350,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/setCommonInstanceMetadata": {
       "post": {
         "description": "Sets metadata common to all instances within the specified project using the data included in the request.",
         "operationId": "compute.projects.setCommonInstanceMetadata",
@@ -5142,10 +5380,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "projects"
         ]
-      }
-    },
-    "/{project}/setUsageExportBucket": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -5168,7 +5407,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/setUsageExportBucket": {
       "post": {
         "description": "Sets usage export location",
         "operationId": "compute.projects.setUsageExportBucket",
@@ -5199,10 +5440,11 @@
               "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
+        ],
+        "tags": [
+          "projects"
         ]
-      }
-    },
-    "/{project}/regions/{region}/operations/{operation}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -5225,7 +5467,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/regions/{region}/operations/{operation}": {
       "delete": {
         "description": "Deletes the specified region-specific operation resource.",
         "operationId": "compute.regionOperations.delete",
@@ -5264,6 +5508,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "regionOperations"
         ]
       },
       "get": {
@@ -5308,10 +5555,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "regionOperations"
         ]
-      }
-    },
-    "/{project}/regions/{region}/operations": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -5334,7 +5582,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/regions/{region}/operations": {
       "get": {
         "description": "Retrieves the list of operation resources contained within the specified region.",
         "operationId": "compute.regionOperations.list",
@@ -5391,10 +5641,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "regionOperations"
         ]
-      }
-    },
-    "/{project}/regions/{region}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -5417,7 +5668,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/regions/{region}": {
       "get": {
         "description": "Returns the specified region resource.",
         "operationId": "compute.regions.get",
@@ -5453,10 +5706,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "regions"
         ]
-      }
-    },
-    "/{project}/regions": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -5479,7 +5733,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/regions": {
       "get": {
         "description": "Retrieves the list of region resources available to the specified project.",
         "operationId": "compute.regions.list",
@@ -5529,10 +5785,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "regions"
         ]
-      }
-    },
-    "/{project}/global/routes/{route}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -5555,7 +5812,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/routes/{route}": {
       "delete": {
         "description": "Deletes the specified route resource.",
         "operationId": "compute.routes.delete",
@@ -5590,6 +5849,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "routes"
         ]
       },
       "get": {
@@ -5627,10 +5889,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "routes"
         ]
-      }
-    },
-    "/{project}/global/routes": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -5653,7 +5916,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/routes": {
       "post": {
         "description": "Creates a route resource in the specified project using the data included in the request.",
         "operationId": "compute.routes.insert",
@@ -5681,6 +5946,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "routes"
         ]
       },
       "get": {
@@ -5732,10 +6000,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "routes"
         ]
-      }
-    },
-    "/{project}/global/snapshots/{snapshot}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -5758,7 +6027,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/snapshots/{snapshot}": {
       "delete": {
         "description": "Deletes the specified persistent disk snapshot resource.",
         "operationId": "compute.snapshots.delete",
@@ -5793,6 +6064,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "snapshots"
         ]
       },
       "get": {
@@ -5830,10 +6104,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "snapshots"
         ]
-      }
-    },
-    "/{project}/global/snapshots": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -5856,7 +6131,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/snapshots": {
       "get": {
         "description": "Retrieves the list of persistent disk snapshot resources contained within the specified project.",
         "operationId": "compute.snapshots.list",
@@ -5906,10 +6183,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "snapshots"
         ]
-      }
-    },
-    "/{project}/global/targetHttpProxies/{targetHttpProxy}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -5932,7 +6210,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/targetHttpProxies/{targetHttpProxy}": {
       "delete": {
         "description": "Deletes the specified TargetHttpProxy resource.",
         "operationId": "compute.targetHttpProxies.delete",
@@ -5967,6 +6247,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "targetHttpProxies"
         ]
       },
       "get": {
@@ -6004,10 +6287,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "targetHttpProxies"
         ]
-      }
-    },
-    "/{project}/global/targetHttpProxies": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6030,7 +6314,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/targetHttpProxies": {
       "post": {
         "description": "Creates a TargetHttpProxy resource in the specified project using the data included in the request.",
         "operationId": "compute.targetHttpProxies.insert",
@@ -6058,6 +6344,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "targetHttpProxies"
         ]
       },
       "get": {
@@ -6109,10 +6398,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "targetHttpProxies"
         ]
-      }
-    },
-    "/{project}/targetHttpProxies/{targetHttpProxy}/setUrlMap": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6135,7 +6425,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/targetHttpProxies/{targetHttpProxy}/setUrlMap": {
       "post": {
         "description": "Changes the URL map for TargetHttpProxy.",
         "operationId": "compute.targetHttpProxies.setUrlMap",
@@ -6170,10 +6462,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "targetHttpProxies"
         ]
-      }
-    },
-    "/{project}/aggregated/targetInstances": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6196,7 +6489,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/aggregated/targetInstances": {
       "get": {
         "description": "Retrieves the list of target instances grouped by scope.",
         "operationId": "compute.targetInstances.aggregatedList",
@@ -6246,10 +6541,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "targetInstances"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/targetInstances/{targetInstance}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6272,7 +6568,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/targetInstances/{targetInstance}": {
       "delete": {
         "description": "Deletes the specified TargetInstance resource.",
         "operationId": "compute.targetInstances.delete",
@@ -6314,6 +6612,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "targetInstances"
         ]
       },
       "get": {
@@ -6358,10 +6659,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "targetInstances"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/targetInstances": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6384,7 +6686,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/targetInstances": {
       "post": {
         "description": "Creates a TargetInstance resource in the specified project and zone using the data included in the request.",
         "operationId": "compute.targetInstances.insert",
@@ -6419,6 +6723,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "targetInstances"
         ]
       },
       "get": {
@@ -6477,10 +6784,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "targetInstances"
         ]
-      }
-    },
-    "/{project}/regions/{region}/targetPools/{targetPool}/addHealthCheck": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6503,7 +6811,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/regions/{region}/targetPools/{targetPool}/addHealthCheck": {
       "post": {
         "description": "Adds health check URL to targetPool.",
         "operationId": "compute.targetPools.addHealthCheck",
@@ -6544,10 +6854,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "targetPools"
         ]
-      }
-    },
-    "/{project}/regions/{region}/targetPools/{targetPool}/addInstance": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6570,7 +6881,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/regions/{region}/targetPools/{targetPool}/addInstance": {
       "post": {
         "description": "Adds instance url to targetPool.",
         "operationId": "compute.targetPools.addInstance",
@@ -6611,10 +6924,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "targetPools"
         ]
-      }
-    },
-    "/{project}/aggregated/targetPools": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6637,7 +6951,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/aggregated/targetPools": {
       "get": {
         "description": "Retrieves the list of target pools grouped by scope.",
         "operationId": "compute.targetPools.aggregatedList",
@@ -6687,10 +7003,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "targetPools"
         ]
-      }
-    },
-    "/{project}/regions/{region}/targetPools/{targetPool}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6713,7 +7030,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/regions/{region}/targetPools/{targetPool}": {
       "delete": {
         "description": "Deletes the specified TargetPool resource.",
         "operationId": "compute.targetPools.delete",
@@ -6755,6 +7074,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "targetPools"
         ]
       },
       "get": {
@@ -6799,10 +7121,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "targetPools"
         ]
-      }
-    },
-    "/{project}/regions/{region}/targetPools/{targetPool}/getHealth": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6825,7 +7148,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/regions/{region}/targetPools/{targetPool}/getHealth": {
       "post": {
         "description": "Gets the most recent health check results for each IP for the given instance that is referenced by given TargetPool.",
         "operationId": "compute.targetPools.getHealth",
@@ -6867,10 +7192,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "targetPools"
         ]
-      }
-    },
-    "/{project}/regions/{region}/targetPools": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6893,7 +7219,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/regions/{region}/targetPools": {
       "post": {
         "description": "Creates a TargetPool resource in the specified project and region using the data included in the request.",
         "operationId": "compute.targetPools.insert",
@@ -6928,6 +7256,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "targetPools"
         ]
       },
       "get": {
@@ -6986,10 +7317,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "targetPools"
         ]
-      }
-    },
-    "/{project}/regions/{region}/targetPools/{targetPool}/removeHealthCheck": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -7012,7 +7344,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/regions/{region}/targetPools/{targetPool}/removeHealthCheck": {
       "post": {
         "description": "Removes health check URL from targetPool.",
         "operationId": "compute.targetPools.removeHealthCheck",
@@ -7053,10 +7387,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "targetPools"
         ]
-      }
-    },
-    "/{project}/regions/{region}/targetPools/{targetPool}/removeInstance": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -7079,7 +7414,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/regions/{region}/targetPools/{targetPool}/removeInstance": {
       "post": {
         "description": "Removes instance URL from targetPool.",
         "operationId": "compute.targetPools.removeInstance",
@@ -7120,10 +7457,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "targetPools"
         ]
-      }
-    },
-    "/{project}/regions/{region}/targetPools/{targetPool}/setBackup": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -7146,7 +7484,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/regions/{region}/targetPools/{targetPool}/setBackup": {
       "post": {
         "description": "Changes backup pool configurations.",
         "operationId": "compute.targetPools.setBackup",
@@ -7194,10 +7534,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "targetPools"
         ]
-      }
-    },
-    "/{project}/global/urlMaps/{urlMap}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -7220,7 +7561,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/urlMaps/{urlMap}": {
       "delete": {
         "description": "Deletes the specified UrlMap resource.",
         "operationId": "compute.urlMaps.delete",
@@ -7255,6 +7598,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "urlMaps"
         ]
       },
       "get": {
@@ -7292,6 +7638,9 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "urlMaps"
         ]
       },
       "patch": {
@@ -7328,6 +7677,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "urlMaps"
         ]
       },
       "put": {
@@ -7364,10 +7716,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "urlMaps"
         ]
-      }
-    },
-    "/{project}/global/urlMaps": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -7390,7 +7743,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/urlMaps": {
       "post": {
         "description": "Creates a UrlMap resource in the specified project using the data included in the request.",
         "operationId": "compute.urlMaps.insert",
@@ -7418,6 +7773,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "urlMaps"
         ]
       },
       "get": {
@@ -7469,10 +7827,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "urlMaps"
         ]
-      }
-    },
-    "/{project}/global/urlMaps/{urlMap}/validate": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -7495,7 +7854,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/urlMaps/{urlMap}/validate": {
       "post": {
         "description": "Run static validation for the UrlMap. In particular, the tests of the provided UrlMap will be run. Calling this method does NOT create the UrlMap.",
         "operationId": "compute.urlMaps.validate",
@@ -7530,10 +7891,11 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "urlMaps"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/operations/{operation}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -7556,7 +7918,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/operations/{operation}": {
       "delete": {
         "description": "Deletes the specified zone-specific operation resource.",
         "operationId": "compute.zoneOperations.delete",
@@ -7595,6 +7959,9 @@
               "https://www.googleapis.com/auth/compute"
             ]
           }
+        ],
+        "tags": [
+          "zoneOperations"
         ]
       },
       "get": {
@@ -7639,10 +8006,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "zoneOperations"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/operations": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -7665,7 +8033,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/operations": {
       "get": {
         "description": "Retrieves the list of operation resources contained within the specified zone.",
         "operationId": "compute.zoneOperations.list",
@@ -7722,10 +8092,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "zoneOperations"
         ]
-      }
-    },
-    "/{project}/zones/{zone}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -7748,7 +8119,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}": {
       "get": {
         "description": "Returns the specified zone resource.",
         "operationId": "compute.zones.get",
@@ -7784,10 +8157,11 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "zones"
         ]
-      }
-    },
-    "/{project}/zones": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -7810,7 +8184,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones": {
       "get": {
         "description": "Retrieves the list of zone resources available to the specified project.",
         "operationId": "compute.zones.list",
@@ -7860,8 +8236,34 @@
               "https://www.googleapis.com/auth/compute.readonly"
             ]
           }
+        ],
+        "tags": [
+          "zones"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

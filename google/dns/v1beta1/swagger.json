@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{project}/managedZones/{managedZone}/changes": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "post": {
         "description": "Atomically update the ResourceRecordSet collection.",
         "operationId": "dns.changes.create",
@@ -76,6 +53,9 @@
               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
             ]
           }
+        ],
+        "tags": [
+          "changes"
         ]
       },
       "get": {
@@ -141,10 +121,11 @@
               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
             ]
           }
+        ],
+        "tags": [
+          "changes"
         ]
-      }
-    },
-    "/{project}/managedZones/{managedZone}/changes/{changeId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -167,7 +148,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/managedZones/{managedZone}/changes/{changeId}": {
       "get": {
         "description": "Fetch the representation of an existing Change.",
         "operationId": "dns.changes.get",
@@ -210,10 +193,11 @@
               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
             ]
           }
+        ],
+        "tags": [
+          "changes"
         ]
-      }
-    },
-    "/{project}/managedZones": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -236,7 +220,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/managedZones": {
       "post": {
         "description": "Create a new ManagedZone.",
         "operationId": "dns.managedZones.create",
@@ -264,6 +250,9 @@
               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
             ]
           }
+        ],
+        "tags": [
+          "managedZones"
         ]
       },
       "get": {
@@ -306,10 +295,11 @@
               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
             ]
           }
+        ],
+        "tags": [
+          "managedZones"
         ]
-      }
-    },
-    "/{project}/managedZones/{managedZone}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -332,7 +322,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/managedZones/{managedZone}": {
       "delete": {
         "description": "Delete a previously created ManagedZone.",
         "operationId": "dns.managedZones.delete",
@@ -364,6 +356,9 @@
               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
             ]
           }
+        ],
+        "tags": [
+          "managedZones"
         ]
       },
       "get": {
@@ -401,10 +396,11 @@
               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
             ]
           }
+        ],
+        "tags": [
+          "managedZones"
         ]
-      }
-    },
-    "/{project}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -427,7 +423,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}": {
       "get": {
         "description": "Fetch the representation of an existing Project.",
         "operationId": "dns.projects.get",
@@ -456,10 +454,11 @@
               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
             ]
           }
+        ],
+        "tags": [
+          "projects"
         ]
-      }
-    },
-    "/{project}/managedZones/{managedZone}/rrsets": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -482,7 +481,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/managedZones/{managedZone}/rrsets": {
       "get": {
         "description": "Enumerate ResourceRecordSets that have been created but not yet deleted.",
         "operationId": "dns.resourceRecordSets.list",
@@ -542,8 +543,34 @@
               "https://www.googleapis.com/auth/ndev.clouddns.readwrite"
             ]
           }
+        ],
+        "tags": [
+          "resourceRecordSets"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

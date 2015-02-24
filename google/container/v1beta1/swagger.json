@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{projectId}/clusters": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Lists all clusters owned by a project across all zones.",
         "operationId": "container.projects.clusters.list",
@@ -68,10 +45,12 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "clusters",
+          "projects"
         ]
-      }
-    },
-    "/{projectId}/operations": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -94,7 +73,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectId}/operations": {
       "get": {
         "description": "Lists all operations in a project, across all zones.",
         "operationId": "container.projects.operations.list",
@@ -121,10 +102,12 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "operations",
+          "projects"
         ]
-      }
-    },
-    "/{projectId}/zones/{zoneId}/clusters": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -147,7 +130,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectId}/zones/{zoneId}/clusters": {
       "post": {
         "description": "Creates a cluster, consisting of the specified number and type of Google Compute Engine instances, plus a Kubernetes master instance.\n\nThe cluster is created in the project's default network.\n\nA firewall is added that allows traffic into port 443 on the master, which enables HTTPS. A firewall and a route is added for each node to allow the containers on that node to communicate with all other instances in the cluster.\n\nFinally, a route named k8s-iproute-10-xx-0-0 is created to track that the cluster's 10.xx.0.0/16 CIDR has been assigned.",
         "operationId": "container.projects.zones.clusters.create",
@@ -181,6 +166,11 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "clusters",
+          "zones",
+          "projects"
         ]
       },
       "get": {
@@ -216,10 +206,13 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "clusters",
+          "zones",
+          "projects"
         ]
-      }
-    },
-    "/{projectId}/zones/{zoneId}/clusters/{clusterId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -242,7 +235,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectId}/zones/{zoneId}/clusters/{clusterId}": {
       "delete": {
         "description": "Deletes the cluster, including the Kubernetes master and all worker nodes.\n\nFirewalls and routes that were configured at cluster creation are also deleted.",
         "operationId": "container.projects.zones.clusters.delete",
@@ -283,6 +278,11 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "clusters",
+          "zones",
+          "projects"
         ]
       },
       "get": {
@@ -325,10 +325,13 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "clusters",
+          "zones",
+          "projects"
         ]
-      }
-    },
-    "/{projectId}/zones/{zoneId}/operations/{operationId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -351,7 +354,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectId}/zones/{zoneId}/operations/{operationId}": {
       "get": {
         "description": "Gets the specified operation.",
         "operationId": "container.projects.zones.operations.get",
@@ -392,10 +397,13 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "operations",
+          "zones",
+          "projects"
         ]
-      }
-    },
-    "/{projectId}/zones/{zoneId}/operations": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -418,7 +426,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectId}/zones/{zoneId}/operations": {
       "get": {
         "description": "Lists all operations in a project in a specific zone.",
         "operationId": "container.projects.zones.operations.list",
@@ -452,8 +462,36 @@
               "https://www.googleapis.com/auth/cloud-platform"
             ]
           }
+        ],
+        "tags": [
+          "operations",
+          "zones",
+          "projects"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

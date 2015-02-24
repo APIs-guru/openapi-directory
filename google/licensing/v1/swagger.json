@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{productId}/sku/{skuId}/user/{userId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "delete": {
         "description": "Revoke License.",
         "operationId": "licensing.licenseAssignments.delete",
@@ -72,6 +49,9 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "tags": [
+          "licenseAssignments"
         ]
       },
       "get": {
@@ -107,6 +87,9 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "tags": [
+          "licenseAssignments"
         ]
       },
       "patch": {
@@ -142,6 +125,9 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "tags": [
+          "licenseAssignments"
         ]
       },
       "put": {
@@ -177,10 +163,11 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "tags": [
+          "licenseAssignments"
         ]
-      }
-    },
-    "/{productId}/sku/{skuId}/user": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -203,7 +190,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{productId}/sku/{skuId}/user": {
       "post": {
         "description": "Assign License.",
         "operationId": "licensing.licenseAssignments.insert",
@@ -230,10 +219,11 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "tags": [
+          "licenseAssignments"
         ]
-      }
-    },
-    "/{productId}/users": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -256,7 +246,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{productId}/users": {
       "get": {
         "description": "List license assignments for given product of the customer.",
         "operationId": "licensing.licenseAssignments.listForProduct",
@@ -299,10 +291,11 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "tags": [
+          "licenseAssignments"
         ]
-      }
-    },
-    "/{productId}/sku/{skuId}/users": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -325,7 +318,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{productId}/sku/{skuId}/users": {
       "get": {
         "description": "List license assignments for given product and sku of the customer.",
         "operationId": "licensing.licenseAssignments.listForProductAndSku",
@@ -375,8 +370,34 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "tags": [
+          "licenseAssignments"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

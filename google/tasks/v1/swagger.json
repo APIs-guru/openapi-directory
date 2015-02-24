@@ -19,29 +19,6 @@
   },
   "paths": {
     "/users/@me/lists/{tasklist}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "delete": {
         "description": "Deletes the authenticated user's specified task list.",
         "operationId": "tasks.tasklists.delete",
@@ -65,6 +42,9 @@
               "https://www.googleapis.com/auth/tasks"
             ]
           }
+        ],
+        "tags": [
+          "tasklists"
         ]
       },
       "get": {
@@ -94,6 +74,9 @@
               "https://www.googleapis.com/auth/tasks.readonly"
             ]
           }
+        ],
+        "tags": [
+          "tasklists"
         ]
       },
       "patch": {
@@ -122,6 +105,9 @@
               "https://www.googleapis.com/auth/tasks"
             ]
           }
+        ],
+        "tags": [
+          "tasklists"
         ]
       },
       "put": {
@@ -150,10 +136,11 @@
               "https://www.googleapis.com/auth/tasks"
             ]
           }
+        ],
+        "tags": [
+          "tasklists"
         ]
-      }
-    },
-    "/users/@me/lists": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -176,7 +163,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/users/@me/lists": {
       "post": {
         "description": "Creates a new task list and adds it to the authenticated user's task lists.",
         "operationId": "tasks.tasklists.insert",
@@ -194,6 +183,9 @@
               "https://www.googleapis.com/auth/tasks"
             ]
           }
+        ],
+        "tags": [
+          "tasklists"
         ]
       },
       "get": {
@@ -228,10 +220,11 @@
               "https://www.googleapis.com/auth/tasks.readonly"
             ]
           }
+        ],
+        "tags": [
+          "tasklists"
         ]
-      }
-    },
-    "/lists/{tasklist}/clear": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -254,7 +247,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/lists/{tasklist}/clear": {
       "post": {
         "description": "Clears all completed tasks from the specified task list. The affected tasks will be marked as 'hidden' and no longer be returned by default when retrieving all tasks for a task list.",
         "operationId": "tasks.tasks.clear",
@@ -278,10 +273,11 @@
               "https://www.googleapis.com/auth/tasks"
             ]
           }
+        ],
+        "tags": [
+          "tasks"
         ]
-      }
-    },
-    "/lists/{tasklist}/tasks/{task}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -304,7 +300,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/lists/{tasklist}/tasks/{task}": {
       "delete": {
         "description": "Deletes the specified task from the task list.",
         "operationId": "tasks.tasks.delete",
@@ -335,6 +333,9 @@
               "https://www.googleapis.com/auth/tasks"
             ]
           }
+        ],
+        "tags": [
+          "tasks"
         ]
       },
       "get": {
@@ -371,6 +372,9 @@
               "https://www.googleapis.com/auth/tasks.readonly"
             ]
           }
+        ],
+        "tags": [
+          "tasks"
         ]
       },
       "patch": {
@@ -406,6 +410,9 @@
               "https://www.googleapis.com/auth/tasks"
             ]
           }
+        ],
+        "tags": [
+          "tasks"
         ]
       },
       "put": {
@@ -441,10 +448,11 @@
               "https://www.googleapis.com/auth/tasks"
             ]
           }
+        ],
+        "tags": [
+          "tasks"
         ]
-      }
-    },
-    "/lists/{tasklist}/tasks": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -467,7 +475,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/lists/{tasklist}/tasks": {
       "post": {
         "description": "Creates a new task on the specified task list.",
         "operationId": "tasks.tasks.insert",
@@ -506,6 +516,9 @@
               "https://www.googleapis.com/auth/tasks"
             ]
           }
+        ],
+        "tags": [
+          "tasks"
         ]
       },
       "get": {
@@ -595,10 +608,11 @@
               "https://www.googleapis.com/auth/tasks.readonly"
             ]
           }
+        ],
+        "tags": [
+          "tasks"
         ]
-      }
-    },
-    "/lists/{tasklist}/tasks/{task}/move": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -621,7 +635,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/lists/{tasklist}/tasks/{task}/move": {
       "post": {
         "description": "Moves the specified task to another position in the task list. This can include putting it as a child task under a new parent and/or move it to a different position among its sibling tasks.",
         "operationId": "tasks.tasks.move",
@@ -667,8 +683,34 @@
               "https://www.googleapis.com/auth/tasks"
             ]
           }
+        ],
+        "tags": [
+          "tasks"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

@@ -19,29 +19,6 @@
   },
   "paths": {
     "/users/{userId}/bookshelves/{shelf}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Retrieves metadata for a specific bookshelf for the specified user.",
         "operationId": "books.bookshelves.get",
@@ -81,10 +58,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "bookshelves"
         ]
-      }
-    },
-    "/users/{userId}/bookshelves": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -107,7 +85,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/users/{userId}/bookshelves": {
       "get": {
         "description": "Retrieves a list of public bookshelves for the specified user.",
         "operationId": "books.bookshelves.list",
@@ -140,10 +120,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "bookshelves"
         ]
-      }
-    },
-    "/users/{userId}/bookshelves/{shelf}/volumes": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -166,7 +147,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/users/{userId}/bookshelves/{shelf}/volumes": {
       "get": {
         "description": "Retrieves volumes in a specific bookshelf for the specified user.",
         "operationId": "books.bookshelves.volumes.list",
@@ -226,10 +209,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "volumes",
+          "bookshelves"
         ]
-      }
-    },
-    "/cloudloading/addBook": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -252,7 +237,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/cloudloading/addBook": {
       "post": {
         "description": "",
         "operationId": "books.cloudloading.addBook",
@@ -295,10 +282,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "cloudloading"
         ]
-      }
-    },
-    "/cloudloading/deleteBook": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -321,7 +309,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/cloudloading/deleteBook": {
       "post": {
         "description": "Remove the book and its contents",
         "operationId": "books.cloudloading.deleteBook",
@@ -345,10 +335,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "cloudloading"
         ]
-      }
-    },
-    "/cloudloading/updateBook": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -371,7 +362,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/cloudloading/updateBook": {
       "post": {
         "description": "",
         "operationId": "books.cloudloading.updateBook",
@@ -389,10 +382,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "cloudloading"
         ]
-      }
-    },
-    "/dictionary/listOfflineMetadata": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -415,7 +409,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/dictionary/listOfflineMetadata": {
       "get": {
         "description": "Returns a list of offline dictionary meatadata available",
         "operationId": "books.dictionary.listOfflineMetadata",
@@ -442,10 +438,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "dictionary"
         ]
-      }
-    },
-    "/volumes/{volumeId}/layersummary/{summaryId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -468,7 +465,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/volumes/{volumeId}/layersummary/{summaryId}": {
       "get": {
         "description": "Gets the layer summary for a volume.",
         "operationId": "books.layers.get",
@@ -514,10 +513,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "layers"
         ]
-      }
-    },
-    "/volumes/{volumeId}/layersummary": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -540,7 +540,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/volumes/{volumeId}/layersummary": {
       "get": {
         "description": "List the layer summaries for a volume.",
         "operationId": "books.layers.list",
@@ -593,10 +595,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "layers"
         ]
-      }
-    },
-    "/volumes/{volumeId}/layers/{layerId}/data/{annotationDataId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -619,7 +622,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/volumes/{volumeId}/layers/{layerId}/data/{annotationDataId}": {
       "get": {
         "description": "Gets the annotation data.",
         "operationId": "books.layers.annotationData.get",
@@ -704,10 +709,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "annotationData",
+          "layers"
         ]
-      }
-    },
-    "/volumes/{volumeId}/layers/{layerId}/data": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -730,7 +737,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/volumes/{volumeId}/layers/{layerId}/data": {
       "get": {
         "description": "Gets the annotation data for a volume and layer.",
         "operationId": "books.layers.annotationData.list",
@@ -838,10 +847,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "annotationData",
+          "layers"
         ]
-      }
-    },
-    "/volumes/{volumeId}/layers/{layerId}/annotations/{annotationId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -864,7 +875,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/volumes/{volumeId}/layers/{layerId}/annotations/{annotationId}": {
       "get": {
         "description": "Gets the volume annotation.",
         "operationId": "books.layers.volumeAnnotations.get",
@@ -917,10 +930,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "volumeAnnotations",
+          "layers"
         ]
-      }
-    },
-    "/volumes/{volumeId}/layers/{layerId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -943,7 +958,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/volumes/{volumeId}/layers/{layerId}": {
       "get": {
         "description": "Gets the volume annotations for a volume and layer.",
         "operationId": "books.layers.volumeAnnotations.list",
@@ -1058,10 +1075,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "volumeAnnotations",
+          "layers"
         ]
-      }
-    },
-    "/myconfig/getUserSettings": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1084,7 +1103,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/myconfig/getUserSettings": {
       "get": {
         "description": "Gets the current settings for the user.",
         "operationId": "books.myconfig.getUserSettings",
@@ -1102,10 +1123,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "myconfig"
         ]
-      }
-    },
-    "/myconfig/releaseDownloadAccess": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1128,7 +1150,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/myconfig/releaseDownloadAccess": {
       "post": {
         "description": "Release downloaded content access restriction.",
         "operationId": "books.myconfig.releaseDownloadAccess",
@@ -1178,10 +1202,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "myconfig"
         ]
-      }
-    },
-    "/myconfig/requestAccess": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1204,7 +1229,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/myconfig/requestAccess": {
       "post": {
         "description": "Request concurrent and download access restrictions.",
         "operationId": "books.myconfig.requestAccess",
@@ -1269,10 +1296,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "myconfig"
         ]
-      }
-    },
-    "/myconfig/syncVolumeLicenses": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1295,7 +1323,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/myconfig/syncVolumeLicenses": {
       "post": {
         "description": "Request downloaded content access for specified volumes on the My eBooks shelf.",
         "operationId": "books.myconfig.syncVolumeLicenses",
@@ -1371,10 +1401,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "myconfig"
         ]
-      }
-    },
-    "/myconfig/updateUserSettings": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1397,7 +1428,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/myconfig/updateUserSettings": {
       "post": {
         "description": "Sets the settings for the user. Unspecified sub-objects will retain the existing value.",
         "operationId": "books.myconfig.updateUserSettings",
@@ -1415,10 +1448,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "myconfig"
         ]
-      }
-    },
-    "/mylibrary/annotations/{annotationId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1441,7 +1475,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/mylibrary/annotations/{annotationId}": {
       "delete": {
         "description": "Deletes an annotation.",
         "operationId": "books.mylibrary.annotations.delete",
@@ -1471,6 +1507,10 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "annotations",
+          "mylibrary"
         ]
       },
       "get": {
@@ -1505,6 +1545,10 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "annotations",
+          "mylibrary"
         ]
       },
       "put": {
@@ -1539,10 +1583,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "annotations",
+          "mylibrary"
         ]
-      }
-    },
-    "/mylibrary/annotations": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1565,7 +1611,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/mylibrary/annotations": {
       "post": {
         "description": "Inserts a new annotation.",
         "operationId": "books.mylibrary.annotations.insert",
@@ -1603,6 +1651,10 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "annotations",
+          "mylibrary"
         ]
       },
       "get": {
@@ -1700,10 +1752,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "annotations",
+          "mylibrary"
         ]
-      }
-    },
-    "/mylibrary/annotations/summary": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1726,7 +1780,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/mylibrary/annotations/summary": {
       "post": {
         "description": "Gets the summary of specified layers.",
         "operationId": "books.mylibrary.annotations.summary",
@@ -1764,10 +1820,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "annotations",
+          "mylibrary"
         ]
-      }
-    },
-    "/mylibrary/bookshelves/{shelf}/addVolume": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1790,7 +1848,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/mylibrary/bookshelves/{shelf}/addVolume": {
       "post": {
         "description": "Adds a volume to a bookshelf.",
         "operationId": "books.mylibrary.bookshelves.addVolume",
@@ -1838,10 +1898,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "bookshelves",
+          "mylibrary"
         ]
-      }
-    },
-    "/mylibrary/bookshelves/{shelf}/clearVolumes": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1864,7 +1926,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/mylibrary/bookshelves/{shelf}/clearVolumes": {
       "post": {
         "description": "Clears all volumes from a bookshelf.",
         "operationId": "books.mylibrary.bookshelves.clearVolumes",
@@ -1894,10 +1958,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "bookshelves",
+          "mylibrary"
         ]
-      }
-    },
-    "/mylibrary/bookshelves/{shelf}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1920,7 +1986,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/mylibrary/bookshelves/{shelf}": {
       "get": {
         "description": "Retrieves metadata for a specific bookshelf belonging to the authenticated user.",
         "operationId": "books.mylibrary.bookshelves.get",
@@ -1953,10 +2021,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "bookshelves",
+          "mylibrary"
         ]
-      }
-    },
-    "/mylibrary/bookshelves": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1979,7 +2049,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/mylibrary/bookshelves": {
       "get": {
         "description": "Retrieves a list of bookshelves belonging to the authenticated user.",
         "operationId": "books.mylibrary.bookshelves.list",
@@ -2005,10 +2077,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "bookshelves",
+          "mylibrary"
         ]
-      }
-    },
-    "/mylibrary/bookshelves/{shelf}/moveVolume": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2031,7 +2105,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/mylibrary/bookshelves/{shelf}/moveVolume": {
       "post": {
         "description": "Moves a volume within a bookshelf.",
         "operationId": "books.mylibrary.bookshelves.moveVolume",
@@ -2075,10 +2151,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "bookshelves",
+          "mylibrary"
         ]
-      }
-    },
-    "/mylibrary/bookshelves/{shelf}/removeVolume": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2101,7 +2179,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/mylibrary/bookshelves/{shelf}/removeVolume": {
       "post": {
         "description": "Removes a volume from a bookshelf.",
         "operationId": "books.mylibrary.bookshelves.removeVolume",
@@ -2147,10 +2227,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "bookshelves",
+          "mylibrary"
         ]
-      }
-    },
-    "/mylibrary/bookshelves/{shelf}/volumes": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2173,7 +2255,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/mylibrary/bookshelves/{shelf}/volumes": {
       "get": {
         "description": "Gets volume information for volumes on a bookshelf.",
         "operationId": "books.mylibrary.bookshelves.volumes.list",
@@ -2248,10 +2332,13 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "volumes",
+          "bookshelves",
+          "mylibrary"
         ]
-      }
-    },
-    "/mylibrary/readingpositions/{volumeId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2274,7 +2361,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/mylibrary/readingpositions/{volumeId}": {
       "get": {
         "description": "Retrieves my reading position information for a volume.",
         "operationId": "books.mylibrary.readingpositions.get",
@@ -2313,10 +2402,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "readingpositions",
+          "mylibrary"
         ]
-      }
-    },
-    "/mylibrary/readingpositions/{volumeId}/setPosition": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2339,7 +2430,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/mylibrary/readingpositions/{volumeId}/setPosition": {
       "post": {
         "description": "Sets my reading position information for a volume.",
         "operationId": "books.mylibrary.readingpositions.setPosition",
@@ -2409,10 +2502,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "readingpositions",
+          "mylibrary"
         ]
-      }
-    },
-    "/onboarding/listCategories": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2435,7 +2530,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/onboarding/listCategories": {
       "get": {
         "description": "List categories for onboarding experience.",
         "operationId": "books.onboarding.listCategories",
@@ -2461,10 +2558,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "onboarding"
         ]
-      }
-    },
-    "/onboarding/listCategoryVolumes": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2487,7 +2585,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/onboarding/listCategoryVolumes": {
       "get": {
         "description": "List available volumes under categories for onboarding experience.",
         "operationId": "books.onboarding.listCategoryVolumes",
@@ -2535,10 +2635,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "onboarding"
         ]
-      }
-    },
-    "/promooffer/accept": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2561,7 +2662,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/promooffer/accept": {
       "post": {
         "description": "",
         "operationId": "books.promooffer.accept",
@@ -2625,10 +2728,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "promooffer"
         ]
-      }
-    },
-    "/promooffer/dismiss": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2651,7 +2755,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/promooffer/dismiss": {
       "post": {
         "description": "",
         "operationId": "books.promooffer.dismiss",
@@ -2710,10 +2816,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "promooffer"
         ]
-      }
-    },
-    "/promooffer/get": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2736,7 +2843,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/promooffer/get": {
       "get": {
         "description": "Returns a list of promo offers available to the user",
         "operationId": "books.promooffer.get",
@@ -2792,10 +2901,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "promooffer"
         ]
-      }
-    },
-    "/volumes/{volumeId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2818,7 +2928,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/volumes/{volumeId}": {
       "get": {
         "description": "Gets volume information for a single volume.",
         "operationId": "books.volumes.get",
@@ -2878,10 +2990,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "volumes"
         ]
-      }
-    },
-    "/volumes": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2904,7 +3017,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/volumes": {
       "get": {
         "description": "Performs a book search.",
         "operationId": "books.volumes.list",
@@ -3033,10 +3148,11 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "volumes"
         ]
-      }
-    },
-    "/volumes/{volumeId}/associated": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3059,7 +3175,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/volumes/{volumeId}/associated": {
       "get": {
         "description": "Return a list of associated books.",
         "operationId": "books.volumes.associated.list",
@@ -3109,10 +3227,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "associated",
+          "volumes"
         ]
-      }
-    },
-    "/volumes/mybooks": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3135,7 +3255,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/volumes/mybooks": {
       "get": {
         "description": "Return a list of books in My Library.",
         "operationId": "books.volumes.mybooks.list",
@@ -3216,10 +3338,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "mybooks",
+          "volumes"
         ]
-      }
-    },
-    "/volumes/recommended": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3242,7 +3366,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/volumes/recommended": {
       "get": {
         "description": "Return a list of recommended books for the current user.",
         "operationId": "books.volumes.recommended.list",
@@ -3274,10 +3400,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "recommended",
+          "volumes"
         ]
-      }
-    },
-    "/volumes/recommended/rate": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3300,7 +3428,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/volumes/recommended/rate": {
       "post": {
         "description": "Rate a recommended book for the current user.",
         "operationId": "books.volumes.recommended.rate",
@@ -3350,10 +3480,12 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "recommended",
+          "volumes"
         ]
-      }
-    },
-    "/volumes/useruploaded": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3376,7 +3508,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/volumes/useruploaded": {
       "get": {
         "description": "Return a list of books uploaded by the current user.",
         "operationId": "books.volumes.useruploaded.list",
@@ -3448,8 +3582,35 @@
               "https://www.googleapis.com/auth/books"
             ]
           }
+        ],
+        "tags": [
+          "useruploaded",
+          "volumes"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

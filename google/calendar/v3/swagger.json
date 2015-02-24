@@ -19,29 +19,6 @@
   },
   "paths": {
     "/calendars/{calendarId}/acl/{ruleId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "delete": {
         "description": "Deletes an access control rule.",
         "operationId": "calendar.acl.delete",
@@ -72,6 +49,9 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "acl"
         ]
       },
       "get": {
@@ -108,6 +88,9 @@
               "https://www.googleapis.com/auth/calendar.readonly"
             ]
           }
+        ],
+        "tags": [
+          "acl"
         ]
       },
       "patch": {
@@ -143,6 +126,9 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "acl"
         ]
       },
       "put": {
@@ -178,10 +164,11 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "acl"
         ]
-      }
-    },
-    "/calendars/{calendarId}/acl": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -204,7 +191,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/calendars/{calendarId}/acl": {
       "post": {
         "description": "Creates an access control rule.",
         "operationId": "calendar.acl.insert",
@@ -231,6 +220,9 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "acl"
         ]
       },
       "get": {
@@ -284,10 +276,11 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "acl"
         ]
-      }
-    },
-    "/calendars/{calendarId}/acl/watch": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -310,7 +303,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/calendars/{calendarId}/acl/watch": {
       "post": {
         "description": "Watch for changes to ACL resources.",
         "operationId": "calendar.acl.watch",
@@ -362,10 +357,11 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "acl"
         ]
-      }
-    },
-    "/users/me/calendarList/{calendarId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -388,7 +384,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/users/me/calendarList/{calendarId}": {
       "delete": {
         "description": "Deletes an entry on the user's calendar list.",
         "operationId": "calendar.calendarList.delete",
@@ -412,6 +410,9 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "calendarList"
         ]
       },
       "get": {
@@ -441,6 +442,9 @@
               "https://www.googleapis.com/auth/calendar.readonly"
             ]
           }
+        ],
+        "tags": [
+          "calendarList"
         ]
       },
       "patch": {
@@ -475,6 +479,9 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "calendarList"
         ]
       },
       "put": {
@@ -509,10 +516,11 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "calendarList"
         ]
-      }
-    },
-    "/users/me/calendarList": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -535,7 +543,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/users/me/calendarList": {
       "post": {
         "description": "Adds an entry to the user's calendar list.",
         "operationId": "calendar.calendarList.insert",
@@ -561,6 +571,9 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "calendarList"
         ]
       },
       "get": {
@@ -626,10 +639,11 @@
               "https://www.googleapis.com/auth/calendar.readonly"
             ]
           }
+        ],
+        "tags": [
+          "calendarList"
         ]
-      }
-    },
-    "/users/me/calendarList/watch": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -652,7 +666,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/users/me/calendarList/watch": {
       "post": {
         "description": "Watch for changes to CalendarList resources.",
         "operationId": "calendar.calendarList.watch",
@@ -716,10 +732,11 @@
               "https://www.googleapis.com/auth/calendar.readonly"
             ]
           }
+        ],
+        "tags": [
+          "calendarList"
         ]
-      }
-    },
-    "/calendars/{calendarId}/clear": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -742,7 +759,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/calendars/{calendarId}/clear": {
       "post": {
         "description": "Clears a primary calendar. This operation deletes all data associated with the primary calendar of an account and cannot be undone.",
         "operationId": "calendar.calendars.clear",
@@ -766,10 +785,11 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "calendars"
         ]
-      }
-    },
-    "/calendars/{calendarId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -792,7 +812,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/calendars/{calendarId}": {
       "delete": {
         "description": "Deletes a secondary calendar.",
         "operationId": "calendar.calendars.delete",
@@ -816,6 +838,9 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "calendars"
         ]
       },
       "get": {
@@ -845,6 +870,9 @@
               "https://www.googleapis.com/auth/calendar.readonly"
             ]
           }
+        ],
+        "tags": [
+          "calendars"
         ]
       },
       "patch": {
@@ -873,6 +901,9 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "calendars"
         ]
       },
       "put": {
@@ -901,10 +932,11 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "calendars"
         ]
-      }
-    },
-    "/calendars": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -927,7 +959,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/calendars": {
       "post": {
         "description": "Creates a secondary calendar.",
         "operationId": "calendar.calendars.insert",
@@ -945,10 +979,11 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "calendars"
         ]
-      }
-    },
-    "/channels/stop": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -971,7 +1006,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/channels/stop": {
       "post": {
         "description": "Stop watching resources through this channel",
         "operationId": "calendar.channels.stop",
@@ -987,10 +1024,11 @@
               "https://www.googleapis.com/auth/calendar.readonly"
             ]
           }
+        ],
+        "tags": [
+          "channels"
         ]
-      }
-    },
-    "/colors": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1013,7 +1051,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/colors": {
       "get": {
         "description": "Returns the color definitions for calendars and events.",
         "operationId": "calendar.colors.get",
@@ -1032,10 +1072,11 @@
               "https://www.googleapis.com/auth/calendar.readonly"
             ]
           }
+        ],
+        "tags": [
+          "colors"
         ]
-      }
-    },
-    "/calendars/{calendarId}/events/{eventId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1058,7 +1099,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/calendars/{calendarId}/events/{eventId}": {
       "delete": {
         "description": "Deletes an event.",
         "operationId": "calendar.events.delete",
@@ -1095,6 +1138,9 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "events"
         ]
       },
       "get": {
@@ -1150,6 +1196,9 @@
               "https://www.googleapis.com/auth/calendar.readonly"
             ]
           }
+        ],
+        "tags": [
+          "events"
         ]
       },
       "patch": {
@@ -1204,6 +1253,9 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "events"
         ]
       },
       "put": {
@@ -1258,10 +1310,11 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "events"
         ]
-      }
-    },
-    "/calendars/{calendarId}/events/import": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1284,7 +1337,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/calendars/{calendarId}/events/import": {
       "post": {
         "description": "Imports an event. This operation is used to add a private copy of an existing event to a calendar.",
         "operationId": "calendar.events.import",
@@ -1311,10 +1366,11 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "events"
         ]
-      }
-    },
-    "/calendars/{calendarId}/events": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1337,7 +1393,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/calendars/{calendarId}/events": {
       "post": {
         "description": "Creates an event.",
         "operationId": "calendar.events.insert",
@@ -1377,6 +1435,9 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "events"
         ]
       },
       "get": {
@@ -1522,10 +1583,11 @@
               "https://www.googleapis.com/auth/calendar.readonly"
             ]
           }
+        ],
+        "tags": [
+          "events"
         ]
-      }
-    },
-    "/calendars/{calendarId}/events/{eventId}/instances": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1548,7 +1610,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/calendars/{calendarId}/events/{eventId}/instances": {
       "get": {
         "description": "Returns instances of the specified recurring event.",
         "operationId": "calendar.events.instances",
@@ -1639,10 +1703,11 @@
               "https://www.googleapis.com/auth/calendar.readonly"
             ]
           }
+        ],
+        "tags": [
+          "events"
         ]
-      }
-    },
-    "/calendars/{calendarId}/events/{eventId}/move": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1665,7 +1730,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/calendars/{calendarId}/events/{eventId}/move": {
       "post": {
         "description": "Moves an event to another calendar, i.e. changes an event's organizer.",
         "operationId": "calendar.events.move",
@@ -1712,10 +1779,11 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "events"
         ]
-      }
-    },
-    "/calendars/{calendarId}/events/quickAdd": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1738,7 +1806,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/calendars/{calendarId}/events/quickAdd": {
       "post": {
         "description": "Creates an event based on a simple text string.",
         "operationId": "calendar.events.quickAdd",
@@ -1778,10 +1848,11 @@
               "https://www.googleapis.com/auth/calendar"
             ]
           }
+        ],
+        "tags": [
+          "events"
         ]
-      }
-    },
-    "/calendars/{calendarId}/events/watch": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1804,7 +1875,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/calendars/{calendarId}/events/watch": {
       "post": {
         "description": "Watch for changes to Events resources.",
         "operationId": "calendar.events.watch",
@@ -1948,10 +2021,11 @@
               "https://www.googleapis.com/auth/calendar.readonly"
             ]
           }
+        ],
+        "tags": [
+          "events"
         ]
-      }
-    },
-    "/freeBusy": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1974,7 +2048,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/freeBusy": {
       "post": {
         "description": "Returns free/busy information for a set of calendars.",
         "operationId": "calendar.freebusy.query",
@@ -1993,10 +2069,11 @@
               "https://www.googleapis.com/auth/calendar.readonly"
             ]
           }
+        ],
+        "tags": [
+          "freebusy"
         ]
-      }
-    },
-    "/users/me/settings/{setting}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2019,7 +2096,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/users/me/settings/{setting}": {
       "get": {
         "description": "Returns a single user setting.",
         "operationId": "calendar.settings.get",
@@ -2047,10 +2126,11 @@
               "https://www.googleapis.com/auth/calendar.readonly"
             ]
           }
+        ],
+        "tags": [
+          "settings"
         ]
-      }
-    },
-    "/users/me/settings": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2073,7 +2153,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/users/me/settings": {
       "get": {
         "description": "Returns all user settings for the authenticated user.",
         "operationId": "calendar.settings.list",
@@ -2113,10 +2195,11 @@
               "https://www.googleapis.com/auth/calendar.readonly"
             ]
           }
+        ],
+        "tags": [
+          "settings"
         ]
-      }
-    },
-    "/users/me/settings/watch": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2139,7 +2222,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/users/me/settings/watch": {
       "post": {
         "description": "Watch for changes to Settings resources.",
         "operationId": "calendar.settings.watch",
@@ -2179,8 +2264,34 @@
               "https://www.googleapis.com/auth/calendar.readonly"
             ]
           }
+        ],
+        "tags": [
+          "settings"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{projectName}/zones/{zone}/pools/{poolName}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "post": {
         "description": "Deletes a replica pool.",
         "operationId": "replicapool.pools.delete",
@@ -81,6 +58,9 @@
               "https://www.googleapis.com/auth/replicapool"
             ]
           }
+        ],
+        "tags": [
+          "pools"
         ]
       },
       "get": {
@@ -127,10 +107,11 @@
               "https://www.googleapis.com/auth/replicapool.readonly"
             ]
           }
+        ],
+        "tags": [
+          "pools"
         ]
-      }
-    },
-    "/{projectName}/zones/{zone}/pools": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -153,7 +134,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectName}/zones/{zone}/pools": {
       "post": {
         "description": "Inserts a new replica pool.",
         "operationId": "replicapool.pools.insert",
@@ -189,6 +172,9 @@
               "https://www.googleapis.com/auth/replicapool"
             ]
           }
+        ],
+        "tags": [
+          "pools"
         ]
       },
       "get": {
@@ -243,10 +229,11 @@
               "https://www.googleapis.com/auth/replicapool.readonly"
             ]
           }
+        ],
+        "tags": [
+          "pools"
         ]
-      }
-    },
-    "/{projectName}/zones/{zone}/pools/{poolName}/resize": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -269,7 +256,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectName}/zones/{zone}/pools/{poolName}/resize": {
       "post": {
         "description": "Resize a pool. This is an asynchronous operation, and multiple overlapping resize requests can be made. Replica Pools will use the information from the last resize request.",
         "operationId": "replicapool.pools.resize",
@@ -318,10 +307,11 @@
               "https://www.googleapis.com/auth/replicapool"
             ]
           }
+        ],
+        "tags": [
+          "pools"
         ]
-      }
-    },
-    "/{projectName}/zones/{zone}/pools/{poolName}/updateTemplate": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -344,7 +334,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectName}/zones/{zone}/pools/{poolName}/updateTemplate": {
       "post": {
         "description": "Update the template used by the pool.",
         "operationId": "replicapool.pools.updatetemplate",
@@ -384,10 +376,11 @@
               "https://www.googleapis.com/auth/replicapool"
             ]
           }
+        ],
+        "tags": [
+          "pools"
         ]
-      }
-    },
-    "/{projectName}/zones/{zone}/pools/{poolName}/replicas/{replicaName}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -410,7 +403,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectName}/zones/{zone}/pools/{poolName}/replicas/{replicaName}": {
       "post": {
         "description": "Deletes a replica from the pool.",
         "operationId": "replicapool.replicas.delete",
@@ -460,6 +455,9 @@
               "https://www.googleapis.com/auth/replicapool"
             ]
           }
+        ],
+        "tags": [
+          "replicas"
         ]
       },
       "get": {
@@ -513,10 +511,11 @@
               "https://www.googleapis.com/auth/replicapool.readonly"
             ]
           }
+        ],
+        "tags": [
+          "replicas"
         ]
-      }
-    },
-    "/{projectName}/zones/{zone}/pools/{poolName}/replicas": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -539,7 +538,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectName}/zones/{zone}/pools/{poolName}/replicas": {
       "get": {
         "description": "Lists all replicas in a pool.",
         "operationId": "replicapool.replicas.list",
@@ -599,10 +600,11 @@
               "https://www.googleapis.com/auth/replicapool.readonly"
             ]
           }
+        ],
+        "tags": [
+          "replicas"
         ]
-      }
-    },
-    "/{projectName}/zones/{zone}/pools/{poolName}/replicas/{replicaName}/restart": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -625,7 +627,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectName}/zones/{zone}/pools/{poolName}/replicas/{replicaName}/restart": {
       "post": {
         "description": "Restarts a replica in a pool.",
         "operationId": "replicapool.replicas.restart",
@@ -675,8 +679,34 @@
               "https://www.googleapis.com/auth/replicapool"
             ]
           }
+        ],
+        "tags": [
+          "replicas"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

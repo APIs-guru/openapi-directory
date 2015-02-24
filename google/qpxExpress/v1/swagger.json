@@ -19,6 +19,21 @@
   },
   "paths": {
     "/search": {
+      "post": {
+        "description": "Returns a list of flights.",
+        "operationId": "qpxExpress.trips.search",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TripsSearchResponse"
+            }
+          }
+        },
+        "tags": [
+          "trips"
+        ]
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -41,19 +56,7 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
-      "post": {
-        "description": "Returns a list of flights.",
-        "operationId": "qpxExpress.trips.search",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/TripsSearchResponse"
-            }
-          }
-        }
-      }
+      ]
     }
   },
   "definitions": {

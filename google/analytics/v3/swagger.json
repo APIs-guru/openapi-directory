@@ -19,29 +19,6 @@
   },
   "paths": {
     "/data/ga": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Returns Analytics data for a view (profile).",
         "operationId": "analytics.data.ga.get",
@@ -148,10 +125,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "ga",
+          "data"
         ]
-      }
-    },
-    "/data/mcf": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -174,7 +153,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/data/mcf": {
       "get": {
         "description": "Returns Analytics Multi-Channel Funnels data for a view (profile).",
         "operationId": "analytics.data.mcf.get",
@@ -265,10 +246,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "mcf",
+          "data"
         ]
-      }
-    },
-    "/data/realtime": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -291,7 +274,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/data/realtime": {
       "get": {
         "description": "Returns real time data for a view (profile).",
         "operationId": "analytics.data.realtime.get",
@@ -350,10 +335,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "realtime",
+          "data"
         ]
-      }
-    },
-    "/management/accountSummaries": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -376,7 +363,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accountSummaries": {
       "get": {
         "description": "Lists account summaries (lightweight tree comprised of accounts/properties/profiles) to which the user has access.",
         "operationId": "analytics.management.accountSummaries.list",
@@ -410,10 +399,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "accountSummaries",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/entityUserLinks/{linkId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -436,7 +427,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/entityUserLinks/{linkId}": {
       "delete": {
         "description": "Removes a user from the given account.",
         "operationId": "analytics.management.accountUserLinks.delete",
@@ -467,6 +460,10 @@
               "https://www.googleapis.com/auth/analytics.manage.users"
             ]
           }
+        ],
+        "tags": [
+          "accountUserLinks",
+          "management"
         ]
       },
       "put": {
@@ -502,10 +499,12 @@
               "https://www.googleapis.com/auth/analytics.manage.users"
             ]
           }
+        ],
+        "tags": [
+          "accountUserLinks",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/entityUserLinks": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -528,7 +527,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/entityUserLinks": {
       "post": {
         "description": "Adds a new user to the given account.",
         "operationId": "analytics.management.accountUserLinks.insert",
@@ -555,6 +556,10 @@
               "https://www.googleapis.com/auth/analytics.manage.users"
             ]
           }
+        ],
+        "tags": [
+          "accountUserLinks",
+          "management"
         ]
       },
       "get": {
@@ -597,10 +602,12 @@
               "https://www.googleapis.com/auth/analytics.manage.users.readonly"
             ]
           }
+        ],
+        "tags": [
+          "accountUserLinks",
+          "management"
         ]
-      }
-    },
-    "/management/accounts": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -623,7 +630,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts": {
       "get": {
         "description": "Lists all accounts to which the user has access.",
         "operationId": "analytics.management.accounts.list",
@@ -658,10 +667,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "accounts",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -684,7 +695,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources": {
       "get": {
         "description": "List custom data sources to which the user has access.",
         "operationId": "analytics.management.customDataSources.list",
@@ -734,10 +747,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "customDataSources",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDimensions/{customDimensionId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -760,7 +775,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDimensions/{customDimensionId}": {
       "get": {
         "description": "Get a custom dimension to which the user has access.",
         "operationId": "analytics.management.customDimensions.get",
@@ -802,6 +819,10 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "customDimensions",
+          "management"
         ]
       },
       "patch": {
@@ -851,6 +872,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "customDimensions",
+          "management"
         ]
       },
       "put": {
@@ -900,10 +925,12 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "customDimensions",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDimensions": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -926,7 +953,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDimensions": {
       "post": {
         "description": "Create a new custom dimension.",
         "operationId": "analytics.management.customDimensions.insert",
@@ -960,6 +989,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "customDimensions",
+          "management"
         ]
       },
       "get": {
@@ -1009,10 +1042,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "customDimensions",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customMetrics/{customMetricId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1035,7 +1070,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customMetrics/{customMetricId}": {
       "get": {
         "description": "Get a custom metric to which the user has access.",
         "operationId": "analytics.management.customMetrics.get",
@@ -1077,6 +1114,10 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "customMetrics",
+          "management"
         ]
       },
       "patch": {
@@ -1126,6 +1167,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "customMetrics",
+          "management"
         ]
       },
       "put": {
@@ -1175,10 +1220,12 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "customMetrics",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customMetrics": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1201,7 +1248,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customMetrics": {
       "post": {
         "description": "Create a new custom metric.",
         "operationId": "analytics.management.customMetrics.insert",
@@ -1235,6 +1284,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "customMetrics",
+          "management"
         ]
       },
       "get": {
@@ -1284,10 +1337,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "customMetrics",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/dailyUploads/{date}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1310,7 +1365,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/dailyUploads/{date}": {
       "delete": {
         "description": "Delete uploaded data for the given date.",
         "operationId": "analytics.management.dailyUploads.delete",
@@ -1366,10 +1423,12 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "dailyUploads",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/dailyUploads": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1392,7 +1451,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/dailyUploads": {
       "get": {
         "description": "List daily uploads to which the user has access.",
         "operationId": "analytics.management.dailyUploads.list",
@@ -1462,10 +1523,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "dailyUploads",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/dailyUploads/{date}/uploads": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1488,7 +1551,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/dailyUploads/{date}/uploads": {
       "post": {
         "description": "Update/Overwrite data for a custom data source.",
         "operationId": "analytics.management.dailyUploads.upload",
@@ -1566,10 +1631,12 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "dailyUploads",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/experiments/{experimentId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1592,7 +1659,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/experiments/{experimentId}": {
       "delete": {
         "description": "Delete an experiment.",
         "operationId": "analytics.management.experiments.delete",
@@ -1638,6 +1707,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "experiments",
+          "management"
         ]
       },
       "get": {
@@ -1689,6 +1762,10 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "experiments",
+          "management"
         ]
       },
       "patch": {
@@ -1739,6 +1816,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "experiments",
+          "management"
         ]
       },
       "put": {
@@ -1789,10 +1870,12 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "experiments",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/experiments": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1815,7 +1898,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/experiments": {
       "post": {
         "description": "Create a new experiment.",
         "operationId": "analytics.management.experiments.insert",
@@ -1857,6 +1942,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "experiments",
+          "management"
         ]
       },
       "get": {
@@ -1914,10 +2003,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "experiments",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/filters/{filterId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1940,7 +2031,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/filters/{filterId}": {
       "delete": {
         "description": "Delete a filter.",
         "operationId": "analytics.management.filters.delete",
@@ -1974,6 +2067,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "filters",
+          "management"
         ]
       },
       "get": {
@@ -2010,6 +2107,10 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "filters",
+          "management"
         ]
       },
       "patch": {
@@ -2045,6 +2146,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "filters",
+          "management"
         ]
       },
       "put": {
@@ -2080,10 +2185,12 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "filters",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/filters": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2106,7 +2213,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/filters": {
       "post": {
         "description": "Create a new filter.",
         "operationId": "analytics.management.filters.insert",
@@ -2133,6 +2242,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "filters",
+          "management"
         ]
       },
       "get": {
@@ -2175,10 +2288,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "filters",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/goals/{goalId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2201,7 +2316,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/goals/{goalId}": {
       "get": {
         "description": "Gets a goal to which the user has access.",
         "operationId": "analytics.management.goals.get",
@@ -2250,6 +2367,10 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "goals",
+          "management"
         ]
       },
       "patch": {
@@ -2299,6 +2420,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "goals",
+          "management"
         ]
       },
       "put": {
@@ -2348,10 +2473,12 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "goals",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/goals": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2374,7 +2501,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/goals": {
       "post": {
         "description": "Create a new goal.",
         "operationId": "analytics.management.goals.insert",
@@ -2415,6 +2544,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "goals",
+          "management"
         ]
       },
       "get": {
@@ -2472,10 +2605,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "goals",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/profileFilterLinks/{linkId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2498,7 +2633,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/profileFilterLinks/{linkId}": {
       "delete": {
         "description": "Delete a profile filter link.",
         "operationId": "analytics.management.profileFilterLinks.delete",
@@ -2543,6 +2680,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "profileFilterLinks",
+          "management"
         ]
       },
       "get": {
@@ -2593,6 +2734,10 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "profileFilterLinks",
+          "management"
         ]
       },
       "patch": {
@@ -2642,6 +2787,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "profileFilterLinks",
+          "management"
         ]
       },
       "put": {
@@ -2691,10 +2840,12 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "profileFilterLinks",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/profileFilterLinks": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2717,7 +2868,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/profileFilterLinks": {
       "post": {
         "description": "Create a new profile filter link.",
         "operationId": "analytics.management.profileFilterLinks.insert",
@@ -2758,6 +2911,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "profileFilterLinks",
+          "management"
         ]
       },
       "get": {
@@ -2814,10 +2971,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "profileFilterLinks",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/entityUserLinks/{linkId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2840,7 +2999,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/entityUserLinks/{linkId}": {
       "delete": {
         "description": "Removes a user from the given view (profile).",
         "operationId": "analytics.management.profileUserLinks.delete",
@@ -2885,6 +3046,10 @@
               "https://www.googleapis.com/auth/analytics.manage.users"
             ]
           }
+        ],
+        "tags": [
+          "profileUserLinks",
+          "management"
         ]
       },
       "put": {
@@ -2934,10 +3099,12 @@
               "https://www.googleapis.com/auth/analytics.manage.users"
             ]
           }
+        ],
+        "tags": [
+          "profileUserLinks",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/entityUserLinks": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2960,7 +3127,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/entityUserLinks": {
       "post": {
         "description": "Adds a new user to the given view (profile).",
         "operationId": "analytics.management.profileUserLinks.insert",
@@ -3001,6 +3170,10 @@
               "https://www.googleapis.com/auth/analytics.manage.users"
             ]
           }
+        ],
+        "tags": [
+          "profileUserLinks",
+          "management"
         ]
       },
       "get": {
@@ -3057,10 +3230,12 @@
               "https://www.googleapis.com/auth/analytics.manage.users.readonly"
             ]
           }
+        ],
+        "tags": [
+          "profileUserLinks",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3083,7 +3258,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}": {
       "delete": {
         "description": "Deletes a view (profile).",
         "operationId": "analytics.management.profiles.delete",
@@ -3121,6 +3298,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "profiles",
+          "management"
         ]
       },
       "get": {
@@ -3164,6 +3345,10 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "profiles",
+          "management"
         ]
       },
       "patch": {
@@ -3206,6 +3391,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "profiles",
+          "management"
         ]
       },
       "put": {
@@ -3248,10 +3437,12 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "profiles",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3274,7 +3465,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles": {
       "post": {
         "description": "Create a new view (profile).",
         "operationId": "analytics.management.profiles.insert",
@@ -3308,6 +3501,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "profiles",
+          "management"
         ]
       },
       "get": {
@@ -3358,10 +3555,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "profiles",
+          "management"
         ]
-      }
-    },
-    "/management/segments": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3384,7 +3583,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/segments": {
       "get": {
         "description": "Lists segments to which the user has access.",
         "operationId": "analytics.management.segments.list",
@@ -3419,10 +3620,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "segments",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/unsampledReports/{unsampledReportId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3445,7 +3648,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/unsampledReports/{unsampledReportId}": {
       "get": {
         "description": "Returns a single unsampled report.",
         "operationId": "analytics.management.unsampledReports.get",
@@ -3495,10 +3700,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "unsampledReports",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/unsampledReports": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3521,7 +3728,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/unsampledReports": {
       "post": {
         "description": "Create a new unsampled report.",
         "operationId": "analytics.management.unsampledReports.insert",
@@ -3563,6 +3772,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "unsampledReports",
+          "management"
         ]
       },
       "get": {
@@ -3620,10 +3833,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "unsampledReports",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/deleteUploadData": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3646,7 +3861,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/deleteUploadData": {
       "post": {
         "description": "Delete data associated with a previous upload.",
         "operationId": "analytics.management.uploads.deleteUploadData",
@@ -3685,10 +3902,12 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "uploads",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/uploads/{uploadId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3711,7 +3930,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/uploads/{uploadId}": {
       "get": {
         "description": "List uploads to which the user has access.",
         "operationId": "analytics.management.uploads.get",
@@ -3761,10 +3982,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "uploads",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/uploads": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3787,7 +4010,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/uploads": {
       "get": {
         "description": "List uploads to which the user has access.",
         "operationId": "analytics.management.uploads.list",
@@ -3844,6 +4069,10 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "uploads",
+          "management"
         ]
       },
       "post": {
@@ -3890,10 +4119,12 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "uploads",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/migrateDataImport": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3916,7 +4147,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/customDataSources/{customDataSourceId}/migrateDataImport": {
       "post": {
         "description": "Migrate custom data source and data imports to latest version.",
         "operationId": "analytics.management.uploads.migrateDataImport",
@@ -3955,10 +4188,12 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "uploads",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/entityAdWordsLinks/{webPropertyAdWordsLinkId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3981,7 +4216,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/entityAdWordsLinks/{webPropertyAdWordsLinkId}": {
       "delete": {
         "description": "Deletes a web property-AdWords link.",
         "operationId": "analytics.management.webPropertyAdWordsLinks.delete",
@@ -4019,6 +4256,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "webPropertyAdWordsLinks",
+          "management"
         ]
       },
       "get": {
@@ -4062,6 +4303,10 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "webPropertyAdWordsLinks",
+          "management"
         ]
       },
       "patch": {
@@ -4104,6 +4349,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "webPropertyAdWordsLinks",
+          "management"
         ]
       },
       "put": {
@@ -4146,10 +4395,12 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "webPropertyAdWordsLinks",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/entityAdWordsLinks": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4172,7 +4423,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/entityAdWordsLinks": {
       "post": {
         "description": "Creates a webProperty-AdWords link.",
         "operationId": "analytics.management.webPropertyAdWordsLinks.insert",
@@ -4206,6 +4459,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "webPropertyAdWordsLinks",
+          "management"
         ]
       },
       "get": {
@@ -4255,10 +4512,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "webPropertyAdWordsLinks",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4281,7 +4540,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}": {
       "get": {
         "description": "Gets a web property to which the user has access.",
         "operationId": "analytics.management.webproperties.get",
@@ -4316,6 +4577,10 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "webproperties",
+          "management"
         ]
       },
       "patch": {
@@ -4351,6 +4616,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "webproperties",
+          "management"
         ]
       },
       "put": {
@@ -4386,10 +4655,12 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "webproperties",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4412,7 +4683,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties": {
       "post": {
         "description": "Create a new property if the account has fewer than 20 properties. Web properties are visible in the Google Analytics interface only if they have at least one profile.",
         "operationId": "analytics.management.webproperties.insert",
@@ -4439,6 +4712,10 @@
               "https://www.googleapis.com/auth/analytics.edit"
             ]
           }
+        ],
+        "tags": [
+          "webproperties",
+          "management"
         ]
       },
       "get": {
@@ -4482,10 +4759,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "webproperties",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/entityUserLinks/{linkId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4508,7 +4787,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/entityUserLinks/{linkId}": {
       "delete": {
         "description": "Removes a user from the given web property.",
         "operationId": "analytics.management.webpropertyUserLinks.delete",
@@ -4546,6 +4827,10 @@
               "https://www.googleapis.com/auth/analytics.manage.users"
             ]
           }
+        ],
+        "tags": [
+          "webpropertyUserLinks",
+          "management"
         ]
       },
       "put": {
@@ -4588,10 +4873,12 @@
               "https://www.googleapis.com/auth/analytics.manage.users"
             ]
           }
+        ],
+        "tags": [
+          "webpropertyUserLinks",
+          "management"
         ]
-      }
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/entityUserLinks": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4614,7 +4901,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/management/accounts/{accountId}/webproperties/{webPropertyId}/entityUserLinks": {
       "post": {
         "description": "Adds a new user to the given web property.",
         "operationId": "analytics.management.webpropertyUserLinks.insert",
@@ -4648,6 +4937,10 @@
               "https://www.googleapis.com/auth/analytics.manage.users"
             ]
           }
+        ],
+        "tags": [
+          "webpropertyUserLinks",
+          "management"
         ]
       },
       "get": {
@@ -4697,10 +4990,12 @@
               "https://www.googleapis.com/auth/analytics.manage.users.readonly"
             ]
           }
+        ],
+        "tags": [
+          "webpropertyUserLinks",
+          "management"
         ]
-      }
-    },
-    "/metadata/{reportType}/columns": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4723,7 +5018,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/metadata/{reportType}/columns": {
       "get": {
         "description": "Lists all columns for a report type",
         "operationId": "analytics.metadata.columns.list",
@@ -4752,10 +5049,12 @@
               "https://www.googleapis.com/auth/analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "columns",
+          "metadata"
         ]
-      }
-    },
-    "/provisioning/createAccountTicket": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4778,7 +5077,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/provisioning/createAccountTicket": {
       "post": {
         "description": "Creates an account ticket.",
         "operationId": "analytics.provisioning.createAccountTicket",
@@ -4796,8 +5097,34 @@
               "https://www.googleapis.com/auth/analytics.provision"
             ]
           }
+        ],
+        "tags": [
+          "provisioning"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

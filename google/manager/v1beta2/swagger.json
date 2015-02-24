@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{projectId}/regions/{region}/deployments/{deploymentName}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "delete": {
         "description": "",
         "operationId": "manager.deployments.delete",
@@ -77,6 +54,9 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "deployments"
         ]
       },
       "get": {
@@ -118,10 +98,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "deployments"
         ]
-      }
-    },
-    "/{projectId}/regions/{region}/deployments": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -144,7 +125,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectId}/regions/{region}/deployments": {
       "post": {
         "description": "",
         "operationId": "manager.deployments.insert",
@@ -180,6 +163,9 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "deployments"
         ]
       },
       "get": {
@@ -230,10 +216,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "deployments"
         ]
-      }
-    },
-    "/{projectId}/templates/{templateName}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -256,7 +243,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectId}/templates/{templateName}": {
       "delete": {
         "description": "",
         "operationId": "manager.templates.delete",
@@ -286,6 +275,9 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "templates"
         ]
       },
       "get": {
@@ -321,10 +313,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "templates"
         ]
-      }
-    },
-    "/{projectId}/templates": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -347,7 +340,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectId}/templates": {
       "post": {
         "description": "",
         "operationId": "manager.templates.insert",
@@ -374,6 +369,9 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "templates"
         ]
       },
       "get": {
@@ -418,8 +416,34 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "templates"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

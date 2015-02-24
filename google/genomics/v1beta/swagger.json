@@ -19,29 +19,6 @@
   },
   "paths": {
     "/callsets": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "post": {
         "description": "Creates a new call set.",
         "operationId": "genomics.callsets.create",
@@ -59,10 +36,11 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "callsets"
         ]
-      }
-    },
-    "/callsets/{callSetId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -85,7 +63,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/callsets/{callSetId}": {
       "delete": {
         "description": "Deletes a call set.",
         "operationId": "genomics.callsets.delete",
@@ -109,6 +89,9 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "callsets"
         ]
       },
       "get": {
@@ -138,6 +121,9 @@
               "https://www.googleapis.com/auth/genomics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "callsets"
         ]
       },
       "patch": {
@@ -166,6 +152,9 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "callsets"
         ]
       },
       "put": {
@@ -194,10 +183,11 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "callsets"
         ]
-      }
-    },
-    "/callsets/search": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -220,7 +210,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/callsets/search": {
       "post": {
         "description": "Gets a list of call sets matching the criteria.\n\nImplements GlobalAllianceApi.searchCallSets.",
         "operationId": "genomics.callsets.search",
@@ -239,10 +231,11 @@
               "https://www.googleapis.com/auth/genomics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "callsets"
         ]
-      }
-    },
-    "/datasets": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -265,7 +258,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/datasets": {
       "post": {
         "description": "Creates a new dataset.",
         "operationId": "genomics.datasets.create",
@@ -283,6 +278,9 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "datasets"
         ]
       },
       "get": {
@@ -324,10 +322,11 @@
               "https://www.googleapis.com/auth/genomics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "datasets"
         ]
-      }
-    },
-    "/datasets/{datasetId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -350,7 +349,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/datasets/{datasetId}": {
       "delete": {
         "description": "Deletes a dataset.",
         "operationId": "genomics.datasets.delete",
@@ -374,6 +375,9 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "datasets"
         ]
       },
       "get": {
@@ -403,6 +407,9 @@
               "https://www.googleapis.com/auth/genomics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "datasets"
         ]
       },
       "patch": {
@@ -431,6 +438,9 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "datasets"
         ]
       },
       "put": {
@@ -459,10 +469,11 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "datasets"
         ]
-      }
-    },
-    "/datasets/{datasetId}/undelete": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -485,7 +496,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/datasets/{datasetId}/undelete": {
       "post": {
         "description": "Undeletes a dataset by restoring a dataset which was deleted via this API. This operation is only possible for a week after the deletion occurred.",
         "operationId": "genomics.datasets.undelete",
@@ -512,10 +525,11 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "datasets"
         ]
-      }
-    },
-    "/experimental/jobs/create": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -538,7 +552,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/experimental/jobs/create": {
       "post": {
         "description": "Creates and asynchronously runs an ad-hoc job. This is an experimental call and may be removed or changed at any time.",
         "operationId": "genomics.experimental.jobs.create",
@@ -557,10 +573,12 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "jobs",
+          "experimental"
         ]
-      }
-    },
-    "/jobs/{jobId}/cancel": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -583,7 +601,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/jobs/{jobId}/cancel": {
       "post": {
         "description": "Cancels a job by ID. Note that it is possible for partial results to be generated and stored for cancelled jobs.",
         "operationId": "genomics.jobs.cancel",
@@ -607,10 +627,11 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "jobs"
         ]
-      }
-    },
-    "/jobs/{jobId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -633,7 +654,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/jobs/{jobId}": {
       "get": {
         "description": "Gets a job by ID.",
         "operationId": "genomics.jobs.get",
@@ -661,10 +684,11 @@
               "https://www.googleapis.com/auth/genomics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "jobs"
         ]
-      }
-    },
-    "/jobs/search": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -687,7 +711,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/jobs/search": {
       "post": {
         "description": "Gets a list of jobs matching the criteria.",
         "operationId": "genomics.jobs.search",
@@ -706,10 +732,11 @@
               "https://www.googleapis.com/auth/genomics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "jobs"
         ]
-      }
-    },
-    "/reads/search": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -732,7 +759,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/reads/search": {
       "post": {
         "description": "Gets a list of reads for one or more readsets. Reads search operates over a genomic coordinate space of reference sequence & position defined over the reference sequences to which the requested readsets are aligned. If a target positional range is specified, search returns all reads whose alignment to the reference genome overlap the range. A query which specifies only readset IDs yields all reads in those readsets, including unmapped reads. All reads returned (including reads on subsequent pages) are ordered by genomic coordinate (reference sequence & position). Reads with equivalent genomic coordinates are returned in a deterministic order.",
         "operationId": "genomics.reads.search",
@@ -751,10 +780,11 @@
               "https://www.googleapis.com/auth/genomics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "reads"
         ]
-      }
-    },
-    "/readsets/{readsetId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -777,7 +807,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/readsets/{readsetId}": {
       "delete": {
         "description": "Deletes a readset.",
         "operationId": "genomics.readsets.delete",
@@ -801,6 +833,9 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "readsets"
         ]
       },
       "get": {
@@ -830,6 +865,9 @@
               "https://www.googleapis.com/auth/genomics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "readsets"
         ]
       },
       "patch": {
@@ -858,6 +896,9 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "readsets"
         ]
       },
       "put": {
@@ -886,10 +927,11 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "readsets"
         ]
-      }
-    },
-    "/readsets/export": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -912,7 +954,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/readsets/export": {
       "post": {
         "description": "Exports readsets to a BAM file in Google Cloud Storage. Note that currently there may be some differences between exported BAM files and the original BAM file at the time of import. In particular, comments in the input file header will not be preserved, and some custom tags will be converted to strings.",
         "operationId": "genomics.readsets.export",
@@ -931,10 +975,11 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "readsets"
         ]
-      }
-    },
-    "/readsets/import": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -957,7 +1002,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/readsets/import": {
       "post": {
         "description": "Creates readsets by asynchronously importing the provided information. Note that currently comments in the input file header are not imported and some custom tags will be converted to strings, rather than preserving tag types. The caller must have WRITE permissions to the dataset.",
         "operationId": "genomics.readsets.import",
@@ -976,10 +1023,11 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "readsets"
         ]
-      }
-    },
-    "/readsets/search": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1002,7 +1050,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/readsets/search": {
       "post": {
         "description": "Gets a list of readsets matching the criteria.",
         "operationId": "genomics.readsets.search",
@@ -1021,10 +1071,11 @@
               "https://www.googleapis.com/auth/genomics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "readsets"
         ]
-      }
-    },
-    "/readsets/{readsetId}/coveragebuckets": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1047,7 +1098,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/readsets/{readsetId}/coveragebuckets": {
       "get": {
         "description": "Lists fixed width coverage buckets for a readset, each of which correspond to a range of a reference sequence. Each bucket summarizes coverage information across its corresponding genomic range. Coverage is defined as the number of reads which are aligned to a given base in the reference sequence. Coverage buckets are available at various bucket widths, enabling various coverage \"zoom levels\". The caller must have READ permissions for the target readset.",
         "operationId": "genomics.readsets.coveragebuckets.list",
@@ -1112,10 +1165,12 @@
               "https://www.googleapis.com/auth/genomics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "coveragebuckets",
+          "readsets"
         ]
-      }
-    },
-    "/variants": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1138,7 +1193,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/variants": {
       "post": {
         "description": "Creates a new variant.",
         "operationId": "genomics.variants.create",
@@ -1156,10 +1213,11 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "variants"
         ]
-      }
-    },
-    "/variants/{variantId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1182,7 +1240,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/variants/{variantId}": {
       "delete": {
         "description": "Deletes a variant.",
         "operationId": "genomics.variants.delete",
@@ -1206,6 +1266,9 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "variants"
         ]
       },
       "get": {
@@ -1235,6 +1298,9 @@
               "https://www.googleapis.com/auth/genomics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "variants"
         ]
       },
       "put": {
@@ -1263,10 +1329,11 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "variants"
         ]
-      }
-    },
-    "/variants/export": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1289,7 +1356,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/variants/export": {
       "post": {
         "description": "Exports variant data to an external destination.",
         "operationId": "genomics.variants.export",
@@ -1308,10 +1377,11 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "variants"
         ]
-      }
-    },
-    "/variants/import": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1334,7 +1404,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/variants/import": {
       "post": {
         "description": "Creates variant data by asynchronously importing the provided information. The variants for import will be merged with any existing data and each other according to the behavior of mergeVariants. In particular, this means for merged VCF variants that have conflicting INFO fields, some data will be arbitrarily discarded. As a special case, for single-sample VCF files, QUAL and FILTER fields will be moved to the call level; these are sometimes interpreted in a call-specific context. Imported VCF headers are appended to the metadata already in a variant set.",
         "operationId": "genomics.variants.import",
@@ -1353,10 +1425,11 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "variants"
         ]
-      }
-    },
-    "/variants/search": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1379,7 +1452,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/variants/search": {
       "post": {
         "description": "Gets a list of variants matching the criteria.\n\nImplements GlobalAllianceApi.searchVariants.",
         "operationId": "genomics.variants.search",
@@ -1398,10 +1473,11 @@
               "https://www.googleapis.com/auth/genomics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "variants"
         ]
-      }
-    },
-    "/variantsets/{variantSetId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1424,7 +1500,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/variantsets/{variantSetId}": {
       "delete": {
         "description": "Deletes the contents of a variant set. The variant set object is not deleted.",
         "operationId": "genomics.variantsets.delete",
@@ -1448,6 +1526,9 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "variantsets"
         ]
       },
       "get": {
@@ -1477,6 +1558,9 @@
               "https://www.googleapis.com/auth/genomics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "variantsets"
         ]
       },
       "patch": {
@@ -1505,6 +1589,9 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "variantsets"
         ]
       },
       "put": {
@@ -1533,10 +1620,11 @@
               "https://www.googleapis.com/auth/genomics"
             ]
           }
+        ],
+        "tags": [
+          "variantsets"
         ]
-      }
-    },
-    "/variantsets/{variantSetId}/mergeVariants": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1559,7 +1647,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/variantsets/{variantSetId}/mergeVariants": {
       "post": {
         "description": "Merges the given variants with existing variants. Each variant will be merged with an existing variant that matches its reference sequence, start, end, reference bases, and alternative bases. If no such variant exists, a new one will be created.\n\nWhen variants are merged, the call information from the new variant is added to the existing variant, and other fields (such as key/value pairs) are discarded.",
         "operationId": "genomics.variantsets.mergeVariants",
@@ -1576,10 +1666,11 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "tags": [
+          "variantsets"
         ]
-      }
-    },
-    "/variantsets/search": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1602,7 +1693,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/variantsets/search": {
       "post": {
         "description": "Returns a list of all variant sets matching search criteria.\n\nImplements GlobalAllianceApi.searchVariantSets.",
         "operationId": "genomics.variantsets.search",
@@ -1621,8 +1714,34 @@
               "https://www.googleapis.com/auth/genomics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "variantsets"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

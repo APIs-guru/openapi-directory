@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{packageName}/edits/{editId}:commit": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "post": {
         "description": "Commits/applies the changes made in this edit back to the app.",
         "operationId": "androidpublisher.edits.commit",
@@ -75,10 +52,11 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "edits"
         ]
-      }
-    },
-    "/{packageName}/edits/{editId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -101,7 +79,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/edits/{editId}": {
       "delete": {
         "description": "Deletes an edit for an app. Creating a new edit will automatically delete any of your previous edits so this method need only be called if you want to preemptively abandon an edit.",
         "operationId": "androidpublisher.edits.delete",
@@ -132,6 +112,9 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "edits"
         ]
       },
       "get": {
@@ -167,10 +150,11 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "edits"
         ]
-      }
-    },
-    "/{packageName}/edits": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -193,7 +177,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/edits": {
       "post": {
         "description": "Creates a new edit for an app, populated with the app's current state.",
         "operationId": "androidpublisher.edits.insert",
@@ -220,10 +206,11 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "edits"
         ]
-      }
-    },
-    "/{packageName}/edits/{editId}:validate": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -246,7 +233,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/edits/{editId}:validate": {
       "post": {
         "description": "Checks that the edit can be successfully committed. The edit's changes are not applied to the live app.",
         "operationId": "androidpublisher.edits.validate",
@@ -280,10 +269,11 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "edits"
         ]
-      }
-    },
-    "/{packageName}/edits/{editId}/apks/{apkVersionCode}/listings/{language}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -306,7 +296,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/edits/{editId}/apks/{apkVersionCode}/listings/{language}": {
       "delete": {
         "description": "Deletes the APK-specific localized listing for a specified APK and language code.",
         "operationId": "androidpublisher.edits.apklistings.delete",
@@ -351,6 +343,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "apklistings",
+          "edits"
         ]
       },
       "get": {
@@ -400,6 +396,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "apklistings",
+          "edits"
         ]
       },
       "patch": {
@@ -449,6 +449,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "apklistings",
+          "edits"
         ]
       },
       "put": {
@@ -498,10 +502,12 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "apklistings",
+          "edits"
         ]
-      }
-    },
-    "/{packageName}/edits/{editId}/apks/{apkVersionCode}/listings": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -524,7 +530,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/edits/{editId}/apks/{apkVersionCode}/listings": {
       "delete": {
         "description": "Deletes all the APK-specific localized listings for a specified APK.",
         "operationId": "androidpublisher.edits.apklistings.deleteall",
@@ -562,6 +570,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "apklistings",
+          "edits"
         ]
       },
       "get": {
@@ -604,10 +616,12 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "apklistings",
+          "edits"
         ]
-      }
-    },
-    "/{packageName}/edits/{editId}/apks/externallyHosted": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -630,7 +644,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/edits/{editId}/apks/externallyHosted": {
       "post": {
         "description": "Creates a new APK without uploading the APK itself to Google Play, instead hosting the APK at a specified URL. This function is only available to enterprises using Android for Work, for applications distributed within the enterprise Private Channel.",
         "operationId": "androidpublisher.edits.apks.addexternallyhosted",
@@ -664,10 +680,12 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "apks",
+          "edits"
         ]
-      }
-    },
-    "/{packageName}/edits/{editId}/apks": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -690,7 +708,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/edits/{editId}/apks": {
       "get": {
         "operationId": "androidpublisher.edits.apks.list",
         "responses": {
@@ -723,6 +743,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "apks",
+          "edits"
         ]
       },
       "post": {
@@ -761,10 +785,12 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "apks",
+          "edits"
         ]
-      }
-    },
-    "/{packageName}/edits/{editId}/details": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -787,7 +813,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/edits/{editId}/details": {
       "get": {
         "description": "Fetches app details for this edit. This includes the default language and developer support contact information.",
         "operationId": "androidpublisher.edits.details.get",
@@ -821,6 +849,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "details",
+          "edits"
         ]
       },
       "patch": {
@@ -856,6 +888,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "details",
+          "edits"
         ]
       },
       "put": {
@@ -891,10 +927,12 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "details",
+          "edits"
         ]
-      }
-    },
-    "/{packageName}/edits/{editId}/apks/{apkVersionCode}/expansionFiles/{expansionFileType}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -917,7 +955,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/edits/{editId}/apks/{apkVersionCode}/expansionFiles/{expansionFileType}": {
       "get": {
         "description": "Fetches the Expansion File configuration for the APK specified.",
         "operationId": "androidpublisher.edits.expansionfiles.get",
@@ -968,6 +1008,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "expansionfiles",
+          "edits"
         ]
       },
       "patch": {
@@ -1020,6 +1064,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "expansionfiles",
+          "edits"
         ]
       },
       "put": {
@@ -1072,6 +1120,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "expansionfiles",
+          "edits"
         ]
       },
       "post": {
@@ -1127,10 +1179,12 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "expansionfiles",
+          "edits"
         ]
-      }
-    },
-    "/{packageName}/edits/{editId}/listings/{language}/{imageType}/{imageId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1153,7 +1207,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/edits/{editId}/listings/{language}/{imageType}/{imageId}": {
       "delete": {
         "description": "Deletes the image (specified by id) from the edit.",
         "operationId": "androidpublisher.edits.images.delete",
@@ -1214,10 +1270,12 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "images",
+          "edits"
         ]
-      }
-    },
-    "/{packageName}/edits/{editId}/listings/{language}/{imageType}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1240,7 +1298,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/edits/{editId}/listings/{language}/{imageType}": {
       "delete": {
         "description": "Deletes all images for the specified language and image type.",
         "operationId": "androidpublisher.edits.images.deleteall",
@@ -1297,6 +1357,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "images",
+          "edits"
         ]
       },
       "get": {
@@ -1355,6 +1419,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "images",
+          "edits"
         ]
       },
       "post": {
@@ -1484,10 +1552,12 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "images",
+          "edits"
         ]
-      }
-    },
-    "/{packageName}/edits/{editId}/listings/{language}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1510,7 +1580,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/edits/{editId}/listings/{language}": {
       "delete": {
         "description": "Deletes the specified localized store listing from an edit.",
         "operationId": "androidpublisher.edits.listings.delete",
@@ -1548,6 +1620,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "listings",
+          "edits"
         ]
       },
       "get": {
@@ -1590,6 +1666,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "listings",
+          "edits"
         ]
       },
       "patch": {
@@ -1632,6 +1712,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "listings",
+          "edits"
         ]
       },
       "put": {
@@ -1674,10 +1758,12 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "listings",
+          "edits"
         ]
-      }
-    },
-    "/{packageName}/edits/{editId}/listings": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1700,7 +1786,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/edits/{editId}/listings": {
       "delete": {
         "description": "Deletes all localized listings from an edit.",
         "operationId": "androidpublisher.edits.listings.deleteall",
@@ -1731,6 +1819,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "listings",
+          "edits"
         ]
       },
       "get": {
@@ -1766,10 +1858,12 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "listings",
+          "edits"
         ]
-      }
-    },
-    "/{packageName}/edits/{editId}/testers/{track}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1792,7 +1886,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/edits/{editId}/testers/{track}": {
       "get": {
         "operationId": "androidpublisher.edits.testers.get",
         "responses": {
@@ -1837,6 +1933,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "testers",
+          "edits"
         ]
       },
       "patch": {
@@ -1883,6 +1983,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "testers",
+          "edits"
         ]
       },
       "put": {
@@ -1929,10 +2033,12 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "testers",
+          "edits"
         ]
-      }
-    },
-    "/{packageName}/edits/{editId}/tracks/{track}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1955,7 +2061,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/edits/{editId}/tracks/{track}": {
       "get": {
         "description": "Fetches the track configuration for the specified track type. Includes the APK version codes that are in this track.",
         "operationId": "androidpublisher.edits.tracks.get",
@@ -2002,6 +2110,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "tracks",
+          "edits"
         ]
       },
       "patch": {
@@ -2050,6 +2162,10 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "tracks",
+          "edits"
         ]
       },
       "put": {
@@ -2098,10 +2214,12 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "tracks",
+          "edits"
         ]
-      }
-    },
-    "/{packageName}/edits/{editId}/tracks": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2124,7 +2242,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/edits/{editId}/tracks": {
       "get": {
         "description": "Lists all the track configurations for this edit.",
         "operationId": "androidpublisher.edits.tracks.list",
@@ -2158,10 +2278,12 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "tracks",
+          "edits"
         ]
-      }
-    },
-    "/inappproducts/batch": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2184,7 +2306,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/inappproducts/batch": {
       "post": {
         "operationId": "androidpublisher.inappproducts.batch",
         "responses": {
@@ -2201,10 +2325,11 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "inappproducts"
         ]
-      }
-    },
-    "/{packageName}/inappproducts/{sku}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2227,7 +2352,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/inappproducts/{sku}": {
       "delete": {
         "description": "Delete an in-app product for an app.",
         "operationId": "androidpublisher.inappproducts.delete",
@@ -2258,6 +2385,9 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "inappproducts"
         ]
       },
       "get": {
@@ -2292,6 +2422,9 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "inappproducts"
         ]
       },
       "patch": {
@@ -2333,6 +2466,9 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "inappproducts"
         ]
       },
       "put": {
@@ -2374,10 +2510,11 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "inappproducts"
         ]
-      }
-    },
-    "/{packageName}/inappproducts": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2400,7 +2537,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/inappproducts": {
       "post": {
         "description": "Creates a new in-app product for an app.",
         "operationId": "androidpublisher.inappproducts.insert",
@@ -2433,6 +2572,9 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "inappproducts"
         ]
       },
       "get": {
@@ -2476,10 +2618,11 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "inappproducts"
         ]
-      }
-    },
-    "/{packageName}/purchases/products/{productId}/tokens/{token}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2502,7 +2645,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/purchases/products/{productId}/tokens/{token}": {
       "get": {
         "description": "Checks the purchase and consumption status of an inapp item.",
         "operationId": "androidpublisher.purchases.products.get",
@@ -2543,10 +2688,12 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "products",
+          "purchases"
         ]
-      }
-    },
-    "/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:cancel": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2569,7 +2716,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:cancel": {
       "post": {
         "description": "Cancels a user's subscription purchase. The subscription remains valid until its expiration time.",
         "operationId": "androidpublisher.purchases.subscriptions.cancel",
@@ -2607,10 +2756,12 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "subscriptions",
+          "purchases"
         ]
-      }
-    },
-    "/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:defer": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2633,7 +2784,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:defer": {
       "post": {
         "description": "Defers a user's subscription purchase until a specified future expiration time.",
         "operationId": "androidpublisher.purchases.subscriptions.defer",
@@ -2674,10 +2827,12 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "subscriptions",
+          "purchases"
         ]
-      }
-    },
-    "/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2700,7 +2855,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}": {
       "get": {
         "description": "Checks whether a user's subscription purchase is valid and returns its expiry time.",
         "operationId": "androidpublisher.purchases.subscriptions.get",
@@ -2741,10 +2898,12 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "subscriptions",
+          "purchases"
         ]
-      }
-    },
-    "/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:refund": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2767,7 +2926,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:refund": {
       "post": {
         "description": "Refunds a user's subscription purchase, but the subscription remains valid until its expiration time and it will continue to recur.",
         "operationId": "androidpublisher.purchases.subscriptions.refund",
@@ -2805,10 +2966,12 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "subscriptions",
+          "purchases"
         ]
-      }
-    },
-    "/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:revoke": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2831,7 +2994,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/purchases/subscriptions/{subscriptionId}/tokens/{token}:revoke": {
       "post": {
         "description": "Refunds and immediately revokes a user's subscription purchase. Access to the subscription will be terminated immediately and it will stop recurring.",
         "operationId": "androidpublisher.purchases.subscriptions.revoke",
@@ -2869,8 +3034,35 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "subscriptions",
+          "purchases"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

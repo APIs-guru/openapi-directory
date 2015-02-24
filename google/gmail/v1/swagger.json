@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{userId}/profile": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Gets the current user's Gmail profile.",
         "operationId": "gmail.users.getProfile",
@@ -72,10 +49,11 @@
               "https://www.googleapis.com/auth/gmail.readonly"
             ]
           }
+        ],
+        "tags": [
+          "users"
         ]
-      }
-    },
-    "/{userId}/drafts": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -98,7 +76,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{userId}/drafts": {
       "post": {
         "description": "Creates a new draft with the DRAFT label.",
         "operationId": "gmail.users.drafts.create",
@@ -131,6 +111,10 @@
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
+        ],
+        "tags": [
+          "drafts",
+          "users"
         ]
       },
       "get": {
@@ -176,10 +160,12 @@
               "https://www.googleapis.com/auth/gmail.readonly"
             ]
           }
+        ],
+        "tags": [
+          "drafts",
+          "users"
         ]
-      }
-    },
-    "/{userId}/drafts/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -202,7 +188,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{userId}/drafts/{id}": {
       "delete": {
         "description": "Immediately and permanently deletes the specified draft. Does not simply trash it.",
         "operationId": "gmail.users.drafts.delete",
@@ -236,6 +224,10 @@
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
+        ],
+        "tags": [
+          "drafts",
+          "users"
         ]
       },
       "get": {
@@ -288,6 +280,10 @@
               "https://www.googleapis.com/auth/gmail.readonly"
             ]
           }
+        ],
+        "tags": [
+          "drafts",
+          "users"
         ]
       },
       "put": {
@@ -329,10 +325,12 @@
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
+        ],
+        "tags": [
+          "drafts",
+          "users"
         ]
-      }
-    },
-    "/{userId}/drafts/send": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -355,7 +353,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{userId}/drafts/send": {
       "post": {
         "description": "Sends the specified, existing draft to the recipients in the To, Cc, and Bcc headers.",
         "operationId": "gmail.users.drafts.send",
@@ -388,10 +388,12 @@
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
+        ],
+        "tags": [
+          "drafts",
+          "users"
         ]
-      }
-    },
-    "/{userId}/history": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -414,7 +416,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{userId}/history": {
       "get": {
         "description": "Lists the history of all changes to the given mailbox. History results are returned in chronological order (increasing historyId).",
         "operationId": "gmail.users.history.list",
@@ -469,10 +473,12 @@
               "https://www.googleapis.com/auth/gmail.readonly"
             ]
           }
+        ],
+        "tags": [
+          "history",
+          "users"
         ]
-      }
-    },
-    "/{userId}/labels": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -495,7 +501,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{userId}/labels": {
       "post": {
         "description": "Creates a new label.",
         "operationId": "gmail.users.labels.create",
@@ -524,6 +532,10 @@
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
+        ],
+        "tags": [
+          "labels",
+          "users"
         ]
       },
       "get": {
@@ -555,10 +567,12 @@
               "https://www.googleapis.com/auth/gmail.readonly"
             ]
           }
+        ],
+        "tags": [
+          "labels",
+          "users"
         ]
-      }
-    },
-    "/{userId}/labels/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -581,7 +595,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{userId}/labels/{id}": {
       "delete": {
         "description": "Immediately and permanently deletes the specified label and removes it from any messages and threads that it is applied to.",
         "operationId": "gmail.users.labels.delete",
@@ -614,6 +630,10 @@
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
+        ],
+        "tags": [
+          "labels",
+          "users"
         ]
       },
       "get": {
@@ -652,6 +672,10 @@
               "https://www.googleapis.com/auth/gmail.readonly"
             ]
           }
+        ],
+        "tags": [
+          "labels",
+          "users"
         ]
       },
       "patch": {
@@ -689,6 +713,10 @@
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
+        ],
+        "tags": [
+          "labels",
+          "users"
         ]
       },
       "put": {
@@ -726,10 +754,12 @@
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
+        ],
+        "tags": [
+          "labels",
+          "users"
         ]
-      }
-    },
-    "/{userId}/messages/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -752,7 +782,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{userId}/messages/{id}": {
       "delete": {
         "description": "Immediately and permanently deletes the specified message. This operation cannot be undone. Prefer messages.trash instead.",
         "operationId": "gmail.users.messages.delete",
@@ -784,6 +816,10 @@
               "https://mail.google.com/"
             ]
           }
+        ],
+        "tags": [
+          "messages",
+          "users"
         ]
       },
       "get": {
@@ -845,10 +881,12 @@
               "https://www.googleapis.com/auth/gmail.readonly"
             ]
           }
+        ],
+        "tags": [
+          "messages",
+          "users"
         ]
-      }
-    },
-    "/{userId}/messages/import": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -871,7 +909,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{userId}/messages/import": {
       "post": {
         "description": "Imports a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP. Does not send a message.",
         "operationId": "gmail.users.messages.import",
@@ -935,10 +975,12 @@
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
+        ],
+        "tags": [
+          "messages",
+          "users"
         ]
-      }
-    },
-    "/{userId}/messages": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -961,7 +1003,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{userId}/messages": {
       "post": {
         "description": "Directly inserts a message into only this user's mailbox similar to IMAP APPEND, bypassing most scanning and classification. Does not send a message.",
         "operationId": "gmail.users.messages.insert",
@@ -1004,6 +1048,10 @@
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
+        ],
+        "tags": [
+          "messages",
+          "users"
         ]
       },
       "get": {
@@ -1071,10 +1119,12 @@
               "https://www.googleapis.com/auth/gmail.readonly"
             ]
           }
+        ],
+        "tags": [
+          "messages",
+          "users"
         ]
-      }
-    },
-    "/{userId}/messages/{id}/modify": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1097,7 +1147,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{userId}/messages/{id}/modify": {
       "post": {
         "description": "Modifies the labels on the specified message.",
         "operationId": "gmail.users.messages.modify",
@@ -1133,10 +1185,12 @@
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
+        ],
+        "tags": [
+          "messages",
+          "users"
         ]
-      }
-    },
-    "/{userId}/messages/send": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1159,7 +1213,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{userId}/messages/send": {
       "post": {
         "description": "Sends the specified message to the recipients in the To, Cc, and Bcc headers.",
         "operationId": "gmail.users.messages.send",
@@ -1192,10 +1248,12 @@
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
+        ],
+        "tags": [
+          "messages",
+          "users"
         ]
-      }
-    },
-    "/{userId}/messages/{id}/trash": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1218,7 +1276,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{userId}/messages/{id}/trash": {
       "post": {
         "description": "Moves the specified message to the trash.",
         "operationId": "gmail.users.messages.trash",
@@ -1254,10 +1314,12 @@
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
+        ],
+        "tags": [
+          "messages",
+          "users"
         ]
-      }
-    },
-    "/{userId}/messages/{id}/untrash": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1280,7 +1342,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{userId}/messages/{id}/untrash": {
       "post": {
         "description": "Removes the specified message from the trash.",
         "operationId": "gmail.users.messages.untrash",
@@ -1316,10 +1380,12 @@
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
+        ],
+        "tags": [
+          "messages",
+          "users"
         ]
-      }
-    },
-    "/{userId}/messages/{messageId}/attachments/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1342,7 +1408,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{userId}/messages/{messageId}/attachments/{id}": {
       "get": {
         "description": "Gets the specified message attachment.",
         "operationId": "gmail.users.messages.attachments.get",
@@ -1386,10 +1454,13 @@
               "https://www.googleapis.com/auth/gmail.readonly"
             ]
           }
+        ],
+        "tags": [
+          "attachments",
+          "messages",
+          "users"
         ]
-      }
-    },
-    "/{userId}/threads/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1412,7 +1483,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{userId}/threads/{id}": {
       "delete": {
         "description": "Immediately and permanently deletes the specified thread. This operation cannot be undone. Prefer threads.trash instead.",
         "operationId": "gmail.users.threads.delete",
@@ -1444,6 +1517,10 @@
               "https://mail.google.com/"
             ]
           }
+        ],
+        "tags": [
+          "threads",
+          "users"
         ]
       },
       "get": {
@@ -1504,10 +1581,12 @@
               "https://www.googleapis.com/auth/gmail.readonly"
             ]
           }
+        ],
+        "tags": [
+          "threads",
+          "users"
         ]
-      }
-    },
-    "/{userId}/threads": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1530,7 +1609,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{userId}/threads": {
       "get": {
         "description": "Lists the threads in the user's mailbox.",
         "operationId": "gmail.users.threads.list",
@@ -1596,10 +1677,12 @@
               "https://www.googleapis.com/auth/gmail.readonly"
             ]
           }
+        ],
+        "tags": [
+          "threads",
+          "users"
         ]
-      }
-    },
-    "/{userId}/threads/{id}/modify": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1622,7 +1705,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{userId}/threads/{id}/modify": {
       "post": {
         "description": "Modifies the labels applied to the thread. This applies to all messages in the thread.",
         "operationId": "gmail.users.threads.modify",
@@ -1658,10 +1743,12 @@
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
+        ],
+        "tags": [
+          "threads",
+          "users"
         ]
-      }
-    },
-    "/{userId}/threads/{id}/trash": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1684,7 +1771,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{userId}/threads/{id}/trash": {
       "post": {
         "description": "Moves the specified thread to the trash.",
         "operationId": "gmail.users.threads.trash",
@@ -1720,10 +1809,12 @@
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
+        ],
+        "tags": [
+          "threads",
+          "users"
         ]
-      }
-    },
-    "/{userId}/threads/{id}/untrash": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1746,7 +1837,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{userId}/threads/{id}/untrash": {
       "post": {
         "description": "Removes the specified thread from the trash.",
         "operationId": "gmail.users.threads.untrash",
@@ -1782,8 +1875,35 @@
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
+        ],
+        "tags": [
+          "threads",
+          "users"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

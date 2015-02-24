@@ -19,29 +19,6 @@
   },
   "paths": {
     "/users/{userId}/blogs/{blogId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Gets one blog and user info pair by blogId and userId.",
         "operationId": "blogger.blogUserInfos.get",
@@ -82,10 +59,11 @@
               "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
+        ],
+        "tags": [
+          "blogUserInfos"
         ]
-      }
-    },
-    "/blogs/{blogId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -108,7 +86,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/blogs/{blogId}": {
       "get": {
         "description": "Gets one blog by ID.",
         "operationId": "blogger.blogs.get",
@@ -153,10 +133,11 @@
               "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
+        ],
+        "tags": [
+          "blogs"
         ]
-      }
-    },
-    "/blogs/byurl": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -179,7 +160,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/blogs/byurl": {
       "get": {
         "description": "Retrieve a Blog by URL.",
         "operationId": "blogger.blogs.getByUrl",
@@ -218,10 +201,11 @@
               "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
+        ],
+        "tags": [
+          "blogs"
         ]
-      }
-    },
-    "/users/{userId}/blogs": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -244,7 +228,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/users/{userId}/blogs": {
       "get": {
         "description": "Retrieves a list of blogs, possibly filtered.",
         "operationId": "blogger.blogs.listByUser",
@@ -319,10 +305,11 @@
               "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
+        ],
+        "tags": [
+          "blogs"
         ]
-      }
-    },
-    "/blogs/{blogId}/posts/{postId}/comments/{commentId}/approve": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -345,7 +332,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/blogs/{blogId}/posts/{postId}/comments/{commentId}/approve": {
       "post": {
         "description": "Marks a comment as not spam.",
         "operationId": "blogger.comments.approve",
@@ -386,10 +375,11 @@
               "https://www.googleapis.com/auth/blogger"
             ]
           }
+        ],
+        "tags": [
+          "comments"
         ]
-      }
-    },
-    "/blogs/{blogId}/posts/{postId}/comments/{commentId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -412,7 +402,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/blogs/{blogId}/posts/{postId}/comments/{commentId}": {
       "delete": {
         "description": "Delete a comment by ID.",
         "operationId": "blogger.comments.delete",
@@ -450,6 +442,9 @@
               "https://www.googleapis.com/auth/blogger"
             ]
           }
+        ],
+        "tags": [
+          "comments"
         ]
       },
       "get": {
@@ -504,10 +499,11 @@
               "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
+        ],
+        "tags": [
+          "comments"
         ]
-      }
-    },
-    "/blogs/{blogId}/posts/{postId}/comments": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -530,7 +526,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/blogs/{blogId}/posts/{postId}/comments": {
       "get": {
         "description": "Retrieves the comments for a post, possibly filtered.",
         "operationId": "blogger.comments.list",
@@ -621,10 +619,11 @@
               "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
+        ],
+        "tags": [
+          "comments"
         ]
-      }
-    },
-    "/blogs/{blogId}/comments": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -647,7 +646,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/blogs/{blogId}/comments": {
       "get": {
         "description": "Retrieves the comments for a blog, across all posts, possibly filtered.",
         "operationId": "blogger.comments.listByBlog",
@@ -720,10 +721,11 @@
               "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
+        ],
+        "tags": [
+          "comments"
         ]
-      }
-    },
-    "/blogs/{blogId}/posts/{postId}/comments/{commentId}/spam": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -746,7 +748,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/blogs/{blogId}/posts/{postId}/comments/{commentId}/spam": {
       "post": {
         "description": "Marks a comment as spam.",
         "operationId": "blogger.comments.markAsSpam",
@@ -787,10 +791,11 @@
               "https://www.googleapis.com/auth/blogger"
             ]
           }
+        ],
+        "tags": [
+          "comments"
         ]
-      }
-    },
-    "/blogs/{blogId}/posts/{postId}/comments/{commentId}/removecontent": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -813,7 +818,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/blogs/{blogId}/posts/{postId}/comments/{commentId}/removecontent": {
       "post": {
         "description": "Removes the content of a comment.",
         "operationId": "blogger.comments.removeContent",
@@ -854,10 +861,11 @@
               "https://www.googleapis.com/auth/blogger"
             ]
           }
+        ],
+        "tags": [
+          "comments"
         ]
-      }
-    },
-    "/blogs/{blogId}/pageviews": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -880,7 +888,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/blogs/{blogId}/pageviews": {
       "get": {
         "description": "Retrieve pageview stats for a Blog.",
         "operationId": "blogger.pageViews.get",
@@ -921,10 +931,11 @@
               "https://www.googleapis.com/auth/blogger"
             ]
           }
+        ],
+        "tags": [
+          "pageViews"
         ]
-      }
-    },
-    "/blogs/{blogId}/pages/{pageId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -947,7 +958,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/blogs/{blogId}/pages/{pageId}": {
       "delete": {
         "description": "Delete a page by ID.",
         "operationId": "blogger.pages.delete",
@@ -978,6 +991,9 @@
               "https://www.googleapis.com/auth/blogger"
             ]
           }
+        ],
+        "tags": [
+          "pages"
         ]
       },
       "get": {
@@ -1024,6 +1040,9 @@
               "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
+        ],
+        "tags": [
+          "pages"
         ]
       },
       "patch": {
@@ -1071,6 +1090,9 @@
               "https://www.googleapis.com/auth/blogger"
             ]
           }
+        ],
+        "tags": [
+          "pages"
         ]
       },
       "put": {
@@ -1118,10 +1140,11 @@
               "https://www.googleapis.com/auth/blogger"
             ]
           }
+        ],
+        "tags": [
+          "pages"
         ]
-      }
-    },
-    "/blogs/{blogId}/pages": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1144,7 +1167,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/blogs/{blogId}/pages": {
       "post": {
         "description": "Add a page.",
         "operationId": "blogger.pages.insert",
@@ -1177,6 +1202,9 @@
               "https://www.googleapis.com/auth/blogger"
             ]
           }
+        ],
+        "tags": [
+          "pages"
         ]
       },
       "get": {
@@ -1248,10 +1276,11 @@
               "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
+        ],
+        "tags": [
+          "pages"
         ]
-      }
-    },
-    "/blogs/{blogId}/pages/{pageId}/publish": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1274,7 +1303,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/blogs/{blogId}/pages/{pageId}/publish": {
       "post": {
         "description": "Publishes a draft page.",
         "operationId": "blogger.pages.publish",
@@ -1308,10 +1339,11 @@
               "https://www.googleapis.com/auth/blogger"
             ]
           }
+        ],
+        "tags": [
+          "pages"
         ]
-      }
-    },
-    "/blogs/{blogId}/pages/{pageId}/revert": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1334,7 +1366,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/blogs/{blogId}/pages/{pageId}/revert": {
       "post": {
         "description": "Revert a published or scheduled page to draft state.",
         "operationId": "blogger.pages.revert",
@@ -1368,10 +1402,11 @@
               "https://www.googleapis.com/auth/blogger"
             ]
           }
+        ],
+        "tags": [
+          "pages"
         ]
-      }
-    },
-    "/users/{userId}/blogs/{blogId}/posts/{postId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1394,7 +1429,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/users/{userId}/blogs/{blogId}/posts/{postId}": {
       "get": {
         "description": "Gets one post and user info pair, by post ID and user ID. The post user info contains per-user information about the post, such as access rights, specific to the user.",
         "operationId": "blogger.postUserInfos.get",
@@ -1442,10 +1479,11 @@
               "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
+        ],
+        "tags": [
+          "postUserInfos"
         ]
-      }
-    },
-    "/users/{userId}/blogs/{blogId}/posts": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1468,7 +1506,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/users/{userId}/blogs/{blogId}/posts": {
       "get": {
         "description": "Retrieves a list of post and post user info pairs, possibly filtered. The post user info contains per-user information about the post, such as access rights, specific to the user.",
         "operationId": "blogger.postUserInfos.list",
@@ -1576,10 +1616,11 @@
               "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
+        ],
+        "tags": [
+          "postUserInfos"
         ]
-      }
-    },
-    "/blogs/{blogId}/posts/{postId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1602,7 +1643,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/blogs/{blogId}/posts/{postId}": {
       "delete": {
         "description": "Delete a post by ID.",
         "operationId": "blogger.posts.delete",
@@ -1633,6 +1676,9 @@
               "https://www.googleapis.com/auth/blogger"
             ]
           }
+        ],
+        "tags": [
+          "posts"
         ]
       },
       "get": {
@@ -1699,6 +1745,9 @@
               "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
+        ],
+        "tags": [
+          "posts"
         ]
       },
       "patch": {
@@ -1765,6 +1814,9 @@
               "https://www.googleapis.com/auth/blogger"
             ]
           }
+        ],
+        "tags": [
+          "posts"
         ]
       },
       "put": {
@@ -1831,10 +1883,11 @@
               "https://www.googleapis.com/auth/blogger"
             ]
           }
+        ],
+        "tags": [
+          "posts"
         ]
-      }
-    },
-    "/blogs/{blogId}/posts/bypath": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1857,7 +1910,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/blogs/{blogId}/posts/bypath": {
       "get": {
         "description": "Retrieve a Post by Path.",
         "operationId": "blogger.posts.getByPath",
@@ -1909,10 +1964,11 @@
               "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
+        ],
+        "tags": [
+          "posts"
         ]
-      }
-    },
-    "/blogs/{blogId}/posts": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1935,7 +1991,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/blogs/{blogId}/posts": {
       "post": {
         "description": "Add a post.",
         "operationId": "blogger.posts.insert",
@@ -1981,6 +2039,9 @@
               "https://www.googleapis.com/auth/blogger"
             ]
           }
+        ],
+        "tags": [
+          "posts"
         ]
       },
       "get": {
@@ -2090,10 +2151,11 @@
               "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
+        ],
+        "tags": [
+          "posts"
         ]
-      }
-    },
-    "/blogs/{blogId}/posts/{postId}/publish": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2116,7 +2178,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/blogs/{blogId}/posts/{postId}/publish": {
       "post": {
         "description": "Publishes a draft post, optionally at the specific time of the given publishDate parameter.",
         "operationId": "blogger.posts.publish",
@@ -2156,10 +2220,11 @@
               "https://www.googleapis.com/auth/blogger"
             ]
           }
+        ],
+        "tags": [
+          "posts"
         ]
-      }
-    },
-    "/blogs/{blogId}/posts/{postId}/revert": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2182,7 +2247,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/blogs/{blogId}/posts/{postId}/revert": {
       "post": {
         "description": "Revert a published or scheduled post to draft state.",
         "operationId": "blogger.posts.revert",
@@ -2216,10 +2283,11 @@
               "https://www.googleapis.com/auth/blogger"
             ]
           }
+        ],
+        "tags": [
+          "posts"
         ]
-      }
-    },
-    "/blogs/{blogId}/posts/search": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2242,7 +2310,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/blogs/{blogId}/posts/search": {
       "get": {
         "description": "Search for a post.",
         "operationId": "blogger.posts.search",
@@ -2295,10 +2365,11 @@
               "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
+        ],
+        "tags": [
+          "posts"
         ]
-      }
-    },
-    "/users/{userId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2321,7 +2392,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/users/{userId}": {
       "get": {
         "description": "Gets one user by ID.",
         "operationId": "blogger.users.get",
@@ -2349,8 +2422,34 @@
               "https://www.googleapis.com/auth/blogger.readonly"
             ]
           }
+        ],
+        "tags": [
+          "users"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

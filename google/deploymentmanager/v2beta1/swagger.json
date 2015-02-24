@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{project}/global/deployments/{deployment}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "delete": {
         "description": "Deletes a deployment and all of the resources in the deployment.",
         "operationId": "deploymentmanager.deployments.delete",
@@ -76,6 +53,9 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "deployments"
         ]
       },
       "get": {
@@ -113,10 +93,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "deployments"
         ]
-      }
-    },
-    "/{project}/global/deployments": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -139,7 +120,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/deployments": {
       "post": {
         "description": "Creates a deployment and all of the resources described by the deployment manifest.",
         "operationId": "deploymentmanager.deployments.insert",
@@ -167,6 +150,9 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "deployments"
         ]
       },
       "get": {
@@ -212,10 +198,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "deployments"
         ]
-      }
-    },
-    "/{project}/global/deployments/{deployment}/manifests/{manifest}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -238,7 +225,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/deployments/{deployment}/manifests/{manifest}": {
       "get": {
         "description": "Gets information about a specific manifest.",
         "operationId": "deploymentmanager.manifests.get",
@@ -281,10 +270,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "manifests"
         ]
-      }
-    },
-    "/{project}/global/deployments/{deployment}/manifests": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -307,7 +297,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/deployments/{deployment}/manifests": {
       "get": {
         "description": "Lists all manifests for a given deployment.",
         "operationId": "deploymentmanager.manifests.list",
@@ -358,10 +350,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "manifests"
         ]
-      }
-    },
-    "/{project}/global/operations/{operation}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -384,7 +377,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/operations/{operation}": {
       "get": {
         "description": "Gets information about a specific Operation.",
         "operationId": "deploymentmanager.operations.get",
@@ -420,10 +415,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "operations"
         ]
-      }
-    },
-    "/{project}/global/operations": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -446,7 +442,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/operations": {
       "get": {
         "description": "Lists all Operations for a project.",
         "operationId": "deploymentmanager.operations.list",
@@ -490,10 +488,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "operations"
         ]
-      }
-    },
-    "/{project}/global/deployments/{deployment}/resources/{resource}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -516,7 +515,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/deployments/{deployment}/resources/{resource}": {
       "get": {
         "description": "Gets information about a single resource.",
         "operationId": "deploymentmanager.resources.get",
@@ -559,10 +560,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "resources"
         ]
-      }
-    },
-    "/{project}/global/deployments/{deployment}/resources": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -585,7 +587,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/deployments/{deployment}/resources": {
       "get": {
         "description": "Lists all resources in a given deployment.",
         "operationId": "deploymentmanager.resources.list",
@@ -636,10 +640,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "resources"
         ]
-      }
-    },
-    "/{project}/global/types": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -662,7 +667,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/global/types": {
       "get": {
         "description": "Lists all Types for Deployment Manager.",
         "operationId": "deploymentmanager.types.list",
@@ -706,8 +713,34 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "types"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

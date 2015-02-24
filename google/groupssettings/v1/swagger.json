@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{groupUniqueId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Gets one resource by id.",
         "operationId": "groupsSettings.groups.get",
@@ -68,6 +45,9 @@
               "https://www.googleapis.com/auth/apps.groups.settings"
             ]
           }
+        ],
+        "tags": [
+          "groups"
         ]
       },
       "patch": {
@@ -96,6 +76,9 @@
               "https://www.googleapis.com/auth/apps.groups.settings"
             ]
           }
+        ],
+        "tags": [
+          "groups"
         ]
       },
       "put": {
@@ -124,8 +107,34 @@
               "https://www.googleapis.com/auth/apps.groups.settings"
             ]
           }
+        ],
+        "tags": [
+          "groups"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

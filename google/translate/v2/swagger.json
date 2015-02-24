@@ -19,29 +19,6 @@
   },
   "paths": {
     "/v2/detect": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Detect the language of text.",
         "operationId": "language.detections.list",
@@ -65,10 +42,11 @@
             },
             "collectionFormat": "multi"
           }
+        ],
+        "tags": [
+          "detections"
         ]
-      }
-    },
-    "/v2/languages": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -91,7 +69,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/v2/languages": {
       "get": {
         "description": "List the source/target languages supported by the API",
         "operationId": "language.languages.list",
@@ -110,10 +90,11 @@
             "description": "the language and collation in which the localized results should be returned",
             "type": "string"
           }
+        ],
+        "tags": [
+          "languages"
         ]
-      }
-    },
-    "/v2": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -136,7 +117,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/v2": {
       "get": {
         "description": "Returns text translations from one language to another.",
         "operationId": "language.translations.list",
@@ -193,8 +176,34 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "tags": [
+          "translations"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

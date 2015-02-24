@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{projectName}/regions/{region}/resourceViews/{resourceViewName}/addResources": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "post": {
         "description": "Add resources to the view.",
         "operationId": "resourceviews.regionViews.addresources",
@@ -81,10 +58,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "regionViews"
         ]
-      }
-    },
-    "/{projectName}/regions/{region}/resourceViews/{resourceViewName}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -107,7 +85,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectName}/regions/{region}/resourceViews/{resourceViewName}": {
       "delete": {
         "description": "Delete a resource view.",
         "operationId": "resourceviews.regionViews.delete",
@@ -147,6 +127,9 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "regionViews"
         ]
       },
       "get": {
@@ -193,10 +176,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "regionViews"
         ]
-      }
-    },
-    "/{projectName}/regions/{region}/resourceViews": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -219,7 +203,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectName}/regions/{region}/resourceViews": {
       "post": {
         "description": "Create a resource view.",
         "operationId": "resourceviews.regionViews.insert",
@@ -255,6 +241,9 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "regionViews"
         ]
       },
       "get": {
@@ -309,10 +298,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "regionViews"
         ]
-      }
-    },
-    "/{projectName}/regions/{region}/resourceViews/{resourceViewName}/resources": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -335,7 +325,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectName}/regions/{region}/resourceViews/{resourceViewName}/resources": {
       "post": {
         "description": "List the resources in the view.",
         "operationId": "resourceviews.regionViews.listresources",
@@ -395,10 +387,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "regionViews"
         ]
-      }
-    },
-    "/{projectName}/regions/{region}/resourceViews/{resourceViewName}/removeResources": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -421,7 +414,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectName}/regions/{region}/resourceViews/{resourceViewName}/removeResources": {
       "post": {
         "description": "Remove resources from the view.",
         "operationId": "resourceviews.regionViews.removeresources",
@@ -461,10 +456,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "regionViews"
         ]
-      }
-    },
-    "/{projectName}/zones/{zone}/resourceViews/{resourceViewName}/addResources": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -487,7 +483,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectName}/zones/{zone}/resourceViews/{resourceViewName}/addResources": {
       "post": {
         "description": "Add resources to the view.",
         "operationId": "resourceviews.zoneViews.addresources",
@@ -527,10 +525,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "zoneViews"
         ]
-      }
-    },
-    "/{projectName}/zones/{zone}/resourceViews/{resourceViewName}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -553,7 +552,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectName}/zones/{zone}/resourceViews/{resourceViewName}": {
       "delete": {
         "description": "Delete a resource view.",
         "operationId": "resourceviews.zoneViews.delete",
@@ -593,6 +594,9 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "zoneViews"
         ]
       },
       "get": {
@@ -639,10 +643,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "zoneViews"
         ]
-      }
-    },
-    "/{projectName}/zones/{zone}/resourceViews": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -665,7 +670,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectName}/zones/{zone}/resourceViews": {
       "post": {
         "description": "Create a resource view.",
         "operationId": "resourceviews.zoneViews.insert",
@@ -701,6 +708,9 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "zoneViews"
         ]
       },
       "get": {
@@ -755,10 +765,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "zoneViews"
         ]
-      }
-    },
-    "/{projectName}/zones/{zone}/resourceViews/{resourceViewName}/resources": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -781,7 +792,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectName}/zones/{zone}/resourceViews/{resourceViewName}/resources": {
       "post": {
         "description": "List the resources of the resource view.",
         "operationId": "resourceviews.zoneViews.listresources",
@@ -841,10 +854,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "zoneViews"
         ]
-      }
-    },
-    "/{projectName}/zones/{zone}/resourceViews/{resourceViewName}/removeResources": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -867,7 +881,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectName}/zones/{zone}/resourceViews/{resourceViewName}/removeResources": {
       "post": {
         "description": "Remove resources from the view.",
         "operationId": "resourceviews.zoneViews.removeresources",
@@ -907,8 +923,34 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "zoneViews"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

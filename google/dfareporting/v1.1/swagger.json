@@ -19,29 +19,6 @@
   },
   "paths": {
     "/userprofiles/{profileId}/dimensionvalues/query": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "post": {
         "description": "Retrieves list of report dimension values for a list of filters.",
         "operationId": "dfareporting.dimensionValues.query",
@@ -82,10 +59,11 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "dimensionValues"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/files": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -108,7 +86,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/files": {
       "get": {
         "description": "Lists files for a user profile.",
         "operationId": "dfareporting.files.list",
@@ -171,10 +151,11 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "files"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/reports/{reportId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -197,7 +178,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/reports/{reportId}": {
       "delete": {
         "description": "Deletes a report by its ID.",
         "operationId": "dfareporting.reports.delete",
@@ -228,6 +211,9 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
       },
       "get": {
@@ -263,6 +249,9 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
       },
       "patch": {
@@ -298,6 +287,9 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
       },
       "put": {
@@ -333,10 +325,11 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/reports": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -359,7 +352,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/reports": {
       "post": {
         "description": "Creates a report.",
         "operationId": "dfareporting.reports.insert",
@@ -386,6 +381,9 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
       },
       "get": {
@@ -451,10 +449,11 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/reports/{reportId}/run": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -477,7 +476,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/reports/{reportId}/run": {
       "post": {
         "description": "Runs a report.",
         "operationId": "dfareporting.reports.run",
@@ -517,10 +518,11 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/reports/{reportId}/files/{fileId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -543,7 +545,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/reports/{reportId}/files/{fileId}": {
       "get": {
         "description": "Retrieves a report file.",
         "operationId": "dfareporting.reports.files.get",
@@ -584,10 +588,12 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "files",
+          "reports"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/reports/{reportId}/files": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -610,7 +616,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/reports/{reportId}/files": {
       "get": {
         "description": "Lists files for a report.",
         "operationId": "dfareporting.reports.files.list",
@@ -680,10 +688,12 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "files",
+          "reports"
         ]
-      }
-    },
-    "/userprofiles/{profileId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -706,7 +716,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}": {
       "get": {
         "description": "Gets one user profile by ID.",
         "operationId": "dfareporting.userProfiles.get",
@@ -733,10 +745,11 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "userProfiles"
         ]
-      }
-    },
-    "/userprofiles": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -759,7 +772,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles": {
       "get": {
         "description": "Retrieves list of user profiles for a user.",
         "operationId": "dfareporting.userProfiles.list",
@@ -777,8 +792,34 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "userProfiles"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

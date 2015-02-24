@@ -19,29 +19,6 @@
   },
   "paths": {
     "/accounts/{accountId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Get information about the selected AdSense account.",
         "operationId": "adsense.accounts.get",
@@ -75,10 +52,11 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
-      }
-    },
-    "/accounts": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -101,7 +79,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts": {
       "get": {
         "description": "List all accounts available to this AdSense account.",
         "operationId": "adsense.accounts.list",
@@ -136,10 +116,11 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/adclients": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -162,7 +143,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/adclients": {
       "get": {
         "description": "List all ad clients in the specified account.",
         "operationId": "adsense.accounts.adclients.list",
@@ -204,10 +187,12 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "adclients",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -230,7 +215,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}": {
       "get": {
         "description": "Gets the specified ad unit in the specified ad client for the specified account.",
         "operationId": "adsense.accounts.adunits.get",
@@ -272,10 +259,12 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "adunits",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/adclients/{adClientId}/adunits": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -298,7 +287,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/adclients/{adClientId}/adunits": {
       "get": {
         "description": "List all ad units in the specified ad client for the specified account.",
         "operationId": "adsense.accounts.adunits.list",
@@ -353,10 +344,12 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "adunits",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/customchannels": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -379,7 +372,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/customchannels": {
       "get": {
         "description": "List all custom channels which the specified ad unit belongs to.",
         "operationId": "adsense.accounts.adunits.customchannels.list",
@@ -435,10 +430,13 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "customchannels",
+          "adunits",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/adclients/{adClientId}/customchannels/{customChannelId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -461,7 +459,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/adclients/{adClientId}/customchannels/{customChannelId}": {
       "get": {
         "description": "Get the specified custom channel from the specified ad client for the specified account.",
         "operationId": "adsense.accounts.customchannels.get",
@@ -503,10 +503,12 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "customchannels",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/adclients/{adClientId}/customchannels": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -529,7 +531,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/adclients/{adClientId}/customchannels": {
       "get": {
         "description": "List all custom channels in the specified ad client for the specified account.",
         "operationId": "adsense.accounts.customchannels.list",
@@ -578,10 +582,12 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "customchannels",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/adclients/{adClientId}/customchannels/{customChannelId}/adunits": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -604,7 +610,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/adclients/{adClientId}/customchannels/{customChannelId}/adunits": {
       "get": {
         "description": "List all ad units in the specified custom channel.",
         "operationId": "adsense.accounts.customchannels.adunits.list",
@@ -666,10 +674,13 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "adunits",
+          "customchannels",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/reports": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -692,7 +703,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/reports": {
       "get": {
         "description": "Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify \"alt=csv\" as a query parameter.",
         "operationId": "adsense.accounts.reports.generate",
@@ -802,10 +815,12 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "reports",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/reports/{savedReportId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -828,7 +843,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/reports/{savedReportId}": {
       "get": {
         "description": "Generate an AdSense report based on the saved report ID sent in the query parameters.",
         "operationId": "adsense.accounts.reports.saved.generate",
@@ -885,10 +902,13 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "saved",
+          "reports",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/reports/saved": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -911,7 +931,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/reports/saved": {
       "get": {
         "description": "List all saved reports in the specified AdSense account.",
         "operationId": "adsense.accounts.reports.saved.list",
@@ -953,10 +975,13 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "saved",
+          "reports",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/savedadstyles/{savedAdStyleId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -979,7 +1004,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/savedadstyles/{savedAdStyleId}": {
       "get": {
         "description": "List a specific saved ad style for the specified account.",
         "operationId": "adsense.accounts.savedadstyles.get",
@@ -1014,10 +1041,12 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "savedadstyles",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/savedadstyles": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1040,7 +1069,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/savedadstyles": {
       "get": {
         "description": "List all saved ad styles in the specified account.",
         "operationId": "adsense.accounts.savedadstyles.list",
@@ -1082,10 +1113,12 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "savedadstyles",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/adclients/{adClientId}/urlchannels": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1108,7 +1141,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/adclients/{adClientId}/urlchannels": {
       "get": {
         "description": "List all URL channels in the specified ad client for the specified account.",
         "operationId": "adsense.accounts.urlchannels.list",
@@ -1157,10 +1192,12 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "urlchannels",
+          "accounts"
         ]
-      }
-    },
-    "/adclients": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1183,7 +1220,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/adclients": {
       "get": {
         "description": "List all ad clients in this AdSense account.",
         "operationId": "adsense.adclients.list",
@@ -1218,10 +1257,11 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "adclients"
         ]
-      }
-    },
-    "/adclients/{adClientId}/adunits/{adUnitId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1244,7 +1284,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/adclients/{adClientId}/adunits/{adUnitId}": {
       "get": {
         "description": "Gets the specified ad unit in the specified ad client.",
         "operationId": "adsense.adunits.get",
@@ -1279,10 +1321,11 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "adunits"
         ]
-      }
-    },
-    "/adclients/{adClientId}/adunits": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1305,7 +1348,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/adclients/{adClientId}/adunits": {
       "get": {
         "description": "List all ad units in the specified ad client for this AdSense account.",
         "operationId": "adsense.adunits.list",
@@ -1353,10 +1398,11 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "adunits"
         ]
-      }
-    },
-    "/adclients/{adClientId}/adunits/{adUnitId}/customchannels": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1379,7 +1425,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/adclients/{adClientId}/adunits/{adUnitId}/customchannels": {
       "get": {
         "description": "List all custom channels which the specified ad unit belongs to.",
         "operationId": "adsense.adunits.customchannels.list",
@@ -1428,10 +1476,12 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "customchannels",
+          "adunits"
         ]
-      }
-    },
-    "/adclients/{adClientId}/customchannels/{customChannelId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1454,7 +1504,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/adclients/{adClientId}/customchannels/{customChannelId}": {
       "get": {
         "description": "Get the specified custom channel from the specified ad client.",
         "operationId": "adsense.customchannels.get",
@@ -1489,10 +1541,11 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "customchannels"
         ]
-      }
-    },
-    "/adclients/{adClientId}/customchannels": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1515,7 +1568,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/adclients/{adClientId}/customchannels": {
       "get": {
         "description": "List all custom channels in the specified ad client for this AdSense account.",
         "operationId": "adsense.customchannels.list",
@@ -1557,10 +1612,11 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "customchannels"
         ]
-      }
-    },
-    "/adclients/{adClientId}/customchannels/{customChannelId}/adunits": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1583,7 +1639,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/adclients/{adClientId}/customchannels/{customChannelId}/adunits": {
       "get": {
         "description": "List all ad units in the specified custom channel.",
         "operationId": "adsense.customchannels.adunits.list",
@@ -1638,10 +1696,12 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "adunits",
+          "customchannels"
         ]
-      }
-    },
-    "/reports": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1664,7 +1724,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/reports": {
       "get": {
         "description": "Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify \"alt=csv\" as a query parameter.",
         "operationId": "adsense.reports.generate",
@@ -1777,10 +1839,11 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
-      }
-    },
-    "/reports/{savedReportId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1803,7 +1866,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/reports/{savedReportId}": {
       "get": {
         "description": "Generate an AdSense report based on the saved report ID sent in the query parameters.",
         "operationId": "adsense.reports.saved.generate",
@@ -1853,10 +1918,12 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "saved",
+          "reports"
         ]
-      }
-    },
-    "/reports/saved": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1879,7 +1946,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/reports/saved": {
       "get": {
         "description": "List all saved reports in this AdSense account.",
         "operationId": "adsense.reports.saved.list",
@@ -1914,10 +1983,12 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "saved",
+          "reports"
         ]
-      }
-    },
-    "/savedadstyles/{savedAdStyleId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1940,7 +2011,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/savedadstyles/{savedAdStyleId}": {
       "get": {
         "description": "Get a specific saved ad style from the user's account.",
         "operationId": "adsense.savedadstyles.get",
@@ -1968,10 +2041,11 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "savedadstyles"
         ]
-      }
-    },
-    "/savedadstyles": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1994,7 +2068,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/savedadstyles": {
       "get": {
         "description": "List all saved ad styles in the user's account.",
         "operationId": "adsense.savedadstyles.list",
@@ -2029,10 +2105,11 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "savedadstyles"
         ]
-      }
-    },
-    "/adclients/{adClientId}/urlchannels": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2055,7 +2132,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/adclients/{adClientId}/urlchannels": {
       "get": {
         "description": "List all URL channels in the specified ad client for this AdSense account.",
         "operationId": "adsense.urlchannels.list",
@@ -2097,8 +2176,34 @@
               "https://www.googleapis.com/auth/adsense.readonly"
             ]
           }
+        ],
+        "tags": [
+          "urlchannels"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

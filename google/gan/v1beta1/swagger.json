@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{role}/{roleId}/advertiser": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Retrieves data about a single advertiser if that the requesting advertiser/publisher has access to it. Only publishers can lookup advertisers. Advertisers can request information about themselves by omitting the advertiserId query parameter.",
         "operationId": "gan.advertisers.get",
@@ -78,10 +55,11 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "tags": [
+          "advertisers"
         ]
-      }
-    },
-    "/{role}/{roleId}/advertisers": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -104,7 +82,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{role}/{roleId}/advertisers": {
       "get": {
         "description": "Retrieves data about all advertisers that the requesting advertiser/publisher has access to.",
         "operationId": "gan.advertisers.list",
@@ -188,10 +168,11 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "tags": [
+          "advertisers"
         ]
-      }
-    },
-    "/publishers/{publisher}/ccOffers": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -214,7 +195,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/publishers/{publisher}/ccOffers": {
       "get": {
         "description": "Retrieves credit card offers for the given publisher.",
         "operationId": "gan.ccOffers.list",
@@ -254,10 +237,11 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "tags": [
+          "ccOffers"
         ]
-      }
-    },
-    "/{role}/{roleId}/events": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -280,7 +264,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{role}/{roleId}/events": {
       "get": {
         "description": "Retrieves event data for a given advertiser/publisher.",
         "operationId": "gan.events.list",
@@ -426,10 +412,11 @@
               "transaction"
             ]
           }
+        ],
+        "tags": [
+          "events"
         ]
-      }
-    },
-    "/{role}/{roleId}/link/{linkId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -452,7 +439,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{role}/{roleId}/link/{linkId}": {
       "get": {
         "description": "Retrieves data about a single link if the requesting advertiser/publisher has access to it. Advertisers can look up their own links. Publishers can look up visible links or links belonging to advertisers they are in a relationship with.",
         "operationId": "gan.links.get",
@@ -490,10 +479,11 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "tags": [
+          "links"
         ]
-      }
-    },
-    "/{role}/{roleId}/link": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -516,7 +506,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{role}/{roleId}/link": {
       "post": {
         "description": "Inserts a new link.",
         "operationId": "gan.links.insert",
@@ -547,10 +539,11 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "tags": [
+          "links"
         ]
-      }
-    },
-    "/{role}/{roleId}/links": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -573,7 +566,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{role}/{roleId}/links": {
       "get": {
         "description": "Retrieves all links that match the query parameters.",
         "operationId": "gan.links.list",
@@ -715,10 +710,11 @@
             "description": "The beginning of the start date range.",
             "type": "string"
           }
+        ],
+        "tags": [
+          "links"
         ]
-      }
-    },
-    "/{role}/{roleId}/publisher": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -741,7 +737,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{role}/{roleId}/publisher": {
       "get": {
         "description": "Retrieves data about a single advertiser if that the requesting advertiser/publisher has access to it. Only advertisers can look up publishers. Publishers can request information about themselves by omitting the publisherId query parameter.",
         "operationId": "gan.publishers.get",
@@ -778,10 +776,11 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "tags": [
+          "publishers"
         ]
-      }
-    },
-    "/{role}/{roleId}/publishers": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -804,7 +803,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{role}/{roleId}/publishers": {
       "get": {
         "description": "Retrieves data about all publishers that the requesting advertiser/publisher has access to.",
         "operationId": "gan.publishers.list",
@@ -888,10 +889,11 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "tags": [
+          "publishers"
         ]
-      }
-    },
-    "/{role}/{roleId}/report/{reportType}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -914,7 +916,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{role}/{roleId}/report/{reportType}": {
       "get": {
         "description": "Retrieves a report of the specified type.",
         "operationId": "gan.reports.get",
@@ -1049,8 +1053,34 @@
               "invalid"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

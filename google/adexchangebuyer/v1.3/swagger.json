@@ -19,29 +19,6 @@
   },
   "paths": {
     "/accounts/{id}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Gets one account by ID.",
         "operationId": "adexchangebuyer.accounts.get",
@@ -68,6 +45,9 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
       },
       "patch": {
@@ -96,6 +76,9 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
       },
       "put": {
@@ -124,10 +107,11 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
-      }
-    },
-    "/accounts": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -150,7 +134,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts": {
       "get": {
         "description": "Retrieves the authenticated user's list of accounts.",
         "operationId": "adexchangebuyer.accounts.list",
@@ -168,10 +154,11 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
-      }
-    },
-    "/billinginfo/{accountId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -194,7 +181,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/billinginfo/{accountId}": {
       "get": {
         "description": "Returns the billing information for one account specified by account ID.",
         "operationId": "adexchangebuyer.billingInfo.get",
@@ -221,10 +210,11 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "billingInfo"
         ]
-      }
-    },
-    "/billinginfo": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -247,7 +237,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/billinginfo": {
       "get": {
         "description": "Retrieves a list of billing information for all accounts of the authenticated user.",
         "operationId": "adexchangebuyer.billingInfo.list",
@@ -265,10 +257,11 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "billingInfo"
         ]
-      }
-    },
-    "/billinginfo/{accountId}/{billingId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -291,7 +284,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/billinginfo/{accountId}/{billingId}": {
       "get": {
         "description": "Returns the budget information for the adgroup specified by the accountId and billingId.",
         "operationId": "adexchangebuyer.budget.get",
@@ -325,6 +320,9 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "budget"
         ]
       },
       "patch": {
@@ -360,6 +358,9 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "budget"
         ]
       },
       "put": {
@@ -395,10 +396,11 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "budget"
         ]
-      }
-    },
-    "/creatives/{accountId}/{buyerCreativeId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -421,7 +423,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/creatives/{accountId}/{buyerCreativeId}": {
       "get": {
         "description": "Gets the status for a single creative. A creative will be available 30-40 minutes after submission.",
         "operationId": "adexchangebuyer.creatives.get",
@@ -455,10 +459,11 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "creatives"
         ]
-      }
-    },
-    "/creatives": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -481,7 +486,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/creatives": {
       "post": {
         "description": "Submit a new creative.",
         "operationId": "adexchangebuyer.creatives.insert",
@@ -499,6 +506,9 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "creatives"
         ]
       },
       "get": {
@@ -565,10 +575,11 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "creatives"
         ]
-      }
-    },
-    "/directdeals/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -591,7 +602,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/directdeals/{id}": {
       "get": {
         "description": "Gets one direct deal by ID.",
         "operationId": "adexchangebuyer.directDeals.get",
@@ -618,10 +631,11 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "directDeals"
         ]
-      }
-    },
-    "/directdeals": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -644,7 +658,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/directdeals": {
       "get": {
         "description": "Retrieves the authenticated user's list of direct deals.",
         "operationId": "adexchangebuyer.directDeals.list",
@@ -662,10 +678,11 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "directDeals"
         ]
-      }
-    },
-    "/performancereport": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -688,7 +705,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/performancereport": {
       "get": {
         "description": "Retrieves the authenticated user's list of performance metrics.",
         "operationId": "adexchangebuyer.performanceReport.list",
@@ -743,10 +762,11 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "performanceReport"
         ]
-      }
-    },
-    "/pretargetingconfigs/{accountId}/{configId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -769,7 +789,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/pretargetingconfigs/{accountId}/{configId}": {
       "delete": {
         "description": "Deletes an existing pretargeting config.",
         "operationId": "adexchangebuyer.pretargetingConfig.delete",
@@ -800,6 +822,9 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "pretargetingConfig"
         ]
       },
       "get": {
@@ -835,6 +860,9 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "pretargetingConfig"
         ]
       },
       "patch": {
@@ -870,6 +898,9 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "pretargetingConfig"
         ]
       },
       "put": {
@@ -905,10 +936,11 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "pretargetingConfig"
         ]
-      }
-    },
-    "/pretargetingconfigs/{accountId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -931,7 +963,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/pretargetingconfigs/{accountId}": {
       "post": {
         "description": "Inserts a new pretargeting configuration.",
         "operationId": "adexchangebuyer.pretargetingConfig.insert",
@@ -958,6 +992,9 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "pretargetingConfig"
         ]
       },
       "get": {
@@ -986,8 +1023,34 @@
               "https://www.googleapis.com/auth/adexchange.buyer"
             ]
           }
+        ],
+        "tags": [
+          "pretargetingConfig"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

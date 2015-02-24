@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{project}/taskqueues/{taskqueue}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Get detailed information about a TaskQueue.",
         "operationId": "taskqueue.taskqueues.get",
@@ -82,10 +59,11 @@
               "https://www.googleapis.com/auth/taskqueue.consumer"
             ]
           }
+        ],
+        "tags": [
+          "taskqueues"
         ]
-      }
-    },
-    "/{project}/taskqueues/{taskqueue}/tasks/{task}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -108,7 +86,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/taskqueues/{taskqueue}/tasks/{task}": {
       "delete": {
         "description": "Delete a task from a TaskQueue.",
         "operationId": "taskqueue.tasks.delete",
@@ -147,6 +127,9 @@
               "https://www.googleapis.com/auth/taskqueue.consumer"
             ]
           }
+        ],
+        "tags": [
+          "tasks"
         ]
       },
       "get": {
@@ -190,10 +173,11 @@
               "https://www.googleapis.com/auth/taskqueue.consumer"
             ]
           }
+        ],
+        "tags": [
+          "tasks"
         ]
-      }
-    },
-    "/{project}/taskqueues/{taskqueue}/tasks/lease": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -216,7 +200,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/taskqueues/{taskqueue}/tasks/lease": {
       "post": {
         "description": "Lease 1 or more tasks from a TaskQueue.",
         "operationId": "taskqueue.tasks.lease",
@@ -265,10 +251,11 @@
               "https://www.googleapis.com/auth/taskqueue.consumer"
             ]
           }
+        ],
+        "tags": [
+          "tasks"
         ]
-      }
-    },
-    "/{project}/taskqueues/{taskqueue}/tasks": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -291,7 +278,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/taskqueues/{taskqueue}/tasks": {
       "get": {
         "description": "List Tasks in a TaskQueue",
         "operationId": "taskqueue.tasks.list",
@@ -326,8 +315,34 @@
               "https://www.googleapis.com/auth/taskqueue.consumer"
             ]
           }
+        ],
+        "tags": [
+          "tasks"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

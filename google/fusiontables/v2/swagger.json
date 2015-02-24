@@ -19,29 +19,6 @@
   },
   "paths": {
     "/tables/{tableId}/columns/{columnId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "delete": {
         "description": "Deletes the column.",
         "operationId": "fusiontables.column.delete",
@@ -72,6 +49,9 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "column"
         ]
       },
       "get": {
@@ -108,6 +88,9 @@
               "https://www.googleapis.com/auth/fusiontables.readonly"
             ]
           }
+        ],
+        "tags": [
+          "column"
         ]
       },
       "patch": {
@@ -143,6 +126,9 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "column"
         ]
       },
       "put": {
@@ -178,10 +164,11 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "column"
         ]
-      }
-    },
-    "/tables/{tableId}/columns": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -204,7 +191,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/tables/{tableId}/columns": {
       "post": {
         "description": "Adds a new column to the table.",
         "operationId": "fusiontables.column.insert",
@@ -231,6 +220,9 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "column"
         ]
       },
       "get": {
@@ -273,10 +265,11 @@
               "https://www.googleapis.com/auth/fusiontables.readonly"
             ]
           }
+        ],
+        "tags": [
+          "column"
         ]
-      }
-    },
-    "/query": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -299,7 +292,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/query": {
       "post": {
         "description": "Executes an SQL SELECT/INSERT/UPDATE/DELETE/SHOW/DESCRIBE/CREATE statement.",
         "operationId": "fusiontables.query.sql",
@@ -339,6 +334,9 @@
               "https://www.googleapis.com/auth/fusiontables.readonly"
             ]
           }
+        ],
+        "tags": [
+          "query"
         ]
       },
       "get": {
@@ -380,10 +378,11 @@
               "https://www.googleapis.com/auth/fusiontables.readonly"
             ]
           }
+        ],
+        "tags": [
+          "query"
         ]
-      }
-    },
-    "/tables/{tableId}/styles/{styleId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -406,7 +405,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/tables/{tableId}/styles/{styleId}": {
       "delete": {
         "description": "Deletes a style.",
         "operationId": "fusiontables.style.delete",
@@ -437,6 +438,9 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "style"
         ]
       },
       "get": {
@@ -473,6 +477,9 @@
               "https://www.googleapis.com/auth/fusiontables.readonly"
             ]
           }
+        ],
+        "tags": [
+          "style"
         ]
       },
       "patch": {
@@ -508,6 +515,9 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "style"
         ]
       },
       "put": {
@@ -543,10 +553,11 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "style"
         ]
-      }
-    },
-    "/tables/{tableId}/styles": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -569,7 +580,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/tables/{tableId}/styles": {
       "post": {
         "description": "Adds a new style for the table.",
         "operationId": "fusiontables.style.insert",
@@ -596,6 +609,9 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "style"
         ]
       },
       "get": {
@@ -638,10 +654,11 @@
               "https://www.googleapis.com/auth/fusiontables.readonly"
             ]
           }
+        ],
+        "tags": [
+          "style"
         ]
-      }
-    },
-    "/tables/{tableId}/copy": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -664,7 +681,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/tables/{tableId}/copy": {
       "post": {
         "description": "Copies a table.",
         "operationId": "fusiontables.table.copy",
@@ -698,10 +717,11 @@
               "https://www.googleapis.com/auth/fusiontables.readonly"
             ]
           }
+        ],
+        "tags": [
+          "table"
         ]
-      }
-    },
-    "/tables/{tableId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -724,7 +744,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/tables/{tableId}": {
       "delete": {
         "description": "Deletes a table.",
         "operationId": "fusiontables.table.delete",
@@ -748,6 +770,9 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "table"
         ]
       },
       "get": {
@@ -777,6 +802,9 @@
               "https://www.googleapis.com/auth/fusiontables.readonly"
             ]
           }
+        ],
+        "tags": [
+          "table"
         ]
       },
       "patch": {
@@ -811,6 +839,9 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "table"
         ]
       },
       "put": {
@@ -845,10 +876,11 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "table"
         ]
-      }
-    },
-    "/tables/{tableId}/import": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -871,7 +903,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/tables/{tableId}/import": {
       "post": {
         "description": "Import more rows into a table.",
         "operationId": "fusiontables.table.importRows",
@@ -931,10 +965,11 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "table"
         ]
-      }
-    },
-    "/tables/import": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -957,7 +992,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/tables/import": {
       "post": {
         "description": "Import a new table.",
         "operationId": "fusiontables.table.importTable",
@@ -999,10 +1036,11 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "table"
         ]
-      }
-    },
-    "/tables": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1025,7 +1063,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/tables": {
       "post": {
         "description": "Creates a new table.",
         "operationId": "fusiontables.table.insert",
@@ -1043,6 +1083,9 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "table"
         ]
       },
       "get": {
@@ -1078,10 +1121,11 @@
               "https://www.googleapis.com/auth/fusiontables.readonly"
             ]
           }
+        ],
+        "tags": [
+          "table"
         ]
-      }
-    },
-    "/tables/{tableId}/replace": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1104,7 +1148,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/tables/{tableId}/replace": {
       "post": {
         "description": "Replaces rows of an existing table. Current rows remain visible until all replacement rows are ready.",
         "operationId": "fusiontables.table.replaceRows",
@@ -1164,10 +1210,11 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "table"
         ]
-      }
-    },
-    "/tables/{tableId}/tasks/{taskId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1190,7 +1237,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/tables/{tableId}/tasks/{taskId}": {
       "delete": {
         "description": "Deletes the task, unless already started.",
         "operationId": "fusiontables.task.delete",
@@ -1220,6 +1269,9 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "task"
         ]
       },
       "get": {
@@ -1255,10 +1307,11 @@
               "https://www.googleapis.com/auth/fusiontables.readonly"
             ]
           }
+        ],
+        "tags": [
+          "task"
         ]
-      }
-    },
-    "/tables/{tableId}/tasks": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1281,7 +1334,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/tables/{tableId}/tasks": {
       "get": {
         "description": "Retrieves a list of tasks.",
         "operationId": "fusiontables.task.list",
@@ -1328,10 +1383,11 @@
               "https://www.googleapis.com/auth/fusiontables.readonly"
             ]
           }
+        ],
+        "tags": [
+          "task"
         ]
-      }
-    },
-    "/tables/{tableId}/templates/{templateId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1354,7 +1410,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/tables/{tableId}/templates/{templateId}": {
       "delete": {
         "description": "Deletes a template",
         "operationId": "fusiontables.template.delete",
@@ -1385,6 +1443,9 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "template"
         ]
       },
       "get": {
@@ -1421,6 +1482,9 @@
               "https://www.googleapis.com/auth/fusiontables.readonly"
             ]
           }
+        ],
+        "tags": [
+          "template"
         ]
       },
       "patch": {
@@ -1456,6 +1520,9 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "template"
         ]
       },
       "put": {
@@ -1491,10 +1558,11 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "template"
         ]
-      }
-    },
-    "/tables/{tableId}/templates": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1517,7 +1585,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/tables/{tableId}/templates": {
       "post": {
         "description": "Creates a new template for the table.",
         "operationId": "fusiontables.template.insert",
@@ -1544,6 +1614,9 @@
               "https://www.googleapis.com/auth/fusiontables"
             ]
           }
+        ],
+        "tags": [
+          "template"
         ]
       },
       "get": {
@@ -1586,8 +1659,34 @@
               "https://www.googleapis.com/auth/fusiontables.readonly"
             ]
           }
+        ],
+        "tags": [
+          "template"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

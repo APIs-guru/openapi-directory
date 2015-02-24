@@ -19,29 +19,6 @@
   },
   "paths": {
     "/accounts/{accountId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Get information about the selected Ad Exchange account.",
         "operationId": "adexchangeseller.accounts.get",
@@ -69,10 +46,11 @@
               "https://www.googleapis.com/auth/adexchange.seller.readonly"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
-      }
-    },
-    "/accounts": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -95,7 +73,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts": {
       "get": {
         "description": "List all accounts available to this Ad Exchange account.",
         "operationId": "adexchangeseller.accounts.list",
@@ -130,10 +110,11 @@
               "https://www.googleapis.com/auth/adexchange.seller.readonly"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/adclients": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -156,7 +137,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/adclients": {
       "get": {
         "description": "List all ad clients in this Ad Exchange account.",
         "operationId": "adexchangeseller.accounts.adclients.list",
@@ -198,10 +181,12 @@
               "https://www.googleapis.com/auth/adexchange.seller.readonly"
             ]
           }
+        ],
+        "tags": [
+          "adclients",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/alerts": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -224,7 +209,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/alerts": {
       "get": {
         "description": "List the alerts for this Ad Exchange account.",
         "operationId": "adexchangeseller.accounts.alerts.list",
@@ -258,10 +245,12 @@
               "https://www.googleapis.com/auth/adexchange.seller.readonly"
             ]
           }
+        ],
+        "tags": [
+          "alerts",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/adclients/{adClientId}/customchannels/{customChannelId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -284,7 +273,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/adclients/{adClientId}/customchannels/{customChannelId}": {
       "get": {
         "description": "Get the specified custom channel from the specified ad client.",
         "operationId": "adexchangeseller.accounts.customchannels.get",
@@ -326,10 +317,12 @@
               "https://www.googleapis.com/auth/adexchange.seller.readonly"
             ]
           }
+        ],
+        "tags": [
+          "customchannels",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/adclients/{adClientId}/customchannels": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -352,7 +345,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/adclients/{adClientId}/customchannels": {
       "get": {
         "description": "List all custom channels in the specified ad client for this Ad Exchange account.",
         "operationId": "adexchangeseller.accounts.customchannels.list",
@@ -401,10 +396,12 @@
               "https://www.googleapis.com/auth/adexchange.seller.readonly"
             ]
           }
+        ],
+        "tags": [
+          "customchannels",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/metadata/dimensions": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -427,7 +424,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/metadata/dimensions": {
       "get": {
         "description": "List the metadata for the dimensions available to this AdExchange account.",
         "operationId": "adexchangeseller.accounts.metadata.dimensions.list",
@@ -455,10 +454,13 @@
               "https://www.googleapis.com/auth/adexchange.seller.readonly"
             ]
           }
+        ],
+        "tags": [
+          "dimensions",
+          "metadata",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/metadata/metrics": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -481,7 +483,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/metadata/metrics": {
       "get": {
         "description": "List the metadata for the metrics available to this AdExchange account.",
         "operationId": "adexchangeseller.accounts.metadata.metrics.list",
@@ -509,10 +513,13 @@
               "https://www.googleapis.com/auth/adexchange.seller.readonly"
             ]
           }
+        ],
+        "tags": [
+          "metrics",
+          "metadata",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/preferreddeals/{dealId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -535,7 +542,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/preferreddeals/{dealId}": {
       "get": {
         "description": "Get information about the selected Ad Exchange Preferred Deal.",
         "operationId": "adexchangeseller.accounts.preferreddeals.get",
@@ -570,10 +579,12 @@
               "https://www.googleapis.com/auth/adexchange.seller.readonly"
             ]
           }
+        ],
+        "tags": [
+          "preferreddeals",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/preferreddeals": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -596,7 +607,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/preferreddeals": {
       "get": {
         "description": "List the preferred deals for this Ad Exchange account.",
         "operationId": "adexchangeseller.accounts.preferreddeals.list",
@@ -624,10 +637,12 @@
               "https://www.googleapis.com/auth/adexchange.seller.readonly"
             ]
           }
+        ],
+        "tags": [
+          "preferreddeals",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/reports": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -650,7 +665,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/reports": {
       "get": {
         "description": "Generate an Ad Exchange report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify \"alt=csv\" as a query parameter.",
         "operationId": "adexchangeseller.accounts.reports.generate",
@@ -754,10 +771,12 @@
               "https://www.googleapis.com/auth/adexchange.seller.readonly"
             ]
           }
+        ],
+        "tags": [
+          "reports",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/reports/{savedReportId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -780,7 +799,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/reports/{savedReportId}": {
       "get": {
         "description": "Generate an Ad Exchange report based on the saved report ID sent in the query parameters.",
         "operationId": "adexchangeseller.accounts.reports.saved.generate",
@@ -837,10 +858,13 @@
               "https://www.googleapis.com/auth/adexchange.seller.readonly"
             ]
           }
+        ],
+        "tags": [
+          "saved",
+          "reports",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/reports/saved": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -863,7 +887,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/reports/saved": {
       "get": {
         "description": "List all saved reports in this Ad Exchange account.",
         "operationId": "adexchangeseller.accounts.reports.saved.list",
@@ -905,10 +931,13 @@
               "https://www.googleapis.com/auth/adexchange.seller.readonly"
             ]
           }
+        ],
+        "tags": [
+          "saved",
+          "reports",
+          "accounts"
         ]
-      }
-    },
-    "/accounts/{accountId}/adclients/{adClientId}/urlchannels": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -931,7 +960,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounts/{accountId}/adclients/{adClientId}/urlchannels": {
       "get": {
         "description": "List all URL channels in the specified ad client for this Ad Exchange account.",
         "operationId": "adexchangeseller.accounts.urlchannels.list",
@@ -980,8 +1011,35 @@
               "https://www.googleapis.com/auth/adexchange.seller.readonly"
             ]
           }
+        ],
+        "tags": [
+          "urlchannels",
+          "accounts"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

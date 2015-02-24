@@ -19,29 +19,6 @@
   },
   "paths": {
     "/achievements/{achievementId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "delete": {
         "description": "Delete the achievement configuration with the given ID.",
         "operationId": "gamesConfiguration.achievementConfigurations.delete",
@@ -65,6 +42,9 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "achievementConfigurations"
         ]
       },
       "get": {
@@ -93,6 +73,9 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "achievementConfigurations"
         ]
       },
       "patch": {
@@ -121,6 +104,9 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "achievementConfigurations"
         ]
       },
       "put": {
@@ -149,10 +135,11 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "achievementConfigurations"
         ]
-      }
-    },
-    "/applications/{applicationId}/achievements": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -175,7 +162,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/applications/{applicationId}/achievements": {
       "post": {
         "description": "Insert a new achievement configuration in this application.",
         "operationId": "gamesConfiguration.achievementConfigurations.insert",
@@ -202,6 +191,9 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "achievementConfigurations"
         ]
       },
       "get": {
@@ -244,10 +236,11 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "achievementConfigurations"
         ]
-      }
-    },
-    "/images/{resourceId}/imageType/{imageType}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -270,7 +263,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/images/{resourceId}/imageType/{imageType}": {
       "post": {
         "description": "Uploads an image for a resource with the given ID and image type.",
         "operationId": "gamesConfiguration.imageConfigurations.upload",
@@ -379,10 +374,11 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "imageConfigurations"
         ]
-      }
-    },
-    "/leaderboards/{leaderboardId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -405,7 +401,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/leaderboards/{leaderboardId}": {
       "delete": {
         "description": "Delete the leaderboard configuration with the given ID.",
         "operationId": "gamesConfiguration.leaderboardConfigurations.delete",
@@ -429,6 +427,9 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "leaderboardConfigurations"
         ]
       },
       "get": {
@@ -457,6 +458,9 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "leaderboardConfigurations"
         ]
       },
       "patch": {
@@ -485,6 +489,9 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "leaderboardConfigurations"
         ]
       },
       "put": {
@@ -513,10 +520,11 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "leaderboardConfigurations"
         ]
-      }
-    },
-    "/applications/{applicationId}/leaderboards": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -539,7 +547,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/applications/{applicationId}/leaderboards": {
       "post": {
         "description": "Insert a new leaderboard configuration in this application.",
         "operationId": "gamesConfiguration.leaderboardConfigurations.insert",
@@ -566,6 +576,9 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "leaderboardConfigurations"
         ]
       },
       "get": {
@@ -608,8 +621,34 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "leaderboardConfigurations"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

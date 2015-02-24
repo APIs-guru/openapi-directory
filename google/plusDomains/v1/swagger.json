@@ -19,29 +19,6 @@
   },
   "paths": {
     "/activities/{activityId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Get an activity.",
         "operationId": "plusDomains.activities.get",
@@ -70,10 +47,11 @@
               "https://www.googleapis.com/auth/plus.stream.read"
             ]
           }
+        ],
+        "tags": [
+          "activities"
         ]
-      }
-    },
-    "/people/{userId}/activities": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -96,7 +74,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/people/{userId}/activities": {
       "post": {
         "description": "Create a new activity for the authenticated user.",
         "operationId": "plusDomains.activities.insert",
@@ -131,10 +111,11 @@
               "https://www.googleapis.com/auth/plus.stream.write"
             ]
           }
+        ],
+        "tags": [
+          "activities"
         ]
-      }
-    },
-    "/people/{userId}/activities/{collection}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -157,7 +138,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/people/{userId}/activities/{collection}": {
       "get": {
         "description": "List all of the activities in the specified collection for a particular user.",
         "operationId": "plusDomains.activities.list",
@@ -211,10 +194,11 @@
               "https://www.googleapis.com/auth/plus.stream.read"
             ]
           }
+        ],
+        "tags": [
+          "activities"
         ]
-      }
-    },
-    "/people/{userId}/audiences": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -237,7 +221,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/people/{userId}/audiences": {
       "get": {
         "description": "List all of the audiences to which a user can share.",
         "operationId": "plusDomains.audiences.list",
@@ -281,10 +267,11 @@
               "https://www.googleapis.com/auth/plus.me"
             ]
           }
+        ],
+        "tags": [
+          "audiences"
         ]
-      }
-    },
-    "/circles/{circleId}/people": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -307,7 +294,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/circles/{circleId}/people": {
       "put": {
         "description": "Add a person to a circle. Google+ limits certain circle operations, including the number of circle adds. Learn More.",
         "operationId": "plusDomains.circles.addPeople",
@@ -355,6 +344,9 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "circles"
         ]
       },
       "delete": {
@@ -401,6 +393,9 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "circles"
         ]
       },
       "get": {
@@ -445,10 +440,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "people"
         ]
-      }
-    },
-    "/circles/{circleId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -471,7 +467,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/circles/{circleId}": {
       "get": {
         "description": "Get a circle.",
         "operationId": "plusDomains.circles.get",
@@ -499,6 +497,9 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "circles"
         ]
       },
       "patch": {
@@ -528,6 +529,9 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "circles"
         ]
       },
       "delete": {
@@ -554,6 +558,9 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "circles"
         ]
       },
       "put": {
@@ -583,10 +590,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "circles"
         ]
-      }
-    },
-    "/people/{userId}/circles": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -609,7 +617,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/people/{userId}/circles": {
       "post": {
         "description": "Create a new circle for the authenticated user.",
         "operationId": "plusDomains.circles.insert",
@@ -638,6 +648,9 @@
               "https://www.googleapis.com/auth/plus.me"
             ]
           }
+        ],
+        "tags": [
+          "circles"
         ]
       },
       "get": {
@@ -683,10 +696,11 @@
               "https://www.googleapis.com/auth/plus.me"
             ]
           }
+        ],
+        "tags": [
+          "circles"
         ]
-      }
-    },
-    "/comments/{commentId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -709,7 +723,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/comments/{commentId}": {
       "get": {
         "description": "Get a comment.",
         "operationId": "plusDomains.comments.get",
@@ -737,10 +753,11 @@
               "https://www.googleapis.com/auth/plus.stream.read"
             ]
           }
+        ],
+        "tags": [
+          "comments"
         ]
-      }
-    },
-    "/activities/{activityId}/comments": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -763,7 +780,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/activities/{activityId}/comments": {
       "post": {
         "description": "Create a new comment in reply to an activity.",
         "operationId": "plusDomains.comments.insert",
@@ -791,6 +810,9 @@
               "https://www.googleapis.com/auth/plus.stream.write"
             ]
           }
+        ],
+        "tags": [
+          "comments"
         ]
       },
       "get": {
@@ -846,10 +868,11 @@
               "https://www.googleapis.com/auth/plus.stream.read"
             ]
           }
+        ],
+        "tags": [
+          "comments"
         ]
-      }
-    },
-    "/people/{userId}/media/{collection}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -872,7 +895,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/people/{userId}/media/{collection}": {
       "post": {
         "description": "Add a new media item to an album. The current upload size limitations are 36MB for a photo and 1GB for a video. Uploads do not count against quota if photos are less than 2048 pixels on their longest side or videos are less than 15 minutes in length.",
         "operationId": "plusDomains.media.insert",
@@ -1067,10 +1092,11 @@
               "https://www.googleapis.com/auth/plus.media.upload"
             ]
           }
+        ],
+        "tags": [
+          "media"
         ]
-      }
-    },
-    "/people/{userId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1093,7 +1119,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/people/{userId}": {
       "get": {
         "description": "Get a person's profile.",
         "operationId": "plusDomains.people.get",
@@ -1124,10 +1152,11 @@
               "https://www.googleapis.com/auth/userinfo.profile"
             ]
           }
+        ],
+        "tags": [
+          "people"
         ]
-      }
-    },
-    "/people/{userId}/people/{collection}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1150,7 +1179,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/people/{userId}/people/{collection}": {
       "get": {
         "description": "List all of the people in the specified collection.",
         "operationId": "plusDomains.people.list",
@@ -1214,10 +1245,11 @@
               "https://www.googleapis.com/auth/plus.me"
             ]
           }
+        ],
+        "tags": [
+          "people"
         ]
-      }
-    },
-    "/activities/{activityId}/people/{collection}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1240,7 +1272,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/activities/{activityId}/people/{collection}": {
       "get": {
         "description": "List all of the people in the specified collection for a particular activity.",
         "operationId": "plusDomains.people.listByActivity",
@@ -1295,8 +1329,34 @@
               "https://www.googleapis.com/auth/plus.stream.read"
             ]
           }
+        ],
+        "tags": [
+          "people"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

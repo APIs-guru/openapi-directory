@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{projectId}/jobs": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "post": {
         "description": "Creates a dataflow job.",
         "operationId": "dataflow.v1b3.projects.jobs.create",
@@ -78,6 +55,11 @@
               "https://www.googleapis.com/auth/userinfo.email"
             ]
           }
+        ],
+        "tags": [
+          "jobs",
+          "projects",
+          "v1b3"
         ]
       },
       "get": {
@@ -126,10 +108,13 @@
               "https://www.googleapis.com/auth/userinfo.email"
             ]
           }
+        ],
+        "tags": [
+          "jobs",
+          "projects",
+          "v1b3"
         ]
-      }
-    },
-    "/{projectId}/jobs/{jobId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -152,7 +137,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectId}/jobs/{jobId}": {
       "get": {
         "description": "Gets the state of the specified dataflow job.",
         "operationId": "dataflow.v1b3.projects.jobs.get",
@@ -195,6 +182,11 @@
               "https://www.googleapis.com/auth/userinfo.email"
             ]
           }
+        ],
+        "tags": [
+          "jobs",
+          "projects",
+          "v1b3"
         ]
       },
       "patch": {
@@ -229,6 +221,11 @@
               "https://www.googleapis.com/auth/userinfo.email"
             ]
           }
+        ],
+        "tags": [
+          "jobs",
+          "projects",
+          "v1b3"
         ]
       },
       "put": {
@@ -263,10 +260,13 @@
               "https://www.googleapis.com/auth/userinfo.email"
             ]
           }
+        ],
+        "tags": [
+          "jobs",
+          "projects",
+          "v1b3"
         ]
-      }
-    },
-    "/{projectId}/jobs/{jobId}/metrics": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -289,7 +289,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectId}/jobs/{jobId}/metrics": {
       "get": {
         "description": "Request the job status.",
         "operationId": "dataflow.v1b3.projects.jobs.getMetrics",
@@ -327,10 +329,13 @@
               "https://www.googleapis.com/auth/userinfo.email"
             ]
           }
+        ],
+        "tags": [
+          "jobs",
+          "projects",
+          "v1b3"
         ]
-      }
-    },
-    "/{projectId}/jobs/{jobId}/messages": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -353,7 +358,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectId}/jobs/{jobId}/messages": {
       "get": {
         "description": "Request the job status.",
         "operationId": "dataflow.v1b3.projects.jobs.messages.list",
@@ -418,10 +425,14 @@
               "https://www.googleapis.com/auth/userinfo.email"
             ]
           }
+        ],
+        "tags": [
+          "messages",
+          "jobs",
+          "projects",
+          "v1b3"
         ]
-      }
-    },
-    "/{projectId}/jobs/{jobId}/workItems:lease": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -444,7 +455,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectId}/jobs/{jobId}/workItems:lease": {
       "post": {
         "description": "Leases a dataflow WorkItem to run.",
         "operationId": "dataflow.v1b3.projects.jobs.workItems.lease",
@@ -477,10 +490,14 @@
               "https://www.googleapis.com/auth/userinfo.email"
             ]
           }
+        ],
+        "tags": [
+          "workItems",
+          "jobs",
+          "projects",
+          "v1b3"
         ]
-      }
-    },
-    "/{projectId}/jobs/{jobId}/workItems:reportStatus": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -503,7 +520,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{projectId}/jobs/{jobId}/workItems:reportStatus": {
       "post": {
         "description": "Reports the status of dataflow WorkItems leased by a worker.",
         "operationId": "dataflow.v1b3.projects.jobs.workItems.reportStatus",
@@ -536,8 +555,37 @@
               "https://www.googleapis.com/auth/userinfo.email"
             ]
           }
+        ],
+        "tags": [
+          "workItems",
+          "jobs",
+          "projects",
+          "v1b3"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

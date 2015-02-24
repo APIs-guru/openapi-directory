@@ -19,29 +19,6 @@
   },
   "paths": {
     "/customers/{customerId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Gets a customer resource if one exists and is owned by the reseller.",
         "operationId": "reseller.customers.get",
@@ -69,6 +46,9 @@
               "https://www.googleapis.com/auth/apps.order.readonly"
             ]
           }
+        ],
+        "tags": [
+          "customers"
         ]
       },
       "patch": {
@@ -97,6 +77,9 @@
               "https://www.googleapis.com/auth/apps.order"
             ]
           }
+        ],
+        "tags": [
+          "customers"
         ]
       },
       "put": {
@@ -125,10 +108,11 @@
               "https://www.googleapis.com/auth/apps.order"
             ]
           }
+        ],
+        "tags": [
+          "customers"
         ]
-      }
-    },
-    "/customers": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -151,7 +135,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/customers": {
       "post": {
         "description": "Creates a customer resource if one does not already exist.",
         "operationId": "reseller.customers.insert",
@@ -177,10 +163,11 @@
               "https://www.googleapis.com/auth/apps.order"
             ]
           }
+        ],
+        "tags": [
+          "customers"
         ]
-      }
-    },
-    "/customers/{customerId}/subscriptions/{subscriptionId}/activate": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -203,7 +190,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/customers/{customerId}/subscriptions/{subscriptionId}/activate": {
       "post": {
         "description": "Activates a subscription previously suspended by the reseller",
         "operationId": "reseller.subscriptions.activate",
@@ -237,10 +226,11 @@
               "https://www.googleapis.com/auth/apps.order"
             ]
           }
+        ],
+        "tags": [
+          "subscriptions"
         ]
-      }
-    },
-    "/customers/{customerId}/subscriptions/{subscriptionId}/changePlan": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -263,7 +253,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/customers/{customerId}/subscriptions/{subscriptionId}/changePlan": {
       "post": {
         "description": "Changes the plan of a subscription",
         "operationId": "reseller.subscriptions.changePlan",
@@ -297,10 +289,11 @@
               "https://www.googleapis.com/auth/apps.order"
             ]
           }
+        ],
+        "tags": [
+          "subscriptions"
         ]
-      }
-    },
-    "/customers/{customerId}/subscriptions/{subscriptionId}/changeRenewalSettings": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -323,7 +316,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/customers/{customerId}/subscriptions/{subscriptionId}/changeRenewalSettings": {
       "post": {
         "description": "Changes the renewal settings of a subscription",
         "operationId": "reseller.subscriptions.changeRenewalSettings",
@@ -357,10 +352,11 @@
               "https://www.googleapis.com/auth/apps.order"
             ]
           }
+        ],
+        "tags": [
+          "subscriptions"
         ]
-      }
-    },
-    "/customers/{customerId}/subscriptions/{subscriptionId}/changeSeats": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -383,7 +379,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/customers/{customerId}/subscriptions/{subscriptionId}/changeSeats": {
       "post": {
         "description": "Changes the seats configuration of a subscription",
         "operationId": "reseller.subscriptions.changeSeats",
@@ -417,10 +415,11 @@
               "https://www.googleapis.com/auth/apps.order"
             ]
           }
+        ],
+        "tags": [
+          "subscriptions"
         ]
-      }
-    },
-    "/customers/{customerId}/subscriptions/{subscriptionId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -443,7 +442,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/customers/{customerId}/subscriptions/{subscriptionId}": {
       "delete": {
         "description": "Cancels/Downgrades a subscription.",
         "operationId": "reseller.subscriptions.delete",
@@ -487,6 +488,9 @@
               "https://www.googleapis.com/auth/apps.order"
             ]
           }
+        ],
+        "tags": [
+          "subscriptions"
         ]
       },
       "get": {
@@ -523,10 +527,11 @@
               "https://www.googleapis.com/auth/apps.order.readonly"
             ]
           }
+        ],
+        "tags": [
+          "subscriptions"
         ]
-      }
-    },
-    "/customers/{customerId}/subscriptions": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -549,7 +554,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/customers/{customerId}/subscriptions": {
       "post": {
         "description": "Creates/Transfers a subscription for the customer.",
         "operationId": "reseller.subscriptions.insert",
@@ -582,10 +589,11 @@
               "https://www.googleapis.com/auth/apps.order"
             ]
           }
+        ],
+        "tags": [
+          "subscriptions"
         ]
-      }
-    },
-    "/subscriptions": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -608,7 +616,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/subscriptions": {
       "get": {
         "description": "Lists subscriptions of a reseller, optionally filtered by a customer name prefix.",
         "operationId": "reseller.subscriptions.list",
@@ -661,10 +671,11 @@
               "https://www.googleapis.com/auth/apps.order.readonly"
             ]
           }
+        ],
+        "tags": [
+          "subscriptions"
         ]
-      }
-    },
-    "/customers/{customerId}/subscriptions/{subscriptionId}/startPaidService": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -687,7 +698,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/customers/{customerId}/subscriptions/{subscriptionId}/startPaidService": {
       "post": {
         "description": "Starts paid service of a trial subscription",
         "operationId": "reseller.subscriptions.startPaidService",
@@ -721,10 +734,11 @@
               "https://www.googleapis.com/auth/apps.order"
             ]
           }
+        ],
+        "tags": [
+          "subscriptions"
         ]
-      }
-    },
-    "/customers/{customerId}/subscriptions/{subscriptionId}/suspend": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -747,7 +761,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/customers/{customerId}/subscriptions/{subscriptionId}/suspend": {
       "post": {
         "description": "Suspends an active subscription",
         "operationId": "reseller.subscriptions.suspend",
@@ -781,8 +797,34 @@
               "https://www.googleapis.com/auth/apps.order"
             ]
           }
+        ],
+        "tags": [
+          "subscriptions"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

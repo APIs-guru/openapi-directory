@@ -19,29 +19,6 @@
   },
   "paths": {
     "/agency/{agencyId}/advertiser/{advertiserId}/engine/{engineAccountId}/conversion": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Retrieves a list of conversions from a DoubleClick Search engine account.",
         "operationId": "doubleclicksearch.conversion.get",
@@ -140,10 +117,11 @@
               "https://www.googleapis.com/auth/doubleclicksearch"
             ]
           }
+        ],
+        "tags": [
+          "conversion"
         ]
-      }
-    },
-    "/conversion": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -166,7 +144,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/conversion": {
       "post": {
         "description": "Inserts a batch of new conversions into DoubleClick Search.",
         "operationId": "doubleclicksearch.conversion.insert",
@@ -184,6 +164,9 @@
               "https://www.googleapis.com/auth/doubleclicksearch"
             ]
           }
+        ],
+        "tags": [
+          "conversion"
         ]
       },
       "patch": {
@@ -260,6 +243,9 @@
               "https://www.googleapis.com/auth/doubleclicksearch"
             ]
           }
+        ],
+        "tags": [
+          "conversion"
         ]
       },
       "put": {
@@ -279,10 +265,11 @@
               "https://www.googleapis.com/auth/doubleclicksearch"
             ]
           }
+        ],
+        "tags": [
+          "conversion"
         ]
-      }
-    },
-    "/conversion/updateAvailability": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -305,7 +292,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/conversion/updateAvailability": {
       "post": {
         "description": "Updates the availabilities of a batch of floodlight activities in DoubleClick Search.",
         "operationId": "doubleclicksearch.conversion.updateAvailability",
@@ -323,10 +312,11 @@
               "https://www.googleapis.com/auth/doubleclicksearch"
             ]
           }
+        ],
+        "tags": [
+          "conversion"
         ]
-      }
-    },
-    "/reports/generate": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -349,7 +339,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/reports/generate": {
       "post": {
         "description": "Generates and returns a report immediately.",
         "operationId": "doubleclicksearch.reports.generate",
@@ -367,10 +359,11 @@
               "https://www.googleapis.com/auth/doubleclicksearch"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
-      }
-    },
-    "/reports/{reportId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -393,7 +386,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/reports/{reportId}": {
       "get": {
         "description": "Polls for the status of a report request.",
         "operationId": "doubleclicksearch.reports.get",
@@ -420,10 +415,11 @@
               "https://www.googleapis.com/auth/doubleclicksearch"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
-      }
-    },
-    "/reports/{reportId}/files/{reportFragment}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -446,7 +442,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/reports/{reportId}/files/{reportFragment}": {
       "get": {
         "description": "Downloads a report file.",
         "operationId": "doubleclicksearch.reports.getFile",
@@ -478,10 +476,11 @@
               "https://www.googleapis.com/auth/doubleclicksearch"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
-      }
-    },
-    "/reports": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -504,7 +503,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/reports": {
       "post": {
         "description": "Inserts a report request into the reporting system.",
         "operationId": "doubleclicksearch.reports.request",
@@ -522,10 +523,11 @@
               "https://www.googleapis.com/auth/doubleclicksearch"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
-      }
-    },
-    "/agency/{agencyId}/advertiser/{advertiserId}/savedcolumns": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -548,7 +550,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/agency/{agencyId}/advertiser/{advertiserId}/savedcolumns": {
       "get": {
         "description": "Retrieve the list of saved columns for a specified advertiser.",
         "operationId": "doubleclicksearch.savedColumns.list",
@@ -582,8 +586,34 @@
               "https://www.googleapis.com/auth/doubleclicksearch"
             ]
           }
+        ],
+        "tags": [
+          "savedColumns"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

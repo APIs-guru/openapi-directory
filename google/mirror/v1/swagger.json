@@ -19,29 +19,6 @@
   },
   "paths": {
     "/accounts/{userToken}/{accountType}/{accountName}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "post": {
         "description": "Inserts a new account for a user",
         "operationId": "mirror.accounts.insert",
@@ -75,10 +52,11 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "tags": [
+          "accounts"
         ]
-      }
-    },
-    "/contacts/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -101,7 +79,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/contacts/{id}": {
       "delete": {
         "description": "Deletes a contact.",
         "operationId": "mirror.contacts.delete",
@@ -125,6 +105,9 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "contacts"
         ]
       },
       "get": {
@@ -153,6 +136,9 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "contacts"
         ]
       },
       "patch": {
@@ -181,6 +167,9 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "contacts"
         ]
       },
       "put": {
@@ -209,10 +198,11 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "contacts"
         ]
-      }
-    },
-    "/contacts": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -235,7 +225,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/contacts": {
       "post": {
         "description": "Inserts a new contact.",
         "operationId": "mirror.contacts.insert",
@@ -253,6 +245,9 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "contacts"
         ]
       },
       "get": {
@@ -272,10 +267,11 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "contacts"
         ]
-      }
-    },
-    "/locations/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -298,7 +294,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/locations/{id}": {
       "get": {
         "description": "Gets a single location by ID.",
         "operationId": "mirror.locations.get",
@@ -326,10 +324,11 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "locations"
         ]
-      }
-    },
-    "/locations": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -352,7 +351,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/locations": {
       "get": {
         "description": "Retrieves a list of locations for the user.",
         "operationId": "mirror.locations.list",
@@ -371,10 +372,11 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "locations"
         ]
-      }
-    },
-    "/settings/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -397,7 +399,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/settings/{id}": {
       "get": {
         "description": "Gets a single setting by ID.",
         "operationId": "mirror.settings.get",
@@ -424,10 +428,11 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "settings"
         ]
-      }
-    },
-    "/subscriptions/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -450,7 +455,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/subscriptions/{id}": {
       "delete": {
         "description": "Deletes a subscription.",
         "operationId": "mirror.subscriptions.delete",
@@ -474,6 +481,9 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "subscriptions"
         ]
       },
       "put": {
@@ -502,10 +512,11 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "subscriptions"
         ]
-      }
-    },
-    "/subscriptions": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -528,7 +539,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/subscriptions": {
       "post": {
         "description": "Creates a new subscription.",
         "operationId": "mirror.subscriptions.insert",
@@ -546,6 +559,9 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "subscriptions"
         ]
       },
       "get": {
@@ -565,10 +581,11 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "subscriptions"
         ]
-      }
-    },
-    "/timeline/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -591,7 +608,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/timeline/{id}": {
       "delete": {
         "description": "Deletes a timeline item.",
         "operationId": "mirror.timeline.delete",
@@ -616,6 +635,9 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "timeline"
         ]
       },
       "get": {
@@ -645,6 +667,9 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "timeline"
         ]
       },
       "patch": {
@@ -674,6 +699,9 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "timeline"
         ]
       },
       "put": {
@@ -1021,10 +1049,11 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "timeline"
         ]
-      }
-    },
-    "/timeline": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1047,7 +1076,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/timeline": {
       "post": {
         "description": "Inserts a new item into the timeline.",
         "operationId": "mirror.timeline.insert",
@@ -1384,6 +1415,9 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "timeline"
         ]
       },
       "get": {
@@ -1452,10 +1486,11 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "timeline"
         ]
-      }
-    },
-    "/timeline/{itemId}/attachments/{attachmentId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1478,7 +1513,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/timeline/{itemId}/attachments/{attachmentId}": {
       "delete": {
         "description": "Deletes an attachment from a timeline item.",
         "operationId": "mirror.timeline.attachments.delete",
@@ -1509,6 +1546,10 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "attachments",
+          "timeline"
         ]
       },
       "get": {
@@ -1544,10 +1585,12 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "attachments",
+          "timeline"
         ]
-      }
-    },
-    "/timeline/{itemId}/attachments": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1570,7 +1613,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/timeline/{itemId}/attachments": {
       "post": {
         "description": "Adds a new attachment to a timeline item.",
         "operationId": "mirror.timeline.attachments.insert",
@@ -1915,6 +1960,10 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "attachments",
+          "timeline"
         ]
       },
       "get": {
@@ -1943,8 +1992,35 @@
               "https://www.googleapis.com/auth/glass.timeline"
             ]
           }
+        ],
+        "tags": [
+          "attachments",
+          "timeline"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

@@ -19,29 +19,6 @@
   },
   "paths": {
     "/apis/{api}/{version}/rest": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Retrieve the description of a particular version of an api.",
         "operationId": "discovery.apis.getRest",
@@ -68,10 +45,11 @@
             "required": true,
             "type": "string"
           }
+        ],
+        "tags": [
+          "apis"
         ]
-      }
-    },
-    "/apis": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -94,7 +72,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/apis": {
       "get": {
         "description": "Retrieve the list of APIs supported at this endpoint.",
         "operationId": "discovery.apis.list",
@@ -120,8 +100,34 @@
             "default": "false",
             "type": "boolean"
           }
+        ],
+        "tags": [
+          "apis"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

@@ -19,29 +19,6 @@
   },
   "paths": {
     "/accounts/batch": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "post": {
         "description": "Retrieves, inserts, updates, and deletes multiple Merchant Center (sub-)accounts in a single request.",
         "operationId": "content.accounts.custombatch",
@@ -59,10 +36,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
-      }
-    },
-    "/{merchantId}/accounts/{accountId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -85,7 +63,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{merchantId}/accounts/{accountId}": {
       "delete": {
         "description": "Deletes a Merchant Center sub-account.",
         "operationId": "content.accounts.delete",
@@ -116,6 +96,9 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
       },
       "get": {
@@ -151,6 +134,9 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
       },
       "patch": {
@@ -186,6 +172,9 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
       },
       "put": {
@@ -221,10 +210,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
-      }
-    },
-    "/{merchantId}/accounts": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -247,7 +237,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{merchantId}/accounts": {
       "post": {
         "description": "Creates a Merchant Center sub-account.",
         "operationId": "content.accounts.insert",
@@ -274,6 +266,9 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
       },
       "get": {
@@ -314,10 +309,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
-      }
-    },
-    "/accountshipping/batch": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -340,7 +336,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accountshipping/batch": {
       "post": {
         "description": "Retrieves and updates the shipping settings of multiple accounts in a single request.",
         "operationId": "content.accountshipping.custombatch",
@@ -358,10 +356,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accountshipping"
         ]
-      }
-    },
-    "/{merchantId}/accountshipping/{accountId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -384,7 +383,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{merchantId}/accountshipping/{accountId}": {
       "get": {
         "description": "Retrieves the shipping settings of the account.",
         "operationId": "content.accountshipping.get",
@@ -418,6 +419,9 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accountshipping"
         ]
       },
       "patch": {
@@ -453,6 +457,9 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accountshipping"
         ]
       },
       "put": {
@@ -488,10 +495,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accountshipping"
         ]
-      }
-    },
-    "/{merchantId}/accountshipping": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -514,7 +522,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{merchantId}/accountshipping": {
       "get": {
         "description": "Lists the shipping settings of the sub-accounts in your Merchant Center account.",
         "operationId": "content.accountshipping.list",
@@ -553,10 +563,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accountshipping"
         ]
-      }
-    },
-    "/accountstatuses/batch": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -579,7 +590,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accountstatuses/batch": {
       "post": {
         "operationId": "content.accountstatuses.custombatch",
         "responses": {
@@ -596,10 +609,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accountstatuses"
         ]
-      }
-    },
-    "/{merchantId}/accountstatuses/{accountId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -622,7 +636,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{merchantId}/accountstatuses/{accountId}": {
       "get": {
         "description": "Retrieves the status of a Merchant Center account.",
         "operationId": "content.accountstatuses.get",
@@ -656,10 +672,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accountstatuses"
         ]
-      }
-    },
-    "/{merchantId}/accountstatuses": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -682,7 +699,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{merchantId}/accountstatuses": {
       "get": {
         "description": "Lists the statuses of the sub-accounts in your Merchant Center account.",
         "operationId": "content.accountstatuses.list",
@@ -721,10 +740,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accountstatuses"
         ]
-      }
-    },
-    "/accounttax/batch": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -747,7 +767,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/accounttax/batch": {
       "post": {
         "description": "Retrieves and updates tax settings of multiple accounts in a single request.",
         "operationId": "content.accounttax.custombatch",
@@ -765,10 +787,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accounttax"
         ]
-      }
-    },
-    "/{merchantId}/accounttax/{accountId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -791,7 +814,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{merchantId}/accounttax/{accountId}": {
       "get": {
         "description": "Retrieves the tax settings of the account.",
         "operationId": "content.accounttax.get",
@@ -825,6 +850,9 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accounttax"
         ]
       },
       "patch": {
@@ -860,6 +888,9 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accounttax"
         ]
       },
       "put": {
@@ -895,10 +926,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accounttax"
         ]
-      }
-    },
-    "/{merchantId}/accounttax": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -921,7 +953,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{merchantId}/accounttax": {
       "get": {
         "description": "Lists the tax settings of the sub-accounts in your Merchant Center account.",
         "operationId": "content.accounttax.list",
@@ -960,10 +994,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "accounttax"
         ]
-      }
-    },
-    "/datafeeds/batch": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -986,7 +1021,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/datafeeds/batch": {
       "post": {
         "operationId": "content.datafeeds.custombatch",
         "responses": {
@@ -1003,10 +1040,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "datafeeds"
         ]
-      }
-    },
-    "/{merchantId}/datafeeds/{datafeedId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1029,7 +1067,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{merchantId}/datafeeds/{datafeedId}": {
       "delete": {
         "description": "Deletes a datafeed from your Merchant Center account.",
         "operationId": "content.datafeeds.delete",
@@ -1058,6 +1098,9 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "datafeeds"
         ]
       },
       "get": {
@@ -1091,6 +1134,9 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "datafeeds"
         ]
       },
       "patch": {
@@ -1124,6 +1170,9 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "datafeeds"
         ]
       },
       "put": {
@@ -1157,10 +1206,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "datafeeds"
         ]
-      }
-    },
-    "/{merchantId}/datafeeds": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1183,7 +1233,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{merchantId}/datafeeds": {
       "post": {
         "description": "Registers a datafeed with your Merchant Center account.",
         "operationId": "content.datafeeds.insert",
@@ -1209,6 +1261,9 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "datafeeds"
         ]
       },
       "get": {
@@ -1249,10 +1304,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "datafeeds"
         ]
-      }
-    },
-    "/datafeedstatuses/batch": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1275,7 +1331,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/datafeedstatuses/batch": {
       "post": {
         "operationId": "content.datafeedstatuses.custombatch",
         "responses": {
@@ -1292,10 +1350,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "datafeedstatuses"
         ]
-      }
-    },
-    "/{merchantId}/datafeedstatuses/{datafeedId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1318,7 +1377,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{merchantId}/datafeedstatuses/{datafeedId}": {
       "get": {
         "description": "Retrieves the status of a datafeed from your Merchant Center account.",
         "operationId": "content.datafeedstatuses.get",
@@ -1350,10 +1411,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "datafeedstatuses"
         ]
-      }
-    },
-    "/{merchantId}/datafeedstatuses": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1376,7 +1438,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{merchantId}/datafeedstatuses": {
       "get": {
         "description": "Lists the statuses of the datafeeds in your Merchant Center account.",
         "operationId": "content.datafeedstatuses.list",
@@ -1415,10 +1479,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "datafeedstatuses"
         ]
-      }
-    },
-    "/inventory/batch": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1441,7 +1506,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/inventory/batch": {
       "post": {
         "description": "Updates price and availability for multiple products or stores in a single request.",
         "operationId": "content.inventory.custombatch",
@@ -1459,10 +1526,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "inventory"
         ]
-      }
-    },
-    "/{merchantId}/inventory/{storeCode}/products/{productId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1485,7 +1553,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{merchantId}/inventory/{storeCode}/products/{productId}": {
       "post": {
         "description": "Updates price and availability of a product in your Merchant Center account.",
         "operationId": "content.inventory.set",
@@ -1526,10 +1596,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "inventory"
         ]
-      }
-    },
-    "/products/batch": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1552,7 +1623,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/products/batch": {
       "post": {
         "description": "Retrieves, inserts, and deletes multiple products in a single request.",
         "operationId": "content.products.custombatch",
@@ -1578,10 +1651,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "products"
         ]
-      }
-    },
-    "/{merchantId}/products/{productId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1604,7 +1678,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{merchantId}/products/{productId}": {
       "delete": {
         "description": "Deletes a product from your Merchant Center account.",
         "operationId": "content.products.delete",
@@ -1641,6 +1717,9 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "products"
         ]
       },
       "get": {
@@ -1676,10 +1755,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "products"
         ]
-      }
-    },
-    "/{merchantId}/products": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1702,7 +1782,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{merchantId}/products": {
       "post": {
         "description": "Uploads a product to your Merchant Center account.",
         "operationId": "content.products.insert",
@@ -1735,6 +1817,9 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "products"
         ]
       },
       "get": {
@@ -1775,10 +1860,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "products"
         ]
-      }
-    },
-    "/productstatuses/batch": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1801,7 +1887,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/productstatuses/batch": {
       "post": {
         "description": "Gets the statuses of multiple products in a single request.",
         "operationId": "content.productstatuses.custombatch",
@@ -1819,10 +1907,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "productstatuses"
         ]
-      }
-    },
-    "/{merchantId}/productstatuses/{productId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1845,7 +1934,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{merchantId}/productstatuses/{productId}": {
       "get": {
         "description": "Gets the status of a product from your Merchant Center account.",
         "operationId": "content.productstatuses.get",
@@ -1879,10 +1970,11 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "productstatuses"
         ]
-      }
-    },
-    "/{merchantId}/productstatuses": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1905,7 +1997,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{merchantId}/productstatuses": {
       "get": {
         "description": "Lists the statuses of the products in your Merchant Center account.",
         "operationId": "content.productstatuses.list",
@@ -1944,8 +2038,34 @@
               "https://www.googleapis.com/auth/content"
             ]
           }
+        ],
+        "tags": [
+          "productstatuses"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

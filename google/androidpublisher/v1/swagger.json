@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{packageName}/subscriptions/{subscriptionId}/purchases/{token}/cancel": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "post": {
         "description": "Cancels a user's subscription purchase. The subscription remains valid until its expiration time.",
         "operationId": "androidpublisher.purchases.cancel",
@@ -79,10 +56,11 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "purchases"
         ]
-      }
-    },
-    "/{packageName}/subscriptions/{subscriptionId}/purchases/{token}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -105,7 +83,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{packageName}/subscriptions/{subscriptionId}/purchases/{token}": {
       "get": {
         "description": "Checks whether a user's subscription purchase is valid and returns its expiry time.",
         "operationId": "androidpublisher.purchases.get",
@@ -146,8 +126,34 @@
               "https://www.googleapis.com/auth/androidpublisher"
             ]
           }
+        ],
+        "tags": [
+          "purchases"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

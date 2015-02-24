@@ -19,29 +19,6 @@
   },
   "paths": {
     "/sites/{siteUrl}/sitemaps/{feedpath}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "delete": {
         "description": "Deletes a sitemap from this site.",
         "operationId": "webmasters.sitemaps.delete",
@@ -72,6 +49,9 @@
               "https://www.googleapis.com/auth/webmasters"
             ]
           }
+        ],
+        "tags": [
+          "sitemaps"
         ]
       },
       "get": {
@@ -108,6 +88,9 @@
               "https://www.googleapis.com/auth/webmasters.readonly"
             ]
           }
+        ],
+        "tags": [
+          "sitemaps"
         ]
       },
       "put": {
@@ -140,10 +123,11 @@
               "https://www.googleapis.com/auth/webmasters"
             ]
           }
+        ],
+        "tags": [
+          "sitemaps"
         ]
-      }
-    },
-    "/sites/{siteUrl}/sitemaps": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -166,7 +150,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/sites/{siteUrl}/sitemaps": {
       "get": {
         "description": "Lists sitemaps uploaded to the site.",
         "operationId": "webmasters.sitemaps.list",
@@ -200,10 +186,11 @@
               "https://www.googleapis.com/auth/webmasters.readonly"
             ]
           }
+        ],
+        "tags": [
+          "sitemaps"
         ]
-      }
-    },
-    "/sites/{siteUrl}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -226,7 +213,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/sites/{siteUrl}": {
       "put": {
         "description": "Adds a site to the set of the user's sites in Webmaster Tools.",
         "operationId": "webmasters.sites.add",
@@ -250,6 +239,9 @@
               "https://www.googleapis.com/auth/webmasters"
             ]
           }
+        ],
+        "tags": [
+          "sites"
         ]
       },
       "delete": {
@@ -275,6 +267,9 @@
               "https://www.googleapis.com/auth/webmasters"
             ]
           }
+        ],
+        "tags": [
+          "sites"
         ]
       },
       "get": {
@@ -304,10 +299,11 @@
               "https://www.googleapis.com/auth/webmasters.readonly"
             ]
           }
+        ],
+        "tags": [
+          "sites"
         ]
-      }
-    },
-    "/sites": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -330,7 +326,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/sites": {
       "get": {
         "description": "Lists your Webmaster Tools sites.",
         "operationId": "webmasters.sites.list",
@@ -349,10 +347,11 @@
               "https://www.googleapis.com/auth/webmasters.readonly"
             ]
           }
+        ],
+        "tags": [
+          "sites"
         ]
-      }
-    },
-    "/sites/{siteUrl}/urlCrawlErrorsCounts/query": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -375,7 +374,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/sites/{siteUrl}/urlCrawlErrorsCounts/query": {
       "get": {
         "description": "Retrieves a time series of the number of URL crawl errors per error category and platform.",
         "operationId": "webmasters.urlcrawlerrorscounts.query",
@@ -437,10 +438,11 @@
               "https://www.googleapis.com/auth/webmasters.readonly"
             ]
           }
+        ],
+        "tags": [
+          "urlcrawlerrorscounts"
         ]
-      }
-    },
-    "/sites/{siteUrl}/urlCrawlErrorsSamples/{url}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -463,7 +465,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/sites/{siteUrl}/urlCrawlErrorsSamples/{url}": {
       "get": {
         "description": "Retrieves details about crawl errors for a site's sample URL.",
         "operationId": "webmasters.urlcrawlerrorssamples.get",
@@ -527,6 +531,9 @@
               "https://www.googleapis.com/auth/webmasters.readonly"
             ]
           }
+        ],
+        "tags": [
+          "urlcrawlerrorssamples"
         ]
       },
       "delete": {
@@ -588,10 +595,11 @@
               "https://www.googleapis.com/auth/webmasters"
             ]
           }
+        ],
+        "tags": [
+          "urlcrawlerrorssamples"
         ]
-      }
-    },
-    "/sites/{siteUrl}/urlCrawlErrorsSamples": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -614,7 +622,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/sites/{siteUrl}/urlCrawlErrorsSamples": {
       "get": {
         "description": "Lists a site's sample URLs for the specified crawl error category and platform.",
         "operationId": "webmasters.urlcrawlerrorssamples.list",
@@ -671,8 +681,34 @@
               "https://www.googleapis.com/auth/webmasters.readonly"
             ]
           }
+        ],
+        "tags": [
+          "urlcrawlerrorssamples"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

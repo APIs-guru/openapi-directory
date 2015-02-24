@@ -19,29 +19,6 @@
   },
   "paths": {
     "/reconcile": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Reconcile entities to Freebase open data.",
         "operationId": "freebase.reconcile",
@@ -109,9 +86,7 @@
             "collectionFormat": "multi"
           }
         ]
-      }
-    },
-    "/search": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -134,7 +109,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/search": {
       "get": {
         "description": "Search Freebase open data.",
         "operationId": "freebase.search",
@@ -343,7 +320,30 @@
             "collectionFormat": "multi"
           }
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

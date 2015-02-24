@@ -19,29 +19,6 @@
   },
   "paths": {
     "/b/{bucket}/acl/{entity}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "delete": {
         "description": "Permanently deletes the ACL entry for the specified entity on the specified bucket.",
         "operationId": "storage.bucketAccessControls.delete",
@@ -72,6 +49,9 @@
               "https://www.googleapis.com/auth/devstorage.full_control"
             ]
           }
+        ],
+        "tags": [
+          "bucketAccessControls"
         ]
       },
       "get": {
@@ -107,6 +87,9 @@
               "https://www.googleapis.com/auth/devstorage.full_control"
             ]
           }
+        ],
+        "tags": [
+          "bucketAccessControls"
         ]
       },
       "patch": {
@@ -142,6 +125,9 @@
               "https://www.googleapis.com/auth/devstorage.full_control"
             ]
           }
+        ],
+        "tags": [
+          "bucketAccessControls"
         ]
       },
       "put": {
@@ -177,10 +163,11 @@
               "https://www.googleapis.com/auth/devstorage.full_control"
             ]
           }
+        ],
+        "tags": [
+          "bucketAccessControls"
         ]
-      }
-    },
-    "/b/{bucket}/acl": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -203,7 +190,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/b/{bucket}/acl": {
       "post": {
         "description": "Creates a new ACL entry on the specified bucket.",
         "operationId": "storage.bucketAccessControls.insert",
@@ -230,6 +219,9 @@
               "https://www.googleapis.com/auth/devstorage.full_control"
             ]
           }
+        ],
+        "tags": [
+          "bucketAccessControls"
         ]
       },
       "get": {
@@ -258,10 +250,11 @@
               "https://www.googleapis.com/auth/devstorage.full_control"
             ]
           }
+        ],
+        "tags": [
+          "bucketAccessControls"
         ]
-      }
-    },
-    "/b/{bucket}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -284,7 +277,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/b/{bucket}": {
       "delete": {
         "description": "Permanently deletes an empty bucket.",
         "operationId": "storage.buckets.delete",
@@ -321,6 +316,9 @@
               "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
+        ],
+        "tags": [
+          "buckets"
         ]
       },
       "get": {
@@ -373,6 +371,9 @@
               "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
+        ],
+        "tags": [
+          "buckets"
         ]
       },
       "patch": {
@@ -424,6 +425,9 @@
               "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
+        ],
+        "tags": [
+          "buckets"
         ]
       },
       "put": {
@@ -475,10 +479,11 @@
               "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
+        ],
+        "tags": [
+          "buckets"
         ]
-      }
-    },
-    "/b": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -501,7 +506,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/b": {
       "post": {
         "description": "Creates a new bucket.",
         "operationId": "storage.buckets.insert",
@@ -539,6 +546,9 @@
               "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
+        ],
+        "tags": [
+          "buckets"
         ]
       },
       "get": {
@@ -592,10 +602,11 @@
               "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
+        ],
+        "tags": [
+          "buckets"
         ]
-      }
-    },
-    "/channels/stop": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -618,7 +629,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/channels/stop": {
       "post": {
         "description": "Stop watching resources through this channel",
         "operationId": "storage.channels.stop",
@@ -635,10 +648,11 @@
               "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
+        ],
+        "tags": [
+          "channels"
         ]
-      }
-    },
-    "/b/{bucket}/defaultObjectAcl/{entity}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -661,7 +675,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/b/{bucket}/defaultObjectAcl/{entity}": {
       "delete": {
         "description": "Permanently deletes the default object ACL entry for the specified entity on the specified bucket.",
         "operationId": "storage.defaultObjectAccessControls.delete",
@@ -692,6 +708,9 @@
               "https://www.googleapis.com/auth/devstorage.full_control"
             ]
           }
+        ],
+        "tags": [
+          "defaultObjectAccessControls"
         ]
       },
       "get": {
@@ -727,6 +746,9 @@
               "https://www.googleapis.com/auth/devstorage.full_control"
             ]
           }
+        ],
+        "tags": [
+          "defaultObjectAccessControls"
         ]
       },
       "patch": {
@@ -762,6 +784,9 @@
               "https://www.googleapis.com/auth/devstorage.full_control"
             ]
           }
+        ],
+        "tags": [
+          "defaultObjectAccessControls"
         ]
       },
       "put": {
@@ -797,10 +822,11 @@
               "https://www.googleapis.com/auth/devstorage.full_control"
             ]
           }
+        ],
+        "tags": [
+          "defaultObjectAccessControls"
         ]
-      }
-    },
-    "/b/{bucket}/defaultObjectAcl": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -823,7 +849,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/b/{bucket}/defaultObjectAcl": {
       "post": {
         "description": "Creates a new default object ACL entry on the specified bucket.",
         "operationId": "storage.defaultObjectAccessControls.insert",
@@ -850,6 +878,9 @@
               "https://www.googleapis.com/auth/devstorage.full_control"
             ]
           }
+        ],
+        "tags": [
+          "defaultObjectAccessControls"
         ]
       },
       "get": {
@@ -890,10 +921,11 @@
               "https://www.googleapis.com/auth/devstorage.full_control"
             ]
           }
+        ],
+        "tags": [
+          "defaultObjectAccessControls"
         ]
-      }
-    },
-    "/b/{bucket}/o/{object}/acl/{entity}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -916,7 +948,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/b/{bucket}/o/{object}/acl/{entity}": {
       "delete": {
         "description": "Permanently deletes the ACL entry for the specified entity on the specified object.",
         "operationId": "storage.objectAccessControls.delete",
@@ -960,6 +994,9 @@
               "https://www.googleapis.com/auth/devstorage.full_control"
             ]
           }
+        ],
+        "tags": [
+          "objectAccessControls"
         ]
       },
       "get": {
@@ -1008,6 +1045,9 @@
               "https://www.googleapis.com/auth/devstorage.full_control"
             ]
           }
+        ],
+        "tags": [
+          "objectAccessControls"
         ]
       },
       "patch": {
@@ -1056,6 +1096,9 @@
               "https://www.googleapis.com/auth/devstorage.full_control"
             ]
           }
+        ],
+        "tags": [
+          "objectAccessControls"
         ]
       },
       "put": {
@@ -1104,10 +1147,11 @@
               "https://www.googleapis.com/auth/devstorage.full_control"
             ]
           }
+        ],
+        "tags": [
+          "objectAccessControls"
         ]
-      }
-    },
-    "/b/{bucket}/o/{object}/acl": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1130,7 +1174,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/b/{bucket}/o/{object}/acl": {
       "post": {
         "description": "Creates a new ACL entry on the specified object.",
         "operationId": "storage.objectAccessControls.insert",
@@ -1170,6 +1216,9 @@
               "https://www.googleapis.com/auth/devstorage.full_control"
             ]
           }
+        ],
+        "tags": [
+          "objectAccessControls"
         ]
       },
       "get": {
@@ -1211,10 +1260,11 @@
               "https://www.googleapis.com/auth/devstorage.full_control"
             ]
           }
+        ],
+        "tags": [
+          "objectAccessControls"
         ]
-      }
-    },
-    "/b/{destinationBucket}/o/{destinationObject}/compose": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1237,7 +1287,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/b/{destinationBucket}/o/{destinationObject}/compose": {
       "post": {
         "description": "Concatenates a list of existing objects into a new object in the same bucket.",
         "operationId": "storage.objects.compose",
@@ -1284,10 +1336,11 @@
               "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
+        ],
+        "tags": [
+          "objects"
         ]
-      }
-    },
-    "/b/{sourceBucket}/o/{sourceObject}/copyTo/b/{destinationBucket}/o/{destinationObject}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1310,7 +1363,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/b/{sourceBucket}/o/{sourceObject}/copyTo/b/{destinationBucket}/o/{destinationObject}": {
       "post": {
         "description": "Copies an object to a destination in the same location. Optionally overrides metadata.",
         "operationId": "storage.objects.copy",
@@ -1423,10 +1478,11 @@
               "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
+        ],
+        "tags": [
+          "objects"
         ]
-      }
-    },
-    "/b/{bucket}/o/{object}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1449,7 +1505,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/b/{bucket}/o/{object}": {
       "delete": {
         "description": "Deletes data blobs and associated metadata. Deletions are permanent if versioning is not enabled for the bucket, or if the generation parameter is used.",
         "operationId": "storage.objects.delete",
@@ -1511,6 +1569,9 @@
               "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
+        ],
+        "tags": [
+          "objects"
         ]
       },
       "get": {
@@ -1588,6 +1649,9 @@
               "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
+        ],
+        "tags": [
+          "objects"
         ]
       },
       "patch": {
@@ -1664,6 +1728,9 @@
               "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
+        ],
+        "tags": [
+          "objects"
         ]
       },
       "put": {
@@ -1740,10 +1807,11 @@
               "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
+        ],
+        "tags": [
+          "objects"
         ]
-      }
-    },
-    "/b/{bucket}/o": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1766,7 +1834,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/b/{bucket}/o": {
       "post": {
         "description": "Stores new data blobs and associated metadata.",
         "operationId": "storage.objects.insert",
@@ -1837,6 +1907,9 @@
               "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
+        ],
+        "tags": [
+          "objects"
         ]
       },
       "get": {
@@ -1908,10 +1981,11 @@
               "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
+        ],
+        "tags": [
+          "objects"
         ]
-      }
-    },
-    "/b/{bucket}/o/watch": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1934,7 +2008,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/b/{bucket}/o/watch": {
       "post": {
         "description": "Watch for changes on all objects in a bucket.",
         "operationId": "storage.objects.watchAll",
@@ -2004,8 +2080,34 @@
               "https://www.googleapis.com/auth/devstorage.read_write"
             ]
           }
+        ],
+        "tags": [
+          "objects"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

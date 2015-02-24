@@ -19,29 +19,6 @@
   },
   "paths": {
     "/achievements": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Lists all the achievement definitions for your application.",
         "operationId": "games.achievementDefinitions.list",
@@ -82,10 +59,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "achievementDefinitions"
         ]
-      }
-    },
-    "/achievements/{achievementId}/increment": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -108,7 +86,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/achievements/{achievementId}/increment": {
       "post": {
         "description": "Increments the steps of the achievement with the given ID for the currently authenticated player.",
         "operationId": "games.achievements.increment",
@@ -150,10 +130,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "achievements"
         ]
-      }
-    },
-    "/players/{playerId}/achievements": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -176,7 +157,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/players/{playerId}/achievements": {
       "get": {
         "description": "Lists the progress for all your application's achievements for the currently authenticated player.",
         "operationId": "games.achievements.list",
@@ -236,10 +219,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "achievements"
         ]
-      }
-    },
-    "/achievements/{achievementId}/reveal": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -262,7 +246,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/achievements/{achievementId}/reveal": {
       "post": {
         "description": "Sets the state of the achievement with the given ID to REVEALED for the currently authenticated player.",
         "operationId": "games.achievements.reveal",
@@ -290,10 +276,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "achievements"
         ]
-      }
-    },
-    "/achievements/{achievementId}/setStepsAtLeast": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -316,7 +303,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/achievements/{achievementId}/setStepsAtLeast": {
       "post": {
         "description": "Sets the steps for the currently authenticated player towards unlocking an achievement. If the steps parameter is less than the current number of steps that the player already gained for the achievement, the achievement is not modified.",
         "operationId": "games.achievements.setStepsAtLeast",
@@ -352,10 +341,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "achievements"
         ]
-      }
-    },
-    "/achievements/{achievementId}/unlock": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -378,7 +368,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/achievements/{achievementId}/unlock": {
       "post": {
         "description": "Unlocks this achievement for the currently authenticated player.",
         "operationId": "games.achievements.unlock",
@@ -406,10 +398,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "achievements"
         ]
-      }
-    },
-    "/achievements/updateMultiple": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -432,7 +425,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/achievements/updateMultiple": {
       "post": {
         "description": "Updates multiple achievements for the currently authenticated player.",
         "operationId": "games.achievements.updateMultiple",
@@ -451,10 +446,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "achievements"
         ]
-      }
-    },
-    "/applications/{applicationId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -477,7 +473,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/applications/{applicationId}": {
       "get": {
         "description": "Retrieves the metadata of the application with the given ID. If the requested application is not available for the specified platformType, the returned response will not include any instance data.",
         "operationId": "games.applications.get",
@@ -522,10 +520,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "applications"
         ]
-      }
-    },
-    "/applications/played": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -548,7 +547,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/applications/played": {
       "post": {
         "description": "Indicate that the the currently authenticated user is playing your application.",
         "operationId": "games.applications.played",
@@ -564,10 +565,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "applications"
         ]
-      }
-    },
-    "/events": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -590,7 +592,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/events": {
       "get": {
         "description": "Returns a list showing the current progress on events in this application for the currently authenticated user.",
         "operationId": "games.events.listByPlayer",
@@ -631,6 +635,9 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "events"
         ]
       },
       "post": {
@@ -659,10 +666,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "events"
         ]
-      }
-    },
-    "/eventDefinitions": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -685,7 +693,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/eventDefinitions": {
       "get": {
         "description": "Returns a list of the event definitions in this application.",
         "operationId": "games.events.listDefinitions",
@@ -726,10 +736,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "events"
         ]
-      }
-    },
-    "/leaderboards/{leaderboardId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -752,7 +763,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/leaderboards/{leaderboardId}": {
       "get": {
         "description": "Retrieves the metadata of the leaderboard with the given ID.",
         "operationId": "games.leaderboards.get",
@@ -786,10 +799,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "leaderboards"
         ]
-      }
-    },
-    "/leaderboards": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -812,7 +826,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/leaderboards": {
       "get": {
         "description": "Lists all the leaderboard metadata for your application.",
         "operationId": "games.leaderboards.list",
@@ -853,10 +869,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "leaderboards"
         ]
-      }
-    },
-    "/metagameConfig": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -879,7 +896,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/metagameConfig": {
       "get": {
         "description": "Return the metagame configuration data for the calling application.",
         "operationId": "games.metagame.getMetagameConfig",
@@ -898,10 +917,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "metagame"
         ]
-      }
-    },
-    "/players/{playerId}/categories/{collection}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -924,7 +944,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/players/{playerId}/categories/{collection}": {
       "get": {
         "description": "List play data aggregated per category for the player corresponding to playerId.",
         "operationId": "games.metagame.listCategoriesByPlayer",
@@ -982,10 +1004,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "metagame"
         ]
-      }
-    },
-    "/players/{playerId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1008,7 +1031,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/players/{playerId}": {
       "get": {
         "description": "Retrieves the Player resource with the given ID. To retrieve the player for the currently authenticated user, set playerId to me.",
         "operationId": "games.players.get",
@@ -1042,10 +1067,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "players"
         ]
-      }
-    },
-    "/players/me/players/{collection}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1068,7 +1094,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/players/me/players/{collection}": {
       "get": {
         "description": "Get the collection of players for the currently authenticated user.",
         "operationId": "games.players.list",
@@ -1120,10 +1148,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "players"
         ]
-      }
-    },
-    "/pushtokens/remove": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1146,7 +1175,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/pushtokens/remove": {
       "post": {
         "description": "Removes a push token for the current user and application. Removing a non-existent push token will report success.",
         "operationId": "games.pushtokens.remove",
@@ -1162,10 +1193,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "pushtokens"
         ]
-      }
-    },
-    "/pushtokens": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1188,7 +1220,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/pushtokens": {
       "put": {
         "description": "Registers a push token for the current user and application.",
         "operationId": "games.pushtokens.update",
@@ -1204,10 +1238,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "pushtokens"
         ]
-      }
-    },
-    "/quests/{questId}/milestones/{milestoneId}/claim": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1230,7 +1265,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/quests/{questId}/milestones/{milestoneId}/claim": {
       "put": {
         "description": "Report that a reward for the milestone corresponding to milestoneId for the quest corresponding to questId has been claimed by the currently authorized user.",
         "operationId": "games.questMilestones.claim",
@@ -1269,10 +1306,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "questMilestones"
         ]
-      }
-    },
-    "/quests/{questId}/accept": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1295,7 +1333,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/quests/{questId}/accept": {
       "post": {
         "description": "Indicates that the currently authorized user will participate in the quest.",
         "operationId": "games.quests.accept",
@@ -1329,10 +1369,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "quests"
         ]
-      }
-    },
-    "/players/{playerId}/quests": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1355,7 +1396,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/players/{playerId}/quests": {
       "get": {
         "description": "Get a list of quests for your application and the currently authenticated player.",
         "operationId": "games.quests.list",
@@ -1403,10 +1446,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "quests"
         ]
-      }
-    },
-    "/revisions/check": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1429,7 +1473,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/revisions/check": {
       "get": {
         "description": "Checks whether the games client is out of date.",
         "operationId": "games.revisions.check",
@@ -1457,10 +1503,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "revisions"
         ]
-      }
-    },
-    "/rooms/create": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1483,7 +1530,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/rooms/create": {
       "post": {
         "description": "Create a room. For internal use by the Games SDK only. Calling this method directly is unsupported.",
         "operationId": "games.rooms.create",
@@ -1510,10 +1559,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "rooms"
         ]
-      }
-    },
-    "/rooms/{roomId}/decline": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1536,7 +1586,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/rooms/{roomId}/decline": {
       "post": {
         "description": "Decline an invitation to join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.",
         "operationId": "games.rooms.decline",
@@ -1570,10 +1622,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "rooms"
         ]
-      }
-    },
-    "/rooms/{roomId}/dismiss": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1596,7 +1649,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/rooms/{roomId}/dismiss": {
       "post": {
         "description": "Dismiss an invitation to join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.",
         "operationId": "games.rooms.dismiss",
@@ -1621,10 +1676,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "rooms"
         ]
-      }
-    },
-    "/rooms/{roomId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1647,7 +1703,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/rooms/{roomId}": {
       "get": {
         "description": "Get the data for a room.",
         "operationId": "games.rooms.get",
@@ -1681,10 +1739,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "rooms"
         ]
-      }
-    },
-    "/rooms/{roomId}/join": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1707,7 +1766,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/rooms/{roomId}/join": {
       "post": {
         "description": "Join a room. For internal use by the Games SDK only. Calling this method directly is unsupported.",
         "operationId": "games.rooms.join",
@@ -1741,10 +1802,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "rooms"
         ]
-      }
-    },
-    "/rooms/{roomId}/leave": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1767,7 +1829,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/rooms/{roomId}/leave": {
       "post": {
         "description": "Leave a room. For internal use by the Games SDK only. Calling this method directly is unsupported.",
         "operationId": "games.rooms.leave",
@@ -1801,10 +1865,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "rooms"
         ]
-      }
-    },
-    "/rooms": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1827,7 +1892,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/rooms": {
       "get": {
         "description": "Returns invitations to join rooms.",
         "operationId": "games.rooms.list",
@@ -1868,10 +1935,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "rooms"
         ]
-      }
-    },
-    "/rooms/{roomId}/reportstatus": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1894,7 +1962,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/rooms/{roomId}/reportstatus": {
       "post": {
         "description": "Updates sent by a client reporting the status of peers in a room. For internal use by the Games SDK only. Calling this method directly is unsupported.",
         "operationId": "games.rooms.reportStatus",
@@ -1928,10 +1998,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "rooms"
         ]
-      }
-    },
-    "/players/{playerId}/leaderboards/{leaderboardId}/scores/{timeSpan}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1954,7 +2025,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/players/{playerId}/leaderboards/{leaderboardId}/scores/{timeSpan}": {
       "get": {
         "description": "Get high scores, and optionally ranks, in leaderboards for the currently authenticated player. For a specific time span, leaderboardId can be set to ALL to retrieve data for all leaderboards in a given time span.\nNOTE: You cannot ask for 'ALL' leaderboards and 'ALL' timeSpans in the same request; only one parameter may be set to 'ALL'.",
         "operationId": "games.scores.get",
@@ -2033,10 +2106,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "scores"
         ]
-      }
-    },
-    "/leaderboards/{leaderboardId}/scores/{collection}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2059,7 +2133,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/leaderboards/{leaderboardId}/scores/{collection}": {
       "get": {
         "description": "Lists the scores in a leaderboard, starting from the top.",
         "operationId": "games.scores.list",
@@ -2130,10 +2206,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "scores"
         ]
-      }
-    },
-    "/leaderboards/{leaderboardId}/window/{collection}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2156,7 +2233,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/leaderboards/{leaderboardId}/window/{collection}": {
       "get": {
         "description": "Lists the scores in a leaderboard around (and including) a player's score.",
         "operationId": "games.scores.listWindow",
@@ -2239,10 +2318,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "scores"
         ]
-      }
-    },
-    "/leaderboards/{leaderboardId}/scores": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2265,7 +2345,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/leaderboards/{leaderboardId}/scores": {
       "post": {
         "description": "Submits a score to the specified leaderboard.",
         "operationId": "games.scores.submit",
@@ -2312,10 +2394,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "scores"
         ]
-      }
-    },
-    "/leaderboards/scores": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2338,7 +2421,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/leaderboards/scores": {
       "post": {
         "description": "Submits multiple scores to leaderboards.",
         "operationId": "games.scores.submitMultiple",
@@ -2365,10 +2450,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "scores"
         ]
-      }
-    },
-    "/snapshots/{snapshotId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2391,7 +2477,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/snapshots/{snapshotId}": {
       "get": {
         "description": "Retrieves the metadata for a given snapshot ID.",
         "operationId": "games.snapshots.get",
@@ -2426,10 +2514,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "snapshots"
         ]
-      }
-    },
-    "/players/{playerId}/snapshots": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2452,7 +2541,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/players/{playerId}/snapshots": {
       "get": {
         "description": "Retrieves a list of snapshots created by your application for the player corresponding to the player ID.",
         "operationId": "games.snapshots.list",
@@ -2501,10 +2592,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "snapshots"
         ]
-      }
-    },
-    "/turnbasedmatches/{matchId}/cancel": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2527,7 +2619,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/turnbasedmatches/{matchId}/cancel": {
       "put": {
         "description": "Cancel a turn-based match.",
         "operationId": "games.turnBasedMatches.cancel",
@@ -2552,10 +2646,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "turnBasedMatches"
         ]
-      }
-    },
-    "/turnbasedmatches/create": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2578,7 +2673,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/turnbasedmatches/create": {
       "post": {
         "description": "Create a turn-based match.",
         "operationId": "games.turnBasedMatches.create",
@@ -2605,10 +2702,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "turnBasedMatches"
         ]
-      }
-    },
-    "/turnbasedmatches/{matchId}/decline": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2631,7 +2729,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/turnbasedmatches/{matchId}/decline": {
       "put": {
         "description": "Decline an invitation to play a turn-based match.",
         "operationId": "games.turnBasedMatches.decline",
@@ -2665,10 +2765,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "turnBasedMatches"
         ]
-      }
-    },
-    "/turnbasedmatches/{matchId}/dismiss": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2691,7 +2792,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/turnbasedmatches/{matchId}/dismiss": {
       "put": {
         "description": "Dismiss a turn-based match from the match list. The match will no longer show up in the list and will not generate notifications.",
         "operationId": "games.turnBasedMatches.dismiss",
@@ -2716,10 +2819,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "turnBasedMatches"
         ]
-      }
-    },
-    "/turnbasedmatches/{matchId}/finish": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2742,7 +2846,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/turnbasedmatches/{matchId}/finish": {
       "put": {
         "description": "Finish a turn-based match. Each player should make this call once, after all results are in. Only the player whose turn it is may make the first call to Finish, and can pass in the final match state.",
         "operationId": "games.turnBasedMatches.finish",
@@ -2776,10 +2882,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "turnBasedMatches"
         ]
-      }
-    },
-    "/turnbasedmatches/{matchId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2802,7 +2909,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/turnbasedmatches/{matchId}": {
       "get": {
         "description": "Get the data for a turn-based match.",
         "operationId": "games.turnBasedMatches.get",
@@ -2842,10 +2951,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "turnBasedMatches"
         ]
-      }
-    },
-    "/turnbasedmatches/{matchId}/join": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2868,7 +2978,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/turnbasedmatches/{matchId}/join": {
       "put": {
         "description": "Join a turn-based match.",
         "operationId": "games.turnBasedMatches.join",
@@ -2902,10 +3014,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "turnBasedMatches"
         ]
-      }
-    },
-    "/turnbasedmatches/{matchId}/leave": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2928,7 +3041,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/turnbasedmatches/{matchId}/leave": {
       "put": {
         "description": "Leave a turn-based match when it is not the current player's turn, without canceling the match.",
         "operationId": "games.turnBasedMatches.leave",
@@ -2962,10 +3077,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "turnBasedMatches"
         ]
-      }
-    },
-    "/turnbasedmatches/{matchId}/leaveTurn": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2988,7 +3104,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/turnbasedmatches/{matchId}/leaveTurn": {
       "put": {
         "description": "Leave a turn-based match during the current player's turn, without canceling the match.",
         "operationId": "games.turnBasedMatches.leaveTurn",
@@ -3035,10 +3153,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "turnBasedMatches"
         ]
-      }
-    },
-    "/turnbasedmatches": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3061,7 +3180,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/turnbasedmatches": {
       "get": {
         "description": "Returns turn-based matches the player is or was involved in.",
         "operationId": "games.turnBasedMatches.list",
@@ -3116,10 +3237,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "turnBasedMatches"
         ]
-      }
-    },
-    "/turnbasedmatches/{matchId}/rematch": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3142,7 +3264,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/turnbasedmatches/{matchId}/rematch": {
       "post": {
         "description": "Create a rematch of a match that was previously completed, with the same participants. This can be called by only one player on a match still in their list; the player must have called Finish first. Returns the newly created match; it will be the caller's turn.",
         "operationId": "games.turnBasedMatches.rematch",
@@ -3182,10 +3306,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "turnBasedMatches"
         ]
-      }
-    },
-    "/turnbasedmatches/sync": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3208,7 +3333,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/turnbasedmatches/sync": {
       "get": {
         "description": "Returns turn-based matches the player is or was involved in that changed since the last sync call, with the least recent changes coming first. Matches that should be removed from the local cache will have a status of MATCH_DELETED.",
         "operationId": "games.turnBasedMatches.sync",
@@ -3263,10 +3390,11 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "turnBasedMatches"
         ]
-      }
-    },
-    "/turnbasedmatches/{matchId}/turn": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3289,7 +3417,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/turnbasedmatches/{matchId}/turn": {
       "put": {
         "description": "Commit the results of a player turn.",
         "operationId": "games.turnBasedMatches.takeTurn",
@@ -3323,8 +3453,34 @@
               "https://www.googleapis.com/auth/plus.login"
             ]
           }
+        ],
+        "tags": [
+          "turnBasedMatches"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

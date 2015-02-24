@@ -19,29 +19,6 @@
   },
   "paths": {
     "/hostedmodels/{hostedModelName}/predict": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "post": {
         "description": "Submit input and request an output against a hosted model",
         "operationId": "prediction.hostedmodels.predict",
@@ -68,10 +45,11 @@
               "https://www.googleapis.com/auth/prediction"
             ]
           }
+        ],
+        "tags": [
+          "hostedmodels"
         ]
-      }
-    },
-    "/training/{data}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -94,7 +72,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/training/{data}": {
       "delete": {
         "description": "Delete a trained model",
         "operationId": "prediction.training.delete",
@@ -118,6 +98,9 @@
               "https://www.googleapis.com/auth/prediction"
             ]
           }
+        ],
+        "tags": [
+          "training"
         ]
       },
       "get": {
@@ -146,6 +129,9 @@
               "https://www.googleapis.com/auth/prediction"
             ]
           }
+        ],
+        "tags": [
+          "training"
         ]
       },
       "put": {
@@ -174,10 +160,11 @@
               "https://www.googleapis.com/auth/prediction"
             ]
           }
+        ],
+        "tags": [
+          "training"
         ]
-      }
-    },
-    "/training": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -200,7 +187,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/training": {
       "post": {
         "description": "Begin training your model",
         "operationId": "prediction.training.insert",
@@ -221,10 +210,11 @@
               "https://www.googleapis.com/auth/prediction"
             ]
           }
+        ],
+        "tags": [
+          "training"
         ]
-      }
-    },
-    "/training/{data}/predict": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -247,7 +237,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/training/{data}/predict": {
       "post": {
         "description": "Submit data and request a prediction",
         "operationId": "prediction.training.predict",
@@ -274,8 +266,34 @@
               "https://www.googleapis.com/auth/prediction"
             ]
           }
+        ],
+        "tags": [
+          "training"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

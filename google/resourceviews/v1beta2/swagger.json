@@ -19,29 +19,6 @@
   },
   "paths": {
     "/{project}/zones/{zone}/operations/{operation}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Retrieves the specified zone-specific operation resource.",
         "operationId": "resourceviews.zoneOperations.get",
@@ -86,10 +63,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "zoneOperations"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/operations": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -112,7 +90,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/operations": {
       "get": {
         "description": "Retrieves the list of operation resources contained within the specified zone.",
         "operationId": "resourceviews.zoneOperations.list",
@@ -171,10 +151,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "zoneOperations"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/resourceViews/{resourceView}/addResources": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -197,7 +178,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/resourceViews/{resourceView}/addResources": {
       "post": {
         "description": "Add resources to the view.",
         "operationId": "resourceviews.zoneViews.addResources",
@@ -240,10 +223,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "zoneViews"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/resourceViews/{resourceView}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -266,7 +250,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/resourceViews/{resourceView}": {
       "delete": {
         "description": "Delete a resource view.",
         "operationId": "resourceviews.zoneViews.delete",
@@ -309,6 +295,9 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "zoneViews"
         ]
       },
       "get": {
@@ -355,10 +344,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "zoneViews"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/resourceViews/{resourceView}/getService": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -381,7 +371,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/resourceViews/{resourceView}/getService": {
       "post": {
         "description": "Get the service information of a resource view or a resource.",
         "operationId": "resourceviews.zoneViews.getService",
@@ -430,10 +422,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "zoneViews"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/resourceViews": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -456,7 +449,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/resourceViews": {
       "post": {
         "description": "Create a resource view.",
         "operationId": "resourceviews.zoneViews.insert",
@@ -492,6 +487,9 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "zoneViews"
         ]
       },
       "get": {
@@ -546,10 +544,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "zoneViews"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/resourceViews/{resourceView}/resources": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -572,7 +571,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/resourceViews/{resourceView}/resources": {
       "get": {
         "description": "List the resources of the resource view.",
         "operationId": "resourceviews.zoneViews.listResources",
@@ -660,10 +661,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman.readonly"
             ]
           }
+        ],
+        "tags": [
+          "zoneViews"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/resourceViews/{resourceView}/removeResources": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -686,7 +688,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/resourceViews/{resourceView}/removeResources": {
       "post": {
         "description": "Remove resources from the view.",
         "operationId": "resourceviews.zoneViews.removeResources",
@@ -729,10 +733,11 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "zoneViews"
         ]
-      }
-    },
-    "/{project}/zones/{zone}/resourceViews/{resourceView}/setService": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -755,7 +760,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/{project}/zones/{zone}/resourceViews/{resourceView}/setService": {
       "post": {
         "description": "Update the service information of a resource view or a resource.",
         "operationId": "resourceviews.zoneViews.setService",
@@ -798,8 +805,34 @@
               "https://www.googleapis.com/auth/ndev.cloudman"
             ]
           }
+        ],
+        "tags": [
+          "zoneViews"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

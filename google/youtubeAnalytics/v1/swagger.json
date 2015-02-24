@@ -19,29 +19,6 @@
   },
   "paths": {
     "/batchReportDefinitions": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Retrieves a list of available batch report definitions.",
         "operationId": "youtubeAnalytics.batchReportDefinitions.list",
@@ -69,10 +46,11 @@
               "https://www.googleapis.com/auth/yt-analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "batchReportDefinitions"
         ]
-      }
-    },
-    "/batchReports": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -95,7 +73,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/batchReports": {
       "get": {
         "description": "Retrieves a list of processed batch reports.",
         "operationId": "youtubeAnalytics.batchReports.list",
@@ -130,10 +110,11 @@
               "https://www.googleapis.com/auth/yt-analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "batchReports"
         ]
-      }
-    },
-    "/groupItems": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -156,7 +137,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/groupItems": {
       "delete": {
         "description": "Removes an item from a group.",
         "operationId": "youtubeAnalytics.groupItems.delete",
@@ -187,6 +170,9 @@
               "https://www.googleapis.com/auth/youtubepartner"
             ]
           }
+        ],
+        "tags": [
+          "groupItems"
         ]
       },
       "post": {
@@ -215,6 +201,9 @@
               "https://www.googleapis.com/auth/youtubepartner"
             ]
           }
+        ],
+        "tags": [
+          "groupItems"
         ]
       },
       "get": {
@@ -252,10 +241,11 @@
               "https://www.googleapis.com/auth/yt-analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "groupItems"
         ]
-      }
-    },
-    "/groups": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -278,7 +268,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/groups": {
       "delete": {
         "description": "Deletes a group.",
         "operationId": "youtubeAnalytics.groups.delete",
@@ -309,6 +301,9 @@
               "https://www.googleapis.com/auth/youtubepartner"
             ]
           }
+        ],
+        "tags": [
+          "groups"
         ]
       },
       "post": {
@@ -337,6 +332,9 @@
               "https://www.googleapis.com/auth/youtubepartner"
             ]
           }
+        ],
+        "tags": [
+          "groups"
         ]
       },
       "get": {
@@ -379,6 +377,9 @@
               "https://www.googleapis.com/auth/yt-analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "groups"
         ]
       },
       "put": {
@@ -407,10 +408,11 @@
               "https://www.googleapis.com/auth/youtubepartner"
             ]
           }
+        ],
+        "tags": [
+          "groups"
         ]
-      }
-    },
-    "/reports": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -433,7 +435,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/reports": {
       "get": {
         "description": "Retrieve your YouTube Analytics reports.",
         "operationId": "youtubeAnalytics.reports.query",
@@ -514,8 +518,34 @@
               "https://www.googleapis.com/auth/yt-analytics.readonly"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

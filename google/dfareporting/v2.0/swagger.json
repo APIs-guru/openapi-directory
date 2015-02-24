@@ -19,29 +19,6 @@
   },
   "paths": {
     "/userprofiles/{profileId}/accountActiveAdSummaries/{summaryAccountId}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Gets the account's active ad summary by account ID.",
         "operationId": "dfareporting.accountActiveAdSummaries.get",
@@ -75,10 +52,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "accountActiveAdSummaries"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/accountPermissionGroups/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -101,7 +79,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/accountPermissionGroups/{id}": {
       "get": {
         "description": "Gets one account permission group by ID.",
         "operationId": "dfareporting.accountPermissionGroups.get",
@@ -135,10 +115,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "accountPermissionGroups"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/accountPermissionGroups": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -161,7 +142,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/accountPermissionGroups": {
       "get": {
         "description": "Retrieves the list of account permission groups.",
         "operationId": "dfareporting.accountPermissionGroups.list",
@@ -188,10 +171,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "accountPermissionGroups"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/accountPermissions/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -214,7 +198,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/accountPermissions/{id}": {
       "get": {
         "description": "Gets one account permission by ID.",
         "operationId": "dfareporting.accountPermissions.get",
@@ -248,10 +234,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "accountPermissions"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/accountPermissions": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -274,7 +261,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/accountPermissions": {
       "get": {
         "description": "Retrieves the list of account permissions.",
         "operationId": "dfareporting.accountPermissions.list",
@@ -301,10 +290,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "accountPermissions"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/accountUserProfiles/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -327,7 +317,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/accountUserProfiles/{id}": {
       "get": {
         "description": "Gets one account user profile by ID.",
         "operationId": "dfareporting.accountUserProfiles.get",
@@ -361,10 +353,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "accountUserProfiles"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/accountUserProfiles": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -387,7 +380,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/accountUserProfiles": {
       "get": {
         "description": "Retrieves a list of account user profiles, possibly filtered.",
         "operationId": "dfareporting.accountUserProfiles.list",
@@ -480,6 +475,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "accountUserProfiles"
         ]
       },
       "patch": {
@@ -515,6 +513,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "accountUserProfiles"
         ]
       },
       "put": {
@@ -543,10 +544,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "accountUserProfiles"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/accounts/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -569,7 +571,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/accounts/{id}": {
       "get": {
         "description": "Gets one account by ID.",
         "operationId": "dfareporting.accounts.get",
@@ -603,10 +607,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/accounts": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -629,7 +634,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/accounts": {
       "get": {
         "description": "Retrieves the list of accounts, possibly filtered.",
         "operationId": "dfareporting.accounts.list",
@@ -710,6 +717,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
       },
       "patch": {
@@ -745,6 +755,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
       },
       "put": {
@@ -773,10 +786,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "accounts"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/ads/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -799,7 +813,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/ads/{id}": {
       "get": {
         "description": "Gets one ad by ID.",
         "operationId": "dfareporting.ads.get",
@@ -833,10 +849,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "ads"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/ads": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -859,7 +876,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/ads": {
       "post": {
         "description": "Inserts a new ad.",
         "operationId": "dfareporting.ads.insert",
@@ -886,6 +905,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "ads"
         ]
       },
       "get": {
@@ -1144,6 +1166,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "ads"
         ]
       },
       "patch": {
@@ -1179,6 +1204,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "ads"
         ]
       },
       "put": {
@@ -1207,10 +1235,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "ads"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/advertiserGroups/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1233,7 +1262,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/advertiserGroups/{id}": {
       "delete": {
         "description": "Deletes an existing advertiser group.",
         "operationId": "dfareporting.advertiserGroups.delete",
@@ -1264,6 +1295,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "advertiserGroups"
         ]
       },
       "get": {
@@ -1299,10 +1333,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "advertiserGroups"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/advertiserGroups": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1325,7 +1360,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/advertiserGroups": {
       "post": {
         "description": "Inserts a new advertiser group.",
         "operationId": "dfareporting.advertiserGroups.insert",
@@ -1352,6 +1389,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "advertiserGroups"
         ]
       },
       "get": {
@@ -1428,6 +1468,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "advertiserGroups"
         ]
       },
       "patch": {
@@ -1463,6 +1506,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "advertiserGroups"
         ]
       },
       "put": {
@@ -1491,10 +1537,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "advertiserGroups"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/advertisers/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1517,7 +1564,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/advertisers/{id}": {
       "get": {
         "description": "Gets one advertiser by ID.",
         "operationId": "dfareporting.advertisers.get",
@@ -1551,10 +1600,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "advertisers"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/advertisers": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1577,7 +1627,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/advertisers": {
       "post": {
         "description": "Inserts a new advertiser.",
         "operationId": "dfareporting.advertisers.insert",
@@ -1604,6 +1656,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "advertisers"
         ]
       },
       "get": {
@@ -1728,6 +1783,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "advertisers"
         ]
       },
       "patch": {
@@ -1763,6 +1821,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "advertisers"
         ]
       },
       "put": {
@@ -1791,10 +1852,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "advertisers"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/browsers": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1817,7 +1879,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/browsers": {
       "get": {
         "description": "Retrieves a list of browsers.",
         "operationId": "dfareporting.browsers.list",
@@ -1844,10 +1908,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "browsers"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/campaigns/{campaignId}/campaignCreativeAssociations": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1870,7 +1935,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/campaigns/{campaignId}/campaignCreativeAssociations": {
       "post": {
         "description": "Associates a creative with the specified campaign. This method creates a default ad with dimensions matching the creative in the campaign if such a default ad does not exist already.",
         "operationId": "dfareporting.campaignCreativeAssociations.insert",
@@ -1904,6 +1971,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "campaignCreativeAssociations"
         ]
       },
       "get": {
@@ -1961,10 +2031,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "campaignCreativeAssociations"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/campaigns/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -1987,7 +2058,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/campaigns/{id}": {
       "get": {
         "description": "Gets one campaign by ID.",
         "operationId": "dfareporting.campaigns.get",
@@ -2021,10 +2094,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "campaigns"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/campaigns": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2047,7 +2121,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/campaigns": {
       "post": {
         "description": "Inserts a new campaign.",
         "operationId": "dfareporting.campaigns.insert",
@@ -2088,6 +2164,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "campaigns"
         ]
       },
       "get": {
@@ -2218,6 +2297,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "campaigns"
         ]
       },
       "patch": {
@@ -2253,6 +2335,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "campaigns"
         ]
       },
       "put": {
@@ -2281,10 +2366,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "campaigns"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/changeLogs/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2307,7 +2393,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/changeLogs/{id}": {
       "get": {
         "description": "Gets one change log by ID.",
         "operationId": "dfareporting.changeLogs.get",
@@ -2341,10 +2429,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "changeLogs"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/changeLogs": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2367,7 +2456,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/changeLogs": {
       "get": {
         "description": "Retrieves a list of change logs.",
         "operationId": "dfareporting.changeLogs.list",
@@ -2522,10 +2613,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "changeLogs"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/cities": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2548,7 +2640,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/cities": {
       "get": {
         "description": "Retrieves a list of cities, possibly filtered.",
         "operationId": "dfareporting.cities.list",
@@ -2611,10 +2705,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "cities"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/connectionTypes": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2637,7 +2732,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/connectionTypes": {
       "get": {
         "description": "Retrieves a list of connection types.",
         "operationId": "dfareporting.connectionTypes.list",
@@ -2664,10 +2761,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "connectionTypes"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/contentCategories/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2690,7 +2788,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/contentCategories/{id}": {
       "delete": {
         "description": "Deletes an existing content category.",
         "operationId": "dfareporting.contentCategories.delete",
@@ -2721,6 +2821,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "contentCategories"
         ]
       },
       "get": {
@@ -2756,10 +2859,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "contentCategories"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/contentCategories": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2782,7 +2886,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/contentCategories": {
       "post": {
         "description": "Inserts a new content category.",
         "operationId": "dfareporting.contentCategories.insert",
@@ -2809,6 +2915,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "contentCategories"
         ]
       },
       "get": {
@@ -2885,6 +2994,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "contentCategories"
         ]
       },
       "patch": {
@@ -2920,6 +3032,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "contentCategories"
         ]
       },
       "put": {
@@ -2948,10 +3063,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "contentCategories"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/countries/{dartId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2974,7 +3090,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/countries/{dartId}": {
       "get": {
         "description": "Gets one country by ID.",
         "operationId": "dfareporting.countries.get",
@@ -3008,10 +3126,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "countries"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/countries": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3034,7 +3153,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/countries": {
       "get": {
         "description": "Retrieves a list of countries.",
         "operationId": "dfareporting.countries.list",
@@ -3061,10 +3182,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "countries"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/creativeAssets/{advertiserId}/creativeAssets": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3087,7 +3209,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/creativeAssets/{advertiserId}/creativeAssets": {
       "post": {
         "description": "Inserts a new creative asset.",
         "operationId": "dfareporting.creativeAssets.insert",
@@ -3124,10 +3248,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creativeAssets"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3150,7 +3275,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues/{id}": {
       "delete": {
         "description": "Deletes an existing creative field value.",
         "operationId": "dfareporting.creativeFieldValues.delete",
@@ -3188,6 +3315,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creativeFieldValues"
         ]
       },
       "get": {
@@ -3230,10 +3360,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creativeFieldValues"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3256,7 +3387,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/creativeFields/{creativeFieldId}/creativeFieldValues": {
       "post": {
         "description": "Inserts a new creative field value.",
         "operationId": "dfareporting.creativeFieldValues.insert",
@@ -3290,6 +3423,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creativeFieldValues"
         ]
       },
       "get": {
@@ -3373,6 +3509,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creativeFieldValues"
         ]
       },
       "patch": {
@@ -3415,6 +3554,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creativeFieldValues"
         ]
       },
       "put": {
@@ -3450,10 +3592,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creativeFieldValues"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/creativeFields/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3476,7 +3619,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/creativeFields/{id}": {
       "delete": {
         "description": "Deletes an existing creative field.",
         "operationId": "dfareporting.creativeFields.delete",
@@ -3507,6 +3652,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creativeFields"
         ]
       },
       "get": {
@@ -3542,10 +3690,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creativeFields"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/creativeFields": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3568,7 +3717,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/creativeFields": {
       "post": {
         "description": "Inserts a new creative field.",
         "operationId": "dfareporting.creativeFields.insert",
@@ -3595,6 +3746,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creativeFields"
         ]
       },
       "get": {
@@ -3681,6 +3835,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creativeFields"
         ]
       },
       "patch": {
@@ -3716,6 +3873,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creativeFields"
         ]
       },
       "put": {
@@ -3744,10 +3904,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creativeFields"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/creativeGroups/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3770,7 +3931,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/creativeGroups/{id}": {
       "get": {
         "description": "Gets one creative group by ID.",
         "operationId": "dfareporting.creativeGroups.get",
@@ -3804,10 +3967,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creativeGroups"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/creativeGroups": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3830,7 +3994,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/creativeGroups": {
       "post": {
         "description": "Inserts a new creative group.",
         "operationId": "dfareporting.creativeGroups.insert",
@@ -3857,6 +4023,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creativeGroups"
         ]
       },
       "get": {
@@ -3949,6 +4118,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creativeGroups"
         ]
       },
       "patch": {
@@ -3984,6 +4156,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creativeGroups"
         ]
       },
       "put": {
@@ -4012,10 +4187,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creativeGroups"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/creatives/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4038,7 +4214,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/creatives/{id}": {
       "get": {
         "description": "Gets one creative by ID.",
         "operationId": "dfareporting.creatives.get",
@@ -4072,10 +4250,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creatives"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/creatives": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4098,7 +4277,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/creatives": {
       "post": {
         "description": "Inserts a new creative.",
         "operationId": "dfareporting.creatives.insert",
@@ -4125,6 +4306,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creatives"
         ]
       },
       "get": {
@@ -4306,6 +4490,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creatives"
         ]
       },
       "patch": {
@@ -4341,6 +4528,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creatives"
         ]
       },
       "put": {
@@ -4369,10 +4559,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "creatives"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/dimensionvalues/query": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4395,7 +4586,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/dimensionvalues/query": {
       "post": {
         "description": "Retrieves list of report dimension values for a list of filters.",
         "operationId": "dfareporting.dimensionValues.query",
@@ -4436,10 +4629,11 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "dimensionValues"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/directorySiteContacts/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4462,7 +4656,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/directorySiteContacts/{id}": {
       "get": {
         "description": "Gets one directory site contact by ID.",
         "operationId": "dfareporting.directorySiteContacts.get",
@@ -4496,10 +4692,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "directorySiteContacts"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/directorySiteContacts": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4522,7 +4719,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/directorySiteContacts": {
       "get": {
         "description": "Retrieves a list of directory site contacts, possibly filtered.",
         "operationId": "dfareporting.directorySiteContacts.list",
@@ -4607,10 +4806,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "directorySiteContacts"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/directorySites/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4633,7 +4833,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/directorySites/{id}": {
       "get": {
         "description": "Gets one directory site by ID.",
         "operationId": "dfareporting.directorySites.get",
@@ -4667,10 +4869,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "directorySites"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/directorySites": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4693,7 +4896,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/directorySites": {
       "get": {
         "description": "Retrieves a list of directory sites, possibly filtered.",
         "operationId": "dfareporting.directorySites.list",
@@ -4810,10 +5015,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "directorySites"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/eventTags/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4836,7 +5042,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/eventTags/{id}": {
       "delete": {
         "description": "Deletes an existing event tag.",
         "operationId": "dfareporting.eventTags.delete",
@@ -4867,6 +5075,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "eventTags"
         ]
       },
       "get": {
@@ -4902,10 +5113,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "eventTags"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/eventTags": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4928,7 +5140,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/eventTags": {
       "post": {
         "description": "Inserts a new event tag.",
         "operationId": "dfareporting.eventTags.insert",
@@ -4955,6 +5169,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "eventTags"
         ]
       },
       "get": {
@@ -5064,6 +5281,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "eventTags"
         ]
       },
       "patch": {
@@ -5099,6 +5319,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "eventTags"
         ]
       },
       "put": {
@@ -5127,10 +5350,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "eventTags"
         ]
-      }
-    },
-    "/reports/{reportId}/files/{fileId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -5153,7 +5377,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/reports/{reportId}/files/{fileId}": {
       "get": {
         "description": "Retrieves a report file by its report ID and file ID.",
         "operationId": "dfareporting.files.get",
@@ -5187,10 +5413,11 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "files"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/files": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -5213,7 +5440,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/files": {
       "get": {
         "description": "Lists files for a user profile.",
         "operationId": "dfareporting.files.list",
@@ -5288,10 +5517,11 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "files"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/floodlightActivities/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -5314,7 +5544,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/floodlightActivities/{id}": {
       "delete": {
         "description": "Deletes an existing floodlight activity.",
         "operationId": "dfareporting.floodlightActivities.delete",
@@ -5345,6 +5577,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "floodlightActivities"
         ]
       },
       "get": {
@@ -5380,10 +5615,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "floodlightActivities"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/floodlightActivities/generatetag": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -5406,7 +5642,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/floodlightActivities/generatetag": {
       "post": {
         "description": "Generates a tag for a floodlight activity.",
         "operationId": "dfareporting.floodlightActivities.generatetag",
@@ -5439,10 +5677,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "floodlightActivities"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/floodlightActivities": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -5465,7 +5704,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/floodlightActivities": {
       "post": {
         "description": "Inserts a new floodlight activity.",
         "operationId": "dfareporting.floodlightActivities.insert",
@@ -5492,6 +5733,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "floodlightActivities"
         ]
       },
       "get": {
@@ -5618,6 +5862,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "floodlightActivities"
         ]
       },
       "patch": {
@@ -5653,6 +5900,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "floodlightActivities"
         ]
       },
       "put": {
@@ -5681,10 +5931,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "floodlightActivities"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/floodlightActivityGroups/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -5707,7 +5958,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/floodlightActivityGroups/{id}": {
       "delete": {
         "description": "Deletes an existing floodlight activity group.",
         "operationId": "dfareporting.floodlightActivityGroups.delete",
@@ -5738,6 +5991,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "floodlightActivityGroups"
         ]
       },
       "get": {
@@ -5773,10 +6029,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "floodlightActivityGroups"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/floodlightActivityGroups": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -5799,7 +6056,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/floodlightActivityGroups": {
       "post": {
         "description": "Inserts a new floodlight activity group.",
         "operationId": "dfareporting.floodlightActivityGroups.insert",
@@ -5826,6 +6085,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "floodlightActivityGroups"
         ]
       },
       "get": {
@@ -5924,6 +6186,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "floodlightActivityGroups"
         ]
       },
       "patch": {
@@ -5959,6 +6224,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "floodlightActivityGroups"
         ]
       },
       "put": {
@@ -5987,10 +6255,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "floodlightActivityGroups"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/floodlightConfigurations/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6013,7 +6282,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/floodlightConfigurations/{id}": {
       "get": {
         "description": "Gets one floodlight configuration by ID.",
         "operationId": "dfareporting.floodlightConfigurations.get",
@@ -6047,10 +6318,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "floodlightConfigurations"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/floodlightConfigurations": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6073,7 +6345,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/floodlightConfigurations": {
       "get": {
         "description": "Retrieves a list of floodlight configurations, possibly filtered.",
         "operationId": "dfareporting.floodlightConfigurations.list",
@@ -6110,6 +6384,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "floodlightConfigurations"
         ]
       },
       "patch": {
@@ -6145,6 +6422,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "floodlightConfigurations"
         ]
       },
       "put": {
@@ -6173,10 +6453,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "floodlightConfigurations"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/campaigns/{campaignId}/landingPages/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6199,7 +6480,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/campaigns/{campaignId}/landingPages/{id}": {
       "delete": {
         "description": "Deletes an existing campaign landing page.",
         "operationId": "dfareporting.landingPages.delete",
@@ -6237,6 +6520,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "landingPages"
         ]
       },
       "get": {
@@ -6279,10 +6565,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "landingPages"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/campaigns/{campaignId}/landingPages": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6305,7 +6592,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/campaigns/{campaignId}/landingPages": {
       "post": {
         "description": "Inserts a new landing page for the specified campaign.",
         "operationId": "dfareporting.landingPages.insert",
@@ -6339,6 +6628,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "landingPages"
         ]
       },
       "get": {
@@ -6374,6 +6666,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "landingPages"
         ]
       },
       "patch": {
@@ -6416,6 +6711,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "landingPages"
         ]
       },
       "put": {
@@ -6451,10 +6749,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "landingPages"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/metros": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6477,7 +6776,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/metros": {
       "get": {
         "description": "Retrieves a list of metros.",
         "operationId": "dfareporting.metros.list",
@@ -6504,10 +6805,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "metros"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/mobileCarriers": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6530,7 +6832,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/mobileCarriers": {
       "get": {
         "description": "Retrieves a list of mobile carriers.",
         "operationId": "dfareporting.mobileCarriers.list",
@@ -6557,10 +6861,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "mobileCarriers"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/operatingSystemVersions": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6583,7 +6888,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/operatingSystemVersions": {
       "get": {
         "description": "Retrieves a list of operating system versions.",
         "operationId": "dfareporting.operatingSystemVersions.list",
@@ -6610,10 +6917,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "operatingSystemVersions"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/operatingSystems": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6636,7 +6944,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/operatingSystems": {
       "get": {
         "description": "Retrieves a list of operating systems.",
         "operationId": "dfareporting.operatingSystems.list",
@@ -6663,10 +6973,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "operatingSystems"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/placementGroups/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6689,7 +7000,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/placementGroups/{id}": {
       "get": {
         "description": "Gets one placement group by ID.",
         "operationId": "dfareporting.placementGroups.get",
@@ -6723,10 +7036,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "placementGroups"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/placementGroups": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -6749,7 +7063,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/placementGroups": {
       "post": {
         "description": "Inserts a new placement group.",
         "operationId": "dfareporting.placementGroups.insert",
@@ -6776,6 +7092,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "placementGroups"
         ]
       },
       "get": {
@@ -6945,6 +7264,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "placementGroups"
         ]
       },
       "patch": {
@@ -6980,6 +7302,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "placementGroups"
         ]
       },
       "put": {
@@ -7008,10 +7333,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "placementGroups"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/placementStrategies/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -7034,7 +7360,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/placementStrategies/{id}": {
       "delete": {
         "description": "Deletes an existing placement strategy.",
         "operationId": "dfareporting.placementStrategies.delete",
@@ -7065,6 +7393,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "placementStrategies"
         ]
       },
       "get": {
@@ -7100,10 +7431,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "placementStrategies"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/placementStrategies": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -7126,7 +7458,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/placementStrategies": {
       "post": {
         "description": "Inserts a new placement strategy.",
         "operationId": "dfareporting.placementStrategies.insert",
@@ -7153,6 +7487,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "placementStrategies"
         ]
       },
       "get": {
@@ -7229,6 +7566,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "placementStrategies"
         ]
       },
       "patch": {
@@ -7264,6 +7604,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "placementStrategies"
         ]
       },
       "put": {
@@ -7292,10 +7635,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "placementStrategies"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/placements/generatetags": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -7318,7 +7662,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/placements/generatetags": {
       "post": {
         "description": "Generates tags for a placement.",
         "operationId": "dfareporting.placements.generatetags",
@@ -7386,10 +7732,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "placements"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/placements/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -7412,7 +7759,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/placements/{id}": {
       "get": {
         "description": "Gets one placement by ID.",
         "operationId": "dfareporting.placements.get",
@@ -7446,10 +7795,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "placements"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/placements": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -7472,7 +7822,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/placements": {
       "post": {
         "description": "Inserts a new placement.",
         "operationId": "dfareporting.placements.insert",
@@ -7499,6 +7851,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "placements"
         ]
       },
       "get": {
@@ -7705,6 +8060,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "placements"
         ]
       },
       "patch": {
@@ -7740,6 +8098,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "placements"
         ]
       },
       "put": {
@@ -7768,10 +8129,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "placements"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/platformTypes": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -7794,7 +8156,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/platformTypes": {
       "get": {
         "description": "Retrieves a list of platform types.",
         "operationId": "dfareporting.platformTypes.list",
@@ -7821,10 +8185,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "platformTypes"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/postalCodes": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -7847,7 +8212,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/postalCodes": {
       "get": {
         "description": "Retrieves a list of postal codes.",
         "operationId": "dfareporting.postalCodes.list",
@@ -7874,10 +8241,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "postalCodes"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/regions": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -7900,7 +8268,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/regions": {
       "get": {
         "description": "Retrieves a list of regions.",
         "operationId": "dfareporting.regions.list",
@@ -7927,10 +8297,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "regions"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/reports/{reportId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -7953,7 +8324,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/reports/{reportId}": {
       "delete": {
         "description": "Deletes a report by its ID.",
         "operationId": "dfareporting.reports.delete",
@@ -7984,6 +8357,9 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
       },
       "get": {
@@ -8019,6 +8395,9 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
       },
       "patch": {
@@ -8054,6 +8433,9 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
       },
       "put": {
@@ -8089,10 +8471,11 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/reports": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -8115,7 +8498,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/reports": {
       "post": {
         "description": "Creates a report.",
         "operationId": "dfareporting.reports.insert",
@@ -8142,6 +8527,9 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
       },
       "get": {
@@ -8218,10 +8606,11 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/reports/{reportId}/run": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -8244,7 +8633,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/reports/{reportId}/run": {
       "post": {
         "description": "Runs a report.",
         "operationId": "dfareporting.reports.run",
@@ -8284,10 +8675,11 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "reports"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/reports/compatiblefields/query": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -8310,7 +8702,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/reports/compatiblefields/query": {
       "post": {
         "description": "Returns the fields that are compatible to be selected in the respective sections of a report criteria, given the fields already selected in the input report and user permissions.",
         "operationId": "dfareporting.reports.compatibleFields.query",
@@ -8337,10 +8731,12 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "compatibleFields",
+          "reports"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/reports/{reportId}/files/{fileId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -8363,7 +8759,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/reports/{reportId}/files/{fileId}": {
       "get": {
         "description": "Retrieves a report file.",
         "operationId": "dfareporting.reports.files.get",
@@ -8404,10 +8802,12 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "files",
+          "reports"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/reports/{reportId}/files": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -8430,7 +8830,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/reports/{reportId}/files": {
       "get": {
         "description": "Lists files for a report.",
         "operationId": "dfareporting.reports.files.list",
@@ -8500,10 +8902,12 @@
               "https://www.googleapis.com/auth/dfareporting"
             ]
           }
+        ],
+        "tags": [
+          "files",
+          "reports"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/sites/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -8526,7 +8930,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/sites/{id}": {
       "get": {
         "description": "Gets one site by ID.",
         "operationId": "dfareporting.sites.get",
@@ -8560,10 +8966,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "sites"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/sites": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -8586,7 +8993,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/sites": {
       "post": {
         "description": "Inserts a new site.",
         "operationId": "dfareporting.sites.insert",
@@ -8613,6 +9022,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "sites"
         ]
       },
       "get": {
@@ -8751,6 +9163,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "sites"
         ]
       },
       "patch": {
@@ -8786,6 +9201,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "sites"
         ]
       },
       "put": {
@@ -8814,10 +9232,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "sites"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/sizes/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -8840,7 +9259,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/sizes/{id}": {
       "get": {
         "description": "Gets one size by ID.",
         "operationId": "dfareporting.sizes.get",
@@ -8874,10 +9295,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "sizes"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/sizes": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -8900,7 +9322,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/sizes": {
       "post": {
         "description": "Inserts a new size.",
         "operationId": "dfareporting.sizes.insert",
@@ -8927,6 +9351,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "sizes"
         ]
       },
       "get": {
@@ -8983,10 +9410,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "sizes"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/subaccounts/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -9009,7 +9437,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/subaccounts/{id}": {
       "get": {
         "description": "Gets one subaccount by ID.",
         "operationId": "dfareporting.subaccounts.get",
@@ -9043,10 +9473,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "subaccounts"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/subaccounts": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -9069,7 +9500,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/subaccounts": {
       "post": {
         "description": "Inserts a new subaccount.",
         "operationId": "dfareporting.subaccounts.insert",
@@ -9096,6 +9529,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "subaccounts"
         ]
       },
       "get": {
@@ -9172,6 +9608,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "subaccounts"
         ]
       },
       "patch": {
@@ -9207,6 +9646,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "subaccounts"
         ]
       },
       "put": {
@@ -9235,10 +9677,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "subaccounts"
         ]
-      }
-    },
-    "/userprofiles/{profileId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -9261,7 +9704,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}": {
       "get": {
         "description": "Gets one user profile by ID.",
         "operationId": "dfareporting.userProfiles.get",
@@ -9289,10 +9734,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "userProfiles"
         ]
-      }
-    },
-    "/userprofiles": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -9315,7 +9761,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles": {
       "get": {
         "description": "Retrieves list of user profiles for a user.",
         "operationId": "dfareporting.userProfiles.list",
@@ -9334,10 +9782,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "userProfiles"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/userRolePermissionGroups/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -9360,7 +9809,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/userRolePermissionGroups/{id}": {
       "get": {
         "description": "Gets one user role permission group by ID.",
         "operationId": "dfareporting.userRolePermissionGroups.get",
@@ -9394,10 +9845,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "userRolePermissionGroups"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/userRolePermissionGroups": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -9420,7 +9872,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/userRolePermissionGroups": {
       "get": {
         "description": "Gets a list of all supported user role permission groups.",
         "operationId": "dfareporting.userRolePermissionGroups.list",
@@ -9447,10 +9901,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "userRolePermissionGroups"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/userRolePermissions/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -9473,7 +9928,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/userRolePermissions/{id}": {
       "get": {
         "description": "Gets one user role permission by ID.",
         "operationId": "dfareporting.userRolePermissions.get",
@@ -9507,10 +9964,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "userRolePermissions"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/userRolePermissions": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -9533,7 +9991,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/userRolePermissions": {
       "get": {
         "description": "Gets a list of user role permissions, possibly filtered.",
         "operationId": "dfareporting.userRolePermissions.list",
@@ -9570,10 +10030,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "userRolePermissions"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/userRoles/{id}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -9596,7 +10057,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/userRoles/{id}": {
       "delete": {
         "description": "Deletes an existing user role.",
         "operationId": "dfareporting.userRoles.delete",
@@ -9627,6 +10090,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "userRoles"
         ]
       },
       "get": {
@@ -9662,10 +10128,11 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "userRoles"
         ]
-      }
-    },
-    "/userprofiles/{profileId}/userRoles": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -9688,7 +10155,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/userprofiles/{profileId}/userRoles": {
       "post": {
         "description": "Inserts a new user role.",
         "operationId": "dfareporting.userRoles.insert",
@@ -9715,6 +10184,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "userRoles"
         ]
       },
       "get": {
@@ -9803,6 +10275,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "userRoles"
         ]
       },
       "patch": {
@@ -9838,6 +10313,9 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "userRoles"
         ]
       },
       "put": {
@@ -9866,8 +10344,34 @@
               "https://www.googleapis.com/auth/dfatrafficking"
             ]
           }
+        ],
+        "tags": [
+          "userRoles"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {

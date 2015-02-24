@@ -19,29 +19,6 @@
   },
   "paths": {
     "/divisions": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
       "get": {
         "description": "Searches for political divisions by their natural name or OCD ID.",
         "operationId": "civicinfo.divisions.search",
@@ -60,10 +37,11 @@
             "description": "The search query. Queries can cover any parts of a OCD ID or a human readable division name. All words given in the query are treated as required patterns. In addition to that, most query operators of the Apache Lucene library are supported. See http://lucene.apache.org/core/2_9_4/queryparsersyntax.html",
             "type": "string"
           }
+        ],
+        "tags": [
+          "divisions"
         ]
-      }
-    },
-    "/elections": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -86,7 +64,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/elections": {
       "get": {
         "description": "List of available elections to query.",
         "operationId": "civicinfo.elections.electionQuery",
@@ -97,10 +77,11 @@
               "$ref": "#/definitions/ElectionsQueryResponse"
             }
           }
-        }
-      }
-    },
-    "/voterinfo": {
+        },
+        "tags": [
+          "elections"
+        ]
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -123,7 +104,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/voterinfo": {
       "get": {
         "description": "Looks up information relevant to a voter based on the voter's registered address.",
         "operationId": "civicinfo.elections.voterInfoQuery",
@@ -157,10 +140,11 @@
             "default": "false",
             "type": "boolean"
           }
+        ],
+        "tags": [
+          "elections"
         ]
-      }
-    },
-    "/representatives": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -183,7 +167,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/representatives": {
       "get": {
         "description": "Looks up political geography and representative information for a single address.",
         "operationId": "civicinfo.representatives.representativeInfoByAddress",
@@ -253,10 +239,11 @@
             },
             "collectionFormat": "multi"
           }
+        ],
+        "tags": [
+          "representatives"
         ]
-      }
-    },
-    "/representatives/{ocdId}": {
+      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -279,7 +266,9 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
+      ]
+    },
+    "/representatives/{ocdId}": {
       "get": {
         "description": "Looks up representative information for a single geographic division.",
         "operationId": "civicinfo.representatives.representativeInfoByDivision",
@@ -349,8 +338,34 @@
             },
             "collectionFormat": "multi"
           }
+        ],
+        "tags": [
+          "representatives"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {
