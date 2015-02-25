@@ -681,6 +681,10 @@
             "type": "string"
           }
         },
+        "sdkPipelineOptions": {
+          "type": "object",
+          "additionalProperties": {}
+        },
         "tempStoragePrefix": {
           "type": "string"
         },
@@ -1351,6 +1355,18 @@
         }
       }
     },
+    "SourceFork": {
+      "id": "SourceFork",
+      "type": "object",
+      "properties": {
+        "primary": {
+          "$ref": "#/definitions/SourceSplitShard"
+        },
+        "residual": {
+          "$ref": "#/definitions/SourceSplitShard"
+        }
+      }
+    },
     "SourceGetMetadataRequest": {
       "id": "SourceGetMetadataRequest",
       "type": "object",
@@ -1734,6 +1750,9 @@
         },
         "requestedLeaseDuration": {
           "type": "string"
+        },
+        "sourceFork": {
+          "$ref": "#/definitions/SourceFork"
         },
         "sourceOperationResponse": {
           "$ref": "#/definitions/SourceOperationResponse"
