@@ -18,9 +18,18 @@
             "app_id": []
         }
     ],
+    "tags": [
+        {
+            "name": "exchange",
+            "description": "Operation which works with exchange rates"
+        }
+    ],
     "paths": {
         "/latest.json": {
             "get": {
+                "tags": [
+                    "exchange"
+                ],
                 "summary": "Latest",
                 "description": "The most up-to-date exchange rates",
                 "responses": {
@@ -35,6 +44,9 @@
         },
         "/currencies.json": {
             "get": {
+                "tags": [
+                    "exchange"
+                ],
                 "summary": "Currency codes",
                 "description": "Get list of currency codes and names",
                 "responses": {
@@ -49,6 +61,9 @@
         },
         "/historical/{date}.json": {
             "get": {
+                "tags": [
+                    "exchange"
+                ],
                 "summary": "Historical",
                 "description": "Historical end of day exchange rates are available for every day since 1999",
                 "parameters": [
