@@ -7,4 +7,5 @@ Our goal is to create machine-readable Wikipedia for REST APIs, with following p
 - Only publicly available APIs(free or paid).
 - Anyone can add/changes API, not only API owners.
 - All data could be accessed through REST API(free, but API key required).
-
+ 
+If you have Swagger files for any public API, please feel free to make pull request.
