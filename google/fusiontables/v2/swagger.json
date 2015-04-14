@@ -14,13 +14,10 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/fusiontables"
-  },
   "paths": {
     "/tables/{tableId}/columns/{columnId}": {
       "delete": {
-        "description": "Deletes the column.",
+        "description": "Deletes the specified column.",
         "operationId": "fusiontables.column.delete",
         "responses": {
           "200": {
@@ -55,7 +52,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves a specific column by its id.",
+        "description": "Retrieves a specific column by its ID.",
         "operationId": "fusiontables.column.get",
         "responses": {
           "200": {
@@ -296,7 +293,7 @@
     },
     "/query": {
       "post": {
-        "description": "Executes an SQL SELECT/INSERT/UPDATE/DELETE/SHOW/DESCRIBE/CREATE statement.",
+        "description": "Executes a Fusion Tables SQL statement, which can be any of \n- SELECT\n- INSERT\n- UPDATE\n- DELETE\n- SHOW\n- DESCRIBE\n- CREATE statement.",
         "operationId": "fusiontables.query.sql",
         "responses": {
           "200": {
@@ -310,20 +307,20 @@
           {
             "name": "hdrs",
             "in": "query",
-            "description": "Should column names be included (in the first row)?. Default is true.",
+            "description": "Whether column names are included in the first row. Default is true.",
             "type": "boolean"
           },
           {
             "name": "sql",
             "in": "query",
-            "description": "An SQL SELECT/SHOW/DESCRIBE/INSERT/UPDATE/DELETE/CREATE statement.",
+            "description": "A Fusion Tables SQL statement, which can be any of \n- SELECT\n- INSERT\n- UPDATE\n- DELETE\n- SHOW\n- DESCRIBE\n- CREATE",
             "required": true,
             "type": "string"
           },
           {
             "name": "typed",
             "in": "query",
-            "description": "Should typed values be returned in the (JSON) response -- numbers for numeric values and parsed geometries for KML values? Default is true.",
+            "description": "Whether typed values are returned in the (JSON) response: numbers for numeric values and parsed geometries for KML values. Default is true.",
             "type": "boolean"
           }
         ],
@@ -340,7 +337,7 @@
         ]
       },
       "get": {
-        "description": "Executes an SQL SELECT/SHOW/DESCRIBE statement.",
+        "description": "Executes a SQL statement which can be any of \n- SELECT\n- SHOW\n- DESCRIBE",
         "operationId": "fusiontables.query.sqlGet",
         "responses": {
           "200": {
@@ -354,20 +351,20 @@
           {
             "name": "hdrs",
             "in": "query",
-            "description": "Should column names be included (in the first row)?. Default is true.",
+            "description": "Whether column names are included (in the first row). Default is true.",
             "type": "boolean"
           },
           {
             "name": "sql",
             "in": "query",
-            "description": "An SQL SELECT/SHOW/DESCRIBE statement.",
+            "description": "A SQL statement which can be any of \n- SELECT\n- SHOW\n- DESCRIBE",
             "required": true,
             "type": "string"
           },
           {
             "name": "typed",
             "in": "query",
-            "description": "Should typed values be returned in the (JSON) response -- numbers for numeric values and parsed geometries for KML values? Default is true.",
+            "description": "Whether typed values are returned in the (JSON) response: numbers for numeric values and parsed geometries for KML values. Default is true.",
             "type": "boolean"
           }
         ],
@@ -759,7 +756,7 @@
           {
             "name": "tableId",
             "in": "path",
-            "description": "ID of the table that is being deleted.",
+            "description": "ID of the table to be deleted.",
             "required": true,
             "type": "string"
           }
@@ -776,7 +773,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves a specific table by its id.",
+        "description": "Retrieves a specific table by its ID.",
         "operationId": "fusiontables.table.get",
         "responses": {
           "200": {
@@ -790,7 +787,7 @@
           {
             "name": "tableId",
             "in": "path",
-            "description": "Identifier(ID) for the table being requested.",
+            "description": "Identifier for the table being requested.",
             "required": true,
             "type": "string"
           }
@@ -822,7 +819,7 @@
           {
             "name": "replaceViewDefinition",
             "in": "query",
-            "description": "Should the view definition also be updated? The specified view definition replaces the existing one. Only a view can be updated with a new definition.",
+            "description": "Whether the view definition is also updated. The specified view definition replaces the existing one. Only a view can be updated with a new definition.",
             "type": "boolean"
           },
           {
@@ -859,7 +856,7 @@
           {
             "name": "replaceViewDefinition",
             "in": "query",
-            "description": "Should the view definition also be updated? The specified view definition replaces the existing one. Only a view can be updated with a new definition.",
+            "description": "Whether the view definition is also updated. The specified view definition replaces the existing one. Only a view can be updated with a new definition.",
             "type": "boolean"
           },
           {
@@ -907,7 +904,7 @@
     },
     "/tables/{tableId}/import": {
       "post": {
-        "description": "Import more rows into a table.",
+        "description": "Imports more rows into a table.",
         "operationId": "fusiontables.table.importRows",
         "responses": {
           "200": {
@@ -924,25 +921,25 @@
           {
             "name": "delimiter",
             "in": "query",
-            "description": "The delimiter used to separate cell values. This can only consist of a single character. Default is ','.",
+            "description": "The delimiter used to separate cell values. This can only consist of a single character. Default is ,.",
             "type": "string"
           },
           {
             "name": "encoding",
             "in": "query",
-            "description": "The encoding of the content. Default is UTF-8. Use 'auto-detect' if you are unsure of the encoding.",
+            "description": "The encoding of the content. Default is UTF-8. Use auto-detect if you are unsure of the encoding.",
             "type": "string"
           },
           {
             "name": "endLine",
             "in": "query",
-            "description": "The index of the last line from which to start importing, exclusive. Thus, the number of imported lines is endLine - startLine. If this parameter is not provided, the file will be imported until the last line of the file. If endLine is negative, then the imported content will exclude the last endLine lines. That is, if endline is negative, no line will be imported whose index is greater than N + endLine where N is the number of lines in the file, and the number of imported lines will be N + endLine - startLine.",
+            "description": "The index of the line up to which data will be imported. Default is to import the entire file. If endLine is negative, it is an offset from the end of the file; the imported content will exclude the last endLine lines.",
             "type": "integer"
           },
           {
             "name": "isStrict",
             "in": "query",
-            "description": "Whether the CSV must have the same number of values for each row. If false, rows with fewer values will be padded with empty values. Default is true.",
+            "description": "Whether the imported CSV must have the same number of values for each row. If false, rows with fewer values will be padded with empty values. Default is true.",
             "type": "boolean"
           },
           {
@@ -996,7 +993,7 @@
     },
     "/tables/import": {
       "post": {
-        "description": "Import a new table.",
+        "description": "Imports a new table.",
         "operationId": "fusiontables.table.importTable",
         "responses": {
           "200": {
@@ -1013,13 +1010,13 @@
           {
             "name": "delimiter",
             "in": "query",
-            "description": "The delimiter used to separate cell values. This can only consist of a single character. Default is ','.",
+            "description": "The delimiter used to separate cell values. This can only consist of a single character. Default is ,.",
             "type": "string"
           },
           {
             "name": "encoding",
             "in": "query",
-            "description": "The encoding of the content. Default is UTF-8. Use 'auto-detect' if you are unsure of the encoding.",
+            "description": "The encoding of the content. Default is UTF-8. Use auto-detect if you are unsure of the encoding.",
             "type": "string"
           },
           {
@@ -1103,14 +1100,14 @@
           {
             "name": "maxResults",
             "in": "query",
-            "description": "Maximum number of styles to return. Optional. Default is 5.",
+            "description": "Maximum number of tables to return. Default is 5.",
             "type": "integer",
             "minimum": 0
           },
           {
             "name": "pageToken",
             "in": "query",
-            "description": "Continuation token specifying which result page to return. Optional.",
+            "description": "Continuation token specifying which result page to return.",
             "type": "string"
           }
         ],
@@ -1169,7 +1166,7 @@
           {
             "name": "delimiter",
             "in": "query",
-            "description": "The delimiter used to separate cell values. This can only consist of a single character. Default is ','.",
+            "description": "The delimiter used to separate cell values. This can only consist of a single character. Default is ,.",
             "type": "string"
           },
           {
@@ -1181,13 +1178,13 @@
           {
             "name": "endLine",
             "in": "query",
-            "description": "The index of the last line to import, exclusive. 'endLine - startLine' rows will be imported. Default is to import through the end of the file. If endLine is negative, it is an offset from the end of the file; the imported content will exclude the last endLine lines.",
+            "description": "The index of the line up to which data will be imported. Default is to import the entire file. If endLine is negative, it is an offset from the end of the file; the imported content will exclude the last endLine lines.",
             "type": "integer"
           },
           {
             "name": "isStrict",
             "in": "query",
-            "description": "Whether the CSV must have the same number of column values for each row. If true, throws an exception if the CSV does not not have the same number of columns. If false, rows with fewer column values will be padded with empty values. Default is true.",
+            "description": "Whether the imported CSV must have the same number of column values for each row. If true, throws an exception if the CSV does not have the same number of columns. If false, rows with fewer column values will be padded with empty values. Default is true.",
             "type": "boolean"
           },
           {
@@ -1241,7 +1238,7 @@
     },
     "/tables/{tableId}/tasks/{taskId}": {
       "delete": {
-        "description": "Deletes the task, unless already started.",
+        "description": "Deletes a specific task by its ID, unless that task has already started running.",
         "operationId": "fusiontables.task.delete",
         "responses": {
           "200": {
@@ -1259,6 +1256,7 @@
           {
             "name": "taskId",
             "in": "path",
+            "description": "The identifier of the task to delete.",
             "required": true,
             "type": "string"
           }
@@ -1275,7 +1273,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves a specific task by its id.",
+        "description": "Retrieves a specific task by its ID.",
         "operationId": "fusiontables.task.get",
         "responses": {
           "200": {
@@ -1296,6 +1294,7 @@
           {
             "name": "taskId",
             "in": "path",
+            "description": "The identifier of the task to get.",
             "required": true,
             "type": "string"
           }
@@ -1765,15 +1764,15 @@
         },
         "formatPattern": {
           "type": "string",
-          "description": "Format pattern."
+          "description": "Format pattern.\nAcceptable values are DT_DATE_MEDIUMe.g Dec 24, 2008 DT_DATE_SHORTfor example 12/24/08 DT_DATE_TIME_MEDIUMfor example Dec 24, 2008 8:30:45 PM DT_DATE_TIME_SHORTfor example 12/24/08 8:30 PM DT_DAY_MONTH_2_DIGIT_YEARfor example 24/12/08 DT_DAY_MONTH_2_DIGIT_YEAR_TIMEfor example 24/12/08 20:30 DT_DAY_MONTH_2_DIGIT_YEAR_TIME_MERIDIANfor example 24/12/08 8:30 PM DT_DAY_MONTH_4_DIGIT_YEARfor example 24/12/2008 DT_DAY_MONTH_4_DIGIT_YEAR_TIMEfor example 24/12/2008 20:30 DT_DAY_MONTH_4_DIGIT_YEAR_TIME_MERIDIANfor example 24/12/2008 8:30 PM DT_ISO_YEAR_MONTH_DAYfor example 2008-12-24 DT_ISO_YEAR_MONTH_DAY_TIMEfor example 2008-12-24 20:30:45 DT_MONTH_DAY_4_DIGIT_YEARfor example 12/24/2008 DT_TIME_LONGfor example 8:30:45 PM UTC-6 DT_TIME_MEDIUMfor example 8:30:45 PM DT_TIME_SHORTfor example 8:30 PM DT_YEAR_ONLYfor example 2008 HIGHLIGHT_UNTYPED_CELLSHighlight cell data that does not match the data type NONENo formatting (default) NUMBER_CURRENCYfor example $1234.56 NUMBER_DEFAULTfor example 1,234.56 NUMBER_INTEGERfor example 1235 NUMBER_NO_SEPARATORfor example 1234.56 NUMBER_PERCENTfor example 123,456% NUMBER_SCIENTIFICfor example 1E3 STRING_EIGHT_LINE_IMAGEDisplays thumbnail images as tall as eight lines of text STRING_FOUR_LINE_IMAGEDisplays thumbnail images as tall as four lines of text STRING_JSON_TEXTAllows JSON editing of text in UI STRING_LINKTreats cell as a link (must start with http:// or https://) STRING_ONE_LINE_IMAGEDisplays thumbnail images as tall as one line of text STRING_VIDEO_OR_MAPDisplay a video or map thumbnail"
         },
         "graphPredicate": {
           "type": "string",
-          "description": "Column graph predicate.\nUsed to map table to graph data model (subject,predicate,object)\nSee http://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/#data-model"
+          "description": "Column graph predicate.\nUsed to map table to graph data model (subject,predicate,object)\nSee W3C Graph-based Data Model."
         },
         "kind": {
           "type": "string",
-          "description": "Type name: a template for an individual column.",
+          "description": "The kind of item this is. For a column, this is always fusiontables#column.",
           "default": "fusiontables#column"
         },
         "name": {
@@ -1821,12 +1820,12 @@
         },
         "kind": {
           "type": "string",
-          "description": "Type name: a list of all columns.",
+          "description": "The kind of item this is. For a column list, this is always fusiontables#columnList.",
           "default": "fusiontables#columnList"
         },
         "nextPageToken": {
           "type": "string",
-          "description": "Token used to access the next page of this result. No token is displayed if there are no more tokens left."
+          "description": "Token used to access the next page of this result. No token is displayed if there are no more pages left."
         },
         "totalItems": {
           "type": "integer",
@@ -1860,7 +1859,7 @@
       "properties": {
         "kind": {
           "type": "string",
-          "description": "Type name: a template for an import request.",
+          "description": "The kind of item this is. For an import, this is always fusiontables#import.",
           "default": "fusiontables#import"
         },
         "numRowsReceived": {
@@ -2028,7 +2027,7 @@
     "Sqlresponse": {
       "id": "Sqlresponse",
       "type": "object",
-      "description": "Represents a response to an sql statement.",
+      "description": "Represents a response to a SQL statement.",
       "properties": {
         "columns": {
           "type": "array",
@@ -2039,7 +2038,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "Type name: a template for an individual table.",
+          "description": "The kind of item this is. For responses to SQL queries, this is always fusiontables#sqlresponse.",
           "default": "fusiontables#sqlresponse"
         },
         "rows": {
@@ -2109,7 +2108,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "Stylers can be one of three kinds: \"fusiontables#fromColumn\" if the column value is to be used as is, i.e., the column values can have colors in #RRGGBBAA format or integer line widths or icon names; \"fusiontables#gradient\" if the styling of the row is to be based on applying the gradient function on the column value; or \"fusiontables#buckets\" if the styling is to based on the bucket into which the the column value falls."
+          "description": "Stylers can be one of three kinds: \"fusiontables#fromColumn if the column value is to be used as is, i.e., the column values can have colors in #RRGGBBAA format or integer line widths or icon names; fusiontables#gradient if the styling of the row is to be based on applying the gradient function on the column value; or fusiontables#buckets if the styling is to based on the bucket into which the the column value falls."
         }
       }
     },
@@ -2120,7 +2119,7 @@
       "properties": {
         "kind": {
           "type": "string",
-          "description": "Type name: an individual style setting. A StyleSetting contains the style defintions for points, lines, and polygons in a table. Since a table can have any one or all of them, a style definition can have point, line and polygon style definitions.",
+          "description": "The kind of item this is. A StyleSetting contains the style definitions for points, lines, and polygons in a table. Since a table can have any one or all of them, a style definition can have point, line and polygon style definitions.",
           "default": "fusiontables#styleSetting"
         },
         "markerOptions": {
@@ -2164,7 +2163,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "Type name: in this case, a list of style settings.",
+          "description": "The kind of item this is. For a style list, this is always fusiontables#styleSettingList .",
           "default": "fusiontables#styleSettingList"
         },
         "nextPageToken": {
@@ -2231,7 +2230,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "Type name: a template for an individual table.",
+          "description": "The kind of item this is. For a table, this is always fusiontables#table.",
           "default": "fusiontables#table"
         },
         "name": {
@@ -2276,23 +2275,23 @@
         },
         "kind": {
           "type": "string",
-          "description": "Type name: a list of all tables.",
+          "description": "The kind of item this is. For table list, this is always fusiontables#tableList.",
           "default": "fusiontables#tableList"
         },
         "nextPageToken": {
           "type": "string",
-          "description": "Token used to access the next page of this result. No token is displayed if there are no more tokens left."
+          "description": "Token used to access the next page of this result. No token is displayed if there are no more pages left."
         }
       }
     },
     "Task": {
       "id": "Task",
       "type": "object",
-      "description": "A background task on a table, initiated for time and or resource consuming operations such as a column type change or delete all rows operation.",
+      "description": "A background task on a table, initiated for time- or resource-consuming operations such as changing column types or deleting all rows.",
       "properties": {
         "kind": {
           "type": "string",
-          "description": "Type name: a template for an individual task.",
+          "description": "Type of the resource. This is always \"fusiontables#task\".",
           "default": "fusiontables#task"
         },
         "progress": {
@@ -2301,7 +2300,7 @@
         },
         "started": {
           "type": "boolean",
-          "description": "True if the task is in progress, its progress indicator will indicated where it is, and it can't be deleted."
+          "description": "false while the table is busy with some other task. true if this background task is currently running."
         },
         "taskId": {
           "type": "string",
@@ -2310,14 +2309,14 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of task being executed in the background."
+          "description": "Type of background task."
         }
       }
     },
     "TaskList": {
       "id": "TaskList",
       "type": "object",
-      "description": "Represents a list of tasks in a table.",
+      "description": "Represents a list of tasks for a table.",
       "properties": {
         "items": {
           "type": "array",
@@ -2328,12 +2327,12 @@
         },
         "kind": {
           "type": "string",
-          "description": "Type name: a list of all tasks.",
+          "description": "Type of the resource. This is always \"fusiontables#taskList\".",
           "default": "fusiontables#taskList"
         },
         "nextPageToken": {
           "type": "string",
-          "description": "Token used to access the next page of this result. No token is displayed if there are no more tokens left."
+          "description": "Token used to access the next page of this result. No token is displayed if there are no more pages left."
         },
         "totalItems": {
           "type": "integer",
@@ -2360,7 +2359,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "Type name: a template for the info window contents. The template can either include an HTML body or a list of columns from which the template is computed automatically.",
+          "description": "The kind of item this is. For a template, this is always fusiontables#template.",
           "default": "fusiontables#template"
         },
         "name": {
@@ -2392,12 +2391,12 @@
         },
         "kind": {
           "type": "string",
-          "description": "Type name: a list of all templates.",
+          "description": "The kind of item this is. For a template list, this is always fusiontables#templateList .",
           "default": "fusiontables#templateList"
         },
         "nextPageToken": {
           "type": "string",
-          "description": "Token used to access the next page of this result. No token is displayed if there are no more tokens left."
+          "description": "Token used to access the next page of this result. No token is displayed if there are no more pages left."
         },
         "totalItems": {
           "type": "integer",
@@ -2468,5 +2467,8 @@
         "https://www.googleapis.com/auth/fusiontables.readonly": "View your Fusion Tables"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/fusiontables"
   }
 }

@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/google-apps/groups-migration/"
-  },
   "paths": {
     "/{groupId}/archive": {
       "post": {
@@ -40,6 +37,13 @@
             "description": "The group ID",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.groups.migration"
+            ]
           }
         ],
         "tags": [
@@ -137,5 +141,19 @@
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
     }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/apps.groups.migration": "Manage messages in groups on your domain"
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/google-apps/groups-migration/"
   }
 }

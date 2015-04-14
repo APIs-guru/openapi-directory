@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Google Play Android Developer API",
+    "title": "Google Play Developer API",
     "description": "Lets Android application developers access their Google Play accounts.",
     "contact": {
       "name": "Google",
@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/android-publisher"
-  },
   "paths": {
     "/{packageName}/inapp/{productId}/purchases/{token}": {
       "get": {
@@ -344,5 +341,8 @@
         "https://www.googleapis.com/auth/androidpublisher": "View and manage your Google Play Android Developer account"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/android-publisher"
   }
 }

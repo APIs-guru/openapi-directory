@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/ad-exchange/buyer-rest"
-  },
   "paths": {
     "/accounts/{id}": {
       "get": {
@@ -1329,7 +1326,7 @@
         },
         "filteringReasons": {
           "type": "object",
-          "description": "The filtering reasons for the creative. If this feature is not enabled, please ask your technical account manager. Read-only. This field should not be set in requests.",
+          "description": "The filtering reasons for the creative. Read-only. This field should not be set in requests.",
           "properties": {
             "date": {
               "type": "string",
@@ -1909,5 +1906,8 @@
         "https://www.googleapis.com/auth/adexchange.buyer": "Manage your Ad Exchange buyer account configuration"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/ad-exchange/buyer-rest"
   }
 }

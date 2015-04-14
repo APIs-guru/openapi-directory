@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/doubleclick-search/"
-  },
   "paths": {
     "/agency/{agencyId}/advertiser/{advertiserId}/engine/{engineAccountId}/conversion": {
       "get": {
@@ -446,7 +443,7 @@
     },
     "/reports/{reportId}/files/{reportFragment}": {
       "get": {
-        "description": "Downloads a report file.",
+        "description": "Downloads a report file encoded in UTF-8.",
         "operationId": "doubleclicksearch.reports.getFile",
         "responses": {
           "200": {
@@ -699,7 +696,7 @@
         },
         "attributionModel": {
           "type": "string",
-          "description": "Attribution model name."
+          "description": "Attribution model name. This field is ignored."
         },
         "campaignId": {
           "type": "string",
@@ -736,7 +733,7 @@
         },
         "countMillis": {
           "type": "string",
-          "description": "Conversion count in millis.",
+          "description": "The number of conversions, formatted in millis (conversions multiplied by 1000). This field is ignored.",
           "format": "int64"
         },
         "criterionId": {
@@ -1305,5 +1302,8 @@
         "https://www.googleapis.com/auth/doubleclicksearch": "View and manage your advertising data in DoubleClick Search"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/doubleclick-search/"
   }
 }

@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/datastore/"
-  },
   "paths": {
     "/{datasetId}/allocateIds": {
       "post": {
@@ -1079,7 +1076,7 @@
         },
         "blobValue": {
           "type": "string",
-          "description": "A blob value. May be a maximum of 1,000,000 bytes.",
+          "description": "A blob value. May be a maximum of 1,000,000 bytes. When indexed is true, may have at most 500 bytes.",
           "format": "byte"
         },
         "booleanValue": {
@@ -1120,7 +1117,7 @@
         },
         "stringValue": {
           "type": "string",
-          "description": "A UTF-8 encoded string value."
+          "description": "A UTF-8 encoded string value. When indexed is true, may have at most 500 characters."
         }
       }
     }
@@ -1187,5 +1184,8 @@
         "https://www.googleapis.com/auth/userinfo.email": "View your email address"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/datastore/"
   }
 }

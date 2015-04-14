@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Google Play Android Developer API",
+    "title": "Google Play Developer API",
     "description": "Lets Android application developers access their Google Play accounts.",
     "contact": {
       "name": "Google",
@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/android-publisher"
-  },
   "paths": {
     "/{packageName}/edits/{editId}:commit": {
       "post": {
@@ -642,7 +639,7 @@
     },
     "/{packageName}/edits/{editId}/apks/externallyHosted": {
       "post": {
-        "description": "Creates a new APK without uploading the APK itself to Google Play, instead hosting the APK at a specified URL. This function is only available to enterprises using Google Play for work whose application is configured to restrict distribution to the enterprise domain.",
+        "description": "Creates a new APK without uploading the APK itself to Google Play, instead hosting the APK at a specified URL. This function is only available to enterprises using Google Play for Work whose application is configured to restrict distribution to the enterprise domain.",
         "operationId": "androidpublisher.edits.apks.addexternallyhosted",
         "responses": {
           "200": {
@@ -3186,7 +3183,7 @@
     "ExternallyHostedApk": {
       "id": "ExternallyHostedApk",
       "type": "object",
-      "description": "Defines an APK available for this application that is hosted externally and not uploaded to Google Play. This function is only available to enterprises who are using Android for Work, and whos application is restricted to the enterprise private channel",
+      "description": "Defines an APK available for this application that is hosted externally and not uploaded to Google Play. This function is only available to enterprises who are using Google Play for Work, and whos application is restricted to the enterprise private channel",
       "properties": {
         "applicationLabel": {
           "type": "string",
@@ -3852,5 +3849,8 @@
         "https://www.googleapis.com/auth/androidpublisher": "View and manage your Google Play Android Developer account"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/android-publisher"
   }
 }

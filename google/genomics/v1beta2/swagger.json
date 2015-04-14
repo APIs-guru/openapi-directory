@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/genomics/v1beta2/reference"
-  },
   "paths": {
     "/annotationSets": {
       "post": {
@@ -214,7 +211,7 @@
     },
     "/annotationSets/search": {
       "post": {
-        "description": "Searches for annotation sets which match the given criteria. Results are returned in a deterministic order. Caller must have READ permission for the queried datasets.",
+        "description": "Searches for annotation sets that match the given criteria. Results are returned in a deterministic order. Caller must have READ permission for the queried datasets.",
         "operationId": "genomics.annotationSets.search",
         "responses": {
           "200": {
@@ -234,6 +231,53 @@
         ],
         "tags": [
           "annotationSets"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/annotations:batchCreate": {
+      "post": {
+        "description": "Creates one or more new annotations atomically. All annotations must belong to the same annotation set. Caller must have WRITE permission for this annotation set. For optimal performance, batch positionally adjacent annotations together.\n\n\nIf the request has a systemic issue, such as an attempt to write to an inaccessible annotation set, the entire RPC will fail accordingly. For lesser data issues, when possible an error will be isolated to the corresponding batch entry in the response; the remaining well formed annotations will be created normally.",
+        "operationId": "genomics.annotations.batchCreate",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/BatchAnnotationsResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
+        ],
+        "tags": [
+          "annotations"
         ]
       },
       "parameters": [
@@ -456,7 +500,7 @@
     },
     "/annotations/search": {
       "post": {
-        "description": "Searches for annotations which match the given criteria. Results are returned ordered by start position. Annotations which have matching start positions are ordered deterministically. Caller must have READ permission for the queried annotation sets.",
+        "description": "Searches for annotations that match the given criteria. Results are returned ordered by start position. Annotations that have matching start positions are ordered deterministically. Caller must have READ permission for the queried annotation sets.",
         "operationId": "genomics.annotations.search",
         "responses": {
           "200": {
@@ -768,7 +812,7 @@
         ]
       },
       "get": {
-        "description": "Lists all datasets.",
+        "description": "Lists datasets within a project.",
         "operationId": "genomics.datasets.list",
         "responses": {
           "200": {
@@ -782,8 +826,7 @@
           {
             "name": "pageSize",
             "in": "query",
-            "description": "The maximum number of results returned by this request.",
-            "default": "50",
+            "description": "The maximum number of results returned by this request. If unspecified, defaults to 50.",
             "type": "integer"
           },
           {
@@ -795,7 +838,7 @@
           {
             "name": "projectNumber",
             "in": "query",
-            "description": "Only return datasets which belong to this Google Developers Console project. Only accepts project numbers. Returns all public projects if no project number is specified.",
+            "description": "The project to list datasets for.",
             "type": "string"
           }
         ],
@@ -1648,7 +1691,6 @@
             "name": "pageSize",
             "in": "query",
             "description": "The maximum number of results to return in a single page. If unspecified, defaults to 1024. The maximum value is 2048.",
-            "default": "1024",
             "type": "integer"
           },
           {
@@ -1901,7 +1943,6 @@
             "name": "pageSize",
             "in": "query",
             "description": "Specifies the maximum number of bases to return in a single page.",
-            "default": "200000",
             "type": "integer"
           },
           {
@@ -2039,6 +2080,46 @@
         ],
         "tags": [
           "referencesets"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/streamingReadstore/streamreads": {
+      "post": {
+        "description": "Gets a stream of reads for one or more read group sets. Reads search operates over a genomic coordinate space of reference sequence & position defined over the reference sequences to which the requested read group sets are aligned.\n\nIf a target positional range is specified, all reads whose alignment to the reference genome overlap the range are returned.\n\nAll reads returned are ordered by genomic coordinate (reference sequence & position). Reads with equivalent genomic coordinates are returned in a deterministic order.",
+        "operationId": "genomics.streamingReadstore.streamreads",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/StreamReadsResponse"
+            }
+          }
+        },
+        "tags": [
+          "streamingReadstore"
         ]
       },
       "parameters": [
@@ -2684,7 +2765,7 @@
     "Annotation": {
       "id": "Annotation",
       "type": "object",
-      "description": "An annotation describes a region of reference genome. The value of an annotation may be one of several canonical types, supplemented by arbitrary info tags. A variant annotation is represented by one or more of these canonical types. An annotation is not inherently associated with a specific sample/individual (though a client could choose to use annotations in this way). Example canonical annotation types are 'Gene' and 'Variant'.",
+      "description": "An annotation describes a region of reference genome. The value of an annotation may be one of several canonical types, supplemented by arbitrary info tags. A variant annotation is represented by one or more of these canonical types. An annotation is not inherently associated with a specific sample or individual (though a client could choose to use annotations in this way). Example canonical annotation types are 'Gene' and 'Variant'.",
       "properties": {
         "annotationSetId": {
           "type": "string",
@@ -2715,7 +2796,7 @@
         },
         "transcript": {
           "$ref": "#/definitions/Transcript",
-          "description": "A transcript value represents the assertion that a particular region of the reference genome may be transcribed as RNA. An alternate splicing pattern would be represented as separate transcript object. This field is only set for annotations of type TRANSCRIPT."
+          "description": "A transcript value represents the assertion that a particular region of the reference genome may be transcribed as RNA. An alternative splicing pattern would be represented as a separate transcript object. This field is only set for annotations of type TRANSCRIPT."
         },
         "type": {
           "type": "string",
@@ -2735,14 +2816,14 @@
         },
         "variant": {
           "$ref": "#/definitions/VariantAnnotation",
-          "description": "A variant annotation which describes the effect of a variant on the genome, the coding sequence, and/or higher level consequences at the organism level e.g. pathogenicity. This field is only set for annotations of type VARIANT."
+          "description": "A variant annotation, which describes the effect of a variant on the genome, the coding sequence, and/or higher level consequences at the organism level e.g. pathogenicity. This field is only set for annotations of type VARIANT."
         }
       }
     },
     "AnnotationSet": {
       "id": "AnnotationSet",
       "type": "object",
-      "description": "An annotation set is a logical grouping of annotations which share consistent type information and provenance. An example would be 'all genes from refseq', or 'all variant annotations from ClinVar'.",
+      "description": "An annotation set is a logical grouping of annotations that share consistent type information and provenance. Examples of annotation sets include 'all genes from refseq', and 'all variant annotations from ClinVar'.",
       "properties": {
         "datasetId": {
           "type": "string",
@@ -2769,7 +2850,7 @@
         },
         "referenceSetId": {
           "type": "string",
-          "description": "The ID of the reference set which defines the coordinate-space for this set's annotations."
+          "description": "The ID of the reference set that defines the coordinate space for this set's annotations."
         },
         "sourceUri": {
           "type": "string",
@@ -2790,6 +2871,62 @@
             "",
             ""
           ]
+        }
+      }
+    },
+    "BatchAnnotationsResponse": {
+      "id": "BatchAnnotationsResponse",
+      "type": "object",
+      "properties": {
+        "entries": {
+          "type": "array",
+          "description": "The resulting per-annotation entries, ordered consistently with the original request.",
+          "items": {
+            "$ref": "#/definitions/BatchAnnotationsResponseEntry"
+          }
+        }
+      }
+    },
+    "BatchAnnotationsResponseEntry": {
+      "id": "BatchAnnotationsResponseEntry",
+      "type": "object",
+      "properties": {
+        "annotation": {
+          "$ref": "#/definitions/Annotation",
+          "description": "The annotation, if any."
+        },
+        "status": {
+          "$ref": "#/definitions/BatchAnnotationsResponseEntryStatus",
+          "description": "The resulting status for this annotation operation."
+        }
+      }
+    },
+    "BatchAnnotationsResponseEntryStatus": {
+      "id": "BatchAnnotationsResponseEntryStatus",
+      "type": "object",
+      "description": "",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "description": "The HTTP status code for this operation.",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message for this status, if any."
+        }
+      }
+    },
+    "BatchCreateAnnotationsRequest": {
+      "id": "BatchCreateAnnotationsRequest",
+      "type": "object",
+      "properties": {
+        "annotations": {
+          "type": "array",
+          "description": "The annotations to be created. At most 4096 can be specified in a single request.",
+          "items": {
+            "$ref": "#/definitions/Annotation"
+          }
         }
       }
     },
@@ -3051,7 +3188,7 @@
       "properties": {
         "exportUri": {
           "type": "string",
-          "description": "A Google Cloud Storage URI where the exported BAM file will be created. The currently authenticated user must have write access to the new file location. An error will be returned if the URI already contains data."
+          "description": "A Google Cloud Storage URI for the exported BAM file. The currently authenticated user must have write access to the new file. An error will be returned if the URI already contains data."
         },
         "projectNumber": {
           "type": "string",
@@ -3695,7 +3832,7 @@
         },
         "alignment": {
           "$ref": "#/definitions/LinearAlignment",
-          "description": "The linear alignment for this alignment record. This field will be null if the read is unmapped."
+          "description": "The linear alignment for this alignment record. This field will be unset if the read is unmapped."
         },
         "duplicateFragment": {
           "type": "boolean",
@@ -3731,7 +3868,7 @@
         },
         "nextMatePosition": {
           "$ref": "#/definitions/Position",
-          "description": "The mapping of the primary alignment of the (readNumber+1)%numberReads read in the fragment. It replaces mate position and mate strand in SAM."
+          "description": "The position of the primary alignment of the (readNumber+1)%numberReads read in the fragment. It replaces mate position and mate strand in SAM. This field will be unset if that read is unmapped or if the fragment only has a single read."
         },
         "numberReads": {
           "type": "integer",
@@ -3983,7 +4120,7 @@
         },
         "description": {
           "type": "string",
-          "description": "Optional free text description of this reference set."
+          "description": "Free text description of this reference set."
         },
         "id": {
           "type": "string",
@@ -4048,7 +4185,7 @@
         },
         "types": {
           "type": "array",
-          "description": "If specified, only annotation sets which have any of these types are returned.",
+          "description": "If specified, only annotation sets that have any of these types are returned.",
           "items": {
             "type": "string",
             "enum": [
@@ -4106,7 +4243,7 @@
         },
         "range": {
           "$ref": "#/definitions/QueryRange",
-          "description": "If specified, this query matches only annotations which overlap this range."
+          "description": "If specified, this query matches only annotations that overlap this range."
         }
       }
     },
@@ -4138,7 +4275,7 @@
         },
         "pageSize": {
           "type": "integer",
-          "description": "The maximum number of call sets to return.",
+          "description": "The maximum number of call sets to return. If unspecified, defaults to 1000.",
           "format": "int32"
         },
         "pageToken": {
@@ -4264,7 +4401,7 @@
         },
         "pageSize": {
           "type": "integer",
-          "description": "Specifies number of results to return in a single page. If unspecified, it will default to 128. The maximum value is 1024.",
+          "description": "Specifies number of results to return in a single page. If unspecified, it will default to 256. The maximum value is 1024.",
           "format": "int32"
         },
         "pageToken": {
@@ -4510,17 +4647,17 @@
         },
         "end": {
           "type": "string",
-          "description": "Required. The end of the window (0-based, exclusive) for which overlapping variants should be returned.",
+          "description": "The end of the window, 0-based exclusive. If unspecified or 0, defaults to the length of the reference.",
           "format": "int64"
         },
         "maxCalls": {
           "type": "integer",
-          "description": "The maximum number of calls to return. However, at least one variant will always be returned, even if it has more calls than this limit.",
+          "description": "The maximum number of calls to return. However, at least one variant will always be returned, even if it has more calls than this limit. If unspecified, defaults to 5000.",
           "format": "int32"
         },
         "pageSize": {
           "type": "integer",
-          "description": "The maximum number of variants to return.",
+          "description": "The maximum number of variants to return. If unspecified, defaults to 5000.",
           "format": "int32"
         },
         "pageToken": {
@@ -4533,7 +4670,7 @@
         },
         "start": {
           "type": "string",
-          "description": "Required. The beginning of the window (0-based, inclusive) for which overlapping variants should be returned.",
+          "description": "The beginning of the window (0-based, inclusive) for which overlapping variants should be returned. If unspecified, defaults to 0.",
           "format": "int64"
         },
         "variantName": {
@@ -4567,6 +4704,45 @@
         }
       }
     },
+    "StreamReadsRequest": {
+      "id": "StreamReadsRequest",
+      "type": "object",
+      "properties": {
+        "end": {
+          "type": "string",
+          "description": "The end position of the range on the reference, 0-based exclusive. If specified, referenceName must also be specified.",
+          "format": "int64"
+        },
+        "readGroupSetIds": {
+          "type": "array",
+          "description": "The ID of the read groups set within which to search for reads. Exactly one ID must be provided.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "referenceName": {
+          "type": "string",
+          "description": "The reference sequence name, for example chr1, 1, or chrX. If set to *, only unmapped reads are returned."
+        },
+        "start": {
+          "type": "string",
+          "description": "The start position of the range on the reference, 0-based inclusive. If specified, referenceName must also be specified.",
+          "format": "int64"
+        }
+      }
+    },
+    "StreamReadsResponse": {
+      "id": "StreamReadsResponse",
+      "type": "object",
+      "properties": {
+        "alignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Read"
+          }
+        }
+      }
+    },
     "Transcript": {
       "id": "Transcript",
       "type": "object",
@@ -4578,7 +4754,7 @@
         },
         "exons": {
           "type": "array",
-          "description": "The exons which compose this transcript. Exons are the pieces of the transcript which are spliced together, may be exported from a cell's nucleus, and may then be translated to protein. This field should be unset for genomes where transcript splicing does not occur, for example prokaryotes.\n\n\nIntrons are regions of the transcript which are not included in the spliced RNA product. Though not explicitly modeled here, intron ranges can be deduced; all regions of this transcript which are not exons are introns.\n\n\nExonic sequences do not necessarily code for a translational product (amino acids). Only the regions of exons bounded by the codingSequence correspond to coding DNA sequence.\n\n\nExons are ordered by start position and may not overlap.",
+          "description": "The exons that compose this transcript. This field should be unset for genomes where transcript splicing does not occur, for example prokaryotes.\n\n\nIntrons are regions of the transcript that are not included in the spliced RNA product. Though not explicitly modeled here, intron ranges can be deduced; all regions of this transcript that are not exons are introns.\n\n\nExonic sequences do not necessarily code for a translational product (amino acids). Only the regions of exons bounded by the codingSequence correspond to coding DNA sequence.\n\n\nExons are ordered by start position and may not overlap.",
           "items": {
             "$ref": "#/definitions/TranscriptExon"
           }
@@ -4616,7 +4792,7 @@
         },
         "frame": {
           "$ref": "#/definitions/Int32Value",
-          "description": "The frame of this exon. Contains a value of 0, 1, or 2 which indicates the offset of the first coding base of the exon within the reading frame of the coding DNA sequence, if any. This field is dependent on the strandedness of this annotation (see Annotation.position.reverseStrand). For forward stranded annotations, this offset is relative to the exon.start. For reverse strand annotations, this offset is relative to the exon.end-1.\n\nUnset if this exon does not intersect the coding sequence. Upon creation of a transcript, the frame must be populated for all or none of the coding exons."
+          "description": "The frame of this exon. Contains a value of 0, 1, or 2, which indicates the offset of the first coding base of the exon within the reading frame of the coding DNA sequence, if any. This field is dependent on the strandedness of this annotation (see Annotation.position.reverseStrand). For forward stranded annotations, this offset is relative to the exon.start. For reverse strand annotations, this offset is relative to the exon.end-1.\n\nUnset if this exon does not intersect the coding sequence. Upon creation of a transcript, the frame must be populated for all or none of the coding exons."
         },
         "start": {
           "type": "string",
@@ -4791,7 +4967,7 @@
         },
         "transcriptIds": {
           "type": "array",
-          "description": "Google annotation ID of the transcripts affected by this variant. These should be provided when the variant is created.",
+          "description": "Google annotation IDs of the transcripts affected by this variant. These should be provided when the variant is created.",
           "items": {
             "type": "string"
           }
@@ -4833,7 +5009,7 @@
         },
         "externalIds": {
           "type": "array",
-          "description": "The set of external ids for this condition.",
+          "description": "The set of external IDs for this condition.",
           "items": {
             "$ref": "#/definitions/ExternalId"
           }
@@ -4943,5 +5119,8 @@
         "https://www.googleapis.com/auth/genomics.readonly": "View Genomics data"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/genomics/v1beta2/reference"
   }
 }

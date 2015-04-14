@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/google-apps/calendar/firstapp"
-  },
   "paths": {
     "/calendars/{calendarId}/acl/{ruleId}": {
       "delete": {
@@ -763,7 +760,7 @@
     },
     "/calendars/{calendarId}/clear": {
       "post": {
-        "description": "Clears a primary calendar. This operation deletes all data associated with the primary calendar of an account and cannot be undone.",
+        "description": "Clears a primary calendar. This operation deletes all events associated with the primary calendar of an account.",
         "operationId": "calendar.calendars.clear",
         "responses": {
           "200": {
@@ -816,7 +813,7 @@
     },
     "/calendars/{calendarId}": {
       "delete": {
-        "description": "Deletes a secondary calendar.",
+        "description": "Deletes a secondary calendar. Use calendars.clear for clearing all events on primary calendars.",
         "operationId": "calendar.calendars.delete",
         "responses": {
           "200": {
@@ -3421,5 +3418,8 @@
         "https://www.googleapis.com/auth/calendar.readonly": "View your calendars"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/google-apps/calendar/firstapp"
   }
 }

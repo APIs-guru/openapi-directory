@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": ""
-  },
   "paths": {
     "/{projectId}/jobs": {
       "post": {
@@ -649,6 +646,30 @@
         }
       }
     },
+    "DerivedSource": {
+      "id": "DerivedSource",
+      "type": "object",
+      "properties": {
+        "derivationMode": {
+          "type": "string",
+          "enum": [
+            "SOURCE_DERIVATION_MODE_CHILD_OF_CURRENT",
+            "SOURCE_DERIVATION_MODE_INDEPENDENT",
+            "SOURCE_DERIVATION_MODE_SIBLING_OF_CURRENT",
+            "SOURCE_DERIVATION_MODE_UNKNOWN"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            "",
+            ""
+          ]
+        },
+        "source": {
+          "$ref": "#/definitions/Source"
+        }
+      }
+    },
     "Disk": {
       "id": "Disk",
       "type": "object",
@@ -662,6 +683,18 @@
         "sizeGb": {
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "DynamicSourceSplit": {
+      "id": "DynamicSourceSplit",
+      "type": "object",
+      "properties": {
+        "primary": {
+          "$ref": "#/definitions/DerivedSource"
+        },
+        "residual": {
+          "$ref": "#/definitions/DerivedSource"
         }
       }
     },
@@ -901,6 +934,21 @@
         }
       }
     },
+    "KeyRangeDataDiskAssignment": {
+      "id": "KeyRangeDataDiskAssignment",
+      "type": "object",
+      "properties": {
+        "dataDisk": {
+          "type": "string"
+        },
+        "end": {
+          "type": "string"
+        },
+        "start": {
+          "type": "string"
+        }
+      }
+    },
     "KeyRangeLocation": {
       "id": "KeyRangeLocation",
       "type": "object",
@@ -1060,6 +1108,15 @@
         }
       }
     },
+    "MountedDataDisk": {
+      "id": "MountedDataDisk",
+      "type": "object",
+      "properties": {
+        "dataDisk": {
+          "type": "string"
+        }
+      }
+    },
     "MultiOutputInfo": {
       "id": "MultiOutputInfo",
       "type": "object",
@@ -1153,6 +1210,10 @@
         "inputElementCodec": {
           "type": "object",
           "additionalProperties": {}
+        },
+        "valueCombiningFn": {
+          "type": "object",
+          "additionalProperties": {}
         }
       }
     },
@@ -1196,6 +1257,9 @@
           "type": "string"
         },
         "topic": {
+          "type": "string"
+        },
+        "trackingSubscription": {
           "type": "string"
         }
       }
@@ -1362,8 +1426,14 @@
         "primary": {
           "$ref": "#/definitions/SourceSplitShard"
         },
+        "primarySource": {
+          "$ref": "#/definitions/DerivedSource"
+        },
         "residual": {
           "$ref": "#/definitions/SourceSplitShard"
+        },
+        "residualSource": {
+          "$ref": "#/definitions/DerivedSource"
         }
       }
     },
@@ -1429,6 +1499,10 @@
       "id": "SourceSplitOptions",
       "type": "object",
       "properties": {
+        "desiredBundleSizeBytes": {
+          "type": "string",
+          "format": "int64"
+        },
         "desiredShardSizeBytes": {
           "type": "string",
           "format": "int64"
@@ -1451,6 +1525,12 @@
       "id": "SourceSplitResponse",
       "type": "object",
       "properties": {
+        "bundles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DerivedSource"
+          }
+        },
         "outcome": {
           "type": "string",
           "enum": [
@@ -1539,8 +1619,57 @@
         "pubsubLocation": {
           "$ref": "#/definitions/PubsubLocation"
         },
+        "sideInputLocation": {
+          "$ref": "#/definitions/StreamingSideInputLocation"
+        },
         "streamingStageLocation": {
           "$ref": "#/definitions/StreamingStageLocation"
+        }
+      }
+    },
+    "StreamingComputationRanges": {
+      "id": "StreamingComputationRanges",
+      "type": "object",
+      "properties": {
+        "computationId": {
+          "type": "string"
+        },
+        "rangeAssignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyRangeDataDiskAssignment"
+          }
+        }
+      }
+    },
+    "StreamingComputationTask": {
+      "id": "StreamingComputationTask",
+      "type": "object",
+      "properties": {
+        "computationRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StreamingComputationRanges"
+          }
+        },
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MountedDataDisk"
+          }
+        },
+        "taskType": {
+          "type": "string",
+          "enum": [
+            "STREAMING_COMPUTATION_TASK_START",
+            "STREAMING_COMPUTATION_TASK_STOP",
+            "STREAMING_COMPUTATION_TASK_UNKNOWN"
+          ],
+          "enumDescriptions": [
+            "",
+            "",
+            ""
+          ]
         }
       }
     },
@@ -1558,6 +1687,15 @@
         "workerHarnessPort": {
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "StreamingSideInputLocation": {
+      "id": "StreamingSideInputLocation",
+      "type": "object",
+      "properties": {
+        "tag": {
+          "type": "string"
         }
       }
     },
@@ -1665,6 +1803,10 @@
           "type": "string",
           "format": "int64"
         },
+        "initialReportIndex": {
+          "type": "string",
+          "format": "int64"
+        },
         "jobId": {
           "type": "string"
         },
@@ -1695,6 +1837,9 @@
         "sourceOperationTask": {
           "$ref": "#/definitions/SourceOperationRequest"
         },
+        "streamingComputationTask": {
+          "$ref": "#/definitions/StreamingComputationTask"
+        },
         "streamingSetupTask": {
           "$ref": "#/definitions/StreamingSetupTask"
         }
@@ -1710,6 +1855,10 @@
         },
         "leaseExpireTime": {
           "type": "string"
+        },
+        "nextReportIndex": {
+          "type": "string",
+          "format": "int64"
         },
         "reportStatusInterval": {
           "type": "string"
@@ -1728,6 +1877,9 @@
       "properties": {
         "completed": {
           "type": "boolean"
+        },
+        "dynamicSourceSplit": {
+          "$ref": "#/definitions/DynamicSourceSplit"
         },
         "errors": {
           "type": "array",
@@ -1824,6 +1976,10 @@
           "items": {
             "$ref": "#/definitions/Package"
           }
+        },
+        "poolArgs": {
+          "type": "object",
+          "additionalProperties": {}
         },
         "taskrunnerSettings": {
           "$ref": "#/definitions/TaskRunnerSettings"

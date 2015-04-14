@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/datastore/"
-  },
   "paths": {
     "/{datasetId}/allocateIds": {
       "post": {
@@ -774,7 +771,7 @@
         },
         "blobValue": {
           "type": "string",
-          "description": "A blob value. May be a maximum of 1,000,000 bytes.",
+          "description": "A blob value. May be a maximum of 1,000,000 bytes. When indexed is true, may have at most 500 bytes.",
           "format": "byte"
         },
         "booleanValue": {
@@ -810,7 +807,7 @@
         },
         "listValue": {
           "type": "array",
-          "description": "A list value. Cannot contain another list value. Cannot also have a meaning and indexing set.",
+          "description": "A list value. Cannot contain another list value. A Value instance that sets field list_value must not set field meaning or field indexed.",
           "items": {
             "$ref": "#/definitions/Value"
           }
@@ -822,7 +819,7 @@
         },
         "stringValue": {
           "type": "string",
-          "description": "A UTF-8 encoded string value."
+          "description": "A UTF-8 encoded string value. When indexed is true, may have at most 500 characters."
         }
       }
     },
@@ -1129,7 +1126,7 @@
         },
         "blobValue": {
           "type": "string",
-          "description": "A blob value. May be a maximum of 1,000,000 bytes.",
+          "description": "A blob value. May be a maximum of 1,000,000 bytes. When indexed is true, may have at most 500 bytes.",
           "format": "byte"
         },
         "booleanValue": {
@@ -1165,7 +1162,7 @@
         },
         "listValue": {
           "type": "array",
-          "description": "A list value. Cannot contain another list value. Cannot also have a meaning and indexing set.",
+          "description": "A list value. Cannot contain another list value. A Value instance that sets field list_value must not set field meaning or field indexed.",
           "items": {
             "$ref": "#/definitions/Value"
           }
@@ -1177,7 +1174,7 @@
         },
         "stringValue": {
           "type": "string",
-          "description": "A UTF-8 encoded string value."
+          "description": "A UTF-8 encoded string value. When indexed is true, may have at most 500 characters."
         }
       }
     }
@@ -1244,5 +1241,8 @@
         "https://www.googleapis.com/auth/userinfo.email": "View your email address"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/datastore/"
   }
 }

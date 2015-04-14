@@ -14,13 +14,10 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/deployment-manager/"
-  },
   "paths": {
     "/{project}/global/deployments/{deployment}": {
       "delete": {
-        "description": "Deletes a deployment and all of the resources in the deployment.",
+        "description": "! Deletes a deployment and all of the resources in the deployment.",
         "operationId": "deploymentmanager.deployments.delete",
         "responses": {
           "200": {
@@ -34,14 +31,14 @@
           {
             "name": "deployment",
             "in": "path",
-            "description": "The name of the deployment for this request.",
+            "description": "! The name of the deployment for this request.",
             "required": true,
             "type": "string"
           },
           {
             "name": "project",
             "in": "path",
-            "description": "The project ID for this request.",
+            "description": "! The project ID for this request.",
             "required": true,
             "type": "string"
           }
@@ -59,7 +56,7 @@
         ]
       },
       "get": {
-        "description": "Gets information about a specific deployment.",
+        "description": "! Gets information about a specific deployment.",
         "operationId": "deploymentmanager.deployments.get",
         "responses": {
           "200": {
@@ -73,14 +70,14 @@
           {
             "name": "deployment",
             "in": "path",
-            "description": "The name of the deployment for this request.",
+            "description": "! The name of the deployment for this request.",
             "required": true,
             "type": "string"
           },
           {
             "name": "project",
             "in": "path",
-            "description": "The project ID for this request.",
+            "description": "! The project ID for this request.",
             "required": true,
             "type": "string"
           }
@@ -124,7 +121,7 @@
     },
     "/{project}/global/deployments": {
       "post": {
-        "description": "Creates a deployment and all of the resources described by the deployment manifest.",
+        "description": "! Creates a deployment and all of the resources described by the ! deployment manifest.",
         "operationId": "deploymentmanager.deployments.insert",
         "responses": {
           "200": {
@@ -138,7 +135,7 @@
           {
             "name": "project",
             "in": "path",
-            "description": "The project ID for this request.",
+            "description": "! The project ID for this request.",
             "required": true,
             "type": "string"
           }
@@ -156,7 +153,7 @@
         ]
       },
       "get": {
-        "description": "Lists all deployments for a given project.",
+        "description": "! Lists all deployments for a given project.",
         "operationId": "deploymentmanager.deployments.list",
         "responses": {
           "200": {
@@ -170,7 +167,7 @@
           {
             "name": "maxResults",
             "in": "query",
-            "description": "Maximum count of results to be returned. Acceptable values are 0 to 100, inclusive. (Default: 50)",
+            "description": "! Maximum count of results to be returned. ! Acceptable values are 0 to 100, inclusive. (Default: 50)",
             "default": "50",
             "type": "integer",
             "minimum": 0,
@@ -179,13 +176,13 @@
           {
             "name": "pageToken",
             "in": "query",
-            "description": "Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.",
+            "description": "! Specifies a nextPageToken returned by a previous list request. This ! token can be used to request the next page of results from a previous ! list request.",
             "type": "string"
           },
           {
             "name": "project",
             "in": "path",
-            "description": "The project ID for this request.",
+            "description": "! The project ID for this request.",
             "required": true,
             "type": "string"
           }
@@ -229,7 +226,7 @@
     },
     "/{project}/global/deployments/{deployment}/manifests/{manifest}": {
       "get": {
-        "description": "Gets information about a specific manifest.",
+        "description": "! Gets information about a specific manifest.",
         "operationId": "deploymentmanager.manifests.get",
         "responses": {
           "200": {
@@ -243,21 +240,21 @@
           {
             "name": "deployment",
             "in": "path",
-            "description": "The name of the deployment for this request.",
+            "description": "! The name of the deployment for this request.",
             "required": true,
             "type": "string"
           },
           {
             "name": "manifest",
             "in": "path",
-            "description": "The name of the manifest for this request.",
+            "description": "! The name of the manifest for this request.",
             "required": true,
             "type": "string"
           },
           {
             "name": "project",
             "in": "path",
-            "description": "The project ID for this request.",
+            "description": "! The project ID for this request.",
             "required": true,
             "type": "string"
           }
@@ -301,7 +298,7 @@
     },
     "/{project}/global/deployments/{deployment}/manifests": {
       "get": {
-        "description": "Lists all manifests for a given deployment.",
+        "description": "! Lists all manifests for a given deployment.",
         "operationId": "deploymentmanager.manifests.list",
         "responses": {
           "200": {
@@ -315,14 +312,14 @@
           {
             "name": "deployment",
             "in": "path",
-            "description": "The name of the deployment for this request.",
+            "description": "! The name of the deployment for this request.",
             "required": true,
             "type": "string"
           },
           {
             "name": "maxResults",
             "in": "query",
-            "description": "Maximum count of results to be returned. Acceptable values are 0 to 100, inclusive. (Default: 50)",
+            "description": "! Maximum count of results to be returned. ! Acceptable values are 0 to 100, inclusive. (Default: 50)",
             "default": "50",
             "type": "integer",
             "minimum": 0,
@@ -331,13 +328,13 @@
           {
             "name": "pageToken",
             "in": "query",
-            "description": "Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.",
+            "description": "! Specifies a nextPageToken returned by a previous list request. This ! token can be used to request the next page of results from a previous ! list request.",
             "type": "string"
           },
           {
             "name": "project",
             "in": "path",
-            "description": "The project ID for this request.",
+            "description": "! The project ID for this request.",
             "required": true,
             "type": "string"
           }
@@ -381,7 +378,7 @@
     },
     "/{project}/global/operations/{operation}": {
       "get": {
-        "description": "Gets information about a specific Operation.",
+        "description": "! Gets information about a specific Operation.",
         "operationId": "deploymentmanager.operations.get",
         "responses": {
           "200": {
@@ -395,14 +392,14 @@
           {
             "name": "operation",
             "in": "path",
-            "description": "The name of the operation for this request.",
+            "description": "! The name of the operation for this request.",
             "required": true,
             "type": "string"
           },
           {
             "name": "project",
             "in": "path",
-            "description": "The project ID for this request.",
+            "description": "! The project ID for this request.",
             "required": true,
             "type": "string"
           }
@@ -446,7 +443,7 @@
     },
     "/{project}/global/operations": {
       "get": {
-        "description": "Lists all Operations for a project.",
+        "description": "! Lists all Operations for a project.",
         "operationId": "deploymentmanager.operations.list",
         "responses": {
           "200": {
@@ -460,7 +457,7 @@
           {
             "name": "maxResults",
             "in": "query",
-            "description": "Maximum count of results to be returned. Acceptable values are 0 to 100, inclusive. (Default: 50)",
+            "description": "! Maximum count of results to be returned. ! Acceptable values are 0 to 100, inclusive. (Default: 50)",
             "default": "50",
             "type": "integer",
             "minimum": 0,
@@ -469,13 +466,13 @@
           {
             "name": "pageToken",
             "in": "query",
-            "description": "Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.",
+            "description": "! Specifies a nextPageToken returned by a previous list request. This ! token can be used to request the next page of results from a previous ! list request.",
             "type": "string"
           },
           {
             "name": "project",
             "in": "path",
-            "description": "The project ID for this request.",
+            "description": "! The project ID for this request.",
             "required": true,
             "type": "string"
           }
@@ -519,7 +516,7 @@
     },
     "/{project}/global/deployments/{deployment}/resources/{resource}": {
       "get": {
-        "description": "Gets information about a single resource.",
+        "description": "! Gets information about a single resource.",
         "operationId": "deploymentmanager.resources.get",
         "responses": {
           "200": {
@@ -533,21 +530,21 @@
           {
             "name": "deployment",
             "in": "path",
-            "description": "The name of the deployment for this request.",
+            "description": "! The name of the deployment for this request.",
             "required": true,
             "type": "string"
           },
           {
             "name": "project",
             "in": "path",
-            "description": "The project ID for this request.",
+            "description": "! The project ID for this request.",
             "required": true,
             "type": "string"
           },
           {
             "name": "resource",
             "in": "path",
-            "description": "The name of the resource for this request.",
+            "description": "! The name of the resource for this request.",
             "required": true,
             "type": "string"
           }
@@ -591,7 +588,7 @@
     },
     "/{project}/global/deployments/{deployment}/resources": {
       "get": {
-        "description": "Lists all resources in a given deployment.",
+        "description": "! Lists all resources in a given deployment.",
         "operationId": "deploymentmanager.resources.list",
         "responses": {
           "200": {
@@ -605,14 +602,14 @@
           {
             "name": "deployment",
             "in": "path",
-            "description": "The name of the deployment for this request.",
+            "description": "! The name of the deployment for this request.",
             "required": true,
             "type": "string"
           },
           {
             "name": "maxResults",
             "in": "query",
-            "description": "Maximum count of results to be returned. Acceptable values are 0 to 100, inclusive. (Default: 50)",
+            "description": "! Maximum count of results to be returned. ! Acceptable values are 0 to 100, inclusive. (Default: 50)",
             "default": "50",
             "type": "integer",
             "minimum": 0,
@@ -621,13 +618,13 @@
           {
             "name": "pageToken",
             "in": "query",
-            "description": "Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.",
+            "description": "! Specifies a nextPageToken returned by a previous list request. This ! token can be used to request the next page of results from a previous ! list request.",
             "type": "string"
           },
           {
             "name": "project",
             "in": "path",
-            "description": "The project ID for this request.",
+            "description": "! The project ID for this request.",
             "required": true,
             "type": "string"
           }
@@ -671,7 +668,7 @@
     },
     "/{project}/global/types": {
       "get": {
-        "description": "Lists all Types for Deployment Manager.",
+        "description": "! Lists all Types for Deployment Manager.",
         "operationId": "deploymentmanager.types.list",
         "responses": {
           "200": {
@@ -685,7 +682,7 @@
           {
             "name": "maxResults",
             "in": "query",
-            "description": "Maximum count of results to be returned. Acceptable values are 0 to 100, inclusive. (Default: 50)",
+            "description": "! Maximum count of results to be returned. ! Acceptable values are 0 to 100, inclusive. (Default: 50)",
             "default": "50",
             "type": "integer",
             "minimum": 0,
@@ -694,13 +691,13 @@
           {
             "name": "pageToken",
             "in": "query",
-            "description": "Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.",
+            "description": "! Specifies a nextPageToken returned by a previous list request. This ! token can be used to request the next page of results from a previous ! list request.",
             "type": "string"
           },
           {
             "name": "project",
             "in": "path",
-            "description": "The project ID for this request.",
+            "description": "! The project ID for this request.",
             "required": true,
             "type": "string"
           }
@@ -747,10 +744,11 @@
     "Deployment": {
       "id": "Deployment",
       "type": "object",
+      "description": "Next available tag: 8",
       "properties": {
         "description": {
           "type": "string",
-          "description": "An optional user-provided description of the deployment."
+          "description": "! An optional user-provided description of the deployment."
         },
         "id": {
           "type": "string",
@@ -759,47 +757,48 @@
         },
         "manifest": {
           "type": "string",
-          "description": "[Output Only] URL of the manifest representing the full configuration of this deployment."
+          "description": "! [Output Only] URL of the manifest representing the full configuration ! of this deployment."
         },
         "name": {
           "type": "string",
-          "description": "The name of the deployment, which must be unique within the project."
+          "description": "! The name of the deployment, which must be unique within the project."
         },
         "targetConfig": {
           "type": "string",
-          "description": "[Input Only] The YAML configuration to use in processing this deployment.\n\nWhen you create a deployment, the server creates a new manifest with the given YAML configuration and sets the `manifest` property to the URL of the manifest resource."
+          "description": "! [Input Only] The YAML configuration to use in processing this deployment. ! ! When you create a deployment, the server creates a new manifest with the ! given YAML configuration and sets the `manifest` property to the URL of ! the manifest resource."
         }
       }
     },
     "DeploymentsListResponse": {
       "id": "DeploymentsListResponse",
       "type": "object",
-      "description": "A response containing a partial list of deployments and a page token used to build the next request if the request has been truncated.",
+      "description": "! A response containing a partial list of deployments and a page token used ! to build the next request if the request has been truncated. Next available tag: 4",
       "properties": {
         "deployments": {
           "type": "array",
-          "description": "The deployments contained in this response.",
+          "description": "! The deployments contained in this response.",
           "items": {
             "$ref": "#/definitions/Deployment"
           }
         },
         "nextPageToken": {
           "type": "string",
-          "description": "A token used to continue a truncated list request."
+          "description": "! A token used to continue a truncated list request."
         }
       }
     },
     "Manifest": {
       "id": "Manifest",
       "type": "object",
+      "description": "Next available tag: 10",
       "properties": {
         "config": {
           "type": "string",
-          "description": "The YAML configuration for this manifest."
+          "description": "v2beta1: YAML with config - described above v2beta2: YAML + templates. ! The YAML configuration for this manifest."
         },
         "evaluatedConfig": {
           "type": "string",
-          "description": "[Output Only] The fully-expanded configuration file, including any templates and references."
+          "description": "! [Output Only] The fully-expanded configuration file, including any ! templates and references."
         },
         "id": {
           "type": "string",
@@ -808,7 +807,7 @@
         },
         "name": {
           "type": "string",
-          "description": "[Output Only] The name of the manifest."
+          "description": "! [Output Only] The name of the manifest."
         },
         "selfLink": {
           "type": "string",
@@ -819,55 +818,55 @@
     "ManifestsListResponse": {
       "id": "ManifestsListResponse",
       "type": "object",
-      "description": "A response containing a partial list of manifests and a page token used to build the next request if the request has been truncated.",
+      "description": "! A response containing a partial list of manifests and a page token used ! to build the next request if the request has been truncated. Next available tag: 4",
       "properties": {
         "manifests": {
           "type": "array",
-          "description": "Manifests contained in this list response.",
+          "description": "! Manifests contained in this list response.",
           "items": {
             "$ref": "#/definitions/Manifest"
           }
         },
         "nextPageToken": {
           "type": "string",
-          "description": "A token used to continue a truncated list request."
+          "description": "! A token used to continue a truncated list request."
         }
       }
     },
     "Operation": {
       "id": "Operation",
       "type": "object",
-      "description": "An operation resource, used to manage asynchronous API requests.",
+      "description": "! An operation resource, used to manage asynchronous API requests. Next available tag: 24",
       "properties": {
         "creationTimestamp": {
           "type": "string",
-          "description": "[Output Only] Creation timestamp in RFC3339 text format."
+          "description": "! [Output Only] Creation timestamp in RFC3339 text format."
         },
         "endTime": {
           "type": "string",
-          "description": "[Output Only] The time that this operation was completed. This is in RFC3339 format."
+          "description": "! [Output Only] The time that this operation was completed. This is in ! RFC3339 format."
         },
         "error": {
           "type": "object",
-          "description": "[Output Only] If errors occurred during processing of this operation, this field will be populated.",
+          "description": "! [Output Only] If errors occurred during processing of this operation, ! this field will be populated.",
           "properties": {
             "errors": {
               "type": "array",
-              "description": "The array of errors encountered while processing this operation.",
+              "description": "! The array of errors encountered while processing this operation.",
               "items": {
                 "type": "object",
                 "properties": {
                   "code": {
                     "type": "string",
-                    "description": "The error type identifier for this error."
+                    "description": "! The error type identifier for this error."
                   },
                   "location": {
                     "type": "string",
-                    "description": "Indicates the field in the request which caused the error. This property is optional."
+                    "description": "! Indicates the field in the request which caused the error. ! This property is optional."
                   },
                   "message": {
                     "type": "string",
-                    "description": "An optional, human-readable error message."
+                    "description": "! An optional, human-readable error message."
                   }
                 }
               }
@@ -876,33 +875,33 @@
         },
         "httpErrorMessage": {
           "type": "string",
-          "description": "[Output Only] If operation fails, the HTTP error message returned, e.g. NOT FOUND."
+          "description": "! [Output Only] If operation fails, the HTTP error message returned, ! e.g. NOT FOUND."
         },
         "httpErrorStatusCode": {
           "type": "integer",
-          "description": "[Output Only] If operation fails, the HTTP error status code returned, e.g. 404.",
+          "description": "! [Output Only] If operation fails, the HTTP error status code returned, ! e.g. 404.",
           "format": "int32"
         },
         "id": {
           "type": "string",
-          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
+          "description": "! [Output Only] Unique identifier for the resource; defined by the server.",
           "format": "uint64"
         },
         "insertTime": {
           "type": "string",
-          "description": "[Output Only] The time that this operation was requested. This is in RFC 3339 format."
+          "description": "! [Output Only] The time that this operation was requested. ! This is in RFC 3339 format."
         },
         "name": {
           "type": "string",
-          "description": "[Output Only] Name of the operation."
+          "description": "! [Output Only] Name of the operation."
         },
         "operationType": {
           "type": "string",
-          "description": "[Output Only] Type of the operation. Examples include \"insert\", or \"delete\""
+          "description": "! [Output Only] Type of the operation. Examples include \"insert\", or ! \"delete\""
         },
         "progress": {
           "type": "integer",
-          "description": "[Output Only] An optional progress indicator that ranges from 0 to 100. There is no requirement that this be linear or support any granularity of operations. This should not be used to guess at when the operation will be complete. This number should be monotonically increasing as the operation progresses.",
+          "description": "! [Output Only] An optional progress indicator that ranges from 0 to 100. ! There is no requirement that this be linear or support any granularity ! of operations. This should not be used to guess at when the operation will ! be complete. This number should be monotonically increasing as the ! operation progresses.",
           "format": "int32"
         },
         "selfLink": {
@@ -911,58 +910,58 @@
         },
         "startTime": {
           "type": "string",
-          "description": "[Output Only] The time that this operation was started by the server. This is in RFC 3339 format."
+          "description": "! [Output Only] The time that this operation was started by the server. ! This is in RFC 3339 format."
         },
         "status": {
           "type": "string",
-          "description": "[Output Only] Status of the operation. Can be one of the following: \"PENDING\", \"RUNNING\", or \"DONE\"."
+          "description": "! [Output Only] Status of the operation. Can be one of the following: ! \"PENDING\", \"RUNNING\", or \"DONE\"."
         },
         "statusMessage": {
           "type": "string",
-          "description": "[Output Only] An optional textual description of the current status of the operation."
+          "description": "! [Output Only] An optional textual description of the current status of ! the operation."
         },
         "targetId": {
           "type": "string",
-          "description": "[Output Only] Unique target id which identifies a particular incarnation of the target.",
+          "description": "! [Output Only] Unique target id which identifies a particular ! incarnation of the target.",
           "format": "uint64"
         },
         "targetLink": {
           "type": "string",
-          "description": "[Output Only] URL of the resource the operation is mutating."
+          "description": "! [Output Only] URL of the resource the operation is mutating."
         },
         "user": {
           "type": "string",
-          "description": "[Output Only] User who requested the operation, for example \"user@example.com\""
+          "description": "! [Output Only] User who requested the operation, for example ! \"user@example.com\""
         },
         "warnings": {
           "type": "array",
-          "description": "[Output Only] If warning messages generated during processing of this operation, this field will be populated.",
+          "description": "! [Output Only] If warning messages generated during processing of this ! operation, this field will be populated.",
           "items": {
             "type": "object",
             "properties": {
               "code": {
-                "description": "The warning type identifier for this warning."
+                "description": "! The warning type identifier for this warning."
               },
               "data": {
                 "type": "array",
-                "description": "Metadata for this warning in 'key: value' format.",
+                "description": "! Metadata for this warning in 'key: value' format.",
                 "items": {
                   "type": "object",
                   "properties": {
                     "key": {
                       "type": "string",
-                      "description": "A key for the warning data."
+                      "description": "! A key for the warning data."
                     },
                     "value": {
                       "type": "string",
-                      "description": "A warning data value corresponding to the key."
+                      "description": "! A warning data value corresponding to the key."
                     }
                   }
                 }
               },
               "message": {
                 "type": "string",
-                "description": "Optional human-readable details for this warning."
+                "description": "! Optional human-readable details for this warning."
               }
             }
           }
@@ -972,15 +971,15 @@
     "OperationsListResponse": {
       "id": "OperationsListResponse",
       "type": "object",
-      "description": "A response containing a partial list of operations and a page token used to build the next request if the request has been truncated.",
+      "description": "! A response containing a partial list of operations and a page token used ! to build the next request if the request has been truncated. Next available tag: 4",
       "properties": {
         "nextPageToken": {
           "type": "string",
-          "description": "A token used to continue a truncated list request."
+          "description": "! A token used to continue a truncated list request."
         },
         "operations": {
           "type": "array",
-          "description": "Operations contained in this list response.",
+          "description": "! Operations contained in this list response.",
           "items": {
             "$ref": "#/definitions/Operation"
           }
@@ -990,10 +989,11 @@
     "Resource": {
       "id": "Resource",
       "type": "object",
+      "description": "Next available tag: 12",
       "properties": {
         "errors": {
           "type": "array",
-          "description": "[Output Only] A list of any errors that occurred during deployment.",
+          "description": "! [Output Only] A list of any errors that occurred during deployment.",
           "items": {
             "type": "string"
           }
@@ -1005,42 +1005,42 @@
         },
         "intent": {
           "type": "string",
-          "description": "[Output Only] The intended state of the resource."
+          "description": "! [Output Only] The intended state of the resource."
         },
         "manifest": {
           "type": "string",
-          "description": "[Output Only] URL of the manifest representing the current configuration of this resource."
+          "description": "! [Output Only] URL of the manifest representing the current configuration ! of this resource."
         },
         "name": {
           "type": "string",
-          "description": "[Output Only] The name of the resource as it appears in the YAML config."
+          "description": "! [Output Only] The name of the resource as it appears in the YAML config."
         },
         "state": {
           "type": "string",
-          "description": "[Output Only] The state of the resource."
+          "description": "! [Output Only] The state of the resource."
         },
         "type": {
           "type": "string",
-          "description": "[Output Only] The type of the resource, for example ?compute.v1.instance?, or ?replicaPools.v1beta2.instanceGroupManager?"
+          "description": "! [Output Only] The type of the resource, for example ! ?compute.v1.instance?, or ?replicaPools.v1beta2.instanceGroupManager?"
         },
         "url": {
           "type": "string",
-          "description": "[Output Only] The URL of the actual resource."
+          "description": "! [Output Only] The URL of the actual resource."
         }
       }
     },
     "ResourcesListResponse": {
       "id": "ResourcesListResponse",
       "type": "object",
-      "description": "A response containing a partial list of resources and a page token used to build the next request if the request has been truncated.",
+      "description": "! A response containing a partial list of resources and a page token used ! to build the next request if the request has been truncated. Next available tag: 4",
       "properties": {
         "nextPageToken": {
           "type": "string",
-          "description": "A token used to continue a truncated list request."
+          "description": "! A token used to continue a truncated list request."
         },
         "resources": {
           "type": "array",
-          "description": "Resources contained in this list response.",
+          "description": "! Resources contained in this list response.",
           "items": {
             "$ref": "#/definitions/Resource"
           }
@@ -1050,22 +1050,22 @@
     "Type": {
       "id": "Type",
       "type": "object",
-      "description": "A type supported by Deployment Manager.",
+      "description": "! A type supported by Deployment Manager. Next available tag: 4",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the type."
+          "description": "! Name of the type."
         }
       }
     },
     "TypesListResponse": {
       "id": "TypesListResponse",
       "type": "object",
-      "description": "A response that returns all Types supported by Deployment Manager",
+      "description": "! A response that returns all Types supported by Deployment Manager Next available tag: 3",
       "properties": {
         "types": {
           "type": "array",
-          "description": "Types supported by Deployment Manager",
+          "description": "! Types supported by Deployment Manager",
           "items": {
             "$ref": "#/definitions/Type"
           }
@@ -1134,5 +1134,8 @@
         "https://www.googleapis.com/auth/ndev.cloudman.readonly": "View your Google Cloud Platform management resources and deployment status information"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/deployment-manager/"
   }
 }

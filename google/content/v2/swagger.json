@@ -14,10 +14,54 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/shopping-content/v2/"
-  },
   "paths": {
+    "/accounts/authinfo": {
+      "get": {
+        "description": "Returns information about the authenticated user.",
+        "operationId": "content.accounts.authinfo",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AccountsAuthInfoResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/accounts/batch": {
       "post": {
         "description": "Retrieves, inserts, updates, and deletes multiple Merchant Center (sub-)accounts in a single request.",
@@ -2146,6 +2190,22 @@
         }
       }
     },
+    "AccountIdentifier": {
+      "id": "AccountIdentifier",
+      "type": "object",
+      "properties": {
+        "aggregatorId": {
+          "type": "string",
+          "description": "The aggregator ID, set for aggregators and subaccounts (in that case, it represents the aggregator of the subaccount).",
+          "format": "uint64"
+        },
+        "merchantId": {
+          "type": "string",
+          "description": "The merchant account ID, set for individual accounts and subaccounts.",
+          "format": "uint64"
+        }
+      }
+    },
     "AccountShipping": {
       "id": "AccountShipping",
       "type": "object",
@@ -2665,6 +2725,24 @@
         "emailAddress": {
           "type": "string",
           "description": "User's email address."
+        }
+      }
+    },
+    "AccountsAuthInfoResponse": {
+      "id": "AccountsAuthInfoResponse",
+      "type": "object",
+      "properties": {
+        "accountIdentifiers": {
+          "type": "array",
+          "description": "The account identifiers corresponding to the authenticated user.\n- For an individual account: only the merchant ID is defined\n- For an aggregator: only the aggregator ID is defined\n- For a subaccount of an MCA: both the merchant ID and the aggregator ID are defined.",
+          "items": {
+            "$ref": "#/definitions/AccountIdentifier"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#accountsAuthInfoResponse\".",
+          "default": "content#accountsAuthInfoResponse"
         }
       }
     },
@@ -3260,6 +3338,10 @@
           "description": "Identifies what kind of resource this is. Value: the fixed string \"content#datafeedStatus\".",
           "default": "content#datafeedStatus"
         },
+        "lastUploadDate": {
+          "type": "string",
+          "description": "The last date at which the feed was uploaded."
+        },
         "processingStatus": {
           "type": "string",
           "description": "The processing status of the feed."
@@ -3780,6 +3862,13 @@
           "type": "string",
           "description": "Target age group of the item."
         },
+        "aspects": {
+          "type": "array",
+          "description": "Specifies the intended aspects for the product.",
+          "items": {
+            "$ref": "#/definitions/ProductAspect"
+          }
+        },
         "availability": {
           "type": "string",
           "description": "Availability status of the item."
@@ -4077,6 +4166,24 @@
           "items": {
             "$ref": "#/definitions/Error"
           }
+        }
+      }
+    },
+    "ProductAspect": {
+      "id": "ProductAspect",
+      "type": "object",
+      "properties": {
+        "aspectName": {
+          "type": "string",
+          "description": "The name of the aspect."
+        },
+        "destinationName": {
+          "type": "string",
+          "description": "The name of the destination. Leave out to apply to all destinations."
+        },
+        "intention": {
+          "type": "string",
+          "description": "Whether the aspect is required, excluded or should be validated."
         }
       }
     },
@@ -4671,5 +4778,8 @@
         "https://www.googleapis.com/auth/content": "Manage your product listings and accounts for Google Shopping"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/shopping-content/v2/"
   }
 }

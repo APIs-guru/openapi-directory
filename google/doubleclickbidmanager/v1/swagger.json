@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/bid-manager/"
-  },
   "paths": {
     "/lineitems/downloadlineitems": {
       "post": {
@@ -407,6 +404,7 @@
             "FILTER_INSERTION_ORDER",
             "FILTER_INVENTORY_FORMAT",
             "FILTER_INVENTORY_SOURCE",
+            "FILTER_INVENTORY_SOURCE_TYPE",
             "FILTER_KEYWORD",
             "FILTER_LINE_ITEM",
             "FILTER_LINE_ITEM_DAILY_FREQUENCY",
@@ -442,6 +440,8 @@
             "FILTER_USER_LIST_FIRST_PARTY",
             "FILTER_USER_LIST_THIRD_PARTY",
             "FILTER_VIDEO_AD_POSITION_IN_STREAM",
+            "FILTER_VIDEO_COMPANION_SIZE",
+            "FILTER_VIDEO_COMPANION_TYPE",
             "FILTER_VIDEO_CREATIVE_DURATION",
             "FILTER_VIDEO_CREATIVE_DURATION_SKIPPABLE",
             "FILTER_VIDEO_DURATION_SECONDS",
@@ -457,6 +457,9 @@
             "FILTER_ZIP_CODE"
           ],
           "enumDescriptions": [
+            "",
+            "",
+            "",
             "",
             "",
             "",
@@ -625,6 +628,7 @@
               "FILTER_INSERTION_ORDER",
               "FILTER_INVENTORY_FORMAT",
               "FILTER_INVENTORY_SOURCE",
+              "FILTER_INVENTORY_SOURCE_TYPE",
               "FILTER_KEYWORD",
               "FILTER_LINE_ITEM",
               "FILTER_LINE_ITEM_DAILY_FREQUENCY",
@@ -660,6 +664,8 @@
               "FILTER_USER_LIST_FIRST_PARTY",
               "FILTER_USER_LIST_THIRD_PARTY",
               "FILTER_VIDEO_AD_POSITION_IN_STREAM",
+              "FILTER_VIDEO_COMPANION_SIZE",
+              "FILTER_VIDEO_COMPANION_TYPE",
               "FILTER_VIDEO_CREATIVE_DURATION",
               "FILTER_VIDEO_CREATIVE_DURATION_SKIPPABLE",
               "FILTER_VIDEO_DURATION_SECONDS",
@@ -675,6 +681,9 @@
               "FILTER_ZIP_CODE"
             ],
             "enumDescriptions": [
+              "",
+              "",
+              "",
               "",
               "",
               "",
@@ -828,6 +837,9 @@
               "METRIC_FEE19_ADVERTISER",
               "METRIC_FEE19_PARTNER",
               "METRIC_FEE19_USD",
+              "METRIC_FEE20_ADVERTISER",
+              "METRIC_FEE20_PARTNER",
+              "METRIC_FEE20_USD",
               "METRIC_FEE2_ADVERTISER",
               "METRIC_FEE2_PARTNER",
               "METRIC_FEE2_USD",
@@ -1002,6 +1014,9 @@
               "METRIC_VIDEO_COMPLETION_RATE"
             ],
             "enumDescriptions": [
+              "",
+              "",
+              "",
               "",
               "",
               "",
@@ -1854,5 +1869,8 @@
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/bid-manager/"
   }
 }

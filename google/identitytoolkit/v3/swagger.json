@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/identity-toolkit/v3/"
-  },
   "paths": {
     "/createAuthUri": {
       "post": {
@@ -227,6 +224,46 @@
             "description": "Successful response",
             "schema": {
               "$ref": "#/definitions/IdentitytoolkitRelyingpartyGetPublicKeysResponse"
+            }
+          }
+        },
+        "tags": [
+          "relyingparty"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/getRecaptchaParam": {
+      "get": {
+        "description": "Get recaptcha secure param.",
+        "operationId": "identitytoolkit.relyingparty.getRecaptchaParam",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/GetRecaptchaParamResponse"
             }
           }
         },
@@ -562,6 +599,26 @@
         }
       }
     },
+    "GetRecaptchaParamResponse": {
+      "id": "GetRecaptchaParamResponse",
+      "type": "object",
+      "description": "Response of getting recaptcha param.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The fixed string \"identitytoolkit#GetRecaptchaParamResponse\".",
+          "default": "identitytoolkit#GetRecaptchaParamResponse"
+        },
+        "recaptchaSiteKey": {
+          "type": "string",
+          "description": "Site key registered at recaptcha."
+        },
+        "recaptchaStoken": {
+          "type": "string",
+          "description": "The stoken field for the recaptcha widget, used to request captcha challenge."
+        }
+      }
+    },
     "IdentitytoolkitRelyingpartyCreateAuthUriRequest": {
       "id": "IdentitytoolkitRelyingpartyCreateAuthUriRequest",
       "type": "object",
@@ -586,6 +643,14 @@
         "identifier": {
           "type": "string",
           "description": "The email or federated ID of the user."
+        },
+        "oauthConsumerKey": {
+          "type": "string",
+          "description": "The developer's consumer key for OpenId OAuth Extension"
+        },
+        "oauthScope": {
+          "type": "string",
+          "description": "Additional oauth scopes, beyond the basid user profile, that the user would be prompted to grant"
         },
         "openidRealm": {
           "type": "string",
@@ -792,6 +857,10 @@
         "requestUri": {
           "type": "string",
           "description": "The URI to which the IDP redirects the user back. It may contain federated login result params added by the IDP."
+        },
+        "returnRefreshToken": {
+          "type": "boolean",
+          "description": "Whether to return refresh tokens."
         }
       }
     },
@@ -1111,6 +1180,19 @@
           "type": "string",
           "description": "The nick name of the user."
         },
+        "oauthAccessToken": {
+          "type": "string",
+          "description": "The OAuth2 access token."
+        },
+        "oauthAuthorizationCode": {
+          "type": "string",
+          "description": "The OAuth2 authorization code."
+        },
+        "oauthExpireIn": {
+          "type": "integer",
+          "description": "The lifetime in seconds of the OAuth2 access token.",
+          "format": "int32"
+        },
         "oauthRequestToken": {
           "type": "string",
           "description": "The user approved request token for the OpenID OAuth extension."
@@ -1229,5 +1311,8 @@
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/identity-toolkit/v3/"
   }
 }

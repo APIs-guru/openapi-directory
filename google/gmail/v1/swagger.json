@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/gmail/api/"
-  },
   "paths": {
     "/{userId}/profile": {
       "get": {
@@ -522,6 +519,7 @@
           {
             "Oauth2": [
               "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.labels",
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
@@ -555,6 +553,7 @@
           {
             "Oauth2": [
               "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.labels",
               "https://www.googleapis.com/auth/gmail.modify",
               "https://www.googleapis.com/auth/gmail.readonly"
             ]
@@ -618,6 +617,7 @@
           {
             "Oauth2": [
               "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.labels",
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
@@ -658,6 +658,7 @@
           {
             "Oauth2": [
               "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.labels",
               "https://www.googleapis.com/auth/gmail.modify",
               "https://www.googleapis.com/auth/gmail.readonly"
             ]
@@ -699,6 +700,7 @@
           {
             "Oauth2": [
               "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.labels",
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
@@ -739,6 +741,7 @@
           {
             "Oauth2": [
               "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.labels",
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
@@ -933,7 +936,7 @@
           {
             "name": "neverMarkSpam",
             "in": "query",
-            "description": "Ignore the Gmail spam classifer decision and never mark this email as SPAM in the mailbox.",
+            "description": "Ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox.",
             "default": "false",
             "type": "boolean"
           },
@@ -957,6 +960,7 @@
           {
             "Oauth2": [
               "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.insert",
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
@@ -1006,6 +1010,13 @@
         ],
         "parameters": [
           {
+            "name": "deleted",
+            "in": "query",
+            "description": "Mark the email as permanently deleted (not TRASH) and only visible in Google Apps Vault to a Vault administrator. Only used for Google Apps for Work accounts.",
+            "default": "false",
+            "type": "boolean"
+          },
+          {
             "name": "internalDateSource",
             "in": "query",
             "description": "Source for Gmail's internal date of the message.",
@@ -1029,6 +1040,7 @@
           {
             "Oauth2": [
               "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.insert",
               "https://www.googleapis.com/auth/gmail.modify"
             ]
           }
@@ -1900,19 +1912,97 @@
     "History": {
       "id": "History",
       "type": "object",
-      "description": "A record of a change to the user's mailbox. Each history contains a list of the messages that were affected by this change.",
+      "description": "A record of a change to the user's mailbox. Each history change may affect multiple messages in multiple ways.",
       "properties": {
         "id": {
           "type": "string",
           "description": "The mailbox sequence ID.",
           "format": "uint64"
         },
+        "labelsAdded": {
+          "type": "array",
+          "description": "Labels added to messages in this history record.",
+          "items": {
+            "$ref": "#/definitions/HistoryLabelAdded"
+          }
+        },
+        "labelsRemoved": {
+          "type": "array",
+          "description": "Labels removed from messages in this history record.",
+          "items": {
+            "$ref": "#/definitions/HistoryLabelRemoved"
+          }
+        },
         "messages": {
           "type": "array",
-          "description": "The messages that changed in this history record.",
+          "description": "List of messages changed in this history record. The fields for specific change types, such as messagesAdded may duplicate messages in this field. We recommend using the specific change-type fields instead of this.",
           "items": {
             "$ref": "#/definitions/Message"
           }
+        },
+        "messagesAdded": {
+          "type": "array",
+          "description": "Messages added to the mailbox in this history record.",
+          "items": {
+            "$ref": "#/definitions/HistoryMessageAdded"
+          }
+        },
+        "messagesDeleted": {
+          "type": "array",
+          "description": "Messages deleted (not Trashed) from the mailbox in this history record.",
+          "items": {
+            "$ref": "#/definitions/HistoryMessageDeleted"
+          }
+        }
+      }
+    },
+    "HistoryLabelAdded": {
+      "id": "HistoryLabelAdded",
+      "type": "object",
+      "properties": {
+        "labelIds": {
+          "type": "array",
+          "description": "Label IDs added to the message.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "message": {
+          "$ref": "#/definitions/Message"
+        }
+      }
+    },
+    "HistoryLabelRemoved": {
+      "id": "HistoryLabelRemoved",
+      "type": "object",
+      "properties": {
+        "labelIds": {
+          "type": "array",
+          "description": "Label IDs removed from the message.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "message": {
+          "$ref": "#/definitions/Message"
+        }
+      }
+    },
+    "HistoryMessageAdded": {
+      "id": "HistoryMessageAdded",
+      "type": "object",
+      "properties": {
+        "message": {
+          "$ref": "#/definitions/Message"
+        }
+      }
+    },
+    "HistoryMessageDeleted": {
+      "id": "HistoryMessageDeleted",
+      "type": "object",
+      "properties": {
+        "message": {
+          "$ref": "#/definitions/Message"
         }
       }
     },
@@ -2040,7 +2130,7 @@
       "properties": {
         "history": {
           "type": "array",
-          "description": "List of history records.",
+          "description": "List of history records. Any messages contained in the response will typically only have id and threadId fields populated.",
           "items": {
             "$ref": "#/definitions/History"
           }
@@ -2390,9 +2480,14 @@
       "scopes": {
         "https://mail.google.com/": "View and manage your mail",
         "https://www.googleapis.com/auth/gmail.compose": "Manage drafts and send emails",
+        "https://www.googleapis.com/auth/gmail.insert": "Insert mail into your mailbox",
+        "https://www.googleapis.com/auth/gmail.labels": "Manage mailbox labels",
         "https://www.googleapis.com/auth/gmail.modify": "View and modify but not delete your email",
         "https://www.googleapis.com/auth/gmail.readonly": "View your emails messages and settings"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/gmail/api/"
   }
 }

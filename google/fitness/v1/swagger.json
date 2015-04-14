@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/fit/rest/"
-  },
   "paths": {
     "/{userId}/dataSources": {
       "post": {
@@ -123,6 +120,46 @@
       ]
     },
     "/{userId}/dataSources/{dataSourceId}": {
+      "delete": {
+        "description": "Delete the data source if there are no datapoints associated with it",
+        "operationId": "fitness.users.dataSources.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataSourceId",
+            "in": "path",
+            "description": "The data stream ID of the data source to delete.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "Retrieve a data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fitness.activity.write",
+              "https://www.googleapis.com/auth/fitness.body.write",
+              "https://www.googleapis.com/auth/fitness.location.write"
+            ]
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      },
       "get": {
         "description": "Returns a data source identified by a data stream ID.",
         "operationId": "fitness.users.dataSources.get",
@@ -871,10 +908,18 @@
           "type": "string",
           "description": "The different supported formats for each field in a data type.",
           "enum": [
+            "floatList",
             "floatPoint",
-            "integer"
+            "integer",
+            "integerList",
+            "map",
+            "string"
           ],
           "enumDescriptions": [
+            "",
+            "",
+            "",
+            "",
             "",
             ""
           ],
@@ -1062,11 +1107,28 @@
         }
       }
     },
+    "MapValue": {
+      "id": "MapValue",
+      "type": "object",
+      "description": "Holder object for the value of an entry in a map field of a data point.\n\nA map value supports a subset of the formats that the regular Value supports.",
+      "properties": {
+        "fpVal": {
+          "type": "number",
+          "description": "Floating point value.",
+          "format": "double"
+        }
+      }
+    },
     "Session": {
       "id": "Session",
       "type": "object",
       "description": "Sessions contain metadata, such as a user-friendly name and time interval information.",
       "properties": {
+        "activeTimeMillis": {
+          "type": "string",
+          "description": "Session active time. While start_time_millis and end_time_millis define the full session time, the active time can be shorter and specified by active_time_millis. If the inactive time during the session is known, it should also be inserted via a com.google.activity.segment data point with a STILL activity value",
+          "format": "int64"
+        },
         "activityType": {
           "type": "integer",
           "description": "The type of activity this session represents.",
@@ -1140,15 +1202,54 @@
       "type": "object",
       "description": "Holder object for the value of a single field in a data point.\n\nA field value has a particular format and is only ever set to one of an integer or a floating point value.",
       "properties": {
+        "floatListVal": {
+          "type": "array",
+          "description": "Float list value. When this is set, other values must not be set.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
         "fpVal": {
           "type": "number",
           "description": "Floating point value. When this is set, intVal must not be set.",
           "format": "double"
         },
+        "intListVal": {
+          "type": "array",
+          "description": "Integer list value. When this is set, other values must not be set.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
         "intVal": {
           "type": "integer",
           "description": "Integer value. When this is set, fpVal must not be set.",
           "format": "int32"
+        },
+        "mapVal": {
+          "type": "array",
+          "description": "",
+          "items": {
+            "$ref": "#/definitions/ValueMapValEntry"
+          }
+        },
+        "stringVal": {
+          "type": "string",
+          "description": ""
+        }
+      }
+    },
+    "ValueMapValEntry": {
+      "id": "ValueMapValEntry",
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/MapValue"
         }
       }
     }
@@ -1217,5 +1318,8 @@
         "https://www.googleapis.com/auth/fitness.location.write": "View and store your location data in Google Fit"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/fit/rest/"
   }
 }

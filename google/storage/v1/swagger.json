@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/storage/docs/json_api/"
-  },
   "paths": {
     "/b/{bucket}/acl/{entity}": {
       "delete": {
@@ -2188,6 +2185,175 @@
         }
       ]
     },
+    "/b/{sourceBucket}/o/{sourceObject}/rewriteTo/b/{destinationBucket}/o/{destinationObject}": {
+      "post": {
+        "description": "Rewrites a source object to a destination object. Optionally overrides metadata.",
+        "operationId": "storage.objects.rewrite",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/RewriteResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "destinationBucket",
+            "in": "path",
+            "description": "Name of the bucket in which to store the new object. Overrides the provided object metadata's bucket value, if any.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "destinationObject",
+            "in": "path",
+            "description": "Name of the new object. Required when the object metadata is not otherwise provided. Overrides the object metadata's name value, if any.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "destinationPredefinedAcl",
+            "in": "query",
+            "description": "Apply a predefined set of access controls to the destination object.",
+            "type": "string",
+            "enum": [
+              "authenticatedRead",
+              "bucketOwnerFullControl",
+              "bucketOwnerRead",
+              "private",
+              "projectPrivate",
+              "publicRead"
+            ]
+          },
+          {
+            "name": "ifGenerationMatch",
+            "in": "query",
+            "description": "Makes the operation conditional on whether the destination object's current generation matches the given value.",
+            "type": "string"
+          },
+          {
+            "name": "ifGenerationNotMatch",
+            "in": "query",
+            "description": "Makes the operation conditional on whether the destination object's current generation does not match the given value.",
+            "type": "string"
+          },
+          {
+            "name": "ifMetagenerationMatch",
+            "in": "query",
+            "description": "Makes the operation conditional on whether the destination object's current metageneration matches the given value.",
+            "type": "string"
+          },
+          {
+            "name": "ifMetagenerationNotMatch",
+            "in": "query",
+            "description": "Makes the operation conditional on whether the destination object's current metageneration does not match the given value.",
+            "type": "string"
+          },
+          {
+            "name": "ifSourceGenerationMatch",
+            "in": "query",
+            "description": "Makes the operation conditional on whether the source object's generation matches the given value.",
+            "type": "string"
+          },
+          {
+            "name": "ifSourceGenerationNotMatch",
+            "in": "query",
+            "description": "Makes the operation conditional on whether the source object's generation does not match the given value.",
+            "type": "string"
+          },
+          {
+            "name": "ifSourceMetagenerationMatch",
+            "in": "query",
+            "description": "Makes the operation conditional on whether the source object's current metageneration matches the given value.",
+            "type": "string"
+          },
+          {
+            "name": "ifSourceMetagenerationNotMatch",
+            "in": "query",
+            "description": "Makes the operation conditional on whether the source object's current metageneration does not match the given value.",
+            "type": "string"
+          },
+          {
+            "name": "maxBytesRewrittenPerCall",
+            "in": "query",
+            "description": "The maximum number of bytes that will be rewritten per Rewrite request. Most callers shouldn't need to specify this parameter - it is primarily in place to support testing. If specified the value must be an integral multiple of 1 MiB (1048576). Also, this only applies to requests where the source and destination span locations and/or storage classes. Finally, this value must not change across Rewrite calls else you'll get an error that the rewrite token is invalid.",
+            "type": "string"
+          },
+          {
+            "name": "projection",
+            "in": "query",
+            "description": "Set of properties to return. Defaults to noAcl, unless the object resource specifies the acl property, when it defaults to full.",
+            "type": "string",
+            "enum": [
+              "full",
+              "noAcl"
+            ]
+          },
+          {
+            "name": "rewriteToken",
+            "in": "query",
+            "description": "Include this field (from the previous Rewrite response) on each Rewrite request after the first one, until the Rewrite response 'done' flag is true. Calls that provide a rewriteToken can omit all other request fields, but if included those fields must match the values provided in the first rewrite request.",
+            "type": "string"
+          },
+          {
+            "name": "sourceBucket",
+            "in": "path",
+            "description": "Name of the bucket in which to find the source object.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sourceGeneration",
+            "in": "query",
+            "description": "If present, selects a specific revision of the source object (as opposed to the latest version, the default).",
+            "type": "string"
+          },
+          {
+            "name": "sourceObject",
+            "in": "path",
+            "description": "Name of the source object.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_write"
+            ]
+          }
+        ],
+        "tags": [
+          "objects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/b/{bucket}/o/watch": {
       "post": {
         "description": "Watch for changes on all objects in a bucket.",
@@ -2469,7 +2635,7 @@
         },
         "storageClass": {
           "type": "string",
-          "description": "The bucket's storage class. This defines how objects in the bucket are stored and determines the SLA and the cost of storage. Typical values are STANDARD and DURABLE_REDUCED_AVAILABILITY. Defaults to STANDARD. See the developer's guide for the authoritative list."
+          "description": "The bucket's storage class. This defines how objects in the bucket are stored and determines the SLA and the cost of storage. Values include STANDARD, NEARLINE and DURABLE_REDUCED_AVAILABILITY. Defaults to STANDARD. For more information, see storage classes."
         },
         "timeCreated": {
           "type": "string",
@@ -2978,6 +3144,35 @@
           }
         }
       }
+    },
+    "RewriteResponse": {
+      "id": "RewriteResponse",
+      "type": "object",
+      "description": "A Rewrite response.",
+      "properties": {
+        "done": {
+          "type": "boolean"
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of item this is.",
+          "default": "storage#rewriteResponse"
+        },
+        "objectSize": {
+          "type": "string",
+          "format": "uint64"
+        },
+        "resource": {
+          "$ref": "#/definitions/Object"
+        },
+        "rewriteToken": {
+          "type": "string"
+        },
+        "totalBytesRewritten": {
+          "type": "string",
+          "format": "uint64"
+        }
+      }
     }
   },
   "parameters": {
@@ -3042,5 +3237,8 @@
         "https://www.googleapis.com/auth/devstorage.read_write": "Manage your data in Google Cloud Storage"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/storage/docs/json_api/"
   }
 }

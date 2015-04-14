@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/url-shortener/v1/getting_started"
-  },
   "paths": {
     "/url": {
       "get": {
@@ -48,6 +45,13 @@
             "description": "The short URL, including the protocol.",
             "required": true,
             "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/urlshortener"
+            ]
           }
         ],
         "tags": [
@@ -375,5 +379,8 @@
         "https://www.googleapis.com/auth/urlshortener": "Manage your goo.gl short URLs"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/url-shortener/v1/getting_started"
   }
 }

@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Resource Views API",
+    "title": "Google Compute Engine Instance Groups API",
     "description": "The Resource View API allows users to create and manage logical sets of Google Compute Engine instances.",
     "contact": {
       "name": "Google",
@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/compute/"
-  },
   "paths": {
     "/{project}/zones/{zone}/operations/{operation}": {
       "get": {
@@ -1318,5 +1315,8 @@
         "https://www.googleapis.com/auth/ndev.cloudman.readonly": "View your Google Cloud Platform management resources and deployment status information"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/compute/"
   }
 }

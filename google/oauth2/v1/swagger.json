@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/accounts/docs/OAuth2"
-  },
   "paths": {
     "/oauth2/v1/certs": {
       "get": {
@@ -408,7 +405,7 @@
         },
         "user_id": {
           "type": "string",
-          "description": "The Gaia obfuscated user id."
+          "description": "The obfuscated user id."
         },
         "verified_email": {
           "type": "boolean",
@@ -442,7 +439,7 @@
         },
         "id": {
           "type": "string",
-          "description": "The focus obfuscated gaia id of the user."
+          "description": "The obfuscated ID of the user."
         },
         "link": {
           "type": "string",
@@ -537,5 +534,8 @@
         "https://www.googleapis.com/auth/userinfo.profile": "View your basic profile info"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/accounts/docs/OAuth2"
   }
 }

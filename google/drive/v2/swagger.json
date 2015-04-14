@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/drive/"
-  },
   "paths": {
     "/about": {
       "get": {
@@ -1139,7 +1136,7 @@
     },
     "/files/{fileId}": {
       "delete": {
-        "description": "Permanently deletes a file by ID. Skips the trash.",
+        "description": "Permanently deletes a file by ID. Skips the trash. The currently authenticated user must own the file.",
         "operationId": "drive.files.delete",
         "responses": {
           "200": {
@@ -1183,9 +1180,15 @@
           {
             "name": "acknowledgeAbuse",
             "in": "query",
-            "description": "Whether the user is acknowledging the risk of downloading known malware or other abusive files.",
+            "description": "Whether the user is acknowledging the risk of downloading known malware or other abusive files. Ignored unless alt=media is specified.",
             "default": "false",
             "type": "boolean"
+          },
+          {
+            "name": "alt",
+            "in": "query",
+            "description": "Specifies the type of resource representation to return. The default is 'json' to return file metadata. Specifying 'media' will cause the file content to be returned.",
+            "type": "string"
           },
           {
             "name": "fileId",
@@ -1203,6 +1206,12 @@
               "BASIC",
               "FULL"
             ]
+          },
+          {
+            "name": "revisionId",
+            "in": "query",
+            "description": "Specifies the Revision ID that should be downloaded. Ignored unless alt=media is specified.",
+            "type": "string"
           },
           {
             "name": "updateViewedDate",
@@ -1901,9 +1910,15 @@
           {
             "name": "acknowledgeAbuse",
             "in": "query",
-            "description": "Whether the user is acknowledging the risk of downloading known malware or other abusive files.",
+            "description": "Whether the user is acknowledging the risk of downloading known malware or other abusive files. Ignored unless alt=media is specified.",
             "default": "false",
             "type": "boolean"
+          },
+          {
+            "name": "alt",
+            "in": "query",
+            "description": "Specifies the type of resource representation to return. The default is 'json' to return file metadata. Specifying 'media' will cause the file content to be returned.",
+            "type": "string"
           },
           {
             "name": "fileId",
@@ -1921,6 +1936,12 @@
               "BASIC",
               "FULL"
             ]
+          },
+          {
+            "name": "revisionId",
+            "in": "query",
+            "description": "Specifies the Revision ID that should be downloaded. Ignored unless alt=media is specified.",
+            "type": "string"
           },
           {
             "name": "updateViewedDate",
@@ -2273,7 +2294,7 @@
           {
             "name": "transferOwnership",
             "in": "query",
-            "description": "Whether changing a role to 'owner' should also downgrade the current owners to writers.",
+            "description": "Whether changing a role to 'owner' downgrades the current owners to writers. Does nothing if the specified role is not 'owner'.",
             "default": "false",
             "type": "boolean"
           }
@@ -2319,7 +2340,7 @@
           {
             "name": "transferOwnership",
             "in": "query",
-            "description": "Whether changing a role to 'owner' should also downgrade the current owners to writers.",
+            "description": "Whether changing a role to 'owner' downgrades the current owners to writers. Does nothing if the specified role is not 'owner'.",
             "default": "false",
             "type": "boolean"
           }
@@ -3802,7 +3823,7 @@
         },
         "openUrlTemplate": {
           "type": "string",
-          "description": "The template url for opening files with this app. The template will contain {ids} and/or {exportIds} to be replaced by the actual file ids."
+          "description": "The template url for opening files with this app. The template will contain {ids} and/or {exportIds} to be replaced by the actual file ids. See  Open Files  for the full documentation."
         },
         "primaryFileExtensions": {
           "type": "array",
@@ -4530,7 +4551,7 @@
             },
             "trashed": {
               "type": "boolean",
-              "description": "Whether this file has been trashed."
+              "description": "Whether this file has been trashed. This label applies to all users accessing the file; however, only owners are allowed to see and untrash files."
             },
             "viewed": {
               "type": "boolean",
@@ -4648,7 +4669,7 @@
           "properties": {
             "image": {
               "type": "string",
-              "description": "The URL-safe Base64 encoded bytes of the thumbnail image.",
+              "description": "The URL-safe Base64 encoded bytes of the thumbnail image. It should conform to RFC 4648 section 5.",
               "format": "byte"
             },
             "mimeType": {
@@ -4659,7 +4680,7 @@
         },
         "thumbnailLink": {
           "type": "string",
-          "description": "A link to the file's thumbnail."
+          "description": "A short-lived link to the file's thumbnail. Typically lasts on the order of hours."
         },
         "title": {
           "type": "string",
@@ -4927,7 +4948,7 @@
     "Property": {
       "id": "Property",
       "type": "object",
-      "description": "A key-value pair that is either public or private to an application.",
+      "description": "A key-value pair attached to a file that is either public or private to an application.\nThe following limits apply to file properties:  \n- Maximum of 100 properties total per file\n- Maximum of 30 private properties per app\n- Maximum of 30 public properties\n- Maximum of 124 bytes size limit on (key + value) string in UTF-8 encoding for a single property.",
       "properties": {
         "etag": {
           "type": "string",
@@ -5191,14 +5212,17 @@
       "flow": "implicit",
       "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
       "scopes": {
-        "https://www.googleapis.com/auth/drive": "View and manage the files and documents in your Google Drive",
+        "https://www.googleapis.com/auth/drive": "View and manage the files in your Google Drive",
         "https://www.googleapis.com/auth/drive.appdata": "View and manage its own configuration data in your Google Drive",
         "https://www.googleapis.com/auth/drive.apps.readonly": "View your Google Drive apps",
         "https://www.googleapis.com/auth/drive.file": "View and manage Google Drive files that you have opened or created with this app",
-        "https://www.googleapis.com/auth/drive.metadata.readonly": "View metadata for files and documents in your Google Drive",
-        "https://www.googleapis.com/auth/drive.readonly": "View the files and documents in your Google Drive",
+        "https://www.googleapis.com/auth/drive.metadata.readonly": "View metadata for files in your Google Drive",
+        "https://www.googleapis.com/auth/drive.readonly": "View the files in your Google Drive",
         "https://www.googleapis.com/auth/drive.scripts": "Modify your Google Apps Script scripts' behavior"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/drive/"
   }
 }

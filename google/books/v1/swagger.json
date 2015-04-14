@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/books/docs/v1/getting_started"
-  },
   "paths": {
     "/users/{userId}/bookshelves/{shelf}": {
       "get": {
@@ -1507,43 +1504,6 @@
           "mylibrary"
         ]
       },
-      "get": {
-        "description": "Gets an annotation by its ID.",
-        "operationId": "books.mylibrary.annotations.get",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Annotation"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "annotationId",
-            "in": "path",
-            "description": "The ID for the annotation to retrieve.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "source",
-            "in": "query",
-            "description": "String to identify the originator of this request.",
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/books"
-            ]
-          }
-        ],
-        "tags": [
-          "mylibrary"
-        ]
-      },
       "put": {
         "description": "Updates an existing annotation.",
         "operationId": "books.mylibrary.annotations.update",
@@ -1689,16 +1649,6 @@
             "type": "integer",
             "minimum": 0,
             "maximum": 40
-          },
-          {
-            "name": "pageIds",
-            "in": "query",
-            "description": "The page ID(s) for the volume that is being queried.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
           },
           {
             "name": "pageToken",
@@ -5508,5 +5458,8 @@
         "https://www.googleapis.com/auth/books": "Manage your books"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/books/docs/v1/getting_started"
   }
 }

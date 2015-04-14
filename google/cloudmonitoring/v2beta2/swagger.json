@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/cloud/eap/cloud-monitoring/v2beta2/"
-  },
   "paths": {
     "/{project}/metricDescriptors": {
       "post": {
@@ -205,7 +202,7 @@
           {
             "name": "aggregator",
             "in": "query",
-            "description": "The aggregation function that will reduce the data points in each window to a single point. This parameter is only valid for non-cumulative metric types.",
+            "description": "The aggregation function that will reduce the data points in each window to a single point. This parameter is only valid for non-cumulative metrics with a value type of INT64 or DOUBLE.",
             "type": "string",
             "enum": [
               "max",
@@ -386,7 +383,7 @@
           {
             "name": "aggregator",
             "in": "query",
-            "description": "The aggregation function that will reduce the data points in each window to a single point. This parameter is only valid for non-cumulative metric types.",
+            "description": "The aggregation function that will reduce the data points in each window to a single point. This parameter is only valid for non-cumulative metrics with a value type of INT64 or DOUBLE.",
             "type": "string",
             "enum": [
               "max",
@@ -975,5 +972,8 @@
         "https://www.googleapis.com/auth/monitoring": "View and write monitoring data for all of your Google and third-party Cloud and API projects"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://cloud.google.com/monitoring/v2beta2/"
   }
 }

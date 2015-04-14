@@ -14,13 +14,10 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/speed/docs/insights/v1/getting_started"
-  },
   "paths": {
     "/runPagespeed": {
       "get": {
-        "description": "Runs Page Speed analysis on the page at the specified URL, and returns a Page Speed score, a list of suggestions to make that page faster, and other information.",
+        "description": "Runs PageSpeed analysis on the page at the specified URL, and returns a PageSpeed score, a list of suggestions to make that page faster, and other information.",
         "operationId": "pagespeedonline.pagespeedapi.runpagespeed",
         "responses": {
           "200": {
@@ -47,7 +44,7 @@
           {
             "name": "rule",
             "in": "query",
-            "description": "A Page Speed rule to run; if none are given, all rules are run",
+            "description": "A PageSpeed rule to run; if none are given, all rules are run",
             "type": "array",
             "items": {
               "type": "string"
@@ -115,7 +112,7 @@
       "properties": {
         "formattedResults": {
           "type": "object",
-          "description": "Localized Page Speed results. Contains a ruleResults entry for each Page Speed rule instantiated and run by the server.",
+          "description": "Localized PageSpeed results. Contains a ruleResults entry for each PageSpeed rule instantiated and run by the server.",
           "properties": {
             "locale": {
               "type": "string",
@@ -123,7 +120,7 @@
             },
             "ruleResults": {
               "type": "object",
-              "description": "Dictionary of formatted rule results, with one entry for each Page Speed rule instantiated and run by the server.",
+              "description": "Dictionary of formatted rule results, with one entry for each PageSpeed rule instantiated and run by the server.",
               "additionalProperties": {
                 "type": "object",
                 "description": "The enum-like identifier for this rule. For instance \"EnableKeepAlive\" or \"AvoidCssImport\". Not localized.",
@@ -338,12 +335,12 @@
         },
         "score": {
           "type": "integer",
-          "description": "The Page Speed Score (0-100), which indicates how much faster a page could be. A high score indicates little room for improvement, while a lower score indicates more room for improvement.",
+          "description": "The PageSpeed Score (0-100), which indicates how much faster a page could be. A high score indicates little room for improvement, while a lower score indicates more room for improvement.",
           "format": "int32"
         },
         "screenshot": {
           "type": "object",
-          "description": "Base64 encoded screenshot of the page that was analyzed.",
+          "description": "Base64-encoded screenshot of the page that was analyzed.",
           "properties": {
             "data": {
               "type": "string",
@@ -372,16 +369,16 @@
         },
         "version": {
           "type": "object",
-          "description": "The version of the Page Speed SDK used to generate these results.",
+          "description": "The version of PageSpeed used to generate these results.",
           "properties": {
             "major": {
               "type": "integer",
-              "description": "The major version number of the Page Speed SDK used to generate these results.",
+              "description": "The major version number of PageSpeed used to generate these results.",
               "format": "int32"
             },
             "minor": {
               "type": "integer",
-              "description": "The minor version number of the Page Speed SDK used to generate these results.",
+              "description": "The minor version number of PageSpeed used to generate these results.",
               "format": "int32"
             }
           }
@@ -437,5 +434,8 @@
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/speed/docs/insights/v1/getting_started"
   }
 }

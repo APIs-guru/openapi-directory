@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/ad-exchange/buyer-rest"
-  },
   "paths": {
     "/accounts/{id}": {
       "get": {
@@ -535,6 +532,35 @@
             }
           }
         },
+        "filteringReasons": {
+          "type": "object",
+          "description": "The filtering reasons for the creative. Read-only. This field should not be set in requests.",
+          "properties": {
+            "date": {
+              "type": "string",
+              "description": "The date in ISO 8601 format for the data. The data is collected from 00:00:00 to 23:59:59 in PST."
+            },
+            "reasons": {
+              "type": "array",
+              "description": "The filtering reasons.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "filteringCount": {
+                    "type": "string",
+                    "description": "The number of times the creative was filtered for the status. The count is aggregated across all publishers on the exchange.",
+                    "format": "int64"
+                  },
+                  "filteringStatus": {
+                    "type": "integer",
+                    "description": "The filtering status code. Please refer to the creative-status-codes.txt file for different statuses.",
+                    "format": "int32"
+                  }
+                }
+              }
+            }
+          }
+        },
         "height": {
           "type": "integer",
           "description": "Ad height.",
@@ -685,5 +711,8 @@
         "https://www.googleapis.com/auth/adexchange.buyer": "Manage your Ad Exchange buyer account configuration"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/ad-exchange/buyer-rest"
   }
 }

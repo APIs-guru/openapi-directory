@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "http://developers.google.com/youtube/analytics/"
-  },
   "paths": {
     "/batchReportDefinitions": {
       "get": {
@@ -450,6 +447,12 @@
           }
         },
         "parameters": [
+          {
+            "name": "currency",
+            "in": "query",
+            "description": "The currency to which financial metrics should be converted. The default is US Dollar (USD). If the result contains no financial metrics, this flag will be ignored. Responds with an error if the specified currency is not recognized.",
+            "type": "string"
+          },
           {
             "name": "dimensions",
             "in": "query",
@@ -894,5 +897,8 @@
         "https://www.googleapis.com/auth/yt-analytics.readonly": "View YouTube Analytics reports for your YouTube content"
       }
     }
+  },
+  "externalDocs": {
+    "url": "http://developers.google.com/youtube/analytics/"
   }
 }

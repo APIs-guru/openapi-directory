@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/fusiontables"
-  },
   "paths": {
     "/tables/{tableId}/columns/{columnId}": {
       "delete": {
@@ -1712,7 +1709,7 @@
         },
         "nextPageToken": {
           "type": "string",
-          "description": "Token used to access the next page of this result. No token is displayed if there are no more tokens left."
+          "description": "Token used to access the next page of this result. No token is displayed if there are no more pages left."
         },
         "totalItems": {
           "type": "integer",
@@ -2055,7 +2052,7 @@
         },
         "nextPageToken": {
           "type": "string",
-          "description": "Token used to access the next page of this result. No token is displayed if there are no more styles left."
+          "description": "Token used to access the next page of this result. No token is displayed if there are no more pages left."
         },
         "totalItems": {
           "type": "integer",
@@ -2155,18 +2152,18 @@
         },
         "nextPageToken": {
           "type": "string",
-          "description": "Token used to access the next page of this result. No token is displayed if there are no more tokens left."
+          "description": "Token used to access the next page of this result. No token is displayed if there are no more pages left."
         }
       }
     },
     "Task": {
       "id": "Task",
       "type": "object",
-      "description": "Specifies the id, name and type of a task in a table.",
+      "description": "Specifies the identifier, name, and type of a task in a table.",
       "properties": {
         "kind": {
           "type": "string",
-          "description": "Type name: a template for an individual task.",
+          "description": "Type of the resource. This is always \"fusiontables#task\".",
           "default": "fusiontables#task"
         },
         "progress": {
@@ -2175,7 +2172,7 @@
         },
         "started": {
           "type": "boolean",
-          "description": "False while the table is busy with some other task."
+          "description": "false while the table is busy with some other task. true if this background task is currently running."
         },
         "taskId": {
           "type": "string",
@@ -2183,14 +2180,15 @@
           "format": "int64"
         },
         "type": {
-          "type": "string"
+          "type": "string",
+          "description": "Type of background task. One of  DELETE_ROWS Deletes one or more rows from the table. ADD_ROWS \"Adds one or more rows to a table. Includes importing data into a new table and importing more rows into an existing table. ADD_COLUMN Adds a new column to the table. CHANGE_TYPE Changes the type of a column."
         }
       }
     },
     "TaskList": {
       "id": "TaskList",
       "type": "object",
-      "description": "Represents a list of tasks in a table.",
+      "description": "Represents a list of tasks for a table.",
       "properties": {
         "items": {
           "type": "array",
@@ -2201,12 +2199,12 @@
         },
         "kind": {
           "type": "string",
-          "description": "Type name: a list of all tasks.",
+          "description": "Type of the resource. This is always \"fusiontables#taskList\".",
           "default": "fusiontables#taskList"
         },
         "nextPageToken": {
           "type": "string",
-          "description": "Token used to access the next page of this result. No token is displayed if there are no more tokens left."
+          "description": "Token used to access the next page of this result. No token is displayed if there are no more pages left."
         },
         "totalItems": {
           "type": "integer",
@@ -2270,7 +2268,7 @@
         },
         "nextPageToken": {
           "type": "string",
-          "description": "Token used to access the next page of this result. No token is displayed if there are no more tokens left."
+          "description": "Token used to access the next page of this result. No token is displayed if there are no more pages left."
         },
         "totalItems": {
           "type": "integer",
@@ -2341,5 +2339,8 @@
         "https://www.googleapis.com/auth/fusiontables.readonly": "View your Fusion Tables"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/fusiontables"
   }
 }

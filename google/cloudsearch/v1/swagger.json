@@ -1,0 +1,845 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Google Cloud Search API",
+    "description": "The Google Cloud Search API defines an application interface to index documents that contain structured data and to search those indexes. It supports full text search.",
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "version": "v1"
+  },
+  "host": "cloudsearch.googleapis.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/v1/projects/{projectId}/indexes": {
+      "get": {
+        "description": "Lists search indexes belonging to the specified project.",
+        "operationId": "cloudsearch.projects.indexes.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ListIndexesResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project from which to retrieve indexes. It cannot be the empty string.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "indexNamePrefix",
+            "in": "query",
+            "description": "The prefix of the index name. It is used to list all indexes with names that have this prefix.",
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The maximum number of indexes to return per page. If not specified, 100 indexes are returned per page.",
+            "type": "integer"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "A `nextPageToken` returned from previous list indexes call as the starting point for this call. If not specified, list indexes from the beginning.",
+            "type": "string"
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "description": "Specifies which parts of the IndexInfo resource is returned in the response. If not specified, `ID_ONLY` is used.",
+            "type": "string",
+            "enum": [
+              "INDEX_VIEW_UNSPECIFIED",
+              "ID_ONLY",
+              "FULL"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/cloudsearch",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/access_token"
+        },
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/bearer_token"
+        },
+        {
+          "$ref": "#/parameters/callback"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/pp"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/$.xgafv"
+        }
+      ]
+    },
+    "/v1/projects/{projectId}/indexes/{indexId}/search": {
+      "get": {
+        "description": "Lists the documents in the named index that match the query.",
+        "operationId": "cloudsearch.projects.indexes.search",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SearchResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project associated with the index for searching document. It cannot be the empty string.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "indexId",
+            "in": "path",
+            "description": "The index to search. It cannot be the empty string.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "The query string in search query syntax. If the query is missing or empty, all documents are returned.",
+            "type": "string"
+          },
+          {
+            "name": "fieldExpressions",
+            "in": "query",
+            "description": "Customized expressions used in `orderBy` or `returnFields`. The expression can contain fields in `Document`, the built-in fields ( `_rank`, the document rank, and `_score` if scoring is enabled) and fields defined in `fieldExpressions`. Each field expression is represented in a json object with the following fields: * `name`: the name of the field expression in string. * `expression`: the expression to be computed. It can be a combination of supported functions encoded in string. Expressions involving number fields can use the arithmetical operators (`+`, `-`, `*`, `/`) and the built-in numeric functions (`max`, `min`, `pow`, `count`, `log`, `abs`). Expressions involving geopoint fields can use the `geopoint` and `distance` functions. Expressions for text and html fields can use the `snippet` function. For example: ``` fieldExpressions={name: \"TotalPrice\", expression: \"(Price+Tax)\"} ``` ``` fieldExpressions={name: \"snippet\", expression: \"snippet('good times', content)\"} ``` The field expression names can be used in `orderBy` and `returnFields` after they are defined in `fieldExpressions`.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The maximum number of search results to return per page. Searches perform best when the `pageSize` is kept as small as possible. If not specified, 10 results are returned per page.",
+            "type": "integer"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "A `nextPageToken` returned from previous Search call as the starting point for this call. Pagination tokens provide better performance and consistency than offsets, and they cannot be used in combination with offsets.",
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Offset is used to move to an arbitrary result, independent of the previous results. Offsets are inefficient when compared to `pageToken`. `pageToken` and `offset` cannot be both set. The default value of `offset` is 0.",
+            "type": "integer"
+          },
+          {
+            "name": "matchedCountAccuracy",
+            "in": "query",
+            "description": "Minimum accuracy requirement for `matchedCount` in search response. If specified, `matchedCount` will be accurate up to at least that number. For example, when set to 100, any `matchedCount <= 100` is accurate. This option may add considerable latency/expense. By default (when it is not specified or set to 0), the accuracy is the same as `pageSize`.",
+            "type": "integer"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Comma-separated list of fields for sorting on the search result, including fields from `Document`, the built-in fields (`_rank` and `_score`), and fields defined in `fieldExpressions`. For example: `orderBy=\"foo,bar\"`. The default sorting order is ascending. To specify descending order for a field, a suffix `\" desc\"` should be appended to the field name. For example: `orderBy=\"foo desc,bar\"`. The default value for text sort is the empty string, and the default value for numeric sort is 0. If not specified, the search results are automatically sorted by descending `_rank`. Sorting by ascending `_rank` is not allowed.",
+            "type": "string"
+          },
+          {
+            "name": "scorer",
+            "in": "query",
+            "description": "The scoring function to invoke on a search result for this query. If `scorer` is not set, scoring is disabled and `_score` is 0 for all documents in the search result. To enable document relevancy score based on term frequency, set `\"scorer=generic\"`.",
+            "type": "string"
+          },
+          {
+            "name": "scorerSize",
+            "in": "query",
+            "description": "Maximum number of top retrieved results to score. It is valid only when `scorer` is set. If not specified, 100 retrieved results are scored.",
+            "type": "integer"
+          },
+          {
+            "name": "returnFields",
+            "in": "query",
+            "description": "List of fields to return in `SearchResult` objects. It can be fields from `Document`, the built-in fields `_rank` and `_score`, and fields defined in `fieldExpressions`. Use `\"*\"` to return all fields from `Document`.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/cloudsearch",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/access_token"
+        },
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/bearer_token"
+        },
+        {
+          "$ref": "#/parameters/callback"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/pp"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/$.xgafv"
+        }
+      ]
+    },
+    "/v1/projects/{projectId}/indexes/{indexId}/documents": {
+      "post": {
+        "description": "Inserts a document for indexing or updates an indexed document. The returned document contains only the ID of the new document. When `docId` is absent from the document, it is provided by the server.",
+        "operationId": "cloudsearch.projects.indexes.documents.create",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Document"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project associated with the index for adding document. It cannot be the empty string.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "indexId",
+            "in": "path",
+            "description": "The index to add document to. It cannot be the empty string.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/cloudsearch",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "get": {
+        "description": "Lists documents in the specified search index. Intended for batch processing.",
+        "operationId": "cloudsearch.projects.indexes.documents.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ListDocumentsResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project associated with the index for listing documents. It cannot be the empty string.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "indexId",
+            "in": "path",
+            "description": "The index from which to list the documents. It cannot be the empty string.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "The maximum number of documents to return per page. If not specified, 100 documents are returned per page.",
+            "type": "integer"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "A `nextPageToken` returned from previous list documents call as the starting point for this call. If not specified, list documents from the beginning.",
+            "type": "string"
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "description": "Specifies which part of the document resource is returned in the response. If not specified, `ID_ONLY` is used.",
+            "type": "string",
+            "enum": [
+              "DOCUMENT_VIEW_UNSPECIFIED",
+              "ID_ONLY",
+              "FULL"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/cloudsearch",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/access_token"
+        },
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/bearer_token"
+        },
+        {
+          "$ref": "#/parameters/callback"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/pp"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/$.xgafv"
+        }
+      ]
+    },
+    "/v1/projects/{projectId}/indexes/{indexId}/documents/{docId}": {
+      "delete": {
+        "description": "Deletes a document from an index.",
+        "operationId": "cloudsearch.projects.indexes.documents.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project associated with the index for deleting document. It cannot be the empty string.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "indexId",
+            "in": "path",
+            "description": "The index from which to delete the document. It cannot be the empty string.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "docId",
+            "in": "path",
+            "description": "The document to be deleted. It cannot be the empty string.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/cloudsearch",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "get": {
+        "description": "Retrieves a document from an index.",
+        "operationId": "cloudsearch.projects.indexes.documents.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Document"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "The project associated with the index for retrieving the document. It cannot be the empty string.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "indexId",
+            "in": "path",
+            "description": "The index from which to retrieve the document. It cannot be the empty string.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "docId",
+            "in": "path",
+            "description": "The identifier of the document to retrieve. It cannot be the empty string.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/cloudsearch",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/access_token"
+        },
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/bearer_token"
+        },
+        {
+          "$ref": "#/parameters/callback"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/pp"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/$.xgafv"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "Document": {
+      "id": "Document",
+      "type": "object",
+      "description": "The message representing a document resource.",
+      "properties": {
+        "docId": {
+          "type": "string",
+          "description": "The unique identifier of the document. It must contain only visible, printable ASCII characters (ASCII codes 33 through 126 inclusive) and be no longer than 500 characters. It cannot begin with an exclamation point ('!'), and it can't begin and end with double underscores (\"__\"). If missing, it is automatically assigned for the document."
+        },
+        "rank": {
+          "type": "integer",
+          "description": "A positive integer which determines the default ordering of documents returned from a search. The rank can be set explicitly when the document is created. It is a bad idea to assign the same rank to many documents, and the same rank should never be assigned to more than 10,000 documents. By default (when it is not specified or set to 0), it is set at the time the document is created to the number of seconds since January 1, 2011. The rank can be used in field_expressions, order_by or return_fields in a search request, where it is referenced as `_rank`.",
+          "format": "int32"
+        },
+        "fields": {
+          "type": "object",
+          "description": "The list of fields in the document. It cannot be the empty list. Each field has a name and a list of values. The field name is unique to a document and is case sensitive. The name can only contain ASCII characters. It must start with a letter and can contain letters, digits, or underscore. It cannot be longer than 500 characters and cannot be the empty string. A field can have multiple values with same or different types, however, it cannot have multiple Timestamp or number values.",
+          "additionalProperties": {
+            "$ref": "#/definitions/FieldValueList"
+          }
+        }
+      }
+    },
+    "FieldValueList": {
+      "id": "FieldValueList",
+      "type": "object",
+      "description": "The values of a document field under the same field name.",
+      "properties": {
+        "values": {
+          "type": "array",
+          "description": "The list of typed values.",
+          "items": {
+            "$ref": "#/definitions/FieldValue"
+          }
+        }
+      }
+    },
+    "FieldValue": {
+      "id": "FieldValue",
+      "type": "object",
+      "description": "The value of a document field and associated metadata. Exactly one of the value fields may be set.",
+      "properties": {
+        "stringValue": {
+          "type": "string",
+          "description": "The value of a string-valued field."
+        },
+        "timestampValue": {
+          "type": "string",
+          "description": "The value of a timestamp-valued field."
+        },
+        "numberValue": {
+          "type": "number",
+          "description": "The value of a number-valued field.",
+          "format": "double"
+        },
+        "geoValue": {
+          "type": "string",
+          "description": "The value of a GEO-valued field, represented in string with any of the listed [ways of writing coordinates](http://en.wikipedia.org/wiki/Geographic_coordinate_conversion#Ways_of_writing_coordinates)"
+        },
+        "stringFormat": {
+          "type": "string",
+          "description": "The format of a string value. By default, the string format is `DEFAULT`, where a format will be automatically detected.",
+          "enum": [
+            "DEFAULT",
+            "ATOM",
+            "TEXT",
+            "HTML"
+          ]
+        },
+        "lang": {
+          "type": "string",
+          "description": "The language of a string value. If given, the language must be a valid `ISO 639-1` code."
+        }
+      }
+    },
+    "Empty": {
+      "id": "Empty",
+      "type": "object",
+      "description": "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
+    },
+    "ListDocumentsResponse": {
+      "id": "ListDocumentsResponse",
+      "type": "object",
+      "description": "A response returned from a listing documents request.",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "The list of documents.",
+          "items": {
+            "$ref": "#/definitions/Document"
+          }
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "If there are more results, retrieve them by invoking list documents call with the same arguments and this `nextPageToken`. If there are no more results, this field is not set."
+        }
+      }
+    },
+    "ListIndexesResponse": {
+      "id": "ListIndexesResponse",
+      "type": "object",
+      "description": "A response returned from a listing indexes request.",
+      "properties": {
+        "indexes": {
+          "type": "array",
+          "description": "The information about available indexes.",
+          "items": {
+            "$ref": "#/definitions/IndexInfo"
+          }
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "If there are more results, retrieve them by invoking list indexes call with the same arguments and this `nextPageToken`. If there are no more results, this field is not set."
+        }
+      }
+    },
+    "IndexInfo": {
+      "id": "IndexInfo",
+      "type": "object",
+      "description": "Information about an index.",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "The project associated with the index. It cannot be the empty string."
+        },
+        "indexId": {
+          "type": "string",
+          "description": "The index identifier. It cannot be the empty string. It must contain only visible, printable ASCII characters (ASCII codes 33 through 126 inclusive) and be no longer than 100 characters. It cannot begin with an exclamation point ('!'), and it can't begin and end with double underscores (\"__\")."
+        },
+        "indexedField": {
+          "$ref": "#/definitions/FieldNames",
+          "description": "Names of indexed fields."
+        }
+      }
+    },
+    "FieldNames": {
+      "id": "FieldNames",
+      "type": "object",
+      "description": "Names of indexed fields.",
+      "properties": {
+        "textFields": {
+          "type": "array",
+          "description": "The names of fields in which TEXT values are stored.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "htmlFields": {
+          "type": "array",
+          "description": "The names of fields in which HTML values are stored.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "atomFields": {
+          "type": "array",
+          "description": "The names of fields in which ATOM values are stored.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dateFields": {
+          "type": "array",
+          "description": "The names of fields in which DATE values are stored.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "numberFields": {
+          "type": "array",
+          "description": "The names of fields in which NUMBER values are stored.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "geoFields": {
+          "type": "array",
+          "description": "The names of fields in which GEO values are stored.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SearchResponse": {
+      "id": "SearchResponse",
+      "type": "object",
+      "description": "A response returned from a search request.",
+      "properties": {
+        "results": {
+          "type": "array",
+          "description": "The list of documents that match the search query.",
+          "items": {
+            "$ref": "#/definitions/SearchResult"
+          }
+        },
+        "matchedCount": {
+          "type": "string",
+          "description": "The number of documents that match the query. It is greater than or equal to the number of documents actually returned. This is an approximation and not an exact count unless it is less than or equal to `matchedCountAccuracy` in search parameter.",
+          "format": "int64"
+        }
+      }
+    },
+    "SearchResult": {
+      "id": "SearchResult",
+      "type": "object",
+      "description": "A document returned in a SearchResponse.",
+      "properties": {
+        "docId": {
+          "type": "string",
+          "description": "The unique identifier of the document."
+        },
+        "fields": {
+          "type": "object",
+          "description": "The list of fields in the result. Each field is either from the stored document, the built-in fields (`_rank`, the document rank, and `_score` if scoring is enabled), or computed from any extra `fieldExpressions` defined in the request. For example, if a request contains a `fieldExpressions` named `\"TotalPrice\"` and expressed as `\"Price + Tax\"`, the result will have a field whose name is `\"TotalPrice\"` and whose value is set to the computed sum of the value of field `\"Price\"` and the value of field `\"Tax\"`. If a request contains a `fieldExpressions` named `\"snippet\"` and expressed as `\"snippet(\\\"good times\\\", content)\"`, the result will have a field whose name is `\"snippet\"` and whose value contains a snippet of text from field `\"content\"` matching the query \"good times\".",
+          "additionalProperties": {
+            "$ref": "#/definitions/FieldValueList"
+          }
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "If there are more results, retrieve them by invoking search call with the same arguments and this `nextPageToken`. If there are no more results, this field is not set."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "access_token": {
+      "name": "access_token",
+      "in": "query",
+      "description": "OAuth access token.",
+      "type": "string"
+    },
+    "alt": {
+      "name": "alt",
+      "in": "query",
+      "description": "Data format for response.",
+      "default": "json",
+      "type": "string"
+    },
+    "bearer_token": {
+      "name": "bearer_token",
+      "in": "query",
+      "description": "OAuth bearer token.",
+      "type": "string"
+    },
+    "callback": {
+      "name": "callback",
+      "in": "query",
+      "description": "JSONP",
+      "type": "string"
+    },
+    "fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Selector specifying which fields to include in a partial response.",
+      "type": "string"
+    },
+    "key": {
+      "name": "key",
+      "in": "query",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    "oauth_token": {
+      "name": "oauth_token",
+      "in": "query",
+      "description": "OAuth 2.0 token for the current user.",
+      "type": "string"
+    },
+    "pp": {
+      "name": "pp",
+      "in": "query",
+      "description": "Pretty-print response.",
+      "default": "true",
+      "type": "boolean"
+    },
+    "prettyPrint": {
+      "name": "prettyPrint",
+      "in": "query",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "true",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "name": "quotaUser",
+      "in": "query",
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.",
+      "type": "string"
+    },
+    "$.xgafv": {
+      "name": "$.xgafv",
+      "in": "query",
+      "description": "V1 error format.",
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/cloud-platform": "View and manage your data across Google Cloud Platform services",
+        "https://www.googleapis.com/auth/cloudsearch": "FOR TESTING ONLY",
+        "https://www.googleapis.com/auth/userinfo.email": "View your email address"
+      }
+    }
+  }
+}

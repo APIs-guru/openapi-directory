@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://cloud.google.com/container-engine/docs/v1beta1/"
-  },
   "paths": {
     "/{projectId}/clusters": {
       "get": {
@@ -478,6 +475,76 @@
           "$ref": "#/parameters/userIp"
         }
       ]
+    },
+    "/{masterProjectId}/zones/{zoneId}/tokens/{projectNumber}/{clusterName}": {
+      "get": {
+        "description": "Gets a compute-rw scoped OAuth2 access token for\n. Authentication is performed to ensure that the caller is a member of  and that the request is coming from the expected master VM for the specified cluster. See go/gke-cross-project-auth for more details.",
+        "operationId": "container.projects.zones.tokens.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the specified cluster.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "masterProjectId",
+            "in": "path",
+            "description": "The hosted master project from which this request is coming.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectNumber",
+            "in": "path",
+            "description": "The project number for which the access token is being requested.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zoneId",
+            "in": "path",
+            "description": "The zone of the specified cluster.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "definitions": {
@@ -500,6 +567,10 @@
         "description": {
           "type": "string",
           "description": "An optional description of this cluster."
+        },
+        "enableCloudLogging": {
+          "type": "boolean",
+          "description": "Whether logs from the cluster should be made available via the Google Cloud Logging service. This includes both logs from your applications running in the cluster as well as logs from the Kubernetes components themselves."
         },
         "endpoint": {
           "type": "string",
@@ -736,6 +807,21 @@
           }
         }
       }
+    },
+    "Token": {
+      "id": "Token",
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string",
+          "description": "The OAuth2 access token"
+        },
+        "expiryTimeSeconds": {
+          "type": "string",
+          "description": "The expiration time of the token in seconds since the unix epoch.",
+          "format": "int64"
+        }
+      }
     }
   },
   "parameters": {
@@ -797,5 +883,8 @@
         "https://www.googleapis.com/auth/cloud-platform": "View and manage your data across Google Cloud Platform services"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://cloud.google.com/container-engine/docs/v1beta1/"
   }
 }

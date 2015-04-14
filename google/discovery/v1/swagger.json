@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/discovery/"
-  },
   "paths": {
     "/apis/{api}/{version}/rest": {
       "get": {
@@ -655,6 +652,10 @@
         "supportsSubscription": {
           "type": "boolean",
           "description": "Whether this method supports subscriptions."
+        },
+        "useMediaDownloadService": {
+          "type": "boolean",
+          "description": "Indicates that downloads from this method should use the download service URL (i.e. \"/download\"). Only applies if the method supports media download."
         }
       }
     },
@@ -729,5 +730,8 @@
       "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
       "type": "string"
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/discovery/"
   }
 }

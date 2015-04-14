@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/google-apps/activity/"
-  },
   "paths": {
     "/activities": {
       "get": {
@@ -493,10 +490,13 @@
       "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
       "scopes": {
         "https://www.googleapis.com/auth/activity": "View the activity history of your Google Apps",
-        "https://www.googleapis.com/auth/drive": "View and manage the files and documents in your Google Drive",
-        "https://www.googleapis.com/auth/drive.metadata.readonly": "View metadata for files and documents in your Google Drive",
-        "https://www.googleapis.com/auth/drive.readonly": "View the files and documents in your Google Drive"
+        "https://www.googleapis.com/auth/drive": "View and manage the files in your Google Drive",
+        "https://www.googleapis.com/auth/drive.metadata.readonly": "View metadata for files in your Google Drive",
+        "https://www.googleapis.com/auth/drive.readonly": "View the files in your Google Drive"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/google-apps/activity/"
   }
 }

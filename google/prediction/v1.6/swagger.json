@@ -14,9 +14,6 @@
   "schemes": [
     "https"
   ],
-  "externalDocs": {
-    "url": "https://developers.google.com/prediction/docs/developer-guide"
-  },
   "paths": {
     "/{project}/hostedmodels/{hostedModelName}/predict": {
       "post": {
@@ -873,9 +870,8 @@
           }
         },
         "outputValue": {
-          "type": "number",
-          "description": "The estimated regression value (Regression models only).",
-          "format": "double"
+          "type": "string",
+          "description": "The estimated regression value (Regression models only)."
         },
         "selfLink": {
           "type": "string",
@@ -961,5 +957,8 @@
         "https://www.googleapis.com/auth/prediction": "Manage your data in the Google Prediction API"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/prediction/docs/developer-guide"
   }
 }
