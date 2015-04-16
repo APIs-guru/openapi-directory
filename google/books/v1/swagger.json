@@ -1424,7 +1424,7 @@
     },
     "/myconfig/updateUserSettings": {
       "post": {
-        "description": "Sets the settings for the user. Unspecified sub-objects will retain the existing value.",
+        "description": "Sets the settings for the user. If a sub-object is specified, it will overwrite the existing sub-object stored in the server. Unspecified sub-objects will retain the existing value.",
         "operationId": "books.myconfig.updateUserSettings",
         "responses": {
           "200": {
@@ -5186,6 +5186,9 @@
             "mainCategory": {
               "type": "string",
               "description": "The main category to which this volume belongs. It will be the category from the categories list returned below that has the highest weight."
+            },
+            "maturityRating": {
+              "type": "string"
             },
             "pageCount": {
               "type": "integer",
