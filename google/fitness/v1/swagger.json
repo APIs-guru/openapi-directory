@@ -1107,18 +1107,6 @@
         }
       }
     },
-    "MapValue": {
-      "id": "MapValue",
-      "type": "object",
-      "description": "Holder object for the value of an entry in a map field of a data point.\n\nA map value supports a subset of the formats that the regular Value supports.",
-      "properties": {
-        "fpVal": {
-          "type": "number",
-          "description": "Floating point value.",
-          "format": "double"
-        }
-      }
-    },
     "Session": {
       "id": "Session",
       "type": "object",
@@ -1202,54 +1190,15 @@
       "type": "object",
       "description": "Holder object for the value of a single field in a data point.\n\nA field value has a particular format and is only ever set to one of an integer or a floating point value.",
       "properties": {
-        "floatListVal": {
-          "type": "array",
-          "description": "Float list value. When this is set, other values must not be set.",
-          "items": {
-            "type": "number",
-            "format": "float"
-          }
-        },
         "fpVal": {
           "type": "number",
           "description": "Floating point value. When this is set, intVal must not be set.",
           "format": "double"
         },
-        "intListVal": {
-          "type": "array",
-          "description": "Integer list value. When this is set, other values must not be set.",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
         "intVal": {
           "type": "integer",
           "description": "Integer value. When this is set, fpVal must not be set.",
           "format": "int32"
-        },
-        "mapVal": {
-          "type": "array",
-          "description": "",
-          "items": {
-            "$ref": "#/definitions/ValueMapValEntry"
-          }
-        },
-        "stringVal": {
-          "type": "string",
-          "description": ""
-        }
-      }
-    },
-    "ValueMapValEntry": {
-      "id": "ValueMapValEntry",
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string"
-        },
-        "value": {
-          "$ref": "#/definitions/MapValue"
         }
       }
     }

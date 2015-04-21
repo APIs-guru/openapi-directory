@@ -578,7 +578,7 @@
         },
         "masterAuth": {
           "$ref": "#/definitions/MasterAuth",
-          "description": "The HTTP basic authentication information for accessing the master. Because the master endpoint is open to the internet, you should create a strong password."
+          "description": "The authentication information for accessing the master."
         },
         "name": {
           "type": "string",
@@ -701,14 +701,19 @@
     "MasterAuth": {
       "id": "MasterAuth",
       "type": "object",
+      "description": "The authentication information for accessing the master. Authentication is either done using HTTP basic authentication or using a bearer token.",
       "properties": {
+        "bearerToken": {
+          "type": "string",
+          "description": "The token used to authenticate API requests to the master. The token is be included in an HTTP Authorization Header included in all requests to the master endpoint. The format of the header is: \"Authorization: Bearer \"."
+        },
         "password": {
           "type": "string",
-          "description": "The password to use when accessing the Kubernetes master endpoint."
+          "description": "The password to use for HTTP basic authentication when accessing the Kubernetes master endpoint. Because the master endpoint is open to the internet, you should create a strong password."
         },
         "user": {
           "type": "string",
-          "description": "The username to use when accessing the Kubernetes master endpoint."
+          "description": "The username to use for HTTP basic authentication when accessing the Kubernetes master endpoint."
         }
       }
     },
