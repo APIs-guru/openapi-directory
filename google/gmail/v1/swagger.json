@@ -1890,18 +1890,12 @@
   },
   "definitions": {
     "Draft": {
-      "id": "Draft",
       "type": "object",
       "description": "A draft email in the user's mailbox.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "The immutable ID of the draft.",
-          "annotations": {
-            "required": [
-              "gmail.users.drafts.send"
-            ]
-          }
+          "description": "The immutable ID of the draft."
         },
         "message": {
           "$ref": "#/definitions/Message",
@@ -1910,7 +1904,6 @@
       }
     },
     "History": {
-      "id": "History",
       "type": "object",
       "description": "A record of a change to the user's mailbox. Each history change may affect multiple messages in multiple ways.",
       "properties": {
@@ -1957,7 +1950,6 @@
       }
     },
     "HistoryLabelAdded": {
-      "id": "HistoryLabelAdded",
       "type": "object",
       "properties": {
         "labelIds": {
@@ -1973,7 +1965,6 @@
       }
     },
     "HistoryLabelRemoved": {
-      "id": "HistoryLabelRemoved",
       "type": "object",
       "properties": {
         "labelIds": {
@@ -1989,7 +1980,6 @@
       }
     },
     "HistoryMessageAdded": {
-      "id": "HistoryMessageAdded",
       "type": "object",
       "properties": {
         "message": {
@@ -1998,7 +1988,6 @@
       }
     },
     "HistoryMessageDeleted": {
-      "id": "HistoryMessageDeleted",
       "type": "object",
       "properties": {
         "message": {
@@ -2007,18 +1996,12 @@
       }
     },
     "Label": {
-      "id": "Label",
       "type": "object",
       "description": "Labels are used to categorize messages and threads within the user's mailbox.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "The immutable ID of the label.",
-          "annotations": {
-            "required": [
-              "gmail.users.labels.update"
-            ]
-          }
+          "description": "The immutable ID of the label."
         },
         "labelListVisibility": {
           "type": "string",
@@ -2027,18 +2010,7 @@
             "labelHide",
             "labelShow",
             "labelShowIfUnread"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
-          ],
-          "annotations": {
-            "required": [
-              "gmail.users.labels.create",
-              "gmail.users.labels.update"
-            ]
-          }
+          ]
         },
         "messageListVisibility": {
           "type": "string",
@@ -2046,17 +2018,7 @@
           "enum": [
             "hide",
             "show"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
-          ],
-          "annotations": {
-            "required": [
-              "gmail.users.labels.create",
-              "gmail.users.labels.update"
-            ]
-          }
+          ]
         },
         "messagesTotal": {
           "type": "integer",
@@ -2070,13 +2032,7 @@
         },
         "name": {
           "type": "string",
-          "description": "The display name of the label.",
-          "annotations": {
-            "required": [
-              "gmail.users.labels.create",
-              "gmail.users.labels.update"
-            ]
-          }
+          "description": "The display name of the label."
         },
         "threadsTotal": {
           "type": "integer",
@@ -2094,16 +2050,11 @@
           "enum": [
             "system",
             "user"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         }
       }
     },
     "ListDraftsResponse": {
-      "id": "ListDraftsResponse",
       "type": "object",
       "properties": {
         "drafts": {
@@ -2125,7 +2076,6 @@
       }
     },
     "ListHistoryResponse": {
-      "id": "ListHistoryResponse",
       "type": "object",
       "properties": {
         "history": {
@@ -2147,7 +2097,6 @@
       }
     },
     "ListLabelsResponse": {
-      "id": "ListLabelsResponse",
       "type": "object",
       "properties": {
         "labels": {
@@ -2160,7 +2109,6 @@
       }
     },
     "ListMessagesResponse": {
-      "id": "ListMessagesResponse",
       "type": "object",
       "properties": {
         "messages": {
@@ -2182,7 +2130,6 @@
       }
     },
     "ListThreadsResponse": {
-      "id": "ListThreadsResponse",
       "type": "object",
       "properties": {
         "nextPageToken": {
@@ -2204,7 +2151,6 @@
       }
     },
     "Message": {
-      "id": "Message",
       "type": "object",
       "description": "An email message.",
       "properties": {
@@ -2231,15 +2177,7 @@
         "raw": {
           "type": "string",
           "description": "The entire email message in an RFC 2822 formatted and base64url encoded string. Returned in messages.get and drafts.get responses when the format=RAW parameter is supplied.",
-          "format": "byte",
-          "annotations": {
-            "required": [
-              "gmail.users.drafts.create",
-              "gmail.users.drafts.update",
-              "gmail.users.messages.insert",
-              "gmail.users.messages.send"
-            ]
-          }
+          "format": "byte"
         },
         "sizeEstimate": {
           "type": "integer",
@@ -2257,7 +2195,6 @@
       }
     },
     "MessagePart": {
-      "id": "MessagePart",
       "type": "object",
       "description": "A single MIME message part.",
       "properties": {
@@ -2294,7 +2231,6 @@
       }
     },
     "MessagePartBody": {
-      "id": "MessagePartBody",
       "type": "object",
       "description": "The body of a single MIME message part.",
       "properties": {
@@ -2315,7 +2251,6 @@
       }
     },
     "MessagePartHeader": {
-      "id": "MessagePartHeader",
       "type": "object",
       "properties": {
         "name": {
@@ -2329,7 +2264,6 @@
       }
     },
     "ModifyMessageRequest": {
-      "id": "ModifyMessageRequest",
       "type": "object",
       "properties": {
         "addLabelIds": {
@@ -2349,7 +2283,6 @@
       }
     },
     "ModifyThreadRequest": {
-      "id": "ModifyThreadRequest",
       "type": "object",
       "properties": {
         "addLabelIds": {
@@ -2369,7 +2302,6 @@
       }
     },
     "Profile": {
-      "id": "Profile",
       "type": "object",
       "description": "Profile for a Gmail user.",
       "properties": {
@@ -2395,7 +2327,6 @@
       }
     },
     "Thread": {
-      "id": "Thread",
       "type": "object",
       "description": "A collection of messages representing a conversation.",
       "properties": {

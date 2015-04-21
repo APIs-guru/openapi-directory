@@ -1052,7 +1052,6 @@
   },
   "definitions": {
     "Account": {
-      "id": "Account",
       "type": "object",
       "description": "Configuration data for an Ad Exchange buyer account.",
       "properties": {
@@ -1114,7 +1113,6 @@
       }
     },
     "AccountsList": {
-      "id": "AccountsList",
       "type": "object",
       "description": "An account feed lists Ad Exchange buyer accounts that the user has access to. Each entry in the feed corresponds to a single buyer account.",
       "properties": {
@@ -1133,7 +1131,6 @@
       }
     },
     "BillingInfo": {
-      "id": "BillingInfo",
       "type": "object",
       "description": "The configuration data for an Ad Exchange billing info.",
       "properties": {
@@ -1161,7 +1158,6 @@
       }
     },
     "BillingInfoList": {
-      "id": "BillingInfoList",
       "type": "object",
       "description": "A billing info feed lists Billing Info the Ad Exchange buyer account has access to. Each entry in the feed corresponds to a single billing info.",
       "properties": {
@@ -1180,7 +1176,6 @@
       }
     },
     "Budget": {
-      "id": "Budget",
       "type": "object",
       "description": "The configuration data for Ad Exchange RTB - Budget API.",
       "properties": {
@@ -1215,7 +1210,6 @@
       }
     },
     "Creative": {
-      "id": "Creative",
       "type": "object",
       "description": "A creative and its classification data.",
       "properties": {
@@ -1226,12 +1220,7 @@
         "accountId": {
           "type": "integer",
           "description": "Account id.",
-          "format": "int32",
-          "annotations": {
-            "required": [
-              "adexchangebuyer.creatives.insert"
-            ]
-          }
+          "format": "int32"
         },
         "advertiserId": {
           "type": "array",
@@ -1243,12 +1232,7 @@
         },
         "advertiserName": {
           "type": "string",
-          "description": "The name of the company being advertised in the creative.",
-          "annotations": {
-            "required": [
-              "adexchangebuyer.creatives.insert"
-            ]
-          }
+          "description": "The name of the company being advertised in the creative."
         },
         "agencyId": {
           "type": "string",
@@ -1265,23 +1249,13 @@
         },
         "buyerCreativeId": {
           "type": "string",
-          "description": "A buyer-specific id identifying the creative in this ad.",
-          "annotations": {
-            "required": [
-              "adexchangebuyer.creatives.insert"
-            ]
-          }
+          "description": "A buyer-specific id identifying the creative in this ad."
         },
         "clickThroughUrl": {
           "type": "array",
           "description": "The set of destination urls for the snippet.",
           "items": {
             "type": "string"
-          },
-          "annotations": {
-            "required": [
-              "adexchangebuyer.creatives.insert"
-            ]
           }
         },
         "corrections": {
@@ -1356,12 +1330,7 @@
         "height": {
           "type": "integer",
           "description": "Ad height.",
-          "format": "int32",
-          "annotations": {
-            "required": [
-              "adexchangebuyer.creatives.insert"
-            ]
-          }
+          "format": "int32"
         },
         "kind": {
           "type": "string",
@@ -1411,17 +1380,11 @@
         "width": {
           "type": "integer",
           "description": "Ad width.",
-          "format": "int32",
-          "annotations": {
-            "required": [
-              "adexchangebuyer.creatives.insert"
-            ]
-          }
+          "format": "int32"
         }
       }
     },
     "CreativesList": {
-      "id": "CreativesList",
       "type": "object",
       "description": "The creatives feed lists the active creatives for the Ad Exchange buyer accounts that the user has access to. Each entry in the feed corresponds to a single creative.",
       "properties": {
@@ -1444,7 +1407,6 @@
       }
     },
     "DirectDeal": {
-      "id": "DirectDeal",
       "type": "object",
       "description": "The configuration data for an Ad Exchange direct deal.",
       "properties": {
@@ -1506,7 +1468,6 @@
       }
     },
     "DirectDealsList": {
-      "id": "DirectDealsList",
       "type": "object",
       "description": "A direct deals feed lists Direct Deals the Ad Exchange buyer account has access to. This includes direct deals set up for the buyer account as well as its merged stream seats.",
       "properties": {
@@ -1525,7 +1486,6 @@
       }
     },
     "PerformanceReport": {
-      "id": "PerformanceReport",
       "type": "object",
       "description": "The configuration data for an Ad Exchange performance report list.",
       "properties": {
@@ -1611,7 +1571,6 @@
       }
     },
     "PerformanceReportList": {
-      "id": "PerformanceReportList",
       "type": "object",
       "description": "The configuration data for an Ad Exchange performance report list. https://sites.google.com/a/google.com/adx-integration/Home/engineering/binary-releases/rtb-api-release https://cs.corp.google.com/#piper///depot/google3/contentads/adx/tools/rtb_api/adxrtb.py",
       "properties": {
@@ -1630,7 +1589,6 @@
       }
     },
     "PretargetingConfig": {
-      "id": "PretargetingConfig",
       "type": "object",
       "properties": {
         "billingId": {
@@ -1829,7 +1787,6 @@
       }
     },
     "PretargetingConfigList": {
-      "id": "PretargetingConfigList",
       "type": "object",
       "properties": {
         "items": {

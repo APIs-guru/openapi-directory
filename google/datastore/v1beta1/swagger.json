@@ -424,7 +424,6 @@
   },
   "definitions": {
     "AllocateIdsRequest": {
-      "id": "AllocateIdsRequest",
       "type": "object",
       "properties": {
         "keys": {
@@ -437,7 +436,6 @@
       }
     },
     "AllocateIdsResponse": {
-      "id": "AllocateIdsResponse",
       "type": "object",
       "properties": {
         "header": {
@@ -453,7 +451,6 @@
       }
     },
     "BeginTransactionRequest": {
-      "id": "BeginTransactionRequest",
       "type": "object",
       "properties": {
         "isolationLevel": {
@@ -463,7 +460,6 @@
       }
     },
     "BeginTransactionResponse": {
-      "id": "BeginTransactionResponse",
       "type": "object",
       "properties": {
         "header": {
@@ -477,7 +473,6 @@
       }
     },
     "BlindWriteRequest": {
-      "id": "BlindWriteRequest",
       "type": "object",
       "properties": {
         "mutation": {
@@ -487,7 +482,6 @@
       }
     },
     "BlindWriteResponse": {
-      "id": "BlindWriteResponse",
       "type": "object",
       "properties": {
         "header": {
@@ -500,7 +494,6 @@
       }
     },
     "CommitRequest": {
-      "id": "CommitRequest",
       "type": "object",
       "properties": {
         "ignoreReadOnly": {
@@ -518,7 +511,6 @@
       }
     },
     "CommitResponse": {
-      "id": "CommitResponse",
       "type": "object",
       "properties": {
         "header": {
@@ -531,7 +523,6 @@
       }
     },
     "CompositeFilter": {
-      "id": "CompositeFilter",
       "type": "object",
       "description": "A filter that merges the multiple other filters using the given operation.",
       "properties": {
@@ -549,7 +540,6 @@
       }
     },
     "Entity": {
-      "id": "Entity",
       "type": "object",
       "description": "An entity.",
       "properties": {
@@ -568,7 +558,6 @@
       }
     },
     "EntityResult": {
-      "id": "EntityResult",
       "type": "object",
       "description": "The result of fetching an entity from the datastore.",
       "properties": {
@@ -579,7 +568,6 @@
       }
     },
     "Filter": {
-      "id": "Filter",
       "type": "object",
       "description": "A holder for any type of filter. Exactly one field should be specified.",
       "properties": {
@@ -594,7 +582,6 @@
       }
     },
     "GqlQuery": {
-      "id": "GqlQuery",
       "type": "object",
       "description": "A GQL query.",
       "properties": {
@@ -623,7 +610,6 @@
       }
     },
     "GqlQueryArg": {
-      "id": "GqlQueryArg",
       "type": "object",
       "description": "A binding argument for a GQL query.",
       "properties": {
@@ -641,7 +627,6 @@
       }
     },
     "Key": {
-      "id": "Key",
       "type": "object",
       "description": "A unique identifier for an entity.",
       "properties": {
@@ -659,7 +644,6 @@
       }
     },
     "KeyPathElement": {
-      "id": "KeyPathElement",
       "type": "object",
       "description": "A (kind, ID/name) pair used to construct a key path.\n\nAt most one of name or ID may be set. If either is set, the element is complete. If neither is set, the element is incomplete.",
       "properties": {
@@ -679,7 +663,6 @@
       }
     },
     "KindExpression": {
-      "id": "KindExpression",
       "type": "object",
       "description": "A representation of a kind.",
       "properties": {
@@ -690,7 +673,6 @@
       }
     },
     "LookupRequest": {
-      "id": "LookupRequest",
       "type": "object",
       "properties": {
         "keys": {
@@ -707,7 +689,6 @@
       }
     },
     "LookupResponse": {
-      "id": "LookupResponse",
       "type": "object",
       "properties": {
         "deferred": {
@@ -737,7 +718,6 @@
       }
     },
     "Mutation": {
-      "id": "Mutation",
       "type": "object",
       "description": "A set of changes to apply.",
       "properties": {
@@ -783,7 +763,6 @@
       }
     },
     "MutationResult": {
-      "id": "MutationResult",
       "type": "object",
       "properties": {
         "indexUpdates": {
@@ -801,7 +780,6 @@
       }
     },
     "PartitionId": {
-      "id": "PartitionId",
       "type": "object",
       "description": "An identifier for a particular subset of entities.\n\nEntities are partitioned into various subsets, each used by different datasets and different namespaces within a dataset and so forth.",
       "properties": {
@@ -816,7 +794,6 @@
       }
     },
     "Property": {
-      "id": "Property",
       "type": "object",
       "description": "An entity property.",
       "properties": {
@@ -834,7 +811,6 @@
       }
     },
     "PropertyExpression": {
-      "id": "PropertyExpression",
       "type": "object",
       "description": "A representation of a property in a projection.",
       "properties": {
@@ -849,7 +825,6 @@
       }
     },
     "PropertyFilter": {
-      "id": "PropertyFilter",
       "type": "object",
       "description": "A filter on a specific property.",
       "properties": {
@@ -868,7 +843,6 @@
       }
     },
     "PropertyOrder": {
-      "id": "PropertyOrder",
       "type": "object",
       "description": "The desired order for a specific property.",
       "properties": {
@@ -883,7 +857,6 @@
       }
     },
     "PropertyReference": {
-      "id": "PropertyReference",
       "type": "object",
       "description": "A reference to a property relative to the kind expressions.",
       "properties": {
@@ -894,7 +867,6 @@
       }
     },
     "Query": {
-      "id": "Query",
       "type": "object",
       "description": "A query.",
       "properties": {
@@ -953,7 +925,6 @@
       }
     },
     "QueryResultBatch": {
-      "id": "QueryResultBatch",
       "type": "object",
       "description": "A batch of results produced by a query.",
       "properties": {
@@ -985,7 +956,6 @@
       }
     },
     "ReadOptions": {
-      "id": "ReadOptions",
       "type": "object",
       "properties": {
         "readConsistency": {
@@ -1000,7 +970,6 @@
       }
     },
     "ResponseHeader": {
-      "id": "ResponseHeader",
       "type": "object",
       "properties": {
         "kind": {
@@ -1011,7 +980,6 @@
       }
     },
     "RollbackRequest": {
-      "id": "RollbackRequest",
       "type": "object",
       "properties": {
         "transaction": {
@@ -1022,7 +990,6 @@
       }
     },
     "RollbackResponse": {
-      "id": "RollbackResponse",
       "type": "object",
       "properties": {
         "header": {
@@ -1031,7 +998,6 @@
       }
     },
     "RunQueryRequest": {
-      "id": "RunQueryRequest",
       "type": "object",
       "properties": {
         "gqlQuery": {
@@ -1053,7 +1019,6 @@
       }
     },
     "RunQueryResponse": {
-      "id": "RunQueryResponse",
       "type": "object",
       "properties": {
         "batch": {
@@ -1066,7 +1031,6 @@
       }
     },
     "Value": {
-      "id": "Value",
       "type": "object",
       "description": "A message that can hold any of the supported value types and associated metadata.",
       "properties": {

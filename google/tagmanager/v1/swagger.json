@@ -2437,7 +2437,6 @@
   },
   "definitions": {
     "Account": {
-      "id": "Account",
       "type": "object",
       "description": "Represents a Google Tag Manager Account.",
       "properties": {
@@ -2460,7 +2459,6 @@
       }
     },
     "AccountAccess": {
-      "id": "AccountAccess",
       "type": "object",
       "description": "Defines the Google Tag Manager Account access permissions.",
       "properties": {
@@ -2475,25 +2473,12 @@
               "manage",
               "publish",
               "read"
-            ],
-            "enumDescriptions": [
-              "",
-              "",
-              "",
-              "",
-              ""
-            ]
-          },
-          "annotations": {
-            "required": [
-              "tagmanager.accounts.permissions.create"
             ]
           }
         }
       }
     },
     "Condition": {
-      "id": "Condition",
       "type": "object",
       "description": "Represents a predicate.",
       "properties": {
@@ -2502,12 +2487,6 @@
           "description": "A list of named parameters (key/value), depending on the condition's type. Notes: \n- For binary operators, include parameters named arg0 and arg1 for specifying the left and right operands, respectively. \n- At this time, the left operand (arg0) must be a reference to a macro. \n- For case-insensitive Regex matching, include a boolean parameter named ignore_case that is set to true. If not specified or set to any other value, the matching will be case sensitive. \n- To negate an operator, include a boolean parameter named negate boolean parameter that is set to true.",
           "items": {
             "$ref": "#/definitions/Parameter"
-          },
-          "annotations": {
-            "required": [
-              "tagmanager.accounts.containers.rules.create",
-              "tagmanager.accounts.containers.rules.update"
-            ]
           }
         },
         "type": {
@@ -2523,29 +2502,11 @@
             "lessOrEquals",
             "matchRegex",
             "startsWith"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-          ],
-          "annotations": {
-            "required": [
-              "tagmanager.accounts.containers.rules.create",
-              "tagmanager.accounts.containers.rules.update"
-            ]
-          }
+          ]
         }
       }
     },
     "Container": {
-      "id": "Container",
       "type": "object",
       "description": "Represents a Google Tag Manager Container.",
       "properties": {
@@ -2599,37 +2560,6 @@
               "pageUrl",
               "randomNumber",
               "referrer"
-            ],
-            "enumDescriptions": [
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              ""
             ]
           }
         },
@@ -2639,12 +2569,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Container display name.",
-          "annotations": {
-            "required": [
-              "tagmanager.accounts.containers.create"
-            ]
-          }
+          "description": "Container display name."
         },
         "notes": {
           "type": "string",
@@ -2656,21 +2581,11 @@
         },
         "timeZoneCountryId": {
           "type": "string",
-          "description": "Container Country ID.",
-          "annotations": {
-            "required": [
-              "tagmanager.accounts.containers.create"
-            ]
-          }
+          "description": "Container Country ID."
         },
         "timeZoneId": {
           "type": "string",
-          "description": "Container Time Zone ID.",
-          "annotations": {
-            "required": [
-              "tagmanager.accounts.containers.create"
-            ]
-          }
+          "description": "Container Time Zone ID."
         },
         "usageContext": {
           "type": "array",
@@ -2681,23 +2596,12 @@
               "android",
               "ios",
               "web"
-            ],
-            "enumDescriptions": [
-              "",
-              "",
-              ""
-            ]
-          },
-          "annotations": {
-            "required": [
-              "tagmanager.accounts.containers.create"
             ]
           }
         }
       }
     },
     "ContainerAccess": {
-      "id": "ContainerAccess",
       "type": "object",
       "description": "Defines the Google Tag Manager Container access permissions.",
       "properties": {
@@ -2716,20 +2620,12 @@
               "manage",
               "publish",
               "read"
-            ],
-            "enumDescriptions": [
-              "",
-              "",
-              "",
-              "",
-              ""
             ]
           }
         }
       }
     },
     "ContainerVersion": {
-      "id": "ContainerVersion",
       "type": "object",
       "description": "Represents a Google Tag Manager Container Version.",
       "properties": {
@@ -2803,7 +2699,6 @@
       }
     },
     "ContainerVersionHeader": {
-      "id": "ContainerVersionHeader",
       "type": "object",
       "description": "Represents a Google Tag Manager Container Version Header.",
       "properties": {
@@ -2850,7 +2745,6 @@
       }
     },
     "CreateContainerVersionRequestVersionOptions": {
-      "id": "CreateContainerVersionRequestVersionOptions",
       "type": "object",
       "description": "Options for new container versions.",
       "properties": {
@@ -2869,7 +2763,6 @@
       }
     },
     "CreateContainerVersionResponse": {
-      "id": "CreateContainerVersionResponse",
       "type": "object",
       "description": "Create container versions response.",
       "properties": {
@@ -2884,7 +2777,6 @@
       }
     },
     "ListAccountUsersResponse": {
-      "id": "ListAccountUsersResponse",
       "type": "object",
       "description": "List AccountUsers Response.",
       "properties": {
@@ -2898,7 +2790,6 @@
       }
     },
     "ListAccountsResponse": {
-      "id": "ListAccountsResponse",
       "type": "object",
       "description": "List Accounts Response.",
       "properties": {
@@ -2912,7 +2803,6 @@
       }
     },
     "ListContainerVersionsResponse": {
-      "id": "ListContainerVersionsResponse",
       "type": "object",
       "description": "List container versions response.",
       "properties": {
@@ -2933,7 +2823,6 @@
       }
     },
     "ListContainersResponse": {
-      "id": "ListContainersResponse",
       "type": "object",
       "description": "List Containers Response.",
       "properties": {
@@ -2947,7 +2836,6 @@
       }
     },
     "ListMacrosResponse": {
-      "id": "ListMacrosResponse",
       "type": "object",
       "description": "List Macros Response.",
       "properties": {
@@ -2961,7 +2849,6 @@
       }
     },
     "ListRulesResponse": {
-      "id": "ListRulesResponse",
       "type": "object",
       "description": "List Rules Response.",
       "properties": {
@@ -2975,7 +2862,6 @@
       }
     },
     "ListTagsResponse": {
-      "id": "ListTagsResponse",
       "type": "object",
       "description": "List Tags Response.",
       "properties": {
@@ -2989,7 +2875,6 @@
       }
     },
     "ListTriggersResponse": {
-      "id": "ListTriggersResponse",
       "type": "object",
       "description": "List triggers response.",
       "properties": {
@@ -3003,7 +2888,6 @@
       }
     },
     "ListVariablesResponse": {
-      "id": "ListVariablesResponse",
       "type": "object",
       "description": "List Variables Response.",
       "properties": {
@@ -3017,7 +2901,6 @@
       }
     },
     "Macro": {
-      "id": "Macro",
       "type": "object",
       "description": "Represents a Google Tag Manager Macro.",
       "properties": {
@@ -3053,12 +2936,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Macro display name.",
-          "annotations": {
-            "required": [
-              "tagmanager.accounts.containers.macros.create"
-            ]
-          }
+          "description": "Macro display name."
         },
         "notes": {
           "type": "string",
@@ -3083,18 +2961,11 @@
         },
         "type": {
           "type": "string",
-          "description": "GTM Macro Type.",
-          "annotations": {
-            "required": [
-              "tagmanager.accounts.containers.macros.create",
-              "tagmanager.accounts.containers.macros.update"
-            ]
-          }
+          "description": "GTM Macro Type."
         }
       }
     },
     "Parameter": {
-      "id": "Parameter",
       "type": "object",
       "description": "Represents a Google Tag Manager Parameter.",
       "properties": {
@@ -3125,24 +2996,7 @@
             "list",
             "map",
             "template"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
-          ],
-          "annotations": {
-            "required": [
-              "tagmanager.accounts.containers.macros.create",
-              "tagmanager.accounts.containers.macros.update",
-              "tagmanager.accounts.containers.rules.create",
-              "tagmanager.accounts.containers.rules.update",
-              "tagmanager.accounts.containers.tags.create",
-              "tagmanager.accounts.containers.tags.update"
-            ]
-          }
+          ]
         },
         "value": {
           "type": "string",
@@ -3151,7 +3005,6 @@
       }
     },
     "PublishContainerVersionResponse": {
-      "id": "PublishContainerVersionResponse",
       "type": "object",
       "description": "Publish container version response.",
       "properties": {
@@ -3166,7 +3019,6 @@
       }
     },
     "Rule": {
-      "id": "Rule",
       "type": "object",
       "description": "Represents a Google Tag Manager Rule.",
       "properties": {
@@ -3191,12 +3043,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Rule display name.",
-          "annotations": {
-            "required": [
-              "tagmanager.accounts.containers.rules.create"
-            ]
-          }
+          "description": "Rule display name."
         },
         "notes": {
           "type": "string",
@@ -3209,7 +3056,6 @@
       }
     },
     "Tag": {
-      "id": "Tag",
       "type": "object",
       "description": "Represents a Google Tag Manager Tag.",
       "properties": {
@@ -3259,12 +3105,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Tag display name.",
-          "annotations": {
-            "required": [
-              "tagmanager.accounts.containers.tags.create"
-            ]
-          }
+          "description": "Tag display name."
         },
         "notes": {
           "type": "string",
@@ -3297,17 +3138,11 @@
         },
         "type": {
           "type": "string",
-          "description": "GTM Tag Type.",
-          "annotations": {
-            "required": [
-              "tagmanager.accounts.containers.tags.create"
-            ]
-          }
+          "description": "GTM Tag Type."
         }
       }
     },
     "Trigger": {
-      "id": "Trigger",
       "type": "object",
       "description": "Represents a Google Tag Manager Trigger",
       "properties": {
@@ -3366,12 +3201,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Trigger display name.",
-          "annotations": {
-            "required": [
-              "tagmanager.accounts.containers.triggers.create"
-            ]
-          }
+          "description": "Trigger display name."
         },
         "triggerId": {
           "type": "string",
@@ -3394,27 +3224,7 @@
             "timer",
             "windowLoaded",
             "youTube"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
-          ],
-          "annotations": {
-            "required": [
-              "tagmanager.accounts.containers.triggers.create"
-            ]
-          }
+          ]
         },
         "uniqueTriggerId": {
           "$ref": "#/definitions/Parameter",
@@ -3435,18 +3245,12 @@
       }
     },
     "UserAccess": {
-      "id": "UserAccess",
       "type": "object",
       "description": "Represents a user's permissions to an account and its container.",
       "properties": {
         "accountAccess": {
           "$ref": "#/definitions/AccountAccess",
-          "description": "GTM Account access permissions.",
-          "annotations": {
-            "required": [
-              "tagmanager.accounts.permissions.create"
-            ]
-          }
+          "description": "GTM Account access permissions."
         },
         "accountId": {
           "type": "string",
@@ -3461,12 +3265,7 @@
         },
         "emailAddress": {
           "type": "string",
-          "description": "User's email address.",
-          "annotations": {
-            "required": [
-              "tagmanager.accounts.permissions.create"
-            ]
-          }
+          "description": "User's email address."
         },
         "permissionId": {
           "type": "string",
@@ -3475,7 +3274,6 @@
       }
     },
     "Variable": {
-      "id": "Variable",
       "type": "object",
       "description": "Represents a Google Tag Manager Variable.",
       "properties": {
@@ -3507,12 +3305,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Variable display name.",
-          "annotations": {
-            "required": [
-              "tagmanager.accounts.containers.variables.create"
-            ]
-          }
+          "description": "Variable display name."
         },
         "notes": {
           "type": "string",
@@ -3537,13 +3330,7 @@
         },
         "type": {
           "type": "string",
-          "description": "GTM Variable Type.",
-          "annotations": {
-            "required": [
-              "tagmanager.accounts.containers.variables.create",
-              "tagmanager.accounts.containers.variables.update"
-            ]
-          }
+          "description": "GTM Variable Type."
         },
         "variableId": {
           "type": "string",

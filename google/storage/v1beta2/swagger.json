@@ -2109,7 +2109,6 @@
   },
   "definitions": {
     "Bucket": {
-      "id": "Bucket",
       "type": "object",
       "description": "A bucket.",
       "properties": {
@@ -2118,11 +2117,6 @@
           "description": "Access controls on the bucket.",
           "items": {
             "$ref": "#/definitions/BucketAccessControl"
-          },
-          "annotations": {
-            "required": [
-              "storage.buckets.update"
-            ]
           }
         },
         "cors": {
@@ -2255,12 +2249,7 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the bucket.",
-          "annotations": {
-            "required": [
-              "storage.buckets.insert"
-            ]
-          }
+          "description": "The name of the bucket."
         },
         "owner": {
           "type": "object",
@@ -2316,7 +2305,6 @@
       }
     },
     "BucketAccessControl": {
-      "id": "BucketAccessControl",
       "type": "object",
       "description": "An access-control entry.",
       "properties": {
@@ -2334,12 +2322,7 @@
         },
         "entity": {
           "type": "string",
-          "description": "The entity holding the permission, in one of the following forms: \n- user-userId \n- user-email \n- group-groupId \n- group-email \n- domain-domain \n- allUsers \n- allAuthenticatedUsers Examples: \n- The user liz@example.com would be user-liz@example.com. \n- The group example@googlegroups.com would be group-example@googlegroups.com. \n- To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com.",
-          "annotations": {
-            "required": [
-              "storage.bucketAccessControls.insert"
-            ]
-          }
+          "description": "The entity holding the permission, in one of the following forms: \n- user-userId \n- user-email \n- group-groupId \n- group-email \n- domain-domain \n- allUsers \n- allAuthenticatedUsers Examples: \n- The user liz@example.com would be user-liz@example.com. \n- The group example@googlegroups.com would be group-example@googlegroups.com. \n- To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com."
         },
         "entityId": {
           "type": "string",
@@ -2360,12 +2343,7 @@
         },
         "role": {
           "type": "string",
-          "description": "The access permission for the entity. Can be READER, WRITER, or OWNER.",
-          "annotations": {
-            "required": [
-              "storage.bucketAccessControls.insert"
-            ]
-          }
+          "description": "The access permission for the entity. Can be READER, WRITER, or OWNER."
         },
         "selfLink": {
           "type": "string",
@@ -2374,7 +2352,6 @@
       }
     },
     "BucketAccessControls": {
-      "id": "BucketAccessControls",
       "type": "object",
       "description": "An access-control list.",
       "properties": {
@@ -2393,7 +2370,6 @@
       }
     },
     "Buckets": {
-      "id": "Buckets",
       "type": "object",
       "description": "A list of buckets.",
       "properties": {
@@ -2416,7 +2392,6 @@
       }
     },
     "Channel": {
-      "id": "Channel",
       "type": "object",
       "description": "An notification channel used to watch for resource changes.",
       "properties": {
@@ -2469,7 +2444,6 @@
       }
     },
     "ComposeRequest": {
-      "id": "ComposeRequest",
       "type": "object",
       "description": "A Compose request.",
       "properties": {
@@ -2495,12 +2469,7 @@
               },
               "name": {
                 "type": "string",
-                "description": "The source object's name. The source object's bucket is implicitly the destination bucket.",
-                "annotations": {
-                  "required": [
-                    "storage.objects.compose"
-                  ]
-                }
+                "description": "The source object's name. The source object's bucket is implicitly the destination bucket."
               },
               "objectPreconditions": {
                 "type": "object",
@@ -2514,17 +2483,11 @@
                 }
               }
             }
-          },
-          "annotations": {
-            "required": [
-              "storage.objects.compose"
-            ]
           }
         }
       }
     },
     "Object": {
-      "id": "Object",
       "type": "object",
       "description": "An object.",
       "properties": {
@@ -2533,11 +2496,6 @@
           "description": "Access controls on the object.",
           "items": {
             "$ref": "#/definitions/ObjectAccessControl"
-          },
-          "annotations": {
-            "required": [
-              "storage.objects.update"
-            ]
           }
         },
         "bucket": {
@@ -2567,12 +2525,7 @@
         },
         "contentType": {
           "type": "string",
-          "description": "Content-Type of the object data.",
-          "annotations": {
-            "required": [
-              "storage.objects.update"
-            ]
-          }
+          "description": "Content-Type of the object data."
         },
         "crc32c": {
           "type": "string",
@@ -2661,7 +2614,6 @@
       }
     },
     "ObjectAccessControl": {
-      "id": "ObjectAccessControl",
       "type": "object",
       "description": "An access-control entry.",
       "properties": {
@@ -2718,7 +2670,6 @@
       }
     },
     "ObjectAccessControls": {
-      "id": "ObjectAccessControls",
       "type": "object",
       "description": "An access-control list.",
       "properties": {
@@ -2735,7 +2686,6 @@
       }
     },
     "Objects": {
-      "id": "Objects",
       "type": "object",
       "description": "A list of objects.",
       "properties": {

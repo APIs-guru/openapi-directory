@@ -445,7 +445,6 @@
   },
   "definitions": {
     "AccessConfig": {
-      "id": "AccessConfig",
       "type": "object",
       "description": "A Compute Engine network accessConfig. Identical to the accessConfig on corresponding Compute Engine resource.",
       "properties": {
@@ -464,7 +463,6 @@
       }
     },
     "Action": {
-      "id": "Action",
       "type": "object",
       "description": "An Action encapsulates a set of commands as a single runnable module with additional information needed during run-time.",
       "properties": {
@@ -483,7 +481,6 @@
       }
     },
     "AllowedRule": {
-      "id": "AllowedRule",
       "type": "object",
       "description": "An allowed port resource.",
       "properties": {
@@ -501,7 +498,6 @@
       }
     },
     "AutoscalingModule": {
-      "id": "AutoscalingModule",
       "type": "object",
       "properties": {
         "coolDownPeriodSec": {
@@ -533,7 +529,6 @@
       }
     },
     "AutoscalingModuleStatus": {
-      "id": "AutoscalingModuleStatus",
       "type": "object",
       "properties": {
         "autoscalingConfigUrl": {
@@ -543,7 +538,6 @@
       }
     },
     "DeployState": {
-      "id": "DeployState",
       "type": "object",
       "description": "[Output Only] The current state of a replica or module.",
       "properties": {
@@ -558,7 +552,6 @@
       }
     },
     "Deployment": {
-      "id": "Deployment",
       "type": "object",
       "description": "A deployment represents a physical instantiation of a Template.",
       "properties": {
@@ -600,7 +593,6 @@
       }
     },
     "DeploymentsListResponse": {
-      "id": "DeploymentsListResponse",
       "type": "object",
       "properties": {
         "nextPageToken": {
@@ -615,7 +607,6 @@
       }
     },
     "DiskAttachment": {
-      "id": "DiskAttachment",
       "type": "object",
       "description": "How to attach a disk to a Replica.",
       "properties": {
@@ -631,7 +622,6 @@
       }
     },
     "EnvVariable": {
-      "id": "EnvVariable",
       "type": "object",
       "description": "An environment variable.",
       "properties": {
@@ -646,7 +636,6 @@
       }
     },
     "ExistingDisk": {
-      "id": "ExistingDisk",
       "type": "object",
       "description": "A pre-existing persistent disk that will be attached to every Replica in the Pool.",
       "properties": {
@@ -661,7 +650,6 @@
       }
     },
     "FirewallModule": {
-      "id": "FirewallModule",
       "type": "object",
       "description": "A Firewall resource",
       "properties": {
@@ -704,7 +692,6 @@
       }
     },
     "FirewallModuleStatus": {
-      "id": "FirewallModuleStatus",
       "type": "object",
       "properties": {
         "firewallUrl": {
@@ -714,7 +701,6 @@
       }
     },
     "HealthCheckModule": {
-      "id": "HealthCheckModule",
       "type": "object",
       "properties": {
         "checkIntervalSec": {
@@ -749,7 +735,6 @@
       }
     },
     "HealthCheckModuleStatus": {
-      "id": "HealthCheckModuleStatus",
       "type": "object",
       "properties": {
         "healthCheckUrl": {
@@ -759,7 +744,6 @@
       }
     },
     "LbModule": {
-      "id": "LbModule",
       "type": "object",
       "properties": {
         "description": {
@@ -792,7 +776,6 @@
       }
     },
     "LbModuleStatus": {
-      "id": "LbModuleStatus",
       "type": "object",
       "properties": {
         "forwardingRuleUrl": {
@@ -806,7 +789,6 @@
       }
     },
     "Metadata": {
-      "id": "Metadata",
       "type": "object",
       "description": "A Compute Engine metadata entry. Identical to the metadata on the corresponding Compute Engine resource.",
       "properties": {
@@ -824,7 +806,6 @@
       }
     },
     "MetadataItem": {
-      "id": "MetadataItem",
       "type": "object",
       "description": "A Compute Engine metadata item, defined as a key:value pair. Identical to the metadata on the corresponding Compute Engine resource.",
       "properties": {
@@ -839,7 +820,6 @@
       }
     },
     "Module": {
-      "id": "Module",
       "type": "object",
       "description": "A module in a configuration. A module represents a single homogeneous, possibly replicated task.",
       "properties": {
@@ -868,7 +848,6 @@
       }
     },
     "ModuleStatus": {
-      "id": "ModuleStatus",
       "type": "object",
       "description": "[Output Only] Aggregate status for a module.",
       "properties": {
@@ -907,7 +886,6 @@
       }
     },
     "NetworkInterface": {
-      "id": "NetworkInterface",
       "type": "object",
       "description": "A Compute Engine NetworkInterface resource. Identical to the NetworkInterface on the corresponding Compute Engine resource.",
       "properties": {
@@ -933,7 +911,6 @@
       }
     },
     "NetworkModule": {
-      "id": "NetworkModule",
       "type": "object",
       "properties": {
         "IPv4Range": {
@@ -951,7 +928,6 @@
       }
     },
     "NetworkModuleStatus": {
-      "id": "NetworkModuleStatus",
       "type": "object",
       "properties": {
         "networkUrl": {
@@ -961,7 +937,6 @@
       }
     },
     "NewDisk": {
-      "id": "NewDisk",
       "type": "object",
       "description": "A Persistent Disk resource that will be created and attached to each Replica in the Pool. Each Replica will have a unique persistent disk that is created and attached to that Replica.",
       "properties": {
@@ -984,7 +959,6 @@
       }
     },
     "NewDiskInitializeParams": {
-      "id": "NewDiskInitializeParams",
       "type": "object",
       "description": "Initialization parameters for creating a new disk.",
       "properties": {
@@ -1004,7 +978,6 @@
       }
     },
     "ParamOverride": {
-      "id": "ParamOverride",
       "type": "object",
       "description": "A specification for overriding parameters in a Template that corresponds to the Deployment.",
       "properties": {
@@ -1019,7 +992,6 @@
       }
     },
     "ReplicaPoolModule": {
-      "id": "ReplicaPoolModule",
       "type": "object",
       "properties": {
         "envVariables": {
@@ -1053,7 +1025,6 @@
       }
     },
     "ReplicaPoolModuleStatus": {
-      "id": "ReplicaPoolModuleStatus",
       "type": "object",
       "properties": {
         "replicaPoolUrl": {
@@ -1067,7 +1038,6 @@
       }
     },
     "ReplicaPoolParams": {
-      "id": "ReplicaPoolParams",
       "type": "object",
       "description": "Configuration information for a ReplicaPools resource. Specifying an item within will determine the ReplicaPools API version used for a ReplicaPoolModule. Only one may be specified.",
       "properties": {
@@ -1078,7 +1048,6 @@
       }
     },
     "ReplicaPoolParamsV1Beta1": {
-      "id": "ReplicaPoolParamsV1Beta1",
       "type": "object",
       "description": "Configuration information for a ReplicaPools v1beta1 API resource. Directly maps to ReplicaPool InitTemplate.",
       "properties": {
@@ -1152,7 +1121,6 @@
       }
     },
     "ServiceAccount": {
-      "id": "ServiceAccount",
       "type": "object",
       "description": "A Compute Engine service account, identical to the Compute Engine resource.",
       "properties": {
@@ -1170,7 +1138,6 @@
       }
     },
     "Tag": {
-      "id": "Tag",
       "type": "object",
       "description": "A Compute Engine Instance tag, identical to the tags on the corresponding Compute Engine Instance resource.",
       "properties": {
@@ -1188,7 +1155,6 @@
       }
     },
     "Template": {
-      "id": "Template",
       "type": "object",
       "description": "A Template represents a complete configuration for a Deployment.",
       "properties": {
@@ -1219,7 +1185,6 @@
       }
     },
     "TemplatesListResponse": {
-      "id": "TemplatesListResponse",
       "type": "object",
       "properties": {
         "nextPageToken": {

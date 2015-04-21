@@ -615,39 +615,23 @@
   },
   "definitions": {
     "Availability": {
-      "id": "Availability",
       "type": "object",
       "description": "A message containing availability data relevant to DoubleClick Search.",
       "properties": {
         "advertiserId": {
           "type": "string",
           "description": "DS advertiser ID.",
-          "format": "int64",
-          "annotations": {
-            "required": [
-              "doubleclicksearch.conversion.updateAvailability"
-            ]
-          }
+          "format": "int64"
         },
         "agencyId": {
           "type": "string",
           "description": "DS agency ID.",
-          "format": "int64",
-          "annotations": {
-            "required": [
-              "doubleclicksearch.conversion.updateAvailability"
-            ]
-          }
+          "format": "int64"
         },
         "availabilityTimestamp": {
           "type": "string",
           "description": "The time by which all conversions have been uploaded, in epoch millis UTC.",
-          "format": "uint64",
-          "annotations": {
-            "required": [
-              "doubleclicksearch.conversion.updateAvailability"
-            ]
-          }
+          "format": "uint64"
         },
         "segmentationId": {
           "type": "string",
@@ -660,17 +644,11 @@
         },
         "segmentationType": {
           "type": "string",
-          "description": "The segmentation type that this availability is for (its default value is FLOODLIGHT).",
-          "annotations": {
-            "required": [
-              "doubleclicksearch.conversion.updateAvailability"
-            ]
-          }
+          "description": "The segmentation type that this availability is for (its default value is FLOODLIGHT)."
         }
       }
     },
     "Conversion": {
-      "id": "Conversion",
       "type": "object",
       "description": "A conversion containing data relevant to DoubleClick Search.",
       "properties": {
@@ -709,12 +687,7 @@
         },
         "conversionId": {
           "type": "string",
-          "description": "Advertiser-provided ID for the conversion, also known as the order ID.",
-          "annotations": {
-            "required": [
-              "doubleclicksearch.conversion.insert"
-            ]
-          }
+          "description": "Advertiser-provided ID for the conversion, also known as the order ID."
         },
         "conversionModifiedTimestamp": {
           "type": "string",
@@ -724,12 +697,7 @@
         "conversionTimestamp": {
           "type": "string",
           "description": "The time at which the conversion took place, in epoch millis UTC.",
-          "format": "uint64",
-          "annotations": {
-            "required": [
-              "doubleclicksearch.conversion.insert"
-            ]
-          }
+          "format": "uint64"
         },
         "countMillis": {
           "type": "string",
@@ -794,12 +762,7 @@
         },
         "segmentationType": {
           "type": "string",
-          "description": "The segmentation type of this conversion (for example, FLOODLIGHT).",
-          "annotations": {
-            "required": [
-              "doubleclicksearch.conversion.insert"
-            ]
-          }
+          "description": "The segmentation type of this conversion (for example, FLOODLIGHT)."
         },
         "state": {
           "type": "string",
@@ -812,7 +775,6 @@
       }
     },
     "ConversionList": {
-      "id": "ConversionList",
       "type": "object",
       "description": "A list of conversions.",
       "properties": {
@@ -831,7 +793,6 @@
       }
     },
     "CustomDimension": {
-      "id": "CustomDimension",
       "type": "object",
       "description": "A message containing the custome dimension.",
       "properties": {
@@ -846,7 +807,6 @@
       }
     },
     "CustomMetric": {
-      "id": "CustomMetric",
       "type": "object",
       "description": "A message containing the custome metric.",
       "properties": {
@@ -862,7 +822,6 @@
       }
     },
     "Report": {
-      "id": "Report",
       "type": "object",
       "description": "A DoubleClick Search report. This object contains the report request, some report metadata such as currency code, and the generated report rows or report files.",
       "properties": {
@@ -924,7 +883,6 @@
       }
     },
     "ReportApiColumnSpec": {
-      "id": "ReportApiColumnSpec",
       "type": "object",
       "description": "A request object used to create a DoubleClick Search report.",
       "properties": {
@@ -968,7 +926,6 @@
       }
     },
     "ReportRequest": {
-      "id": "ReportRequest",
       "type": "object",
       "description": "A request object used to create a DoubleClick Search report.",
       "properties": {
@@ -981,12 +938,7 @@
         },
         "downloadFormat": {
           "type": "string",
-          "description": "Format that the report should be returned in. Currently csv or tsv is supported.",
-          "annotations": {
-            "required": [
-              "doubleclicksearch.reports.request"
-            ]
-          }
+          "description": "Format that the report should be returned in. Currently csv or tsv is supported."
         },
         "filters": {
           "type": "array",
@@ -1025,12 +977,7 @@
           "description": "Asynchronous report only. The maximum number of rows per report file. A large report is split into many files based on this field. Acceptable values are 1000000 to 100000000, inclusive.",
           "format": "int32",
           "minimum": 1000000,
-          "maximum": 100000000,
-          "annotations": {
-            "required": [
-              "doubleclicksearch.reports.request"
-            ]
-          }
+          "maximum": 100000000
         },
         "orderBy": {
           "type": "array",
@@ -1092,13 +1039,7 @@
         },
         "reportType": {
           "type": "string",
-          "description": "Determines the type of rows that are returned in the report. For example, if you specify reportType: keyword, each row in the report will contain data about a keyword. See the Types of Reports reference for the columns that are available for each type.",
-          "annotations": {
-            "required": [
-              "doubleclicksearch.reports.generate",
-              "doubleclicksearch.reports.request"
-            ]
-          }
+          "description": "Determines the type of rows that are returned in the report. For example, if you specify reportType: keyword, each row in the report will contain data about a keyword. See the Types of Reports reference for the columns that are available for each type."
         },
         "rowCount": {
           "type": "integer",
@@ -1106,12 +1047,7 @@
           "default": "10000",
           "format": "int32",
           "minimum": 0,
-          "maximum": 10000,
-          "annotations": {
-            "required": [
-              "doubleclicksearch.reports.generate"
-            ]
-          }
+          "maximum": 10000
         },
         "startRow": {
           "type": "integer",
@@ -1119,22 +1055,11 @@
           "default": "0",
           "format": "int32",
           "minimum": 0,
-          "maximum": 50000,
-          "annotations": {
-            "required": [
-              "doubleclicksearch.reports.generate"
-            ]
-          }
+          "maximum": 50000
         },
         "statisticsCurrency": {
           "type": "string",
-          "description": "Specifies the currency in which monetary will be returned. Possible values are: usd, agency (valid if the report is scoped to agency or lower), advertiser (valid if the report is scoped to * advertiser or lower), or account (valid if the report is scoped to engine account or lower).",
-          "annotations": {
-            "required": [
-              "doubleclicksearch.reports.generate",
-              "doubleclicksearch.reports.request"
-            ]
-          }
+          "description": "Specifies the currency in which monetary will be returned. Possible values are: usd, agency (valid if the report is scoped to agency or lower), advertiser (valid if the report is scoped to * advertiser or lower), or account (valid if the report is scoped to engine account or lower)."
         },
         "timeRange": {
           "type": "object",
@@ -1168,7 +1093,6 @@
       }
     },
     "ReportRow": {
-      "id": "ReportRow",
       "type": "object",
       "description": "A row in a DoubleClick Search report.",
       "additionalProperties": {
@@ -1176,7 +1100,6 @@
       }
     },
     "SavedColumn": {
-      "id": "SavedColumn",
       "type": "object",
       "description": "A saved column",
       "properties": {
@@ -1196,7 +1119,6 @@
       }
     },
     "SavedColumnList": {
-      "id": "SavedColumnList",
       "type": "object",
       "description": "A list of saved columns. Advertisers create saved columns to report on Floodlight activities, Google Analytics goals, or custom KPIs. To request reports with saved columns, you'll need the saved column names that are available from this list.",
       "properties": {
@@ -1215,7 +1137,6 @@
       }
     },
     "UpdateAvailabilityRequest": {
-      "id": "UpdateAvailabilityRequest",
       "type": "object",
       "description": "The request to update availability.",
       "properties": {
@@ -1229,7 +1150,6 @@
       }
     },
     "UpdateAvailabilityResponse": {
-      "id": "UpdateAvailabilityResponse",
       "type": "object",
       "description": "The response to a update availability request.",
       "properties": {

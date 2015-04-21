@@ -4686,7 +4686,6 @@
   },
   "definitions": {
     "Account": {
-      "id": "Account",
       "type": "object",
       "description": "JSON template for Analytics account entry.",
       "properties": {
@@ -4749,7 +4748,6 @@
       }
     },
     "AccountRef": {
-      "id": "AccountRef",
       "type": "object",
       "description": "JSON template for a linked account.",
       "properties": {
@@ -4773,7 +4771,6 @@
       }
     },
     "AccountSummaries": {
-      "id": "AccountSummaries",
       "type": "object",
       "description": "An AccountSummary collection lists a summary of accounts, properties and views (profiles) to which the user has access. Each resource in the collection corresponds to a single AccountSummary.",
       "properties": {
@@ -4819,7 +4816,6 @@
       }
     },
     "AccountSummary": {
-      "id": "AccountSummary",
       "type": "object",
       "description": "JSON template for an Analytics AccountSummary. An AccountSummary is a lightweight tree comprised of properties/profiles.",
       "properties": {
@@ -4846,7 +4842,6 @@
       }
     },
     "AccountTicket": {
-      "id": "AccountTicket",
       "type": "object",
       "description": "JSON template for an Analytics account ticket. The account ticket consists of the ticket ID and the basic information for the account, property and profile.",
       "properties": {
@@ -4878,7 +4873,6 @@
       }
     },
     "Accounts": {
-      "id": "Accounts",
       "type": "object",
       "description": "An account collection provides a list of Analytics accounts to which a user has access. The account collection is the entry point to all management information. Each resource in the collection corresponds to a single Analytics account.",
       "properties": {
@@ -4924,7 +4918,6 @@
       }
     },
     "AdWordsAccount": {
-      "id": "AdWordsAccount",
       "type": "object",
       "description": "JSON template for an AdWords account.",
       "properties": {
@@ -4934,13 +4927,7 @@
         },
         "customerId": {
           "type": "string",
-          "description": "Customer ID. This field is required when creating an AdWords link.",
-          "annotations": {
-            "required": [
-              "analytics.management.webPropertyAdWordsLinks.insert",
-              "analytics.management.webPropertyAdWordsLinks.update"
-            ]
-          }
+          "description": "Customer ID. This field is required when creating an AdWords link."
         },
         "kind": {
           "type": "string",
@@ -4950,7 +4937,6 @@
       }
     },
     "AnalyticsDataimportDeleteUploadDataRequest": {
-      "id": "AnalyticsDataimportDeleteUploadDataRequest",
       "type": "object",
       "description": "Request template for the delete upload data request.",
       "properties": {
@@ -4964,7 +4950,6 @@
       }
     },
     "Column": {
-      "id": "Column",
       "type": "object",
       "description": "JSON template for a metadata column.",
       "properties": {
@@ -4988,7 +4973,6 @@
       }
     },
     "Columns": {
-      "id": "Columns",
       "type": "object",
       "description": "Lists columns (dimensions and metrics) for a particular report type.",
       "properties": {
@@ -5023,7 +5007,6 @@
       }
     },
     "CustomDataSource": {
-      "id": "CustomDataSource",
       "type": "object",
       "description": "JSON template for an Analytics custom data source.",
       "properties": {
@@ -5114,7 +5097,6 @@
       }
     },
     "CustomDataSources": {
-      "id": "CustomDataSources",
       "type": "object",
       "description": "Lists Analytics custom data sources to which the user has access. Each resource in the collection corresponds to a single Analytics custom data source.",
       "properties": {
@@ -5160,7 +5142,6 @@
       }
     },
     "CustomDimension": {
-      "id": "CustomDimension",
       "type": "object",
       "description": "JSON template for Analytics Custom Dimension.",
       "properties": {
@@ -5235,7 +5216,6 @@
       }
     },
     "CustomDimensions": {
-      "id": "CustomDimensions",
       "type": "object",
       "description": "A custom dimension collection lists Analytics custom dimensions to which the user has access. Each resource in the collection corresponds to a single Analytics custom dimension.",
       "properties": {
@@ -5281,7 +5261,6 @@
       }
     },
     "CustomMetric": {
-      "id": "CustomMetric",
       "type": "object",
       "description": "JSON template for Analytics Custom Metric.",
       "properties": {
@@ -5368,7 +5347,6 @@
       }
     },
     "CustomMetrics": {
-      "id": "CustomMetrics",
       "type": "object",
       "description": "A custom metric collection lists Analytics custom metrics to which the user has access. Each resource in the collection corresponds to a single Analytics custom metric.",
       "properties": {
@@ -5414,7 +5392,6 @@
       }
     },
     "EntityAdWordsLink": {
-      "id": "EntityAdWordsLink",
       "type": "object",
       "description": "JSON template for Analytics Entity AdWords Link.",
       "properties": {
@@ -5423,12 +5400,6 @@
           "description": "A list of AdWords client accounts. These cannot be MCC accounts. This field is required when creating an AdWords link. It cannot be empty.",
           "items": {
             "$ref": "#/definitions/AdWordsAccount"
-          },
-          "annotations": {
-            "required": [
-              "analytics.management.webPropertyAdWordsLinks.insert",
-              "analytics.management.webPropertyAdWordsLinks.update"
-            ]
           }
         },
         "entity": {
@@ -5451,13 +5422,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the link. This field is required when creating an AdWords link.",
-          "annotations": {
-            "required": [
-              "analytics.management.webPropertyAdWordsLinks.insert",
-              "analytics.management.webPropertyAdWordsLinks.update"
-            ]
-          }
+          "description": "Name of the link. This field is required when creating an AdWords link."
         },
         "profileIds": {
           "type": "array",
@@ -5473,7 +5438,6 @@
       }
     },
     "EntityAdWordsLinks": {
-      "id": "EntityAdWordsLinks",
       "type": "object",
       "description": "An entity AdWords link collection provides a list of GA-AdWords links Each resource in this collection corresponds to a single link.",
       "properties": {
@@ -5515,7 +5479,6 @@
       }
     },
     "EntityUserLink": {
-      "id": "EntityUserLink",
       "type": "object",
       "description": "JSON template for an Analytics Entity-User Link. Returns permissions that a user has for an entity.",
       "properties": {
@@ -5578,7 +5541,6 @@
       }
     },
     "EntityUserLinks": {
-      "id": "EntityUserLinks",
       "type": "object",
       "description": "An entity user link collection provides a list of Analytics ACL links Each resource in this collection corresponds to a single link.",
       "properties": {
@@ -5620,7 +5582,6 @@
       }
     },
     "Experiment": {
-      "id": "Experiment",
       "type": "object",
       "description": "JSON template for Analytics experiment resource.",
       "properties": {
@@ -5652,13 +5613,7 @@
         },
         "id": {
           "type": "string",
-          "description": "Experiment ID. Required for patch and update. Disallowed for create.",
-          "annotations": {
-            "required": [
-              "analytics.management.experiments.patch",
-              "analytics.management.experiments.update"
-            ]
-          }
+          "description": "Experiment ID. Required for patch and update. Disallowed for create."
         },
         "internalWebPropertyId": {
           "type": "string",
@@ -5676,13 +5631,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Experiment name. This field may not be changed for an experiment whose status is ENDED. This field is required when creating an experiment.",
-          "annotations": {
-            "required": [
-              "analytics.management.experiments.insert",
-              "analytics.management.experiments.update"
-            ]
-          }
+          "description": "Experiment name. This field may not be changed for an experiment whose status is ENDED. This field is required when creating an experiment."
         },
         "objectiveMetric": {
           "type": "string",
@@ -5738,13 +5687,7 @@
         },
         "status": {
           "type": "string",
-          "description": "Experiment status. Possible values: \"DRAFT\", \"READY_TO_RUN\", \"RUNNING\", \"ENDED\". Experiments can be created in the \"DRAFT\", \"READY_TO_RUN\" or \"RUNNING\" state. This field is required when creating an experiment.",
-          "annotations": {
-            "required": [
-              "analytics.management.experiments.insert",
-              "analytics.management.experiments.update"
-            ]
-          }
+          "description": "Experiment status. Possible values: \"DRAFT\", \"READY_TO_RUN\", \"RUNNING\", \"ENDED\". Experiments can be created in the \"DRAFT\", \"READY_TO_RUN\" or \"RUNNING\" state. This field is required when creating an experiment."
         },
         "trafficCoverage": {
           "type": "number",
@@ -5764,13 +5707,7 @@
             "properties": {
               "name": {
                 "type": "string",
-                "description": "The name of the variation. This field is required when creating an experiment. This field may not be changed for an experiment whose status is ENDED.",
-                "annotations": {
-                  "required": [
-                    "analytics.management.experiments.insert",
-                    "analytics.management.experiments.update"
-                  ]
-                }
+                "description": "The name of the variation. This field is required when creating an experiment. This field may not be changed for an experiment whose status is ENDED."
               },
               "status": {
                 "type": "string",
@@ -5808,7 +5745,6 @@
       }
     },
     "Experiments": {
-      "id": "Experiments",
       "type": "object",
       "description": "An experiment collection lists Analytics experiments to which the user has access. Each view (profile) can have a set of experiments. Each resource in the Experiment collection corresponds to a single Analytics experiment.",
       "properties": {
@@ -5854,7 +5790,6 @@
       }
     },
     "Filter": {
-      "id": "Filter",
       "type": "object",
       "description": "JSON template for an Analytics account filter.",
       "properties": {
@@ -5944,13 +5879,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of this filter.",
-          "annotations": {
-            "required": [
-              "analytics.management.filters.insert",
-              "analytics.management.filters.update"
-            ]
-          }
+          "description": "Name of this filter."
         },
         "parentLink": {
           "type": "object",
@@ -5996,13 +5925,7 @@
         },
         "type": {
           "type": "string",
-          "description": "Type of this filter. Possible values are INCLUDE, EXCLUDE, LOWERCASE, UPPERCASE, SEARCH_AND_REPLACE and ADVANCED.",
-          "annotations": {
-            "required": [
-              "analytics.management.filters.insert",
-              "analytics.management.filters.update"
-            ]
-          }
+          "description": "Type of this filter. Possible values are INCLUDE, EXCLUDE, LOWERCASE, UPPERCASE, SEARCH_AND_REPLACE and ADVANCED."
         },
         "updated": {
           "type": "string",
@@ -6023,7 +5946,6 @@
       }
     },
     "FilterExpression": {
-      "id": "FilterExpression",
       "type": "object",
       "description": "JSON template for an Analytics filter expression.",
       "properties": {
@@ -6051,7 +5973,6 @@
       }
     },
     "FilterRef": {
-      "id": "FilterRef",
       "type": "object",
       "description": "JSON template for a profile filter link.",
       "properties": {
@@ -6066,12 +5987,7 @@
         },
         "id": {
           "type": "string",
-          "description": "Filter ID.",
-          "annotations": {
-            "required": [
-              "analytics.management.profileFilterLinks.insert"
-            ]
-          }
+          "description": "Filter ID."
         },
         "kind": {
           "type": "string",
@@ -6086,7 +6002,6 @@
       }
     },
     "Filters": {
-      "id": "Filters",
       "type": "object",
       "description": "A filter collection lists filters created by users in an Analytics account. Each resource in the collection corresponds to a filter.",
       "properties": {
@@ -6132,7 +6047,6 @@
       }
     },
     "GaData": {
-      "id": "GaData",
       "type": "object",
       "description": "Analytics data for a given view (profile).",
       "properties": {
@@ -6352,7 +6266,6 @@
       }
     },
     "Goal": {
-      "id": "Goal",
       "type": "object",
       "description": "JSON template for Analytics goal resource.",
       "properties": {
@@ -6544,7 +6457,6 @@
       }
     },
     "Goals": {
-      "id": "Goals",
       "type": "object",
       "description": "A goal collection lists Analytics goals to which the user has access. Each view (profile) can have a set of goals. Each resource in the Goal collection corresponds to a single Analytics goal.",
       "properties": {
@@ -6590,7 +6502,6 @@
       }
     },
     "McfData": {
-      "id": "McfData",
       "type": "object",
       "description": "Multi-Channel Funnels data for a given view (profile).",
       "properties": {
@@ -6793,7 +6704,6 @@
       }
     },
     "Profile": {
-      "id": "Profile",
       "type": "object",
       "description": "JSON template for an Analytics view (profile).",
       "properties": {
@@ -6937,7 +6847,6 @@
       }
     },
     "ProfileFilterLink": {
-      "id": "ProfileFilterLink",
       "type": "object",
       "description": "JSON template for an Analytics profile filter link.",
       "properties": {
@@ -6972,7 +6881,6 @@
       }
     },
     "ProfileFilterLinks": {
-      "id": "ProfileFilterLinks",
       "type": "object",
       "description": "A profile filter link collection lists profile filter links between profiles and filters. Each resource in the collection corresponds to a profile filter link.",
       "properties": {
@@ -7018,7 +6926,6 @@
       }
     },
     "ProfileRef": {
-      "id": "ProfileRef",
       "type": "object",
       "description": "JSON template for a linked view (profile).",
       "properties": {
@@ -7054,7 +6961,6 @@
       }
     },
     "ProfileSummary": {
-      "id": "ProfileSummary",
       "type": "object",
       "description": "JSON template for an Analytics ProfileSummary. ProfileSummary returns basic information (i.e., summary) for a profile.",
       "properties": {
@@ -7078,7 +6984,6 @@
       }
     },
     "Profiles": {
-      "id": "Profiles",
       "type": "object",
       "description": "A view (profile) collection lists Analytics views (profiles) to which the user has access. Each resource in the collection corresponds to a single Analytics view (profile).",
       "properties": {
@@ -7124,7 +7029,6 @@
       }
     },
     "RealtimeData": {
-      "id": "RealtimeData",
       "type": "object",
       "description": "Real time data for a given view (profile).",
       "properties": {
@@ -7255,7 +7159,6 @@
       }
     },
     "Segment": {
-      "id": "Segment",
       "type": "object",
       "description": "JSON template for an Analytics segment.",
       "properties": {
@@ -7301,7 +7204,6 @@
       }
     },
     "Segments": {
-      "id": "Segments",
       "type": "object",
       "description": "An segment collection lists Analytics segments that the user has access to. Each resource in the collection corresponds to a single Analytics segment.",
       "properties": {
@@ -7347,7 +7249,6 @@
       }
     },
     "UnsampledReport": {
-      "id": "UnsampledReport",
       "type": "object",
       "description": "JSON template for Analytics unsampled report resource.",
       "properties": {
@@ -7398,13 +7299,7 @@
         },
         "end-date": {
           "type": "string",
-          "description": "The end date for the unsampled report.",
-          "annotations": {
-            "required": [
-              "analytics.management.filters.insert",
-              "analytics.management.unsampledReports.insert"
-            ]
-          }
+          "description": "The end date for the unsampled report."
         },
         "filters": {
           "type": "string",
@@ -7422,13 +7317,7 @@
         },
         "metrics": {
           "type": "string",
-          "description": "The metrics for the unsampled report.",
-          "annotations": {
-            "required": [
-              "analytics.management.filters.insert",
-              "analytics.management.unsampledReports.insert"
-            ]
-          }
+          "description": "The metrics for the unsampled report."
         },
         "profileId": {
           "type": "string",
@@ -7445,13 +7334,7 @@
         },
         "start-date": {
           "type": "string",
-          "description": "The start date for the unsampled report.",
-          "annotations": {
-            "required": [
-              "analytics.management.filters.insert",
-              "analytics.management.unsampledReports.insert"
-            ]
-          }
+          "description": "The start date for the unsampled report."
         },
         "status": {
           "type": "string",
@@ -7460,13 +7343,7 @@
         },
         "title": {
           "type": "string",
-          "description": "Title of the unsampled report.",
-          "annotations": {
-            "required": [
-              "analytics.management.filters.insert",
-              "analytics.management.unsampledReports.insert"
-            ]
-          }
+          "description": "Title of the unsampled report."
         },
         "updated": {
           "type": "string",
@@ -7481,7 +7358,6 @@
       }
     },
     "UnsampledReports": {
-      "id": "UnsampledReports",
       "type": "object",
       "description": "An unsampled report collection lists Analytics unsampled reports to which the user has access. Each view (profile) can have a set of unsampled reports. Each resource in the unsampled report collection corresponds to a single Analytics unsampled report.",
       "properties": {
@@ -7527,7 +7403,6 @@
       }
     },
     "Upload": {
-      "id": "Upload",
       "type": "object",
       "description": "Metadata returned for an upload operation.",
       "properties": {
@@ -7563,7 +7438,6 @@
       }
     },
     "Uploads": {
-      "id": "Uploads",
       "type": "object",
       "description": "Upload collection lists Analytics uploads to which the user has access. Each custom data source can have a set of uploads. Each resource in the upload collection corresponds to a single Analytics data upload.",
       "properties": {
@@ -7605,7 +7479,6 @@
       }
     },
     "UserRef": {
-      "id": "UserRef",
       "type": "object",
       "description": "JSON template for a user reference.",
       "properties": {
@@ -7624,7 +7497,6 @@
       }
     },
     "WebPropertyRef": {
-      "id": "WebPropertyRef",
       "type": "object",
       "description": "JSON template for a web property reference.",
       "properties": {
@@ -7656,7 +7528,6 @@
       }
     },
     "WebPropertySummary": {
-      "id": "WebPropertySummary",
       "type": "object",
       "description": "JSON template for an Analytics WebPropertySummary. WebPropertySummary returns basic information (i.e., summary) for a web property.",
       "properties": {
@@ -7695,7 +7566,6 @@
       }
     },
     "Webproperties": {
-      "id": "Webproperties",
       "type": "object",
       "description": "A web property collection lists Analytics web properties to which the user has access. Each resource in the collection corresponds to a single Analytics web property.",
       "properties": {
@@ -7741,7 +7611,6 @@
       }
     },
     "Webproperty": {
-      "id": "Webproperty",
       "type": "object",
       "description": "JSON template for an Analytics web property.",
       "properties": {

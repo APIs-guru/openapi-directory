@@ -549,7 +549,6 @@
   },
   "definitions": {
     "Cluster": {
-      "id": "Cluster",
       "type": "object",
       "properties": {
         "clusterApiVersion": {
@@ -618,12 +617,6 @@
             "provisioning",
             "running",
             "stopping"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "statusMessage": {
@@ -637,7 +630,6 @@
       }
     },
     "CreateClusterRequest": {
-      "id": "CreateClusterRequest",
       "type": "object",
       "properties": {
         "cluster": {
@@ -647,7 +639,6 @@
       }
     },
     "ListAggregatedClustersResponse": {
-      "id": "ListAggregatedClustersResponse",
       "type": "object",
       "properties": {
         "clusters": {
@@ -660,7 +651,6 @@
       }
     },
     "ListAggregatedOperationsResponse": {
-      "id": "ListAggregatedOperationsResponse",
       "type": "object",
       "properties": {
         "operations": {
@@ -673,7 +663,6 @@
       }
     },
     "ListClustersResponse": {
-      "id": "ListClustersResponse",
       "type": "object",
       "properties": {
         "clusters": {
@@ -686,7 +675,6 @@
       }
     },
     "ListOperationsResponse": {
-      "id": "ListOperationsResponse",
       "type": "object",
       "properties": {
         "operations": {
@@ -699,7 +687,6 @@
       }
     },
     "MasterAuth": {
-      "id": "MasterAuth",
       "type": "object",
       "description": "The authentication information for accessing the master. Authentication is either done using HTTP basic authentication or using a bearer token.",
       "properties": {
@@ -718,7 +705,6 @@
       }
     },
     "NodeConfig": {
-      "id": "NodeConfig",
       "type": "object",
       "properties": {
         "machineType": {
@@ -739,7 +725,6 @@
       }
     },
     "Operation": {
-      "id": "Operation",
       "type": "object",
       "description": "Defines the operation resource. All fields are output only.",
       "properties": {
@@ -757,10 +742,6 @@
           "enum": [
             "createCluster",
             "deleteCluster"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         },
         "selfLink": {
@@ -774,11 +755,6 @@
             "done",
             "pending",
             "running"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         },
         "target": {
@@ -796,7 +772,6 @@
       }
     },
     "ServiceAccount": {
-      "id": "ServiceAccount",
       "type": "object",
       "description": "A Compute Engine service account.",
       "properties": {
@@ -814,7 +789,6 @@
       }
     },
     "Token": {
-      "id": "Token",
       "type": "object",
       "properties": {
         "accessToken": {

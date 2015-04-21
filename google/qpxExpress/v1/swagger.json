@@ -58,7 +58,6 @@
   },
   "definitions": {
     "AircraftData": {
-      "id": "AircraftData",
       "type": "object",
       "description": "The make, model, and type of an aircraft.",
       "properties": {
@@ -78,7 +77,6 @@
       }
     },
     "AirportData": {
-      "id": "AirportData",
       "type": "object",
       "description": "An airport.",
       "properties": {
@@ -102,7 +100,6 @@
       }
     },
     "BagDescriptor": {
-      "id": "BagDescriptor",
       "type": "object",
       "description": "Information about an item of baggage.",
       "properties": {
@@ -134,7 +131,6 @@
       }
     },
     "CarrierData": {
-      "id": "CarrierData",
       "type": "object",
       "description": "Information about a carrier (ie. an airline, bus line, railroad, etc) that might be useful to display to an end-user.",
       "properties": {
@@ -154,7 +150,6 @@
       }
     },
     "CityData": {
-      "id": "CityData",
       "type": "object",
       "description": "Information about a city that might be useful to an end-user; typically the city of an airport.",
       "properties": {
@@ -178,7 +173,6 @@
       }
     },
     "Data": {
-      "id": "Data",
       "type": "object",
       "description": "Detailed information about components found in the solutions of this response, including a trip's airport, city, taxes, airline, and aircraft.",
       "properties": {
@@ -225,7 +219,6 @@
       }
     },
     "FareInfo": {
-      "id": "FareInfo",
       "type": "object",
       "description": "Complete information about a fare used in the solution to a low-fare search query. In the airline industry a fare is a price an airline charges for one-way travel between two points. A fare typically contains a carrier code, two city codes, a price, and a fare basis. (A fare basis is a one-to-eight character alphanumeric code used to identify a fare.)",
       "properties": {
@@ -260,7 +253,6 @@
       }
     },
     "FlightInfo": {
-      "id": "FlightInfo",
       "type": "object",
       "description": "A flight is a sequence of legs with the same airline carrier and flight number. (A leg is the smallest unit of travel, in the case of a flight a takeoff immediately followed by a landing at two set points on a particular carrier with a particular flight number.) The naive view is that a flight is scheduled travel of an aircraft between two points, with possibly intermediate stops, but carriers will frequently list flights that require a change of aircraft between legs.",
       "properties": {
@@ -274,7 +266,6 @@
       }
     },
     "FreeBaggageAllowance": {
-      "id": "FreeBaggageAllowance",
       "type": "object",
       "description": "Information about free baggage allowed on one segment of a trip.",
       "properties": {
@@ -313,7 +304,6 @@
       }
     },
     "LegInfo": {
-      "id": "LegInfo",
       "type": "object",
       "description": "Information about a leg. (A leg is the smallest unit of travel, in the case of a flight a takeoff immediately followed by a landing at two set points on a particular carrier with a particular flight number.)",
       "properties": {
@@ -393,7 +383,6 @@
       }
     },
     "PassengerCounts": {
-      "id": "PassengerCounts",
       "type": "object",
       "description": "The number and type of passengers. Unfortunately the definition of an infant, child, adult, and senior citizen varies across carriers and reservation systems.",
       "properties": {
@@ -430,7 +419,6 @@
       }
     },
     "PricingInfo": {
-      "id": "PricingInfo",
       "type": "object",
       "description": "The price of one or more travel segments. The currency used to purchase tickets is usually determined by the sale/ticketing city or the sale/ticketing country, unless none are specified, in which case it defaults to that of the journey origin country.",
       "properties": {
@@ -499,7 +487,6 @@
       }
     },
     "SegmentInfo": {
-      "id": "SegmentInfo",
       "type": "object",
       "description": "Details of a segment of a flight; a segment is one or more consecutive legs on the same flight. For example a hypothetical flight ZZ001, from DFW to OGG, would have one segment with two legs: DFW to HNL (leg 1), HNL to OGG (leg 2), and DFW to OGG (legs 1 and 2).",
       "properties": {
@@ -557,7 +544,6 @@
       }
     },
     "SegmentPricing": {
-      "id": "SegmentPricing",
       "type": "object",
       "description": "The price of this segment.",
       "properties": {
@@ -584,7 +570,6 @@
       }
     },
     "SliceInfo": {
-      "id": "SliceInfo",
       "type": "object",
       "description": "Information about a slice. A slice represents a traveller's intent, the portion of a low-fare search corresponding to a traveler's request to get between two points. One-way journeys are generally expressed using 1 slice, round-trips using 2. For example, if a traveler specifies the following trip in a user interface:\n| Origin | Destination | Departure Date | | BOS | LAX | March 10, 2007 | | LAX | SYD | March 17, 2007 | | SYD | BOS | March 22, 2007 |\nthen this is a three slice trip.",
       "properties": {
@@ -608,7 +593,6 @@
       }
     },
     "SliceInput": {
-      "id": "SliceInput",
       "type": "object",
       "description": "Criteria a desired slice must satisfy.",
       "properties": {
@@ -668,7 +652,6 @@
       }
     },
     "TaxData": {
-      "id": "TaxData",
       "type": "object",
       "description": "Tax data.",
       "properties": {
@@ -688,7 +671,6 @@
       }
     },
     "TaxInfo": {
-      "id": "TaxInfo",
       "type": "object",
       "description": "Tax information.",
       "properties": {
@@ -720,7 +702,6 @@
       }
     },
     "TimeOfDayRange": {
-      "id": "TimeOfDayRange",
       "type": "object",
       "description": "Two times in a single day defining a time range.",
       "properties": {
@@ -740,7 +721,6 @@
       }
     },
     "TripOption": {
-      "id": "TripOption",
       "type": "object",
       "description": "Trip information.",
       "properties": {
@@ -774,7 +754,6 @@
       }
     },
     "TripOptionsRequest": {
-      "id": "TripOptionsRequest",
       "type": "object",
       "description": "A QPX Express search request, which will yield one or more solutions.",
       "properties": {
@@ -809,7 +788,6 @@
       }
     },
     "TripOptionsResponse": {
-      "id": "TripOptionsResponse",
       "type": "object",
       "description": "A QPX Express search response.",
       "properties": {
@@ -836,7 +814,6 @@
       }
     },
     "TripsSearchRequest": {
-      "id": "TripsSearchRequest",
       "type": "object",
       "description": "A QPX Express search request.",
       "properties": {
@@ -847,7 +824,6 @@
       }
     },
     "TripsSearchResponse": {
-      "id": "TripsSearchResponse",
       "type": "object",
       "description": "A QPX Express search response.",
       "properties": {

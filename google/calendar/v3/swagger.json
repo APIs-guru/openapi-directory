@@ -2293,7 +2293,6 @@
   },
   "definitions": {
     "Acl": {
-      "id": "Acl",
       "type": "object",
       "properties": {
         "etag": {
@@ -2323,7 +2322,6 @@
       }
     },
     "AclRule": {
-      "id": "AclRule",
       "type": "object",
       "properties": {
         "etag": {
@@ -2341,12 +2339,7 @@
         },
         "role": {
           "type": "string",
-          "description": "The role assigned to the scope. Possible values are:  \n- \"none\" - Provides no access. \n- \"freeBusyReader\" - Provides read access to free/busy information. \n- \"reader\" - Provides read access to the calendar. Private events will appear to users with reader access, but event details will be hidden. \n- \"writer\" - Provides read and write access to the calendar. Private events will appear to users with writer access, and event details will be visible. \n- \"owner\" - Provides ownership of the calendar. This role has all of the permissions of the writer role with the additional ability to see and manipulate ACLs.",
-          "annotations": {
-            "required": [
-              "calendar.acl.insert"
-            ]
-          }
+          "description": "The role assigned to the scope. Possible values are:  \n- \"none\" - Provides no access. \n- \"freeBusyReader\" - Provides read access to free/busy information. \n- \"reader\" - Provides read access to the calendar. Private events will appear to users with reader access, but event details will be hidden. \n- \"writer\" - Provides read and write access to the calendar. Private events will appear to users with writer access, and event details will be visible. \n- \"owner\" - Provides ownership of the calendar. This role has all of the permissions of the writer role with the additional ability to see and manipulate ACLs."
         },
         "scope": {
           "type": "object",
@@ -2354,28 +2347,17 @@
           "properties": {
             "type": {
               "type": "string",
-              "description": "The type of the scope. Possible values are:  \n- \"default\" - The public scope. This is the default value. \n- \"user\" - Limits the scope to a single user. \n- \"group\" - Limits the scope to a group. \n- \"domain\" - Limits the scope to a domain.  Note: The permissions granted to the \"default\", or public, scope apply to any user, authenticated or not.",
-              "annotations": {
-                "required": [
-                  "calendar.acl.insert"
-                ]
-              }
+              "description": "The type of the scope. Possible values are:  \n- \"default\" - The public scope. This is the default value. \n- \"user\" - Limits the scope to a single user. \n- \"group\" - Limits the scope to a group. \n- \"domain\" - Limits the scope to a domain.  Note: The permissions granted to the \"default\", or public, scope apply to any user, authenticated or not."
             },
             "value": {
               "type": "string",
               "description": "The email address of a user or group, or the name of a domain, depending on the scope type. Omitted for type \"default\"."
             }
-          },
-          "annotations": {
-            "required": [
-              "calendar.acl.insert"
-            ]
           }
         }
       }
     },
     "Calendar": {
-      "id": "Calendar",
       "type": "object",
       "properties": {
         "description": {
@@ -2401,12 +2383,7 @@
         },
         "summary": {
           "type": "string",
-          "description": "Title of the calendar.",
-          "annotations": {
-            "required": [
-              "calendar.calendars.insert"
-            ]
-          }
+          "description": "Title of the calendar."
         },
         "timeZone": {
           "type": "string",
@@ -2415,7 +2392,6 @@
       }
     },
     "CalendarList": {
-      "id": "CalendarList",
       "type": "object",
       "properties": {
         "etag": {
@@ -2445,7 +2421,6 @@
       }
     },
     "CalendarListEntry": {
-      "id": "CalendarListEntry",
       "type": "object",
       "properties": {
         "accessRole": {
@@ -2491,12 +2466,7 @@
         },
         "id": {
           "type": "string",
-          "description": "Identifier of the calendar.",
-          "annotations": {
-            "required": [
-              "calendar.calendarList.insert"
-            ]
-          }
+          "description": "Identifier of the calendar."
         },
         "kind": {
           "type": "string",
@@ -2545,33 +2515,19 @@
       }
     },
     "CalendarNotification": {
-      "id": "CalendarNotification",
       "type": "object",
       "properties": {
         "method": {
           "type": "string",
-          "description": "The method used to deliver the notification. Possible values are:  \n- \"email\" - Reminders are sent via email. \n- \"sms\" - Reminders are sent via SMS. This value is read-only and is ignored on inserts and updates.",
-          "annotations": {
-            "required": [
-              "calendar.calendarList.insert",
-              "calendar.calendarList.update"
-            ]
-          }
+          "description": "The method used to deliver the notification. Possible values are:  \n- \"email\" - Reminders are sent via email. \n- \"sms\" - Reminders are sent via SMS. This value is read-only and is ignored on inserts and updates."
         },
         "type": {
           "type": "string",
-          "description": "The type of notification. Possible values are:  \n- \"eventCreation\" - Notification sent when a new event is put on the calendar. \n- \"eventChange\" - Notification sent when an event is changed. \n- \"eventCancellation\" - Notification sent when an event is cancelled. \n- \"eventResponse\" - Notification sent when an event is changed. \n- \"agenda\" - An agenda with the events of the day (sent out in the morning).",
-          "annotations": {
-            "required": [
-              "calendar.calendarList.insert",
-              "calendar.calendarList.update"
-            ]
-          }
+          "description": "The type of notification. Possible values are:  \n- \"eventCreation\" - Notification sent when a new event is put on the calendar. \n- \"eventChange\" - Notification sent when an event is changed. \n- \"eventCancellation\" - Notification sent when an event is cancelled. \n- \"eventResponse\" - Notification sent when an event is changed. \n- \"agenda\" - An agenda with the events of the day (sent out in the morning)."
         }
       }
     },
     "Channel": {
-      "id": "Channel",
       "type": "object",
       "properties": {
         "address": {
@@ -2623,7 +2579,6 @@
       }
     },
     "ColorDefinition": {
-      "id": "ColorDefinition",
       "type": "object",
       "properties": {
         "background": {
@@ -2637,7 +2592,6 @@
       }
     },
     "Colors": {
-      "id": "Colors",
       "type": "object",
       "properties": {
         "calendar": {
@@ -2669,7 +2623,6 @@
       }
     },
     "Error": {
-      "id": "Error",
       "type": "object",
       "properties": {
         "domain": {
@@ -2683,7 +2636,6 @@
       }
     },
     "Event": {
-      "id": "Event",
       "type": "object",
       "properties": {
         "anyoneCanAddSelf": {
@@ -2741,14 +2693,7 @@
         },
         "end": {
           "$ref": "#/definitions/EventDateTime",
-          "description": "The (exclusive) end time of the event. For a recurring event, this is the end time of the first instance.",
-          "annotations": {
-            "required": [
-              "calendar.events.import",
-              "calendar.events.insert",
-              "calendar.events.update"
-            ]
-          }
+          "description": "The (exclusive) end time of the event. For a recurring event, this is the end time of the first instance."
         },
         "endTimeUnspecified": {
           "type": "boolean",
@@ -2850,12 +2795,7 @@
         },
         "iCalUID": {
           "type": "string",
-          "description": "Event ID in the iCalendar format.",
-          "annotations": {
-            "required": [
-              "calendar.events.import"
-            ]
-          }
+          "description": "Event ID in the iCalendar format."
         },
         "id": {
           "type": "string",
@@ -2956,14 +2896,7 @@
         },
         "start": {
           "$ref": "#/definitions/EventDateTime",
-          "description": "The (inclusive) start time of the event. For a recurring event, this is the start time of the first instance.",
-          "annotations": {
-            "required": [
-              "calendar.events.import",
-              "calendar.events.insert",
-              "calendar.events.update"
-            ]
-          }
+          "description": "The (inclusive) start time of the event. For a recurring event, this is the start time of the first instance."
         },
         "status": {
           "type": "string",
@@ -2991,11 +2924,9 @@
       }
     },
     "EventAttachment": {
-      "id": "EventAttachment",
       "type": "object"
     },
     "EventAttendee": {
-      "id": "EventAttendee",
       "type": "object",
       "properties": {
         "additionalGuests": {
@@ -3014,14 +2945,7 @@
         },
         "email": {
           "type": "string",
-          "description": "The attendee's email address, if available. This field must be present when adding an attendee.",
-          "annotations": {
-            "required": [
-              "calendar.events.import",
-              "calendar.events.insert",
-              "calendar.events.update"
-            ]
-          }
+          "description": "The attendee's email address, if available. This field must be present when adding an attendee."
         },
         "id": {
           "type": "string",
@@ -3053,7 +2977,6 @@
       }
     },
     "EventDateTime": {
-      "id": "EventDateTime",
       "type": "object",
       "properties": {
         "date": {
@@ -3073,40 +2996,20 @@
       }
     },
     "EventReminder": {
-      "id": "EventReminder",
       "type": "object",
       "properties": {
         "method": {
           "type": "string",
-          "description": "The method used by this reminder. Possible values are:  \n- \"email\" - Reminders are sent via email. \n- \"sms\" - Reminders are sent via SMS. \n- \"popup\" - Reminders are sent via a UI popup.",
-          "annotations": {
-            "required": [
-              "calendar.calendarList.insert",
-              "calendar.calendarList.update",
-              "calendar.events.import",
-              "calendar.events.insert",
-              "calendar.events.update"
-            ]
-          }
+          "description": "The method used by this reminder. Possible values are:  \n- \"email\" - Reminders are sent via email. \n- \"sms\" - Reminders are sent via SMS. \n- \"popup\" - Reminders are sent via a UI popup."
         },
         "minutes": {
           "type": "integer",
           "description": "Number of minutes before the start of the event when the reminder should trigger.",
-          "format": "int32",
-          "annotations": {
-            "required": [
-              "calendar.calendarList.insert",
-              "calendar.calendarList.update",
-              "calendar.events.import",
-              "calendar.events.insert",
-              "calendar.events.update"
-            ]
-          }
+          "format": "int32"
         }
       }
     },
     "Events": {
-      "id": "Events",
       "type": "object",
       "properties": {
         "accessRole": {
@@ -3164,7 +3067,6 @@
       }
     },
     "FreeBusyCalendar": {
-      "id": "FreeBusyCalendar",
       "type": "object",
       "properties": {
         "busy": {
@@ -3184,7 +3086,6 @@
       }
     },
     "FreeBusyGroup": {
-      "id": "FreeBusyGroup",
       "type": "object",
       "properties": {
         "calendars": {
@@ -3204,7 +3105,6 @@
       }
     },
     "FreeBusyRequest": {
-      "id": "FreeBusyRequest",
       "type": "object",
       "properties": {
         "calendarExpansionMax": {
@@ -3242,7 +3142,6 @@
       }
     },
     "FreeBusyRequestItem": {
-      "id": "FreeBusyRequestItem",
       "type": "object",
       "properties": {
         "id": {
@@ -3252,7 +3151,6 @@
       }
     },
     "FreeBusyResponse": {
-      "id": "FreeBusyResponse",
       "type": "object",
       "properties": {
         "calendars": {
@@ -3289,7 +3187,6 @@
       }
     },
     "Setting": {
-      "id": "Setting",
       "type": "object",
       "properties": {
         "etag": {
@@ -3312,7 +3209,6 @@
       }
     },
     "Settings": {
-      "id": "Settings",
       "type": "object",
       "properties": {
         "etag": {
@@ -3342,7 +3238,6 @@
       }
     },
     "TimePeriod": {
-      "id": "TimePeriod",
       "type": "object",
       "properties": {
         "end": {

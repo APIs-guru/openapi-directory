@@ -1232,7 +1232,6 @@
   },
   "definitions": {
     "Bucket": {
-      "id": "Bucket",
       "type": "object",
       "description": "A bucket.",
       "properties": {
@@ -1241,11 +1240,6 @@
           "description": "Access controls on the bucket.",
           "items": {
             "$ref": "#/definitions/BucketAccessControl"
-          },
-          "annotations": {
-            "required": [
-              "storage.buckets.update"
-            ]
           }
         },
         "defaultObjectAcl": {
@@ -1257,12 +1251,7 @@
         },
         "id": {
           "type": "string",
-          "description": "The name of the bucket.",
-          "annotations": {
-            "required": [
-              "storage.buckets.insert"
-            ]
-          }
+          "description": "The name of the bucket."
         },
         "kind": {
           "type": "string",
@@ -1290,12 +1279,7 @@
         "projectId": {
           "type": "string",
           "description": "The project the bucket belongs to.",
-          "format": "uint64",
-          "annotations": {
-            "required": [
-              "storage.buckets.insert"
-            ]
-          }
+          "format": "uint64"
         },
         "selfLink": {
           "type": "string",
@@ -1323,7 +1307,6 @@
       }
     },
     "BucketAccessControl": {
-      "id": "BucketAccessControl",
       "type": "object",
       "description": "An access-control entry.",
       "properties": {
@@ -1341,12 +1324,7 @@
         },
         "entity": {
           "type": "string",
-          "description": "The entity holding the permission, in one of the following forms: \n- user-userId \n- user-email \n- group-groupId \n- group-email \n- domain-domain \n- allUsers \n- allAuthenticatedUsers Examples: \n- The user liz@example.com would be user-liz@example.com. \n- The group example@googlegroups.com would be group-example@googlegroups.com. \n- To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com.",
-          "annotations": {
-            "required": [
-              "storage.bucketAccessControls.insert"
-            ]
-          }
+          "description": "The entity holding the permission, in one of the following forms: \n- user-userId \n- user-email \n- group-groupId \n- group-email \n- domain-domain \n- allUsers \n- allAuthenticatedUsers Examples: \n- The user liz@example.com would be user-liz@example.com. \n- The group example@googlegroups.com would be group-example@googlegroups.com. \n- To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com."
         },
         "entityId": {
           "type": "string",
@@ -1363,12 +1341,7 @@
         },
         "role": {
           "type": "string",
-          "description": "The access permission for the entity. Can be READER, WRITER, or OWNER.",
-          "annotations": {
-            "required": [
-              "storage.bucketAccessControls.insert"
-            ]
-          }
+          "description": "The access permission for the entity. Can be READER, WRITER, or OWNER."
         },
         "selfLink": {
           "type": "string",
@@ -1377,7 +1350,6 @@
       }
     },
     "BucketAccessControls": {
-      "id": "BucketAccessControls",
       "type": "object",
       "description": "An access-control list.",
       "properties": {
@@ -1396,7 +1368,6 @@
       }
     },
     "Buckets": {
-      "id": "Buckets",
       "type": "object",
       "description": "A list of buckets.",
       "properties": {
@@ -1419,7 +1390,6 @@
       }
     },
     "Object": {
-      "id": "Object",
       "type": "object",
       "description": "An object.",
       "properties": {
@@ -1428,11 +1398,6 @@
           "description": "Access controls on the object.",
           "items": {
             "$ref": "#/definitions/ObjectAccessControl"
-          },
-          "annotations": {
-            "required": [
-              "storage.objects.update"
-            ]
           }
         },
         "bucket": {
@@ -1475,23 +1440,12 @@
             },
             "contentType": {
               "type": "string",
-              "description": "Content-Type of the object data.",
-              "annotations": {
-                "required": [
-                  "storage.objects.insert",
-                  "storage.objects.update"
-                ]
-              }
+              "description": "Content-Type of the object data."
             },
             "data": {
               "type": "string",
               "description": "URL-safe Base64-encoded data. This property can be used to insert objects under 64KB in size, and will only be returned in response to the get method for objects so created. When this resource is returned in response to the list method, this property is omitted.",
-              "format": "byte",
-              "annotations": {
-                "required": [
-                  "storage.objects.insert"
-                ]
-              }
+              "format": "byte"
             },
             "hash": {
               "type": "string",
@@ -1546,7 +1500,6 @@
       }
     },
     "ObjectAccessControl": {
-      "id": "ObjectAccessControl",
       "type": "object",
       "description": "An access-control entry.",
       "properties": {
@@ -1564,12 +1517,7 @@
         },
         "entity": {
           "type": "string",
-          "description": "The entity holding the permission, in one of the following forms: \n- user-userId \n- user-email \n- group-groupId \n- group-email \n- domain-domain \n- allUsers \n- allAuthenticatedUsers Examples: \n- The user liz@example.com would be user-liz@example.com. \n- The group example@googlegroups.com would be group-example@googlegroups.com. \n- To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com.",
-          "annotations": {
-            "required": [
-              "storage.objectAccessControls.insert"
-            ]
-          }
+          "description": "The entity holding the permission, in one of the following forms: \n- user-userId \n- user-email \n- group-groupId \n- group-email \n- domain-domain \n- allUsers \n- allAuthenticatedUsers Examples: \n- The user liz@example.com would be user-liz@example.com. \n- The group example@googlegroups.com would be group-example@googlegroups.com. \n- To refer to all members of the Google Apps for Business domain example.com, the entity would be domain-example.com."
         },
         "entityId": {
           "type": "string",
@@ -1590,12 +1538,7 @@
         },
         "role": {
           "type": "string",
-          "description": "The access permission for the entity. Can be READER or OWNER.",
-          "annotations": {
-            "required": [
-              "storage.objectAccessControls.insert"
-            ]
-          }
+          "description": "The access permission for the entity. Can be READER or OWNER."
         },
         "selfLink": {
           "type": "string",
@@ -1604,7 +1547,6 @@
       }
     },
     "ObjectAccessControls": {
-      "id": "ObjectAccessControls",
       "type": "object",
       "description": "An access-control list.",
       "properties": {
@@ -1623,7 +1565,6 @@
       }
     },
     "Objects": {
-      "id": "Objects",
       "type": "object",
       "description": "A list of objects.",
       "properties": {

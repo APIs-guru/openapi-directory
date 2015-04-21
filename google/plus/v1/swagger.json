@@ -896,7 +896,6 @@
   },
   "definitions": {
     "Acl": {
-      "id": "Acl",
       "type": "object",
       "properties": {
         "description": {
@@ -918,7 +917,6 @@
       }
     },
     "Activity": {
-      "id": "Activity",
       "type": "object",
       "properties": {
         "access": {
@@ -1278,7 +1276,6 @@
       }
     },
     "ActivityFeed": {
-      "id": "ActivityFeed",
       "type": "object",
       "properties": {
         "etag": {
@@ -1325,7 +1322,6 @@
       }
     },
     "Comment": {
-      "id": "Comment",
       "type": "object",
       "properties": {
         "actor": {
@@ -1438,7 +1434,6 @@
       }
     },
     "CommentFeed": {
-      "id": "CommentFeed",
       "type": "object",
       "properties": {
         "etag": {
@@ -1481,7 +1476,6 @@
       }
     },
     "ItemScope": {
-      "id": "ItemScope",
       "type": "object",
       "properties": {
         "about": {
@@ -1729,7 +1723,6 @@
       }
     },
     "Moment": {
-      "id": "Moment",
       "type": "object",
       "properties": {
         "id": {
@@ -1743,12 +1736,7 @@
         },
         "object": {
           "$ref": "#/definitions/ItemScope",
-          "description": "The object on which the action was performed. Specifying this is equivalent with specifying \"target\". Note that responses from the server will use the \"target\" field instead for backward-compatibility with older clients.",
-          "annotations": {
-            "required": [
-              "plus.moments.insert"
-            ]
-          }
+          "description": "The object on which the action was performed. Specifying this is equivalent with specifying \"target\". Note that responses from the server will use the \"target\" field instead for backward-compatibility with older clients."
         },
         "result": {
           "$ref": "#/definitions/ItemScope",
@@ -1761,26 +1749,15 @@
         },
         "target": {
           "$ref": "#/definitions/ItemScope",
-          "description": "The object on which the action was performed.",
-          "annotations": {
-            "required": [
-              "plus.moments.insert"
-            ]
-          }
+          "description": "The object on which the action was performed."
         },
         "type": {
           "type": "string",
-          "description": "The schema.org type for the type of moment to write. For example, http://schema.org/AddAction. Note that responses from the server will use the Google schema type instead for backward-compatibility with older clients. For example, http://schemas.google.com/AddActivity.",
-          "annotations": {
-            "required": [
-              "plus.moments.insert"
-            ]
-          }
+          "description": "The schema.org type for the type of moment to write. For example, http://schema.org/AddAction. Note that responses from the server will use the Google schema type instead for backward-compatibility with older clients. For example, http://schemas.google.com/AddActivity."
         }
       }
     },
     "MomentsFeed": {
-      "id": "MomentsFeed",
       "type": "object",
       "properties": {
         "etag": {
@@ -1823,7 +1800,6 @@
       }
     },
     "PeopleFeed": {
-      "id": "PeopleFeed",
       "type": "object",
       "properties": {
         "etag": {
@@ -1862,7 +1838,6 @@
       }
     },
     "Person": {
-      "id": "Person",
       "type": "object",
       "properties": {
         "aboutMe": {
@@ -2165,7 +2140,6 @@
       }
     },
     "Place": {
-      "id": "Place",
       "type": "object",
       "properties": {
         "address": {
@@ -2210,7 +2184,6 @@
       }
     },
     "PlusAclentryResource": {
-      "id": "PlusAclentryResource",
       "type": "object",
       "properties": {
         "displayName": {

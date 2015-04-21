@@ -258,7 +258,6 @@
   },
   "definitions": {
     "AntennaCharacteristics": {
-      "id": "AntennaCharacteristics",
       "type": "object",
       "description": "Antenna characteristics provide additional information, such as the antenna height, antenna type, etc. Whether antenna characteristics must be provided in a request depends on the device type and regulatory domain.",
       "properties": {
@@ -279,7 +278,6 @@
       }
     },
     "DatabaseSpec": {
-      "id": "DatabaseSpec",
       "type": "object",
       "description": "This message contains the name and URI of a database.",
       "properties": {
@@ -294,7 +292,6 @@
       }
     },
     "DbUpdateSpec": {
-      "id": "DbUpdateSpec",
       "type": "object",
       "description": "This message is provided by the database to notify devices of an upcoming change to the database URI.",
       "properties": {
@@ -308,7 +305,6 @@
       }
     },
     "DeviceCapabilities": {
-      "id": "DeviceCapabilities",
       "type": "object",
       "description": "Device capabilities provide additional information that may be used by a device to provide additional information to the database that may help it to determine available spectrum. If the database does not support device capabilities it will ignore the parameter altogether.",
       "properties": {
@@ -322,7 +318,6 @@
       }
     },
     "DeviceDescriptor": {
-      "id": "DeviceDescriptor",
       "type": "object",
       "description": "The device descriptor contains parameters that identify the specific device, such as its manufacturer serial number, regulatory-specific identifier (e.g., FCC ID), and any other device characteristics required by regulatory domains.",
       "properties": {
@@ -372,7 +367,6 @@
       }
     },
     "DeviceOwner": {
-      "id": "DeviceOwner",
       "type": "object",
       "description": "This parameter contains device-owner information required as part of device registration. The regulatory domains may require additional parameters.\n\nAll contact information must be expressed using the structure defined by the vCard format specification. Only the contact fields of vCard are supported:  \n- fn: Full name of an individual \n- org: Name of the organization \n- adr: Address fields \n- tel: Telephone numbers \n- email: Email addresses  \n\nNote that the vCard specification defines maximum lengths for each field.",
       "properties": {
@@ -387,7 +381,6 @@
       }
     },
     "DeviceValidity": {
-      "id": "DeviceValidity",
       "type": "object",
       "description": "The device validity element describes whether a particular device is valid to operate in the regulatory domain.",
       "properties": {
@@ -406,7 +399,6 @@
       }
     },
     "EventTime": {
-      "id": "EventTime",
       "type": "object",
       "description": "The start and stop times of an event. This is used to indicate the time period for which a spectrum profile is valid.\n\nBoth times are expressed using the format, YYYY-MM-DDThh:mm:ssZ, as defined in RFC3339. The times must be expressed using UTC.",
       "properties": {
@@ -421,7 +413,6 @@
       }
     },
     "FrequencyRange": {
-      "id": "FrequencyRange",
       "type": "object",
       "description": "A specific range of frequencies together with the associated maximum power level and channel identifier.",
       "properties": {
@@ -447,7 +438,6 @@
       }
     },
     "GeoLocation": {
-      "id": "GeoLocation",
       "type": "object",
       "description": "This parameter is used to specify the geolocation of the device.",
       "properties": {
@@ -467,7 +457,6 @@
       }
     },
     "GeoLocationEllipse": {
-      "id": "GeoLocationEllipse",
       "type": "object",
       "description": "A \"point\" with uncertainty is represented using the Ellipse shape.",
       "properties": {
@@ -493,7 +482,6 @@
       }
     },
     "GeoLocationPoint": {
-      "id": "GeoLocationPoint",
       "type": "object",
       "description": "A single geolocation on the globe.",
       "properties": {
@@ -510,7 +498,6 @@
       }
     },
     "GeoLocationPolygon": {
-      "id": "GeoLocationPolygon",
       "type": "object",
       "description": "A region is represented using the polygonal shape.",
       "properties": {
@@ -524,7 +511,6 @@
       }
     },
     "GeoSpectrumSchedule": {
-      "id": "GeoSpectrumSchedule",
       "type": "object",
       "description": "The schedule of spectrum profiles available at a particular geolocation.",
       "properties": {
@@ -542,7 +528,6 @@
       }
     },
     "PawsGetSpectrumBatchRequest": {
-      "id": "PawsGetSpectrumBatchRequest",
       "type": "object",
       "description": "The request message for a batch available spectrum query protocol.",
       "properties": {
@@ -588,7 +573,6 @@
       }
     },
     "PawsGetSpectrumBatchResponse": {
-      "id": "PawsGetSpectrumBatchResponse",
       "type": "object",
       "description": "The response message for the batch available spectrum query contains a schedule of available spectrum for the device at multiple locations.",
       "properties": {
@@ -645,7 +629,6 @@
       }
     },
     "PawsGetSpectrumRequest": {
-      "id": "PawsGetSpectrumRequest",
       "type": "object",
       "description": "The request message for the available spectrum query protocol which must include the device's geolocation.",
       "properties": {
@@ -688,7 +671,6 @@
       }
     },
     "PawsGetSpectrumResponse": {
-      "id": "PawsGetSpectrumResponse",
       "type": "object",
       "description": "The response message for the available spectrum query which contains a schedule of available spectrum for the device.",
       "properties": {
@@ -745,7 +727,6 @@
       }
     },
     "PawsInitRequest": {
-      "id": "PawsInitRequest",
       "type": "object",
       "description": "The initialization request message allows the master device to initiate exchange of capabilities with the database.",
       "properties": {
@@ -768,7 +749,6 @@
       }
     },
     "PawsInitResponse": {
-      "id": "PawsInitResponse",
       "type": "object",
       "description": "The initialization response message communicates database parameters to the requesting device.",
       "properties": {
@@ -796,7 +776,6 @@
       }
     },
     "PawsNotifySpectrumUseRequest": {
-      "id": "PawsNotifySpectrumUseRequest",
       "type": "object",
       "description": "The spectrum-use notification message which must contain the geolocation of the Device and parameters required by the regulatory domain.",
       "properties": {
@@ -826,7 +805,6 @@
       }
     },
     "PawsNotifySpectrumUseResponse": {
-      "id": "PawsNotifySpectrumUseResponse",
       "type": "object",
       "description": "An empty response to the notification.",
       "properties": {
@@ -846,7 +824,6 @@
       }
     },
     "PawsRegisterRequest": {
-      "id": "PawsRegisterRequest",
       "type": "object",
       "description": "The registration request message contains the required registration parameters.",
       "properties": {
@@ -877,7 +854,6 @@
       }
     },
     "PawsRegisterResponse": {
-      "id": "PawsRegisterResponse",
       "type": "object",
       "description": "The registration response message simply acknowledges receipt of the request and is otherwise empty.",
       "properties": {
@@ -901,7 +877,6 @@
       }
     },
     "PawsVerifyDeviceRequest": {
-      "id": "PawsVerifyDeviceRequest",
       "type": "object",
       "description": "The device validation request message.",
       "properties": {
@@ -923,7 +898,6 @@
       }
     },
     "PawsVerifyDeviceResponse": {
-      "id": "PawsVerifyDeviceResponse",
       "type": "object",
       "description": "The device validation response message.",
       "properties": {
@@ -954,7 +928,6 @@
       }
     },
     "RulesetInfo": {
-      "id": "RulesetInfo",
       "type": "object",
       "description": "This contains parameters for the ruleset of a regulatory domain that is communicated using the initialization and available-spectrum processes.",
       "properties": {
@@ -982,7 +955,6 @@
       }
     },
     "SpectrumMessage": {
-      "id": "SpectrumMessage",
       "type": "object",
       "description": "Available spectrum can be logically characterized by a list of frequency ranges and permissible power levels for each range.",
       "properties": {
@@ -1001,7 +973,6 @@
       }
     },
     "SpectrumSchedule": {
-      "id": "SpectrumSchedule",
       "type": "object",
       "description": "The spectrum schedule element combines an event time with spectrum profile to define a time period in which the profile is valid.",
       "properties": {
@@ -1019,7 +990,6 @@
       }
     },
     "Vcard": {
-      "id": "Vcard",
       "type": "object",
       "description": "A vCard-in-JSON message that contains only the fields needed for PAWS:  \n- fn: Full name of an individual \n- org: Name of the organization \n- adr: Address fields \n- tel: Telephone numbers \n- email: Email addresses",
       "properties": {
@@ -1046,7 +1016,6 @@
       }
     },
     "VcardAddress": {
-      "id": "VcardAddress",
       "type": "object",
       "description": "The structure used to represent a street address.",
       "properties": {
@@ -1077,7 +1046,6 @@
       }
     },
     "VcardTelephone": {
-      "id": "VcardTelephone",
       "type": "object",
       "description": "The structure used to represent a telephone number.",
       "properties": {
@@ -1088,7 +1056,6 @@
       }
     },
     "VcardTypedText": {
-      "id": "VcardTypedText",
       "type": "object",
       "description": "The structure used to represent an organization and an email address.",
       "properties": {

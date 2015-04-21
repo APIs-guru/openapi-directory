@@ -2722,7 +2722,6 @@
   },
   "definitions": {
     "AlignReadGroupSetsRequest": {
-      "id": "AlignReadGroupSetsRequest",
       "type": "object",
       "description": "The read group set align request.",
       "properties": {
@@ -2752,7 +2751,6 @@
       }
     },
     "AlignReadGroupSetsResponse": {
-      "id": "AlignReadGroupSetsResponse",
       "type": "object",
       "description": "The read group set align response.",
       "properties": {
@@ -2763,7 +2761,6 @@
       }
     },
     "Annotation": {
-      "id": "Annotation",
       "type": "object",
       "description": "An annotation describes a region of reference genome. The value of an annotation may be one of several canonical types, supplemented by arbitrary info tags. A variant annotation is represented by one or more of these canonical types. An annotation is not inherently associated with a specific sample or individual (though a client could choose to use annotations in this way). Example canonical annotation types are 'Gene' and 'Variant'.",
       "properties": {
@@ -2806,12 +2803,6 @@
             "GENERIC",
             "TRANSCRIPT",
             "VARIANT"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "variant": {
@@ -2821,7 +2812,6 @@
       }
     },
     "AnnotationSet": {
-      "id": "AnnotationSet",
       "type": "object",
       "description": "An annotation set is a logical grouping of annotations that share consistent type information and provenance. Examples of annotation sets include 'all genes from refseq', and 'all variant annotations from ClinVar'.",
       "properties": {
@@ -2864,18 +2854,11 @@
             "GENERIC",
             "TRANSCRIPT",
             "VARIANT"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "BatchAnnotationsResponse": {
-      "id": "BatchAnnotationsResponse",
       "type": "object",
       "properties": {
         "entries": {
@@ -2888,7 +2871,6 @@
       }
     },
     "BatchAnnotationsResponseEntry": {
-      "id": "BatchAnnotationsResponseEntry",
       "type": "object",
       "properties": {
         "annotation": {
@@ -2902,7 +2884,6 @@
       }
     },
     "BatchAnnotationsResponseEntryStatus": {
-      "id": "BatchAnnotationsResponseEntryStatus",
       "type": "object",
       "description": "",
       "properties": {
@@ -2918,7 +2899,6 @@
       }
     },
     "BatchCreateAnnotationsRequest": {
-      "id": "BatchCreateAnnotationsRequest",
       "type": "object",
       "properties": {
         "annotations": {
@@ -2931,7 +2911,6 @@
       }
     },
     "Call": {
-      "id": "Call",
       "type": "object",
       "description": "A call represents the determination of genotype with respect to a particular variant. It may include associated information such as quality and phasing. For example, a call might assign a probability of 0.32 to the occurrence of a SNP named rs1234 in a call set with the name NA12345.",
       "properties": {
@@ -2977,7 +2956,6 @@
       }
     },
     "CallReadGroupSetsRequest": {
-      "id": "CallReadGroupSetsRequest",
       "type": "object",
       "description": "The read group set call request.",
       "properties": {
@@ -2999,7 +2977,6 @@
       }
     },
     "CallReadGroupSetsResponse": {
-      "id": "CallReadGroupSetsResponse",
       "type": "object",
       "description": "The read group set call response.",
       "properties": {
@@ -3010,7 +2987,6 @@
       }
     },
     "CallSet": {
-      "id": "CallSet",
       "type": "object",
       "description": "A call set is a collection of variant calls, typically for one sample. It belongs to a variant set.",
       "properties": {
@@ -3052,7 +3028,6 @@
       }
     },
     "CigarUnit": {
-      "id": "CigarUnit",
       "type": "object",
       "description": "A single CIGAR operation.",
       "properties": {
@@ -3068,17 +3043,6 @@
             "SEQUENCE_MATCH",
             "SEQUENCE_MISMATCH",
             "SKIP"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "operationLength": {
@@ -3093,7 +3057,6 @@
       }
     },
     "CoverageBucket": {
-      "id": "CoverageBucket",
       "type": "object",
       "description": "A bucket over which read coverage has been precomputed. A bucket corresponds to a specific range of the reference sequence.",
       "properties": {
@@ -3109,7 +3072,6 @@
       }
     },
     "Dataset": {
-      "id": "Dataset",
       "type": "object",
       "description": "A Dataset is a collection of genomic data.",
       "properties": {
@@ -3133,7 +3095,6 @@
       }
     },
     "ExperimentalCreateJobRequest": {
-      "id": "ExperimentalCreateJobRequest",
       "type": "object",
       "description": "The job creation request.",
       "properties": {
@@ -3171,7 +3132,6 @@
       }
     },
     "ExperimentalCreateJobResponse": {
-      "id": "ExperimentalCreateJobResponse",
       "type": "object",
       "description": "The job creation response.",
       "properties": {
@@ -3182,7 +3142,6 @@
       }
     },
     "ExportReadGroupSetsRequest": {
-      "id": "ExportReadGroupSetsRequest",
       "type": "object",
       "description": "The read group set export request.",
       "properties": {
@@ -3212,7 +3171,6 @@
       }
     },
     "ExportReadGroupSetsResponse": {
-      "id": "ExportReadGroupSetsResponse",
       "type": "object",
       "description": "The read group set export response.",
       "properties": {
@@ -3223,7 +3181,6 @@
       }
     },
     "ExportVariantSetRequest": {
-      "id": "ExportVariantSetRequest",
       "type": "object",
       "description": "The variant data export request.",
       "properties": {
@@ -3247,9 +3204,6 @@
           "description": "The format for the exported data.",
           "enum": [
             "BIGQUERY"
-          ],
-          "enumDescriptions": [
-            ""
           ]
         },
         "projectNumber": {
@@ -3260,7 +3214,6 @@
       }
     },
     "ExportVariantSetResponse": {
-      "id": "ExportVariantSetResponse",
       "type": "object",
       "description": "The variant data export response.",
       "properties": {
@@ -3271,7 +3224,6 @@
       }
     },
     "ExternalId": {
-      "id": "ExternalId",
       "type": "object",
       "description": "",
       "properties": {
@@ -3286,7 +3238,6 @@
       }
     },
     "FastqMetadata": {
-      "id": "FastqMetadata",
       "type": "object",
       "properties": {
         "libraryName": {
@@ -3312,7 +3263,6 @@
       }
     },
     "ImportReadGroupSetsRequest": {
-      "id": "ImportReadGroupSetsRequest",
       "type": "object",
       "description": "The read group set import request.",
       "properties": {
@@ -3326,10 +3276,6 @@
           "enum": [
             "MERGE_ALL",
             "PER_FILE_PER_SAMPLE"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         },
         "referenceSetId": {
@@ -3346,7 +3292,6 @@
       }
     },
     "ImportReadGroupSetsResponse": {
-      "id": "ImportReadGroupSetsResponse",
       "type": "object",
       "description": "The read group set import response.",
       "properties": {
@@ -3357,7 +3302,6 @@
       }
     },
     "ImportVariantsRequest": {
-      "id": "ImportVariantsRequest",
       "type": "object",
       "description": "The variant data import request.",
       "properties": {
@@ -3367,10 +3311,6 @@
           "enum": [
             "COMPLETE_GENOMICS",
             "VCF"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         },
         "sourceUris": {
@@ -3383,7 +3323,6 @@
       }
     },
     "ImportVariantsResponse": {
-      "id": "ImportVariantsResponse",
       "type": "object",
       "description": "The variant data import response.",
       "properties": {
@@ -3394,7 +3333,6 @@
       }
     },
     "Int32Value": {
-      "id": "Int32Value",
       "type": "object",
       "description": "Wrapper message for int32.",
       "properties": {
@@ -3406,7 +3344,6 @@
       }
     },
     "InterleavedFastqSource": {
-      "id": "InterleavedFastqSource",
       "type": "object",
       "description": "Describes an interleaved FASTQ file source for alignment.",
       "properties": {
@@ -3424,7 +3361,6 @@
       }
     },
     "Job": {
-      "id": "Job",
       "type": "object",
       "description": "A Job represents an ongoing process that can be monitored for status information.",
       "properties": {
@@ -3475,15 +3411,6 @@
             "RUNNING",
             "SUCCESS",
             "UNKNOWN_STATUS"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "warnings": {
@@ -3496,7 +3423,6 @@
       }
     },
     "JobRequest": {
-      "id": "JobRequest",
       "type": "object",
       "description": "A summary representation of the service request that spawned the job.",
       "properties": {
@@ -3526,22 +3452,11 @@
             "IMPORT_READSETS",
             "IMPORT_VARIANTS",
             "UNKNOWN_TYPE"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "LinearAlignment": {
-      "id": "LinearAlignment",
       "type": "object",
       "description": "A linear alignment can be represented by one CIGAR string. Describes the mapped position and local alignment of the read to the reference.",
       "properties": {
@@ -3564,7 +3479,6 @@
       }
     },
     "ListBasesResponse": {
-      "id": "ListBasesResponse",
       "type": "object",
       "properties": {
         "nextPageToken": {
@@ -3583,7 +3497,6 @@
       }
     },
     "ListCoverageBucketsResponse": {
-      "id": "ListCoverageBucketsResponse",
       "type": "object",
       "properties": {
         "bucketWidth": {
@@ -3605,7 +3518,6 @@
       }
     },
     "ListDatasetsResponse": {
-      "id": "ListDatasetsResponse",
       "type": "object",
       "description": "The dataset list response.",
       "properties": {
@@ -3623,7 +3535,6 @@
       }
     },
     "MergeVariantsRequest": {
-      "id": "MergeVariantsRequest",
       "type": "object",
       "properties": {
         "variants": {
@@ -3636,7 +3547,6 @@
       }
     },
     "Metadata": {
-      "id": "Metadata",
       "type": "object",
       "description": "Metadata describes a single piece of variant call metadata. These data include a top level key and either a single value string (value) or a list of key-value pairs (info.) Value and info are mutually exclusive.",
       "properties": {
@@ -3677,14 +3587,6 @@
             "INTEGER",
             "STRING",
             "UNKNOWN_TYPE"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "value": {
@@ -3694,7 +3596,6 @@
       }
     },
     "PairedFastqSource": {
-      "id": "PairedFastqSource",
       "type": "object",
       "description": "Describes a paired-end FASTQ file source for alignment.",
       "properties": {
@@ -3719,7 +3620,6 @@
       }
     },
     "Position": {
-      "id": "Position",
       "type": "object",
       "description": "An abstraction for referring to a genomic position, in relation to some already known reference. For now, represents a genomic position as a reference name, a base number on that reference (0-based), and a determination of forward or reverse strand.",
       "properties": {
@@ -3739,7 +3639,6 @@
       }
     },
     "QueryRange": {
-      "id": "QueryRange",
       "type": "object",
       "description": "A 0-based half-open genomic coordinate range for search requests.",
       "properties": {
@@ -3764,7 +3663,6 @@
       }
     },
     "Range": {
-      "id": "Range",
       "type": "object",
       "description": "A 0-based half-open genomic coordinate range over a reference sequence.",
       "properties": {
@@ -3785,7 +3683,6 @@
       }
     },
     "RangePosition": {
-      "id": "RangePosition",
       "type": "object",
       "description": "A 0-based half-open genomic coordinate range over a reference sequence, for representing the position of a genomic resource.",
       "properties": {
@@ -3814,7 +3711,6 @@
       }
     },
     "Read": {
-      "id": "Read",
       "type": "object",
       "description": "A read alignment describes a linear alignment of a string of DNA to a reference sequence, in addition to metadata about the fragment (the molecule of DNA sequenced) and the read (the bases which were read by the sequencer). A read is equivalent to a line in a SAM file. A read belongs to exactly one read group and exactly one read group set. Generating a reference-aligned sequence string When interacting with mapped reads, it's often useful to produce a string representing the local alignment of the read to reference. The following pseudocode demonstrates one way of doing this:\nout = \"\" offset = 0 for c in read.alignment.cigar { switch c.operation { case \"ALIGNMENT_MATCH\", \"SEQUENCE_MATCH\", \"SEQUENCE_MISMATCH\": out += read.alignedSequence[offset:offset+c.operationLength] offset += c.operationLength break case \"CLIP_SOFT\", \"INSERT\": offset += c.operationLength break case \"PAD\": out += repeat(\"*\", c.operationLength) break case \"DELETE\": out += repeat(\"-\", c.operationLength) break case \"SKIP\": out += repeat(\" \", c.operationLength) break case \"CLIP_HARD\": break } } return out\nConverting to SAM's CIGAR string The following pseudocode generates a SAM CIGAR string from the cigar field. Note that this is a lossy conversion (cigar.referenceSequence is lost).\ncigarMap = { \"ALIGNMENT_MATCH\": \"M\", \"INSERT\": \"I\", \"DELETE\": \"D\", \"SKIP\": \"N\", \"CLIP_SOFT\": \"S\", \"CLIP_HARD\": \"H\", \"PAD\": \"P\", \"SEQUENCE_MATCH\": \"=\", \"SEQUENCE_MISMATCH\": \"X\", } cigarStr = \"\" for c in read.alignment.cigar { cigarStr += c.operationLength + cigarMap[c.operation] } return cigarStr",
       "properties": {
@@ -3903,7 +3799,6 @@
       }
     },
     "ReadGroup": {
-      "id": "ReadGroup",
       "type": "object",
       "description": "A read group is all the data that's processed the same way by the sequencer.",
       "properties": {
@@ -3961,7 +3856,6 @@
       }
     },
     "ReadGroupExperiment": {
-      "id": "ReadGroupExperiment",
       "type": "object",
       "properties": {
         "instrumentModel": {
@@ -3983,7 +3877,6 @@
       }
     },
     "ReadGroupProgram": {
-      "id": "ReadGroupProgram",
       "type": "object",
       "properties": {
         "commandLine": {
@@ -4009,7 +3902,6 @@
       }
     },
     "ReadGroupSet": {
-      "id": "ReadGroupSet",
       "type": "object",
       "description": "A read group set is a logical collection of read groups, which are collections of reads produced by a sequencer. A read group set typically models reads corresponding to one sample, sequenced one way, and aligned one way.  \n- A read group set belongs to one dataset.\n- A read group belongs to one read group set.\n- A read belongs to one read group.",
       "properties": {
@@ -4054,7 +3946,6 @@
       }
     },
     "Reference": {
-      "id": "Reference",
       "type": "object",
       "description": "A reference is a canonical assembled DNA sequence, intended to act as a reference coordinate space for other genomic annotations. A single reference might represent the human chromosome 1 or mitochandrial DNA, for instance. A reference belongs to one or more reference sets.",
       "properties": {
@@ -4094,7 +3985,6 @@
       }
     },
     "ReferenceBound": {
-      "id": "ReferenceBound",
       "type": "object",
       "description": "ReferenceBound records an upper bound for the starting coordinate of variants in a particular reference.",
       "properties": {
@@ -4110,7 +4000,6 @@
       }
     },
     "ReferenceSet": {
-      "id": "ReferenceSet",
       "type": "object",
       "description": "A reference set is a set of references which typically comprise a reference assembly for a species, such as GRCh38 which is representative of the human genome. A reference set defines a common coordinate space for comparing reference-aligned experimental data. A reference set contains 1 or more references.",
       "properties": {
@@ -4156,7 +4045,6 @@
       }
     },
     "SearchAnnotationSetsRequest": {
-      "id": "SearchAnnotationSetsRequest",
       "type": "object",
       "properties": {
         "datasetIds": {
@@ -4193,19 +4081,12 @@
               "GENERIC",
               "TRANSCRIPT",
               "VARIANT"
-            ],
-            "enumDescriptions": [
-              "",
-              "",
-              "",
-              ""
             ]
           }
         }
       }
     },
     "SearchAnnotationSetsResponse": {
-      "id": "SearchAnnotationSetsResponse",
       "type": "object",
       "properties": {
         "annotationSets": {
@@ -4222,7 +4103,6 @@
       }
     },
     "SearchAnnotationsRequest": {
-      "id": "SearchAnnotationsRequest",
       "type": "object",
       "properties": {
         "annotationSetIds": {
@@ -4248,7 +4128,6 @@
       }
     },
     "SearchAnnotationsResponse": {
-      "id": "SearchAnnotationsResponse",
       "type": "object",
       "properties": {
         "annotations": {
@@ -4265,7 +4144,6 @@
       }
     },
     "SearchCallSetsRequest": {
-      "id": "SearchCallSetsRequest",
       "type": "object",
       "description": "The call set search request.",
       "properties": {
@@ -4292,7 +4170,6 @@
       }
     },
     "SearchCallSetsResponse": {
-      "id": "SearchCallSetsResponse",
       "type": "object",
       "description": "The call set search response.",
       "properties": {
@@ -4310,7 +4187,6 @@
       }
     },
     "SearchJobsRequest": {
-      "id": "SearchJobsRequest",
       "type": "object",
       "description": "The jobs search request.",
       "properties": {
@@ -4351,22 +4227,12 @@
               "RUNNING",
               "SUCCESS",
               "UNKNOWN_STATUS"
-            ],
-            "enumDescriptions": [
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              ""
             ]
           }
         }
       }
     },
     "SearchJobsResponse": {
-      "id": "SearchJobsResponse",
       "type": "object",
       "description": "The job search response.",
       "properties": {
@@ -4384,7 +4250,6 @@
       }
     },
     "SearchReadGroupSetsRequest": {
-      "id": "SearchReadGroupSetsRequest",
       "type": "object",
       "description": "The read group set search request.",
       "properties": {
@@ -4411,7 +4276,6 @@
       }
     },
     "SearchReadGroupSetsResponse": {
-      "id": "SearchReadGroupSetsResponse",
       "type": "object",
       "description": "The read group set search response.",
       "properties": {
@@ -4429,7 +4293,6 @@
       }
     },
     "SearchReadsRequest": {
-      "id": "SearchReadsRequest",
       "type": "object",
       "description": "The read search request.",
       "properties": {
@@ -4473,7 +4336,6 @@
       }
     },
     "SearchReadsResponse": {
-      "id": "SearchReadsResponse",
       "type": "object",
       "description": "The read search response.",
       "properties": {
@@ -4491,7 +4353,6 @@
       }
     },
     "SearchReferenceSetsRequest": {
-      "id": "SearchReferenceSetsRequest",
       "type": "object",
       "description": "",
       "properties": {
@@ -4525,7 +4386,6 @@
       }
     },
     "SearchReferenceSetsResponse": {
-      "id": "SearchReferenceSetsResponse",
       "type": "object",
       "properties": {
         "nextPageToken": {
@@ -4542,7 +4402,6 @@
       }
     },
     "SearchReferencesRequest": {
-      "id": "SearchReferencesRequest",
       "type": "object",
       "description": "",
       "properties": {
@@ -4576,7 +4435,6 @@
       }
     },
     "SearchReferencesResponse": {
-      "id": "SearchReferencesResponse",
       "type": "object",
       "properties": {
         "nextPageToken": {
@@ -4593,7 +4451,6 @@
       }
     },
     "SearchVariantSetsRequest": {
-      "id": "SearchVariantSetsRequest",
       "type": "object",
       "description": "The search variant sets request.",
       "properties": {
@@ -4616,7 +4473,6 @@
       }
     },
     "SearchVariantSetsResponse": {
-      "id": "SearchVariantSetsResponse",
       "type": "object",
       "description": "The search variant sets response.",
       "properties": {
@@ -4634,7 +4490,6 @@
       }
     },
     "SearchVariantsRequest": {
-      "id": "SearchVariantsRequest",
       "type": "object",
       "description": "The variant search request.",
       "properties": {
@@ -4687,7 +4542,6 @@
       }
     },
     "SearchVariantsResponse": {
-      "id": "SearchVariantsResponse",
       "type": "object",
       "description": "The variant search response.",
       "properties": {
@@ -4705,7 +4559,6 @@
       }
     },
     "StreamReadsRequest": {
-      "id": "StreamReadsRequest",
       "type": "object",
       "properties": {
         "end": {
@@ -4732,7 +4585,6 @@
       }
     },
     "StreamReadsResponse": {
-      "id": "StreamReadsResponse",
       "type": "object",
       "properties": {
         "alignments": {
@@ -4744,7 +4596,6 @@
       }
     },
     "Transcript": {
-      "id": "Transcript",
       "type": "object",
       "description": "A transcript represents the assertion that a particular region of the reference genome may be transcribed as RNA.",
       "properties": {
@@ -4766,7 +4617,6 @@
       }
     },
     "TranscriptCodingSequence": {
-      "id": "TranscriptCodingSequence",
       "type": "object",
       "properties": {
         "end": {
@@ -4782,7 +4632,6 @@
       }
     },
     "TranscriptExon": {
-      "id": "TranscriptExon",
       "type": "object",
       "properties": {
         "end": {
@@ -4802,7 +4651,6 @@
       }
     },
     "Variant": {
-      "id": "Variant",
       "type": "object",
       "description": "A variant represents a change in DNA sequence relative to a reference sequence. For example, a variant could represent a SNP or an insertion. Variants belong to a variant set. Each of the calls on a variant represent a determination of genotype with respect to that variant. For example, a call might assign probability of 0.32 to the occurrence of a SNP named rs1234 in a sample named NA12345. A call belongs to a call set, which contains related calls typically from one sample.",
       "properties": {
@@ -4884,7 +4732,6 @@
       }
     },
     "VariantAnnotation": {
-      "id": "VariantAnnotation",
       "type": "object",
       "description": "A Variant annotation.",
       "properties": {
@@ -4910,22 +4757,6 @@
             "PROTECTIVE",
             "RISK_FACTOR",
             "UNCERTAIN"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "conditions": {
@@ -4948,17 +4779,6 @@
             "STOP_GAIN",
             "STOP_LOSS",
             "SYNONYMOUS_SNP"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "geneId": {
@@ -4984,22 +4804,11 @@
             "STRUCTURAL",
             "SUBSTITUTION",
             "TYPE_UNSPECIFIED"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "VariantAnnotationCondition": {
-      "id": "VariantAnnotationCondition",
       "type": "object",
       "description": "",
       "properties": {
@@ -5028,7 +4837,6 @@
       }
     },
     "VariantSet": {
-      "id": "VariantSet",
       "type": "object",
       "description": "A variant set is a collection of call sets and variants. It contains summary statistics of those contents. A variant set belongs to a dataset.",
       "properties": {

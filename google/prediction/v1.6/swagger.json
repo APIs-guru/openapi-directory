@@ -471,7 +471,6 @@
   },
   "definitions": {
     "Analyze": {
-      "id": "Analyze",
       "type": "object",
       "properties": {
         "dataDescription": {
@@ -652,7 +651,6 @@
       }
     },
     "Input": {
-      "id": "Input",
       "type": "object",
       "properties": {
         "input": {
@@ -669,7 +667,6 @@
       }
     },
     "Insert": {
-      "id": "Insert",
       "type": "object",
       "properties": {
         "id": {
@@ -729,7 +726,6 @@
       }
     },
     "Insert2": {
-      "id": "Insert2",
       "type": "object",
       "properties": {
         "created": {
@@ -810,7 +806,6 @@
       }
     },
     "List": {
-      "id": "List",
       "type": "object",
       "properties": {
         "items": {
@@ -836,7 +831,6 @@
       }
     },
     "Output": {
-      "id": "Output",
       "type": "object",
       "properties": {
         "id": {
@@ -870,8 +864,9 @@
           }
         },
         "outputValue": {
-          "type": "string",
-          "description": "The estimated regression value (Regression models only)."
+          "type": "number",
+          "description": "The estimated regression value (Regression models only).",
+          "format": "double"
         },
         "selfLink": {
           "type": "string",
@@ -880,7 +875,6 @@
       }
     },
     "Update": {
-      "id": "Update",
       "type": "object",
       "properties": {
         "csvInstance": {

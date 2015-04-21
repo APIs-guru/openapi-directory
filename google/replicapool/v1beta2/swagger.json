@@ -859,7 +859,6 @@
   },
   "definitions": {
     "InstanceGroupManager": {
-      "id": "InstanceGroupManager",
       "type": "object",
       "description": "An Instance Group Manager resource.",
       "properties": {
@@ -926,7 +925,6 @@
       }
     },
     "InstanceGroupManagerList": {
-      "id": "InstanceGroupManagerList",
       "type": "object",
       "properties": {
         "id": {
@@ -956,7 +954,6 @@
       }
     },
     "InstanceGroupManagersAbandonInstancesRequest": {
-      "id": "InstanceGroupManagersAbandonInstancesRequest",
       "type": "object",
       "properties": {
         "instances": {
@@ -969,7 +966,6 @@
       }
     },
     "InstanceGroupManagersDeleteInstancesRequest": {
-      "id": "InstanceGroupManagersDeleteInstancesRequest",
       "type": "object",
       "properties": {
         "instances": {
@@ -982,7 +978,6 @@
       }
     },
     "InstanceGroupManagersRecreateInstancesRequest": {
-      "id": "InstanceGroupManagersRecreateInstancesRequest",
       "type": "object",
       "properties": {
         "instances": {
@@ -995,7 +990,6 @@
       }
     },
     "InstanceGroupManagersSetInstanceTemplateRequest": {
-      "id": "InstanceGroupManagersSetInstanceTemplateRequest",
       "type": "object",
       "properties": {
         "instanceTemplate": {
@@ -1005,7 +999,6 @@
       }
     },
     "InstanceGroupManagersSetTargetPoolsRequest": {
-      "id": "InstanceGroupManagersSetTargetPoolsRequest",
       "type": "object",
       "properties": {
         "fingerprint": {
@@ -1023,7 +1016,6 @@
       }
     },
     "Operation": {
-      "id": "Operation",
       "type": "object",
       "description": "An operation resource, used to manage asynchronous API requests.",
       "properties": {
@@ -1121,11 +1113,6 @@
             "DONE",
             "PENDING",
             "RUNNING"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         },
         "statusMessage": {
@@ -1168,21 +1155,6 @@
                   "RESOURCE_NOT_DELETED",
                   "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
                   "UNREACHABLE"
-                ],
-                "enumDescriptions": [
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  ""
                 ]
               },
               "data": {
@@ -1216,7 +1188,6 @@
       }
     },
     "OperationList": {
-      "id": "OperationList",
       "type": "object",
       "properties": {
         "id": {

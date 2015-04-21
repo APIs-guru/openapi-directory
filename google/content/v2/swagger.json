@@ -2114,7 +2114,6 @@
   },
   "definitions": {
     "Account": {
-      "id": "Account",
       "type": "object",
       "description": "Account data.",
       "properties": {
@@ -2132,12 +2131,7 @@
         "id": {
           "type": "string",
           "description": "Merchant Center account ID.",
-          "format": "uint64",
-          "annotations": {
-            "required": [
-              "content.accounts.update"
-            ]
-          }
+          "format": "uint64"
         },
         "kind": {
           "type": "string",
@@ -2146,13 +2140,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Display name for the account.",
-          "annotations": {
-            "required": [
-              "content.accounts.insert",
-              "content.accounts.update"
-            ]
-          }
+          "description": "Display name for the account."
         },
         "reviewsUrl": {
           "type": "string",
@@ -2176,7 +2164,6 @@
       }
     },
     "AccountAdwordsLink": {
-      "id": "AccountAdwordsLink",
       "type": "object",
       "properties": {
         "adwordsId": {
@@ -2191,7 +2178,6 @@
       }
     },
     "AccountIdentifier": {
-      "id": "AccountIdentifier",
       "type": "object",
       "properties": {
         "aggregatorId": {
@@ -2207,19 +2193,13 @@
       }
     },
     "AccountShipping": {
-      "id": "AccountShipping",
       "type": "object",
       "description": "The shipping settings of a merchant account.",
       "properties": {
         "accountId": {
           "type": "string",
           "description": "The ID of the account to which these account shipping settings belong.",
-          "format": "uint64",
-          "annotations": {
-            "required": [
-              "content.accountshipping.update"
-            ]
-          }
+          "format": "uint64"
         },
         "carrierRates": {
           "type": "array",
@@ -2257,27 +2237,16 @@
       }
     },
     "AccountShippingCarrierRate": {
-      "id": "AccountShippingCarrierRate",
       "type": "object",
       "description": "A carrier-calculated shipping rate.",
       "properties": {
         "carrier": {
           "type": "string",
-          "description": "The carrier that is responsible for the shipping, such as \"UPS\", \"FedEx\", or \"USPS\".",
-          "annotations": {
-            "required": [
-              "content.accountshipping.update"
-            ]
-          }
+          "description": "The carrier that is responsible for the shipping, such as \"UPS\", \"FedEx\", or \"USPS\"."
         },
         "carrierService": {
           "type": "string",
-          "description": "The carrier service, such as \"Ground\" or \"2Day\".",
-          "annotations": {
-            "required": [
-              "content.accountshipping.update"
-            ]
-          }
+          "description": "The carrier service, such as \"Ground\" or \"2Day\"."
         },
         "modifierFlatRate": {
           "$ref": "#/definitions/Price",
@@ -2289,35 +2258,19 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the carrier rate.",
-          "annotations": {
-            "required": [
-              "content.accountshipping.update"
-            ]
-          }
+          "description": "The name of the carrier rate."
         },
         "saleCountry": {
           "type": "string",
-          "description": "Sale country for which this carrier rate is valid, represented as an ISO 3166-1 Alpha-2 code.",
-          "annotations": {
-            "required": [
-              "content.accountshipping.update"
-            ]
-          }
+          "description": "Sale country for which this carrier rate is valid, represented as an ISO 3166-1 Alpha-2 code."
         },
         "shippingOrigin": {
           "type": "string",
-          "description": "Shipping origin represented as a postal code.",
-          "annotations": {
-            "required": [
-              "content.accountshipping.update"
-            ]
-          }
+          "description": "Shipping origin represented as a postal code."
         }
       }
     },
     "AccountShippingCondition": {
-      "id": "AccountShippingCondition",
       "type": "object",
       "properties": {
         "deliveryLocationGroup": {
@@ -2352,18 +2305,12 @@
       }
     },
     "AccountShippingLocationGroup": {
-      "id": "AccountShippingLocationGroup",
       "type": "object",
       "description": "A user-defined locations group in a given country. All the locations of the group must be of the same type.",
       "properties": {
         "country": {
           "type": "string",
-          "description": "The country in which this location group is, represented as ISO 3166-1 Alpha-2 code.",
-          "annotations": {
-            "required": [
-              "content.accountshipping.update"
-            ]
-          }
+          "description": "The country in which this location group is, represented as ISO 3166-1 Alpha-2 code."
         },
         "locationIds": {
           "type": "array",
@@ -2375,12 +2322,7 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the location group.",
-          "annotations": {
-            "required": [
-              "content.accountshipping.update"
-            ]
-          }
+          "description": "The name of the location group."
         },
         "postalCodeRanges": {
           "type": "array",
@@ -2399,32 +2341,20 @@
       }
     },
     "AccountShippingPostalCodeRange": {
-      "id": "AccountShippingPostalCodeRange",
       "type": "object",
       "description": "A postal code range, that can be either:  \n- A range of postal codes (e.g., start=12340, end=12359)\n- A range of postal codes prefixes (e.g., start=1234* end=1235*). Prefixes must be of the same length (e.g., start=12* end=2* is invalid).",
       "properties": {
         "end": {
           "type": "string",
-          "description": "The last (inclusive) postal code or prefix of the range.",
-          "annotations": {
-            "required": [
-              "content.accountshipping.update"
-            ]
-          }
+          "description": "The last (inclusive) postal code or prefix of the range."
         },
         "start": {
           "type": "string",
-          "description": "The first (inclusive) postal code or prefix of the range.",
-          "annotations": {
-            "required": [
-              "content.accountshipping.update"
-            ]
-          }
+          "description": "The first (inclusive) postal code or prefix of the range."
         }
       }
     },
     "AccountShippingRateTable": {
-      "id": "AccountShippingRateTable",
       "type": "object",
       "description": "A single or bi-dimensional table of shipping rates. Each dimension is defined in terms of consecutive price/weight ranges, delivery locations, or shipping labels.",
       "properties": {
@@ -2437,26 +2367,15 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the rate table.",
-          "annotations": {
-            "required": [
-              "content.accountshipping.update"
-            ]
-          }
+          "description": "The name of the rate table."
         },
         "saleCountry": {
           "type": "string",
-          "description": "Sale country for which this table is valid, represented as an ISO 3166-1 Alpha-2 code.",
-          "annotations": {
-            "required": [
-              "content.accountshipping.update"
-            ]
-          }
+          "description": "Sale country for which this table is valid, represented as an ISO 3166-1 Alpha-2 code."
         }
       }
     },
     "AccountShippingRateTableCell": {
-      "id": "AccountShippingRateTableCell",
       "type": "object",
       "properties": {
         "condition": {
@@ -2465,17 +2384,11 @@
         },
         "rate": {
           "$ref": "#/definitions/Price",
-          "description": "The rate applicable if the cell conditions are matched.",
-          "annotations": {
-            "required": [
-              "content.accountshipping.update"
-            ]
-          }
+          "description": "The rate applicable if the cell conditions are matched."
         }
       }
     },
     "AccountShippingShippingService": {
-      "id": "AccountShippingShippingService",
       "type": "object",
       "description": "Shipping services provided in a country.",
       "properties": {
@@ -2493,26 +2406,15 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of this shipping service.",
-          "annotations": {
-            "required": [
-              "content.accountshipping.update"
-            ]
-          }
+          "description": "The name of this shipping service."
         },
         "saleCountry": {
           "type": "string",
-          "description": "Sale country for which this service can be used, represented as an ISO 3166-1 Alpha-2 code.",
-          "annotations": {
-            "required": [
-              "content.accountshipping.update"
-            ]
-          }
+          "description": "Sale country for which this service can be used, represented as an ISO 3166-1 Alpha-2 code."
         }
       }
     },
     "AccountShippingShippingServiceCalculationMethod": {
-      "id": "AccountShippingShippingServiceCalculationMethod",
       "type": "object",
       "description": "Shipping cost calculation method. Exactly one of the field is set.",
       "properties": {
@@ -2539,7 +2441,6 @@
       }
     },
     "AccountShippingShippingServiceCostRule": {
-      "id": "AccountShippingShippingServiceCostRule",
       "type": "object",
       "description": "Building block of the cost calculation decision tree.  \n- The tree root should have no condition and no calculation method.\n- All the children must have a condition on the same dimension. The first child matching a condition is entered, therefore, price and weight conditions form contiguous intervals.\n- The last child of an element must have no condition and matches all elements not previously matched.\n- Children and calculation method are mutually exclusive, and exactly one of them must be defined; the root must only have children.",
       "properties": {
@@ -2561,7 +2462,6 @@
       }
     },
     "AccountStatus": {
-      "id": "AccountStatus",
       "type": "object",
       "description": "The status of an account, i.e., information about its products, which is computed offline and not returned immediately at insertion time.",
       "properties": {
@@ -2584,7 +2484,6 @@
       }
     },
     "AccountStatusDataQualityIssue": {
-      "id": "AccountStatusDataQualityIssue",
       "type": "object",
       "properties": {
         "country": {
@@ -2626,7 +2525,6 @@
       }
     },
     "AccountStatusExampleItem": {
-      "id": "AccountStatusExampleItem",
       "type": "object",
       "description": "An example of an item that has poor data quality. An item value on the landing page differs from what is submitted, or conflicts with a policy.",
       "properties": {
@@ -2653,19 +2551,13 @@
       }
     },
     "AccountTax": {
-      "id": "AccountTax",
       "type": "object",
       "description": "The tax settings of a merchant account.",
       "properties": {
         "accountId": {
           "type": "string",
           "description": "The ID of the account to which these account tax settings belong.",
-          "format": "uint64",
-          "annotations": {
-            "required": [
-              "content.accounttax.update"
-            ]
-          }
+          "format": "uint64"
         },
         "kind": {
           "type": "string",
@@ -2682,7 +2574,6 @@
       }
     },
     "AccountTaxTaxRule": {
-      "id": "AccountTaxTaxRule",
       "type": "object",
       "description": "Tax calculation rule to apply in a state or province (USA only).",
       "properties": {
@@ -2693,12 +2584,7 @@
         "locationId": {
           "type": "string",
           "description": "State (or province) is which the tax is applicable, described by its location id (also called criteria id).",
-          "format": "uint64",
-          "annotations": {
-            "required": [
-              "content.accounttax.update"
-            ]
-          }
+          "format": "uint64"
         },
         "ratePercent": {
           "type": "string",
@@ -2715,7 +2601,6 @@
       }
     },
     "AccountUser": {
-      "id": "AccountUser",
       "type": "object",
       "properties": {
         "admin": {
@@ -2729,7 +2614,6 @@
       }
     },
     "AccountsAuthInfoResponse": {
-      "id": "AccountsAuthInfoResponse",
       "type": "object",
       "properties": {
         "accountIdentifiers": {
@@ -2747,7 +2631,6 @@
       }
     },
     "AccountsCustomBatchRequest": {
-      "id": "AccountsCustomBatchRequest",
       "type": "object",
       "properties": {
         "entries": {
@@ -2760,7 +2643,6 @@
       }
     },
     "AccountsCustomBatchRequestEntry": {
-      "id": "AccountsCustomBatchRequestEntry",
       "type": "object",
       "description": "A batch entry encoding a single non-batch accounts request.",
       "properties": {
@@ -2789,7 +2671,6 @@
       }
     },
     "AccountsCustomBatchResponse": {
-      "id": "AccountsCustomBatchResponse",
       "type": "object",
       "properties": {
         "entries": {
@@ -2807,7 +2688,6 @@
       }
     },
     "AccountsCustomBatchResponseEntry": {
-      "id": "AccountsCustomBatchResponseEntry",
       "type": "object",
       "description": "A batch entry encoding a single non-batch accounts response.",
       "properties": {
@@ -2832,7 +2712,6 @@
       }
     },
     "AccountsListResponse": {
-      "id": "AccountsListResponse",
       "type": "object",
       "properties": {
         "kind": {
@@ -2853,7 +2732,6 @@
       }
     },
     "AccountshippingCustomBatchRequest": {
-      "id": "AccountshippingCustomBatchRequest",
       "type": "object",
       "properties": {
         "entries": {
@@ -2866,7 +2744,6 @@
       }
     },
     "AccountshippingCustomBatchRequestEntry": {
-      "id": "AccountshippingCustomBatchRequestEntry",
       "type": "object",
       "description": "A batch entry encoding a single non-batch accountshipping request.",
       "properties": {
@@ -2895,7 +2772,6 @@
       }
     },
     "AccountshippingCustomBatchResponse": {
-      "id": "AccountshippingCustomBatchResponse",
       "type": "object",
       "properties": {
         "entries": {
@@ -2913,7 +2789,6 @@
       }
     },
     "AccountshippingCustomBatchResponseEntry": {
-      "id": "AccountshippingCustomBatchResponseEntry",
       "type": "object",
       "description": "A batch entry encoding a single non-batch accountshipping response.",
       "properties": {
@@ -2938,7 +2813,6 @@
       }
     },
     "AccountshippingListResponse": {
-      "id": "AccountshippingListResponse",
       "type": "object",
       "properties": {
         "kind": {
@@ -2959,7 +2833,6 @@
       }
     },
     "AccountstatusesCustomBatchRequest": {
-      "id": "AccountstatusesCustomBatchRequest",
       "type": "object",
       "properties": {
         "entries": {
@@ -2972,7 +2845,6 @@
       }
     },
     "AccountstatusesCustomBatchRequestEntry": {
-      "id": "AccountstatusesCustomBatchRequestEntry",
       "type": "object",
       "description": "A batch entry encoding a single non-batch accountstatuses request.",
       "properties": {
@@ -2998,7 +2870,6 @@
       }
     },
     "AccountstatusesCustomBatchResponse": {
-      "id": "AccountstatusesCustomBatchResponse",
       "type": "object",
       "properties": {
         "entries": {
@@ -3016,7 +2887,6 @@
       }
     },
     "AccountstatusesCustomBatchResponseEntry": {
-      "id": "AccountstatusesCustomBatchResponseEntry",
       "type": "object",
       "description": "A batch entry encoding a single non-batch accountstatuses response.",
       "properties": {
@@ -3036,7 +2906,6 @@
       }
     },
     "AccountstatusesListResponse": {
-      "id": "AccountstatusesListResponse",
       "type": "object",
       "properties": {
         "kind": {
@@ -3057,7 +2926,6 @@
       }
     },
     "AccounttaxCustomBatchRequest": {
-      "id": "AccounttaxCustomBatchRequest",
       "type": "object",
       "properties": {
         "entries": {
@@ -3070,7 +2938,6 @@
       }
     },
     "AccounttaxCustomBatchRequestEntry": {
-      "id": "AccounttaxCustomBatchRequestEntry",
       "type": "object",
       "description": "A batch entry encoding a single non-batch accounttax request.",
       "properties": {
@@ -3099,7 +2966,6 @@
       }
     },
     "AccounttaxCustomBatchResponse": {
-      "id": "AccounttaxCustomBatchResponse",
       "type": "object",
       "properties": {
         "entries": {
@@ -3117,7 +2983,6 @@
       }
     },
     "AccounttaxCustomBatchResponseEntry": {
-      "id": "AccounttaxCustomBatchResponseEntry",
       "type": "object",
       "description": "A batch entry encoding a single non-batch accounttax response.",
       "properties": {
@@ -3142,7 +3007,6 @@
       }
     },
     "AccounttaxListResponse": {
-      "id": "AccounttaxListResponse",
       "type": "object",
       "properties": {
         "kind": {
@@ -3163,7 +3027,6 @@
       }
     },
     "Datafeed": {
-      "id": "Datafeed",
       "type": "object",
       "description": "Datafeed data.",
       "properties": {
@@ -3173,22 +3036,11 @@
         },
         "contentLanguage": {
           "type": "string",
-          "description": "The two-letter ISO 639-1 language of the items in the feed.",
-          "annotations": {
-            "required": [
-              "content.datafeeds.insert"
-            ]
-          }
+          "description": "The two-letter ISO 639-1 language of the items in the feed."
         },
         "contentType": {
           "type": "string",
-          "description": "The type of data feed.",
-          "annotations": {
-            "required": [
-              "content.datafeeds.insert",
-              "content.datafeeds.update"
-            ]
-          }
+          "description": "The type of data feed."
         },
         "fetchSchedule": {
           "$ref": "#/definitions/DatafeedFetchSchedule",
@@ -3196,13 +3048,7 @@
         },
         "fileName": {
           "type": "string",
-          "description": "The filename of the feed. All feeds must have a unique file name.",
-          "annotations": {
-            "required": [
-              "content.datafeeds.insert",
-              "content.datafeeds.update"
-            ]
-          }
+          "description": "The filename of the feed. All feeds must have a unique file name."
         },
         "format": {
           "$ref": "#/definitions/DatafeedFormat",
@@ -3211,12 +3057,7 @@
         "id": {
           "type": "string",
           "description": "The ID of the data feed.",
-          "format": "int64",
-          "annotations": {
-            "required": [
-              "content.datafeeds.update"
-            ]
-          }
+          "format": "int64"
         },
         "intendedDestinations": {
           "type": "array",
@@ -3232,27 +3073,15 @@
         },
         "name": {
           "type": "string",
-          "description": "A descriptive name of the data feed.",
-          "annotations": {
-            "required": [
-              "content.datafeeds.insert"
-            ]
-          }
+          "description": "A descriptive name of the data feed."
         },
         "targetCountry": {
           "type": "string",
-          "description": "The two-letter ISO 3166 country where the items in the feed will be included in the search index.",
-          "annotations": {
-            "required": [
-              "content.datafeeds.insert",
-              "content.datafeeds.update"
-            ]
-          }
+          "description": "The two-letter ISO 3166 country where the items in the feed will be included in the search index."
         }
       }
     },
     "DatafeedFetchSchedule": {
-      "id": "DatafeedFetchSchedule",
       "type": "object",
       "description": "The required fields vary based on the frequency of fetching. For a monthly fetch schedule, day_of_month and hour are required. For a weekly fetch schedule, weekday and hour are required. For a daily fetch schedule, only hour is required.",
       "properties": {
@@ -3289,7 +3118,6 @@
       }
     },
     "DatafeedFormat": {
-      "id": "DatafeedFormat",
       "type": "object",
       "properties": {
         "columnDelimiter": {
@@ -3307,7 +3135,6 @@
       }
     },
     "DatafeedStatus": {
-      "id": "DatafeedStatus",
       "type": "object",
       "description": "The status of a datafeed, i.e., the result of the last retrieval of the datafeed computed asynchronously when the feed processing is finished.",
       "properties": {
@@ -3356,7 +3183,6 @@
       }
     },
     "DatafeedStatusError": {
-      "id": "DatafeedStatusError",
       "type": "object",
       "description": "An error occurring in the feed, like \"invalid price\".",
       "properties": {
@@ -3383,7 +3209,6 @@
       }
     },
     "DatafeedStatusExample": {
-      "id": "DatafeedStatusExample",
       "type": "object",
       "description": "An example occurrence for a particular error.",
       "properties": {
@@ -3403,7 +3228,6 @@
       }
     },
     "DatafeedsCustomBatchRequest": {
-      "id": "DatafeedsCustomBatchRequest",
       "type": "object",
       "properties": {
         "entries": {
@@ -3416,7 +3240,6 @@
       }
     },
     "DatafeedsCustomBatchRequestEntry": {
-      "id": "DatafeedsCustomBatchRequestEntry",
       "type": "object",
       "description": "A batch entry encoding a single non-batch datafeeds request.",
       "properties": {
@@ -3445,7 +3268,6 @@
       }
     },
     "DatafeedsCustomBatchResponse": {
-      "id": "DatafeedsCustomBatchResponse",
       "type": "object",
       "properties": {
         "entries": {
@@ -3463,7 +3285,6 @@
       }
     },
     "DatafeedsCustomBatchResponseEntry": {
-      "id": "DatafeedsCustomBatchResponseEntry",
       "type": "object",
       "description": "A batch entry encoding a single non-batch datafeeds response.",
       "properties": {
@@ -3483,7 +3304,6 @@
       }
     },
     "DatafeedsListResponse": {
-      "id": "DatafeedsListResponse",
       "type": "object",
       "properties": {
         "kind": {
@@ -3504,7 +3324,6 @@
       }
     },
     "DatafeedstatusesCustomBatchRequest": {
-      "id": "DatafeedstatusesCustomBatchRequest",
       "type": "object",
       "properties": {
         "entries": {
@@ -3517,7 +3336,6 @@
       }
     },
     "DatafeedstatusesCustomBatchRequestEntry": {
-      "id": "DatafeedstatusesCustomBatchRequestEntry",
       "type": "object",
       "description": "A batch entry encoding a single non-batch datafeedstatuses request.",
       "properties": {
@@ -3542,7 +3360,6 @@
       }
     },
     "DatafeedstatusesCustomBatchResponse": {
-      "id": "DatafeedstatusesCustomBatchResponse",
       "type": "object",
       "properties": {
         "entries": {
@@ -3560,7 +3377,6 @@
       }
     },
     "DatafeedstatusesCustomBatchResponseEntry": {
-      "id": "DatafeedstatusesCustomBatchResponseEntry",
       "type": "object",
       "description": "A batch entry encoding a single non-batch datafeedstatuses response.",
       "properties": {
@@ -3580,7 +3396,6 @@
       }
     },
     "DatafeedstatusesListResponse": {
-      "id": "DatafeedstatusesListResponse",
       "type": "object",
       "properties": {
         "kind": {
@@ -3601,7 +3416,6 @@
       }
     },
     "Error": {
-      "id": "Error",
       "type": "object",
       "description": "An error returned by the API.",
       "properties": {
@@ -3620,7 +3434,6 @@
       }
     },
     "Errors": {
-      "id": "Errors",
       "type": "object",
       "description": "A list of errors returned by a failed batch entry.",
       "properties": {
@@ -3643,7 +3456,6 @@
       }
     },
     "Inventory": {
-      "id": "Inventory",
       "type": "object",
       "properties": {
         "availability": {
@@ -3675,7 +3487,6 @@
       }
     },
     "InventoryCustomBatchRequest": {
-      "id": "InventoryCustomBatchRequest",
       "type": "object",
       "properties": {
         "entries": {
@@ -3688,7 +3499,6 @@
       }
     },
     "InventoryCustomBatchRequestEntry": {
-      "id": "InventoryCustomBatchRequestEntry",
       "type": "object",
       "description": "A batch entry encoding a single non-batch inventory request.",
       "properties": {
@@ -3717,7 +3527,6 @@
       }
     },
     "InventoryCustomBatchResponse": {
-      "id": "InventoryCustomBatchResponse",
       "type": "object",
       "properties": {
         "entries": {
@@ -3735,7 +3544,6 @@
       }
     },
     "InventoryCustomBatchResponseEntry": {
-      "id": "InventoryCustomBatchResponseEntry",
       "type": "object",
       "description": "A batch entry encoding a single non-batch inventory response.",
       "properties": {
@@ -3756,7 +3564,6 @@
       }
     },
     "InventorySetRequest": {
-      "id": "InventorySetRequest",
       "type": "object",
       "properties": {
         "availability": {
@@ -3783,7 +3590,6 @@
       }
     },
     "InventorySetResponse": {
-      "id": "InventorySetResponse",
       "type": "object",
       "properties": {
         "kind": {
@@ -3794,7 +3600,6 @@
       }
     },
     "LoyaltyPoints": {
-      "id": "LoyaltyPoints",
       "type": "object",
       "properties": {
         "name": {
@@ -3814,7 +3619,6 @@
       }
     },
     "Price": {
-      "id": "Price",
       "type": "object",
       "properties": {
         "currency": {
@@ -3828,7 +3632,6 @@
       }
     },
     "Product": {
-      "id": "Product",
       "type": "object",
       "description": "Product data.",
       "properties": {
@@ -3883,12 +3686,7 @@
         },
         "channel": {
           "type": "string",
-          "description": "The item's channel (online or local).",
-          "annotations": {
-            "required": [
-              "content.products.insert"
-            ]
-          }
+          "description": "The item's channel (online or local)."
         },
         "color": {
           "type": "string",
@@ -3900,12 +3698,7 @@
         },
         "contentLanguage": {
           "type": "string",
-          "description": "The two-letter ISO 639-1 language code for the item.",
-          "annotations": {
-            "required": [
-              "content.products.insert"
-            ]
-          }
+          "description": "The two-letter ISO 639-1 language code for the item."
         },
         "customAttributes": {
           "type": "array",
@@ -4052,12 +3845,7 @@
         },
         "offerId": {
           "type": "string",
-          "description": "An identifier of the item.",
-          "annotations": {
-            "required": [
-              "content.products.insert"
-            ]
-          }
+          "description": "An identifier of the item."
         },
         "onlineOnly": {
           "type": "boolean",
@@ -4127,12 +3915,7 @@
         },
         "targetCountry": {
           "type": "string",
-          "description": "The two-letter ISO 3166 country code for the item.",
-          "annotations": {
-            "required": [
-              "content.products.insert"
-            ]
-          }
+          "description": "The two-letter ISO 3166 country code for the item."
         },
         "taxes": {
           "type": "array",
@@ -4170,7 +3953,6 @@
       }
     },
     "ProductAspect": {
-      "id": "ProductAspect",
       "type": "object",
       "properties": {
         "aspectName": {
@@ -4188,7 +3970,6 @@
       }
     },
     "ProductCustomAttribute": {
-      "id": "ProductCustomAttribute",
       "type": "object",
       "properties": {
         "name": {
@@ -4210,7 +3991,6 @@
       }
     },
     "ProductCustomGroup": {
-      "id": "ProductCustomGroup",
       "type": "object",
       "properties": {
         "attributes": {
@@ -4227,7 +4007,6 @@
       }
     },
     "ProductDestination": {
-      "id": "ProductDestination",
       "type": "object",
       "properties": {
         "destinationName": {
@@ -4241,7 +4020,6 @@
       }
     },
     "ProductInstallment": {
-      "id": "ProductInstallment",
       "type": "object",
       "properties": {
         "amount": {
@@ -4256,7 +4034,6 @@
       }
     },
     "ProductShipping": {
-      "id": "ProductShipping",
       "type": "object",
       "properties": {
         "country": {
@@ -4291,7 +4068,6 @@
       }
     },
     "ProductShippingDimension": {
-      "id": "ProductShippingDimension",
       "type": "object",
       "properties": {
         "unit": {
@@ -4306,7 +4082,6 @@
       }
     },
     "ProductShippingWeight": {
-      "id": "ProductShippingWeight",
       "type": "object",
       "properties": {
         "unit": {
@@ -4321,7 +4096,6 @@
       }
     },
     "ProductStatus": {
-      "id": "ProductStatus",
       "type": "object",
       "description": "The status of a product, i.e., information about a product computed asynchronously by the data quality analysis.",
       "properties": {
@@ -4371,7 +4145,6 @@
       }
     },
     "ProductStatusDataQualityIssue": {
-      "id": "ProductStatusDataQualityIssue",
       "type": "object",
       "properties": {
         "detail": {
@@ -4409,7 +4182,6 @@
       }
     },
     "ProductStatusDestinationStatus": {
-      "id": "ProductStatusDestinationStatus",
       "type": "object",
       "properties": {
         "approvalStatus": {
@@ -4427,7 +4199,6 @@
       }
     },
     "ProductTax": {
-      "id": "ProductTax",
       "type": "object",
       "properties": {
         "country": {
@@ -4459,7 +4230,6 @@
       }
     },
     "ProductUnitPricingBaseMeasure": {
-      "id": "ProductUnitPricingBaseMeasure",
       "type": "object",
       "properties": {
         "unit": {
@@ -4474,7 +4244,6 @@
       }
     },
     "ProductUnitPricingMeasure": {
-      "id": "ProductUnitPricingMeasure",
       "type": "object",
       "properties": {
         "unit": {
@@ -4489,7 +4258,6 @@
       }
     },
     "ProductsCustomBatchRequest": {
-      "id": "ProductsCustomBatchRequest",
       "type": "object",
       "properties": {
         "entries": {
@@ -4502,7 +4270,6 @@
       }
     },
     "ProductsCustomBatchRequestEntry": {
-      "id": "ProductsCustomBatchRequestEntry",
       "type": "object",
       "description": "A batch entry encoding a single non-batch products request.",
       "properties": {
@@ -4530,7 +4297,6 @@
       }
     },
     "ProductsCustomBatchResponse": {
-      "id": "ProductsCustomBatchResponse",
       "type": "object",
       "properties": {
         "entries": {
@@ -4548,7 +4314,6 @@
       }
     },
     "ProductsCustomBatchResponseEntry": {
-      "id": "ProductsCustomBatchResponseEntry",
       "type": "object",
       "description": "A batch entry encoding a single non-batch products response.",
       "properties": {
@@ -4573,7 +4338,6 @@
       }
     },
     "ProductsListResponse": {
-      "id": "ProductsListResponse",
       "type": "object",
       "properties": {
         "kind": {
@@ -4594,7 +4358,6 @@
       }
     },
     "ProductstatusesCustomBatchRequest": {
-      "id": "ProductstatusesCustomBatchRequest",
       "type": "object",
       "properties": {
         "entries": {
@@ -4607,7 +4370,6 @@
       }
     },
     "ProductstatusesCustomBatchRequestEntry": {
-      "id": "ProductstatusesCustomBatchRequestEntry",
       "type": "object",
       "description": "A batch entry encoding a single non-batch productstatuses request.",
       "properties": {
@@ -4631,7 +4393,6 @@
       }
     },
     "ProductstatusesCustomBatchResponse": {
-      "id": "ProductstatusesCustomBatchResponse",
       "type": "object",
       "properties": {
         "entries": {
@@ -4649,7 +4410,6 @@
       }
     },
     "ProductstatusesCustomBatchResponseEntry": {
-      "id": "ProductstatusesCustomBatchResponseEntry",
       "type": "object",
       "description": "A batch entry encoding a single non-batch productstatuses response.",
       "properties": {
@@ -4674,7 +4434,6 @@
       }
     },
     "ProductstatusesListResponse": {
-      "id": "ProductstatusesListResponse",
       "type": "object",
       "properties": {
         "kind": {
@@ -4695,26 +4454,15 @@
       }
     },
     "Weight": {
-      "id": "Weight",
       "type": "object",
       "properties": {
         "unit": {
           "type": "string",
-          "description": "The weight unit.",
-          "annotations": {
-            "required": [
-              "content.accountshipping.update"
-            ]
-          }
+          "description": "The weight unit."
         },
         "value": {
           "type": "string",
-          "description": "The weight represented as a number.",
-          "annotations": {
-            "required": [
-              "content.accountshipping.update"
-            ]
-          }
+          "description": "The weight represented as a number."
         }
       }
     }

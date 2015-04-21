@@ -9033,7 +9033,6 @@
   },
   "definitions": {
     "AccessConfig": {
-      "id": "AccessConfig",
       "type": "object",
       "description": "An access configuration attached to an instance's network interface.",
       "properties": {
@@ -9056,15 +9055,11 @@
           "default": "ONE_TO_ONE_NAT",
           "enum": [
             "ONE_TO_ONE_NAT"
-          ],
-          "enumDescriptions": [
-            ""
           ]
         }
       }
     },
     "Address": {
-      "id": "Address",
       "type": "object",
       "description": "A reserved address resource.",
       "properties": {
@@ -9093,12 +9088,7 @@
         "name": {
           "type": "string",
           "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
-          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
-          "annotations": {
-            "required": [
-              "compute.addresses.insert"
-            ]
-          }
+          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "region": {
           "type": "string",
@@ -9114,10 +9104,6 @@
           "enum": [
             "IN_USE",
             "RESERVED"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         },
         "users": {
@@ -9130,7 +9116,6 @@
       }
     },
     "AddressAggregatedList": {
-      "id": "AddressAggregatedList",
       "type": "object",
       "properties": {
         "id": {
@@ -9161,7 +9146,6 @@
       }
     },
     "AddressList": {
-      "id": "AddressList",
       "type": "object",
       "description": "Contains a list of address resources.",
       "properties": {
@@ -9192,7 +9176,6 @@
       }
     },
     "AddressesScopedList": {
-      "id": "AddressesScopedList",
       "type": "object",
       "properties": {
         "addresses": {
@@ -9223,21 +9206,6 @@
                 "RESOURCE_NOT_DELETED",
                 "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
                 "UNREACHABLE"
-              ],
-              "enumDescriptions": [
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
               ]
             },
             "data": {
@@ -9266,7 +9234,6 @@
       }
     },
     "AttachedDisk": {
-      "id": "AttachedDisk",
       "type": "object",
       "description": "An instance-attached disk resource.",
       "properties": {
@@ -9296,10 +9263,6 @@
           "enum": [
             "NVME",
             "SCSI"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         },
         "kind": {
@@ -9320,10 +9283,6 @@
           "enum": [
             "READ_ONLY",
             "READ_WRITE"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         },
         "source": {
@@ -9336,21 +9295,11 @@
           "enum": [
             "PERSISTENT",
             "SCRATCH"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
-          ],
-          "annotations": {
-            "required": [
-              "compute.instances.insert"
-            ]
-          }
+          ]
         }
       }
     },
     "AttachedDiskInitializeParams": {
-      "id": "AttachedDiskInitializeParams",
       "type": "object",
       "description": "[Input Only] Specifies the parameters for a new disk that will be created alongside the new instance. Use initialization parameters to create boot disks or local SSDs attached to the new instance.\n\nThis property is mutually exclusive with the source property; you can only define one or the other, but not both.",
       "properties": {
@@ -9374,7 +9323,6 @@
       }
     },
     "Backend": {
-      "id": "Backend",
       "type": "object",
       "description": "Message containing information of one individual backend.",
       "properties": {
@@ -9384,10 +9332,6 @@
           "enum": [
             "RATE",
             "UTILIZATION"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         },
         "capacityScaler": {
@@ -9421,7 +9365,6 @@
       }
     },
     "BackendService": {
-      "id": "BackendService",
       "type": "object",
       "description": "A BackendService resource. This resource defines a group of backend VMs together with their serving capacity.",
       "properties": {
@@ -9480,9 +9423,6 @@
           "type": "string",
           "enum": [
             "HTTP"
-          ],
-          "enumDescriptions": [
-            ""
           ]
         },
         "selfLink": {
@@ -9497,7 +9437,6 @@
       }
     },
     "BackendServiceGroupHealth": {
-      "id": "BackendServiceGroupHealth",
       "type": "object",
       "properties": {
         "healthStatus": {
@@ -9514,7 +9453,6 @@
       }
     },
     "BackendServiceList": {
-      "id": "BackendServiceList",
       "type": "object",
       "description": "Contains a list of BackendService resources.",
       "properties": {
@@ -9545,7 +9483,6 @@
       }
     },
     "DeprecationStatus": {
-      "id": "DeprecationStatus",
       "type": "object",
       "description": "Deprecation status for a public resource.",
       "properties": {
@@ -9572,17 +9509,11 @@
             "DELETED",
             "DEPRECATED",
             "OBSOLETE"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "Disk": {
-      "id": "Disk",
       "type": "object",
       "description": "A Disk resource.",
       "properties": {
@@ -9614,12 +9545,7 @@
         "name": {
           "type": "string",
           "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
-          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
-          "annotations": {
-            "required": [
-              "compute.disks.insert"
-            ]
-          }
+          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "options": {
           "type": "string",
@@ -9658,12 +9584,6 @@
             "FAILED",
             "READY",
             "RESTORING"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "type": {
@@ -9677,7 +9597,6 @@
       }
     },
     "DiskAggregatedList": {
-      "id": "DiskAggregatedList",
       "type": "object",
       "properties": {
         "id": {
@@ -9708,7 +9627,6 @@
       }
     },
     "DiskList": {
-      "id": "DiskList",
       "type": "object",
       "description": "A list of Disk resources.",
       "properties": {
@@ -9739,7 +9657,6 @@
       }
     },
     "DiskMoveRequest": {
-      "id": "DiskMoveRequest",
       "type": "object",
       "properties": {
         "destinationZone": {
@@ -9753,7 +9670,6 @@
       }
     },
     "DiskType": {
-      "id": "DiskType",
       "type": "object",
       "description": "A disk type resource.",
       "properties": {
@@ -9804,7 +9720,6 @@
       }
     },
     "DiskTypeAggregatedList": {
-      "id": "DiskTypeAggregatedList",
       "type": "object",
       "properties": {
         "id": {
@@ -9835,7 +9750,6 @@
       }
     },
     "DiskTypeList": {
-      "id": "DiskTypeList",
       "type": "object",
       "description": "Contains a list of disk type resources.",
       "properties": {
@@ -9866,7 +9780,6 @@
       }
     },
     "DiskTypesScopedList": {
-      "id": "DiskTypesScopedList",
       "type": "object",
       "properties": {
         "diskTypes": {
@@ -9897,21 +9810,6 @@
                 "RESOURCE_NOT_DELETED",
                 "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
                 "UNREACHABLE"
-              ],
-              "enumDescriptions": [
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
               ]
             },
             "data": {
@@ -9940,7 +9838,6 @@
       }
     },
     "DisksScopedList": {
-      "id": "DisksScopedList",
       "type": "object",
       "properties": {
         "disks": {
@@ -9971,21 +9868,6 @@
                 "RESOURCE_NOT_DELETED",
                 "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
                 "UNREACHABLE"
-              ],
-              "enumDescriptions": [
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
               ]
             },
             "data": {
@@ -10014,7 +9896,6 @@
       }
     },
     "Firewall": {
-      "id": "Firewall",
       "type": "object",
       "description": "A Firewall resource.",
       "properties": {
@@ -10059,13 +9940,7 @@
         "name": {
           "type": "string",
           "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
-          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
-          "annotations": {
-            "required": [
-              "compute.firewalls.insert",
-              "compute.firewalls.patch"
-            ]
-          }
+          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "network": {
           "type": "string",
@@ -10099,7 +9974,6 @@
       }
     },
     "FirewallList": {
-      "id": "FirewallList",
       "type": "object",
       "description": "Contains a list of Firewall resources.",
       "properties": {
@@ -10130,7 +10004,6 @@
       }
     },
     "ForwardingRule": {
-      "id": "ForwardingRule",
       "type": "object",
       "description": "A ForwardingRule resource. A ForwardingRule resource specifies which pool of target VMs to forward a packet to if it matches the given [IPAddress, IPProtocol, portRange] tuple.",
       "properties": {
@@ -10147,13 +10020,6 @@
             "SCTP",
             "TCP",
             "UDP"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "creationTimestamp": {
@@ -10198,7 +10064,6 @@
       }
     },
     "ForwardingRuleAggregatedList": {
-      "id": "ForwardingRuleAggregatedList",
       "type": "object",
       "properties": {
         "id": {
@@ -10229,7 +10094,6 @@
       }
     },
     "ForwardingRuleList": {
-      "id": "ForwardingRuleList",
       "type": "object",
       "description": "Contains a list of ForwardingRule resources.",
       "properties": {
@@ -10260,7 +10124,6 @@
       }
     },
     "ForwardingRulesScopedList": {
-      "id": "ForwardingRulesScopedList",
       "type": "object",
       "properties": {
         "forwardingRules": {
@@ -10291,21 +10154,6 @@
                 "RESOURCE_NOT_DELETED",
                 "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
                 "UNREACHABLE"
-              ],
-              "enumDescriptions": [
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
               ]
             },
             "data": {
@@ -10334,7 +10182,6 @@
       }
     },
     "HealthCheckReference": {
-      "id": "HealthCheckReference",
       "type": "object",
       "properties": {
         "healthCheck": {
@@ -10343,7 +10190,6 @@
       }
     },
     "HealthStatus": {
-      "id": "HealthStatus",
       "type": "object",
       "properties": {
         "healthState": {
@@ -10352,10 +10198,6 @@
           "enum": [
             "HEALTHY",
             "UNHEALTHY"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         },
         "instance": {
@@ -10374,7 +10216,6 @@
       }
     },
     "HostRule": {
-      "id": "HostRule",
       "type": "object",
       "description": "A host-matching rule for a URL. If matched, will use the named PathMatcher to select the BackendService.",
       "properties": {
@@ -10395,7 +10236,6 @@
       }
     },
     "HttpHealthCheck": {
-      "id": "HttpHealthCheck",
       "type": "object",
       "description": "An HttpHealthCheck resource. This resource defines a template for how individual VMs should be checked for health, via HTTP.",
       "properties": {
@@ -10462,7 +10302,6 @@
       }
     },
     "HttpHealthCheckList": {
-      "id": "HttpHealthCheckList",
       "type": "object",
       "description": "Contains a list of HttpHealthCheck resources.",
       "properties": {
@@ -10493,7 +10332,6 @@
       }
     },
     "Image": {
-      "id": "Image",
       "type": "object",
       "description": "An Image resource.",
       "properties": {
@@ -10539,12 +10377,7 @@
         "name": {
           "type": "string",
           "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
-          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
-          "annotations": {
-            "required": [
-              "compute.images.insert"
-            ]
-          }
+          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "rawDisk": {
           "type": "object",
@@ -10555,9 +10388,6 @@
               "description": "The format used to encode and transmit the block device, which should be TAR. This is just a container and transmission format and not a runtime format. Provided by the client when the disk image is created.",
               "enum": [
                 "TAR"
-              ],
-              "enumDescriptions": [
-                ""
               ]
             },
             "sha1Checksum": {
@@ -10567,12 +10397,7 @@
             },
             "source": {
               "type": "string",
-              "description": "The full Google Cloud Storage URL where the disk image is stored. You must provide either this property or the sourceDisk property but not both.",
-              "annotations": {
-                "required": [
-                  "compute.images.insert"
-                ]
-              }
+              "description": "The full Google Cloud Storage URL where the disk image is stored. You must provide either this property or the sourceDisk property but not both."
             }
           }
         },
@@ -10594,9 +10419,6 @@
           "default": "RAW",
           "enum": [
             "RAW"
-          ],
-          "enumDescriptions": [
-            ""
           ]
         },
         "status": {
@@ -10606,17 +10428,11 @@
             "FAILED",
             "PENDING",
             "READY"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "ImageList": {
-      "id": "ImageList",
       "type": "object",
       "description": "Contains a list of Image resources.",
       "properties": {
@@ -10647,7 +10463,6 @@
       }
     },
     "Instance": {
-      "id": "Instance",
       "type": "object",
       "description": "An Instance resource.",
       "properties": {
@@ -10686,12 +10501,7 @@
         },
         "machineType": {
           "type": "string",
-          "description": "Full or partial URL of the machine type resource to use for this instance. This is provided by the client when the instance is created. For example, the following is a valid partial url:\n\nzones/zone/machineTypes/machine-type",
-          "annotations": {
-            "required": [
-              "compute.instances.insert"
-            ]
-          }
+          "description": "Full or partial URL of the machine type resource to use for this instance. This is provided by the client when the instance is created. For example, the following is a valid partial url:\n\nzones/zone/machineTypes/machine-type"
         },
         "metadata": {
           "$ref": "#/definitions/Metadata",
@@ -10733,14 +10543,6 @@
             "STOPPED",
             "STOPPING",
             "TERMINATED"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "statusMessage": {
@@ -10758,7 +10560,6 @@
       }
     },
     "InstanceAggregatedList": {
-      "id": "InstanceAggregatedList",
       "type": "object",
       "properties": {
         "id": {
@@ -10789,7 +10590,6 @@
       }
     },
     "InstanceList": {
-      "id": "InstanceList",
       "type": "object",
       "description": "Contains a list of instance resources.",
       "properties": {
@@ -10820,7 +10620,6 @@
       }
     },
     "InstanceMoveRequest": {
-      "id": "InstanceMoveRequest",
       "type": "object",
       "properties": {
         "destinationZone": {
@@ -10834,7 +10633,6 @@
       }
     },
     "InstanceProperties": {
-      "id": "InstanceProperties",
       "type": "object",
       "description": "",
       "properties": {
@@ -10855,12 +10653,7 @@
         },
         "machineType": {
           "type": "string",
-          "description": "Name of the machine type resource describing which machine type to use to host the instances created based on this template; provided by the client when the instance template is created.",
-          "annotations": {
-            "required": [
-              "compute.instanceTemplates.insert"
-            ]
-          }
+          "description": "Name of the machine type resource describing which machine type to use to host the instances created based on this template; provided by the client when the instance template is created."
         },
         "metadata": {
           "$ref": "#/definitions/Metadata",
@@ -10891,7 +10684,6 @@
       }
     },
     "InstanceReference": {
-      "id": "InstanceReference",
       "type": "object",
       "properties": {
         "instance": {
@@ -10900,7 +10692,6 @@
       }
     },
     "InstanceTemplate": {
-      "id": "InstanceTemplate",
       "type": "object",
       "description": "An Instance Template resource.",
       "properties": {
@@ -10925,12 +10716,7 @@
         "name": {
           "type": "string",
           "description": "Name of the instance template resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035",
-          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
-          "annotations": {
-            "required": [
-              "compute.instanceTemplates.insert"
-            ]
-          }
+          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "properties": {
           "$ref": "#/definitions/InstanceProperties",
@@ -10943,7 +10729,6 @@
       }
     },
     "InstanceTemplateList": {
-      "id": "InstanceTemplateList",
       "type": "object",
       "description": "Contains a list of instance template resources.",
       "properties": {
@@ -10974,7 +10759,6 @@
       }
     },
     "InstancesScopedList": {
-      "id": "InstancesScopedList",
       "type": "object",
       "properties": {
         "instances": {
@@ -11005,21 +10789,6 @@
                 "RESOURCE_NOT_DELETED",
                 "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
                 "UNREACHABLE"
-              ],
-              "enumDescriptions": [
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
               ]
             },
             "data": {
@@ -11048,7 +10817,6 @@
       }
     },
     "License": {
-      "id": "License",
       "type": "object",
       "description": "A license resource.",
       "properties": {
@@ -11064,12 +10832,7 @@
         "name": {
           "type": "string",
           "description": "Name of the resource. The name must be 1-63 characters long, and comply with RCF1035.",
-          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
-          "annotations": {
-            "required": [
-              "compute.images.insert"
-            ]
-          }
+          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "selfLink": {
           "type": "string",
@@ -11078,7 +10841,6 @@
       }
     },
     "MachineType": {
-      "id": "MachineType",
       "type": "object",
       "description": "A Machine Type resource.",
       "properties": {
@@ -11159,7 +10921,6 @@
       }
     },
     "MachineTypeAggregatedList": {
-      "id": "MachineTypeAggregatedList",
       "type": "object",
       "properties": {
         "id": {
@@ -11190,7 +10951,6 @@
       }
     },
     "MachineTypeList": {
-      "id": "MachineTypeList",
       "type": "object",
       "description": "Contains a list of Machine Type resources.",
       "properties": {
@@ -11221,7 +10981,6 @@
       }
     },
     "MachineTypesScopedList": {
-      "id": "MachineTypesScopedList",
       "type": "object",
       "properties": {
         "machineTypes": {
@@ -11252,21 +11011,6 @@
                 "RESOURCE_NOT_DELETED",
                 "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
                 "UNREACHABLE"
-              ],
-              "enumDescriptions": [
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
               ]
             },
             "data": {
@@ -11295,7 +11039,6 @@
       }
     },
     "Metadata": {
-      "id": "Metadata",
       "type": "object",
       "description": "A metadata key/value entry.",
       "properties": {
@@ -11313,23 +11056,11 @@
               "key": {
                 "type": "string",
                 "description": "Key for the metadata entry. Keys must conform to the following regexp: [a-zA-Z0-9-_]+, and be less than 128 bytes in length. This is reflected as part of a URL in the metadata server. Additionally, to avoid ambiguity, keys must not conflict with any other metadata keys for the project.",
-                "pattern": "[a-zA-Z0-9-_]{1,128}",
-                "annotations": {
-                  "required": [
-                    "compute.instances.insert",
-                    "compute.projects.setCommonInstanceMetadata"
-                  ]
-                }
+                "pattern": "[a-zA-Z0-9-_]{1,128}"
               },
               "value": {
                 "type": "string",
-                "description": "Value for the metadata entry. These are free-form strings, and only have meaning as interpreted by the image running in the instance. The only restriction placed on values is that their size must be less than or equal to 32768 bytes.",
-                "annotations": {
-                  "required": [
-                    "compute.instances.insert",
-                    "compute.projects.setCommonInstanceMetadata"
-                  ]
-                }
+                "description": "Value for the metadata entry. These are free-form strings, and only have meaning as interpreted by the image running in the instance. The only restriction placed on values is that their size must be less than or equal to 32768 bytes."
               }
             }
           }
@@ -11342,19 +11073,13 @@
       }
     },
     "Network": {
-      "id": "Network",
       "type": "object",
       "description": "A network resource.",
       "properties": {
         "IPv4Range": {
           "type": "string",
           "description": "The range of internal addresses that are legal on this network. This range is a CIDR specification, for example: 192.168.0.0/16. Provided by the client when the network is created.",
-          "pattern": "[0-9]{1,3}(?:\\.[0-9]{1,3}){3}/[0-9]{1,2}",
-          "annotations": {
-            "required": [
-              "compute.networks.insert"
-            ]
-          }
+          "pattern": "[0-9]{1,3}(?:\\.[0-9]{1,3}){3}/[0-9]{1,2}"
         },
         "creationTimestamp": {
           "type": "string",
@@ -11382,12 +11107,7 @@
         "name": {
           "type": "string",
           "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
-          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
-          "annotations": {
-            "required": [
-              "compute.networks.insert"
-            ]
-          }
+          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "selfLink": {
           "type": "string",
@@ -11396,7 +11116,6 @@
       }
     },
     "NetworkInterface": {
-      "id": "NetworkInterface",
       "type": "object",
       "description": "A network interface resource attached to an instance.",
       "properties": {
@@ -11413,12 +11132,7 @@
         },
         "network": {
           "type": "string",
-          "description": "URL of the network resource for this instance. This is required for creating an instance but optional when creating a firewall rule. If not specified when creating a firewall rule, the default network is used:\n\nglobal/networks/default \n\nIf you specify this property, you can specify the network as a full or partial URL. For example, the following are all valid URLs:  \n- https://www.googleapis.com/compute/v1/projects/project/global/networks/network \n- projects/project/global/networks/network \n- global/networks/default",
-          "annotations": {
-            "required": [
-              "compute.instances.insert"
-            ]
-          }
+          "description": "URL of the network resource for this instance. This is required for creating an instance but optional when creating a firewall rule. If not specified when creating a firewall rule, the default network is used:\n\nglobal/networks/default \n\nIf you specify this property, you can specify the network as a full or partial URL. For example, the following are all valid URLs:  \n- https://www.googleapis.com/compute/v1/projects/project/global/networks/network \n- projects/project/global/networks/network \n- global/networks/default"
         },
         "networkIP": {
           "type": "string",
@@ -11427,7 +11141,6 @@
       }
     },
     "NetworkList": {
-      "id": "NetworkList",
       "type": "object",
       "description": "Contains a list of Network resources.",
       "properties": {
@@ -11458,7 +11171,6 @@
       }
     },
     "Operation": {
-      "id": "Operation",
       "type": "object",
       "description": "An operation resource, used to manage asynchronous API requests.",
       "properties": {
@@ -11556,11 +11268,6 @@
             "DONE",
             "PENDING",
             "RUNNING"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         },
         "statusMessage": {
@@ -11603,21 +11310,6 @@
                   "RESOURCE_NOT_DELETED",
                   "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
                   "UNREACHABLE"
-                ],
-                "enumDescriptions": [
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  ""
                 ]
               },
               "data": {
@@ -11651,7 +11343,6 @@
       }
     },
     "OperationAggregatedList": {
-      "id": "OperationAggregatedList",
       "type": "object",
       "properties": {
         "id": {
@@ -11682,7 +11373,6 @@
       }
     },
     "OperationList": {
-      "id": "OperationList",
       "type": "object",
       "description": "Contains a list of operation resources.",
       "properties": {
@@ -11713,7 +11403,6 @@
       }
     },
     "OperationsScopedList": {
-      "id": "OperationsScopedList",
       "type": "object",
       "properties": {
         "operations": {
@@ -11744,21 +11433,6 @@
                 "RESOURCE_NOT_DELETED",
                 "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
                 "UNREACHABLE"
-              ],
-              "enumDescriptions": [
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
               ]
             },
             "data": {
@@ -11787,7 +11461,6 @@
       }
     },
     "PathMatcher": {
-      "id": "PathMatcher",
       "type": "object",
       "description": "A matcher for the path portion of the URL. The BackendService from the longest-matched rule will serve the URL. If no rule was matched, the default_service will be used.",
       "properties": {
@@ -11812,7 +11485,6 @@
       }
     },
     "PathRule": {
-      "id": "PathRule",
       "type": "object",
       "description": "A path-matching rule for a URL. If matched, will use the specified BackendService to handle the traffic arriving at this URL.",
       "properties": {
@@ -11830,7 +11502,6 @@
       }
     },
     "Project": {
-      "id": "Project",
       "type": "object",
       "description": "A Project resource. Projects can only be created in the Google Developers Console. Unless marked otherwise, values can only be modified in the console.",
       "properties": {
@@ -11878,7 +11549,6 @@
       }
     },
     "Quota": {
-      "id": "Quota",
       "type": "object",
       "description": "A quotas entry.",
       "properties": {
@@ -11912,29 +11582,6 @@
             "TARGET_VPN_GATEWAYS",
             "URL_MAPS",
             "VPN_TUNNELS"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "usage": {
@@ -11945,7 +11592,6 @@
       }
     },
     "Region": {
-      "id": "Region",
       "type": "object",
       "description": "Region resource.",
       "properties": {
@@ -11992,10 +11638,6 @@
           "enum": [
             "DOWN",
             "UP"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         },
         "zones": {
@@ -12008,7 +11650,6 @@
       }
     },
     "RegionList": {
-      "id": "RegionList",
       "type": "object",
       "description": "Contains a list of region resources.",
       "properties": {
@@ -12039,7 +11680,6 @@
       }
     },
     "ResourceGroupReference": {
-      "id": "ResourceGroupReference",
       "type": "object",
       "properties": {
         "group": {
@@ -12049,7 +11689,6 @@
       }
     },
     "Route": {
-      "id": "Route",
       "type": "object",
       "description": "The route resource. A Route is a rule that specifies how certain packets should be handled by the virtual network. Routes are associated with VMs by tag and the set of Routes for a particular VM is called its routing table. For each packet leaving a VM, the system searches that VM's routing table for a single best matching Route. Routes match packets by destination IP address, preferring smaller or more specific ranges over larger ones. If there is a tie, the system selects the Route with the smallest priority value. If there is still a tie, it uses the layer three and four packet headers to select just one of the remaining matching Routes. The packet is then forwarded as specified by the next_hop field of the winning Route -- either to another VM destination, a VM gateway or a GCE operated gateway. Packets that do not match any Route in the sending VM's routing table will be dropped.",
       "properties": {
@@ -12063,12 +11702,7 @@
         },
         "destRange": {
           "type": "string",
-          "description": "Which packets does this route apply to?",
-          "annotations": {
-            "required": [
-              "compute.routes.insert"
-            ]
-          }
+          "description": "Which packets does this route apply to?"
         },
         "id": {
           "type": "string",
@@ -12083,21 +11717,11 @@
         "name": {
           "type": "string",
           "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035.",
-          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
-          "annotations": {
-            "required": [
-              "compute.routes.insert"
-            ]
-          }
+          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "network": {
           "type": "string",
-          "description": "URL of the network to which this route is applied; provided by the client when the route is created.",
-          "annotations": {
-            "required": [
-              "compute.routes.insert"
-            ]
-          }
+          "description": "URL of the network to which this route is applied; provided by the client when the route is created."
         },
         "nextHopGateway": {
           "type": "string",
@@ -12122,12 +11746,7 @@
         "priority": {
           "type": "integer",
           "description": "Breaks ties between Routes of equal specificity. Routes with smaller values win when tied with routes with larger values.",
-          "format": "uint32",
-          "annotations": {
-            "required": [
-              "compute.routes.insert"
-            ]
-          }
+          "format": "uint32"
         },
         "selfLink": {
           "type": "string",
@@ -12138,11 +11757,6 @@
           "description": "A list of instance tags to which this route applies.",
           "items": {
             "type": "string"
-          },
-          "annotations": {
-            "required": [
-              "compute.routes.insert"
-            ]
           }
         },
         "warnings": {
@@ -12168,21 +11782,6 @@
                   "RESOURCE_NOT_DELETED",
                   "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
                   "UNREACHABLE"
-                ],
-                "enumDescriptions": [
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  "",
-                  ""
                 ]
               },
               "data": {
@@ -12212,7 +11811,6 @@
       }
     },
     "RouteList": {
-      "id": "RouteList",
       "type": "object",
       "description": "Contains a list of route resources.",
       "properties": {
@@ -12243,7 +11841,6 @@
       }
     },
     "Scheduling": {
-      "id": "Scheduling",
       "type": "object",
       "description": "Sets the scheduling options for an Instance.",
       "properties": {
@@ -12257,16 +11854,11 @@
           "enum": [
             "MIGRATE",
             "TERMINATE"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         }
       }
     },
     "SerialPortOutput": {
-      "id": "SerialPortOutput",
       "type": "object",
       "description": "An instance's serial console output.",
       "properties": {
@@ -12286,7 +11878,6 @@
       }
     },
     "ServiceAccount": {
-      "id": "ServiceAccount",
       "type": "object",
       "description": "A service account.",
       "properties": {
@@ -12304,7 +11895,6 @@
       }
     },
     "Snapshot": {
-      "id": "Snapshot",
       "type": "object",
       "description": "A persistent disk snapshot resource.",
       "properties": {
@@ -12364,13 +11954,6 @@
             "FAILED",
             "READY",
             "UPLOADING"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "storageBytes": {
@@ -12384,16 +11967,11 @@
           "enum": [
             "UPDATING",
             "UP_TO_DATE"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         }
       }
     },
     "SnapshotList": {
-      "id": "SnapshotList",
       "type": "object",
       "description": "Contains a list of persistent disk snapshot resources.",
       "properties": {
@@ -12424,7 +12002,6 @@
       }
     },
     "Tags": {
-      "id": "Tags",
       "type": "object",
       "description": "A set of instance tags.",
       "properties": {
@@ -12443,7 +12020,6 @@
       }
     },
     "TargetHttpProxy": {
-      "id": "TargetHttpProxy",
       "type": "object",
       "description": "A TargetHttpProxy resource. This resource defines an HTTP proxy.",
       "properties": {
@@ -12481,7 +12057,6 @@
       }
     },
     "TargetHttpProxyList": {
-      "id": "TargetHttpProxyList",
       "type": "object",
       "description": "Contains a list of TargetHttpProxy resources.",
       "properties": {
@@ -12512,7 +12087,6 @@
       }
     },
     "TargetInstance": {
-      "id": "TargetInstance",
       "type": "object",
       "description": "A TargetInstance resource. This resource defines an endpoint VM that terminates traffic of certain protocols.",
       "properties": {
@@ -12548,9 +12122,6 @@
           "description": "NAT option controlling how IPs are NAT'ed to the VM. Currently only NO_NAT (default value) is supported.",
           "enum": [
             "NO_NAT"
-          ],
-          "enumDescriptions": [
-            ""
           ]
         },
         "selfLink": {
@@ -12564,7 +12135,6 @@
       }
     },
     "TargetInstanceAggregatedList": {
-      "id": "TargetInstanceAggregatedList",
       "type": "object",
       "properties": {
         "id": {
@@ -12595,7 +12165,6 @@
       }
     },
     "TargetInstanceList": {
-      "id": "TargetInstanceList",
       "type": "object",
       "description": "Contains a list of TargetInstance resources.",
       "properties": {
@@ -12626,7 +12195,6 @@
       }
     },
     "TargetInstancesScopedList": {
-      "id": "TargetInstancesScopedList",
       "type": "object",
       "properties": {
         "targetInstances": {
@@ -12657,21 +12225,6 @@
                 "RESOURCE_NOT_DELETED",
                 "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
                 "UNREACHABLE"
-              ],
-              "enumDescriptions": [
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
               ]
             },
             "data": {
@@ -12700,7 +12253,6 @@
       }
     },
     "TargetPool": {
-      "id": "TargetPool",
       "type": "object",
       "description": "A TargetPool resource. This resource defines a pool of VMs, associated HttpHealthCheck resources, and the fallback TargetPool.",
       "properties": {
@@ -12765,17 +12317,11 @@
             "CLIENT_IP",
             "CLIENT_IP_PROTO",
             "NONE"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "TargetPoolAggregatedList": {
-      "id": "TargetPoolAggregatedList",
       "type": "object",
       "properties": {
         "id": {
@@ -12806,7 +12352,6 @@
       }
     },
     "TargetPoolInstanceHealth": {
-      "id": "TargetPoolInstanceHealth",
       "type": "object",
       "properties": {
         "healthStatus": {
@@ -12823,7 +12368,6 @@
       }
     },
     "TargetPoolList": {
-      "id": "TargetPoolList",
       "type": "object",
       "description": "Contains a list of TargetPool resources.",
       "properties": {
@@ -12854,7 +12398,6 @@
       }
     },
     "TargetPoolsAddHealthCheckRequest": {
-      "id": "TargetPoolsAddHealthCheckRequest",
       "type": "object",
       "properties": {
         "healthChecks": {
@@ -12867,7 +12410,6 @@
       }
     },
     "TargetPoolsAddInstanceRequest": {
-      "id": "TargetPoolsAddInstanceRequest",
       "type": "object",
       "properties": {
         "instances": {
@@ -12880,7 +12422,6 @@
       }
     },
     "TargetPoolsRemoveHealthCheckRequest": {
-      "id": "TargetPoolsRemoveHealthCheckRequest",
       "type": "object",
       "properties": {
         "healthChecks": {
@@ -12893,7 +12434,6 @@
       }
     },
     "TargetPoolsRemoveInstanceRequest": {
-      "id": "TargetPoolsRemoveInstanceRequest",
       "type": "object",
       "properties": {
         "instances": {
@@ -12906,7 +12446,6 @@
       }
     },
     "TargetPoolsScopedList": {
-      "id": "TargetPoolsScopedList",
       "type": "object",
       "properties": {
         "targetPools": {
@@ -12937,21 +12476,6 @@
                 "RESOURCE_NOT_DELETED",
                 "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
                 "UNREACHABLE"
-              ],
-              "enumDescriptions": [
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
               ]
             },
             "data": {
@@ -12980,7 +12504,6 @@
       }
     },
     "TargetReference": {
-      "id": "TargetReference",
       "type": "object",
       "properties": {
         "target": {
@@ -12989,7 +12512,6 @@
       }
     },
     "TargetVpnGateway": {
-      "id": "TargetVpnGateway",
       "type": "object",
       "properties": {
         "creationTimestamp": {
@@ -13020,21 +12542,11 @@
         "name": {
           "type": "string",
           "description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long and comply with RFC1035.",
-          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
-          "annotations": {
-            "required": [
-              "compute.targetVpnGateways.insert"
-            ]
-          }
+          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "network": {
           "type": "string",
-          "description": "URL of the network to which this VPN gateway is attached. Provided by the client when the VPN gateway is created.",
-          "annotations": {
-            "required": [
-              "compute.targetVpnGateways.insert"
-            ]
-          }
+          "description": "URL of the network to which this VPN gateway is attached. Provided by the client when the VPN gateway is created."
         },
         "region": {
           "type": "string",
@@ -13052,12 +12564,6 @@
             "DELETING",
             "FAILED",
             "READY"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "tunnels": {
@@ -13070,7 +12576,6 @@
       }
     },
     "TargetVpnGatewayAggregatedList": {
-      "id": "TargetVpnGatewayAggregatedList",
       "type": "object",
       "properties": {
         "id": {
@@ -13101,7 +12606,6 @@
       }
     },
     "TargetVpnGatewayList": {
-      "id": "TargetVpnGatewayList",
       "type": "object",
       "description": "Contains a list of TargetVpnGateway resources.",
       "properties": {
@@ -13132,7 +12636,6 @@
       }
     },
     "TargetVpnGatewaysScopedList": {
-      "id": "TargetVpnGatewaysScopedList",
       "type": "object",
       "properties": {
         "targetVpnGateways": {
@@ -13163,21 +12666,6 @@
                 "RESOURCE_NOT_DELETED",
                 "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
                 "UNREACHABLE"
-              ],
-              "enumDescriptions": [
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
               ]
             },
             "data": {
@@ -13206,7 +12694,6 @@
       }
     },
     "TestFailure": {
-      "id": "TestFailure",
       "type": "object",
       "properties": {
         "actualService": {
@@ -13224,7 +12711,6 @@
       }
     },
     "UrlMap": {
-      "id": "UrlMap",
       "type": "object",
       "description": "A UrlMap resource. This resource defines the mapping from URL to the BackendService resource, based on the \"longest-match\" of the URL's host and path.",
       "properties": {
@@ -13288,7 +12774,6 @@
       }
     },
     "UrlMapList": {
-      "id": "UrlMapList",
       "type": "object",
       "description": "Contains a list of UrlMap resources.",
       "properties": {
@@ -13319,7 +12804,6 @@
       }
     },
     "UrlMapReference": {
-      "id": "UrlMapReference",
       "type": "object",
       "properties": {
         "urlMap": {
@@ -13328,7 +12812,6 @@
       }
     },
     "UrlMapTest": {
-      "id": "UrlMapTest",
       "type": "object",
       "description": "Message for the expected URL mappings.",
       "properties": {
@@ -13351,7 +12834,6 @@
       }
     },
     "UrlMapValidationResult": {
-      "id": "UrlMapValidationResult",
       "type": "object",
       "description": "Message representing the validation result for a UrlMap.",
       "properties": {
@@ -13378,7 +12860,6 @@
       }
     },
     "UrlMapsValidateRequest": {
-      "id": "UrlMapsValidateRequest",
       "type": "object",
       "properties": {
         "resource": {
@@ -13388,7 +12869,6 @@
       }
     },
     "UrlMapsValidateResponse": {
-      "id": "UrlMapsValidateResponse",
       "type": "object",
       "properties": {
         "result": {
@@ -13397,7 +12877,6 @@
       }
     },
     "UsageExportLocation": {
-      "id": "UsageExportLocation",
       "type": "object",
       "description": "The location in Cloud Storage and naming method of the daily usage report. Contains bucket_name and report_name prefix.",
       "properties": {
@@ -13412,7 +12891,6 @@
       }
     },
     "VpnTunnel": {
-      "id": "VpnTunnel",
       "type": "object",
       "properties": {
         "creationTimestamp": {
@@ -13452,12 +12930,7 @@
         "name": {
           "type": "string",
           "description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long and comply with RFC1035.",
-          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
-          "annotations": {
-            "required": [
-              "compute.vpnTunnels.insert"
-            ]
-          }
+          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "peerIp": {
           "type": "string",
@@ -13492,32 +12965,15 @@
             "NETWORK_ERROR",
             "PROVISIONING",
             "WAITING_FOR_FULL_CONFIG"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "targetVpnGateway": {
           "type": "string",
-          "description": "URL of the VPN gateway to which this VPN tunnel is associated. Provided by the client when the VPN tunnel is created.",
-          "annotations": {
-            "required": [
-              "compute.vpnTunnels.insert"
-            ]
-          }
+          "description": "URL of the VPN gateway to which this VPN tunnel is associated. Provided by the client when the VPN tunnel is created."
         }
       }
     },
     "VpnTunnelAggregatedList": {
-      "id": "VpnTunnelAggregatedList",
       "type": "object",
       "properties": {
         "id": {
@@ -13548,7 +13004,6 @@
       }
     },
     "VpnTunnelList": {
-      "id": "VpnTunnelList",
       "type": "object",
       "description": "Contains a list of VpnTunnel resources.",
       "properties": {
@@ -13579,7 +13034,6 @@
       }
     },
     "VpnTunnelsScopedList": {
-      "id": "VpnTunnelsScopedList",
       "type": "object",
       "properties": {
         "vpnTunnels": {
@@ -13610,21 +13064,6 @@
                 "RESOURCE_NOT_DELETED",
                 "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
                 "UNREACHABLE"
-              ],
-              "enumDescriptions": [
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "",
-                ""
               ]
             },
             "data": {
@@ -13653,7 +13092,6 @@
       }
     },
     "Zone": {
-      "id": "Zone",
       "type": "object",
       "description": "A Zone resource.",
       "properties": {
@@ -13722,16 +13160,11 @@
           "enum": [
             "DOWN",
             "UP"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         }
       }
     },
     "ZoneList": {
-      "id": "ZoneList",
       "type": "object",
       "description": "Contains a list of zone resources.",
       "properties": {

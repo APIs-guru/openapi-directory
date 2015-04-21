@@ -318,7 +318,6 @@
   },
   "definitions": {
     "DownloadLineItemsRequest": {
-      "id": "DownloadLineItemsRequest",
       "type": "object",
       "description": "Request to fetch stored line items.",
       "properties": {
@@ -337,11 +336,6 @@
             "ADVERTISER_ID",
             "INSERTION_ORDER_ID",
             "LINE_ITEM_ID"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         },
         "format": {
@@ -349,15 +343,11 @@
           "description": "Format in which the line items will be returned. Default to CSV.",
           "enum": [
             "CSV"
-          ],
-          "enumDescriptions": [
-            ""
           ]
         }
       }
     },
     "DownloadLineItemsResponse": {
-      "id": "DownloadLineItemsResponse",
       "type": "object",
       "description": "Download line items response.",
       "properties": {
@@ -368,7 +358,6 @@
       }
     },
     "FilterPair": {
-      "id": "FilterPair",
       "type": "object",
       "description": "Filter used to match traffic data in your report.",
       "properties": {
@@ -455,87 +444,6 @@
             "FILTER_YEAR",
             "FILTER_YOUTUBE_VERTICAL",
             "FILTER_ZIP_CODE"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "value": {
@@ -545,7 +453,6 @@
       }
     },
     "ListQueriesResponse": {
-      "id": "ListQueriesResponse",
       "type": "object",
       "description": "List queries response.",
       "properties": {
@@ -564,7 +471,6 @@
       }
     },
     "ListReportsResponse": {
-      "id": "ListReportsResponse",
       "type": "object",
       "description": "List reports response.",
       "properties": {
@@ -583,7 +489,6 @@
       }
     },
     "Parameters": {
-      "id": "Parameters",
       "type": "object",
       "description": "Parameters of a query or report.",
       "properties": {
@@ -679,87 +584,6 @@
               "FILTER_YEAR",
               "FILTER_YOUTUBE_VERTICAL",
               "FILTER_ZIP_CODE"
-            ],
-            "enumDescriptions": [
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              ""
             ]
           }
         },
@@ -1012,247 +836,6 @@
               "METRIC_VIDEO_COMPANION_CLICKS",
               "METRIC_VIDEO_COMPANION_IMPRESSIONS",
               "METRIC_VIDEO_COMPLETION_RATE"
-            ],
-            "enumDescriptions": [
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              ""
             ]
           }
         },
@@ -1285,39 +868,11 @@
             "TYPE_TRUEVIEW_IAR",
             "TYPE_VERIFICATION",
             "TYPE_YOUTUBE_VERTICAL"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "Query": {
-      "id": "Query",
       "type": "object",
       "description": "Represents a query.",
       "properties": {
@@ -1360,7 +915,6 @@
       }
     },
     "QueryMetadata": {
-      "id": "QueryMetadata",
       "type": "object",
       "description": "Query metadata.",
       "properties": {
@@ -1386,26 +940,6 @@
             "QUARTER_TO_DATE",
             "WEEK_TO_DATE",
             "YEAR_TO_DATE"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "format": {
@@ -1415,11 +949,6 @@
             "CSV",
             "EXCEL_CSV",
             "XLSX"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         },
         "googleCloudStoragePathForLatestReport": {
@@ -1466,7 +995,6 @@
       }
     },
     "QuerySchedule": {
-      "id": "QuerySchedule",
       "type": "object",
       "description": "Information on how frequently and when to run a query.",
       "properties": {
@@ -1485,14 +1013,6 @@
             "QUARTERLY",
             "SEMI_MONTHLY",
             "WEEKLY"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "nextRunMinuteOfDay": {
@@ -1507,7 +1027,6 @@
       }
     },
     "Report": {
-      "id": "Report",
       "type": "object",
       "description": "Represents a report.",
       "properties": {
@@ -1526,7 +1045,6 @@
       }
     },
     "ReportFailure": {
-      "id": "ReportFailure",
       "type": "object",
       "description": "An explanation of a report failure.",
       "properties": {
@@ -1552,32 +1070,11 @@
             "SERVER_ERROR",
             "UNAUTHORIZED_API_ACCESS",
             "VALIDATION_ERROR"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "ReportKey": {
-      "id": "ReportKey",
       "type": "object",
       "description": "Key used to identify a report.",
       "properties": {
@@ -1594,7 +1091,6 @@
       }
     },
     "ReportMetadata": {
-      "id": "ReportMetadata",
       "type": "object",
       "description": "Report metadata.",
       "properties": {
@@ -1619,7 +1115,6 @@
       }
     },
     "ReportStatus": {
-      "id": "ReportStatus",
       "type": "object",
       "description": "Report status.",
       "properties": {
@@ -1639,11 +1134,6 @@
             "CSV",
             "EXCEL_CSV",
             "XLSX"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         },
         "state": {
@@ -1653,17 +1143,11 @@
             "DONE",
             "FAILED",
             "RUNNING"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "RowStatus": {
-      "id": "RowStatus",
       "type": "object",
       "description": "Represents the upload status of a row in the request.",
       "properties": {
@@ -1699,7 +1183,6 @@
       }
     },
     "RunQueryRequest": {
-      "id": "RunQueryRequest",
       "type": "object",
       "description": "Request to run a stored query to generate a report.",
       "properties": {
@@ -1725,26 +1208,6 @@
             "QUARTER_TO_DATE",
             "WEEK_TO_DATE",
             "YEAR_TO_DATE"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "reportDataEndTimeMs": {
@@ -1764,7 +1227,6 @@
       }
     },
     "UploadLineItemsRequest": {
-      "id": "UploadLineItemsRequest",
       "type": "object",
       "description": "Request to upload line items.",
       "properties": {
@@ -1777,9 +1239,6 @@
           "description": "Format the line items are in. Default to CSV.",
           "enum": [
             "CSV"
-          ],
-          "enumDescriptions": [
-            ""
           ]
         },
         "lineItems": {
@@ -1789,7 +1248,6 @@
       }
     },
     "UploadLineItemsResponse": {
-      "id": "UploadLineItemsResponse",
       "type": "object",
       "description": "Upload line items response.",
       "properties": {
@@ -1800,7 +1258,6 @@
       }
     },
     "UploadStatus": {
-      "id": "UploadStatus",
       "type": "object",
       "description": "Represents the status of upload.",
       "properties": {

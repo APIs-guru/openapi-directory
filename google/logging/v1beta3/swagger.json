@@ -1021,7 +1021,6 @@
   },
   "definitions": {
     "ListLogsResponse": {
-      "id": "ListLogsResponse",
       "type": "object",
       "description": "Result returned from ListLogs.",
       "properties": {
@@ -1039,7 +1038,6 @@
       }
     },
     "Log": {
-      "id": "Log",
       "type": "object",
       "description": "A log object.",
       "properties": {
@@ -1058,12 +1056,10 @@
       }
     },
     "Empty": {
-      "id": "Empty",
       "type": "object",
       "description": "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); }"
     },
     "WriteLogEntriesRequest": {
-      "id": "WriteLogEntriesRequest",
       "type": "object",
       "description": "The parameters to WriteLogEntries.",
       "properties": {
@@ -1084,7 +1080,6 @@
       }
     },
     "LogEntry": {
-      "id": "LogEntry",
       "type": "object",
       "description": "An individual entry in a log.",
       "properties": {
@@ -1121,7 +1116,6 @@
       }
     },
     "LogEntryMetadata": {
-      "id": "LogEntryMetadata",
       "type": "object",
       "description": "Additional data that is associated with a log entry, set by the service creating the log entry.",
       "properties": {
@@ -1174,12 +1168,10 @@
       }
     },
     "WriteLogEntriesResponse": {
-      "id": "WriteLogEntriesResponse",
       "type": "object",
       "description": "Result returned from WriteLogEntries. empty"
     },
     "ListLogServicesResponse": {
-      "id": "ListLogServicesResponse",
       "type": "object",
       "description": "Result returned from `ListLogServicesRequest`.",
       "properties": {
@@ -1197,7 +1189,6 @@
       }
     },
     "LogService": {
-      "id": "LogService",
       "type": "object",
       "description": "A log service object.",
       "properties": {
@@ -1215,7 +1206,6 @@
       }
     },
     "ListLogServiceIndexesResponse": {
-      "id": "ListLogServiceIndexesResponse",
       "type": "object",
       "description": "Result returned from ListLogServiceIndexesRequest.",
       "properties": {
@@ -1233,7 +1223,6 @@
       }
     },
     "ListLogSinksResponse": {
-      "id": "ListLogSinksResponse",
       "type": "object",
       "description": "Result returned from `ListLogSinks`.",
       "properties": {
@@ -1247,7 +1236,6 @@
       }
     },
     "LogSink": {
-      "id": "LogSink",
       "type": "object",
       "description": "An object that describes where a log may be written.",
       "properties": {
@@ -1269,7 +1257,6 @@
       }
     },
     "LogError": {
-      "id": "LogError",
       "type": "object",
       "description": "A problem in a sink or the sink's configuration.",
       "properties": {
@@ -1289,7 +1276,6 @@
       }
     },
     "Status": {
-      "id": "Status",
       "type": "object",
       "description": "Represents the RPC error status for Google APIs. See http://go/errormodel for details.",
       "properties": {
@@ -1315,7 +1301,6 @@
       }
     },
     "ListLogServiceSinksResponse": {
-      "id": "ListLogServiceSinksResponse",
       "type": "object",
       "description": "Result returned from `ListLogServiceSinks`.",
       "properties": {

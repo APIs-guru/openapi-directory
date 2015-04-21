@@ -1450,7 +1450,6 @@
   },
   "definitions": {
     "BackupConfiguration": {
-      "id": "BackupConfiguration",
       "type": "object",
       "description": "Database instance backup configuration.",
       "properties": {
@@ -1478,7 +1477,6 @@
       }
     },
     "BackupRun": {
-      "id": "BackupRun",
       "type": "object",
       "description": "A database instance backup run resource.",
       "properties": {
@@ -1526,7 +1524,6 @@
       }
     },
     "BackupRunsListResponse": {
-      "id": "BackupRunsListResponse",
       "type": "object",
       "description": "Backup run list results.",
       "properties": {
@@ -1549,7 +1546,6 @@
       }
     },
     "BinLogCoordinates": {
-      "id": "BinLogCoordinates",
       "type": "object",
       "description": "Binary log coordinates.",
       "properties": {
@@ -1570,7 +1566,6 @@
       }
     },
     "CloneContext": {
-      "id": "CloneContext",
       "type": "object",
       "description": "Database instance clone context.",
       "properties": {
@@ -1594,7 +1589,6 @@
       }
     },
     "DatabaseFlags": {
-      "id": "DatabaseFlags",
       "type": "object",
       "description": "MySQL flags for Cloud SQL instances.",
       "properties": {
@@ -1609,7 +1603,6 @@
       }
     },
     "DatabaseInstance": {
-      "id": "DatabaseInstance",
       "type": "object",
       "description": "A Cloud SQL instance resource.",
       "properties": {
@@ -1628,13 +1621,7 @@
         },
         "instance": {
           "type": "string",
-          "description": "Name of the Cloud SQL instance. This does not include the project ID.",
-          "annotations": {
-            "required": [
-              "sql.instances.insert",
-              "sql.instances.update"
-            ]
-          }
+          "description": "Name of the Cloud SQL instance. This does not include the project ID."
         },
         "instanceType": {
           "type": "string",
@@ -1667,13 +1654,7 @@
         },
         "project": {
           "type": "string",
-          "description": "The project ID of the project containing the Cloud SQL instance. The Google apps domain is prefixed if applicable.",
-          "annotations": {
-            "required": [
-              "sql.instances.insert",
-              "sql.instances.update"
-            ]
-          }
+          "description": "The project ID of the project containing the Cloud SQL instance. The Google apps domain is prefixed if applicable."
         },
         "region": {
           "type": "string",
@@ -1705,7 +1686,6 @@
       }
     },
     "ExportContext": {
-      "id": "ExportContext",
       "type": "object",
       "description": "Database instance export context.",
       "properties": {
@@ -1735,7 +1715,6 @@
       }
     },
     "Flag": {
-      "id": "Flag",
       "type": "object",
       "description": "A Google Cloud SQL service flag resource.",
       "properties": {
@@ -1779,7 +1758,6 @@
       }
     },
     "FlagsListResponse": {
-      "id": "FlagsListResponse",
       "type": "object",
       "description": "Flags list response.",
       "properties": {
@@ -1798,7 +1776,6 @@
       }
     },
     "ImportContext": {
-      "id": "ImportContext",
       "type": "object",
       "description": "Database instance import context.",
       "properties": {
@@ -1821,7 +1798,6 @@
       }
     },
     "InstanceOperation": {
-      "id": "InstanceOperation",
       "type": "object",
       "description": "An Operations resource contains information about database instance operations such as create, delete, and restart. Operations resources are created in response to operations that were initiated; you never create them directly.",
       "properties": {
@@ -1883,7 +1859,6 @@
       }
     },
     "InstanceSetRootPasswordRequest": {
-      "id": "InstanceSetRootPasswordRequest",
       "type": "object",
       "description": "Database instance set root password request.",
       "properties": {
@@ -1894,7 +1869,6 @@
       }
     },
     "InstancesCloneRequest": {
-      "id": "InstancesCloneRequest",
       "type": "object",
       "description": "Database instance clone request.",
       "properties": {
@@ -1905,7 +1879,6 @@
       }
     },
     "InstancesCloneResponse": {
-      "id": "InstancesCloneResponse",
       "type": "object",
       "description": "Database instance clone response.",
       "properties": {
@@ -1921,7 +1894,6 @@
       }
     },
     "InstancesDeleteResponse": {
-      "id": "InstancesDeleteResponse",
       "type": "object",
       "description": "Database instance delete response.",
       "properties": {
@@ -1937,7 +1909,6 @@
       }
     },
     "InstancesExportRequest": {
-      "id": "InstancesExportRequest",
       "type": "object",
       "description": "Database instance export request.",
       "properties": {
@@ -1948,7 +1919,6 @@
       }
     },
     "InstancesExportResponse": {
-      "id": "InstancesExportResponse",
       "type": "object",
       "description": "Database instance export response.",
       "properties": {
@@ -1964,7 +1934,6 @@
       }
     },
     "InstancesImportRequest": {
-      "id": "InstancesImportRequest",
       "type": "object",
       "description": "Database instance import request.",
       "properties": {
@@ -1975,7 +1944,6 @@
       }
     },
     "InstancesImportResponse": {
-      "id": "InstancesImportResponse",
       "type": "object",
       "description": "Database instance import response.",
       "properties": {
@@ -1991,7 +1959,6 @@
       }
     },
     "InstancesInsertResponse": {
-      "id": "InstancesInsertResponse",
       "type": "object",
       "description": "Database instance insert response.",
       "properties": {
@@ -2007,7 +1974,6 @@
       }
     },
     "InstancesListResponse": {
-      "id": "InstancesListResponse",
       "type": "object",
       "description": "Database instances list response.",
       "properties": {
@@ -2030,7 +1996,6 @@
       }
     },
     "InstancesPromoteReplicaResponse": {
-      "id": "InstancesPromoteReplicaResponse",
       "type": "object",
       "description": "Database promote read replica response.",
       "properties": {
@@ -2046,7 +2011,6 @@
       }
     },
     "InstancesResetSslConfigResponse": {
-      "id": "InstancesResetSslConfigResponse",
       "type": "object",
       "description": "Database instance resetSslConfig response.",
       "properties": {
@@ -2062,7 +2026,6 @@
       }
     },
     "InstancesRestartResponse": {
-      "id": "InstancesRestartResponse",
       "type": "object",
       "description": "Database instance restart response.",
       "properties": {
@@ -2078,7 +2041,6 @@
       }
     },
     "InstancesRestoreBackupResponse": {
-      "id": "InstancesRestoreBackupResponse",
       "type": "object",
       "description": "Database instance restore backup response.",
       "properties": {
@@ -2094,7 +2056,6 @@
       }
     },
     "InstancesSetRootPasswordResponse": {
-      "id": "InstancesSetRootPasswordResponse",
       "type": "object",
       "description": "Database instance set root password response.",
       "properties": {
@@ -2110,7 +2071,6 @@
       }
     },
     "InstancesUpdateResponse": {
-      "id": "InstancesUpdateResponse",
       "type": "object",
       "description": "Database instance update response.",
       "properties": {
@@ -2126,7 +2086,6 @@
       }
     },
     "IpConfiguration": {
-      "id": "IpConfiguration",
       "type": "object",
       "description": "IP Management configuration.",
       "properties": {
@@ -2153,7 +2112,6 @@
       }
     },
     "IpMapping": {
-      "id": "IpMapping",
       "type": "object",
       "description": "Database instance IP Mapping.",
       "properties": {
@@ -2169,7 +2127,6 @@
       }
     },
     "LocationPreference": {
-      "id": "LocationPreference",
       "type": "object",
       "description": "Preferred location. This specifies where a Cloud SQL instance should preferably be located, either in a specific Compute Engine zone, or co-located with an App Engine application. Note that if the preferred location is not available, the instance will be located as close as possible within the region. Only one location may be specified.",
       "properties": {
@@ -2189,7 +2146,6 @@
       }
     },
     "OperationError": {
-      "id": "OperationError",
       "type": "object",
       "description": "Database instance operation error.",
       "properties": {
@@ -2205,7 +2161,6 @@
       }
     },
     "OperationsListResponse": {
-      "id": "OperationsListResponse",
       "type": "object",
       "description": "Database instance list operations response.",
       "properties": {
@@ -2228,7 +2183,6 @@
       }
     },
     "SetRootPasswordContext": {
-      "id": "SetRootPasswordContext",
       "type": "object",
       "description": "Database instance set root password context.",
       "properties": {
@@ -2244,7 +2198,6 @@
       }
     },
     "Settings": {
-      "id": "Settings",
       "type": "object",
       "description": "Database instance settings.",
       "properties": {
@@ -2301,27 +2254,15 @@
         "settingsVersion": {
           "type": "string",
           "description": "The version of instance settings. This is a required field for update method to make sure concurrent updates are handled properly. During update, use the most recent settingsVersion value for this instance and do not try to update this value.",
-          "format": "int64",
-          "annotations": {
-            "required": [
-              "sql.instances.update"
-            ]
-          }
+          "format": "int64"
         },
         "tier": {
           "type": "string",
-          "description": "The tier of service for this instance, for example D1, D2. For more information, see pricing.",
-          "annotations": {
-            "required": [
-              "sql.instances.insert",
-              "sql.instances.update"
-            ]
-          }
+          "description": "The tier of service for this instance, for example D1, D2. For more information, see pricing."
         }
       }
     },
     "SslCert": {
-      "id": "SslCert",
       "type": "object",
       "description": "SslCerts Resource",
       "properties": {
@@ -2363,7 +2304,6 @@
       }
     },
     "SslCertDetail": {
-      "id": "SslCertDetail",
       "type": "object",
       "description": "SslCertDetail.",
       "properties": {
@@ -2378,7 +2318,6 @@
       }
     },
     "SslCertsDeleteResponse": {
-      "id": "SslCertsDeleteResponse",
       "type": "object",
       "description": "SslCert delete response.",
       "properties": {
@@ -2394,7 +2333,6 @@
       }
     },
     "SslCertsInsertRequest": {
-      "id": "SslCertsInsertRequest",
       "type": "object",
       "description": "SslCerts insert request.",
       "properties": {
@@ -2405,7 +2343,6 @@
       }
     },
     "SslCertsInsertResponse": {
-      "id": "SslCertsInsertResponse",
       "type": "object",
       "description": "SslCert insert response.",
       "properties": {
@@ -2425,7 +2362,6 @@
       }
     },
     "SslCertsListResponse": {
-      "id": "SslCertsListResponse",
       "type": "object",
       "description": "SslCerts list response.",
       "properties": {
@@ -2444,7 +2380,6 @@
       }
     },
     "Tier": {
-      "id": "Tier",
       "type": "object",
       "description": "A Google Cloud SQL service tier resource.",
       "properties": {
@@ -2477,7 +2412,6 @@
       }
     },
     "TiersListResponse": {
-      "id": "TiersListResponse",
       "type": "object",
       "description": "Tiers list response.",
       "properties": {

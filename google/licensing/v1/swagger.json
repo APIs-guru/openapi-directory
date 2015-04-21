@@ -448,7 +448,6 @@
   },
   "definitions": {
     "LicenseAssignment": {
-      "id": "LicenseAssignment",
       "type": "object",
       "description": "Template for LiscenseAssignment Resource",
       "properties": {
@@ -463,12 +462,7 @@
         },
         "productId": {
           "type": "string",
-          "description": "Name of the product.",
-          "annotations": {
-            "required": [
-              "licensing.licenseAssignments.update"
-            ]
-          }
+          "description": "Name of the product."
         },
         "selfLink": {
           "type": "string",
@@ -476,42 +470,25 @@
         },
         "skuId": {
           "type": "string",
-          "description": "Name of the sku of the product.",
-          "annotations": {
-            "required": [
-              "licensing.licenseAssignments.update"
-            ]
-          }
+          "description": "Name of the sku of the product."
         },
         "userId": {
           "type": "string",
-          "description": "Email id of the user.",
-          "annotations": {
-            "required": [
-              "licensing.licenseAssignments.update"
-            ]
-          }
+          "description": "Email id of the user."
         }
       }
     },
     "LicenseAssignmentInsert": {
-      "id": "LicenseAssignmentInsert",
       "type": "object",
       "description": "Template for LicenseAssignment Insert request",
       "properties": {
         "userId": {
           "type": "string",
-          "description": "Email id of the user",
-          "annotations": {
-            "required": [
-              "licensing.licenseAssignments.insert"
-            ]
-          }
+          "description": "Email id of the user"
         }
       }
     },
     "LicenseAssignmentList": {
-      "id": "LicenseAssignmentList",
       "type": "object",
       "description": "LicesnseAssignment List for a given product/sku for a customer.",
       "properties": {

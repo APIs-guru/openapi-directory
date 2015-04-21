@@ -572,7 +572,6 @@
   },
   "definitions": {
     "Change": {
-      "id": "Change",
       "type": "object",
       "description": "An atomic update to a collection of ResourceRecordSets.",
       "properties": {
@@ -609,16 +608,11 @@
           "enum": [
             "done",
             "pending"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         }
       }
     },
     "ChangesListResponse": {
-      "id": "ChangesListResponse",
       "type": "object",
       "description": "The response to a request to enumerate Changes to a ResourceRecordSets collection.",
       "properties": {
@@ -641,7 +635,6 @@
       }
     },
     "ManagedZone": {
-      "id": "ManagedZone",
       "type": "object",
       "description": "A zone is a subtree of the DNS namespace under one administrative responsibility. A ManagedZone is a resource that represents a DNS zone hosted by the Cloud DNS service.",
       "properties": {
@@ -685,7 +678,6 @@
       }
     },
     "ManagedZonesListResponse": {
-      "id": "ManagedZonesListResponse",
       "type": "object",
       "properties": {
         "kind": {
@@ -707,7 +699,6 @@
       }
     },
     "Project": {
-      "id": "Project",
       "type": "object",
       "description": "A project resource. The project is a top level container for resources including Cloud DNS ManagedZones. Projects can be created only in the APIs console.",
       "properties": {
@@ -732,7 +723,6 @@
       }
     },
     "Quota": {
-      "id": "Quota",
       "type": "object",
       "description": "Limits associated with a Project.",
       "properties": {
@@ -774,7 +764,6 @@
       }
     },
     "ResourceRecordSet": {
-      "id": "ResourceRecordSet",
       "type": "object",
       "description": "A unit of data that will be returned by the DNS servers.",
       "properties": {
@@ -806,7 +795,6 @@
       }
     },
     "ResourceRecordSetsListResponse": {
-      "id": "ResourceRecordSetsListResponse",
       "type": "object",
       "properties": {
         "kind": {

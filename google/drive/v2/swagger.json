@@ -3565,7 +3565,6 @@
   },
   "definitions": {
     "About": {
-      "id": "About",
       "type": "object",
       "description": "An item with user information and settings.",
       "properties": {
@@ -3781,7 +3780,6 @@
       }
     },
     "App": {
-      "id": "App",
       "type": "object",
       "description": "The apps resource provides a list of the apps that a user has installed, with information about each app's supported MIME types, file extensions, and other details.",
       "properties": {
@@ -3915,7 +3913,6 @@
       }
     },
     "AppList": {
-      "id": "AppList",
       "type": "object",
       "description": "A list of third-party applications which the user has installed or given access to Google Drive.",
       "properties": {
@@ -3949,7 +3946,6 @@
       }
     },
     "Change": {
-      "id": "Change",
       "type": "object",
       "description": "Representation of a change to a file.",
       "properties": {
@@ -3987,7 +3983,6 @@
       }
     },
     "ChangeList": {
-      "id": "ChangeList",
       "type": "object",
       "description": "A list of changes for a user.",
       "properties": {
@@ -4027,7 +4022,6 @@
       }
     },
     "Channel": {
-      "id": "Channel",
       "type": "object",
       "description": "An notification channel used to watch for resource changes.",
       "properties": {
@@ -4080,7 +4074,6 @@
       }
     },
     "ChildList": {
-      "id": "ChildList",
       "type": "object",
       "description": "A list of children of a file.",
       "properties": {
@@ -4115,7 +4108,6 @@
       }
     },
     "ChildReference": {
-      "id": "ChildReference",
       "type": "object",
       "description": "A reference to a folder's child.",
       "properties": {
@@ -4125,12 +4117,7 @@
         },
         "id": {
           "type": "string",
-          "description": "The ID of the child.",
-          "annotations": {
-            "required": [
-              "drive.children.insert"
-            ]
-          }
+          "description": "The ID of the child."
         },
         "kind": {
           "type": "string",
@@ -4144,7 +4131,6 @@
       }
     },
     "Comment": {
-      "id": "Comment",
       "type": "object",
       "description": "A JSON representation of a comment on a file in Google Drive.",
       "properties": {
@@ -4162,13 +4148,7 @@
         },
         "content": {
           "type": "string",
-          "description": "The plain text content used to create this comment. This is not HTML safe and should only be used as a starting point to make edits to a comment's content.",
-          "annotations": {
-            "required": [
-              "drive.comments.insert",
-              "drive.comments.update"
-            ]
-          }
+          "description": "The plain text content used to create this comment. This is not HTML safe and should only be used as a starting point to make edits to a comment's content."
         },
         "context": {
           "type": "object",
@@ -4233,7 +4213,6 @@
       }
     },
     "CommentList": {
-      "id": "CommentList",
       "type": "object",
       "description": "A JSON representation of a list of comments on a file in Google Drive.",
       "properties": {
@@ -4264,7 +4243,6 @@
       }
     },
     "CommentReply": {
-      "id": "CommentReply",
       "type": "object",
       "description": "A JSON representation of a reply to a comment on a file in Google Drive.",
       "properties": {
@@ -4274,12 +4252,7 @@
         },
         "content": {
           "type": "string",
-          "description": "The plain text content used to create this reply. This is not HTML safe and should only be used as a starting point to make edits to a reply's content. This field is required on inserts if no verb is specified (resolve/reopen).",
-          "annotations": {
-            "required": [
-              "drive.replies.update"
-            ]
-          }
+          "description": "The plain text content used to create this reply. This is not HTML safe and should only be used as a starting point to make edits to a reply's content. This field is required on inserts if no verb is specified (resolve/reopen)."
         },
         "createdDate": {
           "type": "string",
@@ -4315,7 +4288,6 @@
       }
     },
     "CommentReplyList": {
-      "id": "CommentReplyList",
       "type": "object",
       "description": "A JSON representation of a list of replies to a comment on a file in Google Drive.",
       "properties": {
@@ -4346,7 +4318,6 @@
       }
     },
     "File": {
-      "id": "File",
       "type": "object",
       "description": "The metadata for a file.",
       "properties": {
@@ -4758,7 +4729,6 @@
       }
     },
     "FileList": {
-      "id": "FileList",
       "type": "object",
       "description": "A list of files.",
       "properties": {
@@ -4793,7 +4763,6 @@
       }
     },
     "ParentList": {
-      "id": "ParentList",
       "type": "object",
       "description": "A list of a file's parents.",
       "properties": {
@@ -4820,18 +4789,12 @@
       }
     },
     "ParentReference": {
-      "id": "ParentReference",
       "type": "object",
       "description": "A reference to a file's parent.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "The ID of the parent.",
-          "annotations": {
-            "required": [
-              "drive.parents.insert"
-            ]
-          }
+          "description": "The ID of the parent."
         },
         "isRoot": {
           "type": "boolean",
@@ -4853,7 +4816,6 @@
       }
     },
     "Permission": {
-      "id": "Permission",
       "type": "object",
       "description": "A permission for a file.",
       "properties": {
@@ -4899,12 +4861,7 @@
         },
         "role": {
           "type": "string",
-          "description": "The primary role for this user. Allowed values are:  \n- owner \n- reader \n- writer",
-          "annotations": {
-            "required": [
-              "drive.permissions.insert"
-            ]
-          }
+          "description": "The primary role for this user. Allowed values are:  \n- owner \n- reader \n- writer"
         },
         "selfLink": {
           "type": "string",
@@ -4912,12 +4869,7 @@
         },
         "type": {
           "type": "string",
-          "description": "The account type. Allowed values are:  \n- user \n- group \n- domain \n- anyone",
-          "annotations": {
-            "required": [
-              "drive.permissions.insert"
-            ]
-          }
+          "description": "The account type. Allowed values are:  \n- user \n- group \n- domain \n- anyone"
         },
         "value": {
           "type": "string",
@@ -4930,7 +4882,6 @@
       }
     },
     "PermissionId": {
-      "id": "PermissionId",
       "type": "object",
       "description": "An ID for a user or group as seen in Permission items.",
       "properties": {
@@ -4946,7 +4897,6 @@
       }
     },
     "PermissionList": {
-      "id": "PermissionList",
       "type": "object",
       "description": "A list of permissions associated with a file.",
       "properties": {
@@ -4973,7 +4923,6 @@
       }
     },
     "Property": {
-      "id": "Property",
       "type": "object",
       "description": "A key-value pair attached to a file that is either public or private to an application.\nThe following limits apply to file properties:  \n- Maximum of 100 properties total per file\n- Maximum of 30 private properties per app\n- Maximum of 30 public properties\n- Maximum of 124 bytes size limit on (key + value) string in UTF-8 encoding for a single property.",
       "properties": {
@@ -5005,7 +4954,6 @@
       }
     },
     "PropertyList": {
-      "id": "PropertyList",
       "type": "object",
       "description": "A collection of properties, key-value pairs that are either public or private to an application.",
       "properties": {
@@ -5032,7 +4980,6 @@
       }
     },
     "Revision": {
-      "id": "Revision",
       "type": "object",
       "description": "A revision of a file.",
       "properties": {
@@ -5118,7 +5065,6 @@
       }
     },
     "RevisionList": {
-      "id": "RevisionList",
       "type": "object",
       "description": "A list of revisions of a file.",
       "properties": {
@@ -5145,7 +5091,6 @@
       }
     },
     "User": {
-      "id": "User",
       "type": "object",
       "description": "The JSON template for a user.",
       "properties": {

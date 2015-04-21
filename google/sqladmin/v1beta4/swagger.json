@@ -2007,7 +2007,6 @@
   },
   "definitions": {
     "AclEntry": {
-      "id": "AclEntry",
       "type": "object",
       "description": "An entry for an Access Control list.",
       "properties": {
@@ -2032,7 +2031,6 @@
       }
     },
     "BackupConfiguration": {
-      "id": "BackupConfiguration",
       "type": "object",
       "description": "Database instance backup configuration.",
       "properties": {
@@ -2056,7 +2054,6 @@
       }
     },
     "BackupRun": {
-      "id": "BackupRun",
       "type": "object",
       "description": "A database instance backup run resource.",
       "properties": {
@@ -2109,7 +2106,6 @@
       }
     },
     "BackupRunsListResponse": {
-      "id": "BackupRunsListResponse",
       "type": "object",
       "description": "Backup run list results.",
       "properties": {
@@ -2132,7 +2128,6 @@
       }
     },
     "BinLogCoordinates": {
-      "id": "BinLogCoordinates",
       "type": "object",
       "description": "Binary log coordinates.",
       "properties": {
@@ -2153,7 +2148,6 @@
       }
     },
     "CloneContext": {
-      "id": "CloneContext",
       "type": "object",
       "description": "Database instance clone context.",
       "properties": {
@@ -2173,7 +2167,6 @@
       }
     },
     "Database": {
-      "id": "Database",
       "type": "object",
       "description": "A database resource inside a Cloud SQL instance.",
       "properties": {
@@ -2191,12 +2184,7 @@
         },
         "instance": {
           "type": "string",
-          "description": "The name of the Cloud SQL instance. This does not include the project ID.",
-          "annotations": {
-            "required": [
-              "sql.databases.insert"
-            ]
-          }
+          "description": "The name of the Cloud SQL instance. This does not include the project ID."
         },
         "kind": {
           "type": "string",
@@ -2205,21 +2193,11 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the database in the Cloud SQL instance. This does not include the project ID or instance name.",
-          "annotations": {
-            "required": [
-              "sql.databases.insert"
-            ]
-          }
+          "description": "The name of the database in the Cloud SQL instance. This does not include the project ID or instance name."
         },
         "project": {
           "type": "string",
-          "description": "The project ID of the project containing the Cloud SQL database. The Google apps domain is prefixed if applicable.",
-          "annotations": {
-            "required": [
-              "sql.databases.insert"
-            ]
-          }
+          "description": "The project ID of the project containing the Cloud SQL database. The Google apps domain is prefixed if applicable."
         },
         "selfLink": {
           "type": "string",
@@ -2228,7 +2206,6 @@
       }
     },
     "DatabaseFlags": {
-      "id": "DatabaseFlags",
       "type": "object",
       "description": "MySQL flags for Cloud SQL instances.",
       "properties": {
@@ -2243,7 +2220,6 @@
       }
     },
     "DatabaseInstance": {
-      "id": "DatabaseInstance",
       "type": "object",
       "description": "A Cloud SQL instance resource.",
       "properties": {
@@ -2291,12 +2267,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the Cloud SQL instance. This does not include the project ID.",
-          "annotations": {
-            "required": [
-              "sql.instances.insert"
-            ]
-          }
+          "description": "Name of the Cloud SQL instance. This does not include the project ID."
         },
         "onPremisesConfiguration": {
           "$ref": "#/definitions/OnPremisesConfiguration",
@@ -2335,13 +2306,7 @@
         },
         "settings": {
           "$ref": "#/definitions/Settings",
-          "description": "The user settings.",
-          "annotations": {
-            "required": [
-              "sql.instances.insert",
-              "sql.instances.update"
-            ]
-          }
+          "description": "The user settings."
         },
         "state": {
           "type": "string",
@@ -2350,7 +2315,6 @@
       }
     },
     "DatabasesListResponse": {
-      "id": "DatabasesListResponse",
       "type": "object",
       "description": "Database list response.",
       "properties": {
@@ -2369,7 +2333,6 @@
       }
     },
     "ExportContext": {
-      "id": "ExportContext",
       "type": "object",
       "description": "Database instance export context.",
       "properties": {
@@ -2419,7 +2382,6 @@
       }
     },
     "Flag": {
-      "id": "Flag",
       "type": "object",
       "description": "A Google Cloud SQL service flag resource.",
       "properties": {
@@ -2463,7 +2425,6 @@
       }
     },
     "FlagsListResponse": {
-      "id": "FlagsListResponse",
       "type": "object",
       "description": "Flags list response.",
       "properties": {
@@ -2482,7 +2443,6 @@
       }
     },
     "ImportContext": {
-      "id": "ImportContext",
       "type": "object",
       "description": "Database instance import context.",
       "properties": {
@@ -2523,7 +2483,6 @@
       }
     },
     "InstancesCloneRequest": {
-      "id": "InstancesCloneRequest",
       "type": "object",
       "description": "Database instance clone request.",
       "properties": {
@@ -2534,7 +2493,6 @@
       }
     },
     "InstancesExportRequest": {
-      "id": "InstancesExportRequest",
       "type": "object",
       "description": "Database instance export request.",
       "properties": {
@@ -2545,7 +2503,6 @@
       }
     },
     "InstancesImportRequest": {
-      "id": "InstancesImportRequest",
       "type": "object",
       "description": "Database instance import request.",
       "properties": {
@@ -2556,7 +2513,6 @@
       }
     },
     "InstancesListResponse": {
-      "id": "InstancesListResponse",
       "type": "object",
       "description": "Database instances list response.",
       "properties": {
@@ -2579,7 +2535,6 @@
       }
     },
     "InstancesRestoreBackupRequest": {
-      "id": "InstancesRestoreBackupRequest",
       "type": "object",
       "description": "Database instance restore backup request.",
       "properties": {
@@ -2590,7 +2545,6 @@
       }
     },
     "IpConfiguration": {
-      "id": "IpConfiguration",
       "type": "object",
       "description": "IP Management configuration.",
       "properties": {
@@ -2612,7 +2566,6 @@
       }
     },
     "IpMapping": {
-      "id": "IpMapping",
       "type": "object",
       "description": "Database instance IP Mapping.",
       "properties": {
@@ -2628,7 +2581,6 @@
       }
     },
     "LocationPreference": {
-      "id": "LocationPreference",
       "type": "object",
       "description": "Preferred location. This specifies where a Cloud SQL instance should preferably be located, either in a specific Compute Engine zone, or co-located with an App Engine application. Note that if the preferred location is not available, the instance will be located as close as possible within the region. Only one location may be specified.",
       "properties": {
@@ -2648,7 +2600,6 @@
       }
     },
     "MySqlReplicaConfiguration": {
-      "id": "MySqlReplicaConfiguration",
       "type": "object",
       "description": "Read-replica configuration specific to MySQL databases.",
       "properties": {
@@ -2702,7 +2653,6 @@
       }
     },
     "OnPremisesConfiguration": {
-      "id": "OnPremisesConfiguration",
       "type": "object",
       "description": "On-premises instance configuration.",
       "properties": {
@@ -2718,7 +2668,6 @@
       }
     },
     "Operation": {
-      "id": "Operation",
       "type": "object",
       "description": "An Operations resource contains information about database instance operations such as create, delete, and restart. Operations resources are created in response to operations that were initiated; you never create them directly.",
       "properties": {
@@ -2788,7 +2737,6 @@
       }
     },
     "OperationError": {
-      "id": "OperationError",
       "type": "object",
       "description": "Database instance operation error.",
       "properties": {
@@ -2808,7 +2756,6 @@
       }
     },
     "OperationErrors": {
-      "id": "OperationErrors",
       "type": "object",
       "description": "Database instance operation errors list wrapper.",
       "properties": {
@@ -2827,7 +2774,6 @@
       }
     },
     "OperationsListResponse": {
-      "id": "OperationsListResponse",
       "type": "object",
       "description": "Database instance list operations response.",
       "properties": {
@@ -2850,7 +2796,6 @@
       }
     },
     "ReplicaConfiguration": {
-      "id": "ReplicaConfiguration",
       "type": "object",
       "description": "Read-replica configuration for connecting to the master.",
       "properties": {
@@ -2866,19 +2811,13 @@
       }
     },
     "RestoreBackupContext": {
-      "id": "RestoreBackupContext",
       "type": "object",
       "description": "Database instance restore from backup context.",
       "properties": {
         "backupRunId": {
           "type": "string",
           "description": "The ID of the backup run to restore from.",
-          "format": "int64",
-          "annotations": {
-            "required": [
-              "sql.instances.restoreBackup"
-            ]
-          }
+          "format": "int64"
         },
         "kind": {
           "type": "string",
@@ -2888,7 +2827,6 @@
       }
     },
     "Settings": {
-      "id": "Settings",
       "type": "object",
       "description": "Database instance settings.",
       "properties": {
@@ -2946,27 +2884,15 @@
         "settingsVersion": {
           "type": "string",
           "description": "The version of instance settings. This is a required field for update method to make sure concurrent updates are handled properly. During update, use the most recent settingsVersion value for this instance and do not try to update this value.",
-          "format": "int64",
-          "annotations": {
-            "required": [
-              "sql.instances.update"
-            ]
-          }
+          "format": "int64"
         },
         "tier": {
           "type": "string",
-          "description": "The tier of service for this instance, for example D1, D2. For more information, see pricing.",
-          "annotations": {
-            "required": [
-              "sql.instances.insert",
-              "sql.instances.update"
-            ]
-          }
+          "description": "The tier of service for this instance, for example D1, D2. For more information, see pricing."
         }
       }
     },
     "SslCert": {
-      "id": "SslCert",
       "type": "object",
       "description": "SslCerts Resource",
       "properties": {
@@ -3011,7 +2937,6 @@
       }
     },
     "SslCertDetail": {
-      "id": "SslCertDetail",
       "type": "object",
       "description": "SslCertDetail.",
       "properties": {
@@ -3026,7 +2951,6 @@
       }
     },
     "SslCertsInsertRequest": {
-      "id": "SslCertsInsertRequest",
       "type": "object",
       "description": "SslCerts insert request.",
       "properties": {
@@ -3037,7 +2961,6 @@
       }
     },
     "SslCertsInsertResponse": {
-      "id": "SslCertsInsertResponse",
       "type": "object",
       "description": "SslCert insert response.",
       "properties": {
@@ -3057,7 +2980,6 @@
       }
     },
     "SslCertsListResponse": {
-      "id": "SslCertsListResponse",
       "type": "object",
       "description": "SslCerts list response.",
       "properties": {
@@ -3076,7 +2998,6 @@
       }
     },
     "Tier": {
-      "id": "Tier",
       "type": "object",
       "description": "A Google Cloud SQL service tier resource.",
       "properties": {
@@ -3109,7 +3030,6 @@
       }
     },
     "TiersListResponse": {
-      "id": "TiersListResponse",
       "type": "object",
       "description": "Tiers list response.",
       "properties": {
@@ -3128,7 +3048,6 @@
       }
     },
     "User": {
-      "id": "User",
       "type": "object",
       "description": "A Cloud SQL user resource.",
       "properties": {
@@ -3164,7 +3083,6 @@
       }
     },
     "UsersListResponse": {
-      "id": "UsersListResponse",
       "type": "object",
       "description": "User list response.",
       "properties": {

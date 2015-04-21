@@ -819,7 +819,6 @@
   },
   "definitions": {
     "DimensionFilter": {
-      "id": "DimensionFilter",
       "type": "object",
       "description": "Represents a dimension filter.",
       "properties": {
@@ -839,7 +838,6 @@
       }
     },
     "DimensionValue": {
-      "id": "DimensionValue",
       "type": "object",
       "description": "Represents a DimensionValue resource.",
       "properties": {
@@ -867,7 +865,6 @@
       }
     },
     "DimensionValueList": {
-      "id": "DimensionValueList",
       "type": "object",
       "description": "Represents the list of DimensionValue resources.",
       "properties": {
@@ -894,7 +891,6 @@
       }
     },
     "DimensionValueRequest": {
-      "id": "DimensionValueRequest",
       "type": "object",
       "description": "Represents a DimensionValuesRequest.",
       "properties": {
@@ -927,7 +923,6 @@
       }
     },
     "File": {
-      "id": "File",
       "type": "object",
       "description": "Represents a File resource. A File contains the meta-data for a report run. It shows the status of the run and holds the urls to the generated report data if the run is finished and the status is \"REPORT_AVAILABLE\".",
       "properties": {
@@ -1002,7 +997,6 @@
       }
     },
     "FileList": {
-      "id": "FileList",
       "type": "object",
       "description": "Represents the list of File resources.",
       "properties": {
@@ -1029,19 +1023,13 @@
       }
     },
     "Report": {
-      "id": "Report",
       "type": "object",
       "description": "Represents a Report resource.",
       "properties": {
         "accountId": {
           "type": "string",
           "description": "The account id this report belongs to.",
-          "format": "int64",
-          "annotations": {
-            "required": [
-              "dfareporting.reports.update"
-            ]
-          }
+          "format": "int64"
         },
         "criteria": {
           "type": "object",
@@ -1134,12 +1122,7 @@
         "id": {
           "type": "string",
           "description": "The unique ID identifying this report resource.",
-          "format": "int64",
-          "annotations": {
-            "required": [
-              "dfareporting.reports.update"
-            ]
-          }
+          "format": "int64"
         },
         "kind": {
           "type": "string",
@@ -1149,32 +1132,16 @@
         "lastModifiedTime": {
           "type": "string",
           "description": "The timestamp (in milliseconds since epoch) of when this report was last modified.",
-          "format": "uint64",
-          "annotations": {
-            "required": [
-              "dfareporting.reports.update"
-            ]
-          }
+          "format": "uint64"
         },
         "name": {
           "type": "string",
-          "description": "The name of the report.",
-          "annotations": {
-            "required": [
-              "dfareporting.reports.insert",
-              "dfareporting.reports.update"
-            ]
-          }
+          "description": "The name of the report."
         },
         "ownerProfileId": {
           "type": "string",
           "description": "The user profile id of the owner of this report.",
-          "format": "int64",
-          "annotations": {
-            "required": [
-              "dfareporting.reports.update"
-            ]
-          }
+          "format": "int64"
         },
         "schedule": {
           "type": "object",
@@ -1182,13 +1149,7 @@
           "properties": {
             "active": {
               "type": "boolean",
-              "description": "Whether the schedule is active or not. Must be set to either true or false.",
-              "annotations": {
-                "required": [
-                  "dfareporting.reports.insert",
-                  "dfareporting.reports.update"
-                ]
-              }
+              "description": "Whether the schedule is active or not. Must be set to either true or false."
             },
             "every": {
               "type": "integer",
@@ -1198,23 +1159,11 @@
             "expirationDate": {
               "type": "string",
               "description": "The expiration date when the scheduled report stops running.",
-              "format": "date",
-              "annotations": {
-                "required": [
-                  "dfareporting.reports.insert",
-                  "dfareporting.reports.update"
-                ]
-              }
+              "format": "date"
             },
             "repeats": {
               "type": "string",
-              "description": "The interval the report is repeated for, one of:  \n- \"DAILY\", also requires field \"every\" to be set. \n- \"WEEKLY\", also requires fields \"every\" and \"repeatsOnWeekDays\" to be set. \n- \"TWICE_A_MONTH\" \n- \"MONTHLY\", also requires fields \"every\" and \"runsOnDayOfMonth\" to be set. \n- \"QUARTERLY\" \n- \"YEARLY\"",
-              "annotations": {
-                "required": [
-                  "dfareporting.reports.insert",
-                  "dfareporting.reports.update"
-                ]
-              }
+              "description": "The interval the report is repeated for, one of:  \n- \"DAILY\", also requires field \"every\" to be set. \n- \"WEEKLY\", also requires fields \"every\" and \"repeatsOnWeekDays\" to be set. \n- \"TWICE_A_MONTH\" \n- \"MONTHLY\", also requires fields \"every\" and \"runsOnDayOfMonth\" to be set. \n- \"QUARTERLY\" \n- \"YEARLY\""
             },
             "repeatsOnWeekDays": {
               "type": "array",
@@ -1230,13 +1179,7 @@
             "startDate": {
               "type": "string",
               "description": "Start date of date range for which scheduled reports should be run.",
-              "format": "date",
-              "annotations": {
-                "required": [
-                  "dfareporting.reports.insert",
-                  "dfareporting.reports.update"
-                ]
-              }
+              "format": "date"
             }
           }
         },
@@ -1247,18 +1190,11 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of the report, currently only \"STANDARD\" is supported.",
-          "annotations": {
-            "required": [
-              "dfareporting.reports.insert",
-              "dfareporting.reports.update"
-            ]
-          }
+          "description": "The type of the report, currently only \"STANDARD\" is supported."
         }
       }
     },
     "ReportList": {
-      "id": "ReportList",
       "type": "object",
       "description": "Represents the list of reports.",
       "properties": {
@@ -1285,7 +1221,6 @@
       }
     },
     "SortedDimension": {
-      "id": "SortedDimension",
       "type": "object",
       "description": "Represents a sorted dimension.",
       "properties": {
@@ -1305,7 +1240,6 @@
       }
     },
     "UserProfile": {
-      "id": "UserProfile",
       "type": "object",
       "description": "Represents a UserProfile resource.",
       "properties": {
@@ -1348,7 +1282,6 @@
       }
     },
     "UserProfileList": {
-      "id": "UserProfileList",
       "type": "object",
       "description": "Represents the list of user profiles.",
       "properties": {

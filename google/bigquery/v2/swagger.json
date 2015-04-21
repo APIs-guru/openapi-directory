@@ -1200,7 +1200,6 @@
   },
   "definitions": {
     "CsvOptions": {
-      "id": "CsvOptions",
       "type": "object",
       "properties": {
         "allowJaggedRows": {
@@ -1231,7 +1230,6 @@
       }
     },
     "Dataset": {
-      "id": "Dataset",
       "type": "object",
       "properties": {
         "access": {
@@ -1314,7 +1312,6 @@
       }
     },
     "DatasetList": {
-      "id": "DatasetList",
       "type": "object",
       "properties": {
         "datasets": {
@@ -1359,31 +1356,19 @@
       }
     },
     "DatasetReference": {
-      "id": "DatasetReference",
       "type": "object",
       "properties": {
         "datasetId": {
           "type": "string",
-          "description": "[Required] A unique ID for this dataset, without the project name. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 1,024 characters.",
-          "annotations": {
-            "required": [
-              "bigquery.datasets.update"
-            ]
-          }
+          "description": "[Required] A unique ID for this dataset, without the project name. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 1,024 characters."
         },
         "projectId": {
           "type": "string",
-          "description": "[Optional] The ID of the project containing this dataset.",
-          "annotations": {
-            "required": [
-              "bigquery.datasets.update"
-            ]
-          }
+          "description": "[Optional] The ID of the project containing this dataset."
         }
       }
     },
     "ErrorProto": {
-      "id": "ErrorProto",
       "type": "object",
       "properties": {
         "debugInfo": {
@@ -1405,7 +1390,6 @@
       }
     },
     "ExternalDataConfiguration": {
-      "id": "ExternalDataConfiguration",
       "type": "object",
       "properties": {
         "compression": {
@@ -1443,7 +1427,6 @@
       }
     },
     "GetQueryResultsResponse": {
-      "id": "GetQueryResultsResponse",
       "type": "object",
       "properties": {
         "cacheHit": {
@@ -1495,7 +1478,6 @@
       }
     },
     "Job": {
-      "id": "Job",
       "type": "object",
       "properties": {
         "configuration": {
@@ -1538,7 +1520,6 @@
       }
     },
     "JobConfiguration": {
-      "id": "JobConfiguration",
       "type": "object",
       "properties": {
         "copy": {
@@ -1568,7 +1549,6 @@
       }
     },
     "JobConfigurationExtract": {
-      "id": "JobConfigurationExtract",
       "type": "object",
       "properties": {
         "compression": {
@@ -1605,7 +1585,6 @@
       }
     },
     "JobConfigurationLink": {
-      "id": "JobConfigurationLink",
       "type": "object",
       "properties": {
         "createDisposition": {
@@ -1630,7 +1609,6 @@
       }
     },
     "JobConfigurationLoad": {
-      "id": "JobConfigurationLoad",
       "type": "object",
       "properties": {
         "allowJaggedRows": {
@@ -1712,7 +1690,6 @@
       }
     },
     "JobConfigurationQuery": {
-      "id": "JobConfigurationQuery",
       "type": "object",
       "properties": {
         "allowLargeResults": {
@@ -1765,7 +1742,6 @@
       }
     },
     "JobConfigurationTableCopy": {
-      "id": "JobConfigurationTableCopy",
       "type": "object",
       "properties": {
         "createDisposition": {
@@ -1794,7 +1770,6 @@
       }
     },
     "JobList": {
-      "id": "JobList",
       "type": "object",
       "properties": {
         "etag": {
@@ -1864,31 +1839,19 @@
       }
     },
     "JobReference": {
-      "id": "JobReference",
       "type": "object",
       "properties": {
         "jobId": {
           "type": "string",
-          "description": "[Required] The ID of the job. The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-). The maximum length is 1,024 characters.",
-          "annotations": {
-            "required": [
-              "bigquery.jobs.getQueryResults"
-            ]
-          }
+          "description": "[Required] The ID of the job. The ID must contain only letters (a-z, A-Z), numbers (0-9), underscores (_), or dashes (-). The maximum length is 1,024 characters."
         },
         "projectId": {
           "type": "string",
-          "description": "[Required] The ID of the project containing this job.",
-          "annotations": {
-            "required": [
-              "bigquery.jobs.getQueryResults"
-            ]
-          }
+          "description": "[Required] The ID of the project containing this job."
         }
       }
     },
     "JobStatistics": {
-      "id": "JobStatistics",
       "type": "object",
       "properties": {
         "creationTime": {
@@ -1926,7 +1889,6 @@
       }
     },
     "JobStatistics2": {
-      "id": "JobStatistics2",
       "type": "object",
       "properties": {
         "cacheHit": {
@@ -1941,7 +1903,6 @@
       }
     },
     "JobStatistics3": {
-      "id": "JobStatistics3",
       "type": "object",
       "properties": {
         "inputFileBytes": {
@@ -1967,7 +1928,6 @@
       }
     },
     "JobStatistics4": {
-      "id": "JobStatistics4",
       "type": "object",
       "properties": {
         "destinationUriFileCounts": {
@@ -1981,7 +1941,6 @@
       }
     },
     "JobStatus": {
-      "id": "JobStatus",
       "type": "object",
       "properties": {
         "errorResult": {
@@ -2002,18 +1961,14 @@
       }
     },
     "JsonObject": {
-      "id": "JsonObject",
       "type": "object",
       "description": "Represents a single JSON object.",
       "additionalProperties": {
         "$ref": "#/definitions/JsonValue"
       }
     },
-    "JsonValue": {
-      "id": "JsonValue"
-    },
+    "JsonValue": {},
     "ProjectList": {
-      "id": "ProjectList",
       "type": "object",
       "properties": {
         "etag": {
@@ -2068,7 +2023,6 @@
       }
     },
     "ProjectReference": {
-      "id": "ProjectReference",
       "type": "object",
       "properties": {
         "projectId": {
@@ -2078,7 +2032,6 @@
       }
     },
     "QueryRequest": {
-      "id": "QueryRequest",
       "type": "object",
       "properties": {
         "defaultDataset": {
@@ -2105,12 +2058,7 @@
         },
         "query": {
           "type": "string",
-          "description": "[Required] A query string, following the BigQuery query syntax, of the query to execute. Example: \"SELECT count(f1) FROM [myProjectId:myDatasetId.myTableId]\".",
-          "annotations": {
-            "required": [
-              "bigquery.jobs.query"
-            ]
-          }
+          "description": "[Required] A query string, following the BigQuery query syntax, of the query to execute. Example: \"SELECT count(f1) FROM [myProjectId:myDatasetId.myTableId]\"."
         },
         "timeoutMs": {
           "type": "integer",
@@ -2124,7 +2072,6 @@
       }
     },
     "QueryResponse": {
-      "id": "QueryResponse",
       "type": "object",
       "properties": {
         "cacheHit": {
@@ -2172,7 +2119,6 @@
       }
     },
     "Table": {
-      "id": "Table",
       "type": "object",
       "properties": {
         "creationTime": {
@@ -2244,7 +2190,6 @@
       }
     },
     "TableCell": {
-      "id": "TableCell",
       "type": "object",
       "description": "Represents a single cell in the result set. Users of the java client can detect whether their value result is null by calling 'com.google.api.client.util.Data.isNull(cell.getV())'.",
       "properties": {
@@ -2252,7 +2197,6 @@
       }
     },
     "TableDataInsertAllRequest": {
-      "id": "TableDataInsertAllRequest",
       "type": "object",
       "properties": {
         "ignoreUnknownValues": {
@@ -2288,7 +2232,6 @@
       }
     },
     "TableDataInsertAllResponse": {
-      "id": "TableDataInsertAllResponse",
       "type": "object",
       "properties": {
         "insertErrors": {
@@ -2320,7 +2263,6 @@
       }
     },
     "TableDataList": {
-      "id": "TableDataList",
       "type": "object",
       "properties": {
         "etag": {
@@ -2351,7 +2293,6 @@
       }
     },
     "TableFieldSchema": {
-      "id": "TableFieldSchema",
       "type": "object",
       "properties": {
         "description": {
@@ -2380,7 +2321,6 @@
       }
     },
     "TableList": {
-      "id": "TableList",
       "type": "object",
       "properties": {
         "etag": {
@@ -2434,40 +2374,23 @@
       }
     },
     "TableReference": {
-      "id": "TableReference",
       "type": "object",
       "properties": {
         "datasetId": {
           "type": "string",
-          "description": "[Required] The ID of the dataset containing this table.",
-          "annotations": {
-            "required": [
-              "bigquery.tables.update"
-            ]
-          }
+          "description": "[Required] The ID of the dataset containing this table."
         },
         "projectId": {
           "type": "string",
-          "description": "[Required] The ID of the project containing this table.",
-          "annotations": {
-            "required": [
-              "bigquery.tables.update"
-            ]
-          }
+          "description": "[Required] The ID of the project containing this table."
         },
         "tableId": {
           "type": "string",
-          "description": "[Required] The ID of the table. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 1,024 characters.",
-          "annotations": {
-            "required": [
-              "bigquery.tables.update"
-            ]
-          }
+          "description": "[Required] The ID of the table. The ID must contain only letters (a-z, A-Z), numbers (0-9), or underscores (_). The maximum length is 1,024 characters."
         }
       }
     },
     "TableRow": {
-      "id": "TableRow",
       "type": "object",
       "description": "Represents a single row in the result set, consisting of one or more fields.",
       "properties": {
@@ -2480,7 +2403,6 @@
       }
     },
     "TableSchema": {
-      "id": "TableSchema",
       "type": "object",
       "properties": {
         "fields": {
@@ -2493,7 +2415,6 @@
       }
     },
     "ViewDefinition": {
-      "id": "ViewDefinition",
       "type": "object",
       "properties": {
         "query": {

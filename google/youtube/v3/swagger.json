@@ -4160,7 +4160,6 @@
   },
   "definitions": {
     "AccessPolicy": {
-      "id": "AccessPolicy",
       "type": "object",
       "description": "Rights management policy for YouTube resources.",
       "properties": {
@@ -4178,7 +4177,6 @@
       }
     },
     "Activity": {
-      "id": "Activity",
       "type": "object",
       "description": "An activity resource contains information about an action that a particular channel, or user, has taken on YouTube.The actions reported in activity feeds include rating a video, sharing a video, marking a video as a favorite, commenting on a video, uploading a video, and so forth. Each activity resource identifies the type of action, the channel associated with the action, and the resource(s) associated with the action, such as the video that was rated or uploaded.",
       "properties": {
@@ -4206,7 +4204,6 @@
       }
     },
     "ActivityContentDetails": {
-      "id": "ActivityContentDetails",
       "type": "object",
       "description": "Details about the content of an activity: the video that was shared, the channel that was subscribed to, etc.",
       "properties": {
@@ -4257,7 +4254,6 @@
       }
     },
     "ActivityContentDetailsBulletin": {
-      "id": "ActivityContentDetailsBulletin",
       "type": "object",
       "description": "Details about a channel bulletin post.",
       "properties": {
@@ -4268,7 +4264,6 @@
       }
     },
     "ActivityContentDetailsChannelItem": {
-      "id": "ActivityContentDetailsChannelItem",
       "type": "object",
       "description": "Details about a resource which was added to a channel.",
       "properties": {
@@ -4279,7 +4274,6 @@
       }
     },
     "ActivityContentDetailsComment": {
-      "id": "ActivityContentDetailsComment",
       "type": "object",
       "description": "Information about a resource that received a comment.",
       "properties": {
@@ -4290,7 +4284,6 @@
       }
     },
     "ActivityContentDetailsFavorite": {
-      "id": "ActivityContentDetailsFavorite",
       "type": "object",
       "description": "Information about a video that was marked as a favorite video.",
       "properties": {
@@ -4301,7 +4294,6 @@
       }
     },
     "ActivityContentDetailsLike": {
-      "id": "ActivityContentDetailsLike",
       "type": "object",
       "description": "Information about a resource that received a positive (like) rating.",
       "properties": {
@@ -4312,7 +4304,6 @@
       }
     },
     "ActivityContentDetailsPlaylistItem": {
-      "id": "ActivityContentDetailsPlaylistItem",
       "type": "object",
       "description": "Information about a new playlist item.",
       "properties": {
@@ -4331,7 +4322,6 @@
       }
     },
     "ActivityContentDetailsPromotedItem": {
-      "id": "ActivityContentDetailsPromotedItem",
       "type": "object",
       "description": "Details about a resource which is being promoted.",
       "properties": {
@@ -4353,10 +4343,6 @@
           "enum": [
             "unspecified",
             "visitAdvertiserSite"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         },
         "customCtaButtonText": {
@@ -4392,7 +4378,6 @@
       }
     },
     "ActivityContentDetailsRecommendation": {
-      "id": "ActivityContentDetailsRecommendation",
       "type": "object",
       "description": "Information that identifies the recommended resource.",
       "properties": {
@@ -4404,12 +4389,6 @@
             "videoFavorited",
             "videoLiked",
             "videoWatched"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "resourceId": {
@@ -4423,7 +4402,6 @@
       }
     },
     "ActivityContentDetailsSocial": {
-      "id": "ActivityContentDetailsSocial",
       "type": "object",
       "description": "Details about a social network post.",
       "properties": {
@@ -4451,18 +4429,11 @@
             "googlePlus",
             "twitter",
             "unspecified"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "ActivityContentDetailsSubscription": {
-      "id": "ActivityContentDetailsSubscription",
       "type": "object",
       "description": "Information about a channel that a user subscribed to.",
       "properties": {
@@ -4473,7 +4444,6 @@
       }
     },
     "ActivityContentDetailsUpload": {
-      "id": "ActivityContentDetailsUpload",
       "type": "object",
       "description": "Information about the uploaded video.",
       "properties": {
@@ -4484,7 +4454,6 @@
       }
     },
     "ActivityListResponse": {
-      "id": "ActivityListResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -4528,7 +4497,6 @@
       }
     },
     "ActivitySnippet": {
-      "id": "ActivitySnippet",
       "type": "object",
       "description": "Basic details about an activity, including title, description, thumbnails, activity type and group.",
       "properties": {
@@ -4542,12 +4510,7 @@
         },
         "description": {
           "type": "string",
-          "description": "The description of the resource primarily associated with the activity.",
-          "annotations": {
-            "required": [
-              "youtube.activities.insert"
-            ]
-          }
+          "description": "The description of the resource primarily associated with the activity."
         },
         "groupId": {
           "type": "string",
@@ -4581,25 +4544,11 @@
             "social",
             "subscription",
             "upload"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "Caption": {
-      "id": "Caption",
       "type": "object",
       "description": "A caption resource represents a YouTube caption track. A caption track is associated with exactly one YouTube video.",
       "properties": {
@@ -4609,12 +4558,7 @@
         },
         "id": {
           "type": "string",
-          "description": "The ID that YouTube uses to uniquely identify the caption track.",
-          "annotations": {
-            "required": [
-              "youtube.captions.update"
-            ]
-          }
+          "description": "The ID that YouTube uses to uniquely identify the caption track."
         },
         "kind": {
           "type": "string",
@@ -4628,7 +4572,6 @@
       }
     },
     "CaptionListResponse": {
-      "id": "CaptionListResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -4658,7 +4601,6 @@
       }
     },
     "CaptionSnippet": {
-      "id": "CaptionSnippet",
       "type": "object",
       "description": "Basic details about a caption track, such as its language and name.",
       "properties": {
@@ -4670,12 +4612,6 @@
             "descriptive",
             "primary",
             "unknown"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "failureReason": {
@@ -4685,11 +4621,6 @@
             "processingFailed",
             "unknownFormat",
             "unsupportedFormat"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         },
         "isAutoSynced": {
@@ -4714,12 +4645,7 @@
         },
         "language": {
           "type": "string",
-          "description": "The language of the caption track. The property value is a BCP-47 language tag.",
-          "annotations": {
-            "required": [
-              "youtube.captions.insert"
-            ]
-          }
+          "description": "The language of the caption track. The property value is a BCP-47 language tag."
         },
         "lastUpdated": {
           "type": "string",
@@ -4728,12 +4654,7 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the caption track. The name is intended to be visible to the user as an option during playback.",
-          "annotations": {
-            "required": [
-              "youtube.captions.insert"
-            ]
-          }
+          "description": "The name of the caption track. The name is intended to be visible to the user as an option during playback."
         },
         "status": {
           "type": "string",
@@ -4742,11 +4663,6 @@
             "failed",
             "serving",
             "syncing"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         },
         "trackKind": {
@@ -4756,38 +4672,21 @@
             "ASR",
             "forced",
             "standard"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         },
         "videoId": {
           "type": "string",
-          "description": "The ID that YouTube uses to uniquely identify the video associated with the caption track.",
-          "annotations": {
-            "required": [
-              "youtube.captions.insert"
-            ]
-          }
+          "description": "The ID that YouTube uses to uniquely identify the video associated with the caption track."
         }
       }
     },
     "CdnSettings": {
-      "id": "CdnSettings",
       "type": "object",
       "description": "Brief description of the live stream cdn settings.",
       "properties": {
         "format": {
           "type": "string",
-          "description": "The format of the video stream that you are sending to Youtube.",
-          "annotations": {
-            "required": [
-              "youtube.liveStreams.insert",
-              "youtube.liveStreams.update"
-            ]
-          }
+          "description": "The format of the video stream that you are sending to Youtube."
         },
         "ingestionInfo": {
           "$ref": "#/definitions/IngestionInfo",
@@ -4799,22 +4698,11 @@
           "enum": [
             "dash",
             "rtmp"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
-          ],
-          "annotations": {
-            "required": [
-              "youtube.liveStreams.insert",
-              "youtube.liveStreams.update"
-            ]
-          }
+          ]
         }
       }
     },
     "Channel": {
-      "id": "Channel",
       "type": "object",
       "description": "A channel resource contains information about a YouTube channel.",
       "properties": {
@@ -4882,7 +4770,6 @@
       }
     },
     "ChannelAuditDetails": {
-      "id": "ChannelAuditDetails",
       "type": "object",
       "description": "The auditDetails object encapsulates channel data that is relevant for YouTube Partners during the audit process.",
       "properties": {
@@ -4905,7 +4792,6 @@
       }
     },
     "ChannelBannerResource": {
-      "id": "ChannelBannerResource",
       "type": "object",
       "description": "A channel banner returned as the response to a channel_banner.insert call.",
       "properties": {
@@ -4925,7 +4811,6 @@
       }
     },
     "ChannelBrandingSettings": {
-      "id": "ChannelBrandingSettings",
       "type": "object",
       "description": "Branding properties of a YouTube channel.",
       "properties": {
@@ -4951,7 +4836,6 @@
       }
     },
     "ChannelContentDetails": {
-      "id": "ChannelContentDetails",
       "type": "object",
       "description": "Details about the content of a channel.",
       "properties": {
@@ -4987,7 +4871,6 @@
       }
     },
     "ChannelContentOwnerDetails": {
-      "id": "ChannelContentOwnerDetails",
       "type": "object",
       "description": "The contentOwnerDetails object encapsulates channel data that is relevant for YouTube Partners linked with the channel.",
       "properties": {
@@ -5003,7 +4886,6 @@
       }
     },
     "ChannelConversionPing": {
-      "id": "ChannelConversionPing",
       "type": "object",
       "description": "Pings that the app shall fire (authenticated by biscotti cookie). Each ping has a context, in which the app must fire the ping, and a url identifying the ping.",
       "properties": {
@@ -5014,11 +4896,6 @@
             "cview",
             "subscribe",
             "unsubscribe"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         },
         "conversionUrl": {
@@ -5028,7 +4905,6 @@
       }
     },
     "ChannelConversionPings": {
-      "id": "ChannelConversionPings",
       "type": "object",
       "description": "The conversionPings object encapsulates information about conversion pings that need to be respected by the channel.",
       "properties": {
@@ -5042,7 +4918,6 @@
       }
     },
     "ChannelId": {
-      "id": "ChannelId",
       "type": "object",
       "properties": {
         "value": {
@@ -5051,7 +4926,6 @@
       }
     },
     "ChannelListResponse": {
-      "id": "ChannelListResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -5095,7 +4969,6 @@
       }
     },
     "ChannelLocalization": {
-      "id": "ChannelLocalization",
       "type": "object",
       "description": "Channel localization setting",
       "properties": {
@@ -5110,7 +4983,6 @@
       }
     },
     "ChannelSection": {
-      "id": "ChannelSection",
       "type": "object",
       "properties": {
         "contentDetails": {
@@ -5149,7 +5021,6 @@
       }
     },
     "ChannelSectionContentDetails": {
-      "id": "ChannelSectionContentDetails",
       "type": "object",
       "description": "Details about a channelsection, including playlists and channels.",
       "properties": {
@@ -5170,7 +5041,6 @@
       }
     },
     "ChannelSectionListResponse": {
-      "id": "ChannelSectionListResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -5200,7 +5070,6 @@
       }
     },
     "ChannelSectionLocalization": {
-      "id": "ChannelSectionLocalization",
       "type": "object",
       "description": "ChannelSection localization setting",
       "properties": {
@@ -5211,7 +5080,6 @@
       }
     },
     "ChannelSectionSnippet": {
-      "id": "ChannelSectionSnippet",
       "type": "object",
       "description": "Basic details about a channel section, including title, style and position.",
       "properties": {
@@ -5239,11 +5107,6 @@
             "channelsectionStyleUndefined",
             "horizontalRow",
             "verticalList"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         },
         "title": {
@@ -5271,31 +5134,11 @@
             "singlePlaylist",
             "subscriptions",
             "upcomingEvents"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "ChannelSectionTargeting": {
-      "id": "ChannelSectionTargeting",
       "type": "object",
       "description": "ChannelSection targeting setting.",
       "properties": {
@@ -5323,7 +5166,6 @@
       }
     },
     "ChannelSettings": {
-      "id": "ChannelSettings",
       "type": "object",
       "description": "Branding properties for the channel view.",
       "properties": {
@@ -5384,7 +5226,6 @@
       }
     },
     "ChannelSnippet": {
-      "id": "ChannelSnippet",
       "type": "object",
       "description": "Basic details about a channel, including title, description and thumbnails.",
       "properties": {
@@ -5416,7 +5257,6 @@
       }
     },
     "ChannelStatistics": {
-      "id": "ChannelStatistics",
       "type": "object",
       "description": "Statistics about a channel: number of subscribers, number of videos in the channel, etc.",
       "properties": {
@@ -5447,7 +5287,6 @@
       }
     },
     "ChannelStatus": {
-      "id": "ChannelStatus",
       "type": "object",
       "description": "JSON template for the status part of a channel.",
       "properties": {
@@ -5463,12 +5302,6 @@
             "disallowed",
             "eligible",
             "longUploadsUnspecified"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "privacyStatus": {
@@ -5478,17 +5311,11 @@
             "private",
             "public",
             "unlisted"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "ChannelTopicDetails": {
-      "id": "ChannelTopicDetails",
       "type": "object",
       "description": "Freebase topic information related to the channel.",
       "properties": {
@@ -5502,7 +5329,6 @@
       }
     },
     "Comment": {
-      "id": "Comment",
       "type": "object",
       "description": "A comment represents a single YouTube comment.",
       "properties": {
@@ -5526,7 +5352,6 @@
       }
     },
     "CommentListResponse": {
-      "id": "CommentListResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -5566,7 +5391,6 @@
       }
     },
     "CommentSnippet": {
-      "id": "CommentSnippet",
       "type": "object",
       "description": "Basic details about a comment, such as its author and text.",
       "properties": {
@@ -5611,12 +5435,6 @@
             "likelySpam",
             "published",
             "rejected"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "parentId": {
@@ -5653,18 +5471,11 @@
             "like",
             "none",
             "unspecified"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "CommentThread": {
-      "id": "CommentThread",
       "type": "object",
       "description": "A comment thread represents information that applies to a top level comment and all its replies. It can also include the top level comment itself and some of the replies.",
       "properties": {
@@ -5692,7 +5503,6 @@
       }
     },
     "CommentThreadListResponse": {
-      "id": "CommentThreadListResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -5732,7 +5542,6 @@
       }
     },
     "CommentThreadReplies": {
-      "id": "CommentThreadReplies",
       "type": "object",
       "description": "Comments written in (direct or indirect) reply to the top level comment.",
       "properties": {
@@ -5746,7 +5555,6 @@
       }
     },
     "CommentThreadSnippet": {
-      "id": "CommentThreadSnippet",
       "type": "object",
       "description": "Basic details about a comment thread.",
       "properties": {
@@ -5778,7 +5586,6 @@
       }
     },
     "ContentRating": {
-      "id": "ContentRating",
       "type": "object",
       "description": "Ratings schemes. The country-specific ratings are mostly for movies and shows. NEXT_ID: 65",
       "properties": {
@@ -5795,17 +5602,6 @@
             "acbPg",
             "acbR18plus",
             "acbUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "agcomRating": {
@@ -5816,12 +5612,6 @@
             "agcomUnrated",
             "agcomVm14",
             "agcomVm18"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "anatelRating": {
@@ -5836,16 +5626,6 @@
             "anatelI7",
             "anatelR",
             "anatelUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "bbfcRating": {
@@ -5860,16 +5640,6 @@
             "bbfcR18",
             "bbfcU",
             "bbfcUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "bfvcRating": {
@@ -5884,16 +5654,6 @@
             "bfvcE",
             "bfvcG",
             "bfvcUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "bmukkRating": {
@@ -5908,16 +5668,6 @@
             "bmukk8",
             "bmukkAa",
             "bmukkUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "catvRating": {
@@ -5931,15 +5681,6 @@
             "catvG",
             "catvPg",
             "catvUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "catvfrRating": {
@@ -5952,14 +5693,6 @@
             "catvfr8plus",
             "catvfrG",
             "catvfrUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "cbfcRating": {
@@ -5971,13 +5704,6 @@
             "cbfcU",
             "cbfcUA",
             "cbfcUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "cccRating": {
@@ -5991,15 +5717,6 @@
             "ccc6",
             "cccTe",
             "cccUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "cceRating": {
@@ -6012,14 +5729,6 @@
             "cceM4",
             "cceM6",
             "cceUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "chfilmRating": {
@@ -6032,14 +5741,6 @@
             "chfilm18",
             "chfilm6",
             "chfilmUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "chvrsRating": {
@@ -6053,15 +5754,6 @@
             "chvrsPg",
             "chvrsR",
             "chvrsUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "cicfRating": {
@@ -6072,12 +5764,6 @@
             "cicfKntEna",
             "cicfKtEa",
             "cicfUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "cnaRating": {
@@ -6090,14 +5776,6 @@
             "cna18plus",
             "cnaAp",
             "cnaUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "csaRating": {
@@ -6110,14 +5788,6 @@
             "csa18",
             "csaInterdiction",
             "csaUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "cscfRating": {
@@ -6130,14 +5800,6 @@
             "cscf6",
             "cscfA",
             "cscfUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "czfilmRating": {
@@ -6149,13 +5811,6 @@
             "czfilm18",
             "czfilmU",
             "czfilmUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "djctqRating": {
@@ -6169,15 +5824,6 @@
             "djctq18",
             "djctqL",
             "djctqUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "djctqRatingReasons": {
@@ -6197,20 +5843,6 @@
               "djctqSex",
               "djctqSexualContent",
               "djctqViolence"
-            ],
-            "enumDescriptions": [
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              ""
             ]
           }
         },
@@ -6227,17 +5859,6 @@
             "eefilmMs6",
             "eefilmPere",
             "eefilmUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "egfilmRating": {
@@ -6248,12 +5869,6 @@
             "egfilmBn",
             "egfilmGn",
             "egfilmUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "eirinRating": {
@@ -6265,13 +5880,6 @@
             "eirinR15plus",
             "eirinR18plus",
             "eirinUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "fcbmRating": {
@@ -6286,16 +5894,6 @@
             "fcbmP13",
             "fcbmU",
             "fcbmUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "fcoRating": {
@@ -6307,13 +5905,6 @@
             "fcoIib",
             "fcoIii",
             "fcoUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "fmocRating": {
@@ -6327,15 +5918,6 @@
             "fmocE",
             "fmocU",
             "fmocUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "fpbRating": {
@@ -6352,18 +5934,6 @@
             "fpbUnrated",
             "fpbX18",
             "fpbXx"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "fskRating": {
@@ -6376,14 +5946,6 @@
             "fsk18",
             "fsk6",
             "fskUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "grfilmRating": {
@@ -6395,13 +5957,6 @@
             "grfilmK13",
             "grfilmK17",
             "grfilmUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "icaaRating": {
@@ -6416,16 +5971,6 @@
             "icaaApta",
             "icaaUnrated",
             "icaaX"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "ifcoRating": {
@@ -6438,14 +5983,6 @@
             "ifcoG",
             "ifcoPg",
             "ifcoUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "ilfilmRating": {
@@ -6457,13 +5994,6 @@
             "ilfilm18",
             "ilfilmAa",
             "ilfilmUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "incaaRating": {
@@ -6476,14 +6006,6 @@
             "incaaSam16",
             "incaaSam18",
             "incaaUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "kfcbRating": {
@@ -6495,13 +6017,6 @@
             "kfcbPg",
             "kfcbR",
             "kfcbUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "kijkwijzerRating": {
@@ -6514,14 +6029,6 @@
             "kijkwijzer9",
             "kijkwijzerAl",
             "kijkwijzerUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "kmrbRating": {
@@ -6534,14 +6041,6 @@
             "kmrbR",
             "kmrbTeenr",
             "kmrbUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "lsfRating": {
@@ -6554,14 +6053,6 @@
             "lsfR",
             "lsfSu",
             "lsfUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "mccaaRating": {
@@ -6577,17 +6068,6 @@
             "mccaaPg",
             "mccaaU",
             "mccaaUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "mccypRating": {
@@ -6599,13 +6079,6 @@
             "mccyp7",
             "mccypA",
             "mccypUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "mdaRating": {
@@ -6619,15 +6092,6 @@
             "mdaPg13",
             "mdaR21",
             "mdaUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "medietilsynetRating": {
@@ -6640,14 +6104,6 @@
             "medietilsynet7",
             "medietilsynetA",
             "medietilsynetUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "mekuRating": {
@@ -6660,14 +6116,6 @@
             "meku7",
             "mekuS",
             "mekuUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "mibacRating": {
@@ -6680,14 +6128,6 @@
             "mibacVm12",
             "mibacVm14",
             "mibacVm18"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "mocRating": {
@@ -6703,17 +6143,6 @@
             "mocT",
             "mocUnrated",
             "mocX"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "moctwRating": {
@@ -6725,13 +6154,6 @@
             "moctwPg",
             "moctwR",
             "moctwUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "mpaaRating": {
@@ -6744,14 +6166,6 @@
             "mpaaPg13",
             "mpaaR",
             "mpaaUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "mtrcbRating": {
@@ -6765,15 +6179,6 @@
             "mtrcbR18",
             "mtrcbUnrated",
             "mtrcbX"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "nbcRating": {
@@ -6788,16 +6193,6 @@
             "nbcPg",
             "nbcPu",
             "nbcUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "nbcplRating": {
@@ -6810,14 +6205,6 @@
             "nbcplIii",
             "nbcplIv",
             "nbcplUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "nfrcRating": {
@@ -6830,14 +6217,6 @@
             "nfrcD",
             "nfrcUnrated",
             "nfrcX"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "nfvcbRating": {
@@ -6852,16 +6231,6 @@
             "nfvcbPg",
             "nfvcbRe",
             "nfvcbUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "nkclvRating": {
@@ -6873,13 +6242,6 @@
             "nkclv7plus",
             "nkclvU",
             "nkclvUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "oflcRating": {
@@ -6896,18 +6258,6 @@
             "oflcRp13",
             "oflcRp16",
             "oflcUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "pefilmRating": {
@@ -6919,13 +6269,6 @@
             "pefilmPg",
             "pefilmPt",
             "pefilmUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "rcnofRating": {
@@ -6939,15 +6282,6 @@
             "rcnofUnrated",
             "rcnofV",
             "rcnofVi"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "resorteviolenciaRating": {
@@ -6960,14 +6294,6 @@
             "resorteviolenciaD",
             "resorteviolenciaE",
             "resorteviolenciaUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "rtcRating": {
@@ -6981,15 +6307,6 @@
             "rtcC",
             "rtcD",
             "rtcUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "rteRating": {
@@ -7001,13 +6318,6 @@
             "rteMa",
             "rtePs",
             "rteUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "russiaRating": {
@@ -7020,14 +6330,6 @@
             "russia18",
             "russia6",
             "russiaUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "skfilmRating": {
@@ -7039,13 +6341,6 @@
             "skfilmP5",
             "skfilmP8",
             "skfilmUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "smaisRating": {
@@ -7059,15 +6354,6 @@
             "smais7",
             "smaisL",
             "smaisUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "smsaRating": {
@@ -7079,13 +6365,6 @@
             "smsa7",
             "smsaA",
             "smsaUnrated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "tvpgRating": {
@@ -7100,16 +6379,6 @@
             "tvpgY",
             "tvpgY7",
             "tvpgY7Fv"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "ytRating": {
@@ -7117,15 +6386,11 @@
           "description": "Internal YouTube rating.",
           "enum": [
             "ytAgeRestricted"
-          ],
-          "enumDescriptions": [
-            ""
           ]
         }
       }
     },
     "GeoPoint": {
-      "id": "GeoPoint",
       "type": "object",
       "description": "Geographical coordinates of a point, in WGS84.",
       "properties": {
@@ -7147,7 +6412,6 @@
       }
     },
     "GuideCategory": {
-      "id": "GuideCategory",
       "type": "object",
       "description": "A guideCategory resource identifies a category that YouTube algorithmically assigns based on a channel's content or other indicators, such as the channel's popularity. The list is similar to video categories, with the difference being that a video's uploader can assign a video category but only YouTube can assign a channel category.",
       "properties": {
@@ -7171,7 +6435,6 @@
       }
     },
     "GuideCategoryListResponse": {
-      "id": "GuideCategoryListResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -7215,7 +6478,6 @@
       }
     },
     "GuideCategorySnippet": {
-      "id": "GuideCategorySnippet",
       "type": "object",
       "description": "Basic details about a guide category.",
       "properties": {
@@ -7230,7 +6492,6 @@
       }
     },
     "I18nLanguage": {
-      "id": "I18nLanguage",
       "type": "object",
       "description": "An i18nLanguage resource identifies a UI language currently supported by YouTube.",
       "properties": {
@@ -7254,7 +6515,6 @@
       }
     },
     "I18nLanguageListResponse": {
-      "id": "I18nLanguageListResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -7284,7 +6544,6 @@
       }
     },
     "I18nLanguageSnippet": {
-      "id": "I18nLanguageSnippet",
       "type": "object",
       "description": "Basic details about an i18n language, such as language code and human-readable name.",
       "properties": {
@@ -7299,7 +6558,6 @@
       }
     },
     "I18nRegion": {
-      "id": "I18nRegion",
       "type": "object",
       "description": "A i18nRegion resource identifies a region where YouTube is available.",
       "properties": {
@@ -7323,7 +6581,6 @@
       }
     },
     "I18nRegionListResponse": {
-      "id": "I18nRegionListResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -7353,7 +6610,6 @@
       }
     },
     "I18nRegionSnippet": {
-      "id": "I18nRegionSnippet",
       "type": "object",
       "description": "Basic details about an i18n region, such as region code and human-readable name.",
       "properties": {
@@ -7368,7 +6624,6 @@
       }
     },
     "ImageSettings": {
-      "id": "ImageSettings",
       "type": "object",
       "description": "Branding properties for images associated with the channel.",
       "properties": {
@@ -7463,7 +6718,6 @@
       }
     },
     "IngestionInfo": {
-      "id": "IngestionInfo",
       "type": "object",
       "description": "Describes information necessary for ingesting an RTMP or an HTTP stream.",
       "properties": {
@@ -7482,7 +6736,6 @@
       }
     },
     "InvideoBranding": {
-      "id": "InvideoBranding",
       "type": "object",
       "properties": {
         "imageBytes": {
@@ -7504,7 +6757,6 @@
       }
     },
     "InvideoPosition": {
-      "id": "InvideoPosition",
       "type": "object",
       "description": "Describes the spatial position of a visual widget inside a video. It is a union of various position types, out of which only will be set one.",
       "properties": {
@@ -7516,12 +6768,6 @@
             "bottomRight",
             "topLeft",
             "topRight"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "type": {
@@ -7529,15 +6775,11 @@
           "description": "Defines the position type.",
           "enum": [
             "corner"
-          ],
-          "enumDescriptions": [
-            ""
           ]
         }
       }
     },
     "InvideoPromotion": {
-      "id": "InvideoPromotion",
       "type": "object",
       "description": "Describes an invideo promotion campaign consisting of multiple promoted items. A campaign belongs to a single channel_id.",
       "properties": {
@@ -7563,7 +6805,6 @@
       }
     },
     "InvideoTiming": {
-      "id": "InvideoTiming",
       "type": "object",
       "description": "Describes a temporal position of a visual widget inside a video.",
       "properties": {
@@ -7583,16 +6824,11 @@
           "enum": [
             "offsetFromEnd",
             "offsetFromStart"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         }
       }
     },
     "LanguageTag": {
-      "id": "LanguageTag",
       "type": "object",
       "properties": {
         "value": {
@@ -7601,7 +6837,6 @@
       }
     },
     "LiveBroadcast": {
-      "id": "LiveBroadcast",
       "type": "object",
       "description": "A liveBroadcast resource represents an event that will be streamed, via live video, on YouTube.",
       "properties": {
@@ -7615,12 +6850,7 @@
         },
         "id": {
           "type": "string",
-          "description": "The ID that YouTube assigns to uniquely identify the broadcast.",
-          "annotations": {
-            "required": [
-              "youtube.liveBroadcasts.update"
-            ]
-          }
+          "description": "The ID that YouTube assigns to uniquely identify the broadcast."
         },
         "kind": {
           "type": "string",
@@ -7638,7 +6868,6 @@
       }
     },
     "LiveBroadcastContentDetails": {
-      "id": "LiveBroadcastContentDetails",
       "type": "object",
       "description": "Detailed settings of a broadcast.",
       "properties": {
@@ -7652,30 +6881,15 @@
         },
         "enableContentEncryption": {
           "type": "boolean",
-          "description": "This setting indicates whether YouTube should enable content encryption for the broadcast.",
-          "annotations": {
-            "required": [
-              "youtube.liveBroadcasts.update"
-            ]
-          }
+          "description": "This setting indicates whether YouTube should enable content encryption for the broadcast."
         },
         "enableDvr": {
           "type": "boolean",
-          "description": "This setting determines whether viewers can access DVR controls while watching the video. DVR controls enable the viewer to control the video playback experience by pausing, rewinding, or fast forwarding content. The default value for this property is true.\n\n\n\nImportant: You must set the value to true and also set the enableArchive property's value to true if you want to make playback available immediately after the broadcast ends.",
-          "annotations": {
-            "required": [
-              "youtube.liveBroadcasts.update"
-            ]
-          }
+          "description": "This setting determines whether viewers can access DVR controls while watching the video. DVR controls enable the viewer to control the video playback experience by pausing, rewinding, or fast forwarding content. The default value for this property is true.\n\n\n\nImportant: You must set the value to true and also set the enableArchive property's value to true if you want to make playback available immediately after the broadcast ends."
         },
         "enableEmbed": {
           "type": "boolean",
-          "description": "This setting indicates whether the broadcast video can be played in an embedded player. If you choose to archive the video (using the enableArchive property), this setting will also apply to the archived video.",
-          "annotations": {
-            "required": [
-              "youtube.liveBroadcasts.update"
-            ]
-          }
+          "description": "This setting indicates whether the broadcast video can be played in an embedded player. If you choose to archive the video (using the enableArchive property), this setting will also apply to the archived video."
         },
         "monitorStream": {
           "$ref": "#/definitions/MonitorStreamInfo",
@@ -7683,26 +6897,15 @@
         },
         "recordFromStart": {
           "type": "boolean",
-          "description": "Automatically start recording after the event goes live. The default value for this property is true.\n\n\n\nImportant: You must also set the enableDvr property's value to true if you want the playback to be available immediately after the broadcast ends. If you set this property's value to true but do not also set the enableDvr property to true, there may be a delay of around one day before the archived video will be available for playback.",
-          "annotations": {
-            "required": [
-              "youtube.liveBroadcasts.update"
-            ]
-          }
+          "description": "Automatically start recording after the event goes live. The default value for this property is true.\n\n\n\nImportant: You must also set the enableDvr property's value to true if you want the playback to be available immediately after the broadcast ends. If you set this property's value to true but do not also set the enableDvr property to true, there may be a delay of around one day before the archived video will be available for playback."
         },
         "startWithSlate": {
           "type": "boolean",
-          "description": "This setting indicates whether the broadcast should automatically begin with an in-stream slate when you update the broadcast's status to live. After updating the status, you then need to send a liveCuepoints.insert request that sets the cuepoint's eventState to end to remove the in-stream slate and make your broadcast stream visible to viewers.",
-          "annotations": {
-            "required": [
-              "youtube.liveBroadcasts.update"
-            ]
-          }
+          "description": "This setting indicates whether the broadcast should automatically begin with an in-stream slate when you update the broadcast's status to live. After updating the status, you then need to send a liveCuepoints.insert request that sets the cuepoint's eventState to end to remove the in-stream slate and make your broadcast stream visible to viewers."
         }
       }
     },
     "LiveBroadcastListResponse": {
-      "id": "LiveBroadcastListResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -7746,7 +6949,6 @@
       }
     },
     "LiveBroadcastSnippet": {
-      "id": "LiveBroadcastSnippet",
       "type": "object",
       "properties": {
         "actualEndTime": {
@@ -7775,24 +6977,12 @@
         "scheduledEndTime": {
           "type": "string",
           "description": "The date and time that the broadcast is scheduled to end. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.",
-          "format": "date-time",
-          "annotations": {
-            "required": [
-              "youtube.liveBroadcasts.insert",
-              "youtube.liveBroadcasts.update"
-            ]
-          }
+          "format": "date-time"
         },
         "scheduledStartTime": {
           "type": "string",
           "description": "The date and time that the broadcast is scheduled to start. The value is specified in ISO 8601 (YYYY-MM-DDThh:mm:ss.sZ) format.",
-          "format": "date-time",
-          "annotations": {
-            "required": [
-              "youtube.liveBroadcasts.insert",
-              "youtube.liveBroadcasts.update"
-            ]
-          }
+          "format": "date-time"
         },
         "thumbnails": {
           "$ref": "#/definitions/ThumbnailDetails",
@@ -7800,18 +6990,11 @@
         },
         "title": {
           "type": "string",
-          "description": "The broadcast's title. Note that the broadcast represents exactly one YouTube video. You can set this field by modifying the broadcast resource or by setting the title field of the corresponding video resource.",
-          "annotations": {
-            "required": [
-              "youtube.liveBroadcasts.insert",
-              "youtube.liveBroadcasts.update"
-            ]
-          }
+          "description": "The broadcast's title. Note that the broadcast represents exactly one YouTube video. You can set this field by modifying the broadcast resource or by setting the title field of the corresponding video resource."
         }
       }
     },
     "LiveBroadcastStatus": {
-      "id": "LiveBroadcastStatus",
       "type": "object",
       "properties": {
         "lifeCycleStatus": {
@@ -7829,19 +7012,6 @@
             "revoked",
             "testStarting",
             "testing"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "liveBroadcastPriority": {
@@ -7851,11 +7021,6 @@
             "high",
             "low",
             "normal"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         },
         "privacyStatus": {
@@ -7865,18 +7030,7 @@
             "private",
             "public",
             "unlisted"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
-          ],
-          "annotations": {
-            "required": [
-              "youtube.liveBroadcasts.insert",
-              "youtube.liveBroadcasts.update"
-            ]
-          }
+          ]
         },
         "recordingStatus": {
           "type": "string",
@@ -7885,17 +7039,11 @@
             "notRecording",
             "recorded",
             "recording"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "LiveStream": {
-      "id": "LiveStream",
       "type": "object",
       "description": "A live stream describes a live ingestion point.",
       "properties": {
@@ -7913,12 +7061,7 @@
         },
         "id": {
           "type": "string",
-          "description": "The ID that YouTube assigns to uniquely identify the stream.",
-          "annotations": {
-            "required": [
-              "youtube.liveStreams.update"
-            ]
-          }
+          "description": "The ID that YouTube assigns to uniquely identify the stream."
         },
         "kind": {
           "type": "string",
@@ -7936,7 +7079,6 @@
       }
     },
     "LiveStreamContentDetails": {
-      "id": "LiveStreamContentDetails",
       "type": "object",
       "description": "Detailed settings of a stream.",
       "properties": {
@@ -7951,7 +7093,6 @@
       }
     },
     "LiveStreamListResponse": {
-      "id": "LiveStreamListResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -7995,7 +7136,6 @@
       }
     },
     "LiveStreamSnippet": {
-      "id": "LiveStreamSnippet",
       "type": "object",
       "properties": {
         "channelId": {
@@ -8013,18 +7153,11 @@
         },
         "title": {
           "type": "string",
-          "description": "The stream's title. The value must be between 1 and 128 characters long.",
-          "annotations": {
-            "required": [
-              "youtube.liveStreams.insert",
-              "youtube.liveStreams.update"
-            ]
-          }
+          "description": "The stream's title. The value must be between 1 and 128 characters long."
         }
       }
     },
     "LiveStreamStatus": {
-      "id": "LiveStreamStatus",
       "type": "object",
       "description": "Brief description of the live stream status.",
       "properties": {
@@ -8036,19 +7169,11 @@
             "error",
             "inactive",
             "ready"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "LocalizedProperty": {
-      "id": "LocalizedProperty",
       "type": "object",
       "properties": {
         "default": {
@@ -8067,7 +7192,6 @@
       }
     },
     "LocalizedString": {
-      "id": "LocalizedString",
       "type": "object",
       "properties": {
         "language": {
@@ -8079,19 +7203,13 @@
       }
     },
     "MonitorStreamInfo": {
-      "id": "MonitorStreamInfo",
       "type": "object",
       "description": "Settings and Info of the monitor stream",
       "properties": {
         "broadcastStreamDelayMs": {
           "type": "integer",
           "description": "If you have set the enableMonitorStream property to true, then this property determines the length of the live broadcast delay.",
-          "format": "uint32",
-          "annotations": {
-            "required": [
-              "youtube.liveBroadcasts.update"
-            ]
-          }
+          "format": "uint32"
         },
         "embedHtml": {
           "type": "string",
@@ -8099,17 +7217,11 @@
         },
         "enableMonitorStream": {
           "type": "boolean",
-          "description": "This value determines whether the monitor stream is enabled for the broadcast. If the monitor stream is enabled, then YouTube will broadcast the event content on a special stream intended only for the broadcaster's consumption. The broadcaster can use the stream to review the event content and also to identify the optimal times to insert cuepoints.\n\nYou need to set this value to true if you intend to have a broadcast delay for your event.\n\nNote: This property cannot be updated once the broadcast is in the testing or live state.",
-          "annotations": {
-            "required": [
-              "youtube.liveBroadcasts.update"
-            ]
-          }
+          "description": "This value determines whether the monitor stream is enabled for the broadcast. If the monitor stream is enabled, then YouTube will broadcast the event content on a special stream intended only for the broadcaster's consumption. The broadcaster can use the stream to review the event content and also to identify the optimal times to insert cuepoints.\n\nYou need to set this value to true if you intend to have a broadcast delay for your event.\n\nNote: This property cannot be updated once the broadcast is in the testing or live state."
         }
       }
     },
     "PageInfo": {
-      "id": "PageInfo",
       "type": "object",
       "description": "Paging details for lists of resources, including total number of items available and number of resources returned in a single page.",
       "properties": {
@@ -8126,7 +7238,6 @@
       }
     },
     "Playlist": {
-      "id": "Playlist",
       "type": "object",
       "description": "A playlist resource represents a YouTube playlist. A playlist is a collection of videos that can be viewed sequentially and shared with other users. A playlist can contain up to 200 videos, and YouTube does not limit the number of playlists that each user creates. By default, playlists are publicly visible to other users, but playlists can be public or private.\n\nYouTube also uses playlists to identify special collections of videos for a channel, such as:  \n- uploaded videos \n- favorite videos \n- positively rated (liked) videos \n- watch history \n- watch later  To be more specific, these lists are associated with a channel, which is a collection of a person, group, or company's videos, playlists, and other YouTube information. You can retrieve the playlist IDs for each of these lists from the  channel resource for a given channel.\n\nYou can then use the   playlistItems.list method to retrieve any of those lists. You can also add or remove items from those lists by calling the   playlistItems.insert and   playlistItems.delete methods.",
       "properties": {
@@ -8170,7 +7281,6 @@
       }
     },
     "PlaylistContentDetails": {
-      "id": "PlaylistContentDetails",
       "type": "object",
       "properties": {
         "itemCount": {
@@ -8181,7 +7291,6 @@
       }
     },
     "PlaylistItem": {
-      "id": "PlaylistItem",
       "type": "object",
       "description": "A playlistItem resource identifies another resource, such as a video, that is included in a playlist. In addition, the playlistItem  resource contains details about the included resource that pertain specifically to how that resource is used in that playlist.\n\nYouTube uses playlists to identify special collections of videos for a channel, such as:  \n- uploaded videos \n- favorite videos \n- positively rated (liked) videos \n- watch history \n- watch later  To be more specific, these lists are associated with a channel, which is a collection of a person, group, or company's videos, playlists, and other YouTube information.\n\nYou can retrieve the playlist IDs for each of these lists from the  channel resource  for a given channel. You can then use the   playlistItems.list method to retrieve any of those lists. You can also add or remove items from those lists by calling the   playlistItems.insert and   playlistItems.delete methods. For example, if a user gives a positive rating to a video, you would insert that video into the liked videos playlist for that user's channel.",
       "properties": {
@@ -8213,7 +7322,6 @@
       }
     },
     "PlaylistItemContentDetails": {
-      "id": "PlaylistItemContentDetails",
       "type": "object",
       "properties": {
         "endAt": {
@@ -8235,7 +7343,6 @@
       }
     },
     "PlaylistItemListResponse": {
-      "id": "PlaylistItemListResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -8279,7 +7386,6 @@
       }
     },
     "PlaylistItemSnippet": {
-      "id": "PlaylistItemSnippet",
       "type": "object",
       "description": "Basic details about a playlist, including title, description and thumbnails.",
       "properties": {
@@ -8297,13 +7403,7 @@
         },
         "playlistId": {
           "type": "string",
-          "description": "The ID that YouTube uses to uniquely identify the playlist that the playlist item is in.",
-          "annotations": {
-            "required": [
-              "youtube.playlistItems.insert",
-              "youtube.playlistItems.update"
-            ]
-          }
+          "description": "The ID that YouTube uses to uniquely identify the playlist that the playlist item is in."
         },
         "position": {
           "type": "integer",
@@ -8317,13 +7417,7 @@
         },
         "resourceId": {
           "$ref": "#/definitions/ResourceId",
-          "description": "The id object contains information that can be used to uniquely identify the resource that is included in the playlist as the playlist item.",
-          "annotations": {
-            "required": [
-              "youtube.playlistItems.insert",
-              "youtube.playlistItems.update"
-            ]
-          }
+          "description": "The id object contains information that can be used to uniquely identify the resource that is included in the playlist as the playlist item."
         },
         "thumbnails": {
           "$ref": "#/definitions/ThumbnailDetails",
@@ -8336,7 +7430,6 @@
       }
     },
     "PlaylistItemStatus": {
-      "id": "PlaylistItemStatus",
       "type": "object",
       "description": "Information about the playlist item's privacy status.",
       "properties": {
@@ -8347,17 +7440,11 @@
             "private",
             "public",
             "unlisted"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "PlaylistListResponse": {
-      "id": "PlaylistListResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -8401,7 +7488,6 @@
       }
     },
     "PlaylistLocalization": {
-      "id": "PlaylistLocalization",
       "type": "object",
       "description": "Playlist localization setting",
       "properties": {
@@ -8416,7 +7502,6 @@
       }
     },
     "PlaylistPlayer": {
-      "id": "PlaylistPlayer",
       "type": "object",
       "properties": {
         "embedHtml": {
@@ -8426,7 +7511,6 @@
       }
     },
     "PlaylistSnippet": {
-      "id": "PlaylistSnippet",
       "type": "object",
       "description": "Basic details about a playlist, including title, description and thumbnails.",
       "properties": {
@@ -8468,18 +7552,11 @@
         },
         "title": {
           "type": "string",
-          "description": "The playlist's title.",
-          "annotations": {
-            "required": [
-              "youtube.playlists.insert",
-              "youtube.playlists.update"
-            ]
-          }
+          "description": "The playlist's title."
         }
       }
     },
     "PlaylistStatus": {
-      "id": "PlaylistStatus",
       "type": "object",
       "properties": {
         "privacyStatus": {
@@ -8489,17 +7566,11 @@
             "private",
             "public",
             "unlisted"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "PromotedItem": {
-      "id": "PromotedItem",
       "type": "object",
       "description": "Describes a single promoted item.",
       "properties": {
@@ -8522,7 +7593,6 @@
       }
     },
     "PromotedItemId": {
-      "id": "PromotedItemId",
       "type": "object",
       "description": "Describes a single promoted item id. It is a union of various possible types.",
       "properties": {
@@ -8537,11 +7607,6 @@
             "recentUpload",
             "video",
             "website"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         },
         "videoId": {
@@ -8555,7 +7620,6 @@
       }
     },
     "PropertyValue": {
-      "id": "PropertyValue",
       "type": "object",
       "description": "A pair Property / Value.",
       "properties": {
@@ -8570,7 +7634,6 @@
       }
     },
     "ResourceId": {
-      "id": "ResourceId",
       "type": "object",
       "description": "A resource id is a generic reference that points to another YouTube resource.",
       "properties": {
@@ -8593,7 +7656,6 @@
       }
     },
     "SearchListResponse": {
-      "id": "SearchListResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -8637,7 +7699,6 @@
       }
     },
     "SearchResult": {
-      "id": "SearchResult",
       "type": "object",
       "description": "A search result contains information about a YouTube video, channel, or playlist that matches the search parameters specified in an API request. While a search result points to a uniquely identifiable resource, like a video, it does not have its own persistent data.",
       "properties": {
@@ -8661,7 +7722,6 @@
       }
     },
     "SearchResultSnippet": {
-      "id": "SearchResultSnippet",
       "type": "object",
       "description": "Basic details about a search result, including title, description and thumbnails of the item referenced by the search result.",
       "properties": {
@@ -8684,11 +7744,6 @@
             "live",
             "none",
             "upcoming"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         },
         "publishedAt": {
@@ -8707,7 +7762,6 @@
       }
     },
     "Subscription": {
-      "id": "Subscription",
       "type": "object",
       "description": "A subscription resource contains information about a YouTube user subscription. A subscription notifies a user when new videos are added to a channel or when another user takes one of several actions on YouTube, such as uploading a video, rating a video, or commenting on a video.",
       "properties": {
@@ -8739,7 +7793,6 @@
       }
     },
     "SubscriptionContentDetails": {
-      "id": "SubscriptionContentDetails",
       "type": "object",
       "description": "Details about the content to witch a subscription refers.",
       "properties": {
@@ -8749,10 +7802,6 @@
           "enum": [
             "all",
             "uploads"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         },
         "newItemCount": {
@@ -8768,7 +7817,6 @@
       }
     },
     "SubscriptionListResponse": {
-      "id": "SubscriptionListResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -8812,7 +7860,6 @@
       }
     },
     "SubscriptionSnippet": {
-      "id": "SubscriptionSnippet",
       "type": "object",
       "description": "Basic details about a subscription, including title, description and thumbnails of the subscribed item.",
       "properties": {
@@ -8835,12 +7882,7 @@
         },
         "resourceId": {
           "$ref": "#/definitions/ResourceId",
-          "description": "The id object contains information about the channel that the user subscribed to.",
-          "annotations": {
-            "required": [
-              "youtube.subscriptions.insert"
-            ]
-          }
+          "description": "The id object contains information about the channel that the user subscribed to."
         },
         "thumbnails": {
           "$ref": "#/definitions/ThumbnailDetails",
@@ -8853,7 +7895,6 @@
       }
     },
     "SubscriptionSubscriberSnippet": {
-      "id": "SubscriptionSubscriberSnippet",
       "type": "object",
       "description": "Basic details about a subscription's subscriber including title, description, channel ID and thumbnails.",
       "properties": {
@@ -8876,7 +7917,6 @@
       }
     },
     "Thumbnail": {
-      "id": "Thumbnail",
       "type": "object",
       "description": "A thumbnail is an image representing a YouTube resource.",
       "properties": {
@@ -8897,7 +7937,6 @@
       }
     },
     "ThumbnailDetails": {
-      "id": "ThumbnailDetails",
       "type": "object",
       "description": "Internal representation of thumbnails for a YouTube resource.",
       "properties": {
@@ -8924,7 +7963,6 @@
       }
     },
     "ThumbnailSetResponse": {
-      "id": "ThumbnailSetResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -8954,12 +7992,10 @@
       }
     },
     "TokenPagination": {
-      "id": "TokenPagination",
       "type": "object",
       "description": "Stub token pagination template to suppress results."
     },
     "Video": {
-      "id": "Video",
       "type": "object",
       "description": "A video resource represents a YouTube video.",
       "properties": {
@@ -8985,12 +8021,7 @@
         },
         "id": {
           "type": "string",
-          "description": "The ID that YouTube uses to uniquely identify the video.",
-          "annotations": {
-            "required": [
-              "youtube.videos.update"
-            ]
-          }
+          "description": "The ID that YouTube uses to uniquely identify the video."
         },
         "kind": {
           "type": "string",
@@ -9052,7 +8083,6 @@
       }
     },
     "VideoAbuseReport": {
-      "id": "VideoAbuseReport",
       "type": "object",
       "properties": {
         "comments": {
@@ -9078,7 +8108,6 @@
       }
     },
     "VideoAbuseReportReason": {
-      "id": "VideoAbuseReportReason",
       "type": "object",
       "description": "A videoAbuseReportReason resource identifies a reason that a video could be reported as abusive. Video abuse report reasons are used with video.ReportAbuse.",
       "properties": {
@@ -9102,7 +8131,6 @@
       }
     },
     "VideoAbuseReportReasonId": {
-      "id": "VideoAbuseReportReasonId",
       "type": "object",
       "properties": {
         "value": {
@@ -9111,7 +8139,6 @@
       }
     },
     "VideoAbuseReportReasonListResponse": {
-      "id": "VideoAbuseReportReasonListResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -9141,7 +8168,6 @@
       }
     },
     "VideoAbuseReportReasonSnippet": {
-      "id": "VideoAbuseReportReasonSnippet",
       "type": "object",
       "description": "Basic details about a video category, such as its localized title.",
       "properties": {
@@ -9159,7 +8185,6 @@
       }
     },
     "VideoAbuseReportSecondaryReason": {
-      "id": "VideoAbuseReportSecondaryReason",
       "type": "object",
       "properties": {
         "id": {
@@ -9173,7 +8198,6 @@
       }
     },
     "VideoAgeGating": {
-      "id": "VideoAgeGating",
       "type": "object",
       "properties": {
         "alcoholContent": {
@@ -9192,18 +8216,11 @@
             "m15Plus",
             "m16Plus",
             "m17Plus"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "VideoCategory": {
-      "id": "VideoCategory",
       "type": "object",
       "description": "A videoCategory resource identifies a category that has been or could be associated with uploaded videos.",
       "properties": {
@@ -9227,7 +8244,6 @@
       }
     },
     "VideoCategoryListResponse": {
-      "id": "VideoCategoryListResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -9271,7 +8287,6 @@
       }
     },
     "VideoCategorySnippet": {
-      "id": "VideoCategorySnippet",
       "type": "object",
       "description": "Basic details about a video category, such as its localized title.",
       "properties": {
@@ -9290,7 +8305,6 @@
       }
     },
     "VideoContentDetails": {
-      "id": "VideoContentDetails",
       "type": "object",
       "description": "Details about the content of a YouTube Video.",
       "properties": {
@@ -9300,10 +8314,6 @@
           "enum": [
             "false",
             "true"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         },
         "contentRating": {
@@ -9320,10 +8330,6 @@
           "enum": [
             "hd",
             "sd"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         },
         "dimension": {
@@ -9345,7 +8351,6 @@
       }
     },
     "VideoContentDetailsRegionRestriction": {
-      "id": "VideoContentDetailsRegionRestriction",
       "type": "object",
       "description": "DEPRECATED Region restriction of the video.",
       "properties": {
@@ -9366,7 +8371,6 @@
       }
     },
     "VideoConversionPing": {
-      "id": "VideoConversionPing",
       "type": "object",
       "properties": {
         "context": {
@@ -9377,12 +8381,6 @@
             "dislike",
             "like",
             "share"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "conversionUrl": {
@@ -9392,7 +8390,6 @@
       }
     },
     "VideoConversionPings": {
-      "id": "VideoConversionPings",
       "type": "object",
       "properties": {
         "pings": {
@@ -9405,7 +8402,6 @@
       }
     },
     "VideoFileDetails": {
-      "id": "VideoFileDetails",
       "type": "object",
       "description": "Describes original video file properties, including technical details about audio and video streams, but also metadata information like content length, digitization time, or geotagging information.",
       "properties": {
@@ -9454,15 +8450,6 @@
             "other",
             "project",
             "video"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "recordingLocation": {
@@ -9479,7 +8466,6 @@
       }
     },
     "VideoFileDetailsAudioStream": {
-      "id": "VideoFileDetailsAudioStream",
       "type": "object",
       "description": "Information about an audio stream.",
       "properties": {
@@ -9504,7 +8490,6 @@
       }
     },
     "VideoFileDetailsVideoStream": {
-      "id": "VideoFileDetailsVideoStream",
       "type": "object",
       "description": "Information about a video stream.",
       "properties": {
@@ -9541,13 +8526,6 @@
             "none",
             "other",
             "upsideDown"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "vendor": {
@@ -9562,7 +8540,6 @@
       }
     },
     "VideoGetRatingResponse": {
-      "id": "VideoGetRatingResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -9592,7 +8569,6 @@
       }
     },
     "VideoListResponse": {
-      "id": "VideoListResponse",
       "type": "object",
       "properties": {
         "etag": {
@@ -9636,7 +8612,6 @@
       }
     },
     "VideoLiveStreamingDetails": {
-      "id": "VideoLiveStreamingDetails",
       "type": "object",
       "description": "Details about the live streaming metadata.",
       "properties": {
@@ -9668,7 +8643,6 @@
       }
     },
     "VideoLocalization": {
-      "id": "VideoLocalization",
       "type": "object",
       "description": "Localized versions of certain video properties (e.g. title).",
       "properties": {
@@ -9683,7 +8657,6 @@
       }
     },
     "VideoMonetizationDetails": {
-      "id": "VideoMonetizationDetails",
       "type": "object",
       "description": "Details about monetization of a YouTube Video.",
       "properties": {
@@ -9694,7 +8667,6 @@
       }
     },
     "VideoPlayer": {
-      "id": "VideoPlayer",
       "type": "object",
       "description": "Player to be used for a video playback.",
       "properties": {
@@ -9705,7 +8677,6 @@
       }
     },
     "VideoProcessingDetails": {
-      "id": "VideoProcessingDetails",
       "type": "object",
       "description": "Describes processing status and progress and availability of some other Video resource parts.",
       "properties": {
@@ -9725,12 +8696,6 @@
             "streamingFailed",
             "transcodeFailed",
             "uploadFailed"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "processingIssuesAvailability": {
@@ -9749,12 +8714,6 @@
             "processing",
             "succeeded",
             "terminated"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "tagSuggestionsAvailability": {
@@ -9768,7 +8727,6 @@
       }
     },
     "VideoProcessingDetailsProcessingProgress": {
-      "id": "VideoProcessingDetailsProcessingProgress",
       "type": "object",
       "description": "Video processing progress and completion time estimate.",
       "properties": {
@@ -9790,7 +8748,6 @@
       }
     },
     "VideoProjectDetails": {
-      "id": "VideoProjectDetails",
       "type": "object",
       "description": "Project specific details about the content of a YouTube Video.",
       "properties": {
@@ -9804,7 +8761,6 @@
       }
     },
     "VideoRating": {
-      "id": "VideoRating",
       "type": "object",
       "properties": {
         "rating": {
@@ -9814,12 +8770,6 @@
             "like",
             "none",
             "unspecified"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "videoId": {
@@ -9828,7 +8778,6 @@
       }
     },
     "VideoRecordingDetails": {
-      "id": "VideoRecordingDetails",
       "type": "object",
       "description": "Recording information associated with the video.",
       "properties": {
@@ -9848,7 +8797,6 @@
       }
     },
     "VideoSnippet": {
-      "id": "VideoSnippet",
       "type": "object",
       "description": "Basic details about a video, including title, description, uploader, thumbnails and category.",
       "properties": {
@@ -9879,11 +8827,6 @@
             "live",
             "none",
             "upcoming"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         },
         "localized": {
@@ -9913,7 +8856,6 @@
       }
     },
     "VideoStatistics": {
-      "id": "VideoStatistics",
       "type": "object",
       "description": "Statistics about the video, such as the number of times the video was viewed or liked.",
       "properties": {
@@ -9945,7 +8887,6 @@
       }
     },
     "VideoStatus": {
-      "id": "VideoStatus",
       "type": "object",
       "description": "Basic details about a video category, such as its localized title.",
       "properties": {
@@ -9963,14 +8904,6 @@
             "invalidFile",
             "tooSmall",
             "uploadAborted"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "license": {
@@ -9979,10 +8912,6 @@
           "enum": [
             "creativeCommon",
             "youtube"
-          ],
-          "enumDescriptions": [
-            "",
-            ""
           ]
         },
         "privacyStatus": {
@@ -9992,11 +8921,6 @@
             "private",
             "public",
             "unlisted"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            ""
           ]
         },
         "publicStatsViewable": {
@@ -10021,17 +8945,6 @@
             "trademark",
             "uploaderAccountClosed",
             "uploaderAccountSuspended"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         },
         "uploadStatus": {
@@ -10043,19 +8956,11 @@
             "processed",
             "rejected",
             "uploaded"
-          ],
-          "enumDescriptions": [
-            "",
-            "",
-            "",
-            "",
-            ""
           ]
         }
       }
     },
     "VideoSuggestions": {
-      "id": "VideoSuggestions",
       "type": "object",
       "description": "Specifies suggestions on how to improve video content, including encoding hints, tag suggestions, and editor suggestions.",
       "properties": {
@@ -10069,12 +8974,6 @@
               "videoAutoLevels",
               "videoCrop",
               "videoStabilize"
-            ],
-            "enumDescriptions": [
-              "",
-              "",
-              "",
-              ""
             ]
           }
         },
@@ -10090,14 +8989,6 @@
               "imageFile",
               "notAVideoFile",
               "projectFile"
-            ],
-            "enumDescriptions": [
-              "",
-              "",
-              "",
-              "",
-              "",
-              ""
             ]
           }
         },
@@ -10109,10 +9000,6 @@
             "enum": [
               "nonStreamableMov",
               "sendBestQualityVideo"
-            ],
-            "enumDescriptions": [
-              "",
-              ""
             ]
           }
         },
@@ -10129,15 +9016,6 @@
               "unknownAudioCodec",
               "unknownContainer",
               "unknownVideoCodec"
-            ],
-            "enumDescriptions": [
-              "",
-              "",
-              "",
-              "",
-              "",
-              "",
-              ""
             ]
           }
         },
@@ -10151,7 +9029,6 @@
       }
     },
     "VideoSuggestionsTagSuggestion": {
-      "id": "VideoSuggestionsTagSuggestion",
       "type": "object",
       "description": "A single tag suggestion with it's relevance information.",
       "properties": {
@@ -10169,7 +9046,6 @@
       }
     },
     "VideoTopicDetails": {
-      "id": "VideoTopicDetails",
       "type": "object",
       "description": "Freebase topic information related to the video.",
       "properties": {
@@ -10190,7 +9066,6 @@
       }
     },
     "WatchSettings": {
-      "id": "WatchSettings",
       "type": "object",
       "description": "Branding properties for the watch.",
       "properties": {

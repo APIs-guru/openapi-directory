@@ -1690,7 +1690,6 @@
   },
   "definitions": {
     "Bucket": {
-      "id": "Bucket",
       "type": "object",
       "description": "Specifies the minimum and maximum values, the color, opacity, icon and weight of a bucket within a StyleSetting.",
       "properties": {
@@ -1725,7 +1724,6 @@
       }
     },
     "Column": {
-      "id": "Column",
       "type": "object",
       "description": "Specifies the details of a column in a table.",
       "properties": {
@@ -1777,21 +1775,11 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the column.",
-          "annotations": {
-            "required": [
-              "fusiontables.column.insert"
-            ]
-          }
+          "description": "Name of the column."
         },
         "type": {
           "type": "string",
-          "description": "Type of the column.",
-          "annotations": {
-            "required": [
-              "fusiontables.column.insert"
-            ]
-          }
+          "description": "Type of the column."
         },
         "validValues": {
           "type": "array",
@@ -1807,7 +1795,6 @@
       }
     },
     "ColumnList": {
-      "id": "ColumnList",
       "type": "object",
       "description": "Represents a list of columns in a table.",
       "properties": {
@@ -1835,7 +1822,6 @@
       }
     },
     "Geometry": {
-      "id": "Geometry",
       "type": "object",
       "description": "Represents a Geometry object.",
       "properties": {
@@ -1853,7 +1839,6 @@
       }
     },
     "Import": {
-      "id": "Import",
       "type": "object",
       "description": "Represents an import request.",
       "properties": {
@@ -1870,7 +1855,6 @@
       }
     },
     "Line": {
-      "id": "Line",
       "type": "object",
       "description": "Represents a line geometry.",
       "properties": {
@@ -1893,7 +1877,6 @@
       }
     },
     "LineStyle": {
-      "id": "LineStyle",
       "type": "object",
       "description": "Represents a LineStyle within a StyleSetting",
       "properties": {
@@ -1922,7 +1905,6 @@
       }
     },
     "Point": {
-      "id": "Point",
       "type": "object",
       "description": "Represents a point object.",
       "properties": {
@@ -1942,7 +1924,6 @@
       }
     },
     "PointStyle": {
-      "id": "PointStyle",
       "type": "object",
       "description": "Represents a PointStyle within a StyleSetting",
       "properties": {
@@ -1957,7 +1938,6 @@
       }
     },
     "Polygon": {
-      "id": "Polygon",
       "type": "object",
       "description": "Represents a polygon object.",
       "properties": {
@@ -1983,7 +1963,6 @@
       }
     },
     "PolygonStyle": {
-      "id": "PolygonStyle",
       "type": "object",
       "description": "Represents a PolygonStyle within a StyleSetting",
       "properties": {
@@ -2025,7 +2004,6 @@
       }
     },
     "Sqlresponse": {
-      "id": "Sqlresponse",
       "type": "object",
       "description": "Represents a response to a SQL statement.",
       "properties": {
@@ -2052,7 +2030,6 @@
       }
     },
     "StyleFunction": {
-      "id": "StyleFunction",
       "type": "object",
       "description": "Represents a StyleFunction within a StyleSetting",
       "properties": {
@@ -2065,12 +2042,7 @@
         },
         "columnName": {
           "type": "string",
-          "description": "Name of the column whose value is used in the style.",
-          "annotations": {
-            "required": [
-              "fusiontables.style.insert"
-            ]
-          }
+          "description": "Name of the column whose value is used in the style."
         },
         "gradient": {
           "type": "object",
@@ -2113,7 +2085,6 @@
       }
     },
     "StyleSetting": {
-      "id": "StyleSetting",
       "type": "object",
       "description": "Represents a complete StyleSettings object. The primary key is a combination of the tableId and a styleId.",
       "properties": {
@@ -2150,7 +2121,6 @@
       }
     },
     "StyleSettingList": {
-      "id": "StyleSettingList",
       "type": "object",
       "description": "Represents a list of styles for a given table.",
       "properties": {
@@ -2178,7 +2148,6 @@
       }
     },
     "Table": {
-      "id": "Table",
       "type": "object",
       "description": "Represents a table.",
       "properties": {
@@ -2206,12 +2175,6 @@
           "description": "Columns in the table.",
           "items": {
             "$ref": "#/definitions/Column"
-          },
-          "annotations": {
-            "required": [
-              "fusiontables.table.insert",
-              "fusiontables.table.update"
-            ]
           }
         },
         "description": {
@@ -2220,13 +2183,7 @@
         },
         "isExportable": {
           "type": "boolean",
-          "description": "Variable for whether table is exportable.",
-          "annotations": {
-            "required": [
-              "fusiontables.table.insert",
-              "fusiontables.table.update"
-            ]
-          }
+          "description": "Variable for whether table is exportable."
         },
         "kind": {
           "type": "string",
@@ -2235,13 +2192,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name assigned to a table.",
-          "annotations": {
-            "required": [
-              "fusiontables.table.insert",
-              "fusiontables.table.update"
-            ]
-          }
+          "description": "Name assigned to a table."
         },
         "sql": {
           "type": "string",
@@ -2262,7 +2213,6 @@
       }
     },
     "TableList": {
-      "id": "TableList",
       "type": "object",
       "description": "Represents a list of tables.",
       "properties": {
@@ -2285,7 +2235,6 @@
       }
     },
     "Task": {
-      "id": "Task",
       "type": "object",
       "description": "A background task on a table, initiated for time- or resource-consuming operations such as changing column types or deleting all rows.",
       "properties": {
@@ -2314,7 +2263,6 @@
       }
     },
     "TaskList": {
-      "id": "TaskList",
       "type": "object",
       "description": "Represents a list of tasks for a table.",
       "properties": {
@@ -2342,7 +2290,6 @@
       }
     },
     "Template": {
-      "id": "Template",
       "type": "object",
       "description": "Represents the contents of InfoWindow templates.",
       "properties": {
@@ -2378,7 +2325,6 @@
       }
     },
     "TemplateList": {
-      "id": "TemplateList",
       "type": "object",
       "description": "Represents a list of templates for a given table.",
       "properties": {

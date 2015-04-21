@@ -342,7 +342,6 @@
   },
   "definitions": {
     "Account": {
-      "id": "Account",
       "type": "object",
       "description": "Configuration data for an Ad Exchange buyer account.",
       "properties": {
@@ -404,7 +403,6 @@
       }
     },
     "AccountsList": {
-      "id": "AccountsList",
       "type": "object",
       "description": "An account feed lists Ad Exchange buyer accounts that the user has access to. Each entry in the feed corresponds to a single buyer account.",
       "properties": {
@@ -423,7 +421,6 @@
       }
     },
     "Creative": {
-      "id": "Creative",
       "type": "object",
       "description": "A creative and its classification data.",
       "properties": {
@@ -434,12 +431,7 @@
         "accountId": {
           "type": "integer",
           "description": "Account id.",
-          "format": "int32",
-          "annotations": {
-            "required": [
-              "adexchangebuyer.creatives.insert"
-            ]
-          }
+          "format": "int32"
         },
         "advertiserId": {
           "type": "array",
@@ -451,12 +443,7 @@
         },
         "advertiserName": {
           "type": "string",
-          "description": "The name of the company being advertised in the creative.",
-          "annotations": {
-            "required": [
-              "adexchangebuyer.creatives.insert"
-            ]
-          }
+          "description": "The name of the company being advertised in the creative."
         },
         "agencyId": {
           "type": "string",
@@ -473,23 +460,13 @@
         },
         "buyerCreativeId": {
           "type": "string",
-          "description": "A buyer-specific id identifying the creative in this ad.",
-          "annotations": {
-            "required": [
-              "adexchangebuyer.creatives.insert"
-            ]
-          }
+          "description": "A buyer-specific id identifying the creative in this ad."
         },
         "clickThroughUrl": {
           "type": "array",
           "description": "The set of destination urls for the snippet.",
           "items": {
             "type": "string"
-          },
-          "annotations": {
-            "required": [
-              "adexchangebuyer.creatives.insert"
-            ]
           }
         },
         "corrections": {
@@ -564,12 +541,7 @@
         "height": {
           "type": "integer",
           "description": "Ad height.",
-          "format": "int32",
-          "annotations": {
-            "required": [
-              "adexchangebuyer.creatives.insert"
-            ]
-          }
+          "format": "int32"
         },
         "kind": {
           "type": "string",
@@ -619,17 +591,11 @@
         "width": {
           "type": "integer",
           "description": "Ad width.",
-          "format": "int32",
-          "annotations": {
-            "required": [
-              "adexchangebuyer.creatives.insert"
-            ]
-          }
+          "format": "int32"
         }
       }
     },
     "CreativesList": {
-      "id": "CreativesList",
       "type": "object",
       "description": "The creatives feed lists the active creatives for the Ad Exchange buyer accounts that the user has access to. Each entry in the feed corresponds to a single creative.",
       "properties": {

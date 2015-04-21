@@ -495,7 +495,6 @@
   },
   "definitions": {
     "DeleteMetricDescriptorResponse": {
-      "id": "DeleteMetricDescriptorResponse",
       "type": "object",
       "description": "The response of cloudmonitoring.metricDescriptors.delete.",
       "properties": {
@@ -507,7 +506,6 @@
       }
     },
     "ListMetricDescriptorsRequest": {
-      "id": "ListMetricDescriptorsRequest",
       "type": "object",
       "description": "The request of cloudmonitoring.metricDescriptors.list.",
       "properties": {
@@ -519,7 +517,6 @@
       }
     },
     "ListMetricDescriptorsResponse": {
-      "id": "ListMetricDescriptorsResponse",
       "type": "object",
       "description": "The response of cloudmonitoring.metricDescriptors.list.",
       "properties": {
@@ -542,7 +539,6 @@
       }
     },
     "ListTimeseriesDescriptorsRequest": {
-      "id": "ListTimeseriesDescriptorsRequest",
       "type": "object",
       "description": "The request of cloudmonitoring.timeseriesDescriptors.list",
       "properties": {
@@ -554,7 +550,6 @@
       }
     },
     "ListTimeseriesDescriptorsResponse": {
-      "id": "ListTimeseriesDescriptorsResponse",
       "type": "object",
       "description": "The response of cloudmonitoring.timeseriesDescriptors.list",
       "properties": {
@@ -587,7 +582,6 @@
       }
     },
     "ListTimeseriesRequest": {
-      "id": "ListTimeseriesRequest",
       "type": "object",
       "description": "The request of cloudmonitoring.timeseries.list",
       "properties": {
@@ -599,7 +593,6 @@
       }
     },
     "ListTimeseriesResponse": {
-      "id": "ListTimeseriesResponse",
       "type": "object",
       "description": "The response of cloudmonitoring.timeseries.list",
       "properties": {
@@ -632,7 +625,6 @@
       }
     },
     "MetricDescriptor": {
-      "id": "MetricDescriptor",
       "type": "object",
       "description": "A metricDescriptor defines the name, label keys, and data type of a particular metric.",
       "properties": {
@@ -662,7 +654,6 @@
       }
     },
     "MetricDescriptorLabelDescriptor": {
-      "id": "MetricDescriptorLabelDescriptor",
       "type": "object",
       "description": "A label in a metric is a description of this metric, including the key of this description (what the description is), and the value for this description.",
       "properties": {
@@ -677,7 +668,6 @@
       }
     },
     "MetricDescriptorTypeDescriptor": {
-      "id": "MetricDescriptorTypeDescriptor",
       "type": "object",
       "description": "A type in a metric contains information about how the metric is collected and what its data points look like.",
       "properties": {
@@ -692,7 +682,6 @@
       }
     },
     "Point": {
-      "id": "Point",
       "type": "object",
       "description": "Point is a single point in a time series. It consists of a start time, an end time, and a value.",
       "properties": {
@@ -731,7 +720,6 @@
       }
     },
     "PointDistribution": {
-      "id": "PointDistribution",
       "type": "object",
       "description": "Distribution data point value type. When writing distribution points, try to be consistent with the boundaries of your buckets. If you must modify the bucket boundaries, then do so by merging, partitioning, or appending rather than skewing them.",
       "properties": {
@@ -753,7 +741,6 @@
       }
     },
     "PointDistributionBucket": {
-      "id": "PointDistributionBucket",
       "type": "object",
       "description": "The histogram's bucket. Buckets that form the histogram of a distribution value. If the upper bound of a bucket, say U1, does not equal the lower bound of the next bucket, say L2, this means that there is no event in [U1, L2).",
       "properties": {
@@ -775,7 +762,6 @@
       }
     },
     "PointDistributionOverflowBucket": {
-      "id": "PointDistributionOverflowBucket",
       "type": "object",
       "description": "The overflow bucket is a special bucket that does not have the upperBound field; it includes all of the events that are no less than its lower bound.",
       "properties": {
@@ -792,7 +778,6 @@
       }
     },
     "PointDistributionUnderflowBucket": {
-      "id": "PointDistributionUnderflowBucket",
       "type": "object",
       "description": "The underflow bucket is a special bucket that does not have the lowerBound field; it includes all of the events that are less than its upper bound.",
       "properties": {
@@ -809,7 +794,6 @@
       }
     },
     "Timeseries": {
-      "id": "Timeseries",
       "type": "object",
       "description": "The monitoring data is organized as metrics and stored as data points that are recorded over time. Each data point represents information like the CPU utilization of your virtual machine. A historical record of these data points is called a time series.",
       "properties": {
@@ -827,7 +811,6 @@
       }
     },
     "TimeseriesDescriptor": {
-      "id": "TimeseriesDescriptor",
       "type": "object",
       "description": "TimeseriesDescriptor identifies a single time series.",
       "properties": {
@@ -850,7 +833,6 @@
       }
     },
     "TimeseriesDescriptorLabel": {
-      "id": "TimeseriesDescriptorLabel",
       "type": "object",
       "properties": {
         "key": {
@@ -864,7 +846,6 @@
       }
     },
     "TimeseriesPoint": {
-      "id": "TimeseriesPoint",
       "type": "object",
       "description": "When writing time series, TimeseriesPoint should be used instead of Timeseries, to enforce single point for each time series in the timeseries.write request.",
       "properties": {
@@ -879,7 +860,6 @@
       }
     },
     "WriteTimeseriesRequest": {
-      "id": "WriteTimeseriesRequest",
       "type": "object",
       "description": "The request of cloudmonitoring.timeseries.write",
       "properties": {
@@ -901,7 +881,6 @@
       }
     },
     "WriteTimeseriesResponse": {
-      "id": "WriteTimeseriesResponse",
       "type": "object",
       "description": "The response of cloudmonitoring.timeseries.write",
       "properties": {
