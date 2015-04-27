@@ -1,0 +1,1648 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Compute Accounts API",
+    "description": "API for the Google Compute Accounts service.",
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "version": "alpha"
+  },
+  "host": "www.googleapis.com",
+  "basePath": "/computeaccounts/alpha/projects",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/{project}/global/operations/{operation}": {
+      "delete": {
+        "description": "Deletes the specified operation resource.",
+        "operationId": "computeaccounts.globalAccountsOperations.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "operation",
+            "in": "path",
+            "description": "Name of the operation resource to delete.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID for this request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/computeaccounts"
+            ]
+          }
+        ],
+        "tags": [
+          "globalAccountsOperations"
+        ]
+      },
+      "get": {
+        "description": "Retrieves the specified operation resource.",
+        "operationId": "computeaccounts.globalAccountsOperations.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "operation",
+            "in": "path",
+            "description": "Name of the operation resource to return.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID for this request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/computeaccounts",
+              "https://www.googleapis.com/auth/computeaccounts.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "globalAccountsOperations"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{project}/global/operations": {
+      "get": {
+        "description": "Retrieves the list of operation resources contained within the specified project.",
+        "operationId": "computeaccounts.globalAccountsOperations.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Optional. Filter expression for filtering listed resources.",
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.",
+            "default": "500",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 500
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.",
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID for this request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/computeaccounts",
+              "https://www.googleapis.com/auth/computeaccounts.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "globalAccountsOperations"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{project}/global/groups/{groupName}/addMember": {
+      "post": {
+        "description": "Adds users to the specified group.",
+        "operationId": "computeaccounts.groups.addMember",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Name of the group for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID for this request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/computeaccounts"
+            ]
+          }
+        ],
+        "tags": [
+          "groups"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{project}/global/groups/{groupName}": {
+      "delete": {
+        "description": "Deletes the specified group resource.",
+        "operationId": "computeaccounts.groups.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Name of the group resource to delete.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID for this request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/computeaccounts"
+            ]
+          }
+        ],
+        "tags": [
+          "groups"
+        ]
+      },
+      "get": {
+        "description": "Returns the specified group resource.",
+        "operationId": "computeaccounts.groups.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Group"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Name of the group resource to return.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID for this request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/computeaccounts",
+              "https://www.googleapis.com/auth/computeaccounts.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "groups"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{project}/global/groups": {
+      "post": {
+        "description": "Creates a group resource in the specified project using the data included in the request.",
+        "operationId": "computeaccounts.groups.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID for this request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/computeaccounts"
+            ]
+          }
+        ],
+        "tags": [
+          "groups"
+        ]
+      },
+      "get": {
+        "description": "Retrieves the list of groups contained within the specified project.",
+        "operationId": "computeaccounts.groups.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/GroupList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Optional. Filter expression for filtering listed resources.",
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.",
+            "default": "500",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 500
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.",
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID for this request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/computeaccounts",
+              "https://www.googleapis.com/auth/computeaccounts.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "groups"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{project}/global/groups/{groupName}/removeMember": {
+      "post": {
+        "description": "Removes users from the specified group.",
+        "operationId": "computeaccounts.groups.removeMember",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "Name of the group for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID for this request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/computeaccounts"
+            ]
+          }
+        ],
+        "tags": [
+          "groups"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{project}/zones/{zone}/authorizedKeysView/{user}": {
+      "post": {
+        "description": "Returns the AuthorizedKeysView of the specified user.",
+        "operationId": "computeaccounts.linux.getAuthorizedKeysView",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/LinuxGetAuthorizedKeysViewResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "instance",
+            "in": "query",
+            "description": "The fully-qualified URL of the instance requesting the view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "user",
+            "in": "path",
+            "description": "Username of the AuthorizedKeysView to return.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "Name of the zone for this request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/computeaccounts",
+              "https://www.googleapis.com/auth/computeaccounts.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "linux"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{project}/zones/{zone}/linuxAccountViews": {
+      "post": {
+        "description": "Retrieves the Linux views for an instance contained within the specified project.",
+        "operationId": "computeaccounts.linux.getLinuxAccountViews",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/LinuxGetLinuxAccountViewsResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Optional. Filter expression for filtering listed resources.",
+            "type": "string"
+          },
+          {
+            "name": "instance",
+            "in": "query",
+            "description": "The fully-qualified URL of the instance requesting the views.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.",
+            "default": "500",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 500
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.",
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "user",
+            "in": "query",
+            "description": "If provided, the user whose login is triggering an immediate refresh of the views.",
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "Name of the zone for this request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/computeaccounts",
+              "https://www.googleapis.com/auth/computeaccounts.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "linux"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{project}/global/users/{user}/addPublicKey": {
+      "post": {
+        "description": "Adds a public key to the specified user using the data included in the request.",
+        "operationId": "computeaccounts.users.addPublicKey",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "user",
+            "in": "path",
+            "description": "Name of the user for this request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/computeaccounts"
+            ]
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{project}/global/users/{user}": {
+      "delete": {
+        "description": "Deletes the specified user resource.",
+        "operationId": "computeaccounts.users.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "user",
+            "in": "path",
+            "description": "Name of the user resource to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/computeaccounts"
+            ]
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      },
+      "get": {
+        "description": "Returns the specified user resource.",
+        "operationId": "computeaccounts.users.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "user",
+            "in": "path",
+            "description": "Name of the user resource to return.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/computeaccounts",
+              "https://www.googleapis.com/auth/computeaccounts.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{project}/global/users": {
+      "post": {
+        "description": "Creates a user resource in the specified project using the data included in the request.",
+        "operationId": "computeaccounts.users.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID for this request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/computeaccounts"
+            ]
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      },
+      "get": {
+        "description": "Retrieves the list of users contained within the specified project.",
+        "operationId": "computeaccounts.users.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/UserList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Optional. Filter expression for filtering listed resources.",
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.",
+            "default": "500",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 500
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.",
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID for this request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/computeaccounts",
+              "https://www.googleapis.com/auth/computeaccounts.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{project}/global/users/{user}/removePublicKey": {
+      "post": {
+        "description": "Removes the specified public key from the user.",
+        "operationId": "computeaccounts.users.removePublicKey",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "fingerprint",
+            "in": "query",
+            "description": "The fingerprint of the public key to delete. Public keys are identified by their fingerprint, which is defined by RFC4716 to be the MD5 digest of the public key.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "user",
+            "in": "path",
+            "description": "Name of the user for this request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/computeaccounts"
+            ]
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "AuthorizedKeysView": {
+      "type": "object",
+      "description": "A list of authorized public keys for a user.",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "description": "[Output Only] The authorized public keys in SSH format.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Group": {
+      "type": "object",
+      "description": "A Group resource.",
+      "properties": {
+        "creationTimestamp": {
+          "type": "string",
+          "description": "[Output Only] Creation timestamp in RFC3339 text format."
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional textual description of the resource; provided by the client when the resource is created."
+        },
+        "id": {
+          "type": "string",
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
+          "format": "uint64"
+        },
+        "kind": {
+          "type": "string",
+          "description": "[Output Only] Type of the resource. Always computeaccounts#group for groups.",
+          "default": "computeaccounts#group"
+        },
+        "members": {
+          "type": "array",
+          "description": "[Output Only] A list of URLs to User resources who belong to the group. Users may only be members of groups in the same project.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the resource; provided by the client when the resource is created.",
+          "pattern": "[a-z][-a-z0-9_]{0,31}"
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "[Output Only] Server defined URL for the resource."
+        }
+      }
+    },
+    "GroupList": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "[Output Only] Unique identifier for the resource; defined by the server."
+        },
+        "items": {
+          "type": "array",
+          "description": "[Output Only] A list of Group resources.",
+          "items": {
+            "$ref": "#/definitions/Group"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "[Output Only] Type of resource. Always computeaccounts#groupList for lists of groups.",
+          "default": "computeaccounts#groupList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "[Output Only] A token used to continue a truncated list request."
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "[Output Only] Server defined URL for this resource."
+        }
+      }
+    },
+    "GroupsAddMemberRequest": {
+      "type": "object",
+      "properties": {
+        "users": {
+          "type": "array",
+          "description": "Fully-qualified URLs of the User resources to add.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GroupsRemoveMemberRequest": {
+      "type": "object",
+      "properties": {
+        "users": {
+          "type": "array",
+          "description": "Fully-qualified URLs of the User resources to remove.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LinuxAccountViews": {
+      "type": "object",
+      "description": "A list of all Linux accounts for this project. Linux Account Views are only used by Compute Engine virtual machines to get information about user accounts for a project or instance. They are read-only views into users and groups managed by the Compute Engine Accounts API.",
+      "properties": {
+        "groupViews": {
+          "type": "array",
+          "description": "[Output Only] A list of all groups within a project.",
+          "items": {
+            "$ref": "#/definitions/LinuxGroupView"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "[Output Only] Type of the resource. Always computeaccounts#linuxAccountViews for Linux views.",
+          "default": "computeaccounts#linuxAccountViews"
+        },
+        "userViews": {
+          "type": "array",
+          "description": "[Output Only] A list of all users within a project.",
+          "items": {
+            "$ref": "#/definitions/LinuxUserView"
+          }
+        }
+      }
+    },
+    "LinuxGetAuthorizedKeysViewResponse": {
+      "type": "object",
+      "properties": {
+        "resource": {
+          "$ref": "#/definitions/AuthorizedKeysView",
+          "description": "[Output Only] A list of authorized public keys for a user."
+        }
+      }
+    },
+    "LinuxGetLinuxAccountViewsResponse": {
+      "type": "object",
+      "properties": {
+        "resource": {
+          "$ref": "#/definitions/LinuxAccountViews",
+          "description": "[Output Only] A list of authorized user accounts and groups."
+        }
+      }
+    },
+    "LinuxGroupView": {
+      "type": "object",
+      "description": "A detailed view of a Linux group.",
+      "properties": {
+        "gid": {
+          "type": "integer",
+          "description": "[Output Only] GID.",
+          "format": "uint32"
+        },
+        "groupName": {
+          "type": "string",
+          "description": "[Output Only] Group name."
+        },
+        "members": {
+          "type": "array",
+          "description": "[Output Only] List of usernames who belong to the group.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LinuxUserView": {
+      "type": "object",
+      "description": "A detailed view of a Linux user account.",
+      "properties": {
+        "gecos": {
+          "type": "string",
+          "description": "[Output Only] The GECOS (user information) entry for this account."
+        },
+        "gid": {
+          "type": "integer",
+          "description": "[Output Only] User's default group ID.",
+          "format": "uint32"
+        },
+        "homeDirectory": {
+          "type": "string",
+          "description": "[Output Only] The path to the home directory for this account."
+        },
+        "shell": {
+          "type": "string",
+          "description": "[Output Only] The path to the login shell for this account."
+        },
+        "uid": {
+          "type": "integer",
+          "description": "[Output Only] User ID.",
+          "format": "uint32"
+        },
+        "username": {
+          "type": "string",
+          "description": "[Output Only] The username for the account."
+        }
+      }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "An operation resource, used to manage asynchronous API requests.",
+      "properties": {
+        "clientOperationId": {
+          "type": "string",
+          "description": "[Output Only] An optional identifier specified by the client when the mutation was initiated. Must be unique for all operation resources in the project"
+        },
+        "creationTimestamp": {
+          "type": "string",
+          "description": "[Output Only] Creation timestamp in RFC3339 text format."
+        },
+        "endTime": {
+          "type": "string",
+          "description": "[Output Only] The time that this operation was completed. This is in RFC3339 text format."
+        },
+        "error": {
+          "type": "object",
+          "description": "[Output Only] If errors are generated during processing of the operation, this field will be populated.",
+          "properties": {
+            "errors": {
+              "type": "array",
+              "description": "[Output Only] The array of errors encountered while processing this operation.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "description": "[Output Only] The error type identifier for this error."
+                  },
+                  "location": {
+                    "type": "string",
+                    "description": "[Output Only] Indicates the field in the request which caused the error. This property is optional."
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "[Output Only] An optional, human-readable error message."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "httpErrorMessage": {
+          "type": "string",
+          "description": "[Output Only] If the operation fails, this field contains the HTTP error message that was returned, such as NOT FOUND."
+        },
+        "httpErrorStatusCode": {
+          "type": "integer",
+          "description": "[Output Only] If the operation fails, this field contains the HTTP error message that was returned, such as 404.",
+          "format": "int32"
+        },
+        "id": {
+          "type": "string",
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
+          "format": "uint64"
+        },
+        "insertTime": {
+          "type": "string",
+          "description": "[Output Only] The time that this operation was requested. This is in RFC3339 text format."
+        },
+        "kind": {
+          "type": "string",
+          "description": "[Output Only] Type of the resource. Always compute#Operation for Operation resources.",
+          "default": "computeaccounts#operation"
+        },
+        "name": {
+          "type": "string",
+          "description": "[Output Only] Name of the resource."
+        },
+        "operationType": {
+          "type": "string",
+          "description": "[Output Only] Type of the operation, such as insert, update, and delete."
+        },
+        "progress": {
+          "type": "integer",
+          "description": "[Output Only] An optional progress indicator that ranges from 0 to 100. There is no requirement that this be linear or support any granularity of operations. This should not be used to guess at when the operation will be complete. This number should be monotonically increasing as the operation progresses.",
+          "format": "int32"
+        },
+        "region": {
+          "type": "string",
+          "description": "[Output Only] URL of the region where the operation resides. Only applicable for regional resources."
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "[Output Only] Server defined URL for the resource."
+        },
+        "startTime": {
+          "type": "string",
+          "description": "[Output Only] The time that this operation was started by the server. This is in RFC3339 text format."
+        },
+        "status": {
+          "type": "string",
+          "description": "[Output Only] Status of the operation. Can be one of the following: PENDING, RUNNING, or DONE.",
+          "enum": [
+            "DONE",
+            "PENDING",
+            "RUNNING"
+          ]
+        },
+        "statusMessage": {
+          "type": "string",
+          "description": "[Output Only] An optional textual description of the current status of the operation."
+        },
+        "targetId": {
+          "type": "string",
+          "description": "[Output Only] Unique target ID which identifies a particular incarnation of the target.",
+          "format": "uint64"
+        },
+        "targetLink": {
+          "type": "string",
+          "description": "[Output Only] URL of the resource the operation is mutating."
+        },
+        "user": {
+          "type": "string",
+          "description": "[Output Only] User who requested the operation, for example: user@example.com."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "[Output Only] If warning messages are generated during processing of the operation, this field will be populated.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "[Output Only] The warning type identifier for this warning.",
+                "enum": [
+                  "DEPRECATED_RESOURCE_USED",
+                  "DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+                  "INJECTED_KERNELS_DEPRECATED",
+                  "NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+                  "NEXT_HOP_CANNOT_IP_FORWARD",
+                  "NEXT_HOP_INSTANCE_NOT_FOUND",
+                  "NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+                  "NEXT_HOP_NOT_RUNNING",
+                  "NO_RESULTS_ON_PAGE",
+                  "REQUIRED_TOS_AGREEMENT",
+                  "RESOURCE_NOT_DELETED",
+                  "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+                  "UNREACHABLE"
+                ]
+              },
+              "data": {
+                "type": "array",
+                "description": "[Output Only] Metadata for this warning in key: value format.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "description": "[Output Only] A key for the warning data."
+                    },
+                    "value": {
+                      "type": "string",
+                      "description": "[Output Only] A warning data value corresponding to the key."
+                    }
+                  }
+                }
+              },
+              "message": {
+                "type": "string",
+                "description": "[Output Only] Optional human-readable details for this warning."
+              }
+            }
+          }
+        },
+        "zone": {
+          "type": "string",
+          "description": "[Output Only] URL of the zone where the operation resides."
+        }
+      }
+    },
+    "OperationList": {
+      "type": "object",
+      "description": "Contains a list of operation resources.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "[Output Only] Unique identifier for the resource; defined by the server."
+        },
+        "items": {
+          "type": "array",
+          "description": "[Output Only] The operation resources.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "[Output Only] Type of resource. Always compute#operations for Operations resource.",
+          "default": "computeaccounts#operationList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "[Output Only] A token used to continue a truncate."
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "[Output Only] Server defined URL for this resource."
+        }
+      }
+    },
+    "PublicKey": {
+      "type": "object",
+      "description": "A public key for authenticating to guests.",
+      "properties": {
+        "creationTimestamp": {
+          "type": "string",
+          "description": "[Output Only] Creation timestamp in RFC3339 text format."
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional textual description of the resource; provided by the client when the resource is created."
+        },
+        "expirationTimestamp": {
+          "type": "string",
+          "description": "Optional expiration timestamp. If provided, the timestamp must be in RFC3339 text format. If not provided, the public key never expires."
+        },
+        "fingerprint": {
+          "type": "string",
+          "description": "[Output Only] The fingerprint of the key is defined by RFC4716 to be the MD5 digest of the public key."
+        },
+        "key": {
+          "type": "string",
+          "description": "Public key text in SSH format, defined by RFC4253 section 6.6."
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "description": "A User resource.",
+      "properties": {
+        "creationTimestamp": {
+          "type": "string",
+          "description": "[Output Only] Creation timestamp in RFC3339 text format."
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional textual description of the resource; provided by the client when the resource is created."
+        },
+        "groups": {
+          "type": "array",
+          "description": "[Output Only] A list of URLs to Group resources who contain the user. Users are only members of groups in the same project.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
+          "format": "uint64"
+        },
+        "kind": {
+          "type": "string",
+          "description": "[Output Only] Type of the resource. Always computeaccounts#user for users.",
+          "default": "computeaccounts#user"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the resource; provided by the client when the resource is created.",
+          "pattern": "[a-z][-a-z0-9_]{0,31}"
+        },
+        "owner": {
+          "type": "string",
+          "description": "Email address of account's owner. This account will be validated to make sure it exists. The email can belong to any domain, but it must be tied to a Google account."
+        },
+        "publicKeys": {
+          "type": "array",
+          "description": "[Output Only] Public keys that this user may use to login.",
+          "items": {
+            "$ref": "#/definitions/PublicKey"
+          }
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "[Output Only] Server defined URL for the resource."
+        }
+      }
+    },
+    "UserList": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "[Output Only] Unique identifier for the resource; defined by the server."
+        },
+        "items": {
+          "type": "array",
+          "description": "[Output Only] A list of User resources.",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "[Output Only] Type of resource. Always computeaccounts#userList for lists of users.",
+          "default": "computeaccounts#userList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "[Output Only] A token used to continue a truncated list request."
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "[Output Only] Server defined URL for this resource."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "alt": {
+      "name": "alt",
+      "in": "query",
+      "description": "Data format for the response.",
+      "default": "json",
+      "type": "string",
+      "enum": [
+        "json"
+      ]
+    },
+    "fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Selector specifying which fields to include in a partial response.",
+      "type": "string"
+    },
+    "key": {
+      "name": "key",
+      "in": "query",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    "oauth_token": {
+      "name": "oauth_token",
+      "in": "query",
+      "description": "OAuth 2.0 token for the current user.",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "name": "prettyPrint",
+      "in": "query",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "true",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "name": "quotaUser",
+      "in": "query",
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "type": "string"
+    },
+    "userIp": {
+      "name": "userIp",
+      "in": "query",
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/cloud-platform": "View and manage your data across Google Cloud Platform services",
+        "https://www.googleapis.com/auth/computeaccounts": "New Service: https://www.googleapis.com/auth/computeaccounts",
+        "https://www.googleapis.com/auth/computeaccounts.readonly": "New Service: https://www.googleapis.com/auth/computeaccounts.readonly"
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://cloud.google.com/compute/docs/access/user-accounts/api/latest/"
+  }
+}

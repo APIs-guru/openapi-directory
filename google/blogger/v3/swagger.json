@@ -2722,6 +2722,10 @@
     "CommentList": {
       "type": "object",
       "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Etag of the response."
+        },
         "items": {
           "type": "array",
           "description": "The List of Comments for a Post.",
@@ -2833,6 +2837,10 @@
     "PageList": {
       "type": "object",
       "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Etag of the response."
+        },
         "items": {
           "type": "array",
           "description": "The list of Pages for a Blog.",
@@ -3049,6 +3057,10 @@
     "PostList": {
       "type": "object",
       "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Etag of the response."
+        },
         "items": {
           "type": "array",
           "description": "The list of Posts for this Blog.",

@@ -2114,7 +2114,7 @@
           {
             "name": "maxResults",
             "in": "query",
-            "description": "Maximum number of items plus prefixes to return. As duplicate prefixes are omitted, fewer total results may be returned than requested.",
+            "description": "Maximum number of items plus prefixes to return. As duplicate prefixes are omitted, fewer total results may be returned than requested. The default value of this parameter is 1,000 items.",
             "type": "integer",
             "minimum": 0
           },
@@ -2143,7 +2143,7 @@
           {
             "name": "versions",
             "in": "query",
-            "description": "If true, lists all versions of a file as distinct results.",
+            "description": "If true, lists all versions of an object as distinct results. The default is false. For more information, see Object Versioning.",
             "type": "boolean"
           }
         ],
@@ -2383,7 +2383,7 @@
           {
             "name": "maxResults",
             "in": "query",
-            "description": "Maximum number of items plus prefixes to return. As duplicate prefixes are omitted, fewer total results may be returned than requested.",
+            "description": "Maximum number of items plus prefixes to return. As duplicate prefixes are omitted, fewer total results may be returned than requested. The default value of this parameter is 1,000 items.",
             "type": "integer",
             "minimum": 0
           },
@@ -2412,7 +2412,7 @@
           {
             "name": "versions",
             "in": "query",
-            "description": "If true, lists all versions of a file as distinct results.",
+            "description": "If true, lists all versions of an object as distinct results. The default is false. For more information, see Object Versioning.",
             "type": "boolean"
           }
         ],

@@ -233,7 +233,7 @@
         ]
       },
       "get": {
-        "description": "Lists all the datasets in the specified project to which the caller has read access; however, a project owner can list (but not necessarily get) all datasets in his project.",
+        "description": "Lists all datasets in the specified project to which you have been granted the READER dataset role.",
         "operationId": "bigquery.datasets.list",
         "responses": {
           "200": {
@@ -308,7 +308,7 @@
     },
     "/projects/{projectId}/jobs/{jobId}": {
       "get": {
-        "description": "Retrieves the specified job by ID.",
+        "description": "Returns information about a specific job. Job information is available for a six month period after creation. Requires that you're the person who ran the job, or have the Is Owner project role.",
         "operationId": "bigquery.jobs.get",
         "responses": {
           "200": {
@@ -460,7 +460,7 @@
     },
     "/projects/{projectId}/jobs": {
       "post": {
-        "description": "Starts a new asynchronous job.",
+        "description": "Starts a new asynchronous job. Requires the Can View project role.",
         "operationId": "bigquery.jobs.insert",
         "responses": {
           "200": {
@@ -498,7 +498,7 @@
         ]
       },
       "get": {
-        "description": "Lists all the Jobs in the specified project that were started by the user. The job list returns in reverse chronological order of when the jobs were created, starting with the most recent job created.",
+        "description": "Lists all jobs that you started in the specified project. The job list returns in reverse chronological order of when the jobs were created, starting with the most recent job created. Requires the Can View project role, or the Is Owner project role if you set the allUsers property.",
         "operationId": "bigquery.jobs.list",
         "responses": {
           "200": {
@@ -655,7 +655,7 @@
     },
     "/projects": {
       "get": {
-        "description": "Lists the projects to which you have at least read access.",
+        "description": "Lists all projects to which you have been granted any project role.",
         "operationId": "bigquery.projects.list",
         "responses": {
           "200": {
@@ -717,7 +717,7 @@
     },
     "/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/insertAll": {
       "post": {
-        "description": "Streams data into BigQuery one record at a time without needing to run a load job.",
+        "description": "Streams data into BigQuery one record at a time without needing to run a load job. Requires the WRITER dataset role.",
         "operationId": "bigquery.tabledata.insertAll",
         "responses": {
           "200": {
@@ -789,7 +789,7 @@
     },
     "/projects/{projectId}/datasets/{datasetId}/tables/{tableId}/data": {
       "get": {
-        "description": "Retrieves table data from a specified set of rows.",
+        "description": "Retrieves table data from a specified set of rows. Requires the READER dataset role.",
         "operationId": "bigquery.tabledata.list",
         "responses": {
           "200": {
@@ -1123,7 +1123,7 @@
         ]
       },
       "get": {
-        "description": "Lists all tables in the specified dataset.",
+        "description": "Lists all tables in the specified dataset. Requires the READER dataset role.",
         "operationId": "bigquery.tables.list",
         "responses": {
           "200": {
@@ -2491,6 +2491,6 @@
     }
   },
   "externalDocs": {
-    "url": "https://developers.google.com/bigquery/docs/overview"
+    "url": "https://cloud.google.com/bigquery/"
   }
 }

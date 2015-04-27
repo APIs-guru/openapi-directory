@@ -4978,7 +4978,7 @@
         },
         "title": {
           "type": "string",
-          "description": "The localized strings for channel's title, read-only."
+          "description": "The localized strings for channel's title."
         }
       }
     },
@@ -5142,7 +5142,7 @@
       "type": "object",
       "description": "ChannelSection targeting setting.",
       "properties": {
-        "countrys": {
+        "countries": {
           "type": "array",
           "description": "The country the channel section is targeting.",
           "items": {
@@ -5169,6 +5169,10 @@
       "type": "object",
       "description": "Branding properties for the channel view.",
       "properties": {
+        "country": {
+          "type": "string",
+          "description": "The country of the channel."
+        },
         "defaultLanguage": {
           "type": "string"
         },
@@ -5229,6 +5233,10 @@
       "type": "object",
       "description": "Basic details about a channel, including title, description and thumbnails.",
       "properties": {
+        "country": {
+          "type": "string",
+          "description": "The country of the channel."
+        },
         "defaultLanguage": {
           "type": "string",
           "description": "The language of the channel's default title and description."
@@ -6997,6 +7005,10 @@
     "LiveBroadcastStatus": {
       "type": "object",
       "properties": {
+        "isDefaultBroadcast": {
+          "type": "boolean",
+          "description": "Whether or not this broadcast is the default broadcast"
+        },
         "lifeCycleStatus": {
           "type": "string",
           "description": "The broadcast's status. The status can be updated using the API's liveBroadcasts.transition method.",
@@ -7161,6 +7173,9 @@
       "type": "object",
       "description": "Brief description of the live stream status.",
       "properties": {
+        "isDefaultStream": {
+          "type": "boolean"
+        },
         "streamStatus": {
           "type": "string",
           "enum": [
@@ -8090,15 +8105,15 @@
           "description": "Additional comments regarding the abuse report."
         },
         "language": {
-          "$ref": "#/definitions/LanguageTag",
+          "type": "string",
           "description": "The language that the content was viewed in."
         },
         "reasonId": {
-          "$ref": "#/definitions/VideoAbuseReportReasonId",
+          "type": "string",
           "description": "The high-level, or primary, reason that the content is abusive. The value is an abuse report reason ID."
         },
         "secondaryReasonId": {
-          "$ref": "#/definitions/VideoAbuseReportReasonId",
+          "type": "string",
           "description": "The specific, or secondary, reason that this content is abusive (if available). The value is an abuse report reason ID that is a valid secondary reason for the primary reason."
         },
         "videoId": {

@@ -1188,15 +1188,9 @@
           {
             "name": "acknowledgeAbuse",
             "in": "query",
-            "description": "Whether the user is acknowledging the risk of downloading known malware or other abusive files. Ignored unless alt=media is specified.",
+            "description": "Whether the user is acknowledging the risk of downloading known malware or other abusive files.",
             "default": "false",
             "type": "boolean"
-          },
-          {
-            "name": "alt",
-            "in": "query",
-            "description": "Specifies the type of resource representation to return. The default is 'json' to return file metadata. Specifying 'media' will cause the file content to be returned.",
-            "type": "string"
           },
           {
             "name": "fileId",
@@ -1923,15 +1917,9 @@
           {
             "name": "acknowledgeAbuse",
             "in": "query",
-            "description": "Whether the user is acknowledging the risk of downloading known malware or other abusive files. Ignored unless alt=media is specified.",
+            "description": "Whether the user is acknowledging the risk of downloading known malware or other abusive files.",
             "default": "false",
             "type": "boolean"
-          },
-          {
-            "name": "alt",
-            "in": "query",
-            "description": "Specifies the type of resource representation to return. The default is 'json' to return file metadata. Specifying 'media' will cause the file content to be returned.",
-            "type": "string"
           },
           {
             "name": "fileId",

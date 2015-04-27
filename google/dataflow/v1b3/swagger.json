@@ -1,0 +1,1968 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Google Dataflow API",
+    "description": "Google Dataflow API.",
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "version": "v1b3"
+  },
+  "host": "dataflow.googleapis.com",
+  "basePath": "/v1b3/projects",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/{projectId}/jobs": {
+      "post": {
+        "description": "Creates a dataflow job.",
+        "operationId": "dataflow.projects.jobs.create",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "JOB_VIEW_ALL",
+              "JOB_VIEW_SUMMARY",
+              "JOB_VIEW_UNKNOWN"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "get": {
+        "description": "List the jobs of a project",
+        "operationId": "dataflow.projects.jobs.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ListJobsResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pageSize",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "JOB_VIEW_ALL",
+              "JOB_VIEW_SUMMARY",
+              "JOB_VIEW_UNKNOWN"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{projectId}/jobs/{jobId}": {
+      "get": {
+        "description": "Gets the state of the specified dataflow job.",
+        "operationId": "dataflow.projects.jobs.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "view",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "JOB_VIEW_ALL",
+              "JOB_VIEW_SUMMARY",
+              "JOB_VIEW_UNKNOWN"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "patch": {
+        "description": "Updates the state of an existing dataflow job. This method supports patch semantics.",
+        "operationId": "dataflow.projects.jobs.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "put": {
+        "description": "Updates the state of an existing dataflow job.",
+        "operationId": "dataflow.projects.jobs.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{projectId}/jobs/{jobId}/metrics": {
+      "get": {
+        "description": "Request the job status.",
+        "operationId": "dataflow.projects.jobs.getMetrics",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/JobMetrics"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{projectId}/jobs/{jobId}/messages": {
+      "get": {
+        "description": "Request the job status.",
+        "operationId": "dataflow.projects.jobs.messages.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ListJobMessagesResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "endTime",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "minimumImportance",
+            "in": "query",
+            "type": "string",
+            "enum": [
+              "JOB_MESSAGE_DEBUG",
+              "JOB_MESSAGE_DETAILED",
+              "JOB_MESSAGE_ERROR",
+              "JOB_MESSAGE_IMPORTANCE_UNKNOWN",
+              "JOB_MESSAGE_WARNING"
+            ]
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{projectId}/jobs/{jobId}/workItems:lease": {
+      "post": {
+        "description": "Leases a dataflow WorkItem to run.",
+        "operationId": "dataflow.projects.jobs.workItems.lease",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/LeaseWorkItemResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{projectId}/jobs/{jobId}/workItems:reportStatus": {
+      "post": {
+        "description": "Reports the status of dataflow WorkItems leased by a worker.",
+        "operationId": "dataflow.projects.jobs.workItems.reportStatus",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ReportWorkItemStatusResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/userinfo.email"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "ApproximateProgress": {
+      "type": "object",
+      "properties": {
+        "percentComplete": {
+          "type": "number",
+          "format": "float"
+        },
+        "position": {
+          "$ref": "#/definitions/Position"
+        },
+        "remainingTime": {
+          "type": "string"
+        }
+      }
+    },
+    "AutoscalingSettings": {
+      "type": "object",
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "enum": [
+            "AUTOSCALING_ALGORITHM_BASIC",
+            "AUTOSCALING_ALGORITHM_NONE",
+            "AUTOSCALING_ALGORITHM_UNKNOWN"
+          ]
+        },
+        "maxNumWorkers": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ComputationTopology": {
+      "type": "object",
+      "properties": {
+        "computationId": {
+          "type": "string"
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StreamLocation"
+          }
+        },
+        "keyRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyRangeLocation"
+          }
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StreamLocation"
+          }
+        }
+      }
+    },
+    "DataDiskAssignment": {
+      "type": "object",
+      "properties": {
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vmInstance": {
+          "type": "string"
+        }
+      }
+    },
+    "DerivedSource": {
+      "type": "object",
+      "properties": {
+        "derivationMode": {
+          "type": "string",
+          "enum": [
+            "SOURCE_DERIVATION_MODE_CHILD_OF_CURRENT",
+            "SOURCE_DERIVATION_MODE_INDEPENDENT",
+            "SOURCE_DERIVATION_MODE_SIBLING_OF_CURRENT",
+            "SOURCE_DERIVATION_MODE_UNKNOWN"
+          ]
+        },
+        "source": {
+          "$ref": "#/definitions/Source"
+        }
+      }
+    },
+    "Disk": {
+      "type": "object",
+      "properties": {
+        "diskType": {
+          "type": "string"
+        },
+        "mountPoint": {
+          "type": "string"
+        },
+        "sizeGb": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "DynamicSourceSplit": {
+      "type": "object",
+      "properties": {
+        "primary": {
+          "$ref": "#/definitions/DerivedSource"
+        },
+        "residual": {
+          "$ref": "#/definitions/DerivedSource"
+        }
+      }
+    },
+    "Environment": {
+      "type": "object",
+      "properties": {
+        "clusterManagerApiService": {
+          "type": "string"
+        },
+        "dataset": {
+          "type": "string"
+        },
+        "experiments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sdkPipelineOptions": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "tempStoragePrefix": {
+          "type": "string"
+        },
+        "userAgent": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "version": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "workerPools": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkerPool"
+          }
+        }
+      }
+    },
+    "FlattenInstruction": {
+      "type": "object",
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstructionInput"
+          }
+        }
+      }
+    },
+    "GoogleprotobufValue": {},
+    "InstructionInput": {
+      "type": "object",
+      "properties": {
+        "outputNum": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "producerInstructionIndex": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "InstructionOutput": {
+      "type": "object",
+      "properties": {
+        "codec": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Job": {
+      "type": "object",
+      "properties": {
+        "createTime": {
+          "type": "string"
+        },
+        "currentState": {
+          "type": "string",
+          "enum": [
+            "JOB_STATE_CANCELLED",
+            "JOB_STATE_DONE",
+            "JOB_STATE_FAILED",
+            "JOB_STATE_RUNNING",
+            "JOB_STATE_STOPPED",
+            "JOB_STATE_UNKNOWN"
+          ]
+        },
+        "currentStateTime": {
+          "type": "string"
+        },
+        "environment": {
+          "$ref": "#/definitions/Environment"
+        },
+        "executionInfo": {
+          "$ref": "#/definitions/JobExecutionInfo"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "projectId": {
+          "type": "string"
+        },
+        "requestedState": {
+          "type": "string",
+          "enum": [
+            "JOB_STATE_CANCELLED",
+            "JOB_STATE_DONE",
+            "JOB_STATE_FAILED",
+            "JOB_STATE_RUNNING",
+            "JOB_STATE_STOPPED",
+            "JOB_STATE_UNKNOWN"
+          ]
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Step"
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "JOB_TYPE_BATCH",
+            "JOB_TYPE_STREAMING",
+            "JOB_TYPE_UNKNOWN"
+          ]
+        }
+      }
+    },
+    "JobExecutionInfo": {
+      "type": "object",
+      "properties": {
+        "stages": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/JobExecutionStageInfo"
+          }
+        }
+      }
+    },
+    "JobExecutionStageInfo": {
+      "type": "object",
+      "properties": {
+        "stepName": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "JobMessage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "messageImportance": {
+          "type": "string",
+          "enum": [
+            "JOB_MESSAGE_DEBUG",
+            "JOB_MESSAGE_DETAILED",
+            "JOB_MESSAGE_ERROR",
+            "JOB_MESSAGE_IMPORTANCE_UNKNOWN",
+            "JOB_MESSAGE_WARNING"
+          ]
+        },
+        "messageText": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string"
+        }
+      }
+    },
+    "JobMetrics": {
+      "type": "object",
+      "properties": {
+        "metricTime": {
+          "type": "string"
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricUpdate"
+          }
+        }
+      }
+    },
+    "KeyRangeDataDiskAssignment": {
+      "type": "object",
+      "properties": {
+        "dataDisk": {
+          "type": "string"
+        },
+        "end": {
+          "type": "string"
+        },
+        "start": {
+          "type": "string"
+        }
+      }
+    },
+    "KeyRangeLocation": {
+      "type": "object",
+      "properties": {
+        "dataDisk": {
+          "type": "string"
+        },
+        "deliveryEndpoint": {
+          "type": "string"
+        },
+        "end": {
+          "type": "string"
+        },
+        "persistentDirectory": {
+          "type": "string"
+        },
+        "start": {
+          "type": "string"
+        }
+      }
+    },
+    "LeaseWorkItemRequest": {
+      "type": "object",
+      "properties": {
+        "currentWorkerTime": {
+          "type": "string"
+        },
+        "requestedLeaseDuration": {
+          "type": "string"
+        },
+        "workItemTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "workerCapabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "workerId": {
+          "type": "string"
+        }
+      }
+    },
+    "LeaseWorkItemResponse": {
+      "type": "object",
+      "properties": {
+        "workItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkItem"
+          }
+        }
+      }
+    },
+    "ListJobMessagesResponse": {
+      "type": "object",
+      "properties": {
+        "jobMessages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobMessage"
+          }
+        },
+        "nextPageToken": {
+          "type": "string"
+        }
+      }
+    },
+    "ListJobsResponse": {
+      "type": "object",
+      "properties": {
+        "jobs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Job"
+          }
+        },
+        "nextPageToken": {
+          "type": "string"
+        }
+      }
+    },
+    "MapTask": {
+      "type": "object",
+      "properties": {
+        "instructions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ParallelInstruction"
+          }
+        },
+        "stageName": {
+          "type": "string"
+        },
+        "systemName": {
+          "type": "string"
+        }
+      }
+    },
+    "MetricStructuredName": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "origin": {
+          "type": "string"
+        }
+      }
+    },
+    "MetricUpdate": {
+      "type": "object",
+      "properties": {
+        "cumulative": {
+          "type": "boolean"
+        },
+        "internal": {
+          "$ref": "#/definitions/GoogleprotobufValue"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "meanCount": {
+          "$ref": "#/definitions/GoogleprotobufValue"
+        },
+        "meanSum": {
+          "$ref": "#/definitions/GoogleprotobufValue"
+        },
+        "name": {
+          "$ref": "#/definitions/MetricStructuredName"
+        },
+        "scalar": {
+          "$ref": "#/definitions/GoogleprotobufValue"
+        },
+        "set": {
+          "$ref": "#/definitions/GoogleprotobufValue"
+        },
+        "updateTime": {
+          "type": "string"
+        }
+      }
+    },
+    "MountedDataDisk": {
+      "type": "object",
+      "properties": {
+        "dataDisk": {
+          "type": "string"
+        }
+      }
+    },
+    "MultiOutputInfo": {
+      "type": "object",
+      "properties": {
+        "tag": {
+          "type": "string"
+        }
+      }
+    },
+    "Package": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "ParDoInstruction": {
+      "type": "object",
+      "properties": {
+        "input": {
+          "$ref": "#/definitions/InstructionInput"
+        },
+        "multiOutputInfos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MultiOutputInfo"
+          }
+        },
+        "numOutputs": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sideInputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SideInputInfo"
+          }
+        },
+        "userFn": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "ParallelInstruction": {
+      "type": "object",
+      "properties": {
+        "flatten": {
+          "$ref": "#/definitions/FlattenInstruction"
+        },
+        "name": {
+          "type": "string"
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstructionOutput"
+          }
+        },
+        "parDo": {
+          "$ref": "#/definitions/ParDoInstruction"
+        },
+        "partialGroupByKey": {
+          "$ref": "#/definitions/PartialGroupByKeyInstruction"
+        },
+        "read": {
+          "$ref": "#/definitions/ReadInstruction"
+        },
+        "systemName": {
+          "type": "string"
+        },
+        "write": {
+          "$ref": "#/definitions/WriteInstruction"
+        }
+      }
+    },
+    "PartialGroupByKeyInstruction": {
+      "type": "object",
+      "properties": {
+        "input": {
+          "$ref": "#/definitions/InstructionInput"
+        },
+        "inputElementCodec": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "valueCombiningFn": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "Position": {
+      "type": "object",
+      "properties": {
+        "byteOffset": {
+          "type": "string",
+          "format": "int64"
+        },
+        "end": {
+          "type": "boolean"
+        },
+        "key": {
+          "type": "string"
+        },
+        "recordIndex": {
+          "type": "string",
+          "format": "int64"
+        },
+        "shufflePosition": {
+          "type": "string"
+        }
+      }
+    },
+    "PubsubLocation": {
+      "type": "object",
+      "properties": {
+        "dropLateData": {
+          "type": "boolean"
+        },
+        "idLabel": {
+          "type": "string"
+        },
+        "subscription": {
+          "type": "string"
+        },
+        "timestampLabel": {
+          "type": "string"
+        },
+        "topic": {
+          "type": "string"
+        },
+        "trackingSubscription": {
+          "type": "string"
+        }
+      }
+    },
+    "ReadInstruction": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/Source"
+        }
+      }
+    },
+    "ReportWorkItemStatusRequest": {
+      "type": "object",
+      "properties": {
+        "currentWorkerTime": {
+          "type": "string"
+        },
+        "workItemStatuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkItemStatus"
+          }
+        },
+        "workerId": {
+          "type": "string"
+        }
+      }
+    },
+    "ReportWorkItemStatusResponse": {
+      "type": "object",
+      "properties": {
+        "workItemServiceStates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkItemServiceState"
+          }
+        }
+      }
+    },
+    "SeqMapTask": {
+      "type": "object",
+      "properties": {
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SideInputInfo"
+          }
+        },
+        "name": {
+          "type": "string"
+        },
+        "outputInfos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SeqMapTaskOutputInfo"
+          }
+        },
+        "stageName": {
+          "type": "string"
+        },
+        "systemName": {
+          "type": "string"
+        },
+        "userFn": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "SeqMapTaskOutputInfo": {
+      "type": "object",
+      "properties": {
+        "sink": {
+          "$ref": "#/definitions/Sink"
+        },
+        "tag": {
+          "type": "string"
+        }
+      }
+    },
+    "ShellTask": {
+      "type": "object",
+      "properties": {
+        "command": {
+          "type": "string"
+        },
+        "exitCode": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SideInputInfo": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Source"
+          }
+        },
+        "tag": {
+          "type": "string"
+        }
+      }
+    },
+    "Sink": {
+      "type": "object",
+      "properties": {
+        "codec": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "spec": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "Source": {
+      "type": "object",
+      "properties": {
+        "baseSpecs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": {}
+          }
+        },
+        "codec": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "doesNotNeedSplitting": {
+          "type": "boolean"
+        },
+        "metadata": {
+          "$ref": "#/definitions/SourceMetadata"
+        },
+        "spec": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "SourceFork": {
+      "type": "object",
+      "properties": {
+        "primary": {
+          "$ref": "#/definitions/SourceSplitShard"
+        },
+        "primarySource": {
+          "$ref": "#/definitions/DerivedSource"
+        },
+        "residual": {
+          "$ref": "#/definitions/SourceSplitShard"
+        },
+        "residualSource": {
+          "$ref": "#/definitions/DerivedSource"
+        }
+      }
+    },
+    "SourceGetMetadataRequest": {
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/Source"
+        }
+      }
+    },
+    "SourceGetMetadataResponse": {
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "$ref": "#/definitions/SourceMetadata"
+        }
+      }
+    },
+    "SourceMetadata": {
+      "type": "object",
+      "properties": {
+        "estimatedSizeBytes": {
+          "type": "string",
+          "format": "int64"
+        },
+        "infinite": {
+          "type": "boolean"
+        },
+        "producesSortedKeys": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SourceOperationRequest": {
+      "type": "object",
+      "properties": {
+        "getMetadata": {
+          "$ref": "#/definitions/SourceGetMetadataRequest"
+        },
+        "split": {
+          "$ref": "#/definitions/SourceSplitRequest"
+        }
+      }
+    },
+    "SourceOperationResponse": {
+      "type": "object",
+      "properties": {
+        "getMetadata": {
+          "$ref": "#/definitions/SourceGetMetadataResponse"
+        },
+        "split": {
+          "$ref": "#/definitions/SourceSplitResponse"
+        }
+      }
+    },
+    "SourceSplitOptions": {
+      "type": "object",
+      "properties": {
+        "desiredBundleSizeBytes": {
+          "type": "string",
+          "format": "int64"
+        },
+        "desiredShardSizeBytes": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "SourceSplitRequest": {
+      "type": "object",
+      "properties": {
+        "options": {
+          "$ref": "#/definitions/SourceSplitOptions"
+        },
+        "source": {
+          "$ref": "#/definitions/Source"
+        }
+      }
+    },
+    "SourceSplitResponse": {
+      "type": "object",
+      "properties": {
+        "bundles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DerivedSource"
+          }
+        },
+        "outcome": {
+          "type": "string",
+          "enum": [
+            "SOURCE_SPLIT_OUTCOME_SPLITTING_HAPPENED",
+            "SOURCE_SPLIT_OUTCOME_UNKNOWN",
+            "SOURCE_SPLIT_OUTCOME_USE_CURRENT"
+          ]
+        },
+        "shards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceSplitShard"
+          }
+        }
+      }
+    },
+    "SourceSplitShard": {
+      "type": "object",
+      "properties": {
+        "derivationMode": {
+          "type": "string",
+          "enum": [
+            "SOURCE_DERIVATION_MODE_CHILD_OF_CURRENT",
+            "SOURCE_DERIVATION_MODE_INDEPENDENT",
+            "SOURCE_DERIVATION_MODE_SIBLING_OF_CURRENT",
+            "SOURCE_DERIVATION_MODE_UNKNOWN"
+          ]
+        },
+        "source": {
+          "$ref": "#/definitions/Source"
+        }
+      }
+    },
+    "Status": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": {}
+          }
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "Step": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "StreamLocation": {
+      "type": "object",
+      "properties": {
+        "pubsubLocation": {
+          "$ref": "#/definitions/PubsubLocation"
+        },
+        "sideInputLocation": {
+          "$ref": "#/definitions/StreamingSideInputLocation"
+        },
+        "streamingStageLocation": {
+          "$ref": "#/definitions/StreamingStageLocation"
+        }
+      }
+    },
+    "StreamingComputationRanges": {
+      "type": "object",
+      "properties": {
+        "computationId": {
+          "type": "string"
+        },
+        "rangeAssignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyRangeDataDiskAssignment"
+          }
+        }
+      }
+    },
+    "StreamingComputationTask": {
+      "type": "object",
+      "properties": {
+        "computationRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StreamingComputationRanges"
+          }
+        },
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MountedDataDisk"
+          }
+        },
+        "taskType": {
+          "type": "string",
+          "enum": [
+            "STREAMING_COMPUTATION_TASK_START",
+            "STREAMING_COMPUTATION_TASK_STOP",
+            "STREAMING_COMPUTATION_TASK_UNKNOWN"
+          ]
+        }
+      }
+    },
+    "StreamingSetupTask": {
+      "type": "object",
+      "properties": {
+        "receiveWorkPort": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "streamingComputationTopology": {
+          "$ref": "#/definitions/TopologyConfig"
+        },
+        "workerHarnessPort": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "StreamingSideInputLocation": {
+      "type": "object",
+      "properties": {
+        "tag": {
+          "type": "string"
+        }
+      }
+    },
+    "StreamingStageLocation": {
+      "type": "object",
+      "properties": {
+        "streamId": {
+          "type": "string"
+        }
+      }
+    },
+    "TaskRunnerSettings": {
+      "type": "object",
+      "properties": {
+        "alsologtostderr": {
+          "type": "boolean"
+        },
+        "baseTaskDir": {
+          "type": "string"
+        },
+        "baseUrl": {
+          "type": "string"
+        },
+        "commandlinesFileName": {
+          "type": "string"
+        },
+        "continueOnException": {
+          "type": "boolean"
+        },
+        "dataflowApiVersion": {
+          "type": "string"
+        },
+        "harnessCommand": {
+          "type": "string"
+        },
+        "languageHint": {
+          "type": "string"
+        },
+        "logDir": {
+          "type": "string"
+        },
+        "logToSerialconsole": {
+          "type": "boolean"
+        },
+        "logUploadLocation": {
+          "type": "string"
+        },
+        "oauthScopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "parallelWorkerSettings": {
+          "$ref": "#/definitions/WorkerSettings"
+        },
+        "streamingWorkerMainClass": {
+          "type": "string"
+        },
+        "taskGroup": {
+          "type": "string"
+        },
+        "taskUser": {
+          "type": "string"
+        },
+        "tempStoragePrefix": {
+          "type": "string"
+        },
+        "vmId": {
+          "type": "string"
+        },
+        "workflowFileName": {
+          "type": "string"
+        }
+      }
+    },
+    "TopologyConfig": {
+      "type": "object",
+      "properties": {
+        "computations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComputationTopology"
+          }
+        },
+        "dataDiskAssignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataDiskAssignment"
+          }
+        }
+      }
+    },
+    "WorkItem": {
+      "type": "object",
+      "properties": {
+        "configuration": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "initialReportIndex": {
+          "type": "string",
+          "format": "int64"
+        },
+        "jobId": {
+          "type": "string"
+        },
+        "leaseExpireTime": {
+          "type": "string"
+        },
+        "mapTask": {
+          "$ref": "#/definitions/MapTask"
+        },
+        "packages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Package"
+          }
+        },
+        "projectId": {
+          "type": "string"
+        },
+        "reportStatusInterval": {
+          "type": "string"
+        },
+        "seqMapTask": {
+          "$ref": "#/definitions/SeqMapTask"
+        },
+        "shellTask": {
+          "$ref": "#/definitions/ShellTask"
+        },
+        "sourceOperationTask": {
+          "$ref": "#/definitions/SourceOperationRequest"
+        },
+        "streamingComputationTask": {
+          "$ref": "#/definitions/StreamingComputationTask"
+        },
+        "streamingSetupTask": {
+          "$ref": "#/definitions/StreamingSetupTask"
+        }
+      }
+    },
+    "WorkItemServiceState": {
+      "type": "object",
+      "properties": {
+        "harnessData": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "leaseExpireTime": {
+          "type": "string"
+        },
+        "nextReportIndex": {
+          "type": "string",
+          "format": "int64"
+        },
+        "reportStatusInterval": {
+          "type": "string"
+        },
+        "suggestedStopPoint": {
+          "$ref": "#/definitions/ApproximateProgress"
+        },
+        "suggestedStopPosition": {
+          "$ref": "#/definitions/Position"
+        }
+      }
+    },
+    "WorkItemStatus": {
+      "type": "object",
+      "properties": {
+        "completed": {
+          "type": "boolean"
+        },
+        "dynamicSourceSplit": {
+          "$ref": "#/definitions/DynamicSourceSplit"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Status"
+          }
+        },
+        "metricUpdates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricUpdate"
+          }
+        },
+        "progress": {
+          "$ref": "#/definitions/ApproximateProgress"
+        },
+        "reportIndex": {
+          "type": "string",
+          "format": "int64"
+        },
+        "requestedLeaseDuration": {
+          "type": "string"
+        },
+        "sourceFork": {
+          "$ref": "#/definitions/SourceFork"
+        },
+        "sourceOperationResponse": {
+          "$ref": "#/definitions/SourceOperationResponse"
+        },
+        "stopPosition": {
+          "$ref": "#/definitions/Position"
+        },
+        "workItemId": {
+          "type": "string"
+        }
+      }
+    },
+    "WorkerPool": {
+      "type": "object",
+      "properties": {
+        "autoscalingSettings": {
+          "$ref": "#/definitions/AutoscalingSettings"
+        },
+        "dataDisks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          }
+        },
+        "defaultPackageSet": {
+          "type": "string",
+          "enum": [
+            "DEFAULT_PACKAGE_SET_JAVA",
+            "DEFAULT_PACKAGE_SET_NONE",
+            "DEFAULT_PACKAGE_SET_PYTHON",
+            "DEFAULT_PACKAGE_SET_UNKNOWN"
+          ]
+        },
+        "diskSizeGb": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "diskSourceImage": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "machineType": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "numWorkers": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "onHostMaintenance": {
+          "type": "string"
+        },
+        "packages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Package"
+          }
+        },
+        "poolArgs": {
+          "type": "object",
+          "additionalProperties": {}
+        },
+        "taskrunnerSettings": {
+          "$ref": "#/definitions/TaskRunnerSettings"
+        },
+        "teardownPolicy": {
+          "type": "string",
+          "enum": [
+            "TEARDOWN_ALWAYS",
+            "TEARDOWN_NEVER",
+            "TEARDOWN_ON_SUCCESS",
+            "TEARDOWN_POLICY_UNKNOWN"
+          ]
+        },
+        "zone": {
+          "type": "string"
+        }
+      }
+    },
+    "WorkerSettings": {
+      "type": "object",
+      "properties": {
+        "baseUrl": {
+          "type": "string"
+        },
+        "reportingEnabled": {
+          "type": "boolean"
+        },
+        "servicePath": {
+          "type": "string"
+        },
+        "shuffleServicePath": {
+          "type": "string"
+        },
+        "tempStoragePrefix": {
+          "type": "string"
+        },
+        "workerId": {
+          "type": "string"
+        }
+      }
+    },
+    "WriteInstruction": {
+      "type": "object",
+      "properties": {
+        "input": {
+          "$ref": "#/definitions/InstructionInput"
+        },
+        "sink": {
+          "$ref": "#/definitions/Sink"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "alt": {
+      "name": "alt",
+      "in": "query",
+      "description": "Data format for the response.",
+      "default": "json",
+      "type": "string",
+      "enum": [
+        "json"
+      ]
+    },
+    "fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Selector specifying which fields to include in a partial response.",
+      "type": "string"
+    },
+    "key": {
+      "name": "key",
+      "in": "query",
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "type": "string"
+    },
+    "oauth_token": {
+      "name": "oauth_token",
+      "in": "query",
+      "description": "OAuth 2.0 token for the current user.",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "name": "prettyPrint",
+      "in": "query",
+      "description": "Returns response with indentations and line breaks.",
+      "default": "true",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "name": "quotaUser",
+      "in": "query",
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "type": "string"
+    },
+    "userIp": {
+      "name": "userIp",
+      "in": "query",
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "Oauth2": {
+      "type": "oauth2",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "scopes": {
+        "https://www.googleapis.com/auth/cloud-platform": "View and manage your data across Google Cloud Platform services",
+        "https://www.googleapis.com/auth/userinfo.email": "View your email address"
+      }
+    }
+  }
+}
