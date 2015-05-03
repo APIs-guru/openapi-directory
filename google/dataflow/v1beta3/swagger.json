@@ -35,6 +35,11 @@
             "type": "string"
           },
           {
+            "name": "replaceJobId",
+            "in": "query",
+            "type": "string"
+          },
+          {
             "name": "view",
             "in": "query",
             "type": "string",
@@ -1821,6 +1826,9 @@
           "format": "int32"
         },
         "diskSourceImage": {
+          "type": "string"
+        },
+        "diskType": {
           "type": "string"
         },
         "kind": {

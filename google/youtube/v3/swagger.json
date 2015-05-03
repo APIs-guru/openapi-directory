@@ -8145,14 +8145,6 @@
         }
       }
     },
-    "VideoAbuseReportReasonId": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "string"
-        }
-      }
-    },
     "VideoAbuseReportReasonListResponse": {
       "type": "object",
       "properties": {
@@ -8203,7 +8195,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "$ref": "#/definitions/VideoAbuseReportReasonId",
+          "type": "string",
           "description": "The ID of this abuse report secondary reason."
         },
         "label": {

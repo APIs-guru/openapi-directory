@@ -681,6 +681,10 @@
           "description": "DS campaign ID.",
           "format": "int64"
         },
+        "channel": {
+          "type": "string",
+          "description": "Channel of the product: local or online."
+        },
         "clickId": {
           "type": "string",
           "description": "DS click ID for the conversion."
@@ -737,9 +741,31 @@
           "description": "DS engine account ID.",
           "format": "int64"
         },
+        "feedId": {
+          "type": "string",
+          "description": "DS inventory feed ID.",
+          "format": "int64"
+        },
         "floodlightOrderId": {
           "type": "string",
           "description": "The advertiser-provided order id for the conversion."
+        },
+        "productCountry": {
+          "type": "string",
+          "description": "ISO 3166 code of the product country."
+        },
+        "productGroupId": {
+          "type": "string",
+          "description": "DS product group ID.",
+          "format": "int64"
+        },
+        "productId": {
+          "type": "string",
+          "description": "The product ID (SKU)."
+        },
+        "productLanguage": {
+          "type": "string",
+          "description": "ISO 639 code of the product language."
         },
         "quantityMillis": {
           "type": "string",
@@ -767,6 +793,10 @@
         "state": {
           "type": "string",
           "description": "The state of the conversion, that is, either ACTIVE or REMOVED. Note: state DELETED is deprecated."
+        },
+        "storeId": {
+          "type": "string",
+          "description": "The store id for which the product was advertised, when the channel is \"local\"."
         },
         "type": {
           "type": "string",

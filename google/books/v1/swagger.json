@@ -2546,6 +2546,16 @@
             "type": "string"
           },
           {
+            "name": "maxAllowedMaturityRating",
+            "in": "query",
+            "description": "The maximum allowed maturity rating of returned volumes. Books with a higher maturity rating are filtered out.",
+            "type": "string",
+            "enum": [
+              "mature",
+              "not-mature"
+            ]
+          },
+          {
             "name": "pageSize",
             "in": "query",
             "description": "Number of maximum results per page to be included in the response.",
@@ -3137,6 +3147,16 @@
             "type": "string"
           },
           {
+            "name": "maxAllowedMaturityRating",
+            "in": "query",
+            "description": "The maximum allowed maturity rating of returned recommendations. Books with a higher maturity rating are filtered out.",
+            "type": "string",
+            "enum": [
+              "mature",
+              "not-mature"
+            ]
+          },
+          {
             "name": "source",
             "in": "query",
             "description": "String to identify the originator of this request.",
@@ -3313,6 +3333,16 @@
             "in": "query",
             "description": "ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'. Used for generating recommendations.",
             "type": "string"
+          },
+          {
+            "name": "maxAllowedMaturityRating",
+            "in": "query",
+            "description": "The maximum allowed maturity rating of returned recommendations. Books with a higher maturity rating are filtered out.",
+            "type": "string",
+            "enum": [
+              "mature",
+              "not-mature"
+            ]
           },
           {
             "name": "source",
@@ -5054,6 +5084,10 @@
           "type": "object",
           "description": "General volume information.",
           "properties": {
+            "allowAnonLogging": {
+              "type": "boolean",
+              "description": "Whether anonymous logging should be allowed."
+            },
             "authors": {
               "type": "array",
               "description": "The names of the authors and/or editors for this volume. (In LITE projection)",

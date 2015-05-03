@@ -2819,6 +2819,10 @@
           "description": "The ID of the backup run to restore from.",
           "format": "int64"
         },
+        "instanceId": {
+          "type": "string",
+          "description": "The ID of the instance that the backup was taken from."
+        },
         "kind": {
           "type": "string",
           "description": "This is always sql#restoreBackupContext.",

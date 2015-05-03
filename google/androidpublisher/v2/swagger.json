@@ -2272,6 +2272,76 @@
         }
       ]
     },
+    "/{packageName}/entitlements": {
+      "get": {
+        "description": "Lists the user's current inapp item or subscription entitlements",
+        "operationId": "androidpublisher.entitlements.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/EntitlementsListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "maxResults",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "packageName",
+            "in": "path",
+            "description": "The package name of the application the inapp product was sold in (for example, 'com.some.thing').",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "productId",
+            "in": "query",
+            "description": "The product id of the inapp product (for example, 'sku1'). This can be used to restrict the result set.",
+            "type": "string"
+          },
+          {
+            "name": "startIndex",
+            "in": "query",
+            "type": "integer"
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "entitlements"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/inappproducts/batch": {
       "post": {
         "operationId": "androidpublisher.inappproducts.batch",
@@ -3143,6 +3213,46 @@
         "id": {
           "type": "string",
           "description": "The ID of the edit that can be used in subsequent API calls."
+        }
+      }
+    },
+    "Entitlement": {
+      "type": "object",
+      "description": "An Entitlement resource indicates a user's current entitlement to an inapp item or subscription.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "This kind represents an entitlement object in the androidpublisher service.",
+          "default": "androidpublisher#entitlement"
+        },
+        "productId": {
+          "type": "string",
+          "description": "The SKU of the product."
+        },
+        "productType": {
+          "type": "string",
+          "description": "The type of the inapp product. Possible values are:  \n- In-app item: \"inapp\" \n- Subscription: \"subs\""
+        },
+        "token": {
+          "type": "string",
+          "description": "The token which can be verified using the subscriptions or products API."
+        }
+      }
+    },
+    "EntitlementsListResponse": {
+      "type": "object",
+      "properties": {
+        "pageInfo": {
+          "$ref": "#/definitions/PageInfo"
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Entitlement"
+          }
+        },
+        "tokenPagination": {
+          "$ref": "#/definitions/TokenPagination"
         }
       }
     },
