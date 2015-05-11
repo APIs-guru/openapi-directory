@@ -1473,7 +1473,7 @@
     },
     "/b/{sourceBucket}/o/{sourceObject}/copyTo/b/{destinationBucket}/o/{destinationObject}": {
       "post": {
-        "description": "Copies an object to a specified location. Optionally overrides metadata.",
+        "description": "Copies a source object to a destination object. Optionally overrides metadata.",
         "operationId": "storage.objects.copy",
         "responses": {
           "200": {
@@ -2277,7 +2277,7 @@
           {
             "name": "maxBytesRewrittenPerCall",
             "in": "query",
-            "description": "The maximum number of bytes that will be rewritten per Rewrite request. Most callers shouldn't need to specify this parameter - it is primarily in place to support testing. If specified the value must be an integral multiple of 1 MiB (1048576). Also, this only applies to requests where the source and destination span locations and/or storage classes. Finally, this value must not change across Rewrite calls else you'll get an error that the rewrite token is invalid.",
+            "description": "The maximum number of bytes that will be rewritten per rewrite request. Most callers shouldn't need to specify this parameter - it is primarily in place to support testing. If specified the value must be an integral multiple of 1 MiB (1048576). Also, this only applies to requests where the source and destination span locations and/or storage classes. Finally, this value must not change across rewrite calls else you'll get an error that the rewriteToken is invalid.",
             "type": "string"
           },
           {
@@ -2293,7 +2293,7 @@
           {
             "name": "rewriteToken",
             "in": "query",
-            "description": "Include this field (from the previous Rewrite response) on each Rewrite request after the first one, until the Rewrite response 'done' flag is true. Calls that provide a rewriteToken can omit all other request fields, but if included those fields must match the values provided in the first rewrite request.",
+            "description": "Include this field (from the previous rewrite response) on each rewrite request after the first one, until the rewrite response 'done' flag is true. Calls that provide a rewriteToken can omit all other request fields, but if included those fields must match the values provided in the first rewrite request.",
             "type": "string"
           },
           {
@@ -3097,10 +3097,11 @@
     },
     "RewriteResponse": {
       "type": "object",
-      "description": "A Rewrite response.",
+      "description": "A rewrite response.",
       "properties": {
         "done": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "true if the copy is finished; otherwise, false if the copy is in progress. This property is always present in the response."
         },
         "kind": {
           "type": "string",
@@ -3109,16 +3110,20 @@
         },
         "objectSize": {
           "type": "string",
+          "description": "The total size of the object being copied in bytes. This property is always present in the response.",
           "format": "uint64"
         },
         "resource": {
-          "$ref": "#/definitions/Object"
+          "$ref": "#/definitions/Object",
+          "description": "A resource containing the metadata for the copied-to object. This property is present in the response only when copying completes."
         },
         "rewriteToken": {
-          "type": "string"
+          "type": "string",
+          "description": "A token to use in subsequent requests to continue copying data. This token is present in the response only when there is more data to copy."
         },
         "totalBytesRewritten": {
           "type": "string",
+          "description": "The total bytes written so far, which can be used to provide a waiting user with a progress indicator. This property is always present in the response.",
           "format": "uint64"
         }
       }

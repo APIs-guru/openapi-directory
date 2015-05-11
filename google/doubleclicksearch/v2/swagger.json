@@ -731,6 +731,10 @@
             "$ref": "#/definitions/CustomMetric"
           }
         },
+        "deviceType": {
+          "type": "string",
+          "description": "The type of device on which the conversion occurred. Valid values are \"DESKTOP\", \"TABLET\", \"HIGH_END_MOBILE\", \"OTHER_DEVICE\"."
+        },
         "dsConversionId": {
           "type": "string",
           "description": "DS conversion ID.",

@@ -1305,6 +1305,10 @@
           "description": "[Output-only] The date when this dataset or any of its tables was last modified, in milliseconds since the epoch.",
           "format": "int64"
         },
+        "location": {
+          "type": "string",
+          "description": "[Experimental] The location where the data resides. If not present, the data will be stored in the US."
+        },
         "selfLink": {
           "type": "string",
           "description": "[Output-only] A URL that can be used to access the resource again. You can use this URL in Get or Update requests to the resource."

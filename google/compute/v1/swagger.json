@@ -3346,7 +3346,7 @@
     },
     "/{project}/global/instanceTemplates/{instanceTemplate}": {
       "delete": {
-        "description": "Deletes the specified instance template resource.",
+        "description": "Deletes the specified instance template.",
         "operationId": "compute.instanceTemplates.delete",
         "responses": {
           "200": {
@@ -3360,14 +3360,14 @@
           {
             "name": "instanceTemplate",
             "in": "path",
-            "description": "Name of the instance template resource to delete.",
+            "description": "The name of the instance template to delete.",
             "required": true,
             "type": "string"
           },
           {
             "name": "project",
             "in": "path",
-            "description": "Name of the project scoping this request.",
+            "description": "The project ID for this request.",
             "required": true,
             "type": "string"
           }
@@ -3399,14 +3399,14 @@
           {
             "name": "instanceTemplate",
             "in": "path",
-            "description": "Name of the instance template resource to return.",
+            "description": "The name of the instance template.",
             "required": true,
             "type": "string"
           },
           {
             "name": "project",
             "in": "path",
-            "description": "Name of the project scoping this request.",
+            "description": "The project ID for this request.",
             "required": true,
             "type": "string"
           }
@@ -3450,7 +3450,7 @@
     },
     "/{project}/global/instanceTemplates": {
       "post": {
-        "description": "Creates an instance template resource in the specified project using the data included in the request.",
+        "description": "Creates an instance template in the specified project using the data that is included in the request.",
         "operationId": "compute.instanceTemplates.insert",
         "responses": {
           "200": {
@@ -3464,7 +3464,7 @@
           {
             "name": "project",
             "in": "path",
-            "description": "Name of the project scoping this request.",
+            "description": "The project ID for this request.",
             "required": true,
             "type": "string"
           }
@@ -3482,7 +3482,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves the list of instance template resources contained within the specified project.",
+        "description": "Retrieves a list of instance templates that are contained within the specified project and zone.",
         "operationId": "compute.instanceTemplates.list",
         "responses": {
           "200": {
@@ -3517,7 +3517,7 @@
           {
             "name": "project",
             "in": "path",
-            "description": "Name of the project scoping this request.",
+            "description": "The project ID for this request.",
             "required": true,
             "type": "string"
           }
@@ -10642,48 +10642,48 @@
       "properties": {
         "canIpForward": {
           "type": "boolean",
-          "description": "Allows instances created based on this template to send packets with source IP addresses other than their own and receive packets with destination IP addresses other than their own. If these instances will be used as an IP gateway or it will be set as the next-hop in a Route resource, say true. If unsure, leave this set to false."
+          "description": "A boolean that specifies if instances created from this template can send packets with source IP addresses other than their own or receive packets with destination IP addresses other than their own. If you use these instances as an IP gateway or as the next-hop in a Route resource, specify true. Otherwise, specify false."
         },
         "description": {
           "type": "string",
-          "description": "An optional textual description for the instances created based on the instance template resource; provided by the client when the template is created."
+          "description": "An optional text description for the instances that are created from this instance template."
         },
         "disks": {
           "type": "array",
-          "description": "Array of disks associated with instance created based on this template.",
+          "description": "An array of disks that are associated with the instances that are created from this template.",
           "items": {
             "$ref": "#/definitions/AttachedDisk"
           }
         },
         "machineType": {
           "type": "string",
-          "description": "Name of the machine type resource describing which machine type to use to host the instances created based on this template; provided by the client when the instance template is created."
+          "description": "The machine type to use for instances that are created from this template."
         },
         "metadata": {
           "$ref": "#/definitions/Metadata",
-          "description": "Metadata key/value pairs assigned to instances created based on this template. Consists of custom metadata or predefined keys; see Instance documentation for more information."
+          "description": "The metadata key/value pairs to assign to instances that are created from this template. These pairs can consist of custom metadata or predefined keys. See Project and instance metadata for more information."
         },
         "networkInterfaces": {
           "type": "array",
-          "description": "Array of configurations for this interface. This specifies how this interface is configured to interact with other network services, such as connecting to the internet. Currently, ONE_TO_ONE_NAT is the only access config supported. If there are no accessConfigs specified, then this instances created based based on this template will have no external internet access.",
+          "description": "An array of network access configurations for this interface. This specifies how this interface is configured to interact with other network services, such as connecting to the internet. Currently, ONE_TO_ONE_NAT is the only supported access configuration. If you do not specify any access configurations, the instances that are created from this template will have no external internet access.",
           "items": {
             "$ref": "#/definitions/NetworkInterface"
           }
         },
         "scheduling": {
           "$ref": "#/definitions/Scheduling",
-          "description": "Scheduling options for the instances created based on this template."
+          "description": "A list of scheduling options for the instances that are created from this template."
         },
         "serviceAccounts": {
           "type": "array",
-          "description": "A list of service accounts each with specified scopes, for which access tokens are to be made available to the instances created based on this template, through metadata queries.",
+          "description": "A list of service accounts with specified scopes. Access tokens for these service accounts are available to the instances that are created from this template. Use metadata queries to obtain the access tokens for these instances.",
           "items": {
             "$ref": "#/definitions/ServiceAccount"
           }
         },
         "tags": {
           "$ref": "#/definitions/Tags",
-          "description": "A list of tags to be applied to the instances created based on this template used to identify valid sources or targets for network firewalls. Provided by the client on instance creation. The tags can be later modified by the setTags method. Each tag within the list must comply with RFC1035."
+          "description": "A list of tags to apply to the instances that are created from this template. The tags identify valid sources or targets for network firewalls. The setTags method can modify this list of tags. Each tag within the list must comply with RFC1035."
         }
       }
     },
@@ -10701,44 +10701,44 @@
       "properties": {
         "creationTimestamp": {
           "type": "string",
-          "description": "Creation timestamp in RFC3339 text format (output only)."
+          "description": "[Output Only] The creation timestamp for this instance template in RFC3339 text format."
         },
         "description": {
           "type": "string",
-          "description": "An optional textual description of the instance template resource; provided by the client when the resource is created."
+          "description": "An optional text description for the instance template."
         },
         "id": {
           "type": "string",
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] A unique identifier for this instance template. The server defines this identifier.",
           "format": "uint64"
         },
         "kind": {
           "type": "string",
-          "description": "Type of the resource.",
+          "description": "[Output Only] The resource type, which is always compute#instanceTemplate for instance templates.",
           "default": "compute#instanceTemplate"
         },
         "name": {
           "type": "string",
-          "description": "Name of the instance template resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035",
+          "description": "The name of the instance template. The name must be 1-63 characters long, and comply with RFC1035.",
           "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "properties": {
           "$ref": "#/definitions/InstanceProperties",
-          "description": "The instance properties portion of this instance template resource."
+          "description": "The instance properties for the instance template resource."
         },
         "selfLink": {
           "type": "string",
-          "description": "Server defined URL for the resource (output only)."
+          "description": "[Output Only] The URL for this instance template. The server defines this URL."
         }
       }
     },
     "InstanceTemplateList": {
       "type": "object",
-      "description": "Contains a list of instance template resources.",
+      "description": "A list of instance templates.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the resource; defined by the server (output only)."
+          "description": "[Output Only] A unique identifier for this instance template. The server defines this identifier."
         },
         "items": {
           "type": "array",
@@ -10749,16 +10749,16 @@
         },
         "kind": {
           "type": "string",
-          "description": "Type of resource.",
+          "description": "[Output Only] The resource type, which is always compute#instanceTemplatesListResponse for instance template lists.",
           "default": "compute#instanceTemplateList"
         },
         "nextPageToken": {
           "type": "string",
-          "description": "A token used to continue a truncated list request (output only)."
+          "description": "[Output Only] A token that is used to continue a truncated list request."
         },
         "selfLink": {
           "type": "string",
-          "description": "Server defined URL for this resource (output only)."
+          "description": "[Output Only] The URL for this instance template list. The server defines this URL."
         }
       }
     },
@@ -11864,6 +11864,10 @@
             "MIGRATE",
             "TERMINATE"
           ]
+        },
+        "preemptible": {
+          "type": "boolean",
+          "description": "Whether the Instance is preemptible."
         }
       }
     },

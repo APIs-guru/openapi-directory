@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Google Play MDM API",
+    "title": "Google Play EMM API",
     "description": "Allows MDMs/EMMs and enterprises to manage the deployment of apps to Android for Work users.",
     "contact": {
       "name": "Google",
@@ -2572,6 +2572,10 @@
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"androidenterprise#device\".",
           "default": "androidenterprise#device"
+        },
+        "managementType": {
+          "type": "string",
+          "description": "The mechanism by which this device is managed by the MDM. \"managedDevice\" means that the MDM's app is a device owner. \"managedProfile\" means that the MDM's app is the profile owner (and there is a separate personal profile which is not managed). \"containerApp\" means that the MDM's app is managing the Android for Work container app on the device."
         }
       }
     },
@@ -2859,6 +2863,10 @@
         "productId": {
           "type": "string",
           "description": "A string of the form \"app:\n\" - e.g. \"app:com.google.android.gm\" represents the GMail app."
+        },
+        "requiresContainerApp": {
+          "type": "boolean",
+          "description": "Whether this app can only be installed on devices using the Android for Work container app."
         },
         "title": {
           "type": "string",

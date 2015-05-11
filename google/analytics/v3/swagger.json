@@ -5817,6 +5817,11 @@
               "type": "string",
               "description": "Field A."
             },
+            "fieldAIndex": {
+              "type": "integer",
+              "description": "The Index of the custom dimension. Required if field is a CUSTOM_DIMENSION.",
+              "format": "int32"
+            },
             "fieldARequired": {
               "type": "boolean",
               "description": "Indicates if field A is required to match."
@@ -5824,6 +5829,11 @@
             "fieldB": {
               "type": "string",
               "description": "Field B."
+            },
+            "fieldBIndex": {
+              "type": "integer",
+              "description": "The Index of the custom dimension. Required if field is a CUSTOM_DIMENSION.",
+              "format": "int32"
             },
             "fieldBRequired": {
               "type": "boolean",
@@ -5836,6 +5846,11 @@
             "outputToField": {
               "type": "string",
               "description": "Output field."
+            },
+            "outputToFieldIndex": {
+              "type": "integer",
+              "description": "The Index of the custom dimension. Required if field is a CUSTOM_DIMENSION.",
+              "format": "int32"
             },
             "overrideOutputField": {
               "type": "boolean",
@@ -5874,6 +5889,11 @@
             "field": {
               "type": "string",
               "description": "Field to use in the filter."
+            },
+            "fieldIndex": {
+              "type": "integer",
+              "description": "The Index of the custom dimension. Required if field is a CUSTOM_DIMENSION.",
+              "format": "int32"
             }
           }
         },
@@ -5908,6 +5928,11 @@
               "type": "string",
               "description": "Field to use in the filter."
             },
+            "fieldIndex": {
+              "type": "integer",
+              "description": "The Index of the custom dimension. Required if field is a CUSTOM_DIMENSION.",
+              "format": "int32"
+            },
             "replaceString": {
               "type": "string",
               "description": "Term to replace the search term with."
@@ -5940,6 +5965,11 @@
             "field": {
               "type": "string",
               "description": "Field to use in the filter."
+            },
+            "fieldIndex": {
+              "type": "integer",
+              "description": "The Index of the custom dimension. Required if field is a CUSTOM_DIMENSION.",
+              "format": "int32"
             }
           }
         }
@@ -5959,7 +5989,12 @@
         },
         "field": {
           "type": "string",
-          "description": "Field to filter. Possible values:  \n- Content and Traffic  \n- PAGE_REQUEST_URI, \n- PAGE_HOSTNAME, \n- PAGE_TITLE, \n- REFERRAL, \n- COST_DATA_URI (Campaign target URL), \n- HIT_TYPE, \n- INTERNAL_SEARCH_TERM, \n- INTERNAL_SEARCH_TYPE, \n- SOURCE_PROPERTY_TRACKING_ID,   \n- Campaign or AdGroup  \n- CAMPAIGN_SOURCE, \n- CAMPAIGN_MEDIUM, \n- CAMPAIGN_NAME, \n- CAMPAIGN_AD_GROUP, \n- CAMPAIGN_TERM, \n- CAMPAIGN_CONTENT, \n- CAMPAIGN_CODE, \n- CAMPAIGN_REFERRAL_PATH,   \n- E-Commerce  \n- TRANSACTION_COUNTRY, \n- TRANSACTION_REGION, \n- TRANSACTION_CITY, \n- TRANSACTION_AFFILIATION (Store or order location), \n- ITEM_NAME, \n- ITEM_CODE, \n- ITEM_VARIATION, \n- TRANSACTION_ID, \n- TRANSACTION_CURRENCY_CODE, \n- PRODUCT_ACTION_TYPE,   \n- Audience/Users  \n- BROWSER, \n- BROWSER_VERSION, \n- BROWSER_SIZE, \n- PLATFORM, \n- PLATFORM_VERSION, \n- LANGUAGE, \n- SCREEN_RESOLUTION, \n- SCREEN_COLORS, \n- JAVA_ENABLED (Boolean Field), \n- FLASH_VERSION, \n- GEO_SPEED (Connection speed), \n- VISITOR_TYPE, \n- GEO_ORGANIZATION (ISP organization), \n- GEO_DOMAIN, \n- GEO_IP_ADDRESS, \n- GEO_IP_VERSION,   \n- Location  \n- GEO_COUNTRY, \n- GEO_REGION, \n- GEO_CITY,   \n- Event  \n- EVENT_CATEGORY, \n- EVENT_ACTION, \n- EVENT_LABEL,   \n- Other  \n- CUSTOM_FIELD_1, \n- CUSTOM_FIELD_2, \n- USER_DEFINED_VALUE,   \n- Application  \n- APP_ID, \n- APP_INSTALLER_ID, \n- APP_NAME, \n- APP_VERSION, \n- SCREEN, \n- IS_APP (Boolean Field), \n- IS_FATAL_EXCEPTION (Boolean Field), \n- EXCEPTION_DESCRIPTION,   \n- Mobile device  \n- IS_MOBILE (Boolean Field, Deprecated. Use DEVICE_CATEGORY=mobile), \n- IS_TABLET (Boolean Field, Deprecated. Use DEVICE_CATEGORY=tablet), \n- DEVICE_CATEGORY, \n- MOBILE_HAS_QWERTY_KEYBOARD (Boolean Field), \n- MOBILE_HAS_NFC_SUPPORT (Boolean Field), \n- MOBILE_HAS_CELLULAR_RADIO (Boolean Field), \n- MOBILE_HAS_WIFI_SUPPORT (Boolean Field), \n- MOBILE_BRAND_NAME, \n- MOBILE_MODEL_NAME, \n- MOBILE_MARKETING_NAME, \n- MOBILE_POINTING_METHOD,   \n- Social  \n- SOCIAL_NETWORK, \n- SOCIAL_ACTION, \n- SOCIAL_ACTION_TARGET,"
+          "description": "Field to filter. Possible values:  \n- Content and Traffic  \n- PAGE_REQUEST_URI, \n- PAGE_HOSTNAME, \n- PAGE_TITLE, \n- REFERRAL, \n- COST_DATA_URI (Campaign target URL), \n- HIT_TYPE, \n- INTERNAL_SEARCH_TERM, \n- INTERNAL_SEARCH_TYPE, \n- SOURCE_PROPERTY_TRACKING_ID,   \n- Campaign or AdGroup  \n- CAMPAIGN_SOURCE, \n- CAMPAIGN_MEDIUM, \n- CAMPAIGN_NAME, \n- CAMPAIGN_AD_GROUP, \n- CAMPAIGN_TERM, \n- CAMPAIGN_CONTENT, \n- CAMPAIGN_CODE, \n- CAMPAIGN_REFERRAL_PATH,   \n- E-Commerce  \n- TRANSACTION_COUNTRY, \n- TRANSACTION_REGION, \n- TRANSACTION_CITY, \n- TRANSACTION_AFFILIATION (Store or order location), \n- ITEM_NAME, \n- ITEM_CODE, \n- ITEM_VARIATION, \n- TRANSACTION_ID, \n- TRANSACTION_CURRENCY_CODE, \n- PRODUCT_ACTION_TYPE,   \n- Audience/Users  \n- BROWSER, \n- BROWSER_VERSION, \n- BROWSER_SIZE, \n- PLATFORM, \n- PLATFORM_VERSION, \n- LANGUAGE, \n- SCREEN_RESOLUTION, \n- SCREEN_COLORS, \n- JAVA_ENABLED (Boolean Field), \n- FLASH_VERSION, \n- GEO_SPEED (Connection speed), \n- VISITOR_TYPE, \n- GEO_ORGANIZATION (ISP organization), \n- GEO_DOMAIN, \n- GEO_IP_ADDRESS, \n- GEO_IP_VERSION,   \n- Location  \n- GEO_COUNTRY, \n- GEO_REGION, \n- GEO_CITY,   \n- Event  \n- EVENT_CATEGORY, \n- EVENT_ACTION, \n- EVENT_LABEL,   \n- Other  \n- CUSTOM_FIELD_1, \n- CUSTOM_FIELD_2, \n- USER_DEFINED_VALUE,   \n- Application  \n- APP_ID, \n- APP_INSTALLER_ID, \n- APP_NAME, \n- APP_VERSION, \n- SCREEN, \n- IS_APP (Boolean Field), \n- IS_FATAL_EXCEPTION (Boolean Field), \n- EXCEPTION_DESCRIPTION,   \n- Mobile device  \n- IS_MOBILE (Boolean Field, Deprecated. Use DEVICE_CATEGORY=mobile), \n- IS_TABLET (Boolean Field, Deprecated. Use DEVICE_CATEGORY=tablet), \n- DEVICE_CATEGORY, \n- MOBILE_HAS_QWERTY_KEYBOARD (Boolean Field), \n- MOBILE_HAS_NFC_SUPPORT (Boolean Field), \n- MOBILE_HAS_CELLULAR_RADIO (Boolean Field), \n- MOBILE_HAS_WIFI_SUPPORT (Boolean Field), \n- MOBILE_BRAND_NAME, \n- MOBILE_MODEL_NAME, \n- MOBILE_MARKETING_NAME, \n- MOBILE_POINTING_METHOD,   \n- Social  \n- SOCIAL_NETWORK, \n- SOCIAL_ACTION, \n- SOCIAL_ACTION_TARGET,   \n- Custom dimension  \n- CUSTOM_DIMENSION (See accompanying field index),"
+        },
+        "fieldIndex": {
+          "type": "integer",
+          "description": "The Index of the custom dimension. Set only if the field is a is CUSTOM_DIMENSION.",
+          "format": "int32"
         },
         "kind": {
           "type": "string",
