@@ -129,7 +129,7 @@
     },
     "/{projectId}/zones/{zoneId}/clusters": {
       "post": {
-        "description": "Creates a cluster, consisting of the specified number and type of Google Compute Engine instances, plus a Kubernetes master instance.\n\nThe cluster is created in the project's default network.\n\nA firewall is added that allows traffic into port 443 on the master, which enables HTTPS. A firewall and a route is added for each node to allow the containers on that node to communicate with all other instances in the cluster.\n\nFinally, a route named k8s-iproute-10-xx-0-0 is created to track that the cluster's 10.xx.0.0/16 CIDR has been assigned.",
+        "description": "Creates a cluster, consisting of the specified number and type of Google Compute Engine instances, plus a Kubernetes master instance.\n\nThe cluster is created in the project's default network.\n\nA firewall is added that allows traffic into port 443 on the master, which enables HTTPS. A firewall and a route is added for each node to allow the containers on that node to communicate with all other instances in the cluster.\n\nFinally, an entry is added to the project's global metadata indicating which CIDR range is being used by the cluster.",
         "operationId": "container.projects.zones.clusters.create",
         "responses": {
           "200": {
@@ -475,76 +475,6 @@
           "$ref": "#/parameters/userIp"
         }
       ]
-    },
-    "/{masterProjectId}/zones/{zoneId}/tokens/{projectNumber}/{clusterName}": {
-      "get": {
-        "description": "Gets a compute-rw scoped OAuth2 access token for\n. Authentication is performed to ensure that the caller is a member of  and that the request is coming from the expected master VM for the specified cluster. See go/gke-cross-project-auth for more details.",
-        "operationId": "container.projects.zones.tokens.get",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Token"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the specified cluster.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "masterProjectId",
-            "in": "path",
-            "description": "The hosted master project from which this request is coming.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "projectNumber",
-            "in": "path",
-            "description": "The project number for which the access token is being requested.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "zoneId",
-            "in": "path",
-            "description": "The zone of the specified cluster.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "projects"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
     }
   },
   "definitions": {
@@ -557,7 +487,7 @@
         },
         "containerIpv4Cidr": {
           "type": "string",
-          "description": "The IP addresses of the container pods in this cluster, in  CIDR notation (e.g. 10.96.0.0/14). Leave blank to have one automatically chosen or specify a /14 block in 10.0.0.0/8 or 172.16.0.0/12."
+          "description": "The IP address range of the container pods in this cluster, in  CIDR notation (e.g. 10.96.0.0/14). Leave blank to have one automatically chosen or specify a /14 block in 10.0.0.0/8 or 172.16.0.0/12."
         },
         "creationTimestamp": {
           "type": "string",
@@ -607,7 +537,7 @@
         },
         "servicesIpv4Cidr": {
           "type": "string",
-          "description": "[Output only] The IP addresses of the Kubernetes services in this cluster, in  CIDR notation (e.g. 1.2.3.4/29). Service addresses are always in the 10.0.0.0/16 range."
+          "description": "[Output only] The IP address range of the Kubernetes services in this cluster, in  CIDR notation (e.g. 1.2.3.4/29). Service addresses are typically put in the last /16 from the container CIDR."
         },
         "status": {
           "type": "string",
@@ -692,7 +622,7 @@
       "properties": {
         "bearerToken": {
           "type": "string",
-          "description": "The token used to authenticate API requests to the master. The token is be included in an HTTP Authorization Header included in all requests to the master endpoint. The format of the header is: \"Authorization: Bearer \"."
+          "description": "The token used to authenticate API requests to the master. The token is to be included in an HTTP Authorization Header in all requests to the master endpoint. The format of the header is: \"Authorization: Bearer \"."
         },
         "password": {
           "type": "string",
@@ -734,7 +664,7 @@
         },
         "name": {
           "type": "string",
-          "description": "The server-assigned ID for this operation. If the operation is fulfilled upfront, it may not have a resource name."
+          "description": "The server-assigned ID for the operation."
         },
         "operationType": {
           "type": "string",
@@ -785,20 +715,6 @@
           "items": {
             "type": "string"
           }
-        }
-      }
-    },
-    "Token": {
-      "type": "object",
-      "properties": {
-        "accessToken": {
-          "type": "string",
-          "description": "The OAuth2 access token"
-        },
-        "expiryTimeSeconds": {
-          "type": "string",
-          "description": "The expiration time of the token in seconds since the unix epoch.",
-          "format": "int64"
         }
       }
     }

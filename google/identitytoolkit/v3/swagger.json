@@ -749,6 +749,10 @@
           "type": "string",
           "description": "Response to the captcha."
         },
+        "disableUser": {
+          "type": "boolean",
+          "description": "Whether to disable the user."
+        },
         "displayName": {
           "type": "string",
           "description": "The name of the user."
@@ -787,6 +791,11 @@
         "upgradeToFederatedLogin": {
           "type": "boolean",
           "description": "Mark the user to upgrade to federated login."
+        },
+        "validSince": {
+          "type": "string",
+          "description": "Timestamp in seconds for valid login token.",
+          "format": "int64"
         }
       }
     },
@@ -1006,6 +1015,10 @@
       "type": "object",
       "description": "Template for an individual account info.",
       "properties": {
+        "disabled": {
+          "type": "boolean",
+          "description": "Whether the user is disabled."
+        },
         "displayName": {
           "type": "string",
           "description": "The name of the user."
@@ -1065,6 +1078,11 @@
           "type": "string",
           "description": "The user's password salt.",
           "format": "byte"
+        },
+        "validSince": {
+          "type": "string",
+          "description": "Timestamp in seconds for valid login token.",
+          "format": "int64"
         },
         "version": {
           "type": "integer",
