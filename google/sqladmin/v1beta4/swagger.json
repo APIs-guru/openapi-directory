@@ -2310,7 +2310,7 @@
         },
         "state": {
           "type": "string",
-          "description": "The current serving state of the Cloud SQL instance. This can be one of the following.\nRUNNABLE: The instance is running, or is ready to run when accessed.\nSUSPENDED: The instance is not available, for example due to problems with billing.\nPENDING_CREATE: The instance is being created.\nMAINTENANCE: The instance is down for maintenance.\nUNKNOWN_STATE: The state of the instance is unknown."
+          "description": "The current serving state of the Cloud SQL instance. This can be one of the following.\nRUNNABLE: The instance is running, or is ready to run when accessed.\nSUSPENDED: The instance is not available, for example due to problems with billing.\nPENDING_CREATE: The instance is being created.\nMAINTENANCE: The instance is down for maintenance.\nFAILED: The instance creation failed.\nUNKNOWN_STATE: The state of the instance is unknown."
         }
       }
     },
@@ -2677,7 +2677,8 @@
           "format": "date-time"
         },
         "error": {
-          "$ref": "#/definitions/OperationErrors"
+          "$ref": "#/definitions/OperationErrors",
+          "description": "If errors occurred during processing of this operation, this field will be populated."
         },
         "exportContext": {
           "$ref": "#/definitions/ExportContext",
@@ -2932,7 +2933,8 @@
           "default": "sql#sslCert"
         },
         "selfLink": {
-          "type": "string"
+          "type": "string",
+          "description": "The URI of this resource."
         },
         "sha1Fingerprint": {
           "type": "string",
@@ -3171,6 +3173,6 @@
     }
   },
   "externalDocs": {
-    "url": "https://developers.google.com/cloud-sql/docs/admin-api/"
+    "url": "https://cloud.google.com/sql/docs/reference/latest"
   }
 }

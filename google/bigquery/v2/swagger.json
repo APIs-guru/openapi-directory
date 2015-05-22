@@ -2195,7 +2195,6 @@
     },
     "TableCell": {
       "type": "object",
-      "description": "Represents a single cell in the result set. Users of the java client can detect whether their value result is null by calling 'com.google.api.client.util.Data.isNull(cell.getV())'.",
       "properties": {
         "v": {}
       }
@@ -2396,10 +2395,10 @@
     },
     "TableRow": {
       "type": "object",
-      "description": "Represents a single row in the result set, consisting of one or more fields.",
       "properties": {
         "f": {
           "type": "array",
+          "description": "Represents a single row in the result set, consisting of one or more fields.",
           "items": {
             "$ref": "#/definitions/TableCell"
           }
