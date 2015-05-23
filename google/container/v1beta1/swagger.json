@@ -501,6 +501,10 @@
           "type": "boolean",
           "description": "Whether logs from the cluster should be made available via the Google Cloud Logging service. This includes both logs from your applications running in the cluster as well as logs from the Kubernetes components themselves."
         },
+        "enableCloudMonitoring": {
+          "type": "boolean",
+          "description": "Whether metrics from the cluster should be made available via the Google Cloud Monitoring service."
+        },
         "endpoint": {
           "type": "string",
           "description": "[Output only] The IP address of this cluster's Kubernetes master. The endpoint can be accessed from the internet at https://username:password@endpoint/.\n\nSee the masterAuth property of this resource for username and password information."
