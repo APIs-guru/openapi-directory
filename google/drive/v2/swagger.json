@@ -324,6 +324,12 @@
             "type": "string"
           },
           {
+            "name": "spaces",
+            "in": "query",
+            "description": "A comma-separated list of spaces to query. Supported values are 'drive' and 'appDataFolder'.",
+            "type": "string"
+          },
+          {
             "name": "startChangeId",
             "in": "query",
             "description": "Change ID to start listing changes from.",
@@ -410,6 +416,12 @@
             "name": "pageToken",
             "in": "query",
             "description": "Page token for changes.",
+            "type": "string"
+          },
+          {
+            "name": "spaces",
+            "in": "query",
+            "description": "A comma-separated list of spaces to query. Supported values are 'drive' and 'appDataFolder'.",
             "type": "string"
           },
           {
@@ -1679,6 +1691,12 @@
             "name": "q",
             "in": "query",
             "description": "Query string for searching files.",
+            "type": "string"
+          },
+          {
+            "name": "spaces",
+            "in": "query",
+            "description": "A comma-separated list of spaces to query. Supported values are 'drive' and 'appDataFolder'.",
             "type": "string"
           }
         ],
@@ -4648,6 +4666,13 @@
         "sharingUser": {
           "$ref": "#/definitions/User",
           "description": "User that shared the item with the current user, if available."
+        },
+        "spaces": {
+          "type": "array",
+          "description": "The list of spaces which contain the file. Supported values are 'drive' and 'appDataFolder'.",
+          "items": {
+            "type": "string"
+          }
         },
         "thumbnail": {
           "type": "object",

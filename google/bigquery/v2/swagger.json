@@ -653,6 +653,70 @@
         }
       ]
     },
+    "/project/{projectId}/jobs/{jobId}/stop": {
+      "post": {
+        "description": "Requests that a job be stopped. This call will return immediately, and the client will need to poll for the job status to see if the stop completed successfully.",
+        "operationId": "bigquery.jobs.stop",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/JobStopResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Job ID of the job to stop",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID of the job to stop",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "jobs"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/projects": {
       "get": {
         "description": "Lists all projects to which you have been granted any project role.",
@@ -1220,7 +1284,9 @@
         },
         "quote": {
           "type": "string",
-          "description": "[Optional] The value that is used to quote data sections in a CSV file. BigQuery converts the string to ISO-8859-1 encoding, and then uses the first byte of the encoded string to split the data in its raw, binary state. The default value is a double-quote ('\"'). If your data does not contain quoted sections, set the property value to an empty string. If your data contains quoted newline characters, you must also set the allowQuotedNewlines property to true."
+          "description": "[Optional] The value that is used to quote data sections in a CSV file. BigQuery converts the string to ISO-8859-1 encoding, and then uses the first byte of the encoded string to split the data in its raw, binary state. The default value is a double-quote ('\"'). If your data does not contain quoted sections, set the property value to an empty string. If your data contains quoted newline characters, you must also set the allowQuotedNewlines property to true.",
+          "default": "\"",
+          "pattern": ".?"
         },
         "skipLeadingRows": {
           "type": "integer",
@@ -1580,7 +1646,8 @@
         },
         "printHeader": {
           "type": "boolean",
-          "description": "[Optional] Whether to print out a header row in the results. Default is true."
+          "description": "[Optional] Whether to print out a header row in the results. Default is true.",
+          "default": "true"
         },
         "sourceTable": {
           "$ref": "#/definitions/TableReference",
@@ -1657,7 +1724,9 @@
         },
         "quote": {
           "type": "string",
-          "description": "[Optional] The value that is used to quote data sections in a CSV file. BigQuery converts the string to ISO-8859-1 encoding, and then uses the first byte of the encoded string to split the data in its raw, binary state. The default value is a double-quote ('\"'). If your data does not contain quoted sections, set the property value to an empty string. If your data contains quoted newline characters, you must also set the allowQuotedNewlines property to true."
+          "description": "[Optional] The value that is used to quote data sections in a CSV file. BigQuery converts the string to ISO-8859-1 encoding, and then uses the first byte of the encoded string to split the data in its raw, binary state. The default value is a double-quote ('\"'). If your data does not contain quoted sections, set the property value to an empty string. If your data contains quoted newline characters, you must also set the allowQuotedNewlines property to true.",
+          "default": "\"",
+          "pattern": ".?"
         },
         "schema": {
           "$ref": "#/definitions/TableSchema",
@@ -1714,7 +1783,8 @@
         },
         "flattenResults": {
           "type": "boolean",
-          "description": "[Optional] Flattens all nested and repeated fields in the query results. The default value is true. allowLargeResults must be true if this is set to false."
+          "description": "[Optional] Flattens all nested and repeated fields in the query results. The default value is true. allowLargeResults must be true if this is set to false.",
+          "default": "true"
         },
         "preserveNulls": {
           "type": "boolean",
@@ -1737,7 +1807,8 @@
         },
         "useQueryCache": {
           "type": "boolean",
-          "description": "[Optional] Whether to look for the result in the query cache. The query cache is a best-effort cache that will be flushed whenever tables in the query are modified. Moreover, the query cache is only available when a query does not have a destination table specified."
+          "description": "[Optional] Whether to look for the result in the query cache. The query cache is a best-effort cache that will be flushed whenever tables in the query are modified. Moreover, the query cache is only available when a query does not have a destination table specified. The default value is true.",
+          "default": "true"
         },
         "writeDisposition": {
           "type": "string",
@@ -1964,6 +2035,20 @@
         }
       }
     },
+    "JobStopResponse": {
+      "type": "object",
+      "properties": {
+        "job": {
+          "$ref": "#/definitions/Job",
+          "description": "The final state of the job."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The resource type of the response.",
+          "default": "bigquery#jobStopResponse"
+        }
+      }
+    },
     "JsonObject": {
       "type": "object",
       "description": "Represents a single JSON object.",
@@ -2071,7 +2156,8 @@
         },
         "useQueryCache": {
           "type": "boolean",
-          "description": "[Optional] Whether to look for the result in the query cache. The query cache is a best-effort cache that will be flushed whenever tables in the query are modified. The default value is true."
+          "description": "[Optional] Whether to look for the result in the query cache. The query cache is a best-effort cache that will be flushed whenever tables in the query are modified. The default value is true.",
+          "default": "true"
         }
       }
     },

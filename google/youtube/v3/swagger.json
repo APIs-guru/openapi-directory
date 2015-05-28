@@ -7185,12 +7185,12 @@
             "interlaceVideo",
             "multipleAudioStreams",
             "multipleVideoStreams",
-            "noAudoStream",
+            "noAudioStream",
             "noVideoStream",
             "openGop",
             "resolutionMismatch",
             "videoBitrateMismatch",
-            "videoCode",
+            "videoCodec",
             "videoCodecMismatch",
             "videoIngestionStarved",
             "videoInterlaceMismatch",
@@ -8961,6 +8961,10 @@
         "channelTitle": {
           "type": "string",
           "description": "Channel title for the channel that the video belongs to."
+        },
+        "defaultAudioLanguage": {
+          "type": "string",
+          "description": "The default_audio_language property specifies the language spoken in the video's default audio track."
         },
         "defaultLanguage": {
           "type": "string",

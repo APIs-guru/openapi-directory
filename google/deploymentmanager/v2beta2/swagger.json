@@ -110,6 +110,7 @@
           {
             "name": "createPolicy",
             "in": "query",
+            "description": "Sets the policy to use for creating new resources.",
             "default": "CREATE_OR_ACQUIRE",
             "type": "string",
             "enum": [
@@ -120,6 +121,7 @@
           {
             "name": "deletePolicy",
             "in": "query",
+            "description": "Sets the policy to use for deleting resources.",
             "default": "DELETE",
             "type": "string",
             "enum": [
@@ -144,6 +146,7 @@
           {
             "name": "updatePolicy",
             "in": "query",
+            "description": "Sets the policy to use for updating resources.",
             "default": "PATCH",
             "type": "string",
             "enum": [
@@ -179,6 +182,7 @@
           {
             "name": "createPolicy",
             "in": "query",
+            "description": "Sets the policy to use for creating new resources.",
             "default": "CREATE_OR_ACQUIRE",
             "type": "string",
             "enum": [
@@ -189,6 +193,7 @@
           {
             "name": "deletePolicy",
             "in": "query",
+            "description": "Sets the policy to use for deleting resources.",
             "default": "DELETE",
             "type": "string",
             "enum": [
@@ -213,6 +218,7 @@
           {
             "name": "updatePolicy",
             "in": "query",
+            "description": "Sets the policy to use for updating resources.",
             "default": "PATCH",
             "type": "string",
             "enum": [
@@ -305,13 +311,13 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Optional. Filter expression for filtering listed resources.",
+            "description": "Filter expression for filtering listed resources.",
             "type": "string"
           },
           {
             "name": "maxResults",
             "in": "query",
-            "description": "Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.",
+            "description": "Maximum count of results to be returned.",
             "default": "500",
             "type": "integer",
             "minimum": 0,
@@ -320,7 +326,7 @@
           {
             "name": "pageToken",
             "in": "query",
-            "description": "Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.",
+            "description": "Tag returned by a previous list request when that list was truncated to maxResults. Used to continue a previous list request.",
             "type": "string"
           },
           {
@@ -463,13 +469,13 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Optional. Filter expression for filtering listed resources.",
+            "description": "Filter expression for filtering listed resources.",
             "type": "string"
           },
           {
             "name": "maxResults",
             "in": "query",
-            "description": "Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.",
+            "description": "Maximum count of results to be returned.",
             "default": "500",
             "type": "integer",
             "minimum": 0,
@@ -478,7 +484,7 @@
           {
             "name": "pageToken",
             "in": "query",
-            "description": "Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.",
+            "description": "Tag returned by a previous list request when that list was truncated to maxResults. Used to continue a previous list request.",
             "type": "string"
           },
           {
@@ -528,7 +534,7 @@
     },
     "/{project}/global/operations/{operation}": {
       "get": {
-        "description": "Gets information about a specific Operation.",
+        "description": "Gets information about a specific operation.",
         "operationId": "deploymentmanager.operations.get",
         "responses": {
           "200": {
@@ -593,7 +599,7 @@
     },
     "/{project}/global/operations": {
       "get": {
-        "description": "Lists all Operations for a project.",
+        "description": "Lists all operations for a project.",
         "operationId": "deploymentmanager.operations.list",
         "responses": {
           "200": {
@@ -607,13 +613,13 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Optional. Filter expression for filtering listed resources.",
+            "description": "Filter expression for filtering listed resources.",
             "type": "string"
           },
           {
             "name": "maxResults",
             "in": "query",
-            "description": "Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.",
+            "description": "Maximum count of results to be returned.",
             "default": "500",
             "type": "integer",
             "minimum": 0,
@@ -622,7 +628,7 @@
           {
             "name": "pageToken",
             "in": "query",
-            "description": "Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.",
+            "description": "Tag returned by a previous list request when that list was truncated to maxResults. Used to continue a previous list request.",
             "type": "string"
           },
           {
@@ -765,13 +771,13 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Optional. Filter expression for filtering listed resources.",
+            "description": "Filter expression for filtering listed resources.",
             "type": "string"
           },
           {
             "name": "maxResults",
             "in": "query",
-            "description": "Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.",
+            "description": "Maximum count of results to be returned.",
             "default": "500",
             "type": "integer",
             "minimum": 0,
@@ -780,7 +786,7 @@
           {
             "name": "pageToken",
             "in": "query",
-            "description": "Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.",
+            "description": "Tag returned by a previous list request when that list was truncated to maxResults. Used to continue a previous list request.",
             "type": "string"
           },
           {
@@ -844,13 +850,13 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Optional. Filter expression for filtering listed resources.",
+            "description": "Filter expression for filtering listed resources.",
             "type": "string"
           },
           {
             "name": "maxResults",
             "in": "query",
-            "description": "Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.",
+            "description": "Maximum count of results to be returned.",
             "default": "500",
             "type": "integer",
             "minimum": 0,
@@ -859,7 +865,7 @@
           {
             "name": "pageToken",
             "in": "query",
-            "description": "Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.",
+            "description": "Tag returned by a previous list request when that list was truncated to maxResults. Used to continue a previous list request.",
             "type": "string"
           },
           {
@@ -913,17 +919,13 @@
       "type": "object",
       "description": "",
       "properties": {
-        "creationTimestamp": {
-          "type": "string",
-          "description": "[Output Only] Creation timestamp in RFC3339 text format ."
-        },
         "description": {
           "type": "string",
           "description": "An optional user-provided description of the deployment."
         },
         "fingerprint": {
           "type": "string",
-          "description": "Supply the fingerprint value for update requests. The fingerprint value is generated by the server and ensures optimistic concurrency (so that only one update can be performed at a time). The fingerprint changes after each update.",
+          "description": "Specifies a fingerprint for update() requests. A fingerprint is a randomly generated value that must be provided in update() requests to perform optimistic locking. This ensures optimistic concurrency so that only one update can be performed at a time.\n\nThe fingerprint is initially generated by Deployment Manager and changes after every request to modify data. To get the latest fingerprint value, perform a get() request to a deployment.",
           "format": "byte"
         },
         "id": {
@@ -931,9 +933,13 @@
           "description": "[Output Only] Unique identifier for the resource; defined by the server.",
           "format": "uint64"
         },
+        "insertTime": {
+          "type": "string",
+          "description": "[Output Only] Timestamp when the deployment was created, in RFC3339 text format ."
+        },
         "intent": {
           "type": "string",
-          "description": "[Input Only] Specifies how to Deployment Manager should apply this template. Possible options are PREVIEW, UPDATE, and CANCEL.\n\nPREVIEW creates a deployment and creates \"shell\" resources but does not actually instantiate these resources. This allows you to preview what your deployment looks like. You can use this intent to preview updates to deployments or preview new deployments. You must provide a targetConfig with a configuration for this intent. After previewing a deployment, you can deploy your resources by making a request with the UPDATE intent or you can CANCEL the preview altogether. Note that the deployment will still exist after you cancel the preview and you must separately delete this deployment if you want to remove it.\n\nUPDATE performs an update to the underlying resources in a deployment. If you provide a populated targetConfig field with this request, Deployment Manager uses that configuration to perform an update. If you had previewed this update beforehand, and do not supply a targetConfig or provide an empty targetConfig, Deployment Manager uses the last previewed configuration.\n\nCANCEL cancels an update that is in PREVIEW or UPDATE but does not undo any changes already made."
+          "description": "[Input Only] Specifies how Deployment Manager should apply this template. Possible options are PREVIEW, UPDATE, and CANCEL.\n\nPREVIEW creates a deployment and creates \"shell\" resources but does not actually instantiate these resources. This allows you to preview what your deployment looks like. You can use this intent to preview updates to deployments or preview new deployments. You must provide a target.config with a configuration for this intent. After previewing a deployment, you can deploy your resources by making a request with the UPDATE intent or you can CANCEL the preview altogether. Note that the deployment will still exist after you cancel the preview and you must separately delete this deployment if you want to remove it.\n\nUPDATE performs an update to the underlying resources in a deployment. If you provide a populated target.config field with this request, Deployment Manager uses that configuration to perform an update. If you had previewed this update beforehand, and do not supply a target.config or provide an empty target.config, Deployment Manager uses the last previewed configuration.\n\nCANCEL cancels an update that is in PREVIEW or UPDATE but does not undo any changes already made."
         },
         "manifest": {
           "type": "string",
@@ -954,6 +960,10 @@
         "update": {
           "$ref": "#/definitions/DeploymentUpdate",
           "description": "[Output Only] If Deployment Manager is currently updating or previewing an update to this deployment, the updated configuration appears here."
+        },
+        "updateTime": {
+          "type": "string",
+          "description": "[Output Only] Timestamp when the deployment was updated, in RFC3339 text format ."
         }
       }
     },
@@ -980,14 +990,14 @@
       "properties": {
         "deployments": {
           "type": "array",
-          "description": "The deployments contained in this response.",
+          "description": "[Output Only] The deployments contained in this response.",
           "items": {
             "$ref": "#/definitions/Deployment"
           }
         },
         "nextPageToken": {
           "type": "string",
-          "description": "A token used to continue a truncated list request (output only)."
+          "description": "[Output Only] A token used to continue a truncated list request."
         }
       }
     },
@@ -1013,10 +1023,6 @@
           "type": "string",
           "description": "[Output Only] The YAML configuration for this manifest."
         },
-        "creationTimestamp": {
-          "type": "string",
-          "description": "Creation timestamp in RFC3339 text format (output only)."
-        },
         "evaluatedConfig": {
           "type": "string",
           "description": "[Output Only] The fully-expanded configuration file, including any templates and references."
@@ -1032,6 +1038,10 @@
           "items": {
             "$ref": "#/definitions/ImportFile"
           }
+        },
+        "insertTime": {
+          "type": "string",
+          "description": "[Output Only] Timestamp when the manifest was created, in RFC3339 text format."
         },
         "layout": {
           "type": "string",
@@ -1053,14 +1063,14 @@
       "properties": {
         "manifests": {
           "type": "array",
-          "description": "Manifests contained in this list response.",
+          "description": "[Output Only] Manifests contained in this list response.",
           "items": {
             "$ref": "#/definitions/Manifest"
           }
         },
         "nextPageToken": {
           "type": "string",
-          "description": "A token used to continue a truncated list request."
+          "description": "[Output Only] A token used to continue a truncated list request."
         }
       }
     },
@@ -1070,7 +1080,7 @@
       "properties": {
         "clientOperationId": {
           "type": "string",
-          "description": "[Output Only] An optional identifier specified by the client when the mutation was initiated. Must be unique for all operation resources in the project"
+          "description": "[Output Only] An optional identifier specified by the client when the mutation was initiated. Must be unique for all operation resources in the project."
         },
         "creationTimestamp": {
           "type": "string",
@@ -1140,7 +1150,7 @@
         },
         "progress": {
           "type": "integer",
-          "description": "[Output Only] An optional progress indicator that ranges from 0 to 100. There is no requirement that this be linear or support any granularity of operations. This should not be used to guess at when the operation will be complete. This number should be monotonically increasing as the operation progresses.",
+          "description": "[Output Only] An optional progress indicator that ranges from 0 to 100. There is no requirement that this be linear or support any granularity of operations. This should not be used to guess at when the operation will be complete. This number should monotonically increase as the operation progresses.",
           "format": "int32"
         },
         "region": {
@@ -1222,11 +1232,11 @@
       "properties": {
         "nextPageToken": {
           "type": "string",
-          "description": "A token used to continue a truncated list request."
+          "description": "[Output Only] A token used to continue a truncated list request."
         },
         "operations": {
           "type": "array",
-          "description": "Operations contained in this list response.",
+          "description": "[Output Only] Operations contained in this list response.",
           "items": {
             "$ref": "#/definitions/Operation"
           }
@@ -1245,6 +1255,10 @@
           "type": "string",
           "description": "[Output Only] Unique identifier for the resource; defined by the server.",
           "format": "uint64"
+        },
+        "insertTime": {
+          "type": "string",
+          "description": "[Output Only] Timestamp when the resource was created or acquired, in RFC3339 text format ."
         },
         "manifest": {
           "type": "string",
@@ -1265,6 +1279,10 @@
         "update": {
           "$ref": "#/definitions/ResourceUpdate",
           "description": "[Output Only] If Deployment Manager is currently updating or previewing an update to this resource, the updated configuration appears here."
+        },
+        "updateTime": {
+          "type": "string",
+          "description": "[Output Only] Timestamp when the resource was updated, in RFC3339 text format ."
         },
         "url": {
           "type": "string",
@@ -1289,7 +1307,7 @@
         },
         "intent": {
           "type": "string",
-          "description": "[Output Only] The intent of the resource."
+          "description": "[Output Only] The intent of the resource, PREVIEW, UPDATE, or CANCEL."
         },
         "manifest": {
           "type": "string",
