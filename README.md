@@ -8,7 +8,7 @@ Our goal is to create machine-readable Wikipedia for REST APIs, with following p
 - Anyone can add/changes API, not only API owners.
 - All data could be accessed through REST API(free, but API key required).
 
-If you have Swagger files for any public API, please feel free to make pull request.
+**If you have Swagger files for any public API, please feel free to make pull request.**
 
 Licenses
 --------------------------
@@ -19,6 +19,6 @@ All API specs acquired from public sources under [Fair use](http://en.wikipedia.
 
 API spec acceptance criteria
 --------------------------
-* Public - mean anyone can access it as long as he follow some clearly difined steps, like email owner, paid for API, etc.
-* Persistant - 
+* Public - anyone can access it as long as he follow some clearly defined steps(email owner, pay money, etc.)
+* Persistant - API is made with long live goal, and not for partucular event(conference, hackaton, etc.)
 * Useful - API could provide usefull functionality not only for it owner.
