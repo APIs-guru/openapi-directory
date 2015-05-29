@@ -1,4 +1,6 @@
 # api-models
+
+[![Join the chat at https://gitter.im/APIs-guru/api-models](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/APIs-guru/api-models?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Repository for API models in Swagger 2.0 format
 
 Our goal is to create machine-readable Wikipedia for REST APIs, with following principals:
