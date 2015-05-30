@@ -813,7 +813,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "[Output Only] Type of the resource. Always kind#operation for Operation resources.",
+          "description": "[Output Only] Type of the resource. Always compute#Operation for Operation resources.",
           "default": "autoscaler#operation"
         },
         "name": {
@@ -898,7 +898,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "Type of resource. Always compute#operations for Operations resource.",
+          "description": "[Output Only] Type of resource. Always compute#operations for Operations resource.",
           "default": "autoscaler#operationList"
         },
         "nextPageToken": {
@@ -927,7 +927,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "Type of the resource.",
+          "description": "[Output Only] Type of the resource. Always kind#zone for zones.",
           "default": "autoscaler#zone"
         },
         "maintenanceWindows": {
@@ -958,7 +958,7 @@
         },
         "selfLink": {
           "type": "string",
-          "description": "Server defined URL for the resource (output only)."
+          "description": "[Output Only] Server defined URL for the resource."
         },
         "status": {
           "type": "string"

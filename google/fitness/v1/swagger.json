@@ -504,6 +504,53 @@
         }
       ]
     },
+    "/{userId}/dataset:aggregate": {
+      "post": {
+        "operationId": "fitness.users.dataset.aggregate",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AggregateResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/{userId}/sessions/{sessionId}": {
       "delete": {
         "description": "Deletes a session specified by the given session ID.",
@@ -701,6 +748,108 @@
     }
   },
   "definitions": {
+    "AggregateBucket": {
+      "type": "object",
+      "properties": {
+        "activity": {
+          "type": "integer",
+          "description": "available for Bucket.Type.ACTIVITY_TYPE, Bucket.Type.ACTIVITY_SEGMENT",
+          "format": "int32"
+        },
+        "dataset": {
+          "type": "array",
+          "description": "There will be one dataset per datatype/datasource",
+          "items": {
+            "$ref": "#/definitions/Dataset"
+          }
+        },
+        "endTimeMillis": {
+          "type": "string",
+          "format": "int64"
+        },
+        "session": {
+          "$ref": "#/definitions/Session",
+          "description": "available for Bucket.Type.SESSION"
+        },
+        "startTimeMillis": {
+          "type": "string",
+          "format": "int64"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of a bucket signifies how the data aggregation is performed in the bucket.",
+          "enum": [
+            "activitySegment",
+            "activityType",
+            "session",
+            "time",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "AggregateBy": {
+      "type": "object",
+      "properties": {
+        "dataSourceId": {
+          "type": "string"
+        },
+        "dataTypeName": {
+          "type": "string",
+          "description": "by dataype or by datasource"
+        },
+        "outputDataSourceId": {
+          "type": "string"
+        },
+        "outputDataTypeName": {
+          "type": "string"
+        }
+      }
+    },
+    "AggregateRequest": {
+      "type": "object",
+      "properties": {
+        "aggregateBy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AggregateBy"
+          }
+        },
+        "bucketByActivitySegment": {
+          "$ref": "#/definitions/BucketByActivity"
+        },
+        "bucketByActivityType": {
+          "$ref": "#/definitions/BucketByActivity"
+        },
+        "bucketBySession": {
+          "$ref": "#/definitions/BucketBySession"
+        },
+        "bucketByTime": {
+          "$ref": "#/definitions/BucketByTime",
+          "description": "apparently oneof is not supported by reduced_nano_proto"
+        },
+        "endTimeMillis": {
+          "type": "string",
+          "format": "int64"
+        },
+        "startTimeMillis": {
+          "type": "string",
+          "description": "required time range",
+          "format": "int64"
+        }
+      }
+    },
+    "AggregateResponse": {
+      "type": "object",
+      "properties": {
+        "bucket": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AggregateBucket"
+          }
+        }
+      }
+    },
     "Application": {
       "type": "object",
       "description": "See: google3/java/com/google/android/apps/heart/platform/api/Application.java",
@@ -720,6 +869,39 @@
         "version": {
           "type": "string",
           "description": "Version of the application. You should update this field whenever the application changes in a way that affects the computation of the data."
+        }
+      }
+    },
+    "BucketByActivity": {
+      "type": "object",
+      "properties": {
+        "activityDataSourceId": {
+          "type": "string",
+          "description": "default activity stream will be used if not specified"
+        },
+        "minDurationMillis": {
+          "type": "string",
+          "description": "Only activity segments of duration longer than this is used",
+          "format": "int64"
+        }
+      }
+    },
+    "BucketBySession": {
+      "type": "object",
+      "properties": {
+        "minDurationMillis": {
+          "type": "string",
+          "description": "Only sessions of duration longer than this is used",
+          "format": "int64"
+        }
+      }
+    },
+    "BucketByTime": {
+      "type": "object",
+      "properties": {
+        "durationMillis": {
+          "type": "string",
+          "format": "int64"
         }
       }
     },

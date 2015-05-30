@@ -76,6 +76,121 @@
         }
       ]
     },
+    "/{userId}/stop": {
+      "post": {
+        "description": "Stop receiving push notifications for the given user mailbox.",
+        "operationId": "gmail.users.stop",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
+            "required": true,
+            "default": "me",
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify",
+              "https://www.googleapis.com/auth/gmail.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{userId}/watch": {
+      "post": {
+        "description": "Set up or update a push notification watch on the given user mailbox.",
+        "operationId": "gmail.users.watch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/WatchResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
+            "required": true,
+            "default": "me",
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.modify",
+              "https://www.googleapis.com/auth/gmail.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/{userId}/drafts": {
       "post": {
         "description": "Creates a new draft with the DRAFT label.",
@@ -2350,6 +2465,47 @@
         "snippet": {
           "type": "string",
           "description": "A short part of the message text."
+        }
+      }
+    },
+    "WatchRequest": {
+      "type": "object",
+      "description": "Set up or update a new push notification watch on this user's mailbox.",
+      "properties": {
+        "labelFilterAction": {
+          "type": "string",
+          "description": "Filtering behavior of labelIds list specified.",
+          "enum": [
+            "exclude",
+            "include"
+          ]
+        },
+        "labelIds": {
+          "type": "array",
+          "description": "List of label_ids to restrict notifications about. By default, if unspecified, all changes are pushed out. If specified then dictates which labels are required for a push notification to be generated.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "topicName": {
+          "type": "string",
+          "description": "Fully qualified Cloud PubSub API topic name to publish events to. This topic name should already exist in Cloud PubSub and you should have already granted gmail \"publish\" privileges on it. For example, \"projects/my-project-identifier/topics/my-topic-name\" (using the new Cloud PubSub \"v1beta2\" topic naming format).\n\nNote that the \"my-project-identifier\" portion must exactly match your developer console project id (the one executing this watch request)."
+        }
+      }
+    },
+    "WatchResponse": {
+      "type": "object",
+      "description": "Push notification watch response.",
+      "properties": {
+        "expiration": {
+          "type": "string",
+          "description": "When Gmail will stop sending notifications for mailbox updates. Call watch again before this time to renew the subscription.",
+          "format": "int64"
+        },
+        "historyId": {
+          "type": "string",
+          "description": "The ID of the mailbox's current history record.",
+          "format": "uint64"
         }
       }
     }
