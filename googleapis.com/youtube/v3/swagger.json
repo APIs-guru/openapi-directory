@@ -6043,7 +6043,10 @@
           "description": "Rating system in Ireland - Irish Film Classification Office",
           "enum": [
             "ifco12",
+            "ifco12a",
             "ifco15",
+            "ifco15a",
+            "ifco16",
             "ifco18",
             "ifcoG",
             "ifcoPg",
@@ -6926,6 +6929,10 @@
           "$ref": "#/definitions/LiveBroadcastSnippet",
           "description": "The snippet object contains basic details about the event, including its title, description, start time, and end time."
         },
+        "statistics": {
+          "$ref": "#/definitions/LiveBroadcastStatistics",
+          "description": "The statistics object contains info about the event's current stats. These include concurrent viewers and total chat count. Statistics can change (in either direction) during the lifetime of an event. Statistics are only returned while the event is live."
+        },
         "status": {
           "$ref": "#/definitions/LiveBroadcastStatus",
           "description": "The status object contains information about the event's status."
@@ -6955,6 +6962,9 @@
         "enableEmbed": {
           "type": "boolean",
           "description": "This setting indicates whether the broadcast video can be played in an embedded player. If you choose to archive the video (using the enableArchive property), this setting will also apply to the archived video."
+        },
+        "enableLowLatency": {
+          "type": "boolean"
         },
         "monitorStream": {
           "$ref": "#/definitions/MonitorStreamInfo",
@@ -7059,6 +7069,22 @@
         "title": {
           "type": "string",
           "description": "The broadcast's title. Note that the broadcast represents exactly one YouTube video. You can set this field by modifying the broadcast resource or by setting the title field of the corresponding video resource."
+        }
+      }
+    },
+    "LiveBroadcastStatistics": {
+      "type": "object",
+      "description": "Statistics about the live broadcast. These represent a snapshot of the values at the time of the request. Statistics are only returned for live broadcasts.",
+      "properties": {
+        "concurrentViewers": {
+          "type": "string",
+          "description": "The number of viewers currently watching the broadcast. The property and its value will be present if the broadcast has current viewers and the broadcast owner has not hidden the viewcount for the video. Note that YouTube stops tracking the number of concurrent viewers for a broadcast when the broadcast ends. So, this property would not identify the number of viewers watching an archived video of a live broadcast that already ended.",
+          "format": "uint64"
+        },
+        "totalChatCount": {
+          "type": "string",
+          "description": "The total number of live chat messages currently on the broadcast. The property and its value will be present if the broadcast is public, has the live chat feature enabled, and has at least one message. Note that this field will not be filled after the broadcast ends. So this property would not identify the number of chat messages for an archived video of a completed live broadcast.",
+          "format": "uint64"
         }
       }
     },
