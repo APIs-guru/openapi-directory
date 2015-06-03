@@ -40,6 +40,13 @@
             "description": "Identifies the dataset.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AllocateIdsRequest"
+            }
           }
         ],
         "security": [
@@ -98,6 +105,13 @@
             "description": "Identifies the dataset.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BeginTransactionRequest"
+            }
           }
         ],
         "security": [
@@ -156,6 +170,13 @@
             "description": "Identifies the dataset.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BlindWriteRequest"
+            }
           }
         ],
         "security": [
@@ -214,6 +235,13 @@
             "description": "Identifies the dataset.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CommitRequest"
+            }
           }
         ],
         "security": [
@@ -272,6 +300,13 @@
             "description": "Identifies the dataset.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LookupRequest"
+            }
           }
         ],
         "security": [
@@ -330,6 +365,13 @@
             "description": "Identifies the dataset.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RollbackRequest"
+            }
           }
         ],
         "security": [
@@ -388,6 +430,13 @@
             "description": "Identifies the dataset.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RunQueryRequest"
+            }
           }
         ],
         "security": [

@@ -120,6 +120,13 @@
             "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BucketAccessControl"
+            }
           }
         ],
         "security": [
@@ -158,6 +165,13 @@
             "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BucketAccessControl"
+            }
           }
         ],
         "security": [
@@ -214,6 +228,13 @@
             "description": "Name of a bucket.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BucketAccessControl"
+            }
           }
         ],
         "security": [
@@ -383,6 +404,13 @@
               "full",
               "no_acl"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Bucket"
+            }
           }
         ],
         "security": [
@@ -425,6 +453,13 @@
               "full",
               "no_acl"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Bucket"
+            }
           }
         ],
         "security": [
@@ -485,6 +520,13 @@
               "full",
               "no_acl"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Bucket"
+            }
           }
         ],
         "security": [
@@ -699,6 +741,13 @@
             "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ObjectAccessControl"
+            }
           }
         ],
         "security": [
@@ -744,6 +793,13 @@
             "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ObjectAccessControl"
+            }
           }
         ],
         "security": [
@@ -807,6 +863,13 @@
             "description": "Name of the object.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ObjectAccessControl"
+            }
           }
         ],
         "security": [
@@ -1004,6 +1067,13 @@
               "full",
               "no_acl"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
           }
         ],
         "security": [
@@ -1053,6 +1123,13 @@
               "full",
               "no_acl"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
           }
         ],
         "security": [
@@ -1129,6 +1206,13 @@
               "full",
               "no_acl"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
           }
         ],
         "security": [

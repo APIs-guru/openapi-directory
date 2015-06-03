@@ -293,6 +293,13 @@
             "description": "Name of the database to be updated in the instance.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
           }
         ],
         "security": [
@@ -339,6 +346,13 @@
             "description": "Name of the database to be updated in the instance.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
           }
         ],
         "security": [
@@ -403,6 +417,13 @@
             "description": "Database instance ID. This does not include the project ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
           }
         ],
         "security": [
@@ -554,6 +575,13 @@
             "description": "The ID of the Cloud SQL instance to be cloned (source). This does not include the project ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/InstancesCloneRequest"
+            }
           }
         ],
         "security": [
@@ -696,6 +724,13 @@
             "description": "Cloud SQL instance ID. This does not include the project ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DatabaseInstance"
+            }
           }
         ],
         "security": [
@@ -735,6 +770,13 @@
             "description": "Cloud SQL instance ID. This does not include the project ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DatabaseInstance"
+            }
           }
         ],
         "security": [
@@ -799,6 +841,13 @@
             "description": "Cloud SQL instance ID. This does not include the project ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/InstancesExportRequest"
+            }
           }
         ],
         "security": [
@@ -862,6 +911,13 @@
             "description": "Cloud SQL instance ID. This does not include the project ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/InstancesImportRequest"
+            }
           }
         ],
         "security": [
@@ -918,6 +974,13 @@
             "description": "Project ID of the project to which the newly created Cloud SQL instances should belong.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DatabaseInstance"
+            }
           }
         ],
         "security": [
@@ -1218,6 +1281,13 @@
             "description": "Cloud SQL instance ID. This does not include the project ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/InstancesRestoreBackupRequest"
+            }
           }
         ],
         "security": [
@@ -1667,6 +1737,13 @@
             "description": "Cloud SQL instance ID. This does not include the project ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SslCertsInsertRequest"
+            }
           }
         ],
         "security": [
@@ -1880,6 +1957,13 @@
             "description": "Database instance ID. This does not include the project ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           }
         ],
         "security": [
@@ -1972,6 +2056,13 @@
             "description": "Name of the user in the instance.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           }
         ],
         "security": [

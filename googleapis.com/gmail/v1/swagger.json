@@ -157,6 +157,13 @@
             "required": true,
             "default": "me",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/WatchRequest"
+            }
           }
         ],
         "security": [
@@ -219,6 +226,13 @@
             "required": true,
             "default": "me",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Draft"
+            }
           }
         ],
         "security": [
@@ -429,6 +443,13 @@
             "description": "The ID of the draft to update.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Draft"
+            }
           }
         ],
         "security": [
@@ -491,6 +512,13 @@
             "required": true,
             "default": "me",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Draft"
+            }
           }
         ],
         "security": [
@@ -634,6 +662,13 @@
             "required": true,
             "default": "me",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Label"
+            }
           }
         ],
         "security": [
@@ -815,6 +850,13 @@
             "description": "The ID of the label to update.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Label"
+            }
           }
         ],
         "security": [
@@ -856,6 +898,13 @@
             "description": "The ID of the label to update.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Label"
+            }
           }
         ],
         "security": [
@@ -1075,6 +1124,13 @@
             "description": "Process calendar invites in the email and add any extracted meetings to the Google Calendar for this user.",
             "default": "false",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
           }
         ],
         "security": [
@@ -1155,6 +1211,13 @@
               "dateHeader",
               "receivedTime"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
           }
         ],
         "security": [
@@ -1291,6 +1354,13 @@
             "description": "The ID of the message to modify.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ModifyMessageRequest"
+            }
           }
         ],
         "security": [
@@ -1352,6 +1422,13 @@
             "required": true,
             "default": "me",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
           }
         ],
         "security": [
@@ -1840,6 +1917,13 @@
             "description": "The ID of the thread to modify.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ModifyThreadRequest"
+            }
           }
         ],
         "security": [

@@ -442,6 +442,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AchievementUpdateMultipleRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -660,6 +669,13 @@
             "in": "query",
             "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/EventRecordRequest"
+            }
           }
         ],
         "security": [
@@ -1189,6 +1205,15 @@
             "description": "Successful response"
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PushTokenId"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -1234,6 +1259,15 @@
             "description": "Successful response"
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PushToken"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -1553,6 +1587,13 @@
             "in": "query",
             "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RoomCreateRequest"
+            }
           }
         ],
         "security": [
@@ -1796,6 +1837,13 @@
             "in": "query",
             "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RoomJoinRequest"
+            }
           }
         ],
         "security": [
@@ -1859,6 +1907,13 @@
             "in": "query",
             "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RoomLeaveRequest"
+            }
           }
         ],
         "security": [
@@ -1992,6 +2047,13 @@
             "in": "query",
             "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RoomP2PStatuses"
+            }
           }
         ],
         "security": [
@@ -2444,6 +2506,13 @@
             "in": "query",
             "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PlayerScoreSubmissionList"
+            }
           }
         ],
         "security": [
@@ -2696,6 +2765,13 @@
             "in": "query",
             "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TurnBasedMatchCreateRequest"
+            }
           }
         ],
         "security": [
@@ -2876,6 +2952,13 @@
             "in": "query",
             "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TurnBasedMatchResults"
+            }
           }
         ],
         "security": [
@@ -3447,6 +3530,13 @@
             "in": "query",
             "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TurnBasedMatchTurn"
+            }
           }
         ],
         "security": [

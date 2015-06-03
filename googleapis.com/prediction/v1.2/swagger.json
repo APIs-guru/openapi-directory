@@ -40,6 +40,13 @@
             "description": "mybucket%2Fmydata resource in Google Storage",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Input"
+            }
           }
         ],
         "security": [
@@ -93,6 +100,13 @@
             "description": "The name of a hosted model",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Input"
+            }
           }
         ],
         "security": [
@@ -208,6 +222,13 @@
             "description": "mybucket/mydata resource in Google Storage",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
           }
         ],
         "security": [
@@ -263,6 +284,13 @@
             "in": "query",
             "description": "mybucket/mydata resource in Google Storage",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Training"
+            }
           }
         ],
         "security": [

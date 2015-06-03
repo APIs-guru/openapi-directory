@@ -54,6 +54,13 @@
             "description": "The name of the account to be passed to the Android Account Manager.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
           }
         ],
         "tags": [
@@ -162,6 +169,13 @@
             "description": "The ID of the contact.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
           }
         ],
         "security": [
@@ -193,6 +207,13 @@
             "description": "The ID of the contact.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
           }
         ],
         "security": [
@@ -242,6 +263,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Contact"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -507,6 +537,13 @@
             "description": "The ID of the subscription.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
           }
         ],
         "security": [
@@ -556,6 +593,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -693,6 +739,13 @@
             "description": "The ID of the timeline item.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TimelineItem"
+            }
           }
         ],
         "security": [
@@ -1044,6 +1097,13 @@
             "description": "The ID of the timeline item.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TimelineItem"
+            }
           }
         ],
         "security": [
@@ -1412,6 +1472,15 @@
           "video/x-msvideo",
           "video/x-sgi-movie",
           "video/x-smv"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TimelineItem"
+            }
+          }
         ],
         "security": [
           {

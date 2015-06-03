@@ -145,6 +145,13 @@
             "description": "Name of the Autoscaler resource.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Autoscaler"
+            }
           }
         ],
         "security": [
@@ -190,6 +197,13 @@
             "description": "Name of the Autoscaler resource.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Autoscaler"
+            }
           }
         ],
         "security": [
@@ -253,6 +267,13 @@
             "description": "Zone name of Autoscaler resource.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Autoscaler"
+            }
           }
         ],
         "security": [

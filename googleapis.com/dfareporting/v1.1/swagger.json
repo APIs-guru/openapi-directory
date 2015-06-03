@@ -54,6 +54,13 @@
             "in": "query",
             "description": "The value of the nextToken from the previous result page.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DimensionValueRequest"
+            }
           }
         ],
         "security": [
@@ -282,6 +289,13 @@
             "description": "The ID of the report.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
           }
         ],
         "security": [
@@ -320,6 +334,13 @@
             "description": "The ID of the report.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
           }
         ],
         "security": [
@@ -376,6 +397,13 @@
             "description": "The DFA user profile ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
           }
         ],
         "security": [

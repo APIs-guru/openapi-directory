@@ -1085,6 +1085,13 @@
             "in": "query",
             "description": "Whether a revert action should be performed when the page is updated (default: false).",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Page"
+            }
           }
         ],
         "security": [
@@ -1135,6 +1142,13 @@
             "in": "query",
             "description": "Whether a revert action should be performed when the page is updated (default: false).",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Page"
+            }
           }
         ],
         "security": [
@@ -1197,6 +1211,13 @@
             "in": "query",
             "description": "Whether to create the page as a draft (default: false).",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Page"
+            }
           }
         ],
         "security": [
@@ -1809,6 +1830,13 @@
             "in": "query",
             "description": "Whether a revert action should be performed when the post is updated (default: false).",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
           }
         ],
         "security": [
@@ -1878,6 +1906,13 @@
             "in": "query",
             "description": "Whether a revert action should be performed when the post is updated (default: false).",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
           }
         ],
         "security": [
@@ -2034,6 +2069,13 @@
             "in": "query",
             "description": "Whether to create the post as a draft (default: false).",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
           }
         ],
         "security": [

@@ -214,6 +214,13 @@
             "description": "Part of `logName`. See documentation of `projectsId`.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/WriteLogEntriesRequest"
+            }
           }
         ],
         "security": [
@@ -327,6 +334,13 @@
             "description": "Part of `logName`. See documentation of `projectsId`.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LogSink"
+            }
           }
         ],
         "security": [
@@ -454,6 +468,13 @@
             "description": "Part of `sinkName`. See documentation of `projectsId`.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LogSink"
+            }
           }
         ],
         "security": [
@@ -803,6 +824,13 @@
             "description": "Part of `serviceName`. See documentation of `projectsId`.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LogSink"
+            }
           }
         ],
         "security": [
@@ -930,6 +958,13 @@
             "description": "Part of `sinkName`. See documentation of `projectsId`.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LogSink"
+            }
           }
         ],
         "security": [

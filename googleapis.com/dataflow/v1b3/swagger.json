@@ -54,6 +54,13 @@
               "JOB_VIEW_SUMMARY",
               "JOB_VIEW_UNKNOWN"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
           }
         ],
         "security": [
@@ -214,6 +221,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
           }
         ],
         "security": [
@@ -251,6 +265,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
           }
         ],
         "security": [
@@ -474,6 +495,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LeaseWorkItemRequest"
+            }
           }
         ],
         "security": [
@@ -536,6 +564,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ReportWorkItemStatusRequest"
+            }
           }
         ],
         "security": [

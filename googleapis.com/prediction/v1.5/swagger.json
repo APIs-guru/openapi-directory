@@ -40,6 +40,13 @@
             "description": "The name of a hosted model.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Input"
+            }
           }
         ],
         "security": [
@@ -211,6 +218,13 @@
             "description": "The unique name for the predictive model.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
           }
         ],
         "security": [
@@ -260,6 +274,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Training"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -379,6 +402,13 @@
             "description": "The unique name for the predictive model.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Input"
+            }
           }
         ],
         "security": [

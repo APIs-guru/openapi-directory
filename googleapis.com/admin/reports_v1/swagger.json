@@ -210,6 +210,13 @@
             "in": "query",
             "description": "Return events which occured at or after this time.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
           }
         ],
         "security": [
@@ -256,6 +263,15 @@
             "description": "Successful response"
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [

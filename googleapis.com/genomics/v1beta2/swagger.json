@@ -33,6 +33,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AnnotationSet"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -150,6 +159,13 @@
             "description": "The ID of the annotation set to be updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AnnotationSet"
+            }
           }
         ],
         "security": [
@@ -182,6 +198,13 @@
             "description": "The ID of the annotation set to be updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AnnotationSet"
+            }
           }
         ],
         "security": [
@@ -232,6 +255,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SearchAnnotationSetsRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -281,6 +313,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BatchCreateAnnotationsRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -329,6 +370,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Annotation"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -446,6 +496,13 @@
             "description": "The ID of the annotation set to be updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Annotation"
+            }
           }
         ],
         "security": [
@@ -478,6 +535,13 @@
             "description": "The ID of the annotation set to be updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Annotation"
+            }
           }
         ],
         "security": [
@@ -528,6 +592,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SearchAnnotationsRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -577,6 +650,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CallSet"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -694,6 +776,13 @@
             "description": "The ID of the call set to be updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CallSet"
+            }
           }
         ],
         "security": [
@@ -726,6 +815,13 @@
             "description": "The ID of the call set to be updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CallSet"
+            }
           }
         ],
         "security": [
@@ -776,6 +872,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SearchCallSetsRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -825,6 +930,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -986,6 +1100,13 @@
             "description": "The ID of the dataset to be updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
           }
         ],
         "security": [
@@ -1018,6 +1139,13 @@
             "description": "The ID of the dataset to be updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
           }
         ],
         "security": [
@@ -1125,6 +1253,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ExperimentalCreateJobRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -1286,6 +1423,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SearchJobsRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -1335,6 +1481,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AlignReadGroupSetsRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -1384,6 +1539,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CallReadGroupSetsRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -1502,6 +1666,13 @@
             "description": "The ID of the read group set to be updated. The caller must have WRITE permissions to the dataset associated with this read group set.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ReadGroupSet"
+            }
           }
         ],
         "security": [
@@ -1534,6 +1705,13 @@
             "description": "The ID of the read group set to be updated. The caller must have WRITE permissions to the dataset associated with this read group set.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ReadGroupSet"
+            }
           }
         ],
         "security": [
@@ -1584,6 +1762,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ExportReadGroupSetsRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -1633,6 +1820,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ImportReadGroupSetsRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -1682,6 +1878,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SearchReadGroupSetsRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -1825,6 +2030,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SearchReadsRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -1932,6 +2146,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SearchReferencesRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -2121,6 +2344,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SearchReferenceSetsRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -2170,6 +2402,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Variant"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -2287,6 +2528,13 @@
             "description": "The ID of the variant to be updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Variant"
+            }
           }
         ],
         "security": [
@@ -2337,6 +2585,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SearchVariantsRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -2455,6 +2712,13 @@
             "description": "The ID of the variant to be updated (must already exist).",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VariantSet"
+            }
           }
         ],
         "security": [
@@ -2487,6 +2751,13 @@
             "description": "The ID of the variant to be updated (must already exist).",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VariantSet"
+            }
           }
         ],
         "security": [
@@ -2544,6 +2815,13 @@
             "description": "Required. The ID of the variant set that contains variant data which should be exported. The caller must have READ access to this variant set.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ExportVariantSetRequest"
+            }
           }
         ],
         "security": [
@@ -2602,6 +2880,13 @@
             "description": "Required. The variant set to which variant data should be imported.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ImportVariantsRequest"
+            }
           }
         ],
         "security": [
@@ -2657,6 +2942,13 @@
             "description": "The destination variant set.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/MergeVariantsRequest"
+            }
           }
         ],
         "security": [
@@ -2707,6 +2999,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SearchVariantSetsRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [

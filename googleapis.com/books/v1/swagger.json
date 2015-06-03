@@ -378,6 +378,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BooksCloudloadingResource"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -1440,6 +1449,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Usersettings"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -1534,6 +1552,13 @@
             "in": "query",
             "description": "String to identify the originator of this request.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Annotation"
+            }
           }
         ],
         "security": [
@@ -1601,6 +1626,13 @@
             "in": "query",
             "description": "String to identify the originator of this request.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Annotation"
+            }
           }
         ],
         "security": [

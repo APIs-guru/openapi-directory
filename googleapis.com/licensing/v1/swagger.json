@@ -141,6 +141,13 @@
             "description": "email id or unique Id of the user",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LicenseAssignment"
+            }
           }
         ],
         "security": [
@@ -186,6 +193,13 @@
             "description": "email id or unique Id of the user",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LicenseAssignment"
+            }
           }
         ],
         "security": [
@@ -249,6 +263,13 @@
             "description": "Name for sku",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LicenseAssignmentInsert"
+            }
           }
         ],
         "security": [

@@ -201,6 +201,13 @@
             "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AppEdit"
+            }
           }
         ],
         "security": [
@@ -442,6 +449,13 @@
             "description": "The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ApkListing"
+            }
           }
         ],
         "security": [
@@ -494,6 +508,13 @@
             "description": "The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ApkListing"
+            }
           }
         ],
         "security": [
@@ -669,6 +690,13 @@
             "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ApksAddExternallyHostedRequest"
+            }
           }
         ],
         "security": [
@@ -873,6 +901,13 @@
             "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AppDetails"
+            }
           }
         ],
         "security": [
@@ -911,6 +946,13 @@
             "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AppDetails"
+            }
           }
         ],
         "security": [
@@ -1046,6 +1088,13 @@
               "main",
               "patch"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ExpansionFile"
+            }
           }
         ],
         "security": [
@@ -1101,6 +1150,13 @@
               "main",
               "patch"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ExpansionFile"
+            }
           }
         ],
         "security": [
@@ -1685,6 +1741,13 @@
             "description": "The language code (a BCP-47 language tag) of the localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Listing"
+            }
           }
         ],
         "security": [
@@ -1730,6 +1793,13 @@
             "description": "The language code (a BCP-47 language tag) of the localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Listing"
+            }
           }
         ],
         "security": [
@@ -1951,6 +2021,13 @@
               "production",
               "rollout"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Testers"
+            }
           }
         ],
         "security": [
@@ -2000,6 +2077,13 @@
               "production",
               "rollout"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Testers"
+            }
           }
         ],
         "security": [
@@ -2127,6 +2211,13 @@
               "production",
               "rollout"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Track"
+            }
           }
         ],
         "security": [
@@ -2178,6 +2269,13 @@
               "production",
               "rollout"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Track"
+            }
           }
         ],
         "security": [
@@ -2359,6 +2457,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/InappproductsBatchRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -2498,6 +2605,13 @@
             "in": "query",
             "description": "If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/InAppProduct"
+            }
           }
         ],
         "security": [
@@ -2542,6 +2656,13 @@
             "in": "query",
             "description": "If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/InAppProduct"
+            }
           }
         ],
         "security": [
@@ -2604,6 +2725,13 @@
             "in": "query",
             "description": "If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/InAppProduct"
+            }
           }
         ],
         "security": [
@@ -2857,6 +2985,13 @@
             "description": "The token provided to the user's device when the subscription was purchased.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionPurchasesDeferRequest"
+            }
           }
         ],
         "security": [

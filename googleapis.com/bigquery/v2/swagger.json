@@ -128,6 +128,13 @@
             "description": "Dataset ID of the dataset being updated",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
           }
         ],
         "security": [
@@ -167,6 +174,13 @@
             "description": "Dataset ID of the dataset being updated",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
           }
         ],
         "security": [
@@ -224,6 +238,13 @@
             "description": "Project ID of the new dataset",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
           }
         ],
         "security": [
@@ -550,6 +571,13 @@
             "description": "Project ID of the project that will be billed for the job",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
           }
         ],
         "security": [
@@ -685,6 +713,13 @@
             "description": "Project ID of the project billed for the query",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/QueryRequest"
+            }
           }
         ],
         "security": [
@@ -818,6 +853,13 @@
             "description": "Table ID of the destination table.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TableDataInsertAllRequest"
+            }
           }
         ],
         "security": [
@@ -1068,6 +1110,13 @@
             "description": "Table ID of the table to update",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
           }
         ],
         "security": [
@@ -1114,6 +1163,13 @@
             "description": "Table ID of the table to update",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
           }
         ],
         "security": [
@@ -1178,6 +1234,13 @@
             "description": "Dataset ID of the new table",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
           }
         ],
         "security": [

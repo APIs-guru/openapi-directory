@@ -47,6 +47,13 @@
             "description": "The name of a hosted model.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Input"
+            }
           }
         ],
         "security": [
@@ -246,6 +253,13 @@
             "description": "The unique name for the predictive model.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Update"
+            }
           }
         ],
         "security": [
@@ -302,6 +316,13 @@
             "description": "The project associated with the model.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Insert"
+            }
           }
         ],
         "security": [
@@ -437,6 +458,13 @@
             "description": "The unique name for the predictive model.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Input"
+            }
           }
         ],
         "security": [

@@ -214,6 +214,13 @@
             "in": "query",
             "description": "Job title",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
           }
         ],
         "security": [
@@ -323,6 +330,13 @@
             "in": "query",
             "description": "Job title",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
           }
         ],
         "security": [
@@ -441,6 +455,13 @@
             "in": "query",
             "description": "Job note as newline (Unix) separated string",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
           }
         ],
         "security": [
@@ -700,6 +721,13 @@
             "in": "query",
             "description": "Scheduled start time in milliseconds since epoch.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
           }
         ],
         "security": [
@@ -762,6 +790,13 @@
             "in": "query",
             "description": "Scheduled start time in milliseconds since epoch.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
           }
         ],
         "security": [

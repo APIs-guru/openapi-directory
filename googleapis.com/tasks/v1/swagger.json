@@ -100,6 +100,13 @@
             "description": "Task list identifier.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TaskList"
+            }
           }
         ],
         "security": [
@@ -131,6 +138,13 @@
             "description": "Task list identifier.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TaskList"
+            }
           }
         ],
         "security": [
@@ -180,6 +194,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TaskList"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -405,6 +428,13 @@
             "description": "Task identifier.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
           }
         ],
         "security": [
@@ -443,6 +473,13 @@
             "description": "Task identifier.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
           }
         ],
         "security": [
@@ -511,6 +548,13 @@
             "in": "query",
             "description": "Previous sibling task identifier. If the task is created at the first position among its siblings, this parameter is omitted. Optional.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
           }
         ],
         "security": [

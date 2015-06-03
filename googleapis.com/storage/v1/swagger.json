@@ -120,6 +120,13 @@
             "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BucketAccessControl"
+            }
           }
         ],
         "security": [
@@ -158,6 +165,13 @@
             "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BucketAccessControl"
+            }
           }
         ],
         "security": [
@@ -214,6 +228,13 @@
             "description": "Name of a bucket.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BucketAccessControl"
+            }
           }
         ],
         "security": [
@@ -448,6 +469,13 @@
               "full",
               "noAcl"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Bucket"
+            }
           }
         ],
         "security": [
@@ -530,6 +558,13 @@
               "full",
               "noAcl"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Bucket"
+            }
           }
         ],
         "security": [
@@ -625,6 +660,13 @@
               "full",
               "noAcl"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Bucket"
+            }
           }
         ],
         "security": [
@@ -736,6 +778,15 @@
             "description": "Successful response"
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -873,6 +924,13 @@
             "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ObjectAccessControl"
+            }
           }
         ],
         "security": [
@@ -911,6 +969,13 @@
             "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ObjectAccessControl"
+            }
           }
         ],
         "security": [
@@ -967,6 +1032,13 @@
             "description": "Name of a bucket.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ObjectAccessControl"
+            }
           }
         ],
         "security": [
@@ -1185,6 +1257,13 @@
             "in": "query",
             "description": "If present, selects a specific revision of this object (as opposed to the latest version, the default).",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ObjectAccessControl"
+            }
           }
         ],
         "security": [
@@ -1236,6 +1315,13 @@
             "in": "query",
             "description": "If present, selects a specific revision of this object (as opposed to the latest version, the default).",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ObjectAccessControl"
+            }
           }
         ],
         "security": [
@@ -1305,6 +1391,13 @@
             "in": "query",
             "description": "If present, selects a specific revision of this object (as opposed to the latest version, the default).",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ObjectAccessControl"
+            }
           }
         ],
         "security": [
@@ -1438,6 +1531,13 @@
             "in": "query",
             "description": "Makes the operation conditional on whether the object's current metageneration matches the given value.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ComposeRequest"
+            }
           }
         ],
         "security": [
@@ -1595,6 +1695,13 @@
             "in": "query",
             "description": "If present, selects a specific revision of the source object (as opposed to the latest version, the default).",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
           }
         ],
         "security": [
@@ -1862,6 +1969,13 @@
               "full",
               "noAcl"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
           }
         ],
         "security": [
@@ -1956,6 +2070,13 @@
               "full",
               "noAcl"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
           }
         ],
         "security": [
@@ -2077,6 +2198,13 @@
               "full",
               "noAcl"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
           }
         ],
         "security": [
@@ -2321,6 +2449,13 @@
             "in": "query",
             "description": "If present, selects a specific revision of the source object (as opposed to the latest version, the default).",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
           }
         ],
         "security": [
@@ -2420,6 +2555,13 @@
             "in": "query",
             "description": "If true, lists all versions of an object as distinct results. The default is false. For more information, see Object Versioning.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
           }
         ],
         "security": [

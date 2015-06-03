@@ -121,6 +121,13 @@
             "description": "ACL rule identifier.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AclRule"
+            }
           }
         ],
         "security": [
@@ -159,6 +166,13 @@
             "description": "ACL rule identifier.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AclRule"
+            }
           }
         ],
         "security": [
@@ -215,6 +229,13 @@
             "description": "Calendar identifier.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AclRule"
+            }
           }
         ],
         "security": [
@@ -352,6 +373,13 @@
             "in": "query",
             "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All entries deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
           }
         ],
         "security": [
@@ -474,6 +502,13 @@
             "in": "query",
             "description": "Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CalendarListEntry"
+            }
           }
         ],
         "security": [
@@ -511,6 +546,13 @@
             "in": "query",
             "description": "Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CalendarListEntry"
+            }
           }
         ],
         "security": [
@@ -566,6 +608,13 @@
             "in": "query",
             "description": "Whether to use the foregroundColor and backgroundColor fields to write the calendar colors (RGB). If this feature is used, the index-based colorId field will be set to the best matching option automatically. Optional. The default is False.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CalendarListEntry"
+            }
           }
         ],
         "security": [
@@ -726,6 +775,13 @@
             "in": "query",
             "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. If only read-only fields such as calendar properties or ACLs have changed, the entry won't be returned. All entries deleted and hidden since the previous list request will always be in the result set and it is not allowed to set showDeleted neither showHidden to False.\nTo ensure client state consistency minAccessRole query parameter cannot be specified together with nextSyncToken.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
           }
         ],
         "security": [
@@ -896,6 +952,13 @@
             "description": "Calendar identifier.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Calendar"
+            }
           }
         ],
         "security": [
@@ -927,6 +990,13 @@
             "description": "Calendar identifier.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Calendar"
+            }
           }
         ],
         "security": [
@@ -976,6 +1046,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Calendar"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -1020,6 +1099,15 @@
             "description": "Successful response"
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -1248,6 +1336,13 @@
             "in": "query",
             "description": "Whether to send notifications about the event update (e.g. attendee's responses, title changes, etc.). Optional. The default is False.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
           }
         ],
         "security": [
@@ -1305,6 +1400,13 @@
             "in": "query",
             "description": "Whether to send notifications about the event update (e.g. attendee's responses, title changes, etc.). Optional. The default is False.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
           }
         ],
         "security": [
@@ -1361,6 +1463,13 @@
             "description": "Calendar identifier.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
           }
         ],
         "security": [
@@ -1430,6 +1539,13 @@
             "in": "query",
             "description": "Whether to send notifications about the creation of the new event. Optional. The default is False.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
           }
         ],
         "security": [
@@ -2015,6 +2131,13 @@
             "in": "query",
             "description": "Lower bound for an event's last modification time (as a RFC 3339 timestamp) to filter by. When specified, entries deleted since this time will always be included regardless of showDeleted. Optional. The default is not to filter by last modification time.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
           }
         ],
         "security": [
@@ -2065,6 +2188,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/FreeBusyRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -2258,6 +2390,13 @@
             "in": "query",
             "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
           }
         ],
         "security": [

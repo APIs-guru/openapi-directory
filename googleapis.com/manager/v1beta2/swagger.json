@@ -154,6 +154,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
           }
         ],
         "security": [
@@ -363,6 +370,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
           }
         ],
         "security": [

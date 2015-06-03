@@ -33,6 +33,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DownloadLineItemsRequest"
+            }
+          }
+        ],
         "tags": [
           "lineitems"
         ]
@@ -73,6 +82,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UploadLineItemsRequest"
+            }
+          }
+        ],
         "tags": [
           "lineitems"
         ]
@@ -113,6 +131,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Query"
+            }
+          }
+        ],
         "tags": [
           "queries"
         ]
@@ -202,6 +229,13 @@
             "description": "Query ID to run.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RunQueryRequest"
+            }
           }
         ],
         "tags": [

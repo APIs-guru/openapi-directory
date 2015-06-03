@@ -40,6 +40,13 @@
             "description": "The project id. The value can be the numeric project ID or string-based project name.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/MetricDescriptor"
+            }
           }
         ],
         "security": [
@@ -92,6 +99,13 @@
             "in": "query",
             "description": "The query used to search against existing metrics. Separate keywords with a space; the service joins all keywords with AND, meaning that all keywords must match for a metric to be returned. If this field is omitted, all metrics are returned. If an empty string is passed with this field, no metrics are returned.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ListMetricDescriptorsRequest"
+            }
           }
         ],
         "security": [
@@ -280,6 +294,13 @@
             "in": "query",
             "description": "The sampling window. At most one data point will be returned for each window in the requested time interval. This parameter is only valid for non-cumulative metric types. Units:  \n- m: minute \n- h: hour \n- d: day \n- w: week  Examples: 3m, 4w. Only one unit is allowed, for example: 2w3d is not allowed; you should use 17d instead.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ListTimeseriesRequest"
+            }
           }
         ],
         "security": [
@@ -336,6 +357,13 @@
             "description": "The project ID. The value can be the numeric project ID or string-based project name.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/WriteTimeseriesRequest"
+            }
           }
         ],
         "security": [
@@ -461,6 +489,13 @@
             "in": "query",
             "description": "The sampling window. At most one data point will be returned for each window in the requested time interval. This parameter is only valid for non-cumulative metric types. Units:  \n- m: minute \n- h: hour \n- d: day \n- w: week  Examples: 3m, 4w. Only one unit is allowed, for example: 2w3d is not allowed; you should use 17d instead.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ListTimeseriesDescriptorsRequest"
+            }
           }
         ],
         "security": [

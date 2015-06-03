@@ -40,6 +40,13 @@
             "description": "Create the data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
           }
         ],
         "security": [
@@ -234,6 +241,13 @@
             "description": "The data stream ID of the data source to update.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
           }
         ],
         "security": [
@@ -274,6 +288,13 @@
             "description": "The data stream ID of the data source to update.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DataSource"
+            }
           }
         ],
         "security": [
@@ -470,6 +491,13 @@
             "in": "query",
             "description": "The client's current time in milliseconds since epoch. Note that the minStartTimeNs and maxEndTimeNs properties in the request body are in nanoseconds instead of milliseconds.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
           }
         ],
         "security": [
@@ -526,6 +554,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AggregateRequest"
+            }
           }
         ],
         "tags": [
@@ -629,6 +664,13 @@
             "in": "query",
             "description": "The client's current time in milliseconds since epoch.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Session"
+            }
           }
         ],
         "security": [

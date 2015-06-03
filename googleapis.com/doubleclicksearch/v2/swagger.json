@@ -161,6 +161,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ConversionList"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -238,6 +247,13 @@
             "description": "The 0-based starting index for retrieving conversions results.",
             "required": true,
             "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ConversionList"
+            }
           }
         ],
         "security": [
@@ -262,6 +278,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ConversionList"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -309,6 +334,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateAvailabilityRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -356,6 +390,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ReportRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -520,6 +563,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ReportRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [

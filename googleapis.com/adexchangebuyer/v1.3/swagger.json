@@ -71,6 +71,13 @@
             "description": "The account id",
             "required": true,
             "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
           }
         ],
         "security": [
@@ -102,6 +109,13 @@
             "description": "The account id",
             "required": true,
             "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
           }
         ],
         "security": [
@@ -353,6 +367,13 @@
             "description": "The billing id associated with the budget being updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Budget"
+            }
           }
         ],
         "security": [
@@ -391,6 +412,13 @@
             "description": "The billing id associated with the budget being updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Budget"
+            }
           }
         ],
         "security": [
@@ -503,6 +531,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Creative"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -893,6 +930,13 @@
             "description": "The specific id of the configuration to update.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PretargetingConfig"
+            }
           }
         ],
         "security": [
@@ -931,6 +975,13 @@
             "description": "The specific id of the configuration to update.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PretargetingConfig"
+            }
           }
         ],
         "security": [
@@ -987,6 +1038,13 @@
             "description": "The account id to insert the pretargeting config for.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PretargetingConfig"
+            }
           }
         ],
         "security": [

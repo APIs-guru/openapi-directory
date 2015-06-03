@@ -121,6 +121,13 @@
             "description": "Name or identifier for the column that is being updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Column"
+            }
           }
         ],
         "security": [
@@ -159,6 +166,13 @@
             "description": "Name or identifier for the column that is being updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Column"
+            }
           }
         ],
         "security": [
@@ -215,6 +229,13 @@
             "description": "Table for which a new column is being added.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Column"
+            }
           }
         ],
         "security": [
@@ -510,6 +531,13 @@
             "description": "Identifier (within a table) for the style being updated.",
             "required": true,
             "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/StyleSetting"
+            }
           }
         ],
         "security": [
@@ -548,6 +576,13 @@
             "description": "Identifier (within a table) for the style being updated.",
             "required": true,
             "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/StyleSetting"
+            }
           }
         ],
         "security": [
@@ -604,6 +639,13 @@
             "description": "Table for which a new style is being added",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/StyleSetting"
+            }
           }
         ],
         "security": [
@@ -834,6 +876,13 @@
             "in": "query",
             "description": "Should the view definition also be updated? The specified view definition replaces the existing one. Only a view can be updated with a new definition.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
           }
         ],
         "security": [
@@ -871,6 +920,13 @@
             "in": "query",
             "description": "Should the view definition also be updated? The specified view definition replaces the existing one. Only a view can be updated with a new definition.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
           }
         ],
         "security": [
@@ -1080,6 +1136,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -1424,6 +1489,13 @@
             "description": "Identifier for the template that is being updated",
             "required": true,
             "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
           }
         ],
         "security": [
@@ -1462,6 +1534,13 @@
             "description": "Identifier for the template that is being updated",
             "required": true,
             "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
           }
         ],
         "security": [
@@ -1518,6 +1597,13 @@
             "description": "Table for which a new template is being created",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
           }
         ],
         "security": [

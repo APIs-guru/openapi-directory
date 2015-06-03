@@ -109,6 +109,13 @@
             "description": "Whether to update the view date after successfully updating the file.",
             "default": "true",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/File"
+            }
           }
         ],
         "security": [
@@ -164,6 +171,13 @@
             "description": "Whether to update the view date after successfully updating the file.",
             "default": "true",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/File"
+            }
           }
         ],
         "security": [
@@ -215,6 +229,15 @@
         },
         "consumes": [
           "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/File"
+            }
+          }
         ],
         "security": [
           {

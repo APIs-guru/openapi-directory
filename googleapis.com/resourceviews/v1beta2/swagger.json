@@ -216,6 +216,13 @@
             "description": "The name of the resource view.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ZoneViewsAddResourcesRequest"
+            }
           }
         ],
         "security": [
@@ -480,6 +487,13 @@
             "description": "The zone name of the resource view.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ResourceView"
+            }
           }
         ],
         "security": [
@@ -726,6 +740,13 @@
             "description": "The name of the resource view.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ZoneViewsRemoveResourcesRequest"
+            }
           }
         ],
         "security": [
@@ -798,6 +819,13 @@
             "description": "The name of the resource view.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ZoneViewsSetServiceRequest"
+            }
           }
         ],
         "security": [

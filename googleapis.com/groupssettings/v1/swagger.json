@@ -71,6 +71,13 @@
             "description": "The resource ID",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Groups"
+            }
           }
         ],
         "security": [
@@ -102,6 +109,13 @@
             "description": "The resource ID",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Groups"
+            }
           }
         ],
         "security": [

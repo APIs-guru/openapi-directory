@@ -33,6 +33,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TripsSearchRequest"
+            }
+          }
+        ],
         "tags": [
           "trips"
         ]

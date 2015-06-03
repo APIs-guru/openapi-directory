@@ -72,6 +72,13 @@
             "description": "Id of the Customer",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
           }
         ],
         "security": [
@@ -103,6 +110,13 @@
             "description": "Id of the Customer",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
           }
         ],
         "security": [
@@ -158,6 +172,13 @@
             "in": "query",
             "description": "An auth token needed for inserting a customer for which domain already exists. Can be generated at https://www.google.com/a/cpanel//TransferToken. Optional.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
           }
         ],
         "security": [
@@ -284,6 +305,13 @@
             "description": "Id of the subscription, which is unique for a customer",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ChangePlanRequest"
+            }
           }
         ],
         "security": [
@@ -347,6 +375,13 @@
             "description": "Id of the subscription, which is unique for a customer",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RenewalSettings"
+            }
           }
         ],
         "security": [
@@ -410,6 +445,13 @@
             "description": "Id of the subscription, which is unique for a customer",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Seats"
+            }
           }
         ],
         "security": [
@@ -584,6 +626,13 @@
             "in": "query",
             "description": "An auth token needed for transferring a subscription. Can be generated at https://www.google.com/a/cpanel/customer-domain/TransferToken. Optional.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
           }
         ],
         "security": [

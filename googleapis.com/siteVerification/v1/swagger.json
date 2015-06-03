@@ -99,6 +99,13 @@
             "description": "The id of a verified site or domain.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SiteVerificationWebResourceResource"
+            }
           }
         ],
         "security": [
@@ -130,6 +137,13 @@
             "description": "The id of a verified site or domain.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SiteVerificationWebResourceResource"
+            }
           }
         ],
         "security": [
@@ -179,6 +193,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SiteVerificationWebResourceGettokenRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -234,6 +257,13 @@
             "description": "The method to use for verifying a site or domain.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SiteVerificationWebResourceResource"
+            }
           }
         ],
         "security": [

@@ -99,6 +99,13 @@
             "description": "The ID of the achievement used by this method.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AchievementConfiguration"
+            }
           }
         ],
         "security": [
@@ -130,6 +137,13 @@
             "description": "The ID of the achievement used by this method.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AchievementConfiguration"
+            }
           }
         ],
         "security": [
@@ -186,6 +200,13 @@
             "description": "The application ID from the Google Play developer console.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AchievementConfiguration"
+            }
           }
         ],
         "security": [
@@ -484,6 +505,13 @@
             "description": "The ID of the leaderboard.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LeaderboardConfiguration"
+            }
           }
         ],
         "security": [
@@ -515,6 +543,13 @@
             "description": "The ID of the leaderboard.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LeaderboardConfiguration"
+            }
           }
         ],
         "security": [
@@ -571,6 +606,13 @@
             "description": "The application ID from the Google Play developer console.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/LeaderboardConfiguration"
+            }
           }
         ],
         "security": [

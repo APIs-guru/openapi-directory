@@ -218,6 +218,13 @@
             "description": "The new lease in seconds.",
             "required": true,
             "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
           }
         ],
         "security": [
@@ -269,6 +276,13 @@
             "description": "The new lease in seconds.",
             "required": true,
             "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
           }
         ],
         "security": [
@@ -333,6 +347,13 @@
             "description": "The taskqueue to insert the task into",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
           }
         ],
         "security": [

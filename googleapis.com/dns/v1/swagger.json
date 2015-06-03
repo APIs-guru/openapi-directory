@@ -47,6 +47,13 @@
             "description": "Identifies the managed zone addressed by this request. Can be the managed zone name or id.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Change"
+            }
           }
         ],
         "security": [
@@ -244,6 +251,13 @@
             "description": "Identifies the project addressed by this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ManagedZone"
+            }
           }
         ],
         "security": [

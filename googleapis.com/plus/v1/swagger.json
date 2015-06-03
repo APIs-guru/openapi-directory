@@ -425,6 +425,13 @@
             "in": "query",
             "description": "Return the moment as written. Should be used only for debugging.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Moment"
+            }
           }
         ],
         "security": [

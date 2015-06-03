@@ -79,6 +79,13 @@
             "in": "query",
             "description": "When provided, this fingerprint must match the fingerprint of the account in storage.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
           }
         ],
         "security": [
@@ -184,6 +191,13 @@
             "description": "The GTM Account ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Container"
+            }
           }
         ],
         "security": [
@@ -359,6 +373,13 @@
             "in": "query",
             "description": "When provided, this fingerprint must match the fingerprint of the container in storage.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Container"
+            }
           }
         ],
         "security": [
@@ -422,6 +443,13 @@
             "description": "The GTM Container ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Macro"
+            }
           }
         ],
         "security": [
@@ -625,6 +653,13 @@
             "in": "query",
             "description": "When provided, this fingerprint must match the fingerprint of the macro in storage.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Macro"
+            }
           }
         ],
         "security": [
@@ -688,6 +723,13 @@
             "description": "The GTM Container ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
           }
         ],
         "security": [
@@ -891,6 +933,13 @@
             "in": "query",
             "description": "When provided, this fingerprint must match the fingerprint of the rule in storage.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Rule"
+            }
           }
         ],
         "security": [
@@ -954,6 +1003,13 @@
             "description": "The GTM Container ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Tag"
+            }
           }
         ],
         "security": [
@@ -1157,6 +1213,13 @@
             "in": "query",
             "description": "When provided, this fingerprint must match the fingerprint of the tag in storage.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Tag"
+            }
           }
         ],
         "security": [
@@ -1220,6 +1283,13 @@
             "description": "The GTM Container ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            }
           }
         ],
         "security": [
@@ -1423,6 +1493,13 @@
             "in": "query",
             "description": "When provided, this fingerprint must match the fingerprint of the trigger in storage.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Trigger"
+            }
           }
         ],
         "security": [
@@ -1486,6 +1563,13 @@
             "description": "The GTM Container ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Variable"
+            }
           }
         ],
         "security": [
@@ -1689,6 +1773,13 @@
             "in": "query",
             "description": "When provided, this fingerprint must match the fingerprint of the variable in storage.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Variable"
+            }
           }
         ],
         "security": [
@@ -1752,6 +1843,13 @@
             "description": "The GTM Container ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateContainerVersionRequestVersionOptions"
+            }
           }
         ],
         "security": [
@@ -1964,6 +2062,13 @@
             "in": "query",
             "description": "When provided, this fingerprint must match the fingerprint of the container version in storage.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ContainerVersion"
+            }
           }
         ],
         "security": [
@@ -2236,6 +2341,13 @@
             "description": "The GTM Account ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UserAccess"
+            }
           }
         ],
         "security": [
@@ -2403,6 +2515,13 @@
             "description": "The GTM User ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UserAccess"
+            }
           }
         ],
         "security": [

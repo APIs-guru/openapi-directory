@@ -159,6 +159,13 @@
               "PATCH",
               "UPDATE"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
           }
         ],
         "security": [
@@ -231,6 +238,13 @@
               "PATCH",
               "UPDATE"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
           }
         ],
         "security": [
@@ -288,6 +302,13 @@
             "description": "The project ID for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
           }
         ],
         "security": [

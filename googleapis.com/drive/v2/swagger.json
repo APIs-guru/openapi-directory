@@ -435,6 +435,13 @@
             "in": "query",
             "description": "Change ID to start listing changes from.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
           }
         ],
         "security": [
@@ -487,6 +494,15 @@
             "description": "Successful response"
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -651,6 +667,13 @@
             "description": "The ID of the folder.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ChildReference"
+            }
           }
         ],
         "security": [
@@ -856,6 +879,13 @@
             "description": "The ID of the comment.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
           }
         ],
         "security": [
@@ -895,6 +925,13 @@
             "description": "The ID of the comment.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
           }
         ],
         "security": [
@@ -952,6 +989,13 @@
             "description": "The ID of the file.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
           }
         ],
         "security": [
@@ -1120,6 +1164,13 @@
               "DEFAULT",
               "PRIVATE"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/File"
+            }
           }
         ],
         "security": [
@@ -1355,6 +1406,13 @@
             "description": "Whether to use the content as indexable text.",
             "default": "false",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/File"
+            }
           }
         ],
         "security": [
@@ -1473,6 +1531,13 @@
             "description": "Whether to use the content as indexable text.",
             "default": "false",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/File"
+            }
           }
         ],
         "security": [
@@ -1631,6 +1696,13 @@
               "DEFAULT",
               "PRIVATE"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/File"
+            }
           }
         ],
         "security": [
@@ -1974,6 +2046,13 @@
             "description": "Whether to update the view date after successfully retrieving the file.",
             "default": "false",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
           }
         ],
         "security": [
@@ -2140,6 +2219,13 @@
             "description": "The ID of the file.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ParentReference"
+            }
           }
         ],
         "security": [
@@ -2326,6 +2412,13 @@
             "description": "Whether changing a role to 'owner' downgrades the current owners to writers. Does nothing if the specified role is not 'owner'.",
             "default": "false",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Permission"
+            }
           }
         ],
         "security": [
@@ -2372,6 +2465,13 @@
             "description": "Whether changing a role to 'owner' downgrades the current owners to writers. Does nothing if the specified role is not 'owner'.",
             "default": "false",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Permission"
+            }
           }
         ],
         "security": [
@@ -2504,6 +2604,13 @@
             "description": "Whether to send notification emails when sharing to users or groups. This parameter is ignored and an email is sent if the role is owner.",
             "default": "true",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Permission"
+            }
           }
         ],
         "security": [
@@ -2705,6 +2812,13 @@
             "description": "The visibility of the property.",
             "default": "private",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Property"
+            }
           }
         ],
         "security": [
@@ -2753,6 +2867,13 @@
             "description": "The visibility of the property.",
             "default": "private",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Property"
+            }
           }
         ],
         "security": [
@@ -2812,6 +2933,13 @@
             "description": "The ID of the file.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Property"
+            }
           }
         ],
         "security": [
@@ -3118,6 +3246,13 @@
             "description": "The ID of the reply.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CommentReply"
+            }
           }
         ],
         "security": [
@@ -3164,6 +3299,13 @@
             "description": "The ID of the reply.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CommentReply"
+            }
           }
         ],
         "security": [
@@ -3228,6 +3370,13 @@
             "description": "The ID of the comment.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CommentReply"
+            }
           }
         ],
         "security": [
@@ -3434,6 +3583,13 @@
             "description": "The ID for the revision.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Revision"
+            }
           }
         ],
         "security": [
@@ -3474,6 +3630,13 @@
             "description": "The ID for the revision.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Revision"
+            }
           }
         ],
         "security": [

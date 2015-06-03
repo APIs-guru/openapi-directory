@@ -227,6 +227,13 @@
             "description": "Name of the group for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/GroupsAddMemberRequest"
+            }
           }
         ],
         "security": [
@@ -388,6 +395,13 @@
             "description": "Project ID for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Group"
+            }
           }
         ],
         "security": [
@@ -506,6 +520,13 @@
             "description": "Name of the group for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/GroupsRemoveMemberRequest"
+            }
           }
         ],
         "security": [
@@ -748,6 +769,13 @@
             "description": "Name of the user for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PublicKey"
+            }
           }
         ],
         "security": [
@@ -909,6 +937,13 @@
             "description": "Project ID for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           }
         ],
         "security": [

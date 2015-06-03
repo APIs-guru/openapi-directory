@@ -120,6 +120,13 @@
             "description": "The ID of the collection.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Collection"
+            }
           }
         ],
         "security": [
@@ -158,6 +165,13 @@
             "description": "The ID of the collection.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Collection"
+            }
           }
         ],
         "security": [
@@ -214,6 +228,13 @@
             "description": "The ID of the enterprise.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Collection"
+            }
           }
         ],
         "security": [
@@ -402,6 +423,13 @@
             "description": "The ID of the user.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           }
         ],
         "security": [
@@ -447,6 +475,13 @@
             "description": "The ID of the user.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           }
         ],
         "security": [
@@ -695,6 +730,13 @@
             "description": "The ID of the device.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DeviceState"
+            }
           }
         ],
         "security": [
@@ -898,6 +940,13 @@
             "description": "The token provided by the enterprise to register the MDM.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Enterprise"
+            }
           }
         ],
         "security": [
@@ -954,6 +1003,13 @@
             "description": "The token provided by the enterprise to register the MDM.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Enterprise"
+            }
           }
         ],
         "security": [
@@ -1041,6 +1097,13 @@
             "description": "The ID of the enterprise.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseAccount"
+            }
           }
         ],
         "security": [
@@ -1257,6 +1320,13 @@
             "in": "query",
             "description": "Set to true to also install the product on all the user's devices where possible. Failure to install on one or more devices will not prevent this operation from returning successfully, as long as the entitlement was successfully assigned to the user.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Entitlement"
+            }
           }
         ],
         "security": [
@@ -1308,6 +1378,13 @@
             "in": "query",
             "description": "Set to true to also install the product on all the user's devices where possible. Failure to install on one or more devices will not prevent this operation from returning successfully, as long as the entitlement was successfully assigned to the user.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Entitlement"
+            }
           }
         ],
         "security": [
@@ -1731,6 +1808,13 @@
             "description": "The ID of the product represented by the install, e.g. \"app:com.google.android.gm\".",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Install"
+            }
           }
         ],
         "security": [
@@ -1783,6 +1867,13 @@
             "description": "The ID of the product represented by the install, e.g. \"app:com.google.android.gm\".",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Install"
+            }
           }
         ],
         "security": [
@@ -2154,6 +2245,13 @@
             "description": "The ID of the product.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ProductPermissions"
+            }
           }
         ],
         "security": [

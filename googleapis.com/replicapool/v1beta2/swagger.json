@@ -54,6 +54,13 @@
             "description": "The name of the instance group manager.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/InstanceGroupManagersAbandonInstancesRequest"
+            }
           }
         ],
         "security": [
@@ -243,6 +250,13 @@
             "description": "The name of the instance group manager.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/InstanceGroupManagersDeleteInstancesRequest"
+            }
           }
         ],
         "security": [
@@ -315,6 +329,13 @@
             "required": true,
             "type": "integer",
             "minimum": 0
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/InstanceGroupManager"
+            }
           }
         ],
         "security": [
@@ -447,6 +468,13 @@
             "description": "The name of the instance group manager.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/InstanceGroupManagersRecreateInstancesRequest"
+            }
           }
         ],
         "security": [
@@ -597,6 +625,13 @@
             "description": "The name of the instance group manager.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/InstanceGroupManagersSetInstanceTemplateRequest"
+            }
           }
         ],
         "security": [
@@ -668,6 +703,13 @@
             "description": "The name of the instance group manager.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/InstanceGroupManagersSetTargetPoolsRequest"
+            }
           }
         ],
         "security": [

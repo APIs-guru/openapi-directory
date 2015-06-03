@@ -491,6 +491,13 @@
             "description": "Ad client into which to insert the ad unit.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AdUnit"
+            }
           }
         ],
         "security": [
@@ -594,6 +601,13 @@
             "description": "Ad unit to get.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AdUnit"
+            }
           }
         ],
         "security": [
@@ -632,6 +646,13 @@
             "description": "Ad client which contains the ad unit.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AdUnit"
+            }
           }
         ],
         "security": [
@@ -1182,6 +1203,13 @@
             "description": "Ad client to which the new custom channel will be added.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CustomChannel"
+            }
           }
         ],
         "security": [
@@ -1265,6 +1293,13 @@
             "description": "Custom channel to get.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CustomChannel"
+            }
           }
         ],
         "security": [
@@ -1296,6 +1331,13 @@
             "description": "Ad client in which the custom channel will be updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CustomChannel"
+            }
           }
         ],
         "security": [
@@ -1540,6 +1582,13 @@
             "description": "Ad client to which the new URL channel will be added.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UrlChannel"
+            }
           }
         ],
         "security": [

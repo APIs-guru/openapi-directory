@@ -80,6 +80,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AccountsCustomBatchRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -214,6 +223,13 @@
             "description": "The ID of the account.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
           }
         ],
         "security": [
@@ -252,6 +268,13 @@
             "description": "The ID of the account.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
           }
         ],
         "security": [
@@ -308,6 +331,13 @@
             "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
           }
         ],
         "security": [
@@ -406,6 +436,13 @@
             "in": "query",
             "description": "Flag to run the request in dry-run mode.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AccountshippingCustomBatchRequest"
+            }
           }
         ],
         "security": [
@@ -513,6 +550,13 @@
             "in": "query",
             "description": "Flag to run the request in dry-run mode.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AccountShipping"
+            }
           }
         ],
         "security": [
@@ -557,6 +601,13 @@
             "in": "query",
             "description": "Flag to run the request in dry-run mode.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AccountShipping"
+            }
           }
         ],
         "security": [
@@ -673,6 +724,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AccountstatusesCustomBatchRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -857,6 +917,13 @@
             "in": "query",
             "description": "Flag to run the request in dry-run mode.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AccounttaxCustomBatchRequest"
+            }
           }
         ],
         "security": [
@@ -964,6 +1031,13 @@
             "in": "query",
             "description": "Flag to run the request in dry-run mode.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AccountTax"
+            }
           }
         ],
         "security": [
@@ -1008,6 +1082,13 @@
             "in": "query",
             "description": "Flag to run the request in dry-run mode.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AccountTax"
+            }
           }
         ],
         "security": [
@@ -1124,6 +1205,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DatafeedsCustomBatchRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -1252,6 +1342,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Datafeed"
+            }
           }
         ],
         "security": [
@@ -1288,6 +1385,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Datafeed"
+            }
           }
         ],
         "security": [
@@ -1343,6 +1447,13 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Datafeed"
+            }
           }
         ],
         "security": [
@@ -1434,6 +1545,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DatafeedstatusesCustomBatchRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -1610,6 +1730,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/InventoryCustomBatchRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [
@@ -1678,6 +1807,13 @@
             "description": "The ID of the product for which to update price and availability.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/InventorySetRequest"
+            }
           }
         ],
         "security": [
@@ -1733,6 +1869,13 @@
             "in": "query",
             "description": "Flag to run the request in dry-run mode.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ProductsCustomBatchRequest"
+            }
           }
         ],
         "security": [
@@ -1899,6 +2042,13 @@
             "in": "query",
             "description": "Flag to run the request in dry-run mode.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
           }
         ],
         "security": [
@@ -1991,6 +2141,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ProductstatusesCustomBatchRequest"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [

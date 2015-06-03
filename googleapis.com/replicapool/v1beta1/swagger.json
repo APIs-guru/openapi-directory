@@ -51,6 +51,13 @@
             "description": "The name of the replica pool for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PoolsDeleteRequest"
+            }
           }
         ],
         "security": [
@@ -165,6 +172,13 @@
             "description": "The zone for this replica pool.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Pool"
+            }
           }
         ],
         "security": [
@@ -369,6 +383,13 @@
             "description": "The name of the replica pool for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Template"
+            }
           }
         ],
         "security": [
@@ -448,6 +469,13 @@
             "description": "The name of the replica for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ReplicasDeleteRequest"
+            }
           }
         ],
         "security": [

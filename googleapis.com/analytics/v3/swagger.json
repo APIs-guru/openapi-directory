@@ -489,6 +489,13 @@
             "description": "Link ID to update the account-user link for.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/EntityUserLink"
+            }
           }
         ],
         "security": [
@@ -545,6 +552,13 @@
             "description": "Account ID to create the user link for.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/EntityUserLink"
+            }
           }
         ],
         "security": [
@@ -856,6 +870,13 @@
             "description": "Force the update and ignore any warnings related to the custom dimension being linked to a custom data source / data set.",
             "default": "false",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CustomDimension"
+            }
           }
         ],
         "security": [
@@ -908,6 +929,13 @@
             "description": "Force the update and ignore any warnings related to the custom dimension being linked to a custom data source / data set.",
             "default": "false",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CustomDimension"
+            }
           }
         ],
         "security": [
@@ -971,6 +999,13 @@
             "description": "Web property ID for the custom dimension to create.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CustomDimension"
+            }
           }
         ],
         "security": [
@@ -1146,6 +1181,13 @@
             "description": "Force the update and ignore any warnings related to the custom metric being linked to a custom data source / data set.",
             "default": "false",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CustomMetric"
+            }
           }
         ],
         "security": [
@@ -1198,6 +1240,13 @@
             "description": "Force the update and ignore any warnings related to the custom metric being linked to a custom data source / data set.",
             "default": "false",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CustomMetric"
+            }
           }
         ],
         "security": [
@@ -1261,6 +1310,13 @@
             "description": "Web property ID for the custom dimension to create.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CustomMetric"
+            }
           }
         ],
         "security": [
@@ -1494,6 +1550,13 @@
             "description": "Experiment ID of the experiment to update.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
           }
         ],
         "security": [
@@ -1547,6 +1610,13 @@
             "description": "Experiment ID of the experiment to update.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
           }
         ],
         "security": [
@@ -1618,6 +1688,13 @@
             "description": "View (Profile) ID to create the experiment for.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
           }
         ],
         "security": [
@@ -1819,6 +1896,13 @@
             "description": "ID of the filter to be updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Filter"
+            }
           }
         ],
         "security": [
@@ -1857,6 +1941,13 @@
             "description": "ID of the filter to be updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Filter"
+            }
           }
         ],
         "security": [
@@ -1913,6 +2004,13 @@
             "description": "Account ID to create filter for.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Filter"
+            }
           }
         ],
         "security": [
@@ -2088,6 +2186,13 @@
             "description": "Index of the goal to be updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Goal"
+            }
           }
         ],
         "security": [
@@ -2140,6 +2245,13 @@
             "description": "Index of the goal to be updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Goal"
+            }
           }
         ],
         "security": [
@@ -2210,6 +2322,13 @@
             "description": "View (Profile) ID to create the goal for.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Goal"
+            }
           }
         ],
         "security": [
@@ -2449,6 +2568,13 @@
             "description": "ID of the profile filter link to be updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ProfileFilterLink"
+            }
           }
         ],
         "security": [
@@ -2501,6 +2627,13 @@
             "description": "ID of the profile filter link to be updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ProfileFilterLink"
+            }
           }
         ],
         "security": [
@@ -2571,6 +2704,13 @@
             "description": "Profile ID to create filter link for.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ProfileFilterLink"
+            }
           }
         ],
         "security": [
@@ -2756,6 +2896,13 @@
             "description": "Link ID to update the user link for.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/EntityUserLink"
+            }
           }
         ],
         "security": [
@@ -2826,6 +2973,13 @@
             "description": "View (Profile) ID to create the user link for.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/EntityUserLink"
+            }
           }
         ],
         "security": [
@@ -3043,6 +3197,13 @@
             "description": "ID of the view (profile) to be updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
           }
         ],
         "security": [
@@ -3088,6 +3249,13 @@
             "description": "ID of the view (profile) to be updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
           }
         ],
         "security": [
@@ -3151,6 +3319,13 @@
             "description": "Web property ID to create the view (profile) for.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Profile"
+            }
           }
         ],
         "security": [
@@ -3417,6 +3592,13 @@
             "description": "View (Profile) ID to create the unsampled report for.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UnsampledReport"
+            }
           }
         ],
         "security": [
@@ -3545,6 +3727,13 @@
             "description": "Custom data source Id for the uploads to be deleted.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AnalyticsDataimportDeleteUploadDataRequest"
+            }
           }
         ],
         "security": [
@@ -3918,6 +4107,13 @@
             "description": "Web property-AdWords link ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/EntityAdWordsLink"
+            }
           }
         ],
         "security": [
@@ -3963,6 +4159,13 @@
             "description": "Web property-AdWords link ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/EntityAdWordsLink"
+            }
           }
         ],
         "security": [
@@ -4026,6 +4229,13 @@
             "description": "Web property ID to create the link for.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/EntityAdWordsLink"
+            }
           }
         ],
         "security": [
@@ -4180,6 +4390,13 @@
             "description": "Web property ID",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Webproperty"
+            }
           }
         ],
         "security": [
@@ -4218,6 +4435,13 @@
             "description": "Web property ID",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Webproperty"
+            }
           }
         ],
         "security": [
@@ -4274,6 +4498,13 @@
             "description": "Account ID to create the web property for.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Webproperty"
+            }
           }
         ],
         "security": [
@@ -4432,6 +4663,13 @@
             "description": "Link ID to update the account-user link for.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/EntityUserLink"
+            }
           }
         ],
         "security": [
@@ -4495,6 +4733,13 @@
             "description": "Web Property ID to create the user link for.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/EntityUserLink"
+            }
           }
         ],
         "security": [
@@ -4654,6 +4899,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AccountTicket"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [

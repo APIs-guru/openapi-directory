@@ -75,6 +75,15 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Url"
+            }
+          }
+        ],
         "security": [
           {
             "Oauth2": [

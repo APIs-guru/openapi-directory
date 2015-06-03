@@ -104,6 +104,13 @@
             "in": "query",
             "description": "If \"true\", extract the potential media attachments for a URL. The response will include all possible attachments for a URL, including video, photos, and articles based on the content of the page.",
             "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Activity"
+            }
           }
         ],
         "security": [
@@ -523,6 +530,13 @@
             "description": "The ID of the circle to update.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Circle"
+            }
           }
         ],
         "security": [
@@ -584,6 +598,13 @@
             "description": "The ID of the circle to update.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Circle"
+            }
           }
         ],
         "security": [
@@ -641,6 +662,13 @@
             "description": "The ID of the user to create the circle on behalf of. The value \"me\" can be used to indicate the authenticated user.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Circle"
+            }
           }
         ],
         "security": [
@@ -804,6 +832,13 @@
             "description": "The ID of the activity to reply to.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
           }
         ],
         "security": [
@@ -1085,6 +1120,13 @@
             "enum": [
               "cloud"
             ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Media"
+            }
           }
         ],
         "security": [

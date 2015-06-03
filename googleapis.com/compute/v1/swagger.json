@@ -244,6 +244,13 @@
             "description": "The name of the region for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Address"
+            }
           }
         ],
         "security": [
@@ -448,6 +455,13 @@
             "description": "Name of the BackendService resource to update.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BackendService"
+            }
           }
         ],
         "security": [
@@ -487,6 +501,13 @@
             "description": "Name of the BackendService resource to update.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BackendService"
+            }
           }
         ],
         "security": [
@@ -550,6 +571,13 @@
             "description": "Name of the BackendService resource to which the queried instance belongs.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ResourceGroupReference"
+            }
           }
         ],
         "security": [
@@ -608,6 +636,13 @@
             "description": "Name of the project scoping this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/BackendService"
+            }
           }
         ],
         "security": [
@@ -1049,6 +1084,13 @@
             "description": "Name of the persistent disk to snapshot.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
+            }
           }
         ],
         "security": [
@@ -1237,6 +1279,13 @@
             "in": "query",
             "description": "Optional. Source image to restore onto a disk.",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Disk"
+            }
           }
         ],
         "security": [
@@ -1441,6 +1490,13 @@
             "description": "Name of the firewall resource to update.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Firewall"
+            }
           }
         ],
         "security": [
@@ -1480,6 +1536,13 @@
             "description": "Name of the firewall resource to update.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Firewall"
+            }
           }
         ],
         "security": [
@@ -1537,6 +1600,13 @@
             "description": "Project ID for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Firewall"
+            }
           }
         ],
         "security": [
@@ -1852,6 +1922,13 @@
             "description": "Name of the region scoping this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ForwardingRule"
+            }
           }
         ],
         "security": [
@@ -1984,6 +2061,13 @@
             "description": "Name of the ForwardingRule resource in which target is to be set.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TargetReference"
+            }
           }
         ],
         "security": [
@@ -2145,6 +2229,13 @@
             "description": "Project ID for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Address"
+            }
           }
         ],
         "security": [
@@ -2360,6 +2451,13 @@
             "description": "Name of the project scoping this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ForwardingRule"
+            }
           }
         ],
         "security": [
@@ -2478,6 +2576,13 @@
             "description": "Name of the ForwardingRule resource in which target is to be set.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TargetReference"
+            }
           }
         ],
         "security": [
@@ -2880,6 +2985,13 @@
             "description": "Name of the HttpHealthCheck resource to update.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/HttpHealthCheck"
+            }
           }
         ],
         "security": [
@@ -2919,6 +3031,13 @@
             "description": "Name of the HttpHealthCheck resource to update.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/HttpHealthCheck"
+            }
           }
         ],
         "security": [
@@ -2976,6 +3095,13 @@
             "description": "Name of the project scoping this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/HttpHealthCheck"
+            }
           }
         ],
         "security": [
@@ -3198,6 +3324,13 @@
             "description": "Image name.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DeprecationStatus"
+            }
           }
         ],
         "security": [
@@ -3255,6 +3388,13 @@
             "description": "Project ID for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Image"
+            }
           }
         ],
         "security": [
@@ -3473,6 +3613,13 @@
             "description": "The project ID for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/InstanceTemplate"
+            }
           }
         ],
         "security": [
@@ -3605,6 +3752,13 @@
             "description": "The name of the network interface to add to this instance.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AccessConfig"
+            }
           }
         ],
         "security": [
@@ -3754,6 +3908,13 @@
             "description": "Instance name.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AttachedDisk"
+            }
           }
         ],
         "security": [
@@ -4180,6 +4341,13 @@
             "description": "The name of the zone for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Instance"
+            }
           }
         ],
         "security": [
@@ -4468,6 +4636,13 @@
             "description": "Name of the instance scoping this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Metadata"
+            }
           }
         ],
         "security": [
@@ -4539,6 +4714,13 @@
             "description": "Instance name.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Scheduling"
+            }
           }
         ],
         "security": [
@@ -4610,6 +4792,13 @@
             "description": "Name of the instance scoping this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Tags"
+            }
           }
         ],
         "security": [
@@ -5215,6 +5404,13 @@
             "description": "Project ID for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Network"
+            }
           }
         ],
         "security": [
@@ -5384,6 +5580,13 @@
             "description": "Project ID for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DiskMoveRequest"
+            }
           }
         ],
         "security": [
@@ -5441,6 +5644,13 @@
             "description": "Project ID for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/InstanceMoveRequest"
+            }
           }
         ],
         "security": [
@@ -5498,6 +5708,13 @@
             "description": "Project ID for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Metadata"
+            }
           }
         ],
         "security": [
@@ -5555,6 +5772,13 @@
             "description": "Project ID for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UsageExportLocation"
+            }
           }
         ],
         "security": [
@@ -6064,6 +6288,13 @@
             "description": "Name of the project scoping this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Route"
+            }
           }
         ],
         "security": [
@@ -6462,6 +6693,13 @@
             "description": "Name of the project scoping this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TargetHttpProxy"
+            }
           }
         ],
         "security": [
@@ -6580,6 +6818,13 @@
             "description": "Name of the TargetHttpProxy resource whose URL map is to be set.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UrlMapReference"
+            }
           }
         ],
         "security": [
@@ -6841,6 +7086,13 @@
             "description": "Name of the zone scoping this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TargetInstance"
+            }
           }
         ],
         "security": [
@@ -6972,6 +7224,13 @@
             "description": "Name of the TargetPool resource to which health_check_url is to be added.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TargetPoolsAddHealthCheckRequest"
+            }
           }
         ],
         "security": [
@@ -7042,6 +7301,13 @@
             "description": "Name of the TargetPool resource to which instance_url is to be added.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TargetPoolsAddInstanceRequest"
+            }
           }
         ],
         "security": [
@@ -7309,6 +7575,13 @@
             "description": "Name of the TargetPool resource to which the queried instance belongs.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/InstanceReference"
+            }
           }
         ],
         "security": [
@@ -7374,6 +7647,13 @@
             "description": "Name of the region scoping this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TargetPool"
+            }
           }
         ],
         "security": [
@@ -7505,6 +7785,13 @@
             "description": "Name of the TargetPool resource to which health_check_url is to be removed.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TargetPoolsRemoveHealthCheckRequest"
+            }
           }
         ],
         "security": [
@@ -7575,6 +7862,13 @@
             "description": "Name of the TargetPool resource to which instance_url is to be removed.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TargetPoolsRemoveInstanceRequest"
+            }
           }
         ],
         "security": [
@@ -7652,6 +7946,13 @@
             "in": "query",
             "description": "New failoverRatio value for the containing target pool.",
             "type": "number"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TargetReference"
+            }
           }
         ],
         "security": [
@@ -7913,6 +8214,13 @@
             "description": "The name of the region for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TargetVpnGateway"
+            }
           }
         ],
         "security": [
@@ -8117,6 +8425,13 @@
             "description": "Name of the UrlMap resource to update.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UrlMap"
+            }
           }
         ],
         "security": [
@@ -8156,6 +8471,13 @@
             "description": "Name of the UrlMap resource to update.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UrlMap"
+            }
           }
         ],
         "security": [
@@ -8213,6 +8535,13 @@
             "description": "Name of the project scoping this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UrlMap"
+            }
           }
         ],
         "security": [
@@ -8331,6 +8660,13 @@
             "description": "Name of the UrlMap resource to be validated as.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/UrlMapsValidateRequest"
+            }
           }
         ],
         "security": [
@@ -8592,6 +8928,13 @@
             "description": "The name of the region for this request.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VpnTunnel"
+            }
           }
         ],
         "security": [
