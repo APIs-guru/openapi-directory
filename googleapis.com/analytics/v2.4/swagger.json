@@ -32,9 +32,17 @@
         },
         "parameters": [
           {
-            "name": "dimensions",
+            "name": "ids",
             "in": "query",
-            "description": "A comma-separated list of Analytics dimensions. E.g., 'ga:browser,ga:city'.",
+            "description": "Unique table ID for retrieving report data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "start-date",
+            "in": "query",
+            "description": "Start date for fetching report data. All requests should specify a start date formatted as YYYY-MM-DD.",
+            "required": true,
             "type": "string"
           },
           {
@@ -45,16 +53,22 @@
             "type": "string"
           },
           {
-            "name": "filters",
+            "name": "metrics",
             "in": "query",
-            "description": "A comma-separated list of dimension or metric filters to be applied to the report data.",
+            "description": "A comma-separated list of Analytics metrics. E.g., 'ga:sessions,ga:pageviews'. At least one metric must be specified to retrieve a valid Analytics report.",
+            "required": true,
             "type": "string"
           },
           {
-            "name": "ids",
+            "name": "dimensions",
             "in": "query",
-            "description": "Unique table ID for retrieving report data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.",
-            "required": true,
+            "description": "A comma-separated list of Analytics dimensions. E.g., 'ga:browser,ga:city'.",
+            "type": "string"
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "description": "A comma-separated list of dimension or metric filters to be applied to the report data.",
             "type": "string"
           },
           {
@@ -62,13 +76,6 @@
             "in": "query",
             "description": "The maximum number of entries to include in this feed.",
             "type": "integer"
-          },
-          {
-            "name": "metrics",
-            "in": "query",
-            "description": "A comma-separated list of Analytics metrics. E.g., 'ga:sessions,ga:pageviews'. At least one metric must be specified to retrieve a valid Analytics report.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "segment",
@@ -80,13 +87,6 @@
             "name": "sort",
             "in": "query",
             "description": "A comma-separated list of dimensions or metrics that determine the sort order for the report data.",
-            "type": "string"
-          },
-          {
-            "name": "start-date",
-            "in": "query",
-            "description": "Start date for fetching report data. All requests should specify a start date formatted as YYYY-MM-DD.",
-            "required": true,
             "type": "string"
           },
           {
@@ -211,10 +211,11 @@
             "type": "string"
           },
           {
-            "name": "max-results",
-            "in": "query",
-            "description": "The maximum number of goals to include in this response.",
-            "type": "integer"
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property ID to retrieve goals for. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "profileId",
@@ -224,18 +225,17 @@
             "type": "string"
           },
           {
+            "name": "max-results",
+            "in": "query",
+            "description": "The maximum number of goals to include in this response.",
+            "type": "integer"
+          },
+          {
             "name": "start-index",
             "in": "query",
             "description": "An index of the first goal to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web property ID to retrieve goals for. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -292,6 +292,13 @@
             "type": "string"
           },
           {
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property ID for the views (profiles) to retrieve. Can either be a specific web property ID or '~all', which refers to all the web properties to which the user has access.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "max-results",
             "in": "query",
             "description": "The maximum number of views (profiles) to include in this response.",
@@ -303,13 +310,6 @@
             "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web property ID for the views (profiles) to retrieve. Can either be a specific web property ID or '~all', which refers to all the web properties to which the user has access.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [

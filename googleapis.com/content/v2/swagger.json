@@ -126,16 +126,16 @@
         },
         "parameters": [
           {
-            "name": "accountId",
+            "name": "merchantId",
             "in": "path",
-            "description": "The ID of the account.",
+            "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "merchantId",
+            "name": "accountId",
             "in": "path",
-            "description": "The ID of the managing account.",
+            "description": "The ID of the account.",
             "required": true,
             "type": "string"
           }
@@ -164,16 +164,16 @@
         },
         "parameters": [
           {
-            "name": "accountId",
+            "name": "merchantId",
             "in": "path",
-            "description": "The ID of the account.",
+            "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "merchantId",
+            "name": "accountId",
             "in": "path",
-            "description": "The ID of the managing account.",
+            "description": "The ID of the account.",
             "required": true,
             "type": "string"
           }
@@ -202,16 +202,16 @@
         },
         "parameters": [
           {
-            "name": "accountId",
+            "name": "merchantId",
             "in": "path",
-            "description": "The ID of the account.",
+            "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "merchantId",
+            "name": "accountId",
             "in": "path",
-            "description": "The ID of the managing account.",
+            "description": "The ID of the account.",
             "required": true,
             "type": "string"
           }
@@ -240,16 +240,16 @@
         },
         "parameters": [
           {
-            "name": "accountId",
+            "name": "merchantId",
             "in": "path",
-            "description": "The ID of the account.",
+            "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "merchantId",
+            "name": "accountId",
             "in": "path",
-            "description": "The ID of the managing account.",
+            "description": "The ID of the account.",
             "required": true,
             "type": "string"
           }
@@ -334,17 +334,17 @@
         },
         "parameters": [
           {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of accounts to return in the response, used for paging.",
-            "type": "integer"
-          },
-          {
             "name": "merchantId",
             "in": "path",
             "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "The maximum number of accounts to return in the response, used for paging.",
+            "type": "integer"
           },
           {
             "name": "pageToken",
@@ -457,16 +457,16 @@
         },
         "parameters": [
           {
-            "name": "accountId",
+            "name": "merchantId",
             "in": "path",
-            "description": "The ID of the account for which to get/update account shipping settings.",
+            "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "merchantId",
+            "name": "accountId",
             "in": "path",
-            "description": "The ID of the managing account.",
+            "description": "The ID of the account for which to get/update account shipping settings.",
             "required": true,
             "type": "string"
           }
@@ -495,6 +495,13 @@
         },
         "parameters": [
           {
+            "name": "merchantId",
+            "in": "path",
+            "description": "The ID of the managing account.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "accountId",
             "in": "path",
             "description": "The ID of the account for which to get/update account shipping settings.",
@@ -506,13 +513,6 @@
             "in": "query",
             "description": "Flag to run the request in dry-run mode.",
             "type": "boolean"
-          },
-          {
-            "name": "merchantId",
-            "in": "path",
-            "description": "The ID of the managing account.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -539,6 +539,13 @@
         },
         "parameters": [
           {
+            "name": "merchantId",
+            "in": "path",
+            "description": "The ID of the managing account.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "accountId",
             "in": "path",
             "description": "The ID of the account for which to get/update account shipping settings.",
@@ -550,13 +557,6 @@
             "in": "query",
             "description": "Flag to run the request in dry-run mode.",
             "type": "boolean"
-          },
-          {
-            "name": "merchantId",
-            "in": "path",
-            "description": "The ID of the managing account.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -608,17 +608,17 @@
         },
         "parameters": [
           {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of shipping settings to return in the response, used for paging.",
-            "type": "integer"
-          },
-          {
             "name": "merchantId",
             "in": "path",
             "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "The maximum number of shipping settings to return in the response, used for paging.",
+            "type": "integer"
           },
           {
             "name": "pageToken",
@@ -722,16 +722,16 @@
         },
         "parameters": [
           {
-            "name": "accountId",
+            "name": "merchantId",
             "in": "path",
-            "description": "The ID of the account.",
+            "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "merchantId",
+            "name": "accountId",
             "in": "path",
-            "description": "The ID of the managing account.",
+            "description": "The ID of the account.",
             "required": true,
             "type": "string"
           }
@@ -785,17 +785,17 @@
         },
         "parameters": [
           {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of account statuses to return in the response, used for paging.",
-            "type": "integer"
-          },
-          {
             "name": "merchantId",
             "in": "path",
             "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "The maximum number of account statuses to return in the response, used for paging.",
+            "type": "integer"
           },
           {
             "name": "pageToken",
@@ -908,16 +908,16 @@
         },
         "parameters": [
           {
-            "name": "accountId",
+            "name": "merchantId",
             "in": "path",
-            "description": "The ID of the account for which to get/update account tax settings.",
+            "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "merchantId",
+            "name": "accountId",
             "in": "path",
-            "description": "The ID of the managing account.",
+            "description": "The ID of the account for which to get/update account tax settings.",
             "required": true,
             "type": "string"
           }
@@ -946,6 +946,13 @@
         },
         "parameters": [
           {
+            "name": "merchantId",
+            "in": "path",
+            "description": "The ID of the managing account.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "accountId",
             "in": "path",
             "description": "The ID of the account for which to get/update account tax settings.",
@@ -957,13 +964,6 @@
             "in": "query",
             "description": "Flag to run the request in dry-run mode.",
             "type": "boolean"
-          },
-          {
-            "name": "merchantId",
-            "in": "path",
-            "description": "The ID of the managing account.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -990,6 +990,13 @@
         },
         "parameters": [
           {
+            "name": "merchantId",
+            "in": "path",
+            "description": "The ID of the managing account.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "accountId",
             "in": "path",
             "description": "The ID of the account for which to get/update account tax settings.",
@@ -1001,13 +1008,6 @@
             "in": "query",
             "description": "Flag to run the request in dry-run mode.",
             "type": "boolean"
-          },
-          {
-            "name": "merchantId",
-            "in": "path",
-            "description": "The ID of the managing account.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -1059,17 +1059,17 @@
         },
         "parameters": [
           {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of tax settings to return in the response, used for paging.",
-            "type": "integer"
-          },
-          {
             "name": "merchantId",
             "in": "path",
             "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "The maximum number of tax settings to return in the response, used for paging.",
+            "type": "integer"
           },
           {
             "name": "pageToken",
@@ -1170,13 +1170,13 @@
         },
         "parameters": [
           {
-            "name": "datafeedId",
+            "name": "merchantId",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "merchantId",
+            "name": "datafeedId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1206,13 +1206,13 @@
         },
         "parameters": [
           {
-            "name": "datafeedId",
+            "name": "merchantId",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "merchantId",
+            "name": "datafeedId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1242,13 +1242,13 @@
         },
         "parameters": [
           {
-            "name": "datafeedId",
+            "name": "merchantId",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "merchantId",
+            "name": "datafeedId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1278,13 +1278,13 @@
         },
         "parameters": [
           {
-            "name": "datafeedId",
+            "name": "merchantId",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "merchantId",
+            "name": "datafeedId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1369,17 +1369,17 @@
         },
         "parameters": [
           {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of products to return in the response, used for paging.",
-            "type": "integer"
-          },
-          {
             "name": "merchantId",
             "in": "path",
             "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "The maximum number of products to return in the response, used for paging.",
+            "type": "integer"
           },
           {
             "name": "pageToken",
@@ -1483,13 +1483,13 @@
         },
         "parameters": [
           {
-            "name": "datafeedId",
+            "name": "merchantId",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "merchantId",
+            "name": "datafeedId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1544,17 +1544,17 @@
         },
         "parameters": [
           {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of products to return in the response, used for paging.",
-            "type": "integer"
-          },
-          {
             "name": "merchantId",
             "in": "path",
             "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "The maximum number of products to return in the response, used for paging.",
+            "type": "integer"
           },
           {
             "name": "pageToken",
@@ -1666,16 +1666,16 @@
             "type": "string"
           },
           {
-            "name": "productId",
+            "name": "storeCode",
             "in": "path",
-            "description": "The ID of the product for which to update price and availability.",
+            "description": "The code of the store for which to update price and availability. Use online to update price and availability of an online product.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "storeCode",
+            "name": "productId",
             "in": "path",
-            "description": "The code of the store for which to update price and availability. Use online to update price and availability of an online product.",
+            "description": "The ID of the product for which to update price and availability.",
             "required": true,
             "type": "string"
           }
@@ -1781,12 +1781,6 @@
         },
         "parameters": [
           {
-            "name": "dryRun",
-            "in": "query",
-            "description": "Flag to run the request in dry-run mode.",
-            "type": "boolean"
-          },
-          {
             "name": "merchantId",
             "in": "path",
             "description": "The ID of the managing account.",
@@ -1799,6 +1793,12 @@
             "description": "The ID of the product.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "dryRun",
+            "in": "query",
+            "description": "Flag to run the request in dry-run mode.",
+            "type": "boolean"
           }
         ],
         "security": [
@@ -1888,17 +1888,17 @@
         },
         "parameters": [
           {
-            "name": "dryRun",
-            "in": "query",
-            "description": "Flag to run the request in dry-run mode.",
-            "type": "boolean"
-          },
-          {
             "name": "merchantId",
             "in": "path",
             "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "dryRun",
+            "in": "query",
+            "description": "Flag to run the request in dry-run mode.",
+            "type": "boolean"
           }
         ],
         "security": [
@@ -1925,17 +1925,17 @@
         },
         "parameters": [
           {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of products to return in the response, used for paging.",
-            "type": "integer"
-          },
-          {
             "name": "merchantId",
             "in": "path",
             "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "The maximum number of products to return in the response, used for paging.",
+            "type": "integer"
           },
           {
             "name": "pageToken",
@@ -2103,17 +2103,17 @@
         },
         "parameters": [
           {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of product statuses to return in the response, used for paging.",
-            "type": "integer"
-          },
-          {
             "name": "merchantId",
             "in": "path",
             "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "The maximum number of product statuses to return in the response, used for paging.",
+            "type": "integer"
           },
           {
             "name": "pageToken",

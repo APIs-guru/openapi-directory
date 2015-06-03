@@ -720,6 +720,20 @@
             "type": "string"
           },
           {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "currency",
             "in": "query",
             "description": "Optional currency to use when reporting on monetary metrics. Defaults to the account's currency if not set.",
@@ -734,13 +748,6 @@
               "type": "string"
             },
             "collectionFormat": "multi"
-          },
-          {
-            "name": "endDate",
-            "in": "query",
-            "description": "End of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "filter",
@@ -785,13 +792,6 @@
               "type": "string"
             },
             "collectionFormat": "multi"
-          },
-          {
-            "name": "startDate",
-            "in": "query",
-            "description": "Start of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "startIndex",
@@ -859,6 +859,13 @@
             "type": "string"
           },
           {
+            "name": "savedReportId",
+            "in": "path",
+            "description": "The saved report to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "locale",
             "in": "query",
             "description": "Optional locale to use for translating report output to a local language. Defaults to \"en_US\" if not specified.",
@@ -871,13 +878,6 @@
             "type": "integer",
             "minimum": 0,
             "maximum": 50000
-          },
-          {
-            "name": "savedReportId",
-            "in": "path",
-            "description": "The saved report to retrieve.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "startIndex",
@@ -1724,6 +1724,20 @@
         },
         "parameters": [
           {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "accountId",
             "in": "query",
             "description": "Accounts upon which to report.",
@@ -1748,13 +1762,6 @@
               "type": "string"
             },
             "collectionFormat": "multi"
-          },
-          {
-            "name": "endDate",
-            "in": "query",
-            "description": "End of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "filter",
@@ -1799,13 +1806,6 @@
               "type": "string"
             },
             "collectionFormat": "multi"
-          },
-          {
-            "name": "startDate",
-            "in": "query",
-            "description": "Start of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "startIndex",
@@ -1866,6 +1866,13 @@
         },
         "parameters": [
           {
+            "name": "savedReportId",
+            "in": "path",
+            "description": "The saved report to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "locale",
             "in": "query",
             "description": "Optional locale to use for translating report output to a local language. Defaults to \"en_US\" if not specified.",
@@ -1878,13 +1885,6 @@
             "type": "integer",
             "minimum": 0,
             "maximum": 50000
-          },
-          {
-            "name": "savedReportId",
-            "in": "path",
-            "description": "The saved report to retrieve.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "startIndex",

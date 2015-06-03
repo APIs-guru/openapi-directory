@@ -247,6 +247,14 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
+            "required": true,
+            "default": "me",
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of drafts to return.",
@@ -257,14 +265,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Page token to retrieve a specific page of results in the list.",
-            "type": "string"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
-            "required": true,
-            "default": "me",
             "type": "string"
           }
         ],
@@ -317,18 +317,18 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the draft to delete.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "userId",
             "in": "path",
             "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
             "required": true,
             "default": "me",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the draft to delete.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -358,6 +358,21 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
+            "required": true,
+            "default": "me",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the draft to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "format",
             "in": "query",
             "description": "The format to return the draft in.",
@@ -369,21 +384,6 @@
               "minimal",
               "raw"
             ]
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the draft to retrieve.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
-            "required": true,
-            "default": "me",
-            "type": "string"
           }
         ],
         "security": [
@@ -416,18 +416,18 @@
         ],
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the draft to update.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "userId",
             "in": "path",
             "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
             "required": true,
             "default": "me",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the draft to update.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -544,6 +544,14 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
+            "required": true,
+            "default": "me",
+            "type": "string"
+          },
+          {
             "name": "labelId",
             "in": "query",
             "description": "Only return messages with a label matching the ID.",
@@ -566,14 +574,6 @@
             "name": "startHistoryId",
             "in": "query",
             "description": "Required. Returns history records after the specified startHistoryId. The supplied startHistoryId should be obtained from the historyId of a message, thread, or previous list response. History IDs increase chronologically but are not contiguous with random gaps in between valid IDs. Supplying an invalid or out of date startHistoryId typically returns an HTTP 404 error code. A historyId is typically valid for at least a week, but in some circumstances may be valid for only a few hours. If you receive an HTTP 404 error response, your application should perform a full sync. If you receive no nextPageToken in the response, there are no updates to retrieve and you can store the returned historyId for a future request.",
-            "type": "string"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
-            "required": true,
-            "default": "me",
             "type": "string"
           }
         ],
@@ -719,18 +719,18 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the label to delete.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "userId",
             "in": "path",
             "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
             "required": true,
             "default": "me",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the label to delete.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -760,18 +760,18 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the label to retrieve.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "userId",
             "in": "path",
             "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
             "required": true,
             "default": "me",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the label to retrieve.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -802,18 +802,18 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the label to update.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "userId",
             "in": "path",
             "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
             "required": true,
             "default": "me",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the label to update.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -843,18 +843,18 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the label to update.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "userId",
             "in": "path",
             "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
             "required": true,
             "default": "me",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the label to update.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -906,18 +906,18 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the message to delete.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "userId",
             "in": "path",
             "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
             "required": true,
             "default": "me",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the message to delete.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -945,6 +945,21 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
+            "required": true,
+            "default": "me",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the message to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "format",
             "in": "query",
             "description": "The format to return the message in.",
@@ -958,13 +973,6 @@
             ]
           },
           {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the message to retrieve.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "metadataHeaders",
             "in": "query",
             "description": "When given and format is METADATA, only include headers specified.",
@@ -973,14 +981,6 @@
               "type": "string"
             },
             "collectionFormat": "multi"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
-            "required": true,
-            "default": "me",
-            "type": "string"
           }
         ],
         "security": [
@@ -1037,6 +1037,14 @@
         ],
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
+            "required": true,
+            "default": "me",
+            "type": "string"
+          },
+          {
             "name": "deleted",
             "in": "query",
             "description": "Mark the email as permanently deleted (not TRASH) and only visible in Google Apps Vault to a Vault administrator. Only used for Google Apps for Work accounts.",
@@ -1067,14 +1075,6 @@
             "description": "Process calendar invites in the email and add any extracted meetings to the Google Calendar for this user.",
             "default": "false",
             "type": "boolean"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
-            "required": true,
-            "default": "me",
-            "type": "string"
           }
         ],
         "security": [
@@ -1131,6 +1131,14 @@
         ],
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
+            "required": true,
+            "default": "me",
+            "type": "string"
+          },
+          {
             "name": "deleted",
             "in": "query",
             "description": "Mark the email as permanently deleted (not TRASH) and only visible in Google Apps Vault to a Vault administrator. Only used for Google Apps for Work accounts.",
@@ -1147,14 +1155,6 @@
               "dateHeader",
               "receivedTime"
             ]
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
-            "required": true,
-            "default": "me",
-            "type": "string"
           }
         ],
         "security": [
@@ -1182,6 +1182,14 @@
           }
         },
         "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
+            "required": true,
+            "default": "me",
+            "type": "string"
+          },
           {
             "name": "includeSpamTrash",
             "in": "query",
@@ -1216,14 +1224,6 @@
             "name": "q",
             "in": "query",
             "description": "Only return messages matching the specified query. Supports the same query format as the Gmail search box. For example, \"from:someuser@example.com rfc822msgid: is:unread\".",
-            "type": "string"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
-            "required": true,
-            "default": "me",
             "type": "string"
           }
         ],
@@ -1278,18 +1278,18 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the message to modify.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "userId",
             "in": "path",
             "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
             "required": true,
             "default": "me",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the message to modify.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -1405,18 +1405,18 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the message to Trash.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "userId",
             "in": "path",
             "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
             "required": true,
             "default": "me",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the message to Trash.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -1470,18 +1470,18 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the message to remove from Trash.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "userId",
             "in": "path",
             "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
             "required": true,
             "default": "me",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the message to remove from Trash.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -1535,10 +1535,11 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "userId",
             "in": "path",
-            "description": "The ID of the attachment.",
+            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
             "required": true,
+            "default": "me",
             "type": "string"
           },
           {
@@ -1549,11 +1550,10 @@
             "type": "string"
           },
           {
-            "name": "userId",
+            "name": "id",
             "in": "path",
-            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
+            "description": "The ID of the attachment.",
             "required": true,
-            "default": "me",
             "type": "string"
           }
         ],
@@ -1605,18 +1605,18 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "ID of the Thread to delete.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "userId",
             "in": "path",
             "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
             "required": true,
             "default": "me",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the Thread to delete.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -1644,6 +1644,21 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
+            "required": true,
+            "default": "me",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the thread to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "format",
             "in": "query",
             "description": "The format to return the messages in.",
@@ -1656,13 +1671,6 @@
             ]
           },
           {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the thread to retrieve.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "metadataHeaders",
             "in": "query",
             "description": "When given and format is METADATA, only include headers specified.",
@@ -1671,14 +1679,6 @@
               "type": "string"
             },
             "collectionFormat": "multi"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
-            "required": true,
-            "default": "me",
-            "type": "string"
           }
         ],
         "security": [
@@ -1732,6 +1732,14 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
+            "required": true,
+            "default": "me",
+            "type": "string"
+          },
+          {
             "name": "includeSpamTrash",
             "in": "query",
             "description": "Include threads from SPAM and TRASH in the results.",
@@ -1765,14 +1773,6 @@
             "name": "q",
             "in": "query",
             "description": "Only return threads matching the specified query. Supports the same query format as the Gmail search box. For example, \"from:someuser@example.com rfc822msgid: is:unread\".",
-            "type": "string"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
-            "required": true,
-            "default": "me",
             "type": "string"
           }
         ],
@@ -1827,18 +1827,18 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the thread to modify.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "userId",
             "in": "path",
             "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
             "required": true,
             "default": "me",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the thread to modify.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -1892,18 +1892,18 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the thread to Trash.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "userId",
             "in": "path",
             "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
             "required": true,
             "default": "me",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the thread to Trash.",
+            "required": true,
             "type": "string"
           }
         ],
@@ -1957,18 +1957,18 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "The ID of the thread to remove from Trash.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "userId",
             "in": "path",
             "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
             "required": true,
             "default": "me",
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the thread to remove from Trash.",
+            "required": true,
             "type": "string"
           }
         ],

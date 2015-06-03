@@ -690,6 +690,20 @@
             "type": "string"
           },
           {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "dimension",
             "in": "query",
             "description": "Dimensions to base the report on.",
@@ -698,13 +712,6 @@
               "type": "string"
             },
             "collectionFormat": "multi"
-          },
-          {
-            "name": "endDate",
-            "in": "query",
-            "description": "End of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "filter",
@@ -749,13 +756,6 @@
               "type": "string"
             },
             "collectionFormat": "multi"
-          },
-          {
-            "name": "startDate",
-            "in": "query",
-            "description": "Start of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "startIndex",
@@ -952,6 +952,13 @@
             "collectionFormat": "multi"
           },
           {
+            "name": "websiteUrl",
+            "in": "query",
+            "description": "The URL of the user's hosted website.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "userLocale",
             "in": "query",
             "description": "The preferred locale of the user.",
@@ -961,13 +968,6 @@
             "name": "websiteLocale",
             "in": "query",
             "description": "The locale of the user's hosted website.",
-            "type": "string"
-          },
-          {
-            "name": "websiteUrl",
-            "in": "query",
-            "description": "The URL of the user's hosted website.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -1347,6 +1347,20 @@
         },
         "parameters": [
           {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "dimension",
             "in": "query",
             "description": "Dimensions to base the report on.",
@@ -1355,13 +1369,6 @@
               "type": "string"
             },
             "collectionFormat": "multi"
-          },
-          {
-            "name": "endDate",
-            "in": "query",
-            "description": "End of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "filter",
@@ -1406,13 +1413,6 @@
               "type": "string"
             },
             "collectionFormat": "multi"
-          },
-          {
-            "name": "startDate",
-            "in": "query",
-            "description": "Start of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "startIndex",

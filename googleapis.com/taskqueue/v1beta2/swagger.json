@@ -35,12 +35,6 @@
         },
         "parameters": [
           {
-            "name": "getStats",
-            "in": "query",
-            "description": "Whether to get stats. Optional.",
-            "type": "boolean"
-          },
-          {
             "name": "project",
             "in": "path",
             "description": "The project under which the queue lies.",
@@ -53,6 +47,12 @@
             "description": "The id of the taskqueue to get the properties of.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "getStats",
+            "in": "query",
+            "description": "Whether to get stats. Optional.",
+            "type": "boolean"
           }
         ],
         "security": [
@@ -109,16 +109,16 @@
             "type": "string"
           },
           {
-            "name": "task",
+            "name": "taskqueue",
             "in": "path",
-            "description": "The id of the task to delete.",
+            "description": "The taskqueue to delete a task from.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "taskqueue",
+            "name": "task",
             "in": "path",
-            "description": "The taskqueue to delete a task from.",
+            "description": "The id of the task to delete.",
             "required": true,
             "type": "string"
           }
@@ -155,16 +155,16 @@
             "type": "string"
           },
           {
-            "name": "task",
+            "name": "taskqueue",
             "in": "path",
-            "description": "The task to get properties of.",
+            "description": "The taskqueue in which the task belongs.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "taskqueue",
+            "name": "task",
             "in": "path",
-            "description": "The taskqueue in which the task belongs.",
+            "description": "The task to get properties of.",
             "required": true,
             "type": "string"
           }
@@ -194,16 +194,15 @@
         },
         "parameters": [
           {
-            "name": "newLeaseSeconds",
-            "in": "query",
-            "description": "The new lease in seconds.",
-            "required": true,
-            "type": "integer"
-          },
-          {
             "name": "project",
             "in": "path",
             "description": "The project under which the queue lies.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "taskqueue",
+            "in": "path",
             "required": true,
             "type": "string"
           },
@@ -214,10 +213,11 @@
             "type": "string"
           },
           {
-            "name": "taskqueue",
-            "in": "path",
+            "name": "newLeaseSeconds",
+            "in": "query",
+            "description": "The new lease in seconds.",
             "required": true,
-            "type": "string"
+            "type": "integer"
           }
         ],
         "security": [
@@ -245,16 +245,15 @@
         },
         "parameters": [
           {
-            "name": "newLeaseSeconds",
-            "in": "query",
-            "description": "The new lease in seconds.",
-            "required": true,
-            "type": "integer"
-          },
-          {
             "name": "project",
             "in": "path",
             "description": "The project under which the queue lies.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "taskqueue",
+            "in": "path",
             "required": true,
             "type": "string"
           },
@@ -265,10 +264,11 @@
             "type": "string"
           },
           {
-            "name": "taskqueue",
-            "in": "path",
+            "name": "newLeaseSeconds",
+            "in": "query",
+            "description": "The new lease in seconds.",
             "required": true,
-            "type": "string"
+            "type": "integer"
           }
         ],
         "security": [
@@ -424,17 +424,18 @@
         },
         "parameters": [
           {
-            "name": "groupByTag",
-            "in": "query",
-            "description": "When true, all returned tasks will have the same tag",
-            "type": "boolean"
+            "name": "project",
+            "in": "path",
+            "description": "The project under which the queue lies.",
+            "required": true,
+            "type": "string"
           },
           {
-            "name": "leaseSecs",
-            "in": "query",
-            "description": "The lease in seconds.",
+            "name": "taskqueue",
+            "in": "path",
+            "description": "The taskqueue to lease a task from.",
             "required": true,
-            "type": "integer"
+            "type": "string"
           },
           {
             "name": "numTasks",
@@ -444,23 +445,22 @@
             "type": "integer"
           },
           {
-            "name": "project",
-            "in": "path",
-            "description": "The project under which the queue lies.",
+            "name": "leaseSecs",
+            "in": "query",
+            "description": "The lease in seconds.",
             "required": true,
-            "type": "string"
+            "type": "integer"
+          },
+          {
+            "name": "groupByTag",
+            "in": "query",
+            "description": "When true, all returned tasks will have the same tag",
+            "type": "boolean"
           },
           {
             "name": "tag",
             "in": "query",
             "description": "The tag allowed for tasks in the response. Must only be specified if group_by_tag is true. If group_by_tag is true and tag is not specified the tag will be that of the oldest task by eta, i.e. the first available tag",
-            "type": "string"
-          },
-          {
-            "name": "taskqueue",
-            "in": "path",
-            "description": "The taskqueue to lease a task from.",
-            "required": true,
             "type": "string"
           }
         ],

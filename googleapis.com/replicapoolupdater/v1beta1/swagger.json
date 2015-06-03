@@ -42,16 +42,16 @@
             "type": "string"
           },
           {
-            "name": "rollingUpdate",
+            "name": "zone",
             "in": "path",
-            "description": "The name of the update.",
+            "description": "The name of the zone in which the update's target resides.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "zone",
+            "name": "rollingUpdate",
             "in": "path",
-            "description": "The name of the zone in which the update's target resides.",
+            "description": "The name of the update.",
             "required": true,
             "type": "string"
           }
@@ -113,16 +113,16 @@
             "type": "string"
           },
           {
-            "name": "rollingUpdate",
+            "name": "zone",
             "in": "path",
-            "description": "The name of the update.",
+            "description": "The name of the zone in which the update's target resides.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "zone",
+            "name": "rollingUpdate",
             "in": "path",
-            "description": "The name of the zone in which the update's target resides.",
+            "description": "The name of the update.",
             "required": true,
             "type": "string"
           }
@@ -217,6 +217,20 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "description": "The Google Developers Console project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "The name of the zone in which the update's target resides.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "filter",
             "in": "query",
             "description": "Optional. Filter expression for filtering listed resources.",
@@ -241,20 +255,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.",
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "path",
-            "description": "The Google Developers Console project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "zone",
-            "in": "path",
-            "description": "The name of the zone in which the update's target resides.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -309,6 +309,27 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "description": "The Google Developers Console project name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "The name of the zone in which the update's target resides.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "rollingUpdate",
+            "in": "path",
+            "description": "The name of the update.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "filter",
             "in": "query",
             "description": "Optional. Filter expression for filtering listed resources.",
@@ -327,27 +348,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.",
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "path",
-            "description": "The Google Developers Console project name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "rollingUpdate",
-            "in": "path",
-            "description": "The name of the update.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "zone",
-            "in": "path",
-            "description": "The name of the zone in which the update's target resides.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -409,16 +409,16 @@
             "type": "string"
           },
           {
-            "name": "rollingUpdate",
+            "name": "zone",
             "in": "path",
-            "description": "The name of the update.",
+            "description": "The name of the zone in which the update's target resides.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "zone",
+            "name": "rollingUpdate",
             "in": "path",
-            "description": "The name of the zone in which the update's target resides.",
+            "description": "The name of the update.",
             "required": true,
             "type": "string"
           }
@@ -480,16 +480,16 @@
             "type": "string"
           },
           {
-            "name": "rollingUpdate",
+            "name": "zone",
             "in": "path",
-            "description": "The name of the update.",
+            "description": "The name of the zone in which the update's target resides.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "zone",
+            "name": "rollingUpdate",
             "in": "path",
-            "description": "The name of the zone in which the update's target resides.",
+            "description": "The name of the update.",
             "required": true,
             "type": "string"
           }
@@ -551,16 +551,16 @@
             "type": "string"
           },
           {
-            "name": "rollingUpdate",
+            "name": "zone",
             "in": "path",
-            "description": "The name of the update.",
+            "description": "The name of the zone in which the update's target resides.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "zone",
+            "name": "rollingUpdate",
             "in": "path",
-            "description": "The name of the zone in which the update's target resides.",
+            "description": "The name of the update.",
             "required": true,
             "type": "string"
           }
@@ -615,13 +615,6 @@
         },
         "parameters": [
           {
-            "name": "operation",
-            "in": "path",
-            "description": "Name of the operation resource to return.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "project",
             "in": "path",
             "description": "Name of the project scoping this request.",
@@ -632,6 +625,13 @@
             "name": "zone",
             "in": "path",
             "description": "Name of the zone scoping this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operation",
+            "in": "path",
+            "description": "Name of the operation resource to return.",
             "required": true,
             "type": "string"
           }

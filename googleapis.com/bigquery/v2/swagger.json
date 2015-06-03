@@ -32,6 +32,13 @@
         },
         "parameters": [
           {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID of the dataset being deleted",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "datasetId",
             "in": "path",
             "description": "Dataset ID of dataset being deleted",
@@ -43,13 +50,6 @@
             "in": "query",
             "description": "If True, delete all the tables in the dataset. If False and the dataset contains tables, the request will fail. Default is False",
             "type": "boolean"
-          },
-          {
-            "name": "projectId",
-            "in": "path",
-            "description": "Project ID of the dataset being deleted",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -77,16 +77,16 @@
         },
         "parameters": [
           {
-            "name": "datasetId",
+            "name": "projectId",
             "in": "path",
-            "description": "Dataset ID of the requested dataset",
+            "description": "Project ID of the requested dataset",
             "required": true,
             "type": "string"
           },
           {
-            "name": "projectId",
+            "name": "datasetId",
             "in": "path",
-            "description": "Project ID of the requested dataset",
+            "description": "Dataset ID of the requested dataset",
             "required": true,
             "type": "string"
           }
@@ -116,16 +116,16 @@
         },
         "parameters": [
           {
-            "name": "datasetId",
+            "name": "projectId",
             "in": "path",
-            "description": "Dataset ID of the dataset being updated",
+            "description": "Project ID of the dataset being updated",
             "required": true,
             "type": "string"
           },
           {
-            "name": "projectId",
+            "name": "datasetId",
             "in": "path",
-            "description": "Project ID of the dataset being updated",
+            "description": "Dataset ID of the dataset being updated",
             "required": true,
             "type": "string"
           }
@@ -155,16 +155,16 @@
         },
         "parameters": [
           {
-            "name": "datasetId",
+            "name": "projectId",
             "in": "path",
-            "description": "Dataset ID of the dataset being updated",
+            "description": "Project ID of the dataset being updated",
             "required": true,
             "type": "string"
           },
           {
-            "name": "projectId",
+            "name": "datasetId",
             "in": "path",
-            "description": "Project ID of the dataset being updated",
+            "description": "Dataset ID of the dataset being updated",
             "required": true,
             "type": "string"
           }
@@ -251,6 +251,13 @@
         },
         "parameters": [
           {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID of the datasets to be listed",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "all",
             "in": "query",
             "description": "Whether to list all datasets, including hidden ones",
@@ -266,13 +273,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Page token, returned by a previous call, to request the next page of results",
-            "type": "string"
-          },
-          {
-            "name": "projectId",
-            "in": "path",
-            "description": "Project ID of the datasets to be listed",
-            "required": true,
             "type": "string"
           }
         ],
@@ -326,16 +326,16 @@
         },
         "parameters": [
           {
-            "name": "jobId",
+            "name": "projectId",
             "in": "path",
-            "description": "Job ID of the job to cancel",
+            "description": "Project ID of the job to cancel",
             "required": true,
             "type": "string"
           },
           {
-            "name": "projectId",
+            "name": "jobId",
             "in": "path",
-            "description": "Project ID of the job to cancel",
+            "description": "Job ID of the job to cancel",
             "required": true,
             "type": "string"
           }
@@ -390,16 +390,16 @@
         },
         "parameters": [
           {
-            "name": "jobId",
+            "name": "projectId",
             "in": "path",
-            "description": "Job ID of the requested job",
+            "description": "Project ID of the requested job",
             "required": true,
             "type": "string"
           },
           {
-            "name": "projectId",
+            "name": "jobId",
             "in": "path",
-            "description": "Project ID of the requested job",
+            "description": "Job ID of the requested job",
             "required": true,
             "type": "string"
           }
@@ -454,6 +454,13 @@
         },
         "parameters": [
           {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID of the query job",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "jobId",
             "in": "path",
             "description": "Job ID of the query job",
@@ -470,13 +477,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Page token, returned by a previous call, to request the next page of results",
-            "type": "string"
-          },
-          {
-            "name": "projectId",
-            "in": "path",
-            "description": "Project ID of the query job",
-            "required": true,
             "type": "string"
           },
           {
@@ -580,6 +580,13 @@
         },
         "parameters": [
           {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID of the jobs to list",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "allUsers",
             "in": "query",
             "description": "Whether to display jobs owned by all users in the project. Default false",
@@ -595,13 +602,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Page token, returned by a previous call, to request the next page of results",
-            "type": "string"
-          },
-          {
-            "name": "projectId",
-            "in": "path",
-            "description": "Project ID of the jobs to list",
-            "required": true,
             "type": "string"
           },
           {
@@ -799,16 +799,16 @@
         },
         "parameters": [
           {
-            "name": "datasetId",
+            "name": "projectId",
             "in": "path",
-            "description": "Dataset ID of the destination table.",
+            "description": "Project ID of the destination table.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "projectId",
+            "name": "datasetId",
             "in": "path",
-            "description": "Project ID of the destination table.",
+            "description": "Dataset ID of the destination table.",
             "required": true,
             "type": "string"
           },
@@ -871,9 +871,23 @@
         },
         "parameters": [
           {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID of the table to read",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "datasetId",
             "in": "path",
             "description": "Dataset ID of the table to read",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table ID of the table to read",
             "required": true,
             "type": "string"
           },
@@ -890,23 +904,9 @@
             "type": "string"
           },
           {
-            "name": "projectId",
-            "in": "path",
-            "description": "Project ID of the table to read",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "startIndex",
             "in": "query",
             "description": "Zero-based index of the starting row to read",
-            "type": "string"
-          },
-          {
-            "name": "tableId",
-            "in": "path",
-            "description": "Table ID of the table to read",
-            "required": true,
             "type": "string"
           }
         ],
@@ -957,16 +957,16 @@
         },
         "parameters": [
           {
-            "name": "datasetId",
+            "name": "projectId",
             "in": "path",
-            "description": "Dataset ID of the table to delete",
+            "description": "Project ID of the table to delete",
             "required": true,
             "type": "string"
           },
           {
-            "name": "projectId",
+            "name": "datasetId",
             "in": "path",
-            "description": "Project ID of the table to delete",
+            "description": "Dataset ID of the table to delete",
             "required": true,
             "type": "string"
           },
@@ -1003,16 +1003,16 @@
         },
         "parameters": [
           {
-            "name": "datasetId",
+            "name": "projectId",
             "in": "path",
-            "description": "Dataset ID of the requested table",
+            "description": "Project ID of the requested table",
             "required": true,
             "type": "string"
           },
           {
-            "name": "projectId",
+            "name": "datasetId",
             "in": "path",
-            "description": "Project ID of the requested table",
+            "description": "Dataset ID of the requested table",
             "required": true,
             "type": "string"
           },
@@ -1049,16 +1049,16 @@
         },
         "parameters": [
           {
-            "name": "datasetId",
+            "name": "projectId",
             "in": "path",
-            "description": "Dataset ID of the table to update",
+            "description": "Project ID of the table to update",
             "required": true,
             "type": "string"
           },
           {
-            "name": "projectId",
+            "name": "datasetId",
             "in": "path",
-            "description": "Project ID of the table to update",
+            "description": "Dataset ID of the table to update",
             "required": true,
             "type": "string"
           },
@@ -1095,16 +1095,16 @@
         },
         "parameters": [
           {
-            "name": "datasetId",
+            "name": "projectId",
             "in": "path",
-            "description": "Dataset ID of the table to update",
+            "description": "Project ID of the table to update",
             "required": true,
             "type": "string"
           },
           {
-            "name": "projectId",
+            "name": "datasetId",
             "in": "path",
-            "description": "Project ID of the table to update",
+            "description": "Dataset ID of the table to update",
             "required": true,
             "type": "string"
           },
@@ -1166,16 +1166,16 @@
         },
         "parameters": [
           {
-            "name": "datasetId",
+            "name": "projectId",
             "in": "path",
-            "description": "Dataset ID of the new table",
+            "description": "Project ID of the new table",
             "required": true,
             "type": "string"
           },
           {
-            "name": "projectId",
+            "name": "datasetId",
             "in": "path",
-            "description": "Project ID of the new table",
+            "description": "Dataset ID of the new table",
             "required": true,
             "type": "string"
           }
@@ -1205,6 +1205,13 @@
         },
         "parameters": [
           {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID of the tables to list",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "datasetId",
             "in": "path",
             "description": "Dataset ID of the tables to list",
@@ -1221,13 +1228,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Page token, returned by a previous call, to request the next page of results",
-            "type": "string"
-          },
-          {
-            "name": "projectId",
-            "in": "path",
-            "description": "Project ID of the tables to list",
-            "required": true,
             "type": "string"
           }
         ],

@@ -35,6 +35,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "The DFA user profile ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of results to return.",
@@ -46,13 +53,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The value of the nextToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "The DFA user profile ID.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -105,6 +105,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "The DFA profile ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of results to return.",
@@ -116,13 +123,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The value of the nextToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "The DFA profile ID.",
-            "required": true,
             "type": "string"
           },
           {
@@ -402,6 +402,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "The DFA user profile ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of results to return.",
@@ -413,13 +420,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The value of the nextToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "The DFA user profile ID.",
-            "required": true,
             "type": "string"
           },
           {
@@ -564,13 +564,6 @@
         },
         "parameters": [
           {
-            "name": "fileId",
-            "in": "path",
-            "description": "The ID of the report file.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "profileId",
             "in": "path",
             "description": "The DFA profile ID.",
@@ -581,6 +574,13 @@
             "name": "reportId",
             "in": "path",
             "description": "The ID of the report.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileId",
+            "in": "path",
+            "description": "The ID of the report file.",
             "required": true,
             "type": "string"
           }
@@ -634,20 +634,6 @@
         },
         "parameters": [
           {
-            "name": "maxResults",
-            "in": "query",
-            "description": "Maximum number of results to return.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 10
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "The value of the nextToken from the previous result page.",
-            "type": "string"
-          },
-          {
             "name": "profileId",
             "in": "path",
             "description": "The DFA profile ID.",
@@ -659,6 +645,20 @@
             "in": "path",
             "description": "The ID of the parent report.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of results to return.",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "The value of the nextToken from the previous result page.",
             "type": "string"
           },
           {

@@ -35,6 +35,13 @@
         },
         "parameters": [
           {
+            "name": "url",
+            "in": "query",
+            "description": "The URL to fetch and analyze",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "filter_third_party_resources",
             "in": "query",
             "description": "Indicates if third party resources should be filtered out before PageSpeed analysis.",
@@ -73,13 +80,6 @@
               "desktop",
               "mobile"
             ]
-          },
-          {
-            "name": "url",
-            "in": "query",
-            "description": "The URL to fetch and analyze",
-            "required": true,
-            "type": "string"
           }
         ],
         "tags": [

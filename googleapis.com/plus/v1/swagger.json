@@ -92,6 +92,13 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user to get activities for. The special value \"me\" can be used to indicate the authenticated user.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "collection",
             "in": "path",
             "description": "The collection of activities to list.",
@@ -114,13 +121,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "type": "string"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "The ID of the user to get activities for. The special value \"me\" can be used to indicate the authenticated user.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -174,6 +174,13 @@
         },
         "parameters": [
           {
+            "name": "query",
+            "in": "query",
+            "description": "Full-text search query string.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "language",
             "in": "query",
             "description": "Specify the preferred language to search with. See search language codes for available values.",
@@ -204,13 +211,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response. This token can be of any length.",
-            "type": "string"
-          },
-          {
-            "name": "query",
-            "in": "query",
-            "description": "Full-text search query string.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -404,6 +404,13 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user to record actions for. The only valid values are \"me\" and the ID of the authenticated user.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "collection",
             "in": "path",
             "description": "The collection to which to write moments.",
@@ -418,13 +425,6 @@
             "in": "query",
             "description": "Return the moment as written. Should be used only for debugging.",
             "type": "boolean"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "The ID of the user to record actions for. The only valid values are \"me\" and the ID of the authenticated user.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -451,6 +451,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user to get moments for. The special value \"me\" can be used to indicate the authenticated user.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "collection",
             "in": "path",
@@ -486,13 +493,6 @@
             "name": "type",
             "in": "query",
             "description": "Only moments of this type will be returned.",
-            "type": "string"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "The ID of the user to get moments for. The special value \"me\" can be used to indicate the authenticated user.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -658,6 +658,13 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "Get the collection of people for the person identified. Use \"me\" to indicate the authenticated user.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "collection",
             "in": "path",
             "description": "The collection of people to list.",
@@ -691,13 +698,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "type": "string"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "Get the collection of people for the person identified. Use \"me\" to indicate the authenticated user.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -834,6 +834,13 @@
         },
         "parameters": [
           {
+            "name": "query",
+            "in": "query",
+            "description": "Specify a query string for full text search of public text in all profiles.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "language",
             "in": "query",
             "description": "Specify the preferred language to search with. See search language codes for available values.",
@@ -853,13 +860,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response. This token can be of any length.",
-            "type": "string"
-          },
-          {
-            "name": "query",
-            "in": "query",
-            "description": "Specify a query string for full text search of public text in all profiles.",
-            "required": true,
             "type": "string"
           }
         ],

@@ -35,6 +35,13 @@
         },
         "parameters": [
           {
+            "name": "shortUrl",
+            "in": "query",
+            "description": "The short URL, including the protocol.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "projection",
             "in": "query",
             "description": "Additional information to return.",
@@ -44,13 +51,6 @@
               "ANALYTICS_TOP_STRINGS",
               "FULL"
             ]
-          },
-          {
-            "name": "shortUrl",
-            "in": "query",
-            "description": "The short URL, including the protocol.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [

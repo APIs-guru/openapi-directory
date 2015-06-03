@@ -285,6 +285,13 @@
         },
         "parameters": [
           {
+            "name": "ocdId",
+            "in": "path",
+            "description": "The Open Civic Data division identifier of the division to look up.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "levels",
             "in": "query",
             "description": "A list of office levels to filter by. Only offices that serve at least one of these levels will be returned. Divisions that don't contain a matching office will not be returned.",
@@ -304,13 +311,6 @@
               ]
             },
             "collectionFormat": "multi"
-          },
-          {
-            "name": "ocdId",
-            "in": "path",
-            "description": "The Open Civic Data division identifier of the division to look up.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "recursive",

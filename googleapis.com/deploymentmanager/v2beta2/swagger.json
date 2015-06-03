@@ -35,16 +35,16 @@
         },
         "parameters": [
           {
-            "name": "deployment",
+            "name": "project",
             "in": "path",
-            "description": "The name of the deployment for this request.",
+            "description": "The project ID for this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "project",
+            "name": "deployment",
             "in": "path",
-            "description": "The project ID for this request.",
+            "description": "The name of the deployment for this request.",
             "required": true,
             "type": "string"
           }
@@ -74,16 +74,16 @@
         },
         "parameters": [
           {
-            "name": "deployment",
+            "name": "project",
             "in": "path",
-            "description": "The name of the deployment for this request.",
+            "description": "The project ID for this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "project",
+            "name": "deployment",
             "in": "path",
-            "description": "The project ID for this request.",
+            "description": "The name of the deployment for this request.",
             "required": true,
             "type": "string"
           }
@@ -114,6 +114,20 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "description": "The project ID for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deployment",
+            "in": "path",
+            "description": "The name of the deployment for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "createPolicy",
             "in": "query",
             "description": "Sets the policy to use for creating new resources.",
@@ -134,20 +148,6 @@
               "ABANDON",
               "DELETE"
             ]
-          },
-          {
-            "name": "deployment",
-            "in": "path",
-            "description": "The name of the deployment for this request.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "path",
-            "description": "The project ID for this request.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "updatePolicy",
@@ -186,6 +186,20 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "description": "The project ID for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deployment",
+            "in": "path",
+            "description": "The name of the deployment for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "createPolicy",
             "in": "query",
             "description": "Sets the policy to use for creating new resources.",
@@ -206,20 +220,6 @@
               "ABANDON",
               "DELETE"
             ]
-          },
-          {
-            "name": "deployment",
-            "in": "path",
-            "description": "The name of the deployment for this request.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "path",
-            "description": "The project ID for this request.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "updatePolicy",
@@ -315,6 +315,13 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "description": "The project ID for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "filter",
             "in": "query",
             "description": "Filter expression for filtering listed resources.",
@@ -333,13 +340,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Tag returned by a previous list request when that list was truncated to maxResults. Used to continue a previous list request.",
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "path",
-            "description": "The project ID for this request.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -394,6 +394,13 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "description": "The project ID for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "deployment",
             "in": "path",
             "description": "The name of the deployment for this request.",
@@ -404,13 +411,6 @@
             "name": "manifest",
             "in": "path",
             "description": "The name of the manifest for this request.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "path",
-            "description": "The project ID for this request.",
             "required": true,
             "type": "string"
           }
@@ -466,6 +466,13 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "description": "The project ID for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "deployment",
             "in": "path",
             "description": "The name of the deployment for this request.",
@@ -491,13 +498,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Tag returned by a previous list request when that list was truncated to maxResults. Used to continue a previous list request.",
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "path",
-            "description": "The project ID for this request.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -552,16 +552,16 @@
         },
         "parameters": [
           {
-            "name": "operation",
+            "name": "project",
             "in": "path",
-            "description": "The name of the operation for this request.",
+            "description": "The project ID for this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "project",
+            "name": "operation",
             "in": "path",
-            "description": "The project ID for this request.",
+            "description": "The name of the operation for this request.",
             "required": true,
             "type": "string"
           }
@@ -617,6 +617,13 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "description": "The project ID for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "filter",
             "in": "query",
             "description": "Filter expression for filtering listed resources.",
@@ -635,13 +642,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Tag returned by a previous list request when that list was truncated to maxResults. Used to continue a previous list request.",
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "path",
-            "description": "The project ID for this request.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -696,16 +696,16 @@
         },
         "parameters": [
           {
-            "name": "deployment",
+            "name": "project",
             "in": "path",
-            "description": "The name of the deployment for this request.",
+            "description": "The project ID for this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "project",
+            "name": "deployment",
             "in": "path",
-            "description": "The project ID for this request.",
+            "description": "The name of the deployment for this request.",
             "required": true,
             "type": "string"
           },
@@ -768,6 +768,13 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "description": "The project ID for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "deployment",
             "in": "path",
             "description": "The name of the deployment for this request.",
@@ -793,13 +800,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Tag returned by a previous list request when that list was truncated to maxResults. Used to continue a previous list request.",
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "path",
-            "description": "The project ID for this request.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -854,6 +854,13 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "description": "The project ID for this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "filter",
             "in": "query",
             "description": "Filter expression for filtering listed resources.",
@@ -872,13 +879,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Tag returned by a previous list request when that list was truncated to maxResults. Used to continue a previous list request.",
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "path",
-            "description": "The project ID for this request.",
-            "required": true,
             "type": "string"
           }
         ],

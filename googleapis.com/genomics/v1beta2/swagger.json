@@ -1733,6 +1733,13 @@
         },
         "parameters": [
           {
+            "name": "readGroupSetId",
+            "in": "path",
+            "description": "Required. The ID of the read group set over which coverage is requested.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "pageSize",
             "in": "query",
             "description": "The maximum number of results to return in a single page. If unspecified, defaults to 1024. The maximum value is 2048.",
@@ -1760,13 +1767,6 @@
             "name": "range.start",
             "in": "query",
             "description": "The start position of the range on the reference, 0-based inclusive. If specified, referenceName must also be specified.",
-            "type": "string"
-          },
-          {
-            "name": "readGroupSetId",
-            "in": "path",
-            "description": "Required. The ID of the read group set over which coverage is requested.",
-            "required": true,
             "type": "string"
           },
           {
@@ -1983,6 +1983,13 @@
         },
         "parameters": [
           {
+            "name": "referenceId",
+            "in": "path",
+            "description": "The ID of the reference.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "end",
             "in": "query",
             "description": "The end position (0-based, exclusive) of this query. Defaults to the length of this reference.",
@@ -1998,13 +2005,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of nextPageToken from the previous response.",
-            "type": "string"
-          },
-          {
-            "name": "referenceId",
-            "in": "path",
-            "description": "The ID of the reference.",
-            "required": true,
             "type": "string"
           },
           {

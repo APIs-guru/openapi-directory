@@ -35,6 +35,13 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "blogId",
             "in": "path",
             "description": "The ID of the blog to get.",
@@ -46,13 +53,6 @@
             "in": "query",
             "description": "Maximum number of posts to pull back with the blog.",
             "type": "integer"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -247,6 +247,13 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "fetchUserInfo",
             "in": "query",
             "description": "Whether the response is a list of blogs with per-user information instead of just blogs.",
@@ -281,13 +288,6 @@
               ]
             },
             "collectionFormat": "multi"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "view",
@@ -358,16 +358,16 @@
             "type": "string"
           },
           {
-            "name": "commentId",
+            "name": "postId",
             "in": "path",
-            "description": "The ID of the comment to mark as not spam.",
+            "description": "The ID of the Post.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "postId",
+            "name": "commentId",
             "in": "path",
-            "description": "The ID of the Post.",
+            "description": "The ID of the comment to mark as not spam.",
             "required": true,
             "type": "string"
           }
@@ -425,16 +425,16 @@
             "type": "string"
           },
           {
-            "name": "commentId",
+            "name": "postId",
             "in": "path",
-            "description": "The ID of the comment to delete.",
+            "description": "The ID of the Post.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "postId",
+            "name": "commentId",
             "in": "path",
-            "description": "The ID of the Post.",
+            "description": "The ID of the comment to delete.",
             "required": true,
             "type": "string"
           }
@@ -470,16 +470,16 @@
             "type": "string"
           },
           {
-            "name": "commentId",
+            "name": "postId",
             "in": "path",
-            "description": "The ID of the comment to get.",
+            "description": "ID of the post to fetch posts from.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "postId",
+            "name": "commentId",
             "in": "path",
-            "description": "ID of the post to fetch posts from.",
+            "description": "The ID of the comment to get.",
             "required": true,
             "type": "string"
           },
@@ -552,6 +552,13 @@
             "type": "string"
           },
           {
+            "name": "postId",
+            "in": "path",
+            "description": "ID of the post to fetch posts from.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "endDate",
             "in": "query",
             "description": "Latest date of comment to fetch, a date-time with RFC 3339 formatting.",
@@ -573,13 +580,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Continuation token if request is paged.",
-            "type": "string"
-          },
-          {
-            "name": "postId",
-            "in": "path",
-            "description": "ID of the post to fetch posts from.",
-            "required": true,
             "type": "string"
           },
           {
@@ -774,16 +774,16 @@
             "type": "string"
           },
           {
-            "name": "commentId",
+            "name": "postId",
             "in": "path",
-            "description": "The ID of the comment to mark as spam.",
+            "description": "The ID of the Post.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "postId",
+            "name": "commentId",
             "in": "path",
-            "description": "The ID of the Post.",
+            "description": "The ID of the comment to mark as spam.",
             "required": true,
             "type": "string"
           }
@@ -844,16 +844,16 @@
             "type": "string"
           },
           {
-            "name": "commentId",
+            "name": "postId",
             "in": "path",
-            "description": "The ID of the comment to delete content from.",
+            "description": "The ID of the Post.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "postId",
+            "name": "commentId",
             "in": "path",
-            "description": "The ID of the Post.",
+            "description": "The ID of the comment to delete content from.",
             "required": true,
             "type": "string"
           }
@@ -1448,17 +1448,18 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "blogId",
             "in": "path",
             "description": "The ID of the blog.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "maxComments",
-            "in": "query",
-            "description": "Maximum number of comments to pull back on a post.",
-            "type": "integer"
           },
           {
             "name": "postId",
@@ -1468,11 +1469,10 @@
             "type": "string"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.",
-            "required": true,
-            "type": "string"
+            "name": "maxComments",
+            "in": "query",
+            "description": "Maximum number of comments to pull back on a post.",
+            "type": "integer"
           }
         ],
         "security": [
@@ -1524,6 +1524,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "blogId",
             "in": "path",
@@ -1592,13 +1599,6 @@
               ]
             },
             "collectionFormat": "multi"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "view",
@@ -1704,6 +1704,13 @@
             "type": "string"
           },
           {
+            "name": "postId",
+            "in": "path",
+            "description": "The ID of the post",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "fetchBody",
             "in": "query",
             "description": "Whether the body content of the post is included (default: true). This should be set to false when the post bodies are not required, to help minimize traffic.",
@@ -1721,13 +1728,6 @@
             "in": "query",
             "description": "Maximum number of comments to pull back on a post.",
             "type": "integer"
-          },
-          {
-            "name": "postId",
-            "in": "path",
-            "description": "The ID of the post",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "view",
@@ -1773,6 +1773,13 @@
             "type": "string"
           },
           {
+            "name": "postId",
+            "in": "path",
+            "description": "The ID of the Post.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "fetchBody",
             "in": "query",
             "description": "Whether the body content of the post is included with the result (default: true).",
@@ -1790,13 +1797,6 @@
             "in": "query",
             "description": "Maximum number of comments to retrieve with the returned post.",
             "type": "integer"
-          },
-          {
-            "name": "postId",
-            "in": "path",
-            "description": "The ID of the Post.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "publish",
@@ -1842,6 +1842,13 @@
             "type": "string"
           },
           {
+            "name": "postId",
+            "in": "path",
+            "description": "The ID of the Post.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "fetchBody",
             "in": "query",
             "description": "Whether the body content of the post is included with the result (default: true).",
@@ -1859,13 +1866,6 @@
             "in": "query",
             "description": "Maximum number of comments to retrieve with the returned post.",
             "type": "integer"
-          },
-          {
-            "name": "postId",
-            "in": "path",
-            "description": "The ID of the Post.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "publish",
@@ -1936,17 +1936,17 @@
             "type": "string"
           },
           {
-            "name": "maxComments",
-            "in": "query",
-            "description": "Maximum number of comments to pull back on a post.",
-            "type": "integer"
-          },
-          {
             "name": "path",
             "in": "query",
             "description": "Path of the Post to retrieve.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "maxComments",
+            "in": "query",
+            "description": "Maximum number of comments to pull back on a post.",
+            "type": "integer"
           },
           {
             "name": "view",
@@ -2336,6 +2336,13 @@
             "type": "string"
           },
           {
+            "name": "q",
+            "in": "query",
+            "description": "Query terms to search this blog for matching posts.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "fetchBodies",
             "in": "query",
             "description": "Whether the body content of posts is included (default: true). This should be set to false when the post bodies are not required, to help minimize traffic.",
@@ -2352,13 +2359,6 @@
               "published",
               "updated"
             ]
-          },
-          {
-            "name": "q",
-            "in": "query",
-            "description": "Query terms to search this blog for matching posts.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [

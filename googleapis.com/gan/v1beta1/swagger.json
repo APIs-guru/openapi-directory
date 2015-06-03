@@ -35,12 +35,6 @@
         },
         "parameters": [
           {
-            "name": "advertiserId",
-            "in": "query",
-            "description": "The ID of the advertiser to look up. Optional.",
-            "type": "string"
-          },
-          {
             "name": "role",
             "in": "path",
             "description": "The role of the requester. Valid values: 'advertisers' or 'publishers'.",
@@ -56,6 +50,12 @@
             "in": "path",
             "description": "The ID of the requesting advertiser or publisher.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advertiserId",
+            "in": "query",
+            "description": "The ID of the advertiser to look up. Optional.",
             "type": "string"
           }
         ],
@@ -100,6 +100,24 @@
           }
         },
         "parameters": [
+          {
+            "name": "role",
+            "in": "path",
+            "description": "The role of the requester. Valid values: 'advertisers' or 'publishers'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "advertisers",
+              "publishers"
+            ]
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The ID of the requesting advertiser or publisher.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "advertiserCategory",
             "in": "query",
@@ -152,24 +170,6 @@
               "declined",
               "pending"
             ]
-          },
-          {
-            "name": "role",
-            "in": "path",
-            "description": "The role of the requester. Valid values: 'advertisers' or 'publishers'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "advertisers",
-              "publishers"
-            ]
-          },
-          {
-            "name": "roleId",
-            "in": "path",
-            "description": "The ID of the requesting advertiser or publisher.",
-            "required": true,
-            "type": "string"
           }
         ],
         "tags": [
@@ -214,6 +214,13 @@
         },
         "parameters": [
           {
+            "name": "publisher",
+            "in": "path",
+            "description": "The ID of the publisher in question.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "advertiser",
             "in": "query",
             "description": "The advertiser ID of a card issuer whose offers to include. Optional, may be repeated.",
@@ -232,13 +239,6 @@
               "full",
               "summary"
             ]
-          },
-          {
-            "name": "publisher",
-            "in": "path",
-            "description": "The ID of the publisher in question.",
-            "required": true,
-            "type": "string"
           }
         ],
         "tags": [
@@ -282,6 +282,24 @@
           }
         },
         "parameters": [
+          {
+            "name": "role",
+            "in": "path",
+            "description": "The role of the requester. Valid values: 'advertisers' or 'publishers'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "advertisers",
+              "publishers"
+            ]
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The ID of the requesting advertiser or publisher.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "advertiserId",
             "in": "query",
@@ -371,24 +389,6 @@
             "type": "string"
           },
           {
-            "name": "role",
-            "in": "path",
-            "description": "The role of the requester. Valid values: 'advertisers' or 'publishers'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "advertisers",
-              "publishers"
-            ]
-          },
-          {
-            "name": "roleId",
-            "in": "path",
-            "description": "The ID of the requesting advertiser or publisher.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "sku",
             "in": "query",
             "description": "Caret(^) delimited list of SKUs. Filters out all events that do not reference one of the given SKU. Optional.",
@@ -458,13 +458,6 @@
         },
         "parameters": [
           {
-            "name": "linkId",
-            "in": "path",
-            "description": "The ID of the link to look up.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "role",
             "in": "path",
             "description": "The role of the requester. Valid values: 'advertisers' or 'publishers'.",
@@ -479,6 +472,13 @@
             "name": "roleId",
             "in": "path",
             "description": "The ID of the requesting advertiser or publisher.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "linkId",
+            "in": "path",
+            "description": "The ID of the link to look up.",
             "required": true,
             "type": "string"
           }
@@ -585,6 +585,24 @@
         },
         "parameters": [
           {
+            "name": "role",
+            "in": "path",
+            "description": "The role of the requester. Valid values: 'advertisers' or 'publishers'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "advertisers",
+              "publishers"
+            ]
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The ID of the requesting advertiser or publisher.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "advertiserId",
             "in": "query",
             "description": "Limits the resulting links to the ones belonging to the listed advertisers.",
@@ -678,24 +696,6 @@
             ]
           },
           {
-            "name": "role",
-            "in": "path",
-            "description": "The role of the requester. Valid values: 'advertisers' or 'publishers'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "advertisers",
-              "publishers"
-            ]
-          },
-          {
-            "name": "roleId",
-            "in": "path",
-            "description": "The ID of the requesting advertiser or publisher.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "searchText",
             "in": "query",
             "description": "Field for full text search across title and merchandising text, supports link id search.",
@@ -756,12 +756,6 @@
         },
         "parameters": [
           {
-            "name": "publisherId",
-            "in": "query",
-            "description": "The ID of the publisher to look up. Optional.",
-            "type": "string"
-          },
-          {
             "name": "role",
             "in": "path",
             "description": "The role of the requester. Valid values: 'advertisers' or 'publishers'.",
@@ -777,6 +771,12 @@
             "in": "path",
             "description": "The ID of the requesting advertiser or publisher.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "publisherId",
+            "in": "query",
+            "description": "The ID of the publisher to look up. Optional.",
             "type": "string"
           }
         ],
@@ -821,6 +821,24 @@
           }
         },
         "parameters": [
+          {
+            "name": "role",
+            "in": "path",
+            "description": "The role of the requester. Valid values: 'advertisers' or 'publishers'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "advertisers",
+              "publishers"
+            ]
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The ID of the requesting advertiser or publisher.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "maxResults",
             "in": "query",
@@ -873,24 +891,6 @@
               "declined",
               "pending"
             ]
-          },
-          {
-            "name": "role",
-            "in": "path",
-            "description": "The role of the requester. Valid values: 'advertisers' or 'publishers'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "advertisers",
-              "publishers"
-            ]
-          },
-          {
-            "name": "roleId",
-            "in": "path",
-            "description": "The ID of the requesting advertiser or publisher.",
-            "required": true,
-            "type": "string"
           }
         ],
         "tags": [
@@ -934,6 +934,34 @@
           }
         },
         "parameters": [
+          {
+            "name": "role",
+            "in": "path",
+            "description": "The role of the requester. Valid values: 'advertisers' or 'publishers'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "advertisers",
+              "publishers"
+            ]
+          },
+          {
+            "name": "roleId",
+            "in": "path",
+            "description": "The ID of the requesting advertiser or publisher.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "reportType",
+            "in": "path",
+            "description": "The type of report being requested. Valid values: 'order_delta'. Required.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "order_delta"
+            ]
+          },
           {
             "name": "advertiserId",
             "in": "query",
@@ -1003,34 +1031,6 @@
               "type": "string"
             },
             "collectionFormat": "multi"
-          },
-          {
-            "name": "reportType",
-            "in": "path",
-            "description": "The type of report being requested. Valid values: 'order_delta'. Required.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "order_delta"
-            ]
-          },
-          {
-            "name": "role",
-            "in": "path",
-            "description": "The role of the requester. Valid values: 'advertisers' or 'publishers'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "advertisers",
-              "publishers"
-            ]
-          },
-          {
-            "name": "roleId",
-            "in": "path",
-            "description": "The ID of the requesting advertiser or publisher.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "startDate",

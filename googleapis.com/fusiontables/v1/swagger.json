@@ -32,16 +32,16 @@
         },
         "parameters": [
           {
-            "name": "columnId",
+            "name": "tableId",
             "in": "path",
-            "description": "Name or identifier for the column being deleted.",
+            "description": "Table from which the column is being deleted.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "tableId",
+            "name": "columnId",
             "in": "path",
-            "description": "Table from which the column is being deleted.",
+            "description": "Name or identifier for the column being deleted.",
             "required": true,
             "type": "string"
           }
@@ -70,16 +70,16 @@
         },
         "parameters": [
           {
-            "name": "columnId",
+            "name": "tableId",
             "in": "path",
-            "description": "Name or identifier for the column that is being requested.",
+            "description": "Table to which the column belongs.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "tableId",
+            "name": "columnId",
             "in": "path",
-            "description": "Table to which the column belongs.",
+            "description": "Name or identifier for the column that is being requested.",
             "required": true,
             "type": "string"
           }
@@ -109,16 +109,16 @@
         },
         "parameters": [
           {
-            "name": "columnId",
+            "name": "tableId",
             "in": "path",
-            "description": "Name or identifier for the column that is being updated.",
+            "description": "Table for which the column is being updated.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "tableId",
+            "name": "columnId",
             "in": "path",
-            "description": "Table for which the column is being updated.",
+            "description": "Name or identifier for the column that is being updated.",
             "required": true,
             "type": "string"
           }
@@ -147,16 +147,16 @@
         },
         "parameters": [
           {
-            "name": "columnId",
+            "name": "tableId",
             "in": "path",
-            "description": "Name or identifier for the column that is being updated.",
+            "description": "Table for which the column is being updated.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "tableId",
+            "name": "columnId",
             "in": "path",
-            "description": "Table for which the column is being updated.",
+            "description": "Name or identifier for the column that is being updated.",
             "required": true,
             "type": "string"
           }
@@ -241,6 +241,13 @@
         },
         "parameters": [
           {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table whose columns are being listed.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of columns to return. Optional. Default is 5.",
@@ -251,13 +258,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Continuation token specifying which result page to return. Optional.",
-            "type": "string"
-          },
-          {
-            "name": "tableId",
-            "in": "path",
-            "description": "Table whose columns are being listed.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -311,17 +311,17 @@
         },
         "parameters": [
           {
-            "name": "hdrs",
-            "in": "query",
-            "description": "Should column names be included (in the first row)?. Default is true.",
-            "type": "boolean"
-          },
-          {
             "name": "sql",
             "in": "query",
             "description": "An SQL SELECT/SHOW/DESCRIBE/INSERT/UPDATE/DELETE/CREATE statement.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "hdrs",
+            "in": "query",
+            "description": "Should column names be included (in the first row)?. Default is true.",
+            "type": "boolean"
           },
           {
             "name": "typed",
@@ -355,17 +355,17 @@
         },
         "parameters": [
           {
-            "name": "hdrs",
-            "in": "query",
-            "description": "Should column names be included (in the first row)?. Default is true.",
-            "type": "boolean"
-          },
-          {
             "name": "sql",
             "in": "query",
             "description": "An SQL SELECT/SHOW/DESCRIBE statement.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "hdrs",
+            "in": "query",
+            "description": "Should column names be included (in the first row)?. Default is true.",
+            "type": "boolean"
           },
           {
             "name": "typed",
@@ -421,18 +421,18 @@
         },
         "parameters": [
           {
-            "name": "styleId",
-            "in": "path",
-            "description": "Identifier (within a table) for the style being deleted",
-            "required": true,
-            "type": "integer"
-          },
-          {
             "name": "tableId",
             "in": "path",
             "description": "Table from which the style is being deleted",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "styleId",
+            "in": "path",
+            "description": "Identifier (within a table) for the style being deleted",
+            "required": true,
+            "type": "integer"
           }
         ],
         "security": [
@@ -459,18 +459,18 @@
         },
         "parameters": [
           {
-            "name": "styleId",
-            "in": "path",
-            "description": "Identifier (integer) for a specific style in a table",
-            "required": true,
-            "type": "integer"
-          },
-          {
             "name": "tableId",
             "in": "path",
             "description": "Table to which the requested style belongs",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "styleId",
+            "in": "path",
+            "description": "Identifier (integer) for a specific style in a table",
+            "required": true,
+            "type": "integer"
           }
         ],
         "security": [
@@ -498,18 +498,18 @@
         },
         "parameters": [
           {
-            "name": "styleId",
-            "in": "path",
-            "description": "Identifier (within a table) for the style being updated.",
-            "required": true,
-            "type": "integer"
-          },
-          {
             "name": "tableId",
             "in": "path",
             "description": "Table whose style is being updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "styleId",
+            "in": "path",
+            "description": "Identifier (within a table) for the style being updated.",
+            "required": true,
+            "type": "integer"
           }
         ],
         "security": [
@@ -536,18 +536,18 @@
         },
         "parameters": [
           {
-            "name": "styleId",
-            "in": "path",
-            "description": "Identifier (within a table) for the style being updated.",
-            "required": true,
-            "type": "integer"
-          },
-          {
             "name": "tableId",
             "in": "path",
             "description": "Table whose style is being updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "styleId",
+            "in": "path",
+            "description": "Identifier (within a table) for the style being updated.",
+            "required": true,
+            "type": "integer"
           }
         ],
         "security": [
@@ -630,6 +630,13 @@
         },
         "parameters": [
           {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table whose styles are being listed",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of styles to return. Optional. Default is 5.",
@@ -640,13 +647,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Continuation token specifying which result page to return. Optional.",
-            "type": "string"
-          },
-          {
-            "name": "tableId",
-            "in": "path",
-            "description": "Table whose styles are being listed",
-            "required": true,
             "type": "string"
           }
         ],
@@ -700,17 +700,17 @@
         },
         "parameters": [
           {
-            "name": "copyPresentation",
-            "in": "query",
-            "description": "Whether to also copy tabs, styles, and templates. Default is false.",
-            "type": "boolean"
-          },
-          {
             "name": "tableId",
             "in": "path",
             "description": "ID of the table that is being copied.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "copyPresentation",
+            "in": "query",
+            "description": "Whether to also copy tabs, styles, and templates. Default is false.",
+            "type": "boolean"
           }
         ],
         "security": [
@@ -823,17 +823,17 @@
         },
         "parameters": [
           {
-            "name": "replaceViewDefinition",
-            "in": "query",
-            "description": "Should the view definition also be updated? The specified view definition replaces the existing one. Only a view can be updated with a new definition.",
-            "type": "boolean"
-          },
-          {
             "name": "tableId",
             "in": "path",
             "description": "ID of the table that is being updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "replaceViewDefinition",
+            "in": "query",
+            "description": "Should the view definition also be updated? The specified view definition replaces the existing one. Only a view can be updated with a new definition.",
+            "type": "boolean"
           }
         ],
         "security": [
@@ -860,17 +860,17 @@
         },
         "parameters": [
           {
-            "name": "replaceViewDefinition",
-            "in": "query",
-            "description": "Should the view definition also be updated? The specified view definition replaces the existing one. Only a view can be updated with a new definition.",
-            "type": "boolean"
-          },
-          {
             "name": "tableId",
             "in": "path",
             "description": "ID of the table that is being updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "replaceViewDefinition",
+            "in": "query",
+            "description": "Should the view definition also be updated? The specified view definition replaces the existing one. Only a view can be updated with a new definition.",
+            "type": "boolean"
           }
         ],
         "security": [
@@ -925,6 +925,13 @@
         ],
         "parameters": [
           {
+            "name": "tableId",
+            "in": "path",
+            "description": "The table into which new rows are being imported.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "delimiter",
             "in": "query",
             "description": "The delimiter used to separate cell values. This can only consist of a single character. Default is ','.",
@@ -953,13 +960,6 @@
             "in": "query",
             "description": "The index of the first line from which to start importing, inclusive. Default is 0.",
             "type": "integer"
-          },
-          {
-            "name": "tableId",
-            "in": "path",
-            "description": "The table into which new rows are being imported.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -1014,6 +1014,13 @@
         ],
         "parameters": [
           {
+            "name": "name",
+            "in": "query",
+            "description": "The name to be assigned to the new table.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "delimiter",
             "in": "query",
             "description": "The delimiter used to separate cell values. This can only consist of a single character. Default is ','.",
@@ -1023,13 +1030,6 @@
             "name": "encoding",
             "in": "query",
             "description": "The encoding of the content. Default is UTF-8. Use 'auto-detect' if you are unsure of the encoding.",
-            "type": "string"
-          },
-          {
-            "name": "name",
-            "in": "query",
-            "description": "The name to be assigned to the new table.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -1264,6 +1264,13 @@
         },
         "parameters": [
           {
+            "name": "tableId",
+            "in": "path",
+            "description": "Table whose tasks are being listed.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of columns to return. Optional. Default is 5.",
@@ -1279,13 +1286,6 @@
             "name": "startIndex",
             "in": "query",
             "type": "integer"
-          },
-          {
-            "name": "tableId",
-            "in": "path",
-            "description": "Table whose tasks are being listed.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -1544,6 +1544,13 @@
         },
         "parameters": [
           {
+            "name": "tableId",
+            "in": "path",
+            "description": "Identifier for the table whose templates are being requested",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of templates to return. Optional. Default is 5.",
@@ -1554,13 +1561,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Continuation token specifying which results page to return. Optional.",
-            "type": "string"
-          },
-          {
-            "name": "tableId",
-            "in": "path",
-            "description": "Identifier for the table whose templates are being requested",
-            "required": true,
             "type": "string"
           }
         ],

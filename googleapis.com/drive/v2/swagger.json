@@ -539,16 +539,16 @@
         },
         "parameters": [
           {
-            "name": "childId",
+            "name": "folderId",
             "in": "path",
-            "description": "The ID of the child.",
+            "description": "The ID of the folder.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "folderId",
+            "name": "childId",
             "in": "path",
-            "description": "The ID of the folder.",
+            "description": "The ID of the child.",
             "required": true,
             "type": "string"
           }
@@ -578,16 +578,16 @@
         },
         "parameters": [
           {
-            "name": "childId",
+            "name": "folderId",
             "in": "path",
-            "description": "The ID of the child.",
+            "description": "The ID of the folder.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "folderId",
+            "name": "childId",
             "in": "path",
-            "description": "The ID of the folder.",
+            "description": "The ID of the child.",
             "required": true,
             "type": "string"
           }
@@ -757,16 +757,16 @@
         },
         "parameters": [
           {
-            "name": "commentId",
+            "name": "fileId",
             "in": "path",
-            "description": "The ID of the comment.",
+            "description": "The ID of the file.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "fileId",
+            "name": "commentId",
             "in": "path",
-            "description": "The ID of the file.",
+            "description": "The ID of the comment.",
             "required": true,
             "type": "string"
           }
@@ -797,16 +797,16 @@
         },
         "parameters": [
           {
-            "name": "commentId",
+            "name": "fileId",
             "in": "path",
-            "description": "The ID of the comment.",
+            "description": "The ID of the file.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "fileId",
+            "name": "commentId",
             "in": "path",
-            "description": "The ID of the file.",
+            "description": "The ID of the comment.",
             "required": true,
             "type": "string"
           },
@@ -844,16 +844,16 @@
         },
         "parameters": [
           {
-            "name": "commentId",
+            "name": "fileId",
             "in": "path",
-            "description": "The ID of the comment.",
+            "description": "The ID of the file.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "fileId",
+            "name": "commentId",
             "in": "path",
-            "description": "The ID of the file.",
+            "description": "The ID of the comment.",
             "required": true,
             "type": "string"
           }
@@ -883,16 +883,16 @@
         },
         "parameters": [
           {
-            "name": "commentId",
+            "name": "fileId",
             "in": "path",
-            "description": "The ID of the comment.",
+            "description": "The ID of the file.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "fileId",
+            "name": "commentId",
             "in": "path",
-            "description": "The ID of the file.",
+            "description": "The ID of the comment.",
             "required": true,
             "type": "string"
           }
@@ -1065,18 +1065,18 @@
         },
         "parameters": [
           {
-            "name": "convert",
-            "in": "query",
-            "description": "Whether to convert this file to the corresponding Google Docs format.",
-            "default": "false",
-            "type": "boolean"
-          },
-          {
             "name": "fileId",
             "in": "path",
             "description": "The ID of the file to copy.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "convert",
+            "in": "query",
+            "description": "Whether to convert this file to the corresponding Google Docs format.",
+            "default": "false",
+            "type": "boolean"
           },
           {
             "name": "ocr",
@@ -1204,18 +1204,18 @@
         },
         "parameters": [
           {
-            "name": "acknowledgeAbuse",
-            "in": "query",
-            "description": "Whether the user is acknowledging the risk of downloading known malware or other abusive files.",
-            "default": "false",
-            "type": "boolean"
-          },
-          {
             "name": "fileId",
             "in": "path",
             "description": "The ID for the file in question.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "acknowledgeAbuse",
+            "in": "query",
+            "description": "Whether the user is acknowledging the risk of downloading known malware or other abusive files.",
+            "default": "false",
+            "type": "boolean"
           },
           {
             "name": "projection",
@@ -1271,6 +1271,13 @@
         },
         "parameters": [
           {
+            "name": "fileId",
+            "in": "path",
+            "description": "The ID of the file to update.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "addParents",
             "in": "query",
             "description": "Comma-separated list of parent IDs to add.",
@@ -1282,13 +1289,6 @@
             "description": "Whether to convert this file to the corresponding Google Docs format.",
             "default": "false",
             "type": "boolean"
-          },
-          {
-            "name": "fileId",
-            "in": "path",
-            "description": "The ID of the file to update.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "newRevision",
@@ -1389,6 +1389,13 @@
         ],
         "parameters": [
           {
+            "name": "fileId",
+            "in": "path",
+            "description": "The ID of the file to update.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "addParents",
             "in": "query",
             "description": "Comma-separated list of parent IDs to add.",
@@ -1400,13 +1407,6 @@
             "description": "Whether to convert this file to the corresponding Google Docs format.",
             "default": "false",
             "type": "boolean"
-          },
-          {
-            "name": "fileId",
-            "in": "path",
-            "description": "The ID of the file to update.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "newRevision",
@@ -1939,18 +1939,18 @@
         },
         "parameters": [
           {
-            "name": "acknowledgeAbuse",
-            "in": "query",
-            "description": "Whether the user is acknowledging the risk of downloading known malware or other abusive files.",
-            "default": "false",
-            "type": "boolean"
-          },
-          {
             "name": "fileId",
             "in": "path",
             "description": "The ID for the file in question.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "acknowledgeAbuse",
+            "in": "query",
+            "description": "Whether the user is acknowledging the risk of downloading known malware or other abusive files.",
+            "default": "false",
+            "type": "boolean"
           },
           {
             "name": "projection",
@@ -2486,16 +2486,16 @@
         },
         "parameters": [
           {
-            "name": "emailMessage",
-            "in": "query",
-            "description": "A custom message to include in notification emails.",
-            "type": "string"
-          },
-          {
             "name": "fileId",
             "in": "path",
             "description": "The ID for the file.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "emailMessage",
+            "in": "query",
+            "description": "A custom message to include in notification emails.",
             "type": "string"
           },
           {
@@ -2939,16 +2939,16 @@
         ],
         "parameters": [
           {
-            "name": "baseRevision",
-            "in": "query",
-            "description": "The revision of the model to diff the uploaded model against. If set, the uploaded model is diffed against the provided revision and those differences are merged with any changes made to the model after the provided revision. If not set, the uploaded model replaces the current model on the server.",
-            "type": "string"
-          },
-          {
             "name": "fileId",
             "in": "path",
             "description": "The ID of the file that the Realtime API data model is associated with.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "baseRevision",
+            "in": "query",
+            "description": "The revision of the model to diff the uploaded model against. If set, the uploaded model is diffed against the provided revision and those differences are merged with any changes made to the model after the provided revision. If not set, the uploaded model replaces the current model on the server.",
             "type": "string"
           }
         ],
@@ -2999,16 +2999,16 @@
         },
         "parameters": [
           {
-            "name": "commentId",
+            "name": "fileId",
             "in": "path",
-            "description": "The ID of the comment.",
+            "description": "The ID of the file.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "fileId",
+            "name": "commentId",
             "in": "path",
-            "description": "The ID of the file.",
+            "description": "The ID of the comment.",
             "required": true,
             "type": "string"
           },
@@ -3045,6 +3045,13 @@
         },
         "parameters": [
           {
+            "name": "fileId",
+            "in": "path",
+            "description": "The ID of the file.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "commentId",
             "in": "path",
             "description": "The ID of the comment.",
@@ -3052,9 +3059,9 @@
             "type": "string"
           },
           {
-            "name": "fileId",
+            "name": "replyId",
             "in": "path",
-            "description": "The ID of the file.",
+            "description": "The ID of the reply.",
             "required": true,
             "type": "string"
           },
@@ -3064,13 +3071,6 @@
             "description": "If set, this will succeed when retrieving a deleted reply.",
             "default": "false",
             "type": "boolean"
-          },
-          {
-            "name": "replyId",
-            "in": "path",
-            "description": "The ID of the reply.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -3099,16 +3099,16 @@
         },
         "parameters": [
           {
-            "name": "commentId",
+            "name": "fileId",
             "in": "path",
-            "description": "The ID of the comment.",
+            "description": "The ID of the file.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "fileId",
+            "name": "commentId",
             "in": "path",
-            "description": "The ID of the file.",
+            "description": "The ID of the comment.",
             "required": true,
             "type": "string"
           },
@@ -3145,16 +3145,16 @@
         },
         "parameters": [
           {
-            "name": "commentId",
+            "name": "fileId",
             "in": "path",
-            "description": "The ID of the comment.",
+            "description": "The ID of the file.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "fileId",
+            "name": "commentId",
             "in": "path",
-            "description": "The ID of the file.",
+            "description": "The ID of the comment.",
             "required": true,
             "type": "string"
           },
@@ -3216,16 +3216,16 @@
         },
         "parameters": [
           {
-            "name": "commentId",
+            "name": "fileId",
             "in": "path",
-            "description": "The ID of the comment.",
+            "description": "The ID of the file.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "fileId",
+            "name": "commentId",
             "in": "path",
-            "description": "The ID of the file.",
+            "description": "The ID of the comment.",
             "required": true,
             "type": "string"
           }
@@ -3255,16 +3255,16 @@
         },
         "parameters": [
           {
-            "name": "commentId",
+            "name": "fileId",
             "in": "path",
-            "description": "The ID of the comment.",
+            "description": "The ID of the file.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "fileId",
+            "name": "commentId",
             "in": "path",
-            "description": "The ID of the file.",
+            "description": "The ID of the comment.",
             "required": true,
             "type": "string"
           },

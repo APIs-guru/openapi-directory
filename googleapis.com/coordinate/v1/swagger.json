@@ -92,16 +92,16 @@
         },
         "parameters": [
           {
-            "name": "jobId",
+            "name": "teamId",
             "in": "path",
-            "description": "Job number",
+            "description": "Team ID",
             "required": true,
             "type": "string"
           },
           {
-            "name": "teamId",
+            "name": "jobId",
             "in": "path",
-            "description": "Team ID",
+            "description": "Job number",
             "required": true,
             "type": "string"
           }
@@ -130,6 +130,20 @@
           }
         },
         "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Job number",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "address",
             "in": "query",
@@ -165,13 +179,6 @@
             "type": "string"
           },
           {
-            "name": "jobId",
-            "in": "path",
-            "description": "Job number",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "lat",
             "in": "query",
             "description": "The latitude coordinate of this job's location.",
@@ -201,13 +208,6 @@
               "NOT_STARTED",
               "OBSOLETE"
             ]
-          },
-          {
-            "name": "teamId",
-            "in": "path",
-            "description": "Team ID",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "title",
@@ -240,6 +240,20 @@
         },
         "parameters": [
           {
+            "name": "teamId",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Job number",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "address",
             "in": "query",
             "description": "Job address as newline (Unix) separated string",
@@ -274,13 +288,6 @@
             "type": "string"
           },
           {
-            "name": "jobId",
-            "in": "path",
-            "description": "Job number",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "lat",
             "in": "query",
             "description": "The latitude coordinate of this job's location.",
@@ -310,13 +317,6 @@
               "NOT_STARTED",
               "OBSOLETE"
             ]
-          },
-          {
-            "name": "teamId",
-            "in": "path",
-            "description": "Team ID",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "title",
@@ -374,9 +374,37 @@
         },
         "parameters": [
           {
+            "name": "teamId",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "address",
             "in": "query",
             "description": "Job address as newline (Unix) separated string",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "The latitude coordinate of this job's location.",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "The longitude coordinate of this job's location.",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "description": "Job title",
             "required": true,
             "type": "string"
           },
@@ -409,37 +437,9 @@
             "type": "string"
           },
           {
-            "name": "lat",
-            "in": "query",
-            "description": "The latitude coordinate of this job's location.",
-            "required": true,
-            "type": "number"
-          },
-          {
-            "name": "lng",
-            "in": "query",
-            "description": "The longitude coordinate of this job's location.",
-            "required": true,
-            "type": "number"
-          },
-          {
             "name": "note",
             "in": "query",
             "description": "Job note as newline (Unix) separated string",
-            "type": "string"
-          },
-          {
-            "name": "teamId",
-            "in": "path",
-            "description": "Team ID",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "title",
-            "in": "query",
-            "description": "Job title",
-            "required": true,
             "type": "string"
           }
         ],
@@ -467,6 +467,13 @@
         },
         "parameters": [
           {
+            "name": "teamId",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of results to return in one page.",
@@ -482,13 +489,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Continuation token",
-            "type": "string"
-          },
-          {
-            "name": "teamId",
-            "in": "path",
-            "description": "Team ID",
-            "required": true,
             "type": "string"
           }
         ],
@@ -542,25 +542,6 @@
         },
         "parameters": [
           {
-            "name": "maxResults",
-            "in": "query",
-            "description": "Maximum number of results to return in one page.",
-            "type": "integer"
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "Continuation token",
-            "type": "string"
-          },
-          {
-            "name": "startTimestampMs",
-            "in": "query",
-            "description": "Start timestamp in milliseconds since the epoch.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "teamId",
             "in": "path",
             "description": "Team ID",
@@ -572,6 +553,25 @@
             "in": "path",
             "description": "Worker email address.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTimestampMs",
+            "in": "query",
+            "description": "Start timestamp in milliseconds since the epoch.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of results to return in one page.",
+            "type": "integer"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Continuation token",
             "type": "string"
           }
         ],
@@ -625,16 +625,16 @@
         },
         "parameters": [
           {
-            "name": "jobId",
+            "name": "teamId",
             "in": "path",
-            "description": "Job number",
+            "description": "Team ID",
             "required": true,
             "type": "string"
           },
           {
-            "name": "teamId",
+            "name": "jobId",
             "in": "path",
-            "description": "Team ID",
+            "description": "Job number",
             "required": true,
             "type": "string"
           }
@@ -664,6 +664,20 @@
         },
         "parameters": [
           {
+            "name": "teamId",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Job number",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "allDay",
             "in": "query",
             "description": "Whether the job is scheduled for the whole day. Time of day in start/end times is ignored if this is true.",
@@ -682,23 +696,9 @@
             "type": "string"
           },
           {
-            "name": "jobId",
-            "in": "path",
-            "description": "Job number",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "startTime",
             "in": "query",
             "description": "Scheduled start time in milliseconds since epoch.",
-            "type": "string"
-          },
-          {
-            "name": "teamId",
-            "in": "path",
-            "description": "Team ID",
-            "required": true,
             "type": "string"
           }
         ],
@@ -726,6 +726,20 @@
         },
         "parameters": [
           {
+            "name": "teamId",
+            "in": "path",
+            "description": "Team ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Job number",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "allDay",
             "in": "query",
             "description": "Whether the job is scheduled for the whole day. Time of day in start/end times is ignored if this is true.",
@@ -744,23 +758,9 @@
             "type": "string"
           },
           {
-            "name": "jobId",
-            "in": "path",
-            "description": "Job number",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "startTime",
             "in": "query",
             "description": "Scheduled start time in milliseconds since epoch.",
-            "type": "string"
-          },
-          {
-            "name": "teamId",
-            "in": "path",
-            "description": "Team ID",
-            "required": true,
             "type": "string"
           }
         ],

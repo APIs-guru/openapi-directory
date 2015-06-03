@@ -35,9 +35,9 @@
         },
         "parameters": [
           {
-            "name": "accountName",
+            "name": "userToken",
             "in": "path",
-            "description": "The name of the account to be passed to the Android Account Manager.",
+            "description": "The ID for the user.",
             "required": true,
             "type": "string"
           },
@@ -49,9 +49,9 @@
             "type": "string"
           },
           {
-            "name": "userToken",
+            "name": "accountName",
             "in": "path",
-            "description": "The ID for the user.",
+            "description": "The name of the account to be passed to the Android Account Manager.",
             "required": true,
             "type": "string"
           }
@@ -1531,16 +1531,16 @@
         },
         "parameters": [
           {
-            "name": "attachmentId",
+            "name": "itemId",
             "in": "path",
-            "description": "The ID of the attachment.",
+            "description": "The ID of the timeline item the attachment belongs to.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "itemId",
+            "name": "attachmentId",
             "in": "path",
-            "description": "The ID of the timeline item the attachment belongs to.",
+            "description": "The ID of the attachment.",
             "required": true,
             "type": "string"
           }
@@ -1569,16 +1569,16 @@
         },
         "parameters": [
           {
-            "name": "attachmentId",
+            "name": "itemId",
             "in": "path",
-            "description": "The ID of the attachment.",
+            "description": "The ID of the timeline item the attachment belongs to.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "itemId",
+            "name": "attachmentId",
             "in": "path",
-            "description": "The ID of the timeline item the attachment belongs to.",
+            "description": "The ID of the attachment.",
             "required": true,
             "type": "string"
           }

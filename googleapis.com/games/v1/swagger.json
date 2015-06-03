@@ -112,18 +112,18 @@
             "type": "string"
           },
           {
-            "name": "requestId",
-            "in": "query",
-            "description": "A randomly generated numeric ID for each request specified by the caller. This number is used at the server to ensure that the request is handled correctly across retries.",
-            "type": "string"
-          },
-          {
             "name": "stepsToIncrement",
             "in": "query",
             "description": "The number of steps to increment.",
             "required": true,
             "type": "integer",
             "minimum": 1
+          },
+          {
+            "name": "requestId",
+            "in": "query",
+            "description": "A randomly generated numeric ID for each request specified by the caller. This number is used at the server to ensure that the request is handled correctly across retries.",
+            "type": "string"
           }
         ],
         "security": [
@@ -176,6 +176,13 @@
         },
         "parameters": [
           {
+            "name": "playerId",
+            "in": "path",
+            "description": "A player ID. A value of me may be used in place of the authenticated player's ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "language",
             "in": "query",
             "description": "The preferred language to use for strings returned by this method.",
@@ -193,13 +200,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The token returned by the previous request.",
-            "type": "string"
-          },
-          {
-            "name": "playerId",
-            "in": "path",
-            "description": "A player ID. A value of me may be used in place of the authenticated player's ID.",
-            "required": true,
             "type": "string"
           },
           {
@@ -782,16 +782,16 @@
         },
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
             "name": "leaderboardId",
             "in": "path",
             "description": "The ID of the leaderboard.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
           }
         ],
@@ -963,6 +963,13 @@
         },
         "parameters": [
           {
+            "name": "playerId",
+            "in": "path",
+            "description": "A player ID. A value of me may be used in place of the authenticated player's ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "collection",
             "in": "path",
             "description": "The collection of categories for which data will be returned.",
@@ -990,13 +997,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The token returned by the previous request.",
-            "type": "string"
-          },
-          {
-            "name": "playerId",
-            "in": "path",
-            "description": "A player ID. A value of me may be used in place of the authenticated player's ID.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -1050,16 +1050,16 @@
         },
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
             "name": "playerId",
             "in": "path",
             "description": "A player ID. A value of me may be used in place of the authenticated player's ID.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
           }
         ],
@@ -1281,16 +1281,16 @@
         },
         "parameters": [
           {
-            "name": "milestoneId",
+            "name": "questId",
             "in": "path",
-            "description": "The ID of the milestone.",
+            "description": "The ID of the quest.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "questId",
+            "name": "milestoneId",
             "in": "path",
-            "description": "The ID of the quest.",
+            "description": "The ID of the milestone.",
             "required": true,
             "type": "string"
           },
@@ -1352,16 +1352,16 @@
         },
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
             "name": "questId",
             "in": "path",
             "description": "The ID of the quest.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
           }
         ],
@@ -1415,6 +1415,13 @@
         },
         "parameters": [
           {
+            "name": "playerId",
+            "in": "path",
+            "description": "A player ID. A value of me may be used in place of the authenticated player's ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "language",
             "in": "query",
             "description": "The preferred language to use for strings returned by this method.",
@@ -1432,13 +1439,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The token returned by the previous request.",
-            "type": "string"
-          },
-          {
-            "name": "playerId",
-            "in": "path",
-            "description": "A player ID. A value of me may be used in place of the authenticated player's ID.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -1605,16 +1605,16 @@
         },
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
             "name": "roomId",
             "in": "path",
             "description": "The ID of the room.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
           }
         ],
@@ -1722,16 +1722,16 @@
         },
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
             "name": "roomId",
             "in": "path",
             "description": "The ID of the room.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
           }
         ],
@@ -1785,16 +1785,16 @@
         },
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
             "name": "roomId",
             "in": "path",
             "description": "The ID of the room.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
           }
         ],
@@ -1848,16 +1848,16 @@
         },
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
             "name": "roomId",
             "in": "path",
             "description": "The ID of the room.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
           }
         ],
@@ -1981,16 +1981,16 @@
         },
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
             "name": "roomId",
             "in": "path",
             "description": "The ID of the room.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
           }
         ],
@@ -2044,6 +2044,33 @@
         },
         "parameters": [
           {
+            "name": "playerId",
+            "in": "path",
+            "description": "A player ID. A value of me may be used in place of the authenticated player's ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "leaderboardId",
+            "in": "path",
+            "description": "The ID of the leaderboard. Can be set to 'ALL' to retrieve data for all leaderboards for this application.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timeSpan",
+            "in": "path",
+            "description": "The time span for the scores and ranks you're requesting.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ALL",
+              "ALL_TIME",
+              "DAILY",
+              "WEEKLY"
+            ]
+          },
+          {
             "name": "includeRankType",
             "in": "query",
             "description": "The types of ranks to return. If the parameter is omitted, no ranks will be returned.",
@@ -2061,13 +2088,6 @@
             "type": "string"
           },
           {
-            "name": "leaderboardId",
-            "in": "path",
-            "description": "The ID of the leaderboard. Can be set to 'ALL' to retrieve data for all leaderboards for this application.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "maxResults",
             "in": "query",
             "description": "The maximum number of leaderboard scores to return in the response. For any response, the actual number of leaderboard scores returned may be less than the specified maxResults.",
@@ -2080,26 +2100,6 @@
             "in": "query",
             "description": "The token returned by the previous request.",
             "type": "string"
-          },
-          {
-            "name": "playerId",
-            "in": "path",
-            "description": "A player ID. A value of me may be used in place of the authenticated player's ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "timeSpan",
-            "in": "path",
-            "description": "The time span for the scores and ranks you're requesting.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "ALL",
-              "ALL_TIME",
-              "DAILY",
-              "WEEKLY"
-            ]
           }
         ],
         "security": [
@@ -2152,6 +2152,13 @@
         },
         "parameters": [
           {
+            "name": "leaderboardId",
+            "in": "path",
+            "description": "The ID of the leaderboard.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "collection",
             "in": "path",
             "description": "The collection of scores you're requesting.",
@@ -2163,16 +2170,21 @@
             ]
           },
           {
+            "name": "timeSpan",
+            "in": "query",
+            "description": "The time span for the scores and ranks you're requesting.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ALL_TIME",
+              "DAILY",
+              "WEEKLY"
+            ]
+          },
+          {
             "name": "language",
             "in": "query",
             "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
-            "name": "leaderboardId",
-            "in": "path",
-            "description": "The ID of the leaderboard.",
-            "required": true,
             "type": "string"
           },
           {
@@ -2188,18 +2200,6 @@
             "in": "query",
             "description": "The token returned by the previous request.",
             "type": "string"
-          },
-          {
-            "name": "timeSpan",
-            "in": "query",
-            "description": "The time span for the scores and ranks you're requesting.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "ALL_TIME",
-              "DAILY",
-              "WEEKLY"
-            ]
           }
         ],
         "security": [
@@ -2252,6 +2252,13 @@
         },
         "parameters": [
           {
+            "name": "leaderboardId",
+            "in": "path",
+            "description": "The ID of the leaderboard.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "collection",
             "in": "path",
             "description": "The collection of scores you're requesting.",
@@ -2263,16 +2270,21 @@
             ]
           },
           {
+            "name": "timeSpan",
+            "in": "query",
+            "description": "The time span for the scores and ranks you're requesting.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ALL_TIME",
+              "DAILY",
+              "WEEKLY"
+            ]
+          },
+          {
             "name": "language",
             "in": "query",
             "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
-            "name": "leaderboardId",
-            "in": "path",
-            "description": "The ID of the leaderboard.",
-            "required": true,
             "type": "string"
           },
           {
@@ -2300,18 +2312,6 @@
             "in": "query",
             "description": "True if the top scores should be returned when the player is not in the leaderboard. Defaults to true.",
             "type": "boolean"
-          },
-          {
-            "name": "timeSpan",
-            "in": "query",
-            "description": "The time span for the scores and ranks you're requesting.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "ALL_TIME",
-              "DAILY",
-              "WEEKLY"
-            ]
           }
         ],
         "security": [
@@ -2364,12 +2364,6 @@
         },
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
             "name": "leaderboardId",
             "in": "path",
             "description": "The ID of the leaderboard.",
@@ -2381,6 +2375,12 @@
             "in": "query",
             "description": "The score you're submitting. The submitted score is ignored if it is worse than a previously submitted score, where worse depends on the leaderboard sort order. The meaning of the score value depends on the leaderboard format type. For fixed-point, the score represents the raw value. For time, the score represents elapsed time in milliseconds. For currency, the score represents a value in micro units.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
           },
           {
@@ -2496,16 +2496,16 @@
         },
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
             "name": "snapshotId",
             "in": "path",
             "description": "The ID of the snapshot.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
           }
         ],
@@ -2560,6 +2560,13 @@
         },
         "parameters": [
           {
+            "name": "playerId",
+            "in": "path",
+            "description": "A player ID. A value of me may be used in place of the authenticated player's ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "language",
             "in": "query",
             "description": "The preferred language to use for strings returned by this method.",
@@ -2577,13 +2584,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The token returned by the previous request.",
-            "type": "string"
-          },
-          {
-            "name": "playerId",
-            "in": "path",
-            "description": "A player ID. A value of me may be used in place of the authenticated player's ID.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -2748,16 +2748,16 @@
         },
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
             "name": "matchId",
             "in": "path",
             "description": "The ID of the match.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
           }
         ],
@@ -2865,16 +2865,16 @@
         },
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
             "name": "matchId",
             "in": "path",
             "description": "The ID of the match.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
           }
         ],
@@ -2928,6 +2928,13 @@
         },
         "parameters": [
           {
+            "name": "matchId",
+            "in": "path",
+            "description": "The ID of the match.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "includeMatchData",
             "in": "query",
             "description": "Get match data along with metadata.",
@@ -2937,13 +2944,6 @@
             "name": "language",
             "in": "query",
             "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
-            "name": "matchId",
-            "in": "path",
-            "description": "The ID of the match.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -2997,16 +2997,16 @@
         },
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
             "name": "matchId",
             "in": "path",
             "description": "The ID of the match.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
           }
         ],
@@ -3060,16 +3060,16 @@
         },
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
             "name": "matchId",
             "in": "path",
             "description": "The ID of the match.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
           }
         ],
@@ -3123,12 +3123,6 @@
         },
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
             "name": "matchId",
             "in": "path",
             "description": "The ID of the match.",
@@ -3141,6 +3135,12 @@
             "description": "The version of the match being updated.",
             "required": true,
             "type": "integer"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The preferred language to use for strings returned by this method.",
+            "type": "string"
           },
           {
             "name": "pendingParticipantId",
@@ -3283,16 +3283,16 @@
         },
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
             "name": "matchId",
             "in": "path",
             "description": "The ID of the match.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
           },
           {
@@ -3436,16 +3436,16 @@
         },
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "The preferred language to use for strings returned by this method.",
-            "type": "string"
-          },
-          {
             "name": "matchId",
             "in": "path",
             "description": "The ID of the match.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The preferred language to use for strings returned by this method.",
             "type": "string"
           }
         ],

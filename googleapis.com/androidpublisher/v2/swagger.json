@@ -35,16 +35,16 @@
         },
         "parameters": [
           {
-            "name": "editId",
+            "name": "packageName",
             "in": "path",
-            "description": "Unique identifier for this edit.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "editId",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
           }
@@ -95,16 +95,16 @@
         },
         "parameters": [
           {
-            "name": "editId",
+            "name": "packageName",
             "in": "path",
-            "description": "Unique identifier for this edit.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "editId",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
           }
@@ -133,16 +133,16 @@
         },
         "parameters": [
           {
-            "name": "editId",
+            "name": "packageName",
             "in": "path",
-            "description": "Unique identifier for this edit.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "editId",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
           }
@@ -252,16 +252,16 @@
         },
         "parameters": [
           {
-            "name": "editId",
+            "name": "packageName",
             "in": "path",
-            "description": "Unique identifier for this edit.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "editId",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
           }
@@ -312,11 +312,11 @@
         },
         "parameters": [
           {
-            "name": "apkVersionCode",
+            "name": "packageName",
             "in": "path",
-            "description": "The APK version code whose APK-specific listings should be read or modified.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
-            "type": "integer"
+            "type": "string"
           },
           {
             "name": "editId",
@@ -326,16 +326,16 @@
             "type": "string"
           },
           {
+            "name": "apkVersionCode",
+            "in": "path",
+            "description": "The APK version code whose APK-specific listings should be read or modified.",
+            "required": true,
+            "type": "integer"
+          },
+          {
             "name": "language",
             "in": "path",
             "description": "The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "packageName",
-            "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           }
@@ -364,11 +364,11 @@
         },
         "parameters": [
           {
-            "name": "apkVersionCode",
+            "name": "packageName",
             "in": "path",
-            "description": "The APK version code whose APK-specific listings should be read or modified.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
-            "type": "integer"
+            "type": "string"
           },
           {
             "name": "editId",
@@ -378,16 +378,16 @@
             "type": "string"
           },
           {
+            "name": "apkVersionCode",
+            "in": "path",
+            "description": "The APK version code whose APK-specific listings should be read or modified.",
+            "required": true,
+            "type": "integer"
+          },
+          {
             "name": "language",
             "in": "path",
             "description": "The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "packageName",
-            "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           }
@@ -416,11 +416,11 @@
         },
         "parameters": [
           {
-            "name": "apkVersionCode",
+            "name": "packageName",
             "in": "path",
-            "description": "The APK version code whose APK-specific listings should be read or modified.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
-            "type": "integer"
+            "type": "string"
           },
           {
             "name": "editId",
@@ -430,16 +430,16 @@
             "type": "string"
           },
           {
+            "name": "apkVersionCode",
+            "in": "path",
+            "description": "The APK version code whose APK-specific listings should be read or modified.",
+            "required": true,
+            "type": "integer"
+          },
+          {
             "name": "language",
             "in": "path",
             "description": "The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "packageName",
-            "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           }
@@ -468,11 +468,11 @@
         },
         "parameters": [
           {
-            "name": "apkVersionCode",
+            "name": "packageName",
             "in": "path",
-            "description": "The APK version code whose APK-specific listings should be read or modified.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
-            "type": "integer"
+            "type": "string"
           },
           {
             "name": "editId",
@@ -482,16 +482,16 @@
             "type": "string"
           },
           {
+            "name": "apkVersionCode",
+            "in": "path",
+            "description": "The APK version code whose APK-specific listings should be read or modified.",
+            "required": true,
+            "type": "integer"
+          },
+          {
             "name": "language",
             "in": "path",
             "description": "The language code (a BCP-47 language tag) of the APK-specific localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "packageName",
-            "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           }
@@ -542,11 +542,11 @@
         },
         "parameters": [
           {
-            "name": "apkVersionCode",
+            "name": "packageName",
             "in": "path",
-            "description": "The APK version code whose APK-specific listings should be read or modified.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
-            "type": "integer"
+            "type": "string"
           },
           {
             "name": "editId",
@@ -556,11 +556,11 @@
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "apkVersionCode",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "The APK version code whose APK-specific listings should be read or modified.",
             "required": true,
-            "type": "string"
+            "type": "integer"
           }
         ],
         "security": [
@@ -587,11 +587,11 @@
         },
         "parameters": [
           {
-            "name": "apkVersionCode",
+            "name": "packageName",
             "in": "path",
-            "description": "The APK version code whose APK-specific listings should be read or modified.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
-            "type": "integer"
+            "type": "string"
           },
           {
             "name": "editId",
@@ -601,11 +601,11 @@
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "apkVersionCode",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "The APK version code whose APK-specific listings should be read or modified.",
             "required": true,
-            "type": "string"
+            "type": "integer"
           }
         ],
         "security": [
@@ -657,16 +657,16 @@
         },
         "parameters": [
           {
-            "name": "editId",
+            "name": "packageName",
             "in": "path",
-            "description": "Unique identifier for this edit.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "editId",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
           }
@@ -719,16 +719,16 @@
         },
         "parameters": [
           {
-            "name": "editId",
+            "name": "packageName",
             "in": "path",
-            "description": "Unique identifier for this edit.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "editId",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
           }
@@ -760,16 +760,16 @@
         ],
         "parameters": [
           {
-            "name": "editId",
+            "name": "packageName",
             "in": "path",
-            "description": "Unique identifier for this edit.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "editId",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
           }
@@ -823,16 +823,16 @@
         },
         "parameters": [
           {
-            "name": "editId",
+            "name": "packageName",
             "in": "path",
-            "description": "Unique identifier for this edit.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "editId",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
           }
@@ -861,16 +861,16 @@
         },
         "parameters": [
           {
-            "name": "editId",
+            "name": "packageName",
             "in": "path",
-            "description": "Unique identifier for this edit.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "editId",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
           }
@@ -899,16 +899,16 @@
         },
         "parameters": [
           {
-            "name": "editId",
+            "name": "packageName",
             "in": "path",
-            "description": "Unique identifier for this edit.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "editId",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
           }
@@ -962,11 +962,11 @@
         },
         "parameters": [
           {
-            "name": "apkVersionCode",
+            "name": "packageName",
             "in": "path",
-            "description": "The version code of the APK whose Expansion File configuration is being read or modified.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
-            "type": "integer"
+            "type": "string"
           },
           {
             "name": "editId",
@@ -974,6 +974,13 @@
             "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "apkVersionCode",
+            "in": "path",
+            "description": "The version code of the APK whose Expansion File configuration is being read or modified.",
+            "required": true,
+            "type": "integer"
           },
           {
             "name": "expansionFileType",
@@ -984,13 +991,6 @@
               "main",
               "patch"
             ]
-          },
-          {
-            "name": "packageName",
-            "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -1017,11 +1017,11 @@
         },
         "parameters": [
           {
-            "name": "apkVersionCode",
+            "name": "packageName",
             "in": "path",
-            "description": "The version code of the APK whose Expansion File configuration is being read or modified.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
-            "type": "integer"
+            "type": "string"
           },
           {
             "name": "editId",
@@ -1029,6 +1029,13 @@
             "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "apkVersionCode",
+            "in": "path",
+            "description": "The version code of the APK whose Expansion File configuration is being read or modified.",
+            "required": true,
+            "type": "integer"
           },
           {
             "name": "expansionFileType",
@@ -1039,13 +1046,6 @@
               "main",
               "patch"
             ]
-          },
-          {
-            "name": "packageName",
-            "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -1072,11 +1072,11 @@
         },
         "parameters": [
           {
-            "name": "apkVersionCode",
+            "name": "packageName",
             "in": "path",
-            "description": "The version code of the APK whose Expansion File configuration is being read or modified.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
-            "type": "integer"
+            "type": "string"
           },
           {
             "name": "editId",
@@ -1084,6 +1084,13 @@
             "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "apkVersionCode",
+            "in": "path",
+            "description": "The version code of the APK whose Expansion File configuration is being read or modified.",
+            "required": true,
+            "type": "integer"
           },
           {
             "name": "expansionFileType",
@@ -1094,13 +1101,6 @@
               "main",
               "patch"
             ]
-          },
-          {
-            "name": "packageName",
-            "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -1130,11 +1130,11 @@
         ],
         "parameters": [
           {
-            "name": "apkVersionCode",
+            "name": "packageName",
             "in": "path",
-            "description": "The version code of the APK whose Expansion File configuration is being read or modified.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
-            "type": "integer"
+            "type": "string"
           },
           {
             "name": "editId",
@@ -1142,6 +1142,13 @@
             "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "apkVersionCode",
+            "in": "path",
+            "description": "The version code of the APK whose Expansion File configuration is being read or modified.",
+            "required": true,
+            "type": "integer"
           },
           {
             "name": "expansionFileType",
@@ -1152,13 +1159,6 @@
               "main",
               "patch"
             ]
-          },
-          {
-            "name": "packageName",
-            "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -1207,6 +1207,13 @@
         },
         "parameters": [
           {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "editId",
             "in": "path",
             "description": "Unique identifier for this edit.",
@@ -1214,9 +1221,9 @@
             "type": "string"
           },
           {
-            "name": "imageId",
+            "name": "language",
             "in": "path",
-            "description": "Unique identifier an image within the set of images attached to this edit.",
+            "description": "The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass \"de-AT\".",
             "required": true,
             "type": "string"
           },
@@ -1237,16 +1244,9 @@
             ]
           },
           {
-            "name": "language",
+            "name": "imageId",
             "in": "path",
-            "description": "The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass \"de-AT\".",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "packageName",
-            "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier an image within the set of images attached to this edit.",
             "required": true,
             "type": "string"
           }
@@ -1300,9 +1300,23 @@
         },
         "parameters": [
           {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "editId",
             "in": "path",
             "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "path",
+            "description": "The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass \"de-AT\".",
             "required": true,
             "type": "string"
           },
@@ -1321,20 +1335,6 @@
               "tvBanner",
               "tvScreenshots"
             ]
-          },
-          {
-            "name": "language",
-            "in": "path",
-            "description": "The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass \"de-AT\".",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "packageName",
-            "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -1361,9 +1361,23 @@
         },
         "parameters": [
           {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "editId",
             "in": "path",
             "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "path",
+            "description": "The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass \"de-AT\".",
             "required": true,
             "type": "string"
           },
@@ -1382,20 +1396,6 @@
               "tvBanner",
               "tvScreenshots"
             ]
-          },
-          {
-            "name": "language",
-            "in": "path",
-            "description": "The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass \"de-AT\".",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "packageName",
-            "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -1493,9 +1493,23 @@
         ],
         "parameters": [
           {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "editId",
             "in": "path",
             "description": "Unique identifier for this edit.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "path",
+            "description": "The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass \"de-AT\".",
             "required": true,
             "type": "string"
           },
@@ -1514,20 +1528,6 @@
               "tvBanner",
               "tvScreenshots"
             ]
-          },
-          {
-            "name": "language",
-            "in": "path",
-            "description": "The language code (a BCP-47 language tag) of the localized listing whose images are to read or modified. For example, to select Austrian German, pass \"de-AT\".",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "packageName",
-            "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -1576,6 +1576,13 @@
         },
         "parameters": [
           {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "editId",
             "in": "path",
             "description": "Unique identifier for this edit.",
@@ -1586,13 +1593,6 @@
             "name": "language",
             "in": "path",
             "description": "The language code (a BCP-47 language tag) of the localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "packageName",
-            "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           }
@@ -1621,6 +1621,13 @@
         },
         "parameters": [
           {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "editId",
             "in": "path",
             "description": "Unique identifier for this edit.",
@@ -1631,13 +1638,6 @@
             "name": "language",
             "in": "path",
             "description": "The language code (a BCP-47 language tag) of the localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "packageName",
-            "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           }
@@ -1666,6 +1666,13 @@
         },
         "parameters": [
           {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "editId",
             "in": "path",
             "description": "Unique identifier for this edit.",
@@ -1676,13 +1683,6 @@
             "name": "language",
             "in": "path",
             "description": "The language code (a BCP-47 language tag) of the localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "packageName",
-            "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           }
@@ -1711,6 +1711,13 @@
         },
         "parameters": [
           {
+            "name": "packageName",
+            "in": "path",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "editId",
             "in": "path",
             "description": "Unique identifier for this edit.",
@@ -1721,13 +1728,6 @@
             "name": "language",
             "in": "path",
             "description": "The language code (a BCP-47 language tag) of the localized listing to read or modify. For example, to select Austrian German, pass \"de-AT\".",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "packageName",
-            "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           }
@@ -1778,16 +1778,16 @@
         },
         "parameters": [
           {
-            "name": "editId",
+            "name": "packageName",
             "in": "path",
-            "description": "Unique identifier for this edit.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "editId",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
           }
@@ -1816,16 +1816,16 @@
         },
         "parameters": [
           {
-            "name": "editId",
+            "name": "packageName",
             "in": "path",
-            "description": "Unique identifier for this edit.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "editId",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
           }
@@ -1878,16 +1878,16 @@
         },
         "parameters": [
           {
-            "name": "editId",
+            "name": "packageName",
             "in": "path",
-            "description": "Unique identifier for this edit.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "editId",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
           },
@@ -1927,16 +1927,16 @@
         },
         "parameters": [
           {
-            "name": "editId",
+            "name": "packageName",
             "in": "path",
-            "description": "Unique identifier for this edit.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "editId",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
           },
@@ -1976,16 +1976,16 @@
         },
         "parameters": [
           {
-            "name": "editId",
+            "name": "packageName",
             "in": "path",
-            "description": "Unique identifier for this edit.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "editId",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
           },
@@ -2051,16 +2051,16 @@
         },
         "parameters": [
           {
-            "name": "editId",
+            "name": "packageName",
             "in": "path",
-            "description": "Unique identifier for this edit.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "editId",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
           },
@@ -2102,16 +2102,16 @@
         },
         "parameters": [
           {
-            "name": "editId",
+            "name": "packageName",
             "in": "path",
-            "description": "Unique identifier for this edit.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "editId",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
           },
@@ -2153,16 +2153,16 @@
         },
         "parameters": [
           {
-            "name": "editId",
+            "name": "packageName",
             "in": "path",
-            "description": "Unique identifier for this edit.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "editId",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
           },
@@ -2229,16 +2229,16 @@
         },
         "parameters": [
           {
-            "name": "editId",
+            "name": "packageName",
             "in": "path",
-            "description": "Unique identifier for this edit.",
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
           },
           {
-            "name": "packageName",
+            "name": "editId",
             "in": "path",
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "description": "Unique identifier for this edit.",
             "required": true,
             "type": "string"
           }
@@ -2292,16 +2292,16 @@
         },
         "parameters": [
           {
-            "name": "maxResults",
-            "in": "query",
-            "type": "integer"
-          },
-          {
             "name": "packageName",
             "in": "path",
             "description": "The package name of the application the inapp product was sold in (for example, 'com.some.thing').",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "type": "integer"
           },
           {
             "name": "productId",
@@ -2480,12 +2480,6 @@
         },
         "parameters": [
           {
-            "name": "autoConvertMissingPrices",
-            "in": "query",
-            "description": "If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.",
-            "type": "boolean"
-          },
-          {
             "name": "packageName",
             "in": "path",
             "description": "Unique identifier for the Android app with the in-app product; for example, \"com.spiffygame\".",
@@ -2498,6 +2492,12 @@
             "description": "Unique identifier for the in-app product.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "autoConvertMissingPrices",
+            "in": "query",
+            "description": "If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.",
+            "type": "boolean"
           }
         ],
         "security": [
@@ -2524,12 +2524,6 @@
         },
         "parameters": [
           {
-            "name": "autoConvertMissingPrices",
-            "in": "query",
-            "description": "If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.",
-            "type": "boolean"
-          },
-          {
             "name": "packageName",
             "in": "path",
             "description": "Unique identifier for the Android app with the in-app product; for example, \"com.spiffygame\".",
@@ -2542,6 +2536,12 @@
             "description": "Unique identifier for the in-app product.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "autoConvertMissingPrices",
+            "in": "query",
+            "description": "If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.",
+            "type": "boolean"
           }
         ],
         "security": [
@@ -2593,17 +2593,17 @@
         },
         "parameters": [
           {
-            "name": "autoConvertMissingPrices",
-            "in": "query",
-            "description": "If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.",
-            "type": "boolean"
-          },
-          {
             "name": "packageName",
             "in": "path",
             "description": "Unique identifier for the Android app; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "autoConvertMissingPrices",
+            "in": "query",
+            "description": "If true the prices for all regions targeted by the parent app that don't have a price specified for this in-app product will be auto converted to the target currency based on the default price. Defaults to false.",
+            "type": "boolean"
           }
         ],
         "security": [
@@ -2630,16 +2630,16 @@
         },
         "parameters": [
           {
-            "name": "maxResults",
-            "in": "query",
-            "type": "integer"
-          },
-          {
             "name": "packageName",
             "in": "path",
             "description": "Unique identifier for the Android app with in-app products; for example, \"com.spiffygame\".",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "type": "integer"
           },
           {
             "name": "startIndex",

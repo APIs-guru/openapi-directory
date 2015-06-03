@@ -300,6 +300,13 @@
         },
         "parameters": [
           {
+            "name": "productId",
+            "in": "path",
+            "description": "Name for product",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "customerId",
             "in": "query",
             "description": "CustomerId represents the customer for whom licenseassignments are queried",
@@ -320,13 +327,6 @@
             "in": "query",
             "description": "Token to fetch the next page.Optional. By default server will return first page",
             "default": "",
-            "type": "string"
-          },
-          {
-            "name": "productId",
-            "in": "path",
-            "description": "Name for product",
-            "required": true,
             "type": "string"
           }
         ],
@@ -379,6 +379,20 @@
         },
         "parameters": [
           {
+            "name": "productId",
+            "in": "path",
+            "description": "Name for product",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "skuId",
+            "in": "path",
+            "description": "Name for sku",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "customerId",
             "in": "query",
             "description": "CustomerId represents the customer for whom licenseassignments are queried",
@@ -399,20 +413,6 @@
             "in": "query",
             "description": "Token to fetch the next page.Optional. By default server will return first page",
             "default": "",
-            "type": "string"
-          },
-          {
-            "name": "productId",
-            "in": "path",
-            "description": "Name for product",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "skuId",
-            "in": "path",
-            "description": "Name for sku",
-            "required": true,
             "type": "string"
           }
         ],

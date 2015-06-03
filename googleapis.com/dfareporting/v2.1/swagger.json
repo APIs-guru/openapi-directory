@@ -98,16 +98,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Account permission group ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Account permission group ID.",
             "required": true,
             "type": "string"
           }
@@ -217,16 +217,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Account permission ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Account permission ID.",
             "required": true,
             "type": "string"
           }
@@ -336,16 +336,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "User profile ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "User profile ID.",
             "required": true,
             "type": "string"
           }
@@ -430,6 +430,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "active",
             "in": "query",
             "description": "Select only active user profiles.",
@@ -455,13 +462,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -527,16 +527,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "User profile ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "User profile ID.",
             "required": true,
             "type": "string"
           }
@@ -621,16 +621,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Account ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Account ID.",
             "required": true,
             "type": "string"
           }
@@ -684,6 +684,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "active",
             "in": "query",
             "description": "Select only active accounts. Don't set this field to select both active and non-active accounts.",
@@ -709,13 +716,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -769,16 +769,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "Account ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "Account ID.",
             "required": true,
             "type": "string"
           }
@@ -863,16 +863,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Ad ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Ad ID.",
             "required": true,
             "type": "string"
           }
@@ -956,6 +956,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "active",
             "in": "query",
@@ -1113,13 +1120,6 @@
             "collectionFormat": "multi"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "remarketingListIds",
             "in": "query",
             "description": "Select only ads whose list targeting expression use these remarketing list IDs.",
@@ -1218,16 +1218,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "Ad ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "Ad ID.",
             "required": true,
             "type": "string"
           }
@@ -1309,16 +1309,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Advertiser group ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Advertiser group ID.",
             "required": true,
             "type": "string"
           }
@@ -1347,16 +1347,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Advertiser group ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Advertiser group ID.",
             "required": true,
             "type": "string"
           }
@@ -1441,6 +1441,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "ids",
             "in": "query",
             "description": "Select only advertiser groups with these IDs.",
@@ -1460,13 +1467,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -1520,16 +1520,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "Advertiser group ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "Advertiser group ID.",
             "required": true,
             "type": "string"
           }
@@ -1614,16 +1614,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Advertiser ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Advertiser ID.",
             "required": true,
             "type": "string"
           }
@@ -1708,6 +1708,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "advertiserGroupIds",
             "in": "query",
             "description": "Select only advertisers with these advertiser group IDs.",
@@ -1759,13 +1766,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -1835,16 +1835,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "Advertiser ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "Advertiser ID.",
             "required": true,
             "type": "string"
           }
@@ -1985,16 +1985,16 @@
         },
         "parameters": [
           {
-            "name": "campaignId",
+            "name": "profileId",
             "in": "path",
-            "description": "Campaign ID in this association.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "campaignId",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Campaign ID in this association.",
             "required": true,
             "type": "string"
           }
@@ -2023,6 +2023,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "campaignId",
             "in": "path",
             "description": "Campaign ID in this association.",
@@ -2039,13 +2046,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -2108,16 +2108,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Campaign ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Campaign ID.",
             "required": true,
             "type": "string"
           }
@@ -2171,6 +2171,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "defaultLandingPageName",
             "in": "query",
             "description": "Default landing page name for this new campaign. Must be less than 256 characters long.",
@@ -2181,13 +2188,6 @@
             "name": "defaultLandingPageUrl",
             "in": "query",
             "description": "Default landing page URL for this new campaign.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           }
@@ -2215,6 +2215,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "advertiserGroupIds",
             "in": "query",
@@ -2286,13 +2293,6 @@
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "searchString",
             "in": "query",
             "description": "Allows searching for campaigns by name or ID. Wildcards (*) are allowed. For example, \"campaign*2015\" will return campaigns with names like \"campaign June 2015\", \"campaign April 2015\", or simply \"campaign 2015\". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of \"campaign\" will match campaigns with name \"my campaign\", \"campaign 2015\", or simply \"campaign\".",
@@ -2349,16 +2349,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "Campaign ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "Campaign ID.",
             "required": true,
             "type": "string"
           }
@@ -2443,16 +2443,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Change log ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Change log ID.",
             "required": true,
             "type": "string"
           }
@@ -2505,6 +2505,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "action",
             "in": "query",
@@ -2618,13 +2625,6 @@
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "searchString",
             "in": "query",
             "description": "Select only change logs whose object ID, user name, old or new values match the search string.",
@@ -2690,6 +2690,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "countryDartIds",
             "in": "query",
             "description": "Select only cities from these countries.",
@@ -2713,13 +2720,6 @@
             "name": "namePrefix",
             "in": "query",
             "description": "Select only cities with names starting with this prefix.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -2782,16 +2782,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Connection type ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Connection type ID.",
             "required": true,
             "type": "string"
           }
@@ -2898,16 +2898,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Content category ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Content category ID.",
             "required": true,
             "type": "string"
           }
@@ -2936,16 +2936,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Content category ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Content category ID.",
             "required": true,
             "type": "string"
           }
@@ -3030,6 +3030,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "ids",
             "in": "query",
             "description": "Select only content categories with these IDs.",
@@ -3049,13 +3056,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -3109,16 +3109,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "Content category ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "Content category ID.",
             "required": true,
             "type": "string"
           }
@@ -3203,16 +3203,16 @@
         },
         "parameters": [
           {
-            "name": "dartId",
+            "name": "profileId",
             "in": "path",
-            "description": "Country DART ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "dartId",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Country DART ID.",
             "required": true,
             "type": "string"
           }
@@ -3325,16 +3325,16 @@
         ],
         "parameters": [
           {
-            "name": "advertiserId",
+            "name": "profileId",
             "in": "path",
-            "description": "Advertiser ID of this creative. This is a required field.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "advertiserId",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Advertiser ID of this creative. This is a required field.",
             "required": true,
             "type": "string"
           }
@@ -3385,6 +3385,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "creativeFieldId",
             "in": "path",
             "description": "Creative field ID for this creative field value.",
@@ -3395,13 +3402,6 @@
             "name": "id",
             "in": "path",
             "description": "Creative Field Value ID",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           }
@@ -3430,6 +3430,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "creativeFieldId",
             "in": "path",
             "description": "Creative field ID for this creative field value.",
@@ -3440,13 +3447,6 @@
             "name": "id",
             "in": "path",
             "description": "Creative Field Value ID",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           }
@@ -3500,16 +3500,16 @@
         },
         "parameters": [
           {
-            "name": "creativeFieldId",
+            "name": "profileId",
             "in": "path",
-            "description": "Creative field ID for this creative field value.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "creativeFieldId",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Creative field ID for this creative field value.",
             "required": true,
             "type": "string"
           }
@@ -3538,6 +3538,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "creativeFieldId",
             "in": "path",
             "description": "Creative field ID for this creative field value.",
@@ -3564,13 +3571,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -3624,6 +3624,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "creativeFieldId",
             "in": "path",
             "description": "Creative field ID for this creative field value.",
@@ -3634,13 +3641,6 @@
             "name": "id",
             "in": "query",
             "description": "Creative Field Value ID",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           }
@@ -3669,16 +3669,16 @@
         },
         "parameters": [
           {
-            "name": "creativeFieldId",
+            "name": "profileId",
             "in": "path",
-            "description": "Creative field ID for this creative field value.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "creativeFieldId",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Creative field ID for this creative field value.",
             "required": true,
             "type": "string"
           }
@@ -3729,16 +3729,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Creative Field ID",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Creative Field ID",
             "required": true,
             "type": "string"
           }
@@ -3767,16 +3767,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Creative Field ID",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Creative Field ID",
             "required": true,
             "type": "string"
           }
@@ -3861,6 +3861,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "advertiserIds",
             "in": "query",
             "description": "Select only creative fields that belong to these advertisers.",
@@ -3890,13 +3897,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -3950,16 +3950,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "Creative Field ID",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "Creative Field ID",
             "required": true,
             "type": "string"
           }
@@ -4044,16 +4044,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Creative group ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Creative group ID.",
             "required": true,
             "type": "string"
           }
@@ -4138,6 +4138,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "advertiserIds",
             "in": "query",
             "description": "Select only creative groups that belong to these advertisers.",
@@ -4173,13 +4180,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -4233,16 +4233,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "Creative group ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "Creative group ID.",
             "required": true,
             "type": "string"
           }
@@ -4327,16 +4327,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Creative ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Creative ID.",
             "required": true,
             "type": "string"
           }
@@ -4421,6 +4421,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "active",
             "in": "query",
             "description": "Select only active creatives. Leave blank to select active and inactive creatives.",
@@ -4484,13 +4491,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -4605,16 +4605,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "Creative ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "Creative ID.",
             "required": true,
             "type": "string"
           }
@@ -4699,6 +4699,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "The DFA user profile ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of results to return.",
@@ -4710,13 +4717,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The value of the nextToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "The DFA user profile ID.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -4769,16 +4769,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Directory site contact ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Directory site contact ID.",
             "required": true,
             "type": "string"
           }
@@ -4832,6 +4832,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "directorySiteIds",
             "in": "query",
             "description": "Select only directory site contacts with these directory site IDs. This is a required field.",
@@ -4861,13 +4868,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -4946,16 +4946,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Directory site ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Directory site ID.",
             "required": true,
             "type": "string"
           }
@@ -5040,6 +5040,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "acceptsInStreamVideoPlacements",
             "in": "query",
             "description": "This search filter is no longer supported and will have no effect on the results returned.",
@@ -5101,13 +5108,6 @@
             "name": "parentId",
             "in": "query",
             "description": "Select only directory sites with this parent ID.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -5183,16 +5183,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Event tag ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Event tag ID.",
             "required": true,
             "type": "string"
           }
@@ -5221,16 +5221,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Event tag ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Event tag ID.",
             "required": true,
             "type": "string"
           }
@@ -5315,6 +5315,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "adId",
             "in": "query",
             "description": "Select only event tags that belong to this ad.",
@@ -5370,13 +5377,6 @@
             "collectionFormat": "multi"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "searchString",
             "in": "query",
             "description": "Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, \"eventtag*2015\" will return objects with names like \"eventtag June 2015\", \"eventtag April 2015\", or simply \"eventtag 2015\". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of \"eventtag\" will match objects with name \"my eventtag\", \"eventtag 2015\", or simply \"eventtag\".",
@@ -5427,16 +5427,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "Event tag ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "Event tag ID.",
             "required": true,
             "type": "string"
           }
@@ -5521,16 +5521,16 @@
         },
         "parameters": [
           {
-            "name": "fileId",
+            "name": "reportId",
             "in": "path",
-            "description": "The ID of the report file.",
+            "description": "The ID of the report.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "reportId",
+            "name": "fileId",
             "in": "path",
-            "description": "The ID of the report.",
+            "description": "The ID of the report file.",
             "required": true,
             "type": "string"
           }
@@ -5584,6 +5584,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "The DFA profile ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of results to return.",
@@ -5595,13 +5602,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The value of the nextToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "The DFA profile ID.",
-            "required": true,
             "type": "string"
           },
           {
@@ -5685,16 +5685,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Floodlight activity ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Floodlight activity ID.",
             "required": true,
             "type": "string"
           }
@@ -5723,16 +5723,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Floodlight activity ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Floodlight activity ID.",
             "required": true,
             "type": "string"
           }
@@ -5786,16 +5786,16 @@
         },
         "parameters": [
           {
-            "name": "floodlightActivityId",
-            "in": "query",
-            "description": "Floodlight activity ID for which we want to generate a tag.",
-            "type": "string"
-          },
-          {
             "name": "profileId",
             "in": "path",
             "description": "User profile ID associated with this request.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "floodlightActivityId",
+            "in": "query",
+            "description": "Floodlight activity ID for which we want to generate a tag.",
             "type": "string"
           }
         ],
@@ -5879,6 +5879,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "advertiserId",
             "in": "query",
             "description": "Select only floodlight activities for the specified advertiser ID. Must specify either ids, advertiserId, or floodlightConfigurationId for a non-empty result.",
@@ -5945,13 +5952,6 @@
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "searchString",
             "in": "query",
             "description": "Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, \"floodlightactivity*2015\" will return objects with names like \"floodlightactivity June 2015\", \"floodlightactivity April 2015\", or simply \"floodlightactivity 2015\". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of \"floodlightactivity\" will match objects with name \"my floodlightactivity activity\", \"floodlightactivity 2015\", or simply \"floodlightactivity\".",
@@ -6008,16 +6008,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "Floodlight activity ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "Floodlight activity ID.",
             "required": true,
             "type": "string"
           }
@@ -6099,16 +6099,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Floodlight activity Group ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Floodlight activity Group ID.",
             "required": true,
             "type": "string"
           }
@@ -6137,16 +6137,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Floodlight activity Group ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Floodlight activity Group ID.",
             "required": true,
             "type": "string"
           }
@@ -6231,6 +6231,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "advertiserId",
             "in": "query",
             "description": "Select only floodlight activity groups with the specified advertiser ID. Must specify either advertiserId or floodlightConfigurationId for a non-empty result.",
@@ -6262,13 +6269,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -6332,16 +6332,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "Floodlight activity Group ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "Floodlight activity Group ID.",
             "required": true,
             "type": "string"
           }
@@ -6426,16 +6426,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Floodlight configuration ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Floodlight configuration ID.",
             "required": true,
             "type": "string"
           }
@@ -6489,6 +6489,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "ids",
             "in": "query",
             "description": "Set of IDs of floodlight configurations to retrieve. Required field; otherwise an empty list will be returned.",
@@ -6497,13 +6504,6 @@
               "type": "string"
             },
             "collectionFormat": "multi"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -6530,16 +6530,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "Floodlight configuration ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "Floodlight configuration ID.",
             "required": true,
             "type": "string"
           }
@@ -6624,13 +6624,6 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "Inventory item ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "profileId",
             "in": "path",
             "description": "User profile ID associated with this request.",
@@ -6641,6 +6634,13 @@
             "name": "projectId",
             "in": "path",
             "description": "Project ID for order documents.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Inventory item ID.",
             "required": true,
             "type": "string"
           }
@@ -6694,6 +6694,20 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID for order documents.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "ids",
             "in": "query",
             "description": "Select only inventory items with these IDs.",
@@ -6729,20 +6743,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "projectId",
-            "in": "path",
-            "description": "Project ID for order documents.",
-            "required": true,
             "type": "string"
           },
           {
@@ -6822,6 +6822,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "campaignId",
             "in": "path",
             "description": "Landing page campaign ID.",
@@ -6832,13 +6839,6 @@
             "name": "id",
             "in": "path",
             "description": "Landing page ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           }
@@ -6867,6 +6867,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "campaignId",
             "in": "path",
             "description": "Landing page campaign ID.",
@@ -6877,13 +6884,6 @@
             "name": "id",
             "in": "path",
             "description": "Landing page ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           }
@@ -6937,16 +6937,16 @@
         },
         "parameters": [
           {
-            "name": "campaignId",
+            "name": "profileId",
             "in": "path",
-            "description": "Landing page campaign ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "campaignId",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Landing page campaign ID.",
             "required": true,
             "type": "string"
           }
@@ -6975,16 +6975,16 @@
         },
         "parameters": [
           {
-            "name": "campaignId",
+            "name": "profileId",
             "in": "path",
-            "description": "Landing page campaign ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "campaignId",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Landing page campaign ID.",
             "required": true,
             "type": "string"
           }
@@ -7013,6 +7013,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "campaignId",
             "in": "path",
             "description": "Landing page campaign ID.",
@@ -7023,13 +7030,6 @@
             "name": "id",
             "in": "query",
             "description": "Landing page ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           }
@@ -7058,16 +7058,16 @@
         },
         "parameters": [
           {
-            "name": "campaignId",
+            "name": "profileId",
             "in": "path",
-            "description": "Landing page campaign ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "campaignId",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Landing page campaign ID.",
             "required": true,
             "type": "string"
           }
@@ -7177,16 +7177,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Mobile carrier ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Mobile carrier ID.",
             "required": true,
             "type": "string"
           }
@@ -7296,16 +7296,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Operating system version ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Operating system version ID.",
             "required": true,
             "type": "string"
           }
@@ -7415,16 +7415,16 @@
         },
         "parameters": [
           {
-            "name": "dartId",
+            "name": "profileId",
             "in": "path",
-            "description": "Operating system DART ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "dartId",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Operating system DART ID.",
             "required": true,
             "type": "string"
           }
@@ -7534,13 +7534,6 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "Order document ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "profileId",
             "in": "path",
             "description": "User profile ID associated with this request.",
@@ -7551,6 +7544,13 @@
             "name": "projectId",
             "in": "path",
             "description": "Project ID for order documents.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Order document ID.",
             "required": true,
             "type": "string"
           }
@@ -7604,6 +7604,20 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID for order documents.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "approved",
             "in": "query",
             "description": "Select only order documents that have been approved by at least one user.",
@@ -7639,20 +7653,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "projectId",
-            "in": "path",
-            "description": "Project ID for order documents.",
-            "required": true,
             "type": "string"
           },
           {
@@ -7741,13 +7741,6 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "Order ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "profileId",
             "in": "path",
             "description": "User profile ID associated with this request.",
@@ -7758,6 +7751,13 @@
             "name": "projectId",
             "in": "path",
             "description": "Project ID for orders.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Order ID.",
             "required": true,
             "type": "string"
           }
@@ -7811,6 +7811,20 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID for orders.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "ids",
             "in": "query",
             "description": "Select only orders with these IDs.",
@@ -7830,20 +7844,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "projectId",
-            "in": "path",
-            "description": "Project ID for orders.",
-            "required": true,
             "type": "string"
           },
           {
@@ -7932,16 +7932,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Placement group ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Placement group ID.",
             "required": true,
             "type": "string"
           }
@@ -8025,6 +8025,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "advertiserIds",
             "in": "query",
@@ -8131,13 +8138,6 @@
             "collectionFormat": "multi"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "searchString",
             "in": "query",
             "description": "Allows searching for placement groups by name or ID. Wildcards (*) are allowed. For example, \"placement*2015\" will return placement groups with names like \"placement group June 2015\", \"placement group May 2015\", or simply \"placements 2015\". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of \"placementgroup\" will match placement groups with name \"my placementgroup\", \"placementgroup 2015\", or simply \"placementgroup\".",
@@ -8198,16 +8198,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "Placement group ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "Placement group ID.",
             "required": true,
             "type": "string"
           }
@@ -8289,16 +8289,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Placement strategy ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Placement strategy ID.",
             "required": true,
             "type": "string"
           }
@@ -8327,16 +8327,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Placement strategy ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Placement strategy ID.",
             "required": true,
             "type": "string"
           }
@@ -8421,6 +8421,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "ids",
             "in": "query",
             "description": "Select only placement strategies with these IDs.",
@@ -8440,13 +8447,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -8500,16 +8500,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "Placement strategy ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "Placement strategy ID.",
             "required": true,
             "type": "string"
           }
@@ -8594,6 +8594,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "campaignId",
             "in": "query",
             "description": "Generate placements belonging to this campaign. This is a required field.",
@@ -8608,13 +8615,6 @@
               "type": "string"
             },
             "collectionFormat": "multi"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "tagFormats",
@@ -8691,16 +8691,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Placement ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Placement ID.",
             "required": true,
             "type": "string"
           }
@@ -8784,6 +8784,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "advertiserIds",
             "in": "query",
@@ -8917,13 +8924,6 @@
             "collectionFormat": "multi"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "searchString",
             "in": "query",
             "description": "Allows searching for placements by name or ID. Wildcards (*) are allowed. For example, \"placement*2015\" will return placements with names like \"placement June 2015\", \"placement May 2015\", or simply \"placements 2015\". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of \"placement\" will match placements with name \"my placement\", \"placement 2015\", or simply \"placement\".",
@@ -8994,16 +8994,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "Placement ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "Placement ID.",
             "required": true,
             "type": "string"
           }
@@ -9088,16 +9088,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Platform type ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Platform type ID.",
             "required": true,
             "type": "string"
           }
@@ -9207,16 +9207,16 @@
         },
         "parameters": [
           {
-            "name": "code",
+            "name": "profileId",
             "in": "path",
-            "description": "Postal code ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "code",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Postal code ID.",
             "required": true,
             "type": "string"
           }
@@ -9326,16 +9326,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Project ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Project ID.",
             "required": true,
             "type": "string"
           }
@@ -9389,6 +9389,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "advertiserIds",
             "in": "query",
             "description": "Select only projects with these advertiser IDs.",
@@ -9418,13 +9425,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -9716,16 +9716,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Remarketing list ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Remarketing list ID.",
             "required": true,
             "type": "string"
           }
@@ -9810,10 +9810,11 @@
         },
         "parameters": [
           {
-            "name": "active",
-            "in": "query",
-            "description": "Select only active or only inactive remarketing lists.",
-            "type": "boolean"
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "advertiserId",
@@ -9821,6 +9822,12 @@
             "description": "Select only remarketing lists owned by this advertiser.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "active",
+            "in": "query",
+            "description": "Select only active or only inactive remarketing lists.",
+            "type": "boolean"
           },
           {
             "name": "floodlightActivityId",
@@ -9844,13 +9851,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -9898,16 +9898,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "Remarketing list ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "Remarketing list ID.",
             "required": true,
             "type": "string"
           }
@@ -10197,6 +10197,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "The DFA user profile ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of results to return.",
@@ -10208,13 +10215,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The value of the nextToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "The DFA user profile ID.",
-            "required": true,
             "type": "string"
           },
           {
@@ -10426,13 +10426,6 @@
         },
         "parameters": [
           {
-            "name": "fileId",
-            "in": "path",
-            "description": "The ID of the report file.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "profileId",
             "in": "path",
             "description": "The DFA profile ID.",
@@ -10443,6 +10436,13 @@
             "name": "reportId",
             "in": "path",
             "description": "The ID of the report.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileId",
+            "in": "path",
+            "description": "The ID of the report file.",
             "required": true,
             "type": "string"
           }
@@ -10496,20 +10496,6 @@
         },
         "parameters": [
           {
-            "name": "maxResults",
-            "in": "query",
-            "description": "Maximum number of results to return.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 10
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "The value of the nextToken from the previous result page.",
-            "type": "string"
-          },
-          {
             "name": "profileId",
             "in": "path",
             "description": "The DFA profile ID.",
@@ -10521,6 +10507,20 @@
             "in": "path",
             "description": "The ID of the parent report.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of results to return.",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "The value of the nextToken from the previous result page.",
             "type": "string"
           },
           {
@@ -10595,16 +10595,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Site ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Site ID.",
             "required": true,
             "type": "string"
           }
@@ -10689,6 +10689,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "acceptsInStreamVideoPlacements",
             "in": "query",
             "description": "This search filter is no longer supported and will have no effect on the results returned.",
@@ -10761,13 +10768,6 @@
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "searchString",
             "in": "query",
             "description": "Allows searching for objects by name, ID or keyName. Wildcards (*) are allowed. For example, \"site*2015\" will return objects with names like \"site June 2015\", \"site April 2015\", or simply \"site 2015\". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of \"site\" will match objects with name \"my site\", \"site 2015\", or simply \"site\".",
@@ -10830,16 +10830,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "Site ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "Site ID.",
             "required": true,
             "type": "string"
           }
@@ -10924,16 +10924,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Size ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Size ID.",
             "required": true,
             "type": "string"
           }
@@ -11018,6 +11018,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "height",
             "in": "query",
             "description": "Select only sizes with this height.",
@@ -11038,13 +11045,6 @@
               "type": "string"
             },
             "collectionFormat": "multi"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "width",
@@ -11102,16 +11102,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Subaccount ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Subaccount ID.",
             "required": true,
             "type": "string"
           }
@@ -11196,6 +11196,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "ids",
             "in": "query",
             "description": "Select only subaccounts with these IDs.",
@@ -11215,13 +11222,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -11275,16 +11275,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "Subaccount ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "Subaccount ID.",
             "required": true,
             "type": "string"
           }
@@ -11369,16 +11369,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "Remarketing list ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "Remarketing list ID.",
             "required": true,
             "type": "string"
           }
@@ -11432,10 +11432,11 @@
         },
         "parameters": [
           {
-            "name": "active",
-            "in": "query",
-            "description": "Select only active or only inactive targetable remarketing lists.",
-            "type": "boolean"
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "advertiserId",
@@ -11443,6 +11444,12 @@
             "description": "Select only targetable remarketing lists targetable by these advertisers.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "active",
+            "in": "query",
+            "description": "Select only active or only inactive targetable remarketing lists.",
+            "type": "boolean"
           },
           {
             "name": "maxResults",
@@ -11460,13 +11467,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -11644,16 +11644,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "User role permission group ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "User role permission group ID.",
             "required": true,
             "type": "string"
           }
@@ -11763,16 +11763,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "User role permission ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "User role permission ID.",
             "required": true,
             "type": "string"
           }
@@ -11826,6 +11826,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "ids",
             "in": "query",
             "description": "Select only user role permissions with these IDs.",
@@ -11834,13 +11841,6 @@
               "type": "string"
             },
             "collectionFormat": "multi"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -11889,16 +11889,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "User role ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "User role ID.",
             "required": true,
             "type": "string"
           }
@@ -11927,16 +11927,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "profileId",
             "in": "path",
-            "description": "User role ID.",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "id",
             "in": "path",
-            "description": "User profile ID associated with this request.",
+            "description": "User role ID.",
             "required": true,
             "type": "string"
           }
@@ -12021,6 +12021,13 @@
         },
         "parameters": [
           {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "accountUserRoleOnly",
             "in": "query",
             "description": "Select only account level user roles not associated with any specific subaccount.",
@@ -12046,13 +12053,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Value of the nextPageToken from the previous result page.",
-            "type": "string"
-          },
-          {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -12112,16 +12112,16 @@
         },
         "parameters": [
           {
-            "name": "id",
-            "in": "query",
-            "description": "User role ID.",
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "profileId",
-            "in": "path",
-            "description": "User profile ID associated with this request.",
+            "name": "id",
+            "in": "query",
+            "description": "User role ID.",
             "required": true,
             "type": "string"
           }

@@ -32,16 +32,16 @@
         },
         "parameters": [
           {
-            "name": "feedpath",
+            "name": "siteUrl",
             "in": "path",
-            "description": "The URL of the actual sitemap (for example http://www.example.com/sitemap.xml).",
+            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
             "required": true,
             "type": "string"
           },
           {
-            "name": "siteUrl",
+            "name": "feedpath",
             "in": "path",
-            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
+            "description": "The URL of the actual sitemap (for example http://www.example.com/sitemap.xml).",
             "required": true,
             "type": "string"
           }
@@ -70,16 +70,16 @@
         },
         "parameters": [
           {
-            "name": "feedpath",
+            "name": "siteUrl",
             "in": "path",
-            "description": "The URL of the actual sitemap (for example http://www.example.com/sitemap.xml).",
+            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
             "required": true,
             "type": "string"
           },
           {
-            "name": "siteUrl",
+            "name": "feedpath",
             "in": "path",
-            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
+            "description": "The URL of the actual sitemap (for example http://www.example.com/sitemap.xml).",
             "required": true,
             "type": "string"
           }
@@ -106,16 +106,16 @@
         },
         "parameters": [
           {
-            "name": "feedpath",
+            "name": "siteUrl",
             "in": "path",
-            "description": "The URL of the sitemap to add.",
+            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
             "required": true,
             "type": "string"
           },
           {
-            "name": "siteUrl",
+            "name": "feedpath",
             "in": "path",
-            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
+            "description": "The URL of the sitemap to add.",
             "required": true,
             "type": "string"
           }
@@ -393,6 +393,13 @@
         },
         "parameters": [
           {
+            "name": "siteUrl",
+            "in": "path",
+            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "category",
             "in": "query",
             "description": "The crawl error category, for example 'serverError'. If not specified, we return results for all categories.",
@@ -425,13 +432,6 @@
               "smartphoneOnly",
               "web"
             ]
-          },
-          {
-            "name": "siteUrl",
-            "in": "path",
-            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -484,6 +484,20 @@
         },
         "parameters": [
           {
+            "name": "siteUrl",
+            "in": "path",
+            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "path",
+            "description": "The relative path (without the site) of the sample URL; must be one of the URLs returned by list",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "category",
             "in": "query",
             "description": "The crawl error category, for example 'authPermissions'",
@@ -511,20 +525,6 @@
               "smartphoneOnly",
               "web"
             ]
-          },
-          {
-            "name": "siteUrl",
-            "in": "path",
-            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "url",
-            "in": "path",
-            "description": "The relative path (without the site) of the sample URL; must be one of the URLs returned by list",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -549,6 +549,20 @@
         },
         "parameters": [
           {
+            "name": "siteUrl",
+            "in": "path",
+            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "path",
+            "description": "The relative path (without the site) of the sample URL; must be one of the URLs returned by list",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "category",
             "in": "query",
             "description": "The crawl error category, for example 'authPermissions'",
@@ -576,20 +590,6 @@
               "smartphoneOnly",
               "web"
             ]
-          },
-          {
-            "name": "siteUrl",
-            "in": "path",
-            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "url",
-            "in": "path",
-            "description": "The relative path (without the site) of the sample URL; must be one of the URLs returned by list",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -641,6 +641,13 @@
         },
         "parameters": [
           {
+            "name": "siteUrl",
+            "in": "path",
+            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "category",
             "in": "query",
             "description": "The crawl error category, for example 'authPermissions'",
@@ -668,13 +675,6 @@
               "smartphoneOnly",
               "web"
             ]
-          },
-          {
-            "name": "siteUrl",
-            "in": "path",
-            "description": "The site's URL, including protocol, for example 'http://www.example.com/'",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [

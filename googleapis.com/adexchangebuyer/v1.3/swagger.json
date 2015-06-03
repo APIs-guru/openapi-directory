@@ -738,6 +738,13 @@
             "type": "string"
           },
           {
+            "name": "startDateTime",
+            "in": "query",
+            "description": "The start time of the report in ISO 8601 timestamp format using UTC.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of entries returned on one result page. If not set, the default is 100. Optional.",
@@ -749,13 +756,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "A continuation token, used to page through performance reports. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response. Optional.",
-            "type": "string"
-          },
-          {
-            "name": "startDateTime",
-            "in": "query",
-            "description": "The start time of the report in ISO 8601 timestamp format using UTC.",
-            "required": true,
             "type": "string"
           }
         ],

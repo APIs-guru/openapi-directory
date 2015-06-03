@@ -81,6 +81,12 @@
         },
         "parameters": [
           {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "pageSize",
             "in": "query",
             "type": "integer"
@@ -88,12 +94,6 @@
           {
             "name": "pageToken",
             "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "projectId",
-            "in": "path",
-            "required": true,
             "type": "string"
           },
           {
@@ -157,13 +157,13 @@
         },
         "parameters": [
           {
-            "name": "jobId",
+            "name": "projectId",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "projectId",
+            "name": "jobId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -204,13 +204,13 @@
         },
         "parameters": [
           {
-            "name": "jobId",
+            "name": "projectId",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "projectId",
+            "name": "jobId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -241,13 +241,13 @@
         },
         "parameters": [
           {
-            "name": "jobId",
+            "name": "projectId",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "projectId",
+            "name": "jobId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -303,13 +303,13 @@
         },
         "parameters": [
           {
-            "name": "jobId",
+            "name": "projectId",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "projectId",
+            "name": "jobId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -370,14 +370,20 @@
         },
         "parameters": [
           {
-            "name": "endTime",
-            "in": "query",
+            "name": "projectId",
+            "in": "path",
+            "required": true,
             "type": "string"
           },
           {
             "name": "jobId",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
             "type": "string"
           },
           {
@@ -400,12 +406,6 @@
           {
             "name": "pageToken",
             "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "projectId",
-            "in": "path",
-            "required": true,
             "type": "string"
           },
           {
@@ -464,13 +464,13 @@
         },
         "parameters": [
           {
-            "name": "jobId",
+            "name": "projectId",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "projectId",
+            "name": "jobId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -526,13 +526,13 @@
         },
         "parameters": [
           {
-            "name": "jobId",
+            "name": "projectId",
             "in": "path",
             "required": true,
             "type": "string"
           },
           {
-            "name": "projectId",
+            "name": "jobId",
             "in": "path",
             "required": true,
             "type": "string"

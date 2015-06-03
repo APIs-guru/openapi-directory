@@ -35,12 +35,6 @@
         },
         "parameters": [
           {
-            "name": "currentDataVersion",
-            "in": "query",
-            "description": "The version of the data to be cleared. Version strings are returned by the server.",
-            "type": "string"
-          },
-          {
             "name": "stateKey",
             "in": "path",
             "description": "The key for the data to be retrieved.",
@@ -48,6 +42,12 @@
             "type": "integer",
             "minimum": 0,
             "maximum": 3
+          },
+          {
+            "name": "currentDataVersion",
+            "in": "query",
+            "description": "The version of the data to be cleared. Version strings are returned by the server.",
+            "type": "string"
           }
         ],
         "security": [
@@ -162,12 +162,6 @@
         },
         "parameters": [
           {
-            "name": "currentStateVersion",
-            "in": "query",
-            "description": "The version of the app state your application is attempting to update. If this does not match the current version, this method will return a conflict error. If there is no data stored on the server for this key, the update will succeed irrespective of the value of this parameter.",
-            "type": "string"
-          },
-          {
             "name": "stateKey",
             "in": "path",
             "description": "The key for the data to be retrieved.",
@@ -175,6 +169,12 @@
             "type": "integer",
             "minimum": 0,
             "maximum": 3
+          },
+          {
+            "name": "currentStateVersion",
+            "in": "query",
+            "description": "The version of the app state your application is attempting to update. If this does not match the current version, this method will return a conflict error. If there is no data stored on the server for this key, the update will succeed irrespective of the value of this parameter.",
+            "type": "string"
           }
         ],
         "security": [

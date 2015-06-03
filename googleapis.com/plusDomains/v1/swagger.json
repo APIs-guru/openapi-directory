@@ -93,17 +93,17 @@
         },
         "parameters": [
           {
-            "name": "preview",
-            "in": "query",
-            "description": "If \"true\", extract the potential media attachments for a URL. The response will include all possible attachments for a URL, including video, photos, and articles based on the content of the page.",
-            "type": "boolean"
-          },
-          {
             "name": "userId",
             "in": "path",
             "description": "The ID of the user to create the activity on behalf of. Its value should be \"me\", to indicate the authenticated user.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "preview",
+            "in": "query",
+            "description": "If \"true\", extract the potential media attachments for a URL. The response will include all possible attachments for a URL, including video, photos, and articles based on the content of the page.",
+            "type": "boolean"
           }
         ],
         "security": [
@@ -157,6 +157,13 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user to get activities for. The special value \"me\" can be used to indicate the authenticated user.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "collection",
             "in": "path",
             "description": "The collection of activities to list.",
@@ -179,13 +186,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "type": "string"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "The ID of the user to get activities for. The special value \"me\" can be used to indicate the authenticated user.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -240,6 +240,13 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user to get audiences for. The special value \"me\" can be used to indicate the authenticated user.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "The maximum number of circles to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.",
@@ -252,13 +259,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "type": "string"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "The ID of the user to get audiences for. The special value \"me\" can be used to indicate the authenticated user.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -669,6 +669,13 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user to get circles for. The special value \"me\" can be used to indicate the authenticated user.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "The maximum number of circles to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.",
@@ -681,13 +688,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "type": "string"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "The ID of the user to get circles for. The special value \"me\" can be used to indicate the authenticated user.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -1071,6 +1071,13 @@
         ],
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user to create the activity on behalf of.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "collection",
             "in": "path",
             "required": true,
@@ -1078,13 +1085,6 @@
             "enum": [
               "cloud"
             ]
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "The ID of the user to create the activity on behalf of.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -1198,6 +1198,13 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "Get the collection of people for the person identified. Use \"me\" to indicate the authenticated user.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "collection",
             "in": "path",
             "description": "The collection of people to list.",
@@ -1230,13 +1237,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "type": "string"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "Get the collection of people for the person identified. Use \"me\" to indicate the authenticated user.",
-            "required": true,
             "type": "string"
           }
         ],

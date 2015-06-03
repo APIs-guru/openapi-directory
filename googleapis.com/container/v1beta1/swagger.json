@@ -248,13 +248,6 @@
         },
         "parameters": [
           {
-            "name": "clusterId",
-            "in": "path",
-            "description": "The name of the cluster to delete.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "projectId",
             "in": "path",
             "description": "The Google Developers Console project ID or  project number.",
@@ -265,6 +258,13 @@
             "name": "zoneId",
             "in": "path",
             "description": "The name of the Google Compute Engine zone in which the cluster resides.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "in": "path",
+            "description": "The name of the cluster to delete.",
             "required": true,
             "type": "string"
           }
@@ -293,13 +293,6 @@
         },
         "parameters": [
           {
-            "name": "clusterId",
-            "in": "path",
-            "description": "The name of the cluster to retrieve.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "projectId",
             "in": "path",
             "description": "The Google Developers Console project ID or  project number.",
@@ -310,6 +303,13 @@
             "name": "zoneId",
             "in": "path",
             "description": "The name of the Google Compute Engine zone in which the cluster resides.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "clusterId",
+            "in": "path",
+            "description": "The name of the cluster to retrieve.",
             "required": true,
             "type": "string"
           }
@@ -363,13 +363,6 @@
         },
         "parameters": [
           {
-            "name": "operationId",
-            "in": "path",
-            "description": "The server-assigned name of the operation.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "projectId",
             "in": "path",
             "description": "The Google Developers Console project ID or  project number.",
@@ -380,6 +373,13 @@
             "name": "zoneId",
             "in": "path",
             "description": "The name of the Google Compute Engine zone in which the operation resides. This is always the same zone as the cluster with which the operation is associated.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The server-assigned name of the operation.",
             "required": true,
             "type": "string"
           }

@@ -68,6 +68,13 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "List data sources for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "dataTypeName",
             "in": "query",
             "description": "The names of data types to include in the list. If not specified, all data sources will be returned.",
@@ -76,13 +83,6 @@
               "type": "string"
             },
             "collectionFormat": "multi"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "List data sources for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -139,16 +139,16 @@
         },
         "parameters": [
           {
-            "name": "dataSourceId",
+            "name": "userId",
             "in": "path",
-            "description": "The data stream ID of the data source to delete.",
+            "description": "Retrieve a data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "userId",
+            "name": "dataSourceId",
             "in": "path",
-            "description": "Retrieve a data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
+            "description": "The data stream ID of the data source to delete.",
             "required": true,
             "type": "string"
           }
@@ -179,16 +179,16 @@
         },
         "parameters": [
           {
-            "name": "dataSourceId",
+            "name": "userId",
             "in": "path",
-            "description": "The data stream ID of the data source to retrieve.",
+            "description": "Retrieve a data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "userId",
+            "name": "dataSourceId",
             "in": "path",
-            "description": "Retrieve a data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
+            "description": "The data stream ID of the data source to retrieve.",
             "required": true,
             "type": "string"
           }
@@ -222,16 +222,16 @@
         },
         "parameters": [
           {
-            "name": "dataSourceId",
+            "name": "userId",
             "in": "path",
-            "description": "The data stream ID of the data source to update.",
+            "description": "Update the data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "userId",
+            "name": "dataSourceId",
             "in": "path",
-            "description": "Update the data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
+            "description": "The data stream ID of the data source to update.",
             "required": true,
             "type": "string"
           }
@@ -262,16 +262,16 @@
         },
         "parameters": [
           {
-            "name": "dataSourceId",
+            "name": "userId",
             "in": "path",
-            "description": "The data stream ID of the data source to update.",
+            "description": "Update the data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "userId",
+            "name": "dataSourceId",
             "in": "path",
-            "description": "Update the data source for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
+            "description": "The data stream ID of the data source to update.",
             "required": true,
             "type": "string"
           }
@@ -324,9 +324,10 @@
         },
         "parameters": [
           {
-            "name": "currentTimeMillis",
-            "in": "query",
-            "description": "The client's current time in milliseconds since epoch.",
+            "name": "userId",
+            "in": "path",
+            "description": "Delete a dataset for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
+            "required": true,
             "type": "string"
           },
           {
@@ -344,16 +345,15 @@
             "type": "string"
           },
           {
-            "name": "modifiedTimeMillis",
+            "name": "currentTimeMillis",
             "in": "query",
-            "description": "When the operation was performed on the client.",
+            "description": "The client's current time in milliseconds since epoch.",
             "type": "string"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "Delete a dataset for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
-            "required": true,
+            "name": "modifiedTimeMillis",
+            "in": "query",
+            "description": "When the operation was performed on the client.",
             "type": "string"
           }
         ],
@@ -383,6 +383,13 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "Retrieve a dataset for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "dataSourceId",
             "in": "path",
             "description": "The data stream ID of the data source that created the dataset.",
@@ -406,13 +413,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The continuation token, which is used to page through large datasets. To get the next page of a dataset, set this parameter to the value of nextPageToken from the previous response. Each subsequent call will yield a partial dataset with data point end timestamps that are strictly smaller than those in the previous partial response.",
-            "type": "string"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "Retrieve a dataset for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -445,9 +445,10 @@
         },
         "parameters": [
           {
-            "name": "currentTimeMillis",
-            "in": "query",
-            "description": "The client's current time in milliseconds since epoch. Note that the minStartTimeNs and maxEndTimeNs properties in the request body are in nanoseconds instead of milliseconds.",
+            "name": "userId",
+            "in": "path",
+            "description": "Patch a dataset for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
+            "required": true,
             "type": "string"
           },
           {
@@ -465,10 +466,9 @@
             "type": "string"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "Patch a dataset for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
-            "required": true,
+            "name": "currentTimeMillis",
+            "in": "query",
+            "description": "The client's current time in milliseconds since epoch. Note that the minStartTimeNs and maxEndTimeNs properties in the request body are in nanoseconds instead of milliseconds.",
             "type": "string"
           }
         ],
@@ -567,9 +567,10 @@
         },
         "parameters": [
           {
-            "name": "currentTimeMillis",
-            "in": "query",
-            "description": "The client's current time in milliseconds since epoch.",
+            "name": "userId",
+            "in": "path",
+            "description": "Delete a session for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
+            "required": true,
             "type": "string"
           },
           {
@@ -580,10 +581,9 @@
             "type": "string"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "Delete a session for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
-            "required": true,
+            "name": "currentTimeMillis",
+            "in": "query",
+            "description": "The client's current time in milliseconds since epoch.",
             "type": "string"
           }
         ],
@@ -611,9 +611,10 @@
         },
         "parameters": [
           {
-            "name": "currentTimeMillis",
-            "in": "query",
-            "description": "The client's current time in milliseconds since epoch.",
+            "name": "userId",
+            "in": "path",
+            "description": "Create sessions for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
+            "required": true,
             "type": "string"
           },
           {
@@ -624,10 +625,9 @@
             "type": "string"
           },
           {
-            "name": "userId",
-            "in": "path",
-            "description": "Create sessions for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
-            "required": true,
+            "name": "currentTimeMillis",
+            "in": "query",
+            "description": "The client's current time in milliseconds since epoch.",
             "type": "string"
           }
         ],
@@ -680,6 +680,13 @@
         },
         "parameters": [
           {
+            "name": "userId",
+            "in": "path",
+            "description": "List sessions for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "endTime",
             "in": "query",
             "description": "An RFC3339 timestamp. Only sessions ending between the start and end times will be included in the response.",
@@ -701,13 +708,6 @@
             "name": "startTime",
             "in": "query",
             "description": "An RFC3339 timestamp. Only sessions ending between the start and end times will be included in the response.",
-            "type": "string"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "List sessions for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
-            "required": true,
             "type": "string"
           }
         ],

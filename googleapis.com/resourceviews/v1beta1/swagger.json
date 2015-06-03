@@ -262,6 +262,20 @@
         },
         "parameters": [
           {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "region",
+            "in": "path",
+            "description": "The region name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum count of results to be returned. Acceptable values are 0 to 5000, inclusive. (Default: 5000)",
@@ -274,20 +288,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.",
-            "type": "string"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name of the resource view.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "region",
-            "in": "path",
-            "description": "The region name of the resource view.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -344,21 +344,6 @@
         },
         "parameters": [
           {
-            "name": "maxResults",
-            "in": "query",
-            "description": "Maximum count of results to be returned. Acceptable values are 0 to 5000, inclusive. (Default: 5000)",
-            "default": "5000",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 5000
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.",
-            "type": "string"
-          },
-          {
             "name": "projectName",
             "in": "path",
             "description": "The project name of the resource view.",
@@ -377,6 +362,21 @@
             "in": "path",
             "description": "The name of the resource view.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum count of results to be returned. Acceptable values are 0 to 5000, inclusive. (Default: 5000)",
+            "default": "5000",
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 5000
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.",
             "type": "string"
           }
         ],
@@ -506,16 +506,16 @@
             "type": "string"
           },
           {
-            "name": "resourceViewName",
+            "name": "zone",
             "in": "path",
-            "description": "The name of the resource view.",
+            "description": "The zone name of the resource view.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "zone",
+            "name": "resourceViewName",
             "in": "path",
-            "description": "The zone name of the resource view.",
+            "description": "The name of the resource view.",
             "required": true,
             "type": "string"
           }
@@ -575,16 +575,16 @@
             "type": "string"
           },
           {
-            "name": "resourceViewName",
+            "name": "zone",
             "in": "path",
-            "description": "The name of the resource view.",
+            "description": "The zone name of the resource view.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "zone",
+            "name": "resourceViewName",
             "in": "path",
-            "description": "The zone name of the resource view.",
+            "description": "The name of the resource view.",
             "required": true,
             "type": "string"
           }
@@ -622,16 +622,16 @@
             "type": "string"
           },
           {
-            "name": "resourceViewName",
+            "name": "zone",
             "in": "path",
-            "description": "The name of the resource view.",
+            "description": "The zone name of the resource view.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "zone",
+            "name": "resourceViewName",
             "in": "path",
-            "description": "The zone name of the resource view.",
+            "description": "The name of the resource view.",
             "required": true,
             "type": "string"
           }
@@ -729,6 +729,20 @@
         },
         "parameters": [
           {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "The zone name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum count of results to be returned. Acceptable values are 0 to 5000, inclusive. (Default: 5000)",
@@ -741,20 +755,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.",
-            "type": "string"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name of the resource view.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "zone",
-            "in": "path",
-            "description": "The zone name of the resource view.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -811,6 +811,27 @@
         },
         "parameters": [
           {
+            "name": "projectName",
+            "in": "path",
+            "description": "The project name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "The zone name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceViewName",
+            "in": "path",
+            "description": "The name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum count of results to be returned. Acceptable values are 0 to 5000, inclusive. (Default: 5000)",
@@ -823,27 +844,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.",
-            "type": "string"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The project name of the resource view.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceViewName",
-            "in": "path",
-            "description": "The name of the resource view.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "zone",
-            "in": "path",
-            "description": "The zone name of the resource view.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -904,16 +904,16 @@
             "type": "string"
           },
           {
-            "name": "resourceViewName",
+            "name": "zone",
             "in": "path",
-            "description": "The name of the resource view.",
+            "description": "The zone name of the resource view.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "zone",
+            "name": "resourceViewName",
             "in": "path",
-            "description": "The zone name of the resource view.",
+            "description": "The name of the resource view.",
             "required": true,
             "type": "string"
           }

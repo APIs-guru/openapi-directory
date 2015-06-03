@@ -512,6 +512,13 @@
         },
         "parameters": [
           {
+            "name": "projectId",
+            "in": "query",
+            "description": "A valid API project identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "max-results",
             "in": "query",
             "description": "Maximum number of buckets to return.",
@@ -522,13 +529,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "A previously-returned page token representing part of the larger set of results to view.",
-            "type": "string"
-          },
-          {
-            "name": "projectId",
-            "in": "query",
-            "description": "A valid API project identifier.",
-            "required": true,
             "type": "string"
           },
           {
@@ -597,16 +597,16 @@
             "type": "string"
           },
           {
-            "name": "entity",
+            "name": "object",
             "in": "path",
-            "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
+            "description": "Name of the object.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "object",
+            "name": "entity",
             "in": "path",
-            "description": "Name of the object.",
+            "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
             "required": true,
             "type": "string"
           }
@@ -642,16 +642,16 @@
             "type": "string"
           },
           {
-            "name": "entity",
+            "name": "object",
             "in": "path",
-            "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
+            "description": "Name of the object.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "object",
+            "name": "entity",
             "in": "path",
-            "description": "Name of the object.",
+            "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
             "required": true,
             "type": "string"
           }
@@ -687,16 +687,16 @@
             "type": "string"
           },
           {
-            "name": "entity",
+            "name": "object",
             "in": "path",
-            "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
+            "description": "Name of the object.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "object",
+            "name": "entity",
             "in": "path",
-            "description": "Name of the object.",
+            "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
             "required": true,
             "type": "string"
           }
@@ -732,16 +732,16 @@
             "type": "string"
           },
           {
-            "name": "entity",
+            "name": "object",
             "in": "path",
-            "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
+            "description": "Name of the object.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "object",
+            "name": "entity",
             "in": "path",
-            "description": "Name of the object.",
+            "description": "The entity holding the permission. Can be user-userId, user-emailAddress, group-groupId, group-emailAddress, allUsers, or allAuthenticatedUsers.",
             "required": true,
             "type": "string"
           }

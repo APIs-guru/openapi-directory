@@ -614,16 +614,16 @@
             "type": "string"
           },
           {
-            "name": "fingerprint",
-            "in": "query",
-            "description": "When provided, this fingerprint must match the fingerprint of the macro in storage.",
-            "type": "string"
-          },
-          {
             "name": "macroId",
             "in": "path",
             "description": "The GTM Macro ID.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fingerprint",
+            "in": "query",
+            "description": "When provided, this fingerprint must match the fingerprint of the macro in storage.",
             "type": "string"
           }
         ],
@@ -880,16 +880,16 @@
             "type": "string"
           },
           {
-            "name": "fingerprint",
-            "in": "query",
-            "description": "When provided, this fingerprint must match the fingerprint of the rule in storage.",
-            "type": "string"
-          },
-          {
             "name": "ruleId",
             "in": "path",
             "description": "The GTM Rule ID.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fingerprint",
+            "in": "query",
+            "description": "When provided, this fingerprint must match the fingerprint of the rule in storage.",
             "type": "string"
           }
         ],
@@ -1146,16 +1146,16 @@
             "type": "string"
           },
           {
-            "name": "fingerprint",
-            "in": "query",
-            "description": "When provided, this fingerprint must match the fingerprint of the tag in storage.",
-            "type": "string"
-          },
-          {
             "name": "tagId",
             "in": "path",
             "description": "The GTM Tag ID.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fingerprint",
+            "in": "query",
+            "description": "When provided, this fingerprint must match the fingerprint of the tag in storage.",
             "type": "string"
           }
         ],
@@ -1412,16 +1412,16 @@
             "type": "string"
           },
           {
-            "name": "fingerprint",
-            "in": "query",
-            "description": "When provided, this fingerprint must match the fingerprint of the trigger in storage.",
-            "type": "string"
-          },
-          {
             "name": "triggerId",
             "in": "path",
             "description": "The GTM Trigger ID.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fingerprint",
+            "in": "query",
+            "description": "When provided, this fingerprint must match the fingerprint of the trigger in storage.",
             "type": "string"
           }
         ],
@@ -1678,16 +1678,16 @@
             "type": "string"
           },
           {
-            "name": "fingerprint",
-            "in": "query",
-            "description": "When provided, this fingerprint must match the fingerprint of the variable in storage.",
-            "type": "string"
-          },
-          {
             "name": "variableId",
             "in": "path",
             "description": "The GTM Variable ID.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fingerprint",
+            "in": "query",
+            "description": "When provided, this fingerprint must match the fingerprint of the variable in storage.",
             "type": "string"
           }
         ],

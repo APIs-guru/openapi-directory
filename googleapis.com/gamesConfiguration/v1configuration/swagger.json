@@ -353,6 +353,13 @@
         ],
         "parameters": [
           {
+            "name": "resourceId",
+            "in": "path",
+            "description": "The ID of the resource used by this method.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "imageType",
             "in": "path",
             "description": "Selects which image in a resource for this method.",
@@ -362,13 +369,6 @@
               "ACHIEVEMENT_ICON",
               "LEADERBOARD_ICON"
             ]
-          },
-          {
-            "name": "resourceId",
-            "in": "path",
-            "description": "The ID of the resource used by this method.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [

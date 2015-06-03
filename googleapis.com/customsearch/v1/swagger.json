@@ -35,6 +35,13 @@
         },
         "parameters": [
           {
+            "name": "q",
+            "in": "query",
+            "description": "Query",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "c2coff",
             "in": "query",
             "description": "Turns off the translation between zh-CN and zh-TW.",
@@ -245,13 +252,6 @@
             "name": "orTerms",
             "in": "query",
             "description": "Provides additional search terms to check for in a document, where each document in the search results must contain at least one of the additional search terms",
-            "type": "string"
-          },
-          {
-            "name": "q",
-            "in": "query",
-            "description": "Query",
-            "required": true,
             "type": "string"
           },
           {

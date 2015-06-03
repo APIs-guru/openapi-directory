@@ -35,13 +35,6 @@
         },
         "parameters": [
           {
-            "name": "autoscaler",
-            "in": "path",
-            "description": "Name of the Autoscaler resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "project",
             "in": "path",
             "description": "Project ID of Autoscaler resource.",
@@ -52,6 +45,13 @@
             "name": "zone",
             "in": "path",
             "description": "Zone name of Autoscaler resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "autoscaler",
+            "in": "path",
+            "description": "Name of the Autoscaler resource.",
             "required": true,
             "type": "string"
           }
@@ -80,13 +80,6 @@
         },
         "parameters": [
           {
-            "name": "autoscaler",
-            "in": "path",
-            "description": "Name of the Autoscaler resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "project",
             "in": "path",
             "description": "Project ID of Autoscaler resource.",
@@ -97,6 +90,13 @@
             "name": "zone",
             "in": "path",
             "description": "Zone name of Autoscaler resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "autoscaler",
+            "in": "path",
+            "description": "Name of the Autoscaler resource.",
             "required": true,
             "type": "string"
           }
@@ -126,13 +126,6 @@
         },
         "parameters": [
           {
-            "name": "autoscaler",
-            "in": "path",
-            "description": "Name of the Autoscaler resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "project",
             "in": "path",
             "description": "Project ID of Autoscaler resource.",
@@ -143,6 +136,13 @@
             "name": "zone",
             "in": "path",
             "description": "Zone name of Autoscaler resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "autoscaler",
+            "in": "path",
+            "description": "Name of the Autoscaler resource.",
             "required": true,
             "type": "string"
           }
@@ -171,13 +171,6 @@
         },
         "parameters": [
           {
-            "name": "autoscaler",
-            "in": "path",
-            "description": "Name of the Autoscaler resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "project",
             "in": "path",
             "description": "Project ID of Autoscaler resource.",
@@ -188,6 +181,13 @@
             "name": "zone",
             "in": "path",
             "description": "Zone name of Autoscaler resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "autoscaler",
+            "in": "path",
+            "description": "Name of the Autoscaler resource.",
             "required": true,
             "type": "string"
           }
@@ -279,6 +279,20 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "description": "Project ID of Autoscaler resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "Zone name of Autoscaler resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "filter",
             "in": "query",
             "type": "string"
@@ -294,20 +308,6 @@
           {
             "name": "pageToken",
             "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "path",
-            "description": "Project ID of Autoscaler resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "zone",
-            "in": "path",
-            "description": "Zone name of Autoscaler resource.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -358,12 +358,6 @@
         },
         "parameters": [
           {
-            "name": "operation",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "project",
             "in": "path",
             "required": true,
@@ -371,6 +365,12 @@
           },
           {
             "name": "zone",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operation",
             "in": "path",
             "required": true,
             "type": "string"
@@ -400,12 +400,6 @@
         },
         "parameters": [
           {
-            "name": "operation",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "project",
             "in": "path",
             "required": true,
@@ -413,6 +407,12 @@
           },
           {
             "name": "zone",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operation",
             "in": "path",
             "required": true,
             "type": "string"
@@ -468,6 +468,18 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "filter",
             "in": "query",
             "type": "string"
@@ -483,18 +495,6 @@
           {
             "name": "pageToken",
             "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "zone",
-            "in": "path",
-            "required": true,
             "type": "string"
           }
         ],
@@ -548,6 +548,12 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "filter",
             "in": "query",
             "type": "string"
@@ -563,12 +569,6 @@
           {
             "name": "pageToken",
             "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "path",
-            "required": true,
             "type": "string"
           }
         ],

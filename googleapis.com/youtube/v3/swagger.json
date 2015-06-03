@@ -67,6 +67,13 @@
         },
         "parameters": [
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies a comma-separated list of one or more activity resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, and contentDetails.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a activity resource, the snippet property contains other properties that identify the type of activity, a display title for the activity, and so forth. If you set part=snippet, the API response will also contain all of those nested properties.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "channelId",
             "in": "query",
             "description": "The channelId parameter specifies a unique YouTube channel ID. The API will then return a list of that channel's activities.",
@@ -97,13 +104,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter specifies a comma-separated list of one or more activity resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, and contentDetails.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a activity resource, the snippet property contains other properties that identify the type of activity, a display title for the activity, and so forth. If you set part=snippet, the API response will also contain all of those nested properties.",
-            "required": true,
             "type": "string"
           },
           {
@@ -173,16 +173,16 @@
         },
         "parameters": [
           {
-            "name": "debugProjectIdOverride",
-            "in": "query",
-            "description": "The debugProjectIdOverride parameter should be used for mimicking a request for a certain project ID",
-            "type": "string"
-          },
-          {
             "name": "id",
             "in": "query",
             "description": "The id parameter identifies the caption track that is being deleted. The value is a caption track ID as identified by the id property in a caption resource.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "debugProjectIdOverride",
+            "in": "query",
+            "description": "The debugProjectIdOverride parameter should be used for mimicking a request for a certain project ID",
             "type": "string"
           },
           {
@@ -227,6 +227,13 @@
         ],
         "parameters": [
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies the caption resource parts that the API response will include. Set the parameter value to snippet.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "debugProjectIdOverride",
             "in": "query",
             "description": "The debugProjectIdOverride parameter should be used for mimicking a request for a certain project ID.",
@@ -242,13 +249,6 @@
             "name": "onBehalfOfContentOwner",
             "in": "query",
             "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter specifies the caption resource parts that the API response will include. Set the parameter value to snippet.",
-            "required": true,
             "type": "string"
           },
           {
@@ -283,6 +283,20 @@
         },
         "parameters": [
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies a comma-separated list of one or more caption resource parts that the API response will include. The part names that you can include in the parameter value are id and snippet.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "videoId",
+            "in": "query",
+            "description": "The videoId parameter specifies the YouTube video ID of the video for which the API should return caption tracks.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "debugProjectIdOverride",
             "in": "query",
             "description": "The debugProjectIdOverride parameter should be used for mimicking a request for a certain project ID.",
@@ -304,20 +318,6 @@
             "name": "onBehalfOfContentOwner",
             "in": "query",
             "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter specifies a comma-separated list of one or more caption resource parts that the API response will include. The part names that you can include in the parameter value are id and snippet.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "videoId",
-            "in": "query",
-            "description": "The videoId parameter specifies the YouTube video ID of the video for which the API should return caption tracks.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -350,6 +350,13 @@
         ],
         "parameters": [
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. Set the property value to snippet if you are updating the track's draft status. Otherwise, set the property value to id.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "debugProjectIdOverride",
             "in": "query",
             "description": "The debugProjectIdOverride parameter should be used for mimicking a request for a certain project ID.",
@@ -365,13 +372,6 @@
             "name": "onBehalfOfContentOwner",
             "in": "query",
             "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include. Set the property value to snippet if you are updating the track's draft status. Otherwise, set the property value to id.",
-            "required": true,
             "type": "string"
           },
           {
@@ -428,16 +428,16 @@
         },
         "parameters": [
           {
-            "name": "debugProjectIdOverride",
-            "in": "query",
-            "description": "The debugProjectIdOverride parameter should be used for mimicking a request for a certain project ID",
-            "type": "string"
-          },
-          {
             "name": "id",
             "in": "path",
             "description": "The id parameter identifies the caption track that is being retrieved. The value is a caption track ID as identified by the id property in a caption resource.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "debugProjectIdOverride",
+            "in": "query",
+            "description": "The debugProjectIdOverride parameter should be used for mimicking a request for a certain project ID",
             "type": "string"
           },
           {
@@ -620,6 +620,13 @@
         },
         "parameters": [
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe part names that you can include in the parameter value are snippet and contentDetails.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "onBehalfOfContentOwner",
             "in": "query",
             "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
@@ -629,13 +636,6 @@
             "name": "onBehalfOfContentOwnerChannel",
             "in": "query",
             "description": "This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.\n\nThis parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe part names that you can include in the parameter value are snippet and contentDetails.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -665,6 +665,13 @@
         },
         "parameters": [
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies a comma-separated list of one or more channelSection resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, and contentDetails.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a channelSection resource, the snippet property contains other properties, such as a display title for the channelSection. If you set part=snippet, the API response will also contain all of those nested properties.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "channelId",
             "in": "query",
             "description": "The channelId parameter specifies a YouTube channel ID. The API will only return that channel's channelSections.",
@@ -692,13 +699,6 @@
             "name": "onBehalfOfContentOwner",
             "in": "query",
             "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter specifies a comma-separated list of one or more channelSection resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, and contentDetails.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a channelSection resource, the snippet property contains other properties, such as a display title for the channelSection. If you set part=snippet, the API response will also contain all of those nested properties.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -729,16 +729,16 @@
         },
         "parameters": [
           {
-            "name": "onBehalfOfContentOwner",
-            "in": "query",
-            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
-            "type": "string"
-          },
-          {
             "name": "part",
             "in": "query",
             "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe part names that you can include in the parameter value are snippet and contentDetails.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onBehalfOfContentOwner",
+            "in": "query",
+            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
             "type": "string"
           }
         ],
@@ -792,6 +792,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies a comma-separated list of one or more channel resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, statistics, topicDetails, and invideoPromotion.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a channel resource, the contentDetails property contains other properties, such as the uploads properties. As such, if you set part=contentDetails, the API response will also contain all of those nested properties.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "categoryId",
             "in": "query",
@@ -854,13 +861,6 @@
             "in": "query",
             "description": "The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.",
             "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter specifies a comma-separated list of one or more channel resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, statistics, topicDetails, and invideoPromotion.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a channel resource, the contentDetails property contains other properties, such as the uploads properties. As such, if you set part=contentDetails, the API response will also contain all of those nested properties.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -891,16 +891,16 @@
         },
         "parameters": [
           {
-            "name": "onBehalfOfContentOwner",
-            "in": "query",
-            "description": "The onBehalfOfContentOwner parameter indicates that the authenticated user is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with needs to be linked to the specified YouTube content owner.",
-            "type": "string"
-          },
-          {
             "name": "part",
             "in": "query",
             "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe part names that you can include in the parameter value are id and invideoPromotion.\n\nNote that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onBehalfOfContentOwner",
+            "in": "query",
+            "description": "The onBehalfOfContentOwner parameter indicates that the authenticated user is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with needs to be linked to the specified YouTube content owner.",
             "type": "string"
           }
         ],
@@ -993,6 +993,13 @@
         },
         "parameters": [
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies the commentThread resource parts that the API response will include. Supported values are id, snippet and replies.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "allThreadsRelatedToChannelId",
             "in": "query",
             "description": "The allThreadsRelatedToChannelId parameter instructs the API to return the comment threads of all videos of the channel and the channel comments as well.",
@@ -1045,13 +1052,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identifies the next page of the result that can be retrieved.\n\nNote: This parameter is not supported for use in conjunction with the id parameter.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter specifies the commentThread resource parts that the API response will include. Supported values are id, snippet and replies.",
-            "required": true,
             "type": "string"
           },
           {
@@ -1217,6 +1217,13 @@
         },
         "parameters": [
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies the comment resource parts that the API response will include. Supported values are id and snippet.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "id",
             "in": "query",
             "description": "The id parameter specifies a comma-separated list of comment IDs for the resources that should be retrieved.",
@@ -1241,13 +1248,6 @@
             "name": "parentId",
             "in": "query",
             "description": "The parentId parameter specifies the ID of the comment for which replies should be retrieved.\n\nNote: Currently YouTube features only one level of replies (ie replies to top level comments). However replies to replies may be supported in the future.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter specifies the comment resource parts that the API response will include. Supported values are id and snippet.",
-            "required": true,
             "type": "string"
           },
           {
@@ -1392,13 +1392,6 @@
         },
         "parameters": [
           {
-            "name": "banAuthor",
-            "in": "query",
-            "description": "The banAuthor paramter, if set to true, adds the author of the comment to the ban list. This means all future comments of the author will autmomatically be rejected.\n\nNote: This parameter is only valid in combination with moderationStatus 'rejected'.",
-            "default": "false",
-            "type": "boolean"
-          },
-          {
             "name": "id",
             "in": "query",
             "description": "The id parameter specifies a comma-separated list of IDs of comments whose moderation status should be updated.",
@@ -1416,6 +1409,13 @@
               "published",
               "rejected"
             ]
+          },
+          {
+            "name": "banAuthor",
+            "in": "query",
+            "description": "The banAuthor paramter, if set to true, adds the author of the comment to the ban list. This means all future comments of the author will autmomatically be rejected.\n\nNote: This parameter is only valid in combination with moderationStatus 'rejected'.",
+            "default": "false",
+            "type": "boolean"
           }
         ],
         "security": [
@@ -1467,6 +1467,13 @@
         },
         "parameters": [
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies a comma-separated list of one or more guideCategory resource properties that the API response will include. The part names that you can include in the parameter value are id and snippet.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a guideCategory resource, the snippet property contains other properties, such as the category's title. If you set part=snippet, the API response will also contain all of those nested properties.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "hl",
             "in": "query",
             "description": "The hl parameter specifies the language that will be used for text values in the API response.",
@@ -1477,13 +1484,6 @@
             "name": "id",
             "in": "query",
             "description": "The id parameter specifies a comma-separated list of the YouTube channel category ID(s) for the resource(s) that are being retrieved. In a guideCategory resource, the id property specifies the YouTube channel category ID.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter specifies a comma-separated list of one or more guideCategory resource properties that the API response will include. The part names that you can include in the parameter value are id and snippet.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a guideCategory resource, the snippet property contains other properties, such as the category's title. If you set part=snippet, the API response will also contain all of those nested properties.",
-            "required": true,
             "type": "string"
           },
           {
@@ -1545,17 +1545,17 @@
         },
         "parameters": [
           {
-            "name": "hl",
-            "in": "query",
-            "description": "The hl parameter specifies the language that should be used for text values in the API response.",
-            "default": "en_US",
-            "type": "string"
-          },
-          {
             "name": "part",
             "in": "query",
             "description": "The part parameter specifies a comma-separated list of one or more i18nLanguage resource properties that the API response will include. The part names that you can include in the parameter value are id and snippet.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hl",
+            "in": "query",
+            "description": "The hl parameter specifies the language that should be used for text values in the API response.",
+            "default": "en_US",
             "type": "string"
           }
         ],
@@ -1611,17 +1611,17 @@
         },
         "parameters": [
           {
-            "name": "hl",
-            "in": "query",
-            "description": "The hl parameter specifies the language that should be used for text values in the API response.",
-            "default": "en_US",
-            "type": "string"
-          },
-          {
             "name": "part",
             "in": "query",
             "description": "The part parameter specifies a comma-separated list of one or more i18nRegion resource properties that the API response will include. The part names that you can include in the parameter value are id and snippet.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hl",
+            "in": "query",
+            "description": "The hl parameter specifies the language that should be used for text values in the API response.",
+            "default": "en_US",
             "type": "string"
           }
         ],
@@ -1684,6 +1684,13 @@
             "type": "string"
           },
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "onBehalfOfContentOwner",
             "in": "query",
             "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
@@ -1693,13 +1700,6 @@
             "name": "onBehalfOfContentOwnerChannel",
             "in": "query",
             "description": "This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.\n\nThis parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.",
-            "required": true,
             "type": "string"
           },
           {
@@ -1759,17 +1759,24 @@
         },
         "parameters": [
           {
-            "name": "displaySlate",
-            "in": "query",
-            "description": "The displaySlate parameter specifies whether the slate is being enabled or disabled.",
-            "type": "boolean"
-          },
-          {
             "name": "id",
             "in": "query",
             "description": "The id parameter specifies the YouTube live broadcast ID that uniquely identifies the broadcast in which the slate is being updated.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "displaySlate",
+            "in": "query",
+            "description": "The displaySlate parameter specifies whether the slate is being enabled or disabled.",
+            "type": "boolean"
           },
           {
             "name": "offsetTimeMs",
@@ -1787,13 +1794,6 @@
             "name": "onBehalfOfContentOwnerChannel",
             "in": "query",
             "description": "This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.\n\nThis parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.",
-            "required": true,
             "type": "string"
           },
           {
@@ -1894,6 +1894,13 @@
         },
         "parameters": [
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe part properties that you can include in the parameter value are id, snippet, contentDetails, and status.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "onBehalfOfContentOwner",
             "in": "query",
             "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
@@ -1903,13 +1910,6 @@
             "name": "onBehalfOfContentOwnerChannel",
             "in": "query",
             "description": "This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.\n\nThis parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe part properties that you can include in the parameter value are id, snippet, contentDetails, and status.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -1937,6 +1937,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "broadcastStatus",
             "in": "query",
@@ -1987,13 +1994,6 @@
             "in": "query",
             "description": "The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.",
             "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -2022,6 +2022,13 @@
         },
         "parameters": [
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe part properties that you can include in the parameter value are id, snippet, contentDetails, and status.\n\nNote that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. For example, a broadcast's privacy status is defined in the status part. As such, if your request is updating a private or unlisted broadcast, and the request's part parameter value includes the status part, the broadcast's privacy setting will be updated to whatever value the request body specifies. If the request body does not specify a value, the existing privacy setting will be removed and the broadcast will revert to the default privacy setting.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "onBehalfOfContentOwner",
             "in": "query",
             "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
@@ -2031,13 +2038,6 @@
             "name": "onBehalfOfContentOwnerChannel",
             "in": "query",
             "description": "This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.\n\nThis parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe part properties that you can include in the parameter value are id, snippet, contentDetails, and status.\n\nNote that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. For example, a broadcast's privacy status is defined in the status part. As such, if your request is updating a private or unlisted broadcast, and the request's part parameter value includes the status part, the broadcast's privacy setting will be updated to whatever value the request body specifies. If the request body does not specify a value, the existing privacy setting will be removed and the broadcast will revert to the default privacy setting.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -2110,6 +2110,13 @@
             "type": "string"
           },
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "onBehalfOfContentOwner",
             "in": "query",
             "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
@@ -2119,13 +2126,6 @@
             "name": "onBehalfOfContentOwnerChannel",
             "in": "query",
             "description": "This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.\n\nThis parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -2220,6 +2220,13 @@
         },
         "parameters": [
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe part properties that you can include in the parameter value are id, snippet, cdn, and status.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "onBehalfOfContentOwner",
             "in": "query",
             "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
@@ -2229,13 +2236,6 @@
             "name": "onBehalfOfContentOwnerChannel",
             "in": "query",
             "description": "This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.\n\nThis parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe part properties that you can include in the parameter value are id, snippet, cdn, and status.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -2263,6 +2263,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies a comma-separated list of one or more liveStream resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, cdn, and status.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "id",
             "in": "query",
@@ -2301,13 +2308,6 @@
             "in": "query",
             "description": "The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.",
             "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter specifies a comma-separated list of one or more liveStream resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, cdn, and status.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -2336,6 +2336,13 @@
         },
         "parameters": [
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe part properties that you can include in the parameter value are id, snippet, cdn, and status.\n\nNote that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. If the request body does not specify a value for a mutable property, the existing value for that property will be removed.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "onBehalfOfContentOwner",
             "in": "query",
             "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
@@ -2345,13 +2352,6 @@
             "name": "onBehalfOfContentOwnerChannel",
             "in": "query",
             "description": "This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.\n\nThis parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe part properties that you can include in the parameter value are id, snippet, cdn, and status.\n\nNote that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. If the request body does not specify a value for a mutable property, the existing value for that property will be removed.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -2435,16 +2435,16 @@
         },
         "parameters": [
           {
-            "name": "onBehalfOfContentOwner",
-            "in": "query",
-            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
-            "type": "string"
-          },
-          {
             "name": "part",
             "in": "query",
             "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe part names that you can include in the parameter value are snippet, contentDetails, and status.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onBehalfOfContentOwner",
+            "in": "query",
+            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
             "type": "string"
           }
         ],
@@ -2474,6 +2474,13 @@
         },
         "parameters": [
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies a comma-separated list of one or more playlistItem resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a playlistItem resource, the snippet property contains numerous fields, including the title, description, position, and resourceId properties. As such, if you set part=snippet, the API response will contain all of those properties.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "id",
             "in": "query",
             "description": "The id parameter specifies a comma-separated list of one or more unique playlist item IDs.",
@@ -2498,13 +2505,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter specifies a comma-separated list of one or more playlistItem resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a playlistItem resource, the snippet property contains numerous fields, including the title, description, position, and resourceId properties. As such, if you set part=snippet, the API response will contain all of those properties.",
-            "required": true,
             "type": "string"
           },
           {
@@ -2641,6 +2641,13 @@
         },
         "parameters": [
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe part names that you can include in the parameter value are snippet and status.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "onBehalfOfContentOwner",
             "in": "query",
             "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
@@ -2650,13 +2657,6 @@
             "name": "onBehalfOfContentOwnerChannel",
             "in": "query",
             "description": "This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.\n\nThis parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe part names that you can include in the parameter value are snippet and status.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -2685,6 +2685,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies a comma-separated list of one or more playlist resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, status, and contentDetails.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a playlist resource, the snippet property contains properties like author, title, description, tags, and timeCreated. As such, if you set part=snippet, the API response will contain all of those properties.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "channelId",
             "in": "query",
@@ -2735,13 +2742,6 @@
             "in": "query",
             "description": "The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.",
             "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter specifies a comma-separated list of one or more playlist resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, status, and contentDetails.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a playlist resource, the snippet property contains properties like author, title, description, tags, and timeCreated. As such, if you set part=snippet, the API response will contain all of those properties.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -2771,16 +2771,16 @@
         },
         "parameters": [
           {
-            "name": "onBehalfOfContentOwner",
-            "in": "query",
-            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
-            "type": "string"
-          },
-          {
             "name": "part",
             "in": "query",
             "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe part names that you can include in the parameter value are snippet and status.\n\nNote that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. For example, a playlist's privacy setting is contained in the status part. As such, if your request is updating a private playlist, and the request's part parameter value includes the status part, the playlist's privacy setting will be updated to whatever value the request body specifies. If the request body does not specify a value, the existing privacy setting will be removed and the playlist will revert to the default privacy setting.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onBehalfOfContentOwner",
+            "in": "query",
+            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
             "type": "string"
           }
         ],
@@ -2834,6 +2834,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies a comma-separated list of one or more search resource properties that the API response will include. The part names that you can include in the parameter value are id and snippet.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a search result, the snippet property contains other properties that identify the result's title, description, and so forth. If you set part=snippet, the API response will also contain all of those nested properties.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "channelId",
             "in": "query",
@@ -2925,13 +2932,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter specifies a comma-separated list of one or more search resource properties that the API response will include. The part names that you can include in the parameter value are id and snippet.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a search result, the snippet property contains other properties that identify the result's title, description, and so forth. If you set part=snippet, the API response will also contain all of those nested properties.",
-            "required": true,
             "type": "string"
           },
           {
@@ -3203,6 +3203,13 @@
         },
         "parameters": [
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies a comma-separated list of one or more subscription resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, and contentDetails.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a subscription resource, the snippet property contains other properties, such as a display title for the subscription. If you set part=snippet, the API response will also contain all of those nested properties.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "channelId",
             "in": "query",
             "description": "The channelId parameter specifies a YouTube channel ID. The API will only return that channel's subscriptions.",
@@ -3270,13 +3277,6 @@
             "in": "query",
             "description": "The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.",
             "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter specifies a comma-separated list of one or more subscription resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, and contentDetails.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a subscription resource, the snippet property contains other properties, such as a display title for the subscription. If you set part=snippet, the API response will also contain all of those nested properties.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -3336,16 +3336,16 @@
         ],
         "parameters": [
           {
-            "name": "onBehalfOfContentOwner",
-            "in": "query",
-            "description": "The onBehalfOfContentOwner parameter indicates that the authenticated user is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with needs to be linked to the specified YouTube content owner.",
-            "type": "string"
-          },
-          {
             "name": "videoId",
             "in": "query",
             "description": "The videoId parameter specifies a YouTube video ID for which the custom video thumbnail is being provided.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onBehalfOfContentOwner",
+            "in": "query",
+            "description": "The onBehalfOfContentOwner parameter indicates that the authenticated user is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with needs to be linked to the specified YouTube content owner.",
             "type": "string"
           }
         ],
@@ -3401,17 +3401,17 @@
         },
         "parameters": [
           {
-            "name": "hl",
-            "in": "query",
-            "description": "The hl parameter specifies the language that should be used for text values in the API response.",
-            "default": "en_US",
-            "type": "string"
-          },
-          {
             "name": "part",
             "in": "query",
             "description": "The part parameter specifies the videoCategory resource parts that the API response will include. Supported values are id and snippet.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hl",
+            "in": "query",
+            "description": "The hl parameter specifies the language that should be used for text values in the API response.",
+            "default": "en_US",
             "type": "string"
           }
         ],
@@ -3466,6 +3466,13 @@
         },
         "parameters": [
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies the videoCategory resource parts that the API response will include. Supported values are id and snippet.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "hl",
             "in": "query",
             "description": "The hl parameter specifies the language that should be used for text values in the API response.",
@@ -3476,13 +3483,6 @@
             "name": "id",
             "in": "query",
             "description": "The id parameter specifies a comma-separated list of video category IDs for the resources that you are retrieving.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter specifies the videoCategory resource parts that the API response will include. Supported values are id and snippet.",
-            "required": true,
             "type": "string"
           },
           {
@@ -3669,6 +3669,13 @@
         ],
         "parameters": [
           {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe part names that you can include in the parameter value are snippet, contentDetails, fileDetails, liveStreamingDetails, localizations, player, processingDetails, recordingDetails, statistics, status, suggestions, and topicDetails. However, not all of those parts contain properties that can be set when setting or updating a video's metadata. For example, the statistics object encapsulates statistics that YouTube calculates for a video and does not contain values that you can set or modify. If the parameter value specifies a part that does not contain mutable values, that part will still be included in the API response.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "autoLevels",
             "in": "query",
             "description": "The autoLevels parameter indicates whether YouTube should automatically enhance the video's lighting and color.",
@@ -3691,13 +3698,6 @@
             "name": "onBehalfOfContentOwnerChannel",
             "in": "query",
             "description": "This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.\n\nThis parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.",
-            "type": "string"
-          },
-          {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe part names that you can include in the parameter value are snippet, contentDetails, fileDetails, liveStreamingDetails, localizations, player, processingDetails, recordingDetails, statistics, status, suggestions, and topicDetails. However, not all of those parts contain properties that can be set when setting or updating a video's metadata. For example, the statistics object encapsulates statistics that YouTube calculates for a video and does not contain values that you can set or modify. If the parameter value specifies a part that does not contain mutable values, that part will still be included in the API response.",
-            "required": true,
             "type": "string"
           },
           {
@@ -3733,6 +3733,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies a comma-separated list of one or more video resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, fileDetails, liveStreamingDetails, localizations, player, processingDetails, recordingDetails, statistics, status, suggestions, and topicDetails.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a video resource, the snippet property contains the channelId, title, description, tags, and categoryId properties. As such, if you set part=snippet, the API response will contain all of those properties.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "chart",
             "in": "query",
@@ -3798,13 +3805,6 @@
             "type": "string"
           },
           {
-            "name": "part",
-            "in": "query",
-            "description": "The part parameter specifies a comma-separated list of one or more video resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, fileDetails, liveStreamingDetails, localizations, player, processingDetails, recordingDetails, statistics, status, suggestions, and topicDetails.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a video resource, the snippet property contains the channelId, title, description, tags, and categoryId properties. As such, if you set part=snippet, the API response will contain all of those properties.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "regionCode",
             "in": "query",
             "description": "The regionCode parameter instructs the API to select a video chart available in the specified region. This parameter can only be used in conjunction with the chart parameter. The parameter value is an ISO 3166-1 alpha-2 country code.",
@@ -3845,16 +3845,16 @@
         },
         "parameters": [
           {
-            "name": "onBehalfOfContentOwner",
-            "in": "query",
-            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
-            "type": "string"
-          },
-          {
             "name": "part",
             "in": "query",
             "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe part names that you can include in the parameter value are snippet, contentDetails, fileDetails, liveStreamingDetails, localizations, player, processingDetails, recordingDetails, statistics, status, suggestions, and topicDetails.\n\nNote that this method will override the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies. For example, a video's privacy setting is contained in the status part. As such, if your request is updating a private video, and the request's part parameter value includes the status part, the video's privacy setting will be updated to whatever value the request body specifies. If the request body does not specify a value, the existing privacy setting will be removed and the video will revert to the default privacy setting.\n\nIn addition, not all of those parts contain properties that can be set when setting or updating a video's metadata. For example, the statistics object encapsulates statistics that YouTube calculates for a video and does not contain values that you can set or modify. If the parameter value specifies a part that does not contain mutable values, that part will still be included in the API response.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onBehalfOfContentOwner",
+            "in": "query",
+            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
             "type": "string"
           }
         ],
@@ -3977,12 +3977,6 @@
             "type": "string"
           },
           {
-            "name": "onBehalfOfContentOwner",
-            "in": "query",
-            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
-            "type": "string"
-          },
-          {
             "name": "rating",
             "in": "query",
             "description": "Specifies the rating to record.",
@@ -3993,6 +3987,12 @@
               "like",
               "none"
             ]
+          },
+          {
+            "name": "onBehalfOfContentOwner",
+            "in": "query",
+            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
+            "type": "string"
           }
         ],
         "security": [

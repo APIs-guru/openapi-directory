@@ -35,16 +35,16 @@
         },
         "parameters": [
           {
-            "name": "managedZone",
+            "name": "project",
             "in": "path",
-            "description": "Identifies the managed zone addressed by this request. Can be the managed zone name or id.",
+            "description": "Identifies the project addressed by this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "project",
+            "name": "managedZone",
             "in": "path",
-            "description": "Identifies the project addressed by this request.",
+            "description": "Identifies the managed zone addressed by this request. Can be the managed zone name or id.",
             "required": true,
             "type": "string"
           }
@@ -74,6 +74,13 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "description": "Identifies the project addressed by this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "managedZone",
             "in": "path",
             "description": "Identifies the managed zone addressed by this request. Can be the managed zone name or id.",
@@ -90,13 +97,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.",
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "path",
-            "description": "Identifies the project addressed by this request.",
-            "required": true,
             "type": "string"
           },
           {
@@ -167,9 +167,9 @@
         },
         "parameters": [
           {
-            "name": "changeId",
+            "name": "project",
             "in": "path",
-            "description": "The identifier of the requested change, from a previous ResourceRecordSetsChangeResponse.",
+            "description": "Identifies the project addressed by this request.",
             "required": true,
             "type": "string"
           },
@@ -181,9 +181,9 @@
             "type": "string"
           },
           {
-            "name": "project",
+            "name": "changeId",
             "in": "path",
-            "description": "Identifies the project addressed by this request.",
+            "description": "The identifier of the requested change, from a previous ResourceRecordSetsChangeResponse.",
             "required": true,
             "type": "string"
           }
@@ -271,6 +271,13 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "description": "Identifies the project addressed by this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.",
@@ -280,13 +287,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.",
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "path",
-            "description": "Identifies the project addressed by this request.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -338,16 +338,16 @@
         },
         "parameters": [
           {
-            "name": "managedZone",
+            "name": "project",
             "in": "path",
-            "description": "Identifies the managed zone addressed by this request. Can be the managed zone name or id.",
+            "description": "Identifies the project addressed by this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "project",
+            "name": "managedZone",
             "in": "path",
-            "description": "Identifies the project addressed by this request.",
+            "description": "Identifies the managed zone addressed by this request. Can be the managed zone name or id.",
             "required": true,
             "type": "string"
           }
@@ -377,16 +377,16 @@
         },
         "parameters": [
           {
-            "name": "managedZone",
+            "name": "project",
             "in": "path",
-            "description": "Identifies the managed zone addressed by this request. Can be the managed zone name or id.",
+            "description": "Identifies the project addressed by this request.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "project",
+            "name": "managedZone",
             "in": "path",
-            "description": "Identifies the project addressed by this request.",
+            "description": "Identifies the managed zone addressed by this request. Can be the managed zone name or id.",
             "required": true,
             "type": "string"
           }
@@ -500,6 +500,13 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "description": "Identifies the project addressed by this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "managedZone",
             "in": "path",
             "description": "Identifies the managed zone addressed by this request. Can be the managed zone name or id.",
@@ -522,13 +529,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Optional. A tag returned by a previous list request that was truncated. Use this parameter to continue a previous list request.",
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "path",
-            "description": "Identifies the project addressed by this request.",
-            "required": true,
             "type": "string"
           },
           {

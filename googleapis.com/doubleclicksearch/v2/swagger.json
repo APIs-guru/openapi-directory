@@ -35,15 +35,10 @@
         },
         "parameters": [
           {
-            "name": "adGroupId",
-            "in": "query",
-            "description": "Numeric ID of the ad group.",
-            "type": "string"
-          },
-          {
-            "name": "adId",
-            "in": "query",
-            "description": "Numeric ID of the ad.",
+            "name": "agencyId",
+            "in": "path",
+            "description": "Numeric ID of the agency.",
+            "required": true,
             "type": "string"
           },
           {
@@ -54,22 +49,10 @@
             "type": "string"
           },
           {
-            "name": "agencyId",
+            "name": "engineAccountId",
             "in": "path",
-            "description": "Numeric ID of the agency.",
+            "description": "Numeric ID of the engine account.",
             "required": true,
-            "type": "string"
-          },
-          {
-            "name": "campaignId",
-            "in": "query",
-            "description": "Numeric ID of the campaign.",
-            "type": "string"
-          },
-          {
-            "name": "criterionId",
-            "in": "query",
-            "description": "Numeric ID of the criterion.",
             "type": "string"
           },
           {
@@ -80,13 +63,6 @@
             "type": "integer",
             "minimum": 20091101,
             "maximum": 99991231
-          },
-          {
-            "name": "engineAccountId",
-            "in": "path",
-            "description": "Numeric ID of the engine account.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "rowCount",
@@ -112,6 +88,30 @@
             "description": "The 0-based starting index for retrieving conversions results.",
             "required": true,
             "type": "integer"
+          },
+          {
+            "name": "adGroupId",
+            "in": "query",
+            "description": "Numeric ID of the ad group.",
+            "type": "string"
+          },
+          {
+            "name": "adId",
+            "in": "query",
+            "description": "Numeric ID of the ad.",
+            "type": "string"
+          },
+          {
+            "name": "campaignId",
+            "in": "query",
+            "description": "Numeric ID of the campaign.",
+            "type": "string"
+          },
+          {
+            "name": "criterionId",
+            "in": "query",
+            "description": "Numeric ID of the criterion.",
+            "type": "string"
           }
         ],
         "security": [
@@ -458,19 +458,19 @@
         },
         "parameters": [
           {
+            "name": "reportId",
+            "in": "path",
+            "description": "ID of the report.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "reportFragment",
             "in": "path",
             "description": "The index of the report fragment to download.",
             "required": true,
             "type": "integer",
             "minimum": 0
-          },
-          {
-            "name": "reportId",
-            "in": "path",
-            "description": "ID of the report.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -569,16 +569,16 @@
         },
         "parameters": [
           {
-            "name": "advertiserId",
+            "name": "agencyId",
             "in": "path",
-            "description": "DS ID of the advertiser.",
+            "description": "DS ID of the agency.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "agencyId",
+            "name": "advertiserId",
             "in": "path",
-            "description": "DS ID of the agency.",
+            "description": "DS ID of the advertiser.",
             "required": true,
             "type": "string"
           }

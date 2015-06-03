@@ -136,6 +136,24 @@
         },
         "parameters": [
           {
+            "name": "q",
+            "in": "query",
+            "description": "The text to translate",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "target",
+            "in": "query",
+            "description": "The target language into which the text should be translated",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "cid",
             "in": "query",
             "description": "The customization id for translate",
@@ -156,27 +174,9 @@
             ]
           },
           {
-            "name": "q",
-            "in": "query",
-            "description": "The text to translate",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
             "name": "source",
             "in": "query",
             "description": "The source language of the text",
-            "type": "string"
-          },
-          {
-            "name": "target",
-            "in": "query",
-            "description": "The target language into which the text should be translated",
-            "required": true,
             "type": "string"
           }
         ],

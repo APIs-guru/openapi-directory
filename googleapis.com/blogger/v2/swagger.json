@@ -98,16 +98,16 @@
             "type": "string"
           },
           {
-            "name": "commentId",
+            "name": "postId",
             "in": "path",
-            "description": "The ID of the comment to get.",
+            "description": "ID of the post to fetch posts from.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "postId",
+            "name": "commentId",
             "in": "path",
-            "description": "ID of the post to fetch posts from.",
+            "description": "The ID of the comment to get.",
             "required": true,
             "type": "string"
           }
@@ -168,6 +168,13 @@
             "type": "string"
           },
           {
+            "name": "postId",
+            "in": "path",
+            "description": "ID of the post to fetch posts from.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "fetchBodies",
             "in": "query",
             "description": "Whether the body content of the comments is included.",
@@ -183,13 +190,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Continuation token if request is paged.",
-            "type": "string"
-          },
-          {
-            "name": "postId",
-            "in": "path",
-            "description": "ID of the post to fetch posts from.",
-            "required": true,
             "type": "string"
           },
           {

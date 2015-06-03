@@ -465,6 +465,13 @@
             "type": "string"
           },
           {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Id of the subscription, which is unique for a customer",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "deletionType",
             "in": "query",
             "description": "Whether the subscription is to be fully cancelled or downgraded",
@@ -476,13 +483,6 @@
               "suspend",
               "transfer_to_direct"
             ]
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Id of the subscription, which is unique for a customer",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -573,16 +573,16 @@
         },
         "parameters": [
           {
-            "name": "customerAuthToken",
-            "in": "query",
-            "description": "An auth token needed for transferring a subscription. Can be generated at https://www.google.com/a/cpanel/customer-domain/TransferToken. Optional.",
-            "type": "string"
-          },
-          {
             "name": "customerId",
             "in": "path",
             "description": "Id of the Customer",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "customerAuthToken",
+            "in": "query",
+            "description": "An auth token needed for transferring a subscription. Can be generated at https://www.google.com/a/cpanel/customer-domain/TransferToken. Optional.",
             "type": "string"
           }
         ],

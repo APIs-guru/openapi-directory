@@ -35,16 +35,16 @@
         },
         "parameters": [
           {
-            "name": "hostedModelName",
+            "name": "project",
             "in": "path",
-            "description": "The name of a hosted model.",
+            "description": "The project associated with the model.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "project",
+            "name": "hostedModelName",
             "in": "path",
-            "description": "The project associated with the model.",
+            "description": "The name of a hosted model.",
             "required": true,
             "type": "string"
           }
@@ -98,16 +98,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "project",
             "in": "path",
-            "description": "The unique name for the predictive model.",
+            "description": "The project associated with the model.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "project",
+            "name": "id",
             "in": "path",
-            "description": "The project associated with the model.",
+            "description": "The unique name for the predictive model.",
             "required": true,
             "type": "string"
           }
@@ -158,16 +158,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "project",
             "in": "path",
-            "description": "The unique name for the predictive model.",
+            "description": "The project associated with the model.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "project",
+            "name": "id",
             "in": "path",
-            "description": "The project associated with the model.",
+            "description": "The unique name for the predictive model.",
             "required": true,
             "type": "string"
           }
@@ -196,16 +196,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "project",
             "in": "path",
-            "description": "The unique name for the predictive model.",
+            "description": "The project associated with the model.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "project",
+            "name": "id",
             "in": "path",
-            "description": "The project associated with the model.",
+            "description": "The unique name for the predictive model.",
             "required": true,
             "type": "string"
           }
@@ -234,16 +234,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "project",
             "in": "path",
-            "description": "The unique name for the predictive model.",
+            "description": "The project associated with the model.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "project",
+            "name": "id",
             "in": "path",
-            "description": "The project associated with the model.",
+            "description": "The unique name for the predictive model.",
             "required": true,
             "type": "string"
           }
@@ -356,6 +356,13 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "description": "The project associated with the model.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of results to return.",
@@ -366,13 +373,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Pagination token.",
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "path",
-            "description": "The project associated with the model.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -425,16 +425,16 @@
         },
         "parameters": [
           {
-            "name": "id",
+            "name": "project",
             "in": "path",
-            "description": "The unique name for the predictive model.",
+            "description": "The project associated with the model.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "project",
+            "name": "id",
             "in": "path",
-            "description": "The project associated with the model.",
+            "description": "The unique name for the predictive model.",
             "required": true,
             "type": "string"
           }
@@ -870,8 +870,9 @@
           }
         },
         "outputValue": {
-          "type": "string",
-          "description": "The estimated regression value (Regression models only)."
+          "type": "number",
+          "description": "The estimated regression value (Regression models only).",
+          "format": "double"
         },
         "selfLink": {
           "type": "string",

@@ -35,9 +35,17 @@
         },
         "parameters": [
           {
-            "name": "dimensions",
+            "name": "ids",
             "in": "query",
-            "description": "A comma-separated list of Analytics dimensions. E.g., 'ga:browser,ga:city'.",
+            "description": "Unique table ID for retrieving Analytics data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "start-date",
+            "in": "query",
+            "description": "Start date for fetching Analytics data. Requests can specify a start date formatted as YYYY-MM-DD, or as a relative date (e.g., today, yesterday, or 7daysAgo). The default value is 7daysAgo.",
+            "required": true,
             "type": "string"
           },
           {
@@ -48,16 +56,22 @@
             "type": "string"
           },
           {
-            "name": "filters",
+            "name": "metrics",
             "in": "query",
-            "description": "A comma-separated list of dimension or metric filters to be applied to Analytics data.",
+            "description": "A comma-separated list of Analytics metrics. E.g., 'ga:sessions,ga:pageviews'. At least one metric must be specified.",
+            "required": true,
             "type": "string"
           },
           {
-            "name": "ids",
+            "name": "dimensions",
             "in": "query",
-            "description": "Unique table ID for retrieving Analytics data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.",
-            "required": true,
+            "description": "A comma-separated list of Analytics dimensions. E.g., 'ga:browser,ga:city'.",
+            "type": "string"
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "description": "A comma-separated list of dimension or metric filters to be applied to Analytics data.",
             "type": "string"
           },
           {
@@ -65,13 +79,6 @@
             "in": "query",
             "description": "The maximum number of entries to include in this feed.",
             "type": "integer"
-          },
-          {
-            "name": "metrics",
-            "in": "query",
-            "description": "A comma-separated list of Analytics metrics. E.g., 'ga:sessions,ga:pageviews'. At least one metric must be specified.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "output",
@@ -104,13 +111,6 @@
             "name": "sort",
             "in": "query",
             "description": "A comma-separated list of dimensions or metrics that determine the sort order for Analytics data.",
-            "type": "string"
-          },
-          {
-            "name": "start-date",
-            "in": "query",
-            "description": "Start date for fetching Analytics data. Requests can specify a start date formatted as YYYY-MM-DD, or as a relative date (e.g., today, yesterday, or 7daysAgo). The default value is 7daysAgo.",
-            "required": true,
             "type": "string"
           },
           {
@@ -171,9 +171,17 @@
         },
         "parameters": [
           {
-            "name": "dimensions",
+            "name": "ids",
             "in": "query",
-            "description": "A comma-separated list of Multi-Channel Funnels dimensions. E.g., 'mcf:source,mcf:medium'.",
+            "description": "Unique table ID for retrieving Analytics data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "start-date",
+            "in": "query",
+            "description": "Start date for fetching Analytics data. Requests can specify a start date formatted as YYYY-MM-DD, or as a relative date (e.g., today, yesterday, or 7daysAgo). The default value is 7daysAgo.",
+            "required": true,
             "type": "string"
           },
           {
@@ -184,16 +192,22 @@
             "type": "string"
           },
           {
-            "name": "filters",
+            "name": "metrics",
             "in": "query",
-            "description": "A comma-separated list of dimension or metric filters to be applied to the Analytics data.",
+            "description": "A comma-separated list of Multi-Channel Funnels metrics. E.g., 'mcf:totalConversions,mcf:totalConversionValue'. At least one metric must be specified.",
+            "required": true,
             "type": "string"
           },
           {
-            "name": "ids",
+            "name": "dimensions",
             "in": "query",
-            "description": "Unique table ID for retrieving Analytics data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.",
-            "required": true,
+            "description": "A comma-separated list of Multi-Channel Funnels dimensions. E.g., 'mcf:source,mcf:medium'.",
+            "type": "string"
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "description": "A comma-separated list of dimension or metric filters to be applied to the Analytics data.",
             "type": "string"
           },
           {
@@ -201,13 +215,6 @@
             "in": "query",
             "description": "The maximum number of entries to include in this feed.",
             "type": "integer"
-          },
-          {
-            "name": "metrics",
-            "in": "query",
-            "description": "A comma-separated list of Multi-Channel Funnels metrics. E.g., 'mcf:totalConversions,mcf:totalConversionValue'. At least one metric must be specified.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "samplingLevel",
@@ -224,13 +231,6 @@
             "name": "sort",
             "in": "query",
             "description": "A comma-separated list of dimensions or metrics that determine the sort order for the Analytics data.",
-            "type": "string"
-          },
-          {
-            "name": "start-date",
-            "in": "query",
-            "description": "Start date for fetching Analytics data. Requests can specify a start date formatted as YYYY-MM-DD, or as a relative date (e.g., today, yesterday, or 7daysAgo). The default value is 7daysAgo.",
-            "required": true,
             "type": "string"
           },
           {
@@ -291,6 +291,20 @@
         },
         "parameters": [
           {
+            "name": "ids",
+            "in": "query",
+            "description": "Unique table ID for retrieving real time data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "metrics",
+            "in": "query",
+            "description": "A comma-separated list of real time metrics. E.g., 'rt:activeUsers'. At least one metric must be specified.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "dimensions",
             "in": "query",
             "description": "A comma-separated list of real time dimensions. E.g., 'rt:medium,rt:city'.",
@@ -303,24 +317,10 @@
             "type": "string"
           },
           {
-            "name": "ids",
-            "in": "query",
-            "description": "Unique table ID for retrieving real time data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "max-results",
             "in": "query",
             "description": "The maximum number of entries to include in this feed.",
             "type": "integer"
-          },
-          {
-            "name": "metrics",
-            "in": "query",
-            "description": "A comma-separated list of real time metrics. E.g., 'rt:activeUsers'. At least one metric must be specified.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "sort",
@@ -712,6 +712,13 @@
             "type": "string"
           },
           {
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property Id for the custom data sources to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "max-results",
             "in": "query",
             "description": "The maximum number of custom data sources to include in this response.",
@@ -724,13 +731,6 @@
             "description": "A 1-based index of the first custom data source to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web property Id for the custom data sources to retrieve.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -791,16 +791,16 @@
             "type": "string"
           },
           {
-            "name": "customDimensionId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "The ID of the custom dimension to retrieve.",
+            "description": "Web property ID for the custom dimension to retrieve.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "customDimensionId",
             "in": "path",
-            "description": "Web property ID for the custom dimension to retrieve.",
+            "description": "The ID of the custom dimension to retrieve.",
             "required": true,
             "type": "string"
           }
@@ -837,6 +837,13 @@
             "type": "string"
           },
           {
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property ID for the custom dimension to update.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "customDimensionId",
             "in": "path",
             "description": "Custom dimension ID for the custom dimension to update.",
@@ -849,13 +856,6 @@
             "description": "Force the update and ignore any warnings related to the custom dimension being linked to a custom data source / data set.",
             "default": "false",
             "type": "boolean"
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web property ID for the custom dimension to update.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -889,6 +889,13 @@
             "type": "string"
           },
           {
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property ID for the custom dimension to update.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "customDimensionId",
             "in": "path",
             "description": "Custom dimension ID for the custom dimension to update.",
@@ -901,13 +908,6 @@
             "description": "Force the update and ignore any warnings related to the custom dimension being linked to a custom data source / data set.",
             "default": "false",
             "type": "boolean"
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web property ID for the custom dimension to update.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -1004,6 +1004,13 @@
             "type": "string"
           },
           {
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property ID for the custom dimensions to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "max-results",
             "in": "query",
             "description": "The maximum number of custom dimensions to include in this response.",
@@ -1015,13 +1022,6 @@
             "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web property ID for the custom dimensions to retrieve.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -1081,16 +1081,16 @@
             "type": "string"
           },
           {
-            "name": "customMetricId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "The ID of the custom metric to retrieve.",
+            "description": "Web property ID for the custom metric to retrieve.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "customMetricId",
             "in": "path",
-            "description": "Web property ID for the custom metric to retrieve.",
+            "description": "The ID of the custom metric to retrieve.",
             "required": true,
             "type": "string"
           }
@@ -1127,6 +1127,13 @@
             "type": "string"
           },
           {
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property ID for the custom metric to update.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "customMetricId",
             "in": "path",
             "description": "Custom metric ID for the custom metric to update.",
@@ -1139,13 +1146,6 @@
             "description": "Force the update and ignore any warnings related to the custom metric being linked to a custom data source / data set.",
             "default": "false",
             "type": "boolean"
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web property ID for the custom metric to update.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -1179,6 +1179,13 @@
             "type": "string"
           },
           {
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property ID for the custom metric to update.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "customMetricId",
             "in": "path",
             "description": "Custom metric ID for the custom metric to update.",
@@ -1191,13 +1198,6 @@
             "description": "Force the update and ignore any warnings related to the custom metric being linked to a custom data source / data set.",
             "default": "false",
             "type": "boolean"
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web property ID for the custom metric to update.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -1294,6 +1294,13 @@
             "type": "string"
           },
           {
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property ID for the custom metrics to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "max-results",
             "in": "query",
             "description": "The maximum number of custom metrics to include in this response.",
@@ -1305,13 +1312,6 @@
             "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web property ID for the custom metrics to retrieve.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -1368,9 +1368,9 @@
             "type": "string"
           },
           {
-            "name": "experimentId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "ID of the experiment to delete",
+            "description": "Web property ID to which the experiment belongs",
             "required": true,
             "type": "string"
           },
@@ -1382,9 +1382,9 @@
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "experimentId",
             "in": "path",
-            "description": "Web property ID to which the experiment belongs",
+            "description": "ID of the experiment to delete",
             "required": true,
             "type": "string"
           }
@@ -1421,9 +1421,9 @@
             "type": "string"
           },
           {
-            "name": "experimentId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "Experiment ID to retrieve the experiment for.",
+            "description": "Web property ID to retrieve the experiment for.",
             "required": true,
             "type": "string"
           },
@@ -1435,9 +1435,9 @@
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "experimentId",
             "in": "path",
-            "description": "Web property ID to retrieve the experiment for.",
+            "description": "Experiment ID to retrieve the experiment for.",
             "required": true,
             "type": "string"
           }
@@ -1475,9 +1475,9 @@
             "type": "string"
           },
           {
-            "name": "experimentId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "Experiment ID of the experiment to update.",
+            "description": "Web property ID of the experiment to update.",
             "required": true,
             "type": "string"
           },
@@ -1489,9 +1489,9 @@
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "experimentId",
             "in": "path",
-            "description": "Web property ID of the experiment to update.",
+            "description": "Experiment ID of the experiment to update.",
             "required": true,
             "type": "string"
           }
@@ -1528,9 +1528,9 @@
             "type": "string"
           },
           {
-            "name": "experimentId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "Experiment ID of the experiment to update.",
+            "description": "Web property ID of the experiment to update.",
             "required": true,
             "type": "string"
           },
@@ -1542,9 +1542,9 @@
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "experimentId",
             "in": "path",
-            "description": "Web property ID of the experiment to update.",
+            "description": "Experiment ID of the experiment to update.",
             "required": true,
             "type": "string"
           }
@@ -1606,16 +1606,16 @@
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "View (Profile) ID to create the experiment for.",
+            "description": "Web property ID to create the experiment for.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "profileId",
             "in": "path",
-            "description": "Web property ID to create the experiment for.",
+            "description": "View (Profile) ID to create the experiment for.",
             "required": true,
             "type": "string"
           }
@@ -1652,10 +1652,11 @@
             "type": "string"
           },
           {
-            "name": "max-results",
-            "in": "query",
-            "description": "The maximum number of experiments to include in this response.",
-            "type": "integer"
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property ID to retrieve experiments for.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "profileId",
@@ -1665,18 +1666,17 @@
             "type": "string"
           },
           {
+            "name": "max-results",
+            "in": "query",
+            "description": "The maximum number of experiments to include in this response.",
+            "type": "integer"
+          },
+          {
             "name": "start-index",
             "in": "query",
             "description": "An index of the first experiment to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web property ID to retrieve experiments for.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -2016,9 +2016,9 @@
             "type": "string"
           },
           {
-            "name": "goalId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "Goal ID to retrieve the goal for.",
+            "description": "Web property ID to retrieve the goal for.",
             "required": true,
             "type": "string"
           },
@@ -2030,9 +2030,9 @@
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "goalId",
             "in": "path",
-            "description": "Web property ID to retrieve the goal for.",
+            "description": "Goal ID to retrieve the goal for.",
             "required": true,
             "type": "string"
           }
@@ -2069,9 +2069,9 @@
             "type": "string"
           },
           {
-            "name": "goalId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "Index of the goal to be updated.",
+            "description": "Web property ID to update the goal.",
             "required": true,
             "type": "string"
           },
@@ -2083,9 +2083,9 @@
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "goalId",
             "in": "path",
-            "description": "Web property ID to update the goal.",
+            "description": "Index of the goal to be updated.",
             "required": true,
             "type": "string"
           }
@@ -2121,9 +2121,9 @@
             "type": "string"
           },
           {
-            "name": "goalId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "Index of the goal to be updated.",
+            "description": "Web property ID to update the goal.",
             "required": true,
             "type": "string"
           },
@@ -2135,9 +2135,9 @@
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "goalId",
             "in": "path",
-            "description": "Web property ID to update the goal.",
+            "description": "Index of the goal to be updated.",
             "required": true,
             "type": "string"
           }
@@ -2198,16 +2198,16 @@
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "View (Profile) ID to create the goal for.",
+            "description": "Web property ID to create the goal for.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "profileId",
             "in": "path",
-            "description": "Web property ID to create the goal for.",
+            "description": "View (Profile) ID to create the goal for.",
             "required": true,
             "type": "string"
           }
@@ -2243,10 +2243,11 @@
             "type": "string"
           },
           {
-            "name": "max-results",
-            "in": "query",
-            "description": "The maximum number of goals to include in this response.",
-            "type": "integer"
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property ID to retrieve goals for. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "profileId",
@@ -2256,18 +2257,17 @@
             "type": "string"
           },
           {
+            "name": "max-results",
+            "in": "query",
+            "description": "The maximum number of goals to include in this response.",
+            "type": "integer"
+          },
+          {
             "name": "start-index",
             "in": "query",
             "description": "An index of the first goal to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web property ID to retrieve goals for. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -2325,9 +2325,9 @@
             "type": "string"
           },
           {
-            "name": "linkId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "ID of the profile filter link to delete.",
+            "description": "Web property Id to which the profile filter link belongs.",
             "required": true,
             "type": "string"
           },
@@ -2339,9 +2339,9 @@
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "linkId",
             "in": "path",
-            "description": "Web property Id to which the profile filter link belongs.",
+            "description": "ID of the profile filter link to delete.",
             "required": true,
             "type": "string"
           }
@@ -2377,9 +2377,9 @@
             "type": "string"
           },
           {
-            "name": "linkId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "ID of the profile filter link.",
+            "description": "Web property Id to retrieve profile filter link for.",
             "required": true,
             "type": "string"
           },
@@ -2391,9 +2391,9 @@
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "linkId",
             "in": "path",
-            "description": "Web property Id to retrieve profile filter link for.",
+            "description": "ID of the profile filter link.",
             "required": true,
             "type": "string"
           }
@@ -2430,9 +2430,9 @@
             "type": "string"
           },
           {
-            "name": "linkId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "ID of the profile filter link to be updated.",
+            "description": "Web property Id to which profile filter link belongs",
             "required": true,
             "type": "string"
           },
@@ -2444,9 +2444,9 @@
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "linkId",
             "in": "path",
-            "description": "Web property Id to which profile filter link belongs",
+            "description": "ID of the profile filter link to be updated.",
             "required": true,
             "type": "string"
           }
@@ -2482,9 +2482,9 @@
             "type": "string"
           },
           {
-            "name": "linkId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "ID of the profile filter link to be updated.",
+            "description": "Web property Id to which profile filter link belongs",
             "required": true,
             "type": "string"
           },
@@ -2496,9 +2496,9 @@
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "linkId",
             "in": "path",
-            "description": "Web property Id to which profile filter link belongs",
+            "description": "ID of the profile filter link to be updated.",
             "required": true,
             "type": "string"
           }
@@ -2559,16 +2559,16 @@
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "Profile ID to create filter link for.",
+            "description": "Web property Id to create profile filter link for.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "profileId",
             "in": "path",
-            "description": "Web property Id to create profile filter link for.",
+            "description": "Profile ID to create filter link for.",
             "required": true,
             "type": "string"
           }
@@ -2604,10 +2604,11 @@
             "type": "string"
           },
           {
-            "name": "max-results",
-            "in": "query",
-            "description": "The maximum number of profile filter links to include in this response.",
-            "type": "integer"
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property Id for profile filter links for. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "profileId",
@@ -2617,18 +2618,17 @@
             "type": "string"
           },
           {
+            "name": "max-results",
+            "in": "query",
+            "description": "The maximum number of profile filter links to include in this response.",
+            "type": "integer"
+          },
+          {
             "name": "start-index",
             "in": "query",
             "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web property Id for profile filter links for. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -2685,9 +2685,9 @@
             "type": "string"
           },
           {
-            "name": "linkId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "Link ID to delete the user link for.",
+            "description": "Web Property ID to delete the user link for.",
             "required": true,
             "type": "string"
           },
@@ -2699,9 +2699,9 @@
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "linkId",
             "in": "path",
-            "description": "Web Property ID to delete the user link for.",
+            "description": "Link ID to delete the user link for.",
             "required": true,
             "type": "string"
           }
@@ -2737,9 +2737,9 @@
             "type": "string"
           },
           {
-            "name": "linkId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "Link ID to update the user link for.",
+            "description": "Web Property ID to update the user link for.",
             "required": true,
             "type": "string"
           },
@@ -2751,9 +2751,9 @@
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "linkId",
             "in": "path",
-            "description": "Web Property ID to update the user link for.",
+            "description": "Link ID to update the user link for.",
             "required": true,
             "type": "string"
           }
@@ -2814,16 +2814,16 @@
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "View (Profile) ID to create the user link for.",
+            "description": "Web Property ID to create the user link for.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "profileId",
             "in": "path",
-            "description": "Web Property ID to create the user link for.",
+            "description": "View (Profile) ID to create the user link for.",
             "required": true,
             "type": "string"
           }
@@ -2859,10 +2859,11 @@
             "type": "string"
           },
           {
-            "name": "max-results",
-            "in": "query",
-            "description": "The maximum number of profile-user links to include in this response.",
-            "type": "integer"
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web Property ID which the given view (profile) belongs to. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "profileId",
@@ -2872,18 +2873,17 @@
             "type": "string"
           },
           {
+            "name": "max-results",
+            "in": "query",
+            "description": "The maximum number of profile-user links to include in this response.",
+            "type": "integer"
+          },
+          {
             "name": "start-index",
             "in": "query",
             "description": "An index of the first profile-user link to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web Property ID which the given view (profile) belongs to. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -2940,16 +2940,16 @@
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "ID of the view (profile) to be deleted.",
+            "description": "Web property ID to delete the view (profile) for.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "profileId",
             "in": "path",
-            "description": "Web property ID to delete the view (profile) for.",
+            "description": "ID of the view (profile) to be deleted.",
             "required": true,
             "type": "string"
           }
@@ -2985,16 +2985,16 @@
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "View (Profile) ID to retrieve the goal for.",
+            "description": "Web property ID to retrieve the goal for.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "profileId",
             "in": "path",
-            "description": "Web property ID to retrieve the goal for.",
+            "description": "View (Profile) ID to retrieve the goal for.",
             "required": true,
             "type": "string"
           }
@@ -3031,16 +3031,16 @@
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "ID of the view (profile) to be updated.",
+            "description": "Web property ID to which the view (profile) belongs",
             "required": true,
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "profileId",
             "in": "path",
-            "description": "Web property ID to which the view (profile) belongs",
+            "description": "ID of the view (profile) to be updated.",
             "required": true,
             "type": "string"
           }
@@ -3076,16 +3076,16 @@
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "ID of the view (profile) to be updated.",
+            "description": "Web property ID to which the view (profile) belongs",
             "required": true,
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "profileId",
             "in": "path",
-            "description": "Web property ID to which the view (profile) belongs",
+            "description": "ID of the view (profile) to be updated.",
             "required": true,
             "type": "string"
           }
@@ -3184,6 +3184,13 @@
             "type": "string"
           },
           {
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property ID for the views (profiles) to retrieve. Can either be a specific web property ID or '~all', which refers to all the web properties to which the user has access.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "max-results",
             "in": "query",
             "description": "The maximum number of views (profiles) to include in this response.",
@@ -3195,13 +3202,6 @@
             "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web property ID for the views (profiles) to retrieve. Can either be a specific web property ID or '~all', which refers to all the web properties to which the user has access.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -3326,6 +3326,13 @@
             "type": "string"
           },
           {
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property ID to retrieve unsampled reports for.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "profileId",
             "in": "path",
             "description": "View (Profile) ID to retrieve unsampled report for.",
@@ -3336,13 +3343,6 @@
             "name": "unsampledReportId",
             "in": "path",
             "description": "ID of the unsampled report to retrieve.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web property ID to retrieve unsampled reports for.",
             "required": true,
             "type": "string"
           }
@@ -3405,16 +3405,16 @@
             "type": "string"
           },
           {
-            "name": "profileId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "View (Profile) ID to create the unsampled report for.",
+            "description": "Web property ID to create the unsampled report for.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "profileId",
             "in": "path",
-            "description": "Web property ID to create the unsampled report for.",
+            "description": "View (Profile) ID to create the unsampled report for.",
             "required": true,
             "type": "string"
           }
@@ -3451,10 +3451,11 @@
             "type": "string"
           },
           {
-            "name": "max-results",
-            "in": "query",
-            "description": "The maximum number of unsampled reports to include in this response.",
-            "type": "integer"
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property ID to retrieve unsampled reports for. Must be a specific web property ID, ~all is not supported.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "profileId",
@@ -3464,18 +3465,17 @@
             "type": "string"
           },
           {
+            "name": "max-results",
+            "in": "query",
+            "description": "The maximum number of unsampled reports to include in this response.",
+            "type": "integer"
+          },
+          {
             "name": "start-index",
             "in": "query",
             "description": "An index of the first unsampled report to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web property ID to retrieve unsampled reports for. Must be a specific web property ID, ~all is not supported.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -3533,16 +3533,16 @@
             "type": "string"
           },
           {
-            "name": "customDataSourceId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "Custom data source Id for the uploads to be deleted.",
+            "description": "Web property Id for the uploads to be deleted.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "customDataSourceId",
             "in": "path",
-            "description": "Web property Id for the uploads to be deleted.",
+            "description": "Custom data source Id for the uploads to be deleted.",
             "required": true,
             "type": "string"
           }
@@ -3604,6 +3604,13 @@
             "type": "string"
           },
           {
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property Id for the upload to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "customDataSourceId",
             "in": "path",
             "description": "Custom data source Id for upload to retrieve.",
@@ -3614,13 +3621,6 @@
             "name": "uploadId",
             "in": "path",
             "description": "Upload Id to retrieve.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web property Id for the upload to retrieve.",
             "required": true,
             "type": "string"
           }
@@ -3683,6 +3683,13 @@
             "type": "string"
           },
           {
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property Id for the uploads to retrieve.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "customDataSourceId",
             "in": "path",
             "description": "Custom data source Id for uploads to retrieve.",
@@ -3702,13 +3709,6 @@
             "description": "A 1-based index of the first upload to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web property Id for the uploads to retrieve.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -3747,16 +3747,16 @@
             "type": "string"
           },
           {
-            "name": "customDataSourceId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "Custom data source Id to which the data being uploaded belongs.",
+            "description": "Web property UA-string associated with the upload.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "customDataSourceId",
             "in": "path",
-            "description": "Web property UA-string associated with the upload.",
+            "description": "Custom data source Id to which the data being uploaded belongs.",
             "required": true,
             "type": "string"
           }
@@ -3815,16 +3815,16 @@
             "type": "string"
           },
           {
-            "name": "webPropertyAdWordsLinkId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "Web property AdWords link ID.",
+            "description": "Web property ID to delete the AdWords link for.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "webPropertyAdWordsLinkId",
             "in": "path",
-            "description": "Web property ID to delete the AdWords link for.",
+            "description": "Web property AdWords link ID.",
             "required": true,
             "type": "string"
           }
@@ -3860,16 +3860,16 @@
             "type": "string"
           },
           {
-            "name": "webPropertyAdWordsLinkId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "Web property-AdWords link ID.",
+            "description": "Web property ID to retrieve the AdWords link for.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "webPropertyAdWordsLinkId",
             "in": "path",
-            "description": "Web property ID to retrieve the AdWords link for.",
+            "description": "Web property-AdWords link ID.",
             "required": true,
             "type": "string"
           }
@@ -3906,16 +3906,16 @@
             "type": "string"
           },
           {
-            "name": "webPropertyAdWordsLinkId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "Web property-AdWords link ID.",
+            "description": "Web property ID to retrieve the AdWords link for.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "webPropertyAdWordsLinkId",
             "in": "path",
-            "description": "Web property ID to retrieve the AdWords link for.",
+            "description": "Web property-AdWords link ID.",
             "required": true,
             "type": "string"
           }
@@ -3951,16 +3951,16 @@
             "type": "string"
           },
           {
-            "name": "webPropertyAdWordsLinkId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "Web property-AdWords link ID.",
+            "description": "Web property ID to retrieve the AdWords link for.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "webPropertyAdWordsLinkId",
             "in": "path",
-            "description": "Web property ID to retrieve the AdWords link for.",
+            "description": "Web property-AdWords link ID.",
             "required": true,
             "type": "string"
           }
@@ -4059,6 +4059,13 @@
             "type": "string"
           },
           {
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web property ID to retrieve the AdWords links for.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "max-results",
             "in": "query",
             "description": "The maximum number of webProperty-AdWords links to include in this response.",
@@ -4070,13 +4077,6 @@
             "description": "An index of the first webProperty-AdWords link to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web property ID to retrieve the AdWords links for.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -4375,16 +4375,16 @@
             "type": "string"
           },
           {
-            "name": "linkId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "Link ID to delete the user link for.",
+            "description": "Web Property ID to delete the user link for.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "linkId",
             "in": "path",
-            "description": "Web Property ID to delete the user link for.",
+            "description": "Link ID to delete the user link for.",
             "required": true,
             "type": "string"
           }
@@ -4420,16 +4420,16 @@
             "type": "string"
           },
           {
-            "name": "linkId",
+            "name": "webPropertyId",
             "in": "path",
-            "description": "Link ID to update the account-user link for.",
+            "description": "Web property ID to update the account-user link for.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "webPropertyId",
+            "name": "linkId",
             "in": "path",
-            "description": "Web property ID to update the account-user link for.",
+            "description": "Link ID to update the account-user link for.",
             "required": true,
             "type": "string"
           }
@@ -4528,6 +4528,13 @@
             "type": "string"
           },
           {
+            "name": "webPropertyId",
+            "in": "path",
+            "description": "Web Property ID for the webProperty-user links to retrieve. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "max-results",
             "in": "query",
             "description": "The maximum number of webProperty-user Links to include in this response.",
@@ -4539,13 +4546,6 @@
             "description": "An index of the first webProperty-user link to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
             "type": "integer",
             "minimum": 1
-          },
-          {
-            "name": "webPropertyId",
-            "in": "path",
-            "description": "Web Property ID for the webProperty-user links to retrieve. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [

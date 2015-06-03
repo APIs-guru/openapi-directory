@@ -35,13 +35,6 @@
         },
         "parameters": [
           {
-            "name": "operation",
-            "in": "path",
-            "description": "Name of the operation resource to return.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "project",
             "in": "path",
             "description": "Name of the project scoping this request.",
@@ -52,6 +45,13 @@
             "name": "zone",
             "in": "path",
             "description": "Name of the zone scoping this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operation",
+            "in": "path",
+            "description": "Name of the operation resource to return.",
             "required": true,
             "type": "string"
           }
@@ -109,6 +109,20 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "description": "Name of the project scoping this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "Name of the zone scoping this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "filter",
             "in": "query",
             "description": "Optional. Filter expression for filtering listed resources.",
@@ -127,20 +141,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.",
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "path",
-            "description": "Name of the project scoping this request.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "zone",
-            "in": "path",
-            "description": "Name of the zone scoping this request.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -204,16 +204,16 @@
             "type": "string"
           },
           {
-            "name": "resourceView",
+            "name": "zone",
             "in": "path",
-            "description": "The name of the resource view.",
+            "description": "The zone name of the resource view.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "zone",
+            "name": "resourceView",
             "in": "path",
-            "description": "The zone name of the resource view.",
+            "description": "The name of the resource view.",
             "required": true,
             "type": "string"
           }
@@ -276,16 +276,16 @@
             "type": "string"
           },
           {
-            "name": "resourceView",
+            "name": "zone",
             "in": "path",
-            "description": "The name of the resource view.",
+            "description": "The zone name of the resource view.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "zone",
+            "name": "resourceView",
             "in": "path",
-            "description": "The zone name of the resource view.",
+            "description": "The name of the resource view.",
             "required": true,
             "type": "string"
           }
@@ -323,16 +323,16 @@
             "type": "string"
           },
           {
-            "name": "resourceView",
+            "name": "zone",
             "in": "path",
-            "description": "The name of the resource view.",
+            "description": "The zone name of the resource view.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "zone",
+            "name": "resourceView",
             "in": "path",
-            "description": "The zone name of the resource view.",
+            "description": "The name of the resource view.",
             "required": true,
             "type": "string"
           }
@@ -397,9 +397,10 @@
             "type": "string"
           },
           {
-            "name": "resourceName",
-            "in": "query",
-            "description": "The name of the resource if user wants to get the service information of the resource.",
+            "name": "zone",
+            "in": "path",
+            "description": "The zone name of the resource view.",
+            "required": true,
             "type": "string"
           },
           {
@@ -410,10 +411,9 @@
             "type": "string"
           },
           {
-            "name": "zone",
-            "in": "path",
-            "description": "The zone name of the resource view.",
-            "required": true,
+            "name": "resourceName",
+            "in": "query",
+            "description": "The name of the resource if user wants to get the service information of the resource.",
             "type": "string"
           }
         ],
@@ -508,6 +508,20 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "description": "The project name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "The zone name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum count of results to be returned. Acceptable values are 0 to 5000, inclusive. (Default: 5000)",
@@ -520,20 +534,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.",
-            "type": "string"
-          },
-          {
-            "name": "project",
-            "in": "path",
-            "description": "The project name of the resource view.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "zone",
-            "in": "path",
-            "description": "The zone name of the resource view.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -590,6 +590,27 @@
         },
         "parameters": [
           {
+            "name": "project",
+            "in": "path",
+            "description": "The project name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "The zone name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceView",
+            "in": "path",
+            "description": "The name of the resource view.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "format",
             "in": "query",
             "description": "The requested format of the return value. It can be URL or URL_PORT. A JSON object will be included in the response based on the format. The default format is NONE, which results in no JSON in the response.",
@@ -627,30 +648,9 @@
             "type": "string"
           },
           {
-            "name": "project",
-            "in": "path",
-            "description": "The project name of the resource view.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceView",
-            "in": "path",
-            "description": "The name of the resource view.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "serviceName",
             "in": "query",
             "description": "The service name to return in the response. It is optional and if it is not set, all the service end points will be returned.",
-            "type": "string"
-          },
-          {
-            "name": "zone",
-            "in": "path",
-            "description": "The zone name of the resource view.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -714,16 +714,16 @@
             "type": "string"
           },
           {
-            "name": "resourceView",
+            "name": "zone",
             "in": "path",
-            "description": "The name of the resource view.",
+            "description": "The zone name of the resource view.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "zone",
+            "name": "resourceView",
             "in": "path",
-            "description": "The zone name of the resource view.",
+            "description": "The name of the resource view.",
             "required": true,
             "type": "string"
           }
@@ -786,16 +786,16 @@
             "type": "string"
           },
           {
-            "name": "resourceView",
+            "name": "zone",
             "in": "path",
-            "description": "The name of the resource view.",
+            "description": "The zone name of the resource view.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "zone",
+            "name": "resourceView",
             "in": "path",
-            "description": "The zone name of the resource view.",
+            "description": "The name of the resource view.",
             "required": true,
             "type": "string"
           }

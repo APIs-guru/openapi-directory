@@ -316,16 +316,16 @@
         },
         "parameters": [
           {
-            "name": "task",
+            "name": "tasklist",
             "in": "path",
-            "description": "Task identifier.",
+            "description": "Task list identifier.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "tasklist",
+            "name": "task",
             "in": "path",
-            "description": "Task list identifier.",
+            "description": "Task identifier.",
             "required": true,
             "type": "string"
           }
@@ -354,16 +354,16 @@
         },
         "parameters": [
           {
-            "name": "task",
+            "name": "tasklist",
             "in": "path",
-            "description": "Task identifier.",
+            "description": "Task list identifier.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "tasklist",
+            "name": "task",
             "in": "path",
-            "description": "Task list identifier.",
+            "description": "Task identifier.",
             "required": true,
             "type": "string"
           }
@@ -393,16 +393,16 @@
         },
         "parameters": [
           {
-            "name": "task",
+            "name": "tasklist",
             "in": "path",
-            "description": "Task identifier.",
+            "description": "Task list identifier.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "tasklist",
+            "name": "task",
             "in": "path",
-            "description": "Task list identifier.",
+            "description": "Task identifier.",
             "required": true,
             "type": "string"
           }
@@ -431,16 +431,16 @@
         },
         "parameters": [
           {
-            "name": "task",
+            "name": "tasklist",
             "in": "path",
-            "description": "Task identifier.",
+            "description": "Task list identifier.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "tasklist",
+            "name": "task",
             "in": "path",
-            "description": "Task list identifier.",
+            "description": "Task identifier.",
             "required": true,
             "type": "string"
           }
@@ -494,6 +494,13 @@
         },
         "parameters": [
           {
+            "name": "tasklist",
+            "in": "path",
+            "description": "Task list identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "parent",
             "in": "query",
             "description": "Parent task identifier. If the task is created at the top level, this parameter is omitted. Optional.",
@@ -503,13 +510,6 @@
             "name": "previous",
             "in": "query",
             "description": "Previous sibling task identifier. If the task is created at the first position among its siblings, this parameter is omitted. Optional.",
-            "type": "string"
-          },
-          {
-            "name": "tasklist",
-            "in": "path",
-            "description": "Task list identifier.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -536,6 +536,13 @@
           }
         },
         "parameters": [
+          {
+            "name": "tasklist",
+            "in": "path",
+            "description": "Task list identifier.",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "completedMax",
             "in": "query",
@@ -589,13 +596,6 @@
             "in": "query",
             "description": "Flag indicating whether hidden tasks are returned in the result. Optional. The default is False.",
             "type": "boolean"
-          },
-          {
-            "name": "tasklist",
-            "in": "path",
-            "description": "Task list identifier.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "updatedMin",
@@ -654,15 +654,10 @@
         },
         "parameters": [
           {
-            "name": "parent",
-            "in": "query",
-            "description": "New parent task identifier. If the task is moved to the top level, this parameter is omitted. Optional.",
-            "type": "string"
-          },
-          {
-            "name": "previous",
-            "in": "query",
-            "description": "New previous sibling task identifier. If the task is moved to the first position among its siblings, this parameter is omitted. Optional.",
+            "name": "tasklist",
+            "in": "path",
+            "description": "Task list identifier.",
+            "required": true,
             "type": "string"
           },
           {
@@ -673,10 +668,15 @@
             "type": "string"
           },
           {
-            "name": "tasklist",
-            "in": "path",
-            "description": "Task list identifier.",
-            "required": true,
+            "name": "parent",
+            "in": "query",
+            "description": "New parent task identifier. If the task is moved to the top level, this parameter is omitted. Optional.",
+            "type": "string"
+          },
+          {
+            "name": "previous",
+            "in": "query",
+            "description": "New previous sibling task identifier. If the task is moved to the first position among its siblings, this parameter is omitted. Optional.",
             "type": "string"
           }
         ],

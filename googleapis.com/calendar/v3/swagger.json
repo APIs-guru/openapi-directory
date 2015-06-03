@@ -1159,12 +1159,6 @@
         },
         "parameters": [
           {
-            "name": "alwaysIncludeEmail",
-            "in": "query",
-            "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
-            "type": "boolean"
-          },
-          {
             "name": "calendarId",
             "in": "path",
             "description": "Calendar identifier.",
@@ -1177,6 +1171,12 @@
             "description": "Event identifier.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "alwaysIncludeEmail",
+            "in": "query",
+            "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
+            "type": "boolean"
           },
           {
             "name": "maxAttendees",
@@ -1217,12 +1217,6 @@
         },
         "parameters": [
           {
-            "name": "alwaysIncludeEmail",
-            "in": "query",
-            "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
-            "type": "boolean"
-          },
-          {
             "name": "calendarId",
             "in": "path",
             "description": "Calendar identifier.",
@@ -1235,6 +1229,12 @@
             "description": "Event identifier.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "alwaysIncludeEmail",
+            "in": "query",
+            "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
+            "type": "boolean"
           },
           {
             "name": "maxAttendees",
@@ -1274,12 +1274,6 @@
         },
         "parameters": [
           {
-            "name": "alwaysIncludeEmail",
-            "in": "query",
-            "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
-            "type": "boolean"
-          },
-          {
             "name": "calendarId",
             "in": "path",
             "description": "Calendar identifier.",
@@ -1292,6 +1286,12 @@
             "description": "Event identifier.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "alwaysIncludeEmail",
+            "in": "query",
+            "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
+            "type": "boolean"
           },
           {
             "name": "maxAttendees",
@@ -1456,17 +1456,17 @@
         },
         "parameters": [
           {
-            "name": "alwaysIncludeEmail",
-            "in": "query",
-            "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
-            "type": "boolean"
-          },
-          {
             "name": "calendarId",
             "in": "path",
             "description": "Calendar identifier.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "alwaysIncludeEmail",
+            "in": "query",
+            "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
+            "type": "boolean"
           },
           {
             "name": "iCalUID",
@@ -1629,12 +1629,6 @@
         },
         "parameters": [
           {
-            "name": "alwaysIncludeEmail",
-            "in": "query",
-            "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
-            "type": "boolean"
-          },
-          {
             "name": "calendarId",
             "in": "path",
             "description": "Calendar identifier.",
@@ -1647,6 +1641,12 @@
             "description": "Recurring event identifier.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "alwaysIncludeEmail",
+            "in": "query",
+            "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
+            "type": "boolean"
           },
           {
             "name": "maxAttendees",
@@ -1756,16 +1756,16 @@
             "type": "string"
           },
           {
-            "name": "destination",
-            "in": "query",
-            "description": "Calendar identifier of the target calendar where the event is to be moved to.",
+            "name": "eventId",
+            "in": "path",
+            "description": "Event identifier.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "eventId",
-            "in": "path",
-            "description": "Event identifier.",
+            "name": "destination",
+            "in": "query",
+            "description": "Calendar identifier of the target calendar where the event is to be moved to.",
             "required": true,
             "type": "string"
           },
@@ -1832,17 +1832,17 @@
             "type": "string"
           },
           {
-            "name": "sendNotifications",
-            "in": "query",
-            "description": "Whether to send notifications about the creation of the event. Optional. The default is False.",
-            "type": "boolean"
-          },
-          {
             "name": "text",
             "in": "query",
             "description": "The text describing the event to be created.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "sendNotifications",
+            "in": "query",
+            "description": "Whether to send notifications about the creation of the event. Optional. The default is False.",
+            "type": "boolean"
           }
         ],
         "security": [
@@ -1894,17 +1894,17 @@
         },
         "parameters": [
           {
-            "name": "alwaysIncludeEmail",
-            "in": "query",
-            "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
-            "type": "boolean"
-          },
-          {
             "name": "calendarId",
             "in": "path",
             "description": "Calendar identifier.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "alwaysIncludeEmail",
+            "in": "query",
+            "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
+            "type": "boolean"
           },
           {
             "name": "iCalUID",

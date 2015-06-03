@@ -32,16 +32,16 @@
         },
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "enterpriseId",
             "in": "path",
-            "description": "The ID of the collection.",
+            "description": "The ID of the enterprise.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "enterpriseId",
+            "name": "collectionId",
             "in": "path",
-            "description": "The ID of the enterprise.",
+            "description": "The ID of the collection.",
             "required": true,
             "type": "string"
           }
@@ -70,16 +70,16 @@
         },
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "enterpriseId",
             "in": "path",
-            "description": "The ID of the collection.",
+            "description": "The ID of the enterprise.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "enterpriseId",
+            "name": "collectionId",
             "in": "path",
-            "description": "The ID of the enterprise.",
+            "description": "The ID of the collection.",
             "required": true,
             "type": "string"
           }
@@ -108,16 +108,16 @@
         },
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "enterpriseId",
             "in": "path",
-            "description": "The ID of the collection.",
+            "description": "The ID of the enterprise.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "enterpriseId",
+            "name": "collectionId",
             "in": "path",
-            "description": "The ID of the enterprise.",
+            "description": "The ID of the collection.",
             "required": true,
             "type": "string"
           }
@@ -146,16 +146,16 @@
         },
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "enterpriseId",
             "in": "path",
-            "description": "The ID of the collection.",
+            "description": "The ID of the enterprise.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "enterpriseId",
+            "name": "collectionId",
             "in": "path",
-            "description": "The ID of the enterprise.",
+            "description": "The ID of the collection.",
             "required": true,
             "type": "string"
           }
@@ -293,16 +293,16 @@
         },
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "enterpriseId",
             "in": "path",
-            "description": "The ID of the collection.",
+            "description": "The ID of the enterprise.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "enterpriseId",
+            "name": "collectionId",
             "in": "path",
-            "description": "The ID of the enterprise.",
+            "description": "The ID of the collection.",
             "required": true,
             "type": "string"
           },
@@ -338,16 +338,16 @@
         },
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "enterpriseId",
             "in": "path",
-            "description": "The ID of the collection.",
+            "description": "The ID of the enterprise.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "enterpriseId",
+            "name": "collectionId",
             "in": "path",
-            "description": "The ID of the enterprise.",
+            "description": "The ID of the collection.",
             "required": true,
             "type": "string"
           },
@@ -383,16 +383,16 @@
         },
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "enterpriseId",
             "in": "path",
-            "description": "The ID of the collection.",
+            "description": "The ID of the enterprise.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "enterpriseId",
+            "name": "collectionId",
             "in": "path",
-            "description": "The ID of the enterprise.",
+            "description": "The ID of the collection.",
             "required": true,
             "type": "string"
           },
@@ -428,16 +428,16 @@
         },
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "enterpriseId",
             "in": "path",
-            "description": "The ID of the collection.",
+            "description": "The ID of the enterprise.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "enterpriseId",
+            "name": "collectionId",
             "in": "path",
-            "description": "The ID of the enterprise.",
+            "description": "The ID of the collection.",
             "required": true,
             "type": "string"
           },
@@ -498,16 +498,16 @@
         },
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "enterpriseId",
             "in": "path",
-            "description": "The ID of the collection.",
+            "description": "The ID of the enterprise.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "enterpriseId",
+            "name": "collectionId",
             "in": "path",
-            "description": "The ID of the enterprise.",
+            "description": "The ID of the collection.",
             "required": true,
             "type": "string"
           }
@@ -561,13 +561,6 @@
         },
         "parameters": [
           {
-            "name": "deviceId",
-            "in": "path",
-            "description": "The ID of the device.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "enterpriseId",
             "in": "path",
             "description": "The ID of the enterprise.",
@@ -578,6 +571,13 @@
             "name": "userId",
             "in": "path",
             "description": "The ID of the user.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "description": "The ID of the device.",
             "required": true,
             "type": "string"
           }
@@ -631,13 +631,6 @@
         },
         "parameters": [
           {
-            "name": "deviceId",
-            "in": "path",
-            "description": "The ID of the device.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "enterpriseId",
             "in": "path",
             "description": "The ID of the enterprise.",
@@ -648,6 +641,13 @@
             "name": "userId",
             "in": "path",
             "description": "The ID of the user.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "description": "The ID of the device.",
             "required": true,
             "type": "string"
           }
@@ -676,13 +676,6 @@
         },
         "parameters": [
           {
-            "name": "deviceId",
-            "in": "path",
-            "description": "The ID of the device.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "enterpriseId",
             "in": "path",
             "description": "The ID of the enterprise.",
@@ -693,6 +686,13 @@
             "name": "userId",
             "in": "path",
             "description": "The ID of the user.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "description": "The ID of the device.",
             "required": true,
             "type": "string"
           }
@@ -1149,16 +1149,16 @@
             "type": "string"
           },
           {
-            "name": "entitlementId",
+            "name": "userId",
             "in": "path",
-            "description": "The ID of the entitlement, e.g. \"app:com.google.android.gm\".",
+            "description": "The ID of the user.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "userId",
+            "name": "entitlementId",
             "in": "path",
-            "description": "The ID of the user.",
+            "description": "The ID of the entitlement, e.g. \"app:com.google.android.gm\".",
             "required": true,
             "type": "string"
           }
@@ -1194,16 +1194,16 @@
             "type": "string"
           },
           {
-            "name": "entitlementId",
+            "name": "userId",
             "in": "path",
-            "description": "The ID of the entitlement, e.g. \"app:com.google.android.gm\".",
+            "description": "The ID of the user.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "userId",
+            "name": "entitlementId",
             "in": "path",
-            "description": "The ID of the user.",
+            "description": "The ID of the entitlement, e.g. \"app:com.google.android.gm\".",
             "required": true,
             "type": "string"
           }
@@ -1239,6 +1239,13 @@
             "type": "string"
           },
           {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "entitlementId",
             "in": "path",
             "description": "The ID of the entitlement, e.g. \"app:com.google.android.gm\".",
@@ -1250,13 +1257,6 @@
             "in": "query",
             "description": "Set to true to also install the product on all the user's devices where possible. Failure to install on one or more devices will not prevent this operation from returning successfully, as long as the entitlement was successfully assigned to the user.",
             "type": "boolean"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "The ID of the user.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -1290,6 +1290,13 @@
             "type": "string"
           },
           {
+            "name": "userId",
+            "in": "path",
+            "description": "The ID of the user.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "entitlementId",
             "in": "path",
             "description": "The ID of the entitlement, e.g. \"app:com.google.android.gm\".",
@@ -1301,13 +1308,6 @@
             "in": "query",
             "description": "Set to true to also install the product on all the user's devices where possible. Failure to install on one or more devices will not prevent this operation from returning successfully, as long as the entitlement was successfully assigned to the user.",
             "type": "boolean"
-          },
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "The ID of the user.",
-            "required": true,
-            "type": "string"
           }
         ],
         "security": [
@@ -1601,13 +1601,6 @@
         },
         "parameters": [
           {
-            "name": "deviceId",
-            "in": "path",
-            "description": "The Android ID of the device.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "enterpriseId",
             "in": "path",
             "description": "The ID of the enterprise.",
@@ -1615,16 +1608,23 @@
             "type": "string"
           },
           {
-            "name": "installId",
+            "name": "userId",
             "in": "path",
-            "description": "The ID of the product represented by the install, e.g. \"app:com.google.android.gm\".",
+            "description": "The ID of the user.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "userId",
+            "name": "deviceId",
             "in": "path",
-            "description": "The ID of the user.",
+            "description": "The Android ID of the device.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "installId",
+            "in": "path",
+            "description": "The ID of the product represented by the install, e.g. \"app:com.google.android.gm\".",
             "required": true,
             "type": "string"
           }
@@ -1653,13 +1653,6 @@
         },
         "parameters": [
           {
-            "name": "deviceId",
-            "in": "path",
-            "description": "The Android ID of the device.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "enterpriseId",
             "in": "path",
             "description": "The ID of the enterprise.",
@@ -1667,16 +1660,23 @@
             "type": "string"
           },
           {
-            "name": "installId",
+            "name": "userId",
             "in": "path",
-            "description": "The ID of the product represented by the install, e.g. \"app:com.google.android.gm\".",
+            "description": "The ID of the user.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "userId",
+            "name": "deviceId",
             "in": "path",
-            "description": "The ID of the user.",
+            "description": "The Android ID of the device.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "installId",
+            "in": "path",
+            "description": "The ID of the product represented by the install, e.g. \"app:com.google.android.gm\".",
             "required": true,
             "type": "string"
           }
@@ -1705,13 +1705,6 @@
         },
         "parameters": [
           {
-            "name": "deviceId",
-            "in": "path",
-            "description": "The Android ID of the device.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "enterpriseId",
             "in": "path",
             "description": "The ID of the enterprise.",
@@ -1719,16 +1712,23 @@
             "type": "string"
           },
           {
-            "name": "installId",
+            "name": "userId",
             "in": "path",
-            "description": "The ID of the product represented by the install, e.g. \"app:com.google.android.gm\".",
+            "description": "The ID of the user.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "userId",
+            "name": "deviceId",
             "in": "path",
-            "description": "The ID of the user.",
+            "description": "The Android ID of the device.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "installId",
+            "in": "path",
+            "description": "The ID of the product represented by the install, e.g. \"app:com.google.android.gm\".",
             "required": true,
             "type": "string"
           }
@@ -1757,13 +1757,6 @@
         },
         "parameters": [
           {
-            "name": "deviceId",
-            "in": "path",
-            "description": "The Android ID of the device.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "enterpriseId",
             "in": "path",
             "description": "The ID of the enterprise.",
@@ -1771,16 +1764,23 @@
             "type": "string"
           },
           {
-            "name": "installId",
+            "name": "userId",
             "in": "path",
-            "description": "The ID of the product represented by the install, e.g. \"app:com.google.android.gm\".",
+            "description": "The ID of the user.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "userId",
+            "name": "deviceId",
             "in": "path",
-            "description": "The ID of the user.",
+            "description": "The Android ID of the device.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "installId",
+            "in": "path",
+            "description": "The ID of the product represented by the install, e.g. \"app:com.google.android.gm\".",
             "required": true,
             "type": "string"
           }
@@ -1834,13 +1834,6 @@
         },
         "parameters": [
           {
-            "name": "deviceId",
-            "in": "path",
-            "description": "The Android ID of the device.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "enterpriseId",
             "in": "path",
             "description": "The ID of the enterprise.",
@@ -1851,6 +1844,13 @@
             "name": "userId",
             "in": "path",
             "description": "The ID of the user.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceId",
+            "in": "path",
+            "description": "The Android ID of the device.",
             "required": true,
             "type": "string"
           }
@@ -1904,16 +1904,16 @@
         },
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "The BCP47 tag for the user's preferred language (e.g. \"en-US\", \"de\")",
-            "type": "string"
-          },
-          {
             "name": "permissionId",
             "in": "path",
             "description": "The ID of the permission.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The BCP47 tag for the user's preferred language (e.g. \"en-US\", \"de\")",
             "type": "string"
           }
         ],
@@ -1973,16 +1973,16 @@
             "type": "string"
           },
           {
-            "name": "language",
-            "in": "query",
-            "description": "The BCP47 tag for the user's preferred language (e.g. \"en-US\", \"de\").",
-            "type": "string"
-          },
-          {
             "name": "productId",
             "in": "path",
             "description": "The ID of the product, e.g. \"app:com.google.android.gm\".",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The BCP47 tag for the user's preferred language (e.g. \"en-US\", \"de\").",
             "type": "string"
           }
         ],
@@ -2042,16 +2042,16 @@
             "type": "string"
           },
           {
-            "name": "language",
-            "in": "query",
-            "description": "The BCP47 tag for the user's preferred language (e.g. \"en-US\", \"de\").",
-            "type": "string"
-          },
-          {
             "name": "productId",
             "in": "path",
             "description": "The ID of the product.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "language",
+            "in": "query",
+            "description": "The BCP47 tag for the user's preferred language (e.g. \"en-US\", \"de\").",
             "type": "string"
           }
         ],
@@ -2366,16 +2366,16 @@
         },
         "parameters": [
           {
-            "name": "email",
-            "in": "query",
-            "description": "The exact primary email address of the user to look up.",
+            "name": "enterpriseId",
+            "in": "path",
+            "description": "The ID of the enterprise.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "enterpriseId",
-            "in": "path",
-            "description": "The ID of the enterprise.",
+            "name": "email",
+            "in": "query",
+            "description": "The exact primary email address of the user to look up.",
             "required": true,
             "type": "string"
           }

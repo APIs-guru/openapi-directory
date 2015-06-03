@@ -32,12 +32,6 @@
         },
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "projectId",
             "in": "path",
             "required": true,
@@ -45,6 +39,12 @@
           },
           {
             "name": "region",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -75,12 +75,6 @@
         },
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "projectId",
             "in": "path",
             "required": true,
@@ -88,6 +82,12 @@
           },
           {
             "name": "region",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deploymentName",
             "in": "path",
             "required": true,
             "type": "string"
@@ -184,6 +184,18 @@
         },
         "parameters": [
           {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "region",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum count of results to be returned. Acceptable values are 0 to 100, inclusive. (Default: 50)",
@@ -196,18 +208,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.",
-            "type": "string"
-          },
-          {
-            "name": "projectId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "region",
-            "in": "path",
-            "required": true,
             "type": "string"
           }
         ],
@@ -390,6 +390,12 @@
         },
         "parameters": [
           {
+            "name": "projectId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum count of results to be returned. Acceptable values are 0 to 100, inclusive. (Default: 50)",
@@ -402,12 +408,6 @@
             "name": "pageToken",
             "in": "query",
             "description": "Specifies a nextPageToken returned by a previous list request. This token can be used to request the next page of results from a previous list request.",
-            "type": "string"
-          },
-          {
-            "name": "projectId",
-            "in": "path",
-            "required": true,
             "type": "string"
           }
         ],
