@@ -312,6 +312,70 @@
         }
       ]
     },
+    "/project/{projectId}/jobs/{jobId}/cancel": {
+      "post": {
+        "description": "Requests that a job be cancelled. This call will return immediately, and the client will need to poll for the job status to see if the cancel completed successfully.",
+        "operationId": "bigquery.jobs.cancel",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/JobCancelResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "Job ID of the job to cancel",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID of the job to cancel",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/bigquery",
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "jobs"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/projects/{projectId}/jobs/{jobId}": {
       "get": {
         "description": "Returns information about a specific job. Job information is available for a six month period after creation. Requires that you're the person who ran the job, or have the Is Owner project role.",
@@ -619,70 +683,6 @@
             "name": "projectId",
             "in": "path",
             "description": "Project ID of the project billed for the query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/bigquery",
-              "https://www.googleapis.com/auth/cloud-platform"
-            ]
-          }
-        ],
-        "tags": [
-          "jobs"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/project/{projectId}/jobs/{jobId}/stop": {
-      "post": {
-        "description": "Requests that a job be stopped. This call will return immediately, and the client will need to poll for the job status to see if the stop completed successfully.",
-        "operationId": "bigquery.jobs.stop",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/JobStopResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "Job ID of the job to stop",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "projectId",
-            "in": "path",
-            "description": "Project ID of the job to stop",
             "required": true,
             "type": "string"
           }
@@ -1595,6 +1595,20 @@
         }
       }
     },
+    "JobCancelResponse": {
+      "type": "object",
+      "properties": {
+        "job": {
+          "$ref": "#/definitions/Job",
+          "description": "The final state of the job."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The resource type of the response.",
+          "default": "bigquery#jobCancelResponse"
+        }
+      }
+    },
     "JobConfiguration": {
       "type": "object",
       "properties": {
@@ -1911,11 +1925,6 @@
         "nextPageToken": {
           "type": "string",
           "description": "A token to request the next page of results."
-        },
-        "totalItems": {
-          "type": "integer",
-          "description": "Total number of jobs in this collection.",
-          "format": "int32"
         }
       }
     },
@@ -2038,20 +2047,6 @@
         "state": {
           "type": "string",
           "description": "[Output-only] Running state of the job."
-        }
-      }
-    },
-    "JobStopResponse": {
-      "type": "object",
-      "properties": {
-        "job": {
-          "$ref": "#/definitions/Job",
-          "description": "The final state of the job."
-        },
-        "kind": {
-          "type": "string",
-          "description": "The resource type of the response.",
-          "default": "bigquery#jobStopResponse"
         }
       }
     },
