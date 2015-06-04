@@ -272,7 +272,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of drafts to return.",
-            "default": "100",
+            "default": 100,
             "type": "integer"
           },
           {
@@ -589,7 +589,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "The maximum number of history records to return.",
-            "default": "100",
+            "default": 100,
             "type": "integer"
           },
           {
@@ -1097,7 +1097,7 @@
             "name": "deleted",
             "in": "query",
             "description": "Mark the email as permanently deleted (not TRASH) and only visible in Google Apps Vault to a Vault administrator. Only used for Google Apps for Work accounts.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1115,14 +1115,14 @@
             "name": "neverMarkSpam",
             "in": "query",
             "description": "Ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
             "name": "processForCalendar",
             "in": "query",
             "description": "Process calendar invites in the email and add any extracted meetings to the Google Calendar for this user.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1198,7 +1198,7 @@
             "name": "deleted",
             "in": "query",
             "description": "Mark the email as permanently deleted (not TRASH) and only visible in Google Apps Vault to a Vault administrator. Only used for Google Apps for Work accounts.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1257,7 +1257,7 @@
             "name": "includeSpamTrash",
             "in": "query",
             "description": "Include messages from SPAM and TRASH in the results.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1274,7 +1274,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of messages to return.",
-            "default": "100",
+            "default": 100,
             "type": "integer"
           },
           {
@@ -1820,7 +1820,7 @@
             "name": "includeSpamTrash",
             "in": "query",
             "description": "Include threads from SPAM and TRASH in the results.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1837,7 +1837,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of threads to return.",
-            "default": "100",
+            "default": 100,
             "type": "integer"
           },
           {
@@ -2632,7 +2632,7 @@
       "name": "prettyPrint",
       "in": "query",
       "description": "Returns response with indentations and line breaks.",
-      "default": "true",
+      "default": true,
       "type": "boolean"
     },
     "quotaUser": {

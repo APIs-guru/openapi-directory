@@ -112,7 +112,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "The maximum number of activities to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.",
-            "default": "20",
+            "default": 20,
             "type": "integer",
             "minimum": 1,
             "maximum": 100
@@ -191,7 +191,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "The maximum number of activities to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.",
-            "default": "10",
+            "default": 10,
             "type": "integer",
             "minimum": 1,
             "maximum": 20
@@ -331,7 +331,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "The maximum number of comments to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.",
-            "default": "20",
+            "default": 20,
             "type": "integer",
             "minimum": 0,
             "maximum": 500
@@ -479,7 +479,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "The maximum number of moments to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.",
-            "default": "20",
+            "default": 20,
             "type": "integer",
             "minimum": 1,
             "maximum": 100
@@ -686,7 +686,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.",
-            "default": "100",
+            "default": 100,
             "type": "integer",
             "minimum": 1,
             "maximum": 100
@@ -779,7 +779,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.",
-            "default": "20",
+            "default": 20,
             "type": "integer",
             "minimum": 1,
             "maximum": 100
@@ -858,7 +858,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "The maximum number of people to include in the response, which is used for paging. For any response, the actual number returned might be less than the specified maxResults.",
-            "default": "25",
+            "default": 25,
             "type": "integer",
             "minimum": 1,
             "maximum": 50
@@ -2247,7 +2247,7 @@
       "name": "prettyPrint",
       "in": "query",
       "description": "Returns response with indentations and line breaks.",
-      "default": "true",
+      "default": true,
       "type": "boolean"
     },
     "quotaUser": {

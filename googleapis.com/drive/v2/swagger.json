@@ -38,7 +38,7 @@
             "name": "includeSubscribed",
             "in": "query",
             "description": "When calculating the number of remaining change IDs, whether to include public files the user has opened and shared files. When set to false, this counts only change IDs for owned files and any shared or public files that the user has explicitly added to a folder they own.",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
@@ -305,21 +305,21 @@
             "name": "includeDeleted",
             "in": "query",
             "description": "Whether to include deleted items.",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
             "name": "includeSubscribed",
             "in": "query",
             "description": "Whether to include public files the user has opened and shared files. When set to false, the list only includes owned files plus any shared or public files the user has explicitly added to a folder they own.",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of changes to return.",
-            "default": "100",
+            "default": 100,
             "type": "integer",
             "minimum": 1
           },
@@ -400,21 +400,21 @@
             "name": "includeDeleted",
             "in": "query",
             "description": "Whether to include deleted items.",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
             "name": "includeSubscribed",
             "in": "query",
             "description": "Whether to include public files the user has opened and shared files. When set to false, the list only includes owned files plus any shared or public files the user has explicitly added to a folder they own.",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of changes to return.",
-            "default": "100",
+            "default": 100,
             "type": "integer",
             "minimum": 1
           },
@@ -712,7 +712,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of children to return.",
-            "default": "100",
+            "default": 100,
             "type": "integer",
             "minimum": 0
           },
@@ -836,7 +836,7 @@
             "name": "includeDeleted",
             "in": "query",
             "description": "If set, this will succeed when retrieving a deleted comment, and will include any deleted replies.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           }
         ],
@@ -1032,14 +1032,14 @@
             "name": "includeDeleted",
             "in": "query",
             "description": "If set, all comments and replies, including deleted comments and replies (with content stripped) will be returned.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
             "name": "maxResults",
             "in": "query",
             "description": "The maximum number of discussions to include in the response, used for paging.",
-            "default": "20",
+            "default": 20,
             "type": "integer",
             "minimum": 0,
             "maximum": 100
@@ -1118,14 +1118,14 @@
             "name": "convert",
             "in": "query",
             "description": "Whether to convert this file to the corresponding Google Docs format.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
             "name": "ocr",
             "in": "query",
             "description": "Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1138,7 +1138,7 @@
             "name": "pinned",
             "in": "query",
             "description": "Whether to pin the head revision of the new copy. A file can have a maximum of 200 pinned revisions.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1264,7 +1264,7 @@
             "name": "acknowledgeAbuse",
             "in": "query",
             "description": "Whether the user is acknowledging the risk of downloading known malware or other abusive files.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1287,7 +1287,7 @@
             "name": "updateViewedDate",
             "in": "query",
             "description": "Whether to update the view date after successfully retrieving the file.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           }
         ],
@@ -1337,21 +1337,21 @@
             "name": "convert",
             "in": "query",
             "description": "Whether to convert this file to the corresponding Google Docs format.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
             "name": "newRevision",
             "in": "query",
             "description": "Whether a blob upload should create a new revision. If false, the blob data in the current head revision is replaced. If true or not set, a new blob is created as head revision, and previous revisions are preserved (causing increased use of the user's data storage quota).",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
             "name": "ocr",
             "in": "query",
             "description": "Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1364,7 +1364,7 @@
             "name": "pinned",
             "in": "query",
             "description": "Whether to pin the new revision. A file can have a maximum of 200 pinned revisions.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1377,7 +1377,7 @@
             "name": "setModifiedDate",
             "in": "query",
             "description": "Whether to set the modified date with the supplied modified date.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1396,14 +1396,14 @@
             "name": "updateViewedDate",
             "in": "query",
             "description": "Whether to update the view date after successfully updating the file.",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
             "name": "useContentAsIndexableText",
             "in": "query",
             "description": "Whether to use the content as indexable text.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1462,21 +1462,21 @@
             "name": "convert",
             "in": "query",
             "description": "Whether to convert this file to the corresponding Google Docs format.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
             "name": "newRevision",
             "in": "query",
             "description": "Whether a blob upload should create a new revision. If false, the blob data in the current head revision is replaced. If true or not set, a new blob is created as head revision, and previous revisions are preserved (causing increased use of the user's data storage quota).",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
             "name": "ocr",
             "in": "query",
             "description": "Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1489,7 +1489,7 @@
             "name": "pinned",
             "in": "query",
             "description": "Whether to pin the new revision. A file can have a maximum of 200 pinned revisions.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1502,7 +1502,7 @@
             "name": "setModifiedDate",
             "in": "query",
             "description": "Whether to set the modified date with the supplied modified date.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1521,14 +1521,14 @@
             "name": "updateViewedDate",
             "in": "query",
             "description": "Whether to update the view date after successfully updating the file.",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
             "name": "useContentAsIndexableText",
             "in": "query",
             "description": "Whether to use the content as indexable text.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1643,14 +1643,14 @@
             "name": "convert",
             "in": "query",
             "description": "Whether to convert this file to the corresponding Google Docs format.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
             "name": "ocr",
             "in": "query",
             "description": "Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1663,7 +1663,7 @@
             "name": "pinned",
             "in": "query",
             "description": "Whether to pin the head revision of the uploaded file. A file can have a maximum of 200 pinned revisions.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1682,7 +1682,7 @@
             "name": "useContentAsIndexableText",
             "in": "query",
             "description": "Whether to use the content as indexable text.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1744,7 +1744,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of files to return.",
-            "default": "100",
+            "default": 100,
             "type": "integer",
             "minimum": 0
           },
@@ -2020,7 +2020,7 @@
             "name": "acknowledgeAbuse",
             "in": "query",
             "description": "Whether the user is acknowledging the risk of downloading known malware or other abusive files.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -2043,7 +2043,7 @@
             "name": "updateViewedDate",
             "in": "query",
             "description": "Whether to update the view date after successfully retrieving the file.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -2409,7 +2409,7 @@
             "name": "transferOwnership",
             "in": "query",
             "description": "Whether changing a role to 'owner' downgrades the current owners to writers. Does nothing if the specified role is not 'owner'.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -2462,7 +2462,7 @@
             "name": "transferOwnership",
             "in": "query",
             "description": "Whether changing a role to 'owner' downgrades the current owners to writers. Does nothing if the specified role is not 'owner'.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -2601,7 +2601,7 @@
             "name": "sendNotificationEmails",
             "in": "query",
             "description": "Whether to send notification emails when sharing to users or groups. This parameter is ignored and an email is sent if the role is owner.",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
@@ -3196,7 +3196,7 @@
             "name": "includeDeleted",
             "in": "query",
             "description": "If set, this will succeed when retrieving a deleted reply.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           }
         ],
@@ -3420,14 +3420,14 @@
             "name": "includeDeleted",
             "in": "query",
             "description": "If set, all replies, including deleted replies (with content stripped) will be returned.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
             "name": "maxResults",
             "in": "query",
             "description": "The maximum number of replies to include in the response, used for paging.",
-            "default": "20",
+            "default": 20,
             "type": "integer",
             "minimum": 0,
             "maximum": 100
@@ -5342,7 +5342,7 @@
       "name": "prettyPrint",
       "in": "query",
       "description": "Returns response with indentations and line breaks.",
-      "default": "true",
+      "default": true,
       "type": "boolean"
     },
     "quotaUser": {

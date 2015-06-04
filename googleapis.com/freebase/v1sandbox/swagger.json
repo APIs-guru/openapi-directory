@@ -38,7 +38,7 @@
             "name": "confidence",
             "in": "query",
             "description": "Required confidence for a candidate to match. Must be between .5 and 1.0",
-            "default": "0.99",
+            "default": 0.99,
             "type": "number",
             "minimum": 0,
             "maximum": 1
@@ -67,7 +67,7 @@
             "name": "limit",
             "in": "query",
             "description": "Maximum number of candidates to return.",
-            "default": "3",
+            "default": 3,
             "type": "integer",
             "minimum": 0,
             "maximum": 25
@@ -225,7 +225,7 @@
             "name": "limit",
             "in": "query",
             "description": "Maximum number of results to return.",
-            "default": "20",
+            "default": 20,
             "type": "integer"
           },
           {
@@ -473,7 +473,7 @@
       "name": "prettyPrint",
       "in": "query",
       "description": "Returns response with indentations and line breaks.",
-      "default": "true",
+      "default": true,
       "type": "boolean"
     },
     "quotaUser": {

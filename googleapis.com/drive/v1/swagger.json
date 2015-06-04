@@ -55,7 +55,7 @@
             "name": "updateViewedDate",
             "in": "query",
             "description": "Whether to update the view date after successfully retrieving the file.",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           }
         ],
@@ -93,21 +93,21 @@
             "name": "newRevision",
             "in": "query",
             "description": "Whether a blob upload should create a new revision. If false, the blob data in the current head revision is replaced. If true or not set, a new blob is created as head revision, and previous revisions are preserved (causing increased use of the user's data storage quota).",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
             "name": "updateModifiedDate",
             "in": "query",
             "description": "Controls updating the modified date of the file. If true, the modified date will be updated to the current time, regardless of whether other changes are being made. If false, the modified date will only be updated to the current time if other changes are also being made (changing the title, for example).",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
             "name": "updateViewedDate",
             "in": "query",
             "description": "Whether to update the view date after successfully updating the file.",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
@@ -155,21 +155,21 @@
             "name": "newRevision",
             "in": "query",
             "description": "Whether a blob upload should create a new revision. If false, the blob data in the current head revision is replaced. If true or not set, a new blob is created as head revision, and previous revisions are preserved (causing increased use of the user's data storage quota).",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
             "name": "updateModifiedDate",
             "in": "query",
             "description": "Controls updating the modified date of the file. If true, the modified date will be updated to the current time, regardless of whether other changes are being made. If false, the modified date will only be updated to the current time if other changes are also being made (changing the title, for example).",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
             "name": "updateViewedDate",
             "in": "query",
             "description": "Whether to update the view date after successfully updating the file.",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
@@ -461,7 +461,7 @@
       "name": "prettyPrint",
       "in": "query",
       "description": "Returns response with indentations and line breaks.",
-      "default": "true",
+      "default": true,
       "type": "boolean"
     },
     "quotaUser": {

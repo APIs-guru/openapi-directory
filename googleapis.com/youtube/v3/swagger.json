@@ -96,7 +96,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "The maxResults parameter specifies the maximum number of items that should be returned in the result set.",
-            "default": "5",
+            "default": 5,
             "type": "integer",
             "minimum": 0,
             "maximum": 50
@@ -875,7 +875,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "The maxResults parameter specifies the maximum number of items that should be returned in the result set.",
-            "default": "5",
+            "default": 5,
             "type": "integer",
             "minimum": 0,
             "maximum": 50
@@ -1014,7 +1014,7 @@
             "name": "shareOnGooglePlus",
             "in": "query",
             "description": "The shareOnGooglePlus determines whether this thread should also be posted on Google+.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1077,7 +1077,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "The maxResults parameter specifies the maximum number of items that should be returned in the result set.\n\nNote: This parameter is not supported for use in conjunction with the id parameter.",
-            "default": "20",
+            "default": 20,
             "type": "integer",
             "minimum": 1,
             "maximum": 100
@@ -1303,7 +1303,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "The maxResults parameter specifies the maximum number of items that should be returned in the result set.\n\nNote: This parameter is not supported for use in conjunction with the id parameter.",
-            "default": "20",
+            "default": 20,
             "type": "integer",
             "minimum": 1,
             "maximum": 100
@@ -1491,7 +1491,7 @@
             "name": "banAuthor",
             "in": "query",
             "description": "The banAuthor paramter, if set to true, adds the author of the comment to the ban list. This means all future comments of the author will autmomatically be rejected.\n\nNote: This parameter is only valid in combination with moderationStatus 'rejected'.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           }
         ],
@@ -2050,7 +2050,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "The maxResults parameter specifies the maximum number of items that should be returned in the result set.",
-            "default": "5",
+            "default": 5,
             "type": "integer",
             "minimum": 0,
             "maximum": 50
@@ -2378,7 +2378,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "The maxResults parameter specifies the maximum number of items that should be returned in the result set. Acceptable values are 0 to 50, inclusive. The default value is 5.",
-            "default": "5",
+            "default": 5,
             "type": "integer",
             "minimum": 0,
             "maximum": 50
@@ -2602,7 +2602,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "The maxResults parameter specifies the maximum number of items that should be returned in the result set.",
-            "default": "5",
+            "default": 5,
             "type": "integer",
             "minimum": 0,
             "maximum": 50
@@ -2840,7 +2840,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "The maxResults parameter specifies the maximum number of items that should be returned in the result set.",
-            "default": "5",
+            "default": 5,
             "type": "integer",
             "minimum": 0,
             "maximum": 50
@@ -3035,7 +3035,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "The maxResults parameter specifies the maximum number of items that should be returned in the result set.",
-            "default": "5",
+            "default": 5,
             "type": "integer",
             "minimum": 0,
             "maximum": 50
@@ -3371,7 +3371,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "The maxResults parameter specifies the maximum number of items that should be returned in the result set.",
-            "default": "5",
+            "default": 5,
             "type": "integer",
             "minimum": 0,
             "maximum": 50
@@ -3825,7 +3825,7 @@
             "name": "notifySubscribers",
             "in": "query",
             "description": "The notifySubscribers parameter indicates whether YouTube should send notification to subscribers about the inserted video.",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
@@ -3924,7 +3924,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "The maxResults parameter specifies the maximum number of items that should be returned in the result set.\n\nNote: This parameter is supported for use in conjunction with the myRating parameter, but it is not supported for use in conjunction with the id parameter.",
-            "default": "5",
+            "default": 5,
             "type": "integer",
             "minimum": 1,
             "maximum": 50
@@ -9471,7 +9471,7 @@
       "name": "prettyPrint",
       "in": "query",
       "description": "Returns response with indentations and line breaks.",
-      "default": "true",
+      "default": true,
       "type": "boolean"
     },
     "quotaUser": {

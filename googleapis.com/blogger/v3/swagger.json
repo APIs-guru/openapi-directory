@@ -1569,7 +1569,7 @@
             "name": "fetchBodies",
             "in": "query",
             "description": "Whether the body content of posts is included. Default is false.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -1735,7 +1735,7 @@
             "name": "fetchBody",
             "in": "query",
             "description": "Whether the body content of the post is included (default: true). This should be set to false when the post bodies are not required, to help minimize traffic.",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
@@ -1804,7 +1804,7 @@
             "name": "fetchBody",
             "in": "query",
             "description": "Whether the body content of the post is included with the result (default: true).",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
@@ -1880,7 +1880,7 @@
             "name": "fetchBody",
             "in": "query",
             "description": "Whether the body content of the post is included with the result (default: true).",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
@@ -2055,7 +2055,7 @@
             "name": "fetchBody",
             "in": "query",
             "description": "Whether the body content of the post is included with the result (default: true).",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
@@ -2118,7 +2118,7 @@
             "name": "fetchBodies",
             "in": "query",
             "description": "Whether the body content of posts is included (default: true). This should be set to false when the post bodies are not required, to help minimize traffic.",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
@@ -2388,7 +2388,7 @@
             "name": "fetchBodies",
             "in": "query",
             "description": "Whether the body content of posts is included (default: true). This should be set to false when the post bodies are not required, to help minimize traffic.",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
@@ -3289,7 +3289,7 @@
       "name": "prettyPrint",
       "in": "query",
       "description": "Returns response with indentations and line breaks.",
-      "default": "true",
+      "default": true,
       "type": "boolean"
     },
     "quotaUser": {

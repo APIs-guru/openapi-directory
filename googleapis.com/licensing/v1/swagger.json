@@ -338,7 +338,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of campaigns to return at one time. Must be positive. Optional. Default value is 100.",
-            "default": "100",
+            "default": 100,
             "type": "integer",
             "minimum": 1,
             "maximum": 1000
@@ -424,7 +424,7 @@
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of campaigns to return at one time. Must be positive. Optional. Default value is 100.",
-            "default": "100",
+            "default": 100,
             "type": "integer",
             "minimum": 1,
             "maximum": 1000
@@ -575,7 +575,7 @@
       "name": "prettyPrint",
       "in": "query",
       "description": "Returns response with indentations and line breaks.",
-      "default": "true",
+      "default": true,
       "type": "boolean"
     },
     "quotaUser": {

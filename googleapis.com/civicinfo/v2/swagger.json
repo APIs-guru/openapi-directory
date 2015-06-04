@@ -140,7 +140,7 @@
             "name": "officialOnly",
             "in": "query",
             "description": "If set to true, only data from official state sources will be returned.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           }
         ],
@@ -195,7 +195,7 @@
             "name": "includeOffices",
             "in": "query",
             "description": "Whether to return information about offices and officials. If false, only the top-level district information will be returned.",
-            "default": "true",
+            "default": true,
             "type": "boolean"
           },
           {
@@ -1105,7 +1105,7 @@
       "name": "prettyPrint",
       "in": "query",
       "description": "Returns response with indentations and line breaks.",
-      "default": "true",
+      "default": true,
       "type": "boolean"
     },
     "quotaUser": {

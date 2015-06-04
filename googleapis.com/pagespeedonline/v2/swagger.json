@@ -45,7 +45,7 @@
             "name": "filter_third_party_resources",
             "in": "query",
             "description": "Indicates if third party resources should be filtered out before PageSpeed analysis.",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -68,7 +68,7 @@
             "name": "screenshot",
             "in": "query",
             "description": "Indicates if binary data containing a screenshot should be included",
-            "default": "false",
+            "default": false,
             "type": "boolean"
           },
           {
@@ -497,7 +497,7 @@
       "name": "prettyPrint",
       "in": "query",
       "description": "Returns response with indentations and line breaks.",
-      "default": "true",
+      "default": true,
       "type": "boolean"
     },
     "quotaUser": {
