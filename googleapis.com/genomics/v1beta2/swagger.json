@@ -3100,7 +3100,7 @@
         },
         "info": {
           "type": "object",
-          "description": "A map of additional data for this annotation.",
+          "description": "A string which maps to an array of values.",
           "additionalProperties": {
             "type": "array",
             "description": "A string which maps to an array of values.",
@@ -3151,7 +3151,7 @@
         },
         "info": {
           "type": "object",
-          "description": "A map of additional data for this annotation set.",
+          "description": "A string which maps to an array of values.",
           "additionalProperties": {
             "type": "array",
             "description": "A string which maps to an array of values.",
@@ -3266,7 +3266,7 @@
         },
         "info": {
           "type": "object",
-          "description": "A map of additional variant call information.",
+          "description": "A string which maps to an array of values.",
           "additionalProperties": {
             "type": "array",
             "description": "A string which maps to an array of values.",
@@ -3327,7 +3327,7 @@
         },
         "info": {
           "type": "object",
-          "description": "A map of additional call set information.",
+          "description": "A string which maps to an array of values.",
           "additionalProperties": {
             "type": "array",
             "description": "A string which maps to an array of values.",
@@ -3513,11 +3513,11 @@
       "properties": {
         "bigqueryDataset": {
           "type": "string",
-          "description": "The BigQuery dataset to export data to. Note that this is distinct from the Genomics concept of \"dataset\"."
+          "description": "Required. The BigQuery dataset to export data to. This dataset must already exist. Note that this is distinct from the Genomics concept of \"dataset\"."
         },
         "bigqueryTable": {
           "type": "string",
-          "description": "The BigQuery table to export data to. If the table doesn't exist, it will be created. If it already exists, it will be overwritten."
+          "description": "Required. The BigQuery table to export data to. If the table doesn't exist, it will be created. If it already exists, it will be overwritten."
         },
         "callSetIds": {
           "type": "array",
@@ -3535,7 +3535,7 @@
         },
         "projectNumber": {
           "type": "string",
-          "description": "The Google Cloud project number that owns the destination BigQuery dataset. The caller must have WRITE access to this project. This project will also own the resulting export job.",
+          "description": "Required. The Google Cloud project number that owns the destination BigQuery dataset. The caller must have WRITE access to this project. This project will also own the resulting export job.",
           "format": "int64"
         }
       }
@@ -3639,6 +3639,10 @@
             "COMPLETE_GENOMICS",
             "VCF"
           ]
+        },
+        "normalizeReferenceNames": {
+          "type": "boolean",
+          "description": "Convert reference names to the canonical representation. hg19 haploytypes (those reference names containing \"_hap\") are not modified in any way. All other reference names are modified according to the following rules: The reference name is capitalized. The \"chr\" prefix is dropped for all autosomes and sex chromsomes. For example \"chr17\" becomes \"17\" and \"chrX\" becomes \"X\". All mitochondrial chromosomes (\"chrM\", \"chrMT\", etc) become \"MT\"."
         },
         "sourceUris": {
           "type": "array",
@@ -3783,6 +3787,23 @@
         }
       }
     },
+    "KeyValue": {
+      "type": "object",
+      "description": "Used to hold basic key value information.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "A string which maps to an array of values."
+        },
+        "value": {
+          "type": "array",
+          "description": "The string values.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "LinearAlignment": {
       "type": "object",
       "description": "A linear alignment can be represented by one CIGAR string. Describes the mapped position and local alignment of the read to the reference.",
@@ -3887,7 +3908,7 @@
         },
         "info": {
           "type": "object",
-          "description": "Remaining structured metadata key-value pairs.",
+          "description": "A string which maps to an array of values.",
           "additionalProperties": {
             "type": "array",
             "description": "A string which maps to an array of values.",
@@ -4080,7 +4101,7 @@
         },
         "info": {
           "type": "object",
-          "description": "A map of additional read alignment information.",
+          "description": "A string which maps to an array of values.",
           "additionalProperties": {
             "type": "array",
             "description": "A string which maps to an array of values.",
@@ -4147,7 +4168,7 @@
         },
         "info": {
           "type": "object",
-          "description": "A map of additional read group information.",
+          "description": "A string which maps to an array of values.",
           "additionalProperties": {
             "type": "array",
             "description": "A string which maps to an array of values.",
@@ -4246,7 +4267,7 @@
         },
         "info": {
           "type": "object",
-          "description": "A map of additional read group set information.",
+          "description": "A string which maps to an array of values.",
           "additionalProperties": {
             "type": "array",
             "description": "A string which maps to an array of values.",
@@ -4981,7 +5002,7 @@
         },
         "info": {
           "type": "object",
-          "description": "A map of additional variant information.",
+          "description": "A string which maps to an array of values.",
           "additionalProperties": {
             "type": "array",
             "description": "A string which maps to an array of values.",

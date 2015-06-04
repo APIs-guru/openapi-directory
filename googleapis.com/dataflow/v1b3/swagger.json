@@ -412,6 +412,7 @@
             "in": "query",
             "type": "string",
             "enum": [
+              "JOB_MESSAGE_BASIC",
               "JOB_MESSAGE_DEBUG",
               "JOB_MESSAGE_DETAILED",
               "JOB_MESSAGE_ERROR",
@@ -804,6 +805,9 @@
     "Job": {
       "type": "object",
       "properties": {
+        "clientRequestId": {
+          "type": "string"
+        },
         "createTime": {
           "type": "string"
         },
@@ -836,6 +840,9 @@
         "projectId": {
           "type": "string"
         },
+        "replaceJobId": {
+          "type": "string"
+        },
         "requestedState": {
           "type": "string",
           "enum": [
@@ -851,6 +858,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Step"
+          }
+        },
+        "transformNameMapping": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
         },
         "type": {
@@ -894,6 +907,7 @@
         "messageImportance": {
           "type": "string",
           "enum": [
+            "JOB_MESSAGE_BASIC",
             "JOB_MESSAGE_DEBUG",
             "JOB_MESSAGE_DETAILED",
             "JOB_MESSAGE_ERROR",
