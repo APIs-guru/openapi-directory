@@ -522,6 +522,13 @@
           "type": "string",
           "description": "[Output only] The IP address of this cluster's Kubernetes master. The endpoint can be accessed from the internet at https://username:password@endpoint/.\n\nSee the masterAuth property of this resource for username and password information."
         },
+        "instanceGroupUrls": {
+          "type": "array",
+          "description": "[Output only] The resource URLs of [instance groups](/compute/docs/instance-groups/) associated with this cluster.",
+          "items": {
+            "type": "string"
+          }
+        },
         "masterAuth": {
           "$ref": "#/definitions/MasterAuth",
           "description": "The authentication information for accessing the master."
@@ -640,6 +647,18 @@
         "bearerToken": {
           "type": "string",
           "description": "The token used to authenticate API requests to the master. The token is to be included in an HTTP Authorization Header in all requests to the master endpoint. The format of the header is: \"Authorization: Bearer \"."
+        },
+        "clientCertificate": {
+          "type": "string",
+          "description": "[Output only] Base64 encoded public certificate used by clients to authenticate to the cluster endpoint."
+        },
+        "clientKey": {
+          "type": "string",
+          "description": "[Output only] Base64 encoded private key used by clients to authenticate to the cluster endpoint."
+        },
+        "clusterCaCertificate": {
+          "type": "string",
+          "description": "[Output only] Base64 encoded public certificate that is the root of trust for the cluster."
         },
         "password": {
           "type": "string",

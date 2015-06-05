@@ -3474,16 +3474,16 @@
       "properties": {
         "exportUri": {
           "type": "string",
-          "description": "A Google Cloud Storage URI for the exported BAM file. The currently authenticated user must have write access to the new file. An error will be returned if the URI already contains data."
+          "description": "Required. A Google Cloud Storage URI for the exported BAM file. The currently authenticated user must have write access to the new file. An error will be returned if the URI already contains data."
         },
         "projectNumber": {
           "type": "string",
-          "description": "The Google Developers Console project number that owns this export.",
+          "description": "Required. The Google Developers Console project number that owns this export.",
           "format": "int64"
         },
         "readGroupSetIds": {
           "type": "array",
-          "description": "The IDs of the read group sets to export.",
+          "description": "Required. The IDs of the read group sets to export.",
           "items": {
             "type": "string"
           }

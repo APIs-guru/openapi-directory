@@ -1106,6 +1106,13 @@
           "type": "string",
           "description": "The id of the subscription."
         },
+        "suspensionReasons": {
+          "type": "array",
+          "description": "Suspension Reasons",
+          "items": {
+            "type": "string"
+          }
+        },
         "transferInfo": {
           "type": "object",
           "description": "Transfer related information for the subscription.",

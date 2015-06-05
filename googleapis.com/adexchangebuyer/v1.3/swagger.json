@@ -1553,6 +1553,16 @@
       "type": "object",
       "description": "The configuration data for an Ad Exchange performance report list.",
       "properties": {
+        "bidRate": {
+          "type": "number",
+          "description": "The number of bid responses with an ad.",
+          "format": "double"
+        },
+        "bidRequestRate": {
+          "type": "number",
+          "description": "The number of bid requests sent to your bidder.",
+          "format": "double"
+        },
         "calloutStatusRate": {
           "type": "array",
           "description": "Rate of various prefiltering statuses per match. Please refer to the callout-status-codes.txt file for different statuses.",
@@ -1568,10 +1578,20 @@
           "description": "Rate of ads with a given status. Please refer to the creative-status-codes.txt file for different statuses.",
           "items": {}
         },
+        "filteredBidRate": {
+          "type": "number",
+          "description": "The number of bid responses that were filtered due to a policy violation or other errors.",
+          "format": "double"
+        },
         "hostedMatchStatusRate": {
           "type": "array",
           "description": "Average QPS for hosted match operations.",
           "items": {}
+        },
+        "inventoryMatchRate": {
+          "type": "number",
+          "description": "The number of potential queries based on your pretargeting settings.",
+          "format": "double"
         },
         "kind": {
           "type": "string",
@@ -1627,10 +1647,20 @@
           "type": "string",
           "description": "The trading location of this data."
         },
+        "successfulRequestRate": {
+          "type": "number",
+          "description": "The number of properly formed bid responses received by our servers within the deadline.",
+          "format": "double"
+        },
         "timestamp": {
           "type": "string",
           "description": "The unix timestamp of the starting time of this performance data.",
           "format": "int64"
+        },
+        "unsuccessfulRequestRate": {
+          "type": "number",
+          "description": "The number of bid responses that were unsuccessful due to timeouts, incorrect formatting, etc.",
+          "format": "double"
         }
       }
     },
