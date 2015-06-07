@@ -2619,6 +2619,7 @@
           "description": "The type of operator for this condition.",
           "enum": [
             "contains",
+            "cssSelector",
             "endsWith",
             "equals",
             "greater",
@@ -2656,6 +2657,12 @@
           "items": {
             "type": "string",
             "enum": [
+              "advertiserId",
+              "advertisingTrackingEnabled",
+              "appId",
+              "appName",
+              "appVersionCode",
+              "appVersionName",
               "clickClasses",
               "clickElement",
               "clickId",
@@ -2665,6 +2672,7 @@
               "containerId",
               "containerVersion",
               "debugMode",
+              "deviceName",
               "errorLine",
               "errorMessage",
               "errorUrl",
@@ -2676,15 +2684,20 @@
               "formText",
               "formUrl",
               "historySource",
+              "language",
               "newHistoryFragment",
               "newHistoryState",
               "oldHistoryFragment",
               "oldHistoryState",
+              "osVersion",
               "pageHostname",
               "pagePath",
               "pageUrl",
+              "platform",
               "randomNumber",
-              "referrer"
+              "referrer",
+              "resolution",
+              "sdkVersion"
             ]
           }
         },
