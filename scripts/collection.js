@@ -4,8 +4,46 @@
 var assert = require('assert');
 var _ = require('lodash');
 var fs = require('fs');
-
 var glob = require('glob')
+var converter = require('api-spec-converter');
+var parseDomain = require('parse-domain');
+var mkdirp = require('mkdirp').sync;
+
+var program = require('commander');
+
+program
+  .command('update')
+  .description('run update')
+  .action(updateCollection);
+
+program
+  .command('add')
+  .description('add new spec')
+  .arguments('<TYPE> <URL>')
+  .action(addToCollection);
+
+program.parse(process.argv);
+
+function updateCollection() {
+  getSpecs(function (filename, swagger) {
+    writeSpec(getUrl(swagger), getSpecType(swagger), function (newFilename) {
+      assert(newFilename === filename);
+    });
+  }, function () {
+    console.log('finish');
+  });
+}
+
+function addToCollection(type, url) {
+  writeSpec(url, type, function () {});
+}
+
+function writeSpec(url, type, callback) {
+  convertToSwagger(url, type, function (swagger) {
+    var filename = saveSwagger(swagger);
+    callback(filename);
+  });
+}
 
 function getSpecs(callback, finishCallback) {
   new glob.Glob('**/swagger.json').on('match', function (filename) {
@@ -17,29 +55,15 @@ function getSpecs(callback, finishCallback) {
   }).on('end', finishCallback);
 }
 
-getSpecs(function (filename, spec) {
-  convertToSwagger(getOrigin(spec), function (swagger) {
-    var newFilename = saveSwagger(swagger);
-    assert(newFilename === filename);
-  })
-}, function () {
-  console.log('finish');
-});
-
-var converter = require('api-spec-converter');
-var parseDomain = require('parse-domain');
-var mkdirp = require('mkdirp').sync;
-
-function convertToSwagger(origin, callback) {
-  var format = converter.getTypeName(origin.format, origin.version);
-  converter.getSpec(origin.url, format, function (err, spec) {
+function convertToSwagger(url, format, callback) {
+  converter.getSpec(url, format, function (err, spec) {
     assert(!err, err);
     spec.convertTo('swagger_2', function (err, swagger) {
       assert(!err, err);
       swagger.spec.info['x-origin'] = {
         format: spec.formatName,
         version: spec.getFormatVersion(),
-        url: origin.url
+        url: url
       };
       callback(swagger.spec)
     });
@@ -54,14 +78,16 @@ function parseHost(swagger, subdomains) {
 
   var host = p.tld;
   if (p.domain !== '')
-    host += '.' + p.domain;
+    host = p.domain + '.' + host;
 
   //Workaround for google API
   if (p.tld === 'googleapis.com')
     host = p.tld;
 
   assert(host && host !== '');
-  assert(p.subdomain === '');
+  console.log(host);
+  console.log(p.subdomain);
+  //assert(p.subdomain === '');
   return host;
 }
 
@@ -76,6 +102,15 @@ function readSwagger(filename, callback) {
 
 function getOrigin(swagger) {
   return swagger.info['x-origin'];
+}
+
+function getSpecType(swagger) {
+  var origin = getOrigin(swagger);
+  return converter.getTypeName(origin.format, origin.version);
+}
+
+function getUrl(swagger) {
+  return getOrigin(swagger).url;
 }
 
 function getPath(swagger) {
