@@ -33,7 +33,7 @@ program.parse(process.argv);
 function updateCollection() {
   var specs = getSpecs();
   _.each(specs, function (swagger, filename) {
-    writeSpec(getUrl(swagger), getSpecType(swagger), function (newFilename) {
+    writeSpec(getOriginUrl(swagger), getSpecType(swagger), function (newFilename) {
       assert(newFilename === filename);
     });
   });
@@ -44,7 +44,7 @@ function addToCollection(type, url) {
 }
 
 function updateGoogle() {
-  var knownUrls = _(getSpecs()).values().map(getUrl).value();
+  var knownUrls = _(getSpecs()).values().map(getOriginUrl).value();
   var discovery = new RestClient();
   discovery.get('https://www.googleapis.com/discovery/v1/apis', function (data) {
     data = JSON.parse(data);
@@ -98,21 +98,25 @@ function convertToSwagger(url, format, callback) {
     assert(!err, err);
     spec.convertTo('swagger_2', function (err, swagger) {
       assert(!err, err);
-      swagger.spec.info['x-origin'] = {
-        format: spec.formatName,
-        version: spec.getFormatVersion(),
-        url: url
-      };
+      _.merge(swagger.spec.info, {
+        'x-providerName': parseHost(swagger.spec),
+        'x-origin': {
+          format: spec.formatName,
+          version: spec.getFormatVersion(),
+          url: url
+        }
+      });
       callback(swagger.spec)
     });
   });
 }
 
-function parseHost(swagger, subdomains) {
+function parseHost(swagger) {
   assert(swagger.host);
   var p = parseDomain(swagger.host);
   p.domain = p.domain.replace(/^www.?/, '')
   p.subdomain = p.subdomain.replace(/^www.?/, '')
+  //TODO: use subdomain to detect 'x-serviceName'
 
   var host = p.tld;
   if (p.domain !== '')
@@ -123,9 +127,6 @@ function parseHost(swagger, subdomains) {
     host = p.tld;
 
   assert(host && host !== '');
-  console.log(host);
-  console.log(p.subdomain);
-  //assert(p.subdomain === '');
   return host;
 }
 
@@ -144,12 +145,13 @@ function getSpecType(swagger) {
   return converter.getTypeName(origin.format, origin.version);
 }
 
-function getUrl(swagger) {
+function getOriginUrl(swagger) {
   return getOrigin(swagger).url;
 }
 
 function getPath(swagger) {
-  return parseHost(swagger) + '/' + swagger.info['x-serviceName'] + '/' + swagger.info.version;
+  var info = swagger.info;
+  return info['x-providerName'] + '/' + info['x-serviceName'] + '/' + info.version;
 }
 
 function saveSwagger(swagger) {
