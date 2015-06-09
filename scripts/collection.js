@@ -8,6 +8,7 @@ var glob = require('glob')
 var converter = require('api-spec-converter');
 var parseDomain = require('parse-domain');
 var mkdirp = require('mkdirp').sync;
+var RestClient = require('node-rest-client').Client;
 
 var program = require('commander');
 
@@ -15,6 +16,11 @@ program
   .command('update')
   .description('run update')
   .action(updateCollection);
+
+program
+  .command('google')
+  .description('add new Google APIs')
+  .action(updateGoogle);
 
 program
   .command('add')
@@ -25,17 +31,52 @@ program
 program.parse(process.argv);
 
 function updateCollection() {
-  getSpecs(function (filename, swagger) {
+  var specs = getSpecs();
+  _.each(specs, function (swagger, filename) {
     writeSpec(getUrl(swagger), getSpecType(swagger), function (newFilename) {
       assert(newFilename === filename);
     });
-  }, function () {
-    console.log('finish');
   });
 }
 
 function addToCollection(type, url) {
   writeSpec(url, type, function () {});
+}
+
+function updateGoogle() {
+  var knownUrls = _(getSpecs()).values().map(getUrl).value();
+  var discovery = new RestClient();
+  discovery.get('https://www.googleapis.com/discovery/v1/apis', function (data) {
+    data = JSON.parse(data);
+    assert.equal(data.kind, 'discovery#directoryList');
+    assert.equal(data.discoveryVersion, 'v1');
+
+    var result = [];
+    //FIXME: data.preferred
+    _.each(data.items, function (api) {
+      //blacklist
+      if ([
+             //missing API description
+             'cloudlatencytest:v2',
+             //asterisk in path
+             'admin:directory_v1',
+             //plus in path
+             'pubsub:v1beta1',
+             'pubsub:v1beta1a',
+             'pubsub:v1beta2',
+             //circular reference in MapFolder/MapItem
+             'mapsengine:exp2',
+             'mapsengine:v1',
+           ].indexOf(api.id) >= 0) {
+          return;
+      }
+      var url = api.discoveryRestUrl;
+      if (knownUrls.indexOf(url) !== -1)
+        return;
+
+      writeSpec(url, 'google', _.noop);
+    });
+  });
 }
 
 function writeSpec(url, type, callback) {
@@ -46,13 +87,10 @@ function writeSpec(url, type, callback) {
 }
 
 function getSpecs(callback, finishCallback) {
-  new glob.Glob('**/swagger.json').on('match', function (filename) {
-    readSwagger(filename, function (swagger) {
-      callback(filename, swagger);
-    })
-  }).on('error', function (err) {
-    assert(false, err);
-  }).on('end', finishCallback);
+  var files = glob.sync('**/swagger.json');
+  return _.transform(files, function (result, filename) {
+    result[filename] = readSwagger(filename);
+  }, {});
 }
 
 function convertToSwagger(url, format, callback) {
@@ -91,12 +129,9 @@ function parseHost(swagger, subdomains) {
   return host;
 }
 
-function readSwagger(filename, callback) {
-  fs.readFile(filename, 'utf-8', function (err, data) {
-    assert(!err, err);
-    var swagger = JSON.parse(data);
-    callback(swagger);
-  });
+function readSwagger(filename) {
+  var data = fs.readFileSync(filename, 'utf-8');
+  return JSON.parse(data);
 }
 
 
