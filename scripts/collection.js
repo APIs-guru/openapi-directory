@@ -150,8 +150,10 @@ function getOriginUrl(swagger) {
 }
 
 function getPath(swagger) {
-  var info = swagger.info;
-  return info['x-providerName'] + '/' + info['x-serviceName'] + '/' + info.version;
+  var path = swagger.info['x-providerName'] + '/';
+  if ('x-serviceName' in swagger.info)
+    path +=  info['x-serviceName'] + '/';
+  return path + swagger.info.version;
 }
 
 function saveSwagger(swagger) {
