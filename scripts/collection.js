@@ -152,7 +152,7 @@ function getOriginUrl(swagger) {
 function getPath(swagger) {
   var path = swagger.info['x-providerName'] + '/';
   if ('x-serviceName' in swagger.info)
-    path +=  info['x-serviceName'] + '/';
+    path +=  swagger.info['x-serviceName'] + '/';
   return path + swagger.info.version;
 }
 
