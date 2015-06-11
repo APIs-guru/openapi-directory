@@ -146,22 +146,27 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Optional. Filter expression for filtering listed resources.",
+            "description": "Filter expression for filtering listed resources.",
             "type": "string"
           },
           {
             "name": "maxResults",
             "in": "query",
-            "description": "Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.",
+            "description": "Maximum count of results to be returned.",
             "default": 500,
             "type": "integer",
             "minimum": 0,
             "maximum": 500
           },
           {
+            "name": "orderBy",
+            "in": "query",
+            "type": "string"
+          },
+          {
             "name": "pageToken",
             "in": "query",
-            "description": "Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.",
+            "description": "Tag returned by a previous list request when that list was truncated to maxResults. Used to continue a previous list request.",
             "type": "string"
           }
         ],
@@ -275,7 +280,7 @@
     },
     "/{project}/global/groups/{groupName}": {
       "delete": {
-        "description": "Deletes the specified group resource.",
+        "description": "Deletes the specified Group resource.",
         "operationId": "computeaccounts.groups.delete",
         "responses": {
           "200": {
@@ -296,7 +301,7 @@
           {
             "name": "groupName",
             "in": "path",
-            "description": "Name of the group resource to delete.",
+            "description": "Name of the Group resource to delete.",
             "required": true,
             "type": "string"
           }
@@ -314,7 +319,7 @@
         ]
       },
       "get": {
-        "description": "Returns the specified group resource.",
+        "description": "Returns the specified Group resource.",
         "operationId": "computeaccounts.groups.get",
         "responses": {
           "200": {
@@ -335,7 +340,7 @@
           {
             "name": "groupName",
             "in": "path",
-            "description": "Name of the group resource to return.",
+            "description": "Name of the Group resource to return.",
             "required": true,
             "type": "string"
           }
@@ -379,7 +384,7 @@
     },
     "/{project}/global/groups": {
       "post": {
-        "description": "Creates a group resource in the specified project using the data included in the request.",
+        "description": "Creates a Group resource in the specified project using the data included in the request.",
         "operationId": "computeaccounts.groups.insert",
         "responses": {
           "200": {
@@ -439,22 +444,27 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Optional. Filter expression for filtering listed resources.",
+            "description": "Filter expression for filtering listed resources.",
             "type": "string"
           },
           {
             "name": "maxResults",
             "in": "query",
-            "description": "Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.",
+            "description": "Maximum count of results to be returned.",
             "default": 500,
             "type": "integer",
             "minimum": 0,
             "maximum": 500
           },
           {
+            "name": "orderBy",
+            "in": "query",
+            "type": "string"
+          },
+          {
             "name": "pageToken",
             "in": "query",
-            "description": "Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.",
+            "description": "Tag returned by a previous list request when that list was truncated to maxResults. Used to continue a previous list request.",
             "type": "string"
           }
         ],
@@ -568,7 +578,7 @@
     },
     "/{project}/zones/{zone}/authorizedKeysView/{user}": {
       "post": {
-        "description": "Returns the AuthorizedKeysView of the specified user.",
+        "description": "Returns a list of authorized public keys for a specific user account.",
         "operationId": "computeaccounts.linux.getAuthorizedKeysView",
         "responses": {
           "200": {
@@ -596,14 +606,14 @@
           {
             "name": "user",
             "in": "path",
-            "description": "Username of the AuthorizedKeysView to return.",
+            "description": "The user account for which you want to get a list of authorized public keys.",
             "required": true,
             "type": "string"
           },
           {
             "name": "instance",
             "in": "query",
-            "description": "The fully-qualified URL of the instance requesting the view.",
+            "description": "The fully-qualified URL of the virtual machine requesting the view.",
             "required": true,
             "type": "string"
           }
@@ -647,7 +657,7 @@
     },
     "/{project}/zones/{zone}/linuxAccountViews": {
       "post": {
-        "description": "Retrieves the Linux views for an instance contained within the specified project.",
+        "description": "Retrieves a list of user accounts for an instance within a specific project.",
         "operationId": "computeaccounts.linux.getLinuxAccountViews",
         "responses": {
           "200": {
@@ -675,35 +685,40 @@
           {
             "name": "instance",
             "in": "query",
-            "description": "The fully-qualified URL of the instance requesting the views.",
+            "description": "The fully-qualified URL of the virtual machine requesting the views.",
             "required": true,
             "type": "string"
           },
           {
             "name": "filter",
             "in": "query",
-            "description": "Optional. Filter expression for filtering listed resources.",
+            "description": "Filter expression for filtering listed resources.",
             "type": "string"
           },
           {
             "name": "maxResults",
             "in": "query",
-            "description": "Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.",
+            "description": "Maximum count of results to be returned.",
             "default": 500,
             "type": "integer",
             "minimum": 0,
             "maximum": 500
           },
           {
+            "name": "orderBy",
+            "in": "query",
+            "type": "string"
+          },
+          {
             "name": "pageToken",
             "in": "query",
-            "description": "Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.",
+            "description": "Tag returned by a previous list request when that list was truncated to maxResults. Used to continue a previous list request.",
             "type": "string"
           },
           {
             "name": "user",
             "in": "query",
-            "description": "If provided, the user whose login is triggering an immediate refresh of the views.",
+            "description": "If provided, the user requesting the views. If left blank, the system is requesting the views, instead of a particular user.",
             "type": "string"
           }
         ],
@@ -746,7 +761,7 @@
     },
     "/{project}/global/users/{user}/addPublicKey": {
       "post": {
-        "description": "Adds a public key to the specified user using the data included in the request.",
+        "description": "Adds a public key to the specified User resource with the data included in the request.",
         "operationId": "computeaccounts.users.addPublicKey",
         "responses": {
           "200": {
@@ -817,7 +832,7 @@
     },
     "/{project}/global/users/{user}": {
       "delete": {
-        "description": "Deletes the specified user resource.",
+        "description": "Deletes the specified User resource.",
         "operationId": "computeaccounts.users.delete",
         "responses": {
           "200": {
@@ -856,7 +871,7 @@
         ]
       },
       "get": {
-        "description": "Returns the specified user resource.",
+        "description": "Returns the specified User resource.",
         "operationId": "computeaccounts.users.get",
         "responses": {
           "200": {
@@ -921,7 +936,7 @@
     },
     "/{project}/global/users": {
       "post": {
-        "description": "Creates a user resource in the specified project using the data included in the request.",
+        "description": "Creates a User resource in the specified project using the data included in the request.",
         "operationId": "computeaccounts.users.insert",
         "responses": {
           "200": {
@@ -960,7 +975,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves the list of users contained within the specified project.",
+        "description": "Retrieves a list of users contained within the specified project.",
         "operationId": "computeaccounts.users.list",
         "responses": {
           "200": {
@@ -981,22 +996,27 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Optional. Filter expression for filtering listed resources.",
+            "description": "Filter expression for filtering listed resources.",
             "type": "string"
           },
           {
             "name": "maxResults",
             "in": "query",
-            "description": "Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.",
+            "description": "Maximum count of results to be returned.",
             "default": 500,
             "type": "integer",
             "minimum": 0,
             "maximum": 500
           },
           {
+            "name": "orderBy",
+            "in": "query",
+            "type": "string"
+          },
+          {
             "name": "pageToken",
             "in": "query",
-            "description": "Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.",
+            "description": "Tag returned by a previous list request when that list was truncated to maxResults. Used to continue a previous list request.",
             "type": "string"
           }
         ],
@@ -1112,11 +1132,11 @@
   "definitions": {
     "AuthorizedKeysView": {
       "type": "object",
-      "description": "A list of authorized public keys for a user.",
+      "description": "A list of authorized public keys for a user account.",
       "properties": {
         "keys": {
           "type": "array",
-          "description": "[Output Only] The authorized public keys in SSH format.",
+          "description": "[Output Only] The list of authorized public keys in SSH format.",
           "items": {
             "type": "string"
           }
@@ -1218,7 +1238,7 @@
     },
     "LinuxAccountViews": {
       "type": "object",
-      "description": "A list of all Linux accounts for this project. Linux Account Views are only used by Compute Engine virtual machines to get information about user accounts for a project or instance. They are read-only views into users and groups managed by the Compute Engine Accounts API.",
+      "description": "A list of all Linux accounts for this project. This API is only used by Compute Engine virtual machines to get information about user accounts for a project or instance. Linux resources are read-only views into users and groups managed by the Compute Engine Accounts API.",
       "properties": {
         "groupViews": {
           "type": "array",
@@ -1229,7 +1249,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "[Output Only] Type of the resource. Always computeaccounts#linuxAccountViews for Linux views.",
+          "description": "[Output Only] Type of the resource. Always computeaccounts#linuxAccountViews for Linux resources.",
           "default": "computeaccounts#linuxAccountViews"
         },
         "userViews": {
@@ -1265,7 +1285,7 @@
       "properties": {
         "gid": {
           "type": "integer",
-          "description": "[Output Only] GID.",
+          "description": "[Output Only] The Group ID.",
           "format": "uint32"
         },
         "groupName": {
@@ -1274,7 +1294,7 @@
         },
         "members": {
           "type": "array",
-          "description": "[Output Only] List of usernames who belong to the group.",
+          "description": "[Output Only] List of user accounts that belong to the group.",
           "items": {
             "type": "string"
           }
@@ -1309,7 +1329,7 @@
         },
         "username": {
           "type": "string",
-          "description": "[Output Only] The username for the account."
+          "description": "[Output Only] The username of the account."
         }
       }
     },
@@ -1319,7 +1339,7 @@
       "properties": {
         "clientOperationId": {
           "type": "string",
-          "description": "[Output Only] An optional identifier specified by the client when the mutation was initiated. Must be unique for all operation resources in the project"
+          "description": "[Output Only] An optional identifier specified by the client when the mutation was initiated. Must be unique for all operation resources in the project."
         },
         "creationTimestamp": {
           "type": "string",
@@ -1389,7 +1409,7 @@
         },
         "progress": {
           "type": "integer",
-          "description": "[Output Only] An optional progress indicator that ranges from 0 to 100. There is no requirement that this be linear or support any granularity of operations. This should not be used to guess at when the operation will be complete. This number should be monotonically increasing as the operation progresses.",
+          "description": "[Output Only] An optional progress indicator that ranges from 0 to 100. There is no requirement that this be linear or support any granularity of operations. This should not be used to guess at when the operation will be complete. This number should monotonically increase as the operation progresses.",
           "format": "int32"
         },
         "region": {
