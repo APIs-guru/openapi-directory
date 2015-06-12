@@ -113,6 +113,13 @@
             "type": "string"
           },
           {
+            "name": "signature",
+            "in": "query",
+            "description": "The signature for the increment request.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "stepsToIncrement",
             "in": "query",
             "description": "The number of steps to increment.",
@@ -391,6 +398,13 @@
             "name": "achievementId",
             "in": "path",
             "description": "The ID of the achievement used by this method.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "signature",
+            "in": "query",
+            "description": "The signature for the unlock request.",
             "required": true,
             "type": "string"
           }
@@ -3787,6 +3801,10 @@
         "setStepsAtLeastPayload": {
           "$ref": "#/definitions/GamesAchievementSetStepsAtLeast",
           "description": "The payload if an update of type SET_STEPS_AT_LEAST was requested for the achievement."
+        },
+        "signature": {
+          "type": "string",
+          "description": "Signature Values will contain URI-safe characters as defined by section 2.3 of RFC 3986."
         },
         "updateType": {
           "type": "string",

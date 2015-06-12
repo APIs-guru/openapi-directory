@@ -6032,7 +6032,9 @@
             "cscf16",
             "cscf18",
             "cscf6",
+            "cscf9",
             "cscfA",
+            "cscfAl",
             "cscfUnrated"
           ]
         },
@@ -6262,6 +6264,7 @@
           "enum": [
             "kijkwijzer12",
             "kijkwijzer16",
+            "kijkwijzer18",
             "kijkwijzer6",
             "kijkwijzer9",
             "kijkwijzerAl",
@@ -7105,6 +7108,9 @@
         "status": {
           "$ref": "#/definitions/LiveBroadcastStatus",
           "description": "The status object contains information about the event's status."
+        },
+        "topicDetails": {
+          "$ref": "#/definitions/LiveBroadcastTopicDetails"
         }
       }
     },
@@ -7303,6 +7309,50 @@
             "recorded",
             "recording"
           ]
+        }
+      }
+    },
+    "LiveBroadcastTopic": {
+      "type": "object",
+      "properties": {
+        "snippet": {
+          "$ref": "#/definitions/LiveBroadcastTopicSnippet",
+          "description": "Information about the topic matched."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the topic.",
+          "enum": [
+            "videoGame"
+          ]
+        },
+        "unmatched": {
+          "type": "boolean",
+          "description": "If this flag is set it means that we have not been able to match the topic title and type provided to a known entity."
+        }
+      }
+    },
+    "LiveBroadcastTopicDetails": {
+      "type": "object",
+      "properties": {
+        "topics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LiveBroadcastTopic"
+          }
+        }
+      }
+    },
+    "LiveBroadcastTopicSnippet": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the topic."
+        },
+        "releaseDate": {
+          "type": "string",
+          "description": "The date at which the topic was released. Filled for types: videoGame"
         }
       }
     },
