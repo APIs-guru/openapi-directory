@@ -1,0 +1,797 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Seldon API",
+    "version": "1.0.0",
+    "x-providerName": "rummblelabs.com",
+    "x-origin": {
+      "format": "swagger",
+      "version": "2.0",
+      "url": "http://recsvm.rummblelabs.com/api-spec/seldon.json"
+    }
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/token": {
+      "get": {
+        "tags": [
+          "token"
+        ],
+        "summary": "get token",
+        "description": "",
+        "operationId": "getToken",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "consumer_key",
+            "description": "consumer key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "consumer_secret",
+            "description": "consumer secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid parameters"
+          }
+        }
+      }
+    },
+    "/items": {
+      "get": {
+        "tags": [
+          "oauth items"
+        ],
+        "summary": "get items",
+        "description": "",
+        "operationId": "getItems",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "oauth_token",
+            "description": "oauth token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "full",
+            "description": "get all attributes for item",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "description": "keywords to match",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "dimension",
+            "description": "limit items to a particular dimension",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "description": "limit items to a particular type",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "limit number of items returned",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid parameters"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "oauth items"
+        ],
+        "summary": "post new item",
+        "description": "",
+        "operationId": "postItem",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "oauth_token",
+            "description": "oauth token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "the json details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid parameters"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "oauth items"
+        ],
+        "summary": "update item",
+        "description": "",
+        "operationId": "putItem",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "oauth_token",
+            "description": "oauth token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "the json details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Item"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid parameters"
+          }
+        }
+      }
+    },
+    "/items/{itemId}": {
+      "get": {
+        "tags": [
+          "oauth items"
+        ],
+        "summary": "get item",
+        "description": "",
+        "operationId": "getItem",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "oauth_token",
+            "description": "oauth token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "itemId",
+            "description": "the item id to get",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "full",
+            "description": "get all attributes for item",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid parameters"
+          }
+        }
+      }
+    },
+    "/items/type": {
+      "get": {
+        "tags": [
+          "oauth items"
+        ],
+        "summary": "get item type",
+        "description": "",
+        "operationId": "getItemTypes",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "oauth_token",
+            "description": "oauth token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid parameters"
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "oauth users"
+        ],
+        "summary": "get users",
+        "description": "",
+        "operationId": "getUsers",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "oauth_token",
+            "description": "oauth token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "full",
+            "description": "get all attributes for user",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "description": "keywords to match",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "limit number of users returned",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid parameters"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "oauth users"
+        ],
+        "summary": "post new user",
+        "description": "",
+        "operationId": "postUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "oauth_token",
+            "description": "oauth token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "the json details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid parameters"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "oauth users"
+        ],
+        "summary": "update user",
+        "description": "",
+        "operationId": "updateUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "oauth_token",
+            "description": "oauth token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "the json details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid parameters"
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "tags": [
+          "oauth users"
+        ],
+        "summary": "get a user",
+        "description": "",
+        "operationId": "getUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "oauth_token",
+            "description": "oauth token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "description": "the user id to get",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "full",
+            "description": "get all attributes for user",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid parameters"
+          }
+        }
+      }
+    },
+    "/users/{userId}/actions": {
+      "get": {
+        "tags": [
+          "oauth users",
+          "oauth actions"
+        ],
+        "summary": "get a user's recent actions",
+        "description": "",
+        "operationId": "getUserActions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "oauth_token",
+            "description": "oauth token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "description": "the user id to get",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "full",
+            "description": "get all attributes for user",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "limit number of actions returned",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid parameters"
+          }
+        }
+      }
+    },
+    "/users/{userId}/recommendations": {
+      "get": {
+        "tags": [
+          "oauth users",
+          "oauth recommendations"
+        ],
+        "summary": "get recommendations for a user",
+        "description": "",
+        "operationId": "getUserRecommendations",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "oauth_token",
+            "description": "oauth token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "description": "the user id to get",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "full",
+            "description": "get all attributes for user",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "limit number of actions returned",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "dimension",
+            "description": "get recommendations for a particular item dimension (e.g., just sports articles)",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "algorithms",
+            "description": "override default algorithms with specified algorithms",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid parameters"
+          }
+        }
+      }
+    },
+    "/actions": {
+      "post": {
+        "tags": [
+          "oauth actions"
+        ],
+        "summary": "post new action between a user and an item",
+        "description": "",
+        "operationId": "postAction",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "oauth_token",
+            "description": "oauth token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "the json details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Action"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid parameters"
+          }
+        }
+      }
+    },
+    "/js/action/new": {
+      "get": {
+        "tags": [
+          "js actions"
+        ],
+        "summary": "Add a user interaction",
+        "description": "",
+        "operationId": "addAction",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "consumer_key",
+            "description": "consumer key",
+            "required": true,
+            "type": "string",
+            "default": "uggyecofcz"
+          },
+          {
+            "in": "query",
+            "name": "user",
+            "description": "user id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "item",
+            "description": "item id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "description": "type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "jsonpCallback",
+            "description": "JSONP callback",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "timestamp",
+            "description": "time",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid parameters"
+          }
+        }
+      }
+    },
+    "/js/recommendations": {
+      "get": {
+        "tags": [
+          "js recommendations"
+        ],
+        "summary": "Get recommendations for a user",
+        "description": "",
+        "operationId": "getRecommendation",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "consumer_key",
+            "description": "consumer key",
+            "required": true,
+            "type": "string",
+            "default": "uggyecofcz"
+          },
+          {
+            "in": "query",
+            "name": "user",
+            "description": "user id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "item",
+            "description": "currently viewed item id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "description": "max number of recommendations to return",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "dimension",
+            "description": "get recommendations for a particular item dimension (e.g., just sports articles)",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "attributes",
+            "description": "the fields to return",
+            "required": false,
+            "type": "string",
+            "format": "command separated list"
+          },
+          {
+            "in": "query",
+            "name": "algorithms",
+            "description": "override default algorithms with specified algorithms",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "jsonpCallback",
+            "description": "JSONP callback",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid parameters"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Item": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "myid1234"
+        },
+        "type": {
+          "type": "integer",
+          "example": 1,
+          "description": "type of item"
+        },
+        "attributesName": {
+          "$ref": "#/definitions/AttributesName"
+        }
+      }
+    },
+    "User": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "myid1234"
+        },
+        "username": {
+          "type": "string",
+          "example": "Joe Bloggs",
+          "description": "name of user"
+        },
+        "active": {
+          "type": "boolean",
+          "description": "whether user is active"
+        },
+        "attributesName": {
+          "$ref": "#/definitions/AttributesName"
+        }
+      }
+    },
+    "Action": {
+      "required": [
+        "user",
+        "item",
+        "type"
+      ],
+      "properties": {
+        "user": {
+          "type": "string",
+          "example": "user1234"
+        },
+        "item": {
+          "type": "string",
+          "example": "item1234"
+        },
+        "type": {
+          "type": "integer",
+          "description": "action type"
+        },
+        "value": {
+          "type": "number",
+          "description": "action value (e.g. a rating)"
+        }
+      }
+    },
+    "AttributesName": {
+      "properties": {
+        "attrName1": {
+          "type": "string",
+          "example": "attrValue1"
+        },
+        "attrName2": {
+          "type": "string",
+          "example": "attrValue2"
+        }
+      }
+    }
+  },
+  "host": "recsvm.rummblelabs.com"
+}
