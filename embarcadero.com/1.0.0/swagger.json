@@ -1,0 +1,143 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "GetIt REST API",
+    "description": "This is the V.1.0.0 for GetIt REST API",
+    "x-providerName": "embarcadero.com",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "http://getit.embarcadero.com/api-docs"
+    }
+  },
+  "paths": {
+    "/catalog/info": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "catalog"
+        ],
+        "summary": "Return an array of matching elements by text",
+        "operationId": "info",
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Search text",
+            "name": "Search",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Current RadStudio product supported personalities",
+            "name": "Personalities",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "CategoryID or list of CategoryIDs separated by \";\"",
+            "name": "Categories",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Catalog Version as positive entire value",
+            "name": "CatalogVersion",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Starting from...",
+            "name": "Start",
+            "required": false,
+            "type": "string",
+            "default": "0"
+          },
+          {
+            "in": "formData",
+            "description": "...ending at",
+            "name": "End",
+            "required": false,
+            "type": "string",
+            "default": "10"
+          }
+        ]
+      }
+    },
+    "/catalog/infobyids": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "catalog"
+        ],
+        "summary": "Return an array of matching elements by id",
+        "operationId": "infobyids",
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Search by Id",
+            "name": "Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Catalog Version as positive entire value",
+            "name": "CatalogVersion",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/catalog/dependencyinfo": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "catalog"
+        ],
+        "summary": "Return dependencies Ids separated by ';'",
+        "operationId": "infobyids",
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Search dependencies for an Id",
+            "name": "Id",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ttp://getit.embarcadero.com/catalog",
+      "description": "Operations about catalog"
+    }
+  ],
+  "host": "getit.embarcadero.com",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ]
+}
