@@ -1,0 +1,484 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "api.datumbox.com",
+    "x-providerName": "datumbox.com",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "http://www.datumbox.com/api-sandbox/api-docs"
+    }
+  },
+  "paths": {
+    "/1.0/SentimentAnalysis.json": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "summary": "Identifies the Sentiment of the Document",
+        "operationId": "SentimentAnalysis",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Your API Key",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/1.0/TwitterSentimentAnalysis.json": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "summary": "Identifies the Sentiment of Twitter Messages",
+        "operationId": "TwitterSentimentAnalysis",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Your API Key",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "The text of the tweet that we evaluate.",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/1.0/SubjectivityAnalysis.json": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "summary": "Classifies Document as Subjective or Objective",
+        "operationId": "SubjectivityAnalysis",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Your API Key",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/1.0/TopicClassification.json": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "summary": "Identifies the Topic of the Document",
+        "operationId": "TopicClassification",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Your API Key",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/1.0/SpamDetection.json": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "summary": "Classifies the Document as spam or nospam",
+        "operationId": "SpamDetection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Your API Key",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/1.0/AdultContentDetection.json": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "summary": "Classifies the Document as adult or noadult",
+        "operationId": "AdultContentDetection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Your API Key",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/1.0/ReadabilityAssessment.json": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "summary": "Evaluates the Readability of the Document",
+        "operationId": "ReadabilityAssessment",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Your API Key",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/1.0/LanguageDetection.json": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "summary": "Identifies the Language of the Document",
+        "operationId": "LanguageDetection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Your API Key",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/1.0/CommercialDetection.json": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "summary": "Classifies the Document as commercial or nocommercial",
+        "operationId": "CommercialDetection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Your API Key",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/1.0/EducationalDetection.json": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "summary": "Classifies the Document as educational or noeducational",
+        "operationId": "EducationalDetection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Your API Key",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/1.0/GenderDetection.json": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "summary": "Gender Detection Service",
+        "operationId": "GenderDetection",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Your API Key",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/1.0/KeywordExtraction.json": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "summary": "Extracts the Keywords of the Document",
+        "operationId": "KeywordExtraction",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Your API Key",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "The number of keyword combinations (n-grams) that you wish to extract.",
+            "name": "n",
+            "required": true,
+            "type": "integer",
+            "maximum": 5,
+            "minimum": 1
+          },
+          {
+            "in": "formData",
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/1.0/TextExtraction.json": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "summary": "Extracts the clear text from Webpage",
+        "operationId": "TextExtraction",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Your API Key",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "The HTML source of the webpage.",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/1.0/DocumentSimilarity.json": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "summary": "Estimates the similarity between 2 Documents",
+        "operationId": "DocumentSimilarity",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Your API Key",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "The first text. It should not contain HTML tags.",
+            "name": "original",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "The second text. It should not contain HTML tags.",
+            "name": "copy",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ttp://www.datumbox.com/api-sandbox/listings/Document-Classification",
+      "description": "Document Classification Functions"
+    },
+    {
+      "name": "ttp://www.datumbox.com/api-sandbox/listings/Information-Retrieval",
+      "description": "Information Retrieval Functions"
+    },
+    {
+      "name": "ttp://www.datumbox.com/api-sandbox/listings/Metrics",
+      "description": "Metrics"
+    }
+  ],
+  "host": "api.datumbox.com",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ]
+}
