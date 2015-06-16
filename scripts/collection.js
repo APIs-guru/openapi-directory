@@ -35,9 +35,7 @@ program.parse(process.argv);
 function updateCollection() {
   var specs = getSpecs();
   async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
-    var url = getOriginUrl(swagger);
-    console.log(url);
-    writeSpec(url, getSpecType(swagger), function (newFilename) {
+    writeSpec(getOriginUrl(swagger), getSpecType(swagger), function (newFilename) {
       assert(newFilename === filename);
       asyncCb(null);
     });
@@ -85,6 +83,7 @@ function updateGoogle() {
 }
 
 function writeSpec(url, type, callback) {
+  console.log(url);
   getOriginSpec(url, type, function (spec) {
     convertToSwagger(spec, function (swagger) {
       validateSwagger(swagger, function (errors) {
