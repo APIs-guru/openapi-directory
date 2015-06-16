@@ -86,15 +86,17 @@ function writeSpec(url, type, callback) {
   console.log(url);
   getOriginSpec(url, type, function (spec) {
     convertToSwagger(spec, function (swagger) {
-      validateSwagger(swagger, function (errors) {
+      validateSwagger(swagger, function (errors, warnings) {
         if (errors) {
           console.log(url);
           if (spec.type !== 'swagger_2')
-            console.log(JSON.stringify(spec.spec, null, 2));
-          console.log(JSON.stringify(swagger, null, 2));
-          console.log(JSON.stringify(errors, null, 2));
+            logJson(spec.spec);
+          logJson(swagger);
+          logJson(errors);
           return;
         }
+        if (warnings)
+          logJson(warnings);
         var filename = saveSwagger(swagger);
         callback(filename);
       });
@@ -102,11 +104,26 @@ function writeSpec(url, type, callback) {
   });
 }
 
+function Json2String(json) {
+  return JSON.stringify(json, null, 2);
+}
+
+function logJson(json) {
+  console.log(Json2String(json));
+}
+
 function validateSwagger(swagger, callback) {
   function validateCallback(validationErrors, validationResults) {
     var errors = [].concat(validationErrors || [])
       .concat((validationResults && validationResults.errors) || []);
-    callback(_.isEmpty(errors) ? null : errors);
+    if (_.isEmpty(errors))
+      errors = null;
+
+    var warnings = (validationResults && validationResults.warnings) || [];
+    if (_.isEmpty(warnings))
+      warnings = null;
+
+    callback(errors, warnings);
   }
   SwaggerTools.validate(swagger, validateCallback);
 }
@@ -187,7 +204,7 @@ function getPath(swagger) {
 }
 
 function saveSwagger(swagger) {
-  var str = JSON.stringify(swagger, null, 2);
+  var str = Json2String(swagger);
   var path = getPath(swagger);
   mkdirp(path);
   path += '/swagger.json';
