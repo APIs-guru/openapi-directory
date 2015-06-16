@@ -1,0 +1,173 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "hashtag.peel-ci.com",
+    "x-providerName": "peel-ci.com",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "https://s3-us-west-2.amazonaws.com/tuneinapi.peel-ci.com/resources.json"
+    }
+  },
+  "paths": {
+    "/hashtag/related": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "summary": "Gets related hashtags for a show.",
+        "operationId": "getRelatedHashtags",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Unique ID for a show",
+            "name": "showID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Time window in seconds (default is 2 hours)",
+            "name": "timeWindow",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/hashtag/trendingShows": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "summary": "Gets trending shows.",
+        "operationId": "getTrendingShows",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Number of trending shows (default is 20)",
+            "name": "limit",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Time window in seconds (default is 2 hours)",
+            "name": "timeWindow",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/hashtag/tuneinlinks": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "summary": "Gets tunein URLs (links) from either a tweet, hashtags, @mentions, or show ID.",
+        "operationId": "getTuneinLinks",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Text from a social networking conversation",
+            "name": "tweet",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of hashtags and @mentions",
+            "name": "hashtags",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Unique ID for a show",
+            "name": "showID",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/status/{showID}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "summary": "Gets the last 100 statuses for this show.",
+        "operationId": "getStatuses",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Unique ID for a show",
+            "name": "showID",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "summary": "Get health of Tune-in service (which includes its uptime).",
+        "operationId": "getHealth",
+        "produces": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "host": "hashtag.peel-ci.com",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "tags": [
+    {
+      "name": "hashtag.json",
+      "description": "Operations about hashtags"
+    },
+    {
+      "name": "status.json",
+      "description": "Operations about statuses"
+    },
+    {
+      "name": "health.json",
+      "description": "Operations about health of Tune-in service"
+    }
+  ]
+}
