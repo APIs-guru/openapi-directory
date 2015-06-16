@@ -5,10 +5,12 @@ var assert = require('assert');
 var _ = require('lodash');
 var fs = require('fs');
 var glob = require('glob')
+var async = require('async')
 var converter = require('api-spec-converter');
 var parseDomain = require('parse-domain');
 var mkdirp = require('mkdirp').sync;
 var RestClient = require('node-rest-client').Client;
+var SwaggerTools = require('swagger-tools').specs.v2;
 
 var program = require('commander');
 
@@ -32,9 +34,12 @@ program.parse(process.argv);
 
 function updateCollection() {
   var specs = getSpecs();
-  _.each(specs, function (swagger, filename) {
-    writeSpec(getOriginUrl(swagger), getSpecType(swagger), function (newFilename) {
+  async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
+    var url = getOriginUrl(swagger);
+    console.log(url);
+    writeSpec(url, getSpecType(swagger), function (newFilename) {
       assert(newFilename === filename);
+      asyncCb(null);
     });
   });
 }
@@ -80,10 +85,31 @@ function updateGoogle() {
 }
 
 function writeSpec(url, type, callback) {
-  convertToSwagger(url, type, function (swagger) {
-    var filename = saveSwagger(swagger);
-    callback(filename);
+  getOriginSpec(url, type, function (spec) {
+    convertToSwagger(spec, function (swagger) {
+      validateSwagger(swagger, function (errors) {
+        if (errors) {
+          console.log(url);
+          if (spec.type !== 'swagger_2')
+            console.log(JSON.stringify(spec.spec, null, 2));
+          console.log(JSON.stringify(swagger, null, 2));
+          console.log(JSON.stringify(errors, null, 2));
+          return;
+        }
+        var filename = saveSwagger(swagger);
+        callback(filename);
+      });
+    });
   });
+}
+
+function validateSwagger(swagger, callback) {
+  function validateCallback(validationErrors, validationResults) {
+    var errors = [].concat(validationErrors || [])
+      .concat((validationResults && validationResults.errors) || []);
+    callback(_.isEmpty(errors) ? null : errors);
+  }
+  SwaggerTools.validate(swagger, validateCallback);
 }
 
 function getSpecs(callback, finishCallback) {
@@ -93,23 +119,28 @@ function getSpecs(callback, finishCallback) {
   }, {});
 }
 
-function convertToSwagger(url, format, callback) {
+function getOriginSpec(url, format, callback) {
   converter.getSpec(url, format, function (err, spec) {
     assert(!err, err);
-    spec.convertTo('swagger_2', function (err, swagger) {
-      assert(!err, err);
-      _.merge(swagger.spec.info, {
-        'x-providerName': parseHost(swagger.spec),
-        'x-origin': {
-          format: spec.formatName,
-          version: spec.getFormatVersion(),
-          url: url
-        }
-      });
-      callback(swagger.spec)
-    });
+    callback(spec);
   });
 }
+
+function convertToSwagger(spec, callback) {
+  spec.convertTo('swagger_2', function (err, swagger) {
+    assert(!err, err);
+    _.merge(swagger.spec.info, {
+      'x-providerName': parseHost(swagger.spec),
+      'x-origin': {
+        format: spec.formatName,
+        version: spec.getFormatVersion(),
+        url: spec.url
+      }
+    });
+    callback(swagger.spec)
+  });
+}
+
 
 function parseHost(swagger) {
   assert(swagger.host);
