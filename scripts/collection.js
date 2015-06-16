@@ -20,6 +20,11 @@ program
   .action(updateCollection);
 
 program
+  .command('validate')
+  .description('validate collection')
+  .action(validateCollection);
+
+program
   .command('google')
   .description('add new Google APIs')
   .action(updateGoogle);
@@ -39,6 +44,24 @@ function updateCollection() {
       assert(newFilename === filename);
       asyncCb(null);
     });
+  });
+}
+
+function validateCollection() {
+  var specs = getSpecs();
+  var foundErrors = false;
+  async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
+    console.log('======================== ' + filename + ' ================');
+    validateSwagger(swagger, function (errors, warnings) {
+      foundErrors = !_.isEmpty(errors) || foundErrors;
+      if (errors)
+        logJson(errors);
+      if (warnings)
+        logJson(warnings);
+    });
+    asyncCb(null);
+  }, function () {
+    process.exit(foundErrors ? 255 : 0);
   });
 }
 
@@ -93,6 +116,7 @@ function writeSpec(url, type, callback) {
             logJson(spec.spec);
           logJson(swagger);
           logJson(errors);
+          process.exit(255);
           return;
         }
         if (warnings)
