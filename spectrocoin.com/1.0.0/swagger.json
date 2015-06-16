@@ -1,0 +1,194 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "SpectroCoin Merchant API",
+    "description": "This is an API designend for merchants who are using SpectroCoin services and wishes to integrate them locally.",
+    "contact": {
+      "email": "info@spectrocoin.com"
+    },
+    "x-providerName": "spectrocoin.com",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "https://spectrocoin.com/api-docs/merchant/1/"
+    }
+  },
+  "paths": {
+    "/api/createOrder": {
+      "post": {
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        },
+        "description": "",
+        "tags": [
+          "createOrder"
+        ],
+        "summary": "Create merchant order",
+        "operationId": "createOrder",
+        "parameters": [
+          {
+            "in": "body",
+            "description": "Request to create order",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/OrderRequest"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "createOrder",
+      "description": "Create Merchant order to be paid by customer"
+    }
+  ],
+  "host": "spectrocoin.com",
+  "basePath": "/api/merchant/1",
+  "schemes": [
+    "https"
+  ],
+  "definitions": {
+    "BigDecimal": {
+      "properties": {
+        "scale": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "precision": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "OrderRequest": {
+      "description": "",
+      "required": [
+        "merchantId",
+        "apiId",
+        "payCurrency",
+        "sign"
+      ],
+      "properties": {
+        "merchantId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Merchant ID assigned to your account"
+        },
+        "apiId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "API ID of specific API you have configured on your merchant account"
+        },
+        "orderId": {
+          "type": "string",
+          "description": "Custom order ID. Must be unique per API. If not provided it will be generated."
+        },
+        "payCurrency": {
+          "type": "string",
+          "description": "Currency in which merchant customer will pay the order. Currently only \"BTC\""
+        },
+        "payAmount": {
+          "$ref": "#/definitions/BigDecimal",
+          "description": "Pay amount in pay currency that should be paid by merchant customer. If not provided receive amount will be used to calculate pay amount"
+        },
+        "receiveAmount": {
+          "$ref": "#/definitions/BigDecimal",
+          "description": "Receive amount in receive currency (which is configured at API configuration) that merchant will be funded after merchant customers payment approval. If not provided pay amount will be used to calculate receive amount"
+        },
+        "description": {
+          "type": "string",
+          "description": "Order description. Will be presented for merchant customer at payment window"
+        },
+        "culture": {
+          "type": "string",
+          "description": "Merchant customer culture payment window to be presented",
+          "enum": [
+            "en",
+            " lt",
+            " ru",
+            " de"
+          ]
+        },
+        "callbackUrl": {
+          "type": "string",
+          "description": "Url of merchant endpoint callback about order status to be returned"
+        },
+        "successUrl": {
+          "type": "string",
+          "description": "Url of merchant page customer should be redirected after successful payment"
+        },
+        "failureUrl": {
+          "type": "string",
+          "description": "Url of merchant page customer should be redirected after unsuccessful payment"
+        },
+        "sign": {
+          "type": "string",
+          "description": "Signature required for signing create order request"
+        }
+      }
+    },
+    "Order": {
+      "description": "",
+      "required": [
+        "orderRequestId",
+        "orderId",
+        "payCurrency",
+        "payAmount",
+        "receiveCurrency",
+        "receiveAmount",
+        "depositAddress",
+        "validUntil",
+        "redirectUrl"
+      ],
+      "properties": {
+        "orderRequestId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Generated unique order request id"
+        },
+        "orderId": {
+          "type": "string",
+          "description": "Merchant provided or generated order id"
+        },
+        "payCurrency": {
+          "type": "string",
+          "description": "Currency to be paid with"
+        },
+        "payAmount": {
+          "$ref": "#/definitions/BigDecimal",
+          "description": "Amount of payment currency to be paid by merchant customer"
+        },
+        "receiveCurrency": {
+          "type": "string",
+          "description": "Currency to be funded to merchant account"
+        },
+        "receiveAmount": {
+          "$ref": "#/definitions/BigDecimal",
+          "description": "Amount of receive currency to be funded to merchant account"
+        },
+        "depositAddress": {
+          "type": "string",
+          "description": "Payment deposit address"
+        },
+        "validUntil": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Timestamp until when order is valid"
+        },
+        "redirectUrl": {
+          "type": "string",
+          "description": "SpectroCoin payment window url where merchant customer may be redirected"
+        }
+      }
+    }
+  }
+}
