@@ -1,0 +1,1729 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.1.10 beta (2015-06-09 09:57:15 49d9c62394f1b2c2c9db6e9f)",
+    "title": "firebrowse.org",
+    "x-providerName": "firebrowse.org",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "http://firebrowse.org/api/api-docs"
+    }
+  },
+  "paths": {
+    "/Samples/mRNASeq": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Samples"
+        ],
+        "summary": "Retrieve mRNASeq data.",
+        "operationId": "mRNASeq",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of gene name(s).",
+            "name": "gene",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of TCGA participant barcodes (e.g. TCGA-GF-A4EO).",
+            "name": "tcga_participant_barcode",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA sample types from the scrollable list.",
+            "name": "sample_type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more sample characterization protocols from the scrollable list.",
+            "name": "protocol",
+            "required": false,
+            "type": "string",
+            "default": "RSEM"
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "integer",
+            "default": 250,
+            "maximum": 2000,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort"
+          }
+        ]
+      }
+    },
+    "/Samples/miRSeq": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Samples"
+        ],
+        "summary": "Retrieve miRSeq data.",
+        "operationId": "miRSeq",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of miR names (e.g. hsa-let-7b-5p,hsa-let-7a-1).",
+            "name": "mir",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of TCGA participant barcodes (e.g. TCGA-GF-A4EO).",
+            "name": "tcga_participant_barcode",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to include only data/results produced by the selected Firehose tool.",
+            "name": "tool",
+            "required": false,
+            "type": "string",
+            "default": "miRseq_Mature_Preprocess"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA sample types from the scrollable list.",
+            "name": "sample_type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "integer",
+            "default": 250,
+            "maximum": 2000,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort"
+          }
+        ]
+      }
+    },
+    "/Samples/ClinicalTier1": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Samples"
+        ],
+        "summary": "Retrieve clinical pick tier 1 data.",
+        "operationId": "ClinicalTier1",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of TCGA participant barcodes (e.g. TCGA-GF-A4EO).",
+            "name": "tcga_participant_barcode",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Shrink results set to include only the CDEs selected from the scrollable list.",
+            "name": "tier1_cde_name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "integer",
+            "default": 250,
+            "maximum": 2000,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort"
+          }
+        ]
+      }
+    },
+    "/Analyses/Mutation/MAF": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Analyses"
+        ],
+        "summary": "Retrieve MutSig final analysis MAF.",
+        "operationId": "MAF",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to include only data/results produced by the selected Firehose tool.",
+            "name": "tool",
+            "required": false,
+            "type": "string",
+            "default": "MutSig2CV"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of gene name(s).",
+            "name": "gene",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of TCGA participant barcodes (e.g. TCGA-GF-A4EO).",
+            "name": "tcga_participant_barcode",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of which data columns/fields to return.",
+            "name": "column",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "integer",
+            "default": 250,
+            "maximum": 2000,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort"
+          }
+        ]
+      }
+    },
+    "/Analyses/Mutation/SMG": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Analyses"
+        ],
+        "summary": "Retrieve Significantly Mutated Genes (SMG).",
+        "operationId": "SMG",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to include only data/results produced by the selected Firehose tool.",
+            "name": "tool",
+            "required": false,
+            "type": "string",
+            "default": "MutSig2CV"
+          },
+          {
+            "in": "query",
+            "description": "Number of significant genes to return.",
+            "name": "rank",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of gene name(s).",
+            "name": "gene",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Only return results with Q-value <= given threshold.",
+            "name": "q",
+            "required": false,
+            "type": "number",
+            "maximum": 1
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "integer",
+            "default": 250,
+            "maximum": 2000,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "rank"
+          }
+        ]
+      }
+    },
+    "/Analyses/CopyNumber/Genes/All": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Analyses"
+        ],
+        "summary": "Retrieve all data by genes Gistic2 results.",
+        "operationId": "All",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of gene name(s).",
+            "name": "gene",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of TCGA participant barcodes (e.g. TCGA-GF-A4EO).",
+            "name": "tcga_participant_barcode",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "integer",
+            "default": 250,
+            "maximum": 2000,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort"
+          }
+        ]
+      }
+    },
+    "/Analyses/CopyNumber/Genes/Focal": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Analyses"
+        ],
+        "summary": "Retrieve focal data by genes Gistic2 results.",
+        "operationId": "Focal",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of gene name(s).",
+            "name": "gene",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of TCGA participant barcodes (e.g. TCGA-GF-A4EO).",
+            "name": "tcga_participant_barcode",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "integer",
+            "default": 250,
+            "maximum": 2000,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort"
+          }
+        ]
+      }
+    },
+    "/Analyses/CopyNumber/Genes/Thresholded": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Analyses"
+        ],
+        "summary": "Retrieve all thresholded by genes Gistic2 results.",
+        "operationId": "Thresholded",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of gene name(s).",
+            "name": "gene",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of TCGA participant barcodes (e.g. TCGA-GF-A4EO).",
+            "name": "tcga_participant_barcode",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "integer",
+            "default": 250,
+            "maximum": 2000,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort"
+          }
+        ]
+      }
+    },
+    "/Analyses/CopyNumber/Genes/Amplified": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Analyses"
+        ],
+        "summary": "Retrieve Gistic2 significantly amplified genes results.",
+        "operationId": "Amplified",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of gene name(s).",
+            "name": "gene",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Only return results with Q-value <= given threshold.",
+            "name": "q",
+            "required": false,
+            "type": "number",
+            "maximum": 1
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "integer",
+            "default": 250,
+            "maximum": 2000,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort"
+          }
+        ]
+      }
+    },
+    "/Analyses/CopyNumber/Genes/Deleted": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Analyses"
+        ],
+        "summary": "Retrieve Gistic2 significantly deleted genes results.",
+        "operationId": "Deleted",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of gene name(s).",
+            "name": "gene",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Only return results with Q-value <= given threshold.",
+            "name": "q",
+            "required": false,
+            "type": "number",
+            "maximum": 1
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "integer",
+            "default": 250,
+            "maximum": 2000,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort"
+          }
+        ]
+      }
+    },
+    "/Analyses/mRNASeq/Quartiles": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Analyses"
+        ],
+        "summary": "Returns RNASeq expression quartiles, e.g. suitable for drawing a boxplot.",
+        "operationId": "mRNASeq/Quartiles",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "description": "Enter a single gene name.",
+            "name": "gene",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more sample characterization protocols from the scrollable list.",
+            "name": "protocol",
+            "required": false,
+            "type": "string",
+            "default": "RSEM"
+          },
+          {
+            "in": "query",
+            "description": "For which type of sample(s) should quartiles be computed?",
+            "name": "sample_type",
+            "required": false,
+            "type": "string",
+            "default": "tumors"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of TCGA participants, identified by barcodes such as TCGA-GF-A4EO, denoting samples to exclude from computation.",
+            "name": "Exclude",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/Analyses/Reports": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Analyses"
+        ],
+        "summary": "Retrieve links to summary reports from Firehose analysis runs.",
+        "operationId": "Reports",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "description": "Select one or more date stamps.",
+            "name": "date",
+            "required": false,
+            "type": "string",
+            "default": "2015_04_02"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more report names.",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more report types.",
+            "name": "type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "integer",
+            "default": 250,
+            "maximum": 2000,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "date"
+          }
+        ]
+      }
+    },
+    "/Analyses/FeatureTable": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Analyses"
+        ],
+        "summary": "Retrieve aggregated analysis features table.",
+        "operationId": "FeatureTable",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "tsv"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Select one or more date stamps.",
+            "name": "date",
+            "required": false,
+            "type": "string",
+            "default": "2015_04_02"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of which data columns/fields to return.",
+            "name": "column",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "integer",
+            "default": 250,
+            "maximum": 2000,
+            "minimum": 1
+          }
+        ]
+      }
+    },
+    "/Archives/StandardData": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Archives"
+        ],
+        "summary": "Retrieve standard data archives.",
+        "operationId": "StandardData",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "description": "Select one or more date stamps.",
+            "name": "date",
+            "required": true,
+            "type": "string",
+            "default": "2015_04_02"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA data types from the scrollable list.",
+            "name": "data_type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to include only data/results produced by the selected Firehose tool.",
+            "name": "tool",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA data generation platforms from the scrollable list.",
+            "name": "platform",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA centers from the scrollable list.",
+            "name": "center",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA data levels.",
+            "name": "level",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more sample characterization protocols from the scrollable list.",
+            "name": "protocol",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "integer",
+            "default": 250,
+            "maximum": 2000,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort"
+          }
+        ]
+      }
+    },
+    "/Metadata/Centers": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Obtain identities of TCGA consortium member centers.",
+        "operationId": "Centers",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA centers from the scrollable list.",
+            "name": "center",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/Metadata/ClinicalTier1": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Retrieve names of all available clinical data elements (CDEs).",
+        "operationId": "ClinicalTier1",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          }
+        ]
+      }
+    },
+    "/Metadata/Cohort/{cohort}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Retrieve formal disease name(s) for cohort abbreviation(s).",
+        "operationId": "Cohort",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "path",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/Metadata/Cohorts": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Translate TCGA cohort abbreviations to full disease names.",
+        "operationId": "Cohorts",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/Metadata/Counts": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Retrieve sample counts.",
+        "operationId": "Counts",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "description": "Select one or more date stamps.",
+            "name": "date",
+            "required": true,
+            "type": "string",
+            "default": "2015_04_02"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA sample types from the scrollable list.",
+            "name": "sample_type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA data types from the scrollable list.",
+            "name": "data_type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Output an entry providing the totals for each data type.",
+            "name": "totals",
+            "required": false,
+            "type": "boolean",
+            "default": true
+          }
+        ]
+      }
+    },
+    "/Metadata/Dates": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Retrieve list of Firehose standard data and analyses dates.",
+        "operationId": "Dates",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          }
+        ]
+      }
+    },
+    "/Metadata/HeartBeat": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Simple way to discern whether API server is up and running",
+        "operationId": "HeartBeat",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          }
+        ]
+      }
+    },
+    "/Metadata/Patients": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Retrieve list of all TCGA patients.",
+        "operationId": "Patients",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "default": 1,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "integer",
+            "default": 250,
+            "maximum": 2000,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort"
+          }
+        ]
+      }
+    },
+    "/Metadata/Platforms": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Translate TCGA platform codes to full platform names.",
+        "operationId": "Platforms",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA data generation platforms from the scrollable list.",
+            "name": "platform",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/Metadata/SampleTypes": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Return all TCGA sample type codes, both numeric and symbolic.",
+        "operationId": "SampleTypes",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          }
+        ]
+      }
+    },
+    "/Metadata/SampleType/Barcode/{TCGA_Barcode}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Given a TCGA barcode, return its short letter sample type code.",
+        "operationId": "Barcode",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "path",
+            "description": "Enter a single TCGA barcode, of any form: e.g. TCGA-GF-A4EO-06 or TCGA-EL-A3D5-01A-22D-A202-08",
+            "name": "TCGA_Barcode",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/Metadata/SampleType/Code/{code}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Translate from numeric to symbolic TCGA sample codes.",
+        "operationId": "Code",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "path",
+            "description": "Narrow search to one or more TCGA sample type codes.",
+            "name": "code",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/Metadata/SampleType/ShortLetterCode/{short_letter_code}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Translate from symbolic to numeric TCGA sample codes.",
+        "operationId": "ShortLetterCode",
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json"
+          },
+          {
+            "in": "path",
+            "description": "TCGA sample type short letter code(s) (e.g. TP, TM, NB, etc.). ",
+            "name": "short_letter_code",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "v1/Samples",
+      "description": "Fine grained retrieval of sample-level data"
+    },
+    {
+      "name": "v1/Analyses",
+      "description": "Fine grained retrieval of analysis pipeline results"
+    },
+    {
+      "name": "v1/Archives",
+      "description": "Bulk retrieval of data or analysis pipeline results"
+    },
+    {
+      "name": "v1/Metadata",
+      "description": "Retrieve disease, sample, and datatype descriptions, sample counts, and more"
+    }
+  ],
+  "host": "firebrowse.org",
+  "basePath": "/api/v1",
+  "schemes": [
+    "http"
+  ]
+}
