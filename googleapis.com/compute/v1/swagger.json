@@ -9886,6 +9886,14 @@
           "description": "[Output Only] Type of the resource. Always compute#disk for disks.",
           "default": "compute#disk"
         },
+        "lastAttachTimestamp": {
+          "type": "string",
+          "description": "[Output Only] Last attach timestamp in RFC3339 text format."
+        },
+        "lastDetachTimestamp": {
+          "type": "string",
+          "description": "[Output Only] Last detach timestamp in RFC3339 text format."
+        },
         "licenses": {
           "type": "array",
           "description": "Any applicable publicly visible licenses.",
@@ -9940,6 +9948,13 @@
         "type": {
           "type": "string",
           "description": "URL of the disk type resource describing which disk type to use to create the disk; provided by the client when the disk is created."
+        },
+        "users": {
+          "type": "array",
+          "description": "Links to the users of the disk (attached instances) in form: project/zones/zone/instances/instance",
+          "items": {
+            "type": "string"
+          }
         },
         "zone": {
           "type": "string",

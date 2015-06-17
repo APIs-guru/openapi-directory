@@ -733,7 +733,7 @@
         },
         "attributionModel": {
           "type": "string",
-          "description": "Attribution model name. This field is ignored."
+          "description": "This field is ignored."
         },
         "campaignId": {
           "type": "string",
@@ -742,7 +742,7 @@
         },
         "channel": {
           "type": "string",
-          "description": "Channel of the product: local or online."
+          "description": "Sales channel for the product. Acceptable values are:  \n- \"local\": a physical store \n- \"online\": an online store"
         },
         "clickId": {
           "type": "string",
@@ -750,7 +750,7 @@
         },
         "conversionId": {
           "type": "string",
-          "description": "Advertiser-provided ID for the conversion, also known as the order ID."
+          "description": "For offline conversions, this is an ID provided by advertisers. Advertisers can use this property to specify an ID that is meaningful to them. If an advertiser doesn't specify a conversionId, DoubleClick Search generates one. For online conversions, DS copies the dsConversionId or floodlightOrderId into this property depending on the advertiser's Floodlight instructions."
         },
         "conversionModifiedTimestamp": {
           "type": "string",
@@ -764,7 +764,7 @@
         },
         "countMillis": {
           "type": "string",
-          "description": "The number of conversions, formatted in millis (conversions multiplied by 1000). This field is ignored.",
+          "description": "This field is ignored.",
           "format": "int64"
         },
         "criterionId": {
@@ -792,11 +792,11 @@
         },
         "deviceType": {
           "type": "string",
-          "description": "The type of device on which the conversion occurred. Valid values are \"DESKTOP\", \"TABLET\", \"HIGH_END_MOBILE\", \"OTHER_DEVICE\"."
+          "description": "The type of device on which the conversion occurred."
         },
         "dsConversionId": {
           "type": "string",
-          "description": "DS conversion ID.",
+          "description": "ID that DoubleClick Search generates for each conversion.",
           "format": "int64"
         },
         "engineAccountId": {
@@ -804,18 +804,18 @@
           "description": "DS engine account ID.",
           "format": "int64"
         },
-        "feedId": {
-          "type": "string",
-          "description": "DS inventory feed ID.",
-          "format": "int64"
-        },
         "floodlightOrderId": {
           "type": "string",
-          "description": "The advertiser-provided order id for the conversion."
+          "description": "The Floodlight order ID provided by the advertiser for the conversion."
+        },
+        "inventoryAccountId": {
+          "type": "string",
+          "description": "ID that DS generates and uses to uniquely identify the inventory account that contains the product.",
+          "format": "int64"
         },
         "productCountry": {
           "type": "string",
-          "description": "ISO 3166 code of the product country."
+          "description": "The country registered for the Merchant Center feed that contains the product. Use an ISO 3166 code to specify a country."
         },
         "productGroupId": {
           "type": "string",
@@ -828,7 +828,7 @@
         },
         "productLanguage": {
           "type": "string",
-          "description": "ISO 639 code of the product language."
+          "description": "The language registered for the Merchant Center feed that contains the product. Use an ISO 639 code to specify a language."
         },
         "quantityMillis": {
           "type": "string",
@@ -859,7 +859,7 @@
         },
         "storeId": {
           "type": "string",
-          "description": "The store id for which the product was advertised, when the channel is \"local\"."
+          "description": "The ID of the local store for which the product was advertised. Applicable only when the channel is \"local\"."
         },
         "type": {
           "type": "string",
