@@ -1,0 +1,199 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.1",
+    "title": "Discovery Market Research API",
+    "description": "<p>This API drives the <a href=\"https://discovery.gsa.gov\">Discovery Market Research Tool</a>.\nIt contains information on the vendors that are part of the OASIS and OASIS Small Business contracting vehicles, such as their contracting history, their elligibility for contract awards, and their small business designations.\nTo learn more about the tool, please visit <a href=\"https://discovery.gsa.gov\">Discovery</a> or see the README on our <a href=\"https://github.com/18F/mirage\">GitHub repository</a>.</p>\n<p><strong>Please note that the base path for this API is <code>https://api.data.gov/gsa/discovery/</code></strong></p>\n<p>It requires an API key, obtainable at <a href=\"http://api.data.gov/\">api.data.gov</a>.\nIt must be passed in the <code>api_key</code> parameter with each request.</p>",
+    "contact": {
+      "email": "discovery-18f@gsa.gov"
+    },
+    "x-providerName": "gsa.gov",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "https://discovery.gsa.gov/docs/api-docs/"
+    }
+  },
+  "paths": {
+    "/api/contracts/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "api/contracts"
+        ],
+        "summary": "This endpoint returns contract history from FPDS for a specific vendor",
+        "operationId": "List_Contracts",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "A 9-digit DUNS number that uniquely identifies a vendor (required).",
+            "name": "duns",
+            "required": true,
+            "type": "string",
+            "default": null
+          },
+          {
+            "in": "query",
+            "description": "a six digit NAICS code used to filter by contracts with a certain NAICS",
+            "name": "naics",
+            "required": false,
+            "type": "string",
+            "default": null
+          },
+          {
+            "in": "query",
+            "description": "a field to sort on. Choices are date, status, agency, and amount",
+            "name": "sort",
+            "required": false,
+            "type": "string",
+            "default": null
+          },
+          {
+            "in": "query",
+            "description": "The sort direction of the results. Choices are asc or desc.",
+            "name": "direction",
+            "required": false,
+            "type": "string",
+            "default": null
+          },
+          {
+            "in": "query",
+            "description": "the page to start on. Results are paginated in increments of 100. Begins at page=1.",
+            "name": "page",
+            "required": false,
+            "type": "string",
+            "default": null
+          }
+        ]
+      }
+    },
+    "/api/metadata/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "api/metadata"
+        ],
+        "summary": "This endpoint returns metadata for the most recent data loads of SAM and FPDS data",
+        "operationId": "Metadata"
+      }
+    },
+    "/api/naics/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "api/naics"
+        ],
+        "summary": "This endpoint lists all of the NAICS codes that are relevant to the OASIS family of vehicles",
+        "operationId": "List_Naics"
+      }
+    },
+    "/api/vendor/{duns}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "api/vendor"
+        ],
+        "summary": "This endpoint returns a single vendor by their 9 digit DUNS number",
+        "operationId": "Get_Vendor",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "a nine digit DUNS number that uniquely identifies the vendor (required)",
+            "name": "duns",
+            "required": true,
+            "type": "string",
+            "default": null
+          }
+        ]
+      }
+    },
+    "/api/vendors/": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "description": "",
+        "tags": [
+          "api/vendors"
+        ],
+        "summary": "This endpoint returns a list of vendors filtered by a NAICS code",
+        "operationId": "List_Vendors",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "a six digit NAICS code (required)",
+            "name": "naics",
+            "required": true,
+            "type": "string",
+            "default": null
+          },
+          {
+            "in": "query",
+            "description": "a comma delimited list of two character setaside codes to filter by.  Ex. setasides=A6,A5  will filter by 8a and veteran owned business.",
+            "name": "setasides",
+            "required": false,
+            "type": "string",
+            "default": null
+          },
+          {
+            "in": "query",
+            "description": "Choices are either oasis or oasissb. Will filter vendors by their presence in either the OASIS unrestricted vehicle or the OASIS Small Business vehicle.",
+            "name": "vehicle",
+            "required": false,
+            "type": "string",
+            "default": null
+          }
+        ]
+      }
+    }
+  },
+  "host": "discovery.gsa.gov",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "tags": [
+    {
+      "name": "api/contracts",
+      "description": "No description was specified"
+    },
+    {
+      "name": "api/metadata",
+      "description": "No description was specified"
+    },
+    {
+      "name": "api/naics",
+      "description": "No description was specified"
+    },
+    {
+      "name": "api/vendor",
+      "description": "No description was specified"
+    },
+    {
+      "name": "api/vendors",
+      "description": "No description was specified"
+    }
+  ]
+}
