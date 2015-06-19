@@ -3403,6 +3403,11 @@
       "type": "object",
       "description": "A Dataset is a collection of genomic data.",
       "properties": {
+        "createTime": {
+          "type": "string",
+          "description": "The time this dataset was created, in seconds from the epoch.",
+          "format": "int64"
+        },
         "id": {
           "type": "string",
           "description": "The Google generated ID of the dataset, immutable."
