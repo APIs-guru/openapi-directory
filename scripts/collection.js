@@ -51,7 +51,7 @@ function validateCollection() {
   var specs = getSpecs();
   var foundErrors = false;
   async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
-    console.log('======================== ' + filename + ' ================');
+    console.error('======================== ' + filename + ' ================');
     validateSwagger(swagger, function (errors, warnings) {
       foundErrors = !_.isEmpty(errors) || foundErrors;
       if (errors)
@@ -133,7 +133,7 @@ function Json2String(json) {
 }
 
 function logJson(json) {
-  console.log(Json2String(json));
+  console.error(Json2String(json));
 }
 
 function validateSwagger(swagger, callback) {
