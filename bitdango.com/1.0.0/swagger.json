@@ -1,0 +1,398 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Bitdango API",
+    "description": "Documentation for the Bitdango API",
+    "x-providerName": "bitdango.com",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "https://bitdango.com/api/documentation"
+    }
+  },
+  "paths": {
+    "/exchanges": {},
+    "/exchanges/{exchangeCode}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "<b>Success</b> Everything worked as expected."
+          },
+          "404": {
+            "description": "<b>InvalidResource</b> The resource you requested doesn't exist."
+          },
+          "500": {
+            "description": "<b>Error</b> Generic error message."
+          },
+          "503": {
+            "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
+          }
+        },
+        "description": "",
+        "tags": [
+          "exchanges"
+        ],
+        "summary": "Use this to get a specific exchange.",
+        "operationId": "exchanges",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "<ul>\r\n</ul>\r\n",
+            "name": "exchangeCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "<ul><li>Example: <span class=\"code\">credentials, limits, transferPolicies, markets</span></li></ul>",
+            "name": "expands",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/currencypairs": {},
+    "/currencypairs/{currencyPairCode}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "<b>Success</b> Everything worked as expected."
+          },
+          "404": {
+            "description": "<b>InvalidResource</b> The resource you requested doesn't exist."
+          },
+          "500": {
+            "description": "<b>Error</b> Generic error message."
+          },
+          "503": {
+            "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
+          }
+        },
+        "description": "",
+        "tags": [
+          "currencypairs"
+        ],
+        "summary": "Return a specific currency pair.",
+        "operationId": "currencypairs",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "<ul>\r\n</ul>\r\n",
+            "name": "currencyPairCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "<ul><li>Example: <span class=\"code\">exchangeRateHistory</span></li></ul>",
+            "name": "expands",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/currencies": {},
+    "/currencies/{currencyCode}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "<b>Success</b> Everything worked as expected."
+          },
+          "404": {
+            "description": "<b>InvalidResource</b> The resource you requested doesn't exist."
+          },
+          "500": {
+            "description": "<b>Error</b> Generic error message."
+          },
+          "503": {
+            "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
+          }
+        },
+        "description": "",
+        "tags": [
+          "currencies"
+        ],
+        "summary": "Get a specific currency.",
+        "operationId": "currencies",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "<ul>\r\n</ul>\r\n",
+            "name": "currencyCode",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/marketpairs": {},
+    "/marketpairs/{marketPairCode}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "<b>Success</b> Everything worked as expected."
+          },
+          "401": {
+            "description": "<b>FailedAuthentication</b> There was a problem validating the accessToken or signature you provided."
+          },
+          "402": {
+            "description": "<b>InsufficientFunds</b> You may get this error if your account is out of API credits. Keep a positive balance to prevent this error."
+          },
+          "404": {
+            "description": "<b>InvalidResource</b> The resource you requested doesn't exist."
+          },
+          "500": {
+            "description": "<b>Error</b> Generic error message."
+          },
+          "503": {
+            "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
+          }
+        },
+        "description": "",
+        "tags": [
+          "marketpairs"
+        ],
+        "summary": "Use this get a specific market pair.",
+        "operationId": "marketpairs",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "description": "<p>The access token for the user (<a href=\"http://self-issued.info/docs/draft-ietf-oauth-v2-bearer.html#authz-header\">format</a>: Bearer access_token).</p><p>Example: Bearer DI83JE3H8FEUIFJKWEKJ8E9383</p>",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "<ul>\r\n<li>Example: <span class=\"code\">bitstampBTCUSDmtgoxBTCEUR</span></li>\r\n</ul>\r\n",
+            "name": "marketPairCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "<ul><li>Example: <span class=\"code\">trades, orderbooks, tickers, profitCurve</span></li></ul>",
+            "name": "expands",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/markets": {},
+    "/markets/{marketCode}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "<b>Success</b> Everything worked as expected."
+          },
+          "401": {
+            "description": "<b>FailedAuthentication</b> There was a problem validating the accessToken or signature you provided."
+          },
+          "402": {
+            "description": "<b>InsufficientFunds</b> You may get this error if your account is out of API credits. Keep a positive balance to prevent this error."
+          },
+          "404": {
+            "description": "<b>InvalidResource</b> The resource you requested doesn't exist."
+          },
+          "500": {
+            "description": "<b>Error</b> Generic error message."
+          },
+          "503": {
+            "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
+          }
+        },
+        "description": "",
+        "tags": [
+          "markets"
+        ],
+        "summary": "Use this to get a specific market.",
+        "operationId": "markets",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "description": "<p>The access token for the user (<a href=\"http://self-issued.info/docs/draft-ietf-oauth-v2-bearer.html#authz-header\">format</a>: Bearer access_token).</p><p>Example: Bearer DI83JE3H8FEUIFJKWEKJ8E9383</p>",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "<ul>\r\n<li>Example: <span class=\"code\">mtgoxBTCUSD, btceLTCEUR</span></li>\r\n</ul>\r\n",
+            "name": "marketCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "<ul><li>Example: <span class=\"code\">tickerHistory, orderBook, ticker</span></li></ul>",
+            "name": "expands",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/sessions": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "<b>Success</b> Everything worked as expected."
+          },
+          "401": {
+            "description": "<b>FailedAuthentication</b> There was a problem validating the accessToken or signature you provided."
+          },
+          "402": {
+            "description": "<b>InsufficientFunds</b> You may get this error if your account is out of API credits. Keep a positive balance to prevent this error."
+          },
+          "500": {
+            "description": "<b>Error</b> Generic error message."
+          },
+          "503": {
+            "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
+          }
+        },
+        "description": "",
+        "tags": [
+          "sessions"
+        ],
+        "summary": "Use this to search your session history.",
+        "operationId": "sessions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "description": "<p>The access token for the user (<a href=\"http://self-issued.info/docs/draft-ietf-oauth-v2-bearer.html#authz-header\">format</a>: Bearer access_token).</p><p>Example: Bearer DI83JE3H8FEUIFJKWEKJ8E9383</p>",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "<ul>\r\n</ul>\r\n",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "<ul>\r\n<li>Max Value: <span class=\"code\">100</span></li>\r\n</ul>\r\n",
+            "name": "pageSize",
+            "required": false,
+            "type": "integer",
+            "default": 10
+          },
+          {
+            "in": "query",
+            "description": "<ul>\r\n</ul>\r\n",
+            "name": "includeTotalResults",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "description": "<ul>\r\n<li>Example: <span class=\"code\">bitdangoApi, automagically</span></li>\r\n</ul>\r\n",
+            "name": "applications",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "<ul>\r\n<li>Example: <span class=\"code\">192.168.456.48</span></li>\r\n</ul>\r\n",
+            "name": "ipAddresses",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "<ul>\r\n<li>Example: <span class=\"code\">Seattle, London, Shanghai</span></li>\r\n</ul>\r\n",
+            "name": "cities",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "<ul>\r\n<li>Example: <span class=\"code\">California, Florida, Colorado</span></li>\r\n</ul>\r\n",
+            "name": "regions",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "<ul>\r\n<li>Example: <span class=\"code\">US, NZ, FR</span></li>\r\n</ul>\r\n",
+            "name": "countries",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "<ul>\r\n<li>Example: <span class=\"code\">9f72b726-d67c-47e5-9a80-fded7a23be1c</span></li>\r\n</ul>\r\n",
+            "name": "sessions",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "<ul><li>Example: countries, applications, ipAddresses, cities, regions</li></ul>",
+            "name": "facets",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {},
+  "host": "bitdango.com",
+  "basePath": "/api",
+  "schemes": [
+    "https"
+  ],
+  "tags": [
+    {
+      "name": "exchanges",
+      "description": "No description was specified"
+    },
+    {
+      "name": "currencypairs",
+      "description": "No description was specified"
+    },
+    {
+      "name": "currencies",
+      "description": "No description was specified"
+    },
+    {
+      "name": "marketpairs",
+      "description": "No description was specified"
+    },
+    {
+      "name": "markets",
+      "description": "No description was specified"
+    },
+    {
+      "name": "sessions",
+      "description": "No description was specified"
+    }
+  ]
+}
