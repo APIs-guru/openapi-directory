@@ -4504,6 +4504,10 @@
           "type": "boolean",
           "description": "Whether this file is in the Application Data folder."
         },
+        "canComment": {
+          "type": "boolean",
+          "description": "Whether the current user can comment on the file."
+        },
         "copyable": {
           "type": "boolean",
           "description": "Whether the file can be copied by the current user."
@@ -4779,6 +4783,10 @@
           "type": "string",
           "description": "The original filename if the file was uploaded manually, or the original title if the file was inserted through the API. Note that renames of the title will not change the original filename. This will only be populated on files with content stored in Drive."
         },
+        "ownedByMe": {
+          "type": "boolean",
+          "description": "Whether the file is owned by the current user."
+        },
         "ownerNames": {
           "type": "array",
           "description": "Name(s) of the owner(s) of this file.",
@@ -4822,6 +4830,10 @@
         "selfLink": {
           "type": "string",
           "description": "A link back to this file."
+        },
+        "shareable": {
+          "type": "boolean",
+          "description": "Whether the file's sharing settings can be modified by the current user."
         },
         "shared": {
           "type": "boolean",
