@@ -1339,6 +1339,12 @@
             "type": "boolean"
           },
           {
+            "name": "supportsAttachments",
+            "in": "query",
+            "description": "Whether API client performing operation supports event attachments. Optional. The default is False.",
+            "type": "boolean"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -1403,6 +1409,12 @@
             "type": "boolean"
           },
           {
+            "name": "supportsAttachments",
+            "in": "query",
+            "description": "Whether API client performing operation supports event attachments. Optional. The default is False.",
+            "type": "boolean"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -1464,6 +1476,12 @@
             "description": "Calendar identifier.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "supportsAttachments",
+            "in": "query",
+            "description": "Whether API client performing operation supports event attachments. Optional. The default is False.",
+            "type": "boolean"
           },
           {
             "name": "body",
@@ -1539,6 +1557,12 @@
             "name": "sendNotifications",
             "in": "query",
             "description": "Whether to send notifications about the creation of the new event. Optional. The default is False.",
+            "type": "boolean"
+          },
+          {
+            "name": "supportsAttachments",
+            "in": "query",
+            "description": "Whether API client performing operation supports event attachments. Optional. The default is False.",
             "type": "boolean"
           },
           {
@@ -2789,6 +2813,13 @@
           "description": "Whether anyone can invite themselves to the event. Optional. The default is False.",
           "default": "false"
         },
+        "attachments": {
+          "type": "array",
+          "description": "File attachments for the event. Currently only Google Drive attachments are supported.\nIn order to modify attachments the supportsAttachments request parameter should be set to true.\nThere can be at most 25 attachments per event,",
+          "items": {
+            "$ref": "#/definitions/EventAttachment"
+          }
+        },
         "attendees": {
           "type": "array",
           "description": "The attendees of the event.",
@@ -3070,7 +3101,25 @@
       }
     },
     "EventAttachment": {
-      "type": "object"
+      "type": "object",
+      "properties": {
+        "fileUrl": {
+          "type": "string",
+          "description": "URL link to the attachment.\nFor adding Google Drive file attachments use the same format as in alternateLink property of the Files resource in the Drive API."
+        },
+        "iconLink": {
+          "type": "string",
+          "description": "URL link to the attachment's icon. Read-only."
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "Internet media type (MIME type) of the attachment."
+        },
+        "title": {
+          "type": "string",
+          "description": "Attachment title."
+        }
+      }
     },
     "EventAttendee": {
       "type": "object",

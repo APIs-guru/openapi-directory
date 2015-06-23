@@ -51,6 +51,7 @@
           {
             "Oauth2": [
               "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/cloud.useraccounts",
               "https://www.googleapis.com/auth/computeaccounts"
             ]
           }
@@ -154,6 +155,7 @@
           {
             "name": "maxResults",
             "in": "query",
+            "description": "Maximum count of results to be returned.",
             "default": 500,
             "type": "integer",
             "minimum": 0,
@@ -162,6 +164,7 @@
           {
             "name": "orderBy",
             "in": "query",
+            "description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.\n\nYou can also sort results in descending order based on the creation timestamp using orderBy=\"creationTimestamp desc\". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.\n\nCurrently, only sorting by name or creationTimestamp desc is supported.",
             "type": "string"
           },
           {
@@ -458,6 +461,7 @@
           {
             "name": "maxResults",
             "in": "query",
+            "description": "Maximum count of results to be returned.",
             "default": 500,
             "type": "integer",
             "minimum": 0,
@@ -466,6 +470,7 @@
           {
             "name": "orderBy",
             "in": "query",
+            "description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.\n\nYou can also sort results in descending order based on the creation timestamp using orderBy=\"creationTimestamp desc\". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.\n\nCurrently, only sorting by name or creationTimestamp desc is supported.",
             "type": "string"
           },
           {
@@ -710,6 +715,7 @@
           {
             "name": "maxResults",
             "in": "query",
+            "description": "Maximum count of results to be returned.",
             "default": 500,
             "type": "integer",
             "minimum": 0,
@@ -718,6 +724,7 @@
           {
             "name": "orderBy",
             "in": "query",
+            "description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.\n\nYou can also sort results in descending order based on the creation timestamp using orderBy=\"creationTimestamp desc\". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.\n\nCurrently, only sorting by name or creationTimestamp desc is supported.",
             "type": "string"
           },
           {
@@ -1020,6 +1027,7 @@
           {
             "name": "maxResults",
             "in": "query",
+            "description": "Maximum count of results to be returned.",
             "default": 500,
             "type": "integer",
             "minimum": 0,
@@ -1028,6 +1036,7 @@
           {
             "name": "orderBy",
             "in": "query",
+            "description": "Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.\n\nYou can also sort results in descending order based on the creation timestamp using orderBy=\"creationTimestamp desc\". This sorts results based on the creationTimestamp field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.\n\nCurrently, only sorting by name or creationTimestamp desc is supported.",
             "type": "string"
           },
           {
