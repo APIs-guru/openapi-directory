@@ -113,8 +113,11 @@ function writeSpec(url, type, callback) {
       validateSwagger(swagger, function (errors, warnings) {
         if (errors) {
           console.log(url);
-          if (spec.type !== 'swagger_2')
+          if (spec.type !== 'swagger_2') {
             logJson(spec.spec);
+            if (spec.apis)
+              logJson(spec.apis);
+          }
           logJson(swagger);
           logJson(errors);
           process.exit(255);
