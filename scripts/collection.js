@@ -87,6 +87,7 @@ function updateGoogle() {
              //asterisk in path
              'admin:directory_v1',
              //plus in path
+             'pubsub:v1',
              'pubsub:v1beta1',
              'pubsub:v1beta1a',
              'pubsub:v1beta2',
