@@ -2312,6 +2312,10 @@
           "description": "[Output-only] The time when this table was last modified, in milliseconds since the epoch.",
           "format": "uint64"
         },
+        "location": {
+          "type": "string",
+          "description": "[Optional] The backing storage location."
+        },
         "numBytes": {
           "type": "string",
           "description": "[Output-only] The size of the table in bytes. This property is unavailable for tables that are actively receiving streaming inserts.",

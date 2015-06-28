@@ -4526,8 +4526,7 @@
           "description": "A short description of the file."
         },
         "downloadUrl": {
-          "type": "string",
-          "description": "Short lived download URL for the file. This is only populated for files with content stored in Drive."
+          "type": "string"
         },
         "editable": {
           "type": "boolean",
@@ -4543,7 +4542,7 @@
         },
         "explicitlyTrashed": {
           "type": "boolean",
-          "description": "Whether this file has been explicitly trashed, as opposed to recursively trashed. This will only be populated if the file is trashed."
+          "description": "Whether this file has been explicitly trashed, as opposed to recursively trashed."
         },
         "exportLinks": {
           "type": "object",
