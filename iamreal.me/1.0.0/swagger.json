@@ -1,0 +1,301 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "api.iamreal.me",
+    "x-providerName": "iamreal.me",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "https://developers.iamreal.me/swagger/spec.json"
+    }
+  },
+  "paths": {
+    "/users/{userId}/": {
+      "post": {
+        "operationId": "POST User",
+        "summary": "Post a new / existing user for validation",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "User Id given by provider (e.g. Facebook Id)",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "description": "User Request Details",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisterUserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          },
+          "202": {},
+          "401": {},
+          "404": {}
+        }
+      }
+    },
+    "/vfv": {
+      "post": {
+        "operationId": "POST Video Validation request",
+        "summary": "Setup video validation for specific user, and get global unique identifier (guid) to launch widget with",
+        "parameters": [
+          {
+            "in": "body",
+            "description": "User Request Details",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VideoValidationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {},
+          "400": {},
+          "401": {},
+          "500": {}
+        }
+      }
+    },
+    "/sms/verify": {
+      "post": {
+        "operationId": "POST VERIFY",
+        "summary": "Post sms validation request",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Application identifier. This never changes.",
+            "name": "appId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Application Secret. This should never be shared and should be done from server only.",
+            "name": "appSecret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "User Id",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Phone number provided by the user",
+            "name": "phoneNumber",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Your brand name, which will appear in the SMS message ",
+            "name": "brand",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          },
+          "202": {},
+          "400": {},
+          "401": {}
+        }
+      }
+    },
+    "/sms/check/{userId}/": {
+      "get": {
+        "operationId": "GET VALIDATION",
+        "summary": "Validate that the code typed by user and the code sent are identical",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The user Id",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Application Id",
+            "name": "appId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Application Secret",
+            "name": "appSecret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Phone number provided by the user",
+            "name": "phoneNumber",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The validation code the user filled in",
+            "name": "validationCode",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {},
+          "400": {},
+          "401": {}
+        }
+      }
+    }
+  },
+  "host": "api.iamreal.me",
+  "basePath": "/api/v2",
+  "schemes": [
+    "http"
+  ],
+  "tags": [
+    {
+      "name": "swagger/spec/social",
+      "description": "Validate a user's Social Network profile"
+    },
+    {
+      "name": "swagger/spec/video",
+      "description": "Validate users by comparing live video of user with profile picture"
+    },
+    {
+      "name": "swagger/spec/sms",
+      "description": "Validate users phone number via SMS"
+    }
+  ],
+  "definitions": {
+    "UserValidationResponse": {
+      "required": [
+        "userId",
+        "score",
+        "significance"
+      ],
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "User Id given by provider (e.g. Facebook Id)"
+        },
+        "score": {
+          "type": "string",
+          "description": "User Score (0-100)"
+        },
+        "significance": {
+          "type": "string",
+          "description": "User Significance (0-100)"
+        }
+      }
+    },
+    "RegisterUserRequest": {
+      "required": [
+        "token",
+        "appId",
+        "appSecret"
+      ],
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "Social network access token of the end user"
+        },
+        "appId": {
+          "type": "string",
+          "description": "Application identifier. This never changes"
+        },
+        "appSecret": {
+          "type": "string",
+          "description": "Application Secret. This should never be shared and should be done from server only"
+        },
+        "callbackUrl": {
+          "type": "string",
+          "description": "The URL address I Am Real will call once the end user's score is calculated"
+        },
+        "clientProof": {
+          "type": "string",
+          "description": "A string that will be sent back with the analysis to prove that the response is sent from I Am Real servers"
+        }
+      }
+    },
+    "VideoValidationRequest": {
+      "required": [
+        "appId",
+        "appSecret",
+        "userId",
+        "photoUrl"
+      ],
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "Application identifier. This never changes"
+        },
+        "appSecret": {
+          "type": "string",
+          "description": "Application Secret. This should never be shared and should be done from server only"
+        },
+        "userId": {
+          "type": "string",
+          "description": "User Identifier (e.g. Facebook User Id or email address"
+        },
+        "photoUrl": {
+          "type": "string",
+          "description": "Url of photo to compare with live video. Link should be to an image that the user cannot modify"
+        },
+        "callbackUrl": {
+          "type": "string",
+          "description": "The URL address I Am Real will call with Video Validation result"
+        },
+        "clientProof": {
+          "type": "string",
+          "description": "A string that will be sent back with the validation to prove that the response is sent from I Am Real servers"
+        }
+      }
+    },
+    "VideoValidationResponse": {
+      "required": [
+        "statusCode",
+        "guid"
+      ],
+      "properties": {
+        "statusCode": {
+          "type": "string",
+          "description": "status code (201 - Created)"
+        },
+        "guid": {
+          "type": "string",
+          "description": "Global unique identifier (guid) to launch widget with"
+        }
+      }
+    },
+    "SmsValidationResponse": {
+      "required": [
+        "validated"
+      ],
+      "properties": {
+        "validated": {
+          "type": "boolean",
+          "description": "True if codes are identical, false if not"
+        }
+      }
+    }
+  }
+}
