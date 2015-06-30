@@ -1275,6 +1275,14 @@
     "ReplicaPoolAutoHealingPolicy": {
       "type": "object",
       "properties": {
+        "actionType": {
+          "type": "string",
+          "description": "The action to perform when an instance becomes unhealthy. Possible values are RECREATE or REBOOT. RECREATE replaces an unhealthy instance with a new instance that is based on the instance template for this managed instance group. REBOOT performs a soft reboot on an instance. If the instance cannot reboot, the instance performs a hard restart.",
+          "enum": [
+            "REBOOT",
+            "RECREATE"
+          ]
+        },
         "healthCheck": {
           "type": "string",
           "description": "The URL for the HealthCheck that signals autohealing."
