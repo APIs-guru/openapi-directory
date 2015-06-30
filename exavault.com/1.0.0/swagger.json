@@ -1,0 +1,3126 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "api.exavault.com",
+    "x-providerName": "exavault.com",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "https://www.exavault.com/api/docs"
+    }
+  },
+  "paths": {
+    "/v1/authenticateUser": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "authenticateUser",
+        "summary": "Authenticates a user into the API",
+        "description": "Returns access token in the Response object",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Name of of user to authenticate",
+            "name": "username",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "User's password",
+            "name": "password",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/AuthResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/checkFilesExist": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "checkFilesExist",
+        "summary": "Checks to see if each file or folder in the array exists",
+        "description": "Requires access token obtained via the authenticateUser operation",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Array containing paths of the files or folders to check",
+            "name": "filePaths",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/ExistingResourcesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/copyResources": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "copyResources",
+        "summary": "Copies files, folders to the destination path",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with the 'upload' permission.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Remote paths of the files or folders to copy",
+            "name": "filePaths",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Remote destination path to copy files/folders to",
+            "name": "destinationPath",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/ModifiedResourcesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/createFolder": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "createFolder",
+        "summary": "Create a folder at a specified path",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with the 'upload' permission.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Name of the folder to create",
+            "name": "folderName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Where to create the folder",
+            "name": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
+    "/v1/createNotification": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "createNotification",
+        "summary": "Creates a new Notification object",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with 'notification' permission",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Full path of file/folder where notification is set.",
+            "name": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Type of action to filter on: 'upload', 'download', 'delete', 'all'",
+            "name": "action",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "User type to filter on: 'notice_user_all', 'notice_user_all_recipients', 'notice_user_all_users'",
+            "name": "usernames",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Set to true if the user should be notified by email when the notification is triggered.",
+            "name": "sendEmail",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "description": "Email addresses to send notification to. If not specified, sends to owner by default.",
+            "name": "emails",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
+    "/v1/createShare": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "createShare",
+        "summary": "Create a new Share object",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The type of share to create: shared_folder, send, receive.",
+            "name": "type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Name of the Share.",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Array of strings containing the file paths to share.",
+            "name": "filePaths",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Share message subject (for email invitations).",
+            "name": "subject",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Share message contents (for email invitations).",
+            "name": "message",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Array of strings for email recipients (for email invitations).",
+            "name": "emails",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Specifies a CC email recipient.",
+            "name": "ccEmail",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Requires a user's email to access (defaults to false if not specified).",
+            "name": "requireEmail",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "query",
+            "description": "Type of permissions share recipients have: upload, download, download_upload, download_upload_modify, download_upload_modify_delete. Defaults to download if no option specified.",
+            "name": "accessMode",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Allows user to embed a widget with the share. Defaults to false if not specified.",
+            "name": "embed",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "query",
+            "description": "True if share has a public URL, otherwise defaults to false",
+            "name": "isPublic",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "query",
+            "description": "If not null, value of password is required to access this Share",
+            "name": "password",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The date the current Share should expire, formatted YYYY-mm-dd",
+            "name": "expiration",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "True if the user should be notified about activity on this Share.",
+            "name": "hasNotification",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "description": "An array of recipients who should receive notification emails.",
+            "name": "notificationEmails",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "If true, all receive folder submissions will be uploaded separate folders (only applicable for Receive folder types)",
+            "name": "fileDropCreateFolders",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
+    "/v1/createUser": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "createUser",
+        "summary": "Adds a new subaccount user to the current account",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with the 'manage users' permission",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Name of the subaccount user to create",
+            "name": "username",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The user's home folder",
+            "name": "destinationFolder",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The user's email address",
+            "name": "email",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The user's password",
+            "name": "password",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The user's role, i.e: 'user' or 'admin'",
+            "name": "role",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "A CSV string of user permissions. The following values are supported: upload, download, delete, modify, list, changePassword, share, notification.",
+            "name": "permissions",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The user's timezone, used for accurate time display within SWFT. See <a href='https://php.net/manual/en/timezones.php' target='blank'>this page</a> for allowed values",
+            "name": "timeZone",
+            "required": true,
+            "type": "string",
+            "default": "America/Los_Angeles"
+          },
+          {
+            "in": "query",
+            "description": "The user's nickname",
+            "name": "nickname",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The date when the user should expire, formatted YYYY-mm-dd",
+            "name": "expiration",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "If true, the user's account is locked by default",
+            "name": "locked",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "query",
+            "description": "If true, send a user email upon creation",
+            "name": "welcomeEmail",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
+    "/v1/deleteNotification": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "deleteNotification",
+        "summary": "Deletes a Notification by ID",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with 'notification' permission",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "ID of the Notification to delete.",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
+    "/v1/deleteResources": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "deleteResources",
+        "summary": "Delete the specified files/folders",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with the 'delete' permission",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Array containing paths of the files or folder to delete",
+            "name": "filePaths",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/DeletedResourcesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/deleteShare": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "deleteShare",
+        "summary": "Deletes a Share by ID",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with 'share' permission",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "ID of the Share to delete.",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
+    "/v1/deleteUser": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "deleteUser",
+        "summary": "Deletes a subaccount user for the current account",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with 'manage users' permission",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Name of the subaccount user to delete",
+            "name": "username",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
+    "/v1/getAccount": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "getAccount",
+        "summary": "Gets the account object for the currently logged in user",
+        "description": "Requires access token obtained via the authenticateUser operation",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/AccountResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/getCurrentUser": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "getCurrentUser",
+        "summary": "Gets the user object for the currently logged in user",
+        "description": "Requires access token obtained via the authenticateUser operation",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/getDownloadFileUrl": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "getDownloadFileUrl",
+        "summary": "Returns a unique URL for handling file downloads",
+        "description": "Requires access token obtained via the authenticateUser operation. URL points at the appropriate storage server for file download.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Path of file to be downloaded",
+            "name": "filePaths",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The name of the file to be downloaded",
+            "name": "downloadName",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/UrlResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/getFileActivityLogs": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "getFileActivityLogs",
+        "summary": "Returns a list of account activity. Allows for searching the activity log.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Starting record in the result set. Can be used for pagination.",
+            "name": "offset",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "in": "query",
+            "description": "Sort method ['sort_logs_date' or 'sort_logs_ip_address' or 'sort_logs_username' or 'sort_logs_file' or 'sort_logs_file_source' or 'sort_logs_operation', or 'sort_logs_duration', or 'sort_logs_size', or 'sort_logs_protocol']",
+            "name": "sortBy",
+            "required": false,
+            "type": "string",
+            "default": "sort_logs_date"
+          },
+          {
+            "in": "query",
+            "description": "Sort in either ascending or descending order: asc, desc",
+            "name": "sortOrder",
+            "required": false,
+            "type": "string",
+            "default": "desc"
+          },
+          {
+            "in": "query",
+            "description": "Field to search on ['filter_logs_date' or 'filter_logs_ip_address' or 'filter_logs_username' or 'filter_logs_operation' or 'filter_logs_file']",
+            "name": "filterBy",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Search criteria. For date ranges, use format 'start_date::end_date'",
+            "name": "filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Number of logs to return. Can be used for pagination.",
+            "name": "itemLimit",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/LogResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/getFolders": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "getFolders",
+        "summary": "Get folders for a specified path",
+        "description": "Requires access token obtained via the authenticateUser operation",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The remote file path",
+            "name": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/ResourcePropertiesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/getNotification": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "getNotification",
+        "summary": "Returns a notification based on the given ID",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with the 'notification' permission",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "ID of the Notification",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/NotificationResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/getNotifications": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "getNotifications",
+        "summary": "Returns all notifications for the current user",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with the 'notification' permission",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Type of notification to filter on: 'file', 'folder', 'shared_folder', 'send_receipt', 'share_receipt', 'file_drop'",
+            "name": "type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Sort by one of the following: 'sort_notifications_folder_name', 'sort_notifications_path', 'sort_notifications_date'",
+            "name": "sortBy",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Sort by 'asc' or 'desc' order.",
+            "name": "sortOrder",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Filter by the provided search terms.",
+            "name": "filter",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/NotificationsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/getNotificationActivity": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "getNotificationActivity",
+        "summary": "Returns all notification activity for the current user",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with the 'notification' permission",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/NotificationActivityResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/getResourceList": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "getResourceList",
+        "summary": "Get a listing of files/folders for the specified path",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with 'list files' permission.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The remote file path",
+            "name": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Sort according to attribute: sort_files_name, sort_files_size, sort_files_date, sort_files_type, sort_files_timeline",
+            "name": "sortBy",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Sort in either ascending or descending order: asc, desc",
+            "name": "sortOrder",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Determines which item to start on for pagination",
+            "name": "offset",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "description": "The number of files to limit the result",
+            "name": "limit",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "description": "If true, returns sharedFolder, notifications or other objects associated with specified path",
+            "name": "detailed",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "in": "query",
+            "description": "Regex string. If not null, perform a search with specified pattern",
+            "name": "pattern",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/ResourceResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/getResourceProperties": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "getResourceProperties",
+        "summary": "Get the properties for each of the specified files/folders",
+        "description": "Requires access token obtained via the authenticateUser operation",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Array containing paths of the files or folder to get",
+            "name": "filePaths",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/ResourcePropertiesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/getShare": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "getShare",
+        "summary": "Returns a share by the specified ID",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "ID of the requested Share",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/ShareResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/getShares": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "getShares",
+        "summary": "Returns all Shares for the current user",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The type of share to return: 'shared_folder', 'send', or 'receive'. If no argument specified, will return all Shares types.",
+            "name": "type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Sort by one of the following: 'sort_shares_name', 'sort_shares_date', 'sort_shares_user', 'sort_shares_access_mode'.",
+            "name": "sortBy",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Sort by 'asc' or 'desc' order.",
+            "name": "sortOrder",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Filter by the provided search terms.",
+            "name": "filter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Filter by all, active-only, or current user's only.",
+            "name": "include",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Start position of results to return, for pagination.",
+            "name": "offset",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "description": "Maximum number of elements to return or 0 if no limit.",
+            "name": "limit",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/SharesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/getShareActivity": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "getShareActivity",
+        "summary": "Return activity log entries for the specified Share ID",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "ID of the Share",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/ShareActivityResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/getUploadFileUrl": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "getUploadFileUrl",
+        "summary": "Returns a unique URL for handling file uploads",
+        "description": "Requires access token obtained via the authenticateUser operation. Called before an upload is started to get URL to appropriate storage server. Available to users with the 'write' permission.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Size of the file to upload, in bytes",
+            "name": "fileSize",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "query",
+            "description": "Path relative to account's home directory, including file name",
+            "name": "destinationPath",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "True if the file should be overwritten, false if different file names should be generated",
+            "name": "allowOverwrite",
+            "required": false,
+            "type": "boolean",
+            "default": true
+          },
+          {
+            "in": "query",
+            "description": "True if upload resume is supported, false if it isn't",
+            "name": "resume",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/UrlResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/getUser": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "getUser",
+        "summary": "Get the specified subaccount user for the current account",
+        "description": "Requires access token obtained via the authenticateUser operation",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Name of the subaccount user to get",
+            "name": "username",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/UserResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/getUsers": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "getUsers",
+        "summary": "Gets the user object for the currently logged in user",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with the 'manage users' permission set",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "sort method ['sort_users_username' or 'sort_users_nickname' or 'sort_users_email' or 'sort_users_home_folder']",
+            "name": "sortBy",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "sort order, i.e. 'asc' or 'desc'",
+            "name": "sortOrder",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/UsersResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/logoutUser": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "logoutUser",
+        "summary": "Removes user's access token from database, logging them out of API",
+        "description": "Requires access token obtained via the authenticateUser operation",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
+    "/v1/moveResources": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "moveResources",
+        "summary": "Moves files, folders to the destination path",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with the 'upload' permission",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Remote paths of the files or folders to move",
+            "name": "filePaths",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Remote destination path to move files/folders to",
+            "name": "destinationPath",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/ModifiedResourcesResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/previewFile": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "previewFile",
+        "summary": "Returns a resized image of the specified document for support file types",
+        "description": "Requires access token obtained via authenticateUser operation",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Path of the image relative to the user's home directory",
+            "name": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The size of the image: small, medium, large",
+            "name": "size",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Overrides sizes. Sets to a specific width",
+            "name": "width",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "description": "Overrides sizes. Sets to a specific height",
+            "name": "height",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "description": "Page number for the document",
+            "name": "page",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/PreviewFileResponse"
+            }
+          }
+        }
+      }
+    },
+    "/v1/renameResource": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "renameResource",
+        "summary": "Rename a file or folder at the specified path",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with the 'modify' permission",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Remote path of the files or folder to rename",
+            "name": "filePath",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The new name of the file or folder",
+            "name": "newName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
+    "/v1/updateNotification": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "updateNotification",
+        "summary": "Updates an existing notification by ID",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with 'notification' permission",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The notification ID",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "description": "Full path of file/folder where notification is set.",
+            "name": "path",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Type of action to filter on: 'upload', 'download', 'delete', 'all'",
+            "name": "action",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "User type to filter on: 'notice_user_all', 'notice_user_all_recipients', 'notice_user_all_users'",
+            "name": "usernames",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Email addresses to send notification to. If not specified, sends to owner by default.",
+            "name": "emails",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Set to true if the user should be notified by email when the notification is triggered.",
+            "name": "sendEmail",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
+    "/v1/updateShare": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "updateShare",
+        "summary": "Update an existing Share by ID",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with the 'share' permission",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The ID of the Share to update.",
+            "name": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "description": "Name of the Share.",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Array of strings containing the file paths to share.",
+            "name": "filePaths",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Share message subject (for email invitations).",
+            "name": "subject",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Share message contents (for email invitations).",
+            "name": "message",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Array of strings for email recipients (for email invitations).",
+            "name": "emails",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Specifies a CC email recipient.",
+            "name": "ccEmail",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Requires a user's email to access.",
+            "name": "requireEmail",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "description": "Type of permissions share recipients have: upload, download, download_upload, download_upload_modify, download_upload_modify_delete.",
+            "name": "accessMode",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Allows user to embed a widget with the share.",
+            "name": "embed",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "description": "True if share has a public URL, otherwise defaults to false",
+            "name": "isPublic",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "description": "If not null, value of password is required to access this Share",
+            "name": "password",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The date the current Share should expire, formatted YYYY-mm-dd",
+            "name": "expiration",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "True if the user should be notified about activity on this Share.",
+            "name": "hasNotification",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "description": "An array of recipients who should receive notification emails.",
+            "name": "notificationEmails",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "If true, all receive folder submissions will be uploaded separate folders (only applicable for Receive folder types)",
+            "name": "fileDropCreateFolders",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
+    "/v1/updateUser": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "updateUser",
+        "summary": "Updates a subaccount user for the current account",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with 'manage users' permission",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The user ID, must be obtained from getUser method first",
+            "name": "userId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "description": "Name of the subaccount user to modify",
+            "name": "username",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The user's nickname",
+            "name": "nickname",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The date when use should expire in format: YYYY-MM-DD",
+            "name": "expiration",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The user's email",
+            "name": "email",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The user's home folder",
+            "name": "destinationFolder",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "The user's password",
+            "name": "password",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "If true, the user's account is locked by default",
+            "name": "locked",
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "description": "The user's role, i.e: 'user', 'admin', 'master'",
+            "name": "role",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "A CSV string of user permissions.",
+            "name": "permissions",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            }
+          }
+        }
+      }
+    },
+    "/v1/userAvailable": {
+      "get": {
+        "tags": [
+          "v1"
+        ],
+        "operationId": "userAvailable",
+        "summary": "Returns true if requested username has not already been taken in the system",
+        "description": "Requires access token obtained via the authenticateUser operation. Available to users with the 'manage users' permission",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Access token required to make the API call",
+            "name": "access_token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Username to check",
+            "name": "username",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/AvailableUserResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "host": "api.exavault.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "tags": [
+    {
+      "name": "v1",
+      "description": "operations for files, notifications, sharing and users"
+    }
+  ],
+  "definitions": {
+    "Error": {
+      "required": [
+        "message",
+        "code"
+      ],
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "DeletedResource": {
+      "required": [
+        "file",
+        "size",
+        "success"
+      ],
+      "properties": {
+        "file": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "Recipient": {
+      "required": [
+        "id",
+        "shareId",
+        "type",
+        "hash",
+        "email",
+        "sent",
+        "received",
+        "created"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "shareId": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "sent": {
+          "type": "boolean"
+        },
+        "received": {
+          "type": "boolean"
+        },
+        "created": {
+          "type": "string"
+        }
+      }
+    },
+    "Notification": {
+      "required": [
+        "id",
+        "userId",
+        "type",
+        "path",
+        "name",
+        "action",
+        "usernames",
+        "recipients",
+        "recipientEmails",
+        "sendEmail",
+        "readableDescription",
+        "readableDescriptionWithoutPath",
+        "shareId",
+        "created",
+        "modified"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "usernames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recipients": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Recipient"
+          }
+        },
+        "recipientEmails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sendEmail": {
+          "type": "string"
+        },
+        "readableDescription": {
+          "type": "string"
+        },
+        "readableDescriptionWithoutPath": {
+          "type": "string"
+        },
+        "shareId": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "modified": {
+          "type": "string"
+        }
+      }
+    },
+    "Message": {
+      "required": [
+        "id",
+        "userId",
+        "shareId",
+        "subject",
+        "body",
+        "created",
+        "modified"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "userId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "shareId": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "modified": {
+          "type": "string"
+        }
+      }
+    },
+    "NotificationMessage": {
+      "required": [
+        "id",
+        "notificationSetting",
+        "message",
+        "path",
+        "action",
+        "username",
+        "sent",
+        "read",
+        "created"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "notificationSetting": {
+          "$ref": "#/definitions/Notification"
+        },
+        "message": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "sent": {
+          "type": "boolean"
+        },
+        "read": {
+          "type": "boolean"
+        },
+        "created": {
+          "type": "string"
+        }
+      }
+    },
+    "Share": {
+      "required": [
+        "id",
+        "name",
+        "hasPassword",
+        "isPublic",
+        "accessMode",
+        "accessDescription",
+        "embed",
+        "hash",
+        "ownerHash",
+        "expiration",
+        "trackingStatus",
+        "expired",
+        "resent",
+        "owner",
+        "ownerUsername",
+        "type",
+        "requireEmail",
+        "fileDropCreateFolders",
+        "paths",
+        "recipients",
+        "recipientsWithOwner",
+        "messages",
+        "inherited",
+        "status",
+        "hasNotification",
+        "notification",
+        "created",
+        "modified"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
+        },
+        "hasPassword": {
+          "type": "boolean"
+        },
+        "isPublic": {
+          "type": "boolean"
+        },
+        "accessMode": {
+          "type": "string"
+        },
+        "accessDescription": {
+          "type": "string"
+        },
+        "embed": {
+          "type": "boolean"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "ownerHash": {
+          "type": "string"
+        },
+        "expiration": {
+          "type": "string"
+        },
+        "trackingStatus": {
+          "type": "string"
+        },
+        "expired": {
+          "type": "string"
+        },
+        "resent": {
+          "type": "boolean"
+        },
+        "owner": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ownerUsername": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "requireEmail": {
+          "type": "boolean"
+        },
+        "fileDropCreateFolders": {
+          "type": "boolean"
+        },
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recipients": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Recipient"
+          }
+        },
+        "recipientsWithOwner": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Recipient"
+          }
+        },
+        "messages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Message"
+          }
+        },
+        "inherited": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "hasNotification": {
+          "type": "boolean"
+        },
+        "notification": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "modified": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceProperty": {
+      "required": [
+        "fileCount",
+        "file",
+        "name",
+        "createdBy",
+        "uploadDate",
+        "parent",
+        "path",
+        "shares",
+        "notificationSettings",
+        "size",
+        "previewable"
+      ],
+      "properties": {
+        "fileCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "file": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "uploadDate": {
+          "type": "string"
+        },
+        "parent": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "shares": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Share"
+          }
+        },
+        "notificationSettings": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "previewable": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "Resource": {
+      "required": [
+        "totalFiles",
+        "resources",
+        "inheritedShares",
+        "inheritedNotifications"
+      ],
+      "properties": {
+        "totalFiles": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProperty"
+          }
+        },
+        "inheritedShares": {
+          "type": "string"
+        },
+        "inheritedNotifications": {
+          "type": "string"
+        }
+      }
+    },
+    "ExistingResource": {
+      "required": [
+        "exists",
+        "resource"
+      ],
+      "properties": {
+        "exists": {
+          "type": "boolean"
+        },
+        "resource": {
+          "$ref": "#/definitions/ResourceProperty"
+        }
+      }
+    },
+    "ModifiedResource": {
+      "required": [
+        "file",
+        "destination",
+        "size",
+        "success"
+      ],
+      "properties": {
+        "file": {
+          "type": "string"
+        },
+        "destination": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "User": {
+      "required": [
+        "gid",
+        "status",
+        "created",
+        "modified",
+        "accessTimestamp",
+        "id",
+        "owningAccountId",
+        "username",
+        "nickname",
+        "email",
+        "expiration",
+        "homeDir",
+        "download",
+        "upload",
+        "modify",
+        "delete",
+        "list",
+        "changePassword",
+        "share",
+        "notification",
+        "role",
+        "timeZone"
+      ],
+      "properties": {
+        "gid": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "created": {
+          "type": "string"
+        },
+        "modified": {
+          "type": "string"
+        },
+        "accessTimestamp": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "owningAccountId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "username": {
+          "type": "string"
+        },
+        "nickname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "expiration": {
+          "type": "string"
+        },
+        "homeDir": {
+          "type": "string"
+        },
+        "download": {
+          "type": "boolean"
+        },
+        "upload": {
+          "type": "boolean"
+        },
+        "modify": {
+          "type": "boolean"
+        },
+        "delete": {
+          "type": "boolean"
+        },
+        "list": {
+          "type": "boolean"
+        },
+        "changePassword": {
+          "type": "boolean"
+        },
+        "share": {
+          "type": "boolean"
+        },
+        "notification": {
+          "type": "boolean"
+        },
+        "role": {
+          "type": "string"
+        },
+        "timeZone": {
+          "type": "string"
+        }
+      }
+    },
+    "AvailableUser": {
+      "required": [
+        "available"
+      ],
+      "properties": {
+        "available": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Account": {
+      "required": [
+        "id",
+        "username",
+        "maxUsers",
+        "userCount",
+        "masterAccount",
+        "status",
+        "branding",
+        "customDomain",
+        "planCode",
+        "diskQuotaLimit",
+        "bandwidthQuotaLimit",
+        "diskQuotaUsed",
+        "bandwidthQuotaUsed",
+        "quotaNoticeEnabled",
+        "quotaNoticeThreshold",
+        "redirect",
+        "secureOnly",
+        "complexPasswords",
+        "showReferralLinks",
+        "externalDomains",
+        "freeTrial",
+        "appliedTrial",
+        "clientId",
+        "created",
+        "modified"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "username": {
+          "type": "string"
+        },
+        "maxUsers": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "userCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "masterAccount": {
+          "$ref": "#/definitions/User"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "branding": {
+          "type": "boolean"
+        },
+        "customDomain": {
+          "type": "boolean"
+        },
+        "planCode": {
+          "type": "string"
+        },
+        "diskQuotaLimit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "bandwidthQuotaLimit": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "diskQuotaUsed": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "bandwidthQuotaUsed": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "quotaNoticeEnabled": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "quotaNoticeThreshold": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "redirect": {
+          "type": "string"
+        },
+        "secureOnly": {
+          "type": "boolean"
+        },
+        "complexPasswords": {
+          "type": "boolean"
+        },
+        "showReferralLinks": {
+          "type": "boolean"
+        },
+        "externalDomains": {
+          "type": "string"
+        },
+        "freeTrial": {
+          "type": "boolean"
+        },
+        "appliedTrial": {
+          "type": "string"
+        },
+        "clientId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "created": {
+          "type": "string"
+        },
+        "modified": {
+          "type": "string"
+        }
+      }
+    },
+    "Auth": {
+      "required": [
+        "username",
+        "accessToken",
+        "mode",
+        "clientIp"
+      ],
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "accessToken": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "clientIp": {
+          "type": "string"
+        }
+      }
+    },
+    "Url": {
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "type": "string"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "PreviewFile": {
+      "required": [
+        "image",
+        "size",
+        "imageId"
+      ],
+      "properties": {
+        "image": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "imageId": {
+          "type": "string"
+        }
+      }
+    },
+    "LogEntry": {
+      "required": [
+        "fileName",
+        "fileSource",
+        "operation",
+        "duration",
+        "bytesTransferred",
+        "id",
+        "created",
+        "username",
+        "sessionId",
+        "ipAddress",
+        "protocol",
+        "status"
+      ],
+      "properties": {
+        "fileName": {
+          "type": "string"
+        },
+        "fileSource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "string"
+        },
+        "bytesTransferred": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "created": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "sessionId": {
+          "type": "string"
+        },
+        "ipAddress": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "ShareLogEntry": {
+      "required": [
+        "id",
+        "shareId",
+        "username",
+        "action",
+        "actionObjectId",
+        "detail",
+        "created"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "shareId": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "actionObjectId": {
+          "type": "string"
+        },
+        "detail": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        }
+      }
+    },
+    "Response": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DeletedResourcesResponse": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeletedResource"
+          }
+        }
+      }
+    },
+    "NotificationResponse": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "$ref": "#/definitions/Notification"
+        }
+      }
+    },
+    "NotificationsResponse": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Notification"
+          }
+        }
+      }
+    },
+    "ResourcePropertiesResponse": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProperty"
+          }
+        }
+      }
+    },
+    "ResourceResponse": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "$ref": "#/definitions/Resource"
+        }
+      }
+    },
+    "LogResponse": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogEntry"
+          }
+        }
+      }
+    },
+    "ShareResponse": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "$ref": "#/definitions/Share"
+        }
+      }
+    },
+    "SharesResponse": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Share"
+          }
+        }
+      }
+    },
+    "UsersResponse": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        }
+      }
+    },
+    "AuthResponse": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "$ref": "#/definitions/Auth"
+        }
+      }
+    },
+    "UserResponse": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "$ref": "#/definitions/User"
+        }
+      }
+    },
+    "AvailableUserResponse": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "$ref": "#/definitions/AvailableUser"
+        }
+      }
+    },
+    "AccountResponse": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "$ref": "#/definitions/Account"
+        }
+      }
+    },
+    "UrlResponse": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "$ref": "#/definitions/Url"
+        }
+      }
+    },
+    "NotificationActivityResponse": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NotificationMessage"
+          }
+        }
+      }
+    },
+    "ShareActivityResponse": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ShareLogEntry"
+          }
+        }
+      }
+    },
+    "PreviewFileResponse": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "$ref": "#/definitions/PreviewFile"
+        }
+      }
+    },
+    "ExistingResourcesResponse": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExistingResource"
+          }
+        }
+      }
+    },
+    "ModifiedResourcesResponse": {
+      "required": [
+        "success",
+        "error",
+        "results"
+      ],
+      "properties": {
+        "success": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModifiedResource"
+          }
+        }
+      }
+    }
+  }
+}
