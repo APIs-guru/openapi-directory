@@ -13,6 +13,68 @@
   "paths": {
     "/v1/company/basicsearch": {
       "get": {
+        "tags": [
+          "v1/company"
+        ],
+        "operationId": "basicCompanySearch",
+        "summary": "Basic Search Company by Ticker or Website or Name",
+        "description": "The Company Basic Search API searches for a company based on the input and will returns results containing basic details about matching companies. By default the API returns the top 10 available results unless the limit is specified. The maximum limit is restricted to 30.",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Search term",
+            "name": "q",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Fields to be searched - name, website, ticker. If not specfied, will be searched against all fields",
+            "name": "fields",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "name",
+                "website",
+                "ticker"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Number of results to be displayed - 10 (by default, if not specified) to 30",
+            "name": "limit",
+            "required": false,
+            "type": "string",
+            "minimum": 1,
+            "maximum": 30
+          },
+          {
+            "in": "query",
+            "description": "Format of the response content - json (by default if not specified), xml",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "xml",
+              "json"
+            ]
+          },
+          {
+            "in": "header",
+            "description": "API Access Key",
+            "name": "user_key",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Search Results",
@@ -32,13 +94,21 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "description": "",
+        }
+      }
+    },
+    "/v1/company/search": {
+      "get": {
         "tags": [
           "v1/company"
         ],
-        "summary": "Basic Search Company by Ticker or Website or Name",
-        "operationId": "basicCompanySearch",
+        "operationId": "searchCompany",
+        "summary": "Search Company by Ticker or Website or Name",
+        "description": "The Company Search API searches for a company based on the input and will returns results containing basic details about matching companies. By default the API returns the top 10 available results unless the limit is specified. The maximum limit is restricted to 30.",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
         "parameters": [
           {
             "in": "query",
@@ -49,10 +119,18 @@
           },
           {
             "in": "query",
-            "description": "Fields to be searched - name, website, ticker. If not specfied, will be searched against all fields",
+            "description": "Fields to be searched - name, website, ticker. If not specified, will be searched against all fields",
             "name": "fields",
             "required": false,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "name",
+                "website",
+                "ticker"
+              ]
+            }
           },
           {
             "in": "query",
@@ -60,8 +138,8 @@
             "name": "limit",
             "required": false,
             "type": "string",
-            "maximum": 30,
-            "minimum": 1
+            "minimum": 1,
+            "maximum": 30
           },
           {
             "in": "query",
@@ -69,7 +147,11 @@
             "name": "format",
             "required": false,
             "type": "string",
-            "default": "json"
+            "default": "json",
+            "enum": [
+              "xml",
+              "json"
+            ]
           },
           {
             "in": "header",
@@ -78,11 +160,7 @@
             "required": true,
             "type": "string"
           }
-        ]
-      }
-    },
-    "/v1/company/search": {
-      "get": {
+        ],
         "responses": {
           "200": {
             "description": "Search Results",
@@ -102,86 +180,21 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "description": "",
-        "tags": [
-          "v1/company"
-        ],
-        "summary": "Search Company by Ticker or Website or Name",
-        "operationId": "searchCompany",
-        "parameters": [
-          {
-            "in": "query",
-            "description": "Search term",
-            "name": "q",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Fields to be searched - name, website, ticker. If not specified, will be searched against all fields",
-            "name": "fields",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Number of results to be displayed - 10 (by default, if not specified) to 30",
-            "name": "limit",
-            "required": false,
-            "type": "string",
-            "maximum": 30,
-            "minimum": 1
-          },
-          {
-            "in": "query",
-            "description": "Format of the response content - json (by default if not specified), xml",
-            "name": "format",
-            "required": false,
-            "type": "string",
-            "default": "json"
-          },
-          {
-            "in": "header",
-            "description": "API Access Key",
-            "name": "user_key",
-            "required": true,
-            "type": "string"
-          }
-        ]
+        }
       }
     },
     "/v1/company/id/{companyId}": {
       "get": {
-        "responses": {
-          "200": {
-            "description": "Company Data",
-            "schema": {
-              "$ref": "#/definitions/company"
-            }
-          },
-          "400": {
-            "description": "Invalid Parameters"
-          },
-          "403": {
-            "description": "Authentication Failed"
-          },
-          "404": {
-            "description": "Resource Not Found"
-          },
-          "429": {
-            "description": "Too Many Requests"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "description": "",
         "tags": [
           "v1/company"
         ],
-        "summary": "Get Company by Id",
         "operationId": "getCompanyById",
+        "summary": "Get Company by Id",
+        "description": "The Company Data API provides complete information about a company for the specified Company Id ",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -196,7 +209,11 @@
             "name": "format",
             "required": false,
             "type": "string",
-            "default": "json"
+            "default": "json",
+            "enum": [
+              "xml",
+              "json"
+            ]
           },
           {
             "in": "header",
@@ -205,11 +222,7 @@
             "required": true,
             "type": "string"
           }
-        ]
-      }
-    },
-    "/v1/company/url/{website}": {
-      "get": {
+        ],
         "responses": {
           "200": {
             "description": "Company Data",
@@ -232,13 +245,21 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "description": "",
+        }
+      }
+    },
+    "/v1/company/url/{website}": {
+      "get": {
         "tags": [
           "v1/company"
         ],
-        "summary": "Get Company by URL",
         "operationId": "getCompanyByWebsite",
+        "summary": "Get Company by URL",
+        "description": "The Company Data API provides complete information about a company for the specified URL ",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -253,7 +274,11 @@
             "name": "format",
             "required": false,
             "type": "string",
-            "default": "json"
+            "default": "json",
+            "enum": [
+              "xml",
+              "json"
+            ]
           },
           {
             "in": "header",
@@ -262,16 +287,12 @@
             "required": true,
             "type": "string"
           }
-        ]
-      }
-    },
-    "/v1/company/competitor/id/{companyId}": {
-      "get": {
+        ],
         "responses": {
           "200": {
-            "description": "Competitors Data",
+            "description": "Company Data",
             "schema": {
-              "$ref": "#/definitions/CompanyCompetitorVO"
+              "$ref": "#/definitions/company"
             }
           },
           "400": {
@@ -289,13 +310,21 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "description": "",
+        }
+      }
+    },
+    "/v1/company/competitor/id/{companyId}": {
+      "get": {
         "tags": [
           "competitor"
         ],
-        "summary": "Get Competitor information by Id",
         "operationId": "getCompetitorsForId",
+        "summary": "Get Competitor information by Id",
+        "description": "The Competitors API provides basic information about top 3 competitors of a company specified in the Company Id",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -310,7 +339,11 @@
             "name": "format",
             "required": false,
             "type": "string",
-            "default": "json"
+            "default": "json",
+            "enum": [
+              "xml",
+              "json"
+            ]
           },
           {
             "in": "header",
@@ -319,11 +352,7 @@
             "required": true,
             "type": "string"
           }
-        ]
-      }
-    },
-    "/v1/company/competitor/url/{website}": {
-      "get": {
+        ],
         "responses": {
           "200": {
             "description": "Competitors Data",
@@ -346,13 +375,21 @@
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "description": "",
+        }
+      }
+    },
+    "/v1/company/competitor/url/{website}": {
+      "get": {
         "tags": [
           "competitor"
         ],
-        "summary": "Get Competitor information by URL",
         "operationId": "getCompetitorsForWebsite",
+        "summary": "Get Competitor information by URL",
+        "description": "The Competitors API provides basic information about top 3 competitors of a company specified in the website",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
         "parameters": [
           {
             "in": "path",
@@ -367,7 +404,11 @@
             "name": "format",
             "required": false,
             "type": "string",
-            "default": "json"
+            "default": "json",
+            "enum": [
+              "xml",
+              "json"
+            ]
           },
           {
             "in": "header",
@@ -376,16 +417,12 @@
             "required": true,
             "type": "string"
           }
-        ]
-      }
-    },
-    "/v1/feed": {
-      "get": {
+        ],
         "responses": {
           "200": {
-            "description": "Feeds Data",
+            "description": "Competitors Data",
             "schema": {
-              "$ref": "#/definitions/results"
+              "$ref": "#/definitions/CompanyCompetitorVO"
             }
           },
           "400": {
@@ -394,19 +431,30 @@
           "403": {
             "description": "Authentication Failed"
           },
+          "404": {
+            "description": "Resource Not Found"
+          },
           "429": {
             "description": "Too Many Requests"
           },
           "500": {
             "description": "Internal Server Error"
           }
-        },
-        "description": "",
+        }
+      }
+    },
+    "/v1/feed": {
+      "get": {
         "tags": [
           "v1/feed"
         ],
-        "summary": "Get Feeds for given Company Ids",
         "operationId": "getFeeds",
+        "summary": "Get Feeds for given Company Ids",
+        "description": "The Feeds API provides a list of feeds and individual feed information for the given Company Ids and Category. By default the API returns the latest 10 feeds available unless the limit is specified. The maximum result is restricted to 100 feeds per API request.",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
         "parameters": [
           {
             "in": "query",
@@ -414,14 +462,21 @@
             "name": "format",
             "required": false,
             "type": "string",
-            "default": "json"
+            "default": "json",
+            "enum": [
+              "xml",
+              "json"
+            ]
           },
           {
             "in": "query",
             "description": "Company Ids separated by comma (Maximum of 10 Company Ids)",
             "name": "company_id",
             "required": true,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "in": "query",
@@ -444,8 +499,20 @@
             "description": "Categories separated by comma. If not specified, will search against all categories",
             "name": "category",
             "required": false,
-            "type": "string",
-            "default": "NEWS,PRESS,FUNDING,ACQUISITION,PEOPLE,BLOG,VIDEOS"
+            "type": "array",
+            "items": {
+              "type": "string",
+              "default": "NEWS,PRESS,FUNDING,ACQUISITION,PEOPLE,BLOG,VIDEOS",
+              "enum": [
+                "NEWS",
+                "PRESS",
+                "FUNDING",
+                "ACQUISITION",
+                "PEOPLE",
+                "BLOG",
+                "VIDEOS"
+              ]
+            }
           },
           {
             "in": "header",
@@ -454,7 +521,27 @@
             "required": true,
             "type": "string"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "Feeds Data",
+            "schema": {
+              "$ref": "#/definitions/results"
+            }
+          },
+          "400": {
+            "description": "Invalid Parameters"
+          },
+          "403": {
+            "description": "Authentication Failed"
+          },
+          "429": {
+            "description": "Too Many Requests"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     }
   },
@@ -585,7 +672,7 @@
         "employee_count": {
           "type": "string"
         },
-        "industry": {
+        "industries": {
           "type": "array",
           "items": {
             "type": "string"
@@ -612,7 +699,7 @@
     "results": {
       "description": "",
       "properties": {
-        "feed": {
+        "feeds": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/FeedsVO"

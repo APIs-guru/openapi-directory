@@ -17,17 +17,12 @@
   "paths": {
     "/api/contracts/": {
       "get": {
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "description": "",
         "tags": [
           "api/contracts"
         ],
-        "summary": "This endpoint returns contract history from FPDS for a specific vendor",
         "operationId": "List_Contracts",
+        "summary": "This endpoint returns contract history from FPDS for a specific vendor",
+        "description": "<p>This endpoint returns contract history from FPDS for a specific vendor. The vendor's DUNS number is a required parameter. You can also filter contracts by their NAICS code to find contracts relevant to a particular category.  </p>",
         "parameters": [
           {
             "in": "query",
@@ -35,7 +30,7 @@
             "name": "duns",
             "required": true,
             "type": "string",
-            "default": null
+            "format": "string"
           },
           {
             "in": "query",
@@ -43,7 +38,7 @@
             "name": "naics",
             "required": false,
             "type": "string",
-            "default": null
+            "format": "string"
           },
           {
             "in": "query",
@@ -51,7 +46,7 @@
             "name": "sort",
             "required": false,
             "type": "string",
-            "default": null
+            "format": "string"
           },
           {
             "in": "query",
@@ -59,7 +54,7 @@
             "name": "direction",
             "required": false,
             "type": "string",
-            "default": null
+            "format": "string"
           },
           {
             "in": "query",
@@ -67,54 +62,54 @@
             "name": "page",
             "required": false,
             "type": "string",
-            "default": null
+            "format": "string"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
       }
     },
     "/api/metadata/": {
       "get": {
+        "tags": [
+          "api/metadata"
+        ],
+        "operationId": "Metadata",
+        "summary": "This endpoint returns metadata for the most recent data loads of SAM and FPDS data",
+        "description": "<p>This endpoint returns metadata for the most recent data loads of SAM and FPDS data. It takes no parameters.  </p>",
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        },
-        "description": "",
-        "tags": [
-          "api/metadata"
-        ],
-        "summary": "This endpoint returns metadata for the most recent data loads of SAM and FPDS data",
-        "operationId": "Metadata"
+        }
       }
     },
     "/api/naics/": {
       "get": {
+        "tags": [
+          "api/naics"
+        ],
+        "operationId": "List_Naics",
+        "summary": "This endpoint lists all of the NAICS codes that are relevant to the OASIS family of vehicles",
+        "description": "<p>This endpoint lists all of the NAICS codes that are relevant to the OASIS family of vehicles. It takes no parameters.  </p>",
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        },
-        "description": "",
-        "tags": [
-          "api/naics"
-        ],
-        "summary": "This endpoint lists all of the NAICS codes that are relevant to the OASIS family of vehicles",
-        "operationId": "List_Naics"
+        }
       }
     },
     "/api/vendor/{duns}": {
       "get": {
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "description": "",
         "tags": [
           "api/vendor"
         ],
-        "summary": "This endpoint returns a single vendor by their 9 digit DUNS number",
         "operationId": "Get_Vendor",
+        "summary": "This endpoint returns a single vendor by their 9 digit DUNS number",
+        "description": "<p>This endpoint returns a single vendor by their 9 digit DUNS number. DUNS numbers can be looked up in the <a href=\"https://www.sam.gov\">System for Award Management</a> by vendor name.  </p>",
         "parameters": [
           {
             "in": "path",
@@ -122,24 +117,24 @@
             "name": "duns",
             "required": true,
             "type": "string",
-            "default": null
+            "format": "string"
           }
-        ]
-      }
-    },
-    "/api/vendors/": {
-      "get": {
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        },
-        "description": "",
+        }
+      }
+    },
+    "/api/vendors/": {
+      "get": {
         "tags": [
           "api/vendors"
         ],
-        "summary": "This endpoint returns a list of vendors filtered by a NAICS code",
         "operationId": "List_Vendors",
+        "summary": "This endpoint returns a list of vendors filtered by a NAICS code",
+        "description": "<p>This endpoint returns a list of vendors filtered by a NAICS code. The NAICS code maps to an OASIS pool and is used to retrieve vendors in that pool only.</p>\n<p>OASIS pools are groupings of NAICS codes that have the same small business size standard. Because contracts solicited to OASIS vendors can only be issued to one pool, much of the data is presented as part of a pool grouping. Using the NAICS code is a shortcut, so that you don't have to explicitly map the NAICS code to a pool in OASIS yourself.</p>\n<p>Vendors can also be filtered by a particular setaside. Valid values for the setasides are two-character codes which include:</p>\n<ul>\n<li>A6 (8(a))</li>\n<li>XX (Hubzone)</li>\n<li>QF (service disabled veteran owned)</li>\n<li>A2 (women owned)</li>\n<li>A5 (veteran owned)</li>\n<li>27 (small disadvantaged business).  </li>\n</ul>",
         "parameters": [
           {
             "in": "query",
@@ -147,15 +142,18 @@
             "name": "naics",
             "required": true,
             "type": "string",
-            "default": null
+            "format": "string"
           },
           {
             "in": "query",
             "description": "a comma delimited list of two character setaside codes to filter by.  Ex. setasides=A6,A5  will filter by 8a and veteran owned business.",
             "name": "setasides",
             "required": false,
-            "type": "string",
-            "default": null
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "string"
+            }
           },
           {
             "in": "query",
@@ -163,9 +161,14 @@
             "name": "vehicle",
             "required": false,
             "type": "string",
-            "default": null
+            "format": "string"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
       }
     }
   },

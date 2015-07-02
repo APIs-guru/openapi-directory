@@ -14,17 +14,11 @@
   "paths": {
     "/catalog/info": {
       "post": {
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "description": "",
         "tags": [
           "catalog"
         ],
-        "summary": "Return an array of matching elements by text",
         "operationId": "info",
+        "summary": "Return an array of matching elements by text",
         "parameters": [
           {
             "in": "formData",
@@ -70,22 +64,22 @@
             "type": "string",
             "default": "10"
           }
-        ]
-      }
-    },
-    "/catalog/infobyids": {
-      "post": {
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        },
-        "description": "",
+        }
+      }
+    },
+    "/catalog/infobyids": {
+      "post": {
         "tags": [
           "catalog"
         ],
-        "summary": "Return an array of matching elements by id",
         "operationId": "infobyids",
+        "summary": "Return an array of matching elements by id",
+        "description": "",
         "parameters": [
           {
             "in": "formData",
@@ -101,22 +95,22 @@
             "required": false,
             "type": "string"
           }
-        ]
-      }
-    },
-    "/catalog/dependencyinfo": {
-      "post": {
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        },
-        "description": "",
+        }
+      }
+    },
+    "/catalog/dependencyinfo": {
+      "post": {
         "tags": [
           "catalog"
         ],
-        "summary": "Return dependencies Ids separated by ';'",
         "operationId": "infobyids",
+        "summary": "Return dependencies Ids separated by ';'",
+        "description": "",
         "parameters": [
           {
             "in": "formData",
@@ -125,19 +119,24 @@
             "required": true,
             "type": "string"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
       }
     }
   },
+  "host": "getit.embarcadero.com",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
   "tags": [
     {
       "name": "ttp://getit.embarcadero.com/catalog",
       "description": "Operations about catalog"
     }
-  ],
-  "host": "getit.embarcadero.com",
-  "basePath": "/",
-  "schemes": [
-    "http"
   ]
 }

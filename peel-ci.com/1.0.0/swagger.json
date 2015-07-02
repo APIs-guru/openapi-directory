@@ -13,17 +13,12 @@
   "paths": {
     "/hashtag/related": {
       "get": {
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "description": "",
-        "summary": "Gets related hashtags for a show.",
-        "operationId": "getRelatedHashtags",
         "produces": [
           "application/json"
         ],
+        "operationId": "getRelatedHashtags",
+        "summary": "Gets related hashtags for a show.",
+        "description": "Returns any official hashtag and any hashtags which were learned within the most recent time window for the show.",
         "parameters": [
           {
             "in": "query",
@@ -39,22 +34,21 @@
             "required": false,
             "type": "string"
           }
-        ]
-      }
-    },
-    "/hashtag/trendingShows": {
-      "get": {
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        },
-        "description": "",
-        "summary": "Gets trending shows.",
-        "operationId": "getTrendingShows",
+        }
+      }
+    },
+    "/hashtag/trendingShows": {
+      "get": {
         "produces": [
           "application/json"
         ],
+        "operationId": "getTrendingShows",
+        "summary": "Gets trending shows.",
         "parameters": [
           {
             "in": "query",
@@ -70,22 +64,22 @@
             "required": false,
             "type": "string"
           }
-        ]
-      }
-    },
-    "/hashtag/tuneinlinks": {
-      "get": {
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        },
-        "description": "",
-        "summary": "Gets tunein URLs (links) from either a tweet, hashtags, @mentions, or show ID.",
-        "operationId": "getTuneinLinks",
+        }
+      }
+    },
+    "/hashtag/tuneinlinks": {
+      "get": {
         "produces": [
           "application/json"
         ],
+        "operationId": "getTuneinLinks",
+        "summary": "Gets tunein URLs (links) from either a tweet, hashtags, @mentions, or show ID.",
+        "description": "Either use <b>tweet</b>, <b>hashtags</b>, or <b>showID</b> as the parameter. The tunein URLs that match best are returned in order of best match.<br/><br/>A <b>tweet</b> in this context is shorthand for text from a social networking conversation, e.g., it could be from Facebook, Twitter, LinkedIn, etc., and be greater than 140 characters.",
         "parameters": [
           {
             "in": "query",
@@ -108,22 +102,22 @@
             "required": false,
             "type": "string"
           }
-        ]
-      }
-    },
-    "/status/{showID}": {
-      "get": {
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        },
-        "description": "",
-        "summary": "Gets the last 100 statuses for this show.",
-        "operationId": "getStatuses",
+        }
+      }
+    },
+    "/status/{showID}": {
+      "get": {
         "produces": [
           "application/json"
         ],
+        "operationId": "getStatuses",
+        "summary": "Gets the last 100 statuses for this show.",
+        "description": "For Twitter, statuses are synonymous with tweets.",
         "parameters": [
           {
             "in": "path",
@@ -132,22 +126,26 @@
             "required": true,
             "type": "string"
           }
-        ]
-      }
-    },
-    "/health": {
-      "get": {
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        },
-        "description": "",
-        "summary": "Get health of Tune-in service (which includes its uptime).",
-        "operationId": "getHealth",
+        }
+      }
+    },
+    "/health": {
+      "get": {
         "produces": [
           "application/json"
-        ]
+        ],
+        "operationId": "getHealth",
+        "summary": "Get health of Tune-in service (which includes its uptime).",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
       }
     }
   },
@@ -158,15 +156,15 @@
   ],
   "tags": [
     {
-      "name": "hashtag.json",
+      "name": "hashtag",
       "description": "Operations about hashtags"
     },
     {
-      "name": "status.json",
+      "name": "status",
       "description": "Operations about statuses"
     },
     {
-      "name": "health.json",
+      "name": "health",
       "description": "Operations about health of Tune-in service"
     }
   ]

@@ -15,29 +15,15 @@
     "/exchanges": {},
     "/exchanges/{exchangeCode}": {
       "get": {
-        "responses": {
-          "200": {
-            "description": "<b>Success</b> Everything worked as expected."
-          },
-          "404": {
-            "description": "<b>InvalidResource</b> The resource you requested doesn't exist."
-          },
-          "500": {
-            "description": "<b>Error</b> Generic error message."
-          },
-          "503": {
-            "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
-          }
-        },
-        "description": "",
-        "tags": [
-          "exchanges"
-        ],
-        "summary": "Use this to get a specific exchange.",
-        "operationId": "exchanges",
         "produces": [
           "application/json"
         ],
+        "tags": [
+          "exchanges"
+        ],
+        "operationId": "exchanges",
+        "summary": "Use this to get a specific exchange.",
+        "description": "<p>Use this to get a specific exchange.</p>\r\n<p>Authentication Level = 0 (\r\npublic / no authentication\r\n)</p>\r\n<h4>Expand Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">credentials</td><td>Include the credentials required to authenticate with this exchange.</td></tr>\r\n<tr><td class=\"code\">limits</td><td>Include the limits enforced by this exchange.</td></tr>\r\n<tr><td class=\"code\">transferPolicies</td><td>Include the transfer policies enforced by this exchange.</td></tr>\r\n<tr><td class=\"code\">markets</td><td>Include the markets listed on this exchange.</td></tr>\r\n</tbody></table>\r\n",
         "parameters": [
           {
             "in": "path",
@@ -53,12 +39,7 @@
             "required": false,
             "type": "string"
           }
-        ]
-      }
-    },
-    "/currencypairs": {},
-    "/currencypairs/{currencyPairCode}": {
-      "get": {
+        ],
         "responses": {
           "200": {
             "description": "<b>Success</b> Everything worked as expected."
@@ -72,16 +53,21 @@
           "503": {
             "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
           }
-        },
-        "description": "",
-        "tags": [
-          "currencypairs"
-        ],
-        "summary": "Return a specific currency pair.",
-        "operationId": "currencypairs",
+        }
+      }
+    },
+    "/currencypairs": {},
+    "/currencypairs/{currencyPairCode}": {
+      "get": {
         "produces": [
           "application/json"
         ],
+        "tags": [
+          "currencypairs"
+        ],
+        "operationId": "currencypairs",
+        "summary": "Return a specific currency pair.",
+        "description": "<p>Return a specific currency pair.</p>\r\n<p>Authentication Level = 0 (\r\npublic / no authentication\r\n)</p>\r\n<h4>Expand Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">exchangeRateHistory</td><td>Use this to get the exchange rate history for currency pairs.</td></tr>\r\n</tbody></table>\r\n",
         "parameters": [
           {
             "in": "path",
@@ -97,12 +83,7 @@
             "required": false,
             "type": "string"
           }
-        ]
-      }
-    },
-    "/currencies": {},
-    "/currencies/{currencyCode}": {
-      "get": {
+        ],
         "responses": {
           "200": {
             "description": "<b>Success</b> Everything worked as expected."
@@ -116,16 +97,21 @@
           "503": {
             "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
           }
-        },
-        "description": "",
-        "tags": [
-          "currencies"
-        ],
-        "summary": "Get a specific currency.",
-        "operationId": "currencies",
+        }
+      }
+    },
+    "/currencies": {},
+    "/currencies/{currencyCode}": {
+      "get": {
         "produces": [
           "application/json"
         ],
+        "tags": [
+          "currencies"
+        ],
+        "operationId": "currencies",
+        "summary": "Get a specific currency.",
+        "description": "<p>Get a specific currency.</p>\r\n<p>Authentication Level = 0 (\r\npublic / no authentication\r\n)</p>\r\n",
         "parameters": [
           {
             "in": "path",
@@ -134,21 +120,10 @@
             "required": true,
             "type": "string"
           }
-        ]
-      }
-    },
-    "/marketpairs": {},
-    "/marketpairs/{marketPairCode}": {
-      "get": {
+        ],
         "responses": {
           "200": {
             "description": "<b>Success</b> Everything worked as expected."
-          },
-          "401": {
-            "description": "<b>FailedAuthentication</b> There was a problem validating the accessToken or signature you provided."
-          },
-          "402": {
-            "description": "<b>InsufficientFunds</b> You may get this error if your account is out of API credits. Keep a positive balance to prevent this error."
           },
           "404": {
             "description": "<b>InvalidResource</b> The resource you requested doesn't exist."
@@ -159,16 +134,21 @@
           "503": {
             "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
           }
-        },
-        "description": "",
-        "tags": [
-          "marketpairs"
-        ],
-        "summary": "Use this get a specific market pair.",
-        "operationId": "marketpairs",
+        }
+      }
+    },
+    "/marketpairs": {},
+    "/marketpairs/{marketPairCode}": {
+      "get": {
         "produces": [
           "application/json"
         ],
+        "tags": [
+          "marketpairs"
+        ],
+        "operationId": "marketpairs",
+        "summary": "Use this get a specific market pair.",
+        "description": "<p>Use this get a specific market pair.</p>\r\n<p>Authentication Level = 1 (\r\naccessToken header\r\n)</p>\r\n<h4>Expand Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">trades</td><td>Use this to include profitable trades that can be made.</td></tr>\r\n<tr><td class=\"code\">orderbooks</td><td>Use this to return the order books for both markets in the market pair.</td></tr>\r\n<tr><td class=\"code\">tickers</td><td>Use this to include the tickers for markets.</td></tr>\r\n<tr><td class=\"code\">profitCurve</td><td>Use this to include the profit at different traded amounts.</td></tr>\r\n</tbody></table>\r\n",
         "parameters": [
           {
             "in": "header",
@@ -191,12 +171,7 @@
             "required": false,
             "type": "string"
           }
-        ]
-      }
-    },
-    "/markets": {},
-    "/markets/{marketCode}": {
-      "get": {
+        ],
         "responses": {
           "200": {
             "description": "<b>Success</b> Everything worked as expected."
@@ -216,16 +191,21 @@
           "503": {
             "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
           }
-        },
-        "description": "",
-        "tags": [
-          "markets"
-        ],
-        "summary": "Use this to get a specific market.",
-        "operationId": "markets",
+        }
+      }
+    },
+    "/markets": {},
+    "/markets/{marketCode}": {
+      "get": {
         "produces": [
           "application/json"
         ],
+        "tags": [
+          "markets"
+        ],
+        "operationId": "markets",
+        "summary": "Use this to get a specific market.",
+        "description": "<p>Use this to get a specific market.</p>\r\n<p>Authentication Level = 1 (\r\naccessToken header\r\n)</p>\r\n<h4>Expand Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">tickerHistory</td><td>This will include the historical prices for the ticker.</td></tr>\r\n<tr><td class=\"code\">orderBook</td><td>This will include the order book for the market.</td></tr>\r\n<tr><td class=\"code\">ticker</td><td>This will include the ticker for the market.</td></tr>\r\n</tbody></table>\r\n",
         "parameters": [
           {
             "in": "header",
@@ -248,11 +228,7 @@
             "required": false,
             "type": "string"
           }
-        ]
-      }
-    },
-    "/sessions": {
-      "get": {
+        ],
         "responses": {
           "200": {
             "description": "<b>Success</b> Everything worked as expected."
@@ -263,22 +239,29 @@
           "402": {
             "description": "<b>InsufficientFunds</b> You may get this error if your account is out of API credits. Keep a positive balance to prevent this error."
           },
+          "404": {
+            "description": "<b>InvalidResource</b> The resource you requested doesn't exist."
+          },
           "500": {
             "description": "<b>Error</b> Generic error message."
           },
           "503": {
             "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
           }
-        },
-        "description": "",
-        "tags": [
-          "sessions"
-        ],
-        "summary": "Use this to search your session history.",
-        "operationId": "sessions",
+        }
+      }
+    },
+    "/sessions": {
+      "get": {
         "produces": [
           "application/json"
         ],
+        "tags": [
+          "sessions"
+        ],
+        "operationId": "sessions",
+        "summary": "Use this to search your session history.",
+        "description": "<p>Use this to search your session history.</p>\r\n<p>Authentication Level = 1 (\r\naccessToken header\r\n)</p>\r\n<h4>Facet Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">countries</td><td>Get a facet of countires where sessions have been initiated.</td></tr>\r\n<tr><td class=\"code\">applications</td><td>Get a facet of applications used to create sessions.</td></tr>\r\n<tr><td class=\"code\">ipAddresses</td><td>Get a facet of IP Addresses used to create sessions.</td></tr>\r\n<tr><td class=\"code\">cities</td><td>Get a facet of cities where sessions have been initiated.</td></tr>\r\n<tr><td class=\"code\">regions</td><td>Get a facet of regions where sessions have been initiated.</td></tr>\r\n</tbody></table>\r\n",
         "parameters": [
           {
             "in": "header",
@@ -308,7 +291,8 @@
             "description": "<ul>\r\n</ul>\r\n",
             "name": "includeTotalResults",
             "required": false,
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "in": "query",
@@ -359,7 +343,24 @@
             "required": false,
             "type": "string"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "<b>Success</b> Everything worked as expected."
+          },
+          "401": {
+            "description": "<b>FailedAuthentication</b> There was a problem validating the accessToken or signature you provided."
+          },
+          "402": {
+            "description": "<b>InsufficientFunds</b> You may get this error if your account is out of API credits. Keep a positive balance to prevent this error."
+          },
+          "500": {
+            "description": "<b>Error</b> Generic error message."
+          },
+          "503": {
+            "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
+          }
+        }
       }
     }
   },

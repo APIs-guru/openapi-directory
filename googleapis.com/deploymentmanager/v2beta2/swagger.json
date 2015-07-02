@@ -346,7 +346,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Filter expression for filtering listed resources.",
+            "description": "Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must contain the following:\nFIELD_NAME COMPARISON_STRING LITERAL_STRING\n \n- FIELD_NAME: The name of the field you want to compare. The field name must be valid for the type of resource being filtered. Only atomic field types are supported (string, number, boolean). Array and object fields are not currently supported. \n- COMPARISON_STRING: The comparison string, either eq (equals) or ne (not equals). \n- LITERAL_STRING: The literal string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.  For example, you can filter by the name of a resource:\nfilter=name ne example-instance\nThe above filter returns only results whose name field does not equal example-instance. You can also enclose your literal string in single, double, or no quotes.",
             "type": "string"
           },
           {
@@ -361,7 +361,7 @@
           {
             "name": "pageToken",
             "in": "query",
-            "description": "Tag returned by a previous list request when that list was truncated to maxResults. Used to continue a previous list request.",
+            "description": "Specifies a page token to use. Use this parameter if you want to list the next page of results. Set pageToken to the nextPageToken returned by a previous list request.",
             "type": "string"
           }
         ],
@@ -504,7 +504,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Filter expression for filtering listed resources.",
+            "description": "Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must contain the following:\nFIELD_NAME COMPARISON_STRING LITERAL_STRING\n \n- FIELD_NAME: The name of the field you want to compare. The field name must be valid for the type of resource being filtered. Only atomic field types are supported (string, number, boolean). Array and object fields are not currently supported. \n- COMPARISON_STRING: The comparison string, either eq (equals) or ne (not equals). \n- LITERAL_STRING: The literal string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.  For example, you can filter by the name of a resource:\nfilter=name ne example-instance\nThe above filter returns only results whose name field does not equal example-instance. You can also enclose your literal string in single, double, or no quotes.",
             "type": "string"
           },
           {
@@ -519,7 +519,7 @@
           {
             "name": "pageToken",
             "in": "query",
-            "description": "Tag returned by a previous list request when that list was truncated to maxResults. Used to continue a previous list request.",
+            "description": "Specifies a page token to use. Use this parameter if you want to list the next page of results. Set pageToken to the nextPageToken returned by a previous list request.",
             "type": "string"
           }
         ],
@@ -648,7 +648,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Filter expression for filtering listed resources.",
+            "description": "Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must contain the following:\nFIELD_NAME COMPARISON_STRING LITERAL_STRING\n \n- FIELD_NAME: The name of the field you want to compare. The field name must be valid for the type of resource being filtered. Only atomic field types are supported (string, number, boolean). Array and object fields are not currently supported. \n- COMPARISON_STRING: The comparison string, either eq (equals) or ne (not equals). \n- LITERAL_STRING: The literal string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.  For example, you can filter by the name of a resource:\nfilter=name ne example-instance\nThe above filter returns only results whose name field does not equal example-instance. You can also enclose your literal string in single, double, or no quotes.",
             "type": "string"
           },
           {
@@ -663,7 +663,7 @@
           {
             "name": "pageToken",
             "in": "query",
-            "description": "Tag returned by a previous list request when that list was truncated to maxResults. Used to continue a previous list request.",
+            "description": "Specifies a page token to use. Use this parameter if you want to list the next page of results. Set pageToken to the nextPageToken returned by a previous list request.",
             "type": "string"
           }
         ],
@@ -806,7 +806,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Filter expression for filtering listed resources.",
+            "description": "Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must contain the following:\nFIELD_NAME COMPARISON_STRING LITERAL_STRING\n \n- FIELD_NAME: The name of the field you want to compare. The field name must be valid for the type of resource being filtered. Only atomic field types are supported (string, number, boolean). Array and object fields are not currently supported. \n- COMPARISON_STRING: The comparison string, either eq (equals) or ne (not equals). \n- LITERAL_STRING: The literal string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.  For example, you can filter by the name of a resource:\nfilter=name ne example-instance\nThe above filter returns only results whose name field does not equal example-instance. You can also enclose your literal string in single, double, or no quotes.",
             "type": "string"
           },
           {
@@ -821,7 +821,7 @@
           {
             "name": "pageToken",
             "in": "query",
-            "description": "Tag returned by a previous list request when that list was truncated to maxResults. Used to continue a previous list request.",
+            "description": "Specifies a page token to use. Use this parameter if you want to list the next page of results. Set pageToken to the nextPageToken returned by a previous list request.",
             "type": "string"
           }
         ],
@@ -885,7 +885,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "Filter expression for filtering listed resources.",
+            "description": "Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must contain the following:\nFIELD_NAME COMPARISON_STRING LITERAL_STRING\n \n- FIELD_NAME: The name of the field you want to compare. The field name must be valid for the type of resource being filtered. Only atomic field types are supported (string, number, boolean). Array and object fields are not currently supported. \n- COMPARISON_STRING: The comparison string, either eq (equals) or ne (not equals). \n- LITERAL_STRING: The literal string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.  For example, you can filter by the name of a resource:\nfilter=name ne example-instance\nThe above filter returns only results whose name field does not equal example-instance. You can also enclose your literal string in single, double, or no quotes.",
             "type": "string"
           },
           {
@@ -900,7 +900,7 @@
           {
             "name": "pageToken",
             "in": "query",
-            "description": "Tag returned by a previous list request when that list was truncated to maxResults. Used to continue a previous list request.",
+            "description": "Specifies a page token to use. Use this parameter if you want to list the next page of results. Set pageToken to the nextPageToken returned by a previous list request.",
             "type": "string"
           }
         ],
@@ -953,7 +953,7 @@
         },
         "fingerprint": {
           "type": "string",
-          "description": "Specifies a fingerprint for update() requests. A fingerprint is a randomly generated value that must be provided in update() requests to perform optimistic locking. This ensures optimistic concurrency so that only one update can be performed at a time.\n\nThe fingerprint is initially generated by Deployment Manager and changes after every request to modify data. To get the latest fingerprint value, perform a get() request to a deployment.",
+          "description": "Specifies a fingerprint for update() requests. A fingerprint is a randomly generated value that must be provided in update() requests to perform optimistic locking. This ensures optimistic concurrency so that only one update can be performed at a time. The fingerprint is initially generated by Deployment Manager and changes after every request to modify data. To get the latest fingerprint value, perform a get() request to a deployment.",
           "format": "byte"
         },
         "id": {
@@ -1104,11 +1104,11 @@
     },
     "Operation": {
       "type": "object",
-      "description": "An operation resource, used to manage asynchronous API requests.",
+      "description": "An Operation resource, used to manage asynchronous API requests.",
       "properties": {
         "clientOperationId": {
           "type": "string",
-          "description": "[Output Only] An optional identifier specified by the client when the mutation was initiated. Must be unique for all operation resources in the project."
+          "description": "[Output Only] An optional identifier specified by the client when the mutation was initiated. Must be unique for all Operation resources in the project."
         },
         "creationTimestamp": {
           "type": "string",
@@ -1302,7 +1302,7 @@
         },
         "type": {
           "type": "string",
-          "description": "[Output Only] The type of the resource, for example ?compute.v1.instance?, or ?replicaPools.v1beta2.instanceGroupManager?"
+          "description": "[Output Only] The type of the resource, for example compute.v1.instance, or replicaPools.v1beta2.instanceGroupManager."
         },
         "update": {
           "$ref": "#/definitions/ResourceUpdate",

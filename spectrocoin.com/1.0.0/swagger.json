@@ -17,20 +17,18 @@
   "paths": {
     "/api/createOrder": {
       "post": {
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/Order"
-            }
-          }
-        },
-        "description": "",
         "tags": [
           "createOrder"
         ],
-        "summary": "Create merchant order",
         "operationId": "createOrder",
+        "summary": "Create merchant order",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -41,20 +39,28 @@
               "$ref": "#/definitions/OrderRequest"
             }
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        }
       }
     }
   },
+  "host": "spectrocoin.com",
+  "basePath": "/api/merchant/1",
+  "schemes": [
+    "https"
+  ],
   "tags": [
     {
       "name": "createOrder",
       "description": "Create Merchant order to be paid by customer"
     }
-  ],
-  "host": "spectrocoin.com",
-  "basePath": "/api/merchant/1",
-  "schemes": [
-    "https"
   ],
   "definitions": {
     "BigDecimal": {
@@ -110,13 +116,13 @@
         },
         "culture": {
           "type": "string",
-          "description": "Merchant customer culture payment window to be presented",
           "enum": [
             "en",
             " lt",
             " ru",
             " de"
-          ]
+          ],
+          "description": "Merchant customer culture payment window to be presented"
         },
         "callbackUrl": {
           "type": "string",

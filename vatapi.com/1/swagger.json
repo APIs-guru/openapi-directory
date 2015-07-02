@@ -13,20 +13,11 @@
   "paths": {
     "/country-code-check": {
       "get": {
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/Country_Code_Check"
-            }
-          }
-        },
-        "description": "",
         "tags": [
           "api"
         ],
-        "summary": "Retrieve a countries VAT rates by its 2 digit country code",
         "operationId": "country_code_check",
+        "summary": "Retrieve a countries VAT rates by its 2 digit country code",
         "parameters": [
           {
             "in": "header",
@@ -39,7 +30,6 @@
             "in": "header",
             "description": "The default response type is application/json if you would like to receive an XML response then set this to XML",
             "name": "Response-Type",
-            "required": false,
             "type": "string"
           },
           {
@@ -49,25 +39,24 @@
             "required": true,
             "type": "string"
           }
-        ]
-      }
-    },
-    "/currency-conversion": {
-      "get": {
+        ],
         "responses": {
           "200": {
             "description": "No response was specified",
             "schema": {
-              "$ref": "#/definitions/Currency_Conversion"
+              "$ref": "#/definitions/Country_Code_Check"
             }
           }
-        },
-        "description": "",
+        }
+      }
+    },
+    "/currency-conversion": {
+      "get": {
         "tags": [
           "api"
         ],
-        "summary": "Convert a currency",
         "operationId": "currency_conversion",
+        "summary": "Convert a currency",
         "parameters": [
           {
             "in": "header",
@@ -80,7 +69,6 @@
             "in": "header",
             "description": "The default response type is application/json if you would like to receive an XML response then set this to XML",
             "name": "Response-Type",
-            "required": false,
             "type": "string"
           },
           {
@@ -104,25 +92,24 @@
             "required": false,
             "type": "integer"
           }
-        ]
-      }
-    },
-    "/invoice": {
-      "post": {
+        ],
         "responses": {
           "200": {
             "description": "No response was specified",
             "schema": {
-              "$ref": "#/definitions/Create_Invoice"
+              "$ref": "#/definitions/Currency_Conversion"
             }
           }
-        },
-        "description": "",
+        }
+      }
+    },
+    "/invoice": {
+      "post": {
         "tags": [
           "api"
         ],
-        "summary": "Create a VAT invoice",
         "operationId": "create_invoice",
+        "summary": "Create a VAT invoice",
         "parameters": [
           {
             "in": "header",
@@ -135,7 +122,6 @@
             "in": "header",
             "description": "The default response type is application/json if you would like to receive an XML response then set this to XML",
             "name": "Response-Type",
-            "required": false,
             "type": "string"
           },
           {
@@ -147,25 +133,24 @@
               "$ref": "#/definitions/Invoice_Data"
             }
           }
-        ]
-      }
-    },
-    "/invoice/{id}": {
-      "get": {
+        ],
         "responses": {
           "200": {
             "description": "No response was specified",
             "schema": {
-              "$ref": "#/definitions/Retrieve_Invoice"
+              "$ref": "#/definitions/Create_Invoice"
             }
           }
-        },
-        "description": "",
+        }
+      }
+    },
+    "/invoice/{id}": {
+      "get": {
         "tags": [
           "api"
         ],
-        "summary": "Retrieve an invoice",
         "operationId": "get_invoice",
+        "summary": "Retrieve an invoice",
         "parameters": [
           {
             "in": "header",
@@ -178,7 +163,6 @@
             "in": "header",
             "description": "The default response type is application/json if you would like to receive an XML response then set this to XML",
             "name": "Response-Type",
-            "required": false,
             "type": "string"
           },
           {
@@ -188,23 +172,22 @@
             "required": true,
             "type": "integer"
           }
-        ]
-      },
-      "put": {
+        ],
         "responses": {
           "200": {
             "description": "No response was specified",
             "schema": {
-              "$ref": "#/definitions/Update_Invoice"
+              "$ref": "#/definitions/Retrieve_Invoice"
             }
           }
-        },
-        "description": "",
+        }
+      },
+      "put": {
         "tags": [
           "api"
         ],
-        "summary": "Update an existing invoice",
         "operationId": "invoice_update",
+        "summary": "Update an existing invoice",
         "parameters": [
           {
             "in": "header",
@@ -217,7 +200,6 @@
             "in": "header",
             "description": "The default response type is application/json if you would like to receive an XML response then set this to XML",
             "name": "Response-Type",
-            "required": false,
             "type": "string"
           },
           {
@@ -236,20 +218,22 @@
               "$ref": "#/definitions/Update_Invoice_Array"
             }
           }
-        ]
-      },
-      "delete": {
+        ],
         "responses": {
           "200": {
-            "description": "No response was specified"
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Update_Invoice"
+            }
           }
-        },
-        "description": "",
+        }
+      },
+      "delete": {
         "tags": [
           "api"
         ],
-        "summary": "Delete an invoice",
         "operationId": "invoice_delete",
+        "summary": "Delete an invoice",
         "parameters": [
           {
             "in": "header",
@@ -262,7 +246,6 @@
             "in": "header",
             "description": "The default response type is application/json if you would like to receive an XML response then set this to XML",
             "name": "Response-Type",
-            "required": false,
             "type": "string"
           },
           {
@@ -272,25 +255,21 @@
             "required": true,
             "type": "integer"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
       }
     },
     "/ip-check": {
       "get": {
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/IP_Check"
-            }
-          }
-        },
-        "description": "",
         "tags": [
           "api"
         ],
-        "summary": "Retrieve a countries VAT rates from an IP address",
         "operationId": "ip_check",
+        "summary": "Retrieve a countries VAT rates from an IP address",
         "parameters": [
           {
             "in": "header",
@@ -303,7 +282,6 @@
             "in": "header",
             "description": "The default response type is application/json if you would like to receive an XML response then set this to XML",
             "name": "Response-Type",
-            "required": false,
             "type": "string"
           },
           {
@@ -313,22 +291,25 @@
             "required": true,
             "type": "string"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/IP_Check"
+            }
+          }
+        }
       }
     },
     "/vat-number-check": {
       "get": {
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "description": "",
         "tags": [
           "api"
         ],
-        "summary": "Validate a VAT number",
         "operationId": "vat_number_validate",
+        "summary": "Validate a VAT number",
+        "description": "<p>We highly recommend if you are able, to check a VAT number on your end first to save wasted API lookups. It maybe that your customer has simply entered the wrong format. <a href='http://www.braemoor.co.uk/software/vat.shtml' target='_blank'>Heres a client side way to check the format using Javascript</a></p>",
         "parameters": [
           {
             "in": "header",
@@ -341,7 +322,6 @@
             "in": "header",
             "description": "The default response type is application/json if you would like to receive an XML response then set this to XML",
             "name": "Response-Type",
-            "required": false,
             "type": "string"
           },
           {
@@ -351,25 +331,21 @@
             "required": true,
             "type": "string"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
       }
     },
     "/vat-price": {
       "get": {
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/Convert_Price"
-            }
-          }
-        },
-        "description": "",
         "tags": [
           "api"
         ],
-        "summary": "Convert a price to or from VAT price.",
         "operationId": "convert_price",
+        "summary": "Convert a price to or from VAT price.",
         "parameters": [
           {
             "in": "header",
@@ -382,7 +358,6 @@
             "in": "header",
             "description": "The default response type is application/json if you would like to receive an XML response then set this to XML",
             "name": "Response-Type",
-            "required": false,
             "type": "string"
           },
           {
@@ -413,25 +388,24 @@
             "required": false,
             "type": "string"
           }
-        ]
-      }
-    },
-    "/vat-rates": {
-      "get": {
+        ],
         "responses": {
           "200": {
             "description": "No response was specified",
             "schema": {
-              "$ref": "#/definitions/Vat_Rates"
+              "$ref": "#/definitions/Convert_Price"
             }
           }
-        },
-        "description": "",
+        }
+      }
+    },
+    "/vat-rates": {
+      "get": {
         "tags": [
           "api"
         ],
-        "summary": "Retrieve all current EU VAT rates",
         "operationId": "vat_rates",
+        "summary": "Retrieve all current EU VAT rates",
         "parameters": [
           {
             "in": "header",
@@ -444,10 +418,17 @@
             "in": "header",
             "description": "The default response type is application/json if you would like to receive an XML response then set this to XML",
             "name": "Response-Type",
-            "required": false,
             "type": "string"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Vat_Rates"
+            }
+          }
+        }
       }
     }
   },
@@ -458,7 +439,7 @@
   ],
   "tags": [
     {
-      "name": "api.json",
+      "name": "api",
       "description": "No description was specified"
     }
   ],
@@ -473,24 +454,24 @@
       ],
       "properties": {
         "status": {
-          "description": "Response code",
-          "type": "integer"
+          "type": "integer",
+          "description": "Response code"
         },
         "country_code": {
-          "description": "The 2 digit country code",
-          "type": "string"
+          "type": "string",
+          "description": "The 2 digit country code"
         },
         "country": {
-          "description": "The country name",
-          "type": "string"
+          "type": "string",
+          "description": "The country name"
         },
         "vat_applies": {
-          "description": "TRUE or FALSE, depending if country is within the EU.",
-          "type": "string"
+          "type": "string",
+          "description": "TRUE or FALSE, depending if country is within the EU."
         },
         "rates": {
-          "description": "An array of the EU VAT rates for that country",
-          "$ref": "#/definitions/Country_Rates"
+          "$ref": "#/definitions/Country_Rates",
+          "description": "An array of the EU VAT rates for that country"
         }
       }
     },
@@ -504,24 +485,24 @@
       ],
       "properties": {
         "standard": {
-          "description": "The type of rate",
-          "$ref": "#/definitions/standard"
+          "$ref": "#/definitions/standard",
+          "description": "The type of rate"
         },
         "reduced": {
-          "description": "The type of rate",
-          "$ref": "#/definitions/reduced"
+          "$ref": "#/definitions/reduced",
+          "description": "The type of rate"
         },
         "reduced_alt": {
-          "description": "The type of rate",
-          "$ref": "#/definitions/reduced_alt"
+          "$ref": "#/definitions/reduced_alt",
+          "description": "The type of rate"
         },
         "super_reduced": {
-          "description": "The type of rate",
-          "$ref": "#/definitions/super_reduced"
+          "$ref": "#/definitions/super_reduced",
+          "description": "The type of rate"
         },
         "parking": {
-          "description": "The type of rate",
-          "$ref": "#/definitions/parking"
+          "$ref": "#/definitions/parking",
+          "description": "The type of rate"
         }
       }
     },
@@ -531,8 +512,8 @@
       ],
       "properties": {
         "value": {
-          "description": "The % VAT rate",
-          "type": "integer"
+          "type": "integer",
+          "description": "The % VAT rate"
         }
       }
     },
@@ -543,12 +524,12 @@
       ],
       "properties": {
         "value": {
-          "description": "The % VAT rate",
-          "type": "integer"
+          "type": "integer",
+          "description": "The % VAT rate"
         },
         "applies_to": {
-          "description": "The type of goods the rate applies to",
-          "type": "string"
+          "type": "string",
+          "description": "The type of goods the rate applies to"
         }
       }
     },
@@ -559,12 +540,12 @@
       ],
       "properties": {
         "value": {
-          "description": "The % VAT rate",
-          "type": "integer"
+          "type": "integer",
+          "description": "The % VAT rate"
         },
         "applies_to": {
-          "description": "The type of goods the rate applies to",
-          "type": "string"
+          "type": "string",
+          "description": "The type of goods the rate applies to"
         }
       }
     },
@@ -575,12 +556,12 @@
       ],
       "properties": {
         "value": {
-          "description": "The % VAT rate",
-          "type": "integer"
+          "type": "integer",
+          "description": "The % VAT rate"
         },
         "applies_to": {
-          "description": "The type of goods the rate applies to",
-          "type": "string"
+          "type": "string",
+          "description": "The type of goods the rate applies to"
         }
       }
     },
@@ -591,12 +572,12 @@
       ],
       "properties": {
         "value": {
-          "description": "The % VAT rate",
-          "type": "integer"
+          "type": "integer",
+          "description": "The % VAT rate"
         },
         "applies_to": {
-          "description": "The type of goods the rate applies to",
-          "type": "string"
+          "type": "string",
+          "description": "The type of goods the rate applies to"
         }
       }
     },
@@ -607,15 +588,15 @@
       ],
       "properties": {
         "status": {
-          "description": "Response code",
-          "type": "integer"
+          "type": "integer",
+          "description": "Response code"
         },
         "countries": {
-          "description": "An array of the EU VAT countries and their respective rates",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Vat_Rates_Countries"
-          }
+          },
+          "description": "An array of the EU VAT countries and their respective rates"
         }
       }
     },
@@ -625,8 +606,8 @@
       ],
       "properties": {
         "country_code": {
-          "description": "The 2 digit country code",
-          "$ref": "#/definitions/Country_Data"
+          "$ref": "#/definitions/Country_Data",
+          "description": "The 2 digit country code"
         }
       }
     },
@@ -637,12 +618,12 @@
       ],
       "properties": {
         "country": {
-          "description": "The country name",
-          "type": "string"
+          "type": "string",
+          "description": "The country name"
         },
         "rates": {
-          "description": "An array of the rates for the country",
-          "$ref": "#/definitions/Country_Rates"
+          "$ref": "#/definitions/Country_Rates",
+          "description": "An array of the rates for the country"
         }
       }
     },
@@ -656,24 +637,24 @@
       ],
       "properties": {
         "status": {
-          "description": "Response code",
-          "type": "integer"
+          "type": "integer",
+          "description": "Response code"
         },
         "country_code": {
-          "description": "The 2 digit country code",
-          "type": "string"
+          "type": "string",
+          "description": "The 2 digit country code"
         },
         "country": {
-          "description": "The country name",
-          "type": "string"
+          "type": "string",
+          "description": "The country name"
         },
         "vat_applies": {
-          "description": "TRUE or FALSE, depending if country is within the EU.",
-          "type": "string"
+          "type": "string",
+          "description": "TRUE or FALSE, depending if country is within the EU."
         },
         "rates": {
-          "description": "An array of the EU VAT rates for that country",
-          "$ref": "#/definitions/Country_Rates"
+          "$ref": "#/definitions/Country_Rates",
+          "description": "An array of the EU VAT rates for that country"
         }
       }
     },
@@ -689,32 +670,32 @@
       ],
       "properties": {
         "status": {
-          "description": "Response code",
-          "type": "integer"
+          "type": "integer",
+          "description": "Response code"
         },
         "country_code": {
-          "description": "The 2 digit country code",
-          "type": "string"
+          "type": "string",
+          "description": "The 2 digit country code"
         },
         "rate": {
-          "description": "The rate % for the country_rate",
-          "type": "integer"
+          "type": "integer",
+          "description": "The rate % for the country_rate"
         },
         "country_rate": {
-          "description": "The country_rate",
-          "type": "string"
+          "type": "string",
+          "description": "The country_rate"
         },
         "price_excl_vat": {
-          "description": "The price excluding VAT",
-          "type": "integer"
+          "type": "integer",
+          "description": "The price excluding VAT"
         },
         "price_incl_vat": {
-          "description": "The price including VAT",
-          "type": "integer"
+          "type": "integer",
+          "description": "The price including VAT"
         },
         "vat": {
-          "description": "The total amount of VAT applied",
-          "type": "integer"
+          "type": "integer",
+          "description": "The total amount of VAT applied"
         }
       }
     },
@@ -727,28 +708,28 @@
       ],
       "properties": {
         "status": {
-          "description": "Response code",
-          "type": "integer"
+          "type": "integer",
+          "description": "Response code"
         },
         "currency_from": {
-          "description": "The currency code you are converting from",
-          "type": "string"
+          "type": "string",
+          "description": "The currency code you are converting from"
         },
         "currency_to": {
-          "description": "The currency code you are converting to",
-          "type": "integer"
+          "type": "integer",
+          "description": "The currency code you are converting to"
         },
         "amount_from": {
-          "description": "The amount you are converting from",
-          "type": "string"
+          "type": "string",
+          "description": "The amount you are converting from"
         },
         "amount_to": {
-          "description": "The result amount you have converted to",
-          "type": "string"
+          "type": "string",
+          "description": "The result amount you have converted to"
         },
         "rate": {
-          "description": "The rate according to HMRC at time of sale",
-          "type": "string"
+          "type": "string",
+          "description": "The rate according to HMRC at time of sale"
         }
       }
     },
@@ -759,12 +740,12 @@
       ],
       "properties": {
         "status": {
-          "description": "Response code",
-          "type": "integer"
+          "type": "integer",
+          "description": "Response code"
         },
         "invoice": {
-          "description": "The new invoice object",
-          "$ref": "#/definitions/Invoice_Array"
+          "$ref": "#/definitions/Invoice_Array",
+          "description": "The new invoice object"
         }
       }
     },
@@ -779,75 +760,75 @@
       ],
       "properties": {
         "date": {
-          "description": "The date the invoice was issued",
-          "type": "string"
+          "type": "string",
+          "description": "The date the invoice was issued"
         },
         "tax_point": {
-          "description": "(or 'time of supply') if this is different from the invoice date",
-          "type": "string"
+          "type": "string",
+          "description": "(or 'time of supply') if this is different from the invoice date"
         },
         "type": {
-          "description": "The type of invoice. Either 'sale' or 'refund'",
-          "type": "string"
+          "type": "string",
+          "description": "The type of invoice. Either 'sale' or 'refund'"
         },
         "currency_code": {
-          "description": "3 character currency code for invoice",
-          "type": "string"
+          "type": "string",
+          "description": "3 character currency code for invoice"
         },
         "currency_code_conversion": {
-          "description": "3 character currency code to be converted from original transaction currency",
-          "type": "string"
+          "type": "string",
+          "description": "3 character currency code to be converted from original transaction currency"
         },
         "conversion_rate": {
-          "description": "The rate of conversion at time of supply",
-          "type": "integer"
+          "type": "integer",
+          "description": "The rate of conversion at time of supply"
         },
         "price_type": {
-          "description": "Optional, if the price is including VAT set the type to 'incl'. Otherwise the default is assumed as excluding VAT already, 'excl'",
-          "type": "string"
+          "type": "string",
+          "description": "Optional, if the price is including VAT set the type to 'incl'. Otherwise the default is assumed as excluding VAT already, 'excl'"
         },
         "business_address": {
-          "description": "Your business address",
-          "type": "string"
+          "type": "string",
+          "description": "Your business address"
         },
         "customer_address": {
-          "description": "Your customers address",
-          "type": "string"
+          "type": "string",
+          "description": "Your customers address"
         },
         "business_name": {
-          "description": "Your business name",
-          "type": "string"
+          "type": "string",
+          "description": "Your business name"
         },
         "customer_name": {
-          "description": "Your customers name or trading name",
-          "type": "string"
+          "type": "string",
+          "description": "Your customers name or trading name"
         },
         "vat_number": {
-          "description": "Your VAT number",
-          "type": "string"
+          "type": "string",
+          "description": "Your VAT number"
         },
         "customer_vat_number": {
-          "description": "Optional customers VAT number",
-          "type": "string"
+          "type": "string",
+          "description": "Optional customers VAT number"
         },
         "zero_rated": {
-          "description": "To Zero-Rate the VAT, set to true.",
-          "type": "string"
+          "type": "string",
+          "description": "To Zero-Rate the VAT, set to true."
         },
         "discount_rate": {
-          "description": "The discount rate per item",
-          "type": "string"
+          "type": "string",
+          "description": "The discount rate per item"
         },
         "notes": {
-          "description": "Add a note to the invoice.",
-          "type": "string"
+          "type": "string",
+          "description": "Add a note to the invoice."
         },
         "items": {
-          "description": "An array of your invoice items",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Invoice_Items"
-          }
+          },
+          "description": "An array of your invoice items"
         }
       }
     },
@@ -870,95 +851,95 @@
       ],
       "properties": {
         "invoice_number": {
-          "description": "A sequential invoice number",
-          "type": "integer"
+          "type": "integer",
+          "description": "A sequential invoice number"
         },
         "date": {
-          "description": "The date the invoice was issued",
-          "type": "string"
+          "type": "string",
+          "description": "The date the invoice was issued"
         },
         "tax_point": {
-          "description": "(or 'time of supply') if this is different from the invoice date",
-          "type": "string"
+          "type": "string",
+          "description": "(or 'time of supply') if this is different from the invoice date"
         },
         "type": {
-          "description": "The type of invoice. Either 'sale' or 'refund'",
-          "type": "string"
+          "type": "string",
+          "description": "The type of invoice. Either 'sale' or 'refund'"
         },
         "currency_code": {
-          "description": "3 character currency code for invoice",
-          "type": "string"
+          "type": "string",
+          "description": "3 character currency code for invoice"
         },
         "currency_code_conversion": {
-          "description": "3 character currency code to be converted from original transaction currency",
-          "type": "string"
+          "type": "string",
+          "description": "3 character currency code to be converted from original transaction currency"
         },
         "conversion_rate": {
-          "description": "The rate of conversion at time of supply",
-          "type": "integer"
+          "type": "integer",
+          "description": "The rate of conversion at time of supply"
         },
         "business_name": {
-          "description": "Your business name",
-          "type": "string"
+          "type": "string",
+          "description": "Your business name"
         },
         "business_address": {
-          "description": "Your business address",
-          "type": "string"
+          "type": "string",
+          "description": "Your business address"
         },
         "customer_name": {
-          "description": "Your customers name or trading name",
-          "type": "string"
+          "type": "string",
+          "description": "Your customers name or trading name"
         },
         "customer_address": {
-          "description": "Your customers address",
-          "type": "string"
+          "type": "string",
+          "description": "Your customers address"
         },
         "vat_number": {
-          "description": "Your VAT number",
-          "type": "string"
+          "type": "string",
+          "description": "Your VAT number"
         },
         "customer_vat_number": {
-          "description": "Customers VAT number",
-          "type": "string"
+          "type": "string",
+          "description": "Customers VAT number"
         },
         "subtotal": {
-          "description": "Total amount excluding VAT",
-          "type": "integer"
+          "type": "integer",
+          "description": "Total amount excluding VAT"
         },
         "vat_total": {
-          "description": "Total amount of VAT",
-          "type": "integer"
+          "type": "integer",
+          "description": "Total amount of VAT"
         },
         "discount_rate": {
-          "description": "The discount rate per item",
-          "type": "integer"
+          "type": "integer",
+          "description": "The discount rate per item"
         },
         "discount_total": {
-          "description": "Total amount of discount",
-          "type": "integer"
+          "type": "integer",
+          "description": "Total amount of discount"
         },
         "total": {
-          "description": "Total amount of including VAT",
-          "type": "integer"
+          "type": "integer",
+          "description": "Total amount of including VAT"
         },
         "logo_url": {
-          "description": "A URL to your logo image. Must be SSL hosted. https://sslimagehost.com is recommended",
-          "type": "string"
+          "type": "string",
+          "description": "A URL to your logo image. Must be SSL hosted. https://sslimagehost.com is recommended"
         },
         "invoice_url": {
-          "description": "A perminant URL to your VAT invoice",
-          "type": "string"
+          "type": "string",
+          "description": "A perminant URL to your VAT invoice"
         },
         "notes": {
-          "description": "Any notes attached to the invoice",
-          "type": "string"
+          "type": "string",
+          "description": "Any notes attached to the invoice"
         },
         "items": {
-          "description": "An array of your invoice items",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Invoice_Items"
-          }
+          },
+          "description": "An array of your invoice items"
         }
       }
     },
@@ -971,20 +952,20 @@
       ],
       "properties": {
         "description": {
-          "description": "The item line description",
-          "type": "string"
+          "type": "string",
+          "description": "The item line description"
         },
         "quantity": {
-          "description": "The quantity of the item",
-          "type": "integer"
+          "type": "integer",
+          "description": "The quantity of the item"
         },
         "price_each": {
-          "description": "The price of the individual item (Ex VAT)",
-          "type": "integer"
+          "type": "integer",
+          "description": "The price of the individual item (Ex VAT)"
         },
         "vat_rate": {
-          "description": "The VAT rate at which the item is charged",
-          "type": "integer"
+          "type": "integer",
+          "description": "The VAT rate at which the item is charged"
         }
       }
     },
@@ -995,12 +976,12 @@
       ],
       "properties": {
         "status": {
-          "description": "Response code",
-          "type": "string"
+          "type": "string",
+          "description": "Response code"
         },
         "invoice": {
-          "description": "The invoice array",
-          "$ref": "#/definitions/Retrieve_Invoice_Array"
+          "$ref": "#/definitions/Retrieve_Invoice_Array",
+          "description": "The invoice array"
         }
       }
     },
@@ -1011,12 +992,12 @@
       ],
       "properties": {
         "status": {
-          "description": "Response code",
-          "type": "string"
+          "type": "string",
+          "description": "Response code"
         },
         "invoice": {
-          "description": "The invoice array",
-          "$ref": "#/definitions/Retrieve_Invoice_Array"
+          "$ref": "#/definitions/Retrieve_Invoice_Array",
+          "description": "The invoice array"
         }
       }
     },
@@ -1031,71 +1012,71 @@
       ],
       "properties": {
         "date": {
-          "description": "The date the invoice was issued",
-          "type": "string"
+          "type": "string",
+          "description": "The date the invoice was issued"
         },
         "tax_point": {
-          "description": "(or 'time of supply') if this is different from the invoice date",
-          "type": "string"
+          "type": "string",
+          "description": "(or 'time of supply') if this is different from the invoice date"
         },
         "type": {
-          "description": "The type of invoice. Either 'sale' or 'refund'",
-          "type": "string"
+          "type": "string",
+          "description": "The type of invoice. Either 'sale' or 'refund'"
         },
         "currency_code": {
-          "description": "3 character currency code for invoice",
-          "type": "string"
+          "type": "string",
+          "description": "3 character currency code for invoice"
         },
         "currency_code_conversion": {
-          "description": "3 character currency code to be converted from original transaction currency",
-          "type": "string"
+          "type": "string",
+          "description": "3 character currency code to be converted from original transaction currency"
         },
         "conversion_rate": {
-          "description": "The rate of conversion at time of supply",
-          "type": "integer"
+          "type": "integer",
+          "description": "The rate of conversion at time of supply"
         },
         "business_address": {
-          "description": "Your business address",
-          "type": "string"
+          "type": "string",
+          "description": "Your business address"
         },
         "customer_address": {
-          "description": "Your customers address",
-          "type": "string"
+          "type": "string",
+          "description": "Your customers address"
         },
         "business_name": {
-          "description": "Your business name",
-          "type": "string"
+          "type": "string",
+          "description": "Your business name"
         },
         "customer_name": {
-          "description": "Your customers name or trading name",
-          "type": "string"
+          "type": "string",
+          "description": "Your customers name or trading name"
         },
         "vat_number": {
-          "description": "Your VAT number",
-          "type": "string"
+          "type": "string",
+          "description": "Your VAT number"
         },
         "customervat_number": {
-          "description": "Customers VAT number",
-          "type": "string"
+          "type": "string",
+          "description": "Customers VAT number"
         },
         "discount_rate": {
-          "description": "The discount rate per item",
-          "type": "string"
+          "type": "string",
+          "description": "The discount rate per item"
         },
         "logo_url": {
-          "description": "A URL to your logo image. Must be SSL hosted. https://sslimagehost.com is recommended",
-          "type": "string"
+          "type": "string",
+          "description": "A URL to your logo image. Must be SSL hosted. https://sslimagehost.com is recommended"
         },
         "notes": {
-          "description": "Add a note to the invoice.",
-          "type": "string"
+          "type": "string",
+          "description": "Add a note to the invoice."
         },
         "items": {
-          "description": "An array of your invoice items",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Invoice_Items"
-          }
+          },
+          "description": "An array of your invoice items"
         }
       }
     },
@@ -1118,103 +1099,103 @@
       ],
       "properties": {
         "id": {
-          "description": "The invoice ID",
-          "type": "integer"
+          "type": "integer",
+          "description": "The invoice ID"
         },
         "date": {
-          "description": "The date the invoice was issued",
-          "type": "string"
+          "type": "string",
+          "description": "The date the invoice was issued"
         },
         "tax_point": {
-          "description": "(or 'time of supply') if this is different from the invoice date",
-          "type": "string"
+          "type": "string",
+          "description": "(or 'time of supply') if this is different from the invoice date"
         },
         "type": {
-          "description": "The type of invoice. Either 'sale' or 'refund'",
-          "type": "string"
+          "type": "string",
+          "description": "The type of invoice. Either 'sale' or 'refund'"
         },
         "currency_code": {
-          "description": "3 character currency code for invoice",
-          "type": "string"
+          "type": "string",
+          "description": "3 character currency code for invoice"
         },
         "currency_code_conversion": {
-          "description": "3 character currency code to be converted from original transaction currency",
-          "type": "string"
+          "type": "string",
+          "description": "3 character currency code to be converted from original transaction currency"
         },
         "conversion_rate": {
-          "description": "The rate of conversion at time of supply",
-          "type": "integer"
+          "type": "integer",
+          "description": "The rate of conversion at time of supply"
         },
         "price_type": {
-          "description": "Optional, if the price is including VAT set the type to 'incl'. Otherwise the default is assumed as excluding VAT already, 'excl'",
-          "type": "string"
+          "type": "string",
+          "description": "Optional, if the price is including VAT set the type to 'incl'. Otherwise the default is assumed as excluding VAT already, 'excl'"
         },
         "business_name": {
-          "description": "Your business name",
-          "type": "string"
+          "type": "string",
+          "description": "Your business name"
         },
         "business_address": {
-          "description": "Your business address",
-          "type": "string"
+          "type": "string",
+          "description": "Your business address"
         },
         "customer_name": {
-          "description": "Your customers name or trading name",
-          "type": "string"
+          "type": "string",
+          "description": "Your customers name or trading name"
         },
         "customer_address": {
-          "description": "Your customers address",
-          "type": "string"
+          "type": "string",
+          "description": "Your customers address"
         },
         "vat_number": {
-          "description": "Your VAT number",
-          "type": "string"
+          "type": "string",
+          "description": "Your VAT number"
         },
         "customer_vat_number": {
-          "description": "Optional, customers VAT number",
-          "type": "string"
+          "type": "string",
+          "description": "Optional, customers VAT number"
         },
         "zero_rated": {
-          "description": "To Zero-Rate the VAT, set to true.",
-          "type": "string"
+          "type": "string",
+          "description": "To Zero-Rate the VAT, set to true."
         },
         "subtotal": {
-          "description": "Total amount excluding VAT",
-          "type": "integer"
+          "type": "integer",
+          "description": "Total amount excluding VAT"
         },
         "vat_total": {
-          "description": "Total amount of VAT",
-          "type": "integer"
+          "type": "integer",
+          "description": "Total amount of VAT"
         },
         "discount_rate": {
-          "description": "The discount rate per item",
-          "type": "integer"
+          "type": "integer",
+          "description": "The discount rate per item"
         },
         "discount_total": {
-          "description": "Total amount of discount",
-          "type": "integer"
+          "type": "integer",
+          "description": "Total amount of discount"
         },
         "total": {
-          "description": "Total amount of including VAT",
-          "type": "integer"
+          "type": "integer",
+          "description": "Total amount of including VAT"
         },
         "logo_url": {
-          "description": "A URL to your logo image. Must be SSL hosted. https://sslimagehost.com is recommended",
-          "type": "string"
+          "type": "string",
+          "description": "A URL to your logo image. Must be SSL hosted. https://sslimagehost.com is recommended"
         },
         "invoice_url": {
-          "description": "A perminant URL to your VAT invoice",
-          "type": "string"
+          "type": "string",
+          "description": "A perminant URL to your VAT invoice"
         },
         "notes": {
-          "description": "Any notes attached to the invoice",
-          "type": "string"
+          "type": "string",
+          "description": "Any notes attached to the invoice"
         },
         "items": {
-          "description": "An array of your invoice items",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Invoice_Items"
-          }
+          },
+          "description": "An array of your invoice items"
         }
       }
     }
