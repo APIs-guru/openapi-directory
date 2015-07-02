@@ -15,6 +15,11 @@ var SwaggerTools = require('swagger-tools').specs.v2;
 var program = require('commander');
 
 program
+  .command('urls')
+  .description('show source url for specs')
+  .action(urlsCollection);
+
+program
   .command('update')
   .description('run update')
   .action(updateCollection);
@@ -36,6 +41,12 @@ program
   .action(addToCollection);
 
 program.parse(process.argv);
+
+function urlsCollection() {
+  _.each(getSpecs(), function (swagger) {
+    console.log(getOriginUrl(swagger));
+  });
+}
 
 function updateCollection() {
   var specs = getSpecs();
