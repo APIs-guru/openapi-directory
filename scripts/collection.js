@@ -61,7 +61,8 @@ function validateCollection() {
     });
     asyncCb(null);
   }, function () {
-    process.exit(foundErrors ? 255 : 0);
+    if (foundErrors)
+      process.exitCode = 255;
   });
 }
 
@@ -120,7 +121,7 @@ function writeSpec(url, type, callback) {
           }
           logJson(swagger);
           logJson(errors);
-          process.exit(255);
+          process.exitCode = 255;
           return;
         }
         if (warnings)
