@@ -18,7 +18,7 @@
     "/api/contracts/": {
       "get": {
         "tags": [
-          "api/contracts"
+          "contracts"
         ],
         "operationId": "List_Contracts",
         "summary": "This endpoint returns contract history from FPDS for a specific vendor",
@@ -75,7 +75,7 @@
     "/api/metadata/": {
       "get": {
         "tags": [
-          "api/metadata"
+          "metadata"
         ],
         "operationId": "Metadata",
         "summary": "This endpoint returns metadata for the most recent data loads of SAM and FPDS data",
@@ -90,7 +90,7 @@
     "/api/naics/": {
       "get": {
         "tags": [
-          "api/naics"
+          "naics"
         ],
         "operationId": "List_Naics",
         "summary": "This endpoint lists all of the NAICS codes that are relevant to the OASIS family of vehicles",
@@ -105,7 +105,7 @@
     "/api/vendor/{duns}": {
       "get": {
         "tags": [
-          "api/vendor"
+          "vendor"
         ],
         "operationId": "Get_Vendor",
         "summary": "This endpoint returns a single vendor by their 9 digit DUNS number",
@@ -130,7 +130,7 @@
     "/api/vendors/": {
       "get": {
         "tags": [
-          "api/vendors"
+          "vendors"
         ],
         "operationId": "List_Vendors",
         "summary": "This endpoint returns a list of vendors filtered by a NAICS code",
@@ -179,24 +179,19 @@
   ],
   "tags": [
     {
-      "name": "api/contracts",
-      "description": "No description was specified"
+      "name": "contracts"
     },
     {
-      "name": "api/metadata",
-      "description": "No description was specified"
+      "name": "metadata"
     },
     {
-      "name": "api/naics",
-      "description": "No description was specified"
+      "name": "naics"
     },
     {
-      "name": "api/vendor",
-      "description": "No description was specified"
+      "name": "vendor"
     },
     {
-      "name": "api/vendors",
-      "description": "No description was specified"
+      "name": "vendors"
     }
   ]
 }

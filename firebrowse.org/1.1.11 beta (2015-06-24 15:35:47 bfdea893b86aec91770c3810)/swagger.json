@@ -1,0 +1,3640 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.1.11 beta (2015-06-24 15:35:47 bfdea893b86aec91770c3810)",
+    "title": "firebrowse.org",
+    "x-providerName": "firebrowse.org",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "http://firebrowse.org/api/api-docs"
+    }
+  },
+  "paths": {
+    "/Samples/mRNASeq": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Samples"
+        ],
+        "operationId": "mRNASeq",
+        "summary": "Retrieve mRNASeq data.",
+        "description": "This service returns sample-level log2 mRNASeq expression values. Results may be filtered by gene, cohort, barcode, sample type or characterization protocol, but at least one gene OR barcode must be supplied.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of gene name(s).",
+            "name": "gene",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACC",
+                "BLCA",
+                "BRCA",
+                "CESC",
+                "CHOL",
+                "COAD",
+                "COADREAD",
+                "DLBC",
+                "ESCA",
+                "FPPP",
+                "GBM",
+                "GBMLGG",
+                "HNSC",
+                "KICH",
+                "KIPAN",
+                "KIRC",
+                "KIRP",
+                "LAML",
+                "LGG",
+                "LIHC",
+                "LUAD",
+                "LUSC",
+                "MESO",
+                "OV",
+                "PAAD",
+                "PCPG",
+                "PRAD",
+                "READ",
+                "SARC",
+                "SKCM",
+                "STAD",
+                "STES",
+                "TGCT",
+                "THCA",
+                "THYM",
+                "UCEC",
+                "UCS",
+                "UVM"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of TCGA participant barcodes (e.g. TCGA-GF-A4EO).",
+            "name": "tcga_participant_barcode",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA sample types from the scrollable list.",
+            "name": "sample_type",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "NB",
+                "NBC",
+                "NBM",
+                "NT",
+                "TAM",
+                "TAP",
+                "TB",
+                "TM",
+                "TP",
+                "TR"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more sample characterization protocols from the scrollable list.",
+            "name": "protocol",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "default": "RSEM",
+              "enum": [
+                "RPKM",
+                "RSEM"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2000,
+              "default": 250
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort",
+            "enum": [
+              "tcga_participant_barcode",
+              "cohort",
+              "gene",
+              "protocol",
+              "sample_type"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Samples/miRSeq": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Samples"
+        ],
+        "operationId": "miRSeq",
+        "summary": "Retrieve miRSeq data.",
+        "description": "This service returns sample-level log2 miRSeq expression values. Results may be filtered by miR, cohort, barcode, sample type or Firehose preprocessing tool, but at least one miR OR barcode must be supplied.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of miR names (e.g. hsa-let-7b-5p,hsa-let-7a-1).",
+            "name": "mir",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACC",
+                "BLCA",
+                "BRCA",
+                "CESC",
+                "CHOL",
+                "COAD",
+                "COADREAD",
+                "DLBC",
+                "ESCA",
+                "FPPP",
+                "GBM",
+                "GBMLGG",
+                "HNSC",
+                "KICH",
+                "KIPAN",
+                "KIRC",
+                "KIRP",
+                "LAML",
+                "LGG",
+                "LIHC",
+                "LUAD",
+                "LUSC",
+                "MESO",
+                "OV",
+                "PAAD",
+                "PCPG",
+                "PRAD",
+                "READ",
+                "SARC",
+                "SKCM",
+                "STAD",
+                "STES",
+                "TGCT",
+                "THCA",
+                "THYM",
+                "UCEC",
+                "UCS",
+                "UVM"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of TCGA participant barcodes (e.g. TCGA-GF-A4EO).",
+            "name": "tcga_participant_barcode",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to include only data/results produced by the selected Firehose tool.",
+            "name": "tool",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "default": "miRseq_Mature_Preprocess",
+              "enum": [
+                "miRseq_Mature_Preprocess",
+                "miRseq_Preprocess"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA sample types from the scrollable list.",
+            "name": "sample_type",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "NB",
+                "NBC",
+                "NBM",
+                "NT",
+                "TAM",
+                "TAP",
+                "TB",
+                "TM",
+                "TP",
+                "TR"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2000,
+              "default": 250
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort",
+            "enum": [
+              "tcga_participant_barcode",
+              "cohort",
+              "tool",
+              "mir",
+              "sample_type"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Samples/ClinicalTier1": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Samples"
+        ],
+        "operationId": "ClinicalTier1",
+        "summary": "Retrieve clinical pick tier 1 data.",
+        "description": "This service returns patient-level tier 1 clinical data elements (CDEs).  Results may be selected by disease cohort, patient barcode or CDE name, but at least one cohort or barcode must be provided. When filtering by CDE note that only when a  patient record contains one or more of the selected CDEs will it be returned. For more information on how these CDEs are processed see our <a href=\"https://confluence.broadinstitute.org/display/GDAC/Documentation#Documentation-ClinicalPipeline\">pipeline documentation</a>.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACC",
+                "BLCA",
+                "BRCA",
+                "CESC",
+                "CHOL",
+                "COAD",
+                "COADREAD",
+                "DLBC",
+                "ESCA",
+                "FPPP",
+                "GBM",
+                "GBMLGG",
+                "HNSC",
+                "KICH",
+                "KIPAN",
+                "KIRC",
+                "KIRP",
+                "LAML",
+                "LGG",
+                "LIHC",
+                "LUAD",
+                "LUSC",
+                "MESO",
+                "OV",
+                "PAAD",
+                "PCPG",
+                "PRAD",
+                "READ",
+                "SARC",
+                "SKCM",
+                "STAD",
+                "STES",
+                "TGCT",
+                "THCA",
+                "THYM",
+                "UCEC",
+                "UCS",
+                "UVM"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of TCGA participant barcodes (e.g. TCGA-GF-A4EO).",
+            "name": "tcga_participant_barcode",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Shrink results set to include only the CDEs selected from the scrollable list.",
+            "name": "tier1_cde_name",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "age_at_diagnosis",
+                "ajcc_tumor_pathologic_pt",
+                "batch_number",
+                "Breslow_thickness",
+                "cause_of_death",
+                "cervix_suv_results",
+                "chemo_concurrent_type",
+                "chemotherapy",
+                "completeness_of_resection",
+                "corpus_involvement",
+                "date_of_initial_pathologic_diagnosis",
+                "days_to_death",
+                "days_to_last_followup",
+                "days_to_last_known_alive",
+                "days_to_preop_psa",
+                "days_to_psa",
+                "days_to_submitted_specimen_dx",
+                "days_to_tumor_recurrence",
+                "dcc_upload_date",
+                "ethnicity",
+                "examinations_examination_karnofskyperformancescore",
+                "extrathyroidal_extension",
+                "fedpet_or_ct_results",
+                "gender",
+                "gleason_score",
+                "gleason_score_combined",
+                "gleason_score_primary",
+                "gleason_score_secondary",
+                "height_cm_at_diagnosis",
+                "highest_gleason_score",
+                "histological_type",
+                "history_hormonal_contraceptives_use",
+                "hysterectomy_type",
+                "initial_pathologic_dx_year",
+                "karnofsky_performance_score",
+                "keratinization_squamous_cell",
+                "lymph_node_location",
+                "lymph_nodes_examined",
+                "lymph_nodes_examined_he_count",
+                "lymphovascular_involvement",
+                "melanoma_primary_known",
+                "melanoma_ulceration",
+                "menopause_status",
+                "multifocality",
+                "neoplasm_diseasestage",
+                "neoplasm_histologic_grade",
+                "number_of_lymph_nodes",
+                "number_pack_years_smoked",
+                "pathology_M_stage",
+                "pathology_N_stage",
+                "pathology_T_stage",
+                "patient_agebegansmokinginyears",
+                "patient_cervicalcarcinomapelvicextensiontext",
+                "patient_patientpregnancyspontaneousabortioncount",
+                "patient_patientpregnancytherapeuticabortioncount",
+                "patient_tumor_recurrence_status",
+                "pos_lymph_node_location",
+                "pregnancies_count_ectopic",
+                "pregnancies_count_live_birth",
+                "pregnancies_count_stillbirth",
+                "pregnancies_count_total",
+                "primary_site_of_disease",
+                "psa_result_preop",
+                "psa_value",
+                "race",
+                "radiation_adjuvant_units",
+                "radiation_exposure",
+                "radiation_therapy",
+                "radiation_therapy_site",
+                "radiation_therapy_status",
+                "radiation_therapy_type",
+                "radiation_total_dose",
+                "radiation_treatment_adjuvant",
+                "radiations_radiation_regimenindication",
+                "stage_event_clinical_stage",
+                "tobacco_smoking_history",
+                "tobacco_smoking_pack_years_smoked",
+                "tobacco_smoking_year_stopped",
+                "tumor_grade",
+                "tumor_sample_procurement_country",
+                "tumor_size",
+                "tumor_stage",
+                "tumor_status",
+                "vital_status",
+                "weight_kg_at_diagnosis",
+                "year_of_tobacco_smoking_onset"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2000,
+              "default": 250
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort",
+            "enum": [
+              "tcga_participant_barcode",
+              "cohort",
+              "tier1_cde_name"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Analyses/Mutation/MAF": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Analyses"
+        ],
+        "operationId": "MAF",
+        "summary": "Retrieve MutSig final analysis MAF.",
+        "description": "This service returns selected columns from the MAF generated by MutSig. Results may be filtered by gene, cohort, tool, or barcode, but at least one gene OR barcode OR cohort must be given.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACC",
+                "BLCA",
+                "BRCA",
+                "CESC",
+                "CHOL",
+                "COAD",
+                "COADREAD",
+                "DLBC",
+                "ESCA",
+                "FPPP",
+                "GBM",
+                "GBMLGG",
+                "HNSC",
+                "KICH",
+                "KIPAN",
+                "KIRC",
+                "KIRP",
+                "LAML",
+                "LGG",
+                "LIHC",
+                "LUAD",
+                "LUSC",
+                "MESO",
+                "OV",
+                "PAAD",
+                "PCPG",
+                "PRAD",
+                "READ",
+                "SARC",
+                "SKCM",
+                "STAD",
+                "STES",
+                "TGCT",
+                "THCA",
+                "THYM",
+                "UCEC",
+                "UCS",
+                "UVM"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to include only data/results produced by the selected Firehose tool.",
+            "name": "tool",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "default": "MutSig2CV",
+              "enum": [
+                "MutSig1.5",
+                "MutSig2.0",
+                "MutSig2CV",
+                "MutSigCV"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of gene name(s).",
+            "name": "gene",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of TCGA participant barcodes (e.g. TCGA-GF-A4EO).",
+            "name": "tcga_participant_barcode",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of which data columns/fields to return.",
+            "name": "column",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2000,
+              "default": 250
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort",
+            "enum": [
+              "tcga_participant_barcode",
+              "cohort",
+              "tool",
+              "gene"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Analyses/Mutation/SMG": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Analyses"
+        ],
+        "operationId": "SMG",
+        "summary": "Retrieve Significantly Mutated Genes (SMG).",
+        "description": "This service provides a list of significantly mutated genes, as scored by MutSig.  It may be filtered by cohort, rank, gene, tool and/or Q-value threshold, but at least one cohort must be supplied.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACC",
+                "BLCA",
+                "BRCA",
+                "CESC",
+                "CHOL",
+                "COAD",
+                "COADREAD",
+                "DLBC",
+                "ESCA",
+                "FPPP",
+                "GBM",
+                "GBMLGG",
+                "HNSC",
+                "KICH",
+                "KIPAN",
+                "KIRC",
+                "KIRP",
+                "LAML",
+                "LGG",
+                "LIHC",
+                "LUAD",
+                "LUSC",
+                "MESO",
+                "OV",
+                "PAAD",
+                "PCPG",
+                "PRAD",
+                "READ",
+                "SARC",
+                "SKCM",
+                "STAD",
+                "STES",
+                "TGCT",
+                "THCA",
+                "THYM",
+                "UCEC",
+                "UCS",
+                "UVM"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to include only data/results produced by the selected Firehose tool.",
+            "name": "tool",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "default": "MutSig2CV",
+              "enum": [
+                "MutSig1.5",
+                "MutSig2.0",
+                "MutSig2CV",
+                "MutSigCV"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Number of significant genes to return.",
+            "name": "rank",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of gene name(s).",
+            "name": "gene",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Only return results with Q-value <= given threshold.",
+            "name": "q",
+            "required": false,
+            "type": "number",
+            "maximum": 1
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2000,
+              "default": 250
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "rank",
+            "enum": [
+              "q",
+              "cohort",
+              "tool",
+              "gene",
+              "rank"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Analyses/CopyNumber/Genes/All": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Analyses"
+        ],
+        "operationId": "All",
+        "summary": "Retrieve all data by genes Gistic2 results.",
+        "description": "This service provides access to the Gistic2 all_data_by_genes.txt output data. This data is a gene-level table of copy number values for all samples. The returned copy number values are in units (copy number - 2) so that no amplification or deletion is 0, genes with amplifications have positive values, and genes with deletions are negative values. The data are converted from marker level to gene level using the extreme method: a gene is assigned the greatest amplification or the least deletion value among the markers it covers. Results may be filtered by cohort, gene, or barcode, but at least one gene or barcode must be supplied.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACC",
+                "BLCA",
+                "BRCA",
+                "CESC",
+                "CHOL",
+                "COAD",
+                "COADREAD",
+                "DLBC",
+                "ESCA",
+                "FPPP",
+                "GBM",
+                "GBMLGG",
+                "HNSC",
+                "KICH",
+                "KIPAN",
+                "KIRC",
+                "KIRP",
+                "LAML",
+                "LGG",
+                "LIHC",
+                "LUAD",
+                "LUSC",
+                "MESO",
+                "OV",
+                "PAAD",
+                "PCPG",
+                "PRAD",
+                "READ",
+                "SARC",
+                "SKCM",
+                "STAD",
+                "STES",
+                "TGCT",
+                "THCA",
+                "THYM",
+                "UCEC",
+                "UCS",
+                "UVM"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of gene name(s).",
+            "name": "gene",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of TCGA participant barcodes (e.g. TCGA-GF-A4EO).",
+            "name": "tcga_participant_barcode",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2000,
+              "default": 250
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort",
+            "enum": [
+              "tcga_participant_barcode",
+              "cohort",
+              "gene"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Analyses/CopyNumber/Genes/Focal": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Analyses"
+        ],
+        "operationId": "Focal",
+        "summary": "Retrieve focal data by genes Gistic2 results.",
+        "description": "This service provides access to the Gistic2 focal_data_by_genes.txt output data. This output is similar to the all_data_by_genes.txt output, but using only focal events with lengths greater than the  focal length cutoff. This data is a gene-level table of copy number values for all samples. The returned copy number values are in units (copy number - 2) so that no amplification or deletion is 0, genes with amplifications have positive values, and genes with deletions are negative values. The data are converted from marker level to gene level using the extreme method: a gene is assigned the greatest amplification or the least deletion value among the markers it covers. Results may be filtered by cohort, gene, and/or barcode, but at least one gene or barcode must be supplied.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACC",
+                "BLCA",
+                "BRCA",
+                "CESC",
+                "CHOL",
+                "COAD",
+                "COADREAD",
+                "DLBC",
+                "ESCA",
+                "FPPP",
+                "GBM",
+                "GBMLGG",
+                "HNSC",
+                "KICH",
+                "KIPAN",
+                "KIRC",
+                "KIRP",
+                "LAML",
+                "LGG",
+                "LIHC",
+                "LUAD",
+                "LUSC",
+                "MESO",
+                "OV",
+                "PAAD",
+                "PCPG",
+                "PRAD",
+                "READ",
+                "SARC",
+                "SKCM",
+                "STAD",
+                "STES",
+                "TGCT",
+                "THCA",
+                "THYM",
+                "UCEC",
+                "UCS",
+                "UVM"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of gene name(s).",
+            "name": "gene",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of TCGA participant barcodes (e.g. TCGA-GF-A4EO).",
+            "name": "tcga_participant_barcode",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2000,
+              "default": 250
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort",
+            "enum": [
+              "tcga_participant_barcode",
+              "cohort",
+              "gene"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Analyses/CopyNumber/Genes/Thresholded": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Analyses"
+        ],
+        "operationId": "Thresholded",
+        "summary": "Retrieve all thresholded by genes Gistic2 results.",
+        "description": "This service provides access to the Gistic2 all_thresholded_by_genes.txt output data. A gene-level table of discrete amplification and deletion indicators for all samples. A table value of 0 means no amplification or deletion above the threshold. Amplifications are positive numbers: 1 means amplification above the amplification threshold; 2 means amplifications larger to the arm level amplifications observed for the sample. Deletions are represented by negative table values: -1 represents deletion beyond the threshold; -2 means deletions greater than the minimum arm-level deletion observed for the sample. Results maybe filtered by cohort, gene or barcode, but at least one gene or barcode must be supplied.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACC",
+                "BLCA",
+                "BRCA",
+                "CESC",
+                "CHOL",
+                "COAD",
+                "COADREAD",
+                "DLBC",
+                "ESCA",
+                "FPPP",
+                "GBM",
+                "GBMLGG",
+                "HNSC",
+                "KICH",
+                "KIPAN",
+                "KIRC",
+                "KIRP",
+                "LAML",
+                "LGG",
+                "LIHC",
+                "LUAD",
+                "LUSC",
+                "MESO",
+                "OV",
+                "PAAD",
+                "PCPG",
+                "PRAD",
+                "READ",
+                "SARC",
+                "SKCM",
+                "STAD",
+                "STES",
+                "TGCT",
+                "THCA",
+                "THYM",
+                "UCEC",
+                "UCS",
+                "UVM"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of gene name(s).",
+            "name": "gene",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of TCGA participant barcodes (e.g. TCGA-GF-A4EO).",
+            "name": "tcga_participant_barcode",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2000,
+              "default": 250
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort",
+            "enum": [
+              "tcga_participant_barcode",
+              "cohort",
+              "gene"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Analyses/CopyNumber/Genes/Amplified": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Analyses"
+        ],
+        "operationId": "Amplified",
+        "summary": "Retrieve Gistic2 significantly amplified genes results.",
+        "description": "This service provides access to the Gistic2 amp_genes.conf_99.txt output data.  At least 1 gene or cohort must be supplied.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACC",
+                "BLCA",
+                "BRCA",
+                "CESC",
+                "CHOL",
+                "COAD",
+                "COADREAD",
+                "DLBC",
+                "ESCA",
+                "FPPP",
+                "GBM",
+                "GBMLGG",
+                "HNSC",
+                "KICH",
+                "KIPAN",
+                "KIRC",
+                "KIRP",
+                "LAML",
+                "LGG",
+                "LIHC",
+                "LUAD",
+                "LUSC",
+                "MESO",
+                "OV",
+                "PAAD",
+                "PCPG",
+                "PRAD",
+                "READ",
+                "SARC",
+                "SKCM",
+                "STAD",
+                "STES",
+                "TGCT",
+                "THCA",
+                "THYM",
+                "UCEC",
+                "UCS",
+                "UVM"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of gene name(s).",
+            "name": "gene",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Only return results with Q-value <= given threshold.",
+            "name": "q",
+            "required": false,
+            "type": "number",
+            "maximum": 1
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2000,
+              "default": 250
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort",
+            "enum": [
+              "q",
+              "cohort",
+              "gene"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Analyses/CopyNumber/Genes/Deleted": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Analyses"
+        ],
+        "operationId": "Deleted",
+        "summary": "Retrieve Gistic2 significantly deleted genes results.",
+        "description": "This service provides access to the Gistic2 del_genes.conf_99.txt output data.  At least 1 gene or cohort must be supplied.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACC",
+                "BLCA",
+                "BRCA",
+                "CESC",
+                "CHOL",
+                "COAD",
+                "COADREAD",
+                "DLBC",
+                "ESCA",
+                "FPPP",
+                "GBM",
+                "GBMLGG",
+                "HNSC",
+                "KICH",
+                "KIPAN",
+                "KIRC",
+                "KIRP",
+                "LAML",
+                "LGG",
+                "LIHC",
+                "LUAD",
+                "LUSC",
+                "MESO",
+                "OV",
+                "PAAD",
+                "PCPG",
+                "PRAD",
+                "READ",
+                "SARC",
+                "SKCM",
+                "STAD",
+                "STES",
+                "TGCT",
+                "THCA",
+                "THYM",
+                "UCEC",
+                "UCS",
+                "UVM"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of gene name(s).",
+            "name": "gene",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Only return results with Q-value <= given threshold.",
+            "name": "q",
+            "required": false,
+            "type": "number",
+            "maximum": 1
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2000,
+              "default": 250
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort",
+            "enum": [
+              "q",
+              "cohort",
+              "gene"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Analyses/mRNASeq/Quartiles": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Analyses"
+        ],
+        "operationId": "mRNASeq/Quartiles",
+        "summary": "Returns RNASeq expression quartiles, e.g. suitable for drawing a boxplot.",
+        "description": "For a given gene compute quartiles and extrema, suitable e.g. for drawing a boxplot (Tukey 1977).  Results may be filtered by cohort, sample type, patient barcode  or characterization protocol, and are returned sorted by cohort.  Note that samples for which no expression value was recorded (e.g. <a href=\"http://firebrowse.org/api/v1/Samples/mRNASeq?&gene=egfr&cohort=SKCM&tcga_participant_barcode=TCGA-GN-A262\">the melanoma sample TCGA-GN-262</a>) are removed prior to calculation.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "Enter a single gene name.",
+            "name": "gene",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACC",
+                "BLCA",
+                "BRCA",
+                "CESC",
+                "CHOL",
+                "COAD",
+                "COADREAD",
+                "DLBC",
+                "ESCA",
+                "FPPP",
+                "GBM",
+                "GBMLGG",
+                "HNSC",
+                "KICH",
+                "KIPAN",
+                "KIRC",
+                "KIRP",
+                "LAML",
+                "LGG",
+                "LIHC",
+                "LUAD",
+                "LUSC",
+                "MESO",
+                "OV",
+                "PAAD",
+                "PCPG",
+                "PRAD",
+                "READ",
+                "SARC",
+                "SKCM",
+                "STAD",
+                "STES",
+                "TGCT",
+                "THCA",
+                "THYM",
+                "UCEC",
+                "UCS",
+                "UVM"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more sample characterization protocols from the scrollable list.",
+            "name": "protocol",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "default": "RSEM",
+              "enum": [
+                "RPKM",
+                "RSEM"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "For which type of sample(s) should quartiles be computed?",
+            "name": "sample_type",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "default": "tumors",
+              "enum": [
+                "tumors",
+                "normals",
+                "TP",
+                "TR",
+                "TB",
+                "TRBM",
+                "TAP",
+                "TM",
+                "TAM",
+                "THOC",
+                "TBM",
+                "NB",
+                "NT",
+                "NBC",
+                "NEBV",
+                "NBM",
+                "TRB"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of TCGA participants, identified by barcodes such as TCGA-GF-A4EO, denoting samples to exclude from computation.",
+            "name": "Exclude",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Analyses/Reports": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Analyses"
+        ],
+        "operationId": "Reports",
+        "summary": "Retrieve links to summary reports from Firehose analysis runs.",
+        "description": "This service returns URLs to the analysis result reports for runs of the Broad Institute GDAC Firehose analysis pipeline. At least one year of run reports are maintained in the database, but the reports from the latest run will be returned by default. The set of <a href=\"https://confluence.broadinstitute.org/display/GDAC/Nozzle\">Nozzle</a> reports returned may be filtered by disease cohort, report type and report name.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "Select one or more date stamps.",
+            "name": "date",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date",
+              "default": "2015_04_02",
+              "enum": [
+                "2015_04_02",
+                "2014_10_17",
+                "2014_07_15",
+                "2014_04_16",
+                "2014_01_15",
+                "2013_09_23",
+                "2013_05_23",
+                "2013_04_21"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACC",
+                "BLCA",
+                "BRCA",
+                "CESC",
+                "CHOL",
+                "COAD",
+                "COADREAD",
+                "DLBC",
+                "ESCA",
+                "FPPP",
+                "GBM",
+                "GBMLGG",
+                "HNSC",
+                "KICH",
+                "KIPAN",
+                "KIRC",
+                "KIRP",
+                "LAML",
+                "LGG",
+                "LIHC",
+                "LUAD",
+                "LUSC",
+                "MESO",
+                "OV",
+                "PAAD",
+                "PCPG",
+                "PRAD",
+                "READ",
+                "SARC",
+                "SKCM",
+                "STAD",
+                "STES",
+                "TGCT",
+                "THCA",
+                "THYM",
+                "UCEC",
+                "UCS",
+                "UVM"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more report names.",
+            "name": "name",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Aggregate_AnalysisFeatures",
+                "CopyNumber_Clustering_CNMF",
+                "CopyNumber_Clustering_CNMF_thresholded",
+                "CopyNumber_Gistic2",
+                "CopyNumberLowPass_Gistic2",
+                "Correlate_Clinical_vs_CopyNumber_Arm",
+                "Correlate_Clinical_vs_CopyNumber_Focal",
+                "Correlate_Clinical_vs_Methylation",
+                "Correlate_Clinical_vs_miR",
+                "Correlate_Clinical_vs_miRseq",
+                "Correlate_Clinical_vs_Molecular_Subtypes",
+                "Correlate_Clinical_vs_mRNA",
+                "Correlate_Clinical_vs_mRNAseq",
+                "Correlate_Clinical_vs_Mutation",
+                "Correlate_Clinical_vs_Mutation_APOBEC_Categorical",
+                "Correlate_Clinical_vs_Mutation_APOBEC_Continuous",
+                "Correlate_Clinical_vs_MutationRate",
+                "Correlate_Clinical_vs_RPPA",
+                "Correlate_CopyNumber_vs_miR",
+                "Correlate_CopyNumber_vs_mRNA",
+                "Correlate_CopyNumber_vs_mRNAseq",
+                "Correlate_Methylation_vs_mRNA",
+                "Correlate_molecularSubtype_vs_CopyNumber_Arm",
+                "Correlate_molecularSubtype_vs_CopyNumber_Focal",
+                "Correlate_molecularSubtype_vs_Mutation",
+                "Correlate_mRNAseq_vs_Mutation_APOBEC",
+                "Methylation_Clustering_CNMF",
+                "miR_Clustering_CNMF",
+                "miR_Clustering_Consensus",
+                "miR_Clustering_Consensus_Plus",
+                "miR_FindDirectTargets",
+                "miRseq_Clustering_CNMF",
+                "miRseq_Clustering_Consensus",
+                "miRseq_Clustering_Consensus_Plus",
+                "miRseq_FindDirectTargets",
+                "miRseq_Mature_Clustering_CNMF",
+                "miRseq_Mature_Clustering_Consensus",
+                "miRseq_Mature_Clustering_Consensus_Plus",
+                "mRNA_Clustering_CNMF",
+                "mRNA_Clustering_Consensus",
+                "mRNA_Clustering_Consensus_Plus",
+                "mRNAseq_Clustering_CNMF",
+                "mRNAseq_Clustering_Consensus",
+                "mRNAseq_Clustering_Consensus_Plus",
+                "Mutation_APOBEC",
+                "Mutation_Assessor",
+                "Mutation_CHASM",
+                "MutSigNozzleReport1.5",
+                "MutSigNozzleReport2.0",
+                "MutSigNozzleReport2CV",
+                "MutSigNozzleReportCV",
+                "MutSigNozzleReportMerged",
+                "Pathway_FindEnrichedGenes",
+                "Pathway_GSEA_mRNAseq",
+                "Pathway_Hotnet",
+                "Pathway_Overlaps_MSigDB_MutSig2CV",
+                "Pathway_Paradigm_mRNA",
+                "Pathway_Paradigm_mRNA_And_Copy_Number",
+                "Pathway_Paradigm_RNASeq",
+                "Pathway_Paradigm_RNASeq_And_Copy_Number",
+                "RPPA_Clustering_CNMF",
+                "RPPA_Clustering_Consensus",
+                "RPPA_Clustering_Consensus_Plus"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more report types.",
+            "name": "type",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Aggregate",
+                "Clustering",
+                "CopyNumber",
+                "Correlations",
+                "Expression",
+                "Mutation",
+                "Pathway"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2000,
+              "default": 250
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "date",
+            "enum": [
+              "date",
+              "cohort",
+              "type",
+              "name"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Analyses/FeatureTable": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Analyses"
+        ],
+        "operationId": "FeatureTable",
+        "summary": "Retrieve aggregated analysis features table.",
+        "description": "This service returns part or all of the so-called <strong>feature table</strong>; which aggregates the most important findings across ALL pipelines in the GDAC Firehose analysis workflow into a single table for simple access.  One feature table is created per disease cohort.  Results may be filtered by date or cohort, but at least 1 cohort must be specified here. For more details please visit the <a href=https://confluence.broadinstitute.org/display/GDAC/Documentation\\#Documentation-FeatureTable>online documentation</a>.  Please note that the service is still undergoing experimental evaluation and does not return JSON format.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "tsv",
+            "enum": [
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACC",
+                "BLCA",
+                "BRCA",
+                "CESC",
+                "CHOL",
+                "COAD",
+                "COADREAD",
+                "DLBC",
+                "ESCA",
+                "FPPP",
+                "GBM",
+                "GBMLGG",
+                "HNSC",
+                "KICH",
+                "KIPAN",
+                "KIRC",
+                "KIRP",
+                "LAML",
+                "LGG",
+                "LIHC",
+                "LUAD",
+                "LUSC",
+                "MESO",
+                "OV",
+                "PAAD",
+                "PCPG",
+                "PRAD",
+                "READ",
+                "SARC",
+                "SKCM",
+                "STAD",
+                "STES",
+                "TGCT",
+                "THCA",
+                "THYM",
+                "UCEC",
+                "UCS",
+                "UVM"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Select one or more date stamps.",
+            "name": "date",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date",
+              "default": "2015_04_02",
+              "enum": [
+                "2015_04_02",
+                "2014_10_17"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of which data columns/fields to return.",
+            "name": "column",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2000,
+              "default": 250
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Archives/StandardData": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Archives"
+        ],
+        "operationId": "StandardData",
+        "summary": "Retrieve standard data archives.",
+        "description": "This service returns the archive URLs for our Firehose standard data runs, providing a RESTful interface similar in spirit to the command line <a href=\"https://confluence.broadinstitute.org/display/GDAC/Download\">firehose_get</a> tool. The archives can be filtered based on date, cohort, data type, platform, center, data level, and protocol.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "Select one or more date stamps.",
+            "name": "date",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date",
+              "default": "2015_06_01",
+              "enum": [
+                "2015_06_01",
+                "2015_04_02",
+                "2015_02_04",
+                "2014_12_06",
+                "2014_10_17",
+                "2014_09_02",
+                "2014_07_15",
+                "2014_05_18",
+                "2014_04_16",
+                "2014_03_16"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACC",
+                "BLCA",
+                "BRCA",
+                "CESC",
+                "CHOL",
+                "COAD",
+                "COADREAD",
+                "DLBC",
+                "ESCA",
+                "FPPP",
+                "GBM",
+                "GBMLGG",
+                "HNSC",
+                "KICH",
+                "KIPAN",
+                "KIRC",
+                "KIRP",
+                "LAML",
+                "LGG",
+                "LIHC",
+                "LUAD",
+                "LUSC",
+                "MESO",
+                "OV",
+                "PAAD",
+                "PCPG",
+                "PRAD",
+                "READ",
+                "SARC",
+                "SKCM",
+                "STAD",
+                "STES",
+                "TGCT",
+                "THCA",
+                "THYM",
+                "UCEC",
+                "UCS",
+                "UVM"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA data types from the scrollable list.",
+            "name": "data_type",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Clinical",
+                "CopyNumber",
+                "LowPass",
+                "MAF",
+                "Methylation",
+                "miR",
+                "miRSeq",
+                "mRNA",
+                "mRNASeq",
+                "rawMAF",
+                "rawWIG",
+                "RPPA",
+                "WIG"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to include only data/results produced by the selected Firehose tool.",
+            "name": "tool",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Clinical_Pick_Tier1",
+                "Merge_Clinical",
+                "Merge_cna__cgh_1x1m_g4447a__mskcc_org__Level_3__segmentation_data_computation__seg",
+                "Merge_cna__hg_cgh_244a__hms_harvard_edu__Level_3__segmentation__seg",
+                "Merge_cna__hg_cgh_244a__mskcc_org__Level_3__segmentation_data_computation__seg",
+                "Merge_cna__hg_cgh_415k_g4124a__hms_harvard_edu__Level_3__segmentation__seg",
+                "Merge_cna__illuminahiseq_dnaseqc__hms_harvard_edu__Level_3__segmentation__seg",
+                "Merge_exon__huex_1_0_st_v2__lbl_gov__Level_2__quantile_normalization_exon__data",
+                "Merge_exon__huex_1_0_st_v2__lbl_gov__Level_3__quantile_normalization_gene__data",
+                "Merge_exon__huex_1_0_st_v2__lbl_gov__Level_3__segmented_as_firma__data",
+                "Merge_methylation__humanmethylation27__jhu_usc_edu__Level_3__within_bioassay_data_set_function__data",
+                "Merge_methylation__humanmethylation450__jhu_usc_edu__Level_3__within_bioassay_data_set_function__data",
+                "Merge_mirna__h_mirna_8x15k__unc_edu__Level_3__unc_DWD_Batch_adjusted__data",
+                "Merge_mirna__h_mirna_8x15kv2__unc_edu__Level_3__unc_DWD_Batch_adjusted__data",
+                "Merge_mirnaseq__illuminaga_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data",
+                "Merge_mirnaseq__illuminaga_mirnaseq__bcgsc_ca__Level_3__miR_isoform_expression__data",
+                "Merge_mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_gene_expression__data",
+                "Merge_mirnaseq__illuminahiseq_mirnaseq__bcgsc_ca__Level_3__miR_isoform_expression__data",
+                "Merge_protein_exp__mda_rppa_core__mdanderson_org__Level_3__protein_normalization__data",
+                "Merge_rnaseq__illuminaga_rnaseq__bcgsc_ca__Level_3__exon_expression__data",
+                "Merge_rnaseq__illuminaga_rnaseq__bcgsc_ca__Level_3__gene_expression__data",
+                "Merge_rnaseq__illuminaga_rnaseq__bcgsc_ca__Level_3__splice_junction_expression__data",
+                "Merge_rnaseq__illuminaga_rnaseq__unc_edu__Level_3__exon_expression__data",
+                "Merge_rnaseq__illuminaga_rnaseq__unc_edu__Level_3__gene_expression__data",
+                "Merge_rnaseq__illuminaga_rnaseq__unc_edu__Level_3__splice_junction_expression__data",
+                "Merge_rnaseq__illuminahiseq_rnaseq__bcgsc_ca__Level_3__exon_expression__data",
+                "Merge_rnaseq__illuminahiseq_rnaseq__bcgsc_ca__Level_3__gene_expression__data",
+                "Merge_rnaseq__illuminahiseq_rnaseq__bcgsc_ca__Level_3__splice_junction_expression__data",
+                "Merge_rnaseq__illuminahiseq_rnaseq__unc_edu__Level_3__exon_expression__data",
+                "Merge_rnaseq__illuminahiseq_rnaseq__unc_edu__Level_3__gene_expression__data",
+                "Merge_rnaseq__illuminahiseq_rnaseq__unc_edu__Level_3__splice_junction_expression__data",
+                "Merge_rnaseqv2__illuminaga_rnaseqv2__unc_edu__Level_3__exon_quantification__data",
+                "Merge_rnaseqv2__illuminaga_rnaseqv2__unc_edu__Level_3__junction_quantification__data",
+                "Merge_rnaseqv2__illuminaga_rnaseqv2__unc_edu__Level_3__RSEM_genes__data",
+                "Merge_rnaseqv2__illuminaga_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data",
+                "Merge_rnaseqv2__illuminaga_rnaseqv2__unc_edu__Level_3__RSEM_isoforms__data",
+                "Merge_rnaseqv2__illuminaga_rnaseqv2__unc_edu__Level_3__RSEM_isoforms_normalized__data",
+                "Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__exon_quantification__data",
+                "Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__junction_quantification__data",
+                "Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes__data",
+                "Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_genes_normalized__data",
+                "Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_isoforms__data",
+                "Merge_rnaseqv2__illuminahiseq_rnaseqv2__unc_edu__Level_3__RSEM_isoforms_normalized__data",
+                "Merge_snp__genome_wide_snp_6__broad_mit_edu__Level_2__birdseed_genotype__birdseed",
+                "Merge_snp__genome_wide_snp_6__broad_mit_edu__Level_3__segmented_scna_hg18__seg",
+                "Merge_snp__genome_wide_snp_6__broad_mit_edu__Level_3__segmented_scna_hg19__seg",
+                "Merge_snp__genome_wide_snp_6__broad_mit_edu__Level_3__segmented_scna_minus_germline_cnv_hg18__seg",
+                "Merge_snp__genome_wide_snp_6__broad_mit_edu__Level_3__segmented_scna_minus_germline_cnv_hg19__seg",
+                "Merge_snp__human1mduo__hudsonalpha_org__Level_3__segmented_cna__seg",
+                "Merge_snp__human1mduo__hudsonalpha_org__Level_3__segmented_cnv__seg",
+                "Merge_snp__human1mduo__hudsonalpha_org__Level_3__segmented_loh__seg",
+                "Merge_snp__humanhap550__hudsonalpha_org__Level_3__segmented_cna__seg",
+                "Merge_snp__humanhap550__hudsonalpha_org__Level_3__segmented_cnv__seg",
+                "Merge_snp__humanhap550__hudsonalpha_org__Level_3__segmented_loh__seg",
+                "Merge_transcriptome__agilentg4502a_07_1__unc_edu__Level_2__unc_lowess_normalization_probe_level__data",
+                "Merge_transcriptome__agilentg4502a_07_1__unc_edu__Level_3__unc_lowess_normalization_gene_level__data",
+                "Merge_transcriptome__agilentg4502a_07_2__unc_edu__Level_2__unc_lowess_normalization_probe_level__data",
+                "Merge_transcriptome__agilentg4502a_07_2__unc_edu__Level_3__unc_lowess_normalization_gene_level__data",
+                "Merge_transcriptome__agilentg4502a_07_3__unc_edu__Level_2__unc_lowess_normalization_probe_level__data",
+                "Merge_transcriptome__agilentg4502a_07_3__unc_edu__Level_3__unc_lowess_normalization_gene_level__data",
+                "Merge_transcriptome__ht_hg_u133a__broad_mit_edu__Level_2__probeset_rma__data",
+                "Merge_transcriptome__ht_hg_u133a__broad_mit_edu__Level_3__gene_rma__data",
+                "Methylation_Preprocess",
+                "miRseq_Mature_Preprocess",
+                "miRseq_Preprocess",
+                "mRNA_Preprocess_Median",
+                "mRNAseq_Preprocess",
+                "Mutation_Packager_Calls",
+                "Mutation_Packager_Coverage",
+                "Mutation_Packager_Raw_Calls",
+                "Mutation_Packager_Raw_Coverage",
+                "RPPA_AnnotateWithGene"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA data generation platforms from the scrollable list.",
+            "name": "platform",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "454",
+                "ABI",
+                "AgilentG4502A_07",
+                "AgilentG4502A_07_1",
+                "AgilentG4502A_07_2",
+                "AgilentG4502A_07_3",
+                "bio",
+                "biotab",
+                "CGH-1x1M_G4447A",
+                "diagnostic_images",
+                "fh_analyses",
+                "fh_reports",
+                "fh_stddata",
+                "Genome_Wide_SNP_6",
+                "GenomeWideSNP_5",
+                "H-miRNA_8x15K",
+                "H-miRNA_8x15Kv2",
+                "H-miRNA_EarlyAccess",
+                "H-miRNA_G4470A",
+                "HG-CGH-244A",
+                "HG-CGH-415K_G4124A",
+                "HG-U133_Plus_2",
+                "HG-U133A_2",
+                "HT_HG-U133A",
+                "HuEx-1_0-st-v2",
+                "Human1MDuo",
+                "HumanHap550",
+                "HumanMethylation27",
+                "HumanMethylation450",
+                "IlluminaDNAMethylation_OMA002_CPI",
+                "IlluminaDNAMethylation_OMA003_CPI",
+                "IlluminaGA_DNASeq",
+                "IlluminaGA_DNASeq_automated",
+                "IlluminaGA_DNASeq_Cont",
+                "IlluminaGA_DNASeq_Cont_automated",
+                "IlluminaGA_DNASeq_Cont_curated",
+                "IlluminaGA_DNASeq_curated",
+                "IlluminaGA_miRNASeq",
+                "IlluminaGA_mRNA_DGE",
+                "IlluminaGA_RNASeq",
+                "IlluminaGA_RNASeqV2",
+                "IlluminaGG",
+                "IlluminaHiSeq_DNASeq",
+                "IlluminaHiSeq_DNASeq_automated",
+                "IlluminaHiSeq_DNASeq_Cont",
+                "IlluminaHiSeq_DNASeq_Cont_automated",
+                "IlluminaHiSeq_DNASeq_Cont_curated",
+                "IlluminaHiSeq_DNASeq_curated",
+                "IlluminaHiSeq_DNASeqC",
+                "IlluminaHiSeq_miRNASeq",
+                "IlluminaHiSeq_mRNA_DGE",
+                "IlluminaHiSeq_RNASeq",
+                "IlluminaHiSeq_RNASeqV2",
+                "IlluminaHiSeq_TotalRNASeqV2",
+                "IlluminaHiSeq_WGBS",
+                "Mapping250K_Nsp",
+                "Mapping250K_Sty",
+                "MDA_RPPA_Core",
+                "microsat_i",
+                "minbio",
+                "minbiotab",
+                "Mixed_DNASeq",
+                "Mixed_DNASeq_automated",
+                "Mixed_DNASeq_Cont",
+                "Mixed_DNASeq_Cont_automated",
+                "Mixed_DNASeq_Cont_curated",
+                "Mixed_DNASeq_curated",
+                "pathology_reports",
+                "SOLiD_DNASeq",
+                "SOLiD_DNASeq_automated",
+                "SOLiD_DNASeq_Cont",
+                "SOLiD_DNASeq_Cont_automated",
+                "SOLiD_DNASeq_Cont_curated",
+                "SOLiD_DNASeq_curated",
+                "tissue_images",
+                "WHG-1x44K_G4112A",
+                "WHG-4x44K_G4112F",
+                "WHG-CGH_4x44B"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA centers from the scrollable list.",
+            "name": "center",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "bcgsc.ca",
+                "broad.mit.edu",
+                "broadinstitute.org",
+                "genome.wustl.edu",
+                "hgsc.bcm.edu",
+                "hms.harvard.edu",
+                "hudsonalpha.org",
+                "intgen.org",
+                "jhu-usc.edu",
+                "jhu.edu",
+                "lbl.gov",
+                "mdanderson.org",
+                "mskcc.org",
+                "nationwidechildrens.org",
+                "pnl.gov",
+                "rubicongenomics.com",
+                "sanger.ac.uk",
+                "systemsbiology.org",
+                "ucsc.edu",
+                "unc.edu",
+                "vanderbilt.edu"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA data levels.",
+            "name": "level",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "enum": [
+                1,
+                2,
+                3,
+                4
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more sample characterization protocols from the scrollable list.",
+            "name": "protocol",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "birdseed_genotype",
+                "exon_expression",
+                "exon_quantification",
+                "gene_expression",
+                "gene_rma",
+                "junction_quantification",
+                "miR_gene_expression",
+                "miR_isoform_expression",
+                "probeset_rma",
+                "protein_normalization",
+                "quantile_normalization_exon",
+                "quantile_normalization_gene",
+                "RSEM_genes",
+                "RSEM_genes_normalized",
+                "RSEM_isoforms",
+                "RSEM_isoforms_normalized",
+                "segmentation",
+                "segmentation_data_computation",
+                "segmented_as_firma",
+                "segmented_cna",
+                "segmented_cnv",
+                "segmented_loh",
+                "segmented_scna_hg18",
+                "segmented_scna_hg19",
+                "segmented_scna_minus_germline_cnv_hg18",
+                "segmented_scna_minus_germline_cnv_hg19",
+                "splice_junction_expression",
+                "unc_DWD_Batch_adjusted",
+                "unc_lowess_normalization_gene_level",
+                "unc_lowess_normalization_probe_level",
+                "within_bioassay_data_set_function"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2000,
+              "default": 250
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort",
+            "enum": [
+              "cohort",
+              "protocol",
+              "center",
+              "data_type",
+              "level",
+              "tool",
+              "platform",
+              "date"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Metadata/Centers": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Metadata"
+        ],
+        "operationId": "Centers",
+        "summary": "Obtain identities of TCGA consortium member centers.",
+        "description": "By default this function returns a table of all consortium members in TCGA, aka centers; it provides both the HTTP domain and full organizational name of each center.  A subset of this table may be obtained by explicitly specifying one or more domain names.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA centers from the scrollable list.",
+            "name": "center",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "bcgsc.ca",
+                "broad.mit.edu",
+                "broadinstitute.org",
+                "genome.wustl.edu",
+                "hgsc.bcm.edu",
+                "hms.harvard.edu",
+                "hudsonalpha.org",
+                "intgen.org",
+                "jhu-usc.edu",
+                "jhu.edu",
+                "lbl.gov",
+                "mdanderson.org",
+                "mskcc.org",
+                "nationwidechildrens.org",
+                "pnl.gov",
+                "rubicongenomics.com",
+                "sanger.ac.uk",
+                "systemsbiology.org",
+                "ucsc.edu",
+                "unc.edu",
+                "vanderbilt.edu"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Metadata/ClinicalTier1": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Metadata"
+        ],
+        "operationId": "ClinicalTier1",
+        "summary": "Retrieve names of all available clinical data elements (CDEs).",
+        "description": "Retrieve names of all available tier 1 clinical data elements (CDEs), unioned across all disease cohorts and patients. For more information on how these CDEs are processed see our <a href=\"https://confluence.broadinstitute.org/display/GDAC/Documentation\">pipeline documentation</a>.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Metadata/Cohort/{cohort}": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Metadata"
+        ],
+        "operationId": "Cohort",
+        "summary": "Retrieve formal disease name(s) for cohort abbreviation(s).",
+        "description": "",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "path",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACC",
+                "BLCA",
+                "BRCA",
+                "CESC",
+                "CHOL",
+                "COAD",
+                "COADREAD",
+                "DLBC",
+                "ESCA",
+                "FPPP",
+                "GBM",
+                "GBMLGG",
+                "HNSC",
+                "KICH",
+                "KIPAN",
+                "KIRC",
+                "KIRP",
+                "LAML",
+                "LGG",
+                "LIHC",
+                "LUAD",
+                "LUSC",
+                "MESO",
+                "OV",
+                "PAAD",
+                "PCPG",
+                "PRAD",
+                "READ",
+                "SARC",
+                "SKCM",
+                "STAD",
+                "STES",
+                "TGCT",
+                "THCA",
+                "THYM",
+                "UCEC",
+                "UCS",
+                "UVM"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Metadata/Cohorts": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Metadata"
+        ],
+        "operationId": "Cohorts",
+        "summary": "Translate TCGA cohort abbreviations to full disease names.",
+        "description": "By default this function returns a table containing all TCGA cohort abbreviations and their corresponding disease names.  A subset of that table may be obtained by explicitly specifying one or more cohort abbreviations.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACC",
+                "BLCA",
+                "BRCA",
+                "CESC",
+                "CHOL",
+                "COAD",
+                "COADREAD",
+                "DLBC",
+                "ESCA",
+                "FPPP",
+                "GBM",
+                "GBMLGG",
+                "HNSC",
+                "KICH",
+                "KIPAN",
+                "KIRC",
+                "KIRP",
+                "LAML",
+                "LGG",
+                "LIHC",
+                "LUAD",
+                "LUSC",
+                "MESO",
+                "OV",
+                "PAAD",
+                "PCPG",
+                "PRAD",
+                "READ",
+                "SARC",
+                "SKCM",
+                "STAD",
+                "STES",
+                "TGCT",
+                "THCA",
+                "THYM",
+                "UCEC",
+                "UCS",
+                "UVM"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Metadata/Counts": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Metadata"
+        ],
+        "operationId": "Counts",
+        "summary": "Retrieve sample counts.",
+        "description": "Returns the aliquot counts for each disease cohort, per sample\ntype and data type.  The sample type designation of \"Tumor\"\nmay be used to aggregate the count of all tumor aliquots into\na single number per disease and data type. See the SampleTypes\nfunction for a complete description of sample types.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "Select one or more date stamps.",
+            "name": "date",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date",
+              "default": "2015_06_01",
+              "enum": [
+                "2015_06_01",
+                "2015_04_02",
+                "2015_02_04",
+                "2014_12_06",
+                "2014_10_17",
+                "2014_09_02",
+                "2014_07_15",
+                "2014_05_18",
+                "2014_04_16",
+                "2014_03_16"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACC",
+                "BLCA",
+                "BRCA",
+                "CESC",
+                "CHOL",
+                "COAD",
+                "COADREAD",
+                "DLBC",
+                "ESCA",
+                "FPPP",
+                "GBM",
+                "GBMLGG",
+                "HNSC",
+                "KICH",
+                "KIPAN",
+                "KIRC",
+                "KIRP",
+                "LAML",
+                "LGG",
+                "LIHC",
+                "LUAD",
+                "LUSC",
+                "MESO",
+                "OV",
+                "PAAD",
+                "PCPG",
+                "PRAD",
+                "READ",
+                "SARC",
+                "SKCM",
+                "STAD",
+                "STES",
+                "TGCT",
+                "THCA",
+                "THYM",
+                "UCEC",
+                "UCS",
+                "UVM"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA sample types from the scrollable list.",
+            "name": "sample_type",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "FFPE",
+                "NB",
+                "NBC",
+                "NBM",
+                "NT",
+                "TAM",
+                "TAP",
+                "TB",
+                "TM",
+                "TP",
+                "TR",
+                "Tumor"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA data types from the scrollable list.",
+            "name": "data_type",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "bcr",
+                "clinical",
+                "cn",
+                "lowp",
+                "methylation",
+                "mrna",
+                "mrnaseq",
+                "mir",
+                "mirseq",
+                "rppa",
+                "maf",
+                "rawmaf"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Output an entry providing the totals for each data type.",
+            "name": "totals",
+            "required": false,
+            "type": "boolean",
+            "default": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Metadata/Dates": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Metadata"
+        ],
+        "operationId": "Dates",
+        "summary": "Retrieve list of Firehose standard data and analyses dates.",
+        "description": "",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Metadata/HeartBeat": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Metadata"
+        ],
+        "operationId": "HeartBeat",
+        "summary": "Simple way to discern whether API server is up and running",
+        "description": "Returns a message to indicate that API (server) is up and running, or times out if not.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Metadata/Patients": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Metadata"
+        ],
+        "operationId": "Patients",
+        "summary": "Retrieve list of all TCGA patients.",
+        "description": "This service returns a list of all TCGA patient barcodes in FireBrowse, optionally filtered by disease cohort.  The barcodes are obtained directy from the clinical data.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "name": "cohort",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "ACC",
+                "BLCA",
+                "BRCA",
+                "CESC",
+                "CHOL",
+                "COAD",
+                "COADREAD",
+                "DLBC",
+                "ESCA",
+                "FPPP",
+                "GBM",
+                "GBMLGG",
+                "HNSC",
+                "KICH",
+                "KIPAN",
+                "KIRC",
+                "KIRP",
+                "LAML",
+                "LGG",
+                "LIHC",
+                "LUAD",
+                "LUSC",
+                "MESO",
+                "OV",
+                "PAAD",
+                "PCPG",
+                "PRAD",
+                "READ",
+                "SARC",
+                "SKCM",
+                "STAD",
+                "STES",
+                "TGCT",
+                "THCA",
+                "THYM",
+                "UCEC",
+                "UCS",
+                "UVM"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "name": "page",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "in": "query",
+            "description": "Number of records per page of results.  Maximum is 2000.",
+            "name": "page_size",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 2000,
+              "default": 250
+            }
+          },
+          {
+            "in": "query",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "name": "sort_by",
+            "required": false,
+            "type": "string",
+            "default": "cohort",
+            "enum": [
+              "cohort"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Metadata/Platforms": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Metadata"
+        ],
+        "operationId": "Platforms",
+        "summary": "Translate TCGA platform codes to full platform names.",
+        "description": "By default this function returns a table of all of the technology platforms used to sequence or characterize samples in TCGA--both their short platform codes and full names.  A subset of this table may be obtained by explicitly specifying one or more platform codes.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "Narrow search to one or more TCGA data generation platforms from the scrollable list.",
+            "name": "platform",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "454",
+                "ABI",
+                "AgilentG4502A_07",
+                "AgilentG4502A_07_1",
+                "AgilentG4502A_07_2",
+                "AgilentG4502A_07_3",
+                "bio",
+                "biotab",
+                "CGH-1x1M_G4447A",
+                "diagnostic_images",
+                "fh_analyses",
+                "fh_reports",
+                "fh_stddata",
+                "Genome_Wide_SNP_6",
+                "GenomeWideSNP_5",
+                "H-miRNA_8x15K",
+                "H-miRNA_8x15Kv2",
+                "H-miRNA_EarlyAccess",
+                "H-miRNA_G4470A",
+                "HG-CGH-244A",
+                "HG-CGH-415K_G4124A",
+                "HG-U133_Plus_2",
+                "HG-U133A_2",
+                "HT_HG-U133A",
+                "HuEx-1_0-st-v2",
+                "Human1MDuo",
+                "HumanHap550",
+                "HumanMethylation27",
+                "HumanMethylation450",
+                "IlluminaDNAMethylation_OMA002_CPI",
+                "IlluminaDNAMethylation_OMA003_CPI",
+                "IlluminaGA_DNASeq",
+                "IlluminaGA_DNASeq_automated",
+                "IlluminaGA_DNASeq_Cont",
+                "IlluminaGA_DNASeq_Cont_automated",
+                "IlluminaGA_DNASeq_Cont_curated",
+                "IlluminaGA_DNASeq_curated",
+                "IlluminaGA_miRNASeq",
+                "IlluminaGA_mRNA_DGE",
+                "IlluminaGA_RNASeq",
+                "IlluminaGA_RNASeqV2",
+                "IlluminaGG",
+                "IlluminaHiSeq_DNASeq",
+                "IlluminaHiSeq_DNASeq_automated",
+                "IlluminaHiSeq_DNASeq_Cont",
+                "IlluminaHiSeq_DNASeq_Cont_automated",
+                "IlluminaHiSeq_DNASeq_Cont_curated",
+                "IlluminaHiSeq_DNASeq_curated",
+                "IlluminaHiSeq_DNASeqC",
+                "IlluminaHiSeq_miRNASeq",
+                "IlluminaHiSeq_mRNA_DGE",
+                "IlluminaHiSeq_RNASeq",
+                "IlluminaHiSeq_RNASeqV2",
+                "IlluminaHiSeq_TotalRNASeqV2",
+                "IlluminaHiSeq_WGBS",
+                "Mapping250K_Nsp",
+                "Mapping250K_Sty",
+                "MDA_RPPA_Core",
+                "microsat_i",
+                "minbio",
+                "minbiotab",
+                "Mixed_DNASeq",
+                "Mixed_DNASeq_automated",
+                "Mixed_DNASeq_Cont",
+                "Mixed_DNASeq_Cont_automated",
+                "Mixed_DNASeq_Cont_curated",
+                "Mixed_DNASeq_curated",
+                "pathology_reports",
+                "SOLiD_DNASeq",
+                "SOLiD_DNASeq_automated",
+                "SOLiD_DNASeq_Cont",
+                "SOLiD_DNASeq_Cont_automated",
+                "SOLiD_DNASeq_Cont_curated",
+                "SOLiD_DNASeq_curated",
+                "tissue_images",
+                "WHG-1x44K_G4112A",
+                "WHG-4x44K_G4112F",
+                "WHG-CGH_4x44B"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Metadata/SampleTypes": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Metadata"
+        ],
+        "operationId": "SampleTypes",
+        "summary": "Return all TCGA sample type codes, both numeric and symbolic.",
+        "description": "",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Metadata/SampleType/Barcode/{TCGA_Barcode}": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Metadata"
+        ],
+        "operationId": "Barcode",
+        "summary": "Given a TCGA barcode, return its short letter sample type code.",
+        "description": "",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "path",
+            "description": "Enter a single TCGA barcode, of any form: e.g. TCGA-GF-A4EO-06 or TCGA-EL-A3D5-01A-22D-A202-08",
+            "name": "TCGA_Barcode",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Metadata/SampleType/Code/{code}": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Metadata"
+        ],
+        "operationId": "Code",
+        "summary": "Translate from numeric to symbolic TCGA sample codes.",
+        "description": "Convert a TCGA numeric sample type code (e.g. 01, 02) to its corresponding symbolic (short letter) code (e.g. TP, TR).",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "path",
+            "description": "Narrow search to one or more TCGA sample type codes.",
+            "name": "code",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "01",
+                "02",
+                "03",
+                "04",
+                "05",
+                "06",
+                "07",
+                "08",
+                "09",
+                "10",
+                "11",
+                "12",
+                "13",
+                "14",
+                "20",
+                "40",
+                "50",
+                "60",
+                "61"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/Metadata/SampleType/ShortLetterCode/{short_letter_code}": {
+      "get": {
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "tags": [
+          "Metadata"
+        ],
+        "operationId": "ShortLetterCode",
+        "summary": "Translate from symbolic to numeric TCGA sample codes.",
+        "description": "Convert a TCGA sample type code in symbolic form (or 'short letter code' like TP, TR) to its corresponding numeric form (e.g. 01, 02).",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Format of result.",
+            "name": "format",
+            "required": false,
+            "type": "string",
+            "default": "json",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ]
+          },
+          {
+            "in": "path",
+            "description": "TCGA sample type short letter code(s) (e.g. TP, TM, NB, etc.). ",
+            "name": "short_letter_code",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "TP",
+                "TR",
+                "TB",
+                "TRBM",
+                "TAP",
+                "TM",
+                "TAM",
+                "THOC",
+                "TBM",
+                "NB",
+                "NT",
+                "NBC",
+                "NEBV",
+                "NBM",
+                "CELLC",
+                "TRB",
+                "CELL",
+                "XP",
+                "XCL"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    }
+  },
+  "host": "firebrowse.org",
+  "basePath": "/api/v1",
+  "schemes": [
+    "http"
+  ],
+  "tags": [
+    {
+      "name": "Samples",
+      "description": "Fine grained retrieval of sample-level data"
+    },
+    {
+      "name": "Analyses",
+      "description": "Fine grained retrieval of analysis pipeline results"
+    },
+    {
+      "name": "Archives",
+      "description": "Bulk retrieval of data or analysis pipeline results"
+    },
+    {
+      "name": "Metadata",
+      "description": "Retrieve disease, sample, and datatype descriptions, sample counts, and more"
+    }
+  ]
+}

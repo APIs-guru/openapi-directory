@@ -63,6 +63,41 @@
             "required": false,
             "type": "string",
             "default": "10"
+          },
+          {
+            "in": "formData",
+            "description": "Build Number",
+            "name": "BuildNumber",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Serial Number",
+            "name": "SerialNo",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Token",
+            "name": "Token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Contact ID",
+            "name": "ContactId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Identity",
+            "name": "Identity",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -126,6 +161,51 @@
           }
         }
       }
+    },
+    "/categories/info": {
+      "post": {
+        "tags": [
+          "categories"
+        ],
+        "operationId": "info",
+        "summary": "Return an array of categories",
+        "description": "",
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Catalog Version as positive entire value",
+            "name": "CatalogVersion",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Current RadStudio product supported personalities",
+            "name": "Personalities",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Build Number",
+            "name": "BuildNumber",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Identity",
+            "name": "Identity",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
     }
   },
   "host": "getit.embarcadero.com",
@@ -135,8 +215,12 @@
   ],
   "tags": [
     {
-      "name": "ttp://getit.embarcadero.com/catalog",
+      "name": "catalog",
       "description": "Operations about catalog"
+    },
+    {
+      "name": "categories",
+      "description": "Operations about categories"
     }
   ]
 }

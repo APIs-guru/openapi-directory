@@ -14,7 +14,7 @@
     "/v1/company/basicsearch": {
       "get": {
         "tags": [
-          "v1/company"
+          "company"
         ],
         "operationId": "basicCompanySearch",
         "summary": "Basic Search Company by Ticker or Website or Name",
@@ -100,7 +100,7 @@
     "/v1/company/search": {
       "get": {
         "tags": [
-          "v1/company"
+          "company"
         ],
         "operationId": "searchCompany",
         "summary": "Search Company by Ticker or Website or Name",
@@ -186,7 +186,7 @@
     "/v1/company/id/{companyId}": {
       "get": {
         "tags": [
-          "v1/company"
+          "company"
         ],
         "operationId": "getCompanyById",
         "summary": "Get Company by Id",
@@ -251,7 +251,7 @@
     "/v1/company/url/{website}": {
       "get": {
         "tags": [
-          "v1/company"
+          "company"
         ],
         "operationId": "getCompanyByWebsite",
         "summary": "Get Company by URL",
@@ -446,7 +446,7 @@
     "/v1/feed": {
       "get": {
         "tags": [
-          "v1/feed"
+          "feed"
         ],
         "operationId": "getFeeds",
         "summary": "Get Feeds for given Company Ids",
@@ -552,16 +552,13 @@
   ],
   "tags": [
     {
-      "name": "swagger/spec/CompanyAPI",
-      "description": "Provides Company information"
+      "name": "company"
     },
     {
-      "name": "swagger/spec/CompetitorAPI",
-      "description": "Provides Competitor information"
+      "name": "competitor"
     },
     {
-      "name": "swagger/spec/FeedAPI",
-      "description": "Provides Feed information"
+      "name": "feed"
     }
   ],
   "definitions": {
