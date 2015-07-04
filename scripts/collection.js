@@ -9,6 +9,7 @@ var async = require('async')
 var converter = require('api-spec-converter');
 var parseDomain = require('parse-domain');
 var mkdirp = require('mkdirp').sync;
+var jsonPatch = require('json-merge-patch');
 var RestClient = require('node-rest-client').Client;
 var SwaggerTools = require('swagger-tools').specs.v2;
 
@@ -123,6 +124,9 @@ function writeSpec(url, type, callback) {
   console.log(url);
   getOriginSpec(url, type, function (spec) {
     convertToSwagger(spec, function (swagger) {
+      var path = getPathComponents(swagger);
+      patchSwagger(swagger, path);
+
       validateSwagger(swagger, function (errors, warnings) {
         if (errors) {
           console.log(url);
@@ -138,7 +142,9 @@ function writeSpec(url, type, callback) {
         }
         if (warnings)
           logJson(warnings);
-        var filename = saveSwagger(swagger);
+
+        var dirname = path.join('/');
+        var filename = saveSwagger(dirname, swagger);
         callback(filename);
       });
     });
@@ -183,6 +189,24 @@ function getOriginSpec(url, format, callback) {
   });
 }
 
+function patchSwagger(swagger, pathComponents) {
+  var patch = null;
+
+  var path = '';
+  _.each(pathComponents, function (dir) {
+    path += dir + '/';
+    var patchFile = path + 'patch.json';
+    if (!fs.existsSync(patchFile))
+      return;
+
+    var subpatch = fs.readFileSync(patchFile, 'utf-8');
+    subpatch = JSON.parse(subpatch);
+    patch = jsonPatch.merge(patch, subpatch);
+  });
+
+  jsonPatch.apply(swagger, patch);
+}
+
 function convertToSwagger(spec, callback) {
   spec.convertTo('swagger_2', function (err, swagger) {
     assert(!err, err);
@@ -197,7 +221,6 @@ function convertToSwagger(spec, callback) {
     callback(swagger.spec)
   });
 }
-
 
 function parseHost(swagger) {
   assert(swagger.host);
@@ -237,18 +260,20 @@ function getOriginUrl(swagger) {
   return getOrigin(swagger).url;
 }
 
-function getPath(swagger) {
-  var path = swagger.info['x-providerName'] + '/';
+function getPathComponents(swagger) {
+  var path = [swagger.info['x-providerName']];
   if ('x-serviceName' in swagger.info)
-    path +=  swagger.info['x-serviceName'] + '/';
-  return path + swagger.info.version;
+    path.push(swagger.info['x-serviceName']);
+  path.push(swagger.info.version);
+
+  return path;
 }
 
-function saveSwagger(swagger) {
+function saveSwagger(dirname, swagger) {
   var str = Json2String(swagger);
-  var path = getPath(swagger);
-  mkdirp(path);
-  path += '/swagger.json';
+  mkdirp(dirname);
+  var path = dirname + '/swagger.json';
+  console.log(path);
   fs.writeFileSync(path, str);
   return path;
 }
