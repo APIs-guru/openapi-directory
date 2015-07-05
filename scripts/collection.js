@@ -15,6 +15,12 @@ var SwaggerTools = require('swagger-tools').specs.v2;
 
 var program = require('commander');
 
+var errExitCode = 255;
+program
+  .option('-0', 'allways return 0 as exit code', function () {
+    errExitCode = 0;
+  });
+
 program
   .command('urls')
   .description('show source url for specs')
@@ -74,7 +80,7 @@ function validateCollection() {
     asyncCb(null);
   }, function () {
     if (foundErrors)
-      process.exitCode = 255;
+      process.exitCode = errExitCode;
   });
 }
 
@@ -137,7 +143,7 @@ function writeSpec(url, type, callback) {
           }
           logJson(swagger);
           logJson(errors);
-          process.exitCode = 255;
+          process.exitCode = errExitCode;
           return;
         }
         if (warnings)
