@@ -1,4 +1,9 @@
 {
+  "host": "discovery.gsa.gov",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
   "swagger": "2.0",
   "info": {
     "version": "0.1",
@@ -14,6 +19,23 @@
       "url": "https://discovery.gsa.gov/docs/api-docs/"
     }
   },
+  "tags": [
+    {
+      "name": "contracts"
+    },
+    {
+      "name": "metadata"
+    },
+    {
+      "name": "naics"
+    },
+    {
+      "name": "vendor"
+    },
+    {
+      "name": "vendors"
+    }
+  ],
   "paths": {
     "/api/contracts/": {
       "get": {
@@ -171,27 +193,5 @@
         }
       }
     }
-  },
-  "host": "discovery.gsa.gov",
-  "basePath": "/",
-  "schemes": [
-    "https"
-  ],
-  "tags": [
-    {
-      "name": "contracts"
-    },
-    {
-      "name": "metadata"
-    },
-    {
-      "name": "naics"
-    },
-    {
-      "name": "vendor"
-    },
-    {
-      "name": "vendors"
-    }
-  ]
+  }
 }

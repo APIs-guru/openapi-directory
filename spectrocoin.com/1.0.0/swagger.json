@@ -1,4 +1,9 @@
 {
+  "host": "spectrocoin.com",
+  "basePath": "/api/merchant/1",
+  "schemes": [
+    "https"
+  ],
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
@@ -14,6 +19,12 @@
       "url": "https://spectrocoin.com/api-docs/merchant/1/"
     }
   },
+  "tags": [
+    {
+      "name": "createOrder",
+      "description": "Create Merchant order to be paid by customer"
+    }
+  ],
   "paths": {
     "/api/createOrder": {
       "post": {
@@ -51,17 +62,6 @@
       }
     }
   },
-  "host": "spectrocoin.com",
-  "basePath": "/api/merchant/1",
-  "schemes": [
-    "https"
-  ],
-  "tags": [
-    {
-      "name": "createOrder",
-      "description": "Create Merchant order to be paid by customer"
-    }
-  ],
   "definitions": {
     "BigDecimal": {
       "properties": {

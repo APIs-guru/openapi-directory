@@ -1,4 +1,9 @@
 {
+  "host": "api-certification.hetras.net",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
@@ -10,6 +15,23 @@
       "url": "https://developer.hetras.com/swagger/spec.json"
     }
   },
+  "tags": [
+    {
+      "name": "Hotel"
+    },
+    {
+      "name": "RoomType"
+    },
+    {
+      "name": "Rates"
+    },
+    {
+      "name": "Addons"
+    },
+    {
+      "name": "Reservation"
+    }
+  ],
   "paths": {
     "/api/hotel/v0/hotels": {
       "get": {
@@ -671,28 +693,6 @@
       }
     }
   },
-  "host": "api-certification.hetras.net",
-  "basePath": "/",
-  "schemes": [
-    "https"
-  ],
-  "tags": [
-    {
-      "name": "Hotel"
-    },
-    {
-      "name": "RoomType"
-    },
-    {
-      "name": "Rates"
-    },
-    {
-      "name": "Addons"
-    },
-    {
-      "name": "Reservation"
-    }
-  ],
   "definitions": {
     "hotel": {
       "properties": {

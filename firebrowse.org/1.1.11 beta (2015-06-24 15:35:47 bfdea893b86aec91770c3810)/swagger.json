@@ -1,4 +1,9 @@
 {
+  "host": "firebrowse.org",
+  "basePath": "/api/v1",
+  "schemes": [
+    "http"
+  ],
   "swagger": "2.0",
   "info": {
     "version": "1.1.11 beta (2015-06-24 15:35:47 bfdea893b86aec91770c3810)",
@@ -10,6 +15,24 @@
       "url": "http://firebrowse.org/api/api-docs"
     }
   },
+  "tags": [
+    {
+      "name": "Samples",
+      "description": "Fine grained retrieval of sample-level data"
+    },
+    {
+      "name": "Analyses",
+      "description": "Fine grained retrieval of analysis pipeline results"
+    },
+    {
+      "name": "Archives",
+      "description": "Bulk retrieval of data or analysis pipeline results"
+    },
+    {
+      "name": "Metadata",
+      "description": "Retrieve disease, sample, and datatype descriptions, sample counts, and more"
+    }
+  ],
   "paths": {
     "/Samples/mRNASeq": {
       "get": {
@@ -3613,28 +3636,5 @@
         }
       }
     }
-  },
-  "host": "firebrowse.org",
-  "basePath": "/api/v1",
-  "schemes": [
-    "http"
-  ],
-  "tags": [
-    {
-      "name": "Samples",
-      "description": "Fine grained retrieval of sample-level data"
-    },
-    {
-      "name": "Analyses",
-      "description": "Fine grained retrieval of analysis pipeline results"
-    },
-    {
-      "name": "Archives",
-      "description": "Bulk retrieval of data or analysis pipeline results"
-    },
-    {
-      "name": "Metadata",
-      "description": "Retrieve disease, sample, and datatype descriptions, sample counts, and more"
-    }
-  ]
+  }
 }

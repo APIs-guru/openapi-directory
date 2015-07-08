@@ -1,4 +1,9 @@
 {
+  "host": "vatapi.com",
+  "basePath": "/v1",
+  "schemes": [
+    "https"
+  ],
   "swagger": "2.0",
   "info": {
     "version": "1",
@@ -10,6 +15,11 @@
       "url": "https://vatapi.com/api-docs.json"
     }
   },
+  "tags": [
+    {
+      "name": "api"
+    }
+  ],
   "paths": {
     "/country-code-check": {
       "get": {
@@ -432,16 +442,6 @@
       }
     }
   },
-  "host": "vatapi.com",
-  "basePath": "/v1",
-  "schemes": [
-    "https"
-  ],
-  "tags": [
-    {
-      "name": "api"
-    }
-  ],
   "definitions": {
     "Country_Code_Check": {
       "required": [

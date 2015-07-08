@@ -1,4 +1,9 @@
 {
+  "host": "api.owler.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
@@ -10,6 +15,17 @@
       "url": "https://developers.owler.com/swagger/spec.json"
     }
   },
+  "tags": [
+    {
+      "name": "company"
+    },
+    {
+      "name": "competitor"
+    },
+    {
+      "name": "feed"
+    }
+  ],
   "paths": {
     "/v1/company/basicsearch": {
       "get": {
@@ -545,22 +561,6 @@
       }
     }
   },
-  "host": "api.owler.com",
-  "basePath": "/",
-  "schemes": [
-    "https"
-  ],
-  "tags": [
-    {
-      "name": "company"
-    },
-    {
-      "name": "competitor"
-    },
-    {
-      "name": "feed"
-    }
-  ],
   "definitions": {
     "CompanyBasicSearchVO": {
       "description": "",

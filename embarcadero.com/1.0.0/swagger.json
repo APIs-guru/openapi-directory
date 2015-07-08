@@ -1,4 +1,9 @@
 {
+  "host": "getit.embarcadero.com",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
@@ -11,6 +16,16 @@
       "url": "http://getit.embarcadero.com/api-docs"
     }
   },
+  "tags": [
+    {
+      "name": "catalog",
+      "description": "Operations about catalog"
+    },
+    {
+      "name": "categories",
+      "description": "Operations about categories"
+    }
+  ],
   "paths": {
     "/catalog/info": {
       "post": {
@@ -207,20 +222,5 @@
         }
       }
     }
-  },
-  "host": "getit.embarcadero.com",
-  "basePath": "/",
-  "schemes": [
-    "http"
-  ],
-  "tags": [
-    {
-      "name": "catalog",
-      "description": "Operations about catalog"
-    },
-    {
-      "name": "categories",
-      "description": "Operations about categories"
-    }
-  ]
+  }
 }

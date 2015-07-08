@@ -1,4 +1,9 @@
 {
+  "host": "www.glugbot.com",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
   "swagger": "2.0",
   "info": {
     "version": "1",
@@ -19,6 +24,20 @@
       "url": "http://www.glugbot.com/api-docs"
     }
   },
+  "tags": [
+    {
+      "name": "words",
+      "description": "API for words in creative writing"
+    },
+    {
+      "name": "iris",
+      "description": "API based on emotion detection for creative writing"
+    },
+    {
+      "name": "random",
+      "description": "API for random goodies in creative writing"
+    }
+  ],
   "paths": {
     "/api/words/top-words": {
       "post": {
@@ -296,26 +315,6 @@
       }
     }
   },
-  "securityDefinitions": {},
-  "host": "www.glugbot.com",
-  "basePath": "/",
-  "schemes": [
-    "http"
-  ],
-  "tags": [
-    {
-      "name": "words",
-      "description": "API for words in creative writing"
-    },
-    {
-      "name": "iris",
-      "description": "API based on emotion detection for creative writing"
-    },
-    {
-      "name": "random",
-      "description": "API for random goodies in creative writing"
-    }
-  ],
   "definitions": {
     "TextInput": {
       "required": [

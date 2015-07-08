@@ -1,4 +1,9 @@
 {
+  "host": "api.exavault.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
@@ -10,6 +15,12 @@
       "url": "https://www.exavault.com/api/docs"
     }
   },
+  "tags": [
+    {
+      "name": "v1",
+      "description": "operations for files, notifications, sharing and users"
+    }
+  ],
   "paths": {
     "/v1/authenticateUser": {
       "get": {
@@ -1841,17 +1852,6 @@
       }
     }
   },
-  "host": "api.exavault.com",
-  "basePath": "/",
-  "schemes": [
-    "https"
-  ],
-  "tags": [
-    {
-      "name": "v1",
-      "description": "operations for files, notifications, sharing and users"
-    }
-  ],
   "definitions": {
     "Error": {
       "required": [

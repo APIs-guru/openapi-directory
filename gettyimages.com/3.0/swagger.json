@@ -1,4 +1,9 @@
 {
+  "host": "api.gettyimages.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
   "swagger": "2.0",
   "info": {
     "version": "3.0",
@@ -10,6 +15,44 @@
       "url": "https://api.gettyimages.com/swagger/api-docs"
     }
   },
+  "tags": [
+    {
+      "name": "Search"
+    },
+    {
+      "name": "Images"
+    },
+    {
+      "name": "Videos"
+    },
+    {
+      "name": "Downloads"
+    },
+    {
+      "name": "Collections"
+    },
+    {
+      "name": "Countries"
+    },
+    {
+      "name": "Events"
+    },
+    {
+      "name": "Products"
+    },
+    {
+      "name": "Purchases"
+    },
+    {
+      "name": "AssetRegistration"
+    },
+    {
+      "name": "Usage"
+    },
+    {
+      "name": "AssetChanges"
+    }
+  ],
   "paths": {
     "/v3/search/events": {
       "get": {
@@ -4711,49 +4754,6 @@
       }
     }
   },
-  "host": "api.gettyimages.com",
-  "basePath": "/",
-  "schemes": [
-    "https"
-  ],
-  "tags": [
-    {
-      "name": "Search"
-    },
-    {
-      "name": "Images"
-    },
-    {
-      "name": "Videos"
-    },
-    {
-      "name": "Downloads"
-    },
-    {
-      "name": "Collections"
-    },
-    {
-      "name": "Countries"
-    },
-    {
-      "name": "Events"
-    },
-    {
-      "name": "Products"
-    },
-    {
-      "name": "Purchases"
-    },
-    {
-      "name": "AssetRegistration"
-    },
-    {
-      "name": "Usage"
-    },
-    {
-      "name": "AssetChanges"
-    }
-  ],
   "definitions": {
     "image_search_results": {
       "properties": {

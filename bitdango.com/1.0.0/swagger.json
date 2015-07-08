@@ -1,4 +1,9 @@
 {
+  "host": "bitdango.com",
+  "basePath": "/api",
+  "schemes": [
+    "https"
+  ],
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
@@ -11,6 +16,32 @@
       "url": "https://bitdango.com/api/documentation"
     }
   },
+  "tags": [
+    {
+      "name": "exchanges",
+      "description": ""
+    },
+    {
+      "name": "currencypairs",
+      "description": ""
+    },
+    {
+      "name": "currencies",
+      "description": ""
+    },
+    {
+      "name": "marketpairs",
+      "description": ""
+    },
+    {
+      "name": "markets",
+      "description": ""
+    },
+    {
+      "name": "sessions",
+      "description": ""
+    }
+  ],
   "paths": {
     "/exchanges": {},
     "/exchanges/{exchangeCode}": {
@@ -363,37 +394,5 @@
         }
       }
     }
-  },
-  "securityDefinitions": {},
-  "host": "bitdango.com",
-  "basePath": "/api",
-  "schemes": [
-    "https"
-  ],
-  "tags": [
-    {
-      "name": "exchanges",
-      "description": ""
-    },
-    {
-      "name": "currencypairs",
-      "description": ""
-    },
-    {
-      "name": "currencies",
-      "description": ""
-    },
-    {
-      "name": "marketpairs",
-      "description": ""
-    },
-    {
-      "name": "markets",
-      "description": ""
-    },
-    {
-      "name": "sessions",
-      "description": ""
-    }
-  ]
+  }
 }
