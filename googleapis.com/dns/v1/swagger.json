@@ -294,6 +294,12 @@
             "type": "string"
           },
           {
+            "name": "dnsName",
+            "in": "query",
+            "description": "Restricts the list to return only zones with this domain name.",
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Optional. Maximum number of results to be returned. If unspecified, the server will decide how many results to return.",

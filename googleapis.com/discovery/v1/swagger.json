@@ -411,6 +411,10 @@
           "description": "The ETag for this response.",
           "readOnly": true
         },
+        "exponentialBackoffDefault": {
+          "type": "boolean",
+          "description": "Enable exponential backoff for suitable methods in the generated clients."
+        },
         "features": {
           "type": "array",
           "description": "A list of supported features for this API.",
