@@ -1,0 +1,128 @@
+{
+  "host": "moonmoonmoonmoon.com",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "moonmoonmoonmoon.com",
+    "x-providerName": "moonmoonmoonmoon.com",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "http://moonmoonmoonmoon.com/api/api-docs.json"
+    }
+  },
+  "tags": [
+    {
+      "name": "marks"
+    }
+  ],
+  "paths": {
+    "/api/marks": {
+      "get": {
+        "tags": [
+          "marks"
+        ],
+        "operationId": "Marks#index",
+        "summary": "Fetches marks",
+        "description": "The main method for querying the marks database. You may use the following options:\n        <ol style='list-style-type: lower-roman;'>\n        <li>No parameters to retrieve all marks in descending chronological order (use <b>before</b> for pagination)</li>\n        <li><b>popular</b> (and optionally <b>last_popular_id</b>) to retrieve all popular marks</li>\n        <li><b>featured</b> to retrieve all featured marks</li>\n        <li><b>x & y</b> to retrieve mark at specific coordinate</li>\n        <li><b>user</b> to retrieve all marks created by the specified user</li>\n        <li><b>collection</b> to retrieve all marks collected by the specified user</li>\n        </ol>",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Before ID (pagination purposes)",
+            "name": "before",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Popular marks",
+            "name": "popular",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "description": "Last popular ID (for pagination purposes)",
+            "name": "last_popular_id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Featured marks",
+            "name": "featured",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "description": "X coordinate",
+            "name": "x",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "description": "Y coordinate",
+            "name": "y",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "description": "Created by user ID",
+            "name": "user",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Collection ID",
+            "name": "collection",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/api/hashtags": {
+      "get": {
+        "tags": [
+          "marks"
+        ],
+        "operationId": "Marks#hashtags",
+        "summary": "Fetches popular hashtags or marks tagged with specified hashtag",
+        "description": "Search for specified tag (no pound sign necessary). If <b>tag</b> is empty, the 50 most popular hashtags will be returned.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Hashtag to search for",
+            "name": "tag",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    }
+  }
+}
