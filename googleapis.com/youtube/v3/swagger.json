@@ -1824,6 +1824,88 @@
         }
       ]
     },
+    "/liveBroadcasts/bind/direct": {
+      "post": {
+        "description": "Binds a YouTube broadcast to a stream or removes an existing binding between a broadcast and a stream. A broadcast can only be bound to one video stream, though a video stream may be bound to more than one broadcast.",
+        "operationId": "youtube.liveBroadcasts.bind_direct",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/LiveBroadcast"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The id parameter specifies the unique ID of the broadcast that is being bound to a video stream.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "part",
+            "in": "query",
+            "description": "The part parameter specifies a comma-separated list of one or more liveBroadcast resource properties that the API response will include. The part names that you can include in the parameter value are id, snippet, contentDetails, and status.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "onBehalfOfContentOwner",
+            "in": "query",
+            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
+            "type": "string"
+          },
+          {
+            "name": "onBehalfOfContentOwnerChannel",
+            "in": "query",
+            "description": "This parameter can only be used in a properly authorized request. Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwnerChannel parameter specifies the YouTube channel ID of the channel to which a video is being added. This parameter is required when a request specifies a value for the onBehalfOfContentOwner parameter, and it can only be used in conjunction with that parameter. In addition, the request must be authorized using a CMS account that is linked to the content owner that the onBehalfOfContentOwner parameter specifies. Finally, the channel that the onBehalfOfContentOwnerChannel parameter value specifies must be linked to the content owner that the onBehalfOfContentOwner parameter specifies.\n\nThis parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and perform actions on behalf of the channel specified in the parameter value, without having to provide authentication credentials for each separate channel.",
+            "type": "string"
+          },
+          {
+            "name": "streamId",
+            "in": "query",
+            "description": "The streamId parameter specifies the unique ID of the video stream that is being bound to a broadcast. If this parameter is omitted, the API will remove any existing binding between the broadcast and a video stream.",
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/youtube",
+              "https://www.googleapis.com/auth/youtube.force-ssl"
+            ]
+          }
+        ],
+        "tags": [
+          "liveBroadcasts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/liveBroadcasts/control": {
       "post": {
         "description": "Controls the settings for a slate that can be displayed in the broadcast stream.",
@@ -6283,6 +6365,9 @@
           "type": "string",
           "description": "Rating system for Indonesia - Lembaga Sensor Film",
           "enum": [
+            "lsf13",
+            "lsf17",
+            "lsf21",
             "lsfA",
             "lsfBo",
             "lsfD",
@@ -7411,25 +7496,25 @@
           "type": "string",
           "description": "The kind of error happening.",
           "enum": [
-            "audioBitrate",
             "audioBitrateHigh",
             "audioBitrateLow",
+            "audioBitrateMismatch",
             "audioCodec",
             "audioCodecMismatch",
             "audioSampleRate",
             "audioSampleRateMismatch",
             "audioStereoMismatch",
-            "audioTooManyChannel",
+            "audioTooManyChannels",
             "badContainer",
             "bitrateHigh",
             "bitrateLow",
-            "framerateHigh",
+            "frameRateHigh",
             "framerateMismatch",
             "gopMismatch",
             "gopSizeLong",
             "gopSizeOver",
             "gopSizeShort",
-            "interlaceVideo",
+            "interlacedVideo",
             "multipleAudioStreams",
             "multipleVideoStreams",
             "noAudioStream",
@@ -7472,7 +7557,7 @@
             "$ref": "#/definitions/LiveStreamConfigurationIssue"
           }
         },
-        "lastUpdateTimeS": {
+        "lastUpdateTimeSeconds": {
           "type": "string",
           "description": "The last time this status was updated (in seconds)",
           "format": "uint64"

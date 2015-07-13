@@ -3104,6 +3104,10 @@
     "EventAttachment": {
       "type": "object",
       "properties": {
+        "fileId": {
+          "type": "string",
+          "description": "ID of the attached file. Read-only.\nE.g. for Google Drive files this is the ID of the corresponding Files resource entry in the Drive API."
+        },
         "fileUrl": {
           "type": "string",
           "description": "URL link to the attachment.\nFor adding Google Drive file attachments use the same format as in alternateLink property of the Files resource in the Drive API."

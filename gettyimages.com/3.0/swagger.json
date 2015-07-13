@@ -160,7 +160,7 @@
             }
           },
           "400": {
-            "description": "UnknownProviderUri"
+            "description": "MalformedRequest"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -722,16 +722,6 @@
           },
           {
             "in": "query",
-            "description": "Allows for filtering by specific location keywords.",
-            "name": "specific_locations",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
             "description": "Allows for filtering based on specific people keywords.",
             "name": "specific_people",
             "required": false,
@@ -749,7 +739,7 @@
             }
           },
           "400": {
-            "description": "UnknownProviderUri"
+            "description": "MalformedRequest"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -1274,16 +1264,6 @@
               "most_popular",
               "newest"
             ]
-          },
-          {
-            "in": "query",
-            "description": "Allows for filtering by specific location keywords.",
-            "name": "specific_locations",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           }
         ],
         "responses": {
@@ -1294,7 +1274,7 @@
             }
           },
           "400": {
-            "description": "UnknownProviderUri"
+            "description": "MalformedRequest"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -1863,16 +1843,6 @@
           },
           {
             "in": "query",
-            "description": "Allows for filtering by specific location keywords.",
-            "name": "specific_locations",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
             "description": "Allows for filtering based on specific people keywords.",
             "name": "specific_people",
             "required": false,
@@ -1890,7 +1860,7 @@
             }
           },
           "400": {
-            "description": "UnknownProviderUri"
+            "description": "MalformedRequest"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -2240,7 +2210,7 @@
             }
           },
           "400": {
-            "description": "UnknownProviderUri"
+            "description": "MalformedRequest"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -2576,7 +2546,7 @@
             }
           },
           "400": {
-            "description": "UnknownProviderUri"
+            "description": "MalformedRequest"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -2918,7 +2888,7 @@
             }
           },
           "400": {
-            "description": "UnknownProviderUri"
+            "description": "MalformedRequest"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -3083,7 +3053,7 @@
             }
           },
           "400": {
-            "description": "MalformedRequest"
+            "description": "InvalidPageSize"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -3248,7 +3218,7 @@
             }
           },
           "400": {
-            "description": "MalformedRequest"
+            "description": "InvalidPageSize"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -3410,7 +3380,7 @@
             }
           },
           "400": {
-            "description": "MalformedRequest"
+            "description": "InvalidPageSize"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -4386,7 +4356,7 @@
             "description": "InvalidParameterValue"
           },
           "401": {
-            "description": "AuthorizationTokenRequired"
+            "description": "NoAgreement"
           }
         }
       }
