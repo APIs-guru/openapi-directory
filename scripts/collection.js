@@ -128,24 +128,19 @@ function updateGoogle() {
 
 function writeSpec(url, type, callback) {
   console.log(url);
+
   getOriginSpec(url, type, function (spec) {
-    convertToSwagger(spec, function (swagger) {
+    convertToSwagger(spec, function (error, swagger) {
+      if (error)
+        return logSpec(error, spec);
+
       var path = getPathComponents(swagger);
       patchSwagger(swagger, path);
 
       validateSwagger(swagger, function (errors, warnings) {
-        if (errors) {
-          console.log(url);
-          if (spec.type !== 'swagger_2') {
-            logJson(spec.spec);
-            if (spec.apis)
-              logJson(spec.apis);
-          }
-          logJson(swagger);
-          logJson(errors);
-          process.exitCode = errExitCode;
-          return;
-        }
+        if (errors)
+          return logSpec(errors, spec, swagger);
+
         if (warnings)
           logJson(warnings);
 
@@ -155,6 +150,26 @@ function writeSpec(url, type, callback) {
       });
     });
   });
+}
+
+function logSpec(error, spec, swagger) {
+  console.error('++++++++++++++++++++++++++ Begin ' + spec.url + ' +++++++++++++++++++++++++');
+  if (spec.type !== 'swagger_2' || _.isUndefined(swagger)) {
+    logJson(spec.spec);
+    if (spec.apis)
+      logJson(spec.apis);
+  }
+  if (!_.isUndefined(swagger)) {
+    console.error('???????????????????? Swagger ' + spec.url + '????????????????????????????');
+    logJson(swagger);
+  }
+  console.error('!!!!!!!!!!!!!!!!!!!! Errors ' + spec.url + ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+  if (_.isArray(error))
+    logJson(error);
+  else
+    console.error(error);
+  console.error('------------------------- End ' + spec.url + ' ----------------------------');
+  process.exitCode = errExitCode;
 }
 
 function Json2String(json) {
@@ -215,7 +230,9 @@ function patchSwagger(swagger, pathComponents) {
 
 function convertToSwagger(spec, callback) {
   spec.convertTo('swagger_2', function (err, swagger) {
-    assert(!err, err);
+    if (err)
+      return callback(err);
+
     _.merge(swagger.spec.info, {
       'x-providerName': parseHost(swagger.spec),
       'x-origin': {
@@ -224,7 +241,7 @@ function convertToSwagger(spec, callback) {
         url: spec.url
       }
     });
-    callback(swagger.spec)
+    callback(null, swagger.spec)
   });
 }
 
