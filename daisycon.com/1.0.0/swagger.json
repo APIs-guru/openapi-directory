@@ -1,0 +1,6050 @@
+{
+  "host": "services.daisycon.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "services.daisycon.com",
+    "x-providerName": "daisycon.com",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "https://services.daisycon.com/docs/api/?resources=publishers"
+    }
+  },
+  "tags": [
+    {
+      "name": "publishers",
+      "description": "Publisher operations"
+    },
+    {
+      "name": "account"
+    },
+    {
+      "name": "clicks"
+    },
+    {
+      "name": "financial"
+    },
+    {
+      "name": "material"
+    },
+    {
+      "name": "media"
+    },
+    {
+      "name": "news"
+    },
+    {
+      "name": "productfeeds"
+    },
+    {
+      "name": "programs"
+    },
+    {
+      "name": "statistics"
+    },
+    {
+      "name": "transactions"
+    }
+  ],
+  "paths": {
+    "/publishers": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "publishers"
+        ],
+        "operationId": "getAll",
+        "summary": "Get all publishers",
+        "description": "Returns a set of publishers",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/publisher"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "publishers"
+        ],
+        "operationId": "get",
+        "summary": "Get publisher",
+        "description": "Returns a publisher by ID",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/publisher"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/account": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "account"
+        ],
+        "operationId": "get",
+        "summary": "Get publisher account information",
+        "description": "Returns account, contact, business, financial & payment information",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/publisher_account"
+            }
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/clicks": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "clicks"
+        ],
+        "operationId": "getAll",
+        "summary": "Get all raw click data",
+        "description": "Returns a set of click",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Start date (YYYY-MM-DD)",
+            "name": "start",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "End date (YYYY-MM-DD)",
+            "name": "end",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Click types ('cpc', 'click', 'clickout')",
+            "name": "type",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "cpc",
+                "click",
+                "clickout"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Media IDs",
+            "name": "media_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Advertiser IDs",
+            "name": "advertiser_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Ad IDs",
+            "name": "ad_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Subids",
+            "name": "subid",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/click"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/financial/income": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "financial"
+        ],
+        "operationId": "getIncome",
+        "summary": "Get income",
+        "description": "Returns publisher income",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/income_publisher"
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          },
+          "503": {
+            "description": "Service temporary unavailable (calculating balance)"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/material/adgroups": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "material"
+        ],
+        "operationId": "getAllAdgroups",
+        "summary": "Get all adgroups",
+        "description": "Returns a set of adgroups",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Name (wildcards * allowed)",
+            "name": "name",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Locale IDs",
+            "name": "locale_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/adgroup"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/material/adgroups/{adgroup_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "material"
+        ],
+        "operationId": "getAdgroup",
+        "summary": "Get adgroup",
+        "description": "Returns a adgroup",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "path",
+            "description": "AdGroup ID",
+            "name": "adgroup_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/adgroup"
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "AdGroup not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/material/adgroups/{adgroup_id}/ads": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "material"
+        ],
+        "operationId": "getAllAdgroupAds",
+        "summary": "Get all ads of the adgroup",
+        "description": "Returns a set of ads for the adgroup",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "path",
+            "description": "AdGroup ID",
+            "name": "adgroup_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Mime type ('image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'text/html', 'text/plain', 'application/x-shockwave-flash')",
+            "name": "type",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "image/jpeg",
+                "image/jpg",
+                "image/png",
+                "image/gif",
+                "text/html",
+                "text/plain",
+                "application/x-shockwave-flash"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Ad dimensions format: 'WIDTHxHEIGHT' eg 468x60",
+            "name": "dimension",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #MEDIA_ID# value",
+            "name": "placeholder_media_id",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #SUB_ID# value",
+            "name": "placeholder_subid",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ad"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "AdGroup not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/material/adgroups/{adgroup_id}/ads/{ad_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "material"
+        ],
+        "operationId": "getAd",
+        "summary": "Get ad",
+        "description": "Returns a ad",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "path",
+            "description": "AdGroup ID",
+            "name": "adgroup_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "path",
+            "description": "Ad ID",
+            "name": "ad_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #MEDIA_ID# value",
+            "name": "placeholder_media_id",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #SUB_ID# value",
+            "name": "placeholder_subid",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/ad"
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Ad not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/material/adpools": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "material"
+        ],
+        "operationId": "getAllAdPools",
+        "summary": "Get all adpools",
+        "description": "Returns a set of adpools",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Media IDs",
+            "name": "media_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Name (wildcards * allowed)",
+            "name": "name",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Status ('active', 'disabled', 'deleted')",
+            "name": "status",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "active",
+                "disabled",
+                "deleted"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Ad dimensions format: 'WIDTHxHEIGHT' eg 468x60",
+            "name": "dimension",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #SUB_ID# value",
+            "name": "placeholder_subid",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/adpool"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/material/adpools/{adpool_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "material"
+        ],
+        "operationId": "getAdpool",
+        "summary": "Get adpool",
+        "description": "Returns a adpool",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "path",
+            "description": "Ad Pool ID",
+            "name": "adpool_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #SUB_ID# value",
+            "name": "placeholder_subid",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/adpool"
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Adpool not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/material/ads": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "material"
+        ],
+        "operationId": "getAllAds",
+        "summary": "Get all ads",
+        "description": "Returns a set of ads",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Adgroup IDs",
+            "name": "adgroup_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Mime type ('image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'text/html', 'text/plain', 'application/x-shockwave-flash')",
+            "name": "type",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "image/jpeg",
+                "image/jpg",
+                "image/png",
+                "image/gif",
+                "text/html",
+                "text/plain",
+                "application/x-shockwave-flash"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Ad dimensions format: 'WIDTHxHEIGHT' eg 468x60",
+            "name": "dimension",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #MEDIA_ID# value",
+            "name": "placeholder_media_id",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #SUB_ID# value",
+            "name": "placeholder_subid",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ad"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/material/promotioncodes": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "material"
+        ],
+        "operationId": "getAllPromotioncodes",
+        "summary": "Get all promotioncodes",
+        "description": "Returns a set of promotioncodes",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Returns programs this media is subscribed to",
+            "name": "media_id",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "query",
+            "description": "Name (wildcards * allowed)",
+            "name": "name",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Description (wildcards * allowed)",
+            "name": "description",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Promotion code (wildcards * allowed)",
+            "name": "promotioncode",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Locale IDs",
+            "name": "locale_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #MEDIA_ID# value",
+            "name": "placeholder_media_id",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #SUB_ID# value",
+            "name": "placeholder_subid",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/promotioncode"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/material/promotioncodes/{promotioncode_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "material"
+        ],
+        "operationId": "getPromotioncode",
+        "summary": "Get promotioncode",
+        "description": "Returns a promotioncode",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "path",
+            "description": "Promotioncode ID",
+            "name": "promotioncode_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #MEDIA_ID# value",
+            "name": "placeholder_media_id",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #SUB_ID# value",
+            "name": "placeholder_subid",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/promotioncode"
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Promotiocode not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/media": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "media"
+        ],
+        "operationId": "getAll",
+        "summary": "Get all media",
+        "description": "Returns a set of media",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Media IDs",
+            "name": "media_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Name (wildcards * allowed)",
+            "name": "name",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Description (wildcards * allowed)",
+            "name": "description",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Mobile ready ('true', 'false')",
+            "name": "mobile",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Type ('website', 'keyword_marketing', 'email_marketing', 'socialmedia')",
+            "name": "type",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "website",
+                "keyword_marketing",
+                "email_marketing",
+                "socialmedia"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "CPC status ('approved', 'disapproved')",
+            "name": "cpc_status",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "approved",
+                "disapproved"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "CO status ('approved', 'disapproved')",
+            "name": "co_status",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "approved",
+                "disapproved"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Approval status ('open', 'pending', 'approved')",
+            "name": "approval_status",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "open",
+                "pending",
+                "approved"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Verification status ('pending', 'verified')",
+            "name": "verification_status",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "pending",
+                "verified"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Locale IDs",
+            "name": "locale_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Target group IDs",
+            "name": "targetgroup_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Category IDs",
+            "name": "category_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Status ('active', 'deleted', 'offline')",
+            "name": "status",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "active",
+                "deleted",
+                "offline"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/media"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/media/{media_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "media"
+        ],
+        "operationId": "get",
+        "summary": "Get media",
+        "description": "Returns a media",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "path",
+            "description": "Media ID",
+            "name": "media_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/media"
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Media not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/media/{media_id}/commissions": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "media"
+        ],
+        "operationId": "getCommission",
+        "summary": "Get program commissions",
+        "description": "Returns program commissions",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "path",
+            "description": "Media ID",
+            "name": "media_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/compensation"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "400": {
+            "description": "Only active media allowed"
+          },
+          "404": {
+            "description": "Media not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/media/{media_id}/subscriptions": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "media"
+        ],
+        "operationId": "getAllMediaSubscriptions",
+        "summary": "Get all subscriptions",
+        "description": "Returns a set of media subscriptions",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "path",
+            "description": "Media ID",
+            "name": "media_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Clickout status ('approved', 'pending' and or 'disapproved')",
+            "name": "co_status",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "approved",
+                "pending",
+                "disapproved"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "CPC status ('approved', 'pending' and or 'disapproved')",
+            "name": "cpc_status",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "approved",
+                "pending",
+                "disapproved"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Status ('open', 'approved', 'disapproved' and or 'canceled')",
+            "name": "status",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "open",
+                "approved",
+                "disapproved",
+                "canceled"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/media_subscription"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "400": {
+            "description": "Only active media allowed"
+          },
+          "404": {
+            "description": "Media not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/news": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "news"
+        ],
+        "operationId": "getAll",
+        "summary": "Get all news items",
+        "description": "Returns a set of news items",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Advertiser IDs",
+            "name": "advertiser_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Start date (YYYY-MM-DD HH:II:SS)",
+            "name": "start",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "description": "End date (YYYY-MM-DD HH:II:SS)",
+            "name": "end",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "description": "Locale IDs",
+            "name": "locale_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Type",
+            "name": "type",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Daisycon",
+                "New",
+                "Action",
+                "Update",
+                "Coupon",
+                "Stop",
+                "Rectification"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Title (wildcards * allowed)",
+            "name": "title",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Content short (wildcards * allowed)",
+            "name": "content_short",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Content long (wildcards * allowed)",
+            "name": "content_long",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/newsitem"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/news/{newsitem_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "news"
+        ],
+        "operationId": "get",
+        "summary": "Get a newsitem",
+        "description": "Returns a newsitem",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "path",
+            "description": "Newsitem ID",
+            "name": "newsitem_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/newsitem"
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "News item not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/productfeeds": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "productfeeds"
+        ],
+        "operationId": "getAll",
+        "summary": "Get all productfeeds",
+        "description": "Returns a set of productfeeds",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Name (wildcards * allowed)",
+            "name": "name",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Returns programs this media is subscribed to",
+            "name": "media_id",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #MEDIA_ID# value",
+            "name": "placeholder_media_id",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #SUB_ID# value",
+            "name": "placeholder_subid",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/productfeed"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/productfeeds/{productfeed_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "productfeeds"
+        ],
+        "operationId": "get",
+        "summary": "Get productfeed",
+        "description": "Returns a productfeed",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "path",
+            "description": "Productfeed ID",
+            "name": "productfeed_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #MEDIA_ID# value",
+            "name": "placeholder_media_id",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #SUB_ID# value",
+            "name": "placeholder_subid",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/productfeed"
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Productfeed not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/programs": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "programs"
+        ],
+        "operationId": "getAll",
+        "summary": "Get all programs",
+        "description": "Returns a set of publishers",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Advertiser IDs",
+            "name": "advertiser_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Name (wildcards * allowed)",
+            "name": "name",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Category IDs",
+            "name": "category_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Locale IDs",
+            "name": "locale_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Supply locale IDs",
+            "name": "supply_locale_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Keyword marketing ('false', 'partial', 'true')",
+            "name": "keywordmarketing",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "false",
+                "partial",
+                "true"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Email marketing ('false', 'partial', 'true')",
+            "name": "emailmarketing",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "false",
+                "partial",
+                "true"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Social media ('false', 'partial', 'true')",
+            "name": "socialmedia",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "false",
+                "partial",
+                "true"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Cash back ('false', 'partial', 'true')",
+            "name": "cashback",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "false",
+                "partial",
+                "true"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Product feed ('false', 'true')",
+            "name": "productfeed",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "false",
+                "true"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Deeplink possible ('false', 'true')",
+            "name": "deeplink",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "false",
+                "true"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Publisher tag ('false', 'true')",
+            "name": "publisher_tag",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "false",
+                "true"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Returns programs this media is subscribed to",
+            "name": "media_id",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #MEDIA_ID# value",
+            "name": "placeholder_media_id",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #SUB_ID# value",
+            "name": "placeholder_subid",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/program"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "No subscriptions found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/programs/{program_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "programs"
+        ],
+        "operationId": "get",
+        "summary": "Get program",
+        "description": "Returns a program",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "path",
+            "description": "Program ID",
+            "name": "program_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #MEDIA_ID# value",
+            "name": "placeholder_media_id",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          },
+          {
+            "in": "query",
+            "description": "replace url placeholder #SUB_ID# value",
+            "name": "placeholder_subid",
+            "required": false,
+            "type": "string",
+            "format": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/program"
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Program not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/programs/{program_id}/subscriptions": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "programs"
+        ],
+        "operationId": "getAll",
+        "summary": "Get all subscriptions",
+        "description": "Returns a set of media subscriptions",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "path",
+            "description": "Program ID",
+            "name": "program_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Media IDs",
+            "name": "media_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Clickout status ('approved', 'pending' and or 'disapproved')",
+            "name": "co_status",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "approved",
+                "pending",
+                "disapproved"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "CPC status ('approved', 'pending' and or 'disapproved')",
+            "name": "cpc_status",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "approved",
+                "pending",
+                "disapproved"
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "description": "Status ('open', 'approved', 'disapproved' and or 'canceled')",
+            "name": "status",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "open",
+                "approved",
+                "disapproved",
+                "canceled"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/subscription"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Program not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/programs/{program_id}/subscriptions/{media_id}": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "programs"
+        ],
+        "operationId": "add",
+        "summary": "Subscribe to program",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "path",
+            "description": "Program ID",
+            "name": "program_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "path",
+            "description": "Media ID",
+            "name": "media_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/subscription"
+            }
+          },
+          "400": {
+            "description": "Agreementterms are not accepted, review/accept agreementterms trough the website"
+          },
+          "404": {
+            "description": "Media not found"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      },
+      "delete": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "programs"
+        ],
+        "operationId": "add",
+        "summary": "Unsubscribe from program",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "path",
+            "description": "Program ID",
+            "name": "program_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "path",
+            "description": "Media ID",
+            "name": "media_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/subscription"
+            }
+          },
+          "400": {
+            "description": "Disapproved media subscriptions cannot be unsubscribed"
+          },
+          "404": {
+            "description": "No subscription found"
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/statistics/cpc": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "statistics"
+        ],
+        "operationId": "getCPC",
+        "summary": "Get statistics grouped by cpc",
+        "description": "Returns statistics grouped by cpc",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Start date (YYYY-MM-DD)",
+            "name": "start",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "End date (YYYY-MM-DD)",
+            "name": "end",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Advertiser IDs",
+            "name": "advertiser_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Media IDs",
+            "name": "media_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Ad IDs",
+            "name": "ad_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Subids",
+            "name": "subid",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/statistic_cpc"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/statistics/date": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "statistics"
+        ],
+        "operationId": "getDate",
+        "summary": "Get statistics grouped by transaction date",
+        "description": "Returns statistics grouped by transaction date",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Start date (YYYY-MM-DD)",
+            "name": "start",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "End date (YYYY-MM-DD)",
+            "name": "end",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Advertiser IDs",
+            "name": "advertiser_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Media IDs",
+            "name": "media_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Ad IDs",
+            "name": "ad_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Subids",
+            "name": "subid",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/statistic_date"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/statistics/day": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "statistics"
+        ],
+        "operationId": "getDay",
+        "summary": "Get statistics grouped by day",
+        "description": "Returns statistics grouped by day",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Start date (YYYY-MM-DD)",
+            "name": "start",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "End date (YYYY-MM-DD)",
+            "name": "end",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Advertiser IDs",
+            "name": "advertiser_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Media IDs",
+            "name": "media_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Ad IDs",
+            "name": "ad_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Subids",
+            "name": "subid",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/statistic_day"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/statistics/description": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "statistics"
+        ],
+        "operationId": "getDescription",
+        "summary": "Get statistics grouped by description",
+        "description": "Returns statistics grouped by description",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Start date (YYYY-MM-DD)",
+            "name": "start",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "End date (YYYY-MM-DD)",
+            "name": "end",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Advertiser IDs",
+            "name": "advertiser_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Media IDs",
+            "name": "media_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Ad IDs",
+            "name": "ad_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Subids",
+            "name": "subid",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/statistic_description"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/statistics/hour": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "statistics"
+        ],
+        "operationId": "getHour",
+        "summary": "Get statistics grouped by hour",
+        "description": "Returns statistics grouped by hour",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Start date (YYYY-MM-DD)",
+            "name": "start",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "End date (YYYY-MM-DD)",
+            "name": "end",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Advertiser IDs",
+            "name": "advertiser_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Media IDs",
+            "name": "media_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Ad IDs",
+            "name": "ad_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Subids",
+            "name": "subid",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/statistic_hour"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/statistics/media": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "statistics"
+        ],
+        "operationId": "getMedia",
+        "summary": "Get statistics grouped by media",
+        "description": "Returns statistics grouped by media",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Start date (YYYY-MM-DD)",
+            "name": "start",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "End date (YYYY-MM-DD)",
+            "name": "end",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Advertiser IDs",
+            "name": "advertiser_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Media IDs",
+            "name": "media_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Ad IDs",
+            "name": "ad_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Subids",
+            "name": "subid",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/statistic_media"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/statistics/month": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "statistics"
+        ],
+        "operationId": "getMonth",
+        "summary": "Get statistics grouped by month",
+        "description": "Returns statistics grouped by month",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Start date (YYYY-MM-DD)",
+            "name": "start",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "End date (YYYY-MM-DD)",
+            "name": "end",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Advertiser IDs",
+            "name": "advertiser_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Media IDs",
+            "name": "media_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Ad IDs",
+            "name": "ad_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Subids",
+            "name": "subid",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/statistic_month"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/statistics/program": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "statistics"
+        ],
+        "operationId": "getProgram",
+        "summary": "Get statistics grouped by program",
+        "description": "Returns statistics grouped by program",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Start date (YYYY-MM-DD)",
+            "name": "start",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "End date (YYYY-MM-DD)",
+            "name": "end",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Advertiser IDs",
+            "name": "advertiser_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Media IDs",
+            "name": "media_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Ad IDs",
+            "name": "ad_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Subids",
+            "name": "subid",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/statistic_program"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/statistics/subid": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "statistics"
+        ],
+        "operationId": "getSubID",
+        "summary": "Get statistics grouped by subid",
+        "description": "Returns statistics grouped by subid",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Start date (YYYY-MM-DD)",
+            "name": "start",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "End date (YYYY-MM-DD)",
+            "name": "end",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Advertiser IDs",
+            "name": "advertiser_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Media IDs",
+            "name": "media_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Ad IDs",
+            "name": "ad_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Subids",
+            "name": "subid",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/statistic_subid"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/statistics/weekday": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "statistics"
+        ],
+        "operationId": "getDay",
+        "summary": "Get statistics grouped by weekday",
+        "description": "Returns statistics grouped by weekday",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Start date (YYYY-MM-DD)",
+            "name": "start",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "End date (YYYY-MM-DD)",
+            "name": "end",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Advertiser IDs",
+            "name": "advertiser_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Media IDs",
+            "name": "media_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Ad IDs",
+            "name": "ad_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Subids",
+            "name": "subid",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/statistic_weekday"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/statistics/year": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "statistics"
+        ],
+        "operationId": "getYear",
+        "summary": "Get statistics grouped by year",
+        "description": "Returns statistics grouped by year",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Start date (YYYY-MM-DD)",
+            "name": "start",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "End date (YYYY-MM-DD)",
+            "name": "end",
+            "required": true,
+            "type": "string",
+            "format": "date",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Advertiser IDs",
+            "name": "advertiser_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Media IDs",
+            "name": "media_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Ad IDs",
+            "name": "ad_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Subids",
+            "name": "subid",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/statistic_year"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/transactions": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "getAll",
+        "summary": "Get all transactions",
+        "description": "Returns a set of transactions<br/>You must provide a start and end date filter OR provide a approval, click or modified (start and/or end) date",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator page",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "Paginator results per page (max 1000)",
+            "name": "per_page",
+            "required": false,
+            "type": "integer",
+            "format": "int64",
+            "default": 100
+          },
+          {
+            "in": "query",
+            "description": "Start date (YYYY-MM-DD HH:II:SS)",
+            "name": "start",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "description": "End date (YYYY-MM-DD HH:II:SS)",
+            "name": "end",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "description": "Click date (YYYY-MM-DD HH:II:SS)",
+            "name": "date_click_start",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Click date end (YYYY-MM-DD HH:II:SS)",
+            "name": "date_click_end",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Approval date (YYYY-MM-DD HH:II:SS)",
+            "name": "date_approval_start",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Approval date end (YYYY-MM-DD HH:II:SS)",
+            "name": "date_approval_end",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Last modification date (YYYY-MM-DD HH:II:SS)",
+            "name": "date_modified_start",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Last modification date end (YYYY-MM-DD HH:II:SS)",
+            "name": "date_modified_end",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Affiliatemarketing IDs",
+            "name": "affiliatemarketing_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Advertiser IDs",
+            "name": "advertiser_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Media IDs",
+            "name": "media_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Program IDs",
+            "name": "program_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Ad IDs",
+            "name": "ad_id",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Subids",
+            "name": "subid",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Transaction description",
+            "name": "description",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "description": "Status ('approved', 'disapproved', 'open')",
+            "name": "status",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "approved",
+                "disapproved",
+                "open"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/transaction"
+              }
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Publisher not found"
+          }
+        }
+      }
+    },
+    "/publishers/{publisher_id}/transactions/{affiliatemarketing_id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "get",
+        "summary": "Get transaction",
+        "description": "Returns a transaction",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Publisher ID",
+            "name": "publisher_id",
+            "required": true,
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1
+          },
+          {
+            "in": "path",
+            "description": "Affiliatemarketing ID",
+            "name": "affiliatemarketing_id",
+            "required": true,
+            "type": "string",
+            "minimum": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/transaction"
+            }
+          },
+          "204": {
+            "description": "No content"
+          },
+          "404": {
+            "description": "Transaction not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "publisher": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "publisher_account": {
+      "properties": {
+        "contact": {
+          "$ref": "#/definitions/contact"
+        },
+        "address": {
+          "$ref": "#/definitions/address"
+        },
+        "relation_type": {
+          "type": "string",
+          "enum": [
+            "private",
+            "business"
+          ]
+        },
+        "business": {
+          "$ref": "#/definitions/businessinfo"
+        },
+        "financial": {
+          "$ref": "#/definitions/paymentinfo"
+        },
+        "communication_language_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "contact": {
+      "properties": {
+        "initials": {
+          "type": "string"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "prefix": {
+          "type": "string"
+        },
+        "surname": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "string",
+          "format": "date"
+        },
+        "gender": {
+          "type": "string",
+          "enum": [
+            "male",
+            "female",
+            "unkown"
+          ]
+        },
+        "website": {
+          "type": "string"
+        },
+        "phone": {
+          "$ref": "#/definitions/phone"
+        }
+      }
+    },
+    "address": {
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "housenumber": {
+          "type": "integer"
+        },
+        "housenumber_additive": {
+          "type": "string"
+        },
+        "postalcode": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "country_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "businessinfo": {
+      "properties": {
+        "company": {
+          "type": "string"
+        },
+        "coc": {
+          "type": "string"
+        },
+        "tax_number": {
+          "type": "string"
+        },
+        "afm_number": {
+          "type": "integer",
+          "description": "AFM only for dutch affiliates"
+        }
+      }
+    },
+    "paymentinfo": {
+      "properties": {
+        "interval": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "request",
+            "custom"
+          ],
+          "description": ""
+        },
+        "threshold": {
+          "type": "integer",
+          "enum": [
+            25,
+            50,
+            100,
+            250,
+            500
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "bank",
+            "paypal",
+            "bitcoin"
+          ]
+        },
+        "bank": {
+          "$ref": "#/definitions/bank"
+        },
+        "paypal": {
+          "$ref": "#/definitions/paypal"
+        },
+        "bitcoin": {
+          "$ref": "#/definitions/bitcoin"
+        },
+        "invoice_reference_number": {
+          "type": "string",
+          "description": ""
+        },
+        "invoice_language_id": {
+          "type": "string",
+          "description": ""
+        }
+      }
+    },
+    "phone": {
+      "properties": {
+        "home": {
+          "type": "string"
+        },
+        "work": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "fax": {
+          "type": "string"
+        }
+      }
+    },
+    "bank": {
+      "properties": {
+        "beneficial": {
+          "type": "string",
+          "description": "Account owner"
+        },
+        "name": {
+          "type": "string",
+          "description": "Bank name"
+        },
+        "country_id": {
+          "type": "integer"
+        },
+        "city": {
+          "type": "string",
+          "description": "Bank/beneficial city"
+        },
+        "account": {
+          "type": "string",
+          "description": "Iban/bank account"
+        },
+        "bic": {
+          "type": "string"
+        }
+      }
+    },
+    "paypal": {
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "bitcoin": {
+      "properties": {
+        "address": {
+          "type": "string"
+        }
+      }
+    },
+    "click": {
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "hour": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "cpc",
+            "click",
+            "clickout"
+          ]
+        },
+        "program_id": {
+          "type": "integer"
+        },
+        "ad_id": {
+          "type": "integer"
+        },
+        "media_id": {
+          "type": "integer"
+        },
+        "subid": {
+          "type": "string"
+        },
+        "commission": {
+          "type": "number",
+          "format": "double"
+        },
+        "raw": {
+          "type": "integer"
+        },
+        "unique": {
+          "type": "integer"
+        }
+      }
+    },
+    "income_publisher": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "released",
+            "pending"
+          ],
+          "description": "released payments are scheduled to be paid, pending payments are still in the approval process"
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "expected pay date"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "adgroup": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "program_id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "locale_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "ad": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "adgroup_id": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "image/jpeg",
+            "image/jpg",
+            "image/png",
+            "image/gif",
+            "text/html",
+            "text/plain",
+            "application/x-shockwave-flash"
+          ],
+          "description": "This is the mime type of the ad"
+        },
+        "width": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
+        },
+        "content": {
+          "type": "string"
+        },
+        "ad_url": {
+          "type": "string",
+          "description": "Url where this ad is hosted"
+        },
+        "click_url": {
+          "type": "string",
+          "description": "Tracking/deeplink url for this ad"
+        },
+        "last_modified": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "promotioncode": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "program_id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "promotioncode": {
+          "type": "string"
+        },
+        "start_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "end_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "click_url": {
+          "type": "string"
+        },
+        "locale_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "subscribed": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "adpool": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "media_id": {
+          "type": "integer"
+        },
+        "width": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
+        },
+        "ads": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/adpool_ad"
+          }
+        },
+        "adpool_url": {
+          "type": "string",
+          "description": "Url where this adpool is hosted"
+        },
+        "click_url": {
+          "type": "string",
+          "description": "Tracking/deeplink url for this adpool"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "disabled",
+            "active"
+          ]
+        }
+      }
+    },
+    "adpool_ad": {
+      "properties": {
+        "ad_id": {
+          "type": "integer"
+        },
+        "weight": {
+          "type": "integer",
+          "enum": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        }
+      }
+    },
+    "media": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "website",
+            "keyword_marketing",
+            "email_marketing",
+            "socialmedia"
+          ]
+        },
+        "mobile": {
+          "type": "boolean"
+        },
+        "visitors_amount": {
+          "type": "integer"
+        },
+        "mailinglist_size": {
+          "type": "integer"
+        },
+        "category_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "targetgroup_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "locale_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "creation_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "cpc_status": {
+          "type": "string",
+          "enum": [
+            "approved",
+            "pending",
+            "disapproved"
+          ]
+        },
+        "co_status": {
+          "type": "string",
+          "enum": [
+            "approved",
+            "pending",
+            "disapproved"
+          ]
+        },
+        "approval_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "approval_status": {
+          "type": "string",
+          "enum": [
+            "approved",
+            "pending",
+            "disapproved"
+          ]
+        },
+        "verification_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "verification_status": {
+          "type": "string",
+          "enum": [
+            "verified",
+            "pending"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "deleted"
+          ]
+        }
+      }
+    },
+    "media_subscription": {
+      "properties": {
+        "program_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "subscribe_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "approval_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "cpc_status": {
+          "type": "string",
+          "enum": [
+            "approved",
+            "pending",
+            "disapproved"
+          ]
+        },
+        "co_status": {
+          "type": "string",
+          "enum": [
+            "approved",
+            "pending",
+            "disapproved"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "open",
+            "approved",
+            "disapproved",
+            "canceled"
+          ]
+        }
+      }
+    },
+    "compensation": {
+      "properties": {
+        "program_id": {
+          "type": "integer"
+        },
+        "cpc": {
+          "type": "number",
+          "format": "double"
+        },
+        "compensations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/compensation_rowsetting"
+          }
+        }
+      }
+    },
+    "compensation_rowsetting": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "percentage": {
+          "type": "number",
+          "format": "double",
+          "description": "Commission percentage"
+        },
+        "amount": {
+          "type": "number",
+          "format": "double",
+          "description": "Commission amount"
+        }
+      }
+    },
+    "newsitem": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "advertiser_id": {
+          "type": "integer"
+        },
+        "program_id": {
+          "type": "integer"
+        },
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "language_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Daisycon",
+            "New",
+            "Action",
+            "Update",
+            "Coupon",
+            "Stop",
+            "Rectification"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "content_short": {
+          "type": "string"
+        },
+        "content_long": {
+          "type": "string"
+        }
+      }
+    },
+    "productfeed": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "program_id": {
+          "type": "integer"
+        },
+        "product_count": {
+          "type": "integer"
+        },
+        "last_update": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "feed_link_csv": {
+          "type": "string"
+        },
+        "feed_link_xml": {
+          "type": "string"
+        },
+        "feed_link_xmlatt": {
+          "type": "string"
+        },
+        "feed_link_csv_update": {
+          "type": "string"
+        },
+        "feed_link_xml_update": {
+          "type": "string"
+        },
+        "feed_link_xmlatt_update": {
+          "type": "string"
+        },
+        "subscribed": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          },
+          "description": "subscribed media ids"
+        }
+      }
+    },
+    "program": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "advertiser_id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "descriptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/program_description"
+          }
+        },
+        "url": {
+          "type": "string"
+        },
+        "display_url": {
+          "type": "string"
+        },
+        "logo": {
+          "type": "string"
+        },
+        "tracking_duration": {
+          "type": "integer",
+          "description": "duration in days"
+        },
+        "tracking_segment": {
+          "type": "string",
+          "description": "tracking domain"
+        },
+        "startdate": {
+          "type": "string",
+          "format": "date"
+        },
+        "enddate": {
+          "type": "string",
+          "format": "date"
+        },
+        "primary_category_id": {
+          "type": "integer"
+        },
+        "category_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "locale_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "supply_locale_ids": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "inactive"
+          ]
+        },
+        "keywordmarketing": {
+          "type": "string",
+          "enum": [
+            "false",
+            "partial",
+            "true"
+          ]
+        },
+        "emailmarketing": {
+          "type": "string",
+          "enum": [
+            "false",
+            "partial",
+            "true"
+          ]
+        },
+        "socialmedia": {
+          "type": "string",
+          "enum": [
+            "false",
+            "partial",
+            "true"
+          ]
+        },
+        "cashback": {
+          "type": "string",
+          "enum": [
+            "true",
+            "false",
+            "partial"
+          ]
+        },
+        "publisher_tag": {
+          "type": "string",
+          "enum": [
+            "false",
+            "true"
+          ]
+        },
+        "productfeed": {
+          "type": "string",
+          "enum": [
+            "false",
+            "true"
+          ]
+        },
+        "deeplink": {
+          "type": "string",
+          "enum": [
+            "false",
+            "true"
+          ]
+        },
+        "deeplink_ads": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/program_deeplinks"
+          },
+          "description": "Collection of deeplink names and ids"
+        },
+        "provides_data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/program_provide_data"
+          },
+          "description": "Advertisers provides extra transaction data"
+        }
+      }
+    },
+    "program_description": {
+      "properties": {
+        "language_id": {
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        },
+        "signup_description": {
+          "type": "string"
+        },
+        "incentive_description": {
+          "type": "string"
+        },
+        "compensationgroup_description": {
+          "type": "string"
+        },
+        "keywordmarketing_description": {
+          "type": "string"
+        },
+        "emailmarketing_description": {
+          "type": "string"
+        },
+        "cashback_description": {
+          "type": "string"
+        },
+        "socialmedia_description": {
+          "type": "string"
+        }
+      }
+    },
+    "program_deeplinks": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "program_provide_data": {
+      "properties": {
+        "field": {
+          "type": "string",
+          "enum": [
+            "age",
+            "revenue",
+            "region",
+            "gender",
+            "country",
+            "extra1",
+            "extra2",
+            "extra3",
+            "extra4",
+            "extra5"
+          ]
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "subscription": {
+      "properties": {
+        "media_id": {
+          "type": "integer"
+        },
+        "subscribe_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "approval_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "cpc_status": {
+          "type": "string",
+          "enum": [
+            "approved",
+            "pending",
+            "disapproved"
+          ]
+        },
+        "co_status": {
+          "type": "string",
+          "enum": [
+            "approved",
+            "pending",
+            "disapproved"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "open",
+            "approved",
+            "disapproved",
+            "canceled"
+          ]
+        }
+      }
+    },
+    "statistic_date": {
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date"
+        },
+        "click_raw": {
+          "type": "integer"
+        },
+        "click_unique": {
+          "type": "integer"
+        },
+        "cpc_raw": {
+          "type": "integer"
+        },
+        "cpc_unique": {
+          "type": "integer"
+        },
+        "cpc_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "clickout_raw": {
+          "type": "integer"
+        },
+        "clickout_unique": {
+          "type": "integer"
+        },
+        "clickout_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_unique": {
+          "type": "integer"
+        },
+        "transaction_open": {
+          "type": "integer"
+        },
+        "transaction_open_parts": {
+          "type": "integer"
+        },
+        "transaction_open_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_approved": {
+          "type": "integer"
+        },
+        "transaction_approved_parts": {
+          "type": "integer"
+        },
+        "transaction_approved_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_disapproved": {
+          "type": "integer"
+        },
+        "transaction_disapproved_parts": {
+          "type": "integer"
+        },
+        "transaction_disapproved_amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "statistic_hour": {
+      "properties": {
+        "hour": {
+          "type": "integer"
+        },
+        "click_raw": {
+          "type": "integer"
+        },
+        "click_unique": {
+          "type": "integer"
+        },
+        "cpc_raw": {
+          "type": "integer"
+        },
+        "cpc_unique": {
+          "type": "integer"
+        },
+        "cpc_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "clickout_raw": {
+          "type": "integer"
+        },
+        "clickout_unique": {
+          "type": "integer"
+        },
+        "clickout_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_unique": {
+          "type": "integer"
+        },
+        "transaction_open": {
+          "type": "integer"
+        },
+        "transaction_open_parts": {
+          "type": "integer"
+        },
+        "transaction_open_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_approved": {
+          "type": "integer"
+        },
+        "transaction_approved_parts": {
+          "type": "integer"
+        },
+        "transaction_approved_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_disapproved": {
+          "type": "integer"
+        },
+        "transaction_disapproved_parts": {
+          "type": "integer"
+        },
+        "transaction_disapproved_amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "statistic_day": {
+      "properties": {
+        "day": {
+          "type": "integer"
+        },
+        "click_raw": {
+          "type": "integer"
+        },
+        "click_unique": {
+          "type": "integer"
+        },
+        "cpc_raw": {
+          "type": "integer"
+        },
+        "cpc_unique": {
+          "type": "integer"
+        },
+        "cpc_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "clickout_raw": {
+          "type": "integer"
+        },
+        "clickout_unique": {
+          "type": "integer"
+        },
+        "clickout_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_unique": {
+          "type": "integer"
+        },
+        "transaction_open": {
+          "type": "integer"
+        },
+        "transaction_open_parts": {
+          "type": "integer"
+        },
+        "transaction_open_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_approved": {
+          "type": "integer"
+        },
+        "transaction_approved_parts": {
+          "type": "integer"
+        },
+        "transaction_approved_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_disapproved": {
+          "type": "integer"
+        },
+        "transaction_disapproved_parts": {
+          "type": "integer"
+        },
+        "transaction_disapproved_amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "statistic_weekday": {
+      "properties": {
+        "weekday": {
+          "type": "string",
+          "enum": [
+            "monday",
+            "tuesday",
+            "wednesday",
+            "thursday",
+            "friday",
+            "saturday",
+            "sunday"
+          ]
+        },
+        "click_raw": {
+          "type": "integer"
+        },
+        "click_unique": {
+          "type": "integer"
+        },
+        "cpc_raw": {
+          "type": "integer"
+        },
+        "cpc_unique": {
+          "type": "integer"
+        },
+        "cpc_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "clickout_raw": {
+          "type": "integer"
+        },
+        "clickout_unique": {
+          "type": "integer"
+        },
+        "clickout_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_unique": {
+          "type": "integer"
+        },
+        "transaction_open": {
+          "type": "integer"
+        },
+        "transaction_open_parts": {
+          "type": "integer"
+        },
+        "transaction_open_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_approved": {
+          "type": "integer"
+        },
+        "transaction_approved_parts": {
+          "type": "integer"
+        },
+        "transaction_approved_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_disapproved": {
+          "type": "integer"
+        },
+        "transaction_disapproved_parts": {
+          "type": "integer"
+        },
+        "transaction_disapproved_amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "statistic_month": {
+      "properties": {
+        "month": {
+          "type": "integer"
+        },
+        "click_raw": {
+          "type": "integer"
+        },
+        "click_unique": {
+          "type": "integer"
+        },
+        "cpc_raw": {
+          "type": "integer"
+        },
+        "cpc_unique": {
+          "type": "integer"
+        },
+        "cpc_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "clickout_raw": {
+          "type": "integer"
+        },
+        "clickout_unique": {
+          "type": "integer"
+        },
+        "clickout_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_unique": {
+          "type": "integer"
+        },
+        "transaction_open": {
+          "type": "integer"
+        },
+        "transaction_open_parts": {
+          "type": "integer"
+        },
+        "transaction_open_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_approved": {
+          "type": "integer"
+        },
+        "transaction_approved_parts": {
+          "type": "integer"
+        },
+        "transaction_approved_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_disapproved": {
+          "type": "integer"
+        },
+        "transaction_disapproved_parts": {
+          "type": "integer"
+        },
+        "transaction_disapproved_amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "statistic_year": {
+      "properties": {
+        "year": {
+          "type": "integer"
+        },
+        "click_raw": {
+          "type": "integer"
+        },
+        "click_unique": {
+          "type": "integer"
+        },
+        "cpc_raw": {
+          "type": "integer"
+        },
+        "cpc_unique": {
+          "type": "integer"
+        },
+        "cpc_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "clickout_raw": {
+          "type": "integer"
+        },
+        "clickout_unique": {
+          "type": "integer"
+        },
+        "clickout_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_unique": {
+          "type": "integer"
+        },
+        "transaction_open": {
+          "type": "integer"
+        },
+        "transaction_open_parts": {
+          "type": "integer"
+        },
+        "transaction_open_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_approved": {
+          "type": "integer"
+        },
+        "transaction_approved_parts": {
+          "type": "integer"
+        },
+        "transaction_approved_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_disapproved": {
+          "type": "integer"
+        },
+        "transaction_disapproved_parts": {
+          "type": "integer"
+        },
+        "transaction_disapproved_amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "statistic_program": {
+      "properties": {
+        "program_id": {
+          "type": "integer"
+        },
+        "program_name": {
+          "type": "string"
+        },
+        "click_raw": {
+          "type": "integer"
+        },
+        "click_unique": {
+          "type": "integer"
+        },
+        "cpc_raw": {
+          "type": "integer"
+        },
+        "cpc_unique": {
+          "type": "integer"
+        },
+        "cpc_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "clickout_raw": {
+          "type": "integer"
+        },
+        "clickout_unique": {
+          "type": "integer"
+        },
+        "clickout_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_unique": {
+          "type": "integer"
+        },
+        "transaction_open_parts": {
+          "type": "integer"
+        },
+        "transaction_open_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_approved_parts": {
+          "type": "integer"
+        },
+        "transaction_approved_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_disapproved_parts": {
+          "type": "integer"
+        },
+        "transaction_disapproved_amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "statistic_media": {
+      "properties": {
+        "media_id": {
+          "type": "integer"
+        },
+        "media_name": {
+          "type": "string"
+        },
+        "media_location": {
+          "type": "string"
+        },
+        "click_raw": {
+          "type": "integer"
+        },
+        "click_unique": {
+          "type": "integer"
+        },
+        "cpc_raw": {
+          "type": "integer"
+        },
+        "cpc_unique": {
+          "type": "integer"
+        },
+        "cpc_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "clickout_raw": {
+          "type": "integer"
+        },
+        "clickout_unique": {
+          "type": "integer"
+        },
+        "clickout_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_unique": {
+          "type": "integer"
+        },
+        "transaction_open_parts": {
+          "type": "integer"
+        },
+        "transaction_open_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_approved_parts": {
+          "type": "integer"
+        },
+        "transaction_approved_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_disapproved_parts": {
+          "type": "integer"
+        },
+        "transaction_disapproved_amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "statistic_subid": {
+      "properties": {
+        "subid": {
+          "type": "string"
+        },
+        "click_unique": {
+          "type": "integer"
+        },
+        "cpc_raw": {
+          "type": "integer"
+        },
+        "cpc_unique": {
+          "type": "integer"
+        },
+        "cpc_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "clickout_raw": {
+          "type": "integer"
+        },
+        "clickout_unique": {
+          "type": "integer"
+        },
+        "clickout_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_unique": {
+          "type": "integer"
+        },
+        "transaction_open_parts": {
+          "type": "integer"
+        },
+        "transaction_open_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_approved_parts": {
+          "type": "integer"
+        },
+        "transaction_approved_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_disapproved_parts": {
+          "type": "integer"
+        },
+        "transaction_disapproved_amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "statistic_description": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "program_id": {
+          "type": "integer"
+        },
+        "program_name": {
+          "type": "string"
+        },
+        "transaction_unique": {
+          "type": "integer"
+        },
+        "transaction_open_parts": {
+          "type": "integer"
+        },
+        "transaction_open_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_approved_parts": {
+          "type": "integer"
+        },
+        "transaction_approved_amount": {
+          "type": "number",
+          "format": "double"
+        },
+        "transaction_disapproved_parts": {
+          "type": "integer"
+        },
+        "transaction_disapproved_amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "statistic_cpc": {
+      "properties": {
+        "commission": {
+          "type": "number",
+          "format": "double",
+          "description": "commission per impression"
+        },
+        "click_raw": {
+          "type": "integer"
+        },
+        "click_unique": {
+          "type": "integer"
+        },
+        "program_id": {
+          "type": "integer"
+        },
+        "program_name": {
+          "type": "string"
+        },
+        "cpc_raw": {
+          "type": "integer"
+        },
+        "cpc_unique": {
+          "type": "integer"
+        },
+        "clickout_raw": {
+          "type": "integer"
+        },
+        "clickout_unique": {
+          "type": "integer"
+        }
+      }
+    },
+    "transaction": {
+      "properties": {
+        "affiliatemarketing_id": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "program_id": {
+          "type": "integer"
+        },
+        "program_name": {
+          "type": "string"
+        },
+        "parts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transaction_part"
+          }
+        },
+        "anonymous_ip": {
+          "type": "string"
+        },
+        "fourhash": {
+          "type": "string"
+        },
+        "country_id": {
+          "type": "integer"
+        },
+        "region_id": {
+          "type": "integer"
+        },
+        "gender": {
+          "type": "string",
+          "enum": [
+            "male",
+            "female",
+            "unknown"
+          ]
+        },
+        "age": {
+          "type": "string"
+        },
+        "device_type": {
+          "type": "string",
+          "enum": [
+            "pc",
+            "tablet",
+            "phone"
+          ]
+        },
+        "device_model_id": {
+          "type": "integer"
+        },
+        "device_platform_id": {
+          "type": "integer"
+        },
+        "device_browser_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "transaction_part": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "date_click": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "media_id": {
+          "type": "integer"
+        },
+        "media_name": {
+          "type": "string"
+        },
+        "ad_id": {
+          "type": "integer"
+        },
+        "subid": {
+          "type": "string"
+        },
+        "publisher_description": {
+          "type": "string"
+        },
+        "commission": {
+          "type": "number",
+          "format": "double"
+        },
+        "revenue": {
+          "type": "number",
+          "format": "double"
+        },
+        "extra_1": {
+          "type": "string"
+        },
+        "extra_2": {
+          "type": "string"
+        },
+        "extra_3": {
+          "type": "string"
+        },
+        "extra_4": {
+          "type": "string"
+        },
+        "extra_5": {
+          "type": "string"
+        },
+        "approval_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "disapproved_reason": {
+          "type": "string",
+          "enum": [
+            "invalid",
+            "duplicate",
+            "cancelled",
+            "nopayment",
+            "refunded",
+            "testorder"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "open",
+            "approved",
+            "disapproved"
+          ]
+        },
+        "referencenumber": {
+          "type": "integer"
+        },
+        "last_modified": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1208 @@
+{
+  "host": "likefolio.com",
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "version": "v0",
+    "title": "Likefolio Api Endpoints",
+    "description": "Create a session to start to use it",
+    "x-providerName": "likefolio.com",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "http://likefolio.com/api/v0/swagger_doc.json"
+    }
+  },
+  "paths": {
+    "/v0/companies/tickers/show.json": {
+      "get": {
+        "operationId": "GET--version-companies-tickers-show---format-",
+        "summary": "Company basic information by ticker.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Ticker of a company.",
+            "name": "ticker",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/companies/show.json": {
+      "get": {
+        "operationId": "GET--version-companies-show---format-",
+        "summary": "Company basic information.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "ID number of a company",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/companies/tickerList.json": {
+      "get": {
+        "operationId": "GET--version-companies-tickerList---format-",
+        "summary": "Returns list of available tickers.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/companies/mentionQty.json": {
+      "get": {
+        "operationId": "GET--version-companies-mentionQty---format-",
+        "summary": "Returns amount of mentions per day for a given period",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "ID number of a company",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Start of the period. Must be in ISO8601 format",
+            "name": "startDate",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "description": "End of period. Must be in ISO8601 format",
+            "name": "endDate",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/companies/topCompanies.json": {
+      "get": {
+        "operationId": "GET--version-companies-topCompanies---format-",
+        "summary": "Return a list of companies ordered by mentions count.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/companies/topBrands.json": {
+      "get": {
+        "operationId": "GET--version-companies-topBrands---format-",
+        "summary": "Returns list of brands ordered by number of mentions.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "ID number of a company",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Start of the period. Must be in ISO8601 format",
+            "name": "startDate",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "description": "End of period. Must be in ISO8601 format",
+            "name": "endDate",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/companies/topTweets.json": {
+      "post": {
+        "operationId": "POST--version-companies-topTweets---format-",
+        "summary": "Returns list of tweets ordered by score. Use JSON to do the POST.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "ids",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "formData",
+            "description": "ID number of a company",
+            "name": "ids[id]",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "description": "Start of the period. Must be in ISO8601 format.",
+            "name": "ids[startDate]",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "formData",
+            "description": "Page to request on a big response",
+            "name": "ids[page]",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "description": "Quantity of records to return",
+            "name": "ids[qty]",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "description": "Filter for sentiment values. Only \"all\" includes 0.",
+            "name": "ids[sentiment]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Order of the results",
+            "name": "ids[sort]",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/companies/topTweets/mostRecent.json": {
+      "get": {
+        "operationId": "GET--version-companies-topTweets-mostRecent---format-",
+        "summary": "Returns last 250 tweets from now to the past",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "ID number of a company",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Start of the period. Must be in ISO8601 format",
+            "name": "startDate",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/companies/topLinks.json": {
+      "get": {
+        "operationId": "GET--version-companies-topLinks---format-",
+        "summary": "Returns list of links from mentions ordered by number of appearences.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "ID of the company.",
+            "name": "company_id",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "description": "End of period. Must be in ISO8601 format",
+            "name": "endDate",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "description": "Start of the period. Must be in ISO8601 format.",
+            "name": "startDate",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "description": "Quantity of records to return",
+            "name": "qty",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/companies/ceiList.json": {
+      "get": {
+        "operationId": "GET--version-companies-ceiList---format-",
+        "summary": "Returns the CEI values of the companies",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Order of the results",
+            "name": "sort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Quantity of records to return",
+            "name": "qty",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/companies/csiList.json": {
+      "get": {
+        "operationId": "GET--version-companies-csiList---format-",
+        "summary": "Returns the CSI values of the companies.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Order of the results",
+            "name": "sort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Quantity of records to return",
+            "name": "qty",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/companies/cei.json": {
+      "get": {
+        "operationId": "GET--version-companies-cei---format-",
+        "summary": "Returns a list of CEI values for a single company on a given period.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "ID number of a company",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Start of the period. Must be in ISO8601 format",
+            "name": "startDate",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "description": "End of period. Must be in ISO8601 format",
+            "name": "endDate",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/companies/csi.json": {
+      "get": {
+        "operationId": "GET--version-companies-csi---format-",
+        "summary": "Returns a list of CSI values for a single company on a given period.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "ID number of a company",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Start of the period. Must be in ISO8601 format",
+            "name": "startDate",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "description": "End of period. Must be in ISO8601 format",
+            "name": "endDate",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/companies/indexes.json": {
+      "get": {
+        "operationId": "GET--version-companies-indexes---format-",
+        "summary": "Returns a collection of indexes by day for the given company.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "ID number of a company",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Start of the period. Must be in ISO8601 format",
+            "name": "startDate",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "description": "End of period. Must be in ISO8601 format",
+            "name": "endDate",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/companies/allStatistics.json": {
+      "get": {
+        "operationId": "GET--version-companies-allStatistics---format-",
+        "summary": "Returns all statistics for all companies on a single day.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Single date and time to query data. Must be in ISO8601 format.",
+            "name": "date",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "description": "Specifies how small the period to fetch is. Posible values are: 'hourly' and 'daily'",
+            "name": "resolution",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/companies/statistics.json": {
+      "get": {
+        "operationId": "GET--version-companies-statistics---format-",
+        "summary": "Returns statistics for a single company on a single date",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "ID number of a company",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Single date and time to query data. Must be in ISO8601 format.",
+            "name": "date",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "description": "Specifies how small the period to fetch is. Posible values are: 'hourly' and 'daily'",
+            "name": "resolution",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/companies/detail.json": {
+      "get": {
+        "operationId": "GET--version-companies-detail---format-",
+        "summary": "Returns details for the last week for the given company",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "company_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/companies/topUsers.json": {
+      "get": {
+        "operationId": "GET--version-companies-topUsers---format-",
+        "summary": "Returns the list of Twitter IDs that have posted more mentions for the company.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "ID number of a company",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Start of the period. Must be in ISO8601 format",
+            "name": "startDate",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "description": "End of period. Must be in ISO8601 format",
+            "name": "endDate",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "description": "Quantity of records to return",
+            "name": "qty",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/brands/show.json": {
+      "get": {
+        "operationId": "GET--version-brands-show---format-",
+        "summary": "Returns brands basic information (up tp 50)",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/brands/mentionQty.json": {
+      "get": {
+        "operationId": "GET--version-brands-mentionQty---format-",
+        "summary": "Returns ordered mentions count for the given brand",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "description": "Start of the period. Must be in ISO8601 format",
+            "name": "startDate",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "description": "End of period. Must be in ISO8601 format",
+            "name": "endDate",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/brands/topTweets.json": {
+      "post": {
+        "operationId": "POST--version-brands-topTweets---format-",
+        "summary": "Returns list of tweets ordered by date",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "ids",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "formData",
+            "name": "ids[id]",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "description": "Start of the period. Must be in ISO8601 format.",
+            "name": "ids[startDate]",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "formData",
+            "name": "sentiment",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Quantity of records to return",
+            "name": "qty",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "formData",
+            "description": "Order of the results",
+            "name": "sort",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/brands/beiList.json": {
+      "get": {
+        "operationId": "GET--version-brands-beiList---format-",
+        "summary": "",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/brands/bei.json": {
+      "get": {
+        "operationId": "GET--version-brands-bei---format-",
+        "summary": "",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/brands/topUsers.json": {
+      "get": {
+        "operationId": "GET--version-brands-topUsers---format-",
+        "summary": "Returns the list of Twitter IDs that have posted more mentions for the company",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "description": "Start of the period. Must be in ISO8601 format",
+            "name": "startDate",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "description": "End of period. Must be in ISO8601 format",
+            "name": "endDate",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "description": "Quantity of records to return",
+            "name": "qty",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/tags/cashtags/mentionQty.json": {
+      "get": {
+        "operationId": "GET--version-tags-cashtags-mentionQty---format-",
+        "summary": "Returns amount of mentions per day for a given period",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Text of the cashtag.",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Start of the period. Must be in ISO8601 format",
+            "name": "startDate",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "in": "query",
+            "description": "End of period. Must be in ISO8601 format",
+            "name": "endDate",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/users/topCompanies.json": {
+      "get": {
+        "operationId": "GET--version-users-topCompanies---format-",
+        "summary": "Returns the scored companies for a user",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "twitterId",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "periodFilter",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "cashtagFilter",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/users/trendingCompanies.json": {
+      "get": {
+        "operationId": "GET--version-users-trendingCompanies---format-",
+        "summary": "Returns the trending companies for a user",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "twitterId",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "periodFilter",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "cashtagFilter",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/sessions/create.json": {
+      "post": {
+        "operationId": "POST--version-sessions-create---format-",
+        "summary": "If credentials are valid, a token usable for 15 minutes will be returned",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "email",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "password",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/swagger_doc.json": {
+      "get": {
+        "operationId": "GET--version-swagger_doc---format-",
+        "summary": "Swagger compatible API description",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v0/swagger_doc/{name}.json": {
+      "get": {
+        "operationId": "GET--version-swagger_doc--name---format-",
+        "summary": "Swagger compatible API description for specific API",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Resource name of mounted API",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    }
+  }
+}

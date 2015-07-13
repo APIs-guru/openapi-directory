@@ -1,0 +1,1230 @@
+{
+  "host": "api.cambase.io",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "api.cambase.io",
+    "x-providerName": "cambase.io",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "http://api.cambase.io/api-docs/api-docs.json"
+    }
+  },
+  "tags": [
+    {
+      "name": "models"
+    },
+    {
+      "name": "recorders"
+    },
+    {
+      "name": "vendors"
+    }
+  ],
+  "paths": {
+    "/api/v1/models/search.json": {
+      "get": {
+        "tags": [
+          "models"
+        ],
+        "operationId": "Api::V1::Models#search",
+        "summary": "Searches all Models",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Page number",
+            "name": "page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "description": "Model",
+            "name": "q[model_cont]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Vendor",
+            "name": "q[manufacturer_name_cont]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Shape",
+            "name": "q[shape_eq]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Resolution",
+            "name": "q[resolution_eq]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "ONVIF",
+            "name": "q[onvif_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "PSIA",
+            "name": "q[psia_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "PTZ",
+            "name": "q[ptz_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Infrared",
+            "name": "q[infrared_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Varifocal",
+            "name": "q[varifocal_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "SD Card",
+            "name": "q[sd_card_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "UPnP",
+            "name": "q[upnp_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Audio In",
+            "name": "q[audio_in_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Audio Out",
+            "name": "q[audio_out_true]",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "406": {
+            "description": "The request you made is not acceptable"
+          },
+          "416": {
+            "description": "Requested Range Not Satisfiable"
+          }
+        }
+      }
+    },
+    "/api/v1/models.json": {
+      "post": {
+        "tags": [
+          "models"
+        ],
+        "operationId": "Api::V1::Models#create",
+        "summary": "Creates a new Model",
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Vendor ID",
+            "name": "vendor_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Model",
+            "name": "model[model]",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Shape",
+            "name": "model[shape]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Resolution",
+            "name": "model[resolution]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "ONVIF",
+            "name": "model[onvif]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "PSIA",
+            "name": "model[psia]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "PTZ",
+            "name": "model[ptz]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Infrared",
+            "name": "model[infrared]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Varifocal",
+            "name": "model[varifocal]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "SD Card",
+            "name": "model[sd_card]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "UPnP",
+            "name": "model[upnp]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "UPnP",
+            "name": "model[audio_in]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "UPnP",
+            "name": "model[audio_out]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Default Username",
+            "name": "model[default_username]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Default Password",
+            "name": "model[default_password]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "JPEG URL",
+            "name": "model[jpeg_url]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "H264 URL",
+            "name": "model[h264_url]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "MJPEG URL",
+            "name": "model[mjpeg_url]",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "406": {
+            "description": "Not Acceptable"
+          }
+        }
+      }
+    },
+    "/api/v1/models/{id}.json": {
+      "put": {
+        "tags": [
+          "models"
+        ],
+        "operationId": "Api::V1::Models#update",
+        "summary": "Updates an existing Model",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Model ID",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Vendor ID",
+            "name": "vendor_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Model",
+            "name": "model[model]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Shape",
+            "name": "model[shape]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Resolution",
+            "name": "model[resolution]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "ONVIF",
+            "name": "model[onvif]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "PSIA",
+            "name": "model[psia]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "PTZ",
+            "name": "model[ptz]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Infrared",
+            "name": "model[infrared]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Varifocal",
+            "name": "model[varifocal]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "SD Card",
+            "name": "model[sd_card]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "UPnP",
+            "name": "model[upnp]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Audio In",
+            "name": "model[audio_in]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Audio Out",
+            "name": "model[audio_out]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Default Username",
+            "name": "model[default_username]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Default Password",
+            "name": "model[default_password]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "JPEG URL",
+            "name": "model[jpeg_url]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "H264 URL",
+            "name": "model[h264_url]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "MJPEG URL",
+            "name": "model[mjpeg_url]",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "406": {
+            "description": "Not Acceptable"
+          }
+        }
+      }
+    },
+    "/api/v1/recorders/search.json": {
+      "get": {
+        "tags": [
+          "recorders"
+        ],
+        "operationId": "Api::V1::Recorders#search",
+        "summary": "Searches all Recorders",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Page number",
+            "name": "page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "description": "Model",
+            "name": "q[model_cont]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Vendor",
+            "name": "q[vendor_name_cont]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "SD Card (GB)",
+            "name": "q[sdhc_eq]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Type",
+            "name": "q[type_eq]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Resolution",
+            "name": "q[resolution_eq]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Input Channels",
+            "name": "q[input_channels_eq]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Playback Channels",
+            "name": "q[playback_channels_eq]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "ONVIF",
+            "name": "q[onvif_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "PSIA",
+            "name": "q[psia_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "PTZ",
+            "name": "q[ptz_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "SD Card",
+            "name": "q[sd_card_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "UPnP",
+            "name": "q[upnp_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Audio In",
+            "name": "q[audio_in_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Audio Out",
+            "name": "q[audio_out_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "HDMI Support",
+            "name": "q[hdmi_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Hot Swap",
+            "name": "q[hot_swap_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "3rd pparty Camera Support",
+            "name": "q[support_3rdparty_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Digital I/O",
+            "name": "q[digital_io_true]",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "406": {
+            "description": "The request you made is not acceptable"
+          },
+          "416": {
+            "description": "Requested Range Not Satisfiable"
+          }
+        }
+      }
+    },
+    "/api/v1/recorders.json": {
+      "post": {
+        "tags": [
+          "recorders"
+        ],
+        "operationId": "Api::V1::Recorders#create",
+        "summary": "Creates a new Recorder",
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Vendor ID",
+            "name": "vendor_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Model",
+            "name": "recorder[model]",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Name",
+            "name": "recorder[name]",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Type",
+            "name": "recorder[recorder_type]",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Resolution",
+            "name": "recorder[resolution]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "ONVIF",
+            "name": "recorder[onvif]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "PSIA",
+            "name": "recorder[psia]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "PTZ",
+            "name": "recorder[ptz]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Discontinued",
+            "name": "recorder[discontinued]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "3rd pparty Camera Support",
+            "name": "recorder[support_3rdparty]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "SD Card",
+            "name": "recorder[sd_card]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "UPnP",
+            "name": "recorder[upnp]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Hot Swap",
+            "name": "recorder[hot_swap]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "HDMI Support",
+            "name": "recorder[hdmi]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Digital I/O",
+            "name": "recorder[digital_io]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Audio In",
+            "name": "recorder[audio_in]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Audio Out",
+            "name": "recorder[audio_out]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Input Channels",
+            "name": "recorder[input_channels]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Playback Channels",
+            "name": "recorder[playback_channels]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "USB Ports",
+            "name": "recorder[usb]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "SD Card (GB)",
+            "name": "recorder[sdhc]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Mobile Access",
+            "name": "recorder[mobile_access]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Alarms",
+            "name": "recorder[alarms]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Raid Support",
+            "name": "recorder[raid_support]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Internal Storage",
+            "name": "recorder[storage]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Additional Information",
+            "name": "recorder[additional_information]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Default Username",
+            "name": "recorder[default_username]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Default Password",
+            "name": "recorder[default_password]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "JPEG URL",
+            "name": "recorder[jpeg_url]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "H264 URL",
+            "name": "recorder[h264_url]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "MJPEG URL",
+            "name": "recorder[mjpeg_url]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Official URL",
+            "name": "recorder[official_url]",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "406": {
+            "description": "Not Acceptable"
+          }
+        }
+      }
+    },
+    "/api/v1/recorders/{id}.json": {
+      "put": {
+        "tags": [
+          "recorders"
+        ],
+        "operationId": "Api::V1::Recorders#update",
+        "summary": "Updates an existing Recorder",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Recorder ID",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Vendor ID",
+            "name": "vendor_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Model",
+            "name": "recorder[model]",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Name",
+            "name": "recorder[name]",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Type",
+            "name": "recorder[recorder_type]",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Resolution",
+            "name": "recorder[resolution]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "ONVIF",
+            "name": "recorder[onvif]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "PSIA",
+            "name": "recorder[psia]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "PTZ",
+            "name": "recorder[ptz]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Discontinued",
+            "name": "recorder[discontinued]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "3rd pparty Camera Support",
+            "name": "recorder[support_3rdparty]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "SD Card",
+            "name": "recorder[sd_card]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "UPnP",
+            "name": "recorder[upnp]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Hot Swap",
+            "name": "recorder[hot_swap]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "HDMI Support",
+            "name": "recorder[hdmi]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Digital I/O",
+            "name": "recorder[digital_io]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Audio In",
+            "name": "recorder[audio_in]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Audio Out",
+            "name": "recorder[audio_out]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Input Channels",
+            "name": "recorder[input_channels]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Playback Channels",
+            "name": "recorder[playback_channels]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "USB Ports",
+            "name": "recorder[usb]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "SD Card (GB)",
+            "name": "recorder[sdhc]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Mobile Access",
+            "name": "recorder[mobile_access]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Alarms",
+            "name": "recorder[alarms]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Raid Support",
+            "name": "recorder[raid_support]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Internal Storage",
+            "name": "recorder[storage]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Additional Information",
+            "name": "recorder[additional_information]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Default Username",
+            "name": "recorder[default_username]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Default Password",
+            "name": "recorder[default_password]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "JPEG URL",
+            "name": "recorder[jpeg_url]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "H264 URL",
+            "name": "recorder[h264_url]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "MJPEG URL",
+            "name": "recorder[mjpeg_url]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Official URL",
+            "name": "recorder[official_url]",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "406": {
+            "description": "Not Acceptable"
+          }
+        }
+      }
+    },
+    "/api/v1/vendors.json": {
+      "post": {
+        "tags": [
+          "vendors"
+        ],
+        "operationId": "Api::V1::Vendors#create",
+        "summary": "Creates a new Vendor",
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Name",
+            "name": "vendor[name]",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Info.",
+            "name": "vendor[info]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Website",
+            "name": "vendor[url]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "MAC",
+            "name": "vendor[mac]",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "406": {
+            "description": "Not Acceptable"
+          }
+        }
+      }
+    },
+    "/api/v1/vendors/{id}.json": {
+      "put": {
+        "tags": [
+          "vendors"
+        ],
+        "operationId": "Api::V1::Vendors#update",
+        "summary": "Updates an existing Vendor",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Vendor ID",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Name",
+            "name": "vendor[name]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Info.",
+            "name": "vendor[info]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Website",
+            "name": "vendor[url]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "MAC",
+            "name": "vendor[mac]",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "406": {
+            "description": "Not Acceptable"
+          }
+        }
+      }
+    }
+  }
+}

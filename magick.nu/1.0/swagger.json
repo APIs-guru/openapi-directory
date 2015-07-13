@@ -1,0 +1,236 @@
+{
+  "host": "devui.magick.nu",
+  "basePath": "/rest",
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "API Documentation",
+    "description": "Authentication is required to access all methods of the API. Enter username and password.\n                Credentials are automatically set as you type.",
+    "x-providerName": "magick.nu",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "http://devui.magick.nu/api/api-docs"
+    }
+  },
+  "tags": [
+    {
+      "name": "tradingAccounts",
+      "description": ""
+    },
+    {
+      "name": "svstradingAccounts",
+      "description": ""
+    },
+    {
+      "name": "users",
+      "description": ""
+    }
+  ],
+  "paths": {
+    "/tradingAccounts": {
+      "post": {
+        "tags": [
+          "tradingAccounts"
+        ],
+        "operationId": "postTradingAccounts",
+        "summary": "Add a Trading Account",
+        "description": "",
+        "produces": [
+          "text/plain"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TradingAccount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/svstradingAccounts": {
+      "post": {
+        "tags": [
+          "svstradingAccounts"
+        ],
+        "operationId": "postSvstradingAccounts",
+        "summary": "Create a new Trading Account",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SVSTradingAccountDTO"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/users/username/{username}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "operationId": "getUsersUsernameUsername",
+        "summary": "Check if username is available",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "username",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/users/email/{email}": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "operationId": "getUsersEmailEmail",
+        "summary": "Check if email is available",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "email",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "operationId": "postUsers",
+        "summary": "Create a new Magick User",
+        "description": "",
+        "produces": [
+          "text/plain"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserDTO"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TradingAccount": {
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "brokerServer": {
+          "type": "string"
+        },
+        "magickUsername": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "SVSTradingAccountDTO": {
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "forename": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "UserDTO": {
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

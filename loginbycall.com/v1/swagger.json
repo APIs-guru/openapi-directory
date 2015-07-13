@@ -1,0 +1,156 @@
+{
+  "host": "api.loginbycall.com",
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "api.loginbycall.com",
+    "x-providerName": "loginbycall.com",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "http://api.loginbycall.com/api/swagger_doc.json"
+    }
+  },
+  "paths": {
+    "/v1/calls.json": {
+      "post": {
+        "operationId": "POST--version-calls---format-",
+        "summary": "",
+        "description": "",
+        "produces": [
+          "application/xml",
+          "application/json",
+          "application/vnd.api+json",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "Target phone number",
+            "name": "number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "API consumer token",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/v1/call/{token}.json": {
+      "get": {
+        "operationId": "GET--version-call--token---format-",
+        "summary": "Fetches call status",
+        "description": "",
+        "produces": [
+          "application/xml",
+          "application/json",
+          "application/vnd.api+json",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/CallLog"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DELETE--version-call--token---format-",
+        "summary": "Cancels active call",
+        "description": "",
+        "produces": [
+          "application/xml",
+          "application/json",
+          "application/vnd.api+json",
+          "text/plain"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/CallLog"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CallLog": {
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "Call token"
+        },
+        "end_code": {
+          "type": "integer",
+          "description": "Call result status in terms of adhearsion"
+        },
+        "operator_result": {
+          "type": "string",
+          "description": "Operator call ( first leg ) result"
+        },
+        "target_result": {
+          "type": "string",
+          "description": "Target number call ( second leg ) result"
+        },
+        "operator_duration": {
+          "type": "integer",
+          "description": "Duration of operator call in seconds ( from the moment the operator answers the call and till hangup"
+        },
+        "target_duration": {
+          "type": "integer",
+          "description": "Duration of talk with target number"
+        },
+        "target_number": {
+          "type": "string",
+          "description": "Phone number of call recipient"
+        },
+        "start_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Call start time"
+        },
+        "end_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Call end time"
+        }
+      }
+    }
+  }
+}

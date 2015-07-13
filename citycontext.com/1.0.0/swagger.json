@@ -1,0 +1,153 @@
+{
+  "host": "api.citycontext.com",
+  "basePath": "/beta",
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "api.citycontext.com",
+    "x-providerName": "citycontext.com",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "https://www.citycontext.com/swagger/spec.json"
+    }
+  },
+  "paths": {
+    "/@{lat},{lon}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "byPoint",
+        "summary": "Query by coordinates (SRID 4326 - decimal degrees)",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Latitude",
+            "name": "lat",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "in": "path",
+            "description": "Longitude",
+            "name": "lon",
+            "required": true,
+            "type": "number",
+            "format": "float"
+          },
+          {
+            "in": "query",
+            "description": "City context user key",
+            "name": "user_key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/PointInfo"
+            }
+          }
+        }
+      }
+    },
+    "/postcodes/{postcode}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "byPostcode",
+        "summary": "Query by postcode",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Postcode",
+            "name": "postcode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "City context user key",
+            "name": "user_key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/PointInfo"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PointInfo": {
+      "description": "Contextual information around a given point",
+      "required": [
+        "location",
+        "parks",
+        "schools"
+      ],
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/Location"
+        },
+        "lsoa": {
+          "type": "object",
+          "description": "Statistics for lower layer super output areas (LSOA)"
+        },
+        "schools": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Schools within 1km of the point of interest, sorted by ascending distance from the POI"
+        },
+        "parks": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Parks within 1km of the point of interest, sorted by descending area"
+        }
+      }
+    },
+    "Location": {
+      "description": "Latitude, Longitude and other info related to the given point",
+      "required": [
+        "lat",
+        "lon"
+      ],
+      "properties": {
+        "lat": {
+          "type": "number",
+          "format": "float",
+          "minimum": -85,
+          "maximum": 85
+        },
+        "lon": {
+          "type": "number",
+          "format": "float",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "withinLondonCCZ": {
+          "type": "boolean",
+          "description": "Boolean flag indicating whether this point is located within London's Congestion Charge zone"
+        }
+      }
+    }
+  }
+}
