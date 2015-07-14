@@ -2616,7 +2616,7 @@
         "deleted": {
           "type": "boolean",
           "description": "Whether this calendar list entry has been deleted from the calendar list. Read-only. Optional. The default is False.",
-          "default": "false"
+          "default": false
         },
         "description": {
           "type": "string",
@@ -2633,7 +2633,7 @@
         "hidden": {
           "type": "boolean",
           "description": "Whether the calendar has been hidden from the list. Optional. The default is False.",
-          "default": "false"
+          "default": false
         },
         "id": {
           "type": "string",
@@ -2664,12 +2664,12 @@
         "primary": {
           "type": "boolean",
           "description": "Whether the calendar is the primary calendar of the authenticated user. Read-only. Optional. The default is False.",
-          "default": "false"
+          "default": false
         },
         "selected": {
           "type": "boolean",
           "description": "Whether the calendar content shows up in the calendar UI. Optional. The default is False.",
-          "default": "false"
+          "default": false
         },
         "summary": {
           "type": "string",
@@ -2812,7 +2812,7 @@
         "anyoneCanAddSelf": {
           "type": "boolean",
           "description": "Whether anyone can invite themselves to the event. Optional. The default is False.",
-          "default": "false"
+          "default": false
         },
         "attachments": {
           "type": "array",
@@ -2831,7 +2831,7 @@
         "attendeesOmitted": {
           "type": "boolean",
           "description": "Whether attendees may have been omitted from the event's representation. When retrieving an event, this may be due to a restriction specified by the maxAttendee query parameter. When updating an event, this can be used to only update the participant's response. Optional. The default is False.",
-          "default": "false"
+          "default": false
         },
         "colorId": {
           "type": "string",
@@ -2876,7 +2876,7 @@
         "endTimeUnspecified": {
           "type": "boolean",
           "description": "Whether the end time is actually unspecified. An end time is still provided for compatibility reasons, even if this attribute is set to True. The default is False.",
-          "default": "false"
+          "default": false
         },
         "etag": {
           "type": "string",
@@ -2951,17 +2951,17 @@
         "guestsCanInviteOthers": {
           "type": "boolean",
           "description": "Whether attendees other than the organizer can invite others to the event. Optional. The default is True.",
-          "default": "true"
+          "default": true
         },
         "guestsCanModify": {
           "type": "boolean",
           "description": "Whether attendees other than the organizer can modify the event. Optional. The default is False.",
-          "default": "false"
+          "default": false
         },
         "guestsCanSeeOtherGuests": {
           "type": "boolean",
           "description": "Whether attendees other than the organizer can see who the event's attendees are. Optional. The default is True.",
-          "default": "true"
+          "default": true
         },
         "hangoutLink": {
           "type": "string",
@@ -2991,7 +2991,7 @@
         "locked": {
           "type": "boolean",
           "description": "Whether this is a locked event copy where no changes can be made to the main event fields \"summary\", \"description\", \"location\", \"start\", \"end\" or \"recurrence\". The default is False. Read-Only.",
-          "default": "false"
+          "default": false
         },
         "organizer": {
           "type": "object",
@@ -3023,7 +3023,7 @@
         "privateCopy": {
           "type": "boolean",
           "description": "Whether this is a private event copy where changes are not shared with other copies on other calendars. Optional. Immutable. The default is False.",
-          "default": "false"
+          "default": false
         },
         "recurrence": {
           "type": "array",
@@ -3132,7 +3132,7 @@
         "additionalGuests": {
           "type": "integer",
           "description": "Number of additional guests. Optional. The default is 0.",
-          "default": "0",
+          "default": 0,
           "format": "int32"
         },
         "comment": {
@@ -3154,7 +3154,7 @@
         "optional": {
           "type": "boolean",
           "description": "Whether this is an optional attendee. Optional. The default is False.",
-          "default": "false"
+          "default": false
         },
         "organizer": {
           "type": "boolean",
@@ -3163,7 +3163,7 @@
         "resource": {
           "type": "boolean",
           "description": "Whether the attendee is a resource. Read-only. The default is False.",
-          "default": "false"
+          "default": false
         },
         "responseStatus": {
           "type": "string",
@@ -3172,7 +3172,7 @@
         "self": {
           "type": "boolean",
           "description": "Whether this entry represents the calendar on which this copy of the event appears. Read-only. The default is False.",
-          "default": "false"
+          "default": false
         }
       }
     },

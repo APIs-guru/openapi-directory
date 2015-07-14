@@ -1133,7 +1133,7 @@
     },
     "/{project}/zones/{zone}/disks/{disk}": {
       "delete": {
-        "description": "Deletes the specified persistent disk.",
+        "description": "Deletes the specified persistent disk. Deleting a disk removes its data permanently and is irreversible. However, deleting a disk does not delete any snapshots previously made from the disk. You must separately delete snapshots.",
         "operationId": "compute.disks.delete",
         "responses": {
           "200": {
@@ -7923,7 +7923,7 @@
     },
     "/{project}/global/snapshots/{snapshot}": {
       "delete": {
-        "description": "Deletes the specified persistent disk snapshot resource.",
+        "description": "Deletes the specified Snapshot resource. Keep in mind that deleting a single snapshot might not necessarily delete all the data on that snapshot. If any data on the snapshot that is marked for deletion is needed for subsequent snapshots, the data will be moved to the next corresponding snapshot.\n\nFor more information, see Deleting snaphots.",
         "operationId": "compute.snapshots.delete",
         "responses": {
           "200": {
@@ -7944,7 +7944,7 @@
           {
             "name": "snapshot",
             "in": "path",
-            "description": "Name of the persistent disk snapshot resource to delete.",
+            "description": "Name of the Snapshot resource to delete.",
             "required": true,
             "type": "string"
           }
@@ -7962,7 +7962,7 @@
         ]
       },
       "get": {
-        "description": "Returns the specified persistent disk snapshot resource.",
+        "description": "Returns the specified Snapshot resource.",
         "operationId": "compute.snapshots.get",
         "responses": {
           "200": {
@@ -7983,7 +7983,7 @@
           {
             "name": "snapshot",
             "in": "path",
-            "description": "Name of the persistent disk snapshot resource to return.",
+            "description": "Name of the Snapshot resource to return.",
             "required": true,
             "type": "string"
           }
@@ -8027,7 +8027,7 @@
     },
     "/{project}/global/snapshots": {
       "get": {
-        "description": "Retrieves the list of persistent disk snapshot resources contained within the specified project.",
+        "description": "Retrieves the list of Snapshot resources contained within the specified project.",
         "operationId": "compute.snapshots.list",
         "responses": {
           "200": {
@@ -11212,7 +11212,7 @@
       "properties": {
         "balancingMode": {
           "type": "string",
-          "description": "The balancing mode of this backend, default is UTILIZATION.",
+          "description": "Specifies the balancing mode for this backend. The default is UTILIZATION but available values are UTILIZATION and RATE.",
           "enum": [
             "RATE",
             "UTILIZATION"
@@ -11220,16 +11220,16 @@
         },
         "capacityScaler": {
           "type": "number",
-          "description": "The multiplier (a value between 0.0 and 1.0) of the max capacity (CPU or RPS, depending on 'balancingMode') the group should serve up to. 0 means the group is totally drained. Default value is 1. Valid range is [0.0, 1.0].",
+          "description": "A multiplier applied to the group's maximum servicing capacity (either UTILIZATION or RATE). Default value is 1, which means the group will serve up to 100% of its configured CPU or RPS (depending on balancingMode). A setting of 0 means the group is completely drained, offering 0% of its available CPU or RPS. Valid range is [0.0,1.0].",
           "format": "float"
         },
         "description": {
           "type": "string",
-          "description": "An optional textual description of the resource, which is provided by the client when the resource is created."
+          "description": "An optional textual description of the resource. Provided by the client when the resource is created."
         },
         "group": {
           "type": "string",
-          "description": "URL of a zonal Cloud Resource View resource. This resource view defines the list of instances that serve traffic. Member virtual machine instances from each resource view must live in the same zone as the resource view itself. No two backends in a backend service are allowed to use same Resource View resource."
+          "description": "The fully-qualified URL of a zonal Instance Group resource. This instance group defines the list of instances that serve traffic. Member virtual machine instances from each instance group must live in the same zone as the instance group itself. No two backends in a backend service are allowed to use same Instance Group resource.\n\nNote that you must specify an Instance Group resource using the fully-qualified URL, rather than a partial URL."
         },
         "maxRate": {
           "type": "integer",
@@ -11243,14 +11243,14 @@
         },
         "maxUtilization": {
           "type": "number",
-          "description": "Used when 'balancingMode' is UTILIZATION. This ratio defines the CPU utilization target for the group. The default is 0.8. Valid range is [0, 1].",
+          "description": "Used when balancingMode is UTILIZATION. This ratio defines the CPU utilization target for the group. The default is 0.8. Valid range is [0.0, 1.0].",
           "format": "float"
         }
       }
     },
     "BackendService": {
       "type": "object",
-      "description": "A BackendService resource. This resource defines a group of backend VMs together with their serving capacity.\n\nIf you add field foo, you probably need to also add: com.google.cloud.cluster.manager.api.BackendServiceResource: foo com.google.cloud.cluster.manager.networking.entities: BackendService, BackendServiceEntity: getFoo, setFoo:\n\nConverters/mappers will need to be updated: com.google.cloud.cluster.manager.networking.services.backendservice.BackendServiceResourceConverter: toResource, updateEntity: copy foo com.google.cloud.cluster.mixer.protomappers.BackendServiceMappers.ResourceMapper: ResourceMapper: add a new map call\n\nTests to update: com.google.cloud.cluster.manager.networking.services.backendservice.BackendServiceResourceConverterTest com.google.cloud.cluster.mixer.protomappers.BackendServiceMappersTest.testResourceMapping",
+      "description": "A BackendService resource. This resource defines a group of backend VMs together with their serving capacity.",
       "properties": {
         "backends": {
           "type": "array",
@@ -11261,11 +11261,11 @@
         },
         "creationTimestamp": {
           "type": "string",
-          "description": "Creation timestamp in RFC3339 text format (output only)."
+          "description": "[Output Only] Creation timestamp in RFC3339 text format."
         },
         "description": {
           "type": "string",
-          "description": "An optional textual description of the resource; provided by the client when the resource is created."
+          "description": "An optional textual description of the resource. Provided by the client when the resource is created."
         },
         "fingerprint": {
           "type": "string",
@@ -11281,22 +11281,22 @@
         },
         "id": {
           "type": "string",
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
           "format": "uint64"
         },
         "kind": {
           "type": "string",
-          "description": "Type of the resource.",
+          "description": "[Output Only] Type of resource. Always compute#backendService for backend services.",
           "default": "compute#backendService"
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035.",
+          "description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
           "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "port": {
           "type": "integer",
-          "description": "Deprecated in favor of port_name. The TCP port to connect on the backend. The default value is 80.",
+          "description": "Deprecated in favor of port name. The TCP port to connect on the backend. The default value is 80.",
           "format": "int32"
         },
         "portName": {
@@ -11311,7 +11311,7 @@
         },
         "selfLink": {
           "type": "string",
-          "description": "Server defined URL for the resource (output only)."
+          "description": "[Output Only] Server defined URL for the resource."
         },
         "timeoutSec": {
           "type": "integer",
@@ -11331,7 +11331,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "Type of resource.",
+          "description": "[Output Only] Type of resource. Always compute#backendServiceGroupHealth for the health of backend services.",
           "default": "compute#backendServiceGroupHealth"
         }
       }
@@ -11342,7 +11342,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the resource; defined by the server (output only)."
+          "description": "[Output Only] Unique identifier for the resource; defined by the server."
         },
         "items": {
           "type": "array",
@@ -11353,16 +11353,16 @@
         },
         "kind": {
           "type": "string",
-          "description": "Type of resource.",
+          "description": "[Output Only] Type of resource. Always compute#backendServiceList for lists of backend services.",
           "default": "compute#backendServiceList"
         },
         "nextPageToken": {
           "type": "string",
-          "description": "A token used to continue a truncated list request (output only)."
+          "description": "[Output Only] A token used to continue a truncated list request."
         },
         "selfLink": {
           "type": "string",
-          "description": "Server defined URL for this resource (output only)."
+          "description": "[Output Only] Server-defined URL for this resource."
         }
       }
     },
@@ -11822,7 +11822,7 @@
         },
         "creationTimestamp": {
           "type": "string",
-          "description": "[Output Only] Creation timestamp in RFC3339text format."
+          "description": "[Output Only] Creation timestamp in RFC3339 text format."
         },
         "description": {
           "type": "string",
@@ -11853,21 +11853,21 @@
         },
         "sourceRanges": {
           "type": "array",
-          "description": "The IP address blocks that this rule applies to, expressed in CIDR format. One or both of sourceRanges and sourceTags may be set.\n\nIf both properties are set, an inbound connection is allowed if the range or the tag of the source matches the sourceRanges OR matches the sourceTags property; the connection does not need to match both properties.",
+          "description": "The IP address blocks that this rule applies to, expressed in CIDR format. One or both of sourceRanges and sourceTags may be set.\n\nIf both properties are set, an inbound connection is allowed if the range matches the sourceRanges OR the tag of the source matches the sourceTags property. The connection does not need to match both properties.",
           "items": {
             "type": "string"
           }
         },
         "sourceTags": {
           "type": "array",
-          "description": "A list of instance tags which this rule applies to. One or both of sourceRanges and sourceTags may be set.\n\nIf both properties are set, an inbound connection is allowed if the range or the tag of the source matches the sourceRanges OR matches the sourceTags property; the connection does not need to match both properties.",
+          "description": "A list of instance tags which this rule applies to. One or both of sourceRanges and sourceTags may be set.\n\nIf both properties are set, an inbound connection is allowed if the range matches the sourceRanges OR the tag of the source matches the sourceTags property. The connection does not need to match both properties.",
           "items": {
             "type": "string"
           }
         },
         "targetTags": {
           "type": "array",
-          "description": "A list of instance tags indicating sets of instances located on network which may make network connections as specified in allowed[]. If no targetTags are specified, the firewall rule applies to all instances on the specified network.",
+          "description": "A list of instance tags indicating sets of instances located in the network that may make network connections as specified in allowed[]. If no targetTags are specified, the firewall rule applies to all instances on the specified network.",
           "items": {
             "type": "string"
           }
@@ -11914,7 +11914,7 @@
         },
         "IPProtocol": {
           "type": "string",
-          "description": "The IP protocol to which this rule applies, valid options are 'TCP', 'UDP', 'ESP', 'AH' or 'SCTP'.",
+          "description": "The IP protocol to which this rule applies, valid options are TCP, UDP, ESP, AH or SCTP.",
           "enum": [
             "AH",
             "ESP",
@@ -11925,7 +11925,7 @@
         },
         "creationTimestamp": {
           "type": "string",
-          "description": "Creation timestamp in RFC3339 text format (output only)."
+          "description": "[Output Only] Creation timestamp in RFC3339 text format."
         },
         "description": {
           "type": "string",
@@ -11933,7 +11933,7 @@
         },
         "id": {
           "type": "string",
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
           "format": "uint64"
         },
         "kind": {
@@ -11943,24 +11943,24 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035.",
+          "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
           "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "portRange": {
           "type": "string",
-          "description": "Applicable only when 'IPProtocol' is 'TCP', 'UDP' or 'SCTP', only packets addressed to ports in the specified range will be forwarded to 'target'. If 'portRange' is left empty (default value), all ports are forwarded. Forwarding rules with the same [IPAddress, IPProtocol] pair must have disjoint port ranges."
+          "description": "Applicable only when `IPProtocol` is TCP, UDP, or SCTP, only packets addressed to ports in the specified range will be forwarded to target. If portRange is left empty (default value), all ports are forwarded. Forwarding rules with the same `[IPAddress, IPProtocol]` pair must have disjoint port ranges."
         },
         "region": {
           "type": "string",
-          "description": "URL of the region where the regional forwarding rule resides (output only). This field is not applicable to global forwarding rules."
+          "description": "[Output Only] URL of the region where the regional forwarding rule resides. This field is not applicable to global forwarding rules."
         },
         "selfLink": {
           "type": "string",
-          "description": "Server defined URL for the resource (output only)."
+          "description": "[Output Only] Server-defined URL for the resource."
         },
         "target": {
           "type": "string",
-          "description": "The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must live in the same region as the forwarding rule. For global forwarding rules, this target must be a global TargetHttpProxy resource."
+          "description": "The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must live in the same region as the forwarding rule. For global forwarding rules, this target must be a global TargetHttpProxy or TargetHttpsProxy resource."
         }
       }
     },
@@ -11969,7 +11969,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the resource; defined by the server (output only)."
+          "description": "[Output Only] Unique identifier for the resource; defined by the server."
         },
         "items": {
           "type": "object",
@@ -11986,11 +11986,11 @@
         },
         "nextPageToken": {
           "type": "string",
-          "description": "A token used to continue a truncated list request (output only)."
+          "description": "[Output Only] A token used to continue a truncated list request."
         },
         "selfLink": {
           "type": "string",
-          "description": "Server defined URL for this resource (output only)."
+          "description": "[Output Only] Server defined URL for this resource."
         }
       }
     },
@@ -12000,7 +12000,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the resource; defined by the server (output only)."
+          "description": "[Output Only] Unique identifier for the resource. Set by the server."
         },
         "items": {
           "type": "array",
@@ -12016,11 +12016,11 @@
         },
         "nextPageToken": {
           "type": "string",
-          "description": "A token used to continue a truncated list request (output only)."
+          "description": "[Output Only] A token used to continue a truncated list request."
         },
         "selfLink": {
           "type": "string",
-          "description": "Server defined URL for this resource (output only)."
+          "description": "[Output Only] Server defined URL for this resource."
         }
       }
     },
@@ -12119,10 +12119,11 @@
     },
     "HostRule": {
       "type": "object",
-      "description": "A host-matching rule for a URL. If matched, will use the named PathMatcher to select the BackendService.",
+      "description": "UrlMaps A host-matching rule for a URL. If matched, will use the named PathMatcher to select the BackendService.",
       "properties": {
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "An optional textual description."
         },
         "hosts": {
           "type": "array",
@@ -12133,7 +12134,7 @@
         },
         "pathMatcher": {
           "type": "string",
-          "description": "The name of the PathMatcher to match the path portion of the URL, if the this HostRule matches the URL's host portion."
+          "description": "The name of the PathMatcher to match the path portion of the URL, if the this hostRule matches the URL's host portion."
         }
       }
     },
@@ -13706,7 +13707,7 @@
         },
         "description": {
           "type": "string",
-          "description": "An optional textual description of the resource; provided by the client when the resource is created."
+          "description": "An optional textual description of the resource. Provided by the client when the resource is created."
         },
         "gatewayIPv4": {
           "type": "string",
@@ -13715,7 +13716,7 @@
         },
         "id": {
           "type": "string",
-          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
+          "description": "[Output Only] Unique identifier for the resource. Defined by the server.",
           "format": "uint64"
         },
         "kind": {
@@ -13725,7 +13726,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
+          "description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
           "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "selfLink": {
@@ -13765,7 +13766,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "[Output Only] Unique identifier for the resource; defined by the server."
+          "description": "[Output Only] Unique identifier for the resource. Defined by the server."
         },
         "items": {
           "type": "array",
@@ -14090,7 +14091,8 @@
           "description": "The URL to the BackendService resource. This will be used if none of the 'pathRules' defined by this PathMatcher is met by the URL's path portion."
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "description": "An optional textual description of the resource."
         },
         "name": {
           "type": "string",
@@ -14314,46 +14316,46 @@
     },
     "Route": {
       "type": "object",
-      "description": "The route resource. A Route is a rule that specifies how certain packets should be handled by the virtual network. Routes are associated with VMs by tag and the set of Routes for a particular VM is called its routing table. For each packet leaving a VM, the system searches that VM's routing table for a single best matching Route. Routes match packets by destination IP address, preferring smaller or more specific ranges over larger ones. If there is a tie, the system selects the Route with the smallest priority value. If there is still a tie, it uses the layer three and four packet headers to select just one of the remaining matching Routes. The packet is then forwarded as specified by the next_hop field of the winning Route -- either to another VM destination, a VM gateway or a GCE operated gateway. Packets that do not match any Route in the sending VM's routing table will be dropped.",
+      "description": "The route resource. A Route is a rule that specifies how certain packets should be handled by the virtual network. Routes are associated with VMs by tag and the set of Routes for a particular VM is called its routing table. For each packet leaving a VM, the system searches that VM's routing table for a single best matching Route. Routes match packets by destination IP address, preferring smaller or more specific ranges over larger ones. If there is a tie, the system selects the Route with the smallest priority value. If there is still a tie, it uses the layer three and four packet headers to select just one of the remaining matching Routes. The packet is then forwarded as specified by the nextHop field of the winning Route -- either to another VM destination, a VM gateway or a GCE operated gateway. Packets that do not match any Route in the sending VM's routing table are dropped.",
       "properties": {
         "creationTimestamp": {
           "type": "string",
-          "description": "Creation timestamp in RFC3339 text format (output only)."
+          "description": "[Output Only] Creation timestamp in RFC3339 text format."
         },
         "description": {
           "type": "string",
-          "description": "An optional textual description of the resource; provided by the client when the resource is created."
+          "description": "An optional textual description of the resource. Provided by the client when the resource is created."
         },
         "destRange": {
           "type": "string",
-          "description": "Which packets does this route apply to?"
+          "description": "The destination range of outgoing packets that this route applies to."
         },
         "id": {
           "type": "string",
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] Unique identifier for the resource. Defined by the server.",
           "format": "uint64"
         },
         "kind": {
           "type": "string",
-          "description": "Type of the resource.",
+          "description": "[Output Only] Type of this resource. Always compute#routes for Route resources.",
           "default": "compute#route"
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035.",
+          "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
           "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "network": {
           "type": "string",
-          "description": "URL of the network to which this route is applied; provided by the client when the route is created."
+          "description": "Fully-qualified URL of the network that this route applies to."
         },
         "nextHopGateway": {
           "type": "string",
-          "description": "The URL to a gateway that should handle matching packets."
+          "description": "The URL to a gateway that should handle matching packets. Currently, this is only the internet gateway:  projects/<project-id>/global/gateways/default-internet-gateway"
         },
         "nextHopInstance": {
           "type": "string",
-          "description": "The URL to an instance that should handle matching packets."
+          "description": "The fully-qualified URL to an instance that should handle matching packets. For example:\nhttps://www.googleapis.com/compute/v1/projects/project/zones/zone/instances/"
         },
         "nextHopIp": {
           "type": "string",
@@ -14374,7 +14376,7 @@
         },
         "selfLink": {
           "type": "string",
-          "description": "Server defined URL for the resource (output only)."
+          "description": "[Output Only] Server-defined fully-qualified URL for this resource."
         },
         "tags": {
           "type": "array",
@@ -14385,7 +14387,7 @@
         },
         "warnings": {
           "type": "array",
-          "description": "If potential misconfigurations are detected for this route, this field will be populated with warning messages.",
+          "description": "[Output Only] If potential misconfigurations are detected for this route, this field will be populated with warning messages.",
           "items": {
             "type": "object",
             "properties": {
@@ -14441,7 +14443,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the resource; defined by the server (output only)."
+          "description": "[Output Only] Unique identifier for the resource. Defined by the server."
         },
         "items": {
           "type": "array",
@@ -14457,11 +14459,11 @@
         },
         "nextPageToken": {
           "type": "string",
-          "description": "A token used to continue a truncated list request (output only)."
+          "description": "[Output Only] A token used to continue a truncated list request."
         },
         "selfLink": {
           "type": "string",
-          "description": "Server defined URL for this resource (output only)."
+          "description": "[Output Only] Server defined URL for this resource."
         }
       }
     },
@@ -14529,7 +14531,7 @@
       "properties": {
         "creationTimestamp": {
           "type": "string",
-          "description": "Creation timestamp in RFC3339 text format (output only)."
+          "description": "[Output Only] Creation timestamp in RFC3339 text format."
         },
         "description": {
           "type": "string",
@@ -14537,17 +14539,17 @@
         },
         "diskSizeGb": {
           "type": "string",
-          "description": "Size of the persistent disk snapshot, specified in GB (output only).",
+          "description": "[Output Only] Size of the snapshot, specified in GB.",
           "format": "int64"
         },
         "id": {
           "type": "string",
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
           "format": "uint64"
         },
         "kind": {
           "type": "string",
-          "description": "Type of the resource.",
+          "description": "[Output Only] Type of the resource. Always compute#snapshot for Snapshot resources.",
           "default": "compute#snapshot"
         },
         "licenses": {
@@ -14559,12 +14561,12 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035.",
+          "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
           "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "selfLink": {
           "type": "string",
-          "description": "Server defined URL for the resource (output only)."
+          "description": "[Output Only] Server-defined URL for the resource."
         },
         "sourceDisk": {
           "type": "string",
@@ -14572,11 +14574,11 @@
         },
         "sourceDiskId": {
           "type": "string",
-          "description": "The 'id' value of the disk used to create this snapshot. This value may be used to determine whether the snapshot was taken from the current or a previous instance of a given disk name."
+          "description": "[Output Only] The ID value of the disk used to create this snapshot. This value may be used to determine whether the snapshot was taken from the current or a previous instance of a given disk name."
         },
         "status": {
           "type": "string",
-          "description": "The status of the persistent disk snapshot (output only).",
+          "description": "[Output Only] The status of the snapshot.",
           "enum": [
             "CREATING",
             "DELETING",
@@ -14587,12 +14589,12 @@
         },
         "storageBytes": {
           "type": "string",
-          "description": "A size of the the storage used by the snapshot. As snapshots share storage this number is expected to change with snapshot creation/deletion.",
+          "description": "[Output Only] A size of the the storage used by the snapshot. As snapshots share storage, this number is expected to change with snapshot creation/deletion.",
           "format": "int64"
         },
         "storageBytesStatus": {
           "type": "string",
-          "description": "An indicator whether storageBytes is in a stable state, or it is being adjusted as a result of shared storage reallocation.",
+          "description": "[Output Only] An indicator whether storageBytes is in a stable state or it is being adjusted as a result of shared storage reallocation.",
           "enum": [
             "UPDATING",
             "UP_TO_DATE"
@@ -14602,7 +14604,7 @@
     },
     "SnapshotList": {
       "type": "object",
-      "description": "Contains a list of persistent disk snapshot resources.",
+      "description": "Contains a list of Snapshot resources.",
       "properties": {
         "id": {
           "type": "string",
@@ -14654,7 +14656,7 @@
       "properties": {
         "creationTimestamp": {
           "type": "string",
-          "description": "Creation timestamp in RFC3339 text format (output only)."
+          "description": "[Output Only] Creation timestamp in RFC3339 text format."
         },
         "description": {
           "type": "string",
@@ -14662,22 +14664,22 @@
         },
         "id": {
           "type": "string",
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] Unique identifier for the resource. Defined by the server.",
           "format": "uint64"
         },
         "kind": {
           "type": "string",
-          "description": "Type of the resource.",
+          "description": "[Output Only] Type of resource. Always compute#Operation for Operation resources.",
           "default": "compute#targetHttpProxy"
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035.",
+          "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
           "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "selfLink": {
           "type": "string",
-          "description": "Server defined URL for the resource (output only)."
+          "description": "[Output Only] Server defined URL for the resource."
         },
         "urlMap": {
           "type": "string",
@@ -14687,11 +14689,11 @@
     },
     "TargetHttpProxyList": {
       "type": "object",
-      "description": "Contains a list of TargetHttpProxy resources.",
+      "description": "A list of TargetHttpProxy resources.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the resource; defined by the server (output only)."
+          "description": "[Output Only] Unique identifier for the resource; defined by the server."
         },
         "items": {
           "type": "array",
@@ -14702,16 +14704,16 @@
         },
         "kind": {
           "type": "string",
-          "description": "Type of resource.",
+          "description": "Type of resource. Always compute#targetHttpProxyList for lists of Target HTTP proxies.",
           "default": "compute#targetHttpProxyList"
         },
         "nextPageToken": {
           "type": "string",
-          "description": "A token used to continue a truncated list request (output only)."
+          "description": "[Output Only] A token used to continue a truncated list request."
         },
         "selfLink": {
           "type": "string",
-          "description": "Server defined URL for this resource (output only)."
+          "description": "[Output Only] Server-defined URL for this resource."
         }
       }
     },
@@ -15172,7 +15174,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long and comply with RFC1035.",
+          "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
           "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "network": {
@@ -15348,7 +15350,7 @@
       "properties": {
         "creationTimestamp": {
           "type": "string",
-          "description": "Creation timestamp in RFC3339 text format (output only)."
+          "description": "[Output Only] Creation timestamp in RFC3339 text format."
         },
         "defaultService": {
           "type": "string",
@@ -15356,7 +15358,7 @@
         },
         "description": {
           "type": "string",
-          "description": "An optional textual description of the resource; provided by the client when the resource is created."
+          "description": "An optional textual description of the resource. Provided by the client when the resource is created."
         },
         "fingerprint": {
           "type": "string",
@@ -15372,7 +15374,7 @@
         },
         "id": {
           "type": "string",
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] Unique identifier for the resource. Set by the server.",
           "format": "uint64"
         },
         "kind": {
@@ -15382,7 +15384,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035.",
+          "description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
           "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "pathMatchers": {
@@ -15394,7 +15396,7 @@
         },
         "selfLink": {
           "type": "string",
-          "description": "Server defined URL for the resource (output only)."
+          "description": "[Output Only] Server defined URL for the resource."
         },
         "tests": {
           "type": "array",
@@ -15411,7 +15413,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the resource; defined by the server (output only)."
+          "description": "[Output Only] Unique identifier for the resource. Set by the server."
         },
         "items": {
           "type": "array",
@@ -15427,11 +15429,11 @@
         },
         "nextPageToken": {
           "type": "string",
-          "description": "A token used to continue a truncated list request (output only)."
+          "description": "[Output Only] A token used to continue a truncated list request."
         },
         "selfLink": {
           "type": "string",
-          "description": "Server defined URL for this resource (output only)."
+          "description": "[Output Only] Server defined URL for this resource."
         }
       }
     },
@@ -15561,7 +15563,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long and comply with RFC1035.",
+          "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
           "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
         },
         "peerIp": {

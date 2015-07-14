@@ -999,7 +999,7 @@
         "groupByColumn": {
           "type": "boolean",
           "description": "Synchronous report only. Set to true to group by this column. Defaults to false.",
-          "default": "false"
+          "default": false
         },
         "headerText": {
           "type": "string",
@@ -1059,12 +1059,12 @@
         "includeDeletedEntities": {
           "type": "boolean",
           "description": "Determines if removed entities should be included in the report. Defaults to false. Deprecated, please use includeRemovedEntities instead.",
-          "default": "false"
+          "default": false
         },
         "includeRemovedEntities": {
           "type": "boolean",
           "description": "Determines if removed entities should be included in the report. Defaults to false.",
-          "default": "false"
+          "default": false
         },
         "maxRowsPerFile": {
           "type": "integer",
@@ -1138,7 +1138,7 @@
         "rowCount": {
           "type": "integer",
           "description": "Synchronous report only. The maxinum number of rows to return; additional rows are dropped. Acceptable values are 0 to 10000, inclusive. Defaults to 10000.",
-          "default": "10000",
+          "default": 10000,
           "format": "int32",
           "minimum": 0,
           "maximum": 10000
@@ -1146,7 +1146,7 @@
         "startRow": {
           "type": "integer",
           "description": "Synchronous report only. Zero-based index of the first row to return. Acceptable values are 0 to 50000, inclusive. Defaults to 0.",
-          "default": "0",
+          "default": 0,
           "format": "int32",
           "minimum": 0,
           "maximum": 50000
@@ -1182,7 +1182,7 @@
         "verifySingleTimeZone": {
           "type": "boolean",
           "description": "If true, the report would only be created if all the requested stat data are sourced from a single timezone. Defaults to false.",
-          "default": "false"
+          "default": false
         }
       }
     },
