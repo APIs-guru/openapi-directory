@@ -1,0 +1,1308 @@
+{
+  "host": "api.citysdk.waag.org",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "api.citysdk.waag.org",
+    "x-providerName": "waag.org",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "http://api.citysdk.waag.org/swagger"
+    }
+  },
+  "tags": [
+    {
+      "name": "layers",
+      "description": "Operations about layers"
+    },
+    {
+      "name": "objects",
+      "description": "Operations about objects"
+    },
+    {
+      "name": "owners",
+      "description": "Operations about owners"
+    },
+    {
+      "name": "session",
+      "description": "Operations about sessions"
+    },
+    {
+      "name": "ngsi10",
+      "description": "Operations about ngsi10s"
+    }
+  ],
+  "paths": {
+    "/layers": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "layers"
+        ],
+        "operationId": "GET-layers---format-",
+        "summary": "Return all layers",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "post": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "layers"
+        ],
+        "operationId": "POST-layers---format-",
+        "summary": "Create new layer",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/layers/{layer}": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "layers"
+        ],
+        "operationId": "GET-layers--layer---format-",
+        "summary": "Return single layer",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "patch": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "layers"
+        ],
+        "operationId": "PATCH-layers--layer---format-",
+        "summary": "Edit a layer",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "delete": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "layers"
+        ],
+        "operationId": "DELETE-layers--layer---format-",
+        "summary": "Delete a layer",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/layers/{layer}/owners": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "layers"
+        ],
+        "operationId": "GET-layers--layer-owners---format-",
+        "summary": "Return all owners associated with single layer",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/layers/{layer}/context": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "layers"
+        ],
+        "operationId": "GET-layers--layer-context---format-",
+        "summary": "Return JSON-LD context of single layer",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "put": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "layers"
+        ],
+        "operationId": "PUT-layers--layer-context---format-",
+        "summary": "Overwrite JSON-LD context of single layer",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/layers/{layer}/objects": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "layers"
+        ],
+        "operationId": "GET-layers--layer-objects---format-",
+        "summary": "Return all objects with data on single layer",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "delete": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "layers"
+        ],
+        "operationId": "DELETE-layers--layer-objects---format-",
+        "summary": "Delete all objects from a single layer",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "post": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "layers"
+        ],
+        "operationId": "POST-layers--layer-objects---format-",
+        "summary": "Create one or more objects with data on single layer, or add data to existing objects (or a combination thereof)",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "patch": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "layers"
+        ],
+        "operationId": "PATCH-layers--layer-objects---format-",
+        "summary": "Edit one or more objects and data on single layer",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/layers/{layer}/objects/{cdk_id}": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "layers"
+        ],
+        "operationId": "GET-layers--layer-objects--cdk_id---format-",
+        "summary": "Return metadata of single layer about single object, e.g. the date the data was added/modified, etc.",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "",
+            "name": "cdk_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/layers/{layer}/fields": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "layers"
+        ],
+        "operationId": "GET-layers--layer-fields---format-",
+        "summary": "Return all fields of single layer",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "post": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "layers"
+        ],
+        "operationId": "POST-layers--layer-fields---format-",
+        "summary": "Create new field for single layer",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/layers/{layer}/fields/{field}": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "layers"
+        ],
+        "operationId": "GET-layers--layer-fields--field---format-",
+        "summary": "Return single field of single layer",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "",
+            "name": "field",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "put": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "layers"
+        ],
+        "operationId": "PUT-layers--layer-fields--field---format-",
+        "summary": "Overwrite single field on single layer",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "",
+            "name": "field",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "patch": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "layers"
+        ],
+        "operationId": "PATCH-layers--layer-fields--field---format-",
+        "summary": "Edit single field on single layer",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "",
+            "name": "field",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "delete": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "layers"
+        ],
+        "operationId": "DELETE-layers--layer-fields--field---format-",
+        "summary": "Delete a single field on single layer",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "",
+            "name": "field",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/objects": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "objects"
+        ],
+        "operationId": "GET-objects---format-",
+        "summary": "Return all objects",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/objects/{cdk_id}": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "objects"
+        ],
+        "operationId": "GET-objects--cdk_id---format-",
+        "summary": "Get a single object",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "cdk_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "patch": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "objects"
+        ],
+        "operationId": "PATCH-objects--cdk_id---format-",
+        "summary": "Edit a single object",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "cdk_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "delete": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "objects"
+        ],
+        "operationId": "DELETE-objects--cdk_id---format-",
+        "summary": "Delete a single object",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "cdk_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/objects/{cdk_id}/layers": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "objects"
+        ],
+        "operationId": "GET-objects--cdk_id-layers---format-",
+        "summary": "Get all layers that contain data of single object",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "cdk_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/objects/{cdk_id}/layers/{layer}": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "objects"
+        ],
+        "operationId": "GET-objects--cdk_id-layers--layer---format-",
+        "summary": "Return all data on single layer of single object",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "cdk_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "post": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "objects"
+        ],
+        "operationId": "POST-objects--cdk_id-layers--layer---format-",
+        "summary": "Add data on layer to single object",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "cdk_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "put": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "objects"
+        ],
+        "operationId": "PUT-objects--cdk_id-layers--layer---format-",
+        "summary": "Overwrite data on layer to single object",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "cdk_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "patch": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "objects"
+        ],
+        "operationId": "PATCH-objects--cdk_id-layers--layer---format-",
+        "summary": "Update data on layer to single object",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "cdk_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "delete": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "objects"
+        ],
+        "operationId": "DELETE-objects--cdk_id-layers--layer---format-",
+        "summary": "Remove data on layer from single object",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "cdk_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "",
+            "name": "layer",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/owners": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "owners"
+        ],
+        "operationId": "GET-owners---format-",
+        "summary": "Return all owners",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "post": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "owners"
+        ],
+        "operationId": "POST-owners---format-",
+        "summary": "Create new owner",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/owners/{owner}": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "owners"
+        ],
+        "operationId": "GET-owners--owner---format-",
+        "summary": "Get a single owner",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "owner",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "patch": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "owners"
+        ],
+        "operationId": "PATCH-owners--owner---format-",
+        "summary": "Edit an owner",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "owner",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "delete": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "owners"
+        ],
+        "operationId": "DELETE-owners--owner---format-",
+        "summary": "Delete owner - and all layers and data belonging to this owner",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "owner",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/owners/{owner}/layers": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "owners"
+        ],
+        "operationId": "GET-owners--owner-layers---format-",
+        "summary": "Return all layers belonging to a single owner",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "owner",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/session": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "session"
+        ],
+        "operationId": "GET-session---format-",
+        "summary": "Return a session key",
+        "description": "",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Login name.",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Login password.",
+            "name": "password",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      },
+      "delete": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "session"
+        ],
+        "operationId": "DELETE-session---format-",
+        "summary": "Close session",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/ngsi10/updateContext": {
+      "post": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "ngsi10"
+        ],
+        "operationId": "POST-ngsi10-updateContext---format-",
+        "summary": "Add or update NGSI contextElements",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/ngsi10/queryContext": {
+      "post": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "ngsi10"
+        ],
+        "operationId": "POST-ngsi10-queryContext---format-",
+        "summary": "Query context broker for contextElements",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/ngsi10/subscribeContext": {
+      "post": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "ngsi10"
+        ],
+        "operationId": "POST-ngsi10-subscribeContext---format-",
+        "summary": "Create a new context subscription",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/ngsi10/updateContextSubscription": {
+      "post": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "ngsi10"
+        ],
+        "operationId": "POST-ngsi10-updateContextSubscription---format-",
+        "summary": "Update/edit a context subscription",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/ngsi10/unsubscribeContext": {
+      "post": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "ngsi10"
+        ],
+        "operationId": "POST-ngsi10-unsubscribeContext---format-",
+        "summary": "Delete a context subscription",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/ngsi10/contextEntityTypes/{cetype}": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "ngsi10"
+        ],
+        "operationId": "GET-ngsi10-contextEntityTypes--cetype---format-",
+        "summary": "Return objects of particular type",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "cetype",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/ngsi10/contextEntityTypes/{cetype}/attributes/{attribute}": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "ngsi10"
+        ],
+        "operationId": "GET-ngsi10-contextEntityTypes--cetype-attributes--attribute---format-",
+        "summary": "Return objects of particular type",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "cetype",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "",
+            "name": "attribute",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/ngsi10/contextEntities/{entity}": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "ngsi10"
+        ],
+        "operationId": "GET-ngsi10-contextEntities--entity---format-",
+        "summary": "Return single context entity",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "entity",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/ngsi10/contextEntities/{entity}/attributes": {
+      "put": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "ngsi10"
+        ],
+        "operationId": "PUT-ngsi10-contextEntities--entity-attributes---format-",
+        "summary": "Update attributes for single context entity",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "entity",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/ngsi10/contextEntities/{entity}/attributes/{attribute}": {
+      "get": {
+        "produces": [
+          "application/json",
+          "application/ld+json"
+        ],
+        "tags": [
+          "ngsi10"
+        ],
+        "operationId": "GET-ngsi10-contextEntities--entity-attributes--attribute---format-",
+        "summary": "Return single context entity attribute",
+        "description": "",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "",
+            "name": "entity",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "",
+            "name": "attribute",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    }
+  }
+}
