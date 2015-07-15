@@ -26,6 +26,24 @@
     }
   ],
   "paths": {
+    "/institution": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "institution"
+        ],
+        "operationId": "getInstitutions",
+        "summary": "List institution",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
     "/institution/{uniqueId}": {
       "get": {
         "produces": [
@@ -47,24 +65,6 @@
             "format": "int64"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/institution": {
-      "get": {
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "institution"
-        ],
-        "operationId": "getInstitutions",
-        "summary": "List institution",
-        "description": "",
         "responses": {
           "200": {
             "description": "No response was specified"

@@ -95,6 +95,51 @@
         }
       ]
     },
+    "/service_accounts/v1/jwk/{robotEmail}": {
+      "get": {
+        "operationId": "oauth2.getRobotJwk",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Jwk"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "robotEmail",
+            "in": "path",
+            "description": "The email of robot account.",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/service_accounts/v1/metadata/raw/{robotEmail}": {
       "get": {
         "operationId": "oauth2.getRobotMetadataRaw",
@@ -338,6 +383,40 @@
     }
   },
   "definitions": {
+    "Jwk": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "alg": {
+                "type": "string",
+                "default": "RS256"
+              },
+              "e": {
+                "type": "string"
+              },
+              "kid": {
+                "type": "string"
+              },
+              "kty": {
+                "type": "string",
+                "default": "RSA"
+              },
+              "n": {
+                "type": "string"
+              },
+              "use": {
+                "type": "string",
+                "default": "sig"
+              }
+            }
+          }
+        }
+      }
+    },
     "Raw": {
       "type": "object",
       "properties": {

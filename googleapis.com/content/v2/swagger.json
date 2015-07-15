@@ -84,6 +84,12 @@
         },
         "parameters": [
           {
+            "name": "dryRun",
+            "in": "query",
+            "description": "Flag to run the request in dry-run mode.",
+            "type": "boolean"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -149,6 +155,12 @@
             "description": "The ID of the account.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "dryRun",
+            "in": "query",
+            "description": "Flag to run the request in dry-run mode.",
+            "type": "boolean"
           }
         ],
         "security": [
@@ -227,6 +239,12 @@
             "type": "string"
           },
           {
+            "name": "dryRun",
+            "in": "query",
+            "description": "Flag to run the request in dry-run mode.",
+            "type": "boolean"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -270,6 +288,12 @@
             "description": "The ID of the account.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "dryRun",
+            "in": "query",
+            "description": "Flag to run the request in dry-run mode.",
+            "type": "boolean"
           },
           {
             "name": "body",
@@ -333,6 +357,12 @@
             "description": "The ID of the managing account.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "dryRun",
+            "in": "query",
+            "description": "Flag to run the request in dry-run mode.",
+            "type": "boolean"
           },
           {
             "name": "body",
@@ -1209,6 +1239,12 @@
         },
         "parameters": [
           {
+            "name": "dryRun",
+            "in": "query",
+            "description": "Flag to run the request in dry-run mode.",
+            "type": "boolean"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -1272,6 +1308,12 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "dryRun",
+            "in": "query",
+            "description": "Flag to run the request in dry-run mode.",
+            "type": "boolean"
           }
         ],
         "security": [
@@ -1346,6 +1388,12 @@
             "type": "string"
           },
           {
+            "name": "dryRun",
+            "in": "query",
+            "description": "Flag to run the request in dry-run mode.",
+            "type": "boolean"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -1387,6 +1435,12 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "dryRun",
+            "in": "query",
+            "description": "Flag to run the request in dry-run mode.",
+            "type": "boolean"
           },
           {
             "name": "body",
@@ -1449,6 +1503,12 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "dryRun",
+            "in": "query",
+            "description": "Flag to run the request in dry-run mode.",
+            "type": "boolean"
           },
           {
             "name": "body",
@@ -1734,6 +1794,12 @@
         },
         "parameters": [
           {
+            "name": "dryRun",
+            "in": "query",
+            "description": "Flag to run the request in dry-run mode.",
+            "type": "boolean"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -1809,6 +1875,12 @@
             "description": "The ID of the product for which to update price and availability.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "dryRun",
+            "in": "query",
+            "description": "Flag to run the request in dry-run mode.",
+            "type": "boolean"
           },
           {
             "name": "body",
