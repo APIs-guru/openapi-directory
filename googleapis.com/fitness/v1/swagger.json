@@ -1233,13 +1233,32 @@
       "properties": {
         "fpVal": {
           "type": "number",
-          "description": "Floating point value. When this is set, intVal must not be set.",
+          "description": "Floating point value. When this is set, other values must not be set.",
           "format": "double"
         },
         "intVal": {
           "type": "integer",
-          "description": "Integer value. When this is set, fpVal must not be set.",
+          "description": "Integer value. When this is set, other values must not be set.",
           "format": "int32"
+        },
+        "mapVal": {
+          "type": "array",
+          "description": "Map value. The valid key space and units for the corresponding value of each entry should be documented as part of the data type definition. Keys should be kept small whenever possible. Data streams with large keys and high data frequency may be down sampled.",
+          "items": {
+            "$ref": "#/definitions/ValueMapValEntry"
+          }
+        },
+        "stringVal": {
+          "type": "string",
+          "description": "String value. When this is set, other values must not be set. Strings should be kept small whenever possible. Data streams with large string values and high data frequency may be down sampled."
+        }
+      }
+    },
+    "ValueMapValEntry": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
         }
       }
     }

@@ -352,6 +352,440 @@
         }
       ]
     },
+    "/{project}/aggregated/autoscalers": {
+      "get": {
+        "description": "Retrieves the list of autoscalers grouped by scope.",
+        "operationId": "compute.autoscalers.aggregatedList",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AutoscalerAggregatedList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Name of the project scoping this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must contain the following:\nFIELD_NAME COMPARISON_STRING LITERAL_STRING\n \n- FIELD_NAME: The name of the field you want to compare. The field name must be valid for the type of resource being filtered. Only atomic field types are supported (string, number, boolean). Array and object fields are not currently supported. \n- COMPARISON_STRING: The comparison string, either eq (equals) or ne (not equals). \n- LITERAL_STRING: The literal string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.  For example, you can filter by the name of a resource:\nfilter=name ne example-instance\nThe above filter returns only results whose name field does not equal example-instance. You can also enclose your literal string in single, double, or no quotes.",
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum count of results to be returned.",
+            "default": 500,
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 500
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Specifies a page token to use. Use this parameter if you want to list the next page of results. Set pageToken to the nextPageToken returned by a previous list request.",
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute",
+              "https://www.googleapis.com/auth/compute.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "autoscalers"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{project}/zones/{zone}/autoscalers/{autoscaler}": {
+      "delete": {
+        "description": "Deletes the specified autoscaler resource.",
+        "operationId": "compute.autoscalers.delete",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Name of the project scoping this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "Name of the zone scoping this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "autoscaler",
+            "in": "path",
+            "description": "Name of the persistent autoscaler resource to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
+          }
+        ],
+        "tags": [
+          "autoscalers"
+        ]
+      },
+      "get": {
+        "description": "Returns the specified autoscaler resource.",
+        "operationId": "compute.autoscalers.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Autoscaler"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Name of the project scoping this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "Name of the zone scoping this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "autoscaler",
+            "in": "path",
+            "description": "Name of the persistent autoscaler resource to return.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute",
+              "https://www.googleapis.com/auth/compute.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "autoscalers"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{project}/zones/{zone}/autoscalers": {
+      "post": {
+        "description": "Creates an autoscaler resource in the specified project using the data included in the request.",
+        "operationId": "compute.autoscalers.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Name of the project scoping this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "Name of the zone scoping this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Autoscaler"
+            }
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
+          }
+        ],
+        "tags": [
+          "autoscalers"
+        ]
+      },
+      "get": {
+        "description": "Retrieves the list of autoscaler resources contained within the specified zone.",
+        "operationId": "compute.autoscalers.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AutoscalerList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Name of the project scoping this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "Name of the zone scoping this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must contain the following:\nFIELD_NAME COMPARISON_STRING LITERAL_STRING\n \n- FIELD_NAME: The name of the field you want to compare. The field name must be valid for the type of resource being filtered. Only atomic field types are supported (string, number, boolean). Array and object fields are not currently supported. \n- COMPARISON_STRING: The comparison string, either eq (equals) or ne (not equals). \n- LITERAL_STRING: The literal string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.  For example, you can filter by the name of a resource:\nfilter=name ne example-instance\nThe above filter returns only results whose name field does not equal example-instance. You can also enclose your literal string in single, double, or no quotes.",
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum count of results to be returned.",
+            "default": 500,
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 500
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Specifies a page token to use. Use this parameter if you want to list the next page of results. Set pageToken to the nextPageToken returned by a previous list request.",
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute",
+              "https://www.googleapis.com/auth/compute.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "autoscalers"
+        ]
+      },
+      "patch": {
+        "description": "Updates an autoscaler resource in the specified project using the data included in the request. This method supports patch semantics.",
+        "operationId": "compute.autoscalers.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Name of the project scoping this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "Name of the zone scoping this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "autoscaler",
+            "in": "query",
+            "description": "Name of the autoscaler resource to update.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Autoscaler"
+            }
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
+          }
+        ],
+        "tags": [
+          "autoscalers"
+        ]
+      },
+      "put": {
+        "description": "Updates an autoscaler resource in the specified project using the data included in the request.",
+        "operationId": "compute.autoscalers.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "Name of the project scoping this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "zone",
+            "in": "path",
+            "description": "Name of the zone scoping this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "autoscaler",
+            "in": "query",
+            "description": "Name of the autoscaler resource to update.",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Autoscaler"
+            }
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
+          }
+        ],
+        "tags": [
+          "autoscalers"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/{project}/global/backendServices/{backendService}": {
       "delete": {
         "description": "Deletes the specified BackendService resource.",
@@ -11206,6 +11640,251 @@
         }
       }
     },
+    "Autoscaler": {
+      "type": "object",
+      "properties": {
+        "autoscalingPolicy": {
+          "$ref": "#/definitions/AutoscalingPolicy",
+          "description": "Autoscaling configuration."
+        },
+        "creationTimestamp": {
+          "type": "string",
+          "description": "Creation timestamp in RFC3339 text format (output only)."
+        },
+        "description": {
+          "type": "string",
+          "description": "An optional textual description of the resource; provided by the client when the resource is created."
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "format": "uint64"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Type of the resource.",
+          "default": "compute#autoscaler"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035.",
+          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?"
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "Server defined URL for the resource (output only)."
+        },
+        "target": {
+          "type": "string",
+          "description": "URL of Instance Group Manager or Replica Pool which will be controlled by Autoscaler."
+        },
+        "zone": {
+          "type": "string",
+          "description": "URL of the zone where the instance group resides (output only)."
+        }
+      }
+    },
+    "AutoscalerAggregatedList": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the resource; defined by the server (output only)."
+        },
+        "items": {
+          "type": "object",
+          "description": "A map of scoped autoscaler lists.",
+          "additionalProperties": {
+            "$ref": "#/definitions/AutoscalersScopedList",
+            "description": "Name of the scope containing this set of autoscalers."
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Type of resource.",
+          "default": "compute#autoscalerAggregatedList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token used to continue a truncated list request (output only)."
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "Server defined URL for this resource (output only)."
+        }
+      }
+    },
+    "AutoscalerList": {
+      "type": "object",
+      "description": "Contains a list of persistent autoscaler resources.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the resource; defined by the server (output only)."
+        },
+        "items": {
+          "type": "array",
+          "description": "A list of Autoscaler resources.",
+          "items": {
+            "$ref": "#/definitions/Autoscaler"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Type of resource.",
+          "default": "compute#autoscalerList"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "A token used to continue a truncated list request (output only)."
+        },
+        "selfLink": {
+          "type": "string",
+          "description": "Server defined URL for this resource (output only)."
+        }
+      }
+    },
+    "AutoscalersScopedList": {
+      "type": "object",
+      "properties": {
+        "autoscalers": {
+          "type": "array",
+          "description": "List of autoscalers contained in this scope.",
+          "items": {
+            "$ref": "#/definitions/Autoscaler"
+          }
+        },
+        "warning": {
+          "type": "object",
+          "description": "Informational warning which replaces the list of autoscalers when the list is empty.",
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "[Output Only] The warning type identifier for this warning.",
+              "enum": [
+                "DEPRECATED_RESOURCE_USED",
+                "DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+                "INJECTED_KERNELS_DEPRECATED",
+                "NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+                "NEXT_HOP_CANNOT_IP_FORWARD",
+                "NEXT_HOP_INSTANCE_NOT_FOUND",
+                "NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+                "NEXT_HOP_NOT_RUNNING",
+                "NOT_CRITICAL_ERROR",
+                "NO_RESULTS_ON_PAGE",
+                "REQUIRED_TOS_AGREEMENT",
+                "RESOURCE_NOT_DELETED",
+                "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+                "UNREACHABLE"
+              ]
+            },
+            "data": {
+              "type": "array",
+              "description": "[Output Only] Metadata for this warning in key: value format.",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "type": "string",
+                    "description": "[Output Only] A key for the warning data."
+                  },
+                  "value": {
+                    "type": "string",
+                    "description": "[Output Only] A warning data value corresponding to the key."
+                  }
+                }
+              }
+            },
+            "message": {
+              "type": "string",
+              "description": "[Output Only] Optional human-readable details for this warning."
+            }
+          }
+        }
+      }
+    },
+    "AutoscalingPolicy": {
+      "type": "object",
+      "description": "Cloud Autoscaler policy.",
+      "properties": {
+        "coolDownPeriodSec": {
+          "type": "integer",
+          "description": "The number of seconds that the Autoscaler should wait between two succeeding changes to the number of virtual machines. You should define an interval that is at least as long as the initialization time of a virtual machine and the time it may take for replica pool to create the virtual machine. The default is 60 seconds.",
+          "format": "int32"
+        },
+        "cpuUtilization": {
+          "$ref": "#/definitions/AutoscalingPolicyCpuUtilization",
+          "description": "TODO(jbartosik): Add support for scaling based on muliple utilization metrics (take max recommendation). Exactly one utilization policy should be provided. Configuration parameters of CPU based autoscaling policy."
+        },
+        "customMetricUtilizations": {
+          "type": "array",
+          "description": "Configuration parameters of autoscaling based on custom metric.",
+          "items": {
+            "$ref": "#/definitions/AutoscalingPolicyCustomMetricUtilization"
+          }
+        },
+        "loadBalancingUtilization": {
+          "$ref": "#/definitions/AutoscalingPolicyLoadBalancingUtilization",
+          "description": "Configuration parameters of autoscaling based on load balancer."
+        },
+        "maxNumReplicas": {
+          "type": "integer",
+          "description": "The maximum number of replicas that the Autoscaler can scale up to. This field is required for config to be effective. Maximum number of replicas should be not lower than minimal number of replicas. Absolute limit for this value is defined in Autoscaler backend.",
+          "format": "int32"
+        },
+        "minNumReplicas": {
+          "type": "integer",
+          "description": "The minimum number of replicas that the Autoscaler can scale down to. Can't be less than 0. If not provided Autoscaler will choose default value depending on maximal number of replicas.",
+          "format": "int32"
+        }
+      }
+    },
+    "AutoscalingPolicyCpuUtilization": {
+      "type": "object",
+      "description": "CPU utilization policy.",
+      "properties": {
+        "utilizationTarget": {
+          "type": "number",
+          "description": "The target utilization that the Autoscaler should maintain. It is represented as a fraction of used cores. For example: 6 cores used in 8-core VM are represented here as 0.75. Must be a float value between (0, 1]. If not defined, the default is 0.8.",
+          "format": "double"
+        }
+      }
+    },
+    "AutoscalingPolicyCustomMetricUtilization": {
+      "type": "object",
+      "description": "Custom utilization metric policy.",
+      "properties": {
+        "metric": {
+          "type": "string",
+          "description": "Identifier of the metric. It should be a Cloud Monitoring metric. The metric can not have negative values. The metric should be an utilization metric (increasing number of VMs handling requests x times should reduce average value of the metric roughly x times). For example you could use: compute.googleapis.com/instance/network/received_bytes_count."
+        },
+        "utilizationTarget": {
+          "type": "number",
+          "description": "Target value of the metric which Autoscaler should maintain. Must be a positive value.",
+          "format": "double"
+        },
+        "utilizationTargetType": {
+          "type": "string",
+          "description": "Defines type in which utilization_target is expressed.",
+          "enum": [
+            "DELTA_PER_MINUTE",
+            "DELTA_PER_SECOND",
+            "GAUGE"
+          ]
+        }
+      }
+    },
+    "AutoscalingPolicyLoadBalancingUtilization": {
+      "type": "object",
+      "description": "Load balancing utilization policy.",
+      "properties": {
+        "utilizationTarget": {
+          "type": "number",
+          "description": "Fraction of backend capacity utilization (set in HTTP load balancing configuration) that Autoscaler should maintain. Must be a positive float value. If not defined, the default is 0.8. For example if your maxRatePerInstance capacity (in HTTP Load Balancing configuration) is set at 10 and you would like to keep number of instances such that each instance receives 7 QPS on average, set this to 0.7.",
+          "format": "double"
+        }
+      }
+    },
     "Backend": {
       "type": "object",
       "description": "Message containing information of one individual backend.",
@@ -12635,11 +13314,6 @@
           "$ref": "#/definitions/InstanceGroupManagerActionsSummary",
           "description": "[Output Only] The list of instance actions and the number of instances in this managed instance group that are scheduled for those actions."
         },
-        "currentSize": {
-          "type": "integer",
-          "description": "[Output Only] The number of instances that currently exist and are a part of this group. The number includes instances that are in a RUNNING state, instances that are starting, and instances that are scheduled to be deleted or abandoned.",
-          "format": "int32"
-        },
         "description": {
           "type": "string",
           "description": "An optional text description for the managed instance group."
@@ -12713,15 +13387,15 @@
           "type": "integer",
           "format": "int32"
         },
-        "rebooting": {
-          "type": "integer",
-          "format": "int32"
-        },
         "recreating": {
           "type": "integer",
           "format": "int32"
         },
         "refreshing": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "restarting": {
           "type": "integer",
           "format": "int32"
         }
@@ -12762,10 +13436,10 @@
       "properties": {
         "actionType": {
           "type": "string",
-          "description": "The action to perform when an instance becomes unhealthy. Possible values are RECREATE or REBOOT. RECREATE replaces an unhealthy instance with a new instance that is based on the instance template for this managed instance group. REBOOT performs a soft reboot on an instance. If the instance cannot reboot, the instance performs a hard restart.",
+          "description": "The action to perform when an instance becomes unhealthy. Possible values are RECREATE or RESTART. RECREATE replaces an unhealthy instance with a new instance that is based on the instance template for this managed instance group. RESTART performs a soft restart on an instance. If the instance cannot restart softly, the instance performs a hard restart.",
           "enum": [
-            "REBOOT",
-            "RECREATE"
+            "RECREATE",
+            "RESTART"
           ]
         },
         "healthCheck": {
@@ -13576,15 +14250,15 @@
             "CREATING",
             "DELETING",
             "NONE",
-            "REBOOTING",
             "RECREATING",
-            "REFRESHING"
+            "REFRESHING",
+            "RESTARTING"
           ]
         },
-        "incarnationId": {
+        "id": {
           "type": "string",
           "description": "The unique identifier for this resource (empty when instance does not exist).",
-          "format": "int64"
+          "format": "uint64"
         },
         "instance": {
           "type": "string",
