@@ -1,0 +1,3370 @@
+{
+  "host": "api.taxamo.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "version": "1",
+    "title": "api.taxamo.com",
+    "x-providerName": "taxamo.com",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "https://api.taxamo.com/swagger"
+    }
+  },
+  "tags": [
+    {
+      "name": "refunds",
+      "description": "Refunds"
+    },
+    {
+      "name": "payments",
+      "description": "Payments"
+    },
+    {
+      "name": "invoice"
+    },
+    {
+      "name": "transactions",
+      "description": "Transactions"
+    },
+    {
+      "name": "tax",
+      "description": "Tax"
+    },
+    {
+      "name": "geoip",
+      "description": "GeoIP"
+    },
+    {
+      "name": "stats"
+    },
+    {
+      "name": "settlement",
+      "description": "Settlement"
+    },
+    {
+      "name": "verification",
+      "description": "Verification"
+    },
+    {
+      "name": "dictionaries",
+      "description": "Dictionaries"
+    }
+  ],
+  "paths": {
+    "/api/v1/transactions/{key}/refunds": {
+      "post": {
+        "tags": [
+          "refunds"
+        ],
+        "operationId": "createRefund",
+        "summary": "Create a refund",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Transaction key.",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "description": "Input",
+            "name": "input",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createRefundIn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/createRefundOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/transactions/{key}/payments": {
+      "get": {
+        "tags": [
+          "payments"
+        ],
+        "operationId": "listPayments",
+        "summary": "List payments",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Max record count (no more than 100, defaults to 10).",
+            "name": "limit",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "How many records need to be skipped, defaults to 0.",
+            "name": "offset",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Transaction key.",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/listPaymentsOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/transactions/{key}/payments/capture": {
+      "post": {
+        "tags": [
+          "payments"
+        ],
+        "operationId": "capturePayment",
+        "summary": "Capture payment",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Transaction key.",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/capturePaymentOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/transactions/{key}/invoice/send_email": {
+      "post": {
+        "tags": [
+          "invoice"
+        ],
+        "operationId": "emailInvoice",
+        "summary": "Email invoice",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Transaction key.",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "description": "Input",
+            "name": "input",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/emailInvoiceIn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/emailInvoiceOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/transactions": {
+      "get": {
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "listTransactions",
+        "summary": "Browse transactions",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Filtering expression",
+            "name": "filter_text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Offset",
+            "name": "offset",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "description": "Taxamo provided transaction key or custom id",
+            "name": "key_or_custom_id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Three letter ISO currency code.",
+            "name": "currency_code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Order date to in yyyy-MM-dd format.",
+            "name": "order_date_to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "If true, results are sorted in descending order.",
+            "name": "sort_reverse",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "description": "Limit (no more than 1000, defaults to 100).",
+            "name": "limit",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "description": "Transaction invoice number.",
+            "name": "invoice_number",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Comma separated list of of transaction statuses.",
+            "name": "statuses",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Order date from in yyyy-MM-dd format.",
+            "name": "order_date_from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Output format - supports 'csv' value for this operation.",
+            "name": "format",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Two letter ISO tax country code.",
+            "name": "tax_country_code",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/listTransactionsOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/transactions/{key}": {
+      "delete": {
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "cancelTransaction",
+        "summary": "Delete transaction",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Transaction key",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/cancelTransactionOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/transactions/{key}/confirm": {
+      "post": {
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "confirmTransaction",
+        "summary": "Confirm transaction",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Transaction key.",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "description": "Input",
+            "name": "input",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/confirmTransactionIn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/confirmTransactionOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/transactions/{key}/unconfirm": {
+      "post": {
+        "tags": [
+          "transactions"
+        ],
+        "operationId": "unconfirmTransaction",
+        "summary": "Un-confirm the transaction. Un-confirmed transaction can be edited or canceled like a newly created one.",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Transaction key.",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "description": "Input",
+            "name": "input",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/unconfirmTransactionIn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/unconfirmTransactionOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/tax/calculate": {
+      "get": {
+        "tags": [
+          "tax"
+        ],
+        "operationId": "calculateSimpleTax",
+        "summary": "Simple tax",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Product type, according to dictionary /dictionaries/product_types. ",
+            "name": "product_type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Buyer's credit card prefix.",
+            "name": "buyer_credit_card_prefix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Currency code for transaction - e.g. EUR.",
+            "name": "currency_code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Unit price.",
+            "name": "unit_price",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "in": "query",
+            "description": "Quantity Defaults to 1.",
+            "name": "quantity",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "in": "query",
+            "description": " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly.",
+            "name": "buyer_tax_number",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Two-letter ISO country code, e.g. FR. Use it to force country code for tax calculation.",
+            "name": "force_country_code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used.",
+            "name": "order_date",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Amount. Required if total amount is not provided.",
+            "name": "amount",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "in": "query",
+            "description": "Billing two letter ISO country code.",
+            "name": "billing_country_code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Total amount. Required if amount is not provided.",
+            "name": "total_amount",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "in": "query",
+            "description": "If the transaction is in a country supported by Taxamo, but the tax is not calculated due to merchant settings or EU B2B transaction for example.",
+            "name": "tax_deducted",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/calculateSimpleTaxOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/tax/vat_numbers/{tax_number}/validate": {
+      "get": {
+        "tags": [
+          "tax"
+        ],
+        "operationId": "validateTaxNumber",
+        "summary": "Validate VAT number",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Two-letter ISO country code.",
+            "name": "country_code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Tax number",
+            "name": "tax_number",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/validateTaxNumberOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/tax/location/calculate": {
+      "get": {
+        "tags": [
+          "tax"
+        ],
+        "operationId": "calculateTaxLocation",
+        "summary": "Calculate location",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Billing two letter ISO country code.",
+            "name": "billing_country_code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Buyer's credit card prefix.",
+            "name": "buyer_credit_card_prefix",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/calculateTaxLocationOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/geoip": {
+      "get": {
+        "tags": [
+          "geoip"
+        ],
+        "operationId": "locateMyIP",
+        "summary": "Locate IP",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/locateMyIPOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/geoip/{ip}": {
+      "get": {
+        "tags": [
+          "geoip"
+        ],
+        "operationId": "locateGivenIP",
+        "summary": "Locate provided IP",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "IP address.",
+            "name": "ip",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/locateGivenIPOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/stats/transactions": {
+      "get": {
+        "tags": [
+          "stats"
+        ],
+        "operationId": "getTransactionsStats",
+        "summary": "Transaction stats",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Date from in yyyy-MM format.",
+            "name": "date_from",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Date to in yyyy-MM format.",
+            "name": "date_to",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Interval. Accepted values are 'day', 'week' and 'month'.",
+            "name": "interval",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/getTransactionsStatsOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/stats/settlement/by_country": {
+      "get": {
+        "tags": [
+          "stats"
+        ],
+        "operationId": "getSettlementStatsByCountry",
+        "summary": "Settlement by country",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Date from in yyyy-MM format.",
+            "name": "date_from",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Date to in yyyy-MM format.",
+            "name": "date_to",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/getSettlementStatsByCountryOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/stats/settlement/by_taxation_type": {
+      "get": {
+        "tags": [
+          "stats"
+        ],
+        "operationId": "getSettlementStatsByTaxationType",
+        "summary": "Settlement by tax type",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Date from in yyyy-MM format.",
+            "name": "date_from",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Date to in yyyy-MM format.",
+            "name": "date_to",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/getSettlementStatsByTaxationTypeOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/stats/settlement/daily": {
+      "get": {
+        "tags": [
+          "stats"
+        ],
+        "operationId": "getDailySettlementStats",
+        "summary": "Settlement stats over time",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Interval type - day, week, month.",
+            "name": "interval",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Date from in yyyy-MM format.",
+            "name": "date_from",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Date to in yyyy-MM format.",
+            "name": "date_to",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/getDailySettlementStatsOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/settlement/refunds": {
+      "get": {
+        "tags": [
+          "settlement"
+        ],
+        "operationId": "getRefunds",
+        "summary": "Fetch refunds",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Output format. 'csv' value is accepted as well",
+            "name": "format",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "MOSS country code, used to determine currency. If ommited, merchant default setting is used.",
+            "name": "moss_country_code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Take only refunds issued at or after the date. Format: yyyy-MM-dd",
+            "name": "date_from",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/getRefundsOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/settlement/{quarter}": {
+      "get": {
+        "tags": [
+          "settlement"
+        ],
+        "operationId": "getSettlement",
+        "summary": "Fetch settlement",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Output format. 'csv' value is accepted as well",
+            "name": "format",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "MOSS country code, used to determine currency. If ommited, merchant default setting is used.",
+            "name": "moss_country_code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used.",
+            "name": "moss_tax_id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Quarter in yyyy-MM format.",
+            "name": "quarter",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/getSettlementOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/settlement/summary/{quarter}": {
+      "get": {
+        "tags": [
+          "settlement"
+        ],
+        "operationId": "getSettlementSummary",
+        "summary": "Fetch summary",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "MOSS country code, used to determine currency. If ommited, merchant default setting is used.",
+            "name": "moss_country_code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "description": "Quarter in yyyy-MM format.",
+            "name": "quarter",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/getSettlementSummaryOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/verification/sms": {
+      "post": {
+        "tags": [
+          "verification"
+        ],
+        "operationId": "createSMSToken",
+        "summary": "Create SMS token",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "description": "Input",
+            "name": "input",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createSMSTokenIn"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/createSMSTokenOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/verification/sms/{token}": {
+      "get": {
+        "tags": [
+          "verification"
+        ],
+        "operationId": "verifySMSToken",
+        "summary": "Verify SMS token",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Provided token.",
+            "name": "token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/verifySMSTokenOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/dictionaries/currencies": {
+      "get": {
+        "tags": [
+          "dictionaries"
+        ],
+        "operationId": "getCurrenciesDict",
+        "summary": "Currencies",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/getCurrenciesDictOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/dictionaries/product_types": {
+      "get": {
+        "tags": [
+          "dictionaries"
+        ],
+        "operationId": "getProductTypesDict",
+        "summary": "Product types",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/getProductTypesDictOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    },
+    "/api/v1/dictionaries/countries": {
+      "get": {
+        "tags": [
+          "dictionaries"
+        ],
+        "operationId": "getCountriesDict",
+        "summary": "Countries",
+        "description": "",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Should only countries with tax supported be listed?",
+            "name": "tax_supported",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/getCountriesDictOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Token"
+    }
+  },
+  "definitions": {
+    "createRefundOut": {
+      "properties": {
+        "total_amount": {
+          "type": "number",
+          "description": "Total amount, including tax, that was refunded in this call."
+        },
+        "tax_amount": {
+          "type": "number",
+          "description": "Calculated tax amount, that was refunded in this call."
+        },
+        "refunded_total_amount": {
+          "type": "number",
+          "description": "Total amount, including tax, that was refunded for this line."
+        },
+        "refunded_tax_amount": {
+          "type": "number",
+          "description": "Total tax amount, that was refunded for this line."
+        }
+      }
+    },
+    "createRefundIn": {
+      "properties": {
+        "line_key": {
+          "type": "string",
+          "description": "Line identifier. Either line key or custom id is required."
+        },
+        "custom_id": {
+          "type": "string",
+          "description": "Line custom identifier. Either line key or custom id is required."
+        },
+        "amount": {
+          "type": "number",
+          "description": "Amount (without tax) to be refunded. Either amount or total amount is required."
+        },
+        "total_amount": {
+          "type": "number",
+          "description": "Total amount, including tax, to be refunded. Either amount or total amount is required."
+        }
+      }
+    },
+    "capturePaymentOut": {
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "description": "Was the operation successful?"
+        }
+      }
+    },
+    "payments": {
+      "properties": {
+        "amount": {
+          "type": "number",
+          "description": "Amount that has been paid. Use negative value to register refunds."
+        },
+        "payment_timestamp": {
+          "type": "string",
+          "description": "When the payment was received in yyyy-MM-dd HH:mm:ss (24 hour format, UTC+0 timezone)."
+        },
+        "payment_information": {
+          "type": "string",
+          "description": "Additional payment information."
+        }
+      }
+    },
+    "listPaymentsOut": {
+      "properties": {
+        "payments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/payments"
+          },
+          "description": "Payments."
+        }
+      }
+    },
+    "listPaymentsIn": {
+      "properties": {
+        "limit": {
+          "type": "string",
+          "description": "Max record count (no more than 100, defaults to 10)."
+        },
+        "offset": {
+          "type": "string",
+          "description": "How many records need to be skipped, defaults to 0."
+        }
+      }
+    },
+    "createPaymentOut": {
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "description": "Was the operation successful?"
+        }
+      }
+    },
+    "createPaymentIn": {
+      "required": [
+        "amount"
+      ],
+      "properties": {
+        "amount": {
+          "type": "number",
+          "description": "Amount that has been paid. Use negative value to register refunds."
+        },
+        "payment_timestamp": {
+          "type": "string",
+          "description": "When the payment was received in yyyy-MM-dd'T'HH:mm:ss(.SSS)'Z' format (24 hour, UTC timezone). Defaults to current date and time."
+        },
+        "payment_information": {
+          "type": "string",
+          "description": "Additional payment information."
+        }
+      }
+    },
+    "emailInvoiceOut": {
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "description": "Was operation successful?"
+        }
+      }
+    },
+    "emailInvoiceIn": {
+      "properties": {
+        "buyer_email": {
+          "type": "string",
+          "description": "Email to send the invoice. If not provided, transaction.buyer_email will be used."
+        }
+      }
+    },
+    "input_transaction_update": {
+      "properties": {
+        "buyer_credit_card_prefix": {
+          "type": "string",
+          "description": "Buyer's credit card prefix."
+        },
+        "custom_data": {
+          "type": "string",
+          "description": "Custom data related to transaction."
+        },
+        "buyer_name": {
+          "type": "string",
+          "description": "Buyer's name - first name and last name or company name."
+        },
+        "invoice_date": {
+          "type": "string",
+          "description": "Invoice date of issue."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Currency code for transaction - e.g. EUR."
+        },
+        "supply_date": {
+          "type": "string",
+          "description": "Supply date in yyyy-MM-dd format."
+        },
+        "invoice_address": {
+          "$ref": "#/definitions/invoice_address",
+          "description": "Invoice address."
+        },
+        "verification_token": {
+          "type": "string",
+          "description": "Verification token"
+        },
+        "transaction_lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/input_transaction_line"
+          },
+          "description": "Transaction lines."
+        },
+        "buyer_tax_number": {
+          "type": "string",
+          "description": " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        },
+        "custom_fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/custom_fields"
+          },
+          "description": "Custom fields, stored as key-value pairs. This property is not processed and used mostly with Taxamo-built helpers."
+        },
+        "force_country_code": {
+          "type": "string",
+          "description": "Two-letter ISO country code, e.g. FR. Use it to force country code for tax calculation."
+        },
+        "invoice_number": {
+          "type": "string",
+          "description": "Invoice number."
+        },
+        "order_date": {
+          "type": "string",
+          "description": "Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used."
+        },
+        "buyer_ip": {
+          "type": "string",
+          "description": "IP address of the buyer in dotted decimal (IPv4) or text format (IPv6)."
+        },
+        "buyer_email": {
+          "type": "string",
+          "description": "Buyer's declared email address."
+        },
+        "original_transaction_key": {
+          "type": "string",
+          "description": "Use data and evidence from original transaction. Tax will be re-calculated, but evidence won't be re-checked. This parameter is taken into account only when 'manual' flag is raised."
+        },
+        "billing_country_code": {
+          "type": "string",
+          "description": "Billing two letter ISO country code."
+        },
+        "custom_id": {
+          "type": "string",
+          "description": "Custom identifier provided upon transaction creation."
+        },
+        "additional_currencies": {
+          "$ref": "#/definitions/additional_currencies",
+          "description": "Additional currency information - can be used to receive additional information about invoice in another currency."
+        },
+        "invoice_place": {
+          "type": "string",
+          "description": "Invoice place of issue."
+        },
+        "evidence": {
+          "$ref": "#/definitions/evidence",
+          "description": "Tax country of residence evidence."
+        },
+        "description": {
+          "type": "string",
+          "description": "Transaction description."
+        },
+        "tax_deducted": {
+          "type": "boolean",
+          "description": "True if the transaction deducted from tax and no tax is applied. Either set automatically when VAT number validates with VIES correctly, but can also be provided in manual mode."
+        },
+        "tax_country_code": {
+          "type": "string",
+          "description": "Two-letter ISO country code, e.g. FR. This code applies to detected/set country for transaction, but can be set using manual mode."
+        }
+      }
+    },
+    "updateTransactionOut": {
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/transaction",
+          "description": "Transaction data."
+        }
+      }
+    },
+    "createTransactionOut": {
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/transaction",
+          "description": "Stored transaction data"
+        }
+      }
+    },
+    "transaction": {
+      "required": [
+        "currency_code",
+        "transaction_lines"
+      ],
+      "properties": {
+        "confirm_timestamp": {
+          "type": "string",
+          "description": "Date and time of transaction confirmation."
+        },
+        "deducted_tax_amount": {
+          "type": "number",
+          "description": "How much tax has been deducted."
+        },
+        "buyer_credit_card_prefix": {
+          "type": "string",
+          "description": "Buyer's credit card prefix."
+        },
+        "custom_data": {
+          "type": "string",
+          "description": "Custom data related to transaction."
+        },
+        "buyer_name": {
+          "type": "string",
+          "description": "Buyer's name - first name and last name or company name."
+        },
+        "invoice_date": {
+          "type": "string",
+          "description": "Invoice date of issue."
+        },
+        "create_timestamp": {
+          "type": "string",
+          "description": "Date and time of transaction creation."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Currency code for transaction - e.g. EUR."
+        },
+        "supply_date": {
+          "type": "string",
+          "description": "Supply date in yyyy-MM-dd format."
+        },
+        "invoice_image_url": {
+          "type": "string",
+          "description": "Invoice image URL - provided by Taxamo."
+        },
+        "key": {
+          "type": "string",
+          "description": "Id generated by taxamo."
+        },
+        "invoice_address": {
+          "$ref": "#/definitions/invoice_address",
+          "description": "Invoice address."
+        },
+        "buyer_tax_number_valid": {
+          "type": "boolean",
+          "description": "If the buyer tax number has been provided and was validated successfully. Always true for domestic transactions (billing country same as merchant's country), tax number doesn't get validated in that case."
+        },
+        "verification_token": {
+          "type": "string",
+          "description": "Verification token"
+        },
+        "tax_supported": {
+          "type": "boolean",
+          "description": "Is tax calculation supported for a detected tax location?"
+        },
+        "transaction_lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transaction_lines"
+          },
+          "description": "Transaction lines."
+        },
+        "buyer_tax_number": {
+          "type": "string",
+          "description": " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        },
+        "status": {
+          "type": "string",
+          "description": "Transaction status."
+        },
+        "custom_fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/custom_fields"
+          },
+          "description": "Custom fields, stored as key-value pairs. This property is not processed and used mostly with Taxamo-built helpers."
+        },
+        "force_country_code": {
+          "type": "string",
+          "description": "Two-letter ISO country code, e.g. FR. Use it to force country code for tax calculation."
+        },
+        "countries": {
+          "$ref": "#/definitions/countries",
+          "description": "Map of countries calculated from evidence provided. This value is not stored and is available only upon tax calculation."
+        },
+        "invoice_number": {
+          "type": "string",
+          "description": "Invoice number."
+        },
+        "order_date": {
+          "type": "string",
+          "description": "Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used."
+        },
+        "source": {
+          "type": "string",
+          "description": "Transaction source software - e.g. plugin"
+        },
+        "amount": {
+          "type": "number",
+          "description": "Amount of transaction without tax."
+        },
+        "buyer_ip": {
+          "type": "string",
+          "description": "IP address of the buyer in dotted decimal (IPv4) or text format (IPv6)."
+        },
+        "buyer_email": {
+          "type": "string",
+          "description": "Buyer's declared email address."
+        },
+        "original_transaction_key": {
+          "type": "string",
+          "description": "Use data and evidence from original transaction. Tax will be re-calculated, but evidence won't be re-checked. This parameter is taken into account only when 'manual' flag is raised."
+        },
+        "billing_country_code": {
+          "type": "string",
+          "description": "Billing two letter ISO country code."
+        },
+        "custom_id": {
+          "type": "string",
+          "description": "Custom identifier provided upon transaction creation."
+        },
+        "tax_amount": {
+          "type": "number",
+          "description": "Tax amount of transaction."
+        },
+        "additional_currencies": {
+          "$ref": "#/definitions/additional_currencies",
+          "description": "Additional currency information - can be used to receive additional information about invoice in another currency."
+        },
+        "invoice_place": {
+          "type": "string",
+          "description": "Invoice place of issue."
+        },
+        "total_amount": {
+          "type": "number",
+          "description": "Total amount of transaction."
+        },
+        "tax_entity_name": {
+          "type": "string",
+          "description": "To which entity is the tax due."
+        },
+        "evidence": {
+          "$ref": "#/definitions/evidence",
+          "description": "Tax country of residence evidence."
+        },
+        "refunded_tax_amount": {
+          "type": "number",
+          "description": "Refunded tax amount."
+        },
+        "manual": {
+          "type": "boolean",
+          "description": "Is the transaction created manually - using private token. In manual mode, it is the merchant who calculates tax country and validates evidence. If you need API to do that when accessing the API with private token, just skip the 'manual' flag or use false value there and provide customer's ip address through buyer_ip field. Manual mode is also used when using original_transaction_key field."
+        },
+        "tax_timezone": {
+          "type": "string",
+          "description": "Timezone name for tax transaction."
+        },
+        "description": {
+          "type": "string",
+          "description": "Transaction description."
+        },
+        "test": {
+          "type": "boolean",
+          "description": "Was this transaction created in test mode?"
+        },
+        "tax_deducted": {
+          "type": "boolean",
+          "description": "If the transaction is in a country supported by Taxamo, but the tax is not calculated due to merchant settings or EU B2B transaction for example."
+        },
+        "tax_country_code": {
+          "type": "string",
+          "description": "Two-letter ISO country code, e.g. FR. This code applies to detected/set country for transaction, but can be set using manual mode."
+        },
+        "refunded_total_amount": {
+          "type": "number",
+          "description": "Total amount refunde (including tax)."
+        }
+      }
+    },
+    "cancelTransactionOut": {
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "description": "Was operation successful?"
+        }
+      }
+    },
+    "input_transaction_line": {
+      "required": [
+        "custom_id"
+      ],
+      "properties": {
+        "product_type": {
+          "type": "string",
+          "description": "Product type, according to dictionary /dictionaries/product_types. "
+        },
+        "supply_date": {
+          "type": "string",
+          "description": "Date of supply in yyyy-MM-dd format."
+        },
+        "unit_price": {
+          "type": "number",
+          "description": "Unit price."
+        },
+        "unit_of_measure": {
+          "type": "string",
+          "description": "Unit of measure."
+        },
+        "quantity": {
+          "type": "number",
+          "description": "Quantity Defaults to 1."
+        },
+        "custom_fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/custom_fields"
+          },
+          "description": "Custom fields, stored as key-value pairs. This property is not processed and used mostly with Taxamo-built helpers."
+        },
+        "line_key": {
+          "type": "string",
+          "description": "Generated line key."
+        },
+        "tax_name": {
+          "type": "string",
+          "description": "Tax name, calculated by taxamo.  Can be overwritten when informative field is true."
+        },
+        "product_code": {
+          "type": "string",
+          "description": "Internal product code, used for invoicing for example."
+        },
+        "amount": {
+          "type": "number",
+          "description": "Amount. Required if total amount is not provided."
+        },
+        "custom_id": {
+          "type": "string",
+          "description": "Custom id, provided by ecommerce software."
+        },
+        "informative": {
+          "type": "boolean",
+          "description": "If the line is provided for informative purposes. Such line must have :tax-rate and optionally :tax-name - if not, API validation will fail for this line."
+        },
+        "tax_rate": {
+          "type": "number",
+          "description": "Tax rate, calculated by taxamo. Must be provided when informative field is true."
+        },
+        "total_amount": {
+          "type": "number",
+          "description": "Total amount. Required if amount is not provided."
+        },
+        "description": {
+          "type": "string",
+          "description": "Line contents description."
+        }
+      }
+    },
+    "listTransactionsOut": {
+      "properties": {
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transactions"
+          },
+          "description": "Transactions matching the criteria."
+        }
+      }
+    },
+    "invoice_address": {
+      "properties": {
+        "freeform_address": {
+          "type": "string",
+          "description": "Freeform address. Use when structured data is not available. Will be used in SAF-MOSS file if other fields are not provided."
+        },
+        "building_number": {
+          "type": "string",
+          "description": "Building number."
+        },
+        "street_name": {
+          "type": "string",
+          "description": " Street name."
+        },
+        "address_detail": {
+          "type": "string",
+          "description": "Address details - for example apartament number."
+        },
+        "city": {
+          "type": "string",
+          "description": "City name."
+        },
+        "postal_code": {
+          "type": "string",
+          "description": "Postal code."
+        },
+        "region": {
+          "type": "string",
+          "description": "Region."
+        },
+        "country": {
+          "type": "string",
+          "description": "2-letter ISO country code."
+        }
+      }
+    },
+    "createTransactionIn": {
+      "required": [
+        "transaction"
+      ],
+      "properties": {
+        "manual_mode": {
+          "type": "boolean",
+          "description": "Use manual mode, bypassing country detection. Only allowed with private token. This flag allows to use original_transaction_key field"
+        },
+        "transaction": {
+          "$ref": "#/definitions/input_transaction",
+          "description": "Transaction."
+        }
+      }
+    },
+    "evidence_schema": {
+      "properties": {
+        "used": {
+          "type": "boolean",
+          "description": "If the evidence was used to match the actual country."
+        },
+        "resolved_country_code": {
+          "type": "string",
+          "description": "Country code that was resolved using this evidence."
+        },
+        "evidence_type": {
+          "type": "string",
+          "description": "Type of evidence."
+        },
+        "evidence_value": {
+          "type": "string",
+          "description": "Value provided as evidence - for example IP address."
+        }
+      }
+    },
+    "transaction_lines": {
+      "required": [
+        "custom_id"
+      ],
+      "properties": {
+        "product_type": {
+          "type": "string",
+          "description": "Product type, according to dictionary /dictionaries/product_types. "
+        },
+        "deducted_tax_amount": {
+          "type": "number",
+          "description": "Deducted tax amount, calculated by taxmo."
+        },
+        "supply_date": {
+          "type": "string",
+          "description": "Date of supply in yyyy-MM-dd format."
+        },
+        "id": {
+          "type": "number",
+          "description": "Generated id."
+        },
+        "unit_price": {
+          "type": "number",
+          "description": "Unit price."
+        },
+        "unit_of_measure": {
+          "type": "string",
+          "description": "Unit of measure."
+        },
+        "quantity": {
+          "type": "number",
+          "description": "Quantity Defaults to 1."
+        },
+        "custom_fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/custom_fields"
+          },
+          "description": "Custom fields, stored as key-value pairs. This property is not processed and used mostly with Taxamo-built helpers."
+        },
+        "line_key": {
+          "type": "string",
+          "description": "Generated line key."
+        },
+        "tax_name": {
+          "type": "string",
+          "description": "Tax name, calculated by taxamo.  Can be overwritten when informative field is true."
+        },
+        "product_code": {
+          "type": "string",
+          "description": "Internal product code, used for invoicing for example."
+        },
+        "amount": {
+          "type": "number",
+          "description": "Amount. Required if total amount is not provided."
+        },
+        "custom_id": {
+          "type": "string",
+          "description": "Custom id, provided by ecommerce software."
+        },
+        "informative": {
+          "type": "boolean",
+          "description": "If the line is provided for informative purposes. Such line must have :tax-rate and optionally :tax-name - if not, API validation will fail for this line."
+        },
+        "tax_amount": {
+          "type": "number",
+          "description": "Tax amount, calculated by taxamo."
+        },
+        "tax_rate": {
+          "type": "number",
+          "description": "Tax rate, calculated by taxamo. Must be provided when informative field is true."
+        },
+        "additional_currencies": {
+          "$ref": "#/definitions/additional_currencies",
+          "description": "Additional currency information - can be used to receive additional information about invoice in another currency."
+        },
+        "total_amount": {
+          "type": "number",
+          "description": "Total amount. Required if amount is not provided."
+        },
+        "refunded_tax_amount": {
+          "type": "number",
+          "description": "Refunded tax amount, calculated by taxmo."
+        },
+        "description": {
+          "type": "string",
+          "description": "Line contents description."
+        },
+        "refunded_total_amount": {
+          "type": "number",
+          "description": "Refunded total amount, calculated by taxmo."
+        }
+      }
+    },
+    "custom_fields": {
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Field's key."
+        },
+        "value": {
+          "type": "string",
+          "description": "Field's value."
+        }
+      }
+    },
+    "country_schema": {
+      "properties": {
+        "code_long": {
+          "type": "string",
+          "description": "Three letter ISO country code."
+        },
+        "codenum": {
+          "type": "string",
+          "description": "Country ISO 3-digit code."
+        },
+        "currency": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of currencies."
+        },
+        "tax_supported": {
+          "type": "boolean",
+          "description": "True if tax calculation supported for this country."
+        },
+        "name": {
+          "type": "string",
+          "description": "Country name."
+        },
+        "ccn3": {
+          "type": "string",
+          "description": "Country ISO 3-digit code."
+        },
+        "cca3": {
+          "type": "string",
+          "description": "Three letter ISO country code."
+        },
+        "callingCode": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of phone number calling codes."
+        },
+        "tax_number_country_code": {
+          "type": "string",
+          "description": "VAT number country code. Important for Greece."
+        },
+        "code": {
+          "type": "string",
+          "description": "Two letter ISO country code."
+        },
+        "cca2": {
+          "type": "string",
+          "description": "Two letter ISO country code."
+        }
+      }
+    },
+    "countries": {
+      "properties": {
+        "by_token": {
+          "$ref": "#/definitions/country_schema",
+          "description": "Country detected from SMS token"
+        },
+        "by_cc": {
+          "$ref": "#/definitions/country_schema",
+          "description": "Country detected by credit card number prefix"
+        },
+        "by_2003_rules": {
+          "$ref": "#/definitions/country_schema",
+          "description": "Used when merchant uses 2003 EU VAT rules."
+        },
+        "forced": {
+          "$ref": "#/definitions/country_schema",
+          "description": "Country forced by paramters"
+        },
+        "by_ip": {
+          "$ref": "#/definitions/country_schema",
+          "description": "Country detected by IP"
+        },
+        "guessed_from_ip": {
+          "$ref": "#/definitions/country_schema",
+          "description": "Country guessed from IP due to lack of other evidence"
+        },
+        "other_commercially_relevant_info": {
+          "$ref": "#/definitions/country_schema",
+          "description": "Additional evidence held by the merchant."
+        },
+        "by_billing": {
+          "$ref": "#/definitions/country_schema",
+          "description": "Country detected by billing country code"
+        },
+        "by_tax_number": {
+          "$ref": "#/definitions/country_schema",
+          "description": "Country detected from EU TAX number"
+        },
+        "detected": {
+          "$ref": "#/definitions/country_schema",
+          "description": "Country detected from other evidence"
+        },
+        "self_declaration": {
+          "$ref": "#/definitions/country_schema",
+          "description": "Self declared country as evidence."
+        }
+      }
+    },
+    "getTransactionOut": {
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/transaction",
+          "description": "Transaction data"
+        }
+      }
+    },
+    "additional_currency": {
+      "properties": {
+        "currency_code": {
+          "type": "string",
+          "description": "3-letter ISO currency code."
+        },
+        "amount": {
+          "type": "number",
+          "description": "Amount (w/o TAX) in designated currency."
+        },
+        "tax_amount": {
+          "type": "number",
+          "description": "Tax amount in designated currency."
+        },
+        "fx_rate": {
+          "type": "number",
+          "description": "Foreign exchange rate used in calculation"
+        },
+        "total_amount": {
+          "type": "number",
+          "description": "Total amount in designated currency."
+        }
+      }
+    },
+    "unconfirmTransactionIn": {
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/input_transaction_update",
+          "description": "Transaction."
+        }
+      }
+    },
+    "unconfirmTransactionOut": {
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/transaction",
+          "description": "Transaction data."
+        }
+      }
+    },
+    "transactions": {
+      "required": [
+        "currency_code",
+        "transaction_lines"
+      ],
+      "properties": {
+        "confirm_timestamp": {
+          "type": "string",
+          "description": "Date and time of transaction confirmation."
+        },
+        "deducted_tax_amount": {
+          "type": "number",
+          "description": "How much tax has been deducted."
+        },
+        "buyer_credit_card_prefix": {
+          "type": "string",
+          "description": "Buyer's credit card prefix."
+        },
+        "custom_data": {
+          "type": "string",
+          "description": "Custom data related to transaction."
+        },
+        "buyer_name": {
+          "type": "string",
+          "description": "Buyer's name - first name and last name or company name."
+        },
+        "invoice_date": {
+          "type": "string",
+          "description": "Invoice date of issue."
+        },
+        "create_timestamp": {
+          "type": "string",
+          "description": "Date and time of transaction creation."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Currency code for transaction - e.g. EUR."
+        },
+        "supply_date": {
+          "type": "string",
+          "description": "Supply date in yyyy-MM-dd format."
+        },
+        "invoice_image_url": {
+          "type": "string",
+          "description": "Invoice image URL - provided by Taxamo."
+        },
+        "key": {
+          "type": "string",
+          "description": "Id generated by taxamo."
+        },
+        "invoice_address": {
+          "$ref": "#/definitions/invoice_address",
+          "description": "Invoice address."
+        },
+        "buyer_tax_number_valid": {
+          "type": "boolean",
+          "description": "If the buyer tax number has been provided and was validated successfully. Always true for domestic transactions (billing country same as merchant's country), tax number doesn't get validated in that case."
+        },
+        "verification_token": {
+          "type": "string",
+          "description": "Verification token"
+        },
+        "tax_supported": {
+          "type": "boolean",
+          "description": "Is tax calculation supported for a detected tax location?"
+        },
+        "transaction_lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transaction_lines"
+          },
+          "description": "Transaction lines."
+        },
+        "buyer_tax_number": {
+          "type": "string",
+          "description": " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        },
+        "status": {
+          "type": "string",
+          "description": "Transaction status."
+        },
+        "custom_fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/custom_fields"
+          },
+          "description": "Custom fields, stored as key-value pairs. This property is not processed and used mostly with Taxamo-built helpers."
+        },
+        "force_country_code": {
+          "type": "string",
+          "description": "Two-letter ISO country code, e.g. FR. Use it to force country code for tax calculation."
+        },
+        "countries": {
+          "$ref": "#/definitions/countries",
+          "description": "Map of countries calculated from evidence provided. This value is not stored and is available only upon tax calculation."
+        },
+        "invoice_number": {
+          "type": "string",
+          "description": "Invoice number."
+        },
+        "order_date": {
+          "type": "string",
+          "description": "Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used."
+        },
+        "source": {
+          "type": "string",
+          "description": "Transaction source software - e.g. plugin"
+        },
+        "amount": {
+          "type": "number",
+          "description": "Amount of transaction without tax."
+        },
+        "buyer_ip": {
+          "type": "string",
+          "description": "IP address of the buyer in dotted decimal (IPv4) or text format (IPv6)."
+        },
+        "buyer_email": {
+          "type": "string",
+          "description": "Buyer's declared email address."
+        },
+        "original_transaction_key": {
+          "type": "string",
+          "description": "Use data and evidence from original transaction. Tax will be re-calculated, but evidence won't be re-checked. This parameter is taken into account only when 'manual' flag is raised."
+        },
+        "billing_country_code": {
+          "type": "string",
+          "description": "Billing two letter ISO country code."
+        },
+        "custom_id": {
+          "type": "string",
+          "description": "Custom identifier provided upon transaction creation."
+        },
+        "tax_amount": {
+          "type": "number",
+          "description": "Tax amount of transaction."
+        },
+        "additional_currencies": {
+          "$ref": "#/definitions/additional_currencies",
+          "description": "Additional currency information - can be used to receive additional information about invoice in another currency."
+        },
+        "invoice_place": {
+          "type": "string",
+          "description": "Invoice place of issue."
+        },
+        "total_amount": {
+          "type": "number",
+          "description": "Total amount of transaction."
+        },
+        "tax_entity_name": {
+          "type": "string",
+          "description": "To which entity is the tax due."
+        },
+        "evidence": {
+          "$ref": "#/definitions/evidence",
+          "description": "Tax country of residence evidence."
+        },
+        "refunded_tax_amount": {
+          "type": "number",
+          "description": "Refunded tax amount."
+        },
+        "manual": {
+          "type": "boolean",
+          "description": "Is the transaction created manually - using private token. In manual mode, it is the merchant who calculates tax country and validates evidence. If you need API to do that when accessing the API with private token, just skip the 'manual' flag or use false value there and provide customer's ip address through buyer_ip field. Manual mode is also used when using original_transaction_key field."
+        },
+        "tax_timezone": {
+          "type": "string",
+          "description": "Timezone name for tax transaction."
+        },
+        "description": {
+          "type": "string",
+          "description": "Transaction description."
+        },
+        "test": {
+          "type": "boolean",
+          "description": "Was this transaction created in test mode?"
+        },
+        "tax_deducted": {
+          "type": "boolean",
+          "description": "If the transaction is in a country supported by Taxamo, but the tax is not calculated due to merchant settings or EU B2B transaction for example."
+        },
+        "tax_country_code": {
+          "type": "string",
+          "description": "Two-letter ISO country code, e.g. FR. This code applies to detected/set country for transaction, but can be set using manual mode."
+        },
+        "refunded_total_amount": {
+          "type": "number",
+          "description": "Total amount refunde (including tax)."
+        }
+      }
+    },
+    "confirmTransactionOut": {
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/transaction",
+          "description": "Transaction data."
+        }
+      }
+    },
+    "listTransactionsIn": {
+      "properties": {
+        "filter_text": {
+          "type": "string",
+          "description": "Filtering expression"
+        },
+        "offset": {
+          "type": "integer",
+          "description": "Offset"
+        },
+        "key_or_custom_id": {
+          "type": "string",
+          "description": "Taxamo provided transaction key or custom id"
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Three letter ISO currency code."
+        },
+        "order_date_to": {
+          "type": "string",
+          "description": "Order date to in yyyy-MM-dd format."
+        },
+        "sort_reverse": {
+          "type": "boolean",
+          "description": "If true, results are sorted in descending order."
+        },
+        "limit": {
+          "type": "integer",
+          "description": "Limit (no more than 1000, defaults to 100)."
+        },
+        "invoice_number": {
+          "type": "string",
+          "description": "Transaction invoice number."
+        },
+        "statuses": {
+          "type": "string",
+          "description": "Comma separated list of of transaction statuses."
+        },
+        "order_date_from": {
+          "type": "string",
+          "description": "Order date from in yyyy-MM-dd format."
+        },
+        "format": {
+          "type": "string",
+          "description": "Output format - supports 'csv' value for this operation."
+        },
+        "tax_country_code": {
+          "type": "string",
+          "description": "Two letter ISO tax country code."
+        }
+      }
+    },
+    "additional_currencies": {
+      "properties": {
+        "invoice": {
+          "$ref": "#/definitions/additional_currency",
+          "description": "Invoicing currency information."
+        }
+      }
+    },
+    "evidence": {
+      "properties": {
+        "by_token": {
+          "$ref": "#/definitions/evidence_schema",
+          "description": "Country detected from SMS token"
+        },
+        "by_cc": {
+          "$ref": "#/definitions/evidence_schema",
+          "description": "Country detected by credit card number prefix"
+        },
+        "by_2003_rules": {
+          "$ref": "#/definitions/evidence_schema",
+          "description": "Used when merchant uses 2003 EU VAT rules."
+        },
+        "forced": {
+          "$ref": "#/definitions/evidence_schema",
+          "description": "Country forced by paramters"
+        },
+        "by_payment_method": {
+          "$ref": "#/definitions/evidence_schema",
+          "description": "Country detected by payment method."
+        },
+        "by_ip": {
+          "$ref": "#/definitions/evidence_schema",
+          "description": "Country detected by IP"
+        },
+        "guessed_from_ip": {
+          "$ref": "#/definitions/evidence_schema",
+          "description": "Country guessed from IP due to lack of other evidence"
+        },
+        "other_commercially_relevant_info": {
+          "$ref": "#/definitions/evidence_schema",
+          "description": "Additional evidence held by the merchant. Can be used only with a private token."
+        },
+        "by_billing": {
+          "$ref": "#/definitions/evidence_schema",
+          "description": "Country detected by billing country code"
+        },
+        "by_tax_number": {
+          "$ref": "#/definitions/evidence_schema",
+          "description": "Country detected from EU TAX number"
+        },
+        "self_declaration": {
+          "$ref": "#/definitions/evidence_schema",
+          "description": "Self declared country as evidence. Requires merchant setting to be active."
+        }
+      }
+    },
+    "updateTransactionIn": {
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/transaction",
+          "description": "Transaction."
+        }
+      }
+    },
+    "confirmTransactionIn": {
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/input_transaction_update",
+          "description": "Transaction."
+        }
+      }
+    },
+    "input_transaction": {
+      "required": [
+        "currency_code",
+        "transaction_lines"
+      ],
+      "properties": {
+        "buyer_credit_card_prefix": {
+          "type": "string",
+          "description": "Buyer's credit card prefix."
+        },
+        "custom_data": {
+          "type": "string",
+          "description": "Custom data related to transaction."
+        },
+        "buyer_name": {
+          "type": "string",
+          "description": "Buyer's name - first name and last name or company name."
+        },
+        "invoice_date": {
+          "type": "string",
+          "description": "Invoice date of issue."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Currency code for transaction - e.g. EUR."
+        },
+        "supply_date": {
+          "type": "string",
+          "description": "Supply date in yyyy-MM-dd format."
+        },
+        "invoice_address": {
+          "$ref": "#/definitions/invoice_address",
+          "description": "Invoice address."
+        },
+        "verification_token": {
+          "type": "string",
+          "description": "Verification token"
+        },
+        "transaction_lines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/input_transaction_line"
+          },
+          "description": "Transaction lines."
+        },
+        "buyer_tax_number": {
+          "type": "string",
+          "description": " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        },
+        "custom_fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/custom_fields"
+          },
+          "description": "Custom fields, stored as key-value pairs. This property is not processed and used mostly with Taxamo-built helpers."
+        },
+        "force_country_code": {
+          "type": "string",
+          "description": "Two-letter ISO country code, e.g. FR. Use it to force country code for tax calculation."
+        },
+        "invoice_number": {
+          "type": "string",
+          "description": "Invoice number."
+        },
+        "order_date": {
+          "type": "string",
+          "description": "Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used."
+        },
+        "buyer_ip": {
+          "type": "string",
+          "description": "IP address of the buyer in dotted decimal (IPv4) or text format (IPv6)."
+        },
+        "buyer_email": {
+          "type": "string",
+          "description": "Buyer's declared email address."
+        },
+        "original_transaction_key": {
+          "type": "string",
+          "description": "Use data and evidence from original transaction. Tax will be re-calculated, but evidence won't be re-checked. This parameter is taken into account only when 'manual' flag is raised."
+        },
+        "billing_country_code": {
+          "type": "string",
+          "description": "Billing two letter ISO country code."
+        },
+        "custom_id": {
+          "type": "string",
+          "description": "Custom identifier provided upon transaction creation."
+        },
+        "additional_currencies": {
+          "$ref": "#/definitions/additional_currencies",
+          "description": "Additional currency information - can be used to receive additional information about invoice in another currency."
+        },
+        "invoice_place": {
+          "type": "string",
+          "description": "Invoice place of issue."
+        },
+        "evidence": {
+          "$ref": "#/definitions/evidence",
+          "description": "Tax country of residence evidence."
+        },
+        "description": {
+          "type": "string",
+          "description": "Transaction description."
+        },
+        "tax_deducted": {
+          "type": "boolean",
+          "description": "True if the transaction deducted from tax and no tax is applied. Either set automatically when VAT number validates with VIES correctly, but can also be provided in manual mode."
+        },
+        "tax_country_code": {
+          "type": "string",
+          "description": "Two-letter ISO country code, e.g. FR. This code applies to detected/set country for transaction, but can be set using manual mode."
+        }
+      }
+    },
+    "calculateTaxIn": {
+      "required": [
+        "transaction"
+      ],
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/input_transaction",
+          "description": "Transaction data."
+        }
+      }
+    },
+    "calculateSimpleTaxOut": {
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/transaction",
+          "description": "Transaction data with tax calculated"
+        }
+      }
+    },
+    "validateTaxNumberOut": {
+      "properties": {
+        "tax_deducted": {
+          "type": "boolean",
+          "description": "If the transaction is in a country supported by Taxamo, but the tax is not calculated due to merchant settings or EU B2B transaction for example."
+        },
+        "buyer_tax_number": {
+          "type": "string",
+          "description": " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        },
+        "buyer_tax_number_valid": {
+          "type": "boolean",
+          "description": "If the buyer tax number has been provided and was validated successfully. Always true for domestic transactions (billing country same as merchant's country), tax number doesn't get validated in that case."
+        },
+        "billing_country_code": {
+          "type": "string",
+          "description": "Billing two letter ISO country code."
+        }
+      }
+    },
+    "validateTaxNumberIn": {
+      "properties": {
+        "country_code": {
+          "type": "string",
+          "description": "Two-letter ISO country code."
+        }
+      }
+    },
+    "calculateTaxLocationIn": {
+      "properties": {
+        "billing_country_code": {
+          "type": "string",
+          "description": "Billing two letter ISO country code."
+        },
+        "buyer_credit_card_prefix": {
+          "type": "string",
+          "description": "Buyer's credit card prefix."
+        }
+      }
+    },
+    "calculateSimpleTaxIn": {
+      "required": [
+        "currency_code"
+      ],
+      "properties": {
+        "product_type": {
+          "type": "string",
+          "description": "Product type, according to dictionary /dictionaries/product_types. "
+        },
+        "buyer_credit_card_prefix": {
+          "type": "string",
+          "description": "Buyer's credit card prefix."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Currency code for transaction - e.g. EUR."
+        },
+        "unit_price": {
+          "type": "number",
+          "description": "Unit price."
+        },
+        "quantity": {
+          "type": "number",
+          "description": "Quantity Defaults to 1."
+        },
+        "buyer_tax_number": {
+          "type": "string",
+          "description": " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        },
+        "force_country_code": {
+          "type": "string",
+          "description": "Two-letter ISO country code, e.g. FR. Use it to force country code for tax calculation."
+        },
+        "order_date": {
+          "type": "string",
+          "description": "Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used."
+        },
+        "amount": {
+          "type": "number",
+          "description": "Amount. Required if total amount is not provided."
+        },
+        "billing_country_code": {
+          "type": "string",
+          "description": "Billing two letter ISO country code."
+        },
+        "total_amount": {
+          "type": "number",
+          "description": "Total amount. Required if amount is not provided."
+        },
+        "tax_deducted": {
+          "type": "boolean",
+          "description": "If the transaction is in a country supported by Taxamo, but the tax is not calculated due to merchant settings or EU B2B transaction for example."
+        }
+      }
+    },
+    "calculateTaxLocationOut": {
+      "properties": {
+        "tax_country_code": {
+          "type": "string",
+          "description": "Two-letter ISO country code, e.g. FR. This code applies to detected/set country for transaction, but can be set using manual mode."
+        },
+        "tax_deducted": {
+          "type": "boolean",
+          "description": "If the transaction is in a country supported by Taxamo, but the tax is not calculated due to merchant settings or EU B2B transaction for example."
+        },
+        "tax_supported": {
+          "type": "boolean",
+          "description": "Is tax calculation supported for a detected tax location?"
+        },
+        "countries": {
+          "$ref": "#/definitions/countries",
+          "description": "Map of countries calculated from evidence provided. This value is not stored and is available only upon tax calculation."
+        },
+        "buyer_ip": {
+          "type": "string",
+          "description": "IP address of the buyer in dotted decimal (IPv4) or text format (IPv6)."
+        },
+        "billing_country_code": {
+          "type": "string",
+          "description": "Billing two letter ISO country code."
+        },
+        "buyer_credit_card_prefix": {
+          "type": "string",
+          "description": "Buyer's credit card prefix."
+        },
+        "evidence": {
+          "$ref": "#/definitions/evidence",
+          "description": "Tax country of residence evidence."
+        }
+      }
+    },
+    "calculateTaxOut": {
+      "properties": {
+        "transaction": {
+          "$ref": "#/definitions/transaction",
+          "description": "Transaction data with tax calculated"
+        }
+      }
+    },
+    "locateGivenIPOut": {
+      "properties": {
+        "remote_addr": {
+          "type": "string",
+          "description": "Remote IP address."
+        },
+        "country_code": {
+          "type": "string",
+          "description": "Detected country code."
+        },
+        "country": {
+          "$ref": "#/definitions/country",
+          "description": "Detected country details"
+        }
+      }
+    },
+    "country": {
+      "properties": {
+        "code_long": {
+          "type": "string",
+          "description": "Three letter ISO country code."
+        },
+        "codenum": {
+          "type": "string",
+          "description": "Country ISO 3-digit code."
+        },
+        "currency": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of currencies."
+        },
+        "tax_supported": {
+          "type": "boolean",
+          "description": "True if tax calculation supported for this country."
+        },
+        "name": {
+          "type": "string",
+          "description": "Country name."
+        },
+        "ccn3": {
+          "type": "string",
+          "description": "Country ISO 3-digit code."
+        },
+        "cca3": {
+          "type": "string",
+          "description": "Three letter ISO country code."
+        },
+        "callingCode": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of phone number calling codes."
+        },
+        "tax_number_country_code": {
+          "type": "string",
+          "description": "VAT number country code. Important for Greece."
+        },
+        "code": {
+          "type": "string",
+          "description": "Two letter ISO country code."
+        },
+        "cca2": {
+          "type": "string",
+          "description": "Two letter ISO country code."
+        }
+      }
+    },
+    "locateMyIPOut": {
+      "properties": {
+        "remote_addr": {
+          "type": "string",
+          "description": "Remote IP address."
+        },
+        "country_code": {
+          "type": "string",
+          "description": "Detected country code."
+        },
+        "country": {
+          "$ref": "#/definitions/country",
+          "description": "Detected country details"
+        }
+      }
+    },
+    "by_country": {
+      "properties": {
+        "value": {
+          "type": "number",
+          "description": "Tax amount"
+        },
+        "tax_country_name": {
+          "type": "string",
+          "description": "Country name"
+        },
+        "tax_country_code": {
+          "type": "string",
+          "description": "Two letter ISO country code."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Three-letter ISO currency code."
+        }
+      }
+    },
+    "settlement_daily_stats_schema": {
+      "properties": {
+        "b2c": {
+          "type": "integer",
+          "description": "B2C transaction count."
+        },
+        "untaxed": {
+          "type": "integer",
+          "description": "Untaxed transaction count."
+        },
+        "eu_taxed": {
+          "type": "integer",
+          "description": "Total EU Taxed transaction count."
+        },
+        "eu_b2b": {
+          "type": "integer",
+          "description": "Total EU B2B transaction count."
+        },
+        "count": {
+          "type": "integer",
+          "description": "Total transaction count."
+        },
+        "eu_total": {
+          "type": "integer",
+          "description": "Total EU transaction count."
+        },
+        "day_raw": {
+          "type": "string",
+          "description": "Date for stats in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        },
+        "b2b": {
+          "type": "integer",
+          "description": "B2B transaction count."
+        },
+        "day": {
+          "type": "string",
+          "description": "Date for stats in yyyy-MM-dd format."
+        }
+      }
+    },
+    "getSettlementStatsByTaxationTypeIn": {
+      "required": [
+        "date_from",
+        "date_to"
+      ],
+      "properties": {
+        "date_from": {
+          "type": "string",
+          "description": "Date from in yyyy-MM format."
+        },
+        "date_to": {
+          "type": "string",
+          "description": "Date to in yyyy-MM format."
+        }
+      }
+    },
+    "C": {
+      "properties": {
+        "day_raw": {
+          "type": "string",
+          "description": "Date for stats in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        },
+        "value": {
+          "type": "number",
+          "description": "Transaction count."
+        },
+        "status": {
+          "type": "string",
+          "description": "Transaction status (C or N)."
+        },
+        "day": {
+          "type": "string",
+          "description": "Date for stats in yyyy-MM-dd format."
+        }
+      }
+    },
+    "getTransactionsStatsIn": {
+      "required": [
+        "date_from",
+        "date_to"
+      ],
+      "properties": {
+        "date_from": {
+          "type": "string",
+          "description": "Date from in yyyy-MM format."
+        },
+        "date_to": {
+          "type": "string",
+          "description": "Date to in yyyy-MM format."
+        },
+        "interval": {
+          "type": "string",
+          "description": "Interval. Accepted values are 'day', 'week' and 'month'."
+        }
+      }
+    },
+    "by_taxation_type": {
+      "properties": {
+        "taxed_count": {
+          "type": "number",
+          "description": "Number of taxed transactions."
+        },
+        "deducted_count": {
+          "type": "number",
+          "description": "Number of tax deducted transactions."
+        },
+        "transactions_count": {
+          "type": "number",
+          "description": "Total number of transactions"
+        },
+        "eu_b2b": {
+          "type": "integer",
+          "description": "Total EU B2B transaction count."
+        },
+        "eu_taxed": {
+          "type": "integer",
+          "description": "Total EU Taxed transaction count."
+        }
+      }
+    },
+    "getSettlementStatsByTaxationTypeOut": {
+      "properties": {
+        "by_taxation_type": {
+          "$ref": "#/definitions/by_taxation_type",
+          "description": "Settlements stats by taxation type."
+        }
+      }
+    },
+    "getSettlementStatsByCountryOut": {
+      "properties": {
+        "by_country": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/by_country"
+          },
+          "description": "Settlement stats."
+        }
+      }
+    },
+    "N": {
+      "properties": {
+        "day_raw": {
+          "type": "string",
+          "description": "Date for stats in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        },
+        "value": {
+          "type": "number",
+          "description": "Transaction count."
+        },
+        "status": {
+          "type": "string",
+          "description": "Transaction status (C or N)."
+        },
+        "day": {
+          "type": "string",
+          "description": "Date for stats in yyyy-MM-dd format."
+        }
+      }
+    },
+    "getTransactionsStatsOut": {
+      "properties": {
+        "by_status": {
+          "$ref": "#/definitions/by_status",
+          "description": "Transaction stats grouped by status."
+        }
+      }
+    },
+    "getSettlementStatsByCountryIn": {
+      "required": [
+        "date_from",
+        "date_to"
+      ],
+      "properties": {
+        "date_from": {
+          "type": "string",
+          "description": "Date from in yyyy-MM format."
+        },
+        "date_to": {
+          "type": "string",
+          "description": "Date to in yyyy-MM format."
+        }
+      }
+    },
+    "getDailySettlementStatsOut": {
+      "properties": {
+        "settlement_daily": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/settlement_daily_stats_schema"
+          },
+          "description": "Daily settlement stats"
+        }
+      }
+    },
+    "by_status": {
+      "properties": {
+        "N": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/N"
+          },
+          "description": "New transactions"
+        },
+        "C": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/C"
+          },
+          "description": "Confirmed transactions"
+        }
+      }
+    },
+    "getDailySettlementStatsIn": {
+      "required": [
+        "interval",
+        "date_from",
+        "date_to"
+      ],
+      "properties": {
+        "interval": {
+          "type": "string",
+          "description": "Interval type - day, week, month."
+        },
+        "date_from": {
+          "type": "string",
+          "description": "Date from in yyyy-MM format."
+        },
+        "date_to": {
+          "type": "string",
+          "description": "Date to in yyyy-MM format."
+        }
+      }
+    },
+    "summary": {
+      "properties": {
+        "quarter": {
+          "type": "string",
+          "description": "Quarter that this summary applies to."
+        },
+        "tax_amount": {
+          "type": "number",
+          "description": "Tax amount due in this quarter."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "In which currency code the settlement was calculated."
+        },
+        "indicative": {
+          "type": "boolean",
+          "description": "If the quarter isn't closed yet, tax amount is indicative, as we cannot determine FX rate or all transactions yet."
+        },
+        "fx_rate_date": {
+          "type": "string",
+          "description": "Date of ECB FX rate used for conversions in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        },
+        "tax_entity_name": {
+          "type": "string",
+          "description": "Tax entity that the tax is due."
+        }
+      }
+    },
+    "getSettlementSummaryOut": {
+      "properties": {
+        "summary": {
+          "$ref": "#/definitions/summary",
+          "description": "Settlement summary."
+        }
+      }
+    },
+    "getSettlementSummaryIn": {
+      "properties": {
+        "moss_country_code": {
+          "type": "string",
+          "description": "MOSS country code, used to determine currency. If ommited, merchant default setting is used."
+        }
+      }
+    },
+    "getSettlementOut": {
+      "properties": {
+        "report": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/report"
+          },
+          "description": "Settlement report."
+        },
+        "start_date": {
+          "type": "string",
+          "description": "Quarter start date in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        },
+        "end_date": {
+          "type": "string",
+          "description": "Quarter end date in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        },
+        "indicative": {
+          "type": "boolean",
+          "description": "If the quarter isn't closed yet, tax amount is indicative, as we cannot determine FX rate or all transactions yet."
+        },
+        "fx_rate_date": {
+          "type": "string",
+          "description": "Date of ECB FX rate used for conversions in yyyy-MM-dd'T'hh:mm:ss'Z' format."
+        }
+      }
+    },
+    "getSettlementIn": {
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "Output format. 'csv' value is accepted as well"
+        },
+        "moss_country_code": {
+          "type": "string",
+          "description": "MOSS country code, used to determine currency. If ommited, merchant default setting is used."
+        },
+        "moss_tax_id": {
+          "type": "string",
+          "description": "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used."
+        }
+      }
+    },
+    "report": {
+      "properties": {
+        "tax_rate": {
+          "type": "number",
+          "description": "Tax rate"
+        },
+        "amount": {
+          "type": "number",
+          "description": "Amount w/o tax"
+        },
+        "country_name": {
+          "type": "string",
+          "description": "Country name"
+        },
+        "country_code": {
+          "type": "string",
+          "description": "Two letter ISO country code."
+        },
+        "tax_amount": {
+          "type": "number",
+          "description": "Tax amount"
+        },
+        "skip_moss": {
+          "type": "boolean",
+          "description": "If true, this line should not be entered into MOSS and is provided for informative purposes only. For example because the country is the same as MOSS registration country and merchant country."
+        },
+        "currency_code": {
+          "type": "string",
+          "description": "Three-letter ISO currency code."
+        }
+      }
+    },
+    "getRefundsOut": {
+      "properties": {
+        "report": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/report"
+          },
+          "description": "Refunds report."
+        }
+      }
+    },
+    "getRefundsIn": {
+      "required": [
+        "date_from"
+      ],
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "Output format. 'csv' value is accepted as well"
+        },
+        "moss_country_code": {
+          "type": "string",
+          "description": "MOSS country code, used to determine currency. If ommited, merchant default setting is used."
+        },
+        "date_from": {
+          "type": "string",
+          "description": "Take only refunds issued at or after the date. Format: yyyy-MM-dd"
+        }
+      }
+    },
+    "verifySMSTokenOut": {
+      "properties": {
+        "country_code": {
+          "type": "string",
+          "description": "Verified country code, returned if operation was successful."
+        }
+      }
+    },
+    "createSMSTokenOut": {
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "description": "Always set to true. Success means that the message has been queued for delivery. In some cases message may be undelivered at the end, e.g. mobile number is blacklisted. API errors are signalled with appropriate error codes."
+        }
+      }
+    },
+    "createSMSTokenIn": {
+      "required": [
+        "country_code",
+        "recipient"
+      ],
+      "properties": {
+        "country_code": {
+          "type": "string",
+          "description": "Two letter ISO country code."
+        },
+        "recipient": {
+          "type": "string",
+          "description": "Recipient phone number."
+        }
+      }
+    },
+    "getCountriesDictOut": {
+      "properties": {
+        "dictionary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/country_schema"
+          },
+          "description": "Countries dictionary."
+        }
+      }
+    },
+    "getCountriesDictIn": {
+      "properties": {
+        "tax_supported": {
+          "type": "boolean",
+          "description": "Should only countries with tax supported be listed?"
+        }
+      }
+    },
+    "product_type_schema": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Product type code."
+        }
+      }
+    },
+    "getProductTypesDictOut": {
+      "properties": {
+        "dictionary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/product_type_schema"
+          },
+          "description": "Product type dictionary."
+        }
+      }
+    },
+    "currency_schema": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Currency 3-letter ISO code."
+        },
+        "minorunits": {
+          "type": "integer",
+          "description": "Number of minor units for currency."
+        },
+        "description": {
+          "type": "string",
+          "description": "Currency description."
+        },
+        "isocode": {
+          "type": "string",
+          "description": "Currency 3-letter ISO code."
+        },
+        "isonum": {
+          "type": "integer",
+          "description": "Currency iso numeric code."
+        }
+      }
+    },
+    "getCurrenciesDictOut": {
+      "properties": {
+        "dictionary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/currency_schema"
+          },
+          "description": "Currency dictionary."
+        }
+      }
+    }
+  }
+}
