@@ -2633,6 +2633,55 @@
         }
       ]
     },
+    "/variantsets": {
+      "post": {
+        "description": "Creates a new variant set (only necessary in v1).",
+        "operationId": "genomics.variantsets.create",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/VariantSet"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VariantSet"
+            }
+          }
+        ],
+        "tags": [
+          "variantsets"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/variantsets/{variantSetId}": {
       "delete": {
         "description": "Deletes the contents of a variant set. The variant set object is not deleted.",
