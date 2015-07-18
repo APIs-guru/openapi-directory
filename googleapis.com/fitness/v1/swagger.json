@@ -1180,6 +1180,17 @@
         }
       }
     },
+    "MapValue": {
+      "type": "object",
+      "description": "Holder object for the value of an entry in a map field of a data point.\n\nA map value supports a subset of the formats that the regular Value supports.",
+      "properties": {
+        "fpVal": {
+          "type": "number",
+          "description": "Floating point value.",
+          "format": "double"
+        }
+      }
+    },
     "Session": {
       "type": "object",
       "description": "Sessions contain metadata, such as a user-friendly name and time interval information.",
@@ -1259,6 +1270,9 @@
       "properties": {
         "key": {
           "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/MapValue"
         }
       }
     }
