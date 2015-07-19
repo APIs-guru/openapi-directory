@@ -1,0 +1,580 @@
+{
+  "host": "api.ss.solarvps.com",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Solar VPS API",
+    "description": "This is the Solar VPS Public API. You can find more at http://www.solarvps.com",
+    "contact": {
+      "email": "support@solarvps.com"
+    },
+    "x-providerName": "solarvps.com",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "http://api.ss.solarvps.com/api-docs"
+    }
+  },
+  "paths": {
+    "/pods": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getPods",
+        "summary": "View all your pods",
+        "description": "Shows all your pods",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/pods/{podId}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getPodById",
+        "summary": "View information on a specific pod",
+        "description": "Shows details of a specific pod. Enter 1 below to see an example",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Id of the pod you want to perform actions on",
+            "name": "podId",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/pods/{podId}/{action}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "actionByPodId",
+        "summary": "Perform action on a specific pod",
+        "description": "Allowed actions are reboot, shutdown, boot",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Id of the pod you want to perform actions on",
+            "name": "podId",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "in": "path",
+            "description": "Action to perform on selected pod",
+            "name": "action",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/pods/{podId}/ping": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "pingPod",
+        "summary": "Ping your specified pod",
+        "description": "Returns the ping response from your server.",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Id of the pod you want to ping check",
+            "name": "podId",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/solarray": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getMonitors",
+        "summary": "View all your monitors",
+        "description": "Shows all your monitors",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/solarray/critical": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getCriticalNotifications",
+        "summary": "View all your critical notifications",
+        "description": "Shows all your critical notifications",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/key/generate": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "generateKey",
+        "summary": "Generate API Key",
+        "description": "API Key is regenerated if it already exists",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Email address used to login to SolarSystem",
+            "name": "username",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Password used to login to SolarSystem",
+            "name": "password",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/key/get": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getKey",
+        "summary": "Get API Key",
+        "description": "Gets the API Key for user",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Email address used to login to SolarSystem",
+            "name": "username",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Password used to login to SolarSystem",
+            "name": "password",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/domains": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getDomains",
+        "summary": "View all your domains managed by SolarVPS Distributed DNS",
+        "description": "Shows all your domains",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/domains/add": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "addDomains",
+        "summary": "Add domain to be managed by SolarVPS Distributed DNS",
+        "description": "Adds domain to SolarVPS Distributed DNS",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Domain to add to SolarVPS Distributed DNS",
+            "name": "domain",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/domains/delete": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "deleteDomains",
+        "summary": "Delete domain from SolarVPS Distributed DNS",
+        "description": "Deletes domain from SolarVPS Distributed DNS",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Domain to delete from SolarVPS Distributed DNS",
+            "name": "domain",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/dns/{domain}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getDns",
+        "summary": "View all your records for a given domain",
+        "description": "Shows all your records for a specific domain. You can try example.com below.",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Domain name you want to get records for",
+            "name": "domain",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/dns/{domain}/add": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getDns",
+        "summary": "Add dns record for given domain",
+        "description": "You can try example.com below. Types allowed are: A CNAME NS TXT MX SRV SPF",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Domain you want to add records for",
+            "name": "domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Fully qualified DNS name",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Type of DNS record",
+            "name": "type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Content for DNS record",
+            "name": "content",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Time To Live for DNS record",
+            "name": "ttl",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Priority of DNS record",
+            "name": "prio",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/dns/{domain}/update": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getDns",
+        "summary": "Update dns record for a given domain",
+        "description": "You can try example.com below.",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Domain name to add record under",
+            "name": "domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Id of DNS record",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Fully qualified name for the DNS record",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Type for DNS record",
+            "name": "type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Content for the DNS Record",
+            "name": "content",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Time To Live for DNS record",
+            "name": "ttl",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Priority of the DNS record",
+            "name": "prio",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/dns/{domain}/delete": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getDns",
+        "summary": "Delete dns record for a given domain",
+        "description": "Shows all your records for a specific domain. You can try example.com below.",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Domain name you want to get records for",
+            "name": "domain",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Id of the DNS Record",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/contacts": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getContacts",
+        "summary": "View all contacts under your account",
+        "description": "Shows all contacts under the client account.",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/tickets": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getTickets",
+        "summary": "View all your tickets",
+        "description": "Shows all your tickets",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/tickets/{ticketId}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getTicketData",
+        "summary": "View details on a specific ticket",
+        "description": "Shows all information of a specific ticketId",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "TicketId you want to see",
+            "name": "ticketId",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/tickets/{department}/add": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "newTicket",
+        "summary": "Open ticket with desired department",
+        "description": "Available departments are support, billing, sales",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "Department you want to open a ticket with",
+            "name": "department",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Subject of the ticket you are opening",
+            "name": "subject",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Message reply being sent",
+            "name": "contents",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/tickets/{ticketid}/update": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "pingPod",
+        "summary": "Post a reply to a ticket",
+        "parameters": [
+          {
+            "in": "path",
+            "description": "TicketId of the ticket you want to post an update to",
+            "name": "ticketid",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "in": "query",
+            "description": "Message reply being sent",
+            "name": "contents",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "0": {
+      "properties": {}
+    }
+  }
+}

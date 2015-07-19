@@ -1,0 +1,2185 @@
+{
+  "host": "www.reactome.org",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "Pathway Analysis Service",
+    "description": "Provides an API for pathway over-representation and expression analysis as well as species comparison tool",
+    "contact": {
+      "email": "help@reactome.org"
+    },
+    "license": {
+      "name": "Creative Commons Attribution 3.0 Unported License",
+      "url": "http://creativecommons.org/licenses/by/3.0/legalcode"
+    },
+    "termsOfService": "/pages/analysisservice/terms",
+    "x-providerName": "reactome.org",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "http://www.reactome.org/AnalysisService/api-docs"
+    }
+  },
+  "paths": {
+    "/download/{token}/entities/found/{resource}/{filename}.csv": {
+      "get": {
+        "produces": [
+          "text/csv"
+        ],
+        "operationId": "downloadMappingResult",
+        "summary": "Downloads those identifiers found for a given analysis and a certain resource",
+        "description": "The identifiers are filtered by the selected resource. The filename is the one to be suggested in the download window.",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The token associated with the data to download",
+            "name": "token",
+            "required": true,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "in": "path",
+            "description": "the preferred resource",
+            "name": "resource",
+            "required": true,
+            "type": "string",
+            "default": "TOTAL",
+            "enum": [
+              "TOTAL",
+              "UNIPROT",
+              "ENSEMBL",
+              "CHEBI",
+              "MIRBASE",
+              "NCBI_PROTEIN",
+              "EMBL",
+              "COMPOUND"
+            ]
+          },
+          {
+            "in": "path",
+            "description": "the file name for the downloaded information",
+            "name": "filename",
+            "required": true,
+            "type": "string",
+            "default": "result"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/FileSystemResource"
+            }
+          },
+          "404": {
+            "description": "No result corresponding to the token was found"
+          },
+          "410": {
+            "description": "Result deleted due to a new data release"
+          }
+        }
+      }
+    },
+    "/download/{token}/entities/notfound/{filename}.csv": {
+      "get": {
+        "produces": [
+          "text/csv"
+        ],
+        "operationId": "downloadNotFound",
+        "summary": "Downloads a list of the not found identifiers",
+        "description": "Those identifiers from the user sample that are not present up to the current data version. The filename is the one to be suggested in the download window.",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The token associated with the data to download",
+            "name": "token",
+            "required": true,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "in": "path",
+            "description": "the file name for the downloaded information",
+            "name": "filename",
+            "required": true,
+            "type": "string",
+            "default": "result"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/FileSystemResource"
+            }
+          },
+          "404": {
+            "description": "No result corresponding to the token was found"
+          },
+          "410": {
+            "description": "Result deleted due to a new data release"
+          }
+        }
+      }
+    },
+    "/download/{token}/pathways/{resource}/{filename}.csv": {
+      "get": {
+        "produces": [
+          "text/csv"
+        ],
+        "operationId": "downloadHitPathways",
+        "summary": "Downloads all hit pathways for a given analysis",
+        "description": "The results are filtered by the selected resource. The filename is the one to be suggested in the download window.",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The token associated with the data to download",
+            "name": "token",
+            "required": true,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "in": "path",
+            "description": "the preferred resource",
+            "name": "resource",
+            "required": true,
+            "type": "string",
+            "default": "TOTAL",
+            "enum": [
+              "TOTAL",
+              "UNIPROT",
+              "ENSEMBL",
+              "CHEBI",
+              "MIRBASE",
+              "NCBI_PROTEIN",
+              "EMBL",
+              "COMPOUND"
+            ]
+          },
+          {
+            "in": "path",
+            "description": "the file name for the downloaded information",
+            "name": "filename",
+            "required": true,
+            "type": "string",
+            "default": "result"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/FileSystemResource"
+            }
+          },
+          "404": {
+            "description": "No result corresponding to the token was found"
+          },
+          "410": {
+            "description": "Result deleted due to a new data release"
+          }
+        }
+      }
+    },
+    "/identifier/{id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getIdentifier",
+        "summary": "Analyse the identifier over the different species in the database",
+        "description": "Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The identifier of the element to be retrieved",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "in": "query",
+            "description": "pathways per page",
+            "name": "pageSize",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "in": "query",
+            "description": "page number",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "how to sort the result",
+            "name": "sortBy",
+            "required": false,
+            "type": "string",
+            "default": "ENTITIES_PVALUE",
+            "enum": [
+              "NAME",
+              "TOTAL_ENTITIES",
+              "TOTAL_REACTIONS",
+              "FOUND_ENTITIES",
+              "FOUND_REACTIONS",
+              "ENTITIES_RATIO",
+              "ENTITIES_PVALUE",
+              "ENTITIES_FDR",
+              "REACTIONS_RATIO"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "specifies the order",
+            "name": "order",
+            "required": false,
+            "type": "string",
+            "default": "ASC",
+            "enum": [
+              "ASC",
+              "DESC"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "the resource to sort",
+            "name": "resource",
+            "required": false,
+            "type": "string",
+            "default": "TOTAL",
+            "enum": [
+              "TOTAL",
+              "UNIPROT",
+              "ENSEMBL",
+              "CHEBI",
+              "MIRBASE",
+              "NCBI_PROTEIN",
+              "EMBL",
+              "COMPOUND"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AnalysisResult"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/identifier/{id}/projection": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "getIdentifierToHuman",
+        "summary": "Analyse the identifier over the different species in the database and projects the result to Homo Sapiens",
+        "description": "The projection is calculated by the orthologous slot in the Reactome database. Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The identifier of the element to be retrieved",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "in": "query",
+            "description": "pathways per page",
+            "name": "pageSize",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "in": "query",
+            "description": "page number",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "how to sort the result",
+            "name": "sortBy",
+            "required": false,
+            "type": "string",
+            "default": "ENTITIES_PVALUE",
+            "enum": [
+              "NAME",
+              "TOTAL_ENTITIES",
+              "TOTAL_REACTIONS",
+              "FOUND_ENTITIES",
+              "FOUND_REACTIONS",
+              "ENTITIES_RATIO",
+              "ENTITIES_PVALUE",
+              "ENTITIES_FDR",
+              "REACTIONS_RATIO"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "specifies the order",
+            "name": "order",
+            "required": false,
+            "type": "string",
+            "default": "ASC",
+            "enum": [
+              "ASC",
+              "DESC"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "resource to sort",
+            "name": "resource",
+            "required": false,
+            "type": "string",
+            "default": "TOTAL",
+            "enum": [
+              "TOTAL",
+              "UNIPROT",
+              "ENSEMBL",
+              "CHEBI",
+              "MIRBASE",
+              "NCBI_PROTEIN",
+              "EMBL",
+              "COMPOUND"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AnalysisResult"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/identifiers/": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "text/plain"
+        ],
+        "operationId": "getPostText",
+        "summary": "Analyse the post identifiers over the different species",
+        "description": "Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "body",
+            "description": "Identifiers to analyse followed by their expression (when applies)",
+            "name": "input",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "in": "query",
+            "description": "pathways per page",
+            "name": "pageSize",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "in": "query",
+            "description": "page number",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "how to sort the result",
+            "name": "sortBy",
+            "required": false,
+            "type": "string",
+            "default": "ENTITIES_PVALUE",
+            "enum": [
+              "NAME",
+              "TOTAL_ENTITIES",
+              "TOTAL_REACTIONS",
+              "FOUND_ENTITIES",
+              "FOUND_REACTIONS",
+              "ENTITIES_RATIO",
+              "ENTITIES_PVALUE",
+              "ENTITIES_FDR",
+              "REACTIONS_RATIO"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "specifies the order",
+            "name": "order",
+            "required": false,
+            "type": "string",
+            "default": "ASC",
+            "enum": [
+              "ASC",
+              "DESC"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "the resource to sort",
+            "name": "resource",
+            "required": false,
+            "type": "string",
+            "default": "TOTAL",
+            "enum": [
+              "TOTAL",
+              "UNIPROT",
+              "ENSEMBL",
+              "CHEBI",
+              "MIRBASE",
+              "NCBI_PROTEIN",
+              "EMBL",
+              "COMPOUND"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/AnalysisResult"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/identifiers/form": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "operationId": "getPostFile",
+        "summary": "Analyse the identifiers in the file over the different species",
+        "description": "Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "A file with the data to be analysed",
+            "name": "file",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "in": "query",
+            "description": "pathways per page",
+            "name": "pageSize",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "in": "query",
+            "description": "page number",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "how to sort the result",
+            "name": "sortBy",
+            "required": false,
+            "type": "string",
+            "default": "ENTITIES_PVALUE",
+            "enum": [
+              "NAME",
+              "TOTAL_ENTITIES",
+              "TOTAL_REACTIONS",
+              "FOUND_ENTITIES",
+              "FOUND_REACTIONS",
+              "ENTITIES_RATIO",
+              "ENTITIES_PVALUE",
+              "ENTITIES_FDR",
+              "REACTIONS_RATIO"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "specifies the order",
+            "name": "order",
+            "required": false,
+            "type": "string",
+            "default": "ASC",
+            "enum": [
+              "ASC",
+              "DESC"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "the resource to sort",
+            "name": "resource",
+            "required": false,
+            "type": "string",
+            "default": "TOTAL",
+            "enum": [
+              "TOTAL",
+              "UNIPROT",
+              "ENSEMBL",
+              "CHEBI",
+              "MIRBASE",
+              "NCBI_PROTEIN",
+              "EMBL",
+              "COMPOUND"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/AnalysisResult"
+            }
+          },
+          "413": {
+            "description": "The file size is larger than the maximum configured size (10MB)"
+          },
+          "415": {
+            "description": "Unsupported Media Type (only 'text/plain')"
+          }
+        }
+      }
+    },
+    "/identifiers/form/projection": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "operationId": "getPostFileToHuman",
+        "summary": "Analyse the identifiers in the file over the different species and projects the result to Homo Sapiens",
+        "description": "The projection is calculated by the orthologous slot in the Reactome database. Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "formData",
+            "description": "A file with the data to be analysed",
+            "name": "file",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "in": "query",
+            "description": "pathways per page",
+            "name": "pageSize",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "in": "query",
+            "description": "page number",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "how to sort the result",
+            "name": "sortBy",
+            "required": false,
+            "type": "string",
+            "default": "ENTITIES_PVALUE",
+            "enum": [
+              "NAME",
+              "TOTAL_ENTITIES",
+              "TOTAL_REACTIONS",
+              "FOUND_ENTITIES",
+              "FOUND_REACTIONS",
+              "ENTITIES_RATIO",
+              "ENTITIES_PVALUE",
+              "ENTITIES_FDR",
+              "REACTIONS_RATIO"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "specifies the order",
+            "name": "order",
+            "required": false,
+            "type": "string",
+            "default": "ASC",
+            "enum": [
+              "ASC",
+              "DESC"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "the resource to sort",
+            "name": "resource",
+            "required": false,
+            "type": "string",
+            "default": "TOTAL",
+            "enum": [
+              "TOTAL",
+              "UNIPROT",
+              "ENSEMBL",
+              "CHEBI",
+              "MIRBASE",
+              "NCBI_PROTEIN",
+              "EMBL",
+              "COMPOUND"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/AnalysisResult"
+            }
+          },
+          "413": {
+            "description": "The file size is larger than the maximum configured size (10MB)"
+          },
+          "415": {
+            "description": "Unsupported Media Type (only 'text/plain')"
+          }
+        }
+      }
+    },
+    "/identifiers/projection": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "text/plain"
+        ],
+        "operationId": "getPostTextToHuman",
+        "summary": "Analyse the post identifiers over the different species and projects the result to Homo Sapiens",
+        "description": "The projection is calculated by the orthologous slot in the Reactome database. Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "body",
+            "description": "Identifiers to analyse followed by their expression (when applies)",
+            "name": "input",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "in": "query",
+            "description": "pathways per page",
+            "name": "pageSize",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "in": "query",
+            "description": "page number",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "how to sort the result",
+            "name": "sortBy",
+            "required": false,
+            "type": "string",
+            "default": "ENTITIES_PVALUE",
+            "enum": [
+              "NAME",
+              "TOTAL_ENTITIES",
+              "TOTAL_REACTIONS",
+              "FOUND_ENTITIES",
+              "FOUND_REACTIONS",
+              "ENTITIES_RATIO",
+              "ENTITIES_PVALUE",
+              "ENTITIES_FDR",
+              "REACTIONS_RATIO"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "specifies the order",
+            "name": "order",
+            "required": false,
+            "type": "string",
+            "default": "ASC",
+            "enum": [
+              "ASC",
+              "DESC"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "the resource to sort",
+            "name": "resource",
+            "required": false,
+            "type": "string",
+            "default": "TOTAL",
+            "enum": [
+              "TOTAL",
+              "UNIPROT",
+              "ENSEMBL",
+              "CHEBI",
+              "MIRBASE",
+              "NCBI_PROTEIN",
+              "EMBL",
+              "COMPOUND"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/AnalysisResult"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/identifiers/url": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "text/plain"
+        ],
+        "operationId": "getPostURL",
+        "summary": "Analyse the identifiers contained in the provided url over the different species",
+        "description": "Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "body",
+            "description": "A URL pointing to the data to be analysed",
+            "name": "url",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "in": "query",
+            "description": "pathways per page",
+            "name": "pageSize",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "in": "query",
+            "description": "page number",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "how to sort the result",
+            "name": "sortBy",
+            "required": false,
+            "type": "string",
+            "default": "ENTITIES_PVALUE",
+            "enum": [
+              "NAME",
+              "TOTAL_ENTITIES",
+              "TOTAL_REACTIONS",
+              "FOUND_ENTITIES",
+              "FOUND_REACTIONS",
+              "ENTITIES_RATIO",
+              "ENTITIES_PVALUE",
+              "ENTITIES_FDR",
+              "REACTIONS_RATIO"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "specifies the order",
+            "name": "order",
+            "required": false,
+            "type": "string",
+            "default": "ASC",
+            "enum": [
+              "ASC",
+              "DESC"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "the resource to sort",
+            "name": "resource",
+            "required": false,
+            "type": "string",
+            "default": "TOTAL",
+            "enum": [
+              "TOTAL",
+              "UNIPROT",
+              "ENSEMBL",
+              "CHEBI",
+              "MIRBASE",
+              "NCBI_PROTEIN",
+              "EMBL",
+              "COMPOUND"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/AnalysisResult"
+            }
+          },
+          "413": {
+            "description": "The file size is larger than the maximum configured size (10MB)"
+          },
+          "415": {
+            "description": "Unsupported Media Type (only 'text/plain')"
+          },
+          "422": {
+            "description": "The provided URL is not processable"
+          }
+        }
+      }
+    },
+    "/identifiers/url/projection": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "text/plain"
+        ],
+        "operationId": "getPostURLToHuman",
+        "summary": "Analyse the identifiers contained in the provided url over the different species and projects the result to Homo Sapiens",
+        "description": "The projection is calculated by the orthologous slot in the Reactome database. Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "body",
+            "description": "A URL pointing to the data to be analysed",
+            "name": "url",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "in": "query",
+            "description": "pathways per page",
+            "name": "pageSize",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "in": "query",
+            "description": "page number",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "how to sort the result",
+            "name": "sortBy",
+            "required": false,
+            "type": "string",
+            "default": "ENTITIES_PVALUE",
+            "enum": [
+              "NAME",
+              "TOTAL_ENTITIES",
+              "TOTAL_REACTIONS",
+              "FOUND_ENTITIES",
+              "FOUND_REACTIONS",
+              "ENTITIES_RATIO",
+              "ENTITIES_PVALUE",
+              "ENTITIES_FDR",
+              "REACTIONS_RATIO"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "specifies the order",
+            "name": "order",
+            "required": false,
+            "type": "string",
+            "default": "ASC",
+            "enum": [
+              "ASC",
+              "DESC"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "the resource to sort",
+            "name": "resource",
+            "required": false,
+            "type": "string",
+            "default": "TOTAL",
+            "enum": [
+              "TOTAL",
+              "UNIPROT",
+              "ENSEMBL",
+              "CHEBI",
+              "MIRBASE",
+              "NCBI_PROTEIN",
+              "EMBL",
+              "COMPOUND"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/AnalysisResult"
+            }
+          },
+          "413": {
+            "description": "The file size is larger than the maximum configured size (10MB)"
+          },
+          "415": {
+            "description": "Unsupported Media Type (only 'text/plain')"
+          },
+          "422": {
+            "description": "The provided URL is not processable"
+          }
+        }
+      }
+    },
+    "/species/homoSapiens/{species}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "operationId": "compareHomoSapiensTo",
+        "summary": "Compares Homo sapiens to the specified species",
+        "description": "Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The dbId of the species to compare to",
+            "name": "species",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "query",
+            "description": "pathways per page",
+            "name": "pageSize",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "in": "query",
+            "description": "page number",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "how to sort the result",
+            "name": "sortBy",
+            "required": false,
+            "type": "string",
+            "default": "ENTITIES_PVALUE",
+            "enum": [
+              "NAME",
+              "TOTAL_ENTITIES",
+              "TOTAL_REACTIONS",
+              "FOUND_ENTITIES",
+              "FOUND_REACTIONS",
+              "ENTITIES_RATIO",
+              "ENTITIES_PVALUE",
+              "ENTITIES_FDR",
+              "REACTIONS_RATIO"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "specifies the order",
+            "name": "order",
+            "required": false,
+            "type": "string",
+            "default": "ASC",
+            "enum": [
+              "ASC",
+              "DESC"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "the resource to sort",
+            "name": "resource",
+            "required": false,
+            "type": "string",
+            "default": "TOTAL",
+            "enum": [
+              "TOTAL",
+              "UNIPROT",
+              "ENSEMBL",
+              "CHEBI",
+              "MIRBASE",
+              "NCBI_PROTEIN",
+              "EMBL",
+              "COMPOUND"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/AnalysisResult"
+            }
+          },
+          "404": {
+            "description": "Species identifier does not match with any of the species in the current data"
+          }
+        }
+      }
+    },
+    "/token/{token}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "text/plain"
+        ],
+        "operationId": "getToken",
+        "summary": "Returns the result associated with the token",
+        "description": "Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The token associated with the data to query",
+            "name": "token",
+            "required": true,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "in": "query",
+            "description": "pathways per page",
+            "name": "pageSize",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "in": "query",
+            "description": "page number",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "how to sort the result",
+            "name": "sortBy",
+            "required": false,
+            "type": "string",
+            "default": "ENTITIES_PVALUE",
+            "enum": [
+              "NAME",
+              "TOTAL_ENTITIES",
+              "TOTAL_REACTIONS",
+              "FOUND_ENTITIES",
+              "FOUND_REACTIONS",
+              "ENTITIES_RATIO",
+              "ENTITIES_PVALUE",
+              "ENTITIES_FDR",
+              "REACTIONS_RATIO"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "specifies the order",
+            "name": "order",
+            "required": false,
+            "type": "string",
+            "default": "ASC",
+            "enum": [
+              "ASC",
+              "DESC"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "the resource to sort",
+            "name": "resource",
+            "required": false,
+            "type": "string",
+            "default": "TOTAL",
+            "enum": [
+              "TOTAL",
+              "UNIPROT",
+              "ENSEMBL",
+              "CHEBI",
+              "MIRBASE",
+              "NCBI_PROTEIN",
+              "EMBL",
+              "COMPOUND"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/AnalysisResult"
+            }
+          },
+          "404": {
+            "description": "No result corresponding to the token was found"
+          },
+          "410": {
+            "description": "Result deleted due to a new data release"
+          }
+        }
+      }
+    },
+    "/token/{token}/filter/pathways": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "text/plain"
+        ],
+        "operationId": "getTokenFilterPathways",
+        "summary": "Returns the result for the pathway ids sent by post (when they are present in the original result)",
+        "description": "For a given list of pathway identifiers (dbId) it will retrieve a list containing those that are present in the result (with the results for the indicated molecule type)",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The token associated with the data to query",
+            "name": "token",
+            "required": true,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "in": "body",
+            "description": "A comma separated list with the identifiers of the pathways of interest (NOTE: is plain text, not json)",
+            "name": "input",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "in": "query",
+            "description": "the resource to sort",
+            "name": "resource",
+            "required": false,
+            "type": "string",
+            "default": "TOTAL",
+            "enum": [
+              "TOTAL",
+              "UNIPROT",
+              "ENSEMBL",
+              "CHEBI",
+              "MIRBASE",
+              "NCBI_PROTEIN",
+              "EMBL",
+              "COMPOUND"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PathwaySummary"
+              }
+            }
+          },
+          "404": {
+            "description": "No result corresponding to the token was found"
+          },
+          "410": {
+            "description": "Result deleted due to a new data release"
+          }
+        }
+      }
+    },
+    "/token/{token}/filter/species/{species}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "text/plain"
+        ],
+        "operationId": "filterBySpecies",
+        "summary": "Filters the result by species",
+        "description": "filterBySpecies",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The token associated with the data to query",
+            "name": "token",
+            "required": true,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "in": "path",
+            "description": "The dbId of the species to filter the result",
+            "name": "species",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "query",
+            "description": "the resource to sort",
+            "name": "resource",
+            "required": false,
+            "type": "string",
+            "default": "TOTAL",
+            "enum": [
+              "TOTAL",
+              "UNIPROT",
+              "ENSEMBL",
+              "CHEBI",
+              "MIRBASE",
+              "NCBI_PROTEIN",
+              "EMBL",
+              "COMPOUND"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/SpeciesFilteredResult"
+            }
+          },
+          "404": {
+            "description": "No result corresponding to the token was found"
+          },
+          "410": {
+            "description": "Result deleted due to a new data release"
+          }
+        }
+      }
+    },
+    "/token/{token}/notFound": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "text/plain"
+        ],
+        "operationId": "getNotFoundIdentifiers",
+        "summary": "Returns a list of the identifiers not found for a given token",
+        "description": "Those identifiers that have not been found in the Reactome database",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The token associated with the data to query",
+            "name": "token",
+            "required": true,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "in": "query",
+            "description": "identifiers per page",
+            "name": "pageSize",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 40
+          },
+          {
+            "in": "query",
+            "description": "page number",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IdentifierSummary"
+              }
+            }
+          },
+          "404": {
+            "description": "No result corresponding to the token was found"
+          },
+          "410": {
+            "description": "Result deleted due to a new data release"
+          }
+        }
+      }
+    },
+    "/token/{token}/page/{pathway}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "text/plain"
+        ],
+        "operationId": "getPageOfPathway",
+        "summary": "Returns the page where the corresponding pathway is taking into account the passed parameters",
+        "description": "Useful when implementing UI with tables showing the results in a page way and the user needs to know in which page a certain pathway is present for a given set of sorting and filtering options.",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The token associated with the data to query",
+            "name": "token",
+            "required": true,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "in": "path",
+            "description": "The database identifier of the pathway of interest",
+            "name": "pathway",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "query",
+            "description": "pathways per page",
+            "name": "pageSize",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "in": "query",
+            "description": "how to sort the result",
+            "name": "sortBy",
+            "required": false,
+            "type": "string",
+            "default": "ENTITIES_PVALUE",
+            "enum": [
+              "NAME",
+              "TOTAL_ENTITIES",
+              "TOTAL_REACTIONS",
+              "FOUND_ENTITIES",
+              "FOUND_REACTIONS",
+              "ENTITIES_RATIO",
+              "ENTITIES_PVALUE",
+              "ENTITIES_FDR",
+              "REACTIONS_RATIO"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "specifies the order",
+            "name": "order",
+            "required": false,
+            "type": "string",
+            "default": "ASC",
+            "enum": [
+              "ASC",
+              "DESC"
+            ]
+          },
+          {
+            "in": "query",
+            "description": "the resource to sort",
+            "name": "resource",
+            "required": false,
+            "type": "string",
+            "default": "TOTAL",
+            "enum": [
+              "TOTAL",
+              "UNIPROT",
+              "ENSEMBL",
+              "CHEBI",
+              "MIRBASE",
+              "NCBI_PROTEIN",
+              "EMBL",
+              "COMPOUND"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "404": {
+            "description": "No result corresponding to the token was found"
+          },
+          "410": {
+            "description": "Result deleted due to a new data release"
+          }
+        }
+      }
+    },
+    "/token/{token}/reactions/pathways": {
+      "post": {
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "text/plain"
+        ],
+        "operationId": "getTokenFilterReactions",
+        "summary": "Returns the reaction ids of the pathway ids sent by post that are present in the original result",
+        "description": "It filters the submitted list and retrieves back only those that at least one of the participating molecules has been hit with the user submitted data.",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The token associated with the data to query",
+            "name": "token",
+            "required": true,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "in": "body",
+            "description": "A comma separated list with the identifiers of the pathways of interest (NOTE: is plain text, not json)",
+            "name": "input",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          },
+          {
+            "in": "query",
+            "description": "the resource to sort",
+            "name": "resource",
+            "required": false,
+            "type": "string",
+            "default": "TOTAL",
+            "enum": [
+              "TOTAL",
+              "UNIPROT",
+              "ENSEMBL",
+              "CHEBI",
+              "MIRBASE",
+              "NCBI_PROTEIN",
+              "EMBL",
+              "COMPOUND"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {}
+            }
+          },
+          "404": {
+            "description": "No result corresponding to the token was found"
+          },
+          "410": {
+            "description": "Result deleted due to a new data release"
+          }
+        }
+      }
+    },
+    "/token/{token}/reactions/{pathway}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "text/plain"
+        ],
+        "operationId": "getTokenFilterReactions",
+        "summary": "Returns the reaction ids of the provided pathway id that are present in the original result",
+        "description": "For a given pathway it returns the identifiers (dbId) of the reactions in the pathway that have been hit with the sample taking into account their participating molecules.",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The token associated with the data to query",
+            "name": "token",
+            "required": true,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "in": "path",
+            "description": "The database identifier of the pathway of interest",
+            "name": "pathway",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "query",
+            "description": "the resource to sort",
+            "name": "resource",
+            "required": false,
+            "type": "string",
+            "default": "TOTAL",
+            "enum": [
+              "TOTAL",
+              "UNIPROT",
+              "ENSEMBL",
+              "CHEBI",
+              "MIRBASE",
+              "NCBI_PROTEIN",
+              "EMBL",
+              "COMPOUND"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {}
+            }
+          },
+          "404": {
+            "description": "No result corresponding to the token was found"
+          },
+          "410": {
+            "description": "Result deleted due to a new data release"
+          }
+        }
+      }
+    },
+    "/token/{token}/resources": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "text/plain"
+        ],
+        "operationId": "getResources",
+        "summary": "Returns the resources summary associated with the token",
+        "description": "A summary of the molecules type associated to the submitted data.",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The token associated with the data to query",
+            "name": "token",
+            "required": true,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResourceSummary"
+              }
+            }
+          },
+          "404": {
+            "description": "No result corresponding to the token was found"
+          },
+          "410": {
+            "description": "Result deleted due to a new data release"
+          }
+        }
+      }
+    },
+    "/token/{token}/summary/{pathway}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "text/plain"
+        ],
+        "operationId": "getTokenSummaryPathway",
+        "summary": "Returns a summary of the contained identifiers for a pathway in the result for a given token",
+        "description": "The identifiers submitted by the user that have a match in Reactome database. It also retrieves the mapping to the main identifiers for those that have been found.",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "path",
+            "description": "The token associated with the data to query",
+            "name": "token",
+            "required": true,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "in": "path",
+            "description": "The dbId of the pathway of interest",
+            "name": "pathway",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "in": "query",
+            "description": "page number",
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 1
+          },
+          {
+            "in": "query",
+            "description": "identifiers per page",
+            "name": "pageSize",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "in": "query",
+            "description": "the resource to sort",
+            "name": "resource",
+            "required": false,
+            "type": "string",
+            "default": "TOTAL",
+            "enum": [
+              "TOTAL",
+              "UNIPROT",
+              "ENSEMBL",
+              "CHEBI",
+              "MIRBASE",
+              "NCBI_PROTEIN",
+              "EMBL",
+              "COMPOUND"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/PathwayIdentifiers"
+            }
+          },
+          "404": {
+            "description": "No result corresponding to the token was found"
+          },
+          "410": {
+            "description": "Result deleted due to a new data release"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "File": {
+      "description": "",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "parent": {
+          "type": "string"
+        },
+        "absolute": {
+          "type": "boolean"
+        },
+        "canonicalPath": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "parentFile": {
+          "$ref": "#/definitions/File"
+        },
+        "absolutePath": {
+          "type": "string"
+        },
+        "absoluteFile": {
+          "$ref": "#/definitions/File"
+        },
+        "canonicalFile": {
+          "$ref": "#/definitions/File"
+        },
+        "directory": {
+          "type": "boolean"
+        },
+        "file": {
+          "type": "boolean"
+        },
+        "hidden": {
+          "type": "boolean"
+        },
+        "totalSpace": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "freeSpace": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "usableSpace": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "InputStream": {
+      "description": "",
+      "properties": {}
+    },
+    "FileSystemResource": {
+      "description": "",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "readable": {
+          "type": "boolean"
+        },
+        "writable": {
+          "type": "boolean"
+        },
+        "outputStream": {
+          "$ref": "#/definitions/OutputStream"
+        },
+        "filename": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "inputStream": {
+          "$ref": "#/definitions/InputStream"
+        },
+        "file": {
+          "$ref": "#/definitions/File"
+        },
+        "open": {
+          "type": "boolean"
+        }
+      }
+    },
+    "OutputStream": {
+      "description": "",
+      "properties": {}
+    },
+    "SpeciesSummary": {
+      "description": "",
+      "properties": {
+        "dbId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "AnalysisSummary": {
+      "description": "",
+      "properties": {
+        "sampleName": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        },
+        "species": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "text": {
+          "type": "boolean"
+        },
+        "type": {
+          "type": "string"
+        },
+        "fileName": {
+          "type": "string"
+        }
+      }
+    },
+    "EntityStatistics": {
+      "description": "",
+      "properties": {
+        "exp": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "pValue": {
+          "type": "number",
+          "format": "double"
+        },
+        "fdr": {
+          "type": "number",
+          "format": "double"
+        },
+        "found": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ratio": {
+          "type": "number",
+          "format": "double"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "resource": {
+          "type": "string"
+        }
+      }
+    },
+    "ResourceSummary": {
+      "description": "",
+      "properties": {
+        "pathways": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "resource": {
+          "type": "string"
+        }
+      }
+    },
+    "PathwaySummary": {
+      "description": "",
+      "properties": {
+        "stId": {
+          "type": "string"
+        },
+        "llp": {
+          "type": "boolean"
+        },
+        "reactions": {
+          "$ref": "#/definitions/ReactionStatistics"
+        },
+        "entities": {
+          "$ref": "#/definitions/EntityStatistics"
+        },
+        "species": {
+          "$ref": "#/definitions/SpeciesSummary"
+        },
+        "dbId": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "AnalysisResult": {
+      "description": "",
+      "properties": {
+        "resourceSummary": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceSummary"
+          }
+        },
+        "summary": {
+          "$ref": "#/definitions/AnalysisSummary"
+        },
+        "expression": {
+          "$ref": "#/definitions/ExpressionSummary"
+        },
+        "identifiersNotFound": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "pathways": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PathwaySummary"
+          }
+        },
+        "pathwaysFound": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "ExpressionSummary": {
+      "description": "",
+      "properties": {
+        "max": {
+          "type": "number",
+          "format": "double"
+        },
+        "columnNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "min": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "ReactionStatistics": {
+      "description": "",
+      "properties": {
+        "found": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "ratio": {
+          "type": "number",
+          "format": "double"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "resource": {
+          "type": "string"
+        }
+      }
+    },
+    "PathwayBase": {
+      "description": "",
+      "properties": {
+        "stId": {
+          "type": "string"
+        },
+        "entities": {
+          "$ref": "#/definitions/EntityStatistics"
+        },
+        "dbId": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "IdentifierSummary": {
+      "description": "",
+      "properties": {
+        "exp": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "PathwayIdentifiers": {
+      "description": "",
+      "properties": {
+        "expNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "found": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "identifiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PathwayIdentifier"
+          }
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "IdentifierMap": {
+      "description": "",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "resource": {
+          "type": "string"
+        }
+      }
+    },
+    "SpeciesFilteredResult": {
+      "description": "",
+      "properties": {
+        "expressionSummary": {
+          "$ref": "#/definitions/ExpressionSummary"
+        },
+        "pathways": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PathwayBase"
+          }
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "PathwayIdentifier": {
+      "description": "",
+      "properties": {
+        "mapsTo": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IdentifierMap"
+          },
+          "uniqueItems": true
+        },
+        "exp": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "identifier": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
