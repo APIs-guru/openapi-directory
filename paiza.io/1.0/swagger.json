@@ -15,9 +15,17 @@
       "url": "https://api.paiza.io/docs/swagger-docs/api-docs.json"
     }
   },
+  "tags": [
+    {
+      "name": "runners"
+    }
+  ],
   "paths": {
     "/runners/create": {
       "post": {
+        "tags": [
+          "runners"
+        ],
         "operationId": "Runners#create",
         "summary": "Create runner session to build and run code.",
         "description": "Create runner session to build and run code.",
@@ -68,6 +76,9 @@
     },
     "/runners/get_status": {
       "get": {
+        "tags": [
+          "runners"
+        ],
         "operationId": "Runners#get_status",
         "summary": "Get status of current session",
         "description": "Get status of current session",
@@ -89,6 +100,9 @@
     },
     "/runners/get_details": {
       "get": {
+        "tags": [
+          "runners"
+        ],
         "operationId": "Runners#get_details",
         "summary": "Get detailed session information.",
         "description": "Get detailed session information.",
