@@ -1,0 +1,112 @@
+{
+  "host": "api.paiza.io",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "api.paiza.io",
+    "x-providerName": "paiza.io",
+    "x-origin": {
+      "format": "swagger",
+      "version": "1.2",
+      "url": "https://api.paiza.io/docs/swagger-docs/api-docs.json"
+    }
+  },
+  "paths": {
+    "/runners/create": {
+      "post": {
+        "operationId": "Runners#create",
+        "summary": "Create runner session to build and run code.",
+        "description": "Create runner session to build and run code.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "Source code",
+            "name": "source_code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Language",
+            "name": "language",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Input data for the program. Program read this data from standard input.",
+            "name": "input",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Enable long polling(default: false)",
+            "name": "longpoll",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "description": "Longpoll timeout(default: 10)",
+            "name": "longpoll_timeout",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "<br/>JSON hash.<br/>{<br/>  id: session id(This should be used in get_status/get_details API),<br/>  status: status('running', 'completed'),<br/>  error: error message.<br/>}<br/>"
+          }
+        }
+      }
+    },
+    "/runners/get_status": {
+      "get": {
+        "operationId": "Runners#get_status",
+        "summary": "Get status of current session",
+        "description": "Get status of current session",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "session id (returned by 'create' API)",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "<br/>  JSON hash.<br/>  {<br/>  id: session id,<br/>  status: status('running', 'completed'),<br/>  error: error message.<br/>  }<br/>  "
+          }
+        }
+      }
+    },
+    "/runners/get_details": {
+      "get": {
+        "operationId": "Runners#get_details",
+        "summary": "Get detailed session information.",
+        "description": "Get detailed session information.",
+        "parameters": [
+          {
+            "in": "query",
+            "description": "session id (returned by 'create' API)",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "<br/>    JSON hash.<br/>{<br/>\t\tid: Session id<br/>\t\tlanguage: language,<br/>\t\tnote: note,<br/>\t\tstatus: status('running', 'completed'),<br/><br/>\t\tbuild_stdout: build output to stdout,<br/>\t\tbuild_stderr: build output to stderr,<br/>\t\tbuild_exit_code: build exit code,<br/>\t\tbuild_time: build time(second),<br/>\t\tbuild_memory: build memory usage(bytes),<br/>\t\tbuild_result: build result('success', 'failure', 'error'),<br/><br/>\t\tstdout: code output to stdout,<br/>\t\tstderr: code output to stderr,<br/>\t\texit_code: exit code,<br/>\t\ttime: time to run(seconds),<br/>\t\tmemory: code memory usage(bytes),<br/>\t\tresult: code result('success', 'failure', 'error'),<br/>\t}<br/>"
+          }
+        }
+      }
+    }
+  }
+}
