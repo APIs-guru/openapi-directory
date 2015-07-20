@@ -331,8 +331,22 @@
           },
           {
             "in": "query",
+            "description": "Return only transactions with total amount greater than given number. Transactions with total amount equal to a given number (e.g. 0) are not returned.",
+            "name": "total_amount_greater_than",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
             "description": "Output format - supports 'csv' value for this operation.",
             "name": "format",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "description": "Return only transactions with total amount less than a given number. Transactions with total amount equal to a given number (e.g. 1) are not returned.",
+            "name": "total_amount_less_than",
             "required": false,
             "type": "string"
           },
@@ -1492,6 +1506,10 @@
           "type": "string",
           "description": " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
         },
+        "status": {
+          "type": "string",
+          "description": "Transaction status: 'N' - new, 'C' - confirmed, 'X' - cancelled, 'S' - settled. Can use 'C' in store-transaction! with private-token to create confirmed transaction, otherwise 'N' is default state. Not applicable for update-transaction!."
+        },
         "custom_fields": {
           "type": "array",
           "items": {
@@ -1583,6 +1601,10 @@
           "type": "string",
           "description": "Date and time of transaction confirmation."
         },
+        "fully_informative": {
+          "type": "boolean",
+          "description": "Set to true if transaction has only informative lines."
+        },
         "deducted_tax_amount": {
           "type": "number",
           "description": "How much tax has been deducted."
@@ -1652,7 +1674,7 @@
         },
         "status": {
           "type": "string",
-          "description": "Transaction status."
+          "description": "Transaction status: 'N' - new, 'C' - confirmed, 'X' - cancelled, 'S' - settled. Can use 'C' in store-transaction! with private-token to create confirmed transaction, otherwise 'N' is default state. Not applicable for update-transaction!."
         },
         "custom_fields": {
           "type": "array",
@@ -1676,6 +1698,10 @@
         "order_date": {
           "type": "string",
           "description": "Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Transaction kind: eu-b2c, eu-b2b, domestic, untaxed"
         },
         "source": {
           "type": "string",
@@ -2189,6 +2215,10 @@
           "type": "string",
           "description": "Date and time of transaction confirmation."
         },
+        "fully_informative": {
+          "type": "boolean",
+          "description": "Set to true if transaction has only informative lines."
+        },
         "deducted_tax_amount": {
           "type": "number",
           "description": "How much tax has been deducted."
@@ -2258,7 +2288,7 @@
         },
         "status": {
           "type": "string",
-          "description": "Transaction status."
+          "description": "Transaction status: 'N' - new, 'C' - confirmed, 'X' - cancelled, 'S' - settled. Can use 'C' in store-transaction! with private-token to create confirmed transaction, otherwise 'N' is default state. Not applicable for update-transaction!."
         },
         "custom_fields": {
           "type": "array",
@@ -2282,6 +2312,10 @@
         "order_date": {
           "type": "string",
           "description": "Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Transaction kind: eu-b2c, eu-b2b, domestic, untaxed"
         },
         "source": {
           "type": "string",
@@ -2419,9 +2453,17 @@
           "type": "string",
           "description": "Order date from in yyyy-MM-dd format."
         },
+        "total_amount_greater_than": {
+          "type": "string",
+          "description": "Return only transactions with total amount greater than given number. Transactions with total amount equal to a given number (e.g. 0) are not returned."
+        },
         "format": {
           "type": "string",
           "description": "Output format - supports 'csv' value for this operation."
+        },
+        "total_amount_less_than": {
+          "type": "string",
+          "description": "Return only transactions with total amount less than a given number. Transactions with total amount equal to a given number (e.g. 1) are not returned."
         },
         "tax_country_code": {
           "type": "string",
@@ -2549,6 +2591,10 @@
         "buyer_tax_number": {
           "type": "string",
           "description": " Buyer's tax number - EU VAT number for example. If using EU VAT number, it is possible to provide country code in it (e.g. IE1234567X) or simply use billing_country_code field for that. In the first case, if billing_country_code value was provided, it will be overwritten with country code value extracted from VAT number - but only if the VAT has been verified properly."
+        },
+        "status": {
+          "type": "string",
+          "description": "Transaction status: 'N' - new, 'C' - confirmed, 'X' - cancelled, 'S' - settled. Can use 'C' in store-transaction! with private-token to create confirmed transaction, otherwise 'N' is default state. Not applicable for update-transaction!."
         },
         "custom_fields": {
           "type": "array",
