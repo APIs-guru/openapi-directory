@@ -541,6 +541,7 @@
     },
     "/{userId}/dataset:aggregate": {
       "post": {
+        "description": "Aggregates data of a certain type or stream into buckets divided by a given type of boundary. Multiple data sets of multiple types and from multiple sources can be aggreated into exactly one bucket type per request.",
         "operationId": "fitness.users.dataset.aggregate",
         "responses": {
           "200": {
@@ -554,6 +555,7 @@
           {
             "name": "userId",
             "in": "path",
+            "description": "Aggregate data for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
             "required": true,
             "type": "string"
           },
@@ -563,6 +565,15 @@
             "schema": {
               "$ref": "#/definitions/AggregateRequest"
             }
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fitness.activity.write",
+              "https://www.googleapis.com/auth/fitness.body.write",
+              "https://www.googleapis.com/auth/fitness.location.write"
+            ]
           }
         ],
         "tags": [
@@ -802,26 +813,28 @@
       "properties": {
         "activity": {
           "type": "integer",
-          "description": "available for Bucket.Type.ACTIVITY_TYPE, Bucket.Type.ACTIVITY_SEGMENT",
+          "description": "Available for Bucket.Type.ACTIVITY_TYPE, Bucket.Type.ACTIVITY_SEGMENT",
           "format": "int32"
         },
         "dataset": {
           "type": "array",
-          "description": "There will be one dataset per datatype/datasource",
+          "description": "There will be one dataset per AggregateBy in the request.",
           "items": {
             "$ref": "#/definitions/Dataset"
           }
         },
         "endTimeMillis": {
           "type": "string",
+          "description": "The end time for the aggregated data, in milliseconds since epoch, inclusive.",
           "format": "int64"
         },
         "session": {
           "$ref": "#/definitions/Session",
-          "description": "available for Bucket.Type.SESSION"
+          "description": "Available for Bucket.Type.SESSION"
         },
         "startTimeMillis": {
           "type": "string",
+          "description": "The start time for the aggregated data, in milliseconds since epoch, inclusive.",
           "format": "int64"
         },
         "type": {
@@ -839,19 +852,15 @@
     },
     "AggregateBy": {
       "type": "object",
+      "description": "The specification of which data to aggregate.",
       "properties": {
         "dataSourceId": {
-          "type": "string"
+          "type": "string",
+          "description": "A data source ID to aggregate. Mutually exclusive of dataTypeName. Only data from the specified data source ID will be included in the aggregation. The dataset in the response will have the same data source ID."
         },
         "dataTypeName": {
           "type": "string",
-          "description": "by dataype or by datasource"
-        },
-        "outputDataSourceId": {
-          "type": "string"
-        },
-        "outputDataTypeName": {
-          "type": "string"
+          "description": "The data type to aggregate. All data sources providing this data type will contribute data to the aggregation. The response will contain a single dataset for this data type name. The dataset will have a data source ID of derived:com.google.:com.google.android.gms:aggregated"
         }
       }
     },
@@ -860,30 +869,35 @@
       "properties": {
         "aggregateBy": {
           "type": "array",
+          "description": "The specification of data to be aggregated. At least one aggregateBy spec must be provided. All data that is specified will be aggregated using the same bucketing criteria. There will be one dataset in the response for every aggregateBy spec.",
           "items": {
             "$ref": "#/definitions/AggregateBy"
           }
         },
         "bucketByActivitySegment": {
-          "$ref": "#/definitions/BucketByActivity"
+          "$ref": "#/definitions/BucketByActivity",
+          "description": "Specifies that data be aggregated each activity segment recored for a user. Similar to bucketByActivitySegment, but bucketing is done for each activity segment rather than all segments of the same type. Mutually exclusive of other bucketing specifications."
         },
         "bucketByActivityType": {
-          "$ref": "#/definitions/BucketByActivity"
+          "$ref": "#/definitions/BucketByActivity",
+          "description": "Specifies that data be aggregated by the type of activity being performed when the data was recorded. All data that was recorded during a certain activity type (for the given time range) will be aggregated into the same bucket. Data that was recorded while the user was not active will not be included in the response. Mutually exclusive of other bucketing specifications."
         },
         "bucketBySession": {
-          "$ref": "#/definitions/BucketBySession"
+          "$ref": "#/definitions/BucketBySession",
+          "description": "Specifies that data be aggregated by user sessions. Data that does not fall within the time range of a session will not be included in the response. Mutually exclusive of other bucketing specifications."
         },
         "bucketByTime": {
           "$ref": "#/definitions/BucketByTime",
-          "description": "apparently oneof is not supported by reduced_nano_proto"
+          "description": "Specifies that data be aggregated by a single time interval. Mutually exclusive of other bucketing specifications."
         },
         "endTimeMillis": {
           "type": "string",
+          "description": "The end of a window of time. Data that intersects with this time window will be aggregated. The time is in milliseconds since epoch, inclusive.",
           "format": "int64"
         },
         "startTimeMillis": {
           "type": "string",
-          "description": "required time range",
+          "description": "The start of a window of time. Data that intersects with this time window will be aggregated. The time is in milliseconds since epoch, inclusive.",
           "format": "int64"
         }
       }
@@ -893,6 +907,7 @@
       "properties": {
         "bucket": {
           "type": "array",
+          "description": "A list of buckets containing the aggregated data.",
           "items": {
             "$ref": "#/definitions/AggregateBucket"
           }
@@ -926,11 +941,11 @@
       "properties": {
         "activityDataSourceId": {
           "type": "string",
-          "description": "default activity stream will be used if not specified"
+          "description": "The default activity stream will be used if a specific activityDataSourceId is not specified."
         },
         "minDurationMillis": {
           "type": "string",
-          "description": "Only activity segments of duration longer than this is used",
+          "description": "Specifies that only activity segments of duration longer than minDurationMillis are considered and used as a container for aggregated data.",
           "format": "int64"
         }
       }
@@ -940,7 +955,7 @@
       "properties": {
         "minDurationMillis": {
           "type": "string",
-          "description": "Only sessions of duration longer than this is used",
+          "description": "Specifies that only sessions of duration longer than minDurationMillis are considered and used as a container for aggregated data.",
           "format": "int64"
         }
       }
@@ -950,6 +965,7 @@
       "properties": {
         "durationMillis": {
           "type": "string",
+          "description": "Specifies that result buckets aggregate data by exactly durationMillis time frames. Time frames that contain no data will be included in the response with an empty dataset.",
           "format": "int64"
         }
       }

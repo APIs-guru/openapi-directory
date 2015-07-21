@@ -669,6 +669,20 @@
           "items": {
             "$ref": "#/definitions/StreamLocation"
           }
+        },
+        "systemStageName": {
+          "type": "string"
+        },
+        "userStageName": {
+          "type": "string"
+        }
+      }
+    },
+    "CustomSourceLocation": {
+      "type": "object",
+      "properties": {
+        "stateful": {
+          "type": "boolean"
         }
       }
     },
@@ -743,6 +757,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "internalExperiments": {
+          "type": "object",
+          "additionalProperties": {}
         },
         "sdkPipelineOptions": {
           "type": "object",
@@ -821,7 +839,8 @@
             "JOB_STATE_FAILED",
             "JOB_STATE_RUNNING",
             "JOB_STATE_STOPPED",
-            "JOB_STATE_UNKNOWN"
+            "JOB_STATE_UNKNOWN",
+            "JOB_STATE_UPDATED"
           ]
         },
         "currentStateTime": {
@@ -845,6 +864,9 @@
         "replaceJobId": {
           "type": "string"
         },
+        "replacedByJobId": {
+          "type": "string"
+        },
         "requestedState": {
           "type": "string",
           "enum": [
@@ -853,7 +875,8 @@
             "JOB_STATE_FAILED",
             "JOB_STATE_RUNNING",
             "JOB_STATE_STOPPED",
-            "JOB_STATE_UNKNOWN"
+            "JOB_STATE_UNKNOWN",
+            "JOB_STATE_UPDATED"
           ]
         },
         "steps": {
@@ -1571,6 +1594,9 @@
     "StreamLocation": {
       "type": "object",
       "properties": {
+        "customSourceLocation": {
+          "$ref": "#/definitions/CustomSourceLocation"
+        },
         "pubsubLocation": {
           "$ref": "#/definitions/PubsubLocation"
         },
@@ -1731,6 +1757,12 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataDiskAssignment"
+          }
+        },
+        "userStageToComputationNameMap": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }

@@ -2690,7 +2690,7 @@
       "properties": {
         "method": {
           "type": "string",
-          "description": "The method used to deliver the notification. Possible values are:  \n- \"email\" - Reminders are sent via email. \n- \"sms\" - Reminders are sent via SMS. This value is read-only and is ignored on inserts and updates."
+          "description": "The method used to deliver the notification. Possible values are:  \n- \"email\" - Reminders are sent via email. \n- \"sms\" - Reminders are sent via SMS. This value is read-only and is ignored on inserts and updates. Furthermore, SMS reminders are only available for Google Apps for Work, Education, and Government customers."
         },
         "type": {
           "type": "string",
@@ -3200,7 +3200,7 @@
       "properties": {
         "method": {
           "type": "string",
-          "description": "The method used by this reminder. Possible values are:  \n- \"email\" - Reminders are sent via email. \n- \"sms\" - Reminders are sent via SMS. \n- \"popup\" - Reminders are sent via a UI popup."
+          "description": "The method used by this reminder. Possible values are:  \n- \"email\" - Reminders are sent via email. \n- \"sms\" - Reminders are sent via SMS. They are only available for Google Apps for Work, Education, and Government customers. Requests to set SMS reminders for the other accounts will be ignored. \n- \"popup\" - Reminders are sent via a UI popup."
         },
         "minutes": {
           "type": "integer",
