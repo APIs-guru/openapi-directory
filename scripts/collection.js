@@ -239,7 +239,7 @@ function convertToSwagger(spec, callback) {
       'x-origin': {
         format: spec.formatName,
         version: spec.getFormatVersion(),
-        url: spec.url
+        url: spec.source
       }
     });
     callback(null, swagger.spec)
