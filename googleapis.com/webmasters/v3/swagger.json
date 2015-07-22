@@ -841,11 +841,11 @@
       "properties": {
         "aggregationType": {
           "type": "string",
-          "description": "[Optional; Default is AUTO] How data is aggregated. If aggregated by property, all data for the same property is aggregated; if aggregated by page, all data is aggregated by canonical URI. If you filter or group by page, choose AUTO; otherwise you can aggregate either by property or by page, depending on how you want your data calculated; see  the help documentation to learn how data is calculated differently by site versus by page.\n\nNote: If you group or filter by page, you cannot aggregate by property.\n\nIf you specify any value other than AUTO, the aggregation type in the result will match the requested type, or if you request an invalid type, you will get an error. The API will never change your aggregation type if the requested type is invalid."
+          "description": "[Optional; Default is \"auto\"] How data is aggregated. If aggregated by property, all data for the same property is aggregated; if aggregated by page, all data is aggregated by canonical URI. If you filter or group by page, choose AUTO; otherwise you can aggregate either by property or by page, depending on how you want your data calculated; see  the help documentation to learn how data is calculated differently by site versus by page.\n\nNote: If you group or filter by page, you cannot aggregate by property.\n\nIf you specify any value other than AUTO, the aggregation type in the result will match the requested type, or if you request an invalid type, you will get an error. The API will never change your aggregation type if the requested type is invalid."
         },
         "dimensionFilterGroups": {
           "type": "array",
-          "description": "[Optional] Zero or more filters to apply to the dimension grouping values; for example, 'Country CONTAINS \"Guinea\"' to see only data where the country contains the substring \"Guinea\". You can filter by a dimension without grouping by it.",
+          "description": "[Optional] Zero or more filters to apply to the dimension grouping values; for example, 'query contains \"buy\"' to see only data where the query string contains the substring \"buy\" (not case-sensitive). You can filter by a dimension without grouping by it.",
           "items": {
             "$ref": "#/definitions/ApiDimensionFilterGroup"
           }
@@ -863,12 +863,12 @@
         },
         "rowLimit": {
           "type": "integer",
-          "description": "[Optional; Default is 1000] The maximum number of rows to return. Must be a number from 1 to 1,000 (inclusive).",
+          "description": "[Optional; Default is 1000] The maximum number of rows to return. Must be a number from 1 to 5,000 (inclusive).",
           "format": "int32"
         },
         "searchType": {
           "type": "string",
-          "description": "[Optional; Default is WEB] The search type to filter for."
+          "description": "[Optional; Default is \"web\"] The search type to filter for."
         },
         "startDate": {
           "type": "string",
