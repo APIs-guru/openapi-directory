@@ -246,12 +246,6 @@
             "type": "string"
           },
           {
-            "name": "instanceGroupManager",
-            "in": "query",
-            "description": "The name of the instance group manager. Use this parameter to return only updates to instances that are part of a specific instance group.",
-            "type": "string"
-          },
-          {
             "name": "maxResults",
             "in": "query",
             "description": "Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.",
@@ -716,7 +710,7 @@
         },
         "instance": {
           "type": "string",
-          "description": "URL of the instance being updated."
+          "description": "Fully-qualified URL of the instance being updated."
         },
         "status": {
           "type": "string",
@@ -957,6 +951,10 @@
           "type": "string",
           "description": "[Output Only] Type of the resource.",
           "default": "replicapoolupdater#rollingUpdate"
+        },
+        "oldInstanceTemplate": {
+          "type": "string",
+          "description": "Fully-qualified URL of the instance template encountered while starting the update."
         },
         "policy": {
           "type": "object",
