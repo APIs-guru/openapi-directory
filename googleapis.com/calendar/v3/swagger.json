@@ -1699,13 +1699,13 @@
           {
             "name": "timeMax",
             "in": "query",
-            "description": "Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time.",
+            "description": "Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.",
             "type": "string"
           },
           {
             "name": "timeMin",
             "in": "query",
-            "description": "Lower bound (inclusive) for an event's end time to filter by. Optional. The default is not to filter by end time.",
+            "description": "Lower bound (inclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.",
             "type": "string"
           },
           {
@@ -1825,13 +1825,13 @@
           {
             "name": "timeMax",
             "in": "query",
-            "description": "Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time.",
+            "description": "Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset.",
             "type": "string"
           },
           {
             "name": "timeMin",
             "in": "query",
-            "description": "Lower bound (inclusive) for an event's end time to filter by. Optional. The default is not to filter by end time.",
+            "description": "Lower bound (inclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset.",
             "type": "string"
           },
           {
@@ -2137,13 +2137,13 @@
           {
             "name": "timeMax",
             "in": "query",
-            "description": "Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time.",
+            "description": "Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.",
             "type": "string"
           },
           {
             "name": "timeMin",
             "in": "query",
-            "description": "Lower bound (inclusive) for an event's end time to filter by. Optional. The default is not to filter by end time.",
+            "description": "Lower bound (inclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.",
             "type": "string"
           },
           {
@@ -2600,11 +2600,11 @@
         },
         "backgroundColor": {
           "type": "string",
-          "description": "The main color of the calendar in the hexadecimal format \"#0088aa\". This property supersedes the index-based colorId property. Optional."
+          "description": "The main color of the calendar in the hexadecimal format \"#0088aa\". This property supersedes the index-based colorId property. To set or change this property, you need to specify colorRgbFormat=true in the parameters of the insert, update and patch methods. Optional."
         },
         "colorId": {
           "type": "string",
-          "description": "The color of the calendar. This is an ID referring to an entry in the calendar section of the colors definition (see the colors endpoint). Optional."
+          "description": "The color of the calendar. This is an ID referring to an entry in the calendar section of the colors definition (see the colors endpoint). This property is superseded by the backgroundColor and foregroundColor properties and can be ignored when using these properties. Optional."
         },
         "defaultReminders": {
           "type": "array",
@@ -2628,7 +2628,7 @@
         },
         "foregroundColor": {
           "type": "string",
-          "description": "The foreground color of the calendar in the hexadecimal format \"#ffffff\". This property supersedes the index-based colorId property. Optional."
+          "description": "The foreground color of the calendar in the hexadecimal format \"#ffffff\". This property supersedes the index-based colorId property. To set or change this property, you need to specify colorRgbFormat=true in the parameters of the insert, update and patch methods. Optional."
         },
         "hidden": {
           "type": "boolean",
@@ -2690,7 +2690,7 @@
       "properties": {
         "method": {
           "type": "string",
-          "description": "The method used to deliver the notification. Possible values are:  \n- \"email\" - Reminders are sent via email. \n- \"sms\" - Reminders are sent via SMS. This value is read-only and is ignored on inserts and updates. Furthermore, SMS reminders are only available for Google Apps for Work, Education, and Government customers."
+          "description": "The method used to deliver the notification. Possible values are:  \n- \"email\" - Reminders are sent via email. \n- \"sms\" - Reminders are sent via SMS. This value is read-only and is ignored on inserts and updates. SMS reminders are only available for Google Apps for Work, Education, and Government customers."
         },
         "type": {
           "type": "string",
@@ -2767,7 +2767,7 @@
       "properties": {
         "calendar": {
           "type": "object",
-          "description": "Palette of calendar colors, mapping from the color ID to its definition. A calendarListEntry resource refers to one of these color IDs in its color field. Read-only.",
+          "description": "A global palette of calendar colors, mapping from the color ID to its definition. A calendarListEntry resource refers to one of these color IDs in its color field. Read-only.",
           "additionalProperties": {
             "$ref": "#/definitions/ColorDefinition",
             "description": "A calendar color defintion."
@@ -2775,7 +2775,7 @@
         },
         "event": {
           "type": "object",
-          "description": "Palette of event colors, mapping from the color ID to its definition. An event resource may refer to one of these color IDs in its color field. Read-only.",
+          "description": "A global palette of event colors, mapping from the color ID to its definition. An event resource may refer to one of these color IDs in its color field. Read-only.",
           "additionalProperties": {
             "$ref": "#/definitions/ColorDefinition",
             "description": "An event color definition."
@@ -2823,7 +2823,7 @@
         },
         "attendees": {
           "type": "array",
-          "description": "The attendees of the event.",
+          "description": "The attendees of the event. See the Events with attendees guide for more information on scheduling events with other calendar users.",
           "items": {
             "$ref": "#/definitions/EventAttendee"
           }
@@ -2914,16 +2914,16 @@
             },
             "height": {
               "type": "integer",
-              "description": "The gadget's height in pixels. Optional.",
+              "description": "The gadget's height in pixels. The height must be an integer greater than 0. Optional.",
               "format": "int32"
             },
             "iconLink": {
               "type": "string",
-              "description": "The gadget's icon URL."
+              "description": "The gadget's icon URL. The URL scheme must be HTTPS."
             },
             "link": {
               "type": "string",
-              "description": "The gadget's URL."
+              "description": "The gadget's URL. The URL scheme must be HTTPS."
             },
             "preferences": {
               "type": "object",
@@ -2943,7 +2943,7 @@
             },
             "width": {
               "type": "integer",
-              "description": "The gadget's width in pixels. Optional.",
+              "description": "The gadget's width in pixels. The width must be an integer greater than 0. Optional.",
               "format": "int32"
             }
           }
@@ -3027,7 +3027,7 @@
         },
         "recurrence": {
           "type": "array",
-          "description": "List of RRULE, EXRULE, RDATE and EXDATE lines for a recurring event. This field is omitted for single events or instances of recurring events.",
+          "description": "List of RRULE, EXRULE, RDATE and EXDATE lines for a recurring event, as specified in RFC5545. Note that DTSTART and DTEND lines are not allowed in this field; event start and end times are specified in the start and end fields. This field is omitted for single events or instances of recurring events.",
           "items": {
             "type": "string"
           }
@@ -3042,7 +3042,7 @@
           "properties": {
             "overrides": {
               "type": "array",
-              "description": "If the event doesn't use the default reminders, this lists the reminders specific to the event, or, if not set, indicates that no reminders are set for this event.",
+              "description": "If the event doesn't use the default reminders, this lists the reminders specific to the event, or, if not set, indicates that no reminders are set for this event. The maximum number of override reminders is 5.",
               "items": {
                 "$ref": "#/definitions/EventReminder"
               }
@@ -3060,7 +3060,7 @@
         },
         "source": {
           "type": "object",
-          "description": "Source of an event from which it was created; for example a web page, an email message or any document identifiable by an URL using HTTP/HTTPS protocol. Accessible only by the creator of the event.",
+          "description": "Source from which the event was created. For example, a web page, an email message or any document identifiable by an URL with HTTP or HTTPS scheme. Can only be seen or modified by the creator of the event.",
           "properties": {
             "title": {
               "type": "string",
@@ -3068,7 +3068,7 @@
             },
             "url": {
               "type": "string",
-              "description": "URL of the source pointing to a resource. URL's protocol must be HTTP or HTTPS."
+              "description": "URL of the source pointing to a resource. The URL scheme must be HTTP or HTTPS."
             }
           }
         },
@@ -3106,7 +3106,7 @@
       "properties": {
         "fileId": {
           "type": "string",
-          "description": "ID of the attached file. Read-only.\nE.g. for Google Drive files this is the ID of the corresponding Files resource entry in the Drive API."
+          "description": "ID of the attached file. Read-only.\nFor Google Drive files, this is the ID of the corresponding Files resource entry in the Drive API."
         },
         "fileUrl": {
           "type": "string",
@@ -3200,11 +3200,11 @@
       "properties": {
         "method": {
           "type": "string",
-          "description": "The method used by this reminder. Possible values are:  \n- \"email\" - Reminders are sent via email. \n- \"sms\" - Reminders are sent via SMS. They are only available for Google Apps for Work, Education, and Government customers. Requests to set SMS reminders for the other accounts will be ignored. \n- \"popup\" - Reminders are sent via a UI popup."
+          "description": "The method used by this reminder. Possible values are:  \n- \"email\" - Reminders are sent via email. \n- \"sms\" - Reminders are sent via SMS. These are only available for Google Apps for Work, Education, and Government customers. Requests to set SMS reminders for other account types are ignored. \n- \"popup\" - Reminders are sent via a UI popup."
         },
         "minutes": {
           "type": "integer",
-          "description": "Number of minutes before the start of the event when the reminder should trigger.",
+          "description": "Number of minutes before the start of the event when the reminder should trigger. Valid values are between 0 and 40320 (4 weeks in minutes).",
           "format": "int32"
         }
       }

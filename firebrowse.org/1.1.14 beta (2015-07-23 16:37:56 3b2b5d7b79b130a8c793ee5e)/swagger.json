@@ -6,7 +6,7 @@
   ],
   "swagger": "2.0",
   "info": {
-    "version": "1.1.13 beta (2015-07-10 11:54:59 eb6dbb5f15256ee39de89419)",
+    "version": "1.1.14 beta (2015-07-23 16:37:56 3b2b5d7b79b130a8c793ee5e)",
     "title": "firebrowse.org",
     "x-providerName": "firebrowse.org",
     "x-origin": {
@@ -414,7 +414,7 @@
         ],
         "operationId": "ClinicalTier1",
         "summary": "Retrieve clinical pick tier 1 data.",
-        "description": "This service returns patient-level tier 1 clinical data elements (CDEs).  Results may be selected by disease cohort, patient barcode or CDE name, but at least one cohort or barcode must be provided. When filtering by CDE note that only when a  patient record contains one or more of the selected CDEs will it be returned. For more information on how these CDEs are processed see our <a href=\"https://confluence.broadinstitute.org/display/GDAC/Documentation#Documentation-ClinicalPipeline\">pipeline documentation</a>.",
+        "description": "This service returns patient-level tier 1 clinical data elements (CDEs).  Results may be selected by disease cohort, patient barcode or CDE name, but at least one cohort or barcode must be provided. When filtering by CDE note that only when a  patient record contains one or more of the selected CDEs will it be returned. Visit <a href=\"http://gdac.broadinstitute.org/runs/info/clinical\">this table of CDEs</a> to see what's available for every disase cohort; for more information on how these CDEs are processed see our <a href=\"https://confluence.broadinstitute.org/display/GDAC/Documentation#Documentation-ClinicalPipeline\">pipeline documentation</a>.",
         "parameters": [
           {
             "in": "query",

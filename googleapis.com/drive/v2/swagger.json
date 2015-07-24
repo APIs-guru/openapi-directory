@@ -65,6 +65,7 @@
               "https://www.googleapis.com/auth/drive.file",
               "https://www.googleapis.com/auth/drive.metadata",
               "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
@@ -258,6 +259,7 @@
               "https://www.googleapis.com/auth/drive.file",
               "https://www.googleapis.com/auth/drive.metadata",
               "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
@@ -334,7 +336,7 @@
           {
             "name": "spaces",
             "in": "query",
-            "description": "A comma-separated list of spaces to query. Supported values are 'drive' and 'appDataFolder'.",
+            "description": "A comma-separated list of spaces to query. Supported values are 'drive', 'appDataFolder' and 'photos'.",
             "type": "string"
           },
           {
@@ -353,6 +355,7 @@
               "https://www.googleapis.com/auth/drive.file",
               "https://www.googleapis.com/auth/drive.metadata",
               "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
@@ -429,7 +432,7 @@
           {
             "name": "spaces",
             "in": "query",
-            "description": "A comma-separated list of spaces to query. Supported values are 'drive' and 'appDataFolder'.",
+            "description": "A comma-separated list of spaces to query. Supported values are 'drive', 'appDataFolder' and 'photos'.",
             "type": "string"
           },
           {
@@ -455,6 +458,7 @@
               "https://www.googleapis.com/auth/drive.file",
               "https://www.googleapis.com/auth/drive.metadata",
               "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
@@ -514,6 +518,7 @@
               "https://www.googleapis.com/auth/drive.file",
               "https://www.googleapis.com/auth/drive.metadata",
               "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
@@ -618,6 +623,7 @@
               "https://www.googleapis.com/auth/drive.file",
               "https://www.googleapis.com/auth/drive.metadata",
               "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
@@ -739,6 +745,7 @@
               "https://www.googleapis.com/auth/drive.file",
               "https://www.googleapis.com/auth/drive.metadata",
               "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
@@ -1180,7 +1187,8 @@
               "https://www.googleapis.com/auth/drive",
               "https://www.googleapis.com/auth/drive.appdata",
               "https://www.googleapis.com/auth/drive.apps.readonly",
-              "https://www.googleapis.com/auth/drive.file"
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.photos.readonly"
             ]
           }
         ],
@@ -1302,6 +1310,7 @@
               "https://www.googleapis.com/auth/drive.file",
               "https://www.googleapis.com/auth/drive.metadata",
               "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
@@ -1803,7 +1812,7 @@
           {
             "name": "spaces",
             "in": "query",
-            "description": "A comma-separated list of spaces to query. Supported values are 'drive' and 'appDataFolder'.",
+            "description": "A comma-separated list of spaces to query. Supported values are 'drive', 'appDataFolder' and 'photos'.",
             "type": "string"
           }
         ],
@@ -1816,6 +1825,7 @@
               "https://www.googleapis.com/auth/drive.file",
               "https://www.googleapis.com/auth/drive.metadata",
               "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
@@ -1910,7 +1920,7 @@
     },
     "/files/{fileId}/trash": {
       "post": {
-        "description": "Moves a file to the trash.",
+        "description": "Moves a file to the trash. The currently authenticated user must own the file.",
         "operationId": "drive.files.trash",
         "responses": {
           "200": {
@@ -2093,6 +2103,7 @@
               "https://www.googleapis.com/auth/drive.file",
               "https://www.googleapis.com/auth/drive.metadata",
               "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
@@ -2197,6 +2208,7 @@
               "https://www.googleapis.com/auth/drive.file",
               "https://www.googleapis.com/auth/drive.metadata",
               "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
@@ -2298,6 +2310,7 @@
               "https://www.googleapis.com/auth/drive.file",
               "https://www.googleapis.com/auth/drive.metadata",
               "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
@@ -2401,6 +2414,7 @@
               "https://www.googleapis.com/auth/drive.file",
               "https://www.googleapis.com/auth/drive.metadata",
               "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
@@ -2569,6 +2583,7 @@
               "https://www.googleapis.com/auth/drive.file",
               "https://www.googleapis.com/auth/drive.metadata",
               "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
@@ -2681,6 +2696,7 @@
               "https://www.googleapis.com/auth/drive.file",
               "https://www.googleapis.com/auth/drive.metadata",
               "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
@@ -2801,6 +2817,7 @@
               "https://www.googleapis.com/auth/drive.file",
               "https://www.googleapis.com/auth/drive.metadata",
               "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
@@ -3013,6 +3030,7 @@
               "https://www.googleapis.com/auth/drive.file",
               "https://www.googleapis.com/auth/drive.metadata",
               "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
@@ -3579,6 +3597,7 @@
               "https://www.googleapis.com/auth/drive.file",
               "https://www.googleapis.com/auth/drive.metadata",
               "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
@@ -3734,6 +3753,7 @@
               "https://www.googleapis.com/auth/drive.file",
               "https://www.googleapis.com/auth/drive.metadata",
               "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
               "https://www.googleapis.com/auth/drive.readonly"
             ]
           }
@@ -4878,7 +4898,7 @@
         },
         "spaces": {
           "type": "array",
-          "description": "The list of spaces which contain the file. Supported values are 'drive' and 'appDataFolder'.",
+          "description": "The list of spaces which contain the file. Supported values are 'drive', 'appDataFolder' and 'photos'.",
           "items": {
             "type": "string"
           }
@@ -5412,6 +5432,7 @@
         "https://www.googleapis.com/auth/drive.file": "View and manage Google Drive files and folders that you have opened or created with this app",
         "https://www.googleapis.com/auth/drive.metadata": "View and manage metadata of files in your Google Drive",
         "https://www.googleapis.com/auth/drive.metadata.readonly": "View metadata for files in your Google Drive",
+        "https://www.googleapis.com/auth/drive.photos.readonly": "View the photos, videos and albums in your Google Photos",
         "https://www.googleapis.com/auth/drive.readonly": "View the files in your Google Drive",
         "https://www.googleapis.com/auth/drive.scripts": "Modify your Google Apps Script scripts' behavior"
       }
