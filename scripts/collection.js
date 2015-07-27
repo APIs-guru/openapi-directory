@@ -112,6 +112,7 @@ function updateGoogle() {
              'pubsub:v1beta2',
              'genomics:v1',
              'appengine:v1beta4',
+             'storagetransfer:v1',
              //circular reference in MapFolder/MapItem
              'mapsengine:exp2',
              'mapsengine:v1',
