@@ -154,22 +154,24 @@ function writeSpec(url, type, callback) {
 }
 
 function logSpec(error, spec, swagger) {
-  console.error('++++++++++++++++++++++++++ Begin ' + spec.url + ' +++++++++++++++++++++++++');
+  var url = spec.source;
+
+  console.error('++++++++++++++++++++++++++ Begin ' + url + ' +++++++++++++++++++++++++');
   if (spec.type !== 'swagger_2' || _.isUndefined(swagger)) {
     logJson(spec.spec);
-    if (spec.apis)
-      logJson(spec.apis);
+    if (spec.subResources)
+      logJson(spec.subResources);
   }
   if (!_.isUndefined(swagger)) {
-    console.error('???????????????????? Swagger ' + spec.url + '????????????????????????????');
+    console.error('???????????????????? Swagger ' + url + ' ????????????????????????????');
     logJson(swagger);
   }
-  console.error('!!!!!!!!!!!!!!!!!!!! Errors ' + spec.url + ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+  console.error('!!!!!!!!!!!!!!!!!!!! Errors ' + url + ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
   if (_.isArray(error))
     logJson(error);
   else
     console.error(error);
-  console.error('------------------------- End ' + spec.url + ' ----------------------------');
+  console.error('------------------------- End ' + url + ' ----------------------------');
   process.exitCode = errExitCode;
 }
 
