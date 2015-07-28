@@ -133,6 +133,58 @@
         "parameters": [
           {
             "in": "formData",
+            "description": "Id or list of Ids separated by ';'",
+            "name": "Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Catalog Version as positive entire value",
+            "name": "CatalogVersion",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Serial Number",
+            "name": "SerialNo",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Token",
+            "name": "Token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Contact ID",
+            "name": "ContactId",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        }
+      }
+    },
+    "/catalog/installbyids": {
+      "post": {
+        "tags": [
+          "catalog"
+        ],
+        "operationId": "installbyids",
+        "summary": "Return an array of matching elements by id for the installing process",
+        "description": "",
+        "parameters": [
+          {
+            "in": "formData",
             "description": "Search by Id",
             "name": "Id",
             "required": true,
@@ -142,6 +194,27 @@
             "in": "formData",
             "description": "Catalog Version as positive entire value",
             "name": "CatalogVersion",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Serial Number",
+            "name": "SerialNo",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "License checksum",
+            "name": "Token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "description": "Contact ID",
+            "name": "ContactId",
             "required": false,
             "type": "string"
           }

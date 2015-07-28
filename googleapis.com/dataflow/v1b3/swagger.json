@@ -670,6 +670,12 @@
             "$ref": "#/definitions/StreamLocation"
           }
         },
+        "stateFamilies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StateFamilyConfig"
+          }
+        },
         "systemStageName": {
           "type": "string"
         },
@@ -1557,6 +1563,17 @@
         }
       }
     },
+    "StateFamilyConfig": {
+      "type": "object",
+      "properties": {
+        "isRead": {
+          "type": "boolean"
+        },
+        "stateFamily": {
+          "type": "string"
+        }
+      }
+    },
     "Status": {
       "type": "object",
       "properties": {
@@ -1666,6 +1683,9 @@
     "StreamingSideInputLocation": {
       "type": "object",
       "properties": {
+        "stateFamily": {
+          "type": "string"
+        },
         "tag": {
           "type": "string"
         }
@@ -2064,5 +2084,8 @@
         "https://www.googleapis.com/auth/userinfo.email": "View your email address"
       }
     }
+  },
+  "externalDocs": {
+    "url": "https://cloud.google.com/dataflow"
   }
 }

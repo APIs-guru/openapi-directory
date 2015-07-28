@@ -679,15 +679,22 @@
             "in": "query",
             "description": "Single date and time to query data. Must be in ISO8601 format.",
             "name": "date",
-            "required": true,
+            "required": false,
             "type": "string",
             "format": "date-time"
           },
           {
             "in": "query",
+            "description": "Number of days/hours to get daya from. Period is calculated backwards from now. For example, 1day means today. 7days means past 7 days and so on. The YTD value is the period from the beginning of the current year to now, different from 1year, which means the past 365 days.",
+            "name": "period",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
             "description": "Specifies how small the period to fetch is. Posible values are: 'hourly' and 'daily'",
             "name": "resolution",
-            "required": true,
+            "required": false,
             "type": "string"
           }
         ],
