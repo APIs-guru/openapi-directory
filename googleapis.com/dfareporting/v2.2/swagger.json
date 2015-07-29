@@ -8,17 +8,17 @@
       "name": "Google",
       "url": "https://google.com"
     },
-    "version": "v2.0",
+    "version": "v2.2",
     "x-providerName": "googleapis.com",
     "x-origin": {
       "format": "google",
       "version": "v1",
-      "url": "https://www.googleapis.com/discovery/v1/apis/dfareporting/v2.0/rest"
+      "url": "https://www.googleapis.com/discovery/v1/apis/dfareporting/v2.2/rest"
     },
     "x-logo": "https://www.google.com/images/srpr/logo11w.png"
   },
   "host": "www.googleapis.com",
-  "basePath": "/dfareporting/v2.0",
+  "basePath": "/dfareporting/v2.2",
   "schemes": [
     "https"
   ],
@@ -388,6 +388,44 @@
       ]
     },
     "/userprofiles/{profileId}/accountUserProfiles": {
+      "post": {
+        "description": "Inserts a new account user profile.",
+        "operationId": "dfareporting.accountUserProfiles.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AccountUserProfile"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/AccountUserProfile"
+            }
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "accountUserProfiles"
+        ]
+      },
       "get": {
         "description": "Retrieves a list of account user profiles, possibly filtered.",
         "operationId": "dfareporting.accountUserProfiles.list",
@@ -2860,6 +2898,69 @@
         }
       ]
     },
+    "/userprofiles/{profileId}/connectionTypes/{id}": {
+      "get": {
+        "description": "Gets one connection type by ID.",
+        "operationId": "dfareporting.connectionTypes.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ConnectionType"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Connection type ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "connectionTypes"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/userprofiles/{profileId}/connectionTypes": {
       "get": {
         "description": "Retrieves a list of connection types.",
@@ -5145,6 +5246,44 @@
       ]
     },
     "/userprofiles/{profileId}/directorySites": {
+      "post": {
+        "description": "Inserts a new directory site.",
+        "operationId": "dfareporting.directorySites.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/DirectorySite"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DirectorySite"
+            }
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "directorySites"
+        ]
+      },
       "get": {
         "description": "Retrieves a list of directory sites, possibly filtered.",
         "operationId": "dfareporting.directorySites.list",
@@ -6805,6 +6944,207 @@
         }
       ]
     },
+    "/userprofiles/{profileId}/projects/{projectId}/inventoryItems/{id}": {
+      "get": {
+        "description": "Gets one inventory item by ID.",
+        "operationId": "dfareporting.inventoryItems.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/InventoryItem"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID for order documents.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Inventory item ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "inventoryItems"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/userprofiles/{profileId}/projects/{projectId}/inventoryItems": {
+      "get": {
+        "description": "Retrieves a list of inventory items, possibly filtered.",
+        "operationId": "dfareporting.inventoryItems.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/InventoryItemsListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID for order documents.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "Select only inventory items with these IDs.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "inPlan",
+            "in": "query",
+            "description": "Select only inventory items that are in plan.",
+            "type": "boolean"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of results to return.",
+            "type": "integer"
+          },
+          {
+            "name": "orderId",
+            "in": "query",
+            "description": "Select only inventory items that belong to specified orders.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Value of the nextPageToken from the previous result page.",
+            "type": "string"
+          },
+          {
+            "name": "siteId",
+            "in": "query",
+            "description": "Select only inventory items that are associated with these sites.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "sortField",
+            "in": "query",
+            "description": "Field by which to sort the list.",
+            "type": "string",
+            "enum": [
+              "ID",
+              "NAME"
+            ]
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "Order of sorted results, default is ASCENDING.",
+            "type": "string",
+            "enum": [
+              "ASCENDING",
+              "DESCENDING"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "inventoryItems"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/userprofiles/{profileId}/campaigns/{campaignId}/landingPages/{id}": {
       "delete": {
         "description": "Deletes an existing campaign landing page.",
@@ -7178,6 +7518,69 @@
         }
       ]
     },
+    "/userprofiles/{profileId}/mobileCarriers/{id}": {
+      "get": {
+        "description": "Gets one mobile carrier by ID.",
+        "operationId": "dfareporting.mobileCarriers.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/MobileCarrier"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Mobile carrier ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "mobileCarriers"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/userprofiles/{profileId}/mobileCarriers": {
       "get": {
         "description": "Retrieves a list of mobile carriers.",
@@ -7208,6 +7611,69 @@
         ],
         "tags": [
           "mobileCarriers"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/userprofiles/{profileId}/operatingSystemVersions/{id}": {
+      "get": {
+        "description": "Gets one operating system version by ID.",
+        "operationId": "dfareporting.operatingSystemVersions.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OperatingSystemVersion"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Operating system version ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "operatingSystemVersions"
         ]
       },
       "parameters": [
@@ -7290,6 +7756,69 @@
         }
       ]
     },
+    "/userprofiles/{profileId}/operatingSystems/{dartId}": {
+      "get": {
+        "description": "Gets one operating system by DART ID.",
+        "operationId": "dfareporting.operatingSystems.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OperatingSystem"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dartId",
+            "in": "path",
+            "description": "Operating system DART ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "operatingSystems"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/userprofiles/{profileId}/operatingSystems": {
       "get": {
         "description": "Retrieves a list of operating systems.",
@@ -7320,6 +7849,404 @@
         ],
         "tags": [
           "operatingSystems"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/userprofiles/{profileId}/projects/{projectId}/orderDocuments/{id}": {
+      "get": {
+        "description": "Gets one order document by ID.",
+        "operationId": "dfareporting.orderDocuments.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OrderDocument"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID for order documents.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Order document ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "orderDocuments"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/userprofiles/{profileId}/projects/{projectId}/orderDocuments": {
+      "get": {
+        "description": "Retrieves a list of order documents, possibly filtered.",
+        "operationId": "dfareporting.orderDocuments.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OrderDocumentsListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID for order documents.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "approved",
+            "in": "query",
+            "description": "Select only order documents that have been approved by at least one user.",
+            "type": "boolean"
+          },
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "Select only order documents with these IDs.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of results to return.",
+            "type": "integer"
+          },
+          {
+            "name": "orderId",
+            "in": "query",
+            "description": "Select only order documents for specified orders.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Value of the nextPageToken from the previous result page.",
+            "type": "string"
+          },
+          {
+            "name": "searchString",
+            "in": "query",
+            "description": "Allows searching for order documents by name or ID. Wildcards (*) are allowed. For example, \"orderdocument*2015\" will return order documents with names like \"orderdocument June 2015\", \"orderdocument April 2015\", or simply \"orderdocument 2015\". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of \"orderdocument\" will match order documents with name \"my orderdocument\", \"orderdocument 2015\", or simply \"orderdocument\".",
+            "type": "string"
+          },
+          {
+            "name": "siteId",
+            "in": "query",
+            "description": "Select only order documents that are associated with these sites.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "sortField",
+            "in": "query",
+            "description": "Field by which to sort the list.",
+            "type": "string",
+            "enum": [
+              "ID",
+              "NAME"
+            ]
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "Order of sorted results, default is ASCENDING.",
+            "type": "string",
+            "enum": [
+              "ASCENDING",
+              "DESCENDING"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "orderDocuments"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/userprofiles/{profileId}/projects/{projectId}/orders/{id}": {
+      "get": {
+        "description": "Gets one order by ID.",
+        "operationId": "dfareporting.orders.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID for orders.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Order ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "orders"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/userprofiles/{profileId}/projects/{projectId}/orders": {
+      "get": {
+        "description": "Retrieves a list of orders, possibly filtered.",
+        "operationId": "dfareporting.orders.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OrdersListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "projectId",
+            "in": "path",
+            "description": "Project ID for orders.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "Select only orders with these IDs.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of results to return.",
+            "type": "integer"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Value of the nextPageToken from the previous result page.",
+            "type": "string"
+          },
+          {
+            "name": "searchString",
+            "in": "query",
+            "description": "Allows searching for orders by name or ID. Wildcards (*) are allowed. For example, \"order*2015\" will return orders with names like \"order June 2015\", \"order April 2015\", or simply \"order 2015\". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of \"order\" will match orders with name \"my order\", \"order 2015\", or simply \"order\".",
+            "type": "string"
+          },
+          {
+            "name": "siteId",
+            "in": "query",
+            "description": "Select only orders that are associated with these site IDs.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "sortField",
+            "in": "query",
+            "description": "Field by which to sort the list.",
+            "type": "string",
+            "enum": [
+              "ID",
+              "NAME"
+            ]
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "Order of sorted results, default is ASCENDING.",
+            "type": "string",
+            "enum": [
+              "ASCENDING",
+              "DESCENDING"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "orders"
         ]
       },
       "parameters": [
@@ -7524,10 +8451,34 @@
             "collectionFormat": "multi"
           },
           {
+            "name": "maxEndDate",
+            "in": "query",
+            "description": "Select only placements or placement groups whose end date is on or before the specified maxEndDate. The date should be formatted as \"yyyy-MM-dd\".",
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of results to return.",
             "type": "integer"
+          },
+          {
+            "name": "maxStartDate",
+            "in": "query",
+            "description": "Select only placements or placement groups whose start date is on or before the specified maxStartDate. The date should be formatted as \"yyyy-MM-dd\".",
+            "type": "string"
+          },
+          {
+            "name": "minEndDate",
+            "in": "query",
+            "description": "Select only placements or placement groups whose end date is on or after the specified minEndDate. The date should be formatted as \"yyyy-MM-dd\".",
+            "type": "string"
+          },
+          {
+            "name": "minStartDate",
+            "in": "query",
+            "description": "Select only placements or placement groups whose start date is on or after the specified minStartDate. The date should be formatted as \"yyyy-MM-dd\".",
+            "type": "string"
           },
           {
             "name": "pageToken",
@@ -8357,10 +9308,34 @@
             "collectionFormat": "multi"
           },
           {
+            "name": "maxEndDate",
+            "in": "query",
+            "description": "Select only placements or placement groups whose end date is on or before the specified maxEndDate. The date should be formatted as \"yyyy-MM-dd\".",
+            "type": "string"
+          },
+          {
             "name": "maxResults",
             "in": "query",
             "description": "Maximum number of results to return.",
             "type": "integer"
+          },
+          {
+            "name": "maxStartDate",
+            "in": "query",
+            "description": "Select only placements or placement groups whose start date is on or before the specified maxStartDate. The date should be formatted as \"yyyy-MM-dd\".",
+            "type": "string"
+          },
+          {
+            "name": "minEndDate",
+            "in": "query",
+            "description": "Select only placements or placement groups whose end date is on or after the specified minEndDate. The date should be formatted as \"yyyy-MM-dd\".",
+            "type": "string"
+          },
+          {
+            "name": "minStartDate",
+            "in": "query",
+            "description": "Select only placements or placement groups whose start date is on or after the specified minStartDate. The date should be formatted as \"yyyy-MM-dd\".",
+            "type": "string"
           },
           {
             "name": "pageToken",
@@ -8570,6 +9545,69 @@
         }
       ]
     },
+    "/userprofiles/{profileId}/platformTypes/{id}": {
+      "get": {
+        "description": "Gets one platform type by ID.",
+        "operationId": "dfareporting.platformTypes.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/PlatformType"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Platform type ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "platformTypes"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/userprofiles/{profileId}/platformTypes": {
       "get": {
         "description": "Retrieves a list of platform types.",
@@ -8600,6 +9638,69 @@
         ],
         "tags": [
           "platformTypes"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/userprofiles/{profileId}/postalCodes/{code}": {
+      "get": {
+        "description": "Gets one postal code by ID.",
+        "operationId": "dfareporting.postalCodes.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/PostalCode"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "description": "Postal code ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "postalCodes"
         ]
       },
       "parameters": [
@@ -8682,6 +9783,183 @@
         }
       ]
     },
+    "/userprofiles/{profileId}/projects/{id}": {
+      "get": {
+        "description": "Gets one project by ID.",
+        "operationId": "dfareporting.projects.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Project"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Project ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/userprofiles/{profileId}/projects": {
+      "get": {
+        "description": "Retrieves a list of projects, possibly filtered.",
+        "operationId": "dfareporting.projects.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ProjectsListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advertiserIds",
+            "in": "query",
+            "description": "Select only projects with these advertiser IDs.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "ids",
+            "in": "query",
+            "description": "Select only projects with these IDs.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of results to return.",
+            "type": "integer"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Value of the nextPageToken from the previous result page.",
+            "type": "string"
+          },
+          {
+            "name": "searchString",
+            "in": "query",
+            "description": "Allows searching for projects by name or ID. Wildcards (*) are allowed. For example, \"project*2015\" will return projects with names like \"project June 2015\", \"project April 2015\", or simply \"project 2015\". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of \"project\" will match projects with name \"my project\", \"project 2015\", or simply \"project\".",
+            "type": "string"
+          },
+          {
+            "name": "sortField",
+            "in": "query",
+            "description": "Field by which to sort the list.",
+            "type": "string",
+            "enum": [
+              "ID",
+              "NAME"
+            ]
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "Order of sorted results, default is ASCENDING.",
+            "type": "string",
+            "enum": [
+              "ASCENDING",
+              "DESCENDING"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/userprofiles/{profileId}/regions": {
       "get": {
         "description": "Retrieves a list of regions.",
@@ -8712,6 +9990,474 @@
         ],
         "tags": [
           "regions"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/userprofiles/{profileId}/remarketingListShares/{remarketingListId}": {
+      "get": {
+        "description": "Gets one remarketing list share by remarketing list ID.",
+        "operationId": "dfareporting.remarketingListShares.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/RemarketingListShare"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "remarketingListId",
+            "in": "path",
+            "description": "Remarketing list ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "remarketingListShares"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/userprofiles/{profileId}/remarketingListShares": {
+      "patch": {
+        "description": "Updates an existing remarketing list share. This method supports patch semantics.",
+        "operationId": "dfareporting.remarketingListShares.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/RemarketingListShare"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "remarketingListId",
+            "in": "query",
+            "description": "Remarketing list ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RemarketingListShare"
+            }
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "remarketingListShares"
+        ]
+      },
+      "put": {
+        "description": "Updates an existing remarketing list share.",
+        "operationId": "dfareporting.remarketingListShares.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/RemarketingListShare"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RemarketingListShare"
+            }
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "remarketingListShares"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/userprofiles/{profileId}/remarketingLists/{id}": {
+      "get": {
+        "description": "Gets one remarketing list by ID.",
+        "operationId": "dfareporting.remarketingLists.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/RemarketingList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Remarketing list ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "remarketingLists"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/userprofiles/{profileId}/remarketingLists": {
+      "post": {
+        "description": "Inserts a new remarketing list.",
+        "operationId": "dfareporting.remarketingLists.insert",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/RemarketingList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RemarketingList"
+            }
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "remarketingLists"
+        ]
+      },
+      "get": {
+        "description": "Retrieves a list of remarketing lists, possibly filtered.",
+        "operationId": "dfareporting.remarketingLists.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/RemarketingListsListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advertiserId",
+            "in": "query",
+            "description": "Select only remarketing lists owned by this advertiser.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "active",
+            "in": "query",
+            "description": "Select only active or only inactive remarketing lists.",
+            "type": "boolean"
+          },
+          {
+            "name": "floodlightActivityId",
+            "in": "query",
+            "description": "Select only remarketing lists that have this floodlight activity ID.",
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of results to return.",
+            "type": "integer"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, \"remarketing list*2015\" will return objects with names like \"remarketing list June 2015\", \"remarketing list April 2015\", or simply \"remarketing list 2015\". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of \"remarketing list\" will match objects with name \"my remarketing list\", \"remarketing list 2015\", or simply \"remarketing list\".",
+            "type": "string"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Value of the nextPageToken from the previous result page.",
+            "type": "string"
+          },
+          {
+            "name": "sortField",
+            "in": "query",
+            "description": "Field by which to sort the list.",
+            "type": "string",
+            "enum": [
+              "ID",
+              "NAME"
+            ]
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "Order of sorted results, default is ASCENDING.",
+            "type": "string",
+            "enum": [
+              "ASCENDING",
+              "DESCENDING"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "remarketingLists"
+        ]
+      },
+      "patch": {
+        "description": "Updates an existing remarketing list. This method supports patch semantics.",
+        "operationId": "dfareporting.remarketingLists.patch",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/RemarketingList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Remarketing list ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RemarketingList"
+            }
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "remarketingLists"
+        ]
+      },
+      "put": {
+        "description": "Updates an existing remarketing list.",
+        "operationId": "dfareporting.remarketingLists.update",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/RemarketingList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/RemarketingList"
+            }
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "remarketingLists"
         ]
       },
       "parameters": [
@@ -10192,6 +11938,176 @@
         }
       ]
     },
+    "/userprofiles/{profileId}/targetableRemarketingLists/{id}": {
+      "get": {
+        "description": "Gets one remarketing list by ID.",
+        "operationId": "dfareporting.targetableRemarketingLists.get",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TargetableRemarketingList"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Remarketing list ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "targetableRemarketingLists"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/userprofiles/{profileId}/targetableRemarketingLists": {
+      "get": {
+        "description": "Retrieves a list of targetable remarketing lists, possibly filtered.",
+        "operationId": "dfareporting.targetableRemarketingLists.list",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TargetableRemarketingListsListResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "profileId",
+            "in": "path",
+            "description": "User profile ID associated with this request.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advertiserId",
+            "in": "query",
+            "description": "Select only targetable remarketing lists targetable by these advertisers.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "active",
+            "in": "query",
+            "description": "Select only active or only inactive targetable remarketing lists.",
+            "type": "boolean"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximum number of results to return.",
+            "type": "integer"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, \"remarketing list*2015\" will return objects with names like \"remarketing list June 2015\", \"remarketing list April 2015\", or simply \"remarketing list 2015\". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of \"remarketing list\" will match objects with name \"my remarketing list\", \"remarketing list 2015\", or simply \"remarketing list\".",
+            "type": "string"
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Value of the nextPageToken from the previous result page.",
+            "type": "string"
+          },
+          {
+            "name": "sortField",
+            "in": "query",
+            "description": "Field by which to sort the list.",
+            "type": "string",
+            "enum": [
+              "ID",
+              "NAME"
+            ]
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "description": "Order of sorted results, default is ASCENDING.",
+            "type": "string",
+            "enum": [
+              "ASCENDING",
+              "DESCENDING"
+            ]
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "targetableRemarketingLists"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/userprofiles/{profileId}": {
       "get": {
         "description": "Gets one user profile by ID.",
@@ -11424,7 +13340,7 @@
             "$ref": "#/definitions/PlacementAssignment"
           }
         },
-        "remarketing_list_expression": {
+        "remarketingListExpression": {
           "$ref": "#/definitions/ListTargetingExpression",
           "description": "Applicable when type is AD_SERVING_STANDARD_AD. Remarketing list targeting expression for this ad."
         },
@@ -11463,6 +13379,58 @@
             "AD_SERVING_STANDARD_AD",
             "AD_SERVING_TRACKING"
           ]
+        }
+      }
+    },
+    "AdSlot": {
+      "type": "object",
+      "description": "Ad Slot",
+      "properties": {
+        "comment": {
+          "type": "string",
+          "description": "Comment for this ad slot."
+        },
+        "compatibility": {
+          "type": "string",
+          "description": "Ad slot compatibility. WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices for regular or interstitial ads respectively. APP and APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering in in-stream video ads developed with the VAST standard.",
+          "enum": [
+            "PLANNING_RENDERING_ENVIRONMENT_TYPE_APP",
+            "PLANNING_RENDERING_ENVIRONMENT_TYPE_APP_INTERSTITIAL",
+            "PLANNING_RENDERING_ENVIRONMENT_TYPE_IN_STREAM_VIDEO",
+            "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB",
+            "PLANNING_RENDERING_ENVIRONMENT_TYPE_WEB_INTERSTITIAL"
+          ]
+        },
+        "height": {
+          "type": "string",
+          "description": "Height of this ad slot.",
+          "format": "int64"
+        },
+        "linkedPlacementId": {
+          "type": "string",
+          "description": "ID of the placement from an external platform that is linked to this ad slot.",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of this ad slot."
+        },
+        "paymentSourceType": {
+          "type": "string",
+          "description": "Payment source type of this ad slot.",
+          "enum": [
+            "PLANNING_PAYMENT_SOURCE_TYPE_AGENCY_PAID",
+            "PLANNING_PAYMENT_SOURCE_TYPE_PUBLISHER_PAID"
+          ]
+        },
+        "primary": {
+          "type": "boolean",
+          "description": "Primary ad slot of a roadblock inventory item."
+        },
+        "width": {
+          "type": "string",
+          "description": "Width of this ad slot.",
+          "format": "int64"
         }
       }
     },
@@ -11542,6 +13510,11 @@
           "type": "string",
           "description": "Name of this advertiser. This is a required field and must be less than 256 characters long and unique among advertisers of the same account."
         },
+        "originalFloodlightConfigurationId": {
+          "type": "string",
+          "description": "Original floodlight configuration before any sharing occurred. Set the floodlightConfigurationId of this advertiser to originalFloodlightConfigurationId to unshare the advertiser's current floodlight configuration. You cannot unshare an advertiser's floodlight configuration if the shared configuration has activities associated with any campaign or placement.",
+          "format": "int64"
+        },
         "status": {
           "type": "string",
           "description": "Status of this advertiser.",
@@ -11554,6 +13527,10 @@
           "type": "string",
           "description": "Subaccount ID of this advertiser.This is a read-only field that can be left blank.",
           "format": "int64"
+        },
+        "suspended": {
+          "type": "boolean",
+          "description": "Suspension status of this advertiser."
         }
       }
     },
@@ -12100,6 +14077,10 @@
       "type": "object",
       "description": "Click-through URL",
       "properties": {
+        "computedClickThroughUrl": {
+          "type": "string",
+          "description": "Read-only convenience field representing the actual URL that will be used for this click-through. The URL is computed as follows: \n- If defaultLandingPage is enabled then the campaign's default landing page URL is assigned to this field.\n- If defaultLandingPage is not enabled and a landingPageId is specified then that landing page's URL is assigned to this field.\n- If neither of the above cases apply, then the customClickThroughUrl is assigned to this field."
+        },
         "customClickThroughUrl": {
           "type": "string",
           "description": "Custom click-through URL. Applicable if the defaultLandingPage field is set to false and the landingPageId field is left unset."
@@ -12243,10 +14224,6 @@
           "type": "string",
           "description": "Account ID of this content category. This is a read-only field that can be left blank.",
           "format": "int64"
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of this content category."
         },
         "id": {
           "type": "string",
@@ -12492,6 +14469,10 @@
             ]
           }
         },
+        "convertFlashToHtml5": {
+          "type": "boolean",
+          "description": "Whether Flash assets associated with the creative need to be automatically converted to HTML5. This flag is enabled by default and users can choose to disable it if they don't want the system to generate and use HTML5 asset for this creative. Applicable to the following creative types: ENHANCED_BANNER and FLASH_INPAGE."
+        },
         "counterCustomEvents": {
           "type": "array",
           "description": "List of counter events configured for the creative. Applicable to the following creative types: all RICH_MEDIA, and all VPAID.",
@@ -12603,6 +14584,10 @@
         "sslCompliant": {
           "type": "boolean",
           "description": "Whether the creative is SSL-compliant. This is a read-only field. Applicable to all creative types."
+        },
+        "sslOverride": {
+          "type": "boolean",
+          "description": "Whether creative should be treated as SSL compliant even if the system scan shows it's not."
         },
         "studioAdvertiserId": {
           "type": "string",
@@ -13237,10 +15222,6 @@
       "type": "object",
       "description": "Creative Custom Event.",
       "properties": {
-        "active": {
-          "type": "boolean",
-          "description": "Whether the event is active."
-        },
         "advertiserCustomEventName": {
           "type": "string",
           "description": "User-entered name for the event."
@@ -14040,6 +16021,10 @@
       "type": "object",
       "description": "Contains properties of a Site Directory contact.",
       "properties": {
+        "address": {
+          "type": "string",
+          "description": "Address of this directory site contact."
+        },
         "email": {
           "type": "string",
           "description": "Email address of this directory site contact."
@@ -14062,6 +16047,10 @@
           "type": "string",
           "description": "Last name of this directory site contact."
         },
+        "phone": {
+          "type": "string",
+          "description": "Phone number of this directory site contact."
+        },
         "role": {
           "type": "string",
           "description": "Directory site contact role.",
@@ -14070,6 +16059,10 @@
             "EDIT",
             "VIEW"
           ]
+        },
+        "title": {
+          "type": "string",
+          "description": "Title or designation of this directory site contact."
         },
         "type": {
           "type": "string",
@@ -14210,6 +16203,10 @@
         "enabledByDefault": {
           "type": "boolean",
           "description": "Whether this event tag should be automatically enabled for all of the advertiser's campaigns and ads."
+        },
+        "excludeFromAdxRequests": {
+          "type": "boolean",
+          "description": "Whether to remove this event tag from ads that are trafficked through DoubleClick Bid Manager to Ad Exchange. This may be useful if the event tag uses a pixel that is unapproved for Ad Exchange bids on one or more networks, such as the Google Display Network."
         },
         "id": {
           "type": "string",
@@ -14404,6 +16401,32 @@
         "nextPageToken": {
           "type": "string",
           "description": "Continuation token used to page through files. To retrieve the next page of results, set the next request's \"pageToken\" to the value of this field. The page token is only valid for a limited amount of time and should not be persisted."
+        }
+      }
+    },
+    "Flight": {
+      "type": "object",
+      "description": "Flight",
+      "properties": {
+        "endDate": {
+          "type": "string",
+          "description": "Inventory item flight end date.",
+          "format": "date"
+        },
+        "rateOrCost": {
+          "type": "string",
+          "description": "Rate or cost of this flight.",
+          "format": "int64"
+        },
+        "startDate": {
+          "type": "string",
+          "description": "Inventory item flight start date.",
+          "format": "date"
+        },
+        "units": {
+          "type": "string",
+          "description": "Units of this flight.",
+          "format": "int64"
         }
       }
     },
@@ -14802,6 +16825,10 @@
           "$ref": "#/definitions/DimensionValue",
           "description": "Dimension value for the ID of this floodlight configuration. This is a read-only, auto-generated field."
         },
+        "inAppAttributionTrackingEnabled": {
+          "type": "boolean",
+          "description": "Whether in-app attribution tracking is enabled."
+        },
         "kind": {
           "type": "string",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#floodlightConfiguration\".",
@@ -14849,6 +16876,13 @@
         "tagSettings": {
           "$ref": "#/definitions/TagSettings",
           "description": "Configuration settings for dynamic and image floodlight tags."
+        },
+        "thirdPartyAuthenticationTokens": {
+          "type": "array",
+          "description": "List of third-party authentication tokens enabled for this configuration.",
+          "items": {
+            "$ref": "#/definitions/ThirdPartyAuthenticationToken"
+          }
         },
         "userDefinedVariableConfigurations": {
           "type": "array",
@@ -15004,6 +17038,127 @@
         }
       }
     },
+    "InventoryItem": {
+      "type": "object",
+      "description": "Represents a buy from the DoubleClick Planning inventory store.",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "Account ID of this inventory item.",
+          "format": "int64"
+        },
+        "adSlots": {
+          "type": "array",
+          "description": "Ad slots of this inventory item. If this inventory item represents a standalone placement, there will be exactly one ad slot. If this inventory item represents a placement group, there will be more than one ad slot, each representing one child placement in that placement group.",
+          "items": {
+            "$ref": "#/definitions/AdSlot"
+          }
+        },
+        "advertiserId": {
+          "type": "string",
+          "description": "Advertiser ID of this inventory item.",
+          "format": "int64"
+        },
+        "contentCategoryId": {
+          "type": "string",
+          "description": "Content category ID of this inventory item.",
+          "format": "int64"
+        },
+        "estimatedClickThroughRate": {
+          "type": "string",
+          "description": "Estimated click-through rate of this inventory item.",
+          "format": "int64"
+        },
+        "estimatedConversionRate": {
+          "type": "string",
+          "description": "Estimated conversion rate of this inventory item.",
+          "format": "int64"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of this inventory item.",
+          "format": "int64"
+        },
+        "inPlan": {
+          "type": "boolean",
+          "description": "Whether this inventory item is in plan."
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#inventoryItem\".",
+          "default": "dfareporting#inventoryItem"
+        },
+        "lastModifiedInfo": {
+          "$ref": "#/definitions/LastModifiedInfo",
+          "description": "Information about the most recent modification of this inventory item."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of this inventory item. For standalone inventory items, this is the same name as that of its only ad slot. For group inventory items, this can differ from the name of any of its ad slots."
+        },
+        "negotiationChannelId": {
+          "type": "string",
+          "description": "Negotiation channel ID of this inventory item.",
+          "format": "int64"
+        },
+        "orderId": {
+          "type": "string",
+          "description": "Order ID of this inventory item.",
+          "format": "int64"
+        },
+        "placementStrategyId": {
+          "type": "string",
+          "description": "Placement strategy ID of this inventory item.",
+          "format": "int64"
+        },
+        "pricing": {
+          "$ref": "#/definitions/Pricing",
+          "description": "Pricing of this inventory item."
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Project ID of this inventory item.",
+          "format": "int64"
+        },
+        "rfpId": {
+          "type": "string",
+          "description": "RFP ID of this inventory item.",
+          "format": "int64"
+        },
+        "siteId": {
+          "type": "string",
+          "description": "ID of the site this inventory item is associated with.",
+          "format": "int64"
+        },
+        "subaccountId": {
+          "type": "string",
+          "description": "Subaccount ID of this inventory item.",
+          "format": "int64"
+        }
+      }
+    },
+    "InventoryItemsListResponse": {
+      "type": "object",
+      "description": "Inventory item List Response",
+      "properties": {
+        "inventoryItems": {
+          "type": "array",
+          "description": "Inventory item collection",
+          "items": {
+            "$ref": "#/definitions/InventoryItem"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#inventoryItemsListResponse\".",
+          "default": "dfareporting#inventoryItemsListResponse"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "Pagination token to be used for the next list operation."
+        }
+      }
+    },
     "KeyValueTargetingExpression": {
       "type": "object",
       "description": "Key Value Targeting Expression.",
@@ -15068,6 +17223,94 @@
           "type": "string",
           "description": "Timestamp of the last change in milliseconds since epoch.",
           "format": "int64"
+        }
+      }
+    },
+    "ListPopulationClause": {
+      "type": "object",
+      "description": "A group clause made up of list population terms representing constraints joined by ORs.",
+      "properties": {
+        "terms": {
+          "type": "array",
+          "description": "Terms of this list population clause. Each clause is made up of list population terms representing constraints and are joined by ORs.",
+          "items": {
+            "$ref": "#/definitions/ListPopulationTerm"
+          }
+        }
+      }
+    },
+    "ListPopulationRule": {
+      "type": "object",
+      "description": "Remarketing List Population Rule.",
+      "properties": {
+        "floodlightActivityId": {
+          "type": "string",
+          "description": "Floodlight activity ID associated with this rule. This field can be left blank.",
+          "format": "int64"
+        },
+        "floodlightActivityName": {
+          "type": "string",
+          "description": "Name of floodlight activity associated with this rule. This is a read-only, auto-generated field."
+        },
+        "listPopulationClauses": {
+          "type": "array",
+          "description": "Clauses that make up this list population rule. Clauses are joined by ANDs, and the clauses themselves are made up of list population terms which are joined by ORs.",
+          "items": {
+            "$ref": "#/definitions/ListPopulationClause"
+          }
+        }
+      }
+    },
+    "ListPopulationTerm": {
+      "type": "object",
+      "description": "Remarketing List Population Rule Term.",
+      "properties": {
+        "contains": {
+          "type": "boolean",
+          "description": "Will be true if the term should check if the user is in the list and false if the term should check if the user is not in the list. This field is only relevant when type is set to LIST_MEMBERSHIP_TERM. False by default."
+        },
+        "negation": {
+          "type": "boolean",
+          "description": "Whether to negate the comparison result of this term during rule evaluation. This field is only relevant when type is left unset or set to CUSTOM_VARIABLE_TERM or REFERRER_TERM."
+        },
+        "operator": {
+          "type": "string",
+          "description": "Comparison operator of this term. This field is only relevant when type is left unset or set to CUSTOM_VARIABLE_TERM or REFERRER_TERM.",
+          "enum": [
+            "NUM_EQUALS",
+            "NUM_GREATER_THAN",
+            "NUM_GREATER_THAN_EQUAL",
+            "NUM_LESS_THAN",
+            "NUM_LESS_THAN_EQUAL",
+            "STRING_CONTAINS",
+            "STRING_EQUALS"
+          ]
+        },
+        "remarketingListId": {
+          "type": "string",
+          "description": "ID of the list in question. This field is only relevant when type is set to LIST_MEMBERSHIP_TERM.",
+          "format": "int64"
+        },
+        "type": {
+          "type": "string",
+          "description": "List population term type determines the applicable fields in this object. If left unset or set to CUSTOM_VARIABLE_TERM, then variableName, variableFriendlyName, operator, value, and negation are applicable. If set to LIST_MEMBERSHIP_TERM then remarketingListId and contains are applicable. If set to REFERRER_TERM then operator, value, and negation are applicable.",
+          "enum": [
+            "CUSTOM_VARIABLE_TERM",
+            "LIST_MEMBERSHIP_TERM",
+            "REFERRER_TERM"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "description": "Literal to compare the variable to. This field is only relevant when type is left unset or set to CUSTOM_VARIABLE_TERM or REFERRER_TERM."
+        },
+        "variableFriendlyName": {
+          "type": "string",
+          "description": "Friendly name of this term's variable. This is a read-only, auto-generated field. This field is only relevant when type is left unset or set to CUSTOM_VARIABLE_TERM."
+        },
+        "variableName": {
+          "type": "string",
+          "description": "Name of the variable (U1, U2, etc.) being compared in this term. This field is only relevant when type is set to null, CUSTOM_VARIABLE_TERM or REFERRER_TERM."
         }
       }
     },
@@ -15386,6 +17629,284 @@
           "type": "integer",
           "description": "Weight associated with this optimization. Must be greater than 1. The weight assigned will be understood in proportion to the weights assigned to the other optimization activities.",
           "format": "int32"
+        }
+      }
+    },
+    "Order": {
+      "type": "object",
+      "description": "Describes properties of a DoubleClick Planning order.",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "Account ID of this order.",
+          "format": "int64"
+        },
+        "advertiserId": {
+          "type": "string",
+          "description": "Advertiser ID of this order.",
+          "format": "int64"
+        },
+        "approverUserProfileIds": {
+          "type": "array",
+          "description": "IDs for users that have to approve documents created for this order.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "buyerInvoiceId": {
+          "type": "string",
+          "description": "Buyer invoice ID associated with this order."
+        },
+        "buyerOrganizationName": {
+          "type": "string",
+          "description": "Name of the buyer organization."
+        },
+        "comments": {
+          "type": "string",
+          "description": "Comments in this order."
+        },
+        "contacts": {
+          "type": "array",
+          "description": "Contacts for this order.",
+          "items": {
+            "$ref": "#/definitions/OrderContact"
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of this order. This is a read-only, auto-generated field.",
+          "format": "int64"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#order\".",
+          "default": "dfareporting#order"
+        },
+        "lastModifiedInfo": {
+          "$ref": "#/definitions/LastModifiedInfo",
+          "description": "Information about the most recent modification of this order."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of this order."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Notes of this order."
+        },
+        "planningTermId": {
+          "type": "string",
+          "description": "ID of the terms and conditions template used in this order.",
+          "format": "int64"
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Project ID of this order.",
+          "format": "int64"
+        },
+        "sellerOrderId": {
+          "type": "string",
+          "description": "Seller order ID associated with this order."
+        },
+        "sellerOrganizationName": {
+          "type": "string",
+          "description": "Name of the seller organization."
+        },
+        "siteId": {
+          "type": "array",
+          "description": "Site IDs this order is associated with.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "siteNames": {
+          "type": "array",
+          "description": "Free-form site names this order is associated with.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "subaccountId": {
+          "type": "string",
+          "description": "Subaccount ID of this order.",
+          "format": "int64"
+        },
+        "termsAndConditions": {
+          "type": "string",
+          "description": "Terms and conditions of this order."
+        }
+      }
+    },
+    "OrderContact": {
+      "type": "object",
+      "description": "Contact of an order.",
+      "properties": {
+        "contactInfo": {
+          "type": "string",
+          "description": "Free-form information about this contact. It could be any information related to this contact in addition to type, title, name, and signature user profile ID."
+        },
+        "contactName": {
+          "type": "string",
+          "description": "Name of this contact."
+        },
+        "contactTitle": {
+          "type": "string",
+          "description": "Title of this contact."
+        },
+        "contactType": {
+          "type": "string",
+          "description": "Type of this contact.",
+          "enum": [
+            "PLANNING_ORDER_CONTACT_BUYER_BILLING_CONTACT",
+            "PLANNING_ORDER_CONTACT_BUYER_CONTACT",
+            "PLANNING_ORDER_CONTACT_SELLER_CONTACT"
+          ]
+        },
+        "signatureUserProfileId": {
+          "type": "string",
+          "description": "ID of the user profile containing the signature that will be embedded into order documents.",
+          "format": "int64"
+        }
+      }
+    },
+    "OrderDocument": {
+      "type": "object",
+      "description": "Contains properties of a DoubleClick Planning order document.",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "Account ID of this order document.",
+          "format": "int64"
+        },
+        "advertiserId": {
+          "type": "string",
+          "description": "Advertiser ID of this order document.",
+          "format": "int64"
+        },
+        "amendedOrderDocumentId": {
+          "type": "string",
+          "description": "The amended order document ID of this order document. An order document can be created by optionally amending another order document so that the change history can be preserved.",
+          "format": "int64"
+        },
+        "approvedByUserProfileIds": {
+          "type": "array",
+          "description": "IDs of users who have approved this order document.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "cancelled": {
+          "type": "boolean",
+          "description": "Whether this order document is cancelled."
+        },
+        "createdInfo": {
+          "$ref": "#/definitions/LastModifiedInfo",
+          "description": "Information about the creation of this order document."
+        },
+        "effectiveDate": {
+          "type": "string",
+          "description": "Effective date of this order document.",
+          "format": "date"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of this order document.",
+          "format": "int64"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#orderDocument\".",
+          "default": "dfareporting#orderDocument"
+        },
+        "lastSentRecipients": {
+          "type": "array",
+          "description": "List of email addresses that received the last sent document.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "lastSentTime": {
+          "type": "string",
+          "description": "Timestamp of the last email sent with this order document.",
+          "format": "date-time"
+        },
+        "orderId": {
+          "type": "string",
+          "description": "ID of the order from which this order document is created.",
+          "format": "int64"
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Project ID of this order document.",
+          "format": "int64"
+        },
+        "signed": {
+          "type": "boolean",
+          "description": "Whether this order document has been signed."
+        },
+        "subaccountId": {
+          "type": "string",
+          "description": "Subaccount ID of this order document.",
+          "format": "int64"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of this order document."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of this order document",
+          "enum": [
+            "PLANNING_ORDER_TYPE_CHANGE_ORDER",
+            "PLANNING_ORDER_TYPE_INSERTION_ORDER"
+          ]
+        }
+      }
+    },
+    "OrderDocumentsListResponse": {
+      "type": "object",
+      "description": "Order document List Response",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#orderDocumentsListResponse\".",
+          "default": "dfareporting#orderDocumentsListResponse"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "Pagination token to be used for the next list operation."
+        },
+        "orderDocuments": {
+          "type": "array",
+          "description": "Order document collection",
+          "items": {
+            "$ref": "#/definitions/OrderDocument"
+          }
+        }
+      }
+    },
+    "OrdersListResponse": {
+      "type": "object",
+      "description": "Order List Response",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#ordersListResponse\".",
+          "default": "dfareporting#ordersListResponse"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "Pagination token to be used for the next list operation."
+        },
+        "orders": {
+          "type": "array",
+          "description": "Order collection.",
+          "items": {
+            "$ref": "#/definitions/Order"
+          }
         }
       }
     },
@@ -15767,10 +18288,6 @@
           "$ref": "#/definitions/DimensionValue",
           "description": "Dimension value for the ID of the primary placement. This is a read-only, auto-generated field."
         },
-        "programmaticSetting": {
-          "$ref": "#/definitions/ProgrammaticSetting",
-          "description": "Settings for a programmatic placement."
-        },
         "siteId": {
           "type": "string",
           "description": "Site ID associated with this placement group. On insert, you must set either this field or the directorySiteId field to specify the site associated with this placement group. This is a required field that is read-only after insertion.",
@@ -16002,6 +18519,10 @@
       "type": "object",
       "description": "Contains information about a postal code that can be targeted by ads.",
       "properties": {
+        "code": {
+          "type": "string",
+          "description": "Postal code. This is equivalent to the id field."
+        },
         "countryCode": {
           "type": "string",
           "description": "Country code of the country to which this postal code belongs."
@@ -16037,6 +18558,59 @@
           "items": {
             "$ref": "#/definitions/PostalCode"
           }
+        }
+      }
+    },
+    "Pricing": {
+      "type": "object",
+      "description": "Pricing Information",
+      "properties": {
+        "capCostType": {
+          "type": "string",
+          "description": "Cap cost type of this inventory item.",
+          "enum": [
+            "PLANNING_PLACEMENT_CAP_COST_TYPE_CUMULATIVE",
+            "PLANNING_PLACEMENT_CAP_COST_TYPE_MONTHLY",
+            "PLANNING_PLACEMENT_CAP_COST_TYPE_NONE"
+          ]
+        },
+        "endDate": {
+          "type": "string",
+          "description": "End date of this inventory item.",
+          "format": "date"
+        },
+        "flights": {
+          "type": "array",
+          "description": "Flights of this inventory item. A flight (a.k.a. pricing period) represents the inventory item pricing information for a specific period of time.",
+          "items": {
+            "$ref": "#/definitions/Flight"
+          }
+        },
+        "groupType": {
+          "type": "string",
+          "description": "Group type of this inventory item if it represents a placement group. Is null otherwise. There are two type of placement groups: PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE is a simple group of inventory items that acts as a single pricing point for a group of tags. PLANNING_PLACEMENT_GROUP_TYPE_ROADBLOCK is a group of inventory items that not only acts as a single pricing point, but also assumes that all the tags in it will be served at the same time. A roadblock requires one of its assigned inventory items to be marked as primary.",
+          "enum": [
+            "PLANNING_PLACEMENT_GROUP_TYPE_PACKAGE",
+            "PLANNING_PLACEMENT_GROUP_TYPE_ROADBLOCK"
+          ]
+        },
+        "pricingType": {
+          "type": "string",
+          "description": "Pricing type of this inventory item.",
+          "enum": [
+            "PLANNING_PLACEMENT_PRICING_TYPE_CLICKS",
+            "PLANNING_PLACEMENT_PRICING_TYPE_CPA",
+            "PLANNING_PLACEMENT_PRICING_TYPE_CPC",
+            "PLANNING_PLACEMENT_PRICING_TYPE_CPM",
+            "PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_CLICKS",
+            "PLANNING_PLACEMENT_PRICING_TYPE_FLAT_RATE_IMPRESSIONS",
+            "PLANNING_PLACEMENT_PRICING_TYPE_IMPRESSIONS"
+          ]
+        },
+        "startDate": {
+          "type": "string",
+          "description": "Start date of this inventory item.",
+          "format": "date"
         }
       }
     },
@@ -16131,40 +18705,141 @@
         }
       }
     },
-    "ProgrammaticSetting": {
+    "Project": {
       "type": "object",
-      "description": "Programmatic Setting",
+      "description": "Contains properties of a DoubleClick Planning project.",
       "properties": {
-        "adxDealIds": {
-          "type": "array",
-          "description": "Adx deal IDs assigned to the placement.",
-          "items": {
-            "type": "string",
-            "format": "int64"
-          }
-        },
-        "insertionOrderId": {
+        "accountId": {
           "type": "string",
-          "description": "Insertion order ID."
-        },
-        "insertionOrderIdStatus": {
-          "type": "boolean",
-          "description": "Whether insertion order ID has been placed in DFP. This is a read-only field."
-        },
-        "mediaCostNanos": {
-          "type": "string",
-          "description": "Media cost for the programmatic placement.",
+          "description": "Account ID of this project.",
           "format": "int64"
         },
-        "programmatic": {
-          "type": "boolean",
-          "description": "Whether programmatic is enabled."
+        "advertiserId": {
+          "type": "string",
+          "description": "Advertiser ID of this project.",
+          "format": "int64"
         },
-        "traffickerEmails": {
+        "audienceAgeGroup": {
+          "type": "string",
+          "description": "Audience age group of this project.",
+          "enum": [
+            "PLANNING_AUDIENCE_AGE_18_24",
+            "PLANNING_AUDIENCE_AGE_25_34",
+            "PLANNING_AUDIENCE_AGE_35_44",
+            "PLANNING_AUDIENCE_AGE_45_54",
+            "PLANNING_AUDIENCE_AGE_55_64",
+            "PLANNING_AUDIENCE_AGE_65_OR_MORE",
+            "PLANNING_AUDIENCE_AGE_UNKNOWN"
+          ]
+        },
+        "audienceGender": {
+          "type": "string",
+          "description": "Audience gender of this project.",
+          "enum": [
+            "PLANNING_AUDIENCE_GENDER_FEMALE",
+            "PLANNING_AUDIENCE_GENDER_MALE"
+          ]
+        },
+        "budget": {
+          "type": "string",
+          "description": "Budget of this project in the currency specified by the current account. The value stored in this field represents only the non-fractional amount. For example, for USD, the smallest value that can be represented by this field is 1 US dollar.",
+          "format": "int64"
+        },
+        "clientBillingCode": {
+          "type": "string",
+          "description": "Client billing code of this project."
+        },
+        "clientName": {
+          "type": "string",
+          "description": "Name of the project client."
+        },
+        "endDate": {
+          "type": "string",
+          "description": "End date of the project.",
+          "format": "date"
+        },
+        "id": {
+          "type": "string",
+          "description": "ID of this project. This is a read-only, auto-generated field.",
+          "format": "int64"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#project\".",
+          "default": "dfareporting#project"
+        },
+        "lastModifiedInfo": {
+          "$ref": "#/definitions/LastModifiedInfo",
+          "description": "Information about the most recent modification of this project."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of this project."
+        },
+        "overview": {
+          "type": "string",
+          "description": "Overview of this project."
+        },
+        "startDate": {
+          "type": "string",
+          "description": "Start date of the project.",
+          "format": "date"
+        },
+        "subaccountId": {
+          "type": "string",
+          "description": "Subaccount ID of this project.",
+          "format": "int64"
+        },
+        "targetClicks": {
+          "type": "string",
+          "description": "Number of clicks that the advertiser is targeting.",
+          "format": "int64"
+        },
+        "targetConversions": {
+          "type": "string",
+          "description": "Number of conversions that the advertiser is targeting.",
+          "format": "int64"
+        },
+        "targetCpaNanos": {
+          "type": "string",
+          "description": "CPA that the advertiser is targeting.",
+          "format": "int64"
+        },
+        "targetCpcNanos": {
+          "type": "string",
+          "description": "CPC that the advertiser is targeting.",
+          "format": "int64"
+        },
+        "targetCpmNanos": {
+          "type": "string",
+          "description": "CPM that the advertiser is targeting.",
+          "format": "int64"
+        },
+        "targetImpressions": {
+          "type": "string",
+          "description": "Number of impressions that the advertiser is targeting.",
+          "format": "int64"
+        }
+      }
+    },
+    "ProjectsListResponse": {
+      "type": "object",
+      "description": "Project List Response",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#projectsListResponse\".",
+          "default": "dfareporting#projectsListResponse"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "Pagination token to be used for the next list operation."
+        },
+        "projects": {
           "type": "array",
-          "description": "Trafficker emails assigned to the placement.",
+          "description": "Project collection.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Project"
           }
         }
       }
@@ -16285,6 +18960,132 @@
           "description": "Region collection.",
           "items": {
             "$ref": "#/definitions/Region"
+          }
+        }
+      }
+    },
+    "RemarketingList": {
+      "type": "object",
+      "description": "Contains properties of a remarketing list. Remarketing enables you to create lists of users who have performed specific actions on a site, then target ads to members of those lists. This resource can be used to manage remarketing lists that are owned by your advertisers. To see all remarketing lists that are visible to your advertisers, including those that are shared to your advertiser or account, use the TargetableRemarketingLists resource.",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "Account ID of this remarketing list. This is a read-only, auto-generated field that is only returned in GET requests.",
+          "format": "int64"
+        },
+        "active": {
+          "type": "boolean",
+          "description": "Whether this remarketing list is active."
+        },
+        "advertiserId": {
+          "type": "string",
+          "description": "Dimension value for the advertiser ID that owns this remarketing list. This is a required field.",
+          "format": "int64"
+        },
+        "advertiserIdDimensionValue": {
+          "$ref": "#/definitions/DimensionValue",
+          "description": "Dimension value for the ID of the advertiser. This is a read-only, auto-generated field."
+        },
+        "description": {
+          "type": "string",
+          "description": "Remarketing list description."
+        },
+        "id": {
+          "type": "string",
+          "description": "Remarketing list ID. This is a read-only, auto-generated field.",
+          "format": "int64"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#remarketingList\".",
+          "default": "dfareporting#remarketingList"
+        },
+        "lifeSpan": {
+          "type": "string",
+          "description": "Number of days that a user should remain in the remarketing list without an impression.",
+          "format": "int64"
+        },
+        "listPopulationRule": {
+          "$ref": "#/definitions/ListPopulationRule",
+          "description": "Rule used to populate the remarketing list with users."
+        },
+        "listSize": {
+          "type": "string",
+          "description": "Number of users currently in the list. This is a read-only field.",
+          "format": "int64"
+        },
+        "listSource": {
+          "type": "string",
+          "description": "Product from which this remarketing list was originated.",
+          "enum": [
+            "REMARKETING_LIST_SOURCE_DBM",
+            "REMARKETING_LIST_SOURCE_DFA",
+            "REMARKETING_LIST_SOURCE_DMP",
+            "REMARKETING_LIST_SOURCE_GA",
+            "REMARKETING_LIST_SOURCE_OTHER"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the remarketing list. This is a required field. Must be no greater than 128 characters long."
+        },
+        "subaccountId": {
+          "type": "string",
+          "description": "Subaccount ID of this remarketing list. This is a read-only, auto-generated field that is only returned in GET requests.",
+          "format": "int64"
+        }
+      }
+    },
+    "RemarketingListShare": {
+      "type": "object",
+      "description": "Contains properties of a remarketing list's sharing information. Sharing allows other accounts or advertisers to target to your remarketing lists. This resource can be used to manage remarketing list sharing to other accounts and advertisers.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#remarketingListShare\".",
+          "default": "dfareporting#remarketingListShare"
+        },
+        "remarketingListId": {
+          "type": "string",
+          "description": "Remarketing list ID. This is a read-only, auto-generated field.",
+          "format": "int64"
+        },
+        "sharedAccountIds": {
+          "type": "array",
+          "description": "Accounts that the remarketing list is shared with.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "sharedAdvertiserIds": {
+          "type": "array",
+          "description": "Advertisers that the remarketing list is shared with.",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        }
+      }
+    },
+    "RemarketingListsListResponse": {
+      "type": "object",
+      "description": "Remarketing list response",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#remarketingListsListResponse\".",
+          "default": "dfareporting#remarketingListsListResponse"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "Pagination token to be used for the next list operation."
+        },
+        "remarketingLists": {
+          "type": "array",
+          "description": "Remarketing list collection.",
+          "items": {
+            "$ref": "#/definitions/RemarketingList"
           }
         }
       }
@@ -16911,6 +19712,10 @@
       "type": "object",
       "description": "Site Contact",
       "properties": {
+        "address": {
+          "type": "string",
+          "description": "Address of this site contact."
+        },
         "contactType": {
           "type": "string",
           "description": "Site contact type.",
@@ -16935,6 +19740,14 @@
         "lastName": {
           "type": "string",
           "description": "Last name of this site contact."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Primary phone number of this site contact."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title or designation of this site contact."
         }
       }
     },
@@ -17224,6 +20037,96 @@
         }
       }
     },
+    "TargetableRemarketingList": {
+      "type": "object",
+      "description": "Contains properties of a targetable remarketing list. Remarketing enables you to create lists of users who have performed specific actions on a site, then target ads to members of those lists. This resource is a read-only view of a remarketing list to be used to faciliate targeting ads to specific lists. Remarketing lists that are owned by your advertisers and those that are shared to your advertisers or account are accessible via this resource. To manage remarketing lists that are owned by your advertisers, use the RemarketingLists resource.",
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "description": "Account ID of this remarketing list. This is a read-only, auto-generated field that is only returned in GET requests.",
+          "format": "int64"
+        },
+        "active": {
+          "type": "boolean",
+          "description": "Whether this targetable remarketing list is active."
+        },
+        "advertiserId": {
+          "type": "string",
+          "description": "Dimension value for the advertiser ID that owns this targetable remarketing list.",
+          "format": "int64"
+        },
+        "advertiserIdDimensionValue": {
+          "$ref": "#/definitions/DimensionValue",
+          "description": "Dimension value for the ID of the advertiser."
+        },
+        "description": {
+          "type": "string",
+          "description": "Targetable remarketing list description."
+        },
+        "id": {
+          "type": "string",
+          "description": "Targetable remarketing list ID.",
+          "format": "int64"
+        },
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#targetableRemarketingList\".",
+          "default": "dfareporting#targetableRemarketingList"
+        },
+        "lifeSpan": {
+          "type": "string",
+          "description": "Number of days that a user should remain in the targetable remarketing list without an impression.",
+          "format": "int64"
+        },
+        "listSize": {
+          "type": "string",
+          "description": "Number of users currently in the list. This is a read-only field.",
+          "format": "int64"
+        },
+        "listSource": {
+          "type": "string",
+          "description": "Product from which this targetable remarketing list was originated.",
+          "enum": [
+            "REMARKETING_LIST_SOURCE_DBM",
+            "REMARKETING_LIST_SOURCE_DFA",
+            "REMARKETING_LIST_SOURCE_DMP",
+            "REMARKETING_LIST_SOURCE_GA",
+            "REMARKETING_LIST_SOURCE_OTHER"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the targetable remarketing list. Is no greater than 128 characters long."
+        },
+        "subaccountId": {
+          "type": "string",
+          "description": "Subaccount ID of this remarketing list. This is a read-only, auto-generated field that is only returned in GET requests.",
+          "format": "int64"
+        }
+      }
+    },
+    "TargetableRemarketingListsListResponse": {
+      "type": "object",
+      "description": "Targetable remarketing list response",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#targetableRemarketingListsListResponse\".",
+          "default": "dfareporting#targetableRemarketingListsListResponse"
+        },
+        "nextPageToken": {
+          "type": "string",
+          "description": "Pagination token to be used for the next list operation."
+        },
+        "targetableRemarketingLists": {
+          "type": "array",
+          "description": "Targetable remarketing list collection.",
+          "items": {
+            "$ref": "#/definitions/TargetableRemarketingList"
+          }
+        }
+      }
+    },
     "TechnologyTargeting": {
       "type": "object",
       "description": "Technology Targeting.",
@@ -17269,6 +20172,20 @@
           "items": {
             "$ref": "#/definitions/PlatformType"
           }
+        }
+      }
+    },
+    "ThirdPartyAuthenticationToken": {
+      "type": "object",
+      "description": "Third Party Authentication Token",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the third-party authentication token."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the third-party authentication token. This is a read-only, auto-generated field."
         }
       }
     },
