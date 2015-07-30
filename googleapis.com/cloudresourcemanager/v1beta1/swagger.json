@@ -355,6 +355,249 @@
           "$ref": "#/parameters/$.xgafv"
         }
       ]
+    },
+    "/v1beta1/projects/{resource}:getIamPolicy": {
+      "post": {
+        "description": "Returns the IAM access control policy for specified project.",
+        "operationId": "cloudresourcemanager.projects.getIamPolicy",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "resource",
+            "in": "path",
+            "description": "REQUIRED: The resource for which policy is being requested. Resource is usually specified as a path, such as, projects/{project}.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/GetIamPolicyRequest"
+            }
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/access_token"
+        },
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/bearer_token"
+        },
+        {
+          "$ref": "#/parameters/callback"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/pp"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/parameters/uploadType"
+        },
+        {
+          "$ref": "#/parameters/$.xgafv"
+        }
+      ]
+    },
+    "/v1beta1/projects/{resource}:setIamPolicy": {
+      "post": {
+        "description": "Sets the IAM access control policy for the specified project. We do not currently support 'domain:' prefixed members in a Binding of a Policy. Calling this method requires enabling the App Engine Admin API.",
+        "operationId": "cloudresourcemanager.projects.setIamPolicy",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Policy"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "resource",
+            "in": "path",
+            "description": "REQUIRED: The resource for which policy is being specified. Resource is usually specified as a path, such as, projects/{project}/zones/{zone}/disks/{disk}.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SetIamPolicyRequest"
+            }
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/access_token"
+        },
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/bearer_token"
+        },
+        {
+          "$ref": "#/parameters/callback"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/pp"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/parameters/uploadType"
+        },
+        {
+          "$ref": "#/parameters/$.xgafv"
+        }
+      ]
+    },
+    "/v1beta1/projects/{resource}:testIamPermissions": {
+      "post": {
+        "description": "Tests the specified permissions against the IAM access control policy for the specified project.",
+        "operationId": "cloudresourcemanager.projects.testIamPermissions",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TestIamPermissionsResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "resource",
+            "in": "path",
+            "description": "REQUIRED: The resource for which policy detail is being requested. Resource is usually specified as a path, such as, projects/{project}.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/TestIamPermissionsRequest"
+            }
+          }
+        ],
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/access_token"
+        },
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/bearer_token"
+        },
+        {
+          "$ref": "#/parameters/callback"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/pp"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/parameters/uploadType"
+        },
+        {
+          "$ref": "#/parameters/$.xgafv"
+        }
+      ]
     }
   },
   "definitions": {
@@ -418,6 +661,242 @@
     "Empty": {
       "type": "object",
       "description": "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`."
+    },
+    "GetIamPolicyRequest": {
+      "type": "object",
+      "description": "Request message for `GetIamPolicy` method."
+    },
+    "Policy": {
+      "type": "object",
+      "description": "# Overview The `Policy` defines an access control policy language. It is used to define policies that are attached to resources like files, folders, VMs, etc. # Policy structure A `Policy` consists of a list of bindings. A `Binding` binds a set of members to a role, where the members include user accounts, user groups, user domains, and service accounts. A 'role' is a named set of permissions, defined by IAM. The definition of a role is outside the policy. A permission check first determines the roles that include the specified permission, and then determines if the principal specified is a member of a binding to at least one of these roles. The membership check is recursive when a group is bound to a role. Policy examples: ``` { \"bindings\": [ { \"role\": \"roles/owner\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:frontend@example.iam.gserviceaccounts.com\"] }, { \"role\": \"roles/viewer\", \"members\": [\"user:sean@example.com\"] } ] } ```",
+      "properties": {
+        "version": {
+          "type": "integer",
+          "description": "The policy language version. The version of the policy is represented by the etag. The default version is 0.",
+          "format": "int32"
+        },
+        "bindings": {
+          "type": "array",
+          "description": "It is an error to specify multiple bindings for the same role. It is an error to specify a binding with no members.",
+          "items": {
+            "$ref": "#/definitions/Binding"
+          }
+        },
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Rule"
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "Can be used to perform a read-modify-write.",
+          "format": "byte"
+        }
+      }
+    },
+    "Binding": {
+      "type": "object",
+      "description": "Associates members with roles. See below for allowed formats of members.",
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "The name of the role to which the members should be bound. Examples: \"roles/viewer\", \"roles/editor\", \"roles/owner\". Required"
+        },
+        "members": {
+          "type": "array",
+          "description": "Format of member entries: 1. allUsers Matches any requesting principal (users, service accounts or anonymous). 2. allAuthenticatedUsers Matches any requesting authenticated principal (users or service accounts). 3. user:{emailid} A google user account using an email address. For example alice@gmail.com, joe@example.com 4. serviceAccount:{emailid} An service account email. 5. group:{emailid} A google group with an email address. For example auth-ti-cloud@google.com 6. domain:{domain} A Google Apps domain name. For example google.com, example.com",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Rule": {
+      "type": "object",
+      "description": "A rule to be applied in a Policy.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the rule."
+        },
+        "permissions": {
+          "type": "array",
+          "description": "A permission is a string of form '..' (e.g., 'storage.buckets.list'). A value of '*' matches all permissions, and a verb part of '*' (e.g., 'storage.buckets.*') matches all verbs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "action": {
+          "type": "string",
+          "description": "Required",
+          "enum": [
+            "NO_ACTION",
+            "ALLOW",
+            "ALLOW_WITH_LOG",
+            "DENY",
+            "DENY_WITH_LOG",
+            "LOG"
+          ]
+        },
+        "in": {
+          "type": "array",
+          "description": "The rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is in this set of entries.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notIn": {
+          "type": "array",
+          "description": "The rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is not in this set of entries. The formation for in and not_in entries is the same as members in a Binding above.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "conditions": {
+          "type": "array",
+          "description": "Additional restrictions that must be met",
+          "items": {
+            "$ref": "#/definitions/Condition"
+          }
+        },
+        "logConfig": {
+          "type": "array",
+          "description": "The config returned to callers of tech.iam.IAM.CheckPolicy for any entries that match the LOG action.",
+          "items": {
+            "$ref": "#/definitions/LogConfig"
+          }
+        }
+      }
+    },
+    "Condition": {
+      "type": "object",
+      "description": "A condition to be met.",
+      "properties": {
+        "iam": {
+          "type": "string",
+          "description": "Trusted attributes supplied by the IAM system.",
+          "enum": [
+            "NO_ATTR",
+            "AUTHORITY",
+            "ATTRIBUTION"
+          ]
+        },
+        "sys": {
+          "type": "string",
+          "description": "Trusted attributes supplied by any service that owns resources and uses the IAM system for access control.",
+          "enum": [
+            "NO_ATTR",
+            "REGION",
+            "SERVICE",
+            "NAME",
+            "IP"
+          ]
+        },
+        "svc": {
+          "type": "string",
+          "description": "Trusted attributes discharged by the service."
+        },
+        "op": {
+          "type": "string",
+          "description": "An operator to apply the subject with.",
+          "enum": [
+            "NO_OP",
+            "EQUALS",
+            "NOT_EQUALS",
+            "IN",
+            "NOT_IN",
+            "DISCHARGED"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "description": "The object of the condition. Exactly one of these must be set."
+        },
+        "values": {
+          "type": "array",
+          "description": "The objects of the condition. This is mutually exclusive with 'value'.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LogConfig": {
+      "type": "object",
+      "description": "Specifies what kind of log the caller must write Increment a streamz counter with the specified metric and field names. Metric names should start with a '/', generally be lowercase-only, and end in \"_count\". Field names should not contain an initial slash. The actual exported metric names will have \"/iam/policy\" prepended. Field names correspond to IAM request parameters and field values are their respective values. At present only \"iam_principal\", corresponding to IAMContext.principal, is supported. Examples: counter { metric: \"/debug_access_count\" field: \"iam_principal\" } ==> increment counter /iam/policy/backend_debug_access_count {iam_principal=[value of IAMContext.principal]} At this time we do not support: * multiple field names (though this may be supported in the future) * decrementing the counter * incrementing it by anything other than 1",
+      "properties": {
+        "counter": {
+          "$ref": "#/definitions/CounterOptions",
+          "description": "Counter options."
+        },
+        "dataAccess": {
+          "$ref": "#/definitions/DataAccessOptions",
+          "description": "Data access options."
+        },
+        "cloudAudit": {
+          "$ref": "#/definitions/CloudAuditOptions",
+          "description": "Cloud audit options."
+        }
+      }
+    },
+    "CounterOptions": {
+      "type": "object",
+      "description": "Options for counters",
+      "properties": {
+        "metric": {
+          "type": "string",
+          "description": "The metric to update."
+        },
+        "field": {
+          "type": "string",
+          "description": "The field value to attribute."
+        }
+      }
+    },
+    "DataAccessOptions": {
+      "type": "object",
+      "description": "Write a Data Access (Gin) log"
+    },
+    "CloudAuditOptions": {
+      "type": "object",
+      "description": "Write a Cloud Audit log"
+    },
+    "SetIamPolicyRequest": {
+      "type": "object",
+      "description": "Request message for `SetIamPolicy` method.",
+      "properties": {
+        "policy": {
+          "$ref": "#/definitions/Policy",
+          "description": "REQUIRED: The complete policy to be applied to the 'resource'. The size of the policy is limited to a few 10s of KB. An empty policy is in general a valid policy but certain services (like Projects) might reject them."
+        }
+      }
+    },
+    "TestIamPermissionsRequest": {
+      "type": "object",
+      "description": "Request message for `TestIamPermissions` method.",
+      "properties": {
+        "permissions": {
+          "type": "array",
+          "description": "The set of permissions to check for the 'resource'. Permissions with wildcards (such as '*' or 'storage.*') are not allowed.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TestIamPermissionsResponse": {
+      "type": "object",
+      "description": "Response message for `TestIamPermissions` method.",
+      "properties": {
+        "permissions": {
+          "type": "array",
+          "description": "A subset of `TestPermissionsRequest.permissions` that the caller is allowed.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
     }
   },
   "parameters": {
