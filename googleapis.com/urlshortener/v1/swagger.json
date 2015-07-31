@@ -1,238 +1,50 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "title": "URL Shortener API",
-    "x-serviceName": "urlshortener",
-    "description": "Lets you create, inspect, and manage goo.gl short URLs",
-    "contact": {
-      "name": "Google",
-      "url": "https://google.com"
-    },
-    "version": "v1",
-    "x-providerName": "googleapis.com",
-    "x-origin": {
-      "format": "google",
-      "version": "v1",
-      "url": "https://www.googleapis.com/discovery/v1/apis/urlshortener/v1/rest"
-    },
-    "x-logo": "https://www.google.com/images/srpr/logo11w.png"
-  },
-  "host": "www.googleapis.com",
   "basePath": "/urlshortener/v1",
-  "schemes": [
-    "https"
-  ],
-  "paths": {
-    "/url": {
-      "get": {
-        "description": "Expands a short URL or gets creation time and analytics.",
-        "operationId": "urlshortener.url.get",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Url"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "shortUrl",
-            "in": "query",
-            "description": "The short URL, including the protocol.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "projection",
-            "in": "query",
-            "description": "Additional information to return.",
-            "type": "string",
-            "enum": [
-              "ANALYTICS_CLICKS",
-              "ANALYTICS_TOP_STRINGS",
-              "FULL"
-            ]
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/urlshortener"
-            ]
-          }
-        ],
-        "tags": [
-          "url"
-        ]
-      },
-      "post": {
-        "description": "Creates a new short URL.",
-        "operationId": "urlshortener.url.insert",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Url"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/Url"
-            }
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/urlshortener"
-            ]
-          }
-        ],
-        "tags": [
-          "url"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/url/history": {
-      "get": {
-        "description": "Retrieves a list of URLs shortened by a user.",
-        "operationId": "urlshortener.url.list",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/UrlHistory"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "projection",
-            "in": "query",
-            "description": "Additional information to return.",
-            "type": "string",
-            "enum": [
-              "ANALYTICS_CLICKS",
-              "FULL"
-            ]
-          },
-          {
-            "name": "start-token",
-            "in": "query",
-            "description": "Token for requesting successive pages of results.",
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/urlshortener"
-            ]
-          }
-        ],
-        "tags": [
-          "url"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    }
-  },
   "definitions": {
     "AnalyticsSnapshot": {
-      "type": "object",
       "properties": {
         "browsers": {
-          "type": "array",
           "description": "Top browsers, e.g. \"Chrome\"; sorted by (descending) click counts. Only present if this data is available.",
           "items": {
             "$ref": "#/definitions/StringCount"
-          }
+          },
+          "type": "array"
         },
         "countries": {
-          "type": "array",
           "description": "Top countries (expressed as country codes), e.g. \"US\" or \"DE\"; sorted by (descending) click counts. Only present if this data is available.",
           "items": {
             "$ref": "#/definitions/StringCount"
-          }
+          },
+          "type": "array"
         },
         "longUrlClicks": {
-          "type": "string",
           "description": "Number of clicks on all goo.gl short URLs pointing to this long URL.",
-          "format": "int64"
+          "format": "int64",
+          "type": "string"
         },
         "platforms": {
-          "type": "array",
           "description": "Top platforms or OSes, e.g. \"Windows\"; sorted by (descending) click counts. Only present if this data is available.",
           "items": {
             "$ref": "#/definitions/StringCount"
-          }
+          },
+          "type": "array"
         },
         "referrers": {
-          "type": "array",
           "description": "Top referring hosts, e.g. \"www.google.com\"; sorted by (descending) click counts. Only present if this data is available.",
           "items": {
             "$ref": "#/definitions/StringCount"
-          }
+          },
+          "type": "array"
         },
         "shortUrlClicks": {
-          "type": "string",
           "description": "Number of clicks on this short URL.",
-          "format": "int64"
+          "format": "int64",
+          "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "AnalyticsSummary": {
-      "type": "object",
       "properties": {
         "allTime": {
           "$ref": "#/definitions/AnalyticsSnapshot",
@@ -254,145 +66,333 @@
           "$ref": "#/definitions/AnalyticsSnapshot",
           "description": "Click analytics over the last week."
         }
-      }
+      },
+      "type": "object"
     },
     "StringCount": {
-      "type": "object",
       "properties": {
         "count": {
-          "type": "string",
           "description": "Number of clicks for this top entry, e.g. for this particular country or browser.",
-          "format": "int64"
+          "format": "int64",
+          "type": "string"
         },
         "id": {
-          "type": "string",
-          "description": "Label assigned to this top entry, e.g. \"US\" or \"Chrome\"."
+          "description": "Label assigned to this top entry, e.g. \"US\" or \"Chrome\".",
+          "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "Url": {
-      "type": "object",
       "properties": {
         "analytics": {
           "$ref": "#/definitions/AnalyticsSummary",
           "description": "A summary of the click analytics for the short and long URL. Might not be present if not requested or currently unavailable."
         },
         "created": {
-          "type": "string",
-          "description": "Time the short URL was created; ISO 8601 representation using the yyyy-MM-dd'T'HH:mm:ss.SSSZZ format, e.g. \"2010-10-14T19:01:24.944+00:00\"."
+          "description": "Time the short URL was created; ISO 8601 representation using the yyyy-MM-dd'T'HH:mm:ss.SSSZZ format, e.g. \"2010-10-14T19:01:24.944+00:00\".",
+          "type": "string"
         },
         "id": {
-          "type": "string",
-          "description": "Short URL, e.g. \"http://goo.gl/l6MS\"."
+          "description": "Short URL, e.g. \"http://goo.gl/l6MS\".",
+          "type": "string"
         },
         "kind": {
-          "type": "string",
+          "default": "urlshortener#url",
           "description": "The fixed string \"urlshortener#url\".",
-          "default": "urlshortener#url"
+          "type": "string"
         },
         "longUrl": {
-          "type": "string",
-          "description": "Long URL, e.g. \"http://www.google.com/\". Might not be present if the status is \"REMOVED\"."
+          "description": "Long URL, e.g. \"http://www.google.com/\". Might not be present if the status is \"REMOVED\".",
+          "type": "string"
         },
         "status": {
-          "type": "string",
-          "description": "Status of the target URL. Possible values: \"OK\", \"MALWARE\", \"PHISHING\", or \"REMOVED\". A URL might be marked \"REMOVED\" if it was flagged as spam, for example."
+          "description": "Status of the target URL. Possible values: \"OK\", \"MALWARE\", \"PHISHING\", or \"REMOVED\". A URL might be marked \"REMOVED\" if it was flagged as spam, for example.",
+          "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "UrlHistory": {
-      "type": "object",
       "properties": {
         "items": {
-          "type": "array",
           "description": "A list of URL resources.",
           "items": {
             "$ref": "#/definitions/Url"
-          }
+          },
+          "type": "array"
         },
         "itemsPerPage": {
-          "type": "integer",
           "description": "Number of items returned with each full \"page\" of results. Note that the last page could have fewer items than the \"itemsPerPage\" value.",
-          "format": "int32"
+          "format": "int32",
+          "type": "integer"
         },
         "kind": {
-          "type": "string",
+          "default": "urlshortener#urlHistory",
           "description": "The fixed string \"urlshortener#urlHistory\".",
-          "default": "urlshortener#urlHistory"
+          "type": "string"
         },
         "nextPageToken": {
-          "type": "string",
-          "description": "A token to provide to get the next page of results."
+          "description": "A token to provide to get the next page of results.",
+          "type": "string"
         },
         "totalItems": {
-          "type": "integer",
           "description": "Total number of short URLs associated with this user (may be approximate).",
-          "format": "int32"
+          "format": "int32",
+          "type": "integer"
         }
-      }
-    }
-  },
-  "parameters": {
-    "alt": {
-      "name": "alt",
-      "in": "query",
-      "description": "Data format for the response.",
-      "default": "json",
-      "type": "string",
-      "enum": [
-        "json"
-      ]
-    },
-    "fields": {
-      "name": "fields",
-      "in": "query",
-      "description": "Selector specifying which fields to include in a partial response.",
-      "type": "string"
-    },
-    "key": {
-      "name": "key",
-      "in": "query",
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "type": "string"
-    },
-    "oauth_token": {
-      "name": "oauth_token",
-      "in": "query",
-      "description": "OAuth 2.0 token for the current user.",
-      "type": "string"
-    },
-    "prettyPrint": {
-      "name": "prettyPrint",
-      "in": "query",
-      "description": "Returns response with indentations and line breaks.",
-      "default": true,
-      "type": "boolean"
-    },
-    "quotaUser": {
-      "name": "quotaUser",
-      "in": "query",
-      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
-      "type": "string"
-    },
-    "userIp": {
-      "name": "userIp",
-      "in": "query",
-      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
-      "type": "string"
-    }
-  },
-  "securityDefinitions": {
-    "Oauth2": {
-      "type": "oauth2",
-      "description": "Oauth 2.0 authentication",
-      "flow": "implicit",
-      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
-      "scopes": {
-        "https://www.googleapis.com/auth/urlshortener": "Manage your goo.gl short URLs"
-      }
+      },
+      "type": "object"
     }
   },
   "externalDocs": {
     "url": "https://developers.google.com/url-shortener/v1/getting_started"
-  }
+  },
+  "host": "www.googleapis.com",
+  "info": {
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "description": "Lets you create, inspect, and manage goo.gl short URLs",
+    "title": "URL Shortener API",
+    "version": "v1",
+    "x-logo": "https://www.google.com/images/srpr/logo11w.png",
+    "x-origin": {
+      "format": "google",
+      "url": "https://www.googleapis.com/discovery/v1/apis/urlshortener/v1/rest",
+      "version": "v1"
+    },
+    "x-providerName": "googleapis.com",
+    "x-serviceName": "urlshortener"
+  },
+  "parameters": {
+    "alt": {
+      "default": "json",
+      "description": "Data format for the response.",
+      "enum": [
+        "json"
+      ],
+      "in": "query",
+      "name": "alt",
+      "type": "string"
+    },
+    "fields": {
+      "description": "Selector specifying which fields to include in a partial response.",
+      "in": "query",
+      "name": "fields",
+      "type": "string"
+    },
+    "key": {
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "in": "query",
+      "name": "key",
+      "type": "string"
+    },
+    "oauth_token": {
+      "description": "OAuth 2.0 token for the current user.",
+      "in": "query",
+      "name": "oauth_token",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "default": true,
+      "description": "Returns response with indentations and line breaks.",
+      "in": "query",
+      "name": "prettyPrint",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "in": "query",
+      "name": "quotaUser",
+      "type": "string"
+    },
+    "userIp": {
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "in": "query",
+      "name": "userIp",
+      "type": "string"
+    }
+  },
+  "paths": {
+    "/url": {
+      "get": {
+        "description": "Expands a short URL or gets creation time and analytics.",
+        "operationId": "urlshortener.url.get",
+        "parameters": [
+          {
+            "description": "The short URL, including the protocol.",
+            "in": "query",
+            "name": "shortUrl",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Additional information to return.",
+            "enum": [
+              "ANALYTICS_CLICKS",
+              "ANALYTICS_TOP_STRINGS",
+              "FULL"
+            ],
+            "in": "query",
+            "name": "projection",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Url"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/urlshortener"
+            ]
+          }
+        ],
+        "tags": [
+          "url"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates a new short URL.",
+        "operationId": "urlshortener.url.insert",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Url"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Url"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/urlshortener"
+            ]
+          }
+        ],
+        "tags": [
+          "url"
+        ]
+      }
+    },
+    "/url/history": {
+      "get": {
+        "description": "Retrieves a list of URLs shortened by a user.",
+        "operationId": "urlshortener.url.list",
+        "parameters": [
+          {
+            "description": "Additional information to return.",
+            "enum": [
+              "ANALYTICS_CLICKS",
+              "FULL"
+            ],
+            "in": "query",
+            "name": "projection",
+            "type": "string"
+          },
+          {
+            "description": "Token for requesting successive pages of results.",
+            "in": "query",
+            "name": "start-token",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/UrlHistory"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/urlshortener"
+            ]
+          }
+        ],
+        "tags": [
+          "url"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "Oauth2": {
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
+      "description": "Oauth 2.0 authentication",
+      "flow": "implicit",
+      "scopes": {
+        "https://www.googleapis.com/auth/urlshortener": "Manage your goo.gl short URLs"
+      },
+      "type": "oauth2"
+    }
+  },
+  "swagger": "2.0"
 }

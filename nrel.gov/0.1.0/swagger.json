@@ -1,124 +1,509 @@
 {
-  "host": "developer.nrel.gov",
   "basePath": "/api/transportation-incentives-laws",
-  "schemes": [
-    "https"
-  ],
-  "swagger": "2.0",
+  "definitions": {
+    "Category": {
+      "description": "A category that the law applies to",
+      "properties": {
+        "category_type": {
+          "description": "The type of category. (E.g. tech, incentive, regulation, user)",
+          "type": "string"
+        },
+        "code": {
+          "description": "The code used to identify the category",
+          "type": "string"
+        },
+        "title": {
+          "description": "The full name of the category",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "title",
+        "category_type"
+      ]
+    },
+    "CategoryResults": {
+      "properties": {
+        "inputs": {
+          "$ref": "#/definitions/Inputs",
+          "description": "The parameters that were passed to the api call"
+        },
+        "metadata": {
+          "$ref": "#/definitions/Metadata",
+          "description": "The api version number, and the count of categories returned"
+        },
+        "result": {
+          "description": "The array of law categories returned",
+          "items": {
+            "$ref": "#/definitions/FullCategory"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "metadata",
+        "inputs",
+        "result"
+      ]
+    },
+    "FullCategory": {
+      "properties": {
+        "category_type": {
+          "description": "The type of category. (E.g. tech, incentive, regulation, user)",
+          "type": "string"
+        },
+        "code": {
+          "description": "The code used to identify the category",
+          "type": "string"
+        },
+        "help_text": {
+          "description": "A short description of what the law category encompasses",
+          "type": "string"
+        },
+        "sort_order": {
+          "description": "The sort order for the categories",
+          "type": "string"
+        },
+        "title": {
+          "description": "The full name of the category",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "title",
+        "category_type",
+        "sort_order"
+      ]
+    },
+    "Inputs": {
+      "description": "The parameters that were passed to the API",
+      "properties": {}
+    },
+    "Law": {
+      "description": "This is a Law",
+      "properties": {
+        "agency": {
+          "description": "The agency with primary responsibility for federal incentives/regulations.",
+          "type": "string"
+        },
+        "amended_date": {
+          "description": "The date the incentive/law/regulation was updated through new legislation or rulemaking.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "archived_date": {
+          "description": "The date that an incentive/law/regulation is no longer relevant to the database. This may include longstanding Executive Orders or laws requiring legislative studies that have been completed.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "categories": {
+          "description": "The various law categories that apply to this law",
+          "items": {
+            "$ref": "#/definitions/Category"
+          },
+          "type": "array"
+        },
+        "contacts": {
+          "description": "The contacts for the given law, returned only if the parameter poc is true",
+          "items": {
+            "$ref": "#/definitions/Poc"
+          },
+          "type": "array"
+        },
+        "enacted_date": {
+          "description": "The date the enacting legislation (if applicable) was signed into law.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "expired_date": {
+          "description": "The date the incentive/law/regulation is set to end.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "id": {
+          "description": "A unique identifier for this specific incentive/law/regulation.",
+          "type": "integer"
+        },
+        "is_recent": {
+          "description": "The true or false value used to distinguish between recent federal executive actions (TRUE) and active incentives/laws/regulations (FALSE).",
+          "type": "boolean"
+        },
+        "plaintext": {
+          "description": "Description of the incentive/law/regulation, including applicable legislative references, without html formatting",
+          "type": "string"
+        },
+        "recent_update_or_new": {
+          "description": "An indicator if the last significant update was an update or the laws creation.",
+          "type": "string"
+        },
+        "references": {
+          "description": "The URL associated with any bill or legislative reference included in the description.",
+          "items": {
+            "$ref": "#/definitions/LawReference"
+          },
+          "type": "array"
+        },
+        "repealed_date": {
+          "description": "The date legislation is enacted or a rulemaking is finalized to repeal the incentive/law/regulation.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "seq_num": {
+          "description": "The numerical value assigned to a description to show the order in which it is displayed online within a jurisdiction (state).",
+          "type": "integer"
+        },
+        "significant_update_date": {
+          "description": "When the last significant update to the law was made.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "state": {
+          "description": "The state in which the incentive/law/regulation was enacted and is active.",
+          "type": "string"
+        },
+        "text": {
+          "description": "Description of the incentive/law/regulation, including applicable legislative references, html formated.",
+          "type": "string"
+        },
+        "title": {
+          "description": "The brief title assigned to the incentive/law/regulation description.",
+          "type": "string"
+        },
+        "topics": {
+          "description": "For local incentive/regulation descriptions, the category that the incentive/regulation falls under, described below: Infrastructure Requirements, Vehicle Purchase and Infrastructure Development Incentives, Fuel Use Incentives, Parking Incentives, Technical Assistance, Vehicle Acquisition Requirements, Promotion Initiatives, Idle Reduction Requirements, Renewable Fuels Mandates and Standards",
+          "items": {
+            "$ref": "#/definitions/LawTopics"
+          },
+          "type": "array"
+        },
+        "type": {
+          "description": "The category that the incentive/law/regulation falls under, described below: -State Incentives, -Laws and Regulations, -Utility/Private Incentives",
+          "type": "string"
+        },
+        "types": {
+          "description": "The types that apply to this law",
+          "items": {
+            "$ref": "#/definitions/LawType"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "state",
+        "title",
+        "text",
+        "plaintext",
+        "type",
+        "categories",
+        "types",
+        "references",
+        "topics"
+      ]
+    },
+    "LawReference": {
+      "description": "The URL associated with any bill or legislative reference included in the description.",
+      "properties": {
+        "description": {
+          "description": "The context of the reference",
+          "type": "string"
+        },
+        "url": {
+          "description": "The url linking to the reference.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "description",
+        "url"
+      ]
+    },
+    "LawResult": {
+      "properties": {
+        "inputs": {
+          "$ref": "#/definitions/Inputs",
+          "description": "The parameters that were passed to the api call"
+        },
+        "metadata": {
+          "$ref": "#/definitions/Metadata",
+          "description": "The api version number"
+        },
+        "result": {
+          "$ref": "#/definitions/Law",
+          "description": "The law requested"
+        }
+      },
+      "required": [
+        "metadata",
+        "inputs",
+        "result"
+      ]
+    },
+    "LawTopics": {
+      "description": "For local incentive/regulation descriptions, the category that the incentive/regulation falls under, described below: Infrastructure Requirements, Vehicle Purchase and Infrastructure Development Incentives, Fuel Use Incentives, Parking Incentives, Technical Assistance, Vehicle Acquisition Requirements, Promotion Initiatives, Idle Reduction Requirements, Renewable Fuels Mandates and Standards",
+      "properties": {
+        "id": {
+          "description": "The database id of the law topic",
+          "type": "integer"
+        },
+        "sort_order": {
+          "description": "The sort order of the law topic",
+          "type": "integer"
+        },
+        "title": {
+          "description": "The name of the law topic",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "sort_order"
+      ]
+    },
+    "LawType": {
+      "description": "The category that the incentive/law/regulation falls under, described below: -State Incentives, -Laws and Regulations, -Utility/Private Incentives",
+      "properties": {
+        "code": {
+          "description": "The code used to identify the law type",
+          "type": "string"
+        },
+        "id": {
+          "description": "The id of the law type",
+          "type": "integer"
+        },
+        "title": {
+          "description": "The name of the law type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "code"
+      ]
+    },
+    "LawsResponse": {
+      "properties": {
+        "inputs": {
+          "$ref": "#/definitions/Inputs",
+          "description": "The parameters that were passed to the api call"
+        },
+        "metadata": {
+          "$ref": "#/definitions/Metadata",
+          "description": "The api version number, and the count of laws returned"
+        },
+        "result": {
+          "description": "The array of laws returned",
+          "items": {
+            "$ref": "#/definitions/Law"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "metadata",
+        "inputs",
+        "result"
+      ]
+    },
+    "Metadata": {
+      "description": "The identifying metadata.",
+      "properties": {
+        "count": {
+          "description": "If the request returns an array of results, this is the number of results returned in the array",
+          "type": "integer"
+        },
+        "version": {
+          "description": "This is the version of the api",
+          "type": "string"
+        }
+      },
+      "required": [
+        "version"
+      ]
+    },
+    "Poc": {
+      "properties": {
+        "agency": {
+          "description": "The agency that the contact represents",
+          "type": "string"
+        },
+        "email": {
+          "description": "The contacts email address",
+          "type": "string"
+        },
+        "fax": {
+          "description": "The contacts fax number",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the contact",
+          "type": "string"
+        },
+        "state": {
+          "description": "The state in which the contact is based ('US' for Federal laws and 'DC' for the District of Columbia)",
+          "type": "string"
+        },
+        "telephone": {
+          "description": "The contacts phone number",
+          "type": "string"
+        },
+        "title": {
+          "description": "The job title of the contact",
+          "type": "string"
+        },
+        "web_page": {
+          "description": "The contacts webpage",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "state"
+      ]
+    },
+    "PocResults": {
+      "properties": {
+        "inputs": {
+          "$ref": "#/definitions/Inputs",
+          "description": "The parameters that were passed to the api call"
+        },
+        "metadata": {
+          "$ref": "#/definitions/Metadata",
+          "description": "The api version number, and the count of contacts returned"
+        },
+        "result": {
+          "description": "The array of Points of Contacts for the state requested",
+          "items": {
+            "$ref": "#/definitions/Poc"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "metadata",
+        "inputs",
+        "result"
+      ]
+    }
+  },
+  "host": "developer.nrel.gov",
   "info": {
-    "version": "0.1.0",
-    "title": "Transportation Laws and Incentives",
     "description": "Query our database of State and Federal Laws and Incentives for Alternative Fuels",
-    "x-providerName": "nrel.gov",
+    "title": "Transportation Laws and Incentives",
+    "version": "0.1.0",
     "x-origin": {
       "format": "swagger",
-      "version": "1.2",
-      "url": "http://developer.nrel.gov/docs/transportation/transportation-incentives-laws-v1/api-docs.json"
-    }
+      "url": "http://developer.nrel.gov/docs/transportation/transportation-incentives-laws-v1/api-docs.json",
+      "version": "1.2"
+    },
+    "x-providerName": "nrel.gov"
   },
   "paths": {
     "/v1.{output_format}": {
       "get": {
         "operationId": "transportation-incentives-laws",
-        "summary": "Return a full list of laws and incentives that match your query.",
         "parameters": [
           {
-            "in": "path",
-            "description": "Response format",
-            "name": "output_format",
-            "required": true,
-            "type": "string",
             "default": "json",
+            "description": "Response format",
             "enum": [
               "json",
               "xml",
               "csv"
-            ]
+            ],
+            "in": "path",
+            "name": "output_format",
+            "required": true,
+            "type": "string"
           },
           {
-            "in": "query",
+            "default": "DEMO_KEY",
             "description": "API Key",
+            "in": "query",
             "name": "api_key",
             "required": true,
-            "type": "string",
-            "default": "DEMO_KEY"
+            "type": "string"
           },
           {
-            "in": "query",
+            "default": 10,
             "description": "Limit the number of laws returned",
+            "in": "query",
             "name": "limit",
-            "type": "integer",
-            "default": 10
+            "type": "integer"
           },
           {
-            "in": "query",
             "description": "Return laws for the given Jurisdiction. Jurisdiction must be given as a two character state code (eg, 'CO' for Colorado). A single jurisdiction, or a comma-separate list of multiple jurisdiction, may be given.  Use the code 'US' for federal laws and the code 'DC' for Washington D.C.",
+            "in": "query",
             "name": "jurisdiction",
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Search by the technology type. A single type, or a comma-separate list of multiple types, may be given. Values and what they stand for are as follows: 'BIOD' for Biodiesel, 'ETH' for Ethanol, 'NG' for Natural Gas, 'LPG' for Propane (LPG), 'HY' for Hydrogen Fuel Cells, 'EFFEC' for Fuel Economy / Efficiency, 'IR' for Idle Reduction, 'ELEC' for EVs, 'HEV' for HEVs / PHEVs, 'OTHER' for Other, 'AFTMKTCONV' for Aftermarket Conversions, and 'NEVS' for NEVs",
+            "in": "query",
             "name": "technology",
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Search by the incentive type. A single type, or a comma-separate list of multiple types, may be given. Values and what they stand for are as follows: 'GNT' for Grants, 'TAX' for Tax Incentives, 'LOANS' for Loans and Leases, 'RBATE' for Rebates, 'EXEM' for Exemptions, and 'OTHER' for Other.",
+            "in": "query",
             "name": "incentive_type",
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Search by the regulation type. A single type, or a comma-separate list of multiple types, may be given. Values and what they stand for are as follows: 'REGIS' for Registration / Licensing, 'STD' for Fuel Production / Quality, 'DREST' for Driving / Idling, 'REQ' for Acquisition / Fuel Use, 'FUEL' for Fuel Taxes, 'RFS' for Renewable Fuel Standard / Mandate, 'OTHER' for Other, 'AIRQEMISSIONS' for Air Quality / Emissions, and 'CCEINIT' for Climate Change / Energy Initiatives",
+            "in": "query",
             "name": "regulation_type",
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Search by the user type. A single type, or a comma-separate list of multiple types, may be given. Values and what they stand for are as follows: 'IND' for Vehicle Owner/Driver, 'FLEET' for Fleet Purchaser/Manager, 'STATION' for Fueling / TSE Infrastructure Owner, 'AFP' for Alternative Fuel Producer, 'AFS' for Alternative Fuel Dealer, 'PURCH' for Alternative Fuel Purchaser, 'MAN' for AFV Manufacturer/Retrofitter, and 'OTHER' for Other",
+            "in": "query",
             "name": "user_type",
             "type": "string"
           },
           {
-            "in": "query",
+            "default": false,
             "description": "Include points of contacts in the return value.",
+            "in": "query",
             "name": "poc",
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
           },
           {
-            "in": "query",
+            "default": false,
             "description": "Return only recently added or updated laws and incentives",
+            "in": "query",
             "name": "recent",
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
           },
           {
-            "in": "query",
+            "default": false,
             "description": "Show only expired, repealed or archived laws and incentives.",
+            "in": "query",
             "name": "expired",
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
           },
           {
-            "in": "query",
             "description": "Search by the law type. A single type, or a comma-separate list of multiple types, may be given. Values are as follows: 'STATEINC' for State Incentives, 'UPINC ' for Utility/Private Incentives, 'LAWREG' for Laws and Regulations, 'INC' for Incentives, 'PROG' for Programs, 'LUP' for Last Updated, 'OVIEW' for Overview, and 'HILITE' for Highlights",
+            "in": "query",
             "name": "law_type",
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Search laws by keyword in title or text.",
+            "in": "query",
             "name": "keyword",
             "type": "string"
           },
           {
-            "in": "query",
+            "default": false,
             "description": "Show only local examples of laws and incentives.",
+            "in": "query",
             "name": "local",
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -128,87 +513,85 @@
               "$ref": "#/definitions/LawsResponse"
             }
           }
-        }
+        },
+        "summary": "Return a full list of laws and incentives that match your query."
       }
     },
-    "/v1/{id}.{output_format}": {
+    "/v1/category-list.{output_format}": {
       "get": {
         "operationId": "transportation-incentives-laws",
-        "summary": "Fetch the details of a specific law given the law's ID.",
         "parameters": [
           {
-            "in": "path",
-            "description": "Response format",
-            "name": "output_format",
-            "required": true,
-            "type": "string",
             "default": "json",
+            "description": "Response format",
             "enum": [
               "json",
               "xml"
-            ]
+            ],
+            "in": "path",
+            "name": "output_format",
+            "required": true,
+            "type": "string"
           },
           {
-            "in": "query",
+            "default": "DEMO_KEY",
             "description": "API Key",
+            "in": "query",
             "name": "api_key",
             "required": true,
-            "type": "string",
-            "default": "DEMO_KEY"
+            "type": "string"
           },
           {
-            "in": "path",
-            "description": "The id of the law that you are searching",
-            "name": "id",
-            "required": true,
-            "type": "integer"
-          },
-          {
+            "description": "Search by the category type.",
+            "enum": [
+              "tech",
+              "user",
+              "regulation",
+              "incentive"
+            ],
             "in": "query",
-            "description": "Include points of contacts in the return value.",
-            "name": "poc",
-            "type": "boolean",
-            "default": false
+            "name": "type",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "No response was specified",
             "schema": {
-              "$ref": "#/definitions/LawResult"
+              "$ref": "#/definitions/CategoryResults"
             }
           }
-        }
+        },
+        "summary": "Return the law categories for a given category type."
       }
     },
     "/v1/pocs.{output_format}": {
       "get": {
         "operationId": "transportation-incentives-laws",
-        "summary": "Get the points of contact for a given jurisdiction.",
         "parameters": [
           {
-            "in": "path",
-            "description": "Response format",
-            "name": "output_format",
-            "required": true,
-            "type": "string",
             "default": "json",
+            "description": "Response format",
             "enum": [
               "json",
               "xml"
-            ]
+            ],
+            "in": "path",
+            "name": "output_format",
+            "required": true,
+            "type": "string"
           },
           {
-            "in": "query",
+            "default": "DEMO_KEY",
             "description": "API Key",
+            "in": "query",
             "name": "api_key",
             "required": true,
-            "type": "string",
-            "default": "DEMO_KEY"
+            "type": "string"
           },
           {
-            "in": "query",
             "description": "Return the points of contact for the given Jurisdiction. Jurisdiction must be given as a two character state code (eg, 'CO' for Colorado). A single jurisdiction, or a comma-separate list of multiple jurisdiction, may be given.  Use the code 'US' for federal laws and the code 'DC' for Washington D.C.",
+            "in": "query",
             "name": "jurisdiction",
             "required": true,
             "type": "string"
@@ -221,446 +604,63 @@
               "$ref": "#/definitions/PocResults"
             }
           }
-        }
+        },
+        "summary": "Get the points of contact for a given jurisdiction."
       }
     },
-    "/v1/category-list.{output_format}": {
+    "/v1/{id}.{output_format}": {
       "get": {
         "operationId": "transportation-incentives-laws",
-        "summary": "Return the law categories for a given category type.",
         "parameters": [
           {
-            "in": "path",
-            "description": "Response format",
-            "name": "output_format",
-            "required": true,
-            "type": "string",
             "default": "json",
+            "description": "Response format",
             "enum": [
               "json",
               "xml"
-            ]
+            ],
+            "in": "path",
+            "name": "output_format",
+            "required": true,
+            "type": "string"
           },
           {
-            "in": "query",
+            "default": "DEMO_KEY",
             "description": "API Key",
+            "in": "query",
             "name": "api_key",
             "required": true,
-            "type": "string",
-            "default": "DEMO_KEY"
+            "type": "string"
           },
           {
+            "description": "The id of the law that you are searching",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "default": false,
+            "description": "Include points of contacts in the return value.",
             "in": "query",
-            "description": "Search by the category type.",
-            "name": "type",
-            "type": "string",
-            "enum": [
-              "tech",
-              "user",
-              "regulation",
-              "incentive"
-            ]
+            "name": "poc",
+            "type": "boolean"
           }
         ],
         "responses": {
           "200": {
             "description": "No response was specified",
             "schema": {
-              "$ref": "#/definitions/CategoryResults"
+              "$ref": "#/definitions/LawResult"
             }
           }
-        }
+        },
+        "summary": "Fetch the details of a specific law given the law's ID."
       }
     }
   },
-  "definitions": {
-    "Metadata": {
-      "description": "The identifying metadata.",
-      "required": [
-        "version"
-      ],
-      "properties": {
-        "version": {
-          "type": "string",
-          "description": "This is the version of the api"
-        },
-        "count": {
-          "type": "integer",
-          "description": "If the request returns an array of results, this is the number of results returned in the array"
-        }
-      }
-    },
-    "Inputs": {
-      "description": "The parameters that were passed to the API",
-      "properties": {}
-    },
-    "Law": {
-      "description": "This is a Law",
-      "required": [
-        "id",
-        "state",
-        "title",
-        "text",
-        "plaintext",
-        "type",
-        "categories",
-        "types",
-        "references",
-        "topics"
-      ],
-      "properties": {
-        "id": {
-          "type": "integer",
-          "description": "A unique identifier for this specific incentive/law/regulation."
-        },
-        "state": {
-          "type": "string",
-          "description": "The state in which the incentive/law/regulation was enacted and is active."
-        },
-        "title": {
-          "type": "string",
-          "description": "The brief title assigned to the incentive/law/regulation description."
-        },
-        "text": {
-          "type": "string",
-          "description": "Description of the incentive/law/regulation, including applicable legislative references, html formated."
-        },
-        "enacted_date": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date the enacting legislation (if applicable) was signed into law."
-        },
-        "amended_date": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date the incentive/law/regulation was updated through new legislation or rulemaking."
-        },
-        "expired_date": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date the incentive/law/regulation is set to end."
-        },
-        "archived_date": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date that an incentive/law/regulation is no longer relevant to the database. This may include longstanding Executive Orders or laws requiring legislative studies that have been completed."
-        },
-        "repealed_date": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date legislation is enacted or a rulemaking is finalized to repeal the incentive/law/regulation."
-        },
-        "plaintext": {
-          "type": "string",
-          "description": "Description of the incentive/law/regulation, including applicable legislative references, without html formatting"
-        },
-        "is_recent": {
-          "type": "boolean",
-          "description": "The true or false value used to distinguish between recent federal executive actions (TRUE) and active incentives/laws/regulations (FALSE)."
-        },
-        "seq_num": {
-          "type": "integer",
-          "description": "The numerical value assigned to a description to show the order in which it is displayed online within a jurisdiction (state)."
-        },
-        "type": {
-          "type": "string",
-          "description": "The category that the incentive/law/regulation falls under, described below: -State Incentives, -Laws and Regulations, -Utility/Private Incentives"
-        },
-        "agency": {
-          "type": "string",
-          "description": "The agency with primary responsibility for federal incentives/regulations."
-        },
-        "significant_update_date": {
-          "type": "string",
-          "format": "date-time",
-          "description": "When the last significant update to the law was made."
-        },
-        "recent_update_or_new": {
-          "type": "string",
-          "description": "An indicator if the last significant update was an update or the laws creation."
-        },
-        "contacts": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Poc"
-          },
-          "description": "The contacts for the given law, returned only if the parameter poc is true"
-        },
-        "categories": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Category"
-          },
-          "description": "The various law categories that apply to this law"
-        },
-        "types": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LawType"
-          },
-          "description": "The types that apply to this law"
-        },
-        "references": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LawReference"
-          },
-          "description": "The URL associated with any bill or legislative reference included in the description."
-        },
-        "topics": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LawTopics"
-          },
-          "description": "For local incentive/regulation descriptions, the category that the incentive/regulation falls under, described below: Infrastructure Requirements, Vehicle Purchase and Infrastructure Development Incentives, Fuel Use Incentives, Parking Incentives, Technical Assistance, Vehicle Acquisition Requirements, Promotion Initiatives, Idle Reduction Requirements, Renewable Fuels Mandates and Standards"
-        }
-      }
-    },
-    "Poc": {
-      "required": [
-        "name",
-        "state"
-      ],
-      "properties": {
-        "title": {
-          "type": "string",
-          "description": "The job title of the contact"
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the contact"
-        },
-        "state": {
-          "type": "string",
-          "description": "The state in which the contact is based ('US' for Federal laws and 'DC' for the District of Columbia)"
-        },
-        "agency": {
-          "type": "string",
-          "description": "The agency that the contact represents"
-        },
-        "web_page": {
-          "type": "string",
-          "description": "The contacts webpage"
-        },
-        "telephone": {
-          "type": "string",
-          "description": "The contacts phone number"
-        },
-        "fax": {
-          "type": "string",
-          "description": "The contacts fax number"
-        },
-        "email": {
-          "type": "string",
-          "description": "The contacts email address"
-        }
-      }
-    },
-    "Category": {
-      "description": "A category that the law applies to",
-      "required": [
-        "code",
-        "title",
-        "category_type"
-      ],
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The code used to identify the category"
-        },
-        "title": {
-          "type": "string",
-          "description": "The full name of the category"
-        },
-        "category_type": {
-          "type": "string",
-          "description": "The type of category. (E.g. tech, incentive, regulation, user)"
-        }
-      }
-    },
-    "LawType": {
-      "description": "The category that the incentive/law/regulation falls under, described below: -State Incentives, -Laws and Regulations, -Utility/Private Incentives",
-      "required": [
-        "id",
-        "title",
-        "code"
-      ],
-      "properties": {
-        "id": {
-          "type": "integer",
-          "description": "The id of the law type"
-        },
-        "title": {
-          "type": "string",
-          "description": "The name of the law type"
-        },
-        "code": {
-          "type": "string",
-          "description": "The code used to identify the law type"
-        }
-      }
-    },
-    "LawReference": {
-      "description": "The URL associated with any bill or legislative reference included in the description.",
-      "required": [
-        "description",
-        "url"
-      ],
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "The context of the reference"
-        },
-        "url": {
-          "type": "string",
-          "description": "The url linking to the reference."
-        }
-      }
-    },
-    "LawTopics": {
-      "description": "For local incentive/regulation descriptions, the category that the incentive/regulation falls under, described below: Infrastructure Requirements, Vehicle Purchase and Infrastructure Development Incentives, Fuel Use Incentives, Parking Incentives, Technical Assistance, Vehicle Acquisition Requirements, Promotion Initiatives, Idle Reduction Requirements, Renewable Fuels Mandates and Standards",
-      "required": [
-        "id",
-        "title",
-        "sort_order"
-      ],
-      "properties": {
-        "id": {
-          "type": "integer",
-          "description": "The database id of the law topic"
-        },
-        "title": {
-          "type": "string",
-          "description": "The name of the law topic"
-        },
-        "sort_order": {
-          "type": "integer",
-          "description": "The sort order of the law topic"
-        }
-      }
-    },
-    "LawsResponse": {
-      "required": [
-        "metadata",
-        "inputs",
-        "result"
-      ],
-      "properties": {
-        "metadata": {
-          "$ref": "#/definitions/Metadata",
-          "description": "The api version number, and the count of laws returned"
-        },
-        "inputs": {
-          "$ref": "#/definitions/Inputs",
-          "description": "The parameters that were passed to the api call"
-        },
-        "result": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Law"
-          },
-          "description": "The array of laws returned"
-        }
-      }
-    },
-    "LawResult": {
-      "required": [
-        "metadata",
-        "inputs",
-        "result"
-      ],
-      "properties": {
-        "metadata": {
-          "$ref": "#/definitions/Metadata",
-          "description": "The api version number"
-        },
-        "inputs": {
-          "$ref": "#/definitions/Inputs",
-          "description": "The parameters that were passed to the api call"
-        },
-        "result": {
-          "$ref": "#/definitions/Law",
-          "description": "The law requested"
-        }
-      }
-    },
-    "PocResults": {
-      "required": [
-        "metadata",
-        "inputs",
-        "result"
-      ],
-      "properties": {
-        "metadata": {
-          "$ref": "#/definitions/Metadata",
-          "description": "The api version number, and the count of contacts returned"
-        },
-        "inputs": {
-          "$ref": "#/definitions/Inputs",
-          "description": "The parameters that were passed to the api call"
-        },
-        "result": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Poc"
-          },
-          "description": "The array of Points of Contacts for the state requested"
-        }
-      }
-    },
-    "FullCategory": {
-      "required": [
-        "code",
-        "title",
-        "category_type",
-        "sort_order"
-      ],
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The code used to identify the category"
-        },
-        "title": {
-          "type": "string",
-          "description": "The full name of the category"
-        },
-        "category_type": {
-          "type": "string",
-          "description": "The type of category. (E.g. tech, incentive, regulation, user)"
-        },
-        "sort_order": {
-          "type": "string",
-          "description": "The sort order for the categories"
-        },
-        "help_text": {
-          "type": "string",
-          "description": "A short description of what the law category encompasses"
-        }
-      }
-    },
-    "CategoryResults": {
-      "required": [
-        "metadata",
-        "inputs",
-        "result"
-      ],
-      "properties": {
-        "metadata": {
-          "$ref": "#/definitions/Metadata",
-          "description": "The api version number, and the count of categories returned"
-        },
-        "inputs": {
-          "$ref": "#/definitions/Inputs",
-          "description": "The parameters that were passed to the api call"
-        },
-        "result": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FullCategory"
-          },
-          "description": "The array of law categories returned"
-        }
-      }
-    }
-  }
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0"
 }

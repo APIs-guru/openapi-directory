@@ -1,32 +1,227 @@
 {
-  "swagger": "2.0",
+  "basePath": "/freebase/v1",
+  "definitions": {
+    "ReconcileCandidate": {
+      "properties": {
+        "confidence": {
+          "description": "Percentage likelihood that this candidate is the unique matching entity. Value will be between 0.0 and 1.0",
+          "format": "float",
+          "type": "number"
+        },
+        "lang": {
+          "description": "Language code that candidate and notable names are displayed in.",
+          "type": "string"
+        },
+        "mid": {
+          "description": "Freebase MID of candidate entity.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Freebase name of matching entity in specified language.",
+          "type": "string"
+        },
+        "notable": {
+          "description": "Type or profession the candidate is notable for.",
+          "properties": {
+            "id": {
+              "description": "MID of notable category.",
+              "type": "string"
+            },
+            "name": {
+              "description": "Name of notable category in specified language.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "ReconcileGet": {
+      "properties": {
+        "candidate": {
+          "description": "If filled, then the listed candidates are potential matches, and such should be evaluated by a more discerning algorithm or human. The matches are ordered by confidence.",
+          "items": {
+            "$ref": "#/definitions/ReconcileCandidate"
+          },
+          "type": "array"
+        },
+        "costs": {
+          "description": "Server costs for reconciling.",
+          "properties": {
+            "hits": {
+              "description": "Total number of hits found.",
+              "format": "int32",
+              "type": "integer"
+            },
+            "ms": {
+              "description": "Total milliseconds spent.",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "match": {
+          "$ref": "#/definitions/ReconcileCandidate",
+          "description": "If filled, this entity is guaranteed to match at requested confidence probability (default 99%)."
+        },
+        "warning": {
+          "description": "If filled, then there were recoverable problems that affected the request. For example, some of the properties were ignored because they either are not valid Freebase predicates or are not indexed for reconciliation. The candidates returned should be considered valid results, with the caveat that sections of the request were ignored as specified by the warning text.",
+          "items": {
+            "properties": {
+              "location": {
+                "description": "Location of warning in the request e.g. invalid predicate.",
+                "type": "string"
+              },
+              "message": {
+                "description": "Warning message to display to the user.",
+                "type": "string"
+              },
+              "reason": {
+                "description": "Code for identifying classes of warnings.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/freebase/"
+  },
+  "host": "www.googleapis.com",
   "info": {
-    "title": "Freebase Search",
-    "x-serviceName": "freebase",
-    "description": "Find Freebase entities using textual queries and other constraints.",
     "contact": {
       "name": "Google",
       "url": "https://google.com"
     },
+    "description": "Find Freebase entities using textual queries and other constraints.",
+    "title": "Freebase Search",
     "version": "v1",
-    "x-providerName": "googleapis.com",
+    "x-logo": "https://www.google.com/images/srpr/logo11w.png",
     "x-origin": {
       "format": "google",
-      "version": "v1",
-      "url": "https://www.googleapis.com/discovery/v1/apis/freebase/v1/rest"
+      "url": "https://www.googleapis.com/discovery/v1/apis/freebase/v1/rest",
+      "version": "v1"
     },
-    "x-logo": "https://www.google.com/images/srpr/logo11w.png"
+    "x-providerName": "googleapis.com",
+    "x-serviceName": "freebase"
   },
-  "host": "www.googleapis.com",
-  "basePath": "/freebase/v1",
-  "schemes": [
-    "https"
-  ],
+  "parameters": {
+    "alt": {
+      "default": "json",
+      "description": "Data format for the response.",
+      "enum": [
+        "json"
+      ],
+      "in": "query",
+      "name": "alt",
+      "type": "string"
+    },
+    "fields": {
+      "description": "Selector specifying which fields to include in a partial response.",
+      "in": "query",
+      "name": "fields",
+      "type": "string"
+    },
+    "key": {
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "in": "query",
+      "name": "key",
+      "type": "string"
+    },
+    "oauth_token": {
+      "description": "OAuth 2.0 token for the current user.",
+      "in": "query",
+      "name": "oauth_token",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "default": true,
+      "description": "Returns response with indentations and line breaks.",
+      "in": "query",
+      "name": "prettyPrint",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "in": "query",
+      "name": "quotaUser",
+      "type": "string"
+    },
+    "userIp": {
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "in": "query",
+      "name": "userIp",
+      "type": "string"
+    }
+  },
   "paths": {
     "/reconcile": {
       "get": {
         "description": "Reconcile entities to Freebase open data.",
         "operationId": "freebase.reconcile",
+        "parameters": [
+          {
+            "default": 0.99,
+            "description": "Required confidence for a candidate to match. Must be between .5 and 1.0",
+            "in": "query",
+            "maximum": 1,
+            "minimum": 0,
+            "name": "confidence",
+            "type": "number"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Classifications of entity e.g. type, category, title.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "kind",
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Languages for names and values. First language is used for display. Default is 'en'.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "lang",
+            "type": "array"
+          },
+          {
+            "default": 3,
+            "description": "Maximum number of candidates to return.",
+            "in": "query",
+            "maximum": 25,
+            "minimum": 0,
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "Name of entity.",
+            "in": "query",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Property values for entity formatted as\n:",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "prop",
+            "type": "array"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -34,63 +229,7 @@
               "$ref": "#/definitions/ReconcileGet"
             }
           }
-        },
-        "parameters": [
-          {
-            "name": "confidence",
-            "in": "query",
-            "description": "Required confidence for a candidate to match. Must be between .5 and 1.0",
-            "default": 0.99,
-            "type": "number",
-            "minimum": 0,
-            "maximum": 1
-          },
-          {
-            "name": "kind",
-            "in": "query",
-            "description": "Classifications of entity e.g. type, category, title.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "lang",
-            "in": "query",
-            "description": "Languages for names and values. First language is used for display. Default is 'en'.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "Maximum number of candidates to return.",
-            "default": 3,
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 25
-          },
-          {
-            "name": "name",
-            "in": "query",
-            "description": "Name of entity.",
-            "type": "string"
-          },
-          {
-            "name": "prop",
-            "in": "query",
-            "description": "Property values for entity formatted as\n:",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          }
-        ]
+        }
       },
       "parameters": [
         {
@@ -120,73 +259,65 @@
       "get": {
         "description": "Search Freebase open data.",
         "operationId": "freebase.search",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
         "parameters": [
           {
-            "name": "as_of_time",
-            "in": "query",
             "description": "A mql as_of_time value to use with mql_output queries.",
+            "in": "query",
+            "name": "as_of_time",
             "type": "string"
           },
           {
-            "name": "callback",
-            "in": "query",
             "description": "JS method name for JSONP callbacks.",
+            "in": "query",
+            "name": "callback",
             "type": "string"
           },
           {
-            "name": "cursor",
-            "in": "query",
             "description": "The cursor value to use for the next page of results.",
+            "in": "query",
+            "name": "cursor",
             "type": "integer"
           },
           {
-            "name": "domain",
-            "in": "query",
+            "collectionFormat": "multi",
             "description": "Restrict to topics with this Freebase domain id.",
-            "type": "array",
+            "in": "query",
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi"
+            "name": "domain",
+            "type": "array"
           },
           {
-            "name": "encode",
-            "in": "query",
-            "description": "The encoding of the response. You can use this parameter to enable html encoding.",
             "default": "off",
-            "type": "string",
+            "description": "The encoding of the response. You can use this parameter to enable html encoding.",
             "enum": [
               "html",
               "off"
-            ]
+            ],
+            "in": "query",
+            "name": "encode",
+            "type": "string"
           },
           {
-            "name": "exact",
-            "in": "query",
             "description": "Query on exact name and keys only.",
+            "in": "query",
+            "name": "exact",
             "type": "boolean"
           },
           {
-            "name": "filter",
-            "in": "query",
+            "collectionFormat": "multi",
             "description": "A filter to apply to the query.",
-            "type": "array",
+            "in": "query",
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi"
+            "name": "filter",
+            "type": "array"
           },
           {
-            "name": "format",
-            "in": "query",
-            "description": "Structural format of the json response.",
             "default": "entity",
-            "type": "string",
+            "description": "Structural format of the json response.",
             "enum": [
               "ac",
               "classic",
@@ -194,137 +325,145 @@
               "guids",
               "ids",
               "mids"
-            ]
+            ],
+            "in": "query",
+            "name": "format",
+            "type": "string"
           },
           {
-            "name": "help",
-            "in": "query",
             "description": "The keyword to request help on.",
-            "type": "string",
             "enum": [
               "langs",
               "mappings",
               "predicates"
-            ]
+            ],
+            "in": "query",
+            "name": "help",
+            "type": "string"
           },
           {
-            "name": "indent",
-            "in": "query",
             "description": "Whether to indent the json results or not.",
+            "in": "query",
+            "name": "indent",
             "type": "boolean"
           },
           {
-            "name": "lang",
-            "in": "query",
+            "collectionFormat": "multi",
             "description": "The code of the language to run the query with. Default is 'en'.",
-            "type": "array",
+            "in": "query",
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi"
+            "name": "lang",
+            "type": "array"
           },
           {
-            "name": "limit",
-            "in": "query",
-            "description": "Maximum number of results to return.",
             "default": 20,
+            "description": "Maximum number of results to return.",
+            "in": "query",
+            "name": "limit",
             "type": "integer"
           },
           {
-            "name": "mid",
-            "in": "query",
+            "collectionFormat": "multi",
             "description": "A mid to use instead of a query.",
-            "type": "array",
+            "in": "query",
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi"
+            "name": "mid",
+            "type": "array"
           },
           {
-            "name": "mql_output",
-            "in": "query",
             "description": "The MQL query to run againist the results to extract more data.",
+            "in": "query",
+            "name": "mql_output",
             "type": "string"
           },
           {
-            "name": "output",
-            "in": "query",
             "description": "An output expression to request data from matches.",
+            "in": "query",
+            "name": "output",
             "type": "string"
           },
           {
-            "name": "prefixed",
-            "in": "query",
             "description": "Prefix match against names and aliases.",
+            "in": "query",
+            "name": "prefixed",
             "type": "boolean"
           },
           {
-            "name": "query",
-            "in": "query",
             "description": "Query term to search for.",
+            "in": "query",
+            "name": "query",
             "type": "string"
           },
           {
-            "name": "scoring",
-            "in": "query",
-            "description": "Relevance scoring algorithm to use.",
             "default": "entity",
-            "type": "string",
+            "description": "Relevance scoring algorithm to use.",
             "enum": [
               "entity",
               "freebase",
               "schema"
-            ]
+            ],
+            "in": "query",
+            "name": "scoring",
+            "type": "string"
           },
           {
-            "name": "spell",
-            "in": "query",
-            "description": "Request 'did you mean' suggestions",
             "default": "no_spelling",
-            "type": "string",
+            "description": "Request 'did you mean' suggestions",
             "enum": [
               "always",
               "no_results",
               "no_spelling"
-            ]
+            ],
+            "in": "query",
+            "name": "spell",
+            "type": "string"
           },
           {
-            "name": "stemmed",
-            "in": "query",
             "description": "Query on stemmed names and aliases. May not be used with prefixed.",
+            "in": "query",
+            "name": "stemmed",
             "type": "boolean"
           },
           {
-            "name": "type",
-            "in": "query",
+            "collectionFormat": "multi",
             "description": "Restrict to topics with this Freebase type id.",
-            "type": "array",
+            "in": "query",
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi"
+            "name": "type",
+            "type": "array"
           },
           {
-            "name": "with",
-            "in": "query",
+            "collectionFormat": "multi",
             "description": "A rule to match against.",
-            "type": "array",
+            "in": "query",
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi"
+            "name": "with",
+            "type": "array"
           },
           {
-            "name": "without",
-            "in": "query",
+            "collectionFormat": "multi",
             "description": "A rule to not match against.",
-            "type": "array",
+            "in": "query",
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi"
+            "name": "without",
+            "type": "array"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        }
       },
       "parameters": [
         {
@@ -351,147 +490,8 @@
       ]
     }
   },
-  "definitions": {
-    "ReconcileCandidate": {
-      "type": "object",
-      "properties": {
-        "confidence": {
-          "type": "number",
-          "description": "Percentage likelihood that this candidate is the unique matching entity. Value will be between 0.0 and 1.0",
-          "format": "float"
-        },
-        "lang": {
-          "type": "string",
-          "description": "Language code that candidate and notable names are displayed in."
-        },
-        "mid": {
-          "type": "string",
-          "description": "Freebase MID of candidate entity."
-        },
-        "name": {
-          "type": "string",
-          "description": "Freebase name of matching entity in specified language."
-        },
-        "notable": {
-          "type": "object",
-          "description": "Type or profession the candidate is notable for.",
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "MID of notable category."
-            },
-            "name": {
-              "type": "string",
-              "description": "Name of notable category in specified language."
-            }
-          }
-        }
-      }
-    },
-    "ReconcileGet": {
-      "type": "object",
-      "properties": {
-        "candidate": {
-          "type": "array",
-          "description": "If filled, then the listed candidates are potential matches, and such should be evaluated by a more discerning algorithm or human. The matches are ordered by confidence.",
-          "items": {
-            "$ref": "#/definitions/ReconcileCandidate"
-          }
-        },
-        "costs": {
-          "type": "object",
-          "description": "Server costs for reconciling.",
-          "properties": {
-            "hits": {
-              "type": "integer",
-              "description": "Total number of hits found.",
-              "format": "int32"
-            },
-            "ms": {
-              "type": "integer",
-              "description": "Total milliseconds spent.",
-              "format": "int32"
-            }
-          }
-        },
-        "match": {
-          "$ref": "#/definitions/ReconcileCandidate",
-          "description": "If filled, this entity is guaranteed to match at requested confidence probability (default 99%)."
-        },
-        "warning": {
-          "type": "array",
-          "description": "If filled, then there were recoverable problems that affected the request. For example, some of the properties were ignored because they either are not valid Freebase predicates or are not indexed for reconciliation. The candidates returned should be considered valid results, with the caveat that sections of the request were ignored as specified by the warning text.",
-          "items": {
-            "type": "object",
-            "properties": {
-              "location": {
-                "type": "string",
-                "description": "Location of warning in the request e.g. invalid predicate."
-              },
-              "message": {
-                "type": "string",
-                "description": "Warning message to display to the user."
-              },
-              "reason": {
-                "type": "string",
-                "description": "Code for identifying classes of warnings."
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "parameters": {
-    "alt": {
-      "name": "alt",
-      "in": "query",
-      "description": "Data format for the response.",
-      "default": "json",
-      "type": "string",
-      "enum": [
-        "json"
-      ]
-    },
-    "fields": {
-      "name": "fields",
-      "in": "query",
-      "description": "Selector specifying which fields to include in a partial response.",
-      "type": "string"
-    },
-    "key": {
-      "name": "key",
-      "in": "query",
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "type": "string"
-    },
-    "oauth_token": {
-      "name": "oauth_token",
-      "in": "query",
-      "description": "OAuth 2.0 token for the current user.",
-      "type": "string"
-    },
-    "prettyPrint": {
-      "name": "prettyPrint",
-      "in": "query",
-      "description": "Returns response with indentations and line breaks.",
-      "default": true,
-      "type": "boolean"
-    },
-    "quotaUser": {
-      "name": "quotaUser",
-      "in": "query",
-      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
-      "type": "string"
-    },
-    "userIp": {
-      "name": "userIp",
-      "in": "query",
-      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
-      "type": "string"
-    }
-  },
-  "externalDocs": {
-    "url": "https://developers.google.com/freebase/"
-  }
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0"
 }

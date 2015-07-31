@@ -1,115 +1,121 @@
 {
-  "host": "getit.embarcadero.com",
   "basePath": "/",
-  "schemes": [
-    "http"
-  ],
-  "swagger": "2.0",
+  "host": "getit.embarcadero.com",
   "info": {
-    "version": "1.0.0",
-    "title": "GetIt REST API",
     "description": "This is the V.1.0.0 for GetIt REST API",
-    "x-providerName": "embarcadero.com",
+    "title": "GetIt REST API",
+    "version": "1.0.0",
     "x-origin": {
       "format": "swagger",
-      "version": "1.2",
-      "url": "http://getit.embarcadero.com/api-docs"
-    }
-  },
-  "tags": [
-    {
-      "name": "catalog",
-      "description": "Operations about catalog"
+      "url": "http://getit.embarcadero.com/api-docs",
+      "version": "1.2"
     },
-    {
-      "name": "categories",
-      "description": "Operations about categories"
-    }
-  ],
+    "x-providerName": "embarcadero.com"
+  },
   "paths": {
-    "/catalog/info": {
+    "/catalog/dependencyinfo": {
       "post": {
-        "tags": [
-          "catalog"
-        ],
-        "operationId": "info",
-        "summary": "Return an array of matching elements by text",
+        "description": "",
+        "operationId": "infobyids",
         "parameters": [
           {
+            "description": "Search dependencies for an Id",
             "in": "formData",
+            "name": "Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Return dependencies Ids separated by ';'",
+        "tags": [
+          "catalog"
+        ]
+      }
+    },
+    "/catalog/info": {
+      "post": {
+        "operationId": "info",
+        "parameters": [
+          {
             "description": "Search text",
+            "in": "formData",
             "name": "Search",
             "required": false,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "Current RadStudio product supported personalities",
+            "in": "formData",
             "name": "Personalities",
             "required": false,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "CategoryID or list of CategoryIDs separated by \";\"",
+            "in": "formData",
             "name": "Categories",
             "required": false,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "Catalog Version as positive entire value",
+            "in": "formData",
             "name": "CatalogVersion",
             "required": false,
             "type": "string"
           },
           {
-            "in": "formData",
+            "default": "0",
             "description": "Starting from...",
+            "in": "formData",
             "name": "Start",
             "required": false,
-            "type": "string",
-            "default": "0"
+            "type": "string"
           },
           {
-            "in": "formData",
+            "default": "10",
             "description": "...ending at",
+            "in": "formData",
             "name": "End",
             "required": false,
-            "type": "string",
-            "default": "10"
+            "type": "string"
           },
           {
-            "in": "formData",
             "description": "Build Number",
+            "in": "formData",
             "name": "BuildNumber",
             "required": false,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "Serial Number",
+            "in": "formData",
             "name": "SerialNo",
             "required": false,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "Token",
+            "in": "formData",
             "name": "Token",
             "required": false,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "Contact ID",
+            "in": "formData",
             "name": "ContactId",
             "required": false,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "Identity",
+            "in": "formData",
             "name": "Identity",
             "required": false,
             "type": "string"
@@ -119,49 +125,49 @@
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Return an array of matching elements by text",
+        "tags": [
+          "catalog"
+        ]
       }
     },
     "/catalog/infobyids": {
       "post": {
-        "tags": [
-          "catalog"
-        ],
-        "operationId": "infobyids",
-        "summary": "Return an array of matching elements by id",
         "description": "",
+        "operationId": "infobyids",
         "parameters": [
           {
-            "in": "formData",
             "description": "Id or list of Ids separated by ';'",
+            "in": "formData",
             "name": "Id",
             "required": true,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "Catalog Version as positive entire value",
+            "in": "formData",
             "name": "CatalogVersion",
             "required": false,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "Serial Number",
+            "in": "formData",
             "name": "SerialNo",
             "required": false,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "Token",
+            "in": "formData",
             "name": "Token",
             "required": false,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "Contact ID",
+            "in": "formData",
             "name": "ContactId",
             "required": false,
             "type": "string"
@@ -171,49 +177,49 @@
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Return an array of matching elements by id",
+        "tags": [
+          "catalog"
+        ]
       }
     },
     "/catalog/installbyids": {
       "post": {
-        "tags": [
-          "catalog"
-        ],
-        "operationId": "installbyids",
-        "summary": "Return an array of matching elements by id for the installing process",
         "description": "",
+        "operationId": "installbyids",
         "parameters": [
           {
-            "in": "formData",
             "description": "Search by Id",
+            "in": "formData",
             "name": "Id",
             "required": true,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "Catalog Version as positive entire value",
+            "in": "formData",
             "name": "CatalogVersion",
             "required": false,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "Serial Number",
+            "in": "formData",
             "name": "SerialNo",
             "required": false,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "License checksum",
+            "in": "formData",
             "name": "Token",
             "required": false,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "Contact ID",
+            "in": "formData",
             "name": "ContactId",
             "required": false,
             "type": "string"
@@ -223,66 +229,42 @@
           "200": {
             "description": "No response was specified"
           }
-        }
-      }
-    },
-    "/catalog/dependencyinfo": {
-      "post": {
+        },
+        "summary": "Return an array of matching elements by id for the installing process",
         "tags": [
           "catalog"
-        ],
-        "operationId": "infobyids",
-        "summary": "Return dependencies Ids separated by ';'",
-        "description": "",
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "Search dependencies for an Id",
-            "name": "Id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
+        ]
       }
     },
     "/categories/info": {
       "post": {
-        "tags": [
-          "categories"
-        ],
-        "operationId": "info",
-        "summary": "Return an array of categories",
         "description": "",
+        "operationId": "info",
         "parameters": [
           {
-            "in": "formData",
             "description": "Catalog Version as positive entire value",
+            "in": "formData",
             "name": "CatalogVersion",
             "required": false,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "Current RadStudio product supported personalities",
+            "in": "formData",
             "name": "Personalities",
             "required": false,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "Build Number",
+            "in": "formData",
             "name": "BuildNumber",
             "required": false,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "Identity",
+            "in": "formData",
             "name": "Identity",
             "required": false,
             "type": "string"
@@ -292,8 +274,26 @@
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Return an array of categories",
+        "tags": [
+          "categories"
+        ]
       }
     }
-  }
+  },
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Operations about catalog",
+      "name": "catalog"
+    },
+    {
+      "description": "Operations about categories",
+      "name": "categories"
+    }
+  ]
 }

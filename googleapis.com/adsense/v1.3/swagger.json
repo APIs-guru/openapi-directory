@@ -1,55 +1,794 @@
 {
-  "swagger": "2.0",
+  "basePath": "/adsense/v1.3",
+  "definitions": {
+    "Account": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier of this account.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "adsense#account",
+          "description": "Kind of resource this is, in this case adsense#account.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of this account.",
+          "type": "string"
+        },
+        "premium": {
+          "description": "Whether this account is premium.",
+          "type": "boolean"
+        },
+        "subAccounts": {
+          "description": "Sub accounts of the this account.",
+          "items": {
+            "$ref": "#/definitions/Account"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "Accounts": {
+      "properties": {
+        "etag": {
+          "description": "ETag of this response for caching purposes.",
+          "type": "string"
+        },
+        "items": {
+          "description": "The accounts returned in this list response.",
+          "items": {
+            "$ref": "#/definitions/Account"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "adsense#accounts",
+          "description": "Kind of list this is, in this case adsense#accounts.",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "Continuation token used to page through accounts. To retrieve the next page of results, set the next request's \"pageToken\" value to this.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AdClient": {
+      "properties": {
+        "arcOptIn": {
+          "description": "Whether this ad client is opted in to ARC.",
+          "type": "boolean"
+        },
+        "id": {
+          "description": "Unique identifier of this ad client.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "adsense#adClient",
+          "description": "Kind of resource this is, in this case adsense#adClient.",
+          "type": "string"
+        },
+        "productCode": {
+          "description": "This ad client's product code, which corresponds to the PRODUCT_CODE report dimension.",
+          "type": "string"
+        },
+        "supportsReporting": {
+          "description": "Whether this ad client supports being reported on.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "AdClients": {
+      "properties": {
+        "etag": {
+          "description": "ETag of this response for caching purposes.",
+          "type": "string"
+        },
+        "items": {
+          "description": "The ad clients returned in this list response.",
+          "items": {
+            "$ref": "#/definitions/AdClient"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "adsense#adClients",
+          "description": "Kind of list this is, in this case adsense#adClients.",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "Continuation token used to page through ad clients. To retrieve the next page of results, set the next request's \"pageToken\" value to this.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AdCode": {
+      "properties": {
+        "adCode": {
+          "description": "The ad code snippet.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "adsense#adCode",
+          "description": "Kind this is, in this case adsense#adCode.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AdStyle": {
+      "properties": {
+        "colors": {
+          "description": "The colors which are included in the style. These are represented as six hexadecimal characters, similar to HTML color codes, but without the leading hash.",
+          "properties": {
+            "background": {
+              "description": "The color of the ad background.",
+              "type": "string"
+            },
+            "border": {
+              "description": "The color of the ad border.",
+              "type": "string"
+            },
+            "text": {
+              "description": "The color of the ad text.",
+              "type": "string"
+            },
+            "title": {
+              "description": "The color of the ad title.",
+              "type": "string"
+            },
+            "url": {
+              "description": "The color of the ad url.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "corners": {
+          "description": "The style of the corners in the ad.",
+          "type": "string"
+        },
+        "font": {
+          "description": "The font which is included in the style.",
+          "properties": {
+            "family": {
+              "description": "The family of the font.",
+              "type": "string"
+            },
+            "size": {
+              "description": "The size of the font.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "kind": {
+          "default": "adsense#adStyle",
+          "description": "Kind this is, in this case adsense#adStyle.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AdUnit": {
+      "properties": {
+        "code": {
+          "description": "Identity code of this ad unit, not necessarily unique across ad clients.",
+          "type": "string"
+        },
+        "contentAdsSettings": {
+          "description": "Settings specific to content ads (AFC) and highend mobile content ads (AFMC).",
+          "properties": {
+            "backupOption": {
+              "description": "The backup option to be used in instances where no ad is available.",
+              "properties": {
+                "color": {
+                  "description": "Color to use when type is set to COLOR.",
+                  "type": "string"
+                },
+                "type": {
+                  "description": "Type of the backup option. Possible values are BLANK, COLOR and URL.",
+                  "type": "string"
+                },
+                "url": {
+                  "description": "URL to use when type is set to URL.",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "size": {
+              "description": "Size of this ad unit.",
+              "type": "string"
+            },
+            "type": {
+              "description": "Type of this ad unit.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "customStyle": {
+          "$ref": "#/definitions/AdStyle",
+          "description": "Custom style information specific to this ad unit."
+        },
+        "feedAdsSettings": {
+          "description": "Settings specific to feed ads (AFF).",
+          "properties": {
+            "adPosition": {
+              "description": "The position of the ads relative to the feed entries.",
+              "type": "string"
+            },
+            "frequency": {
+              "description": "The frequency at which ads should appear in the feed (i.e. every N entries).",
+              "format": "int32",
+              "type": "integer"
+            },
+            "minimumWordCount": {
+              "description": "The minimum length an entry should be in order to have attached ads.",
+              "format": "int32",
+              "type": "integer"
+            },
+            "type": {
+              "description": "The type of ads which should appear.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "id": {
+          "description": "Unique identifier of this ad unit. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "adsense#adUnit",
+          "description": "Kind of resource this is, in this case adsense#adUnit.",
+          "type": "string"
+        },
+        "mobileContentAdsSettings": {
+          "description": "Settings specific to WAP mobile content ads (AFMC).",
+          "properties": {
+            "markupLanguage": {
+              "description": "The markup language to use for this ad unit.",
+              "type": "string"
+            },
+            "scriptingLanguage": {
+              "description": "The scripting language to use for this ad unit.",
+              "type": "string"
+            },
+            "size": {
+              "description": "Size of this ad unit.",
+              "type": "string"
+            },
+            "type": {
+              "description": "Type of this ad unit.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "name": {
+          "description": "Name of this ad unit.",
+          "type": "string"
+        },
+        "savedStyleId": {
+          "description": "ID of the saved ad style which holds this ad unit's style information.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of this ad unit. Possible values are:\nNEW: Indicates that the ad unit was created within the last seven days and does not yet have any activity associated with it.\n\nACTIVE: Indicates that there has been activity on this ad unit in the last seven days.\n\nINACTIVE: Indicates that there has been no activity on this ad unit in the last seven days.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AdUnits": {
+      "properties": {
+        "etag": {
+          "description": "ETag of this response for caching purposes.",
+          "type": "string"
+        },
+        "items": {
+          "description": "The ad units returned in this list response.",
+          "items": {
+            "$ref": "#/definitions/AdUnit"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "adsense#adUnits",
+          "description": "Kind of list this is, in this case adsense#adUnits.",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "Continuation token used to page through ad units. To retrieve the next page of results, set the next request's \"pageToken\" value to this.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AdsenseReportsGenerateResponse": {
+      "properties": {
+        "averages": {
+          "description": "The averages of the report. This is the same length as any other row in the report; cells corresponding to dimension columns are empty.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "headers": {
+          "description": "The header information of the columns requested in the report. This is a list of headers; one for each dimension in the request, followed by one for each metric in the request.",
+          "items": {
+            "properties": {
+              "currency": {
+                "description": "The currency of this column. Only present if the header type is METRIC_CURRENCY.",
+                "type": "string"
+              },
+              "name": {
+                "description": "The name of the header.",
+                "type": "string"
+              },
+              "type": {
+                "description": "The type of the header; one of DIMENSION, METRIC_TALLY, METRIC_RATIO, or METRIC_CURRENCY.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "adsense#report",
+          "description": "Kind this is, in this case adsense#report.",
+          "type": "string"
+        },
+        "rows": {
+          "description": "The output rows of the report. Each row is a list of cells; one for each dimension in the request, followed by one for each metric in the request. The dimension cells contain strings, and the metric cells contain numbers.",
+          "items": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": "array"
+        },
+        "totalMatchedRows": {
+          "description": "The total number of rows matched by the report request. Fewer rows may be returned in the response due to being limited by the row count requested or the report row limit.",
+          "format": "int64",
+          "type": "string"
+        },
+        "totals": {
+          "description": "The totals of the report. This is the same length as any other row in the report; cells corresponding to dimension columns are empty.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "warnings": {
+          "description": "Any warnings associated with generation of the report.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "Alert": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier of this alert. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "adsense#alert",
+          "description": "Kind of resource this is, in this case adsense#alert.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The localized alert message.",
+          "type": "string"
+        },
+        "severity": {
+          "description": "Severity of this alert. Possible values: INFO, WARNING, SEVERE.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of this alert. Possible values: SELF_HOLD, MIGRATED_TO_BILLING3, ADDRESS_PIN_VERIFICATION, PHONE_PIN_VERIFICATION, CORPORATE_ENTITY, GRAYLISTED_PUBLISHER, API_HOLD.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Alerts": {
+      "properties": {
+        "items": {
+          "description": "The alerts returned in this list response.",
+          "items": {
+            "$ref": "#/definitions/Alert"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "adsense#alerts",
+          "description": "Kind of list this is, in this case adsense#alerts.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CustomChannel": {
+      "properties": {
+        "code": {
+          "description": "Code of this custom channel, not necessarily unique across ad clients.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Unique identifier of this custom channel. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "adsense#customChannel",
+          "description": "Kind of resource this is, in this case adsense#customChannel.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of this custom channel.",
+          "type": "string"
+        },
+        "targetingInfo": {
+          "description": "The targeting information of this custom channel, if activated.",
+          "properties": {
+            "adsAppearOn": {
+              "description": "The name used to describe this channel externally.",
+              "type": "string"
+            },
+            "description": {
+              "description": "The external description of the channel.",
+              "type": "string"
+            },
+            "location": {
+              "description": "The locations in which ads appear. (Only valid for content and mobile content ads). Acceptable values for content ads are: TOP_LEFT, TOP_CENTER, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT, MULTIPLE_LOCATIONS. Acceptable values for mobile content ads are: TOP, MIDDLE, BOTTOM, MULTIPLE_LOCATIONS.",
+              "type": "string"
+            },
+            "siteLanguage": {
+              "description": "The language of the sites ads will be displayed on.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "CustomChannels": {
+      "properties": {
+        "etag": {
+          "description": "ETag of this response for caching purposes.",
+          "type": "string"
+        },
+        "items": {
+          "description": "The custom channels returned in this list response.",
+          "items": {
+            "$ref": "#/definitions/CustomChannel"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "adsense#customChannels",
+          "description": "Kind of list this is, in this case adsense#customChannels.",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "Continuation token used to page through custom channels. To retrieve the next page of results, set the next request's \"pageToken\" value to this.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Metadata": {
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/definitions/ReportingMetadataEntry"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "adsense#metadata",
+          "description": "Kind of list this is, in this case adsense#metadata.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ReportingMetadataEntry": {
+      "properties": {
+        "compatibleDimensions": {
+          "description": "For metrics this is a list of dimension IDs which the metric is compatible with, for dimensions it is a list of compatibility groups the dimension belongs to.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "compatibleMetrics": {
+          "description": "The names of the metrics the dimension or metric this reporting metadata entry describes is compatible with.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "id": {
+          "description": "Unique identifier of this reporting metadata entry, corresponding to the name of the appropriate dimension or metric.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "adsense#reportingMetadataEntry",
+          "description": "Kind of resource this is, in this case adsense#reportingMetadataEntry.",
+          "type": "string"
+        },
+        "requiredDimensions": {
+          "description": "The names of the dimensions which the dimension or metric this reporting metadata entry describes requires to also be present in order for the report to be valid. Omitting these will not cause an error or warning, but may result in data which cannot be correctly interpreted.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "requiredMetrics": {
+          "description": "The names of the metrics which the dimension or metric this reporting metadata entry describes requires to also be present in order for the report to be valid. Omitting these will not cause an error or warning, but may result in data which cannot be correctly interpreted.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "supportedProducts": {
+          "description": "The codes of the projects supported by the dimension or metric this reporting metadata entry describes.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "SavedAdStyle": {
+      "properties": {
+        "adStyle": {
+          "$ref": "#/definitions/AdStyle",
+          "description": "The AdStyle itself."
+        },
+        "id": {
+          "description": "Unique identifier of this saved ad style. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "adsense#savedAdStyle",
+          "description": "Kind of resource this is, in this case adsense#savedAdStyle.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The user selected name of this SavedAdStyle.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SavedAdStyles": {
+      "properties": {
+        "etag": {
+          "description": "ETag of this response for caching purposes.",
+          "type": "string"
+        },
+        "items": {
+          "description": "The saved ad styles returned in this list response.",
+          "items": {
+            "$ref": "#/definitions/SavedAdStyle"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "adsense#savedAdStyles",
+          "description": "Kind of list this is, in this case adsense#savedAdStyles.",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "Continuation token used to page through ad units. To retrieve the next page of results, set the next request's \"pageToken\" value to this.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SavedReport": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier of this saved report.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "adsense#savedReport",
+          "description": "Kind of resource this is, in this case adsense#savedReport.",
+          "type": "string"
+        },
+        "name": {
+          "description": "This saved report's name.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SavedReports": {
+      "properties": {
+        "etag": {
+          "description": "ETag of this response for caching purposes.",
+          "type": "string"
+        },
+        "items": {
+          "description": "The saved reports returned in this list response.",
+          "items": {
+            "$ref": "#/definitions/SavedReport"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "adsense#savedReports",
+          "description": "Kind of list this is, in this case adsense#savedReports.",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "Continuation token used to page through saved reports. To retrieve the next page of results, set the next request's \"pageToken\" value to this.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "UrlChannel": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier of this URL channel. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "adsense#urlChannel",
+          "description": "Kind of resource this is, in this case adsense#urlChannel.",
+          "type": "string"
+        },
+        "urlPattern": {
+          "description": "URL Pattern of this URL channel. Does not include \"http://\" or \"https://\". Example: www.example.com/home",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "UrlChannels": {
+      "properties": {
+        "etag": {
+          "description": "ETag of this response for caching purposes.",
+          "type": "string"
+        },
+        "items": {
+          "description": "The URL channels returned in this list response.",
+          "items": {
+            "$ref": "#/definitions/UrlChannel"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "adsense#urlChannels",
+          "description": "Kind of list this is, in this case adsense#urlChannels.",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "Continuation token used to page through URL channels. To retrieve the next page of results, set the next request's \"pageToken\" value to this.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/adsense/management/"
+  },
+  "host": "www.googleapis.com",
   "info": {
-    "title": "AdSense Management API",
-    "x-serviceName": "adsense",
-    "description": "Gives AdSense publishers access to their inventory and the ability to generate reports",
     "contact": {
       "name": "Google",
       "url": "https://google.com"
     },
+    "description": "Gives AdSense publishers access to their inventory and the ability to generate reports",
+    "title": "AdSense Management API",
     "version": "v1.3",
-    "x-providerName": "googleapis.com",
+    "x-logo": "https://www.google.com/images/srpr/logo11w.png",
     "x-origin": {
       "format": "google",
-      "version": "v1",
-      "url": "https://www.googleapis.com/discovery/v1/apis/adsense/v1.3/rest"
+      "url": "https://www.googleapis.com/discovery/v1/apis/adsense/v1.3/rest",
+      "version": "v1"
     },
-    "x-logo": "https://www.google.com/images/srpr/logo11w.png"
+    "x-providerName": "googleapis.com",
+    "x-serviceName": "adsense"
   },
-  "host": "www.googleapis.com",
-  "basePath": "/adsense/v1.3",
-  "schemes": [
-    "https"
-  ],
+  "parameters": {
+    "alt": {
+      "default": "json",
+      "description": "Data format for the response.",
+      "enum": [
+        "csv",
+        "json"
+      ],
+      "in": "query",
+      "name": "alt",
+      "type": "string"
+    },
+    "fields": {
+      "description": "Selector specifying which fields to include in a partial response.",
+      "in": "query",
+      "name": "fields",
+      "type": "string"
+    },
+    "key": {
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "in": "query",
+      "name": "key",
+      "type": "string"
+    },
+    "oauth_token": {
+      "description": "OAuth 2.0 token for the current user.",
+      "in": "query",
+      "name": "oauth_token",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "default": true,
+      "description": "Returns response with indentations and line breaks.",
+      "in": "query",
+      "name": "prettyPrint",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "in": "query",
+      "name": "quotaUser",
+      "type": "string"
+    },
+    "userIp": {
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "in": "query",
+      "name": "userIp",
+      "type": "string"
+    }
+  },
   "paths": {
-    "/accounts/{accountId}": {
+    "/accounts": {
       "get": {
-        "description": "Get information about the selected AdSense account.",
-        "operationId": "adsense.accounts.get",
+        "description": "List all accounts available to this AdSense account.",
+        "operationId": "adsense.accounts.list",
+        "parameters": [
+          {
+            "description": "The maximum number of accounts to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 10000,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through accounts. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
             "schema": {
-              "$ref": "#/definitions/Account"
+              "$ref": "#/definitions/Accounts"
             }
           }
         },
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "Account to get information about.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "tree",
-            "in": "query",
-            "description": "Whether the tree of sub accounts should be returned.",
-            "type": "boolean"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -86,34 +825,33 @@
         }
       ]
     },
-    "/accounts": {
+    "/accounts/{accountId}": {
       "get": {
-        "description": "List all accounts available to this AdSense account.",
-        "operationId": "adsense.accounts.list",
+        "description": "Get information about the selected AdSense account.",
+        "operationId": "adsense.accounts.get",
+        "parameters": [
+          {
+            "description": "Account to get information about.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Whether the tree of sub accounts should be returned.",
+            "in": "query",
+            "name": "tree",
+            "type": "boolean"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
             "schema": {
-              "$ref": "#/definitions/Accounts"
+              "$ref": "#/definitions/Account"
             }
           }
         },
-        "parameters": [
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of accounts to include in the response, used for paging.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 10000
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "A continuation token, used to page through accounts. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "type": "string"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -154,6 +892,29 @@
       "get": {
         "description": "List all ad clients in the specified account.",
         "operationId": "adsense.accounts.adclients.list",
+        "parameters": [
+          {
+            "description": "Account for which to list ad clients.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The maximum number of ad clients to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 10000,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -162,171 +923,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "Account for which to list ad clients.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of ad clients to include in the response, used for paging.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 10000
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/adsense",
-              "https://www.googleapis.com/auth/adsense.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "accounts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}": {
-      "get": {
-        "description": "Gets the specified ad unit in the specified ad client for the specified account.",
-        "operationId": "adsense.accounts.adunits.get",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AdUnit"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "Account to which the ad client belongs.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "adClientId",
-            "in": "path",
-            "description": "Ad client for which to get the ad unit.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "adUnitId",
-            "in": "path",
-            "description": "Ad unit to retrieve.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/adsense",
-              "https://www.googleapis.com/auth/adsense.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "accounts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/adcode": {
-      "get": {
-        "description": "Get ad code for the specified ad unit.",
-        "operationId": "adsense.accounts.adunits.getAdCode",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AdCode"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "Account which contains the ad client.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "adClientId",
-            "in": "path",
-            "description": "Ad client with contains the ad unit.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "adUnitId",
-            "in": "path",
-            "description": "Ad unit to get the code for.",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -367,6 +963,42 @@
       "get": {
         "description": "List all ad units in the specified ad client for the specified account.",
         "operationId": "adsense.accounts.adunits.list",
+        "parameters": [
+          {
+            "description": "Account to which the ad client belongs.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Ad client for which to list ad units.",
+            "in": "path",
+            "name": "adClientId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Whether to include inactive ad units. Default: true.",
+            "in": "query",
+            "name": "includeInactive",
+            "type": "boolean"
+          },
+          {
+            "description": "The maximum number of ad units to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 10000,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through ad units. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -375,42 +1007,148 @@
             }
           }
         },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsense",
+              "https://www.googleapis.com/auth/adsense.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}": {
+      "get": {
+        "description": "Gets the specified ad unit in the specified ad client for the specified account.",
+        "operationId": "adsense.accounts.adunits.get",
         "parameters": [
           {
-            "name": "accountId",
-            "in": "path",
             "description": "Account to which the ad client belongs.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "adClientId",
             "in": "path",
-            "description": "Ad client for which to list ad units.",
+            "name": "accountId",
             "required": true,
             "type": "string"
           },
           {
-            "name": "includeInactive",
-            "in": "query",
-            "description": "Whether to include inactive ad units. Default: true.",
-            "type": "boolean"
+            "description": "Ad client for which to get the ad unit.",
+            "in": "path",
+            "name": "adClientId",
+            "required": true,
+            "type": "string"
           },
           {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of ad units to include in the response, used for paging.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 10000
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "A continuation token, used to page through ad units. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "description": "Ad unit to retrieve.",
+            "in": "path",
+            "name": "adUnitId",
+            "required": true,
             "type": "string"
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AdUnit"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsense",
+              "https://www.googleapis.com/auth/adsense.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/accounts/{accountId}/adclients/{adClientId}/adunits/{adUnitId}/adcode": {
+      "get": {
+        "description": "Get ad code for the specified ad unit.",
+        "operationId": "adsense.accounts.adunits.getAdCode",
+        "parameters": [
+          {
+            "description": "Account which contains the ad client.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Ad client with contains the ad unit.",
+            "in": "path",
+            "name": "adClientId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Ad unit to get the code for.",
+            "in": "path",
+            "name": "adUnitId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AdCode"
+            }
+          }
+        },
         "security": [
           {
             "Oauth2": [
@@ -451,6 +1189,43 @@
       "get": {
         "description": "List all custom channels which the specified ad unit belongs to.",
         "operationId": "adsense.accounts.adunits.customchannels.list",
+        "parameters": [
+          {
+            "description": "Account to which the ad client belongs.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Ad client which contains the ad unit.",
+            "in": "path",
+            "name": "adClientId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Ad unit for which to list custom channels.",
+            "in": "path",
+            "name": "adUnitId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The maximum number of custom channels to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 10000,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through custom channels. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -459,177 +1234,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "Account to which the ad client belongs.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "adClientId",
-            "in": "path",
-            "description": "Ad client which contains the ad unit.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "adUnitId",
-            "in": "path",
-            "description": "Ad unit for which to list custom channels.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of custom channels to include in the response, used for paging.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 10000
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "A continuation token, used to page through custom channels. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/adsense",
-              "https://www.googleapis.com/auth/adsense.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "accounts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/accounts/{accountId}/alerts": {
-      "get": {
-        "description": "List the alerts for the specified AdSense account.",
-        "operationId": "adsense.accounts.alerts.list",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Alerts"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "Account for which to retrieve the alerts.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "locale",
-            "in": "query",
-            "description": "The locale to use for translating alert messages. The account locale will be used if this is not supplied. The AdSense default (English) will be used if the supplied locale is invalid or unsupported.",
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/adsense",
-              "https://www.googleapis.com/auth/adsense.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "accounts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/accounts/{accountId}/adclients/{adClientId}/customchannels/{customChannelId}": {
-      "get": {
-        "description": "Get the specified custom channel from the specified ad client for the specified account.",
-        "operationId": "adsense.accounts.customchannels.get",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/CustomChannel"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "Account to which the ad client belongs.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "adClientId",
-            "in": "path",
-            "description": "Ad client which contains the custom channel.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "customChannelId",
-            "in": "path",
-            "description": "Custom channel to retrieve.",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -670,6 +1274,36 @@
       "get": {
         "description": "List all custom channels in the specified ad client for the specified account.",
         "operationId": "adsense.accounts.customchannels.list",
+        "parameters": [
+          {
+            "description": "Account to which the ad client belongs.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Ad client for which to list custom channels.",
+            "in": "path",
+            "name": "adClientId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The maximum number of custom channels to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 10000,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through custom channels. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -678,36 +1312,77 @@
             }
           }
         },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsense",
+              "https://www.googleapis.com/auth/adsense.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/accounts/{accountId}/adclients/{adClientId}/customchannels/{customChannelId}": {
+      "get": {
+        "description": "Get the specified custom channel from the specified ad client for the specified account.",
+        "operationId": "adsense.accounts.customchannels.get",
         "parameters": [
           {
-            "name": "accountId",
-            "in": "path",
             "description": "Account to which the ad client belongs.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "adClientId",
             "in": "path",
-            "description": "Ad client for which to list custom channels.",
+            "name": "accountId",
             "required": true,
             "type": "string"
           },
           {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of custom channels to include in the response, used for paging.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 10000
+            "description": "Ad client which contains the custom channel.",
+            "in": "path",
+            "name": "adClientId",
+            "required": true,
+            "type": "string"
           },
           {
-            "name": "pageToken",
-            "in": "query",
-            "description": "A continuation token, used to page through custom channels. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "description": "Custom channel to retrieve.",
+            "in": "path",
+            "name": "customChannelId",
+            "required": true,
             "type": "string"
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/CustomChannel"
+            }
+          }
+        },
         "security": [
           {
             "Oauth2": [
@@ -748,6 +1423,49 @@
       "get": {
         "description": "List all ad units in the specified custom channel.",
         "operationId": "adsense.accounts.customchannels.adunits.list",
+        "parameters": [
+          {
+            "description": "Account to which the ad client belongs.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Ad client which contains the custom channel.",
+            "in": "path",
+            "name": "adClientId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Custom channel for which to list ad units.",
+            "in": "path",
+            "name": "customChannelId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Whether to include inactive ad units. Default: true.",
+            "in": "query",
+            "name": "includeInactive",
+            "type": "boolean"
+          },
+          {
+            "description": "The maximum number of ad units to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 10000,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through ad units. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -756,486 +1474,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "Account to which the ad client belongs.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "adClientId",
-            "in": "path",
-            "description": "Ad client which contains the custom channel.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "customChannelId",
-            "in": "path",
-            "description": "Custom channel for which to list ad units.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "includeInactive",
-            "in": "query",
-            "description": "Whether to include inactive ad units. Default: true.",
-            "type": "boolean"
-          },
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of ad units to include in the response, used for paging.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 10000
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "A continuation token, used to page through ad units. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/adsense",
-              "https://www.googleapis.com/auth/adsense.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "accounts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/accounts/{accountId}/reports": {
-      "get": {
-        "description": "Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify \"alt=csv\" as a query parameter.",
-        "operationId": "adsense.accounts.reports.generate",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AdsenseReportsGenerateResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "Account upon which to report.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "startDate",
-            "in": "query",
-            "description": "Start of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endDate",
-            "in": "query",
-            "description": "End of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "currency",
-            "in": "query",
-            "description": "Optional currency to use when reporting on monetary metrics. Defaults to the account's currency if not set.",
-            "type": "string"
-          },
-          {
-            "name": "dimension",
-            "in": "query",
-            "description": "Dimensions to base the report on.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "Filters to be run on the report.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "locale",
-            "in": "query",
-            "description": "Optional locale to use for translating report output to a local language. Defaults to \"en_US\" if not specified.",
-            "type": "string"
-          },
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of rows of report data to return.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 50000
-          },
-          {
-            "name": "metric",
-            "in": "query",
-            "description": "Numeric columns to include in the report.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "sort",
-            "in": "query",
-            "description": "The name of a dimension or metric to sort the resulting report on, optionally prefixed with \"+\" to sort ascending or \"-\" to sort descending. If no prefix is specified, the column is sorted ascending.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "startIndex",
-            "in": "query",
-            "description": "Index of the first row of report data to return.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 5000
-          },
-          {
-            "name": "useTimezoneReporting",
-            "in": "query",
-            "description": "Whether the report should be generated in the AdSense account's local timezone. If false default PST/PDT timezone will be used.",
-            "type": "boolean"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/adsense",
-              "https://www.googleapis.com/auth/adsense.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "accounts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/accounts/{accountId}/reports/{savedReportId}": {
-      "get": {
-        "description": "Generate an AdSense report based on the saved report ID sent in the query parameters.",
-        "operationId": "adsense.accounts.reports.saved.generate",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AdsenseReportsGenerateResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "Account to which the saved reports belong.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "savedReportId",
-            "in": "path",
-            "description": "The saved report to retrieve.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "locale",
-            "in": "query",
-            "description": "Optional locale to use for translating report output to a local language. Defaults to \"en_US\" if not specified.",
-            "type": "string"
-          },
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of rows of report data to return.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 50000
-          },
-          {
-            "name": "startIndex",
-            "in": "query",
-            "description": "Index of the first row of report data to return.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 5000
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/adsense",
-              "https://www.googleapis.com/auth/adsense.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "accounts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/accounts/{accountId}/reports/saved": {
-      "get": {
-        "description": "List all saved reports in the specified AdSense account.",
-        "operationId": "adsense.accounts.reports.saved.list",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/SavedReports"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "Account to which the saved reports belong.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of saved reports to include in the response, used for paging.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 100
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "A continuation token, used to page through saved reports. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/adsense",
-              "https://www.googleapis.com/auth/adsense.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "accounts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/accounts/{accountId}/savedadstyles/{savedAdStyleId}": {
-      "get": {
-        "description": "List a specific saved ad style for the specified account.",
-        "operationId": "adsense.accounts.savedadstyles.get",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/SavedAdStyle"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "Account for which to get the saved ad style.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "savedAdStyleId",
-            "in": "path",
-            "description": "Saved ad style to retrieve.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/adsense",
-              "https://www.googleapis.com/auth/adsense.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "accounts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/accounts/{accountId}/savedadstyles": {
-      "get": {
-        "description": "List all saved ad styles in the specified account.",
-        "operationId": "adsense.accounts.savedadstyles.list",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/SavedAdStyles"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "accountId",
-            "in": "path",
-            "description": "Account for which to list saved ad styles.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of saved ad styles to include in the response, used for paging.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 10000
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "A continuation token, used to page through saved ad styles. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "type": "string"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -1276,6 +1514,36 @@
       "get": {
         "description": "List all URL channels in the specified ad client for the specified account.",
         "operationId": "adsense.accounts.urlchannels.list",
+        "parameters": [
+          {
+            "description": "Account to which the ad client belongs.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Ad client for which to list URL channels.",
+            "in": "path",
+            "name": "adClientId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The maximum number of URL channels to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 10000,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through URL channels. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -1284,36 +1552,506 @@
             }
           }
         },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsense",
+              "https://www.googleapis.com/auth/adsense.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/accounts/{accountId}/alerts": {
+      "get": {
+        "description": "List the alerts for the specified AdSense account.",
+        "operationId": "adsense.accounts.alerts.list",
         "parameters": [
           {
+            "description": "Account for which to retrieve the alerts.",
+            "in": "path",
             "name": "accountId",
-            "in": "path",
-            "description": "Account to which the ad client belongs.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "adClientId",
-            "in": "path",
-            "description": "Ad client for which to list URL channels.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "maxResults",
+            "description": "The locale to use for translating alert messages. The account locale will be used if this is not supplied. The AdSense default (English) will be used if the supplied locale is invalid or unsupported.",
             "in": "query",
-            "description": "The maximum number of URL channels to include in the response, used for paging.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 10000
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "A continuation token, used to page through URL channels. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "name": "locale",
             "type": "string"
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Alerts"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsense",
+              "https://www.googleapis.com/auth/adsense.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/accounts/{accountId}/reports": {
+      "get": {
+        "description": "Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify \"alt=csv\" as a query parameter.",
+        "operationId": "adsense.accounts.reports.generate",
+        "parameters": [
+          {
+            "description": "Account upon which to report.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Start of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
+            "in": "query",
+            "name": "startDate",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "End of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
+            "in": "query",
+            "name": "endDate",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Optional currency to use when reporting on monetary metrics. Defaults to the account's currency if not set.",
+            "in": "query",
+            "name": "currency",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Dimensions to base the report on.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "dimension",
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Filters to be run on the report.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "filter",
+            "type": "array"
+          },
+          {
+            "description": "Optional locale to use for translating report output to a local language. Defaults to \"en_US\" if not specified.",
+            "in": "query",
+            "name": "locale",
+            "type": "string"
+          },
+          {
+            "description": "The maximum number of rows of report data to return.",
+            "in": "query",
+            "maximum": 50000,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Numeric columns to include in the report.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "metric",
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "The name of a dimension or metric to sort the resulting report on, optionally prefixed with \"+\" to sort ascending or \"-\" to sort descending. If no prefix is specified, the column is sorted ascending.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "sort",
+            "type": "array"
+          },
+          {
+            "description": "Index of the first row of report data to return.",
+            "in": "query",
+            "maximum": 5000,
+            "minimum": 0,
+            "name": "startIndex",
+            "type": "integer"
+          },
+          {
+            "description": "Whether the report should be generated in the AdSense account's local timezone. If false default PST/PDT timezone will be used.",
+            "in": "query",
+            "name": "useTimezoneReporting",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AdsenseReportsGenerateResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsense",
+              "https://www.googleapis.com/auth/adsense.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/accounts/{accountId}/reports/saved": {
+      "get": {
+        "description": "List all saved reports in the specified AdSense account.",
+        "operationId": "adsense.accounts.reports.saved.list",
+        "parameters": [
+          {
+            "description": "Account to which the saved reports belong.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The maximum number of saved reports to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 100,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through saved reports. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SavedReports"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsense",
+              "https://www.googleapis.com/auth/adsense.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/accounts/{accountId}/reports/{savedReportId}": {
+      "get": {
+        "description": "Generate an AdSense report based on the saved report ID sent in the query parameters.",
+        "operationId": "adsense.accounts.reports.saved.generate",
+        "parameters": [
+          {
+            "description": "Account to which the saved reports belong.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The saved report to retrieve.",
+            "in": "path",
+            "name": "savedReportId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Optional locale to use for translating report output to a local language. Defaults to \"en_US\" if not specified.",
+            "in": "query",
+            "name": "locale",
+            "type": "string"
+          },
+          {
+            "description": "The maximum number of rows of report data to return.",
+            "in": "query",
+            "maximum": 50000,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "Index of the first row of report data to return.",
+            "in": "query",
+            "maximum": 5000,
+            "minimum": 0,
+            "name": "startIndex",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AdsenseReportsGenerateResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsense",
+              "https://www.googleapis.com/auth/adsense.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/accounts/{accountId}/savedadstyles": {
+      "get": {
+        "description": "List all saved ad styles in the specified account.",
+        "operationId": "adsense.accounts.savedadstyles.list",
+        "parameters": [
+          {
+            "description": "Account for which to list saved ad styles.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The maximum number of saved ad styles to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 10000,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through saved ad styles. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SavedAdStyles"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsense",
+              "https://www.googleapis.com/auth/adsense.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/accounts/{accountId}/savedadstyles/{savedAdStyleId}": {
+      "get": {
+        "description": "List a specific saved ad style for the specified account.",
+        "operationId": "adsense.accounts.savedadstyles.get",
+        "parameters": [
+          {
+            "description": "Account for which to get the saved ad style.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Saved ad style to retrieve.",
+            "in": "path",
+            "name": "savedAdStyleId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SavedAdStyle"
+            }
+          }
+        },
         "security": [
           {
             "Oauth2": [
@@ -1354,6 +2092,22 @@
       "get": {
         "description": "List all ad clients in this AdSense account.",
         "operationId": "adsense.adclients.list",
+        "parameters": [
+          {
+            "description": "The maximum number of ad clients to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 10000,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -1362,22 +2116,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of ad clients to include in the response, used for paging.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 10000
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "A continuation token, used to page through ad clients. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "type": "string"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -1414,10 +2152,103 @@
         }
       ]
     },
+    "/adclients/{adClientId}/adunits": {
+      "get": {
+        "description": "List all ad units in the specified ad client for this AdSense account.",
+        "operationId": "adsense.adunits.list",
+        "parameters": [
+          {
+            "description": "Ad client for which to list ad units.",
+            "in": "path",
+            "name": "adClientId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Whether to include inactive ad units. Default: true.",
+            "in": "query",
+            "name": "includeInactive",
+            "type": "boolean"
+          },
+          {
+            "description": "The maximum number of ad units to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 10000,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through ad units. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AdUnits"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsense",
+              "https://www.googleapis.com/auth/adsense.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "adunits"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/adclients/{adClientId}/adunits/{adUnitId}": {
       "get": {
         "description": "Gets the specified ad unit in the specified ad client.",
         "operationId": "adsense.adunits.get",
+        "parameters": [
+          {
+            "description": "Ad client for which to get the ad unit.",
+            "in": "path",
+            "name": "adClientId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Ad unit to retrieve.",
+            "in": "path",
+            "name": "adUnitId",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -1426,22 +2257,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "adClientId",
-            "in": "path",
-            "description": "Ad client for which to get the ad unit.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "adUnitId",
-            "in": "path",
-            "description": "Ad unit to retrieve.",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -1482,6 +2297,22 @@
       "get": {
         "description": "Get ad code for the specified ad unit.",
         "operationId": "adsense.adunits.getAdCode",
+        "parameters": [
+          {
+            "description": "Ad client with contains the ad unit.",
+            "in": "path",
+            "name": "adClientId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Ad unit to get the code for.",
+            "in": "path",
+            "name": "adUnitId",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -1490,99 +2321,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "adClientId",
-            "in": "path",
-            "description": "Ad client with contains the ad unit.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "adUnitId",
-            "in": "path",
-            "description": "Ad unit to get the code for.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/adsense",
-              "https://www.googleapis.com/auth/adsense.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "adunits"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/adclients/{adClientId}/adunits": {
-      "get": {
-        "description": "List all ad units in the specified ad client for this AdSense account.",
-        "operationId": "adsense.adunits.list",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AdUnits"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "adClientId",
-            "in": "path",
-            "description": "Ad client for which to list ad units.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "includeInactive",
-            "in": "query",
-            "description": "Whether to include inactive ad units. Default: true.",
-            "type": "boolean"
-          },
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of ad units to include in the response, used for paging.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 10000
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "A continuation token, used to page through ad units. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "type": "string"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -1623,6 +2361,36 @@
       "get": {
         "description": "List all custom channels which the specified ad unit belongs to.",
         "operationId": "adsense.adunits.customchannels.list",
+        "parameters": [
+          {
+            "description": "Ad client which contains the ad unit.",
+            "in": "path",
+            "name": "adClientId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Ad unit for which to list custom channels.",
+            "in": "path",
+            "name": "adUnitId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The maximum number of custom channels to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 10000,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through custom channels. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -1631,36 +2399,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "adClientId",
-            "in": "path",
-            "description": "Ad client which contains the ad unit.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "adUnitId",
-            "in": "path",
-            "description": "Ad unit for which to list custom channels.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of custom channels to include in the response, used for paging.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 10000
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "A continuation token, used to page through custom channels. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "type": "string"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -1697,90 +2435,41 @@
         }
       ]
     },
-    "/alerts": {
+    "/adclients/{adClientId}/customchannels": {
       "get": {
-        "description": "List the alerts for this AdSense account.",
-        "operationId": "adsense.alerts.list",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Alerts"
-            }
-          }
-        },
+        "description": "List all custom channels in the specified ad client for this AdSense account.",
+        "operationId": "adsense.customchannels.list",
         "parameters": [
           {
-            "name": "locale",
-            "in": "query",
-            "description": "The locale to use for translating alert messages. The account locale will be used if this is not supplied. The AdSense default (English) will be used if the supplied locale is invalid or unsupported.",
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/adsense",
-              "https://www.googleapis.com/auth/adsense.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "alerts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/adclients/{adClientId}/customchannels/{customChannelId}": {
-      "get": {
-        "description": "Get the specified custom channel from the specified ad client.",
-        "operationId": "adsense.customchannels.get",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/CustomChannel"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "adClientId",
+            "description": "Ad client for which to list custom channels.",
             "in": "path",
-            "description": "Ad client which contains the custom channel.",
+            "name": "adClientId",
             "required": true,
             "type": "string"
           },
           {
-            "name": "customChannelId",
-            "in": "path",
-            "description": "Custom channel to retrieve.",
-            "required": true,
+            "description": "The maximum number of custom channels to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 10000,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through custom channels. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
             "type": "string"
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/CustomChannels"
+            }
+          }
+        },
         "security": [
           {
             "Oauth2": [
@@ -1817,41 +2506,34 @@
         }
       ]
     },
-    "/adclients/{adClientId}/customchannels": {
+    "/adclients/{adClientId}/customchannels/{customChannelId}": {
       "get": {
-        "description": "List all custom channels in the specified ad client for this AdSense account.",
-        "operationId": "adsense.customchannels.list",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/CustomChannels"
-            }
-          }
-        },
+        "description": "Get the specified custom channel from the specified ad client.",
+        "operationId": "adsense.customchannels.get",
         "parameters": [
           {
-            "name": "adClientId",
+            "description": "Ad client which contains the custom channel.",
             "in": "path",
-            "description": "Ad client for which to list custom channels.",
+            "name": "adClientId",
             "required": true,
             "type": "string"
           },
           {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of custom channels to include in the response, used for paging.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 10000
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "A continuation token, used to page through custom channels. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "description": "Custom channel to retrieve.",
+            "in": "path",
+            "name": "customChannelId",
+            "required": true,
             "type": "string"
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/CustomChannel"
+            }
+          }
+        },
         "security": [
           {
             "Oauth2": [
@@ -1892,6 +2574,42 @@
       "get": {
         "description": "List all ad units in the specified custom channel.",
         "operationId": "adsense.customchannels.adunits.list",
+        "parameters": [
+          {
+            "description": "Ad client which contains the custom channel.",
+            "in": "path",
+            "name": "adClientId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Custom channel for which to list ad units.",
+            "in": "path",
+            "name": "customChannelId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Whether to include inactive ad units. Default: true.",
+            "in": "query",
+            "name": "includeInactive",
+            "type": "boolean"
+          },
+          {
+            "description": "The maximum number of ad units to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 10000,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through ad units. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -1900,42 +2618,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "adClientId",
-            "in": "path",
-            "description": "Ad client which contains the custom channel.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "customChannelId",
-            "in": "path",
-            "description": "Custom channel for which to list ad units.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "includeInactive",
-            "in": "query",
-            "description": "Whether to include inactive ad units. Default: true.",
-            "type": "boolean"
-          },
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of ad units to include in the response, used for paging.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 10000
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "A continuation token, used to page through ad units. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "type": "string"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -1946,6 +2628,133 @@
         ],
         "tags": [
           "customchannels"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/adclients/{adClientId}/urlchannels": {
+      "get": {
+        "description": "List all URL channels in the specified ad client for this AdSense account.",
+        "operationId": "adsense.urlchannels.list",
+        "parameters": [
+          {
+            "description": "Ad client for which to list URL channels.",
+            "in": "path",
+            "name": "adClientId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The maximum number of URL channels to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 10000,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through URL channels. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/UrlChannels"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsense",
+              "https://www.googleapis.com/auth/adsense.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "urlchannels"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/alerts": {
+      "get": {
+        "description": "List the alerts for this AdSense account.",
+        "operationId": "adsense.alerts.list",
+        "parameters": [
+          {
+            "description": "The locale to use for translating alert messages. The account locale will be used if this is not supplied. The AdSense default (English) will be used if the supplied locale is invalid or unsupported.",
+            "in": "query",
+            "name": "locale",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Alerts"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsense",
+              "https://www.googleapis.com/auth/adsense.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "alerts"
         ]
       },
       "parameters": [
@@ -2072,154 +2881,106 @@
       "get": {
         "description": "Generate an AdSense report based on the report request sent in the query parameters. Returns the result as JSON; to retrieve output in CSV format specify \"alt=csv\" as a query parameter.",
         "operationId": "adsense.reports.generate",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AdsenseReportsGenerateResponse"
-            }
-          }
-        },
         "parameters": [
           {
-            "name": "startDate",
-            "in": "query",
             "description": "Start of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
+            "in": "query",
+            "name": "startDate",
             "required": true,
             "type": "string"
           },
           {
-            "name": "endDate",
-            "in": "query",
             "description": "End of the date range to report on in \"YYYY-MM-DD\" format, inclusive.",
+            "in": "query",
+            "name": "endDate",
             "required": true,
             "type": "string"
           },
           {
-            "name": "accountId",
-            "in": "query",
+            "collectionFormat": "multi",
             "description": "Accounts upon which to report.",
-            "type": "array",
+            "in": "query",
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi"
+            "name": "accountId",
+            "type": "array"
           },
           {
-            "name": "currency",
-            "in": "query",
             "description": "Optional currency to use when reporting on monetary metrics. Defaults to the account's currency if not set.",
+            "in": "query",
+            "name": "currency",
             "type": "string"
           },
           {
-            "name": "dimension",
-            "in": "query",
+            "collectionFormat": "multi",
             "description": "Dimensions to base the report on.",
-            "type": "array",
+            "in": "query",
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi"
+            "name": "dimension",
+            "type": "array"
           },
           {
-            "name": "filter",
-            "in": "query",
+            "collectionFormat": "multi",
             "description": "Filters to be run on the report.",
-            "type": "array",
+            "in": "query",
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi"
+            "name": "filter",
+            "type": "array"
           },
           {
-            "name": "locale",
-            "in": "query",
             "description": "Optional locale to use for translating report output to a local language. Defaults to \"en_US\" if not specified.",
+            "in": "query",
+            "name": "locale",
             "type": "string"
           },
           {
-            "name": "maxResults",
-            "in": "query",
             "description": "The maximum number of rows of report data to return.",
-            "type": "integer",
+            "in": "query",
+            "maximum": 50000,
             "minimum": 0,
-            "maximum": 50000
+            "name": "maxResults",
+            "type": "integer"
           },
           {
-            "name": "metric",
-            "in": "query",
+            "collectionFormat": "multi",
             "description": "Numeric columns to include in the report.",
-            "type": "array",
+            "in": "query",
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi"
+            "name": "metric",
+            "type": "array"
           },
           {
-            "name": "sort",
-            "in": "query",
+            "collectionFormat": "multi",
             "description": "The name of a dimension or metric to sort the resulting report on, optionally prefixed with \"+\" to sort ascending or \"-\" to sort descending. If no prefix is specified, the column is sorted ascending.",
-            "type": "array",
+            "in": "query",
             "items": {
               "type": "string"
             },
-            "collectionFormat": "multi"
+            "name": "sort",
+            "type": "array"
           },
           {
-            "name": "startIndex",
-            "in": "query",
             "description": "Index of the first row of report data to return.",
-            "type": "integer",
+            "in": "query",
+            "maximum": 5000,
             "minimum": 0,
-            "maximum": 5000
+            "name": "startIndex",
+            "type": "integer"
           },
           {
-            "name": "useTimezoneReporting",
-            "in": "query",
             "description": "Whether the report should be generated in the AdSense account's local timezone. If false default PST/PDT timezone will be used.",
+            "in": "query",
+            "name": "useTimezoneReporting",
             "type": "boolean"
           }
         ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/adsense",
-              "https://www.googleapis.com/auth/adsense.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "reports"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/reports/{savedReportId}": {
-      "get": {
-        "description": "Generate an AdSense report based on the saved report ID sent in the query parameters.",
-        "operationId": "adsense.reports.saved.generate",
         "responses": {
           "200": {
             "description": "Successful response",
@@ -2228,37 +2989,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "savedReportId",
-            "in": "path",
-            "description": "The saved report to retrieve.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "locale",
-            "in": "query",
-            "description": "Optional locale to use for translating report output to a local language. Defaults to \"en_US\" if not specified.",
-            "type": "string"
-          },
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of rows of report data to return.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 50000
-          },
-          {
-            "name": "startIndex",
-            "in": "query",
-            "description": "Index of the first row of report data to return.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 5000
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -2299,6 +3029,22 @@
       "get": {
         "description": "List all saved reports in this AdSense account.",
         "operationId": "adsense.reports.saved.list",
+        "parameters": [
+          {
+            "description": "The maximum number of saved reports to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 100,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through saved reports. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -2307,22 +3053,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of saved reports to include in the response, used for paging.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 100
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "A continuation token, used to page through saved reports. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "type": "string"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -2359,27 +3089,49 @@
         }
       ]
     },
-    "/savedadstyles/{savedAdStyleId}": {
+    "/reports/{savedReportId}": {
       "get": {
-        "description": "Get a specific saved ad style from the user's account.",
-        "operationId": "adsense.savedadstyles.get",
+        "description": "Generate an AdSense report based on the saved report ID sent in the query parameters.",
+        "operationId": "adsense.reports.saved.generate",
+        "parameters": [
+          {
+            "description": "The saved report to retrieve.",
+            "in": "path",
+            "name": "savedReportId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Optional locale to use for translating report output to a local language. Defaults to \"en_US\" if not specified.",
+            "in": "query",
+            "name": "locale",
+            "type": "string"
+          },
+          {
+            "description": "The maximum number of rows of report data to return.",
+            "in": "query",
+            "maximum": 50000,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "Index of the first row of report data to return.",
+            "in": "query",
+            "maximum": 5000,
+            "minimum": 0,
+            "name": "startIndex",
+            "type": "integer"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
             "schema": {
-              "$ref": "#/definitions/SavedAdStyle"
+              "$ref": "#/definitions/AdsenseReportsGenerateResponse"
             }
           }
         },
-        "parameters": [
-          {
-            "name": "savedAdStyleId",
-            "in": "path",
-            "description": "Saved ad style to retrieve.",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -2389,7 +3141,7 @@
           }
         ],
         "tags": [
-          "savedadstyles"
+          "reports"
         ]
       },
       "parameters": [
@@ -2420,6 +3172,22 @@
       "get": {
         "description": "List all saved ad styles in the user's account.",
         "operationId": "adsense.savedadstyles.list",
+        "parameters": [
+          {
+            "description": "The maximum number of saved ad styles to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 10000,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through saved ad styles. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -2428,22 +3196,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of saved ad styles to include in the response, used for paging.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 10000
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "A continuation token, used to page through saved ad styles. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "type": "string"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -2480,41 +3232,27 @@
         }
       ]
     },
-    "/adclients/{adClientId}/urlchannels": {
+    "/savedadstyles/{savedAdStyleId}": {
       "get": {
-        "description": "List all URL channels in the specified ad client for this AdSense account.",
-        "operationId": "adsense.urlchannels.list",
+        "description": "Get a specific saved ad style from the user's account.",
+        "operationId": "adsense.savedadstyles.get",
+        "parameters": [
+          {
+            "description": "Saved ad style to retrieve.",
+            "in": "path",
+            "name": "savedAdStyleId",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
             "schema": {
-              "$ref": "#/definitions/UrlChannels"
+              "$ref": "#/definitions/SavedAdStyle"
             }
           }
         },
-        "parameters": [
-          {
-            "name": "adClientId",
-            "in": "path",
-            "description": "Ad client for which to list URL channels.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "The maximum number of URL channels to include in the response, used for paging.",
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 10000
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "A continuation token, used to page through URL channels. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "type": "string"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -2524,7 +3262,7 @@
           }
         ],
         "tags": [
-          "urlchannels"
+          "savedadstyles"
         ]
       },
       "parameters": [
@@ -2552,758 +3290,20 @@
       ]
     }
   },
-  "definitions": {
-    "Account": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier of this account."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of resource this is, in this case adsense#account.",
-          "default": "adsense#account"
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of this account."
-        },
-        "premium": {
-          "type": "boolean",
-          "description": "Whether this account is premium."
-        },
-        "subAccounts": {
-          "type": "array",
-          "description": "Sub accounts of the this account.",
-          "items": {
-            "$ref": "#/definitions/Account"
-          }
-        }
-      }
-    },
-    "Accounts": {
-      "type": "object",
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "ETag of this response for caching purposes."
-        },
-        "items": {
-          "type": "array",
-          "description": "The accounts returned in this list response.",
-          "items": {
-            "$ref": "#/definitions/Account"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of list this is, in this case adsense#accounts.",
-          "default": "adsense#accounts"
-        },
-        "nextPageToken": {
-          "type": "string",
-          "description": "Continuation token used to page through accounts. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
-        }
-      }
-    },
-    "AdClient": {
-      "type": "object",
-      "properties": {
-        "arcOptIn": {
-          "type": "boolean",
-          "description": "Whether this ad client is opted in to ARC."
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique identifier of this ad client."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of resource this is, in this case adsense#adClient.",
-          "default": "adsense#adClient"
-        },
-        "productCode": {
-          "type": "string",
-          "description": "This ad client's product code, which corresponds to the PRODUCT_CODE report dimension."
-        },
-        "supportsReporting": {
-          "type": "boolean",
-          "description": "Whether this ad client supports being reported on."
-        }
-      }
-    },
-    "AdClients": {
-      "type": "object",
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "ETag of this response for caching purposes."
-        },
-        "items": {
-          "type": "array",
-          "description": "The ad clients returned in this list response.",
-          "items": {
-            "$ref": "#/definitions/AdClient"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of list this is, in this case adsense#adClients.",
-          "default": "adsense#adClients"
-        },
-        "nextPageToken": {
-          "type": "string",
-          "description": "Continuation token used to page through ad clients. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
-        }
-      }
-    },
-    "AdCode": {
-      "type": "object",
-      "properties": {
-        "adCode": {
-          "type": "string",
-          "description": "The ad code snippet."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind this is, in this case adsense#adCode.",
-          "default": "adsense#adCode"
-        }
-      }
-    },
-    "AdStyle": {
-      "type": "object",
-      "properties": {
-        "colors": {
-          "type": "object",
-          "description": "The colors which are included in the style. These are represented as six hexadecimal characters, similar to HTML color codes, but without the leading hash.",
-          "properties": {
-            "background": {
-              "type": "string",
-              "description": "The color of the ad background."
-            },
-            "border": {
-              "type": "string",
-              "description": "The color of the ad border."
-            },
-            "text": {
-              "type": "string",
-              "description": "The color of the ad text."
-            },
-            "title": {
-              "type": "string",
-              "description": "The color of the ad title."
-            },
-            "url": {
-              "type": "string",
-              "description": "The color of the ad url."
-            }
-          }
-        },
-        "corners": {
-          "type": "string",
-          "description": "The style of the corners in the ad."
-        },
-        "font": {
-          "type": "object",
-          "description": "The font which is included in the style.",
-          "properties": {
-            "family": {
-              "type": "string",
-              "description": "The family of the font."
-            },
-            "size": {
-              "type": "string",
-              "description": "The size of the font."
-            }
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind this is, in this case adsense#adStyle.",
-          "default": "adsense#adStyle"
-        }
-      }
-    },
-    "AdUnit": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Identity code of this ad unit, not necessarily unique across ad clients."
-        },
-        "contentAdsSettings": {
-          "type": "object",
-          "description": "Settings specific to content ads (AFC) and highend mobile content ads (AFMC).",
-          "properties": {
-            "backupOption": {
-              "type": "object",
-              "description": "The backup option to be used in instances where no ad is available.",
-              "properties": {
-                "color": {
-                  "type": "string",
-                  "description": "Color to use when type is set to COLOR."
-                },
-                "type": {
-                  "type": "string",
-                  "description": "Type of the backup option. Possible values are BLANK, COLOR and URL."
-                },
-                "url": {
-                  "type": "string",
-                  "description": "URL to use when type is set to URL."
-                }
-              }
-            },
-            "size": {
-              "type": "string",
-              "description": "Size of this ad unit."
-            },
-            "type": {
-              "type": "string",
-              "description": "Type of this ad unit."
-            }
-          }
-        },
-        "customStyle": {
-          "$ref": "#/definitions/AdStyle",
-          "description": "Custom style information specific to this ad unit."
-        },
-        "feedAdsSettings": {
-          "type": "object",
-          "description": "Settings specific to feed ads (AFF).",
-          "properties": {
-            "adPosition": {
-              "type": "string",
-              "description": "The position of the ads relative to the feed entries."
-            },
-            "frequency": {
-              "type": "integer",
-              "description": "The frequency at which ads should appear in the feed (i.e. every N entries).",
-              "format": "int32"
-            },
-            "minimumWordCount": {
-              "type": "integer",
-              "description": "The minimum length an entry should be in order to have attached ads.",
-              "format": "int32"
-            },
-            "type": {
-              "type": "string",
-              "description": "The type of ads which should appear."
-            }
-          }
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique identifier of this ad unit. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of resource this is, in this case adsense#adUnit.",
-          "default": "adsense#adUnit"
-        },
-        "mobileContentAdsSettings": {
-          "type": "object",
-          "description": "Settings specific to WAP mobile content ads (AFMC).",
-          "properties": {
-            "markupLanguage": {
-              "type": "string",
-              "description": "The markup language to use for this ad unit."
-            },
-            "scriptingLanguage": {
-              "type": "string",
-              "description": "The scripting language to use for this ad unit."
-            },
-            "size": {
-              "type": "string",
-              "description": "Size of this ad unit."
-            },
-            "type": {
-              "type": "string",
-              "description": "Type of this ad unit."
-            }
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of this ad unit."
-        },
-        "savedStyleId": {
-          "type": "string",
-          "description": "ID of the saved ad style which holds this ad unit's style information."
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of this ad unit. Possible values are:\nNEW: Indicates that the ad unit was created within the last seven days and does not yet have any activity associated with it.\n\nACTIVE: Indicates that there has been activity on this ad unit in the last seven days.\n\nINACTIVE: Indicates that there has been no activity on this ad unit in the last seven days."
-        }
-      }
-    },
-    "AdUnits": {
-      "type": "object",
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "ETag of this response for caching purposes."
-        },
-        "items": {
-          "type": "array",
-          "description": "The ad units returned in this list response.",
-          "items": {
-            "$ref": "#/definitions/AdUnit"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of list this is, in this case adsense#adUnits.",
-          "default": "adsense#adUnits"
-        },
-        "nextPageToken": {
-          "type": "string",
-          "description": "Continuation token used to page through ad units. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
-        }
-      }
-    },
-    "AdsenseReportsGenerateResponse": {
-      "type": "object",
-      "properties": {
-        "averages": {
-          "type": "array",
-          "description": "The averages of the report. This is the same length as any other row in the report; cells corresponding to dimension columns are empty.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "headers": {
-          "type": "array",
-          "description": "The header information of the columns requested in the report. This is a list of headers; one for each dimension in the request, followed by one for each metric in the request.",
-          "items": {
-            "type": "object",
-            "properties": {
-              "currency": {
-                "type": "string",
-                "description": "The currency of this column. Only present if the header type is METRIC_CURRENCY."
-              },
-              "name": {
-                "type": "string",
-                "description": "The name of the header."
-              },
-              "type": {
-                "type": "string",
-                "description": "The type of the header; one of DIMENSION, METRIC_TALLY, METRIC_RATIO, or METRIC_CURRENCY."
-              }
-            }
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind this is, in this case adsense#report.",
-          "default": "adsense#report"
-        },
-        "rows": {
-          "type": "array",
-          "description": "The output rows of the report. Each row is a list of cells; one for each dimension in the request, followed by one for each metric in the request. The dimension cells contain strings, and the metric cells contain numbers.",
-          "items": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        },
-        "totalMatchedRows": {
-          "type": "string",
-          "description": "The total number of rows matched by the report request. Fewer rows may be returned in the response due to being limited by the row count requested or the report row limit.",
-          "format": "int64"
-        },
-        "totals": {
-          "type": "array",
-          "description": "The totals of the report. This is the same length as any other row in the report; cells corresponding to dimension columns are empty.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Any warnings associated with generation of the report.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "Alert": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier of this alert. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of resource this is, in this case adsense#alert.",
-          "default": "adsense#alert"
-        },
-        "message": {
-          "type": "string",
-          "description": "The localized alert message."
-        },
-        "severity": {
-          "type": "string",
-          "description": "Severity of this alert. Possible values: INFO, WARNING, SEVERE."
-        },
-        "type": {
-          "type": "string",
-          "description": "Type of this alert. Possible values: SELF_HOLD, MIGRATED_TO_BILLING3, ADDRESS_PIN_VERIFICATION, PHONE_PIN_VERIFICATION, CORPORATE_ENTITY, GRAYLISTED_PUBLISHER, API_HOLD."
-        }
-      }
-    },
-    "Alerts": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "description": "The alerts returned in this list response.",
-          "items": {
-            "$ref": "#/definitions/Alert"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of list this is, in this case adsense#alerts.",
-          "default": "adsense#alerts"
-        }
-      }
-    },
-    "CustomChannel": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Code of this custom channel, not necessarily unique across ad clients."
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique identifier of this custom channel. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of resource this is, in this case adsense#customChannel.",
-          "default": "adsense#customChannel"
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of this custom channel."
-        },
-        "targetingInfo": {
-          "type": "object",
-          "description": "The targeting information of this custom channel, if activated.",
-          "properties": {
-            "adsAppearOn": {
-              "type": "string",
-              "description": "The name used to describe this channel externally."
-            },
-            "description": {
-              "type": "string",
-              "description": "The external description of the channel."
-            },
-            "location": {
-              "type": "string",
-              "description": "The locations in which ads appear. (Only valid for content and mobile content ads). Acceptable values for content ads are: TOP_LEFT, TOP_CENTER, TOP_RIGHT, MIDDLE_LEFT, MIDDLE_CENTER, MIDDLE_RIGHT, BOTTOM_LEFT, BOTTOM_CENTER, BOTTOM_RIGHT, MULTIPLE_LOCATIONS. Acceptable values for mobile content ads are: TOP, MIDDLE, BOTTOM, MULTIPLE_LOCATIONS."
-            },
-            "siteLanguage": {
-              "type": "string",
-              "description": "The language of the sites ads will be displayed on."
-            }
-          }
-        }
-      }
-    },
-    "CustomChannels": {
-      "type": "object",
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "ETag of this response for caching purposes."
-        },
-        "items": {
-          "type": "array",
-          "description": "The custom channels returned in this list response.",
-          "items": {
-            "$ref": "#/definitions/CustomChannel"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of list this is, in this case adsense#customChannels.",
-          "default": "adsense#customChannels"
-        },
-        "nextPageToken": {
-          "type": "string",
-          "description": "Continuation token used to page through custom channels. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
-        }
-      }
-    },
-    "Metadata": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ReportingMetadataEntry"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of list this is, in this case adsense#metadata.",
-          "default": "adsense#metadata"
-        }
-      }
-    },
-    "ReportingMetadataEntry": {
-      "type": "object",
-      "properties": {
-        "compatibleDimensions": {
-          "type": "array",
-          "description": "For metrics this is a list of dimension IDs which the metric is compatible with, for dimensions it is a list of compatibility groups the dimension belongs to.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "compatibleMetrics": {
-          "type": "array",
-          "description": "The names of the metrics the dimension or metric this reporting metadata entry describes is compatible with.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique identifier of this reporting metadata entry, corresponding to the name of the appropriate dimension or metric."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of resource this is, in this case adsense#reportingMetadataEntry.",
-          "default": "adsense#reportingMetadataEntry"
-        },
-        "requiredDimensions": {
-          "type": "array",
-          "description": "The names of the dimensions which the dimension or metric this reporting metadata entry describes requires to also be present in order for the report to be valid. Omitting these will not cause an error or warning, but may result in data which cannot be correctly interpreted.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "requiredMetrics": {
-          "type": "array",
-          "description": "The names of the metrics which the dimension or metric this reporting metadata entry describes requires to also be present in order for the report to be valid. Omitting these will not cause an error or warning, but may result in data which cannot be correctly interpreted.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "supportedProducts": {
-          "type": "array",
-          "description": "The codes of the projects supported by the dimension or metric this reporting metadata entry describes.",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "SavedAdStyle": {
-      "type": "object",
-      "properties": {
-        "adStyle": {
-          "$ref": "#/definitions/AdStyle",
-          "description": "The AdStyle itself."
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique identifier of this saved ad style. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of resource this is, in this case adsense#savedAdStyle.",
-          "default": "adsense#savedAdStyle"
-        },
-        "name": {
-          "type": "string",
-          "description": "The user selected name of this SavedAdStyle."
-        }
-      }
-    },
-    "SavedAdStyles": {
-      "type": "object",
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "ETag of this response for caching purposes."
-        },
-        "items": {
-          "type": "array",
-          "description": "The saved ad styles returned in this list response.",
-          "items": {
-            "$ref": "#/definitions/SavedAdStyle"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of list this is, in this case adsense#savedAdStyles.",
-          "default": "adsense#savedAdStyles"
-        },
-        "nextPageToken": {
-          "type": "string",
-          "description": "Continuation token used to page through ad units. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
-        }
-      }
-    },
-    "SavedReport": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier of this saved report."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of resource this is, in this case adsense#savedReport.",
-          "default": "adsense#savedReport"
-        },
-        "name": {
-          "type": "string",
-          "description": "This saved report's name."
-        }
-      }
-    },
-    "SavedReports": {
-      "type": "object",
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "ETag of this response for caching purposes."
-        },
-        "items": {
-          "type": "array",
-          "description": "The saved reports returned in this list response.",
-          "items": {
-            "$ref": "#/definitions/SavedReport"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of list this is, in this case adsense#savedReports.",
-          "default": "adsense#savedReports"
-        },
-        "nextPageToken": {
-          "type": "string",
-          "description": "Continuation token used to page through saved reports. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
-        }
-      }
-    },
-    "UrlChannel": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier of this URL channel. This should be considered an opaque identifier; it is not safe to rely on it being in any particular format."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of resource this is, in this case adsense#urlChannel.",
-          "default": "adsense#urlChannel"
-        },
-        "urlPattern": {
-          "type": "string",
-          "description": "URL Pattern of this URL channel. Does not include \"http://\" or \"https://\". Example: www.example.com/home"
-        }
-      }
-    },
-    "UrlChannels": {
-      "type": "object",
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "ETag of this response for caching purposes."
-        },
-        "items": {
-          "type": "array",
-          "description": "The URL channels returned in this list response.",
-          "items": {
-            "$ref": "#/definitions/UrlChannel"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of list this is, in this case adsense#urlChannels.",
-          "default": "adsense#urlChannels"
-        },
-        "nextPageToken": {
-          "type": "string",
-          "description": "Continuation token used to page through URL channels. To retrieve the next page of results, set the next request's \"pageToken\" value to this."
-        }
-      }
-    }
-  },
-  "parameters": {
-    "alt": {
-      "name": "alt",
-      "in": "query",
-      "description": "Data format for the response.",
-      "default": "json",
-      "type": "string",
-      "enum": [
-        "csv",
-        "json"
-      ]
-    },
-    "fields": {
-      "name": "fields",
-      "in": "query",
-      "description": "Selector specifying which fields to include in a partial response.",
-      "type": "string"
-    },
-    "key": {
-      "name": "key",
-      "in": "query",
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "type": "string"
-    },
-    "oauth_token": {
-      "name": "oauth_token",
-      "in": "query",
-      "description": "OAuth 2.0 token for the current user.",
-      "type": "string"
-    },
-    "prettyPrint": {
-      "name": "prettyPrint",
-      "in": "query",
-      "description": "Returns response with indentations and line breaks.",
-      "default": true,
-      "type": "boolean"
-    },
-    "quotaUser": {
-      "name": "quotaUser",
-      "in": "query",
-      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
-      "type": "string"
-    },
-    "userIp": {
-      "name": "userIp",
-      "in": "query",
-      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
-      "type": "string"
-    }
-  },
+  "schemes": [
+    "https"
+  ],
   "securityDefinitions": {
     "Oauth2": {
-      "type": "oauth2",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
       "description": "Oauth 2.0 authentication",
       "flow": "implicit",
-      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
       "scopes": {
         "https://www.googleapis.com/auth/adsense": "View and manage your AdSense data",
         "https://www.googleapis.com/auth/adsense.readonly": "View your AdSense data"
-      }
+      },
+      "type": "oauth2"
     }
   },
-  "externalDocs": {
-    "url": "https://developers.google.com/adsense/management/"
-  }
+  "swagger": "2.0"
 }

@@ -1,57 +1,181 @@
 {
-  "swagger": "2.0",
+  "basePath": "/appstate/v1",
+  "definitions": {
+    "GetResponse": {
+      "description": "This is a JSON template for an app state resource.",
+      "properties": {
+        "currentStateVersion": {
+          "description": "The current app state version.",
+          "type": "string"
+        },
+        "data": {
+          "description": "The requested data.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "appstate#getResponse",
+          "description": "Uniquely identifies the type of this resource. Value is always the fixed string appstate#getResponse.",
+          "type": "string"
+        },
+        "stateKey": {
+          "description": "The key for the data.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ListResponse": {
+      "description": "This is a JSON template to convert a list-response for app state.",
+      "properties": {
+        "items": {
+          "description": "The app state data.",
+          "items": {
+            "$ref": "#/definitions/GetResponse"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "appstate#listResponse",
+          "description": "Uniquely identifies the type of this resource. Value is always the fixed string appstate#listResponse.",
+          "type": "string"
+        },
+        "maximumKeyCount": {
+          "description": "The maximum number of keys allowed for this user.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "UpdateRequest": {
+      "description": "This is a JSON template for a requests which update app state",
+      "properties": {
+        "data": {
+          "description": "The new app state data that your application is trying to update with.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "appstate#updateRequest",
+          "description": "Uniquely identifies the type of this resource. Value is always the fixed string appstate#updateRequest.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WriteResult": {
+      "description": "This is a JSON template for an app state write result.",
+      "properties": {
+        "currentStateVersion": {
+          "description": "The version of the data for this key on the server.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "appstate#writeResult",
+          "description": "Uniquely identifies the type of this resource. Value is always the fixed string appstate#writeResult.",
+          "type": "string"
+        },
+        "stateKey": {
+          "description": "The written key.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/games/services/web/api/states"
+  },
+  "host": "www.googleapis.com",
   "info": {
-    "title": "Google App State API",
-    "x-serviceName": "appstate",
-    "description": "The Google App State API.",
     "contact": {
       "name": "Google",
       "url": "https://google.com"
     },
+    "description": "The Google App State API.",
+    "title": "Google App State API",
     "version": "v1",
-    "x-providerName": "googleapis.com",
+    "x-logo": "https://www.google.com/images/srpr/logo11w.png",
     "x-origin": {
       "format": "google",
-      "version": "v1",
-      "url": "https://www.googleapis.com/discovery/v1/apis/appstate/v1/rest"
+      "url": "https://www.googleapis.com/discovery/v1/apis/appstate/v1/rest",
+      "version": "v1"
     },
-    "x-logo": "https://www.google.com/images/srpr/logo11w.png"
+    "x-providerName": "googleapis.com",
+    "x-serviceName": "appstate"
   },
-  "host": "www.googleapis.com",
-  "basePath": "/appstate/v1",
-  "schemes": [
-    "https"
-  ],
+  "parameters": {
+    "alt": {
+      "default": "json",
+      "description": "Data format for the response.",
+      "enum": [
+        "json"
+      ],
+      "in": "query",
+      "name": "alt",
+      "type": "string"
+    },
+    "fields": {
+      "description": "Selector specifying which fields to include in a partial response.",
+      "in": "query",
+      "name": "fields",
+      "type": "string"
+    },
+    "key": {
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "in": "query",
+      "name": "key",
+      "type": "string"
+    },
+    "oauth_token": {
+      "description": "OAuth 2.0 token for the current user.",
+      "in": "query",
+      "name": "oauth_token",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "default": true,
+      "description": "Returns response with indentations and line breaks.",
+      "in": "query",
+      "name": "prettyPrint",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "in": "query",
+      "name": "quotaUser",
+      "type": "string"
+    },
+    "userIp": {
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "in": "query",
+      "name": "userIp",
+      "type": "string"
+    }
+  },
   "paths": {
-    "/states/{stateKey}/clear": {
-      "post": {
-        "description": "Clears (sets to empty) the data for the passed key if and only if the passed version matches the currently stored version. This method results in a conflict error on version mismatch.",
-        "operationId": "appstate.states.clear",
+    "/states": {
+      "get": {
+        "description": "Lists all the states keys, and optionally the state data.",
+        "operationId": "appstate.states.list",
+        "parameters": [
+          {
+            "default": false,
+            "description": "Whether to include the full data in addition to the version number",
+            "in": "query",
+            "name": "includeData",
+            "type": "boolean"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
             "schema": {
-              "$ref": "#/definitions/WriteResult"
+              "$ref": "#/definitions/ListResponse"
             }
           }
         },
-        "parameters": [
-          {
-            "name": "stateKey",
-            "in": "path",
-            "description": "The key for the data to be retrieved.",
-            "required": true,
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 3
-          },
-          {
-            "name": "currentDataVersion",
-            "in": "query",
-            "description": "The version of the data to be cleared. Version strings are returned by the server.",
-            "type": "string"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -91,22 +215,22 @@
       "delete": {
         "description": "Deletes a key and the data associated with it. The key is removed and no longer counts against the key quota. Note that since this method is not safe in the face of concurrent modifications, it should only be used for development and testing purposes. Invoking this method in shipping code can result in data loss and data corruption.",
         "operationId": "appstate.states.delete",
+        "parameters": [
+          {
+            "description": "The key for the data to be retrieved.",
+            "in": "path",
+            "maximum": 3,
+            "minimum": 0,
+            "name": "stateKey",
+            "required": true,
+            "type": "integer"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response"
           }
         },
-        "parameters": [
-          {
-            "name": "stateKey",
-            "in": "path",
-            "description": "The key for the data to be retrieved.",
-            "required": true,
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 3
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -121,6 +245,17 @@
       "get": {
         "description": "Retrieves the data corresponding to the passed key. If the key does not exist on the server, an HTTP 404 will be returned.",
         "operationId": "appstate.states.get",
+        "parameters": [
+          {
+            "description": "The key for the data to be retrieved.",
+            "in": "path",
+            "maximum": 3,
+            "minimum": 0,
+            "name": "stateKey",
+            "required": true,
+            "type": "integer"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -129,17 +264,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "stateKey",
-            "in": "path",
-            "description": "The key for the data to be retrieved.",
-            "required": true,
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 3
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -151,9 +275,56 @@
           "states"
         ]
       },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
       "put": {
         "description": "Update the data associated with the input key if and only if the passed version matches the currently stored version. This method is safe in the face of concurrent writes. Maximum per-key size is 128KB.",
         "operationId": "appstate.states.update",
+        "parameters": [
+          {
+            "description": "The key for the data to be retrieved.",
+            "in": "path",
+            "maximum": 3,
+            "minimum": 0,
+            "name": "stateKey",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The version of the app state your application is attempting to update. If this does not match the current version, this method will return a conflict error. If there is no data stored on the server for this key, the update will succeed irrespective of the value of this parameter.",
+            "in": "query",
+            "name": "currentStateVersion",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -162,30 +333,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "stateKey",
-            "in": "path",
-            "description": "The key for the data to be retrieved.",
-            "required": true,
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 3
-          },
-          {
-            "name": "currentStateVersion",
-            "in": "query",
-            "description": "The version of the app state your application is attempting to update. If this does not match the current version, this method will return a conflict error. If there is no data stored on the server for this key, the update will succeed irrespective of the value of this parameter.",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/UpdateRequest"
-            }
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -196,7 +343,9 @@
         "tags": [
           "states"
         ]
-      },
+      }
+    },
+    "/states/{stateKey}/clear": {
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -219,29 +368,35 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ]
-    },
-    "/states": {
-      "get": {
-        "description": "Lists all the states keys, and optionally the state data.",
-        "operationId": "appstate.states.list",
+      ],
+      "post": {
+        "description": "Clears (sets to empty) the data for the passed key if and only if the passed version matches the currently stored version. This method results in a conflict error on version mismatch.",
+        "operationId": "appstate.states.clear",
+        "parameters": [
+          {
+            "description": "The key for the data to be retrieved.",
+            "in": "path",
+            "maximum": 3,
+            "minimum": 0,
+            "name": "stateKey",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The version of the data to be cleared. Version strings are returned by the server.",
+            "in": "query",
+            "name": "currentDataVersion",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
             "schema": {
-              "$ref": "#/definitions/ListResponse"
+              "$ref": "#/definitions/WriteResult"
             }
           }
         },
-        "parameters": [
-          {
-            "name": "includeData",
-            "in": "query",
-            "description": "Whether to include the full data in addition to the version number",
-            "default": false,
-            "type": "boolean"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -252,177 +407,22 @@
         "tags": [
           "states"
         ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    }
-  },
-  "definitions": {
-    "GetResponse": {
-      "type": "object",
-      "description": "This is a JSON template for an app state resource.",
-      "properties": {
-        "currentStateVersion": {
-          "type": "string",
-          "description": "The current app state version."
-        },
-        "data": {
-          "type": "string",
-          "description": "The requested data."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Uniquely identifies the type of this resource. Value is always the fixed string appstate#getResponse.",
-          "default": "appstate#getResponse"
-        },
-        "stateKey": {
-          "type": "integer",
-          "description": "The key for the data.",
-          "format": "int32"
-        }
-      }
-    },
-    "ListResponse": {
-      "type": "object",
-      "description": "This is a JSON template to convert a list-response for app state.",
-      "properties": {
-        "items": {
-          "type": "array",
-          "description": "The app state data.",
-          "items": {
-            "$ref": "#/definitions/GetResponse"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "Uniquely identifies the type of this resource. Value is always the fixed string appstate#listResponse.",
-          "default": "appstate#listResponse"
-        },
-        "maximumKeyCount": {
-          "type": "integer",
-          "description": "The maximum number of keys allowed for this user.",
-          "format": "int32"
-        }
-      }
-    },
-    "UpdateRequest": {
-      "type": "object",
-      "description": "This is a JSON template for a requests which update app state",
-      "properties": {
-        "data": {
-          "type": "string",
-          "description": "The new app state data that your application is trying to update with."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Uniquely identifies the type of this resource. Value is always the fixed string appstate#updateRequest.",
-          "default": "appstate#updateRequest"
-        }
-      }
-    },
-    "WriteResult": {
-      "type": "object",
-      "description": "This is a JSON template for an app state write result.",
-      "properties": {
-        "currentStateVersion": {
-          "type": "string",
-          "description": "The version of the data for this key on the server."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Uniquely identifies the type of this resource. Value is always the fixed string appstate#writeResult.",
-          "default": "appstate#writeResult"
-        },
-        "stateKey": {
-          "type": "integer",
-          "description": "The written key.",
-          "format": "int32"
-        }
       }
     }
   },
-  "parameters": {
-    "alt": {
-      "name": "alt",
-      "in": "query",
-      "description": "Data format for the response.",
-      "default": "json",
-      "type": "string",
-      "enum": [
-        "json"
-      ]
-    },
-    "fields": {
-      "name": "fields",
-      "in": "query",
-      "description": "Selector specifying which fields to include in a partial response.",
-      "type": "string"
-    },
-    "key": {
-      "name": "key",
-      "in": "query",
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "type": "string"
-    },
-    "oauth_token": {
-      "name": "oauth_token",
-      "in": "query",
-      "description": "OAuth 2.0 token for the current user.",
-      "type": "string"
-    },
-    "prettyPrint": {
-      "name": "prettyPrint",
-      "in": "query",
-      "description": "Returns response with indentations and line breaks.",
-      "default": true,
-      "type": "boolean"
-    },
-    "quotaUser": {
-      "name": "quotaUser",
-      "in": "query",
-      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
-      "type": "string"
-    },
-    "userIp": {
-      "name": "userIp",
-      "in": "query",
-      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
-      "type": "string"
-    }
-  },
+  "schemes": [
+    "https"
+  ],
   "securityDefinitions": {
     "Oauth2": {
-      "type": "oauth2",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
       "description": "Oauth 2.0 authentication",
       "flow": "implicit",
-      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
       "scopes": {
         "https://www.googleapis.com/auth/appstate": "View and manage your data for this application"
-      }
+      },
+      "type": "oauth2"
     }
   },
-  "externalDocs": {
-    "url": "https://developers.google.com/games/services/web/api/states"
-  }
+  "swagger": "2.0"
 }

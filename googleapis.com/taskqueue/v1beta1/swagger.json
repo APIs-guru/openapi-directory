@@ -1,32 +1,242 @@
 {
-  "swagger": "2.0",
+  "basePath": "/taskqueue/v1beta1/projects",
+  "definitions": {
+    "Task": {
+      "properties": {
+        "enqueueTimestamp": {
+          "description": "Time (in seconds since the epoch) at which the task was enqueued.",
+          "format": "int64",
+          "type": "string"
+        },
+        "id": {
+          "description": "Name of the task.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "taskqueues#task",
+          "description": "The kind of object returned, in this case set to task.",
+          "type": "string"
+        },
+        "leaseTimestamp": {
+          "description": "Time (in seconds since the epoch) at which the task lease will expire. This value is 0 if the task isnt currently leased out to a worker.",
+          "format": "int64",
+          "type": "string"
+        },
+        "payloadBase64": {
+          "description": "A bag of bytes which is the task payload. The payload on the JSON side is always Base64 encoded.",
+          "type": "string"
+        },
+        "queueName": {
+          "description": "Name of the queue that the task is in.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TaskQueue": {
+      "properties": {
+        "acl": {
+          "description": "ACLs that are applicable to this TaskQueue object.",
+          "properties": {
+            "adminEmails": {
+              "description": "Email addresses of users who are \"admins\" of the TaskQueue. This means they can control the queue, eg set ACLs for the queue.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "consumerEmails": {
+              "description": "Email addresses of users who can \"consume\" tasks from the TaskQueue. This means they can Dequeue and Delete tasks from the queue.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "producerEmails": {
+              "description": "Email addresses of users who can \"produce\" tasks into the TaskQueue. This means they can Insert tasks into the queue.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "id": {
+          "description": "Name of the taskqueue.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "taskqueues#taskqueue",
+          "description": "The kind of REST object returned, in this case taskqueue.",
+          "type": "string"
+        },
+        "maxLeases": {
+          "description": "The number of times we should lease out tasks before giving up on them. If unset we lease them out forever until a worker deletes the task.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "stats": {
+          "description": "Statistics for the TaskQueue object in question.",
+          "properties": {
+            "leasedLastHour": {
+              "description": "Number of tasks leased in the last hour.",
+              "format": "int64",
+              "type": "string"
+            },
+            "leasedLastMinute": {
+              "description": "Number of tasks leased in the last minute.",
+              "format": "int64",
+              "type": "string"
+            },
+            "oldestTask": {
+              "description": "The timestamp (in seconds since the epoch) of the oldest unfinished task.",
+              "format": "int64",
+              "type": "string"
+            },
+            "totalTasks": {
+              "description": "Number of tasks in the queue.",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "Tasks": {
+      "properties": {
+        "items": {
+          "description": "The actual list of tasks returned as a result of the lease operation.",
+          "items": {
+            "$ref": "#/definitions/Task"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "taskqueue#tasks",
+          "description": "The kind of object returned, a list of tasks.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Tasks2": {
+      "properties": {
+        "items": {
+          "description": "The actual list of tasks currently active in the TaskQueue.",
+          "items": {
+            "$ref": "#/definitions/Task"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "taskqueues#tasks",
+          "description": "The kind of object returned, a list of tasks.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/appengine/docs/python/taskqueue/rest"
+  },
+  "host": "www.googleapis.com",
   "info": {
-    "title": "TaskQueue API",
-    "x-serviceName": "taskqueue",
-    "description": "Lets you access a Google App Engine Pull Task Queue over REST.",
     "contact": {
       "name": "Google",
       "url": "https://google.com"
     },
+    "description": "Lets you access a Google App Engine Pull Task Queue over REST.",
+    "title": "TaskQueue API",
     "version": "v1beta1",
-    "x-providerName": "googleapis.com",
+    "x-logo": "https://www.google.com/images/srpr/logo11w.png",
     "x-origin": {
       "format": "google",
-      "version": "v1",
-      "url": "https://www.googleapis.com/discovery/v1/apis/taskqueue/v1beta1/rest"
+      "url": "https://www.googleapis.com/discovery/v1/apis/taskqueue/v1beta1/rest",
+      "version": "v1"
     },
-    "x-logo": "https://www.google.com/images/srpr/logo11w.png"
+    "x-providerName": "googleapis.com",
+    "x-serviceName": "taskqueue"
   },
-  "host": "www.googleapis.com",
-  "basePath": "/taskqueue/v1beta1/projects",
-  "schemes": [
-    "https"
-  ],
+  "parameters": {
+    "alt": {
+      "default": "json",
+      "description": "Data format for the response.",
+      "enum": [
+        "json"
+      ],
+      "in": "query",
+      "name": "alt",
+      "type": "string"
+    },
+    "fields": {
+      "description": "Selector specifying which fields to include in a partial response.",
+      "in": "query",
+      "name": "fields",
+      "type": "string"
+    },
+    "key": {
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "in": "query",
+      "name": "key",
+      "type": "string"
+    },
+    "oauth_token": {
+      "description": "OAuth 2.0 token for the current user.",
+      "in": "query",
+      "name": "oauth_token",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "default": true,
+      "description": "Returns response with indentations and line breaks.",
+      "in": "query",
+      "name": "prettyPrint",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "in": "query",
+      "name": "quotaUser",
+      "type": "string"
+    },
+    "userIp": {
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "in": "query",
+      "name": "userIp",
+      "type": "string"
+    }
+  },
   "paths": {
     "/{project}/taskqueues/{taskqueue}": {
       "get": {
         "description": "Get detailed information about a TaskQueue.",
         "operationId": "taskqueue.taskqueues.get",
+        "parameters": [
+          {
+            "description": "The project under which the queue lies.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The id of the taskqueue to get the properties of.",
+            "in": "path",
+            "name": "taskqueue",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Whether to get stats. Optional.",
+            "in": "query",
+            "name": "getStats",
+            "type": "boolean"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -35,28 +245,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "project",
-            "in": "path",
-            "description": "The project under which the queue lies.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "taskqueue",
-            "in": "path",
-            "description": "The id of the taskqueue to get the properties of.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "getStats",
-            "in": "query",
-            "description": "Whether to get stats. Optional.",
-            "type": "boolean"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -93,84 +281,34 @@
         }
       ]
     },
-    "/{project}/taskqueues/{taskqueue}/tasks/{task}": {
-      "delete": {
-        "description": "Delete a task from a TaskQueue.",
-        "operationId": "taskqueue.tasks.delete",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
+    "/{project}/taskqueues/{taskqueue}/tasks": {
+      "get": {
+        "description": "List Tasks in a TaskQueue",
+        "operationId": "taskqueue.tasks.list",
         "parameters": [
           {
-            "name": "project",
-            "in": "path",
             "description": "The project under which the queue lies.",
+            "in": "path",
+            "name": "project",
             "required": true,
             "type": "string"
           },
           {
+            "description": "The id of the taskqueue to list tasks from.",
+            "in": "path",
             "name": "taskqueue",
-            "in": "path",
-            "description": "The taskqueue to delete a task from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "task",
-            "in": "path",
-            "description": "The id of the task to delete.",
             "required": true,
             "type": "string"
           }
         ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/taskqueue",
-              "https://www.googleapis.com/auth/taskqueue.consumer"
-            ]
-          }
-        ],
-        "tags": [
-          "tasks"
-        ]
-      },
-      "get": {
-        "description": "Get a particular task from a TaskQueue.",
-        "operationId": "taskqueue.tasks.get",
         "responses": {
           "200": {
             "description": "Successful response",
             "schema": {
-              "$ref": "#/definitions/Task"
+              "$ref": "#/definitions/Tasks2"
             }
           }
         },
-        "parameters": [
-          {
-            "name": "project",
-            "in": "path",
-            "description": "The project under which the queue lies.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "taskqueue",
-            "in": "path",
-            "description": "The taskqueue in which the task belongs.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "task",
-            "in": "path",
-            "description": "The task to get properties of.",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -208,9 +346,62 @@
       ]
     },
     "/{project}/taskqueues/{taskqueue}/tasks/lease": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
       "post": {
         "description": "Lease 1 or more tasks from a TaskQueue.",
         "operationId": "taskqueue.tasks.lease",
+        "parameters": [
+          {
+            "description": "The project under which the queue lies.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The taskqueue to lease a task from.",
+            "in": "path",
+            "name": "taskqueue",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The number of tasks to lease.",
+            "in": "query",
+            "name": "numTasks",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The lease in seconds.",
+            "in": "query",
+            "name": "leaseSecs",
+            "required": true,
+            "type": "integer"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -219,36 +410,51 @@
             }
           }
         },
-        "parameters": [
+        "security": [
           {
-            "name": "project",
-            "in": "path",
-            "description": "The project under which the queue lies.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "taskqueue",
-            "in": "path",
-            "description": "The taskqueue to lease a task from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "numTasks",
-            "in": "query",
-            "description": "The number of tasks to lease.",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "leaseSecs",
-            "in": "query",
-            "description": "The lease in seconds.",
-            "required": true,
-            "type": "integer"
+            "Oauth2": [
+              "https://www.googleapis.com/auth/taskqueue",
+              "https://www.googleapis.com/auth/taskqueue.consumer"
+            ]
           }
         ],
+        "tags": [
+          "tasks"
+        ]
+      }
+    },
+    "/{project}/taskqueues/{taskqueue}/tasks/{task}": {
+      "delete": {
+        "description": "Delete a task from a TaskQueue.",
+        "operationId": "taskqueue.tasks.delete",
+        "parameters": [
+          {
+            "description": "The project under which the queue lies.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The taskqueue to delete a task from.",
+            "in": "path",
+            "name": "taskqueue",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The id of the task to delete.",
+            "in": "path",
+            "name": "task",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
         "security": [
           {
             "Oauth2": [
@@ -261,58 +467,40 @@
           "tasks"
         ]
       },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/{project}/taskqueues/{taskqueue}/tasks": {
       "get": {
-        "description": "List Tasks in a TaskQueue",
-        "operationId": "taskqueue.tasks.list",
+        "description": "Get a particular task from a TaskQueue.",
+        "operationId": "taskqueue.tasks.get",
+        "parameters": [
+          {
+            "description": "The project under which the queue lies.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The taskqueue in which the task belongs.",
+            "in": "path",
+            "name": "taskqueue",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The task to get properties of.",
+            "in": "path",
+            "name": "task",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
             "schema": {
-              "$ref": "#/definitions/Tasks2"
+              "$ref": "#/definitions/Task"
             }
           }
         },
-        "parameters": [
-          {
-            "name": "project",
-            "in": "path",
-            "description": "The project under which the queue lies.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "taskqueue",
-            "in": "path",
-            "description": "The id of the taskqueue to list tasks from.",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -350,208 +538,20 @@
       ]
     }
   },
-  "definitions": {
-    "Task": {
-      "type": "object",
-      "properties": {
-        "enqueueTimestamp": {
-          "type": "string",
-          "description": "Time (in seconds since the epoch) at which the task was enqueued.",
-          "format": "int64"
-        },
-        "id": {
-          "type": "string",
-          "description": "Name of the task."
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of object returned, in this case set to task.",
-          "default": "taskqueues#task"
-        },
-        "leaseTimestamp": {
-          "type": "string",
-          "description": "Time (in seconds since the epoch) at which the task lease will expire. This value is 0 if the task isnt currently leased out to a worker.",
-          "format": "int64"
-        },
-        "payloadBase64": {
-          "type": "string",
-          "description": "A bag of bytes which is the task payload. The payload on the JSON side is always Base64 encoded."
-        },
-        "queueName": {
-          "type": "string",
-          "description": "Name of the queue that the task is in."
-        }
-      }
-    },
-    "TaskQueue": {
-      "type": "object",
-      "properties": {
-        "acl": {
-          "type": "object",
-          "description": "ACLs that are applicable to this TaskQueue object.",
-          "properties": {
-            "adminEmails": {
-              "type": "array",
-              "description": "Email addresses of users who are \"admins\" of the TaskQueue. This means they can control the queue, eg set ACLs for the queue.",
-              "items": {
-                "type": "string"
-              }
-            },
-            "consumerEmails": {
-              "type": "array",
-              "description": "Email addresses of users who can \"consume\" tasks from the TaskQueue. This means they can Dequeue and Delete tasks from the queue.",
-              "items": {
-                "type": "string"
-              }
-            },
-            "producerEmails": {
-              "type": "array",
-              "description": "Email addresses of users who can \"produce\" tasks into the TaskQueue. This means they can Insert tasks into the queue.",
-              "items": {
-                "type": "string"
-              }
-            }
-          }
-        },
-        "id": {
-          "type": "string",
-          "description": "Name of the taskqueue."
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of REST object returned, in this case taskqueue.",
-          "default": "taskqueues#taskqueue"
-        },
-        "maxLeases": {
-          "type": "integer",
-          "description": "The number of times we should lease out tasks before giving up on them. If unset we lease them out forever until a worker deletes the task.",
-          "format": "int32"
-        },
-        "stats": {
-          "type": "object",
-          "description": "Statistics for the TaskQueue object in question.",
-          "properties": {
-            "leasedLastHour": {
-              "type": "string",
-              "description": "Number of tasks leased in the last hour.",
-              "format": "int64"
-            },
-            "leasedLastMinute": {
-              "type": "string",
-              "description": "Number of tasks leased in the last minute.",
-              "format": "int64"
-            },
-            "oldestTask": {
-              "type": "string",
-              "description": "The timestamp (in seconds since the epoch) of the oldest unfinished task.",
-              "format": "int64"
-            },
-            "totalTasks": {
-              "type": "integer",
-              "description": "Number of tasks in the queue.",
-              "format": "int32"
-            }
-          }
-        }
-      }
-    },
-    "Tasks": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "description": "The actual list of tasks returned as a result of the lease operation.",
-          "items": {
-            "$ref": "#/definitions/Task"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of object returned, a list of tasks.",
-          "default": "taskqueue#tasks"
-        }
-      }
-    },
-    "Tasks2": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "description": "The actual list of tasks currently active in the TaskQueue.",
-          "items": {
-            "$ref": "#/definitions/Task"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of object returned, a list of tasks.",
-          "default": "taskqueues#tasks"
-        }
-      }
-    }
-  },
-  "parameters": {
-    "alt": {
-      "name": "alt",
-      "in": "query",
-      "description": "Data format for the response.",
-      "default": "json",
-      "type": "string",
-      "enum": [
-        "json"
-      ]
-    },
-    "fields": {
-      "name": "fields",
-      "in": "query",
-      "description": "Selector specifying which fields to include in a partial response.",
-      "type": "string"
-    },
-    "key": {
-      "name": "key",
-      "in": "query",
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "type": "string"
-    },
-    "oauth_token": {
-      "name": "oauth_token",
-      "in": "query",
-      "description": "OAuth 2.0 token for the current user.",
-      "type": "string"
-    },
-    "prettyPrint": {
-      "name": "prettyPrint",
-      "in": "query",
-      "description": "Returns response with indentations and line breaks.",
-      "default": true,
-      "type": "boolean"
-    },
-    "quotaUser": {
-      "name": "quotaUser",
-      "in": "query",
-      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
-      "type": "string"
-    },
-    "userIp": {
-      "name": "userIp",
-      "in": "query",
-      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
-      "type": "string"
-    }
-  },
+  "schemes": [
+    "https"
+  ],
   "securityDefinitions": {
     "Oauth2": {
-      "type": "oauth2",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
       "description": "Oauth 2.0 authentication",
       "flow": "implicit",
-      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
       "scopes": {
         "https://www.googleapis.com/auth/taskqueue": "Manage your Tasks and Taskqueues",
         "https://www.googleapis.com/auth/taskqueue.consumer": "Consume Tasks from your Taskqueues"
-      }
+      },
+      "type": "oauth2"
     }
   },
-  "externalDocs": {
-    "url": "https://developers.google.com/appengine/docs/python/taskqueue/rest"
-  }
+  "swagger": "2.0"
 }

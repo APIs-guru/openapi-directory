@@ -1,137 +1,21 @@
 {
-  "host": "posty-api.herokuapp.com",
   "basePath": "/",
-  "schemes": [
-    "http"
-  ],
-  "swagger": "2.0",
+  "host": "posty-api.herokuapp.com",
   "info": {
-    "version": "v1",
     "title": "posty-api.herokuapp.com",
-    "x-providerName": "posty-api.herokuapp.com",
+    "version": "v1",
     "x-origin": {
       "format": "swagger",
-      "version": "1.2",
-      "url": "http://posty-api.herokuapp.com/api/v1/swagger_doc.json"
-    }
+      "url": "http://posty-api.herokuapp.com/api/v1/swagger_doc.json",
+      "version": "1.2"
+    },
+    "x-providerName": "posty-api.herokuapp.com"
   },
   "paths": {
-    "/api/v1/summary.json": {
-      "get": {
-        "operationId": "GET-api--version-summary---format-",
-        "summary": "Returns a summary of all Resources",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/api/v1/transports.json": {
-      "get": {
-        "operationId": "GET-api--version-transports---format-",
-        "summary": "Returns all available transports",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      },
-      "post": {
-        "operationId": "POST-api--version-transports---format-",
-        "summary": "Create new transport",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/api/v1/transports/{transport_name}.json": {
-      "get": {
-        "operationId": "GET-api--version-transports--transport_name---format-",
-        "summary": "Returns the information to the specified transport",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "description": "",
-            "name": "transport_name",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      },
-      "put": {
-        "operationId": "PUT-api--version-transports--transport_name---format-",
-        "summary": "Update the specified transport",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "description": "",
-            "name": "transport_name",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DELETE-api--version-transports--transport_name---format-",
-        "summary": "Delete the specified transport",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "description": "",
-            "name": "transport_name",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
     "/api/v1/domains.json": {
       "get": {
-        "operationId": "GET-api--version-domains---format-",
-        "summary": "Returns all available domains",
         "description": "",
+        "operationId": "GET-api--version-domains---format-",
         "produces": [
           "application/json"
         ],
@@ -139,12 +23,12 @@
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Returns all available domains"
       },
       "post": {
-        "operationId": "POST-api--version-domains---format-",
-        "summary": "Create new domain",
         "description": "",
+        "operationId": "POST-api--version-domains---format-",
         "produces": [
           "application/json"
         ],
@@ -152,522 +36,537 @@
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Create new domain"
       }
     },
     "/api/v1/domains/{domain_name}.json": {
-      "get": {
-        "operationId": "GET-api--version-domains--domain_name---format-",
-        "summary": "Returns the information to the specified domain",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "description": "",
-            "name": "domain_name",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      },
-      "put": {
-        "operationId": "PUT-api--version-domains--domain_name---format-",
-        "summary": "Update the specified domain",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "description": "",
-            "name": "domain_name",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      },
       "delete": {
+        "description": "",
         "operationId": "DELETE-api--version-domains--domain_name---format-",
-        "summary": "Delete the specified domain",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
-            "in": "path",
             "description": "",
+            "in": "path",
             "name": "domain_name",
             "required": true,
             "type": "string"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/api/v1/domains/{domain_name}/users.json": {
-      "get": {
-        "operationId": "GET-api--version-domains--domain_name-users---format-",
-        "summary": "Returns all users for the specified domain",
-        "description": "",
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "in": "path",
-            "description": "",
-            "name": "domain_name",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Delete the specified domain"
       },
-      "post": {
-        "operationId": "POST-api--version-domains--domain_name-users---format-",
-        "summary": "Create new user",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "description": "",
-            "name": "domain_name",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/api/v1/domains/{domain_name}/users/{user_name}.json": {
       "get": {
-        "operationId": "GET-api--version-domains--domain_name-users--user_name---format-",
-        "summary": "Returns the information to the specified user",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "GET-api--version-domains--domain_name---format-",
         "parameters": [
           {
-            "in": "path",
             "description": "",
+            "in": "path",
             "name": "domain_name",
             "required": true,
             "type": "string"
-          },
-          {
-            "in": "path",
-            "description": "",
-            "name": "user_name",
-            "required": true,
-            "type": "string"
           }
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Returns the information to the specified domain"
       },
       "put": {
-        "operationId": "PUT-api--version-domains--domain_name-users--user_name---format-",
-        "summary": "Update the specified user",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "PUT-api--version-domains--domain_name---format-",
         "parameters": [
           {
-            "in": "path",
             "description": "",
+            "in": "path",
             "name": "domain_name",
             "required": true,
             "type": "string"
-          },
-          {
-            "in": "path",
-            "description": "",
-            "name": "user_name",
-            "required": true,
-            "type": "string"
           }
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
-      },
-      "delete": {
-        "operationId": "DELETE-api--version-domains--domain_name-users--user_name---format-",
-        "summary": "Delete the specified user",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "description": "",
-            "name": "domain_name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "description": "",
-            "name": "user_name",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/api/v1/domains/{domain_name}/users/{user_name}/aliases.json": {
-      "get": {
-        "operationId": "GET-api--version-domains--domain_name-users--user_name-aliases---format-",
-        "summary": "Returns all aliases for the specified user",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "description": "",
-            "name": "domain_name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "description": "",
-            "name": "user_name",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      },
-      "post": {
-        "operationId": "POST-api--version-domains--domain_name-users--user_name-aliases---format-",
-        "summary": "Create new user alias",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "description": "",
-            "name": "domain_name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "description": "",
-            "name": "user_name",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/api/v1/domains/{domain_name}/users/{user_name}/aliases/{alias_name}.json": {
-      "get": {
-        "operationId": "GET-api--version-domains--domain_name-users--user_name-aliases--alias_name---format-",
-        "summary": "Returns the information to the specified user alias",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "description": "",
-            "name": "domain_name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "description": "",
-            "name": "user_name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "description": "",
-            "name": "alias_name",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      },
-      "put": {
-        "operationId": "PUT-api--version-domains--domain_name-users--user_name-aliases--alias_name---format-",
-        "summary": "Update the specified user alias",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "description": "",
-            "name": "domain_name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "description": "",
-            "name": "user_name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "description": "",
-            "name": "alias_name",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "DELETE-api--version-domains--domain_name-users--user_name-aliases--alias_name---format-",
-        "summary": "Delete the specified user alias",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "description": "",
-            "name": "domain_name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "description": "",
-            "name": "user_name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "description": "",
-            "name": "alias_name",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
+        },
+        "summary": "Update the specified domain"
       }
     },
     "/api/v1/domains/{domain_name}/aliases.json": {
       "get": {
-        "operationId": "GET-api--version-domains--domain_name-aliases---format-",
-        "summary": "Returns all aliases for the specified domain",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "GET-api--version-domains--domain_name-aliases---format-",
         "parameters": [
           {
-            "in": "path",
             "description": "",
+            "in": "path",
             "name": "domain_name",
             "required": true,
             "type": "string"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Returns all aliases for the specified domain"
       },
       "post": {
-        "operationId": "POST-api--version-domains--domain_name-aliases---format-",
-        "summary": "Create new domain alias",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "POST-api--version-domains--domain_name-aliases---format-",
         "parameters": [
           {
-            "in": "path",
             "description": "",
+            "in": "path",
             "name": "domain_name",
             "required": true,
             "type": "string"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Create new domain alias"
       }
     },
     "/api/v1/domains/{domain_name}/aliases/{alias_name}.json": {
-      "get": {
-        "operationId": "GET-api--version-domains--domain_name-aliases--alias_name---format-",
-        "summary": "Returns the information to the specified domain alias",
+      "delete": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "DELETE-api--version-domains--domain_name-aliases--alias_name---format-",
         "parameters": [
           {
-            "in": "path",
             "description": "",
+            "in": "path",
             "name": "domain_name",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "description": "",
+            "in": "path",
             "name": "alias_name",
             "required": true,
             "type": "string"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Delete the specified domain alias"
+      },
+      "get": {
+        "description": "",
+        "operationId": "GET-api--version-domains--domain_name-aliases--alias_name---format-",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "domain_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "path",
+            "name": "alias_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Returns the information to the specified domain alias"
       },
       "put": {
+        "description": "",
         "operationId": "PUT-api--version-domains--domain_name-aliases--alias_name---format-",
-        "summary": "Update the specified domain alias",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
-            "in": "path",
             "description": "",
+            "in": "path",
             "name": "domain_name",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "description": "",
+            "in": "path",
             "name": "alias_name",
             "required": true,
             "type": "string"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Update the specified domain alias"
+      }
+    },
+    "/api/v1/domains/{domain_name}/users.json": {
+      "get": {
+        "description": "",
+        "operationId": "GET-api--version-domains--domain_name-users---format-",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "domain_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Returns all users for the specified domain"
       },
-      "delete": {
-        "operationId": "DELETE-api--version-domains--domain_name-aliases--alias_name---format-",
-        "summary": "Delete the specified domain alias",
+      "post": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "POST-api--version-domains--domain_name-users---format-",
         "parameters": [
           {
-            "in": "path",
             "description": "",
+            "in": "path",
             "name": "domain_name",
             "required": true,
             "type": "string"
-          },
-          {
-            "in": "path",
-            "description": "",
-            "name": "alias_name",
-            "required": true,
-            "type": "string"
           }
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Create new user"
+      }
+    },
+    "/api/v1/domains/{domain_name}/users/{user_name}.json": {
+      "delete": {
+        "description": "",
+        "operationId": "DELETE-api--version-domains--domain_name-users--user_name---format-",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "domain_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "path",
+            "name": "user_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Delete the specified user"
+      },
+      "get": {
+        "description": "",
+        "operationId": "GET-api--version-domains--domain_name-users--user_name---format-",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "domain_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "path",
+            "name": "user_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Returns the information to the specified user"
+      },
+      "put": {
+        "description": "",
+        "operationId": "PUT-api--version-domains--domain_name-users--user_name---format-",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "domain_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "path",
+            "name": "user_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Update the specified user"
+      }
+    },
+    "/api/v1/domains/{domain_name}/users/{user_name}/aliases.json": {
+      "get": {
+        "description": "",
+        "operationId": "GET-api--version-domains--domain_name-users--user_name-aliases---format-",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "domain_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "path",
+            "name": "user_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Returns all aliases for the specified user"
+      },
+      "post": {
+        "description": "",
+        "operationId": "POST-api--version-domains--domain_name-users--user_name-aliases---format-",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "domain_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "path",
+            "name": "user_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Create new user alias"
+      }
+    },
+    "/api/v1/domains/{domain_name}/users/{user_name}/aliases/{alias_name}.json": {
+      "delete": {
+        "description": "",
+        "operationId": "DELETE-api--version-domains--domain_name-users--user_name-aliases--alias_name---format-",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "domain_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "path",
+            "name": "user_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "path",
+            "name": "alias_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Delete the specified user alias"
+      },
+      "get": {
+        "description": "",
+        "operationId": "GET-api--version-domains--domain_name-users--user_name-aliases--alias_name---format-",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "domain_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "path",
+            "name": "user_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "path",
+            "name": "alias_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Returns the information to the specified user alias"
+      },
+      "put": {
+        "description": "",
+        "operationId": "PUT-api--version-domains--domain_name-users--user_name-aliases--alias_name---format-",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "domain_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "path",
+            "name": "user_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "",
+            "in": "path",
+            "name": "alias_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Update the specified user alias"
+      }
+    },
+    "/api/v1/summary.json": {
+      "get": {
+        "description": "",
+        "operationId": "GET-api--version-summary---format-",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Returns a summary of all Resources"
       }
     },
     "/api/v1/swagger_doc.json": {
       "get": {
-        "operationId": "GET-api-v1-swagger_doc---format-",
-        "summary": "Swagger compatible API description",
         "description": "",
+        "operationId": "GET-api-v1-swagger_doc---format-",
         "produces": [
           "application/json"
         ],
@@ -675,32 +574,133 @@
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Swagger compatible API description"
       }
     },
     "/api/v1/swagger_doc/{name}.json": {
       "get": {
-        "operationId": "GET-api-v1-swagger_doc--name---format-",
-        "summary": "Swagger compatible API description for specific API",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "GET-api-v1-swagger_doc--name---format-",
         "parameters": [
           {
-            "in": "path",
             "description": "Resource name of mounted API",
+            "in": "path",
             "name": "name",
             "required": true,
             "type": "string"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Swagger compatible API description for specific API"
+      }
+    },
+    "/api/v1/transports.json": {
+      "get": {
+        "description": "",
+        "operationId": "GET-api--version-transports---format-",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Returns all available transports"
+      },
+      "post": {
+        "description": "",
+        "operationId": "POST-api--version-transports---format-",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Create new transport"
+      }
+    },
+    "/api/v1/transports/{transport_name}.json": {
+      "delete": {
+        "description": "",
+        "operationId": "DELETE-api--version-transports--transport_name---format-",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "transport_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Delete the specified transport"
+      },
+      "get": {
+        "description": "",
+        "operationId": "GET-api--version-transports--transport_name---format-",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "transport_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Returns the information to the specified transport"
+      },
+      "put": {
+        "description": "",
+        "operationId": "PUT-api--version-transports--transport_name---format-",
+        "parameters": [
+          {
+            "description": "",
+            "in": "path",
+            "name": "transport_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Update the specified transport"
       }
     }
-  }
+  },
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0"
 }

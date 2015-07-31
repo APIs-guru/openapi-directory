@@ -1,94 +1,94 @@
 {
-  "host": "epscass.prd-prsn.com",
   "basePath": "/",
-  "schemes": [
-    "http"
-  ],
-  "swagger": "2.0",
+  "host": "epscass.prd-prsn.com",
   "info": {
-    "version": "1.0.0",
     "title": "epscass.prd-prsn.com",
-    "x-providerName": "prd-prsn.com",
+    "version": "1.0.0",
     "x-origin": {
       "format": "swagger",
-      "version": "1.2",
-      "url": "http://epscass.prd-prsn.com/api/resources"
-    }
-  },
-  "tags": [
-    {
-      "name": "institution",
-      "description": "institution"
+      "url": "http://epscass.prd-prsn.com/api/resources",
+      "version": "1.2"
     },
-    {
-      "name": "version",
-      "description": "Version"
-    }
-  ],
+    "x-providerName": "prd-prsn.com"
+  },
   "paths": {
     "/institution": {
       "get": {
+        "description": "",
+        "operationId": "getInstitutions",
         "produces": [
           "application/json"
         ],
-        "tags": [
-          "institution"
-        ],
-        "operationId": "getInstitutions",
-        "summary": "List institution",
-        "description": "",
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "List institution",
+        "tags": [
+          "institution"
+        ]
       }
     },
     "/institution/{uniqueId}": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "institution"
-        ],
-        "operationId": "getInstitution",
-        "summary": "Get an institution",
         "description": "",
+        "operationId": "getInstitution",
         "parameters": [
           {
-            "in": "path",
             "description": "The intitution unique id",
+            "format": "int64",
+            "in": "path",
             "name": "uniqueId",
             "required": true,
-            "type": "integer",
-            "format": "int64"
+            "type": "integer"
           }
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Get an institution",
+        "tags": [
+          "institution"
+        ]
       }
     },
     "/version/": {
       "get": {
+        "description": "",
+        "operationId": "version",
         "produces": [
           "application/json"
         ],
-        "tags": [
-          "version"
-        ],
-        "operationId": "version",
-        "summary": "Get the server version",
-        "description": "",
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Get the server version",
+        "tags": [
+          "version"
+        ]
       }
     }
-  }
+  },
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "institution",
+      "name": "institution"
+    },
+    {
+      "description": "Version",
+      "name": "version"
+    }
+  ]
 }

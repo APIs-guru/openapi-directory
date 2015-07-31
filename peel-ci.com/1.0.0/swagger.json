@@ -1,157 +1,157 @@
 {
-  "host": "hashtag.peel-ci.com",
   "basePath": "/",
-  "schemes": [
-    "http"
-  ],
-  "swagger": "2.0",
+  "host": "hashtag.peel-ci.com",
   "info": {
-    "version": "1.0.0",
     "title": "hashtag.peel-ci.com",
-    "x-providerName": "peel-ci.com",
+    "version": "1.0.0",
     "x-origin": {
       "format": "swagger",
-      "version": "1.2",
-      "url": "https://s3-us-west-2.amazonaws.com/tuneinapi.peel-ci.com/resources.json"
-    }
+      "url": "https://s3-us-west-2.amazonaws.com/tuneinapi.peel-ci.com/resources.json",
+      "version": "1.2"
+    },
+    "x-providerName": "peel-ci.com"
   },
   "paths": {
     "/hashtag/related": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "getRelatedHashtags",
-        "summary": "Gets related hashtags for a show.",
         "description": "Returns any official hashtag and any hashtags which were learned within the most recent time window for the show.",
+        "operationId": "getRelatedHashtags",
         "parameters": [
           {
-            "in": "query",
             "description": "Unique ID for a show",
+            "in": "query",
             "name": "showID",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Time window in seconds (default is 2 hours)",
+            "in": "query",
             "name": "timeWindow",
             "required": false,
             "type": "string"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Gets related hashtags for a show."
       }
     },
     "/hashtag/trendingShows": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
         "operationId": "getTrendingShows",
-        "summary": "Gets trending shows.",
         "parameters": [
           {
-            "in": "query",
             "description": "Number of trending shows (default is 20)",
+            "in": "query",
             "name": "limit",
             "required": false,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Time window in seconds (default is 2 hours)",
+            "in": "query",
             "name": "timeWindow",
             "required": false,
             "type": "string"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Gets trending shows."
       }
     },
     "/hashtag/tuneinlinks": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "getTuneinLinks",
-        "summary": "Gets tunein URLs (links) from either a tweet, hashtags, @mentions, or show ID.",
         "description": "Either use <b>tweet</b>, <b>hashtags</b>, or <b>showID</b> as the parameter. The tunein URLs that match best are returned in order of best match.<br/><br/>A <b>tweet</b> in this context is shorthand for text from a social networking conversation, e.g., it could be from Facebook, Twitter, LinkedIn, etc., and be greater than 140 characters.",
+        "operationId": "getTuneinLinks",
         "parameters": [
           {
-            "in": "query",
             "description": "Text from a social networking conversation",
+            "in": "query",
             "name": "tweet",
             "required": false,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Comma separated list of hashtags and @mentions",
+            "in": "query",
             "name": "hashtags",
             "required": false,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Unique ID for a show",
+            "in": "query",
             "name": "showID",
             "required": false,
             "type": "string"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Gets tunein URLs (links) from either a tweet, hashtags, @mentions, or show ID."
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "getHealth",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Get health of Tune-in service (which includes its uptime)."
       }
     },
     "/status/{showID}": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "getStatuses",
-        "summary": "Gets the last 100 statuses for this show.",
         "description": "For Twitter, statuses are synonymous with tweets.",
+        "operationId": "getStatuses",
         "parameters": [
           {
-            "in": "path",
             "description": "Unique ID for a show",
+            "in": "path",
             "name": "showID",
             "required": true,
             "type": "string"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/health": {
-      "get": {
         "produces": [
           "application/json"
         ],
-        "operationId": "getHealth",
-        "summary": "Get health of Tune-in service (which includes its uptime).",
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Gets the last 100 statuses for this show."
       }
     }
-  }
+  },
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0"
 }

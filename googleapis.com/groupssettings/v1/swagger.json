@@ -1,32 +1,212 @@
 {
-  "swagger": "2.0",
+  "basePath": "/groups/v1/groups",
+  "definitions": {
+    "Groups": {
+      "description": "JSON template for Group resource",
+      "properties": {
+        "allowExternalMembers": {
+          "description": "Are external members allowed to join the group.",
+          "type": "string"
+        },
+        "allowGoogleCommunication": {
+          "description": "Is google allowed to contact admins.",
+          "type": "string"
+        },
+        "allowWebPosting": {
+          "description": "If posting from web is allowed.",
+          "type": "string"
+        },
+        "archiveOnly": {
+          "description": "If the group is archive only",
+          "type": "string"
+        },
+        "customReplyTo": {
+          "description": "Default email to which reply to any message should go.",
+          "type": "string"
+        },
+        "defaultMessageDenyNotificationText": {
+          "description": "Default message deny notification message",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the group",
+          "type": "string"
+        },
+        "email": {
+          "description": "Email id of the group",
+          "type": "string"
+        },
+        "includeInGlobalAddressList": {
+          "description": "If this groups should be included in global address list or not.",
+          "type": "string"
+        },
+        "isArchived": {
+          "description": "If the contents of the group are archived.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "groupsSettings#groups",
+          "description": "The type of the resource.",
+          "type": "string"
+        },
+        "maxMessageBytes": {
+          "description": "Maximum message size allowed.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "membersCanPostAsTheGroup": {
+          "description": "Can members post using the group email address.",
+          "type": "string"
+        },
+        "messageDisplayFont": {
+          "description": "Default message display font. Possible values are: DEFAULT_FONT FIXED_WIDTH_FONT",
+          "type": "string"
+        },
+        "messageModerationLevel": {
+          "description": "Moderation level for messages. Possible values are: MODERATE_ALL_MESSAGES MODERATE_NON_MEMBERS MODERATE_NEW_MEMBERS MODERATE_NONE",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the Group",
+          "type": "string"
+        },
+        "primaryLanguage": {
+          "description": "Primary language for the group.",
+          "type": "string"
+        },
+        "replyTo": {
+          "description": "Whome should the default reply to a message go to. Possible values are: REPLY_TO_CUSTOM REPLY_TO_SENDER REPLY_TO_LIST REPLY_TO_OWNER REPLY_TO_IGNORE REPLY_TO_MANAGERS",
+          "type": "string"
+        },
+        "sendMessageDenyNotification": {
+          "description": "Should the member be notified if his message is denied by owner.",
+          "type": "string"
+        },
+        "showInGroupDirectory": {
+          "description": "Is the group listed in groups directory",
+          "type": "string"
+        },
+        "spamModerationLevel": {
+          "description": "Moderation level for messages detected as spam. Possible values are: ALLOW MODERATE SILENTLY_MODERATE REJECT",
+          "type": "string"
+        },
+        "whoCanContactOwner": {
+          "description": "Permission to contact owner of the group via web UI. Possbile values are: ANYONE_CAN_CONTACT ALL_IN_DOMAIN_CAN_CONTACT ALL_MEMBERS_CAN_CONTACT ALL_MANAGERS_CAN_CONTACT",
+          "type": "string"
+        },
+        "whoCanInvite": {
+          "description": "Permissions to invite members. Possbile values are: ALL_MEMBERS_CAN_INVITE ALL_MANAGERS_CAN_INVITE",
+          "type": "string"
+        },
+        "whoCanJoin": {
+          "description": "Permissions to join the group. Possible values are: ANYONE_CAN_JOIN ALL_IN_DOMAIN_CAN_JOIN INVITED_CAN_JOIN CAN_REQUEST_TO_JOIN",
+          "type": "string"
+        },
+        "whoCanLeaveGroup": {
+          "description": "Permission to leave the group. Possible values are: ALL_MANAGERS_CAN_LEAVE ALL_MEMBERS_CAN_LEAVE",
+          "type": "string"
+        },
+        "whoCanPostMessage": {
+          "description": "Permissions to post messages to the group. Possible values are: NONE_CAN_POST ALL_MANAGERS_CAN_POST ALL_MEMBERS_CAN_POST ALL_IN_DOMAIN_CAN_POST ANYONE_CAN_POST",
+          "type": "string"
+        },
+        "whoCanViewGroup": {
+          "description": "Permissions to view group. Possbile values are: ANYONE_CAN_VIEW ALL_IN_DOMAIN_CAN_VIEW ALL_MEMBERS_CAN_VIEW ALL_MANAGERS_CAN_VIEW",
+          "type": "string"
+        },
+        "whoCanViewMembership": {
+          "description": "Permissions to view membership. Possbile values are: ALL_IN_DOMAIN_CAN_VIEW ALL_MEMBERS_CAN_VIEW ALL_MANAGERS_CAN_VIEW",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/google-apps/groups-settings/get_started"
+  },
+  "host": "www.googleapis.com",
   "info": {
-    "title": "Groups Settings API",
-    "x-serviceName": "groupssettings",
-    "description": "Lets you manage permission levels and related settings of a group.",
     "contact": {
       "name": "Google",
       "url": "https://google.com"
     },
+    "description": "Lets you manage permission levels and related settings of a group.",
+    "title": "Groups Settings API",
     "version": "v1",
-    "x-providerName": "googleapis.com",
+    "x-logo": "https://www.google.com/images/srpr/logo11w.png",
     "x-origin": {
       "format": "google",
-      "version": "v1",
-      "url": "https://www.googleapis.com/discovery/v1/apis/groupssettings/v1/rest"
+      "url": "https://www.googleapis.com/discovery/v1/apis/groupssettings/v1/rest",
+      "version": "v1"
     },
-    "x-logo": "https://www.google.com/images/srpr/logo11w.png"
+    "x-providerName": "googleapis.com",
+    "x-serviceName": "groupssettings"
   },
-  "host": "www.googleapis.com",
-  "basePath": "/groups/v1/groups",
-  "schemes": [
-    "https"
-  ],
+  "parameters": {
+    "alt": {
+      "default": "atom",
+      "description": "Data format for the response.",
+      "enum": [
+        "atom",
+        "json"
+      ],
+      "in": "query",
+      "name": "alt",
+      "type": "string"
+    },
+    "fields": {
+      "description": "Selector specifying which fields to include in a partial response.",
+      "in": "query",
+      "name": "fields",
+      "type": "string"
+    },
+    "key": {
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "in": "query",
+      "name": "key",
+      "type": "string"
+    },
+    "oauth_token": {
+      "description": "OAuth 2.0 token for the current user.",
+      "in": "query",
+      "name": "oauth_token",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "default": true,
+      "description": "Returns response with indentations and line breaks.",
+      "in": "query",
+      "name": "prettyPrint",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "in": "query",
+      "name": "quotaUser",
+      "type": "string"
+    },
+    "userIp": {
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "in": "query",
+      "name": "userIp",
+      "type": "string"
+    }
+  },
   "paths": {
     "/{groupUniqueId}": {
       "get": {
         "description": "Gets one resource by id.",
         "operationId": "groupsSettings.groups.get",
+        "parameters": [
+          {
+            "description": "The resource ID",
+            "in": "path",
+            "name": "groupUniqueId",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -35,91 +215,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "groupUniqueId",
-            "in": "path",
-            "description": "The resource ID",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/apps.groups.settings"
-            ]
-          }
-        ],
-        "tags": [
-          "groups"
-        ]
-      },
-      "patch": {
-        "description": "Updates an existing resource. This method supports patch semantics.",
-        "operationId": "groupsSettings.groups.patch",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Groups"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "groupUniqueId",
-            "in": "path",
-            "description": "The resource ID",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/Groups"
-            }
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/apps.groups.settings"
-            ]
-          }
-        ],
-        "tags": [
-          "groups"
-        ]
-      },
-      "put": {
-        "description": "Updates an existing resource.",
-        "operationId": "groupsSettings.groups.update",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Groups"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "groupUniqueId",
-            "in": "path",
-            "description": "The resource ID",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/Groups"
-            }
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -153,193 +248,98 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ]
-    }
-  },
-  "definitions": {
-    "Groups": {
-      "type": "object",
-      "description": "JSON template for Group resource",
-      "properties": {
-        "allowExternalMembers": {
-          "type": "string",
-          "description": "Are external members allowed to join the group."
+      ],
+      "patch": {
+        "description": "Updates an existing resource. This method supports patch semantics.",
+        "operationId": "groupsSettings.groups.patch",
+        "parameters": [
+          {
+            "description": "The resource ID",
+            "in": "path",
+            "name": "groupUniqueId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Groups"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Groups"
+            }
+          }
         },
-        "allowGoogleCommunication": {
-          "type": "string",
-          "description": "Is google allowed to contact admins."
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.groups.settings"
+            ]
+          }
+        ],
+        "tags": [
+          "groups"
+        ]
+      },
+      "put": {
+        "description": "Updates an existing resource.",
+        "operationId": "groupsSettings.groups.update",
+        "parameters": [
+          {
+            "description": "The resource ID",
+            "in": "path",
+            "name": "groupUniqueId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Groups"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Groups"
+            }
+          }
         },
-        "allowWebPosting": {
-          "type": "string",
-          "description": "If posting from web is allowed."
-        },
-        "archiveOnly": {
-          "type": "string",
-          "description": "If the group is archive only"
-        },
-        "customReplyTo": {
-          "type": "string",
-          "description": "Default email to which reply to any message should go."
-        },
-        "defaultMessageDenyNotificationText": {
-          "type": "string",
-          "description": "Default message deny notification message"
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the group"
-        },
-        "email": {
-          "type": "string",
-          "description": "Email id of the group"
-        },
-        "includeInGlobalAddressList": {
-          "type": "string",
-          "description": "If this groups should be included in global address list or not."
-        },
-        "isArchived": {
-          "type": "string",
-          "description": "If the contents of the group are archived."
-        },
-        "kind": {
-          "type": "string",
-          "description": "The type of the resource.",
-          "default": "groupsSettings#groups"
-        },
-        "maxMessageBytes": {
-          "type": "integer",
-          "description": "Maximum message size allowed.",
-          "format": "int32"
-        },
-        "membersCanPostAsTheGroup": {
-          "type": "string",
-          "description": "Can members post using the group email address."
-        },
-        "messageDisplayFont": {
-          "type": "string",
-          "description": "Default message display font. Possible values are: DEFAULT_FONT FIXED_WIDTH_FONT"
-        },
-        "messageModerationLevel": {
-          "type": "string",
-          "description": "Moderation level for messages. Possible values are: MODERATE_ALL_MESSAGES MODERATE_NON_MEMBERS MODERATE_NEW_MEMBERS MODERATE_NONE"
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the Group"
-        },
-        "primaryLanguage": {
-          "type": "string",
-          "description": "Primary language for the group."
-        },
-        "replyTo": {
-          "type": "string",
-          "description": "Whome should the default reply to a message go to. Possible values are: REPLY_TO_CUSTOM REPLY_TO_SENDER REPLY_TO_LIST REPLY_TO_OWNER REPLY_TO_IGNORE REPLY_TO_MANAGERS"
-        },
-        "sendMessageDenyNotification": {
-          "type": "string",
-          "description": "Should the member be notified if his message is denied by owner."
-        },
-        "showInGroupDirectory": {
-          "type": "string",
-          "description": "Is the group listed in groups directory"
-        },
-        "spamModerationLevel": {
-          "type": "string",
-          "description": "Moderation level for messages detected as spam. Possible values are: ALLOW MODERATE SILENTLY_MODERATE REJECT"
-        },
-        "whoCanContactOwner": {
-          "type": "string",
-          "description": "Permission to contact owner of the group via web UI. Possbile values are: ANYONE_CAN_CONTACT ALL_IN_DOMAIN_CAN_CONTACT ALL_MEMBERS_CAN_CONTACT ALL_MANAGERS_CAN_CONTACT"
-        },
-        "whoCanInvite": {
-          "type": "string",
-          "description": "Permissions to invite members. Possbile values are: ALL_MEMBERS_CAN_INVITE ALL_MANAGERS_CAN_INVITE"
-        },
-        "whoCanJoin": {
-          "type": "string",
-          "description": "Permissions to join the group. Possible values are: ANYONE_CAN_JOIN ALL_IN_DOMAIN_CAN_JOIN INVITED_CAN_JOIN CAN_REQUEST_TO_JOIN"
-        },
-        "whoCanLeaveGroup": {
-          "type": "string",
-          "description": "Permission to leave the group. Possible values are: ALL_MANAGERS_CAN_LEAVE ALL_MEMBERS_CAN_LEAVE"
-        },
-        "whoCanPostMessage": {
-          "type": "string",
-          "description": "Permissions to post messages to the group. Possible values are: NONE_CAN_POST ALL_MANAGERS_CAN_POST ALL_MEMBERS_CAN_POST ALL_IN_DOMAIN_CAN_POST ANYONE_CAN_POST"
-        },
-        "whoCanViewGroup": {
-          "type": "string",
-          "description": "Permissions to view group. Possbile values are: ANYONE_CAN_VIEW ALL_IN_DOMAIN_CAN_VIEW ALL_MEMBERS_CAN_VIEW ALL_MANAGERS_CAN_VIEW"
-        },
-        "whoCanViewMembership": {
-          "type": "string",
-          "description": "Permissions to view membership. Possbile values are: ALL_IN_DOMAIN_CAN_VIEW ALL_MEMBERS_CAN_VIEW ALL_MANAGERS_CAN_VIEW"
-        }
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.groups.settings"
+            ]
+          }
+        ],
+        "tags": [
+          "groups"
+        ]
       }
     }
   },
-  "parameters": {
-    "alt": {
-      "name": "alt",
-      "in": "query",
-      "description": "Data format for the response.",
-      "default": "atom",
-      "type": "string",
-      "enum": [
-        "atom",
-        "json"
-      ]
-    },
-    "fields": {
-      "name": "fields",
-      "in": "query",
-      "description": "Selector specifying which fields to include in a partial response.",
-      "type": "string"
-    },
-    "key": {
-      "name": "key",
-      "in": "query",
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "type": "string"
-    },
-    "oauth_token": {
-      "name": "oauth_token",
-      "in": "query",
-      "description": "OAuth 2.0 token for the current user.",
-      "type": "string"
-    },
-    "prettyPrint": {
-      "name": "prettyPrint",
-      "in": "query",
-      "description": "Returns response with indentations and line breaks.",
-      "default": true,
-      "type": "boolean"
-    },
-    "quotaUser": {
-      "name": "quotaUser",
-      "in": "query",
-      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
-      "type": "string"
-    },
-    "userIp": {
-      "name": "userIp",
-      "in": "query",
-      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
-      "type": "string"
-    }
-  },
+  "schemes": [
+    "https"
+  ],
   "securityDefinitions": {
     "Oauth2": {
-      "type": "oauth2",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
       "description": "Oauth 2.0 authentication",
       "flow": "implicit",
-      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
       "scopes": {
         "https://www.googleapis.com/auth/apps.groups.settings": "View and manage the settings of a Google Apps Group"
-      }
+      },
+      "type": "oauth2"
     }
   },
-  "externalDocs": {
-    "url": "https://developers.google.com/google-apps/groups-settings/get_started"
-  }
+  "swagger": "2.0"
 }

@@ -1,484 +1,484 @@
 {
-  "host": "api.datumbox.com",
   "basePath": "/",
-  "schemes": [
-    "http"
-  ],
-  "swagger": "2.0",
+  "host": "api.datumbox.com",
   "info": {
-    "version": "1.0",
     "title": "api.datumbox.com",
-    "x-providerName": "datumbox.com",
+    "version": "1.0",
     "x-origin": {
       "format": "swagger",
-      "version": "1.2",
-      "url": "http://www.datumbox.com/api-sandbox/api-docs"
-    }
+      "url": "http://www.datumbox.com/api-sandbox/api-docs",
+      "version": "1.2"
+    },
+    "x-providerName": "datumbox.com"
   },
   "paths": {
-    "/1.0/SentimentAnalysis.json": {
-      "post": {
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "SentimentAnalysis",
-        "summary": "Identifies the Sentiment of the Document",
-        "description": "The Sentiment Analysis function classifies documents as positive, negative or neutral (lack of sentiment) depending on whether they express a positive, negative or neutral opinion.",
-        "deprecated": false,
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "Your API Key",
-            "name": "api_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "The text that you want to analyze. It should not contain HTML tags.",
-            "name": "text",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/1.0/TwitterSentimentAnalysis.json": {
-      "post": {
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "TwitterSentimentAnalysis",
-        "summary": "Identifies the Sentiment of Twitter Messages",
-        "description": "The Twitter Sentiment Analysis function allows you to perform Sentiment Analysis on Twitter. It classifies the tweets as positive, negative or neutral depending on their context.",
-        "deprecated": false,
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "Your API Key",
-            "name": "api_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "The text of the tweet that we evaluate.",
-            "name": "text",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/1.0/SubjectivityAnalysis.json": {
-      "post": {
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "SubjectivityAnalysis",
-        "summary": "Classifies Document as Subjective or Objective",
-        "description": "The Subjectivity Analysis function categorizes documents as subjective or objective based on their writing style. Texts that express personal opinions are labeled as subjective and the others as objective.",
-        "deprecated": false,
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "Your API Key",
-            "name": "api_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "The text that you want to analyze. It should not contain HTML tags.",
-            "name": "text",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/1.0/TopicClassification.json": {
-      "post": {
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "TopicClassification",
-        "summary": "Identifies the Topic of the Document",
-        "description": "The Topic Classification function assigns documents in 12 thematic categories based on their keywords, idioms and jargon. It can be used to identify the topic of the texts.",
-        "deprecated": false,
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "Your API Key",
-            "name": "api_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "The text that you want to analyze. It should not contain HTML tags.",
-            "name": "text",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/1.0/SpamDetection.json": {
-      "post": {
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "SpamDetection",
-        "summary": "Classifies the Document as spam or nospam",
-        "description": "The Spam Detection function labels documents as spam or nospam by taking into account their context. It can be used to filter out spam emails and comments.",
-        "deprecated": false,
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "Your API Key",
-            "name": "api_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "The text that you want to analyze. It should not contain HTML tags.",
-            "name": "text",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
     "/1.0/AdultContentDetection.json": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "AdultContentDetection",
-        "summary": "Classifies the Document as adult or noadult",
+        "deprecated": false,
         "description": "The Adult Content Detection function classifies the documents as adult or noadult based on their context. It can be used to detect whether a document contains content unsuitable for minors.",
-        "deprecated": false,
+        "operationId": "AdultContentDetection",
         "parameters": [
           {
-            "in": "formData",
             "description": "Your API Key",
+            "in": "formData",
             "name": "api_key",
             "required": true,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "in": "formData",
             "name": "text",
             "required": true,
             "type": "string"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/1.0/ReadabilityAssessment.json": {
-      "post": {
         "produces": [
           "application/json"
         ],
-        "operationId": "ReadabilityAssessment",
-        "summary": "Evaluates the Readability of the Document",
-        "description": "The Readability Assessment function determines the degree of readability of a document based on its terms and idioms. The texts are classified as basic, intermediate and advanced depending their difficulty.",
-        "deprecated": false,
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "Your API Key",
-            "name": "api_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "The text that you want to analyze. It should not contain HTML tags.",
-            "name": "text",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
-      }
-    },
-    "/1.0/LanguageDetection.json": {
-      "post": {
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "LanguageDetection",
-        "summary": "Identifies the Language of the Document",
-        "description": "The Language Detection function identifies the natural language of the given document based on its words and context. This classifier is able to detect 96 different languages.",
-        "deprecated": false,
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "Your API Key",
-            "name": "api_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "The text that you want to analyze. It should not contain HTML tags.",
-            "name": "text",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
+        },
+        "summary": "Classifies the Document as adult or noadult"
       }
     },
     "/1.0/CommercialDetection.json": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "CommercialDetection",
-        "summary": "Classifies the Document as commercial or nocommercial",
+        "deprecated": false,
         "description": "The Commercial Detection function labels the documents as commercial or non-commercial based on their keywords and expressions. It can be used to detect whether a website is commercial or not.",
-        "deprecated": false,
+        "operationId": "CommercialDetection",
         "parameters": [
           {
-            "in": "formData",
             "description": "Your API Key",
+            "in": "formData",
             "name": "api_key",
             "required": true,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "in": "formData",
             "name": "text",
             "required": true,
             "type": "string"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/1.0/EducationalDetection.json": {
-      "post": {
         "produces": [
           "application/json"
         ],
-        "operationId": "EducationalDetection",
-        "summary": "Classifies the Document as educational or noeducational",
-        "description": "The Educational Detection function classifies the documents as educational or non-educational based on their context. It can be used to detect whether a website is educational or not.",
-        "deprecated": false,
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "Your API Key",
-            "name": "api_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "The text that you want to analyze. It should not contain HTML tags.",
-            "name": "text",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
-      }
-    },
-    "/1.0/GenderDetection.json": {
-      "post": {
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "GenderDetection",
-        "summary": "Gender Detection Service",
-        "description": "The Gender Detection function identifies if a particular document is written-by or targets-to a man or a woman based on the context, the words and the idioms found in the text.",
-        "deprecated": false,
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "Your API Key",
-            "name": "api_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "The text that you want to analyze. It should not contain HTML tags.",
-            "name": "text",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/1.0/KeywordExtraction.json": {
-      "post": {
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "KeywordExtraction",
-        "summary": "Extracts the Keywords of the Document",
-        "description": "The Keyword Extraction function enables you to extract from an arbitrary document all the keywords and word-combinations along with their occurrences in the text.",
-        "deprecated": false,
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "Your API Key",
-            "name": "api_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "The number of keyword combinations (n-grams) that you wish to extract.",
-            "name": "n",
-            "required": true,
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 5
-          },
-          {
-            "in": "formData",
-            "description": "The text that you want to analyze. It should not contain HTML tags.",
-            "name": "text",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/1.0/TextExtraction.json": {
-      "post": {
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "TextExtraction",
-        "summary": "Extracts the clear text from Webpage",
-        "description": "The Text Extraction function enables you to extract the important information from a given webpage. Extracting the clear text of the documents is an important step before any other analysis.",
-        "deprecated": false,
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "Your API Key",
-            "name": "api_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "The HTML source of the webpage.",
-            "name": "text",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
+        },
+        "summary": "Classifies the Document as commercial or nocommercial"
       }
     },
     "/1.0/DocumentSimilarity.json": {
       "post": {
-        "produces": [
-          "application/json"
-        ],
-        "operationId": "DocumentSimilarity",
-        "summary": "Estimates the similarity between 2 Documents",
-        "description": "The Document Similarity function estimates the degree of similarity between two documents. It can be used to detect duplicate webpages or detect plagiarism.",
         "deprecated": false,
+        "description": "The Document Similarity function estimates the degree of similarity between two documents. It can be used to detect duplicate webpages or detect plagiarism.",
+        "operationId": "DocumentSimilarity",
         "parameters": [
           {
-            "in": "formData",
             "description": "Your API Key",
+            "in": "formData",
             "name": "api_key",
             "required": true,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "The first text. It should not contain HTML tags.",
+            "in": "formData",
             "name": "original",
             "required": true,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "The second text. It should not contain HTML tags.",
+            "in": "formData",
             "name": "copy",
             "required": true,
             "type": "string"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Estimates the similarity between 2 Documents"
+      }
+    },
+    "/1.0/EducationalDetection.json": {
+      "post": {
+        "deprecated": false,
+        "description": "The Educational Detection function classifies the documents as educational or non-educational based on their context. It can be used to detect whether a website is educational or not.",
+        "operationId": "EducationalDetection",
+        "parameters": [
+          {
+            "description": "Your API Key",
+            "in": "formData",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "in": "formData",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Classifies the Document as educational or noeducational"
+      }
+    },
+    "/1.0/GenderDetection.json": {
+      "post": {
+        "deprecated": false,
+        "description": "The Gender Detection function identifies if a particular document is written-by or targets-to a man or a woman based on the context, the words and the idioms found in the text.",
+        "operationId": "GenderDetection",
+        "parameters": [
+          {
+            "description": "Your API Key",
+            "in": "formData",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "in": "formData",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Gender Detection Service"
+      }
+    },
+    "/1.0/KeywordExtraction.json": {
+      "post": {
+        "deprecated": false,
+        "description": "The Keyword Extraction function enables you to extract from an arbitrary document all the keywords and word-combinations along with their occurrences in the text.",
+        "operationId": "KeywordExtraction",
+        "parameters": [
+          {
+            "description": "Your API Key",
+            "in": "formData",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The number of keyword combinations (n-grams) that you wish to extract.",
+            "in": "formData",
+            "maximum": 5,
+            "minimum": 1,
+            "name": "n",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "in": "formData",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Extracts the Keywords of the Document"
+      }
+    },
+    "/1.0/LanguageDetection.json": {
+      "post": {
+        "deprecated": false,
+        "description": "The Language Detection function identifies the natural language of the given document based on its words and context. This classifier is able to detect 96 different languages.",
+        "operationId": "LanguageDetection",
+        "parameters": [
+          {
+            "description": "Your API Key",
+            "in": "formData",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "in": "formData",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Identifies the Language of the Document"
+      }
+    },
+    "/1.0/ReadabilityAssessment.json": {
+      "post": {
+        "deprecated": false,
+        "description": "The Readability Assessment function determines the degree of readability of a document based on its terms and idioms. The texts are classified as basic, intermediate and advanced depending their difficulty.",
+        "operationId": "ReadabilityAssessment",
+        "parameters": [
+          {
+            "description": "Your API Key",
+            "in": "formData",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "in": "formData",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Evaluates the Readability of the Document"
+      }
+    },
+    "/1.0/SentimentAnalysis.json": {
+      "post": {
+        "deprecated": false,
+        "description": "The Sentiment Analysis function classifies documents as positive, negative or neutral (lack of sentiment) depending on whether they express a positive, negative or neutral opinion.",
+        "operationId": "SentimentAnalysis",
+        "parameters": [
+          {
+            "description": "Your API Key",
+            "in": "formData",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "in": "formData",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Identifies the Sentiment of the Document"
+      }
+    },
+    "/1.0/SpamDetection.json": {
+      "post": {
+        "deprecated": false,
+        "description": "The Spam Detection function labels documents as spam or nospam by taking into account their context. It can be used to filter out spam emails and comments.",
+        "operationId": "SpamDetection",
+        "parameters": [
+          {
+            "description": "Your API Key",
+            "in": "formData",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "in": "formData",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Classifies the Document as spam or nospam"
+      }
+    },
+    "/1.0/SubjectivityAnalysis.json": {
+      "post": {
+        "deprecated": false,
+        "description": "The Subjectivity Analysis function categorizes documents as subjective or objective based on their writing style. Texts that express personal opinions are labeled as subjective and the others as objective.",
+        "operationId": "SubjectivityAnalysis",
+        "parameters": [
+          {
+            "description": "Your API Key",
+            "in": "formData",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "in": "formData",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Classifies Document as Subjective or Objective"
+      }
+    },
+    "/1.0/TextExtraction.json": {
+      "post": {
+        "deprecated": false,
+        "description": "The Text Extraction function enables you to extract the important information from a given webpage. Extracting the clear text of the documents is an important step before any other analysis.",
+        "operationId": "TextExtraction",
+        "parameters": [
+          {
+            "description": "Your API Key",
+            "in": "formData",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The HTML source of the webpage.",
+            "in": "formData",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Extracts the clear text from Webpage"
+      }
+    },
+    "/1.0/TopicClassification.json": {
+      "post": {
+        "deprecated": false,
+        "description": "The Topic Classification function assigns documents in 12 thematic categories based on their keywords, idioms and jargon. It can be used to identify the topic of the texts.",
+        "operationId": "TopicClassification",
+        "parameters": [
+          {
+            "description": "Your API Key",
+            "in": "formData",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The text that you want to analyze. It should not contain HTML tags.",
+            "in": "formData",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Identifies the Topic of the Document"
+      }
+    },
+    "/1.0/TwitterSentimentAnalysis.json": {
+      "post": {
+        "deprecated": false,
+        "description": "The Twitter Sentiment Analysis function allows you to perform Sentiment Analysis on Twitter. It classifies the tweets as positive, negative or neutral depending on their context.",
+        "operationId": "TwitterSentimentAnalysis",
+        "parameters": [
+          {
+            "description": "Your API Key",
+            "in": "formData",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The text of the tweet that we evaluate.",
+            "in": "formData",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Identifies the Sentiment of Twitter Messages"
       }
     }
-  }
+  },
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0"
 }

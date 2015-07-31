@@ -1,32 +1,482 @@
 {
-  "swagger": "2.0",
+  "basePath": "/pagespeedonline/v2",
+  "definitions": {
+    "PagespeedApiFormatStringV2": {
+      "properties": {
+        "args": {
+          "description": "List of arguments for the format string.",
+          "items": {
+            "properties": {
+              "key": {
+                "description": "The placeholder key for this arg, as a string.",
+                "type": "string"
+              },
+              "rects": {
+                "description": "The screen rectangles being referred to, with dimensions measured in CSS pixels. This is only ever used for SNAPSHOT_RECT arguments. If this is absent for a SNAPSHOT_RECT argument, it means that that argument refers to the entire snapshot.",
+                "items": {
+                  "properties": {
+                    "height": {
+                      "description": "The height of the rect.",
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "left": {
+                      "description": "The left coordinate of the rect, in page coordinates.",
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "top": {
+                      "description": "The top coordinate of the rect, in page coordinates.",
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "width": {
+                      "description": "The width of the rect.",
+                      "format": "int32",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "secondary_rects": {
+                "description": "Secondary screen rectangles being referred to, with dimensions measured in CSS pixels. This is only ever used for SNAPSHOT_RECT arguments.",
+                "items": {
+                  "properties": {
+                    "height": {
+                      "description": "The height of the rect.",
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "left": {
+                      "description": "The left coordinate of the rect, in page coordinates.",
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "top": {
+                      "description": "The top coordinate of the rect, in page coordinates.",
+                      "format": "int32",
+                      "type": "integer"
+                    },
+                    "width": {
+                      "description": "The width of the rect.",
+                      "format": "int32",
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              "type": {
+                "description": "Type of argument. One of URL, STRING_LITERAL, INT_LITERAL, BYTES, DURATION, VERBATIM_STRING, PERCENTAGE, HYPERLINK, or SNAPSHOT_RECT.",
+                "type": "string"
+              },
+              "value": {
+                "description": "Argument value, as a localized string.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "format": {
+          "description": "A localized format string with {{FOO}} placeholders, where 'FOO' is the key of the argument whose value should be substituted. For HYPERLINK arguments, the format string will instead contain {{BEGIN_FOO}} and {{END_FOO}} for the argument with key 'FOO'.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PagespeedApiImageV2": {
+      "properties": {
+        "data": {
+          "description": "Image data base64 encoded.",
+          "format": "byte",
+          "type": "string"
+        },
+        "height": {
+          "description": "Height of screenshot in pixels.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "key": {
+          "description": "Unique string key, if any, identifying this image.",
+          "type": "string"
+        },
+        "mime_type": {
+          "description": "Mime type of image data (e.g. \"image/jpeg\").",
+          "type": "string"
+        },
+        "page_rect": {
+          "description": "The region of the page that is captured by this image, with dimensions measured in CSS pixels.",
+          "properties": {
+            "height": {
+              "description": "The height of the rect.",
+              "format": "int32",
+              "type": "integer"
+            },
+            "left": {
+              "description": "The left coordinate of the rect, in page coordinates.",
+              "format": "int32",
+              "type": "integer"
+            },
+            "top": {
+              "description": "The top coordinate of the rect, in page coordinates.",
+              "format": "int32",
+              "type": "integer"
+            },
+            "width": {
+              "description": "The width of the rect.",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "width": {
+          "description": "Width of screenshot in pixels.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Result": {
+      "properties": {
+        "formattedResults": {
+          "description": "Localized PageSpeed results. Contains a ruleResults entry for each PageSpeed rule instantiated and run by the server.",
+          "properties": {
+            "locale": {
+              "description": "The locale of the formattedResults, e.g. \"en_US\".",
+              "type": "string"
+            },
+            "ruleResults": {
+              "additionalProperties": {
+                "description": "The enum-like identifier for this rule. For instance \"EnableKeepAlive\" or \"AvoidCssImport\". Not localized.",
+                "properties": {
+                  "groups": {
+                    "description": "List of rule groups that this rule belongs to. Each entry in the list is one of \"SPEED\" or \"USABILITY\".",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "localizedRuleName": {
+                    "description": "Localized name of the rule, intended for presentation to a user.",
+                    "type": "string"
+                  },
+                  "ruleImpact": {
+                    "description": "The impact (unbounded floating point value) that implementing the suggestions for this rule would have on making the page faster. Impact is comparable between rules to determine which rule's suggestions would have a higher or lower impact on making a page faster. For instance, if enabling compression would save 1MB, while optimizing images would save 500kB, the enable compression rule would have 2x the impact of the image optimization rule, all other things being equal.",
+                    "format": "double",
+                    "type": "number"
+                  },
+                  "summary": {
+                    "$ref": "#/definitions/PagespeedApiFormatStringV2",
+                    "description": "A brief summary description for the rule, indicating at a high level what should be done to follow the rule and what benefit can be gained by doing so."
+                  },
+                  "urlBlocks": {
+                    "description": "List of blocks of URLs. Each block may contain a heading and a list of URLs. Each URL may optionally include additional details.",
+                    "items": {
+                      "properties": {
+                        "header": {
+                          "$ref": "#/definitions/PagespeedApiFormatStringV2",
+                          "description": "Heading to be displayed with the list of URLs."
+                        },
+                        "urls": {
+                          "description": "List of entries that provide information about URLs in the url block. Optional.",
+                          "items": {
+                            "properties": {
+                              "details": {
+                                "description": "List of entries that provide additional details about a single URL. Optional.",
+                                "items": {
+                                  "$ref": "#/definitions/PagespeedApiFormatStringV2"
+                                },
+                                "type": "array"
+                              },
+                              "result": {
+                                "$ref": "#/definitions/PagespeedApiFormatStringV2",
+                                "description": "A format string that gives information about the URL, and a list of arguments for that format string."
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              },
+              "description": "Dictionary of formatted rule results, with one entry for each PageSpeed rule instantiated and run by the server.",
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "id": {
+          "description": "Canonicalized and final URL for the document, after following page redirects (if any).",
+          "type": "string"
+        },
+        "invalidRules": {
+          "description": "List of rules that were specified in the request, but which the server did not know how to instantiate.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "pagespeedonline#result",
+          "description": "Kind of result.",
+          "type": "string"
+        },
+        "pageStats": {
+          "description": "Summary statistics for the page, such as number of JavaScript bytes, number of HTML bytes, etc.",
+          "properties": {
+            "cssResponseBytes": {
+              "description": "Number of uncompressed response bytes for CSS resources on the page.",
+              "format": "int64",
+              "type": "string"
+            },
+            "flashResponseBytes": {
+              "description": "Number of response bytes for flash resources on the page.",
+              "format": "int64",
+              "type": "string"
+            },
+            "htmlResponseBytes": {
+              "description": "Number of uncompressed response bytes for the main HTML document and all iframes on the page.",
+              "format": "int64",
+              "type": "string"
+            },
+            "imageResponseBytes": {
+              "description": "Number of response bytes for image resources on the page.",
+              "format": "int64",
+              "type": "string"
+            },
+            "javascriptResponseBytes": {
+              "description": "Number of uncompressed response bytes for JS resources on the page.",
+              "format": "int64",
+              "type": "string"
+            },
+            "numberCssResources": {
+              "description": "Number of CSS resources referenced by the page.",
+              "format": "int32",
+              "type": "integer"
+            },
+            "numberHosts": {
+              "description": "Number of unique hosts referenced by the page.",
+              "format": "int32",
+              "type": "integer"
+            },
+            "numberJsResources": {
+              "description": "Number of JavaScript resources referenced by the page.",
+              "format": "int32",
+              "type": "integer"
+            },
+            "numberResources": {
+              "description": "Number of HTTP resources loaded by the page.",
+              "format": "int32",
+              "type": "integer"
+            },
+            "numberStaticResources": {
+              "description": "Number of static (i.e. cacheable) resources on the page.",
+              "format": "int32",
+              "type": "integer"
+            },
+            "otherResponseBytes": {
+              "description": "Number of response bytes for other resources on the page.",
+              "format": "int64",
+              "type": "string"
+            },
+            "textResponseBytes": {
+              "description": "Number of uncompressed response bytes for text resources not covered by other statistics (i.e non-HTML, non-script, non-CSS resources) on the page.",
+              "format": "int64",
+              "type": "string"
+            },
+            "totalRequestBytes": {
+              "description": "Total size of all request bytes sent by the page.",
+              "format": "int64",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "responseCode": {
+          "description": "Response code for the document. 200 indicates a normal page load. 4xx/5xx indicates an error.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "ruleGroups": {
+          "additionalProperties": {
+            "description": "The name of this rule group: one of \"SPEED\" or \"USABILITY\".",
+            "properties": {
+              "score": {
+                "description": "The score (0-100) for this rule group, which indicates how much better a page could be in that category (e.g. how much faster, or how much more usable). A high score indicates little room for improvement, while a lower score indicates more room for improvement.",
+                "format": "int32",
+                "type": "integer"
+              }
+            },
+            "type": "object"
+          },
+          "description": "A map with one entry for each rule group in these results.",
+          "type": "object"
+        },
+        "screenshot": {
+          "$ref": "#/definitions/PagespeedApiImageV2",
+          "description": "Base64-encoded screenshot of the page that was analyzed."
+        },
+        "title": {
+          "description": "Title of the page, as displayed in the browser's title bar.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version of PageSpeed used to generate these results.",
+          "properties": {
+            "major": {
+              "description": "The major version number of PageSpeed used to generate these results.",
+              "format": "int32",
+              "type": "integer"
+            },
+            "minor": {
+              "description": "The minor version number of PageSpeed used to generate these results.",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/speed/docs/insights/v2/getting-started"
+  },
+  "host": "www.googleapis.com",
   "info": {
-    "title": "PageSpeed Insights API",
-    "x-serviceName": "pagespeedonline",
-    "description": "Lets you analyze the performance of a web page and get tailored suggestions to make that page faster.",
     "contact": {
       "name": "Google",
       "url": "https://google.com"
     },
+    "description": "Lets you analyze the performance of a web page and get tailored suggestions to make that page faster.",
+    "title": "PageSpeed Insights API",
     "version": "v2",
-    "x-providerName": "googleapis.com",
+    "x-logo": "https://www.google.com/images/srpr/logo11w.png",
     "x-origin": {
       "format": "google",
-      "version": "v1",
-      "url": "https://www.googleapis.com/discovery/v1/apis/pagespeedonline/v2/rest"
+      "url": "https://www.googleapis.com/discovery/v1/apis/pagespeedonline/v2/rest",
+      "version": "v1"
     },
-    "x-logo": "https://www.google.com/images/srpr/logo11w.png"
+    "x-providerName": "googleapis.com",
+    "x-serviceName": "pagespeedonline"
   },
-  "host": "www.googleapis.com",
-  "basePath": "/pagespeedonline/v2",
-  "schemes": [
-    "https"
-  ],
+  "parameters": {
+    "alt": {
+      "default": "json",
+      "description": "Data format for the response.",
+      "enum": [
+        "json"
+      ],
+      "in": "query",
+      "name": "alt",
+      "type": "string"
+    },
+    "fields": {
+      "description": "Selector specifying which fields to include in a partial response.",
+      "in": "query",
+      "name": "fields",
+      "type": "string"
+    },
+    "key": {
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "in": "query",
+      "name": "key",
+      "type": "string"
+    },
+    "oauth_token": {
+      "description": "OAuth 2.0 token for the current user.",
+      "in": "query",
+      "name": "oauth_token",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "default": true,
+      "description": "Returns response with indentations and line breaks.",
+      "in": "query",
+      "name": "prettyPrint",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "in": "query",
+      "name": "quotaUser",
+      "type": "string"
+    },
+    "userIp": {
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "in": "query",
+      "name": "userIp",
+      "type": "string"
+    }
+  },
   "paths": {
     "/runPagespeed": {
       "get": {
         "description": "Runs PageSpeed analysis on the page at the specified URL, and returns PageSpeed scores, a list of suggestions to make that page faster, and other information.",
         "operationId": "pagespeedonline.pagespeedapi.runpagespeed",
+        "parameters": [
+          {
+            "description": "The URL to fetch and analyze",
+            "in": "query",
+            "name": "url",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": false,
+            "description": "Indicates if third party resources should be filtered out before PageSpeed analysis.",
+            "in": "query",
+            "name": "filter_third_party_resources",
+            "type": "boolean"
+          },
+          {
+            "description": "The locale used to localize formatted results",
+            "in": "query",
+            "name": "locale",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "A PageSpeed rule to run; if none are given, all rules are run",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "rule",
+            "type": "array"
+          },
+          {
+            "default": false,
+            "description": "Indicates if binary data containing a screenshot should be included",
+            "in": "query",
+            "name": "screenshot",
+            "type": "boolean"
+          },
+          {
+            "description": "The analysis strategy to use",
+            "enum": [
+              "desktop",
+              "mobile"
+            ],
+            "in": "query",
+            "name": "strategy",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -35,55 +485,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "url",
-            "in": "query",
-            "description": "The URL to fetch and analyze",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "filter_third_party_resources",
-            "in": "query",
-            "description": "Indicates if third party resources should be filtered out before PageSpeed analysis.",
-            "default": false,
-            "type": "boolean"
-          },
-          {
-            "name": "locale",
-            "in": "query",
-            "description": "The locale used to localize formatted results",
-            "type": "string"
-          },
-          {
-            "name": "rule",
-            "in": "query",
-            "description": "A PageSpeed rule to run; if none are given, all rules are run",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "screenshot",
-            "in": "query",
-            "description": "Indicates if binary data containing a screenshot should be included",
-            "default": false,
-            "type": "boolean"
-          },
-          {
-            "name": "strategy",
-            "in": "query",
-            "description": "The analysis strategy to use",
-            "type": "string",
-            "enum": [
-              "desktop",
-              "mobile"
-            ]
-          }
-        ],
         "tags": [
           "pagespeedapi"
         ]
@@ -113,409 +514,8 @@
       ]
     }
   },
-  "definitions": {
-    "PagespeedApiFormatStringV2": {
-      "type": "object",
-      "properties": {
-        "args": {
-          "type": "array",
-          "description": "List of arguments for the format string.",
-          "items": {
-            "type": "object",
-            "properties": {
-              "key": {
-                "type": "string",
-                "description": "The placeholder key for this arg, as a string."
-              },
-              "rects": {
-                "type": "array",
-                "description": "The screen rectangles being referred to, with dimensions measured in CSS pixels. This is only ever used for SNAPSHOT_RECT arguments. If this is absent for a SNAPSHOT_RECT argument, it means that that argument refers to the entire snapshot.",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "height": {
-                      "type": "integer",
-                      "description": "The height of the rect.",
-                      "format": "int32"
-                    },
-                    "left": {
-                      "type": "integer",
-                      "description": "The left coordinate of the rect, in page coordinates.",
-                      "format": "int32"
-                    },
-                    "top": {
-                      "type": "integer",
-                      "description": "The top coordinate of the rect, in page coordinates.",
-                      "format": "int32"
-                    },
-                    "width": {
-                      "type": "integer",
-                      "description": "The width of the rect.",
-                      "format": "int32"
-                    }
-                  }
-                }
-              },
-              "secondary_rects": {
-                "type": "array",
-                "description": "Secondary screen rectangles being referred to, with dimensions measured in CSS pixels. This is only ever used for SNAPSHOT_RECT arguments.",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "height": {
-                      "type": "integer",
-                      "description": "The height of the rect.",
-                      "format": "int32"
-                    },
-                    "left": {
-                      "type": "integer",
-                      "description": "The left coordinate of the rect, in page coordinates.",
-                      "format": "int32"
-                    },
-                    "top": {
-                      "type": "integer",
-                      "description": "The top coordinate of the rect, in page coordinates.",
-                      "format": "int32"
-                    },
-                    "width": {
-                      "type": "integer",
-                      "description": "The width of the rect.",
-                      "format": "int32"
-                    }
-                  }
-                }
-              },
-              "type": {
-                "type": "string",
-                "description": "Type of argument. One of URL, STRING_LITERAL, INT_LITERAL, BYTES, DURATION, VERBATIM_STRING, PERCENTAGE, HYPERLINK, or SNAPSHOT_RECT."
-              },
-              "value": {
-                "type": "string",
-                "description": "Argument value, as a localized string."
-              }
-            }
-          }
-        },
-        "format": {
-          "type": "string",
-          "description": "A localized format string with {{FOO}} placeholders, where 'FOO' is the key of the argument whose value should be substituted. For HYPERLINK arguments, the format string will instead contain {{BEGIN_FOO}} and {{END_FOO}} for the argument with key 'FOO'."
-        }
-      }
-    },
-    "PagespeedApiImageV2": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "string",
-          "description": "Image data base64 encoded.",
-          "format": "byte"
-        },
-        "height": {
-          "type": "integer",
-          "description": "Height of screenshot in pixels.",
-          "format": "int32"
-        },
-        "key": {
-          "type": "string",
-          "description": "Unique string key, if any, identifying this image."
-        },
-        "mime_type": {
-          "type": "string",
-          "description": "Mime type of image data (e.g. \"image/jpeg\")."
-        },
-        "page_rect": {
-          "type": "object",
-          "description": "The region of the page that is captured by this image, with dimensions measured in CSS pixels.",
-          "properties": {
-            "height": {
-              "type": "integer",
-              "description": "The height of the rect.",
-              "format": "int32"
-            },
-            "left": {
-              "type": "integer",
-              "description": "The left coordinate of the rect, in page coordinates.",
-              "format": "int32"
-            },
-            "top": {
-              "type": "integer",
-              "description": "The top coordinate of the rect, in page coordinates.",
-              "format": "int32"
-            },
-            "width": {
-              "type": "integer",
-              "description": "The width of the rect.",
-              "format": "int32"
-            }
-          }
-        },
-        "width": {
-          "type": "integer",
-          "description": "Width of screenshot in pixels.",
-          "format": "int32"
-        }
-      }
-    },
-    "Result": {
-      "type": "object",
-      "properties": {
-        "formattedResults": {
-          "type": "object",
-          "description": "Localized PageSpeed results. Contains a ruleResults entry for each PageSpeed rule instantiated and run by the server.",
-          "properties": {
-            "locale": {
-              "type": "string",
-              "description": "The locale of the formattedResults, e.g. \"en_US\"."
-            },
-            "ruleResults": {
-              "type": "object",
-              "description": "Dictionary of formatted rule results, with one entry for each PageSpeed rule instantiated and run by the server.",
-              "additionalProperties": {
-                "type": "object",
-                "description": "The enum-like identifier for this rule. For instance \"EnableKeepAlive\" or \"AvoidCssImport\". Not localized.",
-                "properties": {
-                  "groups": {
-                    "type": "array",
-                    "description": "List of rule groups that this rule belongs to. Each entry in the list is one of \"SPEED\" or \"USABILITY\".",
-                    "items": {
-                      "type": "string"
-                    }
-                  },
-                  "localizedRuleName": {
-                    "type": "string",
-                    "description": "Localized name of the rule, intended for presentation to a user."
-                  },
-                  "ruleImpact": {
-                    "type": "number",
-                    "description": "The impact (unbounded floating point value) that implementing the suggestions for this rule would have on making the page faster. Impact is comparable between rules to determine which rule's suggestions would have a higher or lower impact on making a page faster. For instance, if enabling compression would save 1MB, while optimizing images would save 500kB, the enable compression rule would have 2x the impact of the image optimization rule, all other things being equal.",
-                    "format": "double"
-                  },
-                  "summary": {
-                    "$ref": "#/definitions/PagespeedApiFormatStringV2",
-                    "description": "A brief summary description for the rule, indicating at a high level what should be done to follow the rule and what benefit can be gained by doing so."
-                  },
-                  "urlBlocks": {
-                    "type": "array",
-                    "description": "List of blocks of URLs. Each block may contain a heading and a list of URLs. Each URL may optionally include additional details.",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "header": {
-                          "$ref": "#/definitions/PagespeedApiFormatStringV2",
-                          "description": "Heading to be displayed with the list of URLs."
-                        },
-                        "urls": {
-                          "type": "array",
-                          "description": "List of entries that provide information about URLs in the url block. Optional.",
-                          "items": {
-                            "type": "object",
-                            "properties": {
-                              "details": {
-                                "type": "array",
-                                "description": "List of entries that provide additional details about a single URL. Optional.",
-                                "items": {
-                                  "$ref": "#/definitions/PagespeedApiFormatStringV2"
-                                }
-                              },
-                              "result": {
-                                "$ref": "#/definitions/PagespeedApiFormatStringV2",
-                                "description": "A format string that gives information about the URL, and a list of arguments for that format string."
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "id": {
-          "type": "string",
-          "description": "Canonicalized and final URL for the document, after following page redirects (if any)."
-        },
-        "invalidRules": {
-          "type": "array",
-          "description": "List of rules that were specified in the request, but which the server did not know how to instantiate.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "Kind of result.",
-          "default": "pagespeedonline#result"
-        },
-        "pageStats": {
-          "type": "object",
-          "description": "Summary statistics for the page, such as number of JavaScript bytes, number of HTML bytes, etc.",
-          "properties": {
-            "cssResponseBytes": {
-              "type": "string",
-              "description": "Number of uncompressed response bytes for CSS resources on the page.",
-              "format": "int64"
-            },
-            "flashResponseBytes": {
-              "type": "string",
-              "description": "Number of response bytes for flash resources on the page.",
-              "format": "int64"
-            },
-            "htmlResponseBytes": {
-              "type": "string",
-              "description": "Number of uncompressed response bytes for the main HTML document and all iframes on the page.",
-              "format": "int64"
-            },
-            "imageResponseBytes": {
-              "type": "string",
-              "description": "Number of response bytes for image resources on the page.",
-              "format": "int64"
-            },
-            "javascriptResponseBytes": {
-              "type": "string",
-              "description": "Number of uncompressed response bytes for JS resources on the page.",
-              "format": "int64"
-            },
-            "numberCssResources": {
-              "type": "integer",
-              "description": "Number of CSS resources referenced by the page.",
-              "format": "int32"
-            },
-            "numberHosts": {
-              "type": "integer",
-              "description": "Number of unique hosts referenced by the page.",
-              "format": "int32"
-            },
-            "numberJsResources": {
-              "type": "integer",
-              "description": "Number of JavaScript resources referenced by the page.",
-              "format": "int32"
-            },
-            "numberResources": {
-              "type": "integer",
-              "description": "Number of HTTP resources loaded by the page.",
-              "format": "int32"
-            },
-            "numberStaticResources": {
-              "type": "integer",
-              "description": "Number of static (i.e. cacheable) resources on the page.",
-              "format": "int32"
-            },
-            "otherResponseBytes": {
-              "type": "string",
-              "description": "Number of response bytes for other resources on the page.",
-              "format": "int64"
-            },
-            "textResponseBytes": {
-              "type": "string",
-              "description": "Number of uncompressed response bytes for text resources not covered by other statistics (i.e non-HTML, non-script, non-CSS resources) on the page.",
-              "format": "int64"
-            },
-            "totalRequestBytes": {
-              "type": "string",
-              "description": "Total size of all request bytes sent by the page.",
-              "format": "int64"
-            }
-          }
-        },
-        "responseCode": {
-          "type": "integer",
-          "description": "Response code for the document. 200 indicates a normal page load. 4xx/5xx indicates an error.",
-          "format": "int32"
-        },
-        "ruleGroups": {
-          "type": "object",
-          "description": "A map with one entry for each rule group in these results.",
-          "additionalProperties": {
-            "type": "object",
-            "description": "The name of this rule group: one of \"SPEED\" or \"USABILITY\".",
-            "properties": {
-              "score": {
-                "type": "integer",
-                "description": "The score (0-100) for this rule group, which indicates how much better a page could be in that category (e.g. how much faster, or how much more usable). A high score indicates little room for improvement, while a lower score indicates more room for improvement.",
-                "format": "int32"
-              }
-            }
-          }
-        },
-        "screenshot": {
-          "$ref": "#/definitions/PagespeedApiImageV2",
-          "description": "Base64-encoded screenshot of the page that was analyzed."
-        },
-        "title": {
-          "type": "string",
-          "description": "Title of the page, as displayed in the browser's title bar."
-        },
-        "version": {
-          "type": "object",
-          "description": "The version of PageSpeed used to generate these results.",
-          "properties": {
-            "major": {
-              "type": "integer",
-              "description": "The major version number of PageSpeed used to generate these results.",
-              "format": "int32"
-            },
-            "minor": {
-              "type": "integer",
-              "description": "The minor version number of PageSpeed used to generate these results.",
-              "format": "int32"
-            }
-          }
-        }
-      }
-    }
-  },
-  "parameters": {
-    "alt": {
-      "name": "alt",
-      "in": "query",
-      "description": "Data format for the response.",
-      "default": "json",
-      "type": "string",
-      "enum": [
-        "json"
-      ]
-    },
-    "fields": {
-      "name": "fields",
-      "in": "query",
-      "description": "Selector specifying which fields to include in a partial response.",
-      "type": "string"
-    },
-    "key": {
-      "name": "key",
-      "in": "query",
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "type": "string"
-    },
-    "oauth_token": {
-      "name": "oauth_token",
-      "in": "query",
-      "description": "OAuth 2.0 token for the current user.",
-      "type": "string"
-    },
-    "prettyPrint": {
-      "name": "prettyPrint",
-      "in": "query",
-      "description": "Returns response with indentations and line breaks.",
-      "default": true,
-      "type": "boolean"
-    },
-    "quotaUser": {
-      "name": "quotaUser",
-      "in": "query",
-      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
-      "type": "string"
-    },
-    "userIp": {
-      "name": "userIp",
-      "in": "query",
-      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
-      "type": "string"
-    }
-  },
-  "externalDocs": {
-    "url": "https://developers.google.com/speed/docs/insights/v2/getting-started"
-  }
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0"
 }

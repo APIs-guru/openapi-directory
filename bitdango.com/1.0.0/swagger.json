@@ -1,157 +1,35 @@
 {
-  "host": "bitdango.com",
   "basePath": "/api",
-  "schemes": [
-    "https"
-  ],
-  "swagger": "2.0",
+  "host": "bitdango.com",
   "info": {
-    "version": "1.0.0",
-    "title": "Bitdango API",
     "description": "Documentation for the Bitdango API",
-    "x-providerName": "bitdango.com",
+    "title": "Bitdango API",
+    "version": "1.0.0",
     "x-origin": {
       "format": "swagger",
-      "version": "1.2",
-      "url": "https://bitdango.com/api/documentation"
-    }
+      "url": "https://bitdango.com/api/documentation",
+      "version": "1.2"
+    },
+    "x-providerName": "bitdango.com"
   },
-  "tags": [
-    {
-      "name": "exchanges",
-      "description": ""
-    },
-    {
-      "name": "currencypairs",
-      "description": ""
-    },
-    {
-      "name": "currencies",
-      "description": ""
-    },
-    {
-      "name": "marketpairs",
-      "description": ""
-    },
-    {
-      "name": "markets",
-      "description": ""
-    },
-    {
-      "name": "sessions",
-      "description": ""
-    }
-  ],
   "paths": {
-    "/exchanges": {},
-    "/exchanges/{exchangeCode}": {
-      "get": {
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "exchanges"
-        ],
-        "operationId": "exchanges",
-        "summary": "Use this to get a specific exchange.",
-        "description": "<p>Use this to get a specific exchange.</p>\r\n<p>Authentication Level = 0 (\r\npublic / no authentication\r\n)</p>\r\n<h4>Expand Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">credentials</td><td>Include the credentials required to authenticate with this exchange.</td></tr>\r\n<tr><td class=\"code\">limits</td><td>Include the limits enforced by this exchange.</td></tr>\r\n<tr><td class=\"code\">transferPolicies</td><td>Include the transfer policies enforced by this exchange.</td></tr>\r\n<tr><td class=\"code\">markets</td><td>Include the markets listed on this exchange.</td></tr>\r\n</tbody></table>\r\n",
-        "parameters": [
-          {
-            "in": "path",
-            "description": "<ul>\r\n</ul>\r\n",
-            "name": "exchangeCode",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "<ul><li>Example: <span class=\"code\">credentials, limits, transferPolicies, markets</span></li></ul>",
-            "name": "expands",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "<b>Success</b> Everything worked as expected."
-          },
-          "404": {
-            "description": "<b>InvalidResource</b> The resource you requested doesn't exist."
-          },
-          "500": {
-            "description": "<b>Error</b> Generic error message."
-          },
-          "503": {
-            "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
-          }
-        }
-      }
-    },
-    "/currencypairs": {},
-    "/currencypairs/{currencyPairCode}": {
-      "get": {
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "currencypairs"
-        ],
-        "operationId": "currencypairs",
-        "summary": "Return a specific currency pair.",
-        "description": "<p>Return a specific currency pair.</p>\r\n<p>Authentication Level = 0 (\r\npublic / no authentication\r\n)</p>\r\n<h4>Expand Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">exchangeRateHistory</td><td>Use this to get the exchange rate history for currency pairs.</td></tr>\r\n</tbody></table>\r\n",
-        "parameters": [
-          {
-            "in": "path",
-            "description": "<ul>\r\n</ul>\r\n",
-            "name": "currencyPairCode",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "<ul><li>Example: <span class=\"code\">exchangeRateHistory</span></li></ul>",
-            "name": "expands",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "<b>Success</b> Everything worked as expected."
-          },
-          "404": {
-            "description": "<b>InvalidResource</b> The resource you requested doesn't exist."
-          },
-          "500": {
-            "description": "<b>Error</b> Generic error message."
-          },
-          "503": {
-            "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
-          }
-        }
-      }
-    },
     "/currencies": {},
     "/currencies/{currencyCode}": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "currencies"
-        ],
-        "operationId": "currencies",
-        "summary": "Get a specific currency.",
         "description": "<p>Get a specific currency.</p>\r\n<p>Authentication Level = 0 (\r\npublic / no authentication\r\n)</p>\r\n",
+        "operationId": "currencies",
         "parameters": [
           {
-            "in": "path",
             "description": "<ul>\r\n</ul>\r\n",
+            "in": "path",
             "name": "currencyCode",
             "required": true,
             "type": "string"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "<b>Success</b> Everything worked as expected."
@@ -165,43 +43,131 @@
           "503": {
             "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
           }
-        }
+        },
+        "summary": "Get a specific currency.",
+        "tags": [
+          "currencies"
+        ]
+      }
+    },
+    "/currencypairs": {},
+    "/currencypairs/{currencyPairCode}": {
+      "get": {
+        "description": "<p>Return a specific currency pair.</p>\r\n<p>Authentication Level = 0 (\r\npublic / no authentication\r\n)</p>\r\n<h4>Expand Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">exchangeRateHistory</td><td>Use this to get the exchange rate history for currency pairs.</td></tr>\r\n</tbody></table>\r\n",
+        "operationId": "currencypairs",
+        "parameters": [
+          {
+            "description": "<ul>\r\n</ul>\r\n",
+            "in": "path",
+            "name": "currencyPairCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "<ul><li>Example: <span class=\"code\">exchangeRateHistory</span></li></ul>",
+            "in": "query",
+            "name": "expands",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "<b>Success</b> Everything worked as expected."
+          },
+          "404": {
+            "description": "<b>InvalidResource</b> The resource you requested doesn't exist."
+          },
+          "500": {
+            "description": "<b>Error</b> Generic error message."
+          },
+          "503": {
+            "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
+          }
+        },
+        "summary": "Return a specific currency pair.",
+        "tags": [
+          "currencypairs"
+        ]
+      }
+    },
+    "/exchanges": {},
+    "/exchanges/{exchangeCode}": {
+      "get": {
+        "description": "<p>Use this to get a specific exchange.</p>\r\n<p>Authentication Level = 0 (\r\npublic / no authentication\r\n)</p>\r\n<h4>Expand Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">credentials</td><td>Include the credentials required to authenticate with this exchange.</td></tr>\r\n<tr><td class=\"code\">limits</td><td>Include the limits enforced by this exchange.</td></tr>\r\n<tr><td class=\"code\">transferPolicies</td><td>Include the transfer policies enforced by this exchange.</td></tr>\r\n<tr><td class=\"code\">markets</td><td>Include the markets listed on this exchange.</td></tr>\r\n</tbody></table>\r\n",
+        "operationId": "exchanges",
+        "parameters": [
+          {
+            "description": "<ul>\r\n</ul>\r\n",
+            "in": "path",
+            "name": "exchangeCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "<ul><li>Example: <span class=\"code\">credentials, limits, transferPolicies, markets</span></li></ul>",
+            "in": "query",
+            "name": "expands",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "<b>Success</b> Everything worked as expected."
+          },
+          "404": {
+            "description": "<b>InvalidResource</b> The resource you requested doesn't exist."
+          },
+          "500": {
+            "description": "<b>Error</b> Generic error message."
+          },
+          "503": {
+            "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
+          }
+        },
+        "summary": "Use this to get a specific exchange.",
+        "tags": [
+          "exchanges"
+        ]
       }
     },
     "/marketpairs": {},
     "/marketpairs/{marketPairCode}": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "marketpairs"
-        ],
-        "operationId": "marketpairs",
-        "summary": "Use this get a specific market pair.",
         "description": "<p>Use this get a specific market pair.</p>\r\n<p>Authentication Level = 1 (\r\naccessToken header\r\n)</p>\r\n<h4>Expand Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">trades</td><td>Use this to include profitable trades that can be made.</td></tr>\r\n<tr><td class=\"code\">orderbooks</td><td>Use this to return the order books for both markets in the market pair.</td></tr>\r\n<tr><td class=\"code\">tickers</td><td>Use this to include the tickers for markets.</td></tr>\r\n<tr><td class=\"code\">profitCurve</td><td>Use this to include the profit at different traded amounts.</td></tr>\r\n</tbody></table>\r\n",
+        "operationId": "marketpairs",
         "parameters": [
           {
-            "in": "header",
             "description": "<p>The access token for the user (<a href=\"http://self-issued.info/docs/draft-ietf-oauth-v2-bearer.html#authz-header\">format</a>: Bearer access_token).</p><p>Example: Bearer DI83JE3H8FEUIFJKWEKJ8E9383</p>",
+            "in": "header",
             "name": "Authorization",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "description": "<ul>\r\n<li>Example: <span class=\"code\">bitstampBTCUSDmtgoxBTCEUR</span></li>\r\n</ul>\r\n",
+            "in": "path",
             "name": "marketPairCode",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "<ul><li>Example: <span class=\"code\">trades, orderbooks, tickers, profitCurve</span></li></ul>",
+            "in": "query",
             "name": "expands",
             "required": false,
             "type": "string"
           }
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -222,43 +188,43 @@
           "503": {
             "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
           }
-        }
+        },
+        "summary": "Use this get a specific market pair.",
+        "tags": [
+          "marketpairs"
+        ]
       }
     },
     "/markets": {},
     "/markets/{marketCode}": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "markets"
-        ],
-        "operationId": "markets",
-        "summary": "Use this to get a specific market.",
         "description": "<p>Use this to get a specific market.</p>\r\n<p>Authentication Level = 1 (\r\naccessToken header\r\n)</p>\r\n<h4>Expand Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">tickerHistory</td><td>This will include the historical prices for the ticker.</td></tr>\r\n<tr><td class=\"code\">orderBook</td><td>This will include the order book for the market.</td></tr>\r\n<tr><td class=\"code\">ticker</td><td>This will include the ticker for the market.</td></tr>\r\n</tbody></table>\r\n",
+        "operationId": "markets",
         "parameters": [
           {
-            "in": "header",
             "description": "<p>The access token for the user (<a href=\"http://self-issued.info/docs/draft-ietf-oauth-v2-bearer.html#authz-header\">format</a>: Bearer access_token).</p><p>Example: Bearer DI83JE3H8FEUIFJKWEKJ8E9383</p>",
+            "in": "header",
             "name": "Authorization",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "description": "<ul>\r\n<li>Example: <span class=\"code\">mtgoxBTCUSD, btceLTCEUR</span></li>\r\n</ul>\r\n",
+            "in": "path",
             "name": "marketCode",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "<ul><li>Example: <span class=\"code\">tickerHistory, orderBook, ticker</span></li></ul>",
+            "in": "query",
             "name": "expands",
             "required": false,
             "type": "string"
           }
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -279,101 +245,101 @@
           "503": {
             "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
           }
-        }
+        },
+        "summary": "Use this to get a specific market.",
+        "tags": [
+          "markets"
+        ]
       }
     },
     "/sessions": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "sessions"
-        ],
-        "operationId": "sessions",
-        "summary": "Use this to search your session history.",
         "description": "<p>Use this to search your session history.</p>\r\n<p>Authentication Level = 1 (\r\naccessToken header\r\n)</p>\r\n<h4>Facet Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">countries</td><td>Get a facet of countires where sessions have been initiated.</td></tr>\r\n<tr><td class=\"code\">applications</td><td>Get a facet of applications used to create sessions.</td></tr>\r\n<tr><td class=\"code\">ipAddresses</td><td>Get a facet of IP Addresses used to create sessions.</td></tr>\r\n<tr><td class=\"code\">cities</td><td>Get a facet of cities where sessions have been initiated.</td></tr>\r\n<tr><td class=\"code\">regions</td><td>Get a facet of regions where sessions have been initiated.</td></tr>\r\n</tbody></table>\r\n",
+        "operationId": "sessions",
         "parameters": [
           {
-            "in": "header",
             "description": "<p>The access token for the user (<a href=\"http://self-issued.info/docs/draft-ietf-oauth-v2-bearer.html#authz-header\">format</a>: Bearer access_token).</p><p>Example: Bearer DI83JE3H8FEUIFJKWEKJ8E9383</p>",
+            "in": "header",
             "name": "Authorization",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
+            "default": 1,
             "description": "<ul>\r\n</ul>\r\n",
+            "in": "query",
             "name": "page",
             "required": false,
-            "type": "integer",
-            "default": 1
+            "type": "integer"
           },
           {
-            "in": "query",
+            "default": 10,
             "description": "<ul>\r\n<li>Max Value: <span class=\"code\">100</span></li>\r\n</ul>\r\n",
+            "in": "query",
             "name": "pageSize",
             "required": false,
-            "type": "integer",
-            "default": 10
+            "type": "integer"
           },
           {
-            "in": "query",
+            "default": false,
             "description": "<ul>\r\n</ul>\r\n",
+            "in": "query",
             "name": "includeTotalResults",
             "required": false,
-            "type": "boolean",
-            "default": false
+            "type": "boolean"
           },
           {
-            "in": "query",
             "description": "<ul>\r\n<li>Example: <span class=\"code\">bitdangoApi, automagically</span></li>\r\n</ul>\r\n",
+            "in": "query",
             "name": "applications",
             "required": false,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "<ul>\r\n<li>Example: <span class=\"code\">192.168.456.48</span></li>\r\n</ul>\r\n",
+            "in": "query",
             "name": "ipAddresses",
             "required": false,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "<ul>\r\n<li>Example: <span class=\"code\">Seattle, London, Shanghai</span></li>\r\n</ul>\r\n",
+            "in": "query",
             "name": "cities",
             "required": false,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "<ul>\r\n<li>Example: <span class=\"code\">California, Florida, Colorado</span></li>\r\n</ul>\r\n",
+            "in": "query",
             "name": "regions",
             "required": false,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "<ul>\r\n<li>Example: <span class=\"code\">US, NZ, FR</span></li>\r\n</ul>\r\n",
+            "in": "query",
             "name": "countries",
             "required": false,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "<ul>\r\n<li>Example: <span class=\"code\">9f72b726-d67c-47e5-9a80-fded7a23be1c</span></li>\r\n</ul>\r\n",
+            "in": "query",
             "name": "sessions",
             "required": false,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "<ul><li>Example: countries, applications, ipAddresses, cities, regions</li></ul>",
+            "in": "query",
             "name": "facets",
             "required": false,
             "type": "string"
           }
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -391,8 +357,42 @@
           "503": {
             "description": "<b>RequestThresholdBreached</b> You may get this error if you are making too many requests in a time period."
           }
-        }
+        },
+        "summary": "Use this to search your session history.",
+        "tags": [
+          "sessions"
+        ]
       }
     }
-  }
+  },
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "",
+      "name": "exchanges"
+    },
+    {
+      "description": "",
+      "name": "currencypairs"
+    },
+    {
+      "description": "",
+      "name": "currencies"
+    },
+    {
+      "description": "",
+      "name": "marketpairs"
+    },
+    {
+      "description": "",
+      "name": "markets"
+    },
+    {
+      "description": "",
+      "name": "sessions"
+    }
+  ]
 }

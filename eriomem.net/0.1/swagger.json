@@ -1,81 +1,65 @@
 {
-  "swagger": "2.0",
+  "basePath": "/",
+  "definitions": {
+    "RandomArray": {
+      "properties": {
+        "rand": {
+          "items": {
+            "format": "int8",
+            "type": "integer"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "RandomByte": {
+      "format": "int8",
+      "type": "integer"
+    }
+  },
+  "host": "testmr.eriomem.net",
   "info": {
-    "description": "This is the experimental API documentation for <a href='http://www.massiverand.com/'>MassiveRand</a> TRNG Web Service. Serving true random numbers since December 2014!<p>Explore our <a href='../tutorials'>Tutorials</a>.</p>",
-    "version": "0.1",
-    "title": "MassiveRand TRNG Web Service",
-    "termsOfService": "terms.html",
     "contact": {
       "name": "info@massiverand.com"
     },
+    "description": "This is the experimental API documentation for <a href='http://www.massiverand.com/'>MassiveRand</a> TRNG Web Service. Serving true random numbers since December 2014!<p>Explore our <a href='../tutorials'>Tutorials</a>.</p>",
     "license": {
       "name": "Terms of Use",
       "url": "terms.html"
     },
-    "x-providerName": "eriomem.net",
+    "termsOfService": "terms.html",
+    "title": "MassiveRand TRNG Web Service",
+    "version": "0.1",
     "x-origin": {
       "format": "swagger",
-      "version": "2.0",
-      "url": "http://testmr.eriomem.net/doc/ex.json"
-    }
-  },
-  "host": "testmr.eriomem.net",
-  "basePath": "/",
-  "schemes": [
-    "http"
-  ],
-  "paths": {
-    "/randprime": {
-      "get": {
-        "tags": [
-          "Million Prime Database"
-        ],
-        "summary": "Generate a large random prime number.",
-        "description": "Returns a large prime number (1536b long) from MassiveRand's Million Prime Database, as an hexadecimal string.",
-        "operationId": "randprime",
-        "produces": [
-          "text/plain"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "type": "string"
-            }
-          },
-          "500": {
-            "description": "Service failure"
-          }
-        }
-      }
+      "url": "http://testmr.eriomem.net/doc/ex.json",
+      "version": "2.0"
     },
+    "x-providerName": "eriomem.net"
+  },
+  "paths": {
     "/rand": {
       "get": {
-        "tags": [
-          "True Random Number Generator"
-        ],
-        "summary": "Generate a page of true random numbers.",
         "description": "Returns a list of true random bytes from the MassiveRand True Random Number Generator as blank-separated decimal strings.",
         "operationId": "rand",
-        "produces": [
-          "text/plain"
-        ],
         "parameters": [
           {
+            "description": "Number of bytes to return",
             "in": "query",
             "name": "length",
-            "description": "Number of bytes to return",
             "required": false,
             "type": "integer"
           },
           {
+            "description": "String to use as separator between bytes",
             "in": "query",
             "name": "sep",
-            "description": "String to use as separator between bytes",
             "required": false,
             "type": "string"
           }
+        ],
+        "produces": [
+          "text/plain"
         ],
         "responses": {
           "200": {
@@ -87,136 +71,15 @@
           "500": {
             "description": "Service failure"
           }
-        }
-      }
-    },
-    "/randjson": {
-      "get": {
+        },
+        "summary": "Generate a page of true random numbers.",
         "tags": [
           "True Random Number Generator"
-        ],
-        "summary": "Generate a JSON list of true random numbers.",
-        "description": "Returns a list of true random bytes from the MassiveRand True Random Number Generator as a JSON string.",
-        "operationId": "rand",
-        "produces": [
-          "text/plain"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "length",
-            "description": "Number of bytes to return",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "sep",
-            "description": "String to use as separator between bytes",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/RandomArray"
-            }
-          },
-          "500": {
-            "description": "Service failure"
-          }
-        }
-      }
-    },
-    "/randbindl": {
-      "get": {
-        "tags": [
-          "True Random Number Generator"
-        ],
-        "summary": "Generate a binary encoded file of true random numbers.",
-        "description": "Returns a binary blob of true random bytes from the MassiveRand True Random Number Generator as an attached file 'rand.raw'.",
-        "operationId": "rand",
-        "produces": [
-          "application/download"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "length",
-            "description": "Number of bytes to return",
-            "required": false,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation"
-          },
-          "500": {
-            "description": "Service failure"
-          }
-        }
-      }
-    },
-    "/randbinds": {
-      "get": {
-        "tags": [
-          "True Random Number Generator"
-        ],
-        "summary": "Generate a binary stream of true random numbers.",
-        "description": "Returns a binary blob of true random bytes from the MassiveRand True Random Number Generator.",
-        "operationId": "rand",
-        "produces": [
-          "application/download"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "length",
-            "description": "Number of bytes to return",
-            "required": false,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation"
-          },
-          "500": {
-            "description": "Service failure"
-          }
-        }
-      }
-    },
-    "/randb64": {
-      "get": {
-        "tags": [
-          "True Random Number Generator"
-        ],
-        "summary": "Generate a base64 encoded page of true random numbers.",
-        "description": "Returns a <a href='http://en.wikipedia.org/wiki/Base64'>base64</a> string of true random bytes from the MassiveRand True Random Number Generator.",
-        "operationId": "rand",
-        "produces": [
-          "application/octetstream"
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation"
-          },
-          "500": {
-            "description": "Service failure"
-          }
-        }
+        ]
       }
     },
     "/randb58": {
       "get": {
-        "tags": [
-          "True Random Number Generator"
-        ],
-        "summary": "Generate a base58 encoded page of true random numbers.",
         "description": "Returns a <a href='http://en.wikipedia.org/wiki/Base58'>base58</a> string of true random bytes from the MassiveRand True Random Number Generator.",
         "operationId": "rand",
         "produces": [
@@ -229,25 +92,162 @@
           "500": {
             "description": "Service failure"
           }
-        }
+        },
+        "summary": "Generate a base58 encoded page of true random numbers.",
+        "tags": [
+          "True Random Number Generator"
+        ]
+      }
+    },
+    "/randb64": {
+      "get": {
+        "description": "Returns a <a href='http://en.wikipedia.org/wiki/Base64'>base64</a> string of true random bytes from the MassiveRand True Random Number Generator.",
+        "operationId": "rand",
+        "produces": [
+          "application/octetstream"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "500": {
+            "description": "Service failure"
+          }
+        },
+        "summary": "Generate a base64 encoded page of true random numbers.",
+        "tags": [
+          "True Random Number Generator"
+        ]
+      }
+    },
+    "/randbindl": {
+      "get": {
+        "description": "Returns a binary blob of true random bytes from the MassiveRand True Random Number Generator as an attached file 'rand.raw'.",
+        "operationId": "rand",
+        "parameters": [
+          {
+            "description": "Number of bytes to return",
+            "in": "query",
+            "name": "length",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/download"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "500": {
+            "description": "Service failure"
+          }
+        },
+        "summary": "Generate a binary encoded file of true random numbers.",
+        "tags": [
+          "True Random Number Generator"
+        ]
+      }
+    },
+    "/randbinds": {
+      "get": {
+        "description": "Returns a binary blob of true random bytes from the MassiveRand True Random Number Generator.",
+        "operationId": "rand",
+        "parameters": [
+          {
+            "description": "Number of bytes to return",
+            "in": "query",
+            "name": "length",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/download"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "500": {
+            "description": "Service failure"
+          }
+        },
+        "summary": "Generate a binary stream of true random numbers.",
+        "tags": [
+          "True Random Number Generator"
+        ]
+      }
+    },
+    "/randjson": {
+      "get": {
+        "description": "Returns a list of true random bytes from the MassiveRand True Random Number Generator as a JSON string.",
+        "operationId": "rand",
+        "parameters": [
+          {
+            "description": "Number of bytes to return",
+            "in": "query",
+            "name": "length",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "String to use as separator between bytes",
+            "in": "query",
+            "name": "sep",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "text/plain"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/RandomArray"
+            }
+          },
+          "500": {
+            "description": "Service failure"
+          }
+        },
+        "summary": "Generate a JSON list of true random numbers.",
+        "tags": [
+          "True Random Number Generator"
+        ]
+      }
+    },
+    "/randprime": {
+      "get": {
+        "description": "Returns a large prime number (1536b long) from MassiveRand's Million Prime Database, as an hexadecimal string.",
+        "operationId": "randprime",
+        "parameters": [],
+        "produces": [
+          "text/plain"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "500": {
+            "description": "Service failure"
+          }
+        },
+        "summary": "Generate a large random prime number.",
+        "tags": [
+          "Million Prime Database"
+        ]
       }
     }
   },
-  "definitions": {
-    "RandomArray": {
-      "properties": {
-        "rand": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int8"
-          }
-        }
-      }
-    },
-    "RandomByte": {
-      "type": "integer",
-      "format": "int8"
-    }
-  }
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0"
 }

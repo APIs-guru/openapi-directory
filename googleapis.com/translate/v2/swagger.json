@@ -1,32 +1,265 @@
 {
-  "swagger": "2.0",
+  "basePath": "/language/translate",
+  "definitions": {
+    "DetectionsListResponse": {
+      "properties": {
+        "detections": {
+          "description": "A detections contains detection results of several text",
+          "items": {
+            "$ref": "#/definitions/DetectionsResource"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "DetectionsResource": {
+      "description": "An array of languages which we detect for the given text The most likely language list first.",
+      "items": {
+        "properties": {
+          "confidence": {
+            "description": "The confidence of the detection resul of this language.",
+            "format": "float",
+            "type": "number"
+          },
+          "isReliable": {
+            "description": "A boolean to indicate is the language detection result reliable.",
+            "type": "boolean"
+          },
+          "language": {
+            "description": "The language we detect",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "LanguagesListResponse": {
+      "properties": {
+        "languages": {
+          "description": "List of source/target languages supported by the translation API. If target parameter is unspecified, the list is sorted by the ASCII code point order of the language code. If target parameter is specified, the list is sorted by the collation order of the language name in the target language.",
+          "items": {
+            "$ref": "#/definitions/LanguagesResource"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "LanguagesResource": {
+      "properties": {
+        "language": {
+          "description": "The language code.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The localized name of the language if target parameter is given.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TranslationsListResponse": {
+      "properties": {
+        "translations": {
+          "description": "Translations contains list of translation results of given text",
+          "items": {
+            "$ref": "#/definitions/TranslationsResource"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "TranslationsResource": {
+      "properties": {
+        "detectedSourceLanguage": {
+          "description": "Detected source language if source parameter is unspecified.",
+          "type": "string"
+        },
+        "translatedText": {
+          "description": "The translation.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/translate/v2/using_rest"
+  },
+  "host": "www.googleapis.com",
   "info": {
-    "title": "Translate API",
-    "x-serviceName": "translate",
-    "description": "Lets you translate text from one language to another",
     "contact": {
       "name": "Google",
       "url": "https://google.com"
     },
+    "description": "Lets you translate text from one language to another",
+    "title": "Translate API",
     "version": "v2",
-    "x-providerName": "googleapis.com",
+    "x-logo": "https://www.google.com/images/srpr/logo11w.png",
     "x-origin": {
       "format": "google",
-      "version": "v1",
-      "url": "https://www.googleapis.com/discovery/v1/apis/translate/v2/rest"
+      "url": "https://www.googleapis.com/discovery/v1/apis/translate/v2/rest",
+      "version": "v1"
     },
-    "x-logo": "https://www.google.com/images/srpr/logo11w.png"
+    "x-providerName": "googleapis.com",
+    "x-serviceName": "translate"
   },
-  "host": "www.googleapis.com",
-  "basePath": "/language/translate",
-  "schemes": [
-    "https"
-  ],
+  "parameters": {
+    "alt": {
+      "default": "json",
+      "description": "Data format for the response.",
+      "enum": [
+        "json"
+      ],
+      "in": "query",
+      "name": "alt",
+      "type": "string"
+    },
+    "fields": {
+      "description": "Selector specifying which fields to include in a partial response.",
+      "in": "query",
+      "name": "fields",
+      "type": "string"
+    },
+    "key": {
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "in": "query",
+      "name": "key",
+      "type": "string"
+    },
+    "oauth_token": {
+      "description": "OAuth 2.0 token for the current user.",
+      "in": "query",
+      "name": "oauth_token",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "default": true,
+      "description": "Returns response with indentations and line breaks.",
+      "in": "query",
+      "name": "prettyPrint",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "in": "query",
+      "name": "quotaUser",
+      "type": "string"
+    },
+    "userIp": {
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "in": "query",
+      "name": "userIp",
+      "type": "string"
+    }
+  },
   "paths": {
+    "/v2": {
+      "get": {
+        "description": "Returns text translations from one language to another.",
+        "operationId": "language.translations.list",
+        "parameters": [
+          {
+            "collectionFormat": "multi",
+            "description": "The text to translate",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "q",
+            "required": true,
+            "type": "array"
+          },
+          {
+            "description": "The target language into which the text should be translated",
+            "in": "query",
+            "name": "target",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "The customization id for translate",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "cid",
+            "type": "array"
+          },
+          {
+            "description": "The format of the text",
+            "enum": [
+              "html",
+              "text"
+            ],
+            "in": "query",
+            "name": "format",
+            "type": "string"
+          },
+          {
+            "description": "The source language of the text",
+            "in": "query",
+            "name": "source",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TranslationsListResponse"
+            }
+          }
+        },
+        "tags": [
+          "translations"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/v2/detect": {
       "get": {
         "description": "Detect the language of text.",
         "operationId": "language.detections.list",
+        "parameters": [
+          {
+            "collectionFormat": "multi",
+            "description": "The text to detect",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "q",
+            "required": true,
+            "type": "array"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -35,19 +268,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "q",
-            "in": "query",
-            "description": "The text to detect",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          }
-        ],
         "tags": [
           "detections"
         ]
@@ -80,6 +300,14 @@
       "get": {
         "description": "List the source/target languages supported by the API",
         "operationId": "language.languages.list",
+        "parameters": [
+          {
+            "description": "the language and collation in which the localized results should be returned",
+            "in": "query",
+            "name": "target",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -88,14 +316,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "target",
-            "in": "query",
-            "description": "the language and collation in which the localized results should be returned",
-            "type": "string"
-          }
-        ],
         "tags": [
           "languages"
         ]
@@ -123,230 +343,10 @@
           "$ref": "#/parameters/userIp"
         }
       ]
-    },
-    "/v2": {
-      "get": {
-        "description": "Returns text translations from one language to another.",
-        "operationId": "language.translations.list",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/TranslationsListResponse"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "q",
-            "in": "query",
-            "description": "The text to translate",
-            "required": true,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "target",
-            "in": "query",
-            "description": "The target language into which the text should be translated",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "cid",
-            "in": "query",
-            "description": "The customization id for translate",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "format",
-            "in": "query",
-            "description": "The format of the text",
-            "type": "string",
-            "enum": [
-              "html",
-              "text"
-            ]
-          },
-          {
-            "name": "source",
-            "in": "query",
-            "description": "The source language of the text",
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "translations"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
     }
   },
-  "definitions": {
-    "DetectionsListResponse": {
-      "type": "object",
-      "properties": {
-        "detections": {
-          "type": "array",
-          "description": "A detections contains detection results of several text",
-          "items": {
-            "$ref": "#/definitions/DetectionsResource"
-          }
-        }
-      }
-    },
-    "DetectionsResource": {
-      "type": "array",
-      "description": "An array of languages which we detect for the given text The most likely language list first.",
-      "items": {
-        "type": "object",
-        "properties": {
-          "confidence": {
-            "type": "number",
-            "description": "The confidence of the detection resul of this language.",
-            "format": "float"
-          },
-          "isReliable": {
-            "type": "boolean",
-            "description": "A boolean to indicate is the language detection result reliable."
-          },
-          "language": {
-            "type": "string",
-            "description": "The language we detect"
-          }
-        }
-      }
-    },
-    "LanguagesListResponse": {
-      "type": "object",
-      "properties": {
-        "languages": {
-          "type": "array",
-          "description": "List of source/target languages supported by the translation API. If target parameter is unspecified, the list is sorted by the ASCII code point order of the language code. If target parameter is specified, the list is sorted by the collation order of the language name in the target language.",
-          "items": {
-            "$ref": "#/definitions/LanguagesResource"
-          }
-        }
-      }
-    },
-    "LanguagesResource": {
-      "type": "object",
-      "properties": {
-        "language": {
-          "type": "string",
-          "description": "The language code."
-        },
-        "name": {
-          "type": "string",
-          "description": "The localized name of the language if target parameter is given."
-        }
-      }
-    },
-    "TranslationsListResponse": {
-      "type": "object",
-      "properties": {
-        "translations": {
-          "type": "array",
-          "description": "Translations contains list of translation results of given text",
-          "items": {
-            "$ref": "#/definitions/TranslationsResource"
-          }
-        }
-      }
-    },
-    "TranslationsResource": {
-      "type": "object",
-      "properties": {
-        "detectedSourceLanguage": {
-          "type": "string",
-          "description": "Detected source language if source parameter is unspecified."
-        },
-        "translatedText": {
-          "type": "string",
-          "description": "The translation."
-        }
-      }
-    }
-  },
-  "parameters": {
-    "alt": {
-      "name": "alt",
-      "in": "query",
-      "description": "Data format for the response.",
-      "default": "json",
-      "type": "string",
-      "enum": [
-        "json"
-      ]
-    },
-    "fields": {
-      "name": "fields",
-      "in": "query",
-      "description": "Selector specifying which fields to include in a partial response.",
-      "type": "string"
-    },
-    "key": {
-      "name": "key",
-      "in": "query",
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "type": "string"
-    },
-    "oauth_token": {
-      "name": "oauth_token",
-      "in": "query",
-      "description": "OAuth 2.0 token for the current user.",
-      "type": "string"
-    },
-    "prettyPrint": {
-      "name": "prettyPrint",
-      "in": "query",
-      "description": "Returns response with indentations and line breaks.",
-      "default": true,
-      "type": "boolean"
-    },
-    "quotaUser": {
-      "name": "quotaUser",
-      "in": "query",
-      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
-      "type": "string"
-    },
-    "userIp": {
-      "name": "userIp",
-      "in": "query",
-      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
-      "type": "string"
-    }
-  },
-  "externalDocs": {
-    "url": "https://developers.google.com/translate/v2/using_rest"
-  }
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0"
 }

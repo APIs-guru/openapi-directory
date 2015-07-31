@@ -1,86 +1,61 @@
 {
-  "host": "bikewise.org",
   "basePath": "/api",
-  "schemes": [
-    "https"
-  ],
-  "swagger": "2.0",
+  "host": "bikewise.org",
   "info": {
-    "version": "v2",
-    "title": "BikeWise API v2",
-    "description": "<p>This is an API for accessing information about bicycling related incidents. You can find the source code on <a href=\"https://github.com/bikeindex/bikewise\">GitHub</a>.</p>\n",
     "contact": {
       "email": "support@bikeindex.org"
     },
-    "x-providerName": "bikewise.org",
+    "description": "<p>This is an API for accessing information about bicycling related incidents. You can find the source code on <a href=\"https://github.com/bikeindex/bikewise\">GitHub</a>.</p>\n",
+    "title": "BikeWise API v2",
+    "version": "v2",
     "x-origin": {
       "format": "swagger",
-      "version": "1.2",
-      "url": "https://bikewise.org/api/v2/swagger_doc"
-    }
-  },
-  "tags": [
-    {
-      "name": "incidents",
-      "description": "Incidents matching parameters"
+      "url": "https://bikewise.org/api/v2/swagger_doc",
+      "version": "1.2"
     },
-    {
-      "name": "locations",
-      "description": "GeoJSON response for matching incidents"
-    }
-  ],
+    "x-providerName": "bikewise.org"
+  },
   "paths": {
     "/v2/incidents": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "incidents"
-        ],
-        "operationId": "GET--version-incidents---format-",
-        "summary": "Paginated incidents matching parameters",
         "description": "\n<p>If you’d like more detailed information about bike incidents, use this endpoint. For mapping, <code>locations</code> is probably a better bet.</p>\n\n<p><strong>Notes on location searching</strong>: <br />\n- <code>proximity</code> accepts an ip address, an address, zipcode, city, or latitude,longitude - i.e. <code>70.210.133.87</code>, <code>210 NW 11th Ave, Portland, OR</code>, <code>60647</code>, <code>Chicago, IL</code>, and <code>45.521728,-122.67326</code> are all acceptable<br />\n- <code>proximity_square</code> sets the length of the sides of the square to find matches inside of. The square is centered on the location specified by <code>proximity</code>. It defaults to 100.</p>\n",
+        "operationId": "GET--version-incidents---format-",
         "parameters": [
           {
-            "in": "query",
+            "default": 1,
             "description": "<p>Page of results to fetch.</p>\n",
+            "format": "int32",
+            "in": "query",
             "name": "page",
             "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 1
+            "type": "integer"
           },
           {
-            "in": "query",
             "description": "<p>Number of results to return per page.</p>\n",
+            "format": "int32",
+            "in": "query",
             "name": "per_page",
             "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "integer"
           },
           {
-            "in": "query",
             "description": "<p>End of period</p>\n",
+            "format": "int32",
+            "in": "query",
             "name": "occurred_before",
             "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "integer"
           },
           {
-            "in": "query",
             "description": "<p>Start of period</p>\n",
+            "format": "int32",
+            "in": "query",
             "name": "occurred_after",
             "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "integer"
           },
           {
-            "in": "query",
             "description": "<p>Only incidents of specific type</p>\n",
-            "name": "incident_type",
-            "required": false,
-            "type": "string",
             "enum": [
               "crash",
               "hazard",
@@ -88,101 +63,101 @@
               "unconfirmed",
               "infrastructure_issue",
               "chop_shop"
-            ]
+            ],
+            "in": "query",
+            "name": "incident_type",
+            "required": false,
+            "type": "string"
           },
           {
-            "in": "query",
             "description": "<p>Center of location for proximity search</p>\n",
+            "in": "query",
             "name": "proximity",
             "required": false,
             "type": "string"
           },
           {
-            "in": "query",
+            "default": 100,
             "description": "<p>Size of the proximity search</p>\n",
+            "format": "int32",
+            "in": "query",
             "name": "proximity_square",
             "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 100
+            "type": "integer"
           },
           {
-            "in": "query",
             "description": "<p>Full text search of incidents</p>\n",
+            "in": "query",
             "name": "query",
             "required": false,
             "type": "string"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Paginated incidents matching parameters",
+        "tags": [
+          "incidents"
+        ]
       }
     },
     "/v2/incidents/{id}": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "incidents"
-        ],
-        "operationId": "GET--version-incidents--id---format-",
-        "summary": "",
         "description": "",
+        "operationId": "GET--version-incidents--id---format-",
         "parameters": [
           {
-            "in": "path",
             "description": "<p>Incident ID</p>\n",
+            "format": "int32",
+            "in": "path",
             "name": "id",
             "required": true,
-            "type": "integer",
-            "format": "int32"
+            "type": "integer"
           }
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "",
+        "tags": [
+          "incidents"
+        ]
       }
     },
     "/v2/locations": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "locations"
-        ],
-        "operationId": "GET--version-locations---format-",
-        "summary": "Unpaginated geojson response",
         "description": "<p><strong>This endpoint behaves exactly like</strong> <code>incidents</code>, but returns a valid geojson <code>FeatureCollection</code> that looks like this:</p>\n\n<pre><code>{\n  type: \"FeatureCollection\",\n  features: [\n    {\n      type: \"Feature\",\n      properties: {\n      id: 4474199,\n      type: \"Theft\",\n      occurred_at: 1428536937\n    },\n      geometry: {\n      type: \"Point\",\n      coordinates: [ -122.6244177, 45.5164386 ]\n    }\n  }\n}\n</code></pre>\n\n<p>It doesn’t paginate. If you pass the <code>all</code> parameter it returns all matches (which can be big, &gt; 4mb), otherwise it returns the 100 most recent.</p>\n\n<p><strong>Go forth and make maps!</strong></p>\n",
+        "operationId": "GET--version-locations---format-",
         "parameters": [
           {
-            "in": "query",
             "description": "<p>End of period</p>\n",
+            "format": "int32",
+            "in": "query",
             "name": "occurred_before",
             "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "integer"
           },
           {
-            "in": "query",
             "description": "<p>Start of period</p>\n",
+            "format": "int32",
+            "in": "query",
             "name": "occurred_after",
             "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "integer"
           },
           {
-            "in": "query",
             "description": "<p>Only incidents of specific type</p>\n",
-            "name": "incident_type",
-            "required": false,
-            "type": "string",
             "enum": [
               "crash",
               "hazard",
@@ -190,88 +165,88 @@
               "unconfirmed",
               "infrastructure_issue",
               "chop_shop"
-            ]
+            ],
+            "in": "query",
+            "name": "incident_type",
+            "required": false,
+            "type": "string"
           },
           {
-            "in": "query",
             "description": "<p>Center of location for proximity search</p>\n",
+            "in": "query",
             "name": "proximity",
             "required": false,
             "type": "string"
           },
           {
-            "in": "query",
+            "default": 100,
             "description": "<p>Size of the proximity search</p>\n",
+            "format": "int32",
+            "in": "query",
             "name": "proximity_square",
             "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 100
+            "type": "integer"
           },
           {
-            "in": "query",
             "description": "<p>Full text search of incidents</p>\n",
+            "in": "query",
             "name": "query",
             "required": false,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "<p>Max number of results to return. Defaults to 100</p>\n",
+            "format": "int32",
+            "in": "query",
             "name": "limit",
             "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "integer"
           },
           {
-            "in": "query",
             "description": "<p>Give ‘em all to me. Will ignore limit</p>\n",
+            "in": "query",
             "name": "all",
             "required": false,
             "type": "boolean"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Unpaginated geojson response",
+        "tags": [
+          "locations"
+        ]
       }
     },
     "/v2/locations/markers": {
       "get": {
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "locations"
-        ],
-        "operationId": "GET--version-locations-markers---format-",
-        "summary": "Unpaginated geojson response with simplestyled markers",
         "description": "<p>This behaves exactly like the root <code>locations</code> endpoint, but returns <a href=\"https://github.com/mapbox/simplestyle-spec\">simplestyled markers</a> (<a href=\"https://www.mapbox.com/guides/markers/#simple-style\">mapbox styled markers</a>)</p>\n\n<p><strong>Go forth and make maps!</strong></p>\n",
+        "operationId": "GET--version-locations-markers---format-",
         "parameters": [
           {
-            "in": "query",
             "description": "<p>End of period</p>\n",
+            "format": "int32",
+            "in": "query",
             "name": "occurred_before",
             "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "integer"
           },
           {
-            "in": "query",
             "description": "<p>Start of period</p>\n",
+            "format": "int32",
+            "in": "query",
             "name": "occurred_after",
             "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "integer"
           },
           {
-            "in": "query",
             "description": "<p>Only incidents of specific type</p>\n",
-            "name": "incident_type",
-            "required": false,
-            "type": "string",
             "enum": [
               "crash",
               "hazard",
@@ -279,53 +254,78 @@
               "unconfirmed",
               "infrastructure_issue",
               "chop_shop"
-            ]
+            ],
+            "in": "query",
+            "name": "incident_type",
+            "required": false,
+            "type": "string"
           },
           {
-            "in": "query",
             "description": "<p>Center of location for proximity search</p>\n",
+            "in": "query",
             "name": "proximity",
             "required": false,
             "type": "string"
           },
           {
-            "in": "query",
+            "default": 100,
             "description": "<p>Size of the proximity search</p>\n",
+            "format": "int32",
+            "in": "query",
             "name": "proximity_square",
             "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 100
+            "type": "integer"
           },
           {
-            "in": "query",
             "description": "<p>Full text search of incidents</p>\n",
+            "in": "query",
             "name": "query",
             "required": false,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "<p>Max number of results to return. Defaults to 100</p>\n",
+            "format": "int32",
+            "in": "query",
             "name": "limit",
             "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "integer"
           },
           {
-            "in": "query",
             "description": "<p>Give ‘em all to me. Will ignore limit</p>\n",
+            "in": "query",
             "name": "all",
             "required": false,
             "type": "boolean"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Unpaginated geojson response with simplestyled markers",
+        "tags": [
+          "locations"
+        ]
       }
     }
-  }
+  },
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Incidents matching parameters",
+      "name": "incidents"
+    },
+    {
+      "description": "GeoJSON response for matching incidents",
+      "name": "locations"
+    }
+  ]
 }

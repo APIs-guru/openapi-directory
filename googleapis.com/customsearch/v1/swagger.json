@@ -1,362 +1,11 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "title": "CustomSearch API",
-    "x-serviceName": "customsearch",
-    "description": "Lets you search over a website or collection of websites",
-    "contact": {
-      "name": "Google",
-      "url": "https://google.com"
-    },
-    "version": "v1",
-    "x-providerName": "googleapis.com",
-    "x-origin": {
-      "format": "google",
-      "version": "v1",
-      "url": "https://www.googleapis.com/discovery/v1/apis/customsearch/v1/rest"
-    },
-    "x-logo": "https://www.google.com/images/srpr/logo11w.png"
-  },
-  "host": "www.googleapis.com",
   "basePath": "/customsearch",
-  "schemes": [
-    "https"
-  ],
-  "paths": {
-    "/v1": {
-      "get": {
-        "description": "Returns metadata about the search performed, metadata about the custom search engine used for the search, and the search results.",
-        "operationId": "search.cse.list",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Search"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "q",
-            "in": "query",
-            "description": "Query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "c2coff",
-            "in": "query",
-            "description": "Turns off the translation between zh-CN and zh-TW.",
-            "type": "string"
-          },
-          {
-            "name": "cr",
-            "in": "query",
-            "description": "Country restrict(s).",
-            "type": "string"
-          },
-          {
-            "name": "cref",
-            "in": "query",
-            "description": "The URL of a linked custom search engine",
-            "type": "string"
-          },
-          {
-            "name": "cx",
-            "in": "query",
-            "description": "The custom search engine ID to scope this search query",
-            "type": "string"
-          },
-          {
-            "name": "dateRestrict",
-            "in": "query",
-            "description": "Specifies all search results are from a time period",
-            "type": "string"
-          },
-          {
-            "name": "exactTerms",
-            "in": "query",
-            "description": "Identifies a phrase that all documents in the search results must contain",
-            "type": "string"
-          },
-          {
-            "name": "excludeTerms",
-            "in": "query",
-            "description": "Identifies a word or phrase that should not appear in any documents in the search results",
-            "type": "string"
-          },
-          {
-            "name": "fileType",
-            "in": "query",
-            "description": "Returns images of a specified type. Some of the allowed values are: bmp, gif, png, jpg, svg, pdf, ...",
-            "type": "string"
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "Controls turning on or off the duplicate content filter.",
-            "type": "string",
-            "enum": [
-              "0",
-              "1"
-            ]
-          },
-          {
-            "name": "gl",
-            "in": "query",
-            "description": "Geolocation of end user.",
-            "type": "string"
-          },
-          {
-            "name": "googlehost",
-            "in": "query",
-            "description": "The local Google domain to use to perform the search.",
-            "type": "string"
-          },
-          {
-            "name": "highRange",
-            "in": "query",
-            "description": "Creates a range in form as_nlo value..as_nhi value and attempts to append it to query",
-            "type": "string"
-          },
-          {
-            "name": "hl",
-            "in": "query",
-            "description": "Sets the user interface language.",
-            "type": "string"
-          },
-          {
-            "name": "hq",
-            "in": "query",
-            "description": "Appends the extra query terms to the query.",
-            "type": "string"
-          },
-          {
-            "name": "imgColorType",
-            "in": "query",
-            "description": "Returns black and white, grayscale, or color images: mono, gray, and color.",
-            "type": "string",
-            "enum": [
-              "color",
-              "gray",
-              "mono"
-            ]
-          },
-          {
-            "name": "imgDominantColor",
-            "in": "query",
-            "description": "Returns images of a specific dominant color: yellow, green, teal, blue, purple, pink, white, gray, black and brown.",
-            "type": "string",
-            "enum": [
-              "black",
-              "blue",
-              "brown",
-              "gray",
-              "green",
-              "pink",
-              "purple",
-              "teal",
-              "white",
-              "yellow"
-            ]
-          },
-          {
-            "name": "imgSize",
-            "in": "query",
-            "description": "Returns images of a specified size, where size can be one of: icon, small, medium, large, xlarge, xxlarge, and huge.",
-            "type": "string",
-            "enum": [
-              "huge",
-              "icon",
-              "large",
-              "medium",
-              "small",
-              "xlarge",
-              "xxlarge"
-            ]
-          },
-          {
-            "name": "imgType",
-            "in": "query",
-            "description": "Returns images of a type, which can be one of: clipart, face, lineart, news, and photo.",
-            "type": "string",
-            "enum": [
-              "clipart",
-              "face",
-              "lineart",
-              "news",
-              "photo"
-            ]
-          },
-          {
-            "name": "linkSite",
-            "in": "query",
-            "description": "Specifies that all search results should contain a link to a particular URL",
-            "type": "string"
-          },
-          {
-            "name": "lowRange",
-            "in": "query",
-            "description": "Creates a range in form as_nlo value..as_nhi value and attempts to append it to query",
-            "type": "string"
-          },
-          {
-            "name": "lr",
-            "in": "query",
-            "description": "The language restriction for the search results",
-            "type": "string",
-            "enum": [
-              "lang_ar",
-              "lang_bg",
-              "lang_ca",
-              "lang_cs",
-              "lang_da",
-              "lang_de",
-              "lang_el",
-              "lang_en",
-              "lang_es",
-              "lang_et",
-              "lang_fi",
-              "lang_fr",
-              "lang_hr",
-              "lang_hu",
-              "lang_id",
-              "lang_is",
-              "lang_it",
-              "lang_iw",
-              "lang_ja",
-              "lang_ko",
-              "lang_lt",
-              "lang_lv",
-              "lang_nl",
-              "lang_no",
-              "lang_pl",
-              "lang_pt",
-              "lang_ro",
-              "lang_ru",
-              "lang_sk",
-              "lang_sl",
-              "lang_sr",
-              "lang_sv",
-              "lang_tr",
-              "lang_zh-CN",
-              "lang_zh-TW"
-            ]
-          },
-          {
-            "name": "num",
-            "in": "query",
-            "description": "Number of search results to return",
-            "default": 10,
-            "type": "integer"
-          },
-          {
-            "name": "orTerms",
-            "in": "query",
-            "description": "Provides additional search terms to check for in a document, where each document in the search results must contain at least one of the additional search terms",
-            "type": "string"
-          },
-          {
-            "name": "relatedSite",
-            "in": "query",
-            "description": "Specifies that all search results should be pages that are related to the specified URL",
-            "type": "string"
-          },
-          {
-            "name": "rights",
-            "in": "query",
-            "description": "Filters based on licensing. Supported values include: cc_publicdomain, cc_attribute, cc_sharealike, cc_noncommercial, cc_nonderived and combinations of these.",
-            "type": "string"
-          },
-          {
-            "name": "safe",
-            "in": "query",
-            "description": "Search safety level",
-            "default": "off",
-            "type": "string",
-            "enum": [
-              "high",
-              "medium",
-              "off"
-            ]
-          },
-          {
-            "name": "searchType",
-            "in": "query",
-            "description": "Specifies the search type: image.",
-            "type": "string",
-            "enum": [
-              "image"
-            ]
-          },
-          {
-            "name": "siteSearch",
-            "in": "query",
-            "description": "Specifies all search results should be pages from a given site",
-            "type": "string"
-          },
-          {
-            "name": "siteSearchFilter",
-            "in": "query",
-            "description": "Controls whether to include or exclude results from the site named in the as_sitesearch parameter",
-            "type": "string",
-            "enum": [
-              "e",
-              "i"
-            ]
-          },
-          {
-            "name": "sort",
-            "in": "query",
-            "description": "The sort expression to apply to the results",
-            "type": "string"
-          },
-          {
-            "name": "start",
-            "in": "query",
-            "description": "The index of the first result to return",
-            "type": "integer"
-          }
-        ],
-        "tags": [
-          "cse"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    }
-  },
   "definitions": {
     "Context": {
-      "type": "object",
       "properties": {
         "facets": {
-          "type": "array",
           "items": {
-            "type": "array",
             "items": {
-              "type": "object",
               "properties": {
                 "anchor": {
                   "type": "string"
@@ -367,22 +16,23 @@
                 "label_with_op": {
                   "type": "string"
                 }
-              }
-            }
-          }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "type": "array"
         },
         "title": {
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "Promotion": {
-      "type": "object",
       "properties": {
         "bodyLines": {
-          "type": "array",
           "items": {
-            "type": "object",
             "properties": {
               "htmlTitle": {
                 "type": "string"
@@ -396,8 +46,10 @@
               "url": {
                 "type": "string"
               }
-            }
-          }
+            },
+            "type": "object"
+          },
+          "type": "array"
         },
         "displayLink": {
           "type": "string"
@@ -406,20 +58,20 @@
           "type": "string"
         },
         "image": {
-          "type": "object",
           "properties": {
             "height": {
-              "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "type": "integer"
             },
             "source": {
               "type": "string"
             },
             "width": {
-              "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "type": "integer"
             }
-          }
+          },
+          "type": "object"
         },
         "link": {
           "type": "string"
@@ -427,14 +79,14 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "Query": {
-      "type": "object",
       "properties": {
         "count": {
-          "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "type": "integer"
         },
         "cr": {
           "type": "string"
@@ -533,24 +185,24 @@
           "type": "string"
         },
         "startIndex": {
-          "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "type": "integer"
         },
         "startPage": {
-          "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "type": "integer"
         },
         "title": {
           "type": "string"
         },
         "totalResults": {
-          "type": "string",
-          "format": "int64"
+          "format": "int64",
+          "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "Result": {
-      "type": "object",
       "properties": {
         "cacheId": {
           "type": "string"
@@ -574,44 +226,42 @@
           "type": "string"
         },
         "image": {
-          "type": "object",
           "properties": {
             "byteSize": {
-              "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "type": "integer"
             },
             "contextLink": {
               "type": "string"
             },
             "height": {
-              "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "type": "integer"
             },
             "thumbnailHeight": {
-              "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "type": "integer"
             },
             "thumbnailLink": {
               "type": "string"
             },
             "thumbnailWidth": {
-              "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "type": "integer"
             },
             "width": {
-              "type": "integer",
-              "format": "int32"
+              "format": "int32",
+              "type": "integer"
             }
-          }
+          },
+          "type": "object"
         },
         "kind": {
-          "type": "string",
-          "default": "customsearch#result"
+          "default": "customsearch#result",
+          "type": "string"
         },
         "labels": {
-          "type": "array",
           "items": {
-            "type": "object",
             "properties": {
               "displayName": {
                 "type": "string"
@@ -622,8 +272,10 @@
               "name": {
                 "type": "string"
               }
-            }
-          }
+            },
+            "type": "object"
+          },
+          "type": "array"
         },
         "link": {
           "type": "string"
@@ -632,14 +284,14 @@
           "type": "string"
         },
         "pagemap": {
-          "type": "object",
           "additionalProperties": {
-            "type": "array",
             "items": {
-              "type": "object",
-              "additionalProperties": {}
-            }
-          }
+              "additionalProperties": {},
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "type": "object"
         },
         "snippet": {
           "type": "string"
@@ -647,41 +299,40 @@
         "title": {
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "Search": {
-      "type": "object",
       "properties": {
         "context": {
           "$ref": "#/definitions/Context"
         },
         "items": {
-          "type": "array",
           "items": {
             "$ref": "#/definitions/Result"
-          }
+          },
+          "type": "array"
         },
         "kind": {
-          "type": "string",
-          "default": "customsearch#search"
+          "default": "customsearch#search",
+          "type": "string"
         },
         "promotions": {
-          "type": "array",
           "items": {
             "$ref": "#/definitions/Promotion"
-          }
+          },
+          "type": "array"
         },
         "queries": {
-          "type": "object",
           "additionalProperties": {
-            "type": "array",
             "items": {
               "$ref": "#/definitions/Query"
-            }
-          }
+            },
+            "type": "array"
+          },
+          "type": "object"
         },
         "searchInformation": {
-          "type": "object",
           "properties": {
             "formattedSearchTime": {
               "type": "string"
@@ -690,17 +341,17 @@
               "type": "string"
             },
             "searchTime": {
-              "type": "number",
-              "format": "double"
+              "format": "double",
+              "type": "number"
             },
             "totalResults": {
-              "type": "string",
-              "format": "int64"
+              "format": "int64",
+              "type": "string"
             }
-          }
+          },
+          "type": "object"
         },
         "spelling": {
-          "type": "object",
           "properties": {
             "correctedQuery": {
               "type": "string"
@@ -708,75 +359,424 @@
             "htmlCorrectedQuery": {
               "type": "string"
             }
-          }
+          },
+          "type": "object"
         },
         "url": {
-          "type": "object",
           "properties": {
             "template": {
-              "type": "string",
-              "default": "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&cref={cref?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"
+              "default": "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&cref={cref?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&relatedSite={relatedSite?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json",
+              "type": "string"
             },
             "type": {
-              "type": "string",
-              "default": "application/json"
+              "default": "application/json",
+              "type": "string"
             }
-          }
+          },
+          "type": "object"
         }
-      }
-    }
-  },
-  "parameters": {
-    "alt": {
-      "name": "alt",
-      "in": "query",
-      "description": "Data format for the response.",
-      "default": "json",
-      "type": "string",
-      "enum": [
-        "atom",
-        "json"
-      ]
-    },
-    "fields": {
-      "name": "fields",
-      "in": "query",
-      "description": "Selector specifying which fields to include in a partial response.",
-      "type": "string"
-    },
-    "key": {
-      "name": "key",
-      "in": "query",
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "type": "string"
-    },
-    "oauth_token": {
-      "name": "oauth_token",
-      "in": "query",
-      "description": "OAuth 2.0 token for the current user.",
-      "type": "string"
-    },
-    "prettyPrint": {
-      "name": "prettyPrint",
-      "in": "query",
-      "description": "Returns response with indentations and line breaks.",
-      "default": true,
-      "type": "boolean"
-    },
-    "quotaUser": {
-      "name": "quotaUser",
-      "in": "query",
-      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
-      "type": "string"
-    },
-    "userIp": {
-      "name": "userIp",
-      "in": "query",
-      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
-      "type": "string"
+      },
+      "type": "object"
     }
   },
   "externalDocs": {
     "url": "https://developers.google.com/custom-search/v1/using_rest"
-  }
+  },
+  "host": "www.googleapis.com",
+  "info": {
+    "contact": {
+      "name": "Google",
+      "url": "https://google.com"
+    },
+    "description": "Lets you search over a website or collection of websites",
+    "title": "CustomSearch API",
+    "version": "v1",
+    "x-logo": "https://www.google.com/images/srpr/logo11w.png",
+    "x-origin": {
+      "format": "google",
+      "url": "https://www.googleapis.com/discovery/v1/apis/customsearch/v1/rest",
+      "version": "v1"
+    },
+    "x-providerName": "googleapis.com",
+    "x-serviceName": "customsearch"
+  },
+  "parameters": {
+    "alt": {
+      "default": "json",
+      "description": "Data format for the response.",
+      "enum": [
+        "atom",
+        "json"
+      ],
+      "in": "query",
+      "name": "alt",
+      "type": "string"
+    },
+    "fields": {
+      "description": "Selector specifying which fields to include in a partial response.",
+      "in": "query",
+      "name": "fields",
+      "type": "string"
+    },
+    "key": {
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "in": "query",
+      "name": "key",
+      "type": "string"
+    },
+    "oauth_token": {
+      "description": "OAuth 2.0 token for the current user.",
+      "in": "query",
+      "name": "oauth_token",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "default": true,
+      "description": "Returns response with indentations and line breaks.",
+      "in": "query",
+      "name": "prettyPrint",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "in": "query",
+      "name": "quotaUser",
+      "type": "string"
+    },
+    "userIp": {
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "in": "query",
+      "name": "userIp",
+      "type": "string"
+    }
+  },
+  "paths": {
+    "/v1": {
+      "get": {
+        "description": "Returns metadata about the search performed, metadata about the custom search engine used for the search, and the search results.",
+        "operationId": "search.cse.list",
+        "parameters": [
+          {
+            "description": "Query",
+            "in": "query",
+            "name": "q",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Turns off the translation between zh-CN and zh-TW.",
+            "in": "query",
+            "name": "c2coff",
+            "type": "string"
+          },
+          {
+            "description": "Country restrict(s).",
+            "in": "query",
+            "name": "cr",
+            "type": "string"
+          },
+          {
+            "description": "The URL of a linked custom search engine",
+            "in": "query",
+            "name": "cref",
+            "type": "string"
+          },
+          {
+            "description": "The custom search engine ID to scope this search query",
+            "in": "query",
+            "name": "cx",
+            "type": "string"
+          },
+          {
+            "description": "Specifies all search results are from a time period",
+            "in": "query",
+            "name": "dateRestrict",
+            "type": "string"
+          },
+          {
+            "description": "Identifies a phrase that all documents in the search results must contain",
+            "in": "query",
+            "name": "exactTerms",
+            "type": "string"
+          },
+          {
+            "description": "Identifies a word or phrase that should not appear in any documents in the search results",
+            "in": "query",
+            "name": "excludeTerms",
+            "type": "string"
+          },
+          {
+            "description": "Returns images of a specified type. Some of the allowed values are: bmp, gif, png, jpg, svg, pdf, ...",
+            "in": "query",
+            "name": "fileType",
+            "type": "string"
+          },
+          {
+            "description": "Controls turning on or off the duplicate content filter.",
+            "enum": [
+              "0",
+              "1"
+            ],
+            "in": "query",
+            "name": "filter",
+            "type": "string"
+          },
+          {
+            "description": "Geolocation of end user.",
+            "in": "query",
+            "name": "gl",
+            "type": "string"
+          },
+          {
+            "description": "The local Google domain to use to perform the search.",
+            "in": "query",
+            "name": "googlehost",
+            "type": "string"
+          },
+          {
+            "description": "Creates a range in form as_nlo value..as_nhi value and attempts to append it to query",
+            "in": "query",
+            "name": "highRange",
+            "type": "string"
+          },
+          {
+            "description": "Sets the user interface language.",
+            "in": "query",
+            "name": "hl",
+            "type": "string"
+          },
+          {
+            "description": "Appends the extra query terms to the query.",
+            "in": "query",
+            "name": "hq",
+            "type": "string"
+          },
+          {
+            "description": "Returns black and white, grayscale, or color images: mono, gray, and color.",
+            "enum": [
+              "color",
+              "gray",
+              "mono"
+            ],
+            "in": "query",
+            "name": "imgColorType",
+            "type": "string"
+          },
+          {
+            "description": "Returns images of a specific dominant color: yellow, green, teal, blue, purple, pink, white, gray, black and brown.",
+            "enum": [
+              "black",
+              "blue",
+              "brown",
+              "gray",
+              "green",
+              "pink",
+              "purple",
+              "teal",
+              "white",
+              "yellow"
+            ],
+            "in": "query",
+            "name": "imgDominantColor",
+            "type": "string"
+          },
+          {
+            "description": "Returns images of a specified size, where size can be one of: icon, small, medium, large, xlarge, xxlarge, and huge.",
+            "enum": [
+              "huge",
+              "icon",
+              "large",
+              "medium",
+              "small",
+              "xlarge",
+              "xxlarge"
+            ],
+            "in": "query",
+            "name": "imgSize",
+            "type": "string"
+          },
+          {
+            "description": "Returns images of a type, which can be one of: clipart, face, lineart, news, and photo.",
+            "enum": [
+              "clipart",
+              "face",
+              "lineart",
+              "news",
+              "photo"
+            ],
+            "in": "query",
+            "name": "imgType",
+            "type": "string"
+          },
+          {
+            "description": "Specifies that all search results should contain a link to a particular URL",
+            "in": "query",
+            "name": "linkSite",
+            "type": "string"
+          },
+          {
+            "description": "Creates a range in form as_nlo value..as_nhi value and attempts to append it to query",
+            "in": "query",
+            "name": "lowRange",
+            "type": "string"
+          },
+          {
+            "description": "The language restriction for the search results",
+            "enum": [
+              "lang_ar",
+              "lang_bg",
+              "lang_ca",
+              "lang_cs",
+              "lang_da",
+              "lang_de",
+              "lang_el",
+              "lang_en",
+              "lang_es",
+              "lang_et",
+              "lang_fi",
+              "lang_fr",
+              "lang_hr",
+              "lang_hu",
+              "lang_id",
+              "lang_is",
+              "lang_it",
+              "lang_iw",
+              "lang_ja",
+              "lang_ko",
+              "lang_lt",
+              "lang_lv",
+              "lang_nl",
+              "lang_no",
+              "lang_pl",
+              "lang_pt",
+              "lang_ro",
+              "lang_ru",
+              "lang_sk",
+              "lang_sl",
+              "lang_sr",
+              "lang_sv",
+              "lang_tr",
+              "lang_zh-CN",
+              "lang_zh-TW"
+            ],
+            "in": "query",
+            "name": "lr",
+            "type": "string"
+          },
+          {
+            "default": 10,
+            "description": "Number of search results to return",
+            "in": "query",
+            "name": "num",
+            "type": "integer"
+          },
+          {
+            "description": "Provides additional search terms to check for in a document, where each document in the search results must contain at least one of the additional search terms",
+            "in": "query",
+            "name": "orTerms",
+            "type": "string"
+          },
+          {
+            "description": "Specifies that all search results should be pages that are related to the specified URL",
+            "in": "query",
+            "name": "relatedSite",
+            "type": "string"
+          },
+          {
+            "description": "Filters based on licensing. Supported values include: cc_publicdomain, cc_attribute, cc_sharealike, cc_noncommercial, cc_nonderived and combinations of these.",
+            "in": "query",
+            "name": "rights",
+            "type": "string"
+          },
+          {
+            "default": "off",
+            "description": "Search safety level",
+            "enum": [
+              "high",
+              "medium",
+              "off"
+            ],
+            "in": "query",
+            "name": "safe",
+            "type": "string"
+          },
+          {
+            "description": "Specifies the search type: image.",
+            "enum": [
+              "image"
+            ],
+            "in": "query",
+            "name": "searchType",
+            "type": "string"
+          },
+          {
+            "description": "Specifies all search results should be pages from a given site",
+            "in": "query",
+            "name": "siteSearch",
+            "type": "string"
+          },
+          {
+            "description": "Controls whether to include or exclude results from the site named in the as_sitesearch parameter",
+            "enum": [
+              "e",
+              "i"
+            ],
+            "in": "query",
+            "name": "siteSearchFilter",
+            "type": "string"
+          },
+          {
+            "description": "The sort expression to apply to the results",
+            "in": "query",
+            "name": "sort",
+            "type": "string"
+          },
+          {
+            "description": "The index of the first result to return",
+            "in": "query",
+            "name": "start",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Search"
+            }
+          }
+        },
+        "tags": [
+          "cse"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0"
 }

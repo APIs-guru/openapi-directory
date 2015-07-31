@@ -1,422 +1,1069 @@
 {
-  "host": "api-certification.hetras.net",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
-  "swagger": "2.0",
-  "info": {
-    "version": "1.0.0",
-    "title": "api-certification.hetras.net",
-    "x-providerName": "hetras.net",
-    "x-origin": {
-      "format": "swagger",
-      "version": "1.2",
-      "url": "https://developer.hetras.com/swagger/spec.json"
+  "definitions": {
+    "SimpleAttribute": {
+      "description": "Represents a simple attribute",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "accepted_guarantee_types": {
+      "properties": {
+        "accepted": {
+          "items": {
+            "enum": [
+              "PM4Hold",
+              "PM6Hold",
+              "GuaranteeToCreditCard",
+              "GuaranteeToGuestAccount",
+              "GuaranteeByTravelAgent",
+              "GuaranteeByCompany",
+              "Deposit",
+              "Voucher",
+              "Prepayment",
+              "NonGuaranteed",
+              "Tentative",
+              "Waitlist"
+            ],
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "minimum": {
+          "enum": [
+            "PM4Hold",
+            "PM6Hold",
+            "GuaranteeToCreditCard",
+            "GuaranteeToGuestAccount",
+            "GuaranteeByTravelAgent",
+            "GuaranteeByCompany",
+            "Deposit",
+            "Voucher",
+            "Prepayment",
+            "NonGuaranteed",
+            "Tentative",
+            "Waitlist"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "addon_offer": {
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "daily_rates": {
+          "items": {
+            "$ref": "#/definitions/addon_offer_daily_rate"
+          },
+          "type": "array"
+        },
+        "description": {
+          "type": "string"
+        },
+        "frequency": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "total_stay": {
+          "$ref": "#/definitions/addon_offer_rate"
+        }
+      }
+    },
+    "addon_offer_daily_rate": {
+      "properties": {
+        "currency": {
+          "type": "string"
+        },
+        "end_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "included_tax": {
+          "format": "double",
+          "type": "number"
+        },
+        "rate": {
+          "format": "double",
+          "type": "number"
+        },
+        "start_date": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "addon_offer_rate": {
+      "properties": {
+        "currency": {
+          "type": "string"
+        },
+        "included_tax": {
+          "format": "double",
+          "type": "number"
+        },
+        "rate": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "addons": {
+      "properties": {
+        "addon_services": {
+          "items": {
+            "$ref": "#/definitions/addon_offer"
+          },
+          "type": "array"
+        },
+        "adults": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "arrival_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "departure_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "hotel_id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hotel_name": {
+          "type": "string"
+        },
+        "rate_plan": {
+          "$ref": "#/definitions/rate_plan"
+        },
+        "room": {
+          "$ref": "#/definitions/room"
+        },
+        "rooms": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "cancellation": {
+      "description": "Result of cancel operation",
+      "properties": {
+        "balance": {
+          "format": "double",
+          "type": "number"
+        },
+        "cancellation_fee": {
+          "format": "double",
+          "type": "number"
+        },
+        "cancellation_id": {
+          "type": "string"
+        }
+      }
+    },
+    "cancellation_policy": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "fee": {
+          "format": "double",
+          "type": "number"
+        },
+        "fee_date": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "company": {
+      "properties": {
+        "company_id": {
+          "type": "string"
+        }
+      }
+    },
+    "contact": {
+      "properties": {
+        "customer_id": {
+          "type": "string"
+        }
+      }
+    },
+    "credit_card": {
+      "properties": {
+        "card_holder_name": {
+          "type": "string"
+        },
+        "card_number": {
+          "type": "string"
+        },
+        "card_type": {
+          "type": "string"
+        },
+        "cvv_code": {
+          "type": "string"
+        },
+        "expiration_month": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "expiration_year": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "daily_rate": {
+      "properties": {
+        "addon_services": {
+          "items": {
+            "$ref": "#/definitions/service_rate"
+          },
+          "type": "array"
+        },
+        "date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "excluded_tax": {
+          "format": "double",
+          "type": "number"
+        },
+        "included_services": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "included_tax": {
+          "format": "double",
+          "type": "number"
+        },
+        "rate": {
+          "format": "double",
+          "type": "number"
+        },
+        "room_type": {
+          "type": "string"
+        }
+      }
+    },
+    "deposit_policy": {
+      "properties": {
+        "amount": {
+          "format": "double",
+          "type": "number"
+        },
+        "description": {
+          "type": "string"
+        },
+        "due_date": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "general_policy": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "guarantee": {
+      "properties": {
+        "credit_card": {
+          "$ref": "#/definitions/credit_card"
+        },
+        "guarantee_type": {
+          "enum": [
+            "PM4Hold",
+            "PM6Hold",
+            "GuaranteeToCreditCard",
+            "GuaranteeToGuestAccount",
+            "GuaranteeByTravelAgent",
+            "GuaranteeByCompany",
+            "Deposit",
+            "Voucher",
+            "Prepayment",
+            "NonGuaranteed",
+            "Tentative",
+            "Waitlist"
+          ],
+          "type": "string"
+        },
+        "token": {
+          "$ref": "#/definitions/token"
+        }
+      }
+    },
+    "guarantee_response": {
+      "properties": {
+        "guarantee_type": {
+          "enum": [
+            "PM4Hold",
+            "PM6Hold",
+            "GuaranteeToCreditCard",
+            "GuaranteeToGuestAccount",
+            "GuaranteeByTravelAgent",
+            "GuaranteeByCompany",
+            "Deposit",
+            "Voucher",
+            "Prepayment",
+            "NonGuaranteed",
+            "Tentative",
+            "Waitlist"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "guest": {
+      "properties": {
+        "customer_id": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "mailing_address": {
+          "$ref": "#/definitions/mailing_address"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "hotel": {
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "desc": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "fax": {
+          "type": "string"
+        },
+        "hotel_id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "latitude": {
+          "format": "double",
+          "type": "number"
+        },
+        "longitude": {
+          "format": "double",
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "postal_code": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "mailing_address": {
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "address_type": {
+          "enum": [
+            "Home",
+            "Business",
+            "Billing",
+            "Other"
+          ],
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "postal_code": {
+          "type": "string"
+        }
+      }
+    },
+    "noshow_policy": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "fee": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "offer": {
+      "properties": {
+        "adults": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "available_rooms": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "cancellation_policies": {
+          "items": {
+            "$ref": "#/definitions/cancellation_policy"
+          },
+          "type": "array"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "deposit_policies": {
+          "items": {
+            "$ref": "#/definitions/deposit_policy"
+          },
+          "type": "array"
+        },
+        "general_policies": {
+          "items": {
+            "$ref": "#/definitions/general_policy"
+          },
+          "type": "array"
+        },
+        "guarantee_types": {
+          "$ref": "#/definitions/accepted_guarantee_types"
+        },
+        "included_services": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "noshow_policy": {
+          "$ref": "#/definitions/noshow_policy"
+        },
+        "rate_plan_code": {
+          "type": "string"
+        },
+        "total_stay": {
+          "$ref": "#/definitions/rate"
+        }
+      }
+    },
+    "rate": {
+      "properties": {
+        "addon_services": {
+          "items": {
+            "$ref": "#/definitions/service_rate"
+          },
+          "type": "array"
+        },
+        "excluded_tax": {
+          "format": "double",
+          "type": "number"
+        },
+        "included_services": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "included_tax": {
+          "format": "double",
+          "type": "number"
+        },
+        "rate": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "rate_plan": {
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "rates": {
+      "properties": {
+        "arrival_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "departure_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "hotel_id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hotel_name": {
+          "type": "string"
+        },
+        "rate_plans": {
+          "items": {
+            "$ref": "#/definitions/rate_plan"
+          },
+          "type": "array"
+        },
+        "room_offers": {
+          "items": {
+            "$ref": "#/definitions/room_offer"
+          },
+          "type": "array"
+        },
+        "rooms": {
+          "items": {
+            "$ref": "#/definitions/room"
+          },
+          "type": "array"
+        },
+        "services": {
+          "items": {
+            "$ref": "#/definitions/service"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "reservation": {
+      "properties": {
+        "addons": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "adults": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "arrival_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "block_code": {
+          "type": "string"
+        },
+        "channel_code": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "company": {
+          "$ref": "#/definitions/company"
+        },
+        "contact": {
+          "$ref": "#/definitions/contact"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "departure_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "external_id": {
+          "type": "string"
+        },
+        "guarantee": {
+          "$ref": "#/definitions/guarantee"
+        },
+        "guests": {
+          "items": {
+            "$ref": "#/definitions/guest"
+          },
+          "type": "array"
+        },
+        "hotel_id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "payment_method": {
+          "enum": [
+            "None",
+            "Cash",
+            "CreditCard",
+            "WireTransfer",
+            "ChargeToCompany",
+            "Check",
+            "Voucher",
+            "DebitCard",
+            "Token"
+          ],
+          "type": "string"
+        },
+        "rate_plan": {
+          "type": "string"
+        },
+        "room_type": {
+          "type": "string"
+        },
+        "rooms": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "total_amount": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "reservation_response": {
+      "properties": {
+        "adults": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "arrival_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "balance": {
+          "format": "double",
+          "type": "number"
+        },
+        "block_code": {
+          "type": "string"
+        },
+        "cancellation_policies": {
+          "items": {
+            "$ref": "#/definitions/cancellation_policy"
+          },
+          "type": "array"
+        },
+        "channel_code": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "company": {
+          "$ref": "#/definitions/company"
+        },
+        "confirmation_id": {
+          "type": "string"
+        },
+        "contact": {
+          "$ref": "#/definitions/contact"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "departure_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "external_id": {
+          "type": "string"
+        },
+        "general_policies": {
+          "items": {
+            "$ref": "#/definitions/general_policy"
+          },
+          "type": "array"
+        },
+        "guarantee": {
+          "$ref": "#/definitions/guarantee_response"
+        },
+        "guests": {
+          "items": {
+            "$ref": "#/definitions/guest"
+          },
+          "type": "array"
+        },
+        "hotel_id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "noshow_policy": {
+          "$ref": "#/definitions/noshow_policy"
+        },
+        "payment_method": {
+          "enum": [
+            "None",
+            "Cash",
+            "CreditCard",
+            "WireTransfer",
+            "ChargeToCompany",
+            "Check",
+            "Voucher",
+            "DebitCard",
+            "Token"
+          ],
+          "type": "string"
+        },
+        "rate_plan": {
+          "$ref": "#/definitions/rate_plan"
+        },
+        "reservation_number": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "reservation_status": {
+          "enum": [
+            "Tentative",
+            "Waitlisted",
+            "OnRequest",
+            "NonGuaranteed",
+            "Guaranteed",
+            "InHouse",
+            "CheckedOut",
+            "NoShow",
+            "Denied",
+            "Cancelled",
+            "Released",
+            "Walked",
+            "Expired",
+            "WalkIn",
+            "Registered"
+          ],
+          "type": "string"
+        },
+        "room": {
+          "$ref": "#/definitions/room"
+        },
+        "room_rates": {
+          "items": {
+            "$ref": "#/definitions/daily_rate"
+          },
+          "type": "array"
+        },
+        "rooms": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "services": {
+          "items": {
+            "$ref": "#/definitions/service"
+          },
+          "type": "array"
+        },
+        "total_stay": {
+          "$ref": "#/definitions/rate"
+        }
+      }
+    },
+    "reservations_response": {
+      "description": "Reservation collection response model",
+      "properties": {
+        "reservations": {
+          "items": {
+            "$ref": "#/definitions/reservation_response"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "room": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "room_offer": {
+      "properties": {
+        "offers": {
+          "items": {
+            "$ref": "#/definitions/offer"
+          },
+          "type": "array"
+        },
+        "room_type": {
+          "type": "string"
+        }
+      }
+    },
+    "room_type": {
+      "description": "Represent a room type for a property",
+      "properties": {
+        "amenities": {
+          "items": {
+            "$ref": "#/definitions/SimpleAttribute"
+          },
+          "type": "array"
+        },
+        "bedding_type": {
+          "enum": [
+            "NotDefined",
+            "Double",
+            "Futon",
+            "King",
+            "MurphyBed",
+            "Queen",
+            "SofaBed",
+            "TatamiMats",
+            "Twin",
+            "Single"
+          ],
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "expected_occupancy": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "facilities": {
+          "items": {
+            "$ref": "#/definitions/SimpleAttribute"
+          },
+          "type": "array"
+        },
+        "max_persons": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "min_persons": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "views": {
+          "items": {
+            "$ref": "#/definitions/SimpleAttribute"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "service": {
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "frequency": {
+          "type": "string"
+        },
+        "is_addon": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "service_rate": {
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "included_tax": {
+          "format": "double",
+          "type": "number"
+        },
+        "rate": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "token": {
+      "properties": {
+        "authorization_expiry_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "authorization_reference": {
+          "type": "string"
+        },
+        "authorization_status": {
+          "enum": [
+            "Authorized",
+            "Refused",
+            "Error",
+            "Canceled",
+            "Consumed",
+            "AuthorizedWithZeroAmount"
+          ],
+          "type": "string"
+        },
+        "authorized_amount": {
+          "format": "double",
+          "type": "number"
+        },
+        "merchant_reference": {
+          "type": "string"
+        },
+        "shopper_email": {
+          "type": "string"
+        },
+        "shopper_reference": {
+          "type": "string"
+        },
+        "token_id": {
+          "type": "string"
+        }
+      }
     }
   },
-  "tags": [
-    {
-      "name": "Hotel"
+  "host": "api-certification.hetras.net",
+  "info": {
+    "title": "api-certification.hetras.net",
+    "version": "1.0.0",
+    "x-origin": {
+      "format": "swagger",
+      "url": "https://developer.hetras.com/swagger/spec.json",
+      "version": "1.2"
     },
-    {
-      "name": "RoomType"
-    },
-    {
-      "name": "Rates"
-    },
-    {
-      "name": "Addons"
-    },
-    {
-      "name": "Reservation"
-    }
-  ],
+    "x-providerName": "hetras.net"
+  },
   "paths": {
-    "/api/hotel/v0/hotels": {
-      "get": {
-        "tags": [
-          "Hotel"
-        ],
-        "operationId": "Hotel_Get",
-        "summary": "Get a list with the details of all the hotels specified.",
-        "description": "",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "consumes": [],
-        "parameters": [
-          {
-            "in": "header",
-            "description": "Application identifier.",
-            "name": "App-Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "header",
-            "description": "Application key.",
-            "name": "App-Key",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "An array of hotels for each of the hotels listed in the hetras-hotels parameter.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/hotel"
-              }
-            }
-          },
-          "403": {
-            "description": "You are not authorized to access this resource or the data for the specified hotels."
-          },
-          "404": {
-            "description": "Not Found. The server has not found anything matching the Request-URI."
-          },
-          "500": {
-            "description": "We couldn't return the representation due to an internal server error."
-          }
-        }
-      }
-    },
-    "/api/hotel/v0/hotels/{hotelId}": {
-      "get": {
-        "tags": [
-          "Hotel"
-        ],
-        "operationId": "Hotel_Get",
-        "summary": "Get the details for the specified hotel id.",
-        "description": "Based on the url parameter hotelId the API evaluates if the client making the request is allowed to access the data and \r\n            returns 403 if the client is not subscribed to that hotel.",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "consumes": [],
-        "parameters": [
-          {
-            "in": "path",
-            "description": "Specifies the hotel id to process.",
-            "name": "hotelId",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "header",
-            "description": "Application identifier.",
-            "name": "App-Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "header",
-            "description": "Application key.",
-            "name": "App-Key",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Hotel details for the hotel with the id specified in the URL.",
-            "schema": {
-              "$ref": "#/definitions/hotel"
-            }
-          },
-          "403": {
-            "description": "You are not authorized to access this resource or the data for the specified hotels."
-          },
-          "404": {
-            "description": "Not Found. The server has not found anything matching the Request-URI."
-          },
-          "500": {
-            "description": "We couldn't return the representation due to an internal server error."
-          }
-        }
-      }
-    },
-    "/api/hotel/v0/hotels/{hotelId}/room_types": {
-      "get": {
-        "tags": [
-          "RoomType"
-        ],
-        "operationId": "RoomType_GetRoomTypes",
-        "summary": "Get a list with the details of all room types for for the specified hotel id",
-        "description": "",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "consumes": [],
-        "parameters": [
-          {
-            "in": "path",
-            "description": "Specifies the hotel id to process.",
-            "name": "hotelId",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "header",
-            "description": "Application identifier.",
-            "name": "App-Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "header",
-            "description": "Application key.",
-            "name": "App-Key",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Room type details for the hotel with the id specified in the URL.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/room_type"
-              }
-            }
-          },
-          "500": {
-            "description": "We couldn't return the representation due to an internal server error."
-          },
-          "503": {
-            "description": "The server is currently unavailable. Please try later."
-          }
-        }
-      }
-    },
-    "/api/booking/v0/rates": {
-      "get": {
-        "tags": [
-          "Rates"
-        ],
-        "operationId": "Rates_Get",
-        "summary": "Get a list of offers for the requested hotel identifier.",
-        "description": "The booking availability endpoint gives the client all room and rate\r\n             combinations for the given timeframe, for the given number of adults and\r\n             number of children per room. The resultset can be further reduced by\r\n             specifying a channel, rate plan or room type.",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "consumes": [],
-        "parameters": [
-          {
-            "in": "query",
-            "description": "Specifies the hotel id to process.",
-            "name": "hotelId",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "query",
-            "description": "Date of arrival for the guest in the ISO-8601 format \"YYYY-MM-DD\".",
-            "name": "arrivalDate",
-            "required": true,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "in": "query",
-            "description": "Date of departure for the guest in the ISO-8601 format \"YYYY-MM-DD\".",
-            "name": "departureDate",
-            "required": true,
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "in": "query",
-            "description": "Channel Code the rate plan needs to be configured for.",
-            "name": "channelCode",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Number of adults per room.",
-            "name": "adults",
-            "required": true,
-            "type": "string",
-            "format": "byte"
-          },
-          {
-            "in": "query",
-            "description": "Number of rooms (default is 1).",
-            "name": "rooms",
-            "required": false,
-            "type": "string",
-            "format": "byte"
-          },
-          {
-            "in": "query",
-            "description": "Only return offers with rates for the specified room type code.",
-            "name": "roomType",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Only return offers for the specified room type code.",
-            "name": "ratePlanCode",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Only return offers for the specified block code.",
-            "name": "blockCode",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "header",
-            "description": "Application identifier.",
-            "name": "App-Id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "header",
-            "description": "Application key.",
-            "name": "App-Key",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "An array of offers for each of the hotels listed in the hetras-hotels\r\n            header. Only hotels with availability for the specified criteria are in the\r\n            list. If the list is empty none of the specified hotels offer available rooms.\r\n            ",
-            "schema": {
-              "$ref": "#/definitions/rates"
-            }
-          },
-          "400": {
-            "description": "Some request parameters are invalid"
-          },
-          "403": {
-            "description": "You are not authorized to access this resource or the data for the specified hotels."
-          },
-          "404": {
-            "description": "Not Found. The server has not found anything matching the Request-URI."
-          },
-          "422": {
-            "description": "Missing a mandatory parameter."
-          },
-          "500": {
-            "description": "We couldn't return the representation due to an internal server error."
-          }
-        }
-      }
-    },
     "/api/booking/v0/addons": {
       "get": {
-        "tags": [
-          "Addons"
-        ],
-        "operationId": "Addons_Get",
-        "summary": "Get a list of addon offers for the requested hotel identifier.",
-        "description": "The booking addons endpoint gives the client all service addon\r\n             combinations for the given rate plan, room type, timeframe, for the given number of adults and\r\n             number of children per room",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "consumes": [],
+        "description": "The booking addons endpoint gives the client all service addon\r\n             combinations for the given rate plan, room type, timeframe, for the given number of adults and\r\n             number of children per room",
+        "operationId": "Addons_Get",
         "parameters": [
           {
-            "in": "query",
             "description": "Specifies the hotel id to process.",
+            "format": "int32",
+            "in": "query",
             "name": "hotelId",
             "required": true,
-            "type": "integer",
-            "format": "int32"
+            "type": "integer"
           },
           {
-            "in": "query",
             "description": "Date of arrival for the guest in the ISO-8601 format \"YYYY-MM-DD\".",
+            "format": "date-time",
+            "in": "query",
             "name": "arrivalDate",
             "required": true,
-            "type": "string",
-            "format": "date-time"
+            "type": "string"
           },
           {
-            "in": "query",
             "description": "Date of departure for the guest in the ISO-8601 format \"YYYY-MM-DD\".",
+            "format": "date-time",
+            "in": "query",
             "name": "departureDate",
             "required": true,
-            "type": "string",
-            "format": "date-time"
+            "type": "string"
           },
           {
-            "in": "query",
             "description": "Channel Code the rate plan needs to be configured for.",
+            "in": "query",
             "name": "channelCode",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Number of adults per room.",
+            "format": "byte",
+            "in": "query",
             "name": "adults",
             "required": true,
-            "type": "string",
-            "format": "byte"
+            "type": "string"
           },
           {
-            "in": "query",
             "description": "Number of rooms.",
+            "format": "byte",
+            "in": "query",
             "name": "rooms",
             "required": true,
-            "type": "string",
-            "format": "byte"
+            "type": "string"
           },
           {
-            "in": "query",
             "description": "Only return offers with rates for the specified room type code.",
+            "in": "query",
             "name": "roomType",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Only return offers for the specified room type code.",
+            "in": "query",
             "name": "ratePlanCode",
             "required": true,
             "type": "string"
           },
           {
-            "in": "header",
             "description": "Application identifier.",
+            "in": "header",
             "name": "App-Id",
             "required": true,
             "type": "string"
           },
           {
-            "in": "header",
             "description": "Application key.",
+            "in": "header",
             "name": "App-Key",
             "required": true,
             "type": "string"
           }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
         ],
         "responses": {
           "200": {
@@ -440,23 +1087,15 @@
           "500": {
             "description": "We couldn't return the representation due to an internal server error."
           }
-        }
+        },
+        "summary": "Get a list of addon offers for the requested hotel identifier.",
+        "tags": [
+          "Addons"
+        ]
       }
     },
     "/api/booking/v0/bookings": {
       "post": {
-        "tags": [
-          "Reservation"
-        ],
-        "operationId": "Reservation_Post",
-        "summary": "Create a reservation.",
-        "description": "Create a reservation based on the payload. If the client making the request is not subscribed to the hotel specified in the request\r\n            the API will return 403.",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "consumes": [
           "application/json",
           "text/json",
@@ -464,10 +1103,12 @@
           "text/xml",
           "application/x-www-form-urlencoded"
         ],
+        "description": "Create a reservation based on the payload. If the client making the request is not subscribed to the hotel specified in the request\r\n            the API will return 403.",
+        "operationId": "Reservation_Post",
         "parameters": [
           {
-            "in": "body",
             "description": "Specifies the reservation payload.",
+            "in": "body",
             "name": "reservationRequest",
             "required": true,
             "schema": {
@@ -475,19 +1116,25 @@
             }
           },
           {
-            "in": "header",
             "description": "Application identifier.",
+            "in": "header",
             "name": "App-Id",
             "required": true,
             "type": "string"
           },
           {
-            "in": "header",
             "description": "Application key.",
+            "in": "header",
             "name": "App-Key",
             "required": true,
             "type": "string"
           }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
         ],
         "responses": {
           "200": {
@@ -511,46 +1158,46 @@
           "500": {
             "description": "We couldn't return the representation due to an internal server error."
           }
-        }
+        },
+        "summary": "Create a reservation.",
+        "tags": [
+          "Reservation"
+        ]
       }
     },
     "/api/booking/v0/bookings/{confirmationId}": {
       "get": {
-        "tags": [
-          "Reservation"
-        ],
-        "operationId": "Reservation_Get",
-        "summary": "Get reservations by confirmation id",
-        "description": "",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "consumes": [],
+        "description": "",
+        "operationId": "Reservation_Get",
         "parameters": [
           {
-            "in": "path",
             "description": "Specifies the booking confirmation id to process.",
+            "in": "path",
             "name": "confirmationId",
             "required": true,
             "type": "string"
           },
           {
-            "in": "header",
             "description": "Application identifier.",
+            "in": "header",
             "name": "App-Id",
             "required": true,
             "type": "string"
           },
           {
-            "in": "header",
             "description": "Application key.",
+            "in": "header",
             "name": "App-Key",
             "required": true,
             "type": "string"
           }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
         ],
         "responses": {
           "200": {
@@ -568,54 +1215,54 @@
           "500": {
             "description": "We couldn't return the representation due to an internal server error."
           }
-        }
+        },
+        "summary": "Get reservations by confirmation id",
+        "tags": [
+          "Reservation"
+        ]
       }
     },
     "/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}": {
       "get": {
-        "tags": [
-          "Reservation"
-        ],
-        "operationId": "Reservation_Get",
-        "summary": "Get a reservation",
-        "description": "",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "consumes": [],
+        "description": "",
+        "operationId": "Reservation_Get",
         "parameters": [
           {
-            "in": "path",
             "description": "Specifies the booking confirmation id to process.",
+            "in": "path",
             "name": "confirmationId",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "description": "Specifies the reservation id to use for all further operations.",
+            "format": "int32",
+            "in": "path",
             "name": "reservationNumber",
             "required": true,
-            "type": "integer",
-            "format": "int32"
+            "type": "integer"
           },
           {
-            "in": "header",
             "description": "Application identifier.",
+            "in": "header",
             "name": "App-Id",
             "required": true,
             "type": "string"
           },
           {
-            "in": "header",
             "description": "Application key.",
+            "in": "header",
             "name": "App-Key",
             "required": true,
             "type": "string"
           }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
         ],
         "responses": {
           "200": {
@@ -633,54 +1280,54 @@
           "500": {
             "description": "We couldn't return the representation due to an internal server error."
           }
-        }
+        },
+        "summary": "Get a reservation",
+        "tags": [
+          "Reservation"
+        ]
       }
     },
     "/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/cancel": {
       "post": {
-        "tags": [
-          "Reservation"
-        ],
-        "operationId": "Reservation_Post",
-        "summary": "Cancels reservation",
-        "description": "",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
         "consumes": [],
+        "description": "",
+        "operationId": "Reservation_Post",
         "parameters": [
           {
-            "in": "path",
             "description": "Specifies the booking confirmation id to process.",
+            "in": "path",
             "name": "confirmationId",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "description": "Specifies the reservation id to use for all further operations.",
+            "format": "int32",
+            "in": "path",
             "name": "reservationNumber",
             "required": true,
-            "type": "integer",
-            "format": "int32"
+            "type": "integer"
           },
           {
-            "in": "header",
             "description": "Application identifier.",
+            "in": "header",
             "name": "App-Id",
             "required": true,
             "type": "string"
           },
           {
-            "in": "header",
             "description": "Application key.",
+            "in": "header",
             "name": "App-Key",
             "required": true,
             "type": "string"
           }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
         ],
         "responses": {
           "200": {
@@ -689,973 +1336,326 @@
               "$ref": "#/definitions/cancellation"
             }
           }
-        }
+        },
+        "summary": "Cancels reservation",
+        "tags": [
+          "Reservation"
+        ]
+      }
+    },
+    "/api/booking/v0/rates": {
+      "get": {
+        "consumes": [],
+        "description": "The booking availability endpoint gives the client all room and rate\r\n             combinations for the given timeframe, for the given number of adults and\r\n             number of children per room. The resultset can be further reduced by\r\n             specifying a channel, rate plan or room type.",
+        "operationId": "Rates_Get",
+        "parameters": [
+          {
+            "description": "Specifies the hotel id to process.",
+            "format": "int32",
+            "in": "query",
+            "name": "hotelId",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "Date of arrival for the guest in the ISO-8601 format \"YYYY-MM-DD\".",
+            "format": "date-time",
+            "in": "query",
+            "name": "arrivalDate",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Date of departure for the guest in the ISO-8601 format \"YYYY-MM-DD\".",
+            "format": "date-time",
+            "in": "query",
+            "name": "departureDate",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Channel Code the rate plan needs to be configured for.",
+            "in": "query",
+            "name": "channelCode",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Number of adults per room.",
+            "format": "byte",
+            "in": "query",
+            "name": "adults",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Number of rooms (default is 1).",
+            "format": "byte",
+            "in": "query",
+            "name": "rooms",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Only return offers with rates for the specified room type code.",
+            "in": "query",
+            "name": "roomType",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Only return offers for the specified room type code.",
+            "in": "query",
+            "name": "ratePlanCode",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Only return offers for the specified block code.",
+            "in": "query",
+            "name": "blockCode",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Application identifier.",
+            "in": "header",
+            "name": "App-Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Application key.",
+            "in": "header",
+            "name": "App-Key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of offers for each of the hotels listed in the hetras-hotels\r\n            header. Only hotels with availability for the specified criteria are in the\r\n            list. If the list is empty none of the specified hotels offer available rooms.\r\n            ",
+            "schema": {
+              "$ref": "#/definitions/rates"
+            }
+          },
+          "400": {
+            "description": "Some request parameters are invalid"
+          },
+          "403": {
+            "description": "You are not authorized to access this resource or the data for the specified hotels."
+          },
+          "404": {
+            "description": "Not Found. The server has not found anything matching the Request-URI."
+          },
+          "422": {
+            "description": "Missing a mandatory parameter."
+          },
+          "500": {
+            "description": "We couldn't return the representation due to an internal server error."
+          }
+        },
+        "summary": "Get a list of offers for the requested hotel identifier.",
+        "tags": [
+          "Rates"
+        ]
+      }
+    },
+    "/api/hotel/v0/hotels": {
+      "get": {
+        "consumes": [],
+        "description": "",
+        "operationId": "Hotel_Get",
+        "parameters": [
+          {
+            "description": "Application identifier.",
+            "in": "header",
+            "name": "App-Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Application key.",
+            "in": "header",
+            "name": "App-Key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of hotels for each of the hotels listed in the hetras-hotels parameter.",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/hotel"
+              },
+              "type": "array"
+            }
+          },
+          "403": {
+            "description": "You are not authorized to access this resource or the data for the specified hotels."
+          },
+          "404": {
+            "description": "Not Found. The server has not found anything matching the Request-URI."
+          },
+          "500": {
+            "description": "We couldn't return the representation due to an internal server error."
+          }
+        },
+        "summary": "Get a list with the details of all the hotels specified.",
+        "tags": [
+          "Hotel"
+        ]
+      }
+    },
+    "/api/hotel/v0/hotels/{hotelId}": {
+      "get": {
+        "consumes": [],
+        "description": "Based on the url parameter hotelId the API evaluates if the client making the request is allowed to access the data and \r\n            returns 403 if the client is not subscribed to that hotel.",
+        "operationId": "Hotel_Get",
+        "parameters": [
+          {
+            "description": "Specifies the hotel id to process.",
+            "format": "int32",
+            "in": "path",
+            "name": "hotelId",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "Application identifier.",
+            "in": "header",
+            "name": "App-Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Application key.",
+            "in": "header",
+            "name": "App-Key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "Hotel details for the hotel with the id specified in the URL.",
+            "schema": {
+              "$ref": "#/definitions/hotel"
+            }
+          },
+          "403": {
+            "description": "You are not authorized to access this resource or the data for the specified hotels."
+          },
+          "404": {
+            "description": "Not Found. The server has not found anything matching the Request-URI."
+          },
+          "500": {
+            "description": "We couldn't return the representation due to an internal server error."
+          }
+        },
+        "summary": "Get the details for the specified hotel id.",
+        "tags": [
+          "Hotel"
+        ]
+      }
+    },
+    "/api/hotel/v0/hotels/{hotelId}/room_types": {
+      "get": {
+        "consumes": [],
+        "description": "",
+        "operationId": "RoomType_GetRoomTypes",
+        "parameters": [
+          {
+            "description": "Specifies the hotel id to process.",
+            "format": "int32",
+            "in": "path",
+            "name": "hotelId",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "Application identifier.",
+            "in": "header",
+            "name": "App-Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Application key.",
+            "in": "header",
+            "name": "App-Key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "Room type details for the hotel with the id specified in the URL.",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/room_type"
+              },
+              "type": "array"
+            }
+          },
+          "500": {
+            "description": "We couldn't return the representation due to an internal server error."
+          },
+          "503": {
+            "description": "The server is currently unavailable. Please try later."
+          }
+        },
+        "summary": "Get a list with the details of all room types for for the specified hotel id",
+        "tags": [
+          "RoomType"
+        ]
       }
     }
   },
-  "definitions": {
-    "hotel": {
-      "properties": {
-        "hotel_id": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "name": {
-          "type": "string"
-        },
-        "street": {
-          "type": "string"
-        },
-        "city": {
-          "type": "string"
-        },
-        "postal_code": {
-          "type": "string"
-        },
-        "state": {
-          "type": "string"
-        },
-        "country": {
-          "type": "string"
-        },
-        "url": {
-          "type": "string"
-        },
-        "latitude": {
-          "type": "number",
-          "format": "double"
-        },
-        "longitude": {
-          "type": "number",
-          "format": "double"
-        },
-        "desc": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "phone": {
-          "type": "string"
-        },
-        "fax": {
-          "type": "string"
-        }
-      }
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "tags": [
+    {
+      "name": "Hotel"
     },
-    "room_type": {
-      "description": "Represent a room type for a property",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "min_persons": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "max_persons": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "expected_occupancy": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "bedding_type": {
-          "type": "string",
-          "enum": [
-            "NotDefined",
-            "Double",
-            "Futon",
-            "King",
-            "MurphyBed",
-            "Queen",
-            "SofaBed",
-            "TatamiMats",
-            "Twin",
-            "Single"
-          ]
-        },
-        "amenities": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SimpleAttribute"
-          }
-        },
-        "facilities": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SimpleAttribute"
-          }
-        },
-        "views": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SimpleAttribute"
-          }
-        }
-      }
+    {
+      "name": "RoomType"
     },
-    "SimpleAttribute": {
-      "description": "Represents a simple attribute",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        }
-      }
+    {
+      "name": "Rates"
     },
-    "rates": {
-      "properties": {
-        "hotel_id": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "hotel_name": {
-          "type": "string"
-        },
-        "arrival_date": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "departure_date": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "room_offers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/room_offer"
-          }
-        },
-        "rate_plans": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/rate_plan"
-          }
-        },
-        "rooms": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/room"
-          }
-        },
-        "services": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/service"
-          }
-        }
-      }
+    {
+      "name": "Addons"
     },
-    "room_offer": {
-      "properties": {
-        "room_type": {
-          "type": "string"
-        },
-        "offers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/offer"
-          }
-        }
-      }
-    },
-    "rate_plan": {
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
-      }
-    },
-    "room": {
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
-      }
-    },
-    "service": {
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "frequency": {
-          "type": "string"
-        },
-        "is_addon": {
-          "type": "boolean"
-        }
-      }
-    },
-    "offer": {
-      "properties": {
-        "rate_plan_code": {
-          "type": "string"
-        },
-        "available_rooms": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "adults": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "currency": {
-          "type": "string"
-        },
-        "total_stay": {
-          "$ref": "#/definitions/rate"
-        },
-        "included_services": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "guarantee_types": {
-          "$ref": "#/definitions/accepted_guarantee_types"
-        },
-        "cancellation_policies": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/cancellation_policy"
-          }
-        },
-        "noshow_policy": {
-          "$ref": "#/definitions/noshow_policy"
-        },
-        "deposit_policies": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/deposit_policy"
-          }
-        },
-        "general_policies": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/general_policy"
-          }
-        }
-      }
-    },
-    "rate": {
-      "properties": {
-        "rate": {
-          "type": "number",
-          "format": "double"
-        },
-        "included_tax": {
-          "type": "number",
-          "format": "double"
-        },
-        "excluded_tax": {
-          "type": "number",
-          "format": "double"
-        },
-        "included_services": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "addon_services": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/service_rate"
-          }
-        }
-      }
-    },
-    "accepted_guarantee_types": {
-      "properties": {
-        "minimum": {
-          "type": "string",
-          "enum": [
-            "PM4Hold",
-            "PM6Hold",
-            "GuaranteeToCreditCard",
-            "GuaranteeToGuestAccount",
-            "GuaranteeByTravelAgent",
-            "GuaranteeByCompany",
-            "Deposit",
-            "Voucher",
-            "Prepayment",
-            "NonGuaranteed",
-            "Tentative",
-            "Waitlist"
-          ]
-        },
-        "accepted": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "PM4Hold",
-              "PM6Hold",
-              "GuaranteeToCreditCard",
-              "GuaranteeToGuestAccount",
-              "GuaranteeByTravelAgent",
-              "GuaranteeByCompany",
-              "Deposit",
-              "Voucher",
-              "Prepayment",
-              "NonGuaranteed",
-              "Tentative",
-              "Waitlist"
-            ]
-          }
-        }
-      }
-    },
-    "cancellation_policy": {
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "fee": {
-          "type": "number",
-          "format": "double"
-        },
-        "fee_date": {
-          "type": "string",
-          "format": "date-time"
-        }
-      }
-    },
-    "noshow_policy": {
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "fee": {
-          "type": "number",
-          "format": "double"
-        }
-      }
-    },
-    "deposit_policy": {
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "amount": {
-          "type": "number",
-          "format": "double"
-        },
-        "due_date": {
-          "type": "string",
-          "format": "date-time"
-        }
-      }
-    },
-    "general_policy": {
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        }
-      }
-    },
-    "service_rate": {
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "rate": {
-          "type": "number",
-          "format": "double"
-        },
-        "included_tax": {
-          "type": "number",
-          "format": "double"
-        }
-      }
-    },
-    "addons": {
-      "properties": {
-        "hotel_id": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "hotel_name": {
-          "type": "string"
-        },
-        "arrival_date": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "departure_date": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "rooms": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "adults": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "rate_plan": {
-          "$ref": "#/definitions/rate_plan"
-        },
-        "room": {
-          "$ref": "#/definitions/room"
-        },
-        "addon_services": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/addon_offer"
-          }
-        }
-      }
-    },
-    "addon_offer": {
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "frequency": {
-          "type": "string"
-        },
-        "total_stay": {
-          "$ref": "#/definitions/addon_offer_rate"
-        },
-        "daily_rates": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/addon_offer_daily_rate"
-          }
-        }
-      }
-    },
-    "addon_offer_rate": {
-      "properties": {
-        "currency": {
-          "type": "string"
-        },
-        "rate": {
-          "type": "number",
-          "format": "double"
-        },
-        "included_tax": {
-          "type": "number",
-          "format": "double"
-        }
-      }
-    },
-    "addon_offer_daily_rate": {
-      "properties": {
-        "start_date": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "end_date": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "currency": {
-          "type": "string"
-        },
-        "rate": {
-          "type": "number",
-          "format": "double"
-        },
-        "included_tax": {
-          "type": "number",
-          "format": "double"
-        }
-      }
-    },
-    "reservations_response": {
-      "description": "Reservation collection response model",
-      "properties": {
-        "reservations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/reservation_response"
-          }
-        }
-      }
-    },
-    "reservation_response": {
-      "properties": {
-        "hotel_id": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "confirmation_id": {
-          "type": "string"
-        },
-        "reservation_number": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "external_id": {
-          "type": "string"
-        },
-        "block_code": {
-          "type": "string"
-        },
-        "reservation_status": {
-          "type": "string",
-          "enum": [
-            "Tentative",
-            "Waitlisted",
-            "OnRequest",
-            "NonGuaranteed",
-            "Guaranteed",
-            "InHouse",
-            "CheckedOut",
-            "NoShow",
-            "Denied",
-            "Cancelled",
-            "Released",
-            "Walked",
-            "Expired",
-            "WalkIn",
-            "Registered"
-          ]
-        },
-        "balance": {
-          "type": "number",
-          "format": "double"
-        },
-        "channel_code": {
-          "type": "string"
-        },
-        "arrival_date": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "departure_date": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "rooms": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "adults": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "currency": {
-          "type": "string"
-        },
-        "payment_method": {
-          "type": "string",
-          "enum": [
-            "None",
-            "Cash",
-            "CreditCard",
-            "WireTransfer",
-            "ChargeToCompany",
-            "Check",
-            "Voucher",
-            "DebitCard",
-            "Token"
-          ]
-        },
-        "guarantee": {
-          "$ref": "#/definitions/guarantee_response"
-        },
-        "cancellation_policies": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/cancellation_policy"
-          }
-        },
-        "noshow_policy": {
-          "$ref": "#/definitions/noshow_policy"
-        },
-        "general_policies": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/general_policy"
-          }
-        },
-        "room": {
-          "$ref": "#/definitions/room"
-        },
-        "rate_plan": {
-          "$ref": "#/definitions/rate_plan"
-        },
-        "total_stay": {
-          "$ref": "#/definitions/rate"
-        },
-        "room_rates": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/daily_rate"
-          }
-        },
-        "services": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/service"
-          }
-        },
-        "guests": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/guest"
-          }
-        },
-        "contact": {
-          "$ref": "#/definitions/contact"
-        },
-        "company": {
-          "$ref": "#/definitions/company"
-        },
-        "comment": {
-          "type": "string"
-        }
-      }
-    },
-    "guarantee_response": {
-      "properties": {
-        "guarantee_type": {
-          "type": "string",
-          "enum": [
-            "PM4Hold",
-            "PM6Hold",
-            "GuaranteeToCreditCard",
-            "GuaranteeToGuestAccount",
-            "GuaranteeByTravelAgent",
-            "GuaranteeByCompany",
-            "Deposit",
-            "Voucher",
-            "Prepayment",
-            "NonGuaranteed",
-            "Tentative",
-            "Waitlist"
-          ]
-        }
-      }
-    },
-    "daily_rate": {
-      "properties": {
-        "date": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "room_type": {
-          "type": "string"
-        },
-        "rate": {
-          "type": "number",
-          "format": "double"
-        },
-        "included_tax": {
-          "type": "number",
-          "format": "double"
-        },
-        "excluded_tax": {
-          "type": "number",
-          "format": "double"
-        },
-        "included_services": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "addon_services": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/service_rate"
-          }
-        }
-      }
-    },
-    "guest": {
-      "properties": {
-        "customer_id": {
-          "type": "string"
-        },
-        "first_name": {
-          "type": "string"
-        },
-        "last_name": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "phone": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "mailing_address": {
-          "$ref": "#/definitions/mailing_address"
-        }
-      }
-    },
-    "contact": {
-      "properties": {
-        "customer_id": {
-          "type": "string"
-        }
-      }
-    },
-    "company": {
-      "properties": {
-        "company_id": {
-          "type": "string"
-        }
-      }
-    },
-    "mailing_address": {
-      "properties": {
-        "postal_code": {
-          "type": "string"
-        },
-        "country": {
-          "type": "string"
-        },
-        "city": {
-          "type": "string"
-        },
-        "address_type": {
-          "type": "string",
-          "enum": [
-            "Home",
-            "Business",
-            "Billing",
-            "Other"
-          ]
-        },
-        "address": {
-          "type": "string"
-        }
-      }
-    },
-    "cancellation": {
-      "description": "Result of cancel operation",
-      "properties": {
-        "cancellation_id": {
-          "type": "string"
-        },
-        "cancellation_fee": {
-          "type": "number",
-          "format": "double"
-        },
-        "balance": {
-          "type": "number",
-          "format": "double"
-        }
-      }
-    },
-    "reservation": {
-      "properties": {
-        "hotel_id": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "external_id": {
-          "type": "string"
-        },
-        "arrival_date": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "departure_date": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "room_type": {
-          "type": "string"
-        },
-        "rate_plan": {
-          "type": "string"
-        },
-        "channel_code": {
-          "type": "string"
-        },
-        "block_code": {
-          "type": "string"
-        },
-        "rooms": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "adults": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "guests": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/guest"
-          }
-        },
-        "contact": {
-          "$ref": "#/definitions/contact"
-        },
-        "company": {
-          "$ref": "#/definitions/company"
-        },
-        "addons": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "total_amount": {
-          "type": "number",
-          "format": "double"
-        },
-        "currency": {
-          "type": "string"
-        },
-        "payment_method": {
-          "type": "string",
-          "enum": [
-            "None",
-            "Cash",
-            "CreditCard",
-            "WireTransfer",
-            "ChargeToCompany",
-            "Check",
-            "Voucher",
-            "DebitCard",
-            "Token"
-          ]
-        },
-        "guarantee": {
-          "$ref": "#/definitions/guarantee"
-        },
-        "comment": {
-          "type": "string"
-        }
-      }
-    },
-    "guarantee": {
-      "properties": {
-        "guarantee_type": {
-          "type": "string",
-          "enum": [
-            "PM4Hold",
-            "PM6Hold",
-            "GuaranteeToCreditCard",
-            "GuaranteeToGuestAccount",
-            "GuaranteeByTravelAgent",
-            "GuaranteeByCompany",
-            "Deposit",
-            "Voucher",
-            "Prepayment",
-            "NonGuaranteed",
-            "Tentative",
-            "Waitlist"
-          ]
-        },
-        "token": {
-          "$ref": "#/definitions/token"
-        },
-        "credit_card": {
-          "$ref": "#/definitions/credit_card"
-        }
-      }
-    },
-    "token": {
-      "properties": {
-        "token_id": {
-          "type": "string"
-        },
-        "merchant_reference": {
-          "type": "string"
-        },
-        "shopper_reference": {
-          "type": "string"
-        },
-        "shopper_email": {
-          "type": "string"
-        },
-        "authorization_status": {
-          "type": "string",
-          "enum": [
-            "Authorized",
-            "Refused",
-            "Error",
-            "Canceled",
-            "Consumed",
-            "AuthorizedWithZeroAmount"
-          ]
-        },
-        "authorization_reference": {
-          "type": "string"
-        },
-        "authorization_expiry_date": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "authorized_amount": {
-          "type": "number",
-          "format": "double"
-        }
-      }
-    },
-    "credit_card": {
-      "properties": {
-        "card_type": {
-          "type": "string"
-        },
-        "card_number": {
-          "type": "string"
-        },
-        "card_holder_name": {
-          "type": "string"
-        },
-        "cvv_code": {
-          "type": "string"
-        },
-        "expiration_year": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "expiration_month": {
-          "type": "integer",
-          "format": "int32"
-        }
-      }
+    {
+      "name": "Reservation"
     }
-  }
+  ]
 }

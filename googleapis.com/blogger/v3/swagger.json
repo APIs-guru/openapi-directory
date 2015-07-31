@@ -1,32 +1,3052 @@
 {
-  "swagger": "2.0",
+  "basePath": "/blogger/v3",
+  "definitions": {
+    "Blog": {
+      "properties": {
+        "customMetaData": {
+          "description": "The JSON custom meta-data for the Blog",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of this blog. This is displayed underneath the title.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The identifier for this resource.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "blogger#blog",
+          "description": "The kind of this entry. Always blogger#blog",
+          "type": "string"
+        },
+        "locale": {
+          "description": "The locale this Blog is set to.",
+          "properties": {
+            "country": {
+              "description": "The country this blog's locale is set to.",
+              "type": "string"
+            },
+            "language": {
+              "description": "The language this blog is authored in.",
+              "type": "string"
+            },
+            "variant": {
+              "description": "The language variant this blog is authored in.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "name": {
+          "description": "The name of this blog. This is displayed as the title.",
+          "type": "string"
+        },
+        "pages": {
+          "description": "The container of pages in this blog.",
+          "properties": {
+            "selfLink": {
+              "description": "The URL of the container for pages in this blog.",
+              "type": "string"
+            },
+            "totalItems": {
+              "description": "The count of pages in this blog.",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "posts": {
+          "description": "The container of posts in this blog.",
+          "properties": {
+            "items": {
+              "description": "The List of Posts for this Blog.",
+              "items": {
+                "$ref": "#/definitions/Post"
+              },
+              "type": "array"
+            },
+            "selfLink": {
+              "description": "The URL of the container for posts in this blog.",
+              "type": "string"
+            },
+            "totalItems": {
+              "description": "The count of posts in this blog.",
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "published": {
+          "description": "RFC 3339 date-time when this blog was published.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "selfLink": {
+          "description": "The API REST URL to fetch this resource from.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the blog.",
+          "type": "string"
+        },
+        "updated": {
+          "description": "RFC 3339 date-time when this blog was last updated.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "url": {
+          "description": "The URL where this blog is published.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "BlogList": {
+      "properties": {
+        "blogUserInfos": {
+          "description": "Admin level list of blog per-user information",
+          "items": {
+            "$ref": "#/definitions/BlogUserInfo"
+          },
+          "type": "array"
+        },
+        "items": {
+          "description": "The list of Blogs this user has Authorship or Admin rights over.",
+          "items": {
+            "$ref": "#/definitions/Blog"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "blogger#blogList",
+          "description": "The kind of this entity. Always blogger#blogList",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "BlogPerUserInfo": {
+      "properties": {
+        "blogId": {
+          "description": "ID of the Blog resource",
+          "type": "string"
+        },
+        "hasAdminAccess": {
+          "description": "True if the user has Admin level access to the blog.",
+          "type": "boolean"
+        },
+        "kind": {
+          "default": "blogger#blogPerUserInfo",
+          "description": "The kind of this entity. Always blogger#blogPerUserInfo",
+          "type": "string"
+        },
+        "photosAlbumKey": {
+          "description": "The Photo Album Key for the user when adding photos to the blog",
+          "type": "string"
+        },
+        "role": {
+          "description": "Access permissions that the user has for the blog (ADMIN, AUTHOR, or READER).",
+          "type": "string"
+        },
+        "userId": {
+          "description": "ID of the User",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "BlogUserInfo": {
+      "properties": {
+        "blog": {
+          "$ref": "#/definitions/Blog",
+          "description": "The Blog resource."
+        },
+        "blog_user_info": {
+          "$ref": "#/definitions/BlogPerUserInfo",
+          "description": "Information about a User for the Blog."
+        },
+        "kind": {
+          "default": "blogger#blogUserInfo",
+          "description": "The kind of this entity. Always blogger#blogUserInfo",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Comment": {
+      "properties": {
+        "author": {
+          "description": "The author of this Comment.",
+          "properties": {
+            "displayName": {
+              "description": "The display name.",
+              "type": "string"
+            },
+            "id": {
+              "description": "The identifier of the Comment creator.",
+              "type": "string"
+            },
+            "image": {
+              "description": "The comment creator's avatar.",
+              "properties": {
+                "url": {
+                  "description": "The comment creator's avatar URL.",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "url": {
+              "description": "The URL of the Comment creator's Profile page.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "blog": {
+          "description": "Data about the blog containing this comment.",
+          "properties": {
+            "id": {
+              "description": "The identifier of the blog containing this comment.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "content": {
+          "description": "The actual content of the comment. May include HTML markup.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The identifier for this resource.",
+          "type": "string"
+        },
+        "inReplyTo": {
+          "description": "Data about the comment this is in reply to.",
+          "properties": {
+            "id": {
+              "description": "The identified of the parent of this comment.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "kind": {
+          "default": "blogger#comment",
+          "description": "The kind of this entry. Always blogger#comment",
+          "type": "string"
+        },
+        "post": {
+          "description": "Data about the post containing this comment.",
+          "properties": {
+            "id": {
+              "description": "The identifier of the post containing this comment.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "published": {
+          "description": "RFC 3339 date-time when this comment was published.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "selfLink": {
+          "description": "The API REST URL to fetch this resource from.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the comment (only populated for admin users)",
+          "type": "string"
+        },
+        "updated": {
+          "description": "RFC 3339 date-time when this comment was last updated.",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CommentList": {
+      "properties": {
+        "etag": {
+          "description": "Etag of the response.",
+          "type": "string"
+        },
+        "items": {
+          "description": "The List of Comments for a Post.",
+          "items": {
+            "$ref": "#/definitions/Comment"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "blogger#commentList",
+          "description": "The kind of this entry. Always blogger#commentList",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "Pagination token to fetch the next page, if one exists.",
+          "type": "string"
+        },
+        "prevPageToken": {
+          "description": "Pagination token to fetch the previous page, if one exists.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Page": {
+      "properties": {
+        "author": {
+          "description": "The author of this Page.",
+          "properties": {
+            "displayName": {
+              "description": "The display name.",
+              "type": "string"
+            },
+            "id": {
+              "description": "The identifier of the Page creator.",
+              "type": "string"
+            },
+            "image": {
+              "description": "The page author's avatar.",
+              "properties": {
+                "url": {
+                  "description": "The page author's avatar URL.",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "url": {
+              "description": "The URL of the Page creator's Profile page.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "blog": {
+          "description": "Data about the blog containing this Page.",
+          "properties": {
+            "id": {
+              "description": "The identifier of the blog containing this page.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "content": {
+          "description": "The body content of this Page, in HTML.",
+          "type": "string"
+        },
+        "etag": {
+          "description": "Etag of the resource.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The identifier for this resource.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "blogger#page",
+          "description": "The kind of this entity. Always blogger#page",
+          "type": "string"
+        },
+        "published": {
+          "description": "RFC 3339 date-time when this Page was published.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "selfLink": {
+          "description": "The API REST URL to fetch this resource from.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the page for admin resources (either LIVE or DRAFT).",
+          "type": "string"
+        },
+        "title": {
+          "description": "The title of this entity. This is the name displayed in the Admin user interface.",
+          "type": "string"
+        },
+        "updated": {
+          "description": "RFC 3339 date-time when this Page was last updated.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "url": {
+          "description": "The URL that this Page is displayed at.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PageList": {
+      "properties": {
+        "etag": {
+          "description": "Etag of the response.",
+          "type": "string"
+        },
+        "items": {
+          "description": "The list of Pages for a Blog.",
+          "items": {
+            "$ref": "#/definitions/Page"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "blogger#pageList",
+          "description": "The kind of this entity. Always blogger#pageList",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "Pagination token to fetch the next page, if one exists.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Pageviews": {
+      "properties": {
+        "blogId": {
+          "description": "Blog Id",
+          "type": "string"
+        },
+        "counts": {
+          "description": "The container of posts in this blog.",
+          "items": {
+            "properties": {
+              "count": {
+                "description": "Count of page views for the given time range",
+                "format": "int64",
+                "type": "string"
+              },
+              "timeRange": {
+                "description": "Time range the given count applies to",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "blogger#page_views",
+          "description": "The kind of this entry. Always blogger#page_views",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Post": {
+      "properties": {
+        "author": {
+          "description": "The author of this Post.",
+          "properties": {
+            "displayName": {
+              "description": "The display name.",
+              "type": "string"
+            },
+            "id": {
+              "description": "The identifier of the Post creator.",
+              "type": "string"
+            },
+            "image": {
+              "description": "The Post author's avatar.",
+              "properties": {
+                "url": {
+                  "description": "The Post author's avatar URL.",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "url": {
+              "description": "The URL of the Post creator's Profile page.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "blog": {
+          "description": "Data about the blog containing this Post.",
+          "properties": {
+            "id": {
+              "description": "The identifier of the Blog that contains this Post.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "content": {
+          "description": "The content of the Post. May contain HTML markup.",
+          "type": "string"
+        },
+        "customMetaData": {
+          "description": "The JSON meta-data for the Post.",
+          "type": "string"
+        },
+        "etag": {
+          "description": "Etag of the resource.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The identifier of this Post.",
+          "type": "string"
+        },
+        "images": {
+          "description": "Display image for the Post.",
+          "items": {
+            "properties": {
+              "url": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "blogger#post",
+          "description": "The kind of this entity. Always blogger#post",
+          "type": "string"
+        },
+        "labels": {
+          "description": "The list of labels this Post was tagged with.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "location": {
+          "description": "The location for geotagged posts.",
+          "properties": {
+            "lat": {
+              "description": "Location's latitude.",
+              "format": "double",
+              "type": "number"
+            },
+            "lng": {
+              "description": "Location's longitude.",
+              "format": "double",
+              "type": "number"
+            },
+            "name": {
+              "description": "Location name.",
+              "type": "string"
+            },
+            "span": {
+              "description": "Location's viewport span. Can be used when rendering a map preview.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "published": {
+          "description": "RFC 3339 date-time when this Post was published.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "readerComments": {
+          "description": "Comment control and display setting for readers of this post.",
+          "type": "string"
+        },
+        "replies": {
+          "description": "The container of comments on this Post.",
+          "properties": {
+            "items": {
+              "description": "The List of Comments for this Post.",
+              "items": {
+                "$ref": "#/definitions/Comment"
+              },
+              "type": "array"
+            },
+            "selfLink": {
+              "description": "The URL of the comments on this post.",
+              "type": "string"
+            },
+            "totalItems": {
+              "description": "The count of comments on this post.",
+              "format": "int64",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "selfLink": {
+          "description": "The API REST URL to fetch this resource from.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the post. Only set for admin-level requests",
+          "type": "string"
+        },
+        "title": {
+          "description": "The title of the Post.",
+          "type": "string"
+        },
+        "titleLink": {
+          "description": "The title link URL, similar to atom's related link.",
+          "type": "string"
+        },
+        "updated": {
+          "description": "RFC 3339 date-time when this Post was last updated.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "url": {
+          "description": "The URL where this Post is displayed.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PostList": {
+      "properties": {
+        "etag": {
+          "description": "Etag of the response.",
+          "type": "string"
+        },
+        "items": {
+          "description": "The list of Posts for this Blog.",
+          "items": {
+            "$ref": "#/definitions/Post"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "blogger#postList",
+          "description": "The kind of this entity. Always blogger#postList",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "Pagination token to fetch the next page, if one exists.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PostPerUserInfo": {
+      "properties": {
+        "blogId": {
+          "description": "ID of the Blog that the post resource belongs to.",
+          "type": "string"
+        },
+        "hasEditAccess": {
+          "description": "True if the user has Author level access to the post.",
+          "type": "boolean"
+        },
+        "kind": {
+          "default": "blogger#postPerUserInfo",
+          "description": "The kind of this entity. Always blogger#postPerUserInfo",
+          "type": "string"
+        },
+        "postId": {
+          "description": "ID of the Post resource.",
+          "type": "string"
+        },
+        "userId": {
+          "description": "ID of the User.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PostUserInfo": {
+      "properties": {
+        "kind": {
+          "default": "blogger#postUserInfo",
+          "description": "The kind of this entity. Always blogger#postUserInfo",
+          "type": "string"
+        },
+        "post": {
+          "$ref": "#/definitions/Post",
+          "description": "The Post resource."
+        },
+        "post_user_info": {
+          "$ref": "#/definitions/PostPerUserInfo",
+          "description": "Information about a User for the Post."
+        }
+      },
+      "type": "object"
+    },
+    "PostUserInfosList": {
+      "properties": {
+        "items": {
+          "description": "The list of Posts with User information for the post, for this Blog.",
+          "items": {
+            "$ref": "#/definitions/PostUserInfo"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "blogger#postUserInfosList",
+          "description": "The kind of this entity. Always blogger#postList",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "Pagination token to fetch the next page, if one exists.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "User": {
+      "properties": {
+        "about": {
+          "description": "Profile summary information.",
+          "type": "string"
+        },
+        "blogs": {
+          "description": "The container of blogs for this user.",
+          "properties": {
+            "selfLink": {
+              "description": "The URL of the Blogs for this user.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "created": {
+          "description": "The timestamp of when this profile was created, in seconds since epoch.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The identifier for this User.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "blogger#user",
+          "description": "The kind of this entity. Always blogger#user",
+          "type": "string"
+        },
+        "locale": {
+          "description": "This user's locale",
+          "properties": {
+            "country": {
+              "description": "The user's country setting.",
+              "type": "string"
+            },
+            "language": {
+              "description": "The user's language setting.",
+              "type": "string"
+            },
+            "variant": {
+              "description": "The user's language variant setting.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "selfLink": {
+          "description": "The API REST URL to fetch this resource from.",
+          "type": "string"
+        },
+        "url": {
+          "description": "The user's profile page.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/blogger/docs/3.0/getting_started"
+  },
+  "host": "www.googleapis.com",
   "info": {
-    "title": "Blogger API",
-    "x-serviceName": "blogger",
-    "description": "API for access to the data within Blogger.",
     "contact": {
       "name": "Google",
       "url": "https://google.com"
     },
+    "description": "API for access to the data within Blogger.",
+    "title": "Blogger API",
     "version": "v3",
-    "x-providerName": "googleapis.com",
+    "x-logo": "https://www.google.com/images/srpr/logo11w.png",
     "x-origin": {
       "format": "google",
-      "version": "v1",
-      "url": "https://www.googleapis.com/discovery/v1/apis/blogger/v3/rest"
+      "url": "https://www.googleapis.com/discovery/v1/apis/blogger/v3/rest",
+      "version": "v1"
     },
-    "x-logo": "https://www.google.com/images/srpr/logo11w.png"
+    "x-providerName": "googleapis.com",
+    "x-serviceName": "blogger"
   },
-  "host": "www.googleapis.com",
-  "basePath": "/blogger/v3",
-  "schemes": [
-    "https"
-  ],
+  "parameters": {
+    "alt": {
+      "default": "json",
+      "description": "Data format for the response.",
+      "enum": [
+        "json"
+      ],
+      "in": "query",
+      "name": "alt",
+      "type": "string"
+    },
+    "fields": {
+      "description": "Selector specifying which fields to include in a partial response.",
+      "in": "query",
+      "name": "fields",
+      "type": "string"
+    },
+    "key": {
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "in": "query",
+      "name": "key",
+      "type": "string"
+    },
+    "oauth_token": {
+      "description": "OAuth 2.0 token for the current user.",
+      "in": "query",
+      "name": "oauth_token",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "default": true,
+      "description": "Returns response with indentations and line breaks.",
+      "in": "query",
+      "name": "prettyPrint",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "in": "query",
+      "name": "quotaUser",
+      "type": "string"
+    },
+    "userIp": {
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "in": "query",
+      "name": "userIp",
+      "type": "string"
+    }
+  },
   "paths": {
+    "/blogs/byurl": {
+      "get": {
+        "description": "Retrieve a Blog by URL.",
+        "operationId": "blogger.blogs.getByUrl",
+        "parameters": [
+          {
+            "description": "The URL of the blog to retrieve.",
+            "in": "query",
+            "name": "url",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Access level with which to view the blog. Note that some fields require elevated access.",
+            "enum": [
+              "ADMIN",
+              "AUTHOR",
+              "READER"
+            ],
+            "in": "query",
+            "name": "view",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Blog"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "blogs"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/blogs/{blogId}": {
+      "get": {
+        "description": "Gets one blog by ID.",
+        "operationId": "blogger.blogs.get",
+        "parameters": [
+          {
+            "description": "The ID of the blog to get.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Maximum number of posts to pull back with the blog.",
+            "in": "query",
+            "name": "maxPosts",
+            "type": "integer"
+          },
+          {
+            "description": "Access level with which to view the blog. Note that some fields require elevated access.",
+            "enum": [
+              "ADMIN",
+              "AUTHOR",
+              "READER"
+            ],
+            "in": "query",
+            "name": "view",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Blog"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "blogs"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/blogs/{blogId}/comments": {
+      "get": {
+        "description": "Retrieves the comments for a blog, across all posts, possibly filtered.",
+        "operationId": "blogger.comments.listByBlog",
+        "parameters": [
+          {
+            "description": "ID of the blog to fetch comments from.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Latest date of comment to fetch, a date-time with RFC 3339 formatting.",
+            "in": "query",
+            "name": "endDate",
+            "type": "string"
+          },
+          {
+            "description": "Whether the body content of the comments is included.",
+            "in": "query",
+            "name": "fetchBodies",
+            "type": "boolean"
+          },
+          {
+            "description": "Maximum number of comments to include in the result.",
+            "in": "query",
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "Continuation token if request is paged.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          },
+          {
+            "description": "Earliest date of comment to fetch, a date-time with RFC 3339 formatting.",
+            "in": "query",
+            "name": "startDate",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "in": "query",
+            "items": {
+              "enum": [
+                "emptied",
+                "live",
+                "pending",
+                "spam"
+              ],
+              "type": "string"
+            },
+            "name": "status",
+            "type": "array"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/CommentList"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "comments"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/blogs/{blogId}/pages": {
+      "get": {
+        "description": "Retrieves the pages for a blog, optionally including non-LIVE statuses.",
+        "operationId": "blogger.pages.list",
+        "parameters": [
+          {
+            "description": "ID of the blog to fetch Pages from.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Whether to retrieve the Page bodies.",
+            "in": "query",
+            "name": "fetchBodies",
+            "type": "boolean"
+          },
+          {
+            "description": "Maximum number of Pages to fetch.",
+            "in": "query",
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "Continuation token if the request is paged.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "in": "query",
+            "items": {
+              "enum": [
+                "draft",
+                "live"
+              ],
+              "type": "string"
+            },
+            "name": "status",
+            "type": "array"
+          },
+          {
+            "description": "Access level with which to view the returned result. Note that some fields require elevated access.",
+            "enum": [
+              "ADMIN",
+              "AUTHOR",
+              "READER"
+            ],
+            "in": "query",
+            "name": "view",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/PageList"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "pages"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Add a page.",
+        "operationId": "blogger.pages.insert",
+        "parameters": [
+          {
+            "description": "ID of the blog to add the page to.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Whether to create the page as a draft (default: false).",
+            "in": "query",
+            "name": "isDraft",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Page"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
+        ],
+        "tags": [
+          "pages"
+        ]
+      }
+    },
+    "/blogs/{blogId}/pages/{pageId}": {
+      "delete": {
+        "description": "Delete a page by ID.",
+        "operationId": "blogger.pages.delete",
+        "parameters": [
+          {
+            "description": "The ID of the Blog.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the Page.",
+            "in": "path",
+            "name": "pageId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
+        ],
+        "tags": [
+          "pages"
+        ]
+      },
+      "get": {
+        "description": "Gets one blog page by ID.",
+        "operationId": "blogger.pages.get",
+        "parameters": [
+          {
+            "description": "ID of the blog containing the page.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the page to get.",
+            "in": "path",
+            "name": "pageId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "enum": [
+              "ADMIN",
+              "AUTHOR",
+              "READER"
+            ],
+            "in": "query",
+            "name": "view",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Page"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "pages"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "patch": {
+        "description": "Update a page. This method supports patch semantics.",
+        "operationId": "blogger.pages.patch",
+        "parameters": [
+          {
+            "description": "The ID of the Blog.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the Page.",
+            "in": "path",
+            "name": "pageId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Whether a publish action should be performed when the page is updated (default: false).",
+            "in": "query",
+            "name": "publish",
+            "type": "boolean"
+          },
+          {
+            "description": "Whether a revert action should be performed when the page is updated (default: false).",
+            "in": "query",
+            "name": "revert",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Page"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
+        ],
+        "tags": [
+          "pages"
+        ]
+      },
+      "put": {
+        "description": "Update a page.",
+        "operationId": "blogger.pages.update",
+        "parameters": [
+          {
+            "description": "The ID of the Blog.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the Page.",
+            "in": "path",
+            "name": "pageId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Whether a publish action should be performed when the page is updated (default: false).",
+            "in": "query",
+            "name": "publish",
+            "type": "boolean"
+          },
+          {
+            "description": "Whether a revert action should be performed when the page is updated (default: false).",
+            "in": "query",
+            "name": "revert",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Page"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Page"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
+        ],
+        "tags": [
+          "pages"
+        ]
+      }
+    },
+    "/blogs/{blogId}/pages/{pageId}/publish": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Publishes a draft page.",
+        "operationId": "blogger.pages.publish",
+        "parameters": [
+          {
+            "description": "The ID of the blog.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the page.",
+            "in": "path",
+            "name": "pageId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Page"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
+        ],
+        "tags": [
+          "pages"
+        ]
+      }
+    },
+    "/blogs/{blogId}/pages/{pageId}/revert": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Revert a published or scheduled page to draft state.",
+        "operationId": "blogger.pages.revert",
+        "parameters": [
+          {
+            "description": "The ID of the blog.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the page.",
+            "in": "path",
+            "name": "pageId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Page"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
+        ],
+        "tags": [
+          "pages"
+        ]
+      }
+    },
+    "/blogs/{blogId}/pageviews": {
+      "get": {
+        "description": "Retrieve pageview stats for a Blog.",
+        "operationId": "blogger.pageViews.get",
+        "parameters": [
+          {
+            "description": "The ID of the blog to get.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "in": "query",
+            "items": {
+              "enum": [
+                "30DAYS",
+                "7DAYS",
+                "all"
+              ],
+              "type": "string"
+            },
+            "name": "range",
+            "type": "array"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Pageviews"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
+        ],
+        "tags": [
+          "pageViews"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/blogs/{blogId}/posts": {
+      "get": {
+        "description": "Retrieves a list of posts, possibly filtered.",
+        "operationId": "blogger.posts.list",
+        "parameters": [
+          {
+            "description": "ID of the blog to fetch posts from.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Latest post date to fetch, a date-time with RFC 3339 formatting.",
+            "in": "query",
+            "name": "endDate",
+            "type": "string"
+          },
+          {
+            "default": true,
+            "description": "Whether the body content of posts is included (default: true). This should be set to false when the post bodies are not required, to help minimize traffic.",
+            "in": "query",
+            "name": "fetchBodies",
+            "type": "boolean"
+          },
+          {
+            "description": "Whether image URL metadata for each post is included.",
+            "in": "query",
+            "name": "fetchImages",
+            "type": "boolean"
+          },
+          {
+            "description": "Comma-separated list of labels to search for.",
+            "in": "query",
+            "name": "labels",
+            "type": "string"
+          },
+          {
+            "description": "Maximum number of posts to fetch.",
+            "in": "query",
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "default": "published",
+            "description": "Sort search results",
+            "enum": [
+              "published",
+              "updated"
+            ],
+            "in": "query",
+            "name": "orderBy",
+            "type": "string"
+          },
+          {
+            "description": "Continuation token if the request is paged.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          },
+          {
+            "description": "Earliest post date to fetch, a date-time with RFC 3339 formatting.",
+            "in": "query",
+            "name": "startDate",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Statuses to include in the results.",
+            "in": "query",
+            "items": {
+              "enum": [
+                "draft",
+                "live",
+                "scheduled"
+              ],
+              "type": "string"
+            },
+            "name": "status",
+            "type": "array"
+          },
+          {
+            "description": "Access level with which to view the returned result. Note that some fields require escalated access.",
+            "enum": [
+              "ADMIN",
+              "AUTHOR",
+              "READER"
+            ],
+            "in": "query",
+            "name": "view",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/PostList"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "posts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Add a post.",
+        "operationId": "blogger.posts.insert",
+        "parameters": [
+          {
+            "description": "ID of the blog to add the post to.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": true,
+            "description": "Whether the body content of the post is included with the result (default: true).",
+            "in": "query",
+            "name": "fetchBody",
+            "type": "boolean"
+          },
+          {
+            "description": "Whether image URL metadata for each post is included in the returned result (default: false).",
+            "in": "query",
+            "name": "fetchImages",
+            "type": "boolean"
+          },
+          {
+            "description": "Whether to create the post as a draft (default: false).",
+            "in": "query",
+            "name": "isDraft",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
+        ],
+        "tags": [
+          "posts"
+        ]
+      }
+    },
+    "/blogs/{blogId}/posts/bypath": {
+      "get": {
+        "description": "Retrieve a Post by Path.",
+        "operationId": "blogger.posts.getByPath",
+        "parameters": [
+          {
+            "description": "ID of the blog to fetch the post from.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Path of the Post to retrieve.",
+            "in": "query",
+            "name": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Maximum number of comments to pull back on a post.",
+            "in": "query",
+            "name": "maxComments",
+            "type": "integer"
+          },
+          {
+            "description": "Access level with which to view the returned result. Note that some fields require elevated access.",
+            "enum": [
+              "ADMIN",
+              "AUTHOR",
+              "READER"
+            ],
+            "in": "query",
+            "name": "view",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "posts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/blogs/{blogId}/posts/search": {
+      "get": {
+        "description": "Search for a post.",
+        "operationId": "blogger.posts.search",
+        "parameters": [
+          {
+            "description": "ID of the blog to fetch the post from.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Query terms to search this blog for matching posts.",
+            "in": "query",
+            "name": "q",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": true,
+            "description": "Whether the body content of posts is included (default: true). This should be set to false when the post bodies are not required, to help minimize traffic.",
+            "in": "query",
+            "name": "fetchBodies",
+            "type": "boolean"
+          },
+          {
+            "default": "published",
+            "description": "Sort search results",
+            "enum": [
+              "published",
+              "updated"
+            ],
+            "in": "query",
+            "name": "orderBy",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/PostList"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "posts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/blogs/{blogId}/posts/{postId}": {
+      "delete": {
+        "description": "Delete a post by ID.",
+        "operationId": "blogger.posts.delete",
+        "parameters": [
+          {
+            "description": "The ID of the Blog.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the Post.",
+            "in": "path",
+            "name": "postId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
+        ],
+        "tags": [
+          "posts"
+        ]
+      },
+      "get": {
+        "description": "Get a post by ID.",
+        "operationId": "blogger.posts.get",
+        "parameters": [
+          {
+            "description": "ID of the blog to fetch the post from.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the post",
+            "in": "path",
+            "name": "postId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": true,
+            "description": "Whether the body content of the post is included (default: true). This should be set to false when the post bodies are not required, to help minimize traffic.",
+            "in": "query",
+            "name": "fetchBody",
+            "type": "boolean"
+          },
+          {
+            "description": "Whether image URL metadata for each post is included (default: false).",
+            "in": "query",
+            "name": "fetchImages",
+            "type": "boolean"
+          },
+          {
+            "description": "Maximum number of comments to pull back on a post.",
+            "in": "query",
+            "name": "maxComments",
+            "type": "integer"
+          },
+          {
+            "description": "Access level with which to view the returned result. Note that some fields require elevated access.",
+            "enum": [
+              "ADMIN",
+              "AUTHOR",
+              "READER"
+            ],
+            "in": "query",
+            "name": "view",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "posts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "patch": {
+        "description": "Update a post. This method supports patch semantics.",
+        "operationId": "blogger.posts.patch",
+        "parameters": [
+          {
+            "description": "The ID of the Blog.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the Post.",
+            "in": "path",
+            "name": "postId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": true,
+            "description": "Whether the body content of the post is included with the result (default: true).",
+            "in": "query",
+            "name": "fetchBody",
+            "type": "boolean"
+          },
+          {
+            "description": "Whether image URL metadata for each post is included in the returned result (default: false).",
+            "in": "query",
+            "name": "fetchImages",
+            "type": "boolean"
+          },
+          {
+            "description": "Maximum number of comments to retrieve with the returned post.",
+            "in": "query",
+            "name": "maxComments",
+            "type": "integer"
+          },
+          {
+            "description": "Whether a publish action should be performed when the post is updated (default: false).",
+            "in": "query",
+            "name": "publish",
+            "type": "boolean"
+          },
+          {
+            "description": "Whether a revert action should be performed when the post is updated (default: false).",
+            "in": "query",
+            "name": "revert",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
+        ],
+        "tags": [
+          "posts"
+        ]
+      },
+      "put": {
+        "description": "Update a post.",
+        "operationId": "blogger.posts.update",
+        "parameters": [
+          {
+            "description": "The ID of the Blog.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the Post.",
+            "in": "path",
+            "name": "postId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": true,
+            "description": "Whether the body content of the post is included with the result (default: true).",
+            "in": "query",
+            "name": "fetchBody",
+            "type": "boolean"
+          },
+          {
+            "description": "Whether image URL metadata for each post is included in the returned result (default: false).",
+            "in": "query",
+            "name": "fetchImages",
+            "type": "boolean"
+          },
+          {
+            "description": "Maximum number of comments to retrieve with the returned post.",
+            "in": "query",
+            "name": "maxComments",
+            "type": "integer"
+          },
+          {
+            "description": "Whether a publish action should be performed when the post is updated (default: false).",
+            "in": "query",
+            "name": "publish",
+            "type": "boolean"
+          },
+          {
+            "description": "Whether a revert action should be performed when the post is updated (default: false).",
+            "in": "query",
+            "name": "revert",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
+        ],
+        "tags": [
+          "posts"
+        ]
+      }
+    },
+    "/blogs/{blogId}/posts/{postId}/comments": {
+      "get": {
+        "description": "Retrieves the comments for a post, possibly filtered.",
+        "operationId": "blogger.comments.list",
+        "parameters": [
+          {
+            "description": "ID of the blog to fetch comments from.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the post to fetch posts from.",
+            "in": "path",
+            "name": "postId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Latest date of comment to fetch, a date-time with RFC 3339 formatting.",
+            "in": "query",
+            "name": "endDate",
+            "type": "string"
+          },
+          {
+            "description": "Whether the body content of the comments is included.",
+            "in": "query",
+            "name": "fetchBodies",
+            "type": "boolean"
+          },
+          {
+            "description": "Maximum number of comments to include in the result.",
+            "in": "query",
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "Continuation token if request is paged.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          },
+          {
+            "description": "Earliest date of comment to fetch, a date-time with RFC 3339 formatting.",
+            "in": "query",
+            "name": "startDate",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "in": "query",
+            "items": {
+              "enum": [
+                "emptied",
+                "live",
+                "pending",
+                "spam"
+              ],
+              "type": "string"
+            },
+            "name": "status",
+            "type": "array"
+          },
+          {
+            "description": "Access level with which to view the returned result. Note that some fields require elevated access.",
+            "enum": [
+              "ADMIN",
+              "AUTHOR",
+              "READER"
+            ],
+            "in": "query",
+            "name": "view",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/CommentList"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "comments"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/blogs/{blogId}/posts/{postId}/comments/{commentId}": {
+      "delete": {
+        "description": "Delete a comment by ID.",
+        "operationId": "blogger.comments.delete",
+        "parameters": [
+          {
+            "description": "The ID of the Blog.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the Post.",
+            "in": "path",
+            "name": "postId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the comment to delete.",
+            "in": "path",
+            "name": "commentId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
+        ],
+        "tags": [
+          "comments"
+        ]
+      },
+      "get": {
+        "description": "Gets one comment by ID.",
+        "operationId": "blogger.comments.get",
+        "parameters": [
+          {
+            "description": "ID of the blog to containing the comment.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the post to fetch posts from.",
+            "in": "path",
+            "name": "postId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the comment to get.",
+            "in": "path",
+            "name": "commentId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Access level for the requested comment (default: READER). Note that some comments will require elevated permissions, for example comments where the parent posts which is in a draft state, or comments that are pending moderation.",
+            "enum": [
+              "ADMIN",
+              "AUTHOR",
+              "READER"
+            ],
+            "in": "query",
+            "name": "view",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "comments"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/blogs/{blogId}/posts/{postId}/comments/{commentId}/approve": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Marks a comment as not spam.",
+        "operationId": "blogger.comments.approve",
+        "parameters": [
+          {
+            "description": "The ID of the Blog.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the Post.",
+            "in": "path",
+            "name": "postId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the comment to mark as not spam.",
+            "in": "path",
+            "name": "commentId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
+        ],
+        "tags": [
+          "comments"
+        ]
+      }
+    },
+    "/blogs/{blogId}/posts/{postId}/comments/{commentId}/removecontent": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Removes the content of a comment.",
+        "operationId": "blogger.comments.removeContent",
+        "parameters": [
+          {
+            "description": "The ID of the Blog.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the Post.",
+            "in": "path",
+            "name": "postId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the comment to delete content from.",
+            "in": "path",
+            "name": "commentId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
+        ],
+        "tags": [
+          "comments"
+        ]
+      }
+    },
+    "/blogs/{blogId}/posts/{postId}/comments/{commentId}/spam": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Marks a comment as spam.",
+        "operationId": "blogger.comments.markAsSpam",
+        "parameters": [
+          {
+            "description": "The ID of the Blog.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the Post.",
+            "in": "path",
+            "name": "postId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the comment to mark as spam.",
+            "in": "path",
+            "name": "commentId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
+        ],
+        "tags": [
+          "comments"
+        ]
+      }
+    },
+    "/blogs/{blogId}/posts/{postId}/publish": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Publishes a draft post, optionally at the specific time of the given publishDate parameter.",
+        "operationId": "blogger.posts.publish",
+        "parameters": [
+          {
+            "description": "The ID of the Blog.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the Post.",
+            "in": "path",
+            "name": "postId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Optional date and time to schedule the publishing of the Blog. If no publishDate parameter is given, the post is either published at the a previously saved schedule date (if present), or the current time. If a future date is given, the post will be scheduled to be published.",
+            "in": "query",
+            "name": "publishDate",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
+        ],
+        "tags": [
+          "posts"
+        ]
+      }
+    },
+    "/blogs/{blogId}/posts/{postId}/revert": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Revert a published or scheduled post to draft state.",
+        "operationId": "blogger.posts.revert",
+        "parameters": [
+          {
+            "description": "The ID of the Blog.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the Post.",
+            "in": "path",
+            "name": "postId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger"
+            ]
+          }
+        ],
+        "tags": [
+          "posts"
+        ]
+      }
+    },
+    "/users/{userId}": {
+      "get": {
+        "description": "Gets one user by ID.",
+        "operationId": "blogger.users.get",
+        "parameters": [
+          {
+            "description": "The ID of the user to get.",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/users/{userId}/blogs": {
+      "get": {
+        "description": "Retrieves a list of blogs, possibly filtered.",
+        "operationId": "blogger.blogs.listByUser",
+        "parameters": [
+          {
+            "description": "ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Whether the response is a list of blogs with per-user information instead of just blogs.",
+            "in": "query",
+            "name": "fetchUserInfo",
+            "type": "boolean"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "User access types for blogs to include in the results, e.g. AUTHOR will return blogs where the user has author level access. If no roles are specified, defaults to ADMIN and AUTHOR roles.",
+            "in": "query",
+            "items": {
+              "enum": [
+                "ADMIN",
+                "AUTHOR",
+                "READER"
+              ],
+              "type": "string"
+            },
+            "name": "role",
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "default": "LIVE",
+            "description": "Blog statuses to include in the result (default: Live blogs only). Note that ADMIN access is required to view deleted blogs.",
+            "in": "query",
+            "items": {
+              "enum": [
+                "DELETED",
+                "LIVE"
+              ],
+              "type": "string"
+            },
+            "name": "status",
+            "type": "array"
+          },
+          {
+            "description": "Access level with which to view the blogs. Note that some fields require elevated access.",
+            "enum": [
+              "ADMIN",
+              "AUTHOR",
+              "READER"
+            ],
+            "in": "query",
+            "name": "view",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/BlogList"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "blogs"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/users/{userId}/blogs/{blogId}": {
       "get": {
         "description": "Gets one blog and user info pair by blogId and userId.",
         "operationId": "blogger.blogUserInfos.get",
+        "parameters": [
+          {
+            "description": "ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the blog to get.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Maximum number of posts to pull back with the blog.",
+            "in": "query",
+            "name": "maxPosts",
+            "type": "integer"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -35,28 +3055,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "The ID of the blog to get.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "maxPosts",
-            "in": "query",
-            "description": "Maximum number of posts to pull back with the blog.",
-            "type": "integer"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -93,1208 +3091,107 @@
         }
       ]
     },
-    "/blogs/{blogId}": {
+    "/users/{userId}/blogs/{blogId}/posts": {
       "get": {
-        "description": "Gets one blog by ID.",
-        "operationId": "blogger.blogs.get",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Blog"
-            }
-          }
-        },
+        "description": "Retrieves a list of post and post user info pairs, possibly filtered. The post user info contains per-user information about the post, such as access rights, specific to the user.",
+        "operationId": "blogger.postUserInfos.list",
         "parameters": [
           {
-            "name": "blogId",
+            "description": "ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.",
             "in": "path",
-            "description": "The ID of the blog to get.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "maxPosts",
-            "in": "query",
-            "description": "Maximum number of posts to pull back with the blog.",
-            "type": "integer"
-          },
-          {
-            "name": "view",
-            "in": "query",
-            "description": "Access level with which to view the blog. Note that some fields require elevated access.",
-            "type": "string",
-            "enum": [
-              "ADMIN",
-              "AUTHOR",
-              "READER"
-            ]
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger",
-              "https://www.googleapis.com/auth/blogger.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "blogs"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/blogs/byurl": {
-      "get": {
-        "description": "Retrieve a Blog by URL.",
-        "operationId": "blogger.blogs.getByUrl",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Blog"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "url",
-            "in": "query",
-            "description": "The URL of the blog to retrieve.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "view",
-            "in": "query",
-            "description": "Access level with which to view the blog. Note that some fields require elevated access.",
-            "type": "string",
-            "enum": [
-              "ADMIN",
-              "AUTHOR",
-              "READER"
-            ]
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger",
-              "https://www.googleapis.com/auth/blogger.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "blogs"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/users/{userId}/blogs": {
-      "get": {
-        "description": "Retrieves a list of blogs, possibly filtered.",
-        "operationId": "blogger.blogs.listByUser",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/BlogList"
-            }
-          }
-        },
-        "parameters": [
-          {
             "name": "userId",
-            "in": "path",
-            "description": "ID of the user whose blogs are to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "fetchUserInfo",
-            "in": "query",
-            "description": "Whether the response is a list of blogs with per-user information instead of just blogs.",
-            "type": "boolean"
-          },
-          {
-            "name": "role",
-            "in": "query",
-            "description": "User access types for blogs to include in the results, e.g. AUTHOR will return blogs where the user has author level access. If no roles are specified, defaults to ADMIN and AUTHOR roles.",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "ADMIN",
-                "AUTHOR",
-                "READER"
-              ]
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "description": "Blog statuses to include in the result (default: Live blogs only). Note that ADMIN access is required to view deleted blogs.",
-            "default": "LIVE",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "DELETED",
-                "LIVE"
-              ]
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "view",
-            "in": "query",
-            "description": "Access level with which to view the blogs. Note that some fields require elevated access.",
-            "type": "string",
-            "enum": [
-              "ADMIN",
-              "AUTHOR",
-              "READER"
-            ]
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger",
-              "https://www.googleapis.com/auth/blogger.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "blogs"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/blogs/{blogId}/posts/{postId}/comments/{commentId}/approve": {
-      "post": {
-        "description": "Marks a comment as not spam.",
-        "operationId": "blogger.comments.approve",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Comment"
-            }
-          }
-        },
-        "parameters": [
-          {
+            "description": "ID of the blog to fetch posts from.",
+            "in": "path",
             "name": "blogId",
-            "in": "path",
-            "description": "The ID of the Blog.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "postId",
-            "in": "path",
-            "description": "The ID of the Post.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "commentId",
-            "in": "path",
-            "description": "The ID of the comment to mark as not spam.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger"
-            ]
-          }
-        ],
-        "tags": [
-          "comments"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/blogs/{blogId}/posts/{postId}/comments/{commentId}": {
-      "delete": {
-        "description": "Delete a comment by ID.",
-        "operationId": "blogger.comments.delete",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "The ID of the Blog.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "postId",
-            "in": "path",
-            "description": "The ID of the Post.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "commentId",
-            "in": "path",
-            "description": "The ID of the comment to delete.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger"
-            ]
-          }
-        ],
-        "tags": [
-          "comments"
-        ]
-      },
-      "get": {
-        "description": "Gets one comment by ID.",
-        "operationId": "blogger.comments.get",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Comment"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "ID of the blog to containing the comment.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "postId",
-            "in": "path",
-            "description": "ID of the post to fetch posts from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "commentId",
-            "in": "path",
-            "description": "The ID of the comment to get.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "view",
+            "description": "Latest post date to fetch, a date-time with RFC 3339 formatting.",
             "in": "query",
-            "description": "Access level for the requested comment (default: READER). Note that some comments will require elevated permissions, for example comments where the parent posts which is in a draft state, or comments that are pending moderation.",
-            "type": "string",
-            "enum": [
-              "ADMIN",
-              "AUTHOR",
-              "READER"
-            ]
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger",
-              "https://www.googleapis.com/auth/blogger.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "comments"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/blogs/{blogId}/posts/{postId}/comments": {
-      "get": {
-        "description": "Retrieves the comments for a post, possibly filtered.",
-        "operationId": "blogger.comments.list",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/CommentList"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "ID of the blog to fetch comments from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "postId",
-            "in": "path",
-            "description": "ID of the post to fetch posts from.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "endDate",
-            "in": "query",
-            "description": "Latest date of comment to fetch, a date-time with RFC 3339 formatting.",
             "type": "string"
           },
           {
-            "name": "fetchBodies",
+            "default": false,
+            "description": "Whether the body content of posts is included. Default is false.",
             "in": "query",
-            "description": "Whether the body content of the comments is included.",
+            "name": "fetchBodies",
             "type": "boolean"
           },
           {
-            "name": "maxResults",
+            "description": "Comma-separated list of labels to search for.",
             "in": "query",
-            "description": "Maximum number of comments to include in the result.",
+            "name": "labels",
+            "type": "string"
+          },
+          {
+            "description": "Maximum number of posts to fetch.",
+            "in": "query",
+            "name": "maxResults",
             "type": "integer"
           },
           {
-            "name": "pageToken",
-            "in": "query",
-            "description": "Continuation token if request is paged.",
-            "type": "string"
-          },
-          {
-            "name": "startDate",
-            "in": "query",
-            "description": "Earliest date of comment to fetch, a date-time with RFC 3339 formatting.",
-            "type": "string"
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "emptied",
-                "live",
-                "pending",
-                "spam"
-              ]
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "view",
-            "in": "query",
-            "description": "Access level with which to view the returned result. Note that some fields require elevated access.",
-            "type": "string",
+            "default": "published",
+            "description": "Sort order applied to search results. Default is published.",
             "enum": [
-              "ADMIN",
-              "AUTHOR",
-              "READER"
-            ]
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger",
-              "https://www.googleapis.com/auth/blogger.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "comments"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/blogs/{blogId}/comments": {
-      "get": {
-        "description": "Retrieves the comments for a blog, across all posts, possibly filtered.",
-        "operationId": "blogger.comments.listByBlog",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/CommentList"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "ID of the blog to fetch comments from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endDate",
+              "published",
+              "updated"
+            ],
             "in": "query",
-            "description": "Latest date of comment to fetch, a date-time with RFC 3339 formatting.",
+            "name": "orderBy",
             "type": "string"
           },
           {
-            "name": "fetchBodies",
-            "in": "query",
-            "description": "Whether the body content of the comments is included.",
-            "type": "boolean"
-          },
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "Maximum number of comments to include in the result.",
-            "type": "integer"
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "Continuation token if request is paged.",
-            "type": "string"
-          },
-          {
-            "name": "startDate",
-            "in": "query",
-            "description": "Earliest date of comment to fetch, a date-time with RFC 3339 formatting.",
-            "type": "string"
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "emptied",
-                "live",
-                "pending",
-                "spam"
-              ]
-            },
-            "collectionFormat": "multi"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger",
-              "https://www.googleapis.com/auth/blogger.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "comments"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/blogs/{blogId}/posts/{postId}/comments/{commentId}/spam": {
-      "post": {
-        "description": "Marks a comment as spam.",
-        "operationId": "blogger.comments.markAsSpam",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Comment"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "The ID of the Blog.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "postId",
-            "in": "path",
-            "description": "The ID of the Post.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "commentId",
-            "in": "path",
-            "description": "The ID of the comment to mark as spam.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger"
-            ]
-          }
-        ],
-        "tags": [
-          "comments"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/blogs/{blogId}/posts/{postId}/comments/{commentId}/removecontent": {
-      "post": {
-        "description": "Removes the content of a comment.",
-        "operationId": "blogger.comments.removeContent",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Comment"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "The ID of the Blog.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "postId",
-            "in": "path",
-            "description": "The ID of the Post.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "commentId",
-            "in": "path",
-            "description": "The ID of the comment to delete content from.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger"
-            ]
-          }
-        ],
-        "tags": [
-          "comments"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/blogs/{blogId}/pageviews": {
-      "get": {
-        "description": "Retrieve pageview stats for a Blog.",
-        "operationId": "blogger.pageViews.get",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Pageviews"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "The ID of the blog to get.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "range",
-            "in": "query",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "30DAYS",
-                "7DAYS",
-                "all"
-              ]
-            },
-            "collectionFormat": "multi"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger"
-            ]
-          }
-        ],
-        "tags": [
-          "pageViews"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/blogs/{blogId}/pages/{pageId}": {
-      "delete": {
-        "description": "Delete a page by ID.",
-        "operationId": "blogger.pages.delete",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "The ID of the Blog.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "pageId",
-            "in": "path",
-            "description": "The ID of the Page.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger"
-            ]
-          }
-        ],
-        "tags": [
-          "pages"
-        ]
-      },
-      "get": {
-        "description": "Gets one blog page by ID.",
-        "operationId": "blogger.pages.get",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Page"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "ID of the blog containing the page.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "pageId",
-            "in": "path",
-            "description": "The ID of the page to get.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "view",
-            "in": "query",
-            "type": "string",
-            "enum": [
-              "ADMIN",
-              "AUTHOR",
-              "READER"
-            ]
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger",
-              "https://www.googleapis.com/auth/blogger.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "pages"
-        ]
-      },
-      "patch": {
-        "description": "Update a page. This method supports patch semantics.",
-        "operationId": "blogger.pages.patch",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Page"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "The ID of the Blog.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "pageId",
-            "in": "path",
-            "description": "The ID of the Page.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "publish",
-            "in": "query",
-            "description": "Whether a publish action should be performed when the page is updated (default: false).",
-            "type": "boolean"
-          },
-          {
-            "name": "revert",
-            "in": "query",
-            "description": "Whether a revert action should be performed when the page is updated (default: false).",
-            "type": "boolean"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/Page"
-            }
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger"
-            ]
-          }
-        ],
-        "tags": [
-          "pages"
-        ]
-      },
-      "put": {
-        "description": "Update a page.",
-        "operationId": "blogger.pages.update",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Page"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "The ID of the Blog.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "pageId",
-            "in": "path",
-            "description": "The ID of the Page.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "publish",
-            "in": "query",
-            "description": "Whether a publish action should be performed when the page is updated (default: false).",
-            "type": "boolean"
-          },
-          {
-            "name": "revert",
-            "in": "query",
-            "description": "Whether a revert action should be performed when the page is updated (default: false).",
-            "type": "boolean"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/Page"
-            }
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger"
-            ]
-          }
-        ],
-        "tags": [
-          "pages"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/blogs/{blogId}/pages": {
-      "post": {
-        "description": "Add a page.",
-        "operationId": "blogger.pages.insert",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Page"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "ID of the blog to add the page to.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "isDraft",
-            "in": "query",
-            "description": "Whether to create the page as a draft (default: false).",
-            "type": "boolean"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/Page"
-            }
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger"
-            ]
-          }
-        ],
-        "tags": [
-          "pages"
-        ]
-      },
-      "get": {
-        "description": "Retrieves the pages for a blog, optionally including non-LIVE statuses.",
-        "operationId": "blogger.pages.list",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/PageList"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "ID of the blog to fetch Pages from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "fetchBodies",
-            "in": "query",
-            "description": "Whether to retrieve the Page bodies.",
-            "type": "boolean"
-          },
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "Maximum number of Pages to fetch.",
-            "type": "integer"
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
             "description": "Continuation token if the request is paged.",
+            "in": "query",
+            "name": "pageToken",
             "type": "string"
           },
           {
-            "name": "status",
+            "description": "Earliest post date to fetch, a date-time with RFC 3339 formatting.",
             "in": "query",
-            "type": "array",
+            "name": "startDate",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "in": "query",
             "items": {
-              "type": "string",
               "enum": [
                 "draft",
-                "live"
-              ]
+                "live",
+                "scheduled"
+              ],
+              "type": "string"
             },
-            "collectionFormat": "multi"
+            "name": "status",
+            "type": "array"
           },
           {
-            "name": "view",
-            "in": "query",
             "description": "Access level with which to view the returned result. Note that some fields require elevated access.",
-            "type": "string",
             "enum": [
               "ADMIN",
               "AUTHOR",
               "READER"
-            ]
+            ],
+            "in": "query",
+            "name": "view",
+            "type": "string"
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/PostUserInfosList"
+            }
+          }
+        },
         "security": [
           {
             "Oauth2": [
@@ -1304,133 +3201,7 @@
           }
         ],
         "tags": [
-          "pages"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/blogs/{blogId}/pages/{pageId}/publish": {
-      "post": {
-        "description": "Publishes a draft page.",
-        "operationId": "blogger.pages.publish",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Page"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "The ID of the blog.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "pageId",
-            "in": "path",
-            "description": "The ID of the page.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger"
-            ]
-          }
-        ],
-        "tags": [
-          "pages"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/blogs/{blogId}/pages/{pageId}/revert": {
-      "post": {
-        "description": "Revert a published or scheduled page to draft state.",
-        "operationId": "blogger.pages.revert",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Page"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "The ID of the blog.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "pageId",
-            "in": "path",
-            "description": "The ID of the page.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger"
-            ]
-          }
-        ],
-        "tags": [
-          "pages"
+          "postUserInfos"
         ]
       },
       "parameters": [
@@ -1461,6 +3232,35 @@
       "get": {
         "description": "Gets one post and user info pair, by post ID and user ID. The post user info contains per-user information about the post, such as access rights, specific to the user.",
         "operationId": "blogger.postUserInfos.get",
+        "parameters": [
+          {
+            "description": "ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the blog.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the post to get.",
+            "in": "path",
+            "name": "postId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Maximum number of comments to pull back on a post.",
+            "in": "query",
+            "name": "maxComments",
+            "type": "integer"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -1469,35 +3269,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "The ID of the blog.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "postId",
-            "in": "path",
-            "description": "The ID of the post to get.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "maxComments",
-            "in": "query",
-            "description": "Maximum number of comments to pull back on a post.",
-            "type": "integer"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -1533,1793 +3304,22 @@
           "$ref": "#/parameters/userIp"
         }
       ]
-    },
-    "/users/{userId}/blogs/{blogId}/posts": {
-      "get": {
-        "description": "Retrieves a list of post and post user info pairs, possibly filtered. The post user info contains per-user information about the post, such as access rights, specific to the user.",
-        "operationId": "blogger.postUserInfos.list",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/PostUserInfosList"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "ID of the user for the per-user information to be fetched. Either the word 'self' (sans quote marks) or the user's profile identifier.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "ID of the blog to fetch posts from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endDate",
-            "in": "query",
-            "description": "Latest post date to fetch, a date-time with RFC 3339 formatting.",
-            "type": "string"
-          },
-          {
-            "name": "fetchBodies",
-            "in": "query",
-            "description": "Whether the body content of posts is included. Default is false.",
-            "default": false,
-            "type": "boolean"
-          },
-          {
-            "name": "labels",
-            "in": "query",
-            "description": "Comma-separated list of labels to search for.",
-            "type": "string"
-          },
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "Maximum number of posts to fetch.",
-            "type": "integer"
-          },
-          {
-            "name": "orderBy",
-            "in": "query",
-            "description": "Sort order applied to search results. Default is published.",
-            "default": "published",
-            "type": "string",
-            "enum": [
-              "published",
-              "updated"
-            ]
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "Continuation token if the request is paged.",
-            "type": "string"
-          },
-          {
-            "name": "startDate",
-            "in": "query",
-            "description": "Earliest post date to fetch, a date-time with RFC 3339 formatting.",
-            "type": "string"
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "draft",
-                "live",
-                "scheduled"
-              ]
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "view",
-            "in": "query",
-            "description": "Access level with which to view the returned result. Note that some fields require elevated access.",
-            "type": "string",
-            "enum": [
-              "ADMIN",
-              "AUTHOR",
-              "READER"
-            ]
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger",
-              "https://www.googleapis.com/auth/blogger.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "postUserInfos"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/blogs/{blogId}/posts/{postId}": {
-      "delete": {
-        "description": "Delete a post by ID.",
-        "operationId": "blogger.posts.delete",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "The ID of the Blog.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "postId",
-            "in": "path",
-            "description": "The ID of the Post.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger"
-            ]
-          }
-        ],
-        "tags": [
-          "posts"
-        ]
-      },
-      "get": {
-        "description": "Get a post by ID.",
-        "operationId": "blogger.posts.get",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Post"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "ID of the blog to fetch the post from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "postId",
-            "in": "path",
-            "description": "The ID of the post",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "fetchBody",
-            "in": "query",
-            "description": "Whether the body content of the post is included (default: true). This should be set to false when the post bodies are not required, to help minimize traffic.",
-            "default": true,
-            "type": "boolean"
-          },
-          {
-            "name": "fetchImages",
-            "in": "query",
-            "description": "Whether image URL metadata for each post is included (default: false).",
-            "type": "boolean"
-          },
-          {
-            "name": "maxComments",
-            "in": "query",
-            "description": "Maximum number of comments to pull back on a post.",
-            "type": "integer"
-          },
-          {
-            "name": "view",
-            "in": "query",
-            "description": "Access level with which to view the returned result. Note that some fields require elevated access.",
-            "type": "string",
-            "enum": [
-              "ADMIN",
-              "AUTHOR",
-              "READER"
-            ]
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger",
-              "https://www.googleapis.com/auth/blogger.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "posts"
-        ]
-      },
-      "patch": {
-        "description": "Update a post. This method supports patch semantics.",
-        "operationId": "blogger.posts.patch",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Post"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "The ID of the Blog.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "postId",
-            "in": "path",
-            "description": "The ID of the Post.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "fetchBody",
-            "in": "query",
-            "description": "Whether the body content of the post is included with the result (default: true).",
-            "default": true,
-            "type": "boolean"
-          },
-          {
-            "name": "fetchImages",
-            "in": "query",
-            "description": "Whether image URL metadata for each post is included in the returned result (default: false).",
-            "type": "boolean"
-          },
-          {
-            "name": "maxComments",
-            "in": "query",
-            "description": "Maximum number of comments to retrieve with the returned post.",
-            "type": "integer"
-          },
-          {
-            "name": "publish",
-            "in": "query",
-            "description": "Whether a publish action should be performed when the post is updated (default: false).",
-            "type": "boolean"
-          },
-          {
-            "name": "revert",
-            "in": "query",
-            "description": "Whether a revert action should be performed when the post is updated (default: false).",
-            "type": "boolean"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/Post"
-            }
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger"
-            ]
-          }
-        ],
-        "tags": [
-          "posts"
-        ]
-      },
-      "put": {
-        "description": "Update a post.",
-        "operationId": "blogger.posts.update",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Post"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "The ID of the Blog.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "postId",
-            "in": "path",
-            "description": "The ID of the Post.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "fetchBody",
-            "in": "query",
-            "description": "Whether the body content of the post is included with the result (default: true).",
-            "default": true,
-            "type": "boolean"
-          },
-          {
-            "name": "fetchImages",
-            "in": "query",
-            "description": "Whether image URL metadata for each post is included in the returned result (default: false).",
-            "type": "boolean"
-          },
-          {
-            "name": "maxComments",
-            "in": "query",
-            "description": "Maximum number of comments to retrieve with the returned post.",
-            "type": "integer"
-          },
-          {
-            "name": "publish",
-            "in": "query",
-            "description": "Whether a publish action should be performed when the post is updated (default: false).",
-            "type": "boolean"
-          },
-          {
-            "name": "revert",
-            "in": "query",
-            "description": "Whether a revert action should be performed when the post is updated (default: false).",
-            "type": "boolean"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/Post"
-            }
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger"
-            ]
-          }
-        ],
-        "tags": [
-          "posts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/blogs/{blogId}/posts/bypath": {
-      "get": {
-        "description": "Retrieve a Post by Path.",
-        "operationId": "blogger.posts.getByPath",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Post"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "ID of the blog to fetch the post from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "path",
-            "in": "query",
-            "description": "Path of the Post to retrieve.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "maxComments",
-            "in": "query",
-            "description": "Maximum number of comments to pull back on a post.",
-            "type": "integer"
-          },
-          {
-            "name": "view",
-            "in": "query",
-            "description": "Access level with which to view the returned result. Note that some fields require elevated access.",
-            "type": "string",
-            "enum": [
-              "ADMIN",
-              "AUTHOR",
-              "READER"
-            ]
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger",
-              "https://www.googleapis.com/auth/blogger.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "posts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/blogs/{blogId}/posts": {
-      "post": {
-        "description": "Add a post.",
-        "operationId": "blogger.posts.insert",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Post"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "ID of the blog to add the post to.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "fetchBody",
-            "in": "query",
-            "description": "Whether the body content of the post is included with the result (default: true).",
-            "default": true,
-            "type": "boolean"
-          },
-          {
-            "name": "fetchImages",
-            "in": "query",
-            "description": "Whether image URL metadata for each post is included in the returned result (default: false).",
-            "type": "boolean"
-          },
-          {
-            "name": "isDraft",
-            "in": "query",
-            "description": "Whether to create the post as a draft (default: false).",
-            "type": "boolean"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/Post"
-            }
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger"
-            ]
-          }
-        ],
-        "tags": [
-          "posts"
-        ]
-      },
-      "get": {
-        "description": "Retrieves a list of posts, possibly filtered.",
-        "operationId": "blogger.posts.list",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/PostList"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "ID of the blog to fetch posts from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endDate",
-            "in": "query",
-            "description": "Latest post date to fetch, a date-time with RFC 3339 formatting.",
-            "type": "string"
-          },
-          {
-            "name": "fetchBodies",
-            "in": "query",
-            "description": "Whether the body content of posts is included (default: true). This should be set to false when the post bodies are not required, to help minimize traffic.",
-            "default": true,
-            "type": "boolean"
-          },
-          {
-            "name": "fetchImages",
-            "in": "query",
-            "description": "Whether image URL metadata for each post is included.",
-            "type": "boolean"
-          },
-          {
-            "name": "labels",
-            "in": "query",
-            "description": "Comma-separated list of labels to search for.",
-            "type": "string"
-          },
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "Maximum number of posts to fetch.",
-            "type": "integer"
-          },
-          {
-            "name": "orderBy",
-            "in": "query",
-            "description": "Sort search results",
-            "default": "published",
-            "type": "string",
-            "enum": [
-              "published",
-              "updated"
-            ]
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "Continuation token if the request is paged.",
-            "type": "string"
-          },
-          {
-            "name": "startDate",
-            "in": "query",
-            "description": "Earliest post date to fetch, a date-time with RFC 3339 formatting.",
-            "type": "string"
-          },
-          {
-            "name": "status",
-            "in": "query",
-            "description": "Statuses to include in the results.",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "draft",
-                "live",
-                "scheduled"
-              ]
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "view",
-            "in": "query",
-            "description": "Access level with which to view the returned result. Note that some fields require escalated access.",
-            "type": "string",
-            "enum": [
-              "ADMIN",
-              "AUTHOR",
-              "READER"
-            ]
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger",
-              "https://www.googleapis.com/auth/blogger.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "posts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/blogs/{blogId}/posts/{postId}/publish": {
-      "post": {
-        "description": "Publishes a draft post, optionally at the specific time of the given publishDate parameter.",
-        "operationId": "blogger.posts.publish",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Post"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "The ID of the Blog.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "postId",
-            "in": "path",
-            "description": "The ID of the Post.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "publishDate",
-            "in": "query",
-            "description": "Optional date and time to schedule the publishing of the Blog. If no publishDate parameter is given, the post is either published at the a previously saved schedule date (if present), or the current time. If a future date is given, the post will be scheduled to be published.",
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger"
-            ]
-          }
-        ],
-        "tags": [
-          "posts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/blogs/{blogId}/posts/{postId}/revert": {
-      "post": {
-        "description": "Revert a published or scheduled post to draft state.",
-        "operationId": "blogger.posts.revert",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Post"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "The ID of the Blog.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "postId",
-            "in": "path",
-            "description": "The ID of the Post.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger"
-            ]
-          }
-        ],
-        "tags": [
-          "posts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/blogs/{blogId}/posts/search": {
-      "get": {
-        "description": "Search for a post.",
-        "operationId": "blogger.posts.search",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/PostList"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "blogId",
-            "in": "path",
-            "description": "ID of the blog to fetch the post from.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "q",
-            "in": "query",
-            "description": "Query terms to search this blog for matching posts.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "fetchBodies",
-            "in": "query",
-            "description": "Whether the body content of posts is included (default: true). This should be set to false when the post bodies are not required, to help minimize traffic.",
-            "default": true,
-            "type": "boolean"
-          },
-          {
-            "name": "orderBy",
-            "in": "query",
-            "description": "Sort search results",
-            "default": "published",
-            "type": "string",
-            "enum": [
-              "published",
-              "updated"
-            ]
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger",
-              "https://www.googleapis.com/auth/blogger.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "posts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/users/{userId}": {
-      "get": {
-        "description": "Gets one user by ID.",
-        "operationId": "blogger.users.get",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "The ID of the user to get.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger",
-              "https://www.googleapis.com/auth/blogger.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "users"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
     }
   },
-  "definitions": {
-    "Blog": {
-      "type": "object",
-      "properties": {
-        "customMetaData": {
-          "type": "string",
-          "description": "The JSON custom meta-data for the Blog"
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of this blog. This is displayed underneath the title."
-        },
-        "id": {
-          "type": "string",
-          "description": "The identifier for this resource."
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of this entry. Always blogger#blog",
-          "default": "blogger#blog"
-        },
-        "locale": {
-          "type": "object",
-          "description": "The locale this Blog is set to.",
-          "properties": {
-            "country": {
-              "type": "string",
-              "description": "The country this blog's locale is set to."
-            },
-            "language": {
-              "type": "string",
-              "description": "The language this blog is authored in."
-            },
-            "variant": {
-              "type": "string",
-              "description": "The language variant this blog is authored in."
-            }
-          }
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of this blog. This is displayed as the title."
-        },
-        "pages": {
-          "type": "object",
-          "description": "The container of pages in this blog.",
-          "properties": {
-            "selfLink": {
-              "type": "string",
-              "description": "The URL of the container for pages in this blog."
-            },
-            "totalItems": {
-              "type": "integer",
-              "description": "The count of pages in this blog.",
-              "format": "int32"
-            }
-          }
-        },
-        "posts": {
-          "type": "object",
-          "description": "The container of posts in this blog.",
-          "properties": {
-            "items": {
-              "type": "array",
-              "description": "The List of Posts for this Blog.",
-              "items": {
-                "$ref": "#/definitions/Post"
-              }
-            },
-            "selfLink": {
-              "type": "string",
-              "description": "The URL of the container for posts in this blog."
-            },
-            "totalItems": {
-              "type": "integer",
-              "description": "The count of posts in this blog.",
-              "format": "int32"
-            }
-          }
-        },
-        "published": {
-          "type": "string",
-          "description": "RFC 3339 date-time when this blog was published.",
-          "format": "date-time"
-        },
-        "selfLink": {
-          "type": "string",
-          "description": "The API REST URL to fetch this resource from."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of the blog."
-        },
-        "updated": {
-          "type": "string",
-          "description": "RFC 3339 date-time when this blog was last updated.",
-          "format": "date-time"
-        },
-        "url": {
-          "type": "string",
-          "description": "The URL where this blog is published."
-        }
-      }
-    },
-    "BlogList": {
-      "type": "object",
-      "properties": {
-        "blogUserInfos": {
-          "type": "array",
-          "description": "Admin level list of blog per-user information",
-          "items": {
-            "$ref": "#/definitions/BlogUserInfo"
-          }
-        },
-        "items": {
-          "type": "array",
-          "description": "The list of Blogs this user has Authorship or Admin rights over.",
-          "items": {
-            "$ref": "#/definitions/Blog"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of this entity. Always blogger#blogList",
-          "default": "blogger#blogList"
-        }
-      }
-    },
-    "BlogPerUserInfo": {
-      "type": "object",
-      "properties": {
-        "blogId": {
-          "type": "string",
-          "description": "ID of the Blog resource"
-        },
-        "hasAdminAccess": {
-          "type": "boolean",
-          "description": "True if the user has Admin level access to the blog."
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of this entity. Always blogger#blogPerUserInfo",
-          "default": "blogger#blogPerUserInfo"
-        },
-        "photosAlbumKey": {
-          "type": "string",
-          "description": "The Photo Album Key for the user when adding photos to the blog"
-        },
-        "role": {
-          "type": "string",
-          "description": "Access permissions that the user has for the blog (ADMIN, AUTHOR, or READER)."
-        },
-        "userId": {
-          "type": "string",
-          "description": "ID of the User"
-        }
-      }
-    },
-    "BlogUserInfo": {
-      "type": "object",
-      "properties": {
-        "blog": {
-          "$ref": "#/definitions/Blog",
-          "description": "The Blog resource."
-        },
-        "blog_user_info": {
-          "$ref": "#/definitions/BlogPerUserInfo",
-          "description": "Information about a User for the Blog."
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of this entity. Always blogger#blogUserInfo",
-          "default": "blogger#blogUserInfo"
-        }
-      }
-    },
-    "Comment": {
-      "type": "object",
-      "properties": {
-        "author": {
-          "type": "object",
-          "description": "The author of this Comment.",
-          "properties": {
-            "displayName": {
-              "type": "string",
-              "description": "The display name."
-            },
-            "id": {
-              "type": "string",
-              "description": "The identifier of the Comment creator."
-            },
-            "image": {
-              "type": "object",
-              "description": "The comment creator's avatar.",
-              "properties": {
-                "url": {
-                  "type": "string",
-                  "description": "The comment creator's avatar URL."
-                }
-              }
-            },
-            "url": {
-              "type": "string",
-              "description": "The URL of the Comment creator's Profile page."
-            }
-          }
-        },
-        "blog": {
-          "type": "object",
-          "description": "Data about the blog containing this comment.",
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "The identifier of the blog containing this comment."
-            }
-          }
-        },
-        "content": {
-          "type": "string",
-          "description": "The actual content of the comment. May include HTML markup."
-        },
-        "id": {
-          "type": "string",
-          "description": "The identifier for this resource."
-        },
-        "inReplyTo": {
-          "type": "object",
-          "description": "Data about the comment this is in reply to.",
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "The identified of the parent of this comment."
-            }
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of this entry. Always blogger#comment",
-          "default": "blogger#comment"
-        },
-        "post": {
-          "type": "object",
-          "description": "Data about the post containing this comment.",
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "The identifier of the post containing this comment."
-            }
-          }
-        },
-        "published": {
-          "type": "string",
-          "description": "RFC 3339 date-time when this comment was published.",
-          "format": "date-time"
-        },
-        "selfLink": {
-          "type": "string",
-          "description": "The API REST URL to fetch this resource from."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of the comment (only populated for admin users)"
-        },
-        "updated": {
-          "type": "string",
-          "description": "RFC 3339 date-time when this comment was last updated.",
-          "format": "date-time"
-        }
-      }
-    },
-    "CommentList": {
-      "type": "object",
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "Etag of the response."
-        },
-        "items": {
-          "type": "array",
-          "description": "The List of Comments for a Post.",
-          "items": {
-            "$ref": "#/definitions/Comment"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of this entry. Always blogger#commentList",
-          "default": "blogger#commentList"
-        },
-        "nextPageToken": {
-          "type": "string",
-          "description": "Pagination token to fetch the next page, if one exists."
-        },
-        "prevPageToken": {
-          "type": "string",
-          "description": "Pagination token to fetch the previous page, if one exists."
-        }
-      }
-    },
-    "Page": {
-      "type": "object",
-      "properties": {
-        "author": {
-          "type": "object",
-          "description": "The author of this Page.",
-          "properties": {
-            "displayName": {
-              "type": "string",
-              "description": "The display name."
-            },
-            "id": {
-              "type": "string",
-              "description": "The identifier of the Page creator."
-            },
-            "image": {
-              "type": "object",
-              "description": "The page author's avatar.",
-              "properties": {
-                "url": {
-                  "type": "string",
-                  "description": "The page author's avatar URL."
-                }
-              }
-            },
-            "url": {
-              "type": "string",
-              "description": "The URL of the Page creator's Profile page."
-            }
-          }
-        },
-        "blog": {
-          "type": "object",
-          "description": "Data about the blog containing this Page.",
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "The identifier of the blog containing this page."
-            }
-          }
-        },
-        "content": {
-          "type": "string",
-          "description": "The body content of this Page, in HTML."
-        },
-        "etag": {
-          "type": "string",
-          "description": "Etag of the resource."
-        },
-        "id": {
-          "type": "string",
-          "description": "The identifier for this resource."
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of this entity. Always blogger#page",
-          "default": "blogger#page"
-        },
-        "published": {
-          "type": "string",
-          "description": "RFC 3339 date-time when this Page was published.",
-          "format": "date-time"
-        },
-        "selfLink": {
-          "type": "string",
-          "description": "The API REST URL to fetch this resource from."
-        },
-        "status": {
-          "type": "string",
-          "description": "The status of the page for admin resources (either LIVE or DRAFT)."
-        },
-        "title": {
-          "type": "string",
-          "description": "The title of this entity. This is the name displayed in the Admin user interface."
-        },
-        "updated": {
-          "type": "string",
-          "description": "RFC 3339 date-time when this Page was last updated.",
-          "format": "date-time"
-        },
-        "url": {
-          "type": "string",
-          "description": "The URL that this Page is displayed at."
-        }
-      }
-    },
-    "PageList": {
-      "type": "object",
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "Etag of the response."
-        },
-        "items": {
-          "type": "array",
-          "description": "The list of Pages for a Blog.",
-          "items": {
-            "$ref": "#/definitions/Page"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of this entity. Always blogger#pageList",
-          "default": "blogger#pageList"
-        },
-        "nextPageToken": {
-          "type": "string",
-          "description": "Pagination token to fetch the next page, if one exists."
-        }
-      }
-    },
-    "Pageviews": {
-      "type": "object",
-      "properties": {
-        "blogId": {
-          "type": "string",
-          "description": "Blog Id"
-        },
-        "counts": {
-          "type": "array",
-          "description": "The container of posts in this blog.",
-          "items": {
-            "type": "object",
-            "properties": {
-              "count": {
-                "type": "string",
-                "description": "Count of page views for the given time range",
-                "format": "int64"
-              },
-              "timeRange": {
-                "type": "string",
-                "description": "Time range the given count applies to"
-              }
-            }
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of this entry. Always blogger#page_views",
-          "default": "blogger#page_views"
-        }
-      }
-    },
-    "Post": {
-      "type": "object",
-      "properties": {
-        "author": {
-          "type": "object",
-          "description": "The author of this Post.",
-          "properties": {
-            "displayName": {
-              "type": "string",
-              "description": "The display name."
-            },
-            "id": {
-              "type": "string",
-              "description": "The identifier of the Post creator."
-            },
-            "image": {
-              "type": "object",
-              "description": "The Post author's avatar.",
-              "properties": {
-                "url": {
-                  "type": "string",
-                  "description": "The Post author's avatar URL."
-                }
-              }
-            },
-            "url": {
-              "type": "string",
-              "description": "The URL of the Post creator's Profile page."
-            }
-          }
-        },
-        "blog": {
-          "type": "object",
-          "description": "Data about the blog containing this Post.",
-          "properties": {
-            "id": {
-              "type": "string",
-              "description": "The identifier of the Blog that contains this Post."
-            }
-          }
-        },
-        "content": {
-          "type": "string",
-          "description": "The content of the Post. May contain HTML markup."
-        },
-        "customMetaData": {
-          "type": "string",
-          "description": "The JSON meta-data for the Post."
-        },
-        "etag": {
-          "type": "string",
-          "description": "Etag of the resource."
-        },
-        "id": {
-          "type": "string",
-          "description": "The identifier of this Post."
-        },
-        "images": {
-          "type": "array",
-          "description": "Display image for the Post.",
-          "items": {
-            "type": "object",
-            "properties": {
-              "url": {
-                "type": "string"
-              }
-            }
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of this entity. Always blogger#post",
-          "default": "blogger#post"
-        },
-        "labels": {
-          "type": "array",
-          "description": "The list of labels this Post was tagged with.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "object",
-          "description": "The location for geotagged posts.",
-          "properties": {
-            "lat": {
-              "type": "number",
-              "description": "Location's latitude.",
-              "format": "double"
-            },
-            "lng": {
-              "type": "number",
-              "description": "Location's longitude.",
-              "format": "double"
-            },
-            "name": {
-              "type": "string",
-              "description": "Location name."
-            },
-            "span": {
-              "type": "string",
-              "description": "Location's viewport span. Can be used when rendering a map preview."
-            }
-          }
-        },
-        "published": {
-          "type": "string",
-          "description": "RFC 3339 date-time when this Post was published.",
-          "format": "date-time"
-        },
-        "readerComments": {
-          "type": "string",
-          "description": "Comment control and display setting for readers of this post."
-        },
-        "replies": {
-          "type": "object",
-          "description": "The container of comments on this Post.",
-          "properties": {
-            "items": {
-              "type": "array",
-              "description": "The List of Comments for this Post.",
-              "items": {
-                "$ref": "#/definitions/Comment"
-              }
-            },
-            "selfLink": {
-              "type": "string",
-              "description": "The URL of the comments on this post."
-            },
-            "totalItems": {
-              "type": "string",
-              "description": "The count of comments on this post.",
-              "format": "int64"
-            }
-          }
-        },
-        "selfLink": {
-          "type": "string",
-          "description": "The API REST URL to fetch this resource from."
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of the post. Only set for admin-level requests"
-        },
-        "title": {
-          "type": "string",
-          "description": "The title of the Post."
-        },
-        "titleLink": {
-          "type": "string",
-          "description": "The title link URL, similar to atom's related link."
-        },
-        "updated": {
-          "type": "string",
-          "description": "RFC 3339 date-time when this Post was last updated.",
-          "format": "date-time"
-        },
-        "url": {
-          "type": "string",
-          "description": "The URL where this Post is displayed."
-        }
-      }
-    },
-    "PostList": {
-      "type": "object",
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "Etag of the response."
-        },
-        "items": {
-          "type": "array",
-          "description": "The list of Posts for this Blog.",
-          "items": {
-            "$ref": "#/definitions/Post"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of this entity. Always blogger#postList",
-          "default": "blogger#postList"
-        },
-        "nextPageToken": {
-          "type": "string",
-          "description": "Pagination token to fetch the next page, if one exists."
-        }
-      }
-    },
-    "PostPerUserInfo": {
-      "type": "object",
-      "properties": {
-        "blogId": {
-          "type": "string",
-          "description": "ID of the Blog that the post resource belongs to."
-        },
-        "hasEditAccess": {
-          "type": "boolean",
-          "description": "True if the user has Author level access to the post."
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of this entity. Always blogger#postPerUserInfo",
-          "default": "blogger#postPerUserInfo"
-        },
-        "postId": {
-          "type": "string",
-          "description": "ID of the Post resource."
-        },
-        "userId": {
-          "type": "string",
-          "description": "ID of the User."
-        }
-      }
-    },
-    "PostUserInfo": {
-      "type": "object",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The kind of this entity. Always blogger#postUserInfo",
-          "default": "blogger#postUserInfo"
-        },
-        "post": {
-          "$ref": "#/definitions/Post",
-          "description": "The Post resource."
-        },
-        "post_user_info": {
-          "$ref": "#/definitions/PostPerUserInfo",
-          "description": "Information about a User for the Post."
-        }
-      }
-    },
-    "PostUserInfosList": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "description": "The list of Posts with User information for the post, for this Blog.",
-          "items": {
-            "$ref": "#/definitions/PostUserInfo"
-          }
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of this entity. Always blogger#postList",
-          "default": "blogger#postUserInfosList"
-        },
-        "nextPageToken": {
-          "type": "string",
-          "description": "Pagination token to fetch the next page, if one exists."
-        }
-      }
-    },
-    "User": {
-      "type": "object",
-      "properties": {
-        "about": {
-          "type": "string",
-          "description": "Profile summary information."
-        },
-        "blogs": {
-          "type": "object",
-          "description": "The container of blogs for this user.",
-          "properties": {
-            "selfLink": {
-              "type": "string",
-              "description": "The URL of the Blogs for this user."
-            }
-          }
-        },
-        "created": {
-          "type": "string",
-          "description": "The timestamp of when this profile was created, in seconds since epoch.",
-          "format": "date-time"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name."
-        },
-        "id": {
-          "type": "string",
-          "description": "The identifier for this User."
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of this entity. Always blogger#user",
-          "default": "blogger#user"
-        },
-        "locale": {
-          "type": "object",
-          "description": "This user's locale",
-          "properties": {
-            "country": {
-              "type": "string",
-              "description": "The user's country setting."
-            },
-            "language": {
-              "type": "string",
-              "description": "The user's language setting."
-            },
-            "variant": {
-              "type": "string",
-              "description": "The user's language variant setting."
-            }
-          }
-        },
-        "selfLink": {
-          "type": "string",
-          "description": "The API REST URL to fetch this resource from."
-        },
-        "url": {
-          "type": "string",
-          "description": "The user's profile page."
-        }
-      }
-    }
-  },
-  "parameters": {
-    "alt": {
-      "name": "alt",
-      "in": "query",
-      "description": "Data format for the response.",
-      "default": "json",
-      "type": "string",
-      "enum": [
-        "json"
-      ]
-    },
-    "fields": {
-      "name": "fields",
-      "in": "query",
-      "description": "Selector specifying which fields to include in a partial response.",
-      "type": "string"
-    },
-    "key": {
-      "name": "key",
-      "in": "query",
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "type": "string"
-    },
-    "oauth_token": {
-      "name": "oauth_token",
-      "in": "query",
-      "description": "OAuth 2.0 token for the current user.",
-      "type": "string"
-    },
-    "prettyPrint": {
-      "name": "prettyPrint",
-      "in": "query",
-      "description": "Returns response with indentations and line breaks.",
-      "default": true,
-      "type": "boolean"
-    },
-    "quotaUser": {
-      "name": "quotaUser",
-      "in": "query",
-      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
-      "type": "string"
-    },
-    "userIp": {
-      "name": "userIp",
-      "in": "query",
-      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
-      "type": "string"
-    }
-  },
+  "schemes": [
+    "https"
+  ],
   "securityDefinitions": {
     "Oauth2": {
-      "type": "oauth2",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
       "description": "Oauth 2.0 authentication",
       "flow": "implicit",
-      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
       "scopes": {
         "https://www.googleapis.com/auth/blogger": "Manage your Blogger account",
         "https://www.googleapis.com/auth/blogger.readonly": "View your Blogger account"
-      }
+      },
+      "type": "oauth2"
     }
   },
-  "externalDocs": {
-    "url": "https://developers.google.com/blogger/docs/3.0/getting_started"
-  }
+  "swagger": "2.0"
 }

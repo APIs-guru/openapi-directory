@@ -1,63 +1,94 @@
 {
-  "swagger": "2.0",
+  "basePath": "/groups/v1/groups",
+  "definitions": {
+    "Groups": {
+      "description": "JSON response template for groups migration API.",
+      "properties": {
+        "kind": {
+          "default": "groupsmigration#groups",
+          "description": "The kind of insert resource this is.",
+          "type": "string"
+        },
+        "responseCode": {
+          "description": "The status of the insert request.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/google-apps/groups-migration/"
+  },
+  "host": "www.googleapis.com",
   "info": {
-    "title": "Groups Migration API",
-    "x-serviceName": "groupsmigration",
-    "description": "Groups Migration Api.",
     "contact": {
       "name": "Google",
       "url": "https://google.com"
     },
+    "description": "Groups Migration Api.",
+    "title": "Groups Migration API",
     "version": "v1",
-    "x-providerName": "googleapis.com",
+    "x-logo": "https://www.google.com/images/srpr/logo11w.png",
     "x-origin": {
       "format": "google",
-      "version": "v1",
-      "url": "https://www.googleapis.com/discovery/v1/apis/groupsmigration/v1/rest"
+      "url": "https://www.googleapis.com/discovery/v1/apis/groupsmigration/v1/rest",
+      "version": "v1"
     },
-    "x-logo": "https://www.google.com/images/srpr/logo11w.png"
+    "x-providerName": "googleapis.com",
+    "x-serviceName": "groupsmigration"
   },
-  "host": "www.googleapis.com",
-  "basePath": "/groups/v1/groups",
-  "schemes": [
-    "https"
-  ],
+  "parameters": {
+    "alt": {
+      "default": "json",
+      "description": "Data format for the response.",
+      "enum": [
+        "json"
+      ],
+      "in": "query",
+      "name": "alt",
+      "type": "string"
+    },
+    "fields": {
+      "description": "Selector specifying which fields to include in a partial response.",
+      "in": "query",
+      "name": "fields",
+      "type": "string"
+    },
+    "key": {
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "in": "query",
+      "name": "key",
+      "type": "string"
+    },
+    "oauth_token": {
+      "description": "OAuth 2.0 token for the current user.",
+      "in": "query",
+      "name": "oauth_token",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "default": true,
+      "description": "Returns response with indentations and line breaks.",
+      "in": "query",
+      "name": "prettyPrint",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "in": "query",
+      "name": "quotaUser",
+      "type": "string"
+    },
+    "userIp": {
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "in": "query",
+      "name": "userIp",
+      "type": "string"
+    }
+  },
   "paths": {
     "/{groupId}/archive": {
-      "post": {
-        "description": "Inserts a new mail into the archive of the Google group.",
-        "operationId": "groupsmigration.archive.insert",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Groups"
-            }
-          }
-        },
-        "consumes": [
-          "message/rfc822"
-        ],
-        "parameters": [
-          {
-            "name": "groupId",
-            "in": "path",
-            "description": "The group ID",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/apps.groups.migration"
-            ]
-          }
-        ],
-        "tags": [
-          "archive"
-        ]
-      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -80,87 +111,56 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ]
-    }
-  },
-  "definitions": {
-    "Groups": {
-      "type": "object",
-      "description": "JSON response template for groups migration API.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The kind of insert resource this is.",
-          "default": "groupsmigration#groups"
+      ],
+      "post": {
+        "consumes": [
+          "message/rfc822"
+        ],
+        "description": "Inserts a new mail into the archive of the Google group.",
+        "operationId": "groupsmigration.archive.insert",
+        "parameters": [
+          {
+            "description": "The group ID",
+            "in": "path",
+            "name": "groupId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Groups"
+            }
+          }
         },
-        "responseCode": {
-          "type": "string",
-          "description": "The status of the insert request."
-        }
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.groups.migration"
+            ]
+          }
+        ],
+        "tags": [
+          "archive"
+        ]
       }
     }
   },
-  "parameters": {
-    "alt": {
-      "name": "alt",
-      "in": "query",
-      "description": "Data format for the response.",
-      "default": "json",
-      "type": "string",
-      "enum": [
-        "json"
-      ]
-    },
-    "fields": {
-      "name": "fields",
-      "in": "query",
-      "description": "Selector specifying which fields to include in a partial response.",
-      "type": "string"
-    },
-    "key": {
-      "name": "key",
-      "in": "query",
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "type": "string"
-    },
-    "oauth_token": {
-      "name": "oauth_token",
-      "in": "query",
-      "description": "OAuth 2.0 token for the current user.",
-      "type": "string"
-    },
-    "prettyPrint": {
-      "name": "prettyPrint",
-      "in": "query",
-      "description": "Returns response with indentations and line breaks.",
-      "default": true,
-      "type": "boolean"
-    },
-    "quotaUser": {
-      "name": "quotaUser",
-      "in": "query",
-      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
-      "type": "string"
-    },
-    "userIp": {
-      "name": "userIp",
-      "in": "query",
-      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
-      "type": "string"
-    }
-  },
+  "schemes": [
+    "https"
+  ],
   "securityDefinitions": {
     "Oauth2": {
-      "type": "oauth2",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
       "description": "Oauth 2.0 authentication",
       "flow": "implicit",
-      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
       "scopes": {
         "https://www.googleapis.com/auth/apps.groups.migration": "Manage messages in groups on your domain"
-      }
+      },
+      "type": "oauth2"
     }
   },
-  "externalDocs": {
-    "url": "https://developers.google.com/google-apps/groups-migration/"
-  }
+  "swagger": "2.0"
 }

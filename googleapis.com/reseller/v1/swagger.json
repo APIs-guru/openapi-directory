@@ -1,32 +1,407 @@
 {
-  "swagger": "2.0",
+  "basePath": "/apps/reseller/v1",
+  "definitions": {
+    "Address": {
+      "description": "JSON template for address of a customer.",
+      "properties": {
+        "addressLine1": {
+          "description": "Address line 1 of the address.",
+          "type": "string"
+        },
+        "addressLine2": {
+          "description": "Address line 2 of the address.",
+          "type": "string"
+        },
+        "addressLine3": {
+          "description": "Address line 3 of the address.",
+          "type": "string"
+        },
+        "contactName": {
+          "description": "Name of the contact person.",
+          "type": "string"
+        },
+        "countryCode": {
+          "description": "ISO 3166 country code.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "customers#address",
+          "description": "Identifies the resource as a customer address.",
+          "type": "string"
+        },
+        "locality": {
+          "description": "Name of the locality. This is in accordance with - http://portablecontacts.net/draft-spec.html#address_element.",
+          "type": "string"
+        },
+        "organizationName": {
+          "description": "Name of the organization.",
+          "type": "string"
+        },
+        "postalCode": {
+          "description": "The postal code. This is in accordance with - http://portablecontacts.net/draft-spec.html#address_element.",
+          "type": "string"
+        },
+        "region": {
+          "description": "Name of the region. This is in accordance with - http://portablecontacts.net/draft-spec.html#address_element.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ChangePlanRequest": {
+      "description": "JSON template for the ChangePlan rpc request.",
+      "properties": {
+        "kind": {
+          "default": "subscriptions#changePlanRequest",
+          "description": "Identifies the resource as a subscription change plan request.",
+          "type": "string"
+        },
+        "planName": {
+          "description": "Name of the plan to change to.",
+          "type": "string"
+        },
+        "purchaseOrderId": {
+          "description": "Purchase order id for your order tracking purposes.",
+          "type": "string"
+        },
+        "seats": {
+          "$ref": "#/definitions/Seats",
+          "description": "Number/Limit of seats in the new plan."
+        }
+      },
+      "type": "object"
+    },
+    "Customer": {
+      "description": "JSON template for a customer.",
+      "properties": {
+        "alternateEmail": {
+          "description": "The alternate email of the customer.",
+          "type": "string"
+        },
+        "customerDomain": {
+          "description": "The domain name of the customer.",
+          "type": "string"
+        },
+        "customerId": {
+          "description": "The id of the customer.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "reseller#customer",
+          "description": "Identifies the resource as a customer.",
+          "type": "string"
+        },
+        "phoneNumber": {
+          "description": "The phone number of the customer.",
+          "type": "string"
+        },
+        "postalAddress": {
+          "$ref": "#/definitions/Address",
+          "description": "The postal address of the customer."
+        },
+        "resourceUiUrl": {
+          "description": "Ui url for customer resource.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RenewalSettings": {
+      "description": "JSON template for a subscription renewal settings.",
+      "properties": {
+        "kind": {
+          "default": "subscriptions#renewalSettings",
+          "description": "Identifies the resource as a subscription renewal setting.",
+          "type": "string"
+        },
+        "renewalType": {
+          "description": "Subscription renewal type.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Seats": {
+      "description": "JSON template for subscription seats.",
+      "properties": {
+        "kind": {
+          "default": "subscriptions#seats",
+          "description": "Identifies the resource as a subscription change plan request.",
+          "type": "string"
+        },
+        "licensedNumberOfSeats": {
+          "description": "Read-only field containing the current number of licensed seats for FLEXIBLE Google-Apps subscriptions and secondary subscriptions such as Google-Vault and Drive-storage.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "maximumNumberOfSeats": {
+          "description": "Maximum number of seats that can be purchased. This needs to be provided only for a non-commitment plan. For a commitment plan it is decided by the contract.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "numberOfSeats": {
+          "description": "Number of seats to purchase. This is applicable only for a commitment plan.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "Subscription": {
+      "description": "JSON template for a subscription.",
+      "properties": {
+        "billingMethod": {
+          "description": "Billing method of this subscription.",
+          "type": "string"
+        },
+        "creationTime": {
+          "description": "Creation time of this subscription in milliseconds since Unix epoch.",
+          "format": "int64",
+          "type": "string"
+        },
+        "customerId": {
+          "description": "The id of the customer to whom the subscription belongs.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "reseller#subscription",
+          "description": "Identifies the resource as a Subscription.",
+          "type": "string"
+        },
+        "plan": {
+          "description": "Plan details of the subscription",
+          "properties": {
+            "commitmentInterval": {
+              "description": "Interval of the commitment if it is a commitment plan.",
+              "properties": {
+                "endTime": {
+                  "description": "End time of the commitment interval in milliseconds since Unix epoch.",
+                  "format": "int64",
+                  "type": "string"
+                },
+                "startTime": {
+                  "description": "Start time of the commitment interval in milliseconds since Unix epoch.",
+                  "format": "int64",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "isCommitmentPlan": {
+              "description": "Whether the plan is a commitment plan or not.",
+              "type": "boolean"
+            },
+            "planName": {
+              "description": "The plan name of this subscription's plan.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "purchaseOrderId": {
+          "description": "Purchase order id for your order tracking purposes.",
+          "type": "string"
+        },
+        "renewalSettings": {
+          "$ref": "#/definitions/RenewalSettings",
+          "description": "Renewal settings of the subscription."
+        },
+        "resourceUiUrl": {
+          "description": "Ui url for subscription resource.",
+          "type": "string"
+        },
+        "seats": {
+          "$ref": "#/definitions/Seats",
+          "description": "Number/Limit of seats in the new plan."
+        },
+        "skuId": {
+          "description": "Name of the sku for which this subscription is purchased.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the subscription.",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "The id of the subscription.",
+          "type": "string"
+        },
+        "suspensionReasons": {
+          "description": "Suspension Reasons",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "transferInfo": {
+          "description": "Transfer related information for the subscription.",
+          "properties": {
+            "minimumTransferableSeats": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "transferabilityExpirationTime": {
+              "description": "Time when transfer token or intent to transfer will expire.",
+              "format": "int64",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "trialSettings": {
+          "description": "Trial Settings of the subscription.",
+          "properties": {
+            "isInTrial": {
+              "description": "Whether the subscription is in trial.",
+              "type": "boolean"
+            },
+            "trialEndTime": {
+              "description": "End time of the trial in milliseconds since Unix epoch.",
+              "format": "int64",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "Subscriptions": {
+      "description": "JSON template for a subscription list.",
+      "properties": {
+        "kind": {
+          "default": "reseller#subscriptions",
+          "description": "Identifies the resource as a collection of subscriptions.",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results.",
+          "type": "string"
+        },
+        "subscriptions": {
+          "description": "The subscriptions in this page of results.",
+          "items": {
+            "$ref": "#/definitions/Subscription"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "externalDocs": {
+    "url": "https://developers.google.com/google-apps/reseller/"
+  },
+  "host": "www.googleapis.com",
   "info": {
-    "title": "Enterprise Apps Reseller API",
-    "x-serviceName": "reseller",
-    "description": "Lets you create and manage your customers and their subscriptions.",
     "contact": {
       "name": "Google",
       "url": "https://google.com"
     },
+    "description": "Lets you create and manage your customers and their subscriptions.",
+    "title": "Enterprise Apps Reseller API",
     "version": "v1",
-    "x-providerName": "googleapis.com",
+    "x-logo": "https://www.google.com/images/srpr/logo11w.png",
     "x-origin": {
       "format": "google",
-      "version": "v1",
-      "url": "https://www.googleapis.com/discovery/v1/apis/reseller/v1/rest"
+      "url": "https://www.googleapis.com/discovery/v1/apis/reseller/v1/rest",
+      "version": "v1"
     },
-    "x-logo": "https://www.google.com/images/srpr/logo11w.png"
+    "x-providerName": "googleapis.com",
+    "x-serviceName": "reseller"
   },
-  "host": "www.googleapis.com",
-  "basePath": "/apps/reseller/v1",
-  "schemes": [
-    "https"
-  ],
+  "parameters": {
+    "alt": {
+      "default": "json",
+      "description": "Data format for the response.",
+      "enum": [
+        "json"
+      ],
+      "in": "query",
+      "name": "alt",
+      "type": "string"
+    },
+    "fields": {
+      "description": "Selector specifying which fields to include in a partial response.",
+      "in": "query",
+      "name": "fields",
+      "type": "string"
+    },
+    "key": {
+      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "in": "query",
+      "name": "key",
+      "type": "string"
+    },
+    "oauth_token": {
+      "description": "OAuth 2.0 token for the current user.",
+      "in": "query",
+      "name": "oauth_token",
+      "type": "string"
+    },
+    "prettyPrint": {
+      "default": true,
+      "description": "Returns response with indentations and line breaks.",
+      "in": "query",
+      "name": "prettyPrint",
+      "type": "boolean"
+    },
+    "quotaUser": {
+      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+      "in": "query",
+      "name": "quotaUser",
+      "type": "string"
+    },
+    "userIp": {
+      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+      "in": "query",
+      "name": "userIp",
+      "type": "string"
+    }
+  },
   "paths": {
-    "/customers/{customerId}": {
-      "get": {
-        "description": "Gets a customer resource if one exists and is owned by the reseller.",
-        "operationId": "reseller.customers.get",
+    "/customers": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates a customer resource if one does not already exist.",
+        "operationId": "reseller.customers.insert",
+        "parameters": [
+          {
+            "description": "An auth token needed for inserting a customer for which domain already exists. Can be generated at https://www.google.com/a/cpanel//TransferToken. Optional.",
+            "in": "query",
+            "name": "customerAuthToken",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -35,96 +410,44 @@
             }
           }
         },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order"
+            ]
+          }
+        ],
+        "tags": [
+          "customers"
+        ]
+      }
+    },
+    "/customers/{customerId}": {
+      "get": {
+        "description": "Gets a customer resource if one exists and is owned by the reseller.",
+        "operationId": "reseller.customers.get",
         "parameters": [
           {
-            "name": "customerId",
-            "in": "path",
             "description": "Id of the Customer",
+            "in": "path",
+            "name": "customerId",
             "required": true,
             "type": "string"
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        },
         "security": [
           {
             "Oauth2": [
               "https://www.googleapis.com/auth/apps.order",
               "https://www.googleapis.com/auth/apps.order.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "customers"
-        ]
-      },
-      "patch": {
-        "description": "Update a customer resource if one it exists and is owned by the reseller. This method supports patch semantics.",
-        "operationId": "reseller.customers.patch",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Customer"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "customerId",
-            "in": "path",
-            "description": "Id of the Customer",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/Customer"
-            }
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/apps.order"
-            ]
-          }
-        ],
-        "tags": [
-          "customers"
-        ]
-      },
-      "put": {
-        "description": "Update a customer resource if one it exists and is owned by the reseller.",
-        "operationId": "reseller.customers.update",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Customer"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "customerId",
-            "in": "path",
-            "description": "Id of the Customer",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/Customer"
-            }
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/apps.order"
             ]
           }
         ],
@@ -154,12 +477,26 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ]
-    },
-    "/customers": {
-      "post": {
-        "description": "Creates a customer resource if one does not already exist.",
-        "operationId": "reseller.customers.insert",
+      ],
+      "patch": {
+        "description": "Update a customer resource if one it exists and is owned by the reseller. This method supports patch semantics.",
+        "operationId": "reseller.customers.patch",
+        "parameters": [
+          {
+            "description": "Id of the Customer",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -168,21 +505,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "customerAuthToken",
-            "in": "query",
-            "description": "An auth token needed for inserting a customer for which domain already exists. Can be generated at https://www.google.com/a/cpanel//TransferToken. Optional.",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/Customer"
-            }
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -192,6 +514,202 @@
         ],
         "tags": [
           "customers"
+        ]
+      },
+      "put": {
+        "description": "Update a customer resource if one it exists and is owned by the reseller.",
+        "operationId": "reseller.customers.update",
+        "parameters": [
+          {
+            "description": "Id of the Customer",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order"
+            ]
+          }
+        ],
+        "tags": [
+          "customers"
+        ]
+      }
+    },
+    "/customers/{customerId}/subscriptions": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates/Transfers a subscription for the customer.",
+        "operationId": "reseller.subscriptions.insert",
+        "parameters": [
+          {
+            "description": "Id of the Customer",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "An auth token needed for transferring a subscription. Can be generated at https://www.google.com/a/cpanel/customer-domain/TransferToken. Optional.",
+            "in": "query",
+            "name": "customerAuthToken",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order"
+            ]
+          }
+        ],
+        "tags": [
+          "subscriptions"
+        ]
+      }
+    },
+    "/customers/{customerId}/subscriptions/{subscriptionId}": {
+      "delete": {
+        "description": "Cancels/Downgrades a subscription.",
+        "operationId": "reseller.subscriptions.delete",
+        "parameters": [
+          {
+            "description": "Id of the Customer",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Id of the subscription, which is unique for a customer",
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Whether the subscription is to be fully cancelled or downgraded",
+            "enum": [
+              "cancel",
+              "downgrade",
+              "suspend",
+              "transfer_to_direct"
+            ],
+            "in": "query",
+            "name": "deletionType",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order"
+            ]
+          }
+        ],
+        "tags": [
+          "subscriptions"
+        ]
+      },
+      "get": {
+        "description": "Gets a subscription of the customer.",
+        "operationId": "reseller.subscriptions.get",
+        "parameters": [
+          {
+            "description": "Id of the Customer",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Id of the subscription, which is unique for a customer",
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order",
+              "https://www.googleapis.com/auth/apps.order.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "subscriptions"
         ]
       },
       "parameters": [
@@ -219,44 +737,6 @@
       ]
     },
     "/customers/{customerId}/subscriptions/{subscriptionId}/activate": {
-      "post": {
-        "description": "Activates a subscription previously suspended by the reseller",
-        "operationId": "reseller.subscriptions.activate",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Subscription"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "customerId",
-            "in": "path",
-            "description": "Id of the Customer",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Id of the subscription, which is unique for a customer",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/apps.order"
-            ]
-          }
-        ],
-        "tags": [
-          "subscriptions"
-        ]
-      },
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -279,12 +759,26 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ]
-    },
-    "/customers/{customerId}/subscriptions/{subscriptionId}/changePlan": {
+      ],
       "post": {
-        "description": "Changes the plan of a subscription",
-        "operationId": "reseller.subscriptions.changePlan",
+        "description": "Activates a subscription previously suspended by the reseller",
+        "operationId": "reseller.subscriptions.activate",
+        "parameters": [
+          {
+            "description": "Id of the Customer",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Id of the subscription, which is unique for a customer",
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -293,29 +787,76 @@
             }
           }
         },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order"
+            ]
+          }
+        ],
+        "tags": [
+          "subscriptions"
+        ]
+      }
+    },
+    "/customers/{customerId}/subscriptions/{subscriptionId}/changePlan": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Changes the plan of a subscription",
+        "operationId": "reseller.subscriptions.changePlan",
         "parameters": [
           {
-            "name": "customerId",
-            "in": "path",
             "description": "Id of the Customer",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
             "in": "path",
-            "description": "Id of the subscription, which is unique for a customer",
+            "name": "customerId",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "description": "Id of the subscription, which is unique for a customer",
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
             "in": "body",
+            "name": "body",
             "schema": {
               "$ref": "#/definitions/ChangePlanRequest"
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        },
         "security": [
           {
             "Oauth2": [
@@ -326,7 +867,9 @@
         "tags": [
           "subscriptions"
         ]
-      },
+      }
+    },
+    "/customers/{customerId}/subscriptions/{subscriptionId}/changeRenewalSettings": {
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -349,43 +892,41 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ]
-    },
-    "/customers/{customerId}/subscriptions/{subscriptionId}/changeRenewalSettings": {
+      ],
       "post": {
         "description": "Changes the renewal settings of a subscription",
         "operationId": "reseller.subscriptions.changeRenewalSettings",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Subscription"
-            }
-          }
-        },
         "parameters": [
           {
-            "name": "customerId",
-            "in": "path",
             "description": "Id of the Customer",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
             "in": "path",
-            "description": "Id of the subscription, which is unique for a customer",
+            "name": "customerId",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "description": "Id of the subscription, which is unique for a customer",
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
             "in": "body",
+            "name": "body",
             "schema": {
               "$ref": "#/definitions/RenewalSettings"
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        },
         "security": [
           {
             "Oauth2": [
@@ -396,7 +937,9 @@
         "tags": [
           "subscriptions"
         ]
-      },
+      }
+    },
+    "/customers/{customerId}/subscriptions/{subscriptionId}/changeSeats": {
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -419,130 +962,33 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ]
-    },
-    "/customers/{customerId}/subscriptions/{subscriptionId}/changeSeats": {
+      ],
       "post": {
         "description": "Changes the seats configuration of a subscription",
         "operationId": "reseller.subscriptions.changeSeats",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Subscription"
-            }
-          }
-        },
         "parameters": [
           {
-            "name": "customerId",
-            "in": "path",
             "description": "Id of the Customer",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
             "in": "path",
-            "description": "Id of the subscription, which is unique for a customer",
+            "name": "customerId",
             "required": true,
             "type": "string"
           },
           {
-            "name": "body",
+            "description": "Id of the subscription, which is unique for a customer",
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          },
+          {
             "in": "body",
+            "name": "body",
             "schema": {
               "$ref": "#/definitions/Seats"
             }
           }
         ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/apps.order"
-            ]
-          }
-        ],
-        "tags": [
-          "subscriptions"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/customers/{customerId}/subscriptions/{subscriptionId}": {
-      "delete": {
-        "description": "Cancels/Downgrades a subscription.",
-        "operationId": "reseller.subscriptions.delete",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "parameters": [
-          {
-            "name": "customerId",
-            "in": "path",
-            "description": "Id of the Customer",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Id of the subscription, which is unique for a customer",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "deletionType",
-            "in": "query",
-            "description": "Whether the subscription is to be fully cancelled or downgraded",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "cancel",
-              "downgrade",
-              "suspend",
-              "transfer_to_direct"
-            ]
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/apps.order"
-            ]
-          }
-        ],
-        "tags": [
-          "subscriptions"
-        ]
-      },
-      "get": {
-        "description": "Gets a subscription of the customer.",
-        "operationId": "reseller.subscriptions.get",
         "responses": {
           "200": {
             "description": "Successful response",
@@ -551,34 +997,19 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "customerId",
-            "in": "path",
-            "description": "Id of the Customer",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Id of the subscription, which is unique for a customer",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
-              "https://www.googleapis.com/auth/apps.order",
-              "https://www.googleapis.com/auth/apps.order.readonly"
+              "https://www.googleapis.com/auth/apps.order"
             ]
           }
         ],
         "tags": [
           "subscriptions"
         ]
-      },
+      }
+    },
+    "/customers/{customerId}/subscriptions/{subscriptionId}/startPaidService": {
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -601,12 +1032,26 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ]
-    },
-    "/customers/{customerId}/subscriptions": {
+      ],
       "post": {
-        "description": "Creates/Transfers a subscription for the customer.",
-        "operationId": "reseller.subscriptions.insert",
+        "description": "Starts paid service of a trial subscription",
+        "operationId": "reseller.subscriptions.startPaidService",
+        "parameters": [
+          {
+            "description": "Id of the Customer",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Id of the subscription, which is unique for a customer",
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -615,28 +1060,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "customerId",
-            "in": "path",
-            "description": "Id of the Customer",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "customerAuthToken",
-            "in": "query",
-            "description": "An auth token needed for transferring a subscription. Can be generated at https://www.google.com/a/cpanel/customer-domain/TransferToken. Optional.",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/Subscription"
-            }
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -647,7 +1070,9 @@
         "tags": [
           "subscriptions"
         ]
-      },
+      }
+    },
+    "/customers/{customerId}/subscriptions/{subscriptionId}/suspend": {
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -670,12 +1095,84 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ]
+      ],
+      "post": {
+        "description": "Suspends an active subscription",
+        "operationId": "reseller.subscriptions.suspend",
+        "parameters": [
+          {
+            "description": "Id of the Customer",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Id of the subscription, which is unique for a customer",
+            "in": "path",
+            "name": "subscriptionId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/apps.order"
+            ]
+          }
+        ],
+        "tags": [
+          "subscriptions"
+        ]
+      }
     },
     "/subscriptions": {
       "get": {
         "description": "Lists subscriptions of a reseller, optionally filtered by a customer name prefix.",
         "operationId": "reseller.subscriptions.list",
+        "parameters": [
+          {
+            "description": "An auth token needed if the customer is not a resold customer of this reseller. Can be generated at https://www.google.com/a/cpanel/customer-domain/TransferToken.Optional.",
+            "in": "query",
+            "name": "customerAuthToken",
+            "type": "string"
+          },
+          {
+            "description": "Id of the Customer",
+            "in": "query",
+            "name": "customerId",
+            "type": "string"
+          },
+          {
+            "description": "Prefix of the customer's domain name by which the subscriptions should be filtered. Optional",
+            "in": "query",
+            "name": "customerNamePrefix",
+            "type": "string"
+          },
+          {
+            "description": "Maximum number of results to return",
+            "in": "query",
+            "maximum": 100,
+            "minimum": 1,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "Token to specify next page in the list",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Successful response",
@@ -684,40 +1181,6 @@
             }
           }
         },
-        "parameters": [
-          {
-            "name": "customerAuthToken",
-            "in": "query",
-            "description": "An auth token needed if the customer is not a resold customer of this reseller. Can be generated at https://www.google.com/a/cpanel/customer-domain/TransferToken.Optional.",
-            "type": "string"
-          },
-          {
-            "name": "customerId",
-            "in": "query",
-            "description": "Id of the Customer",
-            "type": "string"
-          },
-          {
-            "name": "customerNamePrefix",
-            "in": "query",
-            "description": "Prefix of the customer's domain name by which the subscriptions should be filtered. Optional",
-            "type": "string"
-          },
-          {
-            "name": "maxResults",
-            "in": "query",
-            "description": "Maximum number of results to return",
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 100
-          },
-          {
-            "name": "pageToken",
-            "in": "query",
-            "description": "Token to specify next page in the list",
-            "type": "string"
-          }
-        ],
         "security": [
           {
             "Oauth2": [
@@ -753,485 +1216,22 @@
           "$ref": "#/parameters/userIp"
         }
       ]
-    },
-    "/customers/{customerId}/subscriptions/{subscriptionId}/startPaidService": {
-      "post": {
-        "description": "Starts paid service of a trial subscription",
-        "operationId": "reseller.subscriptions.startPaidService",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Subscription"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "customerId",
-            "in": "path",
-            "description": "Id of the Customer",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Id of the subscription, which is unique for a customer",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/apps.order"
-            ]
-          }
-        ],
-        "tags": [
-          "subscriptions"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/customers/{customerId}/subscriptions/{subscriptionId}/suspend": {
-      "post": {
-        "description": "Suspends an active subscription",
-        "operationId": "reseller.subscriptions.suspend",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Subscription"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "customerId",
-            "in": "path",
-            "description": "Id of the Customer",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Id of the subscription, which is unique for a customer",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/apps.order"
-            ]
-          }
-        ],
-        "tags": [
-          "subscriptions"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
     }
   },
-  "definitions": {
-    "Address": {
-      "type": "object",
-      "description": "JSON template for address of a customer.",
-      "properties": {
-        "addressLine1": {
-          "type": "string",
-          "description": "Address line 1 of the address."
-        },
-        "addressLine2": {
-          "type": "string",
-          "description": "Address line 2 of the address."
-        },
-        "addressLine3": {
-          "type": "string",
-          "description": "Address line 3 of the address."
-        },
-        "contactName": {
-          "type": "string",
-          "description": "Name of the contact person."
-        },
-        "countryCode": {
-          "type": "string",
-          "description": "ISO 3166 country code."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Identifies the resource as a customer address.",
-          "default": "customers#address"
-        },
-        "locality": {
-          "type": "string",
-          "description": "Name of the locality. This is in accordance with - http://portablecontacts.net/draft-spec.html#address_element."
-        },
-        "organizationName": {
-          "type": "string",
-          "description": "Name of the organization."
-        },
-        "postalCode": {
-          "type": "string",
-          "description": "The postal code. This is in accordance with - http://portablecontacts.net/draft-spec.html#address_element."
-        },
-        "region": {
-          "type": "string",
-          "description": "Name of the region. This is in accordance with - http://portablecontacts.net/draft-spec.html#address_element."
-        }
-      }
-    },
-    "ChangePlanRequest": {
-      "type": "object",
-      "description": "JSON template for the ChangePlan rpc request.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Identifies the resource as a subscription change plan request.",
-          "default": "subscriptions#changePlanRequest"
-        },
-        "planName": {
-          "type": "string",
-          "description": "Name of the plan to change to."
-        },
-        "purchaseOrderId": {
-          "type": "string",
-          "description": "Purchase order id for your order tracking purposes."
-        },
-        "seats": {
-          "$ref": "#/definitions/Seats",
-          "description": "Number/Limit of seats in the new plan."
-        }
-      }
-    },
-    "Customer": {
-      "type": "object",
-      "description": "JSON template for a customer.",
-      "properties": {
-        "alternateEmail": {
-          "type": "string",
-          "description": "The alternate email of the customer."
-        },
-        "customerDomain": {
-          "type": "string",
-          "description": "The domain name of the customer."
-        },
-        "customerId": {
-          "type": "string",
-          "description": "The id of the customer."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Identifies the resource as a customer.",
-          "default": "reseller#customer"
-        },
-        "phoneNumber": {
-          "type": "string",
-          "description": "The phone number of the customer."
-        },
-        "postalAddress": {
-          "$ref": "#/definitions/Address",
-          "description": "The postal address of the customer."
-        },
-        "resourceUiUrl": {
-          "type": "string",
-          "description": "Ui url for customer resource."
-        }
-      }
-    },
-    "RenewalSettings": {
-      "type": "object",
-      "description": "JSON template for a subscription renewal settings.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Identifies the resource as a subscription renewal setting.",
-          "default": "subscriptions#renewalSettings"
-        },
-        "renewalType": {
-          "type": "string",
-          "description": "Subscription renewal type."
-        }
-      }
-    },
-    "Seats": {
-      "type": "object",
-      "description": "JSON template for subscription seats.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Identifies the resource as a subscription change plan request.",
-          "default": "subscriptions#seats"
-        },
-        "licensedNumberOfSeats": {
-          "type": "integer",
-          "description": "Read-only field containing the current number of licensed seats for FLEXIBLE Google-Apps subscriptions and secondary subscriptions such as Google-Vault and Drive-storage.",
-          "format": "int32"
-        },
-        "maximumNumberOfSeats": {
-          "type": "integer",
-          "description": "Maximum number of seats that can be purchased. This needs to be provided only for a non-commitment plan. For a commitment plan it is decided by the contract.",
-          "format": "int32"
-        },
-        "numberOfSeats": {
-          "type": "integer",
-          "description": "Number of seats to purchase. This is applicable only for a commitment plan.",
-          "format": "int32"
-        }
-      }
-    },
-    "Subscription": {
-      "type": "object",
-      "description": "JSON template for a subscription.",
-      "properties": {
-        "billingMethod": {
-          "type": "string",
-          "description": "Billing method of this subscription."
-        },
-        "creationTime": {
-          "type": "string",
-          "description": "Creation time of this subscription in milliseconds since Unix epoch.",
-          "format": "int64"
-        },
-        "customerId": {
-          "type": "string",
-          "description": "The id of the customer to whom the subscription belongs."
-        },
-        "kind": {
-          "type": "string",
-          "description": "Identifies the resource as a Subscription.",
-          "default": "reseller#subscription"
-        },
-        "plan": {
-          "type": "object",
-          "description": "Plan details of the subscription",
-          "properties": {
-            "commitmentInterval": {
-              "type": "object",
-              "description": "Interval of the commitment if it is a commitment plan.",
-              "properties": {
-                "endTime": {
-                  "type": "string",
-                  "description": "End time of the commitment interval in milliseconds since Unix epoch.",
-                  "format": "int64"
-                },
-                "startTime": {
-                  "type": "string",
-                  "description": "Start time of the commitment interval in milliseconds since Unix epoch.",
-                  "format": "int64"
-                }
-              }
-            },
-            "isCommitmentPlan": {
-              "type": "boolean",
-              "description": "Whether the plan is a commitment plan or not."
-            },
-            "planName": {
-              "type": "string",
-              "description": "The plan name of this subscription's plan."
-            }
-          }
-        },
-        "purchaseOrderId": {
-          "type": "string",
-          "description": "Purchase order id for your order tracking purposes."
-        },
-        "renewalSettings": {
-          "$ref": "#/definitions/RenewalSettings",
-          "description": "Renewal settings of the subscription."
-        },
-        "resourceUiUrl": {
-          "type": "string",
-          "description": "Ui url for subscription resource."
-        },
-        "seats": {
-          "$ref": "#/definitions/Seats",
-          "description": "Number/Limit of seats in the new plan."
-        },
-        "skuId": {
-          "type": "string",
-          "description": "Name of the sku for which this subscription is purchased."
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of the subscription."
-        },
-        "subscriptionId": {
-          "type": "string",
-          "description": "The id of the subscription."
-        },
-        "suspensionReasons": {
-          "type": "array",
-          "description": "Suspension Reasons",
-          "items": {
-            "type": "string"
-          }
-        },
-        "transferInfo": {
-          "type": "object",
-          "description": "Transfer related information for the subscription.",
-          "properties": {
-            "minimumTransferableSeats": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "transferabilityExpirationTime": {
-              "type": "string",
-              "description": "Time when transfer token or intent to transfer will expire.",
-              "format": "int64"
-            }
-          }
-        },
-        "trialSettings": {
-          "type": "object",
-          "description": "Trial Settings of the subscription.",
-          "properties": {
-            "isInTrial": {
-              "type": "boolean",
-              "description": "Whether the subscription is in trial."
-            },
-            "trialEndTime": {
-              "type": "string",
-              "description": "End time of the trial in milliseconds since Unix epoch.",
-              "format": "int64"
-            }
-          }
-        }
-      }
-    },
-    "Subscriptions": {
-      "type": "object",
-      "description": "JSON template for a subscription list.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Identifies the resource as a collection of subscriptions.",
-          "default": "reseller#subscriptions"
-        },
-        "nextPageToken": {
-          "type": "string",
-          "description": "The continuation token, used to page through large result sets. Provide this value in a subsequent request to return the next page of results."
-        },
-        "subscriptions": {
-          "type": "array",
-          "description": "The subscriptions in this page of results.",
-          "items": {
-            "$ref": "#/definitions/Subscription"
-          }
-        }
-      }
-    }
-  },
-  "parameters": {
-    "alt": {
-      "name": "alt",
-      "in": "query",
-      "description": "Data format for the response.",
-      "default": "json",
-      "type": "string",
-      "enum": [
-        "json"
-      ]
-    },
-    "fields": {
-      "name": "fields",
-      "in": "query",
-      "description": "Selector specifying which fields to include in a partial response.",
-      "type": "string"
-    },
-    "key": {
-      "name": "key",
-      "in": "query",
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "type": "string"
-    },
-    "oauth_token": {
-      "name": "oauth_token",
-      "in": "query",
-      "description": "OAuth 2.0 token for the current user.",
-      "type": "string"
-    },
-    "prettyPrint": {
-      "name": "prettyPrint",
-      "in": "query",
-      "description": "Returns response with indentations and line breaks.",
-      "default": true,
-      "type": "boolean"
-    },
-    "quotaUser": {
-      "name": "quotaUser",
-      "in": "query",
-      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
-      "type": "string"
-    },
-    "userIp": {
-      "name": "userIp",
-      "in": "query",
-      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
-      "type": "string"
-    }
-  },
+  "schemes": [
+    "https"
+  ],
   "securityDefinitions": {
     "Oauth2": {
-      "type": "oauth2",
+      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
       "description": "Oauth 2.0 authentication",
       "flow": "implicit",
-      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
       "scopes": {
         "https://www.googleapis.com/auth/apps.order": "Manage users on your domain",
         "https://www.googleapis.com/auth/apps.order.readonly": "Manage users on your domain"
-      }
+      },
+      "type": "oauth2"
     }
   },
-  "externalDocs": {
-    "url": "https://developers.google.com/google-apps/reseller/"
-  }
+  "swagger": "2.0"
 }

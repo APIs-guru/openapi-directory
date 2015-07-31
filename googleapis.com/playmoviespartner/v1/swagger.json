@@ -1,109 +1,109 @@
 {
-  "swagger": "2.0",
+  "basePath": "/",
+  "host": "playmoviespartner.googleapis.com",
   "info": {
-    "title": "Google Play Movies Partner API",
-    "x-serviceName": "playmoviespartner",
-    "description": "An API providing Google Play Movies Partners a way to get the delivery status of their titles.",
     "contact": {
       "name": "Google",
       "url": "https://google.com"
     },
+    "description": "An API providing Google Play Movies Partners a way to get the delivery status of their titles.",
+    "title": "Google Play Movies Partner API",
     "version": "v1",
-    "x-providerName": "googleapis.com",
+    "x-logo": "https://www.google.com/images/srpr/logo11w.png",
     "x-origin": {
       "format": "google",
-      "version": "v1",
-      "url": "https://www.googleapis.com/discovery/v1/apis/playmoviespartner/v1/rest"
+      "url": "https://www.googleapis.com/discovery/v1/apis/playmoviespartner/v1/rest",
+      "version": "v1"
     },
-    "x-logo": "https://www.google.com/images/srpr/logo11w.png"
+    "x-providerName": "googleapis.com",
+    "x-serviceName": "playmoviespartner"
   },
-  "host": "playmoviespartner.googleapis.com",
-  "basePath": "/",
-  "schemes": [
-    "https"
-  ],
-  "paths": {},
   "parameters": {
-    "access_token": {
-      "name": "access_token",
+    "$.xgafv": {
+      "description": "V1 error format.",
       "in": "query",
+      "name": "$.xgafv",
+      "type": "string"
+    },
+    "access_token": {
       "description": "OAuth access token.",
+      "in": "query",
+      "name": "access_token",
       "type": "string"
     },
     "alt": {
-      "name": "alt",
-      "in": "query",
-      "description": "Data format for response.",
       "default": "json",
+      "description": "Data format for response.",
+      "in": "query",
+      "name": "alt",
       "type": "string"
     },
     "bearer_token": {
-      "name": "bearer_token",
-      "in": "query",
       "description": "OAuth bearer token.",
+      "in": "query",
+      "name": "bearer_token",
       "type": "string"
     },
     "callback": {
-      "name": "callback",
-      "in": "query",
       "description": "JSONP",
+      "in": "query",
+      "name": "callback",
       "type": "string"
     },
     "fields": {
-      "name": "fields",
-      "in": "query",
       "description": "Selector specifying which fields to include in a partial response.",
+      "in": "query",
+      "name": "fields",
       "type": "string"
     },
     "key": {
-      "name": "key",
-      "in": "query",
       "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+      "in": "query",
+      "name": "key",
       "type": "string"
     },
     "oauth_token": {
-      "name": "oauth_token",
-      "in": "query",
       "description": "OAuth 2.0 token for the current user.",
+      "in": "query",
+      "name": "oauth_token",
       "type": "string"
     },
     "pp": {
-      "name": "pp",
-      "in": "query",
-      "description": "Pretty-print response.",
       "default": true,
+      "description": "Pretty-print response.",
+      "in": "query",
+      "name": "pp",
       "type": "boolean"
     },
     "prettyPrint": {
-      "name": "prettyPrint",
-      "in": "query",
-      "description": "Returns response with indentations and line breaks.",
       "default": true,
+      "description": "Returns response with indentations and line breaks.",
+      "in": "query",
+      "name": "prettyPrint",
       "type": "boolean"
     },
     "quotaUser": {
-      "name": "quotaUser",
-      "in": "query",
       "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.",
-      "type": "string"
-    },
-    "upload_protocol": {
-      "name": "upload_protocol",
       "in": "query",
-      "description": "Upload protocol for media (e.g. \"raw\", \"multipart\").",
+      "name": "quotaUser",
       "type": "string"
     },
     "uploadType": {
-      "name": "uploadType",
-      "in": "query",
       "description": "Legacy upload protocol for media (e.g. \"media\", \"multipart\").",
+      "in": "query",
+      "name": "uploadType",
       "type": "string"
     },
-    "$.xgafv": {
-      "name": "$.xgafv",
+    "upload_protocol": {
+      "description": "Upload protocol for media (e.g. \"raw\", \"multipart\").",
       "in": "query",
-      "description": "V1 error format.",
+      "name": "upload_protocol",
       "type": "string"
     }
-  }
+  },
+  "paths": {},
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0"
 }

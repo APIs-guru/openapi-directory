@@ -1,37 +1,32 @@
 {
-  "host": "aiaas.pandorabots.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
-  "swagger": "2.0",
+  "host": "aiaas.pandorabots.com",
   "info": {
-    "version": "1.0.0",
     "title": "aiaas.pandorabots.com",
-    "x-providerName": "pandorabots.com",
+    "version": "1.0.0",
     "x-origin": {
       "format": "swagger",
-      "version": "1.2",
-      "url": "https://developer.pandorabots.com/swagger/spec.json"
-    }
+      "url": "https://developer.pandorabots.com/swagger/spec.json",
+      "version": "1.2"
+    },
+    "x-providerName": "pandorabots.com"
   },
   "paths": {
     "/bot/{app_id}": {
       "get": {
-        "operationId": "listBots",
-        "summary": "List of bots",
         "description": "Retrieve a list of your application's bots. Response returns JSON object with info for each bot.<p>Returns a 401 error code for invalid app_ID or user_key.</p><p><pre class='prettyprint'>curl -v  -X GET 'https://aiaas.pandorabots.com/bot/APP_ID?user_key=USER_KEY'</pre></p>",
+        "operationId": "listBots",
         "parameters": [
           {
-            "in": "path",
             "description": "Your Application ID",
+            "in": "path",
             "name": "app_id",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Your application's user key.",
+            "in": "query",
             "name": "user_key",
             "required": true,
             "type": "string"
@@ -41,38 +36,38 @@
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "List of bots"
       }
     },
     "/bot/{app_id}/{botname}": {
       "get": {
-        "operationId": "listBotFiles",
-        "summary": "List of bot files",
         "description": "Retrieve a list of a bot's files. Returns a JSON object with each bot file associated with bot specified.<p>Returns a 400 error code for bot not found. Returns a 401 error code for invalid app_ID or user_key.</p><p>The <code color=blue>return=zip</code> option may not behave as expected using Active Docs 1.2</p><p><pre class='prettyprint'>curl -v  -X GET 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME?user_key=USER_KEY'</pre></p>",
+        "operationId": "listBotFiles",
         "parameters": [
           {
-            "in": "path",
             "description": "Your Application ID",
+            "in": "path",
             "name": "app_id",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "description": "The name of the bot.",
+            "in": "path",
             "name": "botname",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "If set to zip, a zip file with all bot files will be returned.",
+            "in": "query",
             "name": "return",
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Your application's user key.",
+            "in": "query",
             "name": "user_key",
             "required": true,
             "type": "string"
@@ -82,46 +77,123 @@
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "List of bot files"
       }
     },
-    "/bot/{app_id}/{botname}/{file-kind}/{filename}": {
+    "/bot/{app_id}/{botname}/verify": {
       "get": {
-        "operationId": "getBotFile1",
-        "summary": "Retrieve a bot file (AIML, set, map, substitution)",
-        "description": "Retrieve an AIML, set, map or substitution bot file.<p>For malformed file-kind, a 404 error is returned. For invalid filename or botname, a 400 error is returned. For unknown bot or file, a 412 error is returned.</p><pre><p>curl -v -X GET 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME/FILE-KIND/FILENAME?user_key=USER_KEY'</p></pre>",
+        "description": "A bot personality is created by uploading AIML and other file types to Pandorabots. The files must compile correctly in order for the bot to run. By issuing a call to this API, Pandorabots will compile the bot, updating any changes that have been made to the files.<p>Compiling the bot makes its most recent version available for talk. A 400 error means that we were unable to compile your bot (you should check your files for syntax issues) or the botname was not found. </p><p>You can see any thrown errors in the results field of the returned JSON object:</p><p><pre class='prettyprint'>curl -v  -X GET 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME/verify?user_key=USER_KEY'</pre></p>",
+        "operationId": "compileBot",
         "parameters": [
           {
-            "in": "path",
             "description": "Your Application ID",
+            "in": "path",
             "name": "app_id",
             "required": true,
             "type": "string"
           },
           {
+            "description": "Your bot's name",
             "in": "path",
-            "description": "Name of the bot.",
             "name": "botname",
             "required": true,
             "type": "string"
           },
           {
+            "description": "Your application's user key.",
+            "in": "query",
+            "name": "user_key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Compile a bot"
+      }
+    },
+    "/bot/{app_id}/{botname}/{file-kind}": {
+      "get": {
+        "description": "Retrieve pdefaults or properties bot file.<p>For malformed file-kind, a 404 error is returned. For invalid botname, a 400 error is returned. For unknown bot or file, a 412 error is returned.</p><pre><p>curl -v -X GET 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME/FILE-KIND?user_key=USER_KEY'</p></pre>",
+        "operationId": "getBotFile2",
+        "parameters": [
+          {
+            "description": "Your Application ID",
             "in": "path",
-            "description": "Specify the type of file being retrieved: file (for AIML files), map, substitution, set",
+            "name": "app_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the bot.",
+            "in": "path",
+            "name": "botname",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Specify the type of file being retrieved: pdefaults, properties",
+            "in": "path",
             "name": "file-kind",
             "required": true,
             "type": "string"
           },
           {
+            "description": "Your application's user key.",
+            "in": "query",
+            "name": "user_key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Retrieve a bot file (pdefaults, properties)"
+      }
+    },
+    "/bot/{app_id}/{botname}/{file-kind}/{filename}": {
+      "get": {
+        "description": "Retrieve an AIML, set, map or substitution bot file.<p>For malformed file-kind, a 404 error is returned. For invalid filename or botname, a 400 error is returned. For unknown bot or file, a 412 error is returned.</p><pre><p>curl -v -X GET 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME/FILE-KIND/FILENAME?user_key=USER_KEY'</p></pre>",
+        "operationId": "getBotFile1",
+        "parameters": [
+          {
+            "description": "Your Application ID",
             "in": "path",
+            "name": "app_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the bot.",
+            "in": "path",
+            "name": "botname",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Specify the type of file being retrieved: file (for AIML files), map, substitution, set",
+            "in": "path",
+            "name": "file-kind",
+            "required": true,
+            "type": "string"
+          },
+          {
             "description": "Filename to retrieve. Note: for non-AIML files, do not include the file extension in the path.",
+            "in": "path",
             "name": "filename",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Your application's user key.",
+            "in": "query",
             "name": "user_key",
             "required": true,
             "type": "string"
@@ -131,171 +203,94 @@
           "200": {
             "description": "No response was specified"
           }
-        }
-      }
-    },
-    "/bot/{app_id}/{botname}/{file-kind}": {
-      "get": {
-        "operationId": "getBotFile2",
-        "summary": "Retrieve a bot file (pdefaults, properties)",
-        "description": "Retrieve pdefaults or properties bot file.<p>For malformed file-kind, a 404 error is returned. For invalid botname, a 400 error is returned. For unknown bot or file, a 412 error is returned.</p><pre><p>curl -v -X GET 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME/FILE-KIND?user_key=USER_KEY'</p></pre>",
-        "parameters": [
-          {
-            "in": "path",
-            "description": "Your Application ID",
-            "name": "app_id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "description": "Name of the bot.",
-            "name": "botname",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "description": "Specify the type of file being retrieved: pdefaults, properties",
-            "name": "file-kind",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Your application's user key.",
-            "name": "user_key",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/bot/{app_id}/{botname}/verify": {
-      "get": {
-        "operationId": "compileBot",
-        "summary": "Compile a bot",
-        "description": "A bot personality is created by uploading AIML and other file types to Pandorabots. The files must compile correctly in order for the bot to run. By issuing a call to this API, Pandorabots will compile the bot, updating any changes that have been made to the files.<p>Compiling the bot makes its most recent version available for talk. A 400 error means that we were unable to compile your bot (you should check your files for syntax issues) or the botname was not found. </p><p>You can see any thrown errors in the results field of the returned JSON object:</p><p><pre class='prettyprint'>curl -v  -X GET 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME/verify?user_key=USER_KEY'</pre></p>",
-        "parameters": [
-          {
-            "in": "path",
-            "description": "Your Application ID",
-            "name": "app_id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "description": "Your bot's name",
-            "name": "botname",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Your application's user key.",
-            "name": "user_key",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
+        },
+        "summary": "Retrieve a bot file (AIML, set, map, substitution)"
       }
     },
     "/talk/{app_id}/{botname}": {
       "post": {
-        "operationId": "debugBot",
-        "summary": "Debug a bot conversation",
         "description": "Use these tools to test/debug/trace bot categories. <p>Malformed requests such as exceeding size of input or invalid clientname returns 400 error code. Error code 412 is returned if the bot is not compiled or does not exist.</p><p><pre class='prettyprint'>curl -v  -X POST 'https://aiaas.pandorabots.com/talk/APP_ID/BOTNAME?user_key=USER_KEY&input=INPUT'</pre></p>",
+        "operationId": "debugBot",
         "parameters": [
           {
-            "in": "path",
             "description": "Your Application ID",
+            "in": "path",
             "name": "app_id",
             "required": true,
             "type": "string"
           },
           {
-            "in": "path",
             "description": "The name of the bot.",
+            "in": "path",
             "name": "botname",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "String to be sent to the bot. This can contain multiple sentences. Currently the limit is 500 characters.",
+            "in": "query",
             "name": "input",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Identifies your application's end user. You can assign each of your end users a unique client_name. This will allow you to set predicates and other variable information that is specific to an individual. Format required is 3-64 characters in length and only numbers or lower-case letters [0-9][a-z]",
+            "in": "query",
             "name": "client_name",
             "required": false,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Session ID generated by Pandorabots. This allows the application to group individual conversations into a collection. While testing your bot, not including this parameter, Pandorabots will issue a new session ID. (4-byte integer type)",
+            "in": "query",
             "name": "sessionid",
             "type": "string"
           },
           {
-            "in": "query",
             "description": "For debugging purposes, you can specify a 'that' with the input that supersedes the existing that in bot memory.",
+            "in": "query",
             "name": "that",
             "type": "string"
           },
           {
-            "in": "query",
             "description": "For debugging purposes, you can specify a 'topic' with the input that supersedes the existing topic in bot memory.",
+            "in": "query",
             "name": "topic",
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Return extra conversation information. If true, input, pattern, that and topic associated with the pattern matched are returned in addition to response.",
+            "in": "query",
             "name": "extra",
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Reset the bot memory. If true, all state in the bot will be discarded, and the user can talk to the bot as if it is the first time",
+            "in": "query",
             "name": "reset",
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Include trace data in the response. If true, the system will generate AIML trace information for the input.",
+            "in": "query",
             "name": "trace",
             "type": "string"
           },
           {
-            "in": "query",
             "description": "If true, the system will force a reload of the bot into memory. This can be useful if you've recently uploaded an AIML file, recompiled your bot and want access to your bot's latest changes.",
+            "in": "query",
             "name": "reload",
             "type": "string"
           },
           {
-            "in": "query",
             "description": "If true, the system will not signal an error if the bot is uncompiled, and will instead look for a previous version of the bot that is available.",
+            "in": "query",
             "name": "recent",
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Your application's user key.",
+            "in": "query",
             "name": "user_key",
             "required": true,
             "type": "string"
@@ -305,8 +300,13 @@
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Debug a bot conversation"
       }
     }
-  }
+  },
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0"
 }

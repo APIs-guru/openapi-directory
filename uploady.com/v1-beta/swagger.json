@@ -1,412 +1,415 @@
 {
-  "host": "content.uploady.com",
   "basePath": "/v1/api",
-  "schemes": [
-    "https"
-  ],
-  "swagger": "2.0",
-  "info": {
-    "version": "v1-beta",
-    "title": "content.uploady.com",
-    "x-providerName": "uploady.com",
-    "x-origin": {
-      "format": "swagger",
-      "version": "1.2",
-      "url": "https://www.uploady.com/v1/docs/api"
+  "definitions": {
+    "Children": {
+      "properties": {
+        "files": {
+          "items": {
+            "$ref": "#/definitions/File"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "folders": {
+          "items": {
+            "$ref": "#/definitions/Folder"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      }
+    },
+    "Event": {
+      "description": "Event information",
+      "properties": {
+        "file": {
+          "$ref": "#/definitions/File"
+        },
+        "file_id": {
+          "type": "string"
+        },
+        "folder": {
+          "$ref": "#/definitions/Folder"
+        },
+        "folder_id": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "root_id": {
+          "type": "string"
+        },
+        "time": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "user",
+        "root_id",
+        "time"
+      ]
+    },
+    "Events": {
+      "properties": {
+        "events": {
+          "items": {
+            "$ref": "#/definitions/Event"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "events"
+      ]
+    },
+    "File": {
+      "description": "File information",
+      "properties": {
+        "extension": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "mime_type": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parent_folder": {
+          "type": "string"
+        },
+        "sha1": {
+          "type": "string"
+        },
+        "share_enabled": {
+          "type": "boolean"
+        },
+        "share_link": {
+          "type": "string"
+        },
+        "share_link_enabled": {
+          "type": "boolean"
+        },
+        "share_password": {
+          "type": "string"
+        },
+        "share_url": {
+          "type": "string"
+        },
+        "size": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "time": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "time",
+        "mime_type",
+        "extension",
+        "size",
+        "sha1",
+        "parent_folder"
+      ]
+    },
+    "FileLink": {
+      "description": "Get file download url",
+      "properties": {
+        "direct_link": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "direct_link"
+      ]
+    },
+    "FileShare": {
+      "properties": {
+        "emails": {
+          "items": {
+            "$ref": "#/definitions/FileShareEmail"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "emails"
+      ]
+    },
+    "FileShareEmail": {
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "email"
+      ]
+    },
+    "Files": {
+      "properties": {
+        "files": {
+          "items": {
+            "$ref": "#/definitions/File"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "files"
+      ]
+    },
+    "FilesLinks": {
+      "properties": {
+        "links": {
+          "items": {
+            "$ref": "#/definitions/FileLink"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "links"
+      ]
+    },
+    "Folder": {
+      "description": "Folder information",
+      "properties": {
+        "has_folders": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parent_folder": {
+          "type": "string"
+        },
+        "time": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "time",
+        "has_folders"
+      ]
+    },
+    "Folders": {
+      "properties": {
+        "folders": {
+          "items": {
+            "$ref": "#/definitions/Folder"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "folders"
+      ]
+    },
+    "Storage": {
+      "properties": {
+        "storage": {
+          "items": {
+            "$ref": "#/definitions/StorageData"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "storage"
+      ]
+    },
+    "StorageData": {
+      "properties": {
+        "storage_limit": {
+          "type": "integer"
+        },
+        "used_storage_size": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "used_storage_size",
+        "storage_limit"
+      ]
+    },
+    "Success": {
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "success"
+      ]
+    },
+    "User": {
+      "description": "User information.",
+      "properties": {
+        "display_name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "family_name": {
+          "type": "string"
+        },
+        "given_name": {
+          "type": "string"
+        },
+        "group": {
+          "type": "string"
+        },
+        "links": {
+          "items": {
+            "$ref": "#/definitions/UserLinks"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "new_user": {
+          "type": "boolean"
+        },
+        "verified": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "email",
+        "given_name",
+        "family_name",
+        "display_name",
+        "group",
+        "verified",
+        "new_user",
+        "links"
+      ]
+    },
+    "UserLinks": {
+      "properties": {
+        "root_folder": {
+          "type": "string"
+        },
+        "trash_folder": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "root_folder",
+        "trash_folder"
+      ]
+    },
+    "Users": {
+      "properties": {
+        "users": {
+          "items": {
+            "$ref": "#/definitions/User"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "users"
+      ]
     }
   },
-  "tags": [
-    {
-      "name": "users",
-      "description": "Manage user"
+  "host": "content.uploady.com",
+  "info": {
+    "title": "content.uploady.com",
+    "version": "v1-beta",
+    "x-origin": {
+      "format": "swagger",
+      "url": "https://www.uploady.com/v1/docs/api",
+      "version": "1.2"
     },
-    {
-      "name": "folders",
-      "description": "Manage folders"
-    },
-    {
-      "name": "files",
-      "description": "Manage files"
-    },
-    {
-      "name": "upload",
-      "description": "Upload files"
-    },
-    {
-      "name": "events",
-      "description": "Synchronize files"
-    }
-  ],
+    "x-providerName": "uploady.com"
+  },
   "paths": {
-    "/users": {
-      "post": {
-        "tags": [
-          "users"
-        ],
+    "/events": {
+      "get": {
+        "description": "There are two types of events: for folders and for files.<br/>\nAll events will contain latest resource information about folder or file.\nIf `folder` or `file` key is set to `null`, this means what this object was deleted.<br/>\nTo access this resource, scope `read.events` is required.",
         "operationId": "index",
-        "summary": "Static - Create new user",
-        "description": "This api is only available for clients with static type.<br/>\nScope `register` is required.<br/>\nAccess token can be created with `client credentials` grant type.<br/>\nThis resource can not be accessed with cross origin request.",
         "parameters": [
           {
+            "description": "Get events for root folder",
             "in": "query",
-            "description": "Available values: storage,folders",
+            "name": "root_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of last known event id",
+            "in": "query",
+            "name": "last_event_id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Available values: links",
+            "in": "query",
             "name": "include",
             "required": false,
             "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "If set to true, temporary user will be created.",
-            "name": "temporary",
-            "required": false,
-            "type": "boolean"
           }
         ],
         "responses": {
           "200": {
             "description": "No response was specified",
             "schema": {
-              "$ref": "#/definitions/Users"
+              "$ref": "#/definitions/Events"
             }
           }
-        }
-      }
-    },
-    "/users/logout": {
-      "post": {
+        },
+        "summary": "Get events",
         "tags": [
-          "users"
-        ],
-        "operationId": "logout",
-        "summary": "Destroy access and refresh tokens",
-        "description": "Logout user. User will be detached from access token. \n Implicit grant does not provide a refresh token, but provided access token will be destroyed.",
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "Refresh token to be deleted",
-            "name": "refresh_token",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/Success"
-            }
-          }
-        }
-      }
-    },
-    "/users/storage": {
-      "get": {
-        "tags": [
-          "users"
-        ],
-        "operationId": "storage",
-        "summary": "Get user storage information.",
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/Storage"
-            }
-          }
-        }
-      }
-    },
-    "/folders": {
-      "get": {
-        "tags": [
-          "folders"
-        ],
-        "operationId": "index",
-        "summary": "Find folder",
-        "description": "You can get multiple folders by joining id's with comma.<br/>\n To access this resource, scope `read.folder` is required.",
-        "parameters": [
-          {
-            "in": "query",
-            "description": "ID of folder that needs to be fetched",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/Folders"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "folders"
-        ],
-        "operationId": "index",
-        "summary": "Update folder",
-        "description": "You can update multiple folders by joining id's with comma. <br/>\n To access this resource, scope `update.folder` is required.",
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "ID of folder that needs to be updated",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "folder name",
-            "name": "name",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "parent folder id",
-            "name": "parent_id",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/Folders"
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "folders"
-        ],
-        "operationId": "index",
-        "summary": "Create folder",
-        "description": "Create new folder.<br/>\n To access this resource, scope `create.folder` is required.",
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "folder name",
-            "name": "name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "parent folder id, if id is not specified, root folder will be used instead.",
-            "name": "parent_id",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/Folders"
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "folders"
-        ],
-        "operationId": "index",
-        "summary": "Delete folder",
-        "description": "You can delete multiple folders by joining id's with comma.<br/>\n To access this resource, scope `delete.folder` is required.",
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "folder id",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/Folders"
-            }
-          }
-        }
-      }
-    },
-    "/folders/children": {
-      "get": {
-        "tags": [
-          "folders"
-        ],
-        "operationId": "index",
-        "summary": "Find child files and folders",
-        "description": "To access this resource, scope `read.folder` is required.",
-        "parameters": [
-          {
-            "in": "query",
-            "description": "ID of parent folder",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "set this to get child files",
-            "name": "get_files",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "in": "query",
-            "description": "set this to get child folders",
-            "name": "get_folders",
-            "required": false,
-            "type": "boolean"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/Children"
-            }
-          }
-        }
-      }
-    },
-    "/folders/path": {
-      "get": {
-        "tags": [
-          "folders"
-        ],
-        "operationId": "index",
-        "summary": "Get full path to the folder",
-        "description": "Folders are returned in strict order. From root folder to folder specified by id.<br/>\n To access this resource, scope `read.folder` is required.",
-        "parameters": [
-          {
-            "in": "query",
-            "description": "folder id",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/Folders"
-            }
-          }
-        }
+          "events"
+        ]
       }
     },
     "/files": {
-      "get": {
-        "tags": [
-          "files"
-        ],
-        "operationId": "index",
-        "summary": "Find files",
-        "description": "You can get multiple files by joining id's with comma.<br/>\n To access this resource, scope `read.file` is required.",
-        "parameters": [
-          {
-            "in": "query",
-            "description": "ID of file that needs to be fetched",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Available values: links",
-            "name": "include",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/Files"
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "files"
-        ],
-        "operationId": "index",
-        "summary": "Update files information",
-        "description": "You can update multiple files by joining id's with comma. <br/>\nTo access this resource, scope `update.file` is required.",
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "ID of file",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "rename file",
-            "name": "name",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "move file to folder",
-            "name": "folder_id",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "if set to true, file will be copied.",
-            "name": "copy",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "in": "formData",
-            "description": "if set to true, file will be shared.",
-            "name": "share_link_enabled",
-            "required": false,
-            "type": "boolean"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/Files"
-            }
-          },
-          "403": {
-            "description": "You do not have permission to access this folder"
-          }
-        }
-      },
       "delete": {
-        "tags": [
-          "files"
-        ],
-        "operationId": "index",
-        "summary": "Delete files",
         "description": "File will be permanently deleted, recovery is not possible. You can delete multiple files by joining id's with comma. <br/>\nTo access this resource, scope `delete.file` is required.",
+        "operationId": "index",
         "parameters": [
           {
-            "in": "formData",
             "description": "ID of file",
+            "in": "formData",
             "name": "id",
             "required": true,
             "type": "string"
@@ -422,21 +425,109 @@
           "404": {
             "description": "No files were found"
           }
-        }
+        },
+        "summary": "Delete files",
+        "tags": [
+          "files"
+        ]
+      },
+      "get": {
+        "description": "You can get multiple files by joining id's with comma.<br/>\n To access this resource, scope `read.file` is required.",
+        "operationId": "index",
+        "parameters": [
+          {
+            "description": "ID of file that needs to be fetched",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Available values: links",
+            "in": "query",
+            "name": "include",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Files"
+            }
+          }
+        },
+        "summary": "Find files",
+        "tags": [
+          "files"
+        ]
+      },
+      "put": {
+        "description": "You can update multiple files by joining id's with comma. <br/>\nTo access this resource, scope `update.file` is required.",
+        "operationId": "index",
+        "parameters": [
+          {
+            "description": "ID of file",
+            "in": "formData",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "rename file",
+            "in": "formData",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "move file to folder",
+            "in": "formData",
+            "name": "folder_id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "if set to true, file will be copied.",
+            "in": "formData",
+            "name": "copy",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "description": "if set to true, file will be shared.",
+            "in": "formData",
+            "name": "share_link_enabled",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Files"
+            }
+          },
+          "403": {
+            "description": "You do not have permission to access this folder"
+          }
+        },
+        "summary": "Update files information",
+        "tags": [
+          "files"
+        ]
       }
     },
     "/files/link": {
       "post": {
-        "tags": [
-          "files"
-        ],
-        "operationId": "link",
-        "summary": "Get download link",
         "description": "You can get multiple links by joining id's with comma.<br/>\n To access this resource, scope `read.file` is required.",
+        "operationId": "link",
         "parameters": [
           {
-            "in": "formData",
             "description": "file id",
+            "in": "formData",
             "name": "id",
             "required": true,
             "type": "string"
@@ -449,85 +540,28 @@
               "$ref": "#/definitions/FilesLinks"
             }
           }
-        }
+        },
+        "summary": "Get download link",
+        "tags": [
+          "files"
+        ]
       }
     },
     "/files/share": {
-      "get": {
-        "tags": [
-          "files"
-        ],
-        "operationId": "share",
-        "summary": "Get shared emails",
-        "description": "Get shared emails.<br/>\n To access this resource, scope `share.file` is required.",
-        "parameters": [
-          {
-            "in": "query",
-            "description": "file id",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/FileShare"
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "files"
-        ],
-        "operationId": "share",
-        "summary": "Share file via email",
-        "description": "Be sure that user is verified.<br/>\n To access this resource, scope `share.file` is required.",
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "file id",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "email address",
-            "name": "email",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/FileShare"
-            }
-          }
-        }
-      },
       "delete": {
-        "tags": [
-          "files"
-        ],
-        "operationId": "share",
-        "summary": "Delete shared email",
         "description": "Delete shared email.<br/>\nTo access this resource, scope `share.file` is required.",
+        "operationId": "share",
         "parameters": [
           {
-            "in": "formData",
             "description": "file id",
+            "in": "formData",
             "name": "id",
             "required": true,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "shared link id",
+            "in": "formData",
             "name": "link_id",
             "required": true,
             "type": "string"
@@ -546,46 +580,294 @@
           "404": {
             "description": "File not found"
           }
-        }
+        },
+        "summary": "Delete shared email",
+        "tags": [
+          "files"
+        ]
+      },
+      "get": {
+        "description": "Get shared emails.<br/>\n To access this resource, scope `share.file` is required.",
+        "operationId": "share",
+        "parameters": [
+          {
+            "description": "file id",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/FileShare"
+            }
+          }
+        },
+        "summary": "Get shared emails",
+        "tags": [
+          "files"
+        ]
+      },
+      "post": {
+        "description": "Be sure that user is verified.<br/>\n To access this resource, scope `share.file` is required.",
+        "operationId": "share",
+        "parameters": [
+          {
+            "description": "file id",
+            "in": "formData",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "email address",
+            "in": "formData",
+            "name": "email",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/FileShare"
+            }
+          }
+        },
+        "summary": "Share file via email",
+        "tags": [
+          "files"
+        ]
+      }
+    },
+    "/folders": {
+      "delete": {
+        "description": "You can delete multiple folders by joining id's with comma.<br/>\n To access this resource, scope `delete.folder` is required.",
+        "operationId": "index",
+        "parameters": [
+          {
+            "description": "folder id",
+            "in": "formData",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Folders"
+            }
+          }
+        },
+        "summary": "Delete folder",
+        "tags": [
+          "folders"
+        ]
+      },
+      "get": {
+        "description": "You can get multiple folders by joining id's with comma.<br/>\n To access this resource, scope `read.folder` is required.",
+        "operationId": "index",
+        "parameters": [
+          {
+            "description": "ID of folder that needs to be fetched",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Folders"
+            }
+          }
+        },
+        "summary": "Find folder",
+        "tags": [
+          "folders"
+        ]
+      },
+      "post": {
+        "description": "Create new folder.<br/>\n To access this resource, scope `create.folder` is required.",
+        "operationId": "index",
+        "parameters": [
+          {
+            "description": "folder name",
+            "in": "formData",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "parent folder id, if id is not specified, root folder will be used instead.",
+            "in": "formData",
+            "name": "parent_id",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Folders"
+            }
+          }
+        },
+        "summary": "Create folder",
+        "tags": [
+          "folders"
+        ]
+      },
+      "put": {
+        "description": "You can update multiple folders by joining id's with comma. <br/>\n To access this resource, scope `update.folder` is required.",
+        "operationId": "index",
+        "parameters": [
+          {
+            "description": "ID of folder that needs to be updated",
+            "in": "formData",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "folder name",
+            "in": "formData",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "parent folder id",
+            "in": "formData",
+            "name": "parent_id",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Folders"
+            }
+          }
+        },
+        "summary": "Update folder",
+        "tags": [
+          "folders"
+        ]
+      }
+    },
+    "/folders/children": {
+      "get": {
+        "description": "To access this resource, scope `read.folder` is required.",
+        "operationId": "index",
+        "parameters": [
+          {
+            "description": "ID of parent folder",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "set this to get child files",
+            "in": "query",
+            "name": "get_files",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "description": "set this to get child folders",
+            "in": "query",
+            "name": "get_folders",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Children"
+            }
+          }
+        },
+        "summary": "Find child files and folders",
+        "tags": [
+          "folders"
+        ]
+      }
+    },
+    "/folders/path": {
+      "get": {
+        "description": "Folders are returned in strict order. From root folder to folder specified by id.<br/>\n To access this resource, scope `read.folder` is required.",
+        "operationId": "index",
+        "parameters": [
+          {
+            "description": "folder id",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Folders"
+            }
+          }
+        },
+        "summary": "Get full path to the folder",
+        "tags": [
+          "folders"
+        ]
       }
     },
     "/upload": {
       "post": {
-        "tags": [
-          "upload"
-        ],
-        "operationId": "index",
-        "summary": "Upload files",
         "description": "Files are uploaded to https://content.uploady.com/v1/api/upload.<br/>\n                    To access this resource, scope `create.file` is required.",
+        "operationId": "index",
         "parameters": [
           {
-            "in": "formData",
             "description": "file to store",
+            "in": "formData",
             "name": "file",
             "required": true,
             "type": "file"
           },
           {
-            "in": "formData",
             "description": "ID of parent folder, there file will be stored. If not passed, files will be stored in app root folder.",
+            "in": "formData",
             "name": "folder_id",
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "File name",
+            "in": "formData",
             "name": "file_name",
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "ID of file that needs to be updated. Should be sent as form data.",
+            "in": "formData",
             "name": "file_id",
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "if set to true, file will be shared.",
+            "in": "formData",
             "name": "share_link_enabled",
             "type": "boolean"
           }
@@ -597,36 +879,56 @@
               "$ref": "#/definitions/Files"
             }
           }
-        }
+        },
+        "summary": "Upload files",
+        "tags": [
+          "upload"
+        ]
       }
     },
-    "/events": {
-      "get": {
-        "tags": [
-          "events"
-        ],
+    "/users": {
+      "post": {
+        "description": "This api is only available for clients with static type.<br/>\nScope `register` is required.<br/>\nAccess token can be created with `client credentials` grant type.<br/>\nThis resource can not be accessed with cross origin request.",
         "operationId": "index",
-        "summary": "Get events",
-        "description": "There are two types of events: for folders and for files.<br/>\nAll events will contain latest resource information about folder or file.\nIf `folder` or `file` key is set to `null`, this means what this object was deleted.<br/>\nTo access this resource, scope `read.events` is required.",
         "parameters": [
           {
+            "description": "Available values: storage,folders",
             "in": "query",
-            "description": "Get events for root folder",
-            "name": "root_id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "ID of last known event id",
-            "name": "last_event_id",
+            "name": "include",
             "required": false,
             "type": "string"
           },
           {
-            "in": "query",
-            "description": "Available values: links",
-            "name": "include",
+            "description": "If set to true, temporary user will be created.",
+            "in": "formData",
+            "name": "temporary",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Users"
+            }
+          }
+        },
+        "summary": "Static - Create new user",
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/users/logout": {
+      "post": {
+        "description": "Logout user. User will be detached from access token. \n Implicit grant does not provide a refresh token, but provided access token will be destroyed.",
+        "operationId": "logout",
+        "parameters": [
+          {
+            "description": "Refresh token to be deleted",
+            "in": "formData",
+            "name": "refresh_token",
             "required": false,
             "type": "string"
           }
@@ -635,360 +937,58 @@
           "200": {
             "description": "No response was specified",
             "schema": {
-              "$ref": "#/definitions/Events"
+              "$ref": "#/definitions/Success"
             }
           }
-        }
+        },
+        "summary": "Destroy access and refresh tokens",
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/users/storage": {
+      "get": {
+        "operationId": "storage",
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Storage"
+            }
+          }
+        },
+        "summary": "Get user storage information.",
+        "tags": [
+          "users"
+        ]
       }
     }
   },
-  "definitions": {
-    "Folder": {
-      "description": "Folder information",
-      "required": [
-        "id",
-        "name",
-        "time",
-        "has_folders"
-      ],
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "parent_folder": {
-          "type": "string"
-        },
-        "has_folders": {
-          "type": "boolean"
-        },
-        "type": {
-          "type": "string"
-        },
-        "time": {
-          "type": "integer"
-        }
-      }
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Manage user",
+      "name": "users"
     },
-    "Folders": {
-      "required": [
-        "folders"
-      ],
-      "properties": {
-        "folders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Folder"
-          },
-          "uniqueItems": true
-        }
-      }
+    {
+      "description": "Manage folders",
+      "name": "folders"
     },
-    "Children": {
-      "properties": {
-        "folders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Folder"
-          },
-          "uniqueItems": true
-        },
-        "files": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/File"
-          },
-          "uniqueItems": true
-        }
-      }
+    {
+      "description": "Manage files",
+      "name": "files"
     },
-    "File": {
-      "description": "File information",
-      "required": [
-        "id",
-        "name",
-        "time",
-        "mime_type",
-        "extension",
-        "size",
-        "sha1",
-        "parent_folder"
-      ],
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "time": {
-          "type": "integer"
-        },
-        "mime_type": {
-          "type": "string"
-        },
-        "extension": {
-          "type": "string"
-        },
-        "size": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "sha1": {
-          "type": "string"
-        },
-        "parent_folder": {
-          "type": "string"
-        },
-        "share_enabled": {
-          "type": "boolean"
-        },
-        "share_link": {
-          "type": "string"
-        },
-        "share_url": {
-          "type": "string"
-        },
-        "share_link_enabled": {
-          "type": "boolean"
-        },
-        "share_password": {
-          "type": "string"
-        }
-      }
+    {
+      "description": "Upload files",
+      "name": "upload"
     },
-    "Files": {
-      "required": [
-        "files"
-      ],
-      "properties": {
-        "files": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/File"
-          },
-          "uniqueItems": true
-        }
-      }
-    },
-    "FileLink": {
-      "description": "Get file download url",
-      "required": [
-        "id",
-        "direct_link"
-      ],
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "direct_link": {
-          "type": "string"
-        }
-      }
-    },
-    "FilesLinks": {
-      "required": [
-        "links"
-      ],
-      "properties": {
-        "links": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FileLink"
-          },
-          "uniqueItems": true
-        }
-      }
-    },
-    "FileShareEmail": {
-      "required": [
-        "id",
-        "email"
-      ],
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        }
-      }
-    },
-    "FileShare": {
-      "required": [
-        "emails"
-      ],
-      "properties": {
-        "emails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FileShareEmail"
-          },
-          "uniqueItems": true
-        }
-      }
-    },
-    "User": {
-      "description": "User information.",
-      "required": [
-        "email",
-        "given_name",
-        "family_name",
-        "display_name",
-        "group",
-        "verified",
-        "new_user",
-        "links"
-      ],
-      "properties": {
-        "email": {
-          "type": "string"
-        },
-        "given_name": {
-          "type": "string"
-        },
-        "family_name": {
-          "type": "string"
-        },
-        "display_name": {
-          "type": "string"
-        },
-        "group": {
-          "type": "string"
-        },
-        "verified": {
-          "type": "boolean"
-        },
-        "new_user": {
-          "type": "boolean"
-        },
-        "links": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserLinks"
-          },
-          "uniqueItems": true
-        }
-      }
-    },
-    "UserLinks": {
-      "required": [
-        "root_folder",
-        "trash_folder"
-      ],
-      "properties": {
-        "root_folder": {
-          "type": "string"
-        },
-        "trash_folder": {
-          "type": "string"
-        }
-      }
-    },
-    "Users": {
-      "required": [
-        "users"
-      ],
-      "properties": {
-        "users": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/User"
-          },
-          "uniqueItems": true
-        }
-      }
-    },
-    "Storage": {
-      "required": [
-        "storage"
-      ],
-      "properties": {
-        "storage": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StorageData"
-          }
-        }
-      }
-    },
-    "StorageData": {
-      "required": [
-        "used_storage_size",
-        "storage_limit"
-      ],
-      "properties": {
-        "used_storage_size": {
-          "type": "integer"
-        },
-        "storage_limit": {
-          "type": "integer"
-        }
-      }
-    },
-    "Events": {
-      "required": [
-        "events"
-      ],
-      "properties": {
-        "events": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Event"
-          },
-          "uniqueItems": true
-        }
-      }
-    },
-    "Event": {
-      "description": "Event information",
-      "required": [
-        "id",
-        "user",
-        "root_id",
-        "time"
-      ],
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "user": {
-          "type": "string"
-        },
-        "root_id": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "time": {
-          "type": "integer"
-        },
-        "folder_id": {
-          "type": "string"
-        },
-        "folder": {
-          "$ref": "#/definitions/Folder"
-        },
-        "file_id": {
-          "type": "string"
-        },
-        "file": {
-          "$ref": "#/definitions/File"
-        }
-      }
-    },
-    "Success": {
-      "required": [
-        "success"
-      ],
-      "properties": {
-        "success": {
-          "type": "boolean"
-        }
-      }
+    {
+      "description": "Synchronize files",
+      "name": "events"
     }
-  }
+  ]
 }

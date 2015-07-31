@@ -1,197 +1,39 @@
 {
-  "host": "yunbi.com",
   "basePath": "/api",
-  "schemes": [
-    "https"
-  ],
-  "swagger": "2.0",
+  "host": "yunbi.com",
   "info": {
-    "version": "v2",
     "title": "yunbi.com",
-    "x-providerName": "yunbi.com",
+    "version": "v2",
     "x-origin": {
       "format": "swagger",
-      "version": "1.2",
-      "url": "https://yunbi.com/api/v2/doc/swagger"
-    }
+      "url": "https://yunbi.com/api/v2/doc/swagger",
+      "version": "1.2"
+    },
+    "x-providerName": "yunbi.com"
   },
   "paths": {
-    "/v2/markets.json": {
-      "get": {
-        "operationId": "GET--version-markets---format-",
-        "summary": "Get all available markets.",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/v2/tickers.json": {
-      "get": {
-        "operationId": "GET--version-tickers---format-",
-        "summary": "Get ticker of all markets.",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/v2/tickers/{market}.json": {
-      "get": {
-        "operationId": "GET--version-tickers--market---format-",
-        "summary": "Get ticker of specific market.",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "description": "Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.",
-            "name": "market",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/v2/members/me.json": {
-      "get": {
-        "operationId": "GET--version-members-me---format-",
-        "summary": "Get your profile and accounts info.",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "description": "Access key.",
-            "name": "access_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
-            "name": "tonce",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "description": "The signature of your request payload, generated using your secret key.",
-            "name": "signature",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/v2/deposits.json": {
-      "get": {
-        "operationId": "GET--version-deposits---format-",
-        "summary": "Get your deposits history.",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "description": "Access key.",
-            "name": "access_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
-            "name": "tonce",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "description": "The signature of your request payload, generated using your secret key.",
-            "name": "signature",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Currency value contains  cny,btc,pls,bts,note,bitcny,bitusd,bitbtc,yun,nxt,ltc,doge",
-            "name": "currency",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Set result limit.",
-            "name": "limit",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "state",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
     "/v2/deposit.json": {
       "get": {
-        "operationId": "GET--version-deposit---format-",
-        "summary": "Get details of specific deposit.",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "GET--version-deposit---format-",
         "parameters": [
           {
-            "in": "query",
             "description": "Access key.",
+            "in": "query",
             "name": "access_key",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
+            "in": "query",
             "name": "tonce",
             "required": true,
             "type": "integer"
           },
           {
-            "in": "query",
             "description": "The signature of your request payload, generated using your secret key.",
+            "in": "query",
             "name": "signature",
             "required": true,
             "type": "string"
@@ -203,183 +45,550 @@
             "type": "string"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Get details of specific deposit."
       }
     },
     "/v2/deposit_address.json": {
       "get": {
-        "operationId": "GET--version-deposit_address---format-",
-        "summary": "Where to deposit. The address field could be empty when a new address is generating (e.g. for bitcoin), you should try again later in that case.",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "GET--version-deposit_address---format-",
         "parameters": [
           {
-            "in": "query",
             "description": "Access key.",
+            "in": "query",
             "name": "access_key",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
+            "in": "query",
             "name": "tonce",
             "required": true,
             "type": "integer"
           },
           {
-            "in": "query",
             "description": "The signature of your request payload, generated using your secret key.",
+            "in": "query",
             "name": "signature",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "The account to which you want to deposit. Available values: cny, btc, pls, bts, note, bitcny, bitusd, bitbtc, yun, nxt, ltc, doge",
+            "in": "query",
             "name": "currency",
             "required": true,
             "type": "string"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Where to deposit. The address field could be empty when a new address is generating (e.g. for bitcoin), you should try again later in that case."
       }
     },
-    "/v2/orders.json": {
+    "/v2/deposits.json": {
       "get": {
-        "operationId": "GET--version-orders---format-",
-        "summary": "Get your orders, results is paginated.",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "GET--version-deposits---format-",
         "parameters": [
           {
-            "in": "query",
             "description": "Access key.",
+            "in": "query",
             "name": "access_key",
             "required": true,
             "type": "string"
           },
           {
-            "in": "query",
             "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
+            "in": "query",
             "name": "tonce",
             "required": true,
             "type": "integer"
           },
           {
-            "in": "query",
             "description": "The signature of your request payload, generated using your secret key.",
+            "in": "query",
             "name": "signature",
             "required": true,
             "type": "string"
           },
           {
+            "description": "Currency value contains  cny,btc,pls,bts,note,bitcny,bitusd,bitbtc,yun,nxt,ltc,doge",
             "in": "query",
-            "description": "Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.",
-            "name": "market",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Filter order by state, default to 'wait' (active orders).",
-            "name": "state",
+            "name": "currency",
             "required": false,
             "type": "string"
           },
           {
+            "description": "Set result limit.",
             "in": "query",
-            "description": "Limit the number of returned orders, default to 100.",
             "name": "limit",
             "required": false,
             "type": "integer"
           },
           {
             "in": "query",
-            "description": "Specify the page of paginated results.",
-            "name": "page",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "description": "If set, returned orders will be sorted in specific order, default to 'asc'.",
-            "name": "order_by",
+            "name": "state",
             "required": false,
             "type": "string"
           }
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
-      },
-      "post": {
-        "operationId": "POST--version-orders---format-",
-        "summary": "Create a Sell/Buy order.",
+        },
+        "summary": "Get your deposits history."
+      }
+    },
+    "/v2/depth.json": {
+      "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "GET--version-depth---format-",
         "parameters": [
           {
-            "in": "formData",
-            "description": "Access key.",
-            "name": "access_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
-            "name": "tonce",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "in": "formData",
-            "description": "The signature of your request payload, generated using your secret key.",
-            "name": "signature",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
             "description": "Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.",
+            "in": "query",
             "name": "market",
             "required": true,
             "type": "string"
           },
           {
+            "description": "Limit the number of returned price levels. Default to 300.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Get depth or specified market. Both asks and bids are sorted from highest price to lowest."
+      }
+    },
+    "/v2/k.json": {
+      "get": {
+        "description": "",
+        "operationId": "GET--version-k---format-",
+        "parameters": [
+          {
+            "description": "Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.",
+            "in": "query",
+            "name": "market",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Limit the number of returned data points, default to 30.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Time period of K line, default to 1. You can choose between 1, 5, 15, 30, 60, 120, 240, 360, 720, 1440, 4320, 10080",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "An integer represents the seconds elapsed since Unix epoch. If set, only k-line data after that time will be returned.",
+            "in": "query",
+            "name": "timestamp",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Get OHLC(k line) of specific market."
+      }
+    },
+    "/v2/k_with_pending_trades.json": {
+      "get": {
+        "description": "",
+        "operationId": "GET--version-k_with_pending_trades---format-",
+        "parameters": [
+          {
+            "description": "Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.",
+            "in": "query",
+            "name": "market",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The trade id of the first trade you received.",
+            "in": "query",
+            "name": "trade_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "Limit the number of returned data points, default to 30.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Time period of K line, default to 1. You can choose between 1, 5, 15, 30, 60, 120, 240, 360, 720, 1440, 4320, 10080",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "An integer represents the seconds elapsed since Unix epoch. If set, only k-line data after that time will be returned.",
+            "in": "query",
+            "name": "timestamp",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Get K data with pending trades, which are the trades not included in K data yet, because there's delay between trade generated and processed by K data generator."
+      }
+    },
+    "/v2/markets.json": {
+      "get": {
+        "description": "",
+        "operationId": "GET--version-markets---format-",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Get all available markets."
+      }
+    },
+    "/v2/members/me.json": {
+      "get": {
+        "description": "",
+        "operationId": "GET--version-members-me---format-",
+        "parameters": [
+          {
+            "description": "Access key.",
+            "in": "query",
+            "name": "access_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
+            "in": "query",
+            "name": "tonce",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The signature of your request payload, generated using your secret key.",
+            "in": "query",
+            "name": "signature",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Get your profile and accounts info."
+      }
+    },
+    "/v2/order.json": {
+      "get": {
+        "description": "",
+        "operationId": "GET--version-order---format-",
+        "parameters": [
+          {
+            "description": "Access key.",
+            "in": "query",
+            "name": "access_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
+            "in": "query",
+            "name": "tonce",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The signature of your request payload, generated using your secret key.",
+            "in": "query",
+            "name": "signature",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Unique order id.",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Get information of specified order."
+      }
+    },
+    "/v2/order/delete.json": {
+      "post": {
+        "description": "",
+        "operationId": "POST--version-order-delete---format-",
+        "parameters": [
+          {
+            "description": "Access key.",
             "in": "formData",
+            "name": "access_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
+            "in": "formData",
+            "name": "tonce",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The signature of your request payload, generated using your secret key.",
+            "in": "formData",
+            "name": "signature",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Unique order id.",
+            "in": "formData",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Cancel an order."
+      }
+    },
+    "/v2/order_book.json": {
+      "get": {
+        "description": "",
+        "operationId": "GET--version-order_book---format-",
+        "parameters": [
+          {
+            "description": "Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.",
+            "in": "query",
+            "name": "market",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Limit the number of returned sell orders. Default to 20.",
+            "in": "query",
+            "name": "asks_limit",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Limit the number of returned buy orders. Default to 20.",
+            "in": "query",
+            "name": "bids_limit",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Get the order book of specified market."
+      }
+    },
+    "/v2/orders.json": {
+      "get": {
+        "description": "",
+        "operationId": "GET--version-orders---format-",
+        "parameters": [
+          {
+            "description": "Access key.",
+            "in": "query",
+            "name": "access_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
+            "in": "query",
+            "name": "tonce",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The signature of your request payload, generated using your secret key.",
+            "in": "query",
+            "name": "signature",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.",
+            "in": "query",
+            "name": "market",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Filter order by state, default to 'wait' (active orders).",
+            "in": "query",
+            "name": "state",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Limit the number of returned orders, default to 100.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Specify the page of paginated results.",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "If set, returned orders will be sorted in specific order, default to 'asc'.",
+            "in": "query",
+            "name": "order_by",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Get your orders, results is paginated."
+      },
+      "post": {
+        "description": "",
+        "operationId": "POST--version-orders---format-",
+        "parameters": [
+          {
+            "description": "Access key.",
+            "in": "formData",
+            "name": "access_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
+            "in": "formData",
+            "name": "tonce",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The signature of your request payload, generated using your secret key.",
+            "in": "formData",
+            "name": "signature",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.",
+            "in": "formData",
+            "name": "market",
+            "required": true,
+            "type": "string"
+          },
+          {
             "description": "Either 'sell' or 'buy'.",
+            "in": "formData",
             "name": "side",
             "required": true,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "The amount user want to sell/buy. An order could be partially executed, e.g. an order sell 5 btc can be matched with a buy 3 btc order, left 2 btc to be sold; in this case the order's volume would be '5.0', its remaining_volume would be '2.0', its executed volume is '3.0'.",
+            "in": "formData",
             "name": "volume",
             "required": true,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "Price for each unit. e.g. If you want to sell/buy 1 btc at 3000 CNY, the price is '3000.0'",
+            "in": "formData",
             "name": "price",
             "required": false,
             "type": "string"
@@ -391,76 +600,121 @@
             "type": "string"
           }
         ],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Create a Sell/Buy order."
       }
     },
-    "/v2/orders/multi.json": {
+    "/v2/orders/clear.json": {
       "post": {
-        "operationId": "POST--version-orders-multi---format-",
-        "summary": "Create multiple sell/buy orders.",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "POST--version-orders-clear---format-",
         "parameters": [
           {
-            "in": "formData",
             "description": "Access key.",
+            "in": "formData",
             "name": "access_key",
             "required": true,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
+            "in": "formData",
             "name": "tonce",
             "required": true,
             "type": "integer"
           },
           {
-            "in": "formData",
             "description": "The signature of your request payload, generated using your secret key.",
+            "in": "formData",
             "name": "signature",
             "required": true,
             "type": "string"
           },
           {
+            "description": "If present, only sell orders (asks) or buy orders (bids) will be canncelled.",
             "in": "formData",
+            "name": "side",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Cancel all my orders."
+      }
+    },
+    "/v2/orders/multi.json": {
+      "post": {
+        "description": "",
+        "operationId": "POST--version-orders-multi---format-",
+        "parameters": [
+          {
+            "description": "Access key.",
+            "in": "formData",
+            "name": "access_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
+            "in": "formData",
+            "name": "tonce",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The signature of your request payload, generated using your secret key.",
+            "in": "formData",
+            "name": "signature",
+            "required": true,
+            "type": "string"
+          },
+          {
             "description": "Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.",
+            "in": "formData",
             "name": "market",
             "required": true,
             "type": "string"
           },
           {
             "in": "formData",
-            "name": "orders",
-            "required": true,
-            "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "name": "orders",
+            "required": true,
+            "type": "array"
           },
           {
-            "in": "formData",
             "description": "Either 'sell' or 'buy'.",
+            "in": "formData",
             "name": "orders[side]",
             "required": true,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "The amount user want to sell/buy. An order could be partially executed, e.g. an order sell 5 btc can be matched with a buy 3 btc order, left 2 btc to be sold; in this case the order's volume would be '5.0', its remaining_volume would be '2.0', its executed volume is '3.0'.",
+            "in": "formData",
             "name": "orders[volume]",
             "required": true,
             "type": "string"
           },
           {
-            "in": "formData",
             "description": "Price for each unit. e.g. If you want to sell/buy 1 btc at 3000 CNY, the price is '3000.0'",
+            "in": "formData",
             "name": "orders[price]",
             "required": false,
             "type": "string"
@@ -472,361 +726,60 @@
             "type": "string"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/v2/orders/clear.json": {
-      "post": {
-        "operationId": "POST--version-orders-clear---format-",
-        "summary": "Cancel all my orders.",
-        "description": "",
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "Access key.",
-            "name": "access_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
-            "name": "tonce",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "in": "formData",
-            "description": "The signature of your request payload, generated using your secret key.",
-            "name": "signature",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "If present, only sell orders (asks) or buy orders (bids) will be canncelled.",
-            "name": "side",
-            "required": false,
-            "type": "string"
-          }
-        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Create multiple sell/buy orders."
       }
     },
-    "/v2/order.json": {
+    "/v2/tickers.json": {
       "get": {
-        "operationId": "GET--version-order---format-",
-        "summary": "Get information of specified order.",
         "description": "",
+        "operationId": "GET--version-tickers---format-",
         "produces": [
           "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "description": "Access key.",
-            "name": "access_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
-            "name": "tonce",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "description": "The signature of your request payload, generated using your secret key.",
-            "name": "signature",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Unique order id.",
-            "name": "id",
-            "required": true,
-            "type": "integer"
-          }
         ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Get ticker of all markets."
       }
     },
-    "/v2/order/delete.json": {
-      "post": {
-        "operationId": "POST--version-order-delete---format-",
-        "summary": "Cancel an order.",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "formData",
-            "description": "Access key.",
-            "name": "access_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
-            "name": "tonce",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "in": "formData",
-            "description": "The signature of your request payload, generated using your secret key.",
-            "name": "signature",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "description": "Unique order id.",
-            "name": "id",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/v2/order_book.json": {
+    "/v2/tickers/{market}.json": {
       "get": {
-        "operationId": "GET--version-order_book---format-",
-        "summary": "Get the order book of specified market.",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "GET--version-tickers--market---format-",
         "parameters": [
           {
-            "in": "query",
             "description": "Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.",
+            "in": "path",
             "name": "market",
             "required": true,
             "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Limit the number of returned sell orders. Default to 20.",
-            "name": "asks_limit",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "description": "Limit the number of returned buy orders. Default to 20.",
-            "name": "bids_limit",
-            "required": false,
-            "type": "integer"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/v2/depth.json": {
-      "get": {
-        "operationId": "GET--version-depth---format-",
-        "summary": "Get depth or specified market. Both asks and bids are sorted from highest price to lowest.",
-        "description": "",
         "produces": [
           "application/json"
         ],
-        "parameters": [
-          {
-            "in": "query",
-            "description": "Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.",
-            "name": "market",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Limit the number of returned price levels. Default to 300.",
-            "name": "limit",
-            "required": false,
-            "type": "integer"
-          }
-        ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
-      }
-    },
-    "/v2/trades.json": {
-      "get": {
-        "operationId": "GET--version-trades---format-",
-        "summary": "Get recent trades on market, each trade is included only once. Trades are sorted in reverse creation order.",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "description": "Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.",
-            "name": "market",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Limit the number of returned trades. Default to 50.",
-            "name": "limit",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "description": "An integer represents the seconds elapsed since Unix epoch. If set, only trades executed before the time will be returned.",
-            "name": "timestamp",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "description": "Trade id. If set, only trades created after the trade will be returned.",
-            "name": "from",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "description": "Trade id. If set, only trades created before the trade will be returned.",
-            "name": "to",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "description": "If set, returned trades will be sorted in specific order, default to 'desc'.",
-            "name": "order_by",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/v2/trades/my.json": {
-      "get": {
-        "operationId": "GET--version-trades-my---format-",
-        "summary": "Get your executed trades. Trades are sorted in reverse creation order.",
-        "description": "",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "description": "Access key.",
-            "name": "access_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
-            "name": "tonce",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "description": "The signature of your request payload, generated using your secret key.",
-            "name": "signature",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.",
-            "name": "market",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "description": "Limit the number of returned trades. Default to 50.",
-            "name": "limit",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "description": "An integer represents the seconds elapsed since Unix epoch. If set, only trades executed before the time will be returned.",
-            "name": "timestamp",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "description": "Trade id. If set, only trades created after the trade will be returned.",
-            "name": "from",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "description": "Trade id. If set, only trades created before the trade will be returned.",
-            "name": "to",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "description": "If set, returned trades will be sorted in specific order, default to 'desc'.",
-            "name": "order_by",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
+        },
+        "summary": "Get ticker of specific market."
       }
     },
     "/v2/timestamp.json": {
       "get": {
+        "description": "",
         "operationId": "GET--version-timestamp---format-",
-        "summary": "Get server current time, in seconds since Unix epoch.",
-        "description": "",
         "produces": [
           "application/json"
         ],
@@ -834,105 +787,152 @@
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Get server current time, in seconds since Unix epoch."
       }
     },
-    "/v2/k.json": {
+    "/v2/trades.json": {
       "get": {
-        "operationId": "GET--version-k---format-",
-        "summary": "Get OHLC(k line) of specific market.",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "GET--version-trades---format-",
         "parameters": [
           {
-            "in": "query",
             "description": "Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.",
+            "in": "query",
             "name": "market",
             "required": true,
             "type": "string"
           },
           {
+            "description": "Limit the number of returned trades. Default to 50.",
             "in": "query",
-            "description": "Limit the number of returned data points, default to 30.",
             "name": "limit",
             "required": false,
             "type": "integer"
           },
           {
+            "description": "An integer represents the seconds elapsed since Unix epoch. If set, only trades executed before the time will be returned.",
             "in": "query",
-            "description": "Time period of K line, default to 1. You can choose between 1, 5, 15, 30, 60, 120, 240, 360, 720, 1440, 4320, 10080",
-            "name": "period",
+            "name": "timestamp",
             "required": false,
             "type": "integer"
           },
           {
+            "description": "Trade id. If set, only trades created after the trade will be returned.",
             "in": "query",
-            "description": "An integer represents the seconds elapsed since Unix epoch. If set, only k-line data after that time will be returned.",
-            "name": "timestamp",
+            "name": "from",
             "required": false,
             "type": "integer"
+          },
+          {
+            "description": "Trade id. If set, only trades created before the trade will be returned.",
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "If set, returned trades will be sorted in specific order, default to 'desc'.",
+            "in": "query",
+            "name": "order_by",
+            "required": false,
+            "type": "string"
           }
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Get recent trades on market, each trade is included only once. Trades are sorted in reverse creation order."
       }
     },
-    "/v2/k_with_pending_trades.json": {
+    "/v2/trades/my.json": {
       "get": {
-        "operationId": "GET--version-k_with_pending_trades---format-",
-        "summary": "Get K data with pending trades, which are the trades not included in K data yet, because there's delay between trade generated and processed by K data generator.",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "GET--version-trades-my---format-",
         "parameters": [
           {
+            "description": "Access key.",
             "in": "query",
+            "name": "access_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
+            "in": "query",
+            "name": "tonce",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The signature of your request payload, generated using your secret key.",
+            "in": "query",
+            "name": "signature",
+            "required": true,
+            "type": "string"
+          },
+          {
             "description": "Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.",
+            "in": "query",
             "name": "market",
             "required": true,
             "type": "string"
           },
           {
+            "description": "Limit the number of returned trades. Default to 50.",
             "in": "query",
-            "description": "The trade id of the first trade you received.",
-            "name": "trade_id",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "description": "Limit the number of returned data points, default to 30.",
             "name": "limit",
             "required": false,
             "type": "integer"
           },
           {
+            "description": "An integer represents the seconds elapsed since Unix epoch. If set, only trades executed before the time will be returned.",
             "in": "query",
-            "description": "Time period of K line, default to 1. You can choose between 1, 5, 15, 30, 60, 120, 240, 360, 720, 1440, 4320, 10080",
-            "name": "period",
+            "name": "timestamp",
             "required": false,
             "type": "integer"
           },
           {
+            "description": "Trade id. If set, only trades created after the trade will be returned.",
             "in": "query",
-            "description": "An integer represents the seconds elapsed since Unix epoch. If set, only k-line data after that time will be returned.",
-            "name": "timestamp",
+            "name": "from",
             "required": false,
             "type": "integer"
+          },
+          {
+            "description": "Trade id. If set, only trades created before the trade will be returned.",
+            "in": "query",
+            "name": "to",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "If set, returned trades will be sorted in specific order, default to 'desc'.",
+            "in": "query",
+            "name": "order_by",
+            "required": false,
+            "type": "string"
           }
+        ],
+        "produces": [
+          "application/json"
         ],
         "responses": {
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "summary": "Get your executed trades. Trades are sorted in reverse creation order."
       }
     }
-  }
+  },
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0"
 }
