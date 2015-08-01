@@ -1646,7 +1646,7 @@
       "description": "The read search response.",
       "properties": {
         "alignments": {
-          "description": "The list of matching alignments sorted by mapped genomic coordinate, if any, ascending in position within the same reference. Unmapped reads, which have no position, are returned last and are further sorted in ascending lexicographic order by fragment name.",
+          "description": "The list of matching alignments sorted by mapped genomic coordinate, if any, ascending in position within the same reference. Unmapped reads, which have no position, are returned contiguously and are sorted in ascending lexicographic order by fragment name.",
           "items": {
             "$ref": "#/definitions/Read"
           },

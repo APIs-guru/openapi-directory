@@ -65,7 +65,8 @@
             "less",
             "lessOrEquals",
             "matchRegex",
-            "startsWith"
+            "startsWith",
+            "urlMatches"
           ],
           "type": "string"
         }
@@ -121,6 +122,7 @@
               "formText",
               "formUrl",
               "historySource",
+              "htmlId",
               "language",
               "newHistoryFragment",
               "newHistoryState",
@@ -229,6 +231,13 @@
         "fingerprint": {
           "description": "The fingerprint of the GTM Container Version as computed at storage time. This value is recomputed whenever the container version is modified.",
           "type": "string"
+        },
+        "folder": {
+          "description": "The folders in the container that this version was taken from.",
+          "items": {
+            "$ref": "#/definitions/Folder"
+          },
+          "type": "array"
         },
         "macro": {
           "description": "The macros in the container that this version was taken from.",
@@ -354,6 +363,59 @@
       },
       "type": "object"
     },
+    "Folder": {
+      "description": "Represents a Google Tag Manager Folder.",
+      "properties": {
+        "accountId": {
+          "description": "GTM Account ID.",
+          "type": "string"
+        },
+        "containerId": {
+          "description": "GTM Container ID.",
+          "type": "string"
+        },
+        "fingerprint": {
+          "description": "The fingerprint of the GTM Folder as computed at storage time. This value is recomputed whenever the folder is modified.",
+          "type": "string"
+        },
+        "folderId": {
+          "description": "The Folder ID uniquely identifies the GTM Folder.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Folder display name.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "FolderEntities": {
+      "description": "Represents a Google Tag Manager Folder's contents.",
+      "properties": {
+        "tag": {
+          "description": "The list of tags inside the folder.",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "type": "array"
+        },
+        "trigger": {
+          "description": "The list of triggers inside the folder.",
+          "items": {
+            "$ref": "#/definitions/Trigger"
+          },
+          "type": "array"
+        },
+        "variable": {
+          "description": "The list of variables inside the folder.",
+          "items": {
+            "$ref": "#/definitions/Variable"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "ListAccountUsersResponse": {
       "description": "List AccountUsers Response.",
       "properties": {
@@ -407,6 +469,19 @@
           "description": "All Containers of a GTM Account.",
           "items": {
             "$ref": "#/definitions/Container"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ListFoldersResponse": {
+      "description": "List Folders Response.",
+      "properties": {
+        "folders": {
+          "description": "All GTM Folders of a GTM Container.",
+          "items": {
+            "$ref": "#/definitions/Folder"
           },
           "type": "array"
         }
@@ -526,6 +601,10 @@
           },
           "type": "array"
         },
+        "parentFolderId": {
+          "description": "Parent folder id.",
+          "type": "string"
+        },
         "scheduleEndMs": {
           "description": "The end timestamp in milliseconds to schedule a macro.",
           "format": "int64",
@@ -633,6 +712,19 @@
       },
       "type": "object"
     },
+    "SetupTag": {
+      "properties": {
+        "stopOnSetupFailure": {
+          "description": "If true, fire the main tag if and only if the setup tag fires successfully. If false, fire the main tag regardless of setup tag firing status.",
+          "type": "boolean"
+        },
+        "tagName": {
+          "description": "The name of the setup tag.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Tag": {
       "description": "Represents a Google Tag Manager Tag.",
       "properties": {
@@ -695,6 +787,10 @@
           },
           "type": "array"
         },
+        "parentFolderId": {
+          "description": "Parent folder id.",
+          "type": "string"
+        },
         "priority": {
           "$ref": "#/definitions/Parameter",
           "description": "User defined numeric priority of the tag. Tags are fired asynchronously in order of priority. Tags with higher numeric value fire first. A tag's priority can be a positive or negative value. The default value is 0."
@@ -709,12 +805,39 @@
           "format": "int64",
           "type": "string"
         },
+        "setupTag": {
+          "description": "The list of setup tags. Currently we only allow one.",
+          "items": {
+            "$ref": "#/definitions/SetupTag"
+          },
+          "type": "array"
+        },
         "tagId": {
           "description": "The Tag ID uniquely identifies the GTM Tag.",
           "type": "string"
         },
+        "teardownTag": {
+          "description": "The list of teardown tags. Currently we only allow one.",
+          "items": {
+            "$ref": "#/definitions/TeardownTag"
+          },
+          "type": "array"
+        },
         "type": {
           "description": "GTM Tag Type.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TeardownTag": {
+      "properties": {
+        "stopTeardownOnFailure": {
+          "description": "If true, fire the teardown tag if and only if the main tag fires successfully. If false, fire the teardown tag regardless of main tag firing status.",
+          "type": "boolean"
+        },
+        "tagName": {
+          "description": "The name of the teardown tag.",
           "type": "string"
         }
       },
@@ -778,6 +901,10 @@
         },
         "name": {
           "description": "Trigger display name.",
+          "type": "string"
+        },
+        "parentFolderId": {
+          "description": "Parent folder id.",
           "type": "string"
         },
         "triggerId": {
@@ -894,6 +1021,10 @@
             "$ref": "#/definitions/Parameter"
           },
           "type": "array"
+        },
+        "parentFolderId": {
+          "description": "Parent folder id.",
+          "type": "string"
         },
         "scheduleEndMs": {
           "description": "The end timestamp in milliseconds to schedule a variable.",
@@ -1384,6 +1515,357 @@
         ]
       }
     },
+    "/accounts/{accountId}/containers/{containerId}/folders": {
+      "get": {
+        "description": "Lists all GTM Folders of a Container.",
+        "operationId": "tagmanager.accounts.containers.folders.list",
+        "parameters": [
+          {
+            "description": "The GTM Account ID.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The GTM Container ID.",
+            "in": "path",
+            "name": "containerId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ListFoldersResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tagmanager.edit.containers",
+              "https://www.googleapis.com/auth/tagmanager.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates a GTM Folder.",
+        "operationId": "tagmanager.accounts.containers.folders.create",
+        "parameters": [
+          {
+            "description": "The GTM Account ID.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The GTM Container ID.",
+            "in": "path",
+            "name": "containerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Folder"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Folder"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tagmanager.edit.containers"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      }
+    },
+    "/accounts/{accountId}/containers/{containerId}/folders/{folderId}": {
+      "delete": {
+        "description": "Deletes a GTM Folder.",
+        "operationId": "tagmanager.accounts.containers.folders.delete",
+        "parameters": [
+          {
+            "description": "The GTM Account ID.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The GTM Container ID.",
+            "in": "path",
+            "name": "containerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The GTM Folder ID.",
+            "in": "path",
+            "name": "folderId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tagmanager.edit.containers"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      },
+      "get": {
+        "description": "Gets a GTM Folder.",
+        "operationId": "tagmanager.accounts.containers.folders.get",
+        "parameters": [
+          {
+            "description": "The GTM Account ID.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The GTM Container ID.",
+            "in": "path",
+            "name": "containerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The GTM Folder ID.",
+            "in": "path",
+            "name": "folderId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Folder"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tagmanager.edit.containers",
+              "https://www.googleapis.com/auth/tagmanager.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "put": {
+        "description": "Updates a GTM Folder.",
+        "operationId": "tagmanager.accounts.containers.folders.update",
+        "parameters": [
+          {
+            "description": "The GTM Account ID.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The GTM Container ID.",
+            "in": "path",
+            "name": "containerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The GTM Folder ID.",
+            "in": "path",
+            "name": "folderId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "When provided, this fingerprint must match the fingerprint of the folder in storage.",
+            "in": "query",
+            "name": "fingerprint",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Folder"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Folder"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tagmanager.edit.containers"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      }
+    },
+    "/accounts/{accountId}/containers/{containerId}/folders/{folderId}/entities": {
+      "get": {
+        "description": "List all entities in a GTM Folder.",
+        "operationId": "tagmanager.accounts.containers.folders.entities.list",
+        "parameters": [
+          {
+            "description": "The GTM Account ID.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The GTM Container ID.",
+            "in": "path",
+            "name": "containerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The GTM Folder ID.",
+            "in": "path",
+            "name": "folderId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/FolderEntities"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/tagmanager.edit.containers",
+              "https://www.googleapis.com/auth/tagmanager.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/accounts/{accountId}/containers/{containerId}/macros": {
       "get": {
         "description": "Lists all GTM Macros of a Container.",
@@ -1659,6 +2141,96 @@
             ]
           }
         ],
+        "tags": [
+          "accounts"
+        ]
+      }
+    },
+    "/accounts/{accountId}/containers/{containerId}/move_folders/{folderId}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "put": {
+        "description": "Moves entities to a GTM Folder.",
+        "operationId": "tagmanager.accounts.containers.move_folders.update",
+        "parameters": [
+          {
+            "description": "The GTM Account ID.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The GTM Container ID.",
+            "in": "path",
+            "name": "containerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The GTM Folder ID.",
+            "in": "path",
+            "name": "folderId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "The tags to be moved to the folder.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "tagId",
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "The triggers to be moved to the folder.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "triggerId",
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "The variables to be moved to the folder.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "variableId",
+            "type": "array"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
         "tags": [
           "accounts"
         ]
