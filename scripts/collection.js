@@ -6,6 +6,7 @@ var _ = require('lodash');
 var fs = require('fs');
 var glob = require('glob')
 var async = require('async')
+var sortobject = require('deep-sort-object');
 var converter = require('api-spec-converter');
 var parseDomain = require('parse-domain');
 var mkdirp = require('mkdirp').sync;
@@ -177,7 +178,8 @@ function logSpec(error, spec, swagger) {
 }
 
 function Json2String(json) {
-  return JSON.stringify(json, null, 2);
+  json = sortobject(json);
+  return JSON.stringify(json, null, 2) + '\n';
 }
 
 function logJson(json) {
