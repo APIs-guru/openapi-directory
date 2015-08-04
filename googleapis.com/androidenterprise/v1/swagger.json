@@ -4,6 +4,11 @@
     "AppRestrictionsSchema": {
       "description": "Represents the list of app restrictions available to be pre-configured for the product.",
       "properties": {
+        "kind": {
+          "default": "androidenterprise#appRestrictionsSchema",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"androidenterprise#appRestrictionsSchema\".",
+          "type": "string"
+        },
         "restrictions": {
           "description": "The set of restrictions that make up this schema.",
           "items": {
@@ -138,7 +143,7 @@
           "type": "array"
         },
         "visibility": {
-          "description": "Whether this collection is visible to all users, or only to the users that have been granted access through the collection_viewers api. Even if a collection is visible to allUsers, it is possible to add and remove viewers, but this will have no effect until the collection's visibility changes to viewersOnly.",
+          "description": "Whether this collection is visible to all users, or only to the users that have been granted access through the \"Collectionviewers\" API. With the launch of the \"setAvailableProductSet\" API, this property should always be set to \"viewersOnly\", as the \"allUsers\" option will bypass the \"availableProductSet\" for all users within a domain.\n\nThe \"allUsers\" setting is deprecated, and will be removed.",
           "type": "string"
         }
       },
@@ -491,7 +496,7 @@
           "type": "string"
         },
         "productId": {
-          "description": "A string of the form app:\n. For example, app:com.google.android.gm represents the Gmail app.",
+          "description": "A string of the form app:<package name>. For example, app:com.google.android.gm represents the Gmail app.",
           "type": "string"
         },
         "requiresContainerApp": {
@@ -541,6 +546,24 @@
         "productId": {
           "description": "The ID of the app that the permissions relate to, e.g. \"app:com.google.android.gm\".",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ProductSet": {
+      "description": "A set of products.",
+      "properties": {
+        "kind": {
+          "default": "androidenterprise#productSet",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"androidenterprise#productSet\".",
+          "type": "string"
+        },
+        "productId": {
+          "description": "The list of product IDs making up the set of products.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -2298,6 +2321,114 @@
           "$ref": "#/parameters/userIp"
         }
       ]
+    },
+    "/enterprises/{enterpriseId}/users/{userId}/availableProductSet": {
+      "get": {
+        "description": "Retrieves the set of products a user is entitled to access.",
+        "operationId": "androidenterprise.users.getAvailableProductSet",
+        "parameters": [
+          {
+            "description": "The ID of the enterprise.",
+            "in": "path",
+            "name": "enterpriseId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the user.",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ProductSet"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidenterprise"
+            ]
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "put": {
+        "description": "Modifies the set of products a user is entitled to access.",
+        "operationId": "androidenterprise.users.setAvailableProductSet",
+        "parameters": [
+          {
+            "description": "The ID of the enterprise.",
+            "in": "path",
+            "name": "enterpriseId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the user.",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ProductSet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ProductSet"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidenterprise"
+            ]
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      }
     },
     "/enterprises/{enterpriseId}/users/{userId}/devices": {
       "get": {
