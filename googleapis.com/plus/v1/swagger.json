@@ -1748,59 +1748,6 @@
         }
       ]
     },
-    "/moments/{id}": {
-      "delete": {
-        "description": "Delete a moment.",
-        "operationId": "plus.moments.remove",
-        "parameters": [
-          {
-            "description": "The ID of the moment to delete.",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/plus.login"
-            ]
-          }
-        ],
-        "tags": [
-          "moments"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
     "/people": {
       "get": {
         "description": "Search all public profiles.",

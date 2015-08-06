@@ -4841,7 +4841,7 @@
         }
       ],
       "post": {
-        "description": "Creates a new variant set (only necessary in v1).",
+        "description": "Creates a new variant set (only necessary in v1).\n\nThe provided variant set must have a valid datasetId set - all other fields are optional. Note that the id field will be ignored, as this is assigned by the server.",
         "operationId": "genomics.variantsets.create",
         "parameters": [
           {

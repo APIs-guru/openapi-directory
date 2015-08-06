@@ -11,6 +11,16 @@
         }
       }
     },
+    "PremiumAccessDownloadData": {
+      "properties": {
+        "download_notes": {
+          "type": "string"
+        },
+        "project_code": {
+          "type": "string"
+        }
+      }
+    },
     "PreviousPurchase": {
       "properties": {
         "date_purchased": {
@@ -1014,6 +1024,22 @@
         }
       }
     },
+    "premium_access_download_requirements": {
+      "properties": {
+        "is_note_required": {
+          "type": "boolean"
+        },
+        "is_project_code_required": {
+          "type": "boolean"
+        },
+        "project_codes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    },
     "product": {
       "properties": {
         "application_website": {
@@ -1044,6 +1070,9 @@
         },
         "name": {
           "type": "string"
+        },
+        "premium_access_download_requirements": {
+          "$ref": "#/definitions/premium_access_download_requirements"
         },
         "status": {
           "enum": [
@@ -1717,7 +1746,10 @@
     },
     "/v3/downloads/images/{id}": {
       "post": {
-        "consumes": [],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
         "description": "The single step download call returns either a redirect or a response message with the URI to download the largest\r\n                image available.\r\n                Returns HTTP status code 303 Redirect to download URI or HTTP status code 200.",
         "operationId": "Downloads_PostDownloads",
         "parameters": [
@@ -1805,7 +1837,7 @@
             "description": "AuthorizationTokenRequired"
           },
           "404": {
-            "description": "ImageNotFound"
+            "description": "FileDownloadSizeNotFound"
           }
         },
         "summary": "Download an image",
@@ -1868,7 +1900,7 @@
             }
           },
           "401": {
-            "description": "NoDownloadAuthorization"
+            "description": "NoAgreement"
           },
           "404": {
             "description": "VideoNotFound"
@@ -1882,7 +1914,10 @@
     },
     "/v3/downloads/{id}": {
       "post": {
-        "consumes": [],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
         "description": "The single step download call returns either a redirect or a response message with the URI to download the largest\r\n                image available.\r\n                Returns HTTP status code 303 Redirect to download URI or HTTP status code 200.",
         "operationId": "Downloads_PostDownloads",
         "parameters": [
@@ -1970,7 +2005,7 @@
             "description": "AuthorizationTokenRequired"
           },
           "404": {
-            "description": "ImageNotFound"
+            "description": "FileDownloadSizeNotFound"
           }
         },
         "summary": "Download an image",
@@ -2062,7 +2097,7 @@
             }
           },
           "400": {
-            "description": "MalformedRequest"
+            "description": "InvalidParameterValue"
           },
           "404": {
             "description": "EventNotFound"
@@ -2154,7 +2189,7 @@
             }
           },
           "400": {
-            "description": "MalformedRequest"
+            "description": "InvalidParameterValue"
           },
           "404": {
             "description": "EventNotFound"
@@ -2715,7 +2750,7 @@
             "description": "InvalidParameterValue"
           },
           "401": {
-            "description": "NoAgreement"
+            "description": "AuthorizationTokenRequired"
           }
         },
         "summary": "Get Products",
@@ -5996,6 +6031,9 @@
     },
     {
       "name": "Downloads"
+    },
+    {
+      "name": "Boards"
     },
     {
       "name": "Collections"

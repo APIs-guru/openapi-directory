@@ -2320,11 +2320,6 @@
             "RUNNING"
           ],
           "type": "string"
-        },
-        "portName": {
-          "description": "A filter for the named ports that are associated with instances in the instance group. If you specify this parameter, the generated list includes only instances that are associated with the specified named ports. If you do not specify this parameter, the generated list includes all instances regardless of their named ports.",
-          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
-          "type": "string"
         }
       },
       "type": "object"
@@ -3471,6 +3466,13 @@
         "description": {
           "description": "An optional textual description of the resource.",
           "type": "string"
+        },
+        "enabledFeatures": {
+          "description": "Restricted features enabled for use on this project.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "id": {
           "description": "[Output Only] Unique identifier for the resource; defined by the server.",
