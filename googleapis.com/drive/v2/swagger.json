@@ -38,7 +38,7 @@
           "type": "array"
         },
         "domainSharingPolicy": {
-          "description": "The domain sharing policy for the current user. Possible values are:  \n- ALLOWED \n- ALLOWED_WITH_WARNING \n- INCOMING_ONLY \n- DISALLOWED",
+          "description": "The domain sharing policy for the current user. Possible values are:  \n- allowed \n- allowedWithWarning \n- incomingOnly \n- disallowed",
           "type": "string"
         },
         "etag": {
@@ -1217,6 +1217,28 @@
       },
       "type": "object"
     },
+    "GeneratedIds": {
+      "description": "A list of generated IDs which can be provided in insert requests",
+      "properties": {
+        "ids": {
+          "description": "The IDs generated for the requesting user in the specified space.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "drive#generatedIds",
+          "description": "This is always drive#generatedIds",
+          "type": "string"
+        },
+        "space": {
+          "description": "The type of file that can be created with these IDs.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "ParentList": {
       "description": "A list of a file's parents.",
       "properties": {
@@ -2377,6 +2399,73 @@
           "files"
         ]
       }
+    },
+    "/files/generateIds": {
+      "get": {
+        "description": "Generates a set of file IDs which can be provided in insert requests.",
+        "operationId": "drive.files.generateIds",
+        "parameters": [
+          {
+            "default": 10,
+            "description": "Maximum number of IDs to return.",
+            "in": "query",
+            "maximum": 1000,
+            "minimum": 1,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "default": "drive",
+            "description": "The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'.",
+            "in": "query",
+            "name": "space",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/GeneratedIds"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
+        ],
+        "tags": [
+          "files"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     },
     "/files/trash": {
       "delete": {

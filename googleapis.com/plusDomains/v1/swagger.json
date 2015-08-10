@@ -70,6 +70,16 @@
             "url": {
               "description": "The link to the actor's Google profile.",
               "type": "string"
+            },
+            "verification": {
+              "description": "Verification status of actor.",
+              "properties": {
+                "adHocVerified": {
+                  "description": "Verification for one-time or manual processes.",
+                  "type": "string"
+                }
+              },
+              "type": "object"
             }
           },
           "type": "object"
@@ -134,6 +144,16 @@
                 "url": {
                   "description": "A link to the original actor's Google profile.",
                   "type": "string"
+                },
+                "verification": {
+                  "description": "Verification status of actor.",
+                  "properties": {
+                    "adHocVerified": {
+                      "description": "Verification for one-time or manual processes.",
+                      "type": "string"
+                    }
+                  },
+                  "type": "object"
                 }
               },
               "type": "object"
@@ -636,6 +656,16 @@
             "url": {
               "description": "A link to the Person resource for this actor.",
               "type": "string"
+            },
+            "verification": {
+              "description": "Verification status of actor.",
+              "properties": {
+                "adHocVerified": {
+                  "description": "Verification for one-time or manual processes.",
+                  "type": "string"
+                }
+              },
+              "type": "object"
             }
           },
           "type": "object"

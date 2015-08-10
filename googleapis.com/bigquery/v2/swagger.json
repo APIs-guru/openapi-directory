@@ -240,6 +240,13 @@
           "description": "Whether the query result was fetched from the query cache.",
           "type": "boolean"
         },
+        "errors": {
+          "description": "[Output-only] All errors and warnings encountered during the running of the job. Errors here do not necessarily mean that the job has completed or was unsuccessful.",
+          "items": {
+            "$ref": "#/definitions/ErrorProto"
+          },
+          "type": "array"
+        },
         "etag": {
           "description": "A hash of this response.",
           "type": "string"
@@ -906,6 +913,13 @@
         "cacheHit": {
           "description": "Whether the query result was fetched from the query cache.",
           "type": "boolean"
+        },
+        "errors": {
+          "description": "[Output-only] All errors and warnings encountered during the running of the job. Errors here do not necessarily mean that the job has completed or was unsuccessful.",
+          "items": {
+            "$ref": "#/definitions/ErrorProto"
+          },
+          "type": "array"
         },
         "jobComplete": {
           "description": "Whether the query has completed or not. If rows or totalRows are present, this will always be true. If this is false, totalRows will not be available.",

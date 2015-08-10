@@ -998,6 +998,16 @@
       },
       "type": "object"
     },
+    "SslCertsSignRequest": {
+      "description": "SslCerts sign request.",
+      "properties": {
+        "public_key": {
+          "description": "PEM encoded public key to include in the signed certificate.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Tier": {
       "description": "A Google Cloud SQL service tier resource.",
       "properties": {
@@ -1674,6 +1684,77 @@
           "$ref": "#/parameters/userIp"
         }
       ]
+    },
+    "/projects/{project}/instances/{instance}/certSign": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Generates a short-lived X509 certificate containing the provided public key and signed by a private key specific to the target instance. Users may use the certificate to authenticate as themselves when connecting to the database.",
+        "operationId": "sql.sslCerts.sign",
+        "parameters": [
+          {
+            "description": "Project ID of the Cloud SQL project.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "in": "path",
+            "name": "instance",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SslCertsSignRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SslCert"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
+        ],
+        "tags": [
+          "sslCerts"
+        ]
+      }
     },
     "/projects/{project}/instances/{instance}/clone": {
       "parameters": [
