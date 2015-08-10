@@ -75,7 +75,6 @@
         "externalDocs": {
           "url": "http://instagr.am/developer/endpoints/locations/#get_locations"
         },
-        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful Response"
@@ -154,7 +153,6 @@
         "externalDocs": {
           "url": "http://instagr.am/developer/endpoints/media/#get_media_popular"
         },
-        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful Response"
@@ -226,7 +224,6 @@
         "externalDocs": {
           "url": "http://instagr.am/developer/endpoints/media/#get_media"
         },
-        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful Response"
@@ -249,7 +246,6 @@
         "externalDocs": {
           "url": "http://instagr.am/developer/endpoints/comments/#get_media_comments"
         },
-        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful Response"
@@ -284,7 +280,6 @@
         "externalDocs": {
           "url": "http://instagr.am/developer/endpoints/comments/#delete_media_comments"
         },
-        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful Response"
@@ -314,7 +309,6 @@
         "externalDocs": {
           "url": "http://instagr.am/developer/endpoints/likes/#delete_media_likes"
         },
-        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful Response"
@@ -326,7 +320,6 @@
         "externalDocs": {
           "url": "http://instagr.am/developer/endpoints/likes/#get_media_likes"
         },
-        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful Response"
@@ -347,7 +340,6 @@
         "externalDocs": {
           "url": "http://instagr.am/developer/endpoints/likes/#post_media_likes"
         },
-        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful Response"
@@ -495,7 +487,6 @@
         "externalDocs": {
           "url": "http://instagr.am/developer/endpoints/tags/#get_tags"
         },
-        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful Response"
@@ -656,7 +647,6 @@
         "externalDocs": {
           "url": "http://instagr.am/developer/endpoints/relationships/#get_incoming_requests"
         },
-        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful Response"
@@ -671,7 +661,6 @@
         "externalDocs": {
           "url": "http://instagr.am/developer/endpoints/users/#get_users"
         },
-        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful Response"
@@ -694,7 +683,6 @@
         "externalDocs": {
           "url": "http://instagr.am/developer/endpoints/relationships/#get_users_followed_by"
         },
-        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful Response"
@@ -717,7 +705,6 @@
         "externalDocs": {
           "url": "http://instagr.am/developer/endpoints/relationships/#get_users_follows"
         },
-        "parameters": [],
         "responses": {
           "200": {
             "description": "Successful Response"
@@ -799,6 +786,17 @@
       ]
     },
     "/users/{user-id}/relationship": {
+      "get": {
+        "description": "Get information about the current user's relationship (follow/following/etc) to another user. Required scope: relationships",
+        "externalDocs": {
+          "url": "http://instagr.am/developer/endpoints/relationships/#get_relationship"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          }
+        }
+      },
       "parameters": [
         {
           "description": "The ID of the user to reference.",
