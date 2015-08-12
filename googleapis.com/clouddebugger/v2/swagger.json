@@ -239,6 +239,20 @@
       },
       "type": "object"
     },
+    "GitSourceContext": {
+      "description": "A GitSourceContext denotes a particular revision in a third party Git repository (e.g. GitHub).",
+      "properties": {
+        "revisionId": {
+          "description": "Git commit hash. required.",
+          "type": "string"
+        },
+        "url": {
+          "description": "Git repository URL.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "ListActiveBreakpointsResponse": {
       "description": "The response of listing active breakpoints.",
       "properties": {
@@ -358,6 +372,10 @@
         "gerrit": {
           "$ref": "#/definitions/GerritSourceContext",
           "description": "A SourceContext referring to a Gerrit project."
+        },
+        "git": {
+          "$ref": "#/definitions/GitSourceContext",
+          "description": "A SourceContext referring to any third party Git repo (e.g. GitHub)."
         }
       },
       "type": "object"
@@ -485,7 +503,7 @@
       "name": "Google",
       "url": "https://google.com"
     },
-    "description": "",
+    "description": "Lets you examine the stack and variables of your running application without stopping or slowing it down.",
     "title": "Google Cloud Debugger API",
     "version": "v2",
     "x-logo": "https://www.google.com/images/srpr/logo11w.png",

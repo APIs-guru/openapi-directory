@@ -63,7 +63,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for the resource.",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         },
         "status": {
@@ -108,7 +108,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource.",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -138,7 +138,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for the resource.",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         }
       },
@@ -215,7 +215,7 @@
           "type": "boolean"
         },
         "deviceName": {
-          "description": "Specifies a unique device name of your choice that is reflected into the /dev/ tree of a Linux operating system running within the instance. This name can be used to reference the device for mounting, resizing, and so on, from within the instance.\n\nIf not specified, the server chooses a default device name to apply to this disk, in the form persistent-disks-x, where x is a number assigned by Google Compute Engine. This field is only applicable for persistent disks.",
+          "description": "Specifies a unique device name of your choice that is reflected into the /dev/disk/by-id/google-* tree of a Linux operating system running within the instance. This name can be used to reference the device for mounting, resizing, and so on, from within the instance.\n\nIf not specified, the server chooses a default device name to apply to this disk, in the form persistent-disks-x, where x is a number assigned by Google Compute Engine. This field is only applicable for persistent disks.",
           "type": "string"
         },
         "index": {
@@ -299,7 +299,7 @@
           "description": "Autoscaling configuration."
         },
         "creationTimestamp": {
-          "description": "Creation timestamp in RFC3339 text format (output only).",
+          "description": "[Output Only] Creation timestamp in RFC3339 text format.",
           "type": "string"
         },
         "description": {
@@ -307,7 +307,7 @@
           "type": "string"
         },
         "id": {
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
           "format": "uint64",
           "type": "string"
         },
@@ -317,12 +317,12 @@
           "type": "string"
         },
         "name": {
-          "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035.",
+          "description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
           "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
           "type": "string"
         },
         "selfLink": {
-          "description": "Server defined URL for the resource (output only).",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         },
         "target": {
@@ -330,7 +330,7 @@
           "type": "string"
         },
         "zone": {
-          "description": "URL of the zone where the instance group resides (output only).",
+          "description": "[Output Only] URL of the zone where the instance group resides.",
           "type": "string"
         }
       },
@@ -339,7 +339,7 @@
     "AutoscalerAggregatedList": {
       "properties": {
         "id": {
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
           "type": "string"
         },
         "items": {
@@ -356,11 +356,11 @@
           "type": "string"
         },
         "nextPageToken": {
-          "description": "A token used to continue a truncated list request (output only).",
+          "description": "[Output Only] A token used to continue a truncated list request.",
           "type": "string"
         },
         "selfLink": {
-          "description": "Server defined URL for this resource (output only).",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -370,7 +370,7 @@
       "description": "Contains a list of persistent autoscaler resources.",
       "properties": {
         "id": {
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
           "type": "string"
         },
         "items": {
@@ -386,11 +386,11 @@
           "type": "string"
         },
         "nextPageToken": {
-          "description": "A token used to continue a truncated list request (output only).",
+          "description": "[Output Only] A token used to continue a truncated list request.",
           "type": "string"
         },
         "selfLink": {
-          "description": "Server defined URL for this resource (output only).",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -580,7 +580,7 @@
       "type": "object"
     },
     "BackendService": {
-      "description": "A BackendService resource. This resource defines a group of backend VMs together with their serving capacity.",
+      "description": "A BackendService resource. This resource defines a group of backend virtual machines together with their serving capacity.",
       "properties": {
         "backends": {
           "description": "The list of backends that serve this BackendService.",
@@ -640,7 +640,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for the resource.",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         },
         "timeoutSec": {
@@ -850,7 +850,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource.",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -880,7 +880,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource.",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -907,7 +907,7 @@
           "type": "string"
         },
         "defaultDiskSizeGb": {
-          "description": "[Output Only] Server defined default disk size in GB.",
+          "description": "[Output Only] Server-defined default disk size in GB.",
           "format": "int64",
           "type": "string"
         },
@@ -935,7 +935,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for the resource.",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         },
         "validDiskSize": {
@@ -973,7 +973,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource.",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -1003,7 +1003,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource.",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -1178,7 +1178,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for the resource.",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         },
         "sourceRanges": {
@@ -1229,21 +1229,21 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource.",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
       "type": "object"
     },
     "ForwardingRule": {
-      "description": "A ForwardingRule resource. A ForwardingRule resource specifies which pool of target VMs to forward a packet to if it matches the given [IPAddress, IPProtocol, portRange] tuple.",
+      "description": "A ForwardingRule resource. A ForwardingRule resource specifies which pool of target virtual machines to forward a packet to if it matches the given [IPAddress, IPProtocol, portRange] tuple.",
       "properties": {
         "IPAddress": {
           "description": "Value of the reserved IP address that this forwarding rule is serving on behalf of. For global forwarding rules, the address must be a global IP; for regional forwarding rules, the address must live in the same region as the forwarding rule. If left empty (default value), an ephemeral IP from the same scope (global or regional) will be assigned.",
           "type": "string"
         },
         "IPProtocol": {
-          "description": "The IP protocol to which this rule applies, valid options are TCP, UDP, ESP, AH or SCTP.",
+          "description": "The IP protocol to which this rule applies. Valid options are TCP, UDP, ESP, AH or SCTP.",
           "enum": [
             "AH",
             "ESP",
@@ -1319,7 +1319,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource.",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -1349,7 +1349,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource.",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -1470,7 +1470,7 @@
       "type": "object"
     },
     "HttpHealthCheck": {
-      "description": "An HttpHealthCheck resource. This resource defines a template for how individual VMs should be checked for health, via HTTP.",
+      "description": "An HttpHealthCheck resource. This resource defines a template for how individual instances should be checked for health, via HTTP.",
       "properties": {
         "checkIntervalSec": {
           "description": "How often (in seconds) to send a health check. The default value is 5 seconds.",
@@ -1478,7 +1478,7 @@
           "type": "integer"
         },
         "creationTimestamp": {
-          "description": "Creation timestamp in RFC3339 text format (output only).",
+          "description": "[Output Only] Creation timestamp in RFC3339 text format.",
           "type": "string"
         },
         "description": {
@@ -1486,7 +1486,7 @@
           "type": "string"
         },
         "healthyThreshold": {
-          "description": "A so-far unhealthy VM will be marked healthy after this many consecutive successes. The default value is 2.",
+          "description": "A so-far unhealthy instance will be marked healthy after this many consecutive successes. The default value is 2.",
           "format": "int32",
           "type": "integer"
         },
@@ -1495,7 +1495,7 @@
           "type": "string"
         },
         "id": {
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] Unique identifier for the resource. Defined by the server.",
           "format": "uint64",
           "type": "string"
         },
@@ -1505,7 +1505,7 @@
           "type": "string"
         },
         "name": {
-          "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035.",
+          "description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
           "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
           "type": "string"
         },
@@ -1519,7 +1519,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "Server defined URL for the resource (output only).",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         },
         "timeoutSec": {
@@ -1528,7 +1528,7 @@
           "type": "integer"
         },
         "unhealthyThreshold": {
-          "description": "A so-far healthy VM will be marked unhealthy after this many consecutive failures. The default value is 2.",
+          "description": "A so-far healthy instance will be marked unhealthy after this many consecutive failures. The default value is 2.",
           "format": "int32",
           "type": "integer"
         }
@@ -1539,7 +1539,7 @@
       "description": "Contains a list of HttpHealthCheck resources.",
       "properties": {
         "id": {
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] Unique identifier for the resource. Defined by the server.",
           "type": "string"
         },
         "items": {
@@ -1555,11 +1555,11 @@
           "type": "string"
         },
         "nextPageToken": {
-          "description": "A token used to continue a truncated list request (output only).",
+          "description": "[Output Only] A token used to continue a truncated list request.",
           "type": "string"
         },
         "selfLink": {
-          "description": "Server defined URL for this resource (output only).",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -1635,7 +1635,7 @@
           "type": "object"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for the resource.",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         },
         "sourceDisk": {
@@ -1670,7 +1670,7 @@
       "description": "Contains a list of Image resources.",
       "properties": {
         "id": {
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
           "type": "string"
         },
         "items": {
@@ -1686,11 +1686,11 @@
           "type": "string"
         },
         "nextPageToken": {
-          "description": "A token used to continue a truncated list request (output only).",
+          "description": "[Output Only] A token used to continue a truncated list request.",
           "type": "string"
         },
         "selfLink": {
-          "description": "Server defined URL for this resource (output only).",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -1756,7 +1756,7 @@
           "description": "Scheduling options for this instance."
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource.",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         },
         "serviceAccounts": {
@@ -1819,7 +1819,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource.",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -1998,7 +1998,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this managed instance group.",
+          "description": "[Output Only] Server-defined URL for this managed instance group.",
           "type": "string"
         },
         "targetPools": {
@@ -2436,7 +2436,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource.",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -2683,12 +2683,12 @@
           "type": "string"
         },
         "name": {
-          "description": "Name of the resource. The name must be 1-63 characters long, and comply with RCF1035.",
+          "description": "Name of the resource. The name must be 1-63 characters long, and comply with RFC1035.",
           "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for the resource.",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         }
       },
@@ -2764,7 +2764,7 @@
           "type": "array"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for the resource.",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         },
         "zone": {
@@ -2798,7 +2798,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource.",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -2828,7 +2828,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource.",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -3057,7 +3057,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for the resource.",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         }
       },
@@ -3112,7 +3112,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource .",
+          "description": "[Output Only] Server-defined URL for this resource .",
           "type": "string"
         }
       },
@@ -3201,7 +3201,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for the resource.",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         },
         "startTime": {
@@ -3315,7 +3315,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource.",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -3345,7 +3345,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource.",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -3496,7 +3496,7 @@
           "type": "array"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for the resource.",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         },
         "usageExportLocation": {
@@ -3589,7 +3589,7 @@
           "type": "array"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for the resource.",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         },
         "status": {
@@ -3634,7 +3634,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource.",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -3650,7 +3650,7 @@
       "type": "object"
     },
     "Route": {
-      "description": "The route resource. A Route is a rule that specifies how certain packets should be handled by the virtual network. Routes are associated with VMs by tag and the set of Routes for a particular VM is called its routing table. For each packet leaving a VM, the system searches that VM's routing table for a single best matching Route. Routes match packets by destination IP address, preferring smaller or more specific ranges over larger ones. If there is a tie, the system selects the Route with the smallest priority value. If there is still a tie, it uses the layer three and four packet headers to select just one of the remaining matching Routes. The packet is then forwarded as specified by the nextHop field of the winning Route -- either to another VM destination, a VM gateway or a GCE operated gateway. Packets that do not match any Route in the sending VM's routing table are dropped.",
+      "description": "The route resource. A Route is a rule that specifies how certain packets should be handled by the virtual network. Routes are associated with instances by tag and the set of Routes for a particular instance is called its routing table. For each packet leaving a instance, the system searches that instance's routing table for a single best matching Route. Routes match packets by destination IP address, preferring smaller or more specific ranges over larger ones. If there is a tie, the system selects the Route with the smallest priority value. If there is still a tie, it uses the layer three and four packet headers to select just one of the remaining matching Routes. The packet is then forwarded as specified by the nextHop field of the winning Route -- either to another instance destination, a instance gateway or a Google Compute Engien-operated gateway. Packets that do not match any Route in the sending instance's routing table are dropped.",
       "properties": {
         "creationTimestamp": {
           "description": "[Output Only] Creation timestamp in RFC3339 text format.",
@@ -3796,7 +3796,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource.",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -3837,7 +3837,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for the resource.",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         }
       },
@@ -3941,7 +3941,7 @@
       "description": "Contains a list of Snapshot resources.",
       "properties": {
         "id": {
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] Unique identifier for the resource. Defined by the server.",
           "type": "string"
         },
         "items": {
@@ -3957,11 +3957,11 @@
           "type": "string"
         },
         "nextPageToken": {
-          "description": "A token used to continue a truncated list request (output only).",
+          "description": "[Output Only] A token used to continue a truncated list request.",
           "type": "string"
         },
         "selfLink": {
-          "description": "Server defined URL for this resource (output only).",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -4012,7 +4012,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for the resource.",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         },
         "urlMap": {
@@ -4053,10 +4053,10 @@
       "type": "object"
     },
     "TargetInstance": {
-      "description": "A TargetInstance resource. This resource defines an endpoint VM that terminates traffic of certain protocols.",
+      "description": "A TargetInstance resource. This resource defines an endpoint instance that terminates traffic of certain protocols.",
       "properties": {
         "creationTimestamp": {
-          "description": "Creation timestamp in RFC3339 text format (output only).",
+          "description": "[Output Only] Creation timestamp in RFC3339 text format.",
           "type": "string"
         },
         "description": {
@@ -4064,7 +4064,7 @@
           "type": "string"
         },
         "id": {
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
           "format": "uint64",
           "type": "string"
         },
@@ -4078,23 +4078,23 @@
           "type": "string"
         },
         "name": {
-          "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035.",
+          "description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
           "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
           "type": "string"
         },
         "natPolicy": {
-          "description": "NAT option controlling how IPs are NAT'ed to the VM. Currently only NO_NAT (default value) is supported.",
+          "description": "NAT option controlling how IPs are NAT'ed to the instance. Currently only NO_NAT (default value) is supported.",
           "enum": [
             "NO_NAT"
           ],
           "type": "string"
         },
         "selfLink": {
-          "description": "Server defined URL for the resource (output only).",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         },
         "zone": {
-          "description": "URL of the zone where the target instance resides (output only).",
+          "description": "[Output Only] URL of the zone where the target instance resides.",
           "type": "string"
         }
       },
@@ -4103,7 +4103,7 @@
     "TargetInstanceAggregatedList": {
       "properties": {
         "id": {
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
           "type": "string"
         },
         "items": {
@@ -4120,11 +4120,11 @@
           "type": "string"
         },
         "nextPageToken": {
-          "description": "A token used to continue a truncated list request (output only).",
+          "description": "[Output Only] A token used to continue a truncated list request.",
           "type": "string"
         },
         "selfLink": {
-          "description": "Server defined URL for this resource (output only).",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -4134,7 +4134,7 @@
       "description": "Contains a list of TargetInstance resources.",
       "properties": {
         "id": {
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
           "type": "string"
         },
         "items": {
@@ -4150,11 +4150,11 @@
           "type": "string"
         },
         "nextPageToken": {
-          "description": "A token used to continue a truncated list request (output only).",
+          "description": "[Output Only] A token used to continue a truncated list request.",
           "type": "string"
         },
         "selfLink": {
-          "description": "Server defined URL for this resource (output only).",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -4220,14 +4220,14 @@
       "type": "object"
     },
     "TargetPool": {
-      "description": "A TargetPool resource. This resource defines a pool of VMs, associated HttpHealthCheck resources, and the fallback TargetPool.",
+      "description": "A TargetPool resource. This resource defines a pool of instances, associated HttpHealthCheck resources, and the fallback TargetPool.",
       "properties": {
         "backupPool": {
-          "description": "This field is applicable only when the containing target pool is serving a forwarding rule as the primary pool, and its 'failoverRatio' field is properly set to a value between [0, 1].\n\n'backupPool' and 'failoverRatio' together define the fallback behavior of the primary target pool: if the ratio of the healthy VMs in the primary pool is at or below 'failoverRatio', traffic arriving at the load-balanced IP will be directed to the backup pool.\n\nIn case where 'failoverRatio' and 'backupPool' are not set, or all the VMs in the backup pool are unhealthy, the traffic will be directed back to the primary pool in the \"force\" mode, where traffic will be spread to the healthy VMs with the best effort, or to all VMs when no VM is healthy.",
+          "description": "This field is applicable only when the containing target pool is serving a forwarding rule as the primary pool, and its failoverRatio field is properly set to a value between [0, 1].\n\nbackupPool and failoverRatio together define the fallback behavior of the primary target pool: if the ratio of the healthy instances in the primary pool is at or below failoverRatio, traffic arriving at the load-balanced IP will be directed to the backup pool.\n\nIn case where failoverRatio and backupPool are not set, or all the instances in the backup pool are unhealthy, the traffic will be directed back to the primary pool in the \"force\" mode, where traffic will be spread to the healthy instances with the best effort, or to all instances when no instance is healthy.",
           "type": "string"
         },
         "creationTimestamp": {
-          "description": "Creation timestamp in RFC3339 text format (output only).",
+          "description": "[Output Only] Creation timestamp in RFC3339 text format.",
           "type": "string"
         },
         "description": {
@@ -4235,24 +4235,24 @@
           "type": "string"
         },
         "failoverRatio": {
-          "description": "This field is applicable only when the containing target pool is serving a forwarding rule as the primary pool (i.e., not as a backup pool to some other target pool). The value of the field must be in [0, 1].\n\nIf set, 'backupPool' must also be set. They together define the fallback behavior of the primary target pool: if the ratio of the healthy VMs in the primary pool is at or below this number, traffic arriving at the load-balanced IP will be directed to the backup pool.\n\nIn case where 'failoverRatio' is not set or all the VMs in the backup pool are unhealthy, the traffic will be directed back to the primary pool in the \"force\" mode, where traffic will be spread to the healthy VMs with the best effort, or to all VMs when no VM is healthy.",
+          "description": "This field is applicable only when the containing target pool is serving a forwarding rule as the primary pool (i.e., not as a backup pool to some other target pool). The value of the field must be in [0, 1].\n\nIf set, backupPool must also be set. They together define the fallback behavior of the primary target pool: if the ratio of the healthy instances in the primary pool is at or below this number, traffic arriving at the load-balanced IP will be directed to the backup pool.\n\nIn case where failoverRatio is not set or all the instances in the backup pool are unhealthy, the traffic will be directed back to the primary pool in the \"force\" mode, where traffic will be spread to the healthy instances with the best effort, or to all instances when no instance is healthy.",
           "format": "float",
           "type": "number"
         },
         "healthChecks": {
-          "description": "A list of URLs to the HttpHealthCheck resource. A member VM in this pool is considered healthy if and only if all specified health checks pass. An empty list means all member VMs will be considered healthy at all times.",
+          "description": "A list of URLs to the HttpHealthCheck resource. A member instance in this pool is considered healthy if and only if all specified health checks pass. An empty list means all member instances will be considered healthy at all times.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "id": {
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
           "format": "uint64",
           "type": "string"
         },
         "instances": {
-          "description": "A list of resource URLs to the member VMs serving this pool. They must live in zones contained in the same region as this pool.",
+          "description": "A list of resource URLs to the member virtual machines serving this pool. They must live in zones contained in the same region as this pool.",
           "items": {
             "type": "string"
           },
@@ -4264,20 +4264,20 @@
           "type": "string"
         },
         "name": {
-          "description": "Name of the resource; provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035.",
+          "description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
           "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
           "type": "string"
         },
         "region": {
-          "description": "URL of the region where the target pool resides (output only).",
+          "description": "[Output Only] URL of the region where the target pool resides.",
           "type": "string"
         },
         "selfLink": {
-          "description": "Server defined URL for the resource (output only).",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         },
         "sessionAffinity": {
-          "description": "Sesssion affinity option, must be one of the following values: 'NONE': Connections from the same client IP may go to any VM in the pool; 'CLIENT_IP': Connections from the same client IP will go to the same VM in the pool while that VM remains healthy. 'CLIENT_IP_PROTO': Connections from the same client IP with the same IP protocol will go to the same VM in the pool while that VM remains healthy.",
+          "description": "Sesssion affinity option, must be one of the following values: NONE: Connections from the same client IP may go to any instance in the pool; CLIENT_IP: Connections from the same client IP will go to the same instance in the pool while that instance remains healthy. CLIENT_IP_PROTO: Connections from the same client IP with the same IP protocol will go to the same instance in the pool while that instance remains healthy.",
           "enum": [
             "CLIENT_IP",
             "CLIENT_IP_PROTO",
@@ -4291,7 +4291,7 @@
     "TargetPoolAggregatedList": {
       "properties": {
         "id": {
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] Unique identifier for the resource. Defined by the server.",
           "type": "string"
         },
         "items": {
@@ -4308,11 +4308,11 @@
           "type": "string"
         },
         "nextPageToken": {
-          "description": "A token used to continue a truncated list request (output only).",
+          "description": "[Output Only] A token used to continue a truncated list request.",
           "type": "string"
         },
         "selfLink": {
-          "description": "Server defined URL for this resource (output only).",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -4338,7 +4338,7 @@
       "description": "Contains a list of TargetPool resources.",
       "properties": {
         "id": {
-          "description": "Unique identifier for the resource; defined by the server (output only).",
+          "description": "[Output Only] Unique identifier for the resource. Defined by the server.",
           "type": "string"
         },
         "items": {
@@ -4354,11 +4354,11 @@
           "type": "string"
         },
         "nextPageToken": {
-          "description": "A token used to continue a truncated list request (output only).",
+          "description": "[Output Only] A token used to continue a truncated list request.",
           "type": "string"
         },
         "selfLink": {
-          "description": "Server defined URL for this resource (output only).",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -4729,7 +4729,7 @@
           "type": "array"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for the resource.",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         },
         "tests": {
@@ -4766,7 +4766,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource.",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -4902,7 +4902,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for the resource.",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         },
         "sharedSecret": {
@@ -4961,7 +4961,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for this resource.",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -5115,7 +5115,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "[Output Only] Server defined URL for the resource.",
+          "description": "[Output Only] Server-defined URL for the resource.",
           "type": "string"
         },
         "status": {
@@ -5153,7 +5153,7 @@
           "type": "string"
         },
         "selfLink": {
-          "description": "Server defined URL for this resource (output only).",
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
