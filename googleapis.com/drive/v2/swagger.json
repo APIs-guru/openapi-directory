@@ -814,11 +814,11 @@
           "type": "object"
         },
         "fileExtension": {
-          "description": "The file extension used when downloading this file. This field is read only. To set the extension, include it in the title when creating the file. This is only populated for files with content stored in Drive.",
+          "description": "The final component of fullFileExtension with trailing text that does not appear to be part of the extension removed. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files.",
           "type": "string"
         },
         "fileSize": {
-          "description": "The size of the file in bytes. This is only populated for files with content stored in Drive.",
+          "description": "The size of the file in bytes. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files.",
           "format": "int64",
           "type": "string"
         },
@@ -826,8 +826,12 @@
           "description": "Folder color as an RGB hex string if the file is a folder. The list of supported colors is available in the folderColorPalette field of the About resource. If an unsupported color is specified, it will be changed to the closest color in the palette.",
           "type": "string"
         },
+        "fullFileExtension": {
+          "description": "The full file extension; extracted from the title. May contain multiple concatenated extensions, such as \"tar.gz\". Removing an extension from the title does not clear this field; however, changing the extension on the title does update this field. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files.",
+          "type": "string"
+        },
         "headRevisionId": {
-          "description": "The ID of the file's head revision. This will only be populated for files with content stored in Drive.",
+          "description": "The ID of the file's head revision. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files.",
           "type": "string"
         },
         "iconLink": {
@@ -1015,7 +1019,7 @@
           "type": "string"
         },
         "md5Checksum": {
-          "description": "An MD5 checksum for the content of this file. This is populated only for files with content stored in Drive.",
+          "description": "An MD5 checksum for the content of this file. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files.",
           "type": "string"
         },
         "mimeType": {
@@ -1040,7 +1044,7 @@
           "type": "object"
         },
         "originalFilename": {
-          "description": "The original filename if the file was uploaded manually, or the original title if the file was inserted through the API. Note that renames of the title will not change the original filename. This will only be populated on files with content stored in Drive.",
+          "description": "The original filename if the file was uploaded manually, or the original title if the file was inserted through the API. Note that renames of the title will not change the original filename. This field is only populated for files with content stored in Drive; it is not populated for Google Docs or shortcut files.",
           "type": "string"
         },
         "ownedByMe": {

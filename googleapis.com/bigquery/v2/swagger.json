@@ -962,6 +962,26 @@
       },
       "type": "object"
     },
+    "Streamingbuffer": {
+      "properties": {
+        "estimatedBytes": {
+          "description": "[Output-only] A lower-bound estimate of the number of bytes currently in the streaming buffer.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "estimatedRows": {
+          "description": "[Output-only] A lower-bound estimate of the number of rows currently in the streaming buffer.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "oldestEntryTime": {
+          "description": "[Output-only] Contains the timestamp of the oldest entry in the streaming buffer, in milliseconds since the epoch, if the streaming buffer is available.",
+          "format": "uint64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Table": {
       "properties": {
         "creationTime": {
@@ -1009,12 +1029,12 @@
           "type": "string"
         },
         "numBytes": {
-          "description": "[Output-only] The size of the table in bytes. This property is unavailable for tables that are actively receiving streaming inserts.",
+          "description": "[Output-only] The size of this table in bytes, excluding any data in the streaming buffer.",
           "format": "int64",
           "type": "string"
         },
         "numRows": {
-          "description": "[Output-only] The number of rows of data in this table. This property is unavailable for tables that are actively receiving streaming inserts.",
+          "description": "[Output-only] The number of rows of data in this table, excluding any data in the streaming buffer.",
           "format": "uint64",
           "type": "string"
         },
@@ -1025,6 +1045,10 @@
         "selfLink": {
           "description": "[Output-only] A URL that can be used to access this resource again.",
           "type": "string"
+        },
+        "streamingBuffer": {
+          "$ref": "#/definitions/Streamingbuffer",
+          "description": "[Output-only] Contains information regarding this table's streaming buffer, if one is present. This field will be absent if the table is not being streamed to or if there is no data in the streaming buffer."
         },
         "tableReference": {
           "$ref": "#/definitions/TableReference",

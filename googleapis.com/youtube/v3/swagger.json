@@ -1436,7 +1436,7 @@
       "type": "object"
     },
     "ContentRating": {
-      "description": "Ratings schemes. The country-specific ratings are mostly for movies and shows. NEXT_ID: 65",
+      "description": "Ratings schemes. The country-specific ratings are mostly for movies and shows. NEXT_ID: 66",
       "properties": {
         "acbRating": {
           "description": "Rating system in Australia - Australian Classification Board",
@@ -1627,6 +1627,19 @@
           ],
           "type": "string"
         },
+        "cncRating": {
+          "description": "Rating system in France - Commission de classification cinematographique",
+          "enum": [
+            "cnc10",
+            "cnc12",
+            "cnc16",
+            "cnc18",
+            "cncE",
+            "cncT",
+            "cncUnrated"
+          ],
+          "type": "string"
+        },
         "csaRating": {
           "description": "Rating system for France - Conseil sup�rieur de l?audiovisuel",
           "enum": [
@@ -1635,6 +1648,7 @@
             "csa16",
             "csa18",
             "csaInterdiction",
+            "csaT",
             "csaUnrated"
           ],
           "type": "string"
@@ -1760,7 +1774,7 @@
           "type": "string"
         },
         "fmocRating": {
-          "description": "Rating system in France - French Minister of Culture",
+          "description": "Deprecated use CNC rating instead",
           "enum": [
             "fmoc10",
             "fmoc12",
@@ -4863,7 +4877,7 @@
           "type": "string"
         },
         "tags": {
-          "description": "A list of keyword tags associated with the video. Tags may contain spaces. This field is only visible to the video's uploader.",
+          "description": "A list of keyword tags associated with the video. Tags may contain spaces.",
           "items": {
             "type": "string"
           },
@@ -5341,12 +5355,6 @@
             "type": "string"
           },
           {
-            "description": "The debugProjectIdOverride parameter should be used for mimicking a request for a certain project ID",
-            "in": "query",
-            "name": "debugProjectIdOverride",
-            "type": "string"
-          },
-          {
             "description": "ID of the Google+ Page for the channel that the request is be on behalf of",
             "in": "query",
             "name": "onBehalfOf",
@@ -5392,12 +5400,6 @@
             "in": "query",
             "name": "videoId",
             "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The debugProjectIdOverride parameter should be used for mimicking a request for a certain project ID.",
-            "in": "query",
-            "name": "debugProjectIdOverride",
             "type": "string"
           },
           {
@@ -5478,12 +5480,6 @@
             "type": "string"
           },
           {
-            "description": "The debugProjectIdOverride parameter should be used for mimicking a request for a certain project ID.",
-            "in": "query",
-            "name": "debugProjectIdOverride",
-            "type": "string"
-          },
-          {
             "description": "ID of the Google+ Page for the channel that the request is be on behalf of",
             "in": "query",
             "name": "onBehalfOf",
@@ -5545,12 +5541,6 @@
             "type": "string"
           },
           {
-            "description": "The debugProjectIdOverride parameter should be used for mimicking a request for a certain project ID.",
-            "in": "query",
-            "name": "debugProjectIdOverride",
-            "type": "string"
-          },
-          {
             "description": "ID of the Google+ Page for the channel that the request is be on behalf of",
             "in": "query",
             "name": "onBehalfOf",
@@ -5607,12 +5597,6 @@
             "in": "path",
             "name": "id",
             "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The debugProjectIdOverride parameter should be used for mimicking a request for a certain project ID",
-            "in": "query",
-            "name": "debugProjectIdOverride",
             "type": "string"
           },
           {
@@ -8966,12 +8950,6 @@
             ],
             "in": "query",
             "name": "chart",
-            "type": "string"
-          },
-          {
-            "description": "The debugProjectIdOverride parameter should be used for mimicking a request for a certain project ID",
-            "in": "query",
-            "name": "debugProjectIdOverride",
             "type": "string"
           },
           {
