@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e
-
+set -pipefail
 export GIT_COMMITTER_NAME=APIs-GuruBot
-git push "https://$GH_TOKEN@$GH_REF" master:gh-pages 2>&1 | sed "s/$GH_TOKEN/xxPASSxx/"
+git push "https://${GH_TOKEN}@${GH_REF}" "${TRAVIS_COMMIT}:gh-pages" 2>&1 | sed "s/${GH_TOKEN}/xxPASSxx/"
