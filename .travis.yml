@@ -3,7 +3,7 @@ node_js:
   - "stable"
 env:
   global:
-    - GH_REF: "github.com/APIs-guru/api-models"
+    - GH_REF: "github.com/APIs-guru/api-models.git"
 deploy:
   provider: script
   script: scripts/merge_gh_pages.sh
