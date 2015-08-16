@@ -1,3 +1,11 @@
 language: node_js
 node_js:
   - "stable"
+env:
+  global:
+    - GH_REF: "github.com/APIs-guru/api-models"
+deploy:
+  provider: gh_pages
+  script: scripts/merge_gh_pages.sh
+  on:
+    branch: develop
