@@ -5,7 +5,7 @@ env:
   global:
     - GH_REF: "github.com/APIs-guru/api-models"
 deploy:
-  provider: gh_pages
+  provider: script
   script: scripts/merge_gh_pages.sh
   on:
     branch: master
