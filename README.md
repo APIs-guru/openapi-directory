@@ -8,7 +8,7 @@ Our goal is to create machine-readable Wikipedia for REST APIs, with following p
 - Community driven project
 - Only publicly available APIs(free or paid).
 - Anyone can add/changes API, not only API owners.
-- All data could be accessed through REST API(free, but API key required).
+- All data could be accessed through [REST API](API.md)(free, but API key required).
 
 **If you have Swagger files for any public API, please feel free to make pull request.**<BR>
 [You can also support project using BountySource](https://www.bountysource.com/teams/apis_guru)
@@ -25,3 +25,7 @@ API spec acceptance criteria
 * Public - anyone can access it as long as he follow some clearly defined steps(email owner, pay money, etc.)
 * Persistant - API is made with long live goal, and not for partucular event(conference, hackaton, etc.)
 * Useful - API could provide usefull functionality not only for it owner.
+
+Integration with 3rd-party services
+--------------------------
+You can use our [REST API](API.md)
