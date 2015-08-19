@@ -10,7 +10,6 @@ Our goal is to create machine-readable Wikipedia for REST APIs, with following p
 - Anyone can add/changes API, not only API owners.
 - All data could be accessed through [REST API](API.md)(free, but API key required).
 
-**If you have Swagger files for any public API, please feel free to make pull request.**<BR>
 [You can also support project using BountySource](https://www.bountysource.com/teams/apis_guru)
 
 Licenses
@@ -25,6 +24,11 @@ API spec acceptance criteria
 * Public - anyone can access it as long as he follow some clearly defined steps(email owner, pay money, etc.)
 * Persistant - API is made with long live goal, and not for partucular event(conference, hackaton, etc.)
 * Useful - API could provide usefull functionality not only for it owner.
+
+Future additions
+--------------------------
+We currently working on adding many new API specs, you can see full list inside [this](https://docs.google.com/spreadsheets/d/14zxKcW_Pzu5aYI3Tnwe5ph2Ru2pkSP8yHWEQhx3t8pI/edit?usp=sharing) document.<BR>
+If you have API spec in any format(Swagger, RAML, WADL, ...) for any public API, please feel free to open [issue](https://github.com/APIs-guru/api-models/issues/new).
 
 Integration with 3rd-party services
 --------------------------
