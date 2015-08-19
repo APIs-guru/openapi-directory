@@ -41,6 +41,9 @@
     },
     "Api.Core.Dto.Accounting.ExtendedGrants": {
       "properties": {
+        "allowAllGrants": {
+          "type": "boolean"
+        },
         "allowGroupCreation": {
           "type": "boolean"
         }
@@ -78,6 +81,9 @@
         "groupGrants": {
           "format": "int64",
           "type": "integer"
+        },
+        "hitOptions": {
+          "$ref": "#/definitions/Api.Core.Dto.Accounting.HitOptions"
         },
         "id": {
           "format": "int64",
@@ -134,6 +140,14 @@
         },
         "userName": {
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Api.Core.Dto.Accounting.HitOptions": {
+      "properties": {
+        "hideReferrer": {
+          "type": "boolean"
         }
       },
       "type": "object"
@@ -240,6 +254,9 @@
         },
         "phone": {
           "type": "string"
+        },
+        "redirectOnly": {
+          "type": "boolean"
         },
         "registrationDate": {
           "description": " (A date in \"YmdHis\" format)",
@@ -378,6 +395,15 @@
           "$ref": "#/definitions/Api.Core.Dto.ClickStream.HitConversionInfo"
         },
         "conversion2": {
+          "$ref": "#/definitions/Api.Core.Dto.ClickStream.HitConversionInfo"
+        },
+        "conversion3": {
+          "$ref": "#/definitions/Api.Core.Dto.ClickStream.HitConversionInfo"
+        },
+        "conversion4": {
+          "$ref": "#/definitions/Api.Core.Dto.ClickStream.HitConversionInfo"
+        },
+        "conversion5": {
           "$ref": "#/definitions/Api.Core.Dto.ClickStream.HitConversionInfo"
         },
         "conversions": {
@@ -702,11 +728,25 @@
         "encodeIp": {
           "type": "boolean"
         },
+        "fifthConversionId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "fifthConversionName": {
+          "type": "string"
+        },
         "firstConversionId": {
           "format": "int64",
           "type": "integer"
         },
         "firstConversionName": {
+          "type": "string"
+        },
+        "fourthConversionId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "fourthConversionName": {
           "type": "string"
         },
         "groupId": {
@@ -738,6 +778,9 @@
         "preferred": {
           "type": "boolean"
         },
+        "redirectOnly": {
+          "type": "boolean"
+        },
         "secondConversionId": {
           "format": "int64",
           "type": "integer"
@@ -760,6 +803,13 @@
           },
           "type": "array"
         },
+        "thirdConversionId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "thirdConversionName": {
+          "type": "string"
+        },
         "title": {
           "type": "string"
         },
@@ -781,6 +831,18 @@
         },
         "writePermited": {
           "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "Api.Core.Dto.Datapoints.DatapointRetargetingInfo": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
         }
       },
       "type": "object"
@@ -877,6 +939,12 @@
             "Myself"
           ],
           "type": "string"
+        },
+        "scripts": {
+          "items": {
+            "$ref": "#/definitions/Api.Core.Dto.Datapoints.DatapointRetargetingInfo"
+          },
+          "type": "array"
         },
         "sequentialDestinationItems": {
           "items": {
@@ -1058,6 +1126,9 @@
         "preferred": {
           "type": "boolean"
         },
+        "redirectOnly": {
+          "type": "boolean"
+        },
         "tags": {
           "items": {
             "$ref": "#/definitions/Api.Core.Dto.Tags.Tag"
@@ -1066,6 +1137,21 @@
         },
         "writePermited": {
           "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "Api.Core.Dto.Retargeting.RetargetingScript": {
+      "properties": {
+        "id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "script": {
+          "type": "string"
         }
       },
       "type": "object"
@@ -1406,6 +1492,7 @@
     "description": "Api dashboard for ClickMeter API",
     "title": "ClickMeter API",
     "version": "v2",
+    "x-logo": "https://s3.amazonaws.com/clickmeter.com/Web/static/cmlogo.svg",
     "x-origin": {
       "format": "swagger",
       "url": "http://api.v2.clickmeter.com.s3.amazonaws.com/docs/api-docs-v2.json",
@@ -2411,7 +2498,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -2419,7 +2505,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -2496,7 +2581,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -2504,7 +2588,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -2578,7 +2661,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -2586,7 +2668,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -2715,7 +2796,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -2723,7 +2803,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -2743,7 +2822,7 @@
             "type": "string"
           },
           {
-            "description": "Filter by this tag name",
+            "description": "A comma separated list of tags you want to filter with.",
             "in": "query",
             "name": "tag",
             "required": false,
@@ -2865,7 +2944,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -2873,7 +2951,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -2891,7 +2968,7 @@
             "type": "string"
           },
           {
-            "description": "Filter by this tag name",
+            "description": "A comma separated list of tags you want to filter with.",
             "in": "query",
             "name": "tag",
             "required": false,
@@ -3096,7 +3173,6 @@
           },
           {
             "description": "Exclude conversions created before this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdAfter",
             "required": false,
@@ -3104,7 +3180,6 @@
           },
           {
             "description": "Exclude conversions created after this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdBefore",
             "required": false,
@@ -3216,7 +3291,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -3224,7 +3298,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -3303,7 +3376,6 @@
           },
           {
             "description": "Exclude conversions created before this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdAfter",
             "required": false,
@@ -3311,7 +3383,6 @@
           },
           {
             "description": "Exclude conversions created after this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdBefore",
             "required": false,
@@ -3527,7 +3598,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -3535,7 +3605,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -3627,7 +3696,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -3635,7 +3703,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -3750,7 +3817,6 @@
           },
           {
             "description": "Exclude datapoints created before this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdAfter",
             "required": false,
@@ -3758,7 +3824,6 @@
           },
           {
             "description": "Exclude datapoints created after this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdBefore",
             "required": false,
@@ -3890,7 +3955,6 @@
           },
           {
             "description": "Exclude datapoints created before this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdAfter",
             "required": false,
@@ -3898,7 +3962,6 @@
           },
           {
             "description": "Exclude datapoints created after this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdBefore",
             "required": false,
@@ -4042,7 +4105,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -4050,7 +4112,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -4225,7 +4286,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -4233,7 +4293,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -4340,8 +4399,25 @@
             "type": "boolean"
           },
           {
+            "description": "Field to sort by",
+            "in": "query",
+            "name": "sortBy",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Direction of sort \"asc\" or \"desc\"",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "in": "query",
+            "name": "sortDirection",
+            "required": false,
+            "type": "string"
+          },
+          {
             "description": "Exclude datapoints created before this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdAfter",
             "required": false,
@@ -4349,7 +4425,6 @@
           },
           {
             "description": "Exclude datapoints created after this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdBefore",
             "required": false,
@@ -4473,7 +4548,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -4481,7 +4555,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -4508,7 +4581,7 @@
             "type": "string"
           },
           {
-            "description": "Filter by this tag name",
+            "description": "A comma separated list of tags you want to filter with.",
             "in": "query",
             "name": "tag",
             "required": false,
@@ -4589,7 +4662,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -4597,7 +4669,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -4617,7 +4688,7 @@
             "type": "string"
           },
           {
-            "description": "Filter by this tag name",
+            "description": "A comma separated list of tags you want to filter with.",
             "in": "query",
             "name": "tag",
             "required": false,
@@ -4856,7 +4927,6 @@
           },
           {
             "description": "Exclude datapoints created before this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdAfter",
             "required": false,
@@ -4864,7 +4934,6 @@
           },
           {
             "description": "Exclude datapoints created after this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdBefore",
             "required": false,
@@ -5079,7 +5148,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -5087,7 +5155,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -5165,7 +5232,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -5173,7 +5239,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -5269,7 +5334,7 @@
         "operationId": "DataPoints_GetHits",
         "parameters": [
           {
-            "description": "Id of the group",
+            "description": "Id of the datapoint",
             "format": "int64",
             "in": "path",
             "name": "id",
@@ -5314,7 +5379,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -5322,7 +5386,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -5487,7 +5550,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -5495,7 +5557,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -5862,7 +5923,7 @@
             "type": "integer"
           },
           {
-            "description": "Status of the datapoint",
+            "description": "Status of the group",
             "enum": [
               "deleted",
               "active"
@@ -5888,7 +5949,6 @@
           },
           {
             "description": "Exclude groups created before this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdAfter",
             "required": false,
@@ -5896,11 +5956,17 @@
           },
           {
             "description": "Exclude groups created after this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdBefore",
             "required": false,
             "type": "string"
+          },
+          {
+            "description": "Write permission",
+            "in": "query",
+            "name": "write",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "produces": [
@@ -6009,7 +6075,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -6017,7 +6082,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -6042,7 +6106,7 @@
             "type": "string"
           },
           {
-            "description": "Filter by this tag name",
+            "description": "A comma separated list of tags you want to filter with.",
             "in": "query",
             "name": "tag",
             "required": false,
@@ -6112,7 +6176,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -6120,7 +6183,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -6134,7 +6196,7 @@
             "type": "string"
           },
           {
-            "description": "Filter by this tag name",
+            "description": "A comma separated list of tags you want to filter with.",
             "in": "query",
             "name": "tag",
             "required": false,
@@ -6216,7 +6278,6 @@
           },
           {
             "description": "Exclude groups created before this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdAfter",
             "required": false,
@@ -6224,11 +6285,17 @@
           },
           {
             "description": "Exclude groups created after this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdBefore",
             "required": false,
             "type": "string"
+          },
+          {
+            "description": "Write permission",
+            "in": "query",
+            "name": "write",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "produces": [
@@ -6439,7 +6506,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -6447,7 +6513,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -6525,7 +6590,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -6533,7 +6597,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -6626,7 +6689,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -6634,7 +6696,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -6652,7 +6713,7 @@
             "type": "string"
           },
           {
-            "description": "Filter by this tag name",
+            "description": "A comma separated list of tags you want to filter with.",
             "in": "query",
             "name": "tag",
             "required": false,
@@ -6810,8 +6871,32 @@
             "type": "string"
           },
           {
+            "description": "Filter fields by favourite status",
+            "in": "query",
+            "name": "onlyFavorites",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "description": "Field to sort by",
+            "in": "query",
+            "name": "sortBy",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Direction of sort \"asc\" or \"desc\"",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "in": "query",
+            "name": "sortDirection",
+            "required": false,
+            "type": "string"
+          },
+          {
             "description": "Exclude datapoints created before this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdAfter",
             "required": false,
@@ -6819,7 +6904,6 @@
           },
           {
             "description": "Exclude datapoints created after this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdBefore",
             "required": false,
@@ -6961,8 +7045,14 @@
             "type": "string"
           },
           {
+            "description": "Filter fields by favourite status",
+            "in": "query",
+            "name": "onlyFavorites",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "description": "Exclude datapoints created before this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdAfter",
             "required": false,
@@ -6970,7 +7060,6 @@
           },
           {
             "description": "Exclude datapoints created after this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdBefore",
             "required": false,
@@ -7105,7 +7194,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -7113,7 +7201,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -7289,7 +7376,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -7297,7 +7383,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -7373,7 +7458,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -7381,7 +7465,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -7569,7 +7652,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "fromDay",
             "required": false,
@@ -7577,7 +7659,6 @@
           },
           {
             "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "toDay",
             "required": false,
@@ -7608,6 +7689,505 @@
         "summary": "Retrieve a top report",
         "tags": [
           "Reports"
+        ]
+      }
+    },
+    "/retargeting": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "operationId": "Retargeting_Get",
+        "parameters": [
+          {
+            "default": 0,
+            "description": "Where to start when retrieving elements. Default is 0 if not specified.",
+            "format": "int32",
+            "in": "query",
+            "minLength": 0,
+            "name": "offset",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "default": 20,
+            "description": "Maximum elements to retrieve. Default to 20 if not specified.",
+            "format": "int32",
+            "in": "query",
+            "maxLength": 0,
+            "minLength": 0,
+            "name": "limit",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "List of all the retargeting scripts associated to the user",
+        "tags": [
+          "Retargeting"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "deprecated": false,
+        "operationId": "Retargeting_Put",
+        "parameters": [
+          {
+            "description": "The body of the retargeting script",
+            "in": "body",
+            "name": "value",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Dto.Retargeting.RetargetingScript"
+            }
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Creates a retargeting script",
+        "tags": [
+          "Retargeting"
+        ]
+      }
+    },
+    "/retargeting/count": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "operationId": "Retargeting_Count",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.CountResponce"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Retrieve count of retargeting scripts",
+        "tags": [
+          "Retargeting"
+        ]
+      }
+    },
+    "/retargeting/{id}": {
+      "delete": {
+        "consumes": [],
+        "deprecated": false,
+        "operationId": "Retargeting_Delete",
+        "parameters": [
+          {
+            "description": "The id of the retargeting script",
+            "format": "int64",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Deletes a retargeting script (and remove associations)",
+        "tags": [
+          "Retargeting"
+        ]
+      },
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "operationId": "Retargeting_Get",
+        "parameters": [
+          {
+            "description": "The id of the retargeting script",
+            "format": "int64",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Dto.Retargeting.RetargetingScript"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Get a retargeting script object",
+        "tags": [
+          "Retargeting"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "deprecated": false,
+        "operationId": "Retargeting_Post",
+        "parameters": [
+          {
+            "description": "The id of the retargeting script",
+            "format": "int64",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The body of the retargeting script",
+            "in": "body",
+            "name": "value",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Dto.Retargeting.RetargetingScript"
+            }
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Updates a retargeting script",
+        "tags": [
+          "Retargeting"
+        ]
+      }
+    },
+    "/retargeting/{id}/datapoints": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "operationId": "Retargeting_GetDatapoints",
+        "parameters": [
+          {
+            "description": "Id of the retargeting script",
+            "format": "int64",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "default": 0,
+            "description": "Where to start when retrieving elements. Default is 0 if not specified.",
+            "format": "int32",
+            "in": "query",
+            "minLength": 0,
+            "name": "offset",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "default": 20,
+            "description": "Maximum elements to retrieve. Default to 20 if not specified.",
+            "format": "int32",
+            "in": "query",
+            "maxLength": 0,
+            "minLength": 0,
+            "name": "limit",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Status of the datapoint",
+            "enum": [
+              "deleted",
+              "active",
+              "paused",
+              "spam"
+            ],
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "A comma separated list of tags you want to filter with.",
+            "in": "query",
+            "name": "tags",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Filter fields by this pattern",
+            "in": "query",
+            "name": "textSearch",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Filter fields by favourite status",
+            "in": "query",
+            "name": "onlyFavorites",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "description": "Field to sort by",
+            "in": "query",
+            "name": "sortBy",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Direction of sort \"asc\" or \"desc\"",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "in": "query",
+            "name": "sortDirection",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Exclude datapoints created before this date (YYYYMMDD)",
+            "in": "query",
+            "name": "createdAfter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Exclude datapoints created after this date (YYYYMMDD)",
+            "in": "query",
+            "name": "createdBefore",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Responses.EntityUri[System.Int64]]"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "List of all the datapoints associated to the retargeting script.",
+        "tags": [
+          "Retargeting"
+        ]
+      }
+    },
+    "/retargeting/{id}/datapoints/count": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "operationId": "Retargeting_GetDatapointsCount",
+        "parameters": [
+          {
+            "description": "Id of the group",
+            "format": "int64",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "Status of the datapoint",
+            "enum": [
+              "deleted",
+              "active",
+              "paused",
+              "spam"
+            ],
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "A comma separated list of tags you want to filter with.",
+            "in": "query",
+            "name": "tags",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Filter fields by this pattern",
+            "in": "query",
+            "name": "textSearch",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Filter fields by favourite status",
+            "in": "query",
+            "name": "onlyFavorites",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "description": "Exclude datapoints created before this date (YYYYMMDD)",
+            "in": "query",
+            "name": "createdAfter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Exclude datapoints created after this date (YYYYMMDD)",
+            "in": "query",
+            "name": "createdBefore",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.CountResponce"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Count the datapoints associated to the retargeting script.",
+        "tags": [
+          "Retargeting"
         ]
       }
     },
@@ -7998,7 +8578,6 @@
           },
           {
             "description": "Exclude datapoints created before this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdAfter",
             "required": false,
@@ -8006,7 +8585,6 @@
           },
           {
             "description": "Exclude datapoints created after this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdBefore",
             "required": false,
@@ -8087,7 +8665,6 @@
           },
           {
             "description": "Exclude datapoints created before this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdAfter",
             "required": false,
@@ -8095,7 +8672,6 @@
           },
           {
             "description": "Exclude datapoints created after this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdBefore",
             "required": false,
@@ -8284,7 +8860,6 @@
           },
           {
             "description": "Exclude groups created before this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdAfter",
             "required": false,
@@ -8292,7 +8867,6 @@
           },
           {
             "description": "Exclude groups created after this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdBefore",
             "required": false,
@@ -8360,7 +8934,6 @@
           },
           {
             "description": "Exclude groups created before this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdAfter",
             "required": false,
@@ -8368,7 +8941,6 @@
           },
           {
             "description": "Exclude groups created after this date (YYYYMMDD)",
-            "format": "date-time",
             "in": "query",
             "name": "createdBefore",
             "required": false,
