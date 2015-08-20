@@ -1,5 +1,5 @@
 #!/bin/sh
-LIST=$(find -name swagger.json | sed '
+LIST=$(find -name swagger.json | sort | sed '
 s#/swagger.json##;
 s#^./#    ["#;
 s#/#","#g;
