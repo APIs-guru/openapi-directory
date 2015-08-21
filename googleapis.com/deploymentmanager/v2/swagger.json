@@ -551,8 +551,21 @@
     "Type": {
       "description": "A resource type supported by Deployment Manager.",
       "properties": {
+        "id": {
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "insertTime": {
+          "description": "[Output Only] Timestamp when the type was created, in RFC3339 text format.",
+          "type": "string"
+        },
         "name": {
           "description": "Name of the type.",
+          "type": "string"
+        },
+        "selfLink": {
+          "description": "[Output Only] Self link for the type.",
           "type": "string"
         }
       },

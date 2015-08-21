@@ -782,6 +782,10 @@
         "partnersSessionId": {
           "description": "Google Partners session ID.",
           "type": "string"
+        },
+        "trafficSource": {
+          "$ref": "#/definitions/TrafficSource",
+          "description": "Source of traffic for the current request."
         }
       },
       "type": "object"
@@ -792,6 +796,20 @@
         "debugInfo": {
           "$ref": "#/definitions/DebugInfo",
           "description": "Debug information about this request."
+        }
+      },
+      "type": "object"
+    },
+    "TrafficSource": {
+      "description": "Source of traffic for the current request.",
+      "properties": {
+        "trafficSourceId": {
+          "description": "Identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.",
+          "type": "string"
+        },
+        "trafficSubId": {
+          "description": "Second level identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -995,6 +1013,18 @@
             },
             "name": "requestMetadata.experimentIds",
             "type": "array"
+          },
+          {
+            "description": "Identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.",
+            "in": "query",
+            "name": "requestMetadata.trafficSource.trafficSourceId",
+            "type": "string"
+          },
+          {
+            "description": "Second level identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.",
+            "in": "query",
+            "name": "requestMetadata.trafficSource.trafficSubId",
+            "type": "string"
           },
           {
             "description": "Requested page size. Server may return fewer companies than requested. If unspecified, server picks an appropriate default.",
@@ -1233,6 +1263,18 @@
             },
             "name": "requestMetadata.experimentIds",
             "type": "array"
+          },
+          {
+            "description": "Identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.",
+            "in": "query",
+            "name": "requestMetadata.trafficSource.trafficSourceId",
+            "type": "string"
+          },
+          {
+            "description": "Second level identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.",
+            "in": "query",
+            "name": "requestMetadata.trafficSource.trafficSubId",
+            "type": "string"
           },
           {
             "description": "The view of `Company` resource to be returned. This must not be `COMPANY_VIEW_UNSPECIFIED`.",
@@ -1484,6 +1526,18 @@
             },
             "name": "requestMetadata.experimentIds",
             "type": "array"
+          },
+          {
+            "description": "Identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.",
+            "in": "query",
+            "name": "requestMetadata.trafficSource.trafficSourceId",
+            "type": "string"
+          },
+          {
+            "description": "Second level identifier to indicate where the traffic comes from. An identifier has multiple letters created by a team which redirected the traffic to us.",
+            "in": "query",
+            "name": "requestMetadata.trafficSource.trafficSubId",
+            "type": "string"
           }
         ],
         "responses": {

@@ -18,81 +18,6 @@
       },
       "type": "object"
     },
-    "CloudAuditOptions": {
-      "description": "Write a Cloud Audit log",
-      "type": "object"
-    },
-    "Condition": {
-      "description": "A condition to be met.",
-      "properties": {
-        "iam": {
-          "description": "Trusted attributes supplied by the IAM system.",
-          "enum": [
-            "NO_ATTR",
-            "AUTHORITY",
-            "ATTRIBUTION"
-          ],
-          "type": "string"
-        },
-        "op": {
-          "description": "An operator to apply the subject with.",
-          "enum": [
-            "NO_OP",
-            "EQUALS",
-            "NOT_EQUALS",
-            "IN",
-            "NOT_IN",
-            "DISCHARGED"
-          ],
-          "type": "string"
-        },
-        "svc": {
-          "description": "Trusted attributes discharged by the service.",
-          "type": "string"
-        },
-        "sys": {
-          "description": "Trusted attributes supplied by any service that owns resources and uses the IAM system for access control.",
-          "enum": [
-            "NO_ATTR",
-            "REGION",
-            "SERVICE",
-            "NAME",
-            "IP"
-          ],
-          "type": "string"
-        },
-        "value": {
-          "description": "The object of the condition. Exactly one of these must be set.",
-          "type": "string"
-        },
-        "values": {
-          "description": "The objects of the condition. This is mutually exclusive with 'value'.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "CounterOptions": {
-      "description": "Options for counters",
-      "properties": {
-        "field": {
-          "description": "The field value to attribute.",
-          "type": "string"
-        },
-        "metric": {
-          "description": "The metric to update.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "DataAccessOptions": {
-      "description": "Write a Data Access (Gin) log",
-      "type": "object"
-    },
     "Empty": {
       "description": "A generic empty message that you can re-use to avoid defining duplicated empty messages in your APIs. A typical example is to use it as the request or the response type of an API method. For instance: service Foo { rpc Bar(google.protobuf.Empty) returns (google.protobuf.Empty); } The JSON representation for `Empty` is empty JSON object `{}`.",
       "type": "object"
@@ -118,24 +43,6 @@
       },
       "type": "object"
     },
-    "LogConfig": {
-      "description": "Specifies what kind of log the caller must write Increment a streamz counter with the specified metric and field names. Metric names should start with a '/', generally be lowercase-only, and end in \"_count\". Field names should not contain an initial slash. The actual exported metric names will have \"/iam/policy\" prepended. Field names correspond to IAM request parameters and field values are their respective values. At present only \"iam_principal\", corresponding to IAMContext.principal, is supported. Examples: counter { metric: \"/debug_access_count\" field: \"iam_principal\" } ==> increment counter /iam/policy/backend_debug_access_count {iam_principal=[value of IAMContext.principal]} At this time we do not support: * multiple field names (though this may be supported in the future) * decrementing the counter * incrementing it by anything other than 1",
-      "properties": {
-        "cloudAudit": {
-          "$ref": "#/definitions/CloudAuditOptions",
-          "description": "Cloud audit options."
-        },
-        "counter": {
-          "$ref": "#/definitions/CounterOptions",
-          "description": "Counter options."
-        },
-        "dataAccess": {
-          "$ref": "#/definitions/DataAccessOptions",
-          "description": "Data access options."
-        }
-      },
-      "type": "object"
-    },
     "Policy": {
       "description": "# Overview The `Policy` defines an access control policy language. It is used to define policies that are attached to resources like files, folders, VMs, etc. # Policy structure A `Policy` consists of a list of bindings. A `Binding` binds a set of members to a role, where the members include user accounts, user groups, user domains, and service accounts. A 'role' is a named set of permissions, defined by IAM. The definition of a role is outside the policy. A permission check first determines the roles that include the specified permission, and then determines if the principal specified is a member of a binding to at least one of these roles. The membership check is recursive when a group is bound to a role. Policy examples: ``` { \"bindings\": [ { \"role\": \"roles/owner\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:frontend@example.iam.gserviceaccounts.com\"] }, { \"role\": \"roles/viewer\", \"members\": [\"user:sean@example.com\"] } ] } ```",
       "properties": {
@@ -150,12 +57,6 @@
           "description": "Can be used to perform a read-modify-write.",
           "format": "byte",
           "type": "string"
-        },
-        "rules": {
-          "items": {
-            "$ref": "#/definitions/Rule"
-          },
-          "type": "array"
         },
         "version": {
           "description": "The policy language version. The version of the policy is represented by the etag. The default version is 0.",
@@ -201,63 +102,6 @@
           "description": "The number uniquely identifying the project. Example: 415104041262 Read-only.",
           "format": "int64",
           "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Rule": {
-      "description": "A rule to be applied in a Policy.",
-      "properties": {
-        "action": {
-          "description": "Required",
-          "enum": [
-            "NO_ACTION",
-            "ALLOW",
-            "ALLOW_WITH_LOG",
-            "DENY",
-            "DENY_WITH_LOG",
-            "LOG"
-          ],
-          "type": "string"
-        },
-        "conditions": {
-          "description": "Additional restrictions that must be met",
-          "items": {
-            "$ref": "#/definitions/Condition"
-          },
-          "type": "array"
-        },
-        "description": {
-          "description": "Human-readable description of the rule.",
-          "type": "string"
-        },
-        "in": {
-          "description": "The rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is in this set of entries.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "logConfig": {
-          "description": "The config returned to callers of tech.iam.IAM.CheckPolicy for any entries that match the LOG action.",
-          "items": {
-            "$ref": "#/definitions/LogConfig"
-          },
-          "type": "array"
-        },
-        "notIn": {
-          "description": "The rule matches if the PRINCIPAL/AUTHORITY_SELECTOR is not in this set of entries. The formation for in and not_in entries is the same as members in a Binding above.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "permissions": {
-          "description": "A permission is a string of form '..' (e.g., 'storage.buckets.list'). A value of '*' matches all permissions, and a verb part of '*' (e.g., 'storage.buckets.*') matches all verbs.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
         }
       },
       "type": "object"

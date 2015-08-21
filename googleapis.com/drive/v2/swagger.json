@@ -2232,6 +2232,12 @@
             "type": "integer"
           },
           {
+            "description": "A comma-separated list of sort keys. Valid keys are 'createdDate', 'folder', 'lastViewedByMeDate', 'modifiedByMeDate', 'modifiedDate', 'quotaBytesUsed', 'recency', 'sharedWithMeDate', 'starred', and 'title'. Each key sorts ascending by default, but may be reversed with the 'desc' modifier. Example usage: ?orderBy=folder,modifiedDate desc,title. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored.",
+            "in": "query",
+            "name": "orderBy",
+            "type": "string"
+          },
+          {
             "description": "Page token for files.",
             "in": "query",
             "name": "pageToken",
@@ -5239,6 +5245,12 @@
             "minimum": 0,
             "name": "maxResults",
             "type": "integer"
+          },
+          {
+            "description": "A comma-separated list of sort keys. Valid keys are 'createdDate', 'folder', 'lastViewedByMeDate', 'modifiedByMeDate', 'modifiedDate', 'quotaBytesUsed', 'recency', 'sharedWithMeDate', 'starred', and 'title'. Each key sorts ascending by default, but may be reversed with the 'desc' modifier. Example usage: ?orderBy=folder,modifiedDate desc,title. Please note that there is a current limitation for users with approximately one million files in which the requested sort order is ignored.",
+            "in": "query",
+            "name": "orderBy",
+            "type": "string"
           },
           {
             "description": "Page token for children.",

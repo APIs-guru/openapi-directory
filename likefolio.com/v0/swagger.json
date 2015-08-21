@@ -1107,6 +1107,50 @@
         "summary": "Returns amount of mentions per day for a given period"
       }
     },
+    "/v0/tags/match.json": {
+      "get": {
+        "operationId": "GET--version-tags-match---format-",
+        "parameters": [
+          {
+            "description": "Text to match agains tags.",
+            "in": "query",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Matches text passed and returns list of company tickers that matched. Text parameter is limited to valid URL encoded values."
+      },
+      "post": {
+        "operationId": "POST--version-tags-match---format-",
+        "parameters": [
+          {
+            "description": "Text to match agains tags.",
+            "in": "formData",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Matches text passed and returns list of company tickers that matched."
+      }
+    },
     "/v0/users/topCompanies.json": {
       "get": {
         "operationId": "GET--version-users-topCompanies---format-",
