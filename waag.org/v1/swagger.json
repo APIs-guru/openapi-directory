@@ -14,7 +14,6 @@
   "paths": {
     "/layers": {
       "get": {
-        "description": "",
         "operationId": "GET-layers---format-",
         "produces": [
           "application/json",
@@ -31,7 +30,6 @@
         ]
       },
       "post": {
-        "description": "",
         "operationId": "POST-layers---format-",
         "produces": [
           "application/json",
@@ -50,11 +48,9 @@
     },
     "/layers/{layer}": {
       "delete": {
-        "description": "",
         "operationId": "DELETE-layers--layer---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
@@ -76,11 +72,9 @@
         ]
       },
       "get": {
-        "description": "",
         "operationId": "GET-layers--layer---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
@@ -102,11 +96,9 @@
         ]
       },
       "patch": {
-        "description": "",
         "operationId": "PATCH-layers--layer---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
@@ -130,11 +122,9 @@
     },
     "/layers/{layer}/context": {
       "get": {
-        "description": "",
         "operationId": "GET-layers--layer-context---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
@@ -156,11 +146,9 @@
         ]
       },
       "put": {
-        "description": "",
         "operationId": "PUT-layers--layer-context---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
@@ -184,11 +172,9 @@
     },
     "/layers/{layer}/fields": {
       "get": {
-        "description": "",
         "operationId": "GET-layers--layer-fields---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
@@ -210,11 +196,9 @@
         ]
       },
       "post": {
-        "description": "",
         "operationId": "POST-layers--layer-fields---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
@@ -238,18 +222,15 @@
     },
     "/layers/{layer}/fields/{field}": {
       "delete": {
-        "description": "",
         "operationId": "DELETE-layers--layer-fields--field---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "field",
             "required": true,
@@ -271,18 +252,15 @@
         ]
       },
       "get": {
-        "description": "",
         "operationId": "GET-layers--layer-fields--field---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "field",
             "required": true,
@@ -304,18 +282,15 @@
         ]
       },
       "patch": {
-        "description": "",
         "operationId": "PATCH-layers--layer-fields--field---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "field",
             "required": true,
@@ -337,18 +312,15 @@
         ]
       },
       "put": {
-        "description": "",
         "operationId": "PUT-layers--layer-fields--field---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "field",
             "required": true,
@@ -372,11 +344,9 @@
     },
     "/layers/{layer}/objects": {
       "delete": {
-        "description": "",
         "operationId": "DELETE-layers--layer-objects---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
@@ -398,11 +368,9 @@
         ]
       },
       "get": {
-        "description": "",
         "operationId": "GET-layers--layer-objects---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
@@ -424,11 +392,9 @@
         ]
       },
       "patch": {
-        "description": "",
         "operationId": "PATCH-layers--layer-objects---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
@@ -450,11 +416,9 @@
         ]
       },
       "post": {
-        "description": "",
         "operationId": "POST-layers--layer-objects---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
@@ -478,18 +442,15 @@
     },
     "/layers/{layer}/objects/{cdk_id}": {
       "get": {
-        "description": "",
         "operationId": "GET-layers--layer-objects--cdk_id---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "cdk_id",
             "required": true,
@@ -513,11 +474,9 @@
     },
     "/layers/{layer}/owners": {
       "get": {
-        "description": "",
         "operationId": "GET-layers--layer-owners---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
@@ -541,11 +500,9 @@
     },
     "/ngsi10/contextEntities/{entity}": {
       "get": {
-        "description": "",
         "operationId": "GET-ngsi10-contextEntities--entity---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "entity",
             "required": true,
@@ -569,11 +526,9 @@
     },
     "/ngsi10/contextEntities/{entity}/attributes": {
       "put": {
-        "description": "",
         "operationId": "PUT-ngsi10-contextEntities--entity-attributes---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "entity",
             "required": true,
@@ -597,18 +552,15 @@
     },
     "/ngsi10/contextEntities/{entity}/attributes/{attribute}": {
       "get": {
-        "description": "",
         "operationId": "GET-ngsi10-contextEntities--entity-attributes--attribute---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "entity",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "attribute",
             "required": true,
@@ -632,11 +584,9 @@
     },
     "/ngsi10/contextEntityTypes/{cetype}": {
       "get": {
-        "description": "",
         "operationId": "GET-ngsi10-contextEntityTypes--cetype---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "cetype",
             "required": true,
@@ -660,18 +610,15 @@
     },
     "/ngsi10/contextEntityTypes/{cetype}/attributes/{attribute}": {
       "get": {
-        "description": "",
         "operationId": "GET-ngsi10-contextEntityTypes--cetype-attributes--attribute---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "cetype",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "attribute",
             "required": true,
@@ -695,7 +642,6 @@
     },
     "/ngsi10/queryContext": {
       "post": {
-        "description": "",
         "operationId": "POST-ngsi10-queryContext---format-",
         "produces": [
           "application/json",
@@ -714,7 +660,6 @@
     },
     "/ngsi10/subscribeContext": {
       "post": {
-        "description": "",
         "operationId": "POST-ngsi10-subscribeContext---format-",
         "produces": [
           "application/json",
@@ -733,7 +678,6 @@
     },
     "/ngsi10/unsubscribeContext": {
       "post": {
-        "description": "",
         "operationId": "POST-ngsi10-unsubscribeContext---format-",
         "produces": [
           "application/json",
@@ -752,7 +696,6 @@
     },
     "/ngsi10/updateContext": {
       "post": {
-        "description": "",
         "operationId": "POST-ngsi10-updateContext---format-",
         "produces": [
           "application/json",
@@ -771,7 +714,6 @@
     },
     "/ngsi10/updateContextSubscription": {
       "post": {
-        "description": "",
         "operationId": "POST-ngsi10-updateContextSubscription---format-",
         "produces": [
           "application/json",
@@ -790,7 +732,6 @@
     },
     "/objects": {
       "get": {
-        "description": "",
         "operationId": "GET-objects---format-",
         "produces": [
           "application/json",
@@ -809,11 +750,9 @@
     },
     "/objects/{cdk_id}": {
       "delete": {
-        "description": "",
         "operationId": "DELETE-objects--cdk_id---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "cdk_id",
             "required": true,
@@ -835,11 +774,9 @@
         ]
       },
       "get": {
-        "description": "",
         "operationId": "GET-objects--cdk_id---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "cdk_id",
             "required": true,
@@ -861,11 +798,9 @@
         ]
       },
       "patch": {
-        "description": "",
         "operationId": "PATCH-objects--cdk_id---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "cdk_id",
             "required": true,
@@ -889,11 +824,9 @@
     },
     "/objects/{cdk_id}/layers": {
       "get": {
-        "description": "",
         "operationId": "GET-objects--cdk_id-layers---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "cdk_id",
             "required": true,
@@ -917,18 +850,15 @@
     },
     "/objects/{cdk_id}/layers/{layer}": {
       "delete": {
-        "description": "",
         "operationId": "DELETE-objects--cdk_id-layers--layer---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "cdk_id",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
@@ -950,18 +880,15 @@
         ]
       },
       "get": {
-        "description": "",
         "operationId": "GET-objects--cdk_id-layers--layer---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "cdk_id",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
@@ -983,18 +910,15 @@
         ]
       },
       "patch": {
-        "description": "",
         "operationId": "PATCH-objects--cdk_id-layers--layer---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "cdk_id",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
@@ -1016,18 +940,15 @@
         ]
       },
       "post": {
-        "description": "",
         "operationId": "POST-objects--cdk_id-layers--layer---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "cdk_id",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
@@ -1049,18 +970,15 @@
         ]
       },
       "put": {
-        "description": "",
         "operationId": "PUT-objects--cdk_id-layers--layer---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "cdk_id",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "layer",
             "required": true,
@@ -1084,7 +1002,6 @@
     },
     "/owners": {
       "get": {
-        "description": "",
         "operationId": "GET-owners---format-",
         "produces": [
           "application/json",
@@ -1101,7 +1018,6 @@
         ]
       },
       "post": {
-        "description": "",
         "operationId": "POST-owners---format-",
         "produces": [
           "application/json",
@@ -1120,11 +1036,9 @@
     },
     "/owners/{owner}": {
       "delete": {
-        "description": "",
         "operationId": "DELETE-owners--owner---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "owner",
             "required": true,
@@ -1146,11 +1060,9 @@
         ]
       },
       "get": {
-        "description": "",
         "operationId": "GET-owners--owner---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "owner",
             "required": true,
@@ -1172,11 +1084,9 @@
         ]
       },
       "patch": {
-        "description": "",
         "operationId": "PATCH-owners--owner---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "owner",
             "required": true,
@@ -1200,11 +1110,9 @@
     },
     "/owners/{owner}/layers": {
       "get": {
-        "description": "",
         "operationId": "GET-owners--owner-layers---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "owner",
             "required": true,
@@ -1228,7 +1136,6 @@
     },
     "/session": {
       "delete": {
-        "description": "",
         "operationId": "DELETE-session---format-",
         "produces": [
           "application/json",
@@ -1245,7 +1152,6 @@
         ]
       },
       "get": {
-        "description": "",
         "operationId": "GET-session---format-",
         "parameters": [
           {

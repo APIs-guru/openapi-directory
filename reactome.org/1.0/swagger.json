@@ -2,7 +2,6 @@
   "basePath": "/",
   "definitions": {
     "AnalysisResult": {
-      "description": "",
       "properties": {
         "expression": {
           "$ref": "#/definitions/ExpressionSummary"
@@ -33,7 +32,6 @@
       }
     },
     "AnalysisSummary": {
-      "description": "",
       "properties": {
         "fileName": {
           "type": "string"
@@ -57,7 +55,6 @@
       }
     },
     "EntityStatistics": {
-      "description": "",
       "properties": {
         "exp": {
           "items": {
@@ -92,7 +89,6 @@
       }
     },
     "ExpressionSummary": {
-      "description": "",
       "properties": {
         "columnNames": {
           "items": {
@@ -111,7 +107,6 @@
       }
     },
     "File": {
-      "description": "",
       "properties": {
         "absolute": {
           "type": "boolean"
@@ -164,7 +159,6 @@
       }
     },
     "FileSystemResource": {
-      "description": "",
       "properties": {
         "description": {
           "type": "string"
@@ -196,7 +190,6 @@
       }
     },
     "IdentifierMap": {
-      "description": "",
       "properties": {
         "ids": {
           "items": {
@@ -211,7 +204,6 @@
       }
     },
     "IdentifierSummary": {
-      "description": "",
       "properties": {
         "exp": {
           "items": {
@@ -226,15 +218,12 @@
       }
     },
     "InputStream": {
-      "description": "",
       "properties": {}
     },
     "OutputStream": {
-      "description": "",
       "properties": {}
     },
     "PathwayBase": {
-      "description": "",
       "properties": {
         "dbId": {
           "format": "int64",
@@ -249,7 +238,6 @@
       }
     },
     "PathwayIdentifier": {
-      "description": "",
       "properties": {
         "exp": {
           "items": {
@@ -271,7 +259,6 @@
       }
     },
     "PathwayIdentifiers": {
-      "description": "",
       "properties": {
         "expNames": {
           "items": {
@@ -299,7 +286,6 @@
       }
     },
     "PathwaySummary": {
-      "description": "",
       "properties": {
         "dbId": {
           "format": "int64",
@@ -326,7 +312,6 @@
       }
     },
     "ReactionStatistics": {
-      "description": "",
       "properties": {
         "found": {
           "format": "int32",
@@ -346,7 +331,6 @@
       }
     },
     "ResourceSummary": {
-      "description": "",
       "properties": {
         "pathways": {
           "format": "int32",
@@ -358,7 +342,6 @@
       }
     },
     "SpeciesFilteredResult": {
-      "description": "",
       "properties": {
         "expressionSummary": {
           "$ref": "#/definitions/ExpressionSummary"
@@ -375,7 +358,6 @@
       }
     },
     "SpeciesSummary": {
-      "description": "",
       "properties": {
         "dbId": {
           "format": "int64",
@@ -415,7 +397,6 @@
         "operationId": "downloadMappingResult",
         "parameters": [
           {
-            "default": "",
             "description": "The token associated with the data to download",
             "in": "path",
             "name": "token",
@@ -476,7 +457,6 @@
         "operationId": "downloadNotFound",
         "parameters": [
           {
-            "default": "",
             "description": "The token associated with the data to download",
             "in": "path",
             "name": "token",
@@ -519,7 +499,6 @@
         "operationId": "downloadHitPathways",
         "parameters": [
           {
-            "default": "",
             "description": "The token associated with the data to download",
             "in": "path",
             "name": "token",
@@ -580,7 +559,6 @@
         "operationId": "getIdentifier",
         "parameters": [
           {
-            "default": "",
             "description": "The identifier of the element to be retrieved",
             "in": "path",
             "name": "id",
@@ -685,7 +663,6 @@
         "operationId": "getIdentifierToHuman",
         "parameters": [
           {
-            "default": "",
             "description": "The identifier of the element to be retrieved",
             "in": "path",
             "name": "id",
@@ -798,7 +775,6 @@
             "name": "input",
             "required": true,
             "schema": {
-              "default": "",
               "type": "string"
             }
           },
@@ -1110,7 +1086,6 @@
             "name": "input",
             "required": true,
             "schema": {
-              "default": "",
               "type": "string"
             }
           },
@@ -1214,7 +1189,6 @@
             "name": "url",
             "required": true,
             "schema": {
-              "default": "",
               "type": "string"
             }
           },
@@ -1324,7 +1298,6 @@
             "name": "url",
             "required": true,
             "schema": {
-              "default": "",
               "type": "string"
             }
           },
@@ -1528,7 +1501,6 @@
         "operationId": "getToken",
         "parameters": [
           {
-            "default": "",
             "description": "The token associated with the data to query",
             "in": "path",
             "name": "token",
@@ -1633,7 +1605,6 @@
         "operationId": "getTokenFilterPathways",
         "parameters": [
           {
-            "default": "",
             "description": "The token associated with the data to query",
             "in": "path",
             "name": "token",
@@ -1646,7 +1617,6 @@
             "name": "input",
             "required": true,
             "schema": {
-              "default": "",
               "type": "string"
             }
           },
@@ -1702,7 +1672,6 @@
         "operationId": "filterBySpecies",
         "parameters": [
           {
-            "default": "",
             "description": "The token associated with the data to query",
             "in": "path",
             "name": "token",
@@ -1766,7 +1735,6 @@
         "operationId": "getNotFoundIdentifiers",
         "parameters": [
           {
-            "default": "",
             "description": "The token associated with the data to query",
             "in": "path",
             "name": "token",
@@ -1825,7 +1793,6 @@
         "operationId": "getPageOfPathway",
         "parameters": [
           {
-            "default": "",
             "description": "The token associated with the data to query",
             "in": "path",
             "name": "token",
@@ -1930,7 +1897,6 @@
         "operationId": "getTokenFilterReactions",
         "parameters": [
           {
-            "default": "",
             "description": "The token associated with the data to query",
             "in": "path",
             "name": "token",
@@ -1943,7 +1909,6 @@
             "name": "input",
             "required": true,
             "schema": {
-              "default": "",
               "type": "string"
             }
           },
@@ -1998,7 +1963,6 @@
         "operationId": "getTokenFilterReactions",
         "parameters": [
           {
-            "default": "",
             "description": "The token associated with the data to query",
             "in": "path",
             "name": "token",
@@ -2064,7 +2028,6 @@
         "operationId": "getResources",
         "parameters": [
           {
-            "default": "",
             "description": "The token associated with the data to query",
             "in": "path",
             "name": "token",
@@ -2105,7 +2068,6 @@
         "operationId": "getTokenSummaryPathway",
         "parameters": [
           {
-            "default": "",
             "description": "The token associated with the data to query",
             "in": "path",
             "name": "token",

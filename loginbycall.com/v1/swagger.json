@@ -58,11 +58,9 @@
   "paths": {
     "/v1/call/{token}.json": {
       "delete": {
-        "description": "",
         "operationId": "DELETE--version-call--token---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "token",
             "required": true,
@@ -86,11 +84,9 @@
         "summary": "Cancels active call"
       },
       "get": {
-        "description": "",
         "operationId": "GET--version-call--token---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "token",
             "required": true,
@@ -116,7 +112,6 @@
     },
     "/v1/calls.json": {
       "post": {
-        "description": "",
         "operationId": "POST--version-calls---format-",
         "parameters": [
           {
@@ -144,8 +139,7 @@
           "200": {
             "description": "No response was specified"
           }
-        },
-        "summary": ""
+        }
       }
     }
   },

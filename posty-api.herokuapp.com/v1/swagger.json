@@ -14,7 +14,6 @@
   "paths": {
     "/api/v1/domains.json": {
       "get": {
-        "description": "",
         "operationId": "GET-api--version-domains---format-",
         "produces": [
           "application/json"
@@ -27,7 +26,6 @@
         "summary": "Returns all available domains"
       },
       "post": {
-        "description": "",
         "operationId": "POST-api--version-domains---format-",
         "produces": [
           "application/json"
@@ -42,11 +40,9 @@
     },
     "/api/v1/domains/{domain_name}.json": {
       "delete": {
-        "description": "",
         "operationId": "DELETE-api--version-domains--domain_name---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "domain_name",
             "required": true,
@@ -64,11 +60,9 @@
         "summary": "Delete the specified domain"
       },
       "get": {
-        "description": "",
         "operationId": "GET-api--version-domains--domain_name---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "domain_name",
             "required": true,
@@ -86,11 +80,9 @@
         "summary": "Returns the information to the specified domain"
       },
       "put": {
-        "description": "",
         "operationId": "PUT-api--version-domains--domain_name---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "domain_name",
             "required": true,
@@ -110,11 +102,9 @@
     },
     "/api/v1/domains/{domain_name}/aliases.json": {
       "get": {
-        "description": "",
         "operationId": "GET-api--version-domains--domain_name-aliases---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "domain_name",
             "required": true,
@@ -132,11 +122,9 @@
         "summary": "Returns all aliases for the specified domain"
       },
       "post": {
-        "description": "",
         "operationId": "POST-api--version-domains--domain_name-aliases---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "domain_name",
             "required": true,
@@ -156,18 +144,15 @@
     },
     "/api/v1/domains/{domain_name}/aliases/{alias_name}.json": {
       "delete": {
-        "description": "",
         "operationId": "DELETE-api--version-domains--domain_name-aliases--alias_name---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "domain_name",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "alias_name",
             "required": true,
@@ -185,18 +170,15 @@
         "summary": "Delete the specified domain alias"
       },
       "get": {
-        "description": "",
         "operationId": "GET-api--version-domains--domain_name-aliases--alias_name---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "domain_name",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "alias_name",
             "required": true,
@@ -214,18 +196,15 @@
         "summary": "Returns the information to the specified domain alias"
       },
       "put": {
-        "description": "",
         "operationId": "PUT-api--version-domains--domain_name-aliases--alias_name---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "domain_name",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "alias_name",
             "required": true,
@@ -245,11 +224,9 @@
     },
     "/api/v1/domains/{domain_name}/users.json": {
       "get": {
-        "description": "",
         "operationId": "GET-api--version-domains--domain_name-users---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "domain_name",
             "required": true,
@@ -267,11 +244,9 @@
         "summary": "Returns all users for the specified domain"
       },
       "post": {
-        "description": "",
         "operationId": "POST-api--version-domains--domain_name-users---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "domain_name",
             "required": true,
@@ -291,18 +266,15 @@
     },
     "/api/v1/domains/{domain_name}/users/{user_name}.json": {
       "delete": {
-        "description": "",
         "operationId": "DELETE-api--version-domains--domain_name-users--user_name---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "domain_name",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "user_name",
             "required": true,
@@ -320,18 +292,15 @@
         "summary": "Delete the specified user"
       },
       "get": {
-        "description": "",
         "operationId": "GET-api--version-domains--domain_name-users--user_name---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "domain_name",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "user_name",
             "required": true,
@@ -349,18 +318,15 @@
         "summary": "Returns the information to the specified user"
       },
       "put": {
-        "description": "",
         "operationId": "PUT-api--version-domains--domain_name-users--user_name---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "domain_name",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "user_name",
             "required": true,
@@ -380,18 +346,15 @@
     },
     "/api/v1/domains/{domain_name}/users/{user_name}/aliases.json": {
       "get": {
-        "description": "",
         "operationId": "GET-api--version-domains--domain_name-users--user_name-aliases---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "domain_name",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "user_name",
             "required": true,
@@ -409,18 +372,15 @@
         "summary": "Returns all aliases for the specified user"
       },
       "post": {
-        "description": "",
         "operationId": "POST-api--version-domains--domain_name-users--user_name-aliases---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "domain_name",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "user_name",
             "required": true,
@@ -440,25 +400,21 @@
     },
     "/api/v1/domains/{domain_name}/users/{user_name}/aliases/{alias_name}.json": {
       "delete": {
-        "description": "",
         "operationId": "DELETE-api--version-domains--domain_name-users--user_name-aliases--alias_name---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "domain_name",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "user_name",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "alias_name",
             "required": true,
@@ -476,25 +432,21 @@
         "summary": "Delete the specified user alias"
       },
       "get": {
-        "description": "",
         "operationId": "GET-api--version-domains--domain_name-users--user_name-aliases--alias_name---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "domain_name",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "user_name",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "alias_name",
             "required": true,
@@ -512,25 +464,21 @@
         "summary": "Returns the information to the specified user alias"
       },
       "put": {
-        "description": "",
         "operationId": "PUT-api--version-domains--domain_name-users--user_name-aliases--alias_name---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "domain_name",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "user_name",
             "required": true,
             "type": "string"
           },
           {
-            "description": "",
             "in": "path",
             "name": "alias_name",
             "required": true,
@@ -550,7 +498,6 @@
     },
     "/api/v1/summary.json": {
       "get": {
-        "description": "",
         "operationId": "GET-api--version-summary---format-",
         "produces": [
           "application/json"
@@ -565,7 +512,6 @@
     },
     "/api/v1/swagger_doc.json": {
       "get": {
-        "description": "",
         "operationId": "GET-api-v1-swagger_doc---format-",
         "produces": [
           "application/json"
@@ -580,7 +526,6 @@
     },
     "/api/v1/swagger_doc/{name}.json": {
       "get": {
-        "description": "",
         "operationId": "GET-api-v1-swagger_doc--name---format-",
         "parameters": [
           {
@@ -604,7 +549,6 @@
     },
     "/api/v1/transports.json": {
       "get": {
-        "description": "",
         "operationId": "GET-api--version-transports---format-",
         "produces": [
           "application/json"
@@ -617,7 +561,6 @@
         "summary": "Returns all available transports"
       },
       "post": {
-        "description": "",
         "operationId": "POST-api--version-transports---format-",
         "produces": [
           "application/json"
@@ -632,11 +575,9 @@
     },
     "/api/v1/transports/{transport_name}.json": {
       "delete": {
-        "description": "",
         "operationId": "DELETE-api--version-transports--transport_name---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "transport_name",
             "required": true,
@@ -654,11 +595,9 @@
         "summary": "Delete the specified transport"
       },
       "get": {
-        "description": "",
         "operationId": "GET-api--version-transports--transport_name---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "transport_name",
             "required": true,
@@ -676,11 +615,9 @@
         "summary": "Returns the information to the specified transport"
       },
       "put": {
-        "description": "",
         "operationId": "PUT-api--version-transports--transport_name---format-",
         "parameters": [
           {
-            "description": "",
             "in": "path",
             "name": "transport_name",
             "required": true,
