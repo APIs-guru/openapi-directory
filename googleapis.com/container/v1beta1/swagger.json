@@ -215,7 +215,11 @@
           "description": "The operation type.",
           "enum": [
             "createCluster",
-            "deleteCluster"
+            "deleteCluster",
+            "repairCluster",
+            "updateCluster",
+            "upgradeMaster",
+            "upgradeNodes"
           ],
           "type": "string"
         },
