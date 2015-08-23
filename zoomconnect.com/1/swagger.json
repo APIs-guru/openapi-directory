@@ -1,0 +1,1105 @@
+{
+  "basePath": "/zoom",
+  "definitions": {
+    "Link": {
+      "properties": {
+        "href": {
+          "type": "string"
+        },
+        "rel": {
+          "type": "string"
+        },
+        "templated": {
+          "type": "boolean"
+        }
+      }
+    },
+    "RestErrorDTO": {
+      "description": "RestErrorDTO",
+      "properties": {
+        "code": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "developerMessage": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "moreInfoUrl": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "Void": {
+      "properties": {}
+    },
+    "WebServiceAccount": {
+      "description": "WebServiceAccount",
+      "properties": {
+        "creditBalance": {
+          "format": "double",
+          "type": "number"
+        },
+        "links": {
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "WebServiceContact": {
+      "description": "WebServiceContact",
+      "properties": {
+        "contactId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "contactNumber": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "links": {
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "type": "array"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "WebServiceContactLink": {
+      "description": "WebServiceContactLink",
+      "properties": {
+        "contactId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "links": {
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "WebServiceContacts": {
+      "description": "WebServiceContacts",
+      "properties": {
+        "links": {
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "type": "array"
+        },
+        "webServiceContacts": {
+          "items": {
+            "$ref": "#/definitions/WebServiceContact"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "WebServiceGroup": {
+      "description": "WebServiceGroup",
+      "properties": {
+        "groupId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "links": {
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "WebServiceGroups": {
+      "description": "WebServiceGroups",
+      "properties": {
+        "links": {
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "type": "array"
+        },
+        "webServiceGroups": {
+          "items": {
+            "$ref": "#/definitions/WebServiceGroup"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "WebServiceMessage": {
+      "description": "WebServiceMessage",
+      "properties": {
+        "campaign": {
+          "type": "string"
+        },
+        "contact": {
+          "$ref": "#/definitions/WebServiceContactLink"
+        },
+        "creditCost": {
+          "format": "double",
+          "type": "number"
+        },
+        "dateTimeReceived": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "dateTimeScheduled": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "dateTimeSent": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "deleted": {
+          "type": "boolean"
+        },
+        "fromNumber": {
+          "type": "string"
+        },
+        "links": {
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "type": "array"
+        },
+        "message": {
+          "type": "string"
+        },
+        "messageId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "messageStatus": {
+          "type": "string"
+        },
+        "messageType": {
+          "type": "string"
+        },
+        "numberOfMessages": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "read": {
+          "type": "boolean"
+        },
+        "toNumber": {
+          "type": "string"
+        },
+        "userDataField": {
+          "type": "string"
+        }
+      }
+    },
+    "WebServiceMessages": {
+      "description": "WebServiceMessages",
+      "properties": {
+        "elements": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "links": {
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "type": "array"
+        },
+        "page": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "pageSize": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "totalElements": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "totalPages": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "webServiceMessages": {
+          "items": {
+            "$ref": "#/definitions/WebServiceMessage"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "WebServiceSendSmsRequest": {
+      "description": "WebServiceSendSmsRequest",
+      "properties": {
+        "campaign": {
+          "type": "string"
+        },
+        "dataField": {
+          "type": "string"
+        },
+        "dateToSend": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "recipientNumber": {
+          "type": "string"
+        }
+      }
+    },
+    "WebServiceSendSmsRequests": {
+      "description": "WebServiceSendSmsRequests",
+      "properties": {
+        "defaultDateToSend": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "messagesPerMinute": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "sendSmsRequests": {
+          "items": {
+            "$ref": "#/definitions/WebServiceSendSmsRequest"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "WebServiceSendSmsResponse": {
+      "description": "WebServiceSendSmsResponse",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "messageId": {
+          "type": "string"
+        }
+      }
+    },
+    "WebServiceSendSmsResponses": {
+      "description": "WebServiceSendSmsResponses",
+      "properties": {
+        "sendSmsResponses": {
+          "items": {
+            "$ref": "#/definitions/WebServiceSendSmsResponse"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "WebServiceTemplate": {
+      "description": "WebServiceTemplate",
+      "properties": {
+        "data": {
+          "type": "string"
+        },
+        "links": {
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        },
+        "templateId": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "WebServiceTemplates": {
+      "description": "WebServiceTemplates",
+      "properties": {
+        "links": {
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "type": "array"
+        },
+        "webServiceTemplates": {
+          "items": {
+            "$ref": "#/definitions/WebServiceTemplate"
+          },
+          "type": "array"
+        }
+      }
+    }
+  },
+  "host": "www.zoomconnect.com",
+  "info": {
+    "title": "www.zoomconnect.com",
+    "version": "1",
+    "x-origin": {
+      "format": "swagger",
+      "url": "https://www.zoomconnect.com/zoom/api-docs",
+      "version": "1.2"
+    },
+    "x-providerName": "zoomconnect.com"
+  },
+  "paths": {
+    "/api/rest/v1/account/balance": {
+      "get": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Returns your account's credit balance",
+        "operationId": "getBalance",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/WebServiceAccount"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "balance",
+        "tags": [
+          "balance"
+        ]
+      }
+    },
+    "/api/rest/v1/contacts/all": {
+      "get": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Returns all contacts",
+        "operationId": "getAll",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebServiceContacts"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "all",
+        "tags": [
+          "contacts"
+        ]
+      }
+    },
+    "/api/rest/v1/contacts/{contactId}": {
+      "get": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Returns details for a single contact",
+        "operationId": "get",
+        "parameters": [
+          {
+            "description": "contactId",
+            "format": "int64",
+            "in": "path",
+            "name": "contactId",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebServiceContact"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "get",
+        "tags": [
+          "contacts"
+        ]
+      }
+    },
+    "/api/rest/v1/groups/all": {
+      "get": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Returns all groups",
+        "operationId": "getAll",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebServiceGroups"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "all",
+        "tags": [
+          "groups"
+        ]
+      }
+    },
+    "/api/rest/v1/groups/{groupId}": {
+      "delete": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Deletes a  group",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "description": "groupId",
+            "format": "int64",
+            "in": "path",
+            "name": "groupId",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "Description was not specified"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "summary": "delete",
+        "tags": [
+          "groups"
+        ]
+      }
+    },
+    "/api/rest/v1/messages/all": {
+      "get": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Returns all messages",
+        "operationId": "getAll",
+        "parameters": [
+          {
+            "default": 100,
+            "description": "number of elements to return at a time",
+            "format": "int32",
+            "in": "query",
+            "name": "pageSize",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "default": 1,
+            "description": "page number",
+            "format": "int32",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "filter by message type",
+            "enum": [
+              "OUTBOUND",
+              "INBOUND"
+            ],
+            "in": "query",
+            "name": "type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "filter by message status",
+            "enum": [
+              "SCHEDULED",
+              "UNKNOWN",
+              "SENT",
+              "FAILED",
+              "FAILED_REFUNDED",
+              "FAILED_OPTOUT",
+              "DELIVERED",
+              "RECEIVED"
+            ],
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "date format: yyyyMMdd",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromDateTimeSent",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "date format: yyyyMMdd",
+            "format": "date-time",
+            "in": "query",
+            "name": "toDateTimeSent",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "date format: yyyyMMdd",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromDateTimeReceived",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "date format: yyyyMMdd",
+            "format": "date-time",
+            "in": "query",
+            "name": "toDateTimeReceived",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "phone number the message was sent from",
+            "in": "query",
+            "name": "fromNumber",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "phone number the message was sent to",
+            "in": "query",
+            "name": "toNumber",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "search matching message text",
+            "in": "query",
+            "name": "message",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "search by campaign",
+            "in": "query",
+            "name": "campaign",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "search by data field",
+            "in": "query",
+            "name": "dataField",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "return only deleted / not deleted messages",
+            "in": "query",
+            "name": "deleted",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "description": "return only read / unread messages (inbox messages only)",
+            "in": "query",
+            "name": "read",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebServiceMessages"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "all",
+        "tags": [
+          "messages"
+        ]
+      }
+    },
+    "/api/rest/v1/messages/{messageId}": {
+      "get": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Returns details for a single message",
+        "operationId": "get",
+        "parameters": [
+          {
+            "description": "messageId",
+            "format": "int64",
+            "in": "path",
+            "name": "messageId",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebServiceMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "get",
+        "tags": [
+          "messages"
+        ]
+      }
+    },
+    "/api/rest/v1/sms/send": {
+      "get": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Returns an example of the data to POST to send a single message.",
+        "operationId": "send",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebServiceSendSmsRequest"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "send",
+        "tags": [
+          "sms"
+        ]
+      }
+    },
+    "/api/rest/v1/sms/send-bulk": {
+      "get": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Returns an example of the data to POST to send multiple messages in one transaction.",
+        "operationId": "sendBulk",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebServiceSendSmsRequests"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "send-bulk",
+        "tags": [
+          "sms"
+        ]
+      }
+    },
+    "/api/rest/v1/sms/send-url-parameters": {
+      "get": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Send a single message using URL parameters.The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional.",
+        "operationId": "sendUrlParameters",
+        "parameters": [
+          {
+            "description": "the phone number of the recipient to send to",
+            "in": "query",
+            "name": "recipientNumber",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "the message to send",
+            "in": "query",
+            "name": "message",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "date format: yyyyMMddHHmm",
+            "format": "date-time",
+            "in": "query",
+            "name": "dateToSend",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "optional campaign name",
+            "in": "query",
+            "name": "campaign",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "optional extra data",
+            "in": "query",
+            "name": "dataField",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "send-url-parameters",
+        "tags": [
+          "sms"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Send a single message using URL parameters.The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional.",
+        "operationId": "sendUrlParameters",
+        "parameters": [
+          {
+            "description": "the phone number of the recipient to send to",
+            "in": "query",
+            "name": "recipientNumber",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "the message to send",
+            "in": "query",
+            "name": "message",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "date format: yyyyMMddHHmm",
+            "format": "date-time",
+            "in": "query",
+            "name": "dateToSend",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "optional campaign name",
+            "in": "query",
+            "name": "campaign",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "optional extra data",
+            "in": "query",
+            "name": "dataField",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "Description was not specified",
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "send-url-parameters",
+        "tags": [
+          "sms"
+        ]
+      }
+    },
+    "/api/rest/v1/templates/all": {
+      "get": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Returns all templates",
+        "operationId": "getAll",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebServiceTemplates"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "all",
+        "tags": [
+          "templates"
+        ]
+      }
+    },
+    "/api/rest/v1/templates/{templateId}": {
+      "delete": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Deletes a  template",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "description": "templateId",
+            "format": "int64",
+            "in": "path",
+            "name": "templateId",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "Description was not specified"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "summary": "delete",
+        "tags": [
+          "templates"
+        ]
+      }
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "tags": [
+    {
+      "name": "balance"
+    },
+    {
+      "description": "Send and schedule messages",
+      "name": "sms"
+    },
+    {
+      "description": "Manage your contacts",
+      "name": "contacts"
+    },
+    {
+      "description": "Manage your groups",
+      "name": "groups"
+    },
+    {
+      "description": "Manage your messages",
+      "name": "messages"
+    },
+    {
+      "description": "Manage your templates",
+      "name": "templates"
+    }
+  ]
+}
