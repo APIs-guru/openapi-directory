@@ -188,19 +188,11 @@ function logJson(json) {
 }
 
 function validateSwagger(swagger, callback) {
-  function validateCallback(validationErrors, validationResults) {
-    var errors = [].concat(validationErrors || [])
-      .concat((validationResults && validationResults.errors) || []);
-    if (_.isEmpty(errors))
-      errors = null;
-
-    var warnings = (validationResults && validationResults.warnings) || [];
-    if (_.isEmpty(warnings))
-      warnings = null;
-
-    callback(errors, warnings);
-  }
-  SwaggerTools.validate(swagger, validateCallback);
+  //TODO: remove 'getSpec', instead do it when reading file.
+  converter.getSpec(swagger, 'swagger_2', function (err, spec) {
+    assert(!err, err);
+    spec.validate(callback);
+  });
 }
 
 function getSpecs(callback, finishCallback) {
