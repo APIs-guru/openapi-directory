@@ -136,14 +136,14 @@ function writeSpec(url, type, callback) {
   getOriginSpec(url, type, function (spec) {
     convertToSwagger(spec, function (error, swagger) {
       if (error)
-        return logSpec(error, spec);
+        return logSpec(error, null, spec);
 
       var path = getPathComponents(swagger);
       patchSwagger(swagger, path);
 
       validateSwagger(swagger, function (errors, warnings) {
         if (errors)
-          return logSpec(errors, spec, swagger);
+          return logSpec(errors, warnings, spec, swagger);
 
         if (warnings)
           logJson(warnings);
@@ -156,7 +156,7 @@ function writeSpec(url, type, callback) {
   });
 }
 
-function logSpec(error, spec, swagger) {
+function logSpec(error, warnings, spec, swagger) {
   var url = spec.source;
 
   console.error('++++++++++++++++++++++++++ Begin ' + url + ' +++++++++++++++++++++++++');
@@ -174,6 +174,10 @@ function logSpec(error, spec, swagger) {
     logJson(error);
   else
     console.error(error);
+  if (warnings) {
+    console.error('******************** Warnings ' + url + ' ******************************');
+    logJson(warnings);
+  }
   console.error('------------------------- End ' + url + ' ----------------------------');
   process.exitCode = errExitCode;
 }
