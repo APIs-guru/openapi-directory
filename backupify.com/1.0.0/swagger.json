@@ -1,0 +1,2344 @@
+{
+  "basePath": "/",
+  "definitions": {
+    "backup": {
+      "properties": {
+        "backup_instance_id": {
+          "type": "integer"
+        },
+        "ended_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "failures": {
+          "items": {},
+          "type": "array"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "started_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "queued",
+            "in_progress",
+            "successful",
+            "failed",
+            "canceled"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "backup_instance_id",
+        "status",
+        "started_at",
+        "ended_at"
+      ]
+    },
+    "backup_definition": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "published": {
+          "type": "boolean"
+        },
+        "vendor_id": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "vendor_id",
+        "published"
+      ]
+    },
+    "backup_definition_variable": {
+      "properties": {
+        "default_value": {
+          "description": "A default value that can be used when no instance specific value is provided",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description offering additional information or detail about the variable",
+          "type": "string"
+        },
+        "key": {
+          "description": "Symbolic name or identifier of the variable",
+          "type": "string"
+        },
+        "name": {
+          "description": "Human friendly name of the variable",
+          "type": "string"
+        },
+        "optional": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "key",
+        "name"
+      ]
+    },
+    "backup_instance": {
+      "properties": {
+        "backup_definition_id": {
+          "description": "Unique identifier of the backup_definition the backup_instance derives from",
+          "type": "integer"
+        },
+        "backup_frequency": {
+          "description": "Frequency with which scheduled backups are performed",
+          "enum": [
+            "off",
+            "daily",
+            "weekly"
+          ],
+          "type": "string"
+        },
+        "customer_id": {
+          "description": "Unique identifier of the customer the backup_instance belongs to",
+          "type": "integer"
+        },
+        "id": {
+          "description": "Unique identifier of the backup_instance",
+          "type": "integer"
+        },
+        "last_backup_state": {
+          "description": "Final state of the last completed backup or current state of an in progress backup",
+          "enum": [
+            "queued",
+            "in progress",
+            "successful",
+            "failed",
+            "canceled"
+          ]
+        },
+        "last_successful_backup": {
+          "description": "Date and time of the last successful backup in ISO 8601 format",
+          "format": "date-time",
+          "type": "string"
+        },
+        "next_scheduled_backup": {
+          "description": "Date and time of the next scheduled backup in ISO 8601 format",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "backup_definition_id",
+        "customer_id"
+      ]
+    },
+    "backup_instance_endpoint": {
+      "properties": {
+        "description": {
+          "description": "Information and detail about the endpoint",
+          "type": "string"
+        },
+        "name": {
+          "description": "Symbolic name or identifier of the endpoint as defined by the backup_definition",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "backup_instance_variable": {
+      "properties": {
+        "is_default_value": {
+          "type": "boolean"
+        },
+        "key": {
+          "description": "Symbolic name or identifier of the variable",
+          "type": "string"
+        },
+        "value": {
+          "description": "Information to be stored for later retrieval",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ]
+    },
+    "blob": {
+      "description": "A Binary Large OBject",
+      "properties": {}
+    },
+    "customer": {
+      "properties": {
+        "id": {
+          "description": "The ID of the customer. Should be saved by the vendor to allow fast access to backup information to users of their system",
+          "type": "integer"
+        },
+        "name": {
+          "description": "Vendor provided ID uniquely identifying customer",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "endpoint_record": {
+      "properties": {
+        "blob_url": {
+          "description": "URL to download the blob associated with the given endpoint record"
+        },
+        "field_data": {
+          "description": "JSON object (possibly nested) matching the structure of the endpoint's source"
+        }
+      },
+      "required": [
+        "field_data"
+      ]
+    },
+    "export": {
+      "properties": {
+        "backup_instance_id": {
+          "type": "integer"
+        },
+        "content_types": {
+          "type": "string"
+        },
+        "ended_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "export_formats": {
+          "type": "string"
+        },
+        "exported_data_url": {
+          "type": "string"
+        },
+        "exported_data_url_expiration": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "failures": {
+          "items": {},
+          "type": "array"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "records_failed": {
+          "type": "integer"
+        },
+        "records_processed": {
+          "type": "integer"
+        },
+        "started_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "queued",
+            "in_progress",
+            "successful",
+            "failed",
+            "canceled"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "backup_instance_id",
+        "status",
+        "started_at",
+        "ended_at"
+      ]
+    },
+    "export_reauth": {
+      "properties": {
+        "exported_data_url": {
+          "type": "string"
+        },
+        "exported_data_url_expiration": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "token": {
+      "properties": {
+        "access_token": {
+          "description": "The Access Token string for the requested grant type",
+          "type": "string"
+        },
+        "expires_in": {
+          "type": "integer"
+        },
+        "token_type": {
+          "enum": [
+            "bearer_token"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "access_token",
+        "token_type",
+        "expires_in"
+      ]
+    },
+    "vendor_user": {
+      "properties": {
+        "client_id": {
+          "description": "The client_id stored for the current vendor",
+          "type": "string"
+        },
+        "client_secret": {
+          "description": "The client_secret stored for the current vendor",
+          "type": "string"
+        },
+        "email": {
+          "description": "The email stored for the current vendor",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name stored for the current vendor",
+          "type": "string"
+        },
+        "vendor_id": {
+          "description": "The ID of the vendor.",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "vendor_id",
+        "name",
+        "email",
+        "client_id",
+        "client_secret"
+      ]
+    }
+  },
+  "host": "api.backupify.com",
+  "info": {
+    "title": "api.backupify.com",
+    "version": "1.0.0",
+    "x-origin": {
+      "format": "swagger",
+      "url": "https://api.backupify.com/docs/json/api.json",
+      "version": "1.2"
+    },
+    "x-providerName": "backupify.com"
+  },
+  "paths": {
+    "/oauth/token": {
+      "post": {
+        "description": "All actions and visibility is limited in scope to items that are descendents of the authenticated vendor and the backup_definitions owned thereby. At this time, all Access Tokens are scoped with full write capabilities.",
+        "operationId": "access_token_from_client_credentials",
+        "parameters": [
+          {
+            "description": "API Client ID",
+            "in": "formData",
+            "name": "client_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "API Client secret",
+            "in": "formData",
+            "name": "client_secret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "String identifying the grant type to be used for token retrieval. MUST be 'client_credentials' to retrieve Access Token using client_id and client_secret.",
+            "enum": [
+              "client_credentials"
+            ],
+            "in": "formData",
+            "name": "grant_type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "A space separated list of operational scopes available to the returned token.",
+            "enum": [
+              "write"
+            ],
+            "in": "formData",
+            "name": "scope",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Access Token retrieval",
+            "schema": {
+              "$ref": "#/definitions/token"
+            }
+          },
+          "400": {
+            "description": "Invalid Scope - The requested scope is invalid, unknown, malformed, or exceeds the previously granted scope."
+          }
+        },
+        "summary": "Retrieve an Access Token authenticated using the provided client_id and client_secret.",
+        "tags": [
+          "tokens"
+        ]
+      }
+    },
+    "/v1/authenticate_customer": {
+      "get": {
+        "description": "Requires Access Token granted for a customer",
+        "operationId": "utils_authenticate_customer",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted for customer",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The customer access token successfully authenticated. The response body is empty JSON object."
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          }
+        },
+        "summary": "A simple method to test authentication of a customer access token.",
+        "tags": [
+          "utilities"
+        ]
+      }
+    },
+    "/v1/authenticate_vendor": {
+      "get": {
+        "description": "Requires Access Token granted from client_credentials",
+        "operationId": "utils_authenticate_vendor",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client_credentials for vendor",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The vendor access token successfully authenticated."
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          }
+        },
+        "summary": "A simple method to test authentication of a vendor access token. The response body is empty JSON object.",
+        "tags": [
+          "utilities"
+        ]
+      }
+    },
+    "/v1/backup_definitions": {
+      "get": {
+        "description": "This will retrieve a list of backup_defintions from all vendors. To view backup_defintions for a particular vendor, see the vendors API. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
+        "operationId": "index_backup_definitions",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Limit backup_definitions returned to those owned by the specified vendor_id",
+            "in": "query",
+            "name": "vendor_id",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The index of backup_defintions was retrieved successfully. The response body is a list of all backup_definitions.",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/backup_definition"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The specified vendor could not be found"
+          }
+        },
+        "summary": "Retrieve an index of all backup_definitions",
+        "tags": [
+          "backup_definitions"
+        ]
+      },
+      "post": {
+        "operationId": "backup_definition_create",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name for the backup_definition",
+            "in": "formData",
+            "name": "backup_definition[name]",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Description of the backup_definition",
+            "in": "formData",
+            "name": "backup_definition[description]",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Boolean flag indicating whether the backup definition is published and available for use",
+            "in": "formData",
+            "name": "backup_definition[published]",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The backup_defintion was successfully created. The response body is the new backup_definition.",
+            "schema": {
+              "$ref": "#/definitions/backup_definition"
+            }
+          },
+          "400": {
+            "description": "Bad request - Likely the result of a validation failure or the omission of a required parameter. See response body for specific details."
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          }
+        },
+        "summary": "Create a new backup_definition",
+        "tags": [
+          "backup_definitions"
+        ]
+      }
+    },
+    "/v1/backup_definitions/{backup_definition_id}": {
+      "get": {
+        "description": "Only backup_definitions you have permission to view will be returned",
+        "operationId": "get_backup_definition_by_id",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_definition to retrieve",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_definition_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The backup_definition was successfully retrieved. Response body is the backup_definition.",
+            "schema": {
+              "$ref": "#/definitions/backup_definition"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The requested backup_definition could not be found"
+          }
+        },
+        "summary": "Retrieve a backup_definition by backup_definition_id",
+        "tags": [
+          "backup_definitions"
+        ]
+      },
+      "put": {
+        "description": "Only backup_definitions you have permission to change can be modified",
+        "operationId": "update_backup_definition",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_definition to retrieve",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_definition_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "Name for the backup_definition",
+            "in": "formData",
+            "name": "backup_definition[name]",
+            "type": "string"
+          },
+          {
+            "description": "Description of the backup_definition",
+            "in": "formData",
+            "name": "backup_definition[description]",
+            "type": "string"
+          },
+          {
+            "description": "Boolean flag indicating whether the backup definition is published and available for use",
+            "in": "formData",
+            "name": "backup_definition[published]",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The backup_definition was successfully updated. Response body is the updated backup_definition.",
+            "schema": {
+              "$ref": "#/definitions/backup_definition"
+            }
+          },
+          "400": {
+            "description": "Bad request - Likely the result of a validation failure. See response body for error specifics."
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The requested backup_definition could not be found"
+          }
+        },
+        "summary": "Update the specified backup_definition",
+        "tags": [
+          "backup_definitions"
+        ]
+      }
+    },
+    "/v1/backup_definitions/{backup_definition_id}/variables": {
+      "get": {
+        "description": "You can only retrieve variables for backup_definitions you have access to. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
+        "operationId": "backup_definition_variables_index",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_definition to retrieve variables for",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_definition_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The list of variables for the specified backup_definition was successfully retrieved. The response is a list of backup_definition_variables.",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/backup_definition_variable"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The requested backup_definition could not be found"
+          }
+        },
+        "summary": "Retrieve a list of variables for the specified backup_definition",
+        "tags": [
+          "backup_definition_variables"
+        ]
+      },
+      "post": {
+        "description": "It is only possible to create variables for backup_definitions you have permission to manage.",
+        "operationId": "backup_definition_variable_create",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_definition to create a variable for",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_definition_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The symbolic name or identifier to access the defined variable by",
+            "in": "formData",
+            "name": "variable[key]",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "A human-friendly name for the variable",
+            "in": "formData",
+            "name": "variable[name]",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Description offering additional information or detail about the variable",
+            "in": "formData",
+            "name": "variable[description]",
+            "type": "string"
+          },
+          {
+            "description": "Flag indicating whether this variable is optional or if a value is required",
+            "in": "formData",
+            "name": "variable[optional]",
+            "type": "boolean"
+          },
+          {
+            "description": "A default value that can be used when no instance specific value is provided",
+            "in": "formData",
+            "name": "variable[default_value]",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The request completed successfully and the variable was created. The response is backup_definition_variable created.",
+            "schema": {
+              "$ref": "#/definitions/backup_definition_variable"
+            }
+          },
+          "400": {
+            "description": "Bad request - See the response body for more infomation on the error. May indicate that a variable is already defined for the provided key or a required parameter has been omitted."
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The requested backup_definition could not be found"
+          }
+        },
+        "summary": "Create a new variable for the specified key for the specified backup_definition",
+        "tags": [
+          "backup_definition_variables"
+        ]
+      }
+    },
+    "/v1/backup_definitions/{backup_definition_id}/variables/{key}": {
+      "get": {
+        "description": "You can only retrieve variables for backup_definitions you have access to",
+        "operationId": "get_backup_definition_variable_by_key",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_definition to retrieve a variable for",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_definition_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The key, symbolic name, or identifier of the variable to retrieve",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The specified variable for the specified backup_definition was successfully retrieved. The response is the requested backup_definition_variable.",
+            "schema": {
+              "$ref": "#/definitions/backup_definition_variable"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action."
+          },
+          "404": {
+            "description": "Not found - Either the requested backup_definition or variable key could not be found. See error message for specific details."
+          }
+        },
+        "summary": "Retrieve a specific variable by key for the specified backup_definition",
+        "tags": [
+          "backup_definition_variables"
+        ]
+      },
+      "put": {
+        "description": "You can only update variables for backup_definitions you have access to. Additionally, it is not possible to update a variable's key. Requests including a modified key name will result in an error.",
+        "operationId": "update_backup_definition_variable_by_key",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_definition to retrieve a variable for",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_definition_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The key, symbolic name, or identifier of the variable to update",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The human-friendly name to use for the variable",
+            "in": "formData",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Description offering additional information or detail about the variable",
+            "in": "formData",
+            "name": "variable[description]",
+            "type": "string"
+          },
+          {
+            "description": "Flag indicating whether this variable is optional or if a value is required",
+            "in": "formData",
+            "name": "variable[optional]",
+            "type": "boolean"
+          },
+          {
+            "description": "A default value that can be used when no instance specific value is provided",
+            "in": "formData",
+            "name": "variable[default_value]",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The specified variable for the specified backup_definition was successfully updated. The response is the updated backup_definition_variable.",
+            "schema": {
+              "$ref": "#/definitions/backup_definition_variable"
+            }
+          },
+          "400": {
+            "description": "Bad request - See response body for additional information on the specific error. May be caused by trying to alter the key of a variable."
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action."
+          },
+          "404": {
+            "description": "Not found - Either the requested backup_definition or variable could not be found. See error message for specific details."
+          }
+        },
+        "summary": "Update a specific variable by key for the specified backup_definition",
+        "tags": [
+          "backup_definition_variables"
+        ]
+      }
+    },
+    "/v1/backup_instances": {
+      "get": {
+        "description": "It is only possible to retrieve backup_instances for customers you are authorized to access. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
+        "operationId": "index_backup_instance",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_definition to retrieve backup_instances for",
+            "format": "int64",
+            "in": "query",
+            "name": "backup_definition_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The backup_instances related to the backup_definition specified were successfully retrieved. The response body is a list of the backup_instances.",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/backup_instance"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Bad request - See the response body for more infomation on the error. May be caused by the omission of a required parameter, such as backup_definition_id"
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - Unable to retrieve backup_instances because the requested backup_definition could not be found"
+          }
+        },
+        "summary": "Retrieves a list of backup_instances associated with the specified backup_definition",
+        "tags": [
+          "backup_instances"
+        ]
+      },
+      "post": {
+        "description": "It is only possible to create backup_instances for customers you are authorized to modify",
+        "operationId": "create_backup_instance",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_definition to create a backup_instance for",
+            "format": "int64",
+            "in": "formData",
+            "name": "backup_instance[backup_definition_id]",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "ID of the customer to create the backup_instance for",
+            "format": "int64",
+            "in": "formData",
+            "name": "backup_instance[customer_id]",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "Frequency with which scheduled backups are performed",
+            "enum": [
+              "off",
+              "daily"
+            ],
+            "in": "formData",
+            "name": "backup_instance[backup_frequency]",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The backup_instance was successfully created. Response body is the backup_instance.",
+            "schema": {
+              "$ref": "#/definitions/backup_instance"
+            }
+          },
+          "400": {
+            "description": "Bad request - See the response body for more infomation on the error. May be caused by the omission of a required parameter."
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          }
+        },
+        "summary": "Create a new backup_instance from the specified backup_definition for the specified customer",
+        "tags": [
+          "backup_instances"
+        ]
+      }
+    },
+    "/v1/backup_instances/{backup_instance_id}": {
+      "get": {
+        "description": "Only backup_instances you have permission to view will be returned",
+        "operationId": "get_backup_instance_by_id",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance to retrieve",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The backup_instance was successfully retrieved. Response body is the backup_instance.",
+            "schema": {
+              "$ref": "#/definitions/backup_instance"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The requested backup_instance could not be found"
+          }
+        },
+        "summary": "Retrieve a backup_instance by backup_instance_id",
+        "tags": [
+          "backup_instances"
+        ]
+      },
+      "put": {
+        "description": "Only backup_instances you have permission to change can be modified",
+        "operationId": "update_backup_instance",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance to retrieve",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "Frequency with which scheduled backups will be performed",
+            "enum": [
+              "off",
+              "daily"
+            ],
+            "in": "formData",
+            "name": "backup_instance[backup_frequency]",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The backup_instance was successfully altered. Response body is the updated backup_instance.",
+            "schema": {
+              "$ref": "#/definitions/backup_instance"
+            }
+          },
+          "400": {
+            "description": "Bad request - See response body for error specifics. Likely caused by attempting to update a read-only attribute or the omission of a required parameter."
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action."
+          },
+          "404": {
+            "description": "Not found - The requested backup_instance could not be found"
+          }
+        },
+        "summary": "Modify the specified backup_instance",
+        "tags": [
+          "backup_instances"
+        ]
+      }
+    },
+    "/v1/backup_instances/{backup_instance_id}/backups": {
+      "get": {
+        "description": "Only backups belonging to backup_instances you have permission to manage can be retrieved. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
+        "operationId": "index_backups",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance to backup",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The list of backups for the specified backup_instance were successfully retrieved. The response body is the list of backups.",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/backup"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The requested backup_instance could not be found"
+          }
+        },
+        "summary": "Retrieve a list of all backups for the specified backup_instance. ",
+        "tags": [
+          "backups"
+        ]
+      },
+      "post": {
+        "description": "Only backup_instances you have permission to manage can be backed up",
+        "operationId": "create_backup",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance to backup",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - A backup has been enqueued for the backup_instance. Response body is the backup that has been enqueued.",
+            "schema": {
+              "$ref": "#/definitions/backup"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The requested backup_instance could not be found"
+          }
+        },
+        "summary": "Perform an immediate backup of the specified backup_instance",
+        "tags": [
+          "backups"
+        ]
+      }
+    },
+    "/v1/backup_instances/{backup_instance_id}/backups/active": {
+      "get": {
+        "description": "Only backups belonging to backup_instances you have permission to access can be retrieved",
+        "operationId": "get_active_backup_run",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance the requested backup belongs to",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The specified active backup for the specified backup_instance was successfully retrieved. The response body is the requested backup.",
+            "schema": {
+              "$ref": "#/definitions/backup"
+            }
+          },
+          "204": {
+            "description": "No Content - The specified backup_instance was found but there is not currently a backup in progress. The response body contains no content."
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The requested backup_instance could not be found. See error message for specific details."
+          }
+        },
+        "summary": "Retrieve the active backup for the specified backup_instance if one exists",
+        "tags": [
+          "backups"
+        ]
+      }
+    },
+    "/v1/backup_instances/{backup_instance_id}/backups/{backup_id}": {
+      "get": {
+        "description": "Only backups belonging to backup_instances you have permission to access can be retrieved",
+        "operationId": "get_backup_by_id",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance the requested backup belongs to",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "ID of the backup to retrieve",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The specified backup for the specified backup_instance was successfully retrieved. The response body is the requested backup.",
+            "schema": {
+              "$ref": "#/definitions/backup"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - Either the requested backup_instance or backup could not be found. See error message for specific details."
+          }
+        },
+        "summary": "Retrieve the specified backup for the specified backup_instance",
+        "tags": [
+          "backups"
+        ]
+      }
+    },
+    "/v1/backup_instances/{backup_instance_id}/endpoints": {
+      "get": {
+        "description": "You can only retrieve endpoints for backup_instances you have access to. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
+        "operationId": "backup_instance_endpoint_index",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance to retrieve an endpoint for",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The list of endpoints for the specified backup_instance was successfully retrieved. The response contains the requested backup_instance_endpoints.",
+            "schema": {
+              "$ref": "#/definitions/backup_instance_endpoint"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The requested backup_instance could not be found. See response body for specific details."
+          }
+        },
+        "summary": "Retrieve a list of endpoints for the specified backup_instance",
+        "tags": [
+          "backup_instance_endpoints"
+        ]
+      }
+    },
+    "/v1/backup_instances/{backup_instance_id}/endpoints/{endpoint_name}": {
+      "get": {
+        "description": "You can only retrieve endpoints for backup_instances you have access to",
+        "operationId": "get_backup_instance_endpoint_by_name",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance to retrieve an endpoint for",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The name of the endpoint to retrieve as defined by the backup_definition of the specified backup_instance",
+            "in": "path",
+            "name": "endpoint_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The specified endpoint for the specified backup_instance was successfully retrieved. The response is the requested backup_instance_endpoint.",
+            "schema": {
+              "$ref": "#/definitions/backup_instance_endpoint"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - Either the requested backup_instance or endpoint could not be found. See error message for specific details."
+          }
+        },
+        "summary": "Retrieve a specific endpoint by name for the specified backup_instance",
+        "tags": [
+          "backup_instance_endpoints"
+        ]
+      }
+    },
+    "/v1/backup_instances/{backup_instance_id}/endpoints/{endpoint_name}/records": {
+      "get": {
+        "description": "You can only retrieve records for endpoints that belong to backup_instances you have access to. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
+        "operationId": "endpoint_records_index",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance to retrieve an endpoint for",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "ID of the endpoint to retrieve records for",
+            "in": "path",
+            "name": "endpoint_name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The list of records for the specified endpoint and backup_instance was successfully retrieved. The response contains the requested endpoint records.",
+            "schema": {
+              "$ref": "#/definitions/endpoint_record"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The requested backup_instance or endpoint could not be found. See response body for specific details."
+          }
+        },
+        "summary": "Retrieve a list of records stored for the specified endpoint and backup_instance",
+        "tags": [
+          "endpoint_records"
+        ]
+      }
+    },
+    "/v1/backup_instances/{backup_instance_id}/endpoints/{endpoint_name}/records/{record_id}": {
+      "get": {
+        "description": "You can only retrieve records for endpoints of backup_instances you have access to",
+        "operationId": "get_endpoint_record_by_id",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance to retrieve an endpoint for",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The name of the endpoint to retrieve the record from",
+            "in": "path",
+            "name": "endpoint_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The id of the endpoint record to retrieve",
+            "in": "path",
+            "name": "record_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The specified record for the specified endpoint was successfully retrieved. The response is the requested endpoint record.",
+            "schema": {
+              "$ref": "#/definitions/endpoint_record"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - Either the requested backup_instance, endpoint, or endpoint record could not be found. See error message for specific details."
+          }
+        },
+        "summary": "Retrieve a specific record by id for the specified endpoint and backup_instance",
+        "tags": [
+          "endpoint_records"
+        ]
+      }
+    },
+    "/v1/backup_instances/{backup_instance_id}/endpoints/{endpoint_name}/records/{record_id}/blob": {
+      "get": {
+        "description": "You can only retrieve blobs for endpoints of backup_instances you have access to",
+        "operationId": "get_endpoint_record_blob",
+        "parameters": [
+          {
+            "description": "Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Access-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance to retrieve an endpoint for",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The name of the endpoint to retrieve the record from",
+            "in": "path",
+            "name": "endpoint_name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The id of the endpoint record the blob belongs to",
+            "in": "path",
+            "name": "record_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The specified blob was successfully retrieved. The response is a binary stream of the blob.",
+            "schema": {
+              "$ref": "#/definitions/blob"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - Either the requested backup_instance, endpoint, endpoint record, or blob could not be found. See error message for specific details."
+          }
+        },
+        "summary": "Retrieve the blob associated with the specified record for the specified endpoint and backup_instance",
+        "tags": [
+          "endpoint_records"
+        ]
+      }
+    },
+    "/v1/backup_instances/{backup_instance_id}/exports": {
+      "get": {
+        "description": "You can only retrieve exports for backup_instances you have access to. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
+        "operationId": "backup_instance_exports",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance to retrieve exports for",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The list of exports for the specified backup_instance were successfully retrieved. The response is a list of exports.",
+            "schema": {
+              "$ref": "#/definitions/export"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The requested backup_instance could not be found"
+          }
+        },
+        "summary": "Retrieve a list of exports for the specified backup_instance",
+        "tags": [
+          "exports"
+        ]
+      },
+      "post": {
+        "description": "Only backup_instances you have permission to manage can be exported",
+        "operationId": "backup_instance_export",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance to export",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "default": false,
+            "description": "Flag to force a full export, as opposed to re-authorizing an old export if the data is the same.",
+            "in": "formData",
+            "name": "export_run[force_full]",
+            "type": "boolean"
+          },
+          {
+            "description": "ID of a specific backup_run to export. Note: backup_run.ended_at will overwrite any value passed into for export_datetime",
+            "format": "int64",
+            "in": "formData",
+            "name": "export_run[backup_run_id]",
+            "type": "integer"
+          },
+          {
+            "description": "Date (format: YYYY-MM-DD) from which to export. Data will be exported from the last backup_run on the date specified, or the most recent backup_run if no date is not given.",
+            "in": "formData",
+            "name": "export_run[export_datetime]",
+            "type": "string"
+          },
+          {
+            "description": "Comma separated list of export format options. Valid options: blobs, csv, json",
+            "in": "formData",
+            "name": "export_run[export_formats]",
+            "type": "string"
+          },
+          {
+            "description": "Comma separated list of blob content-types to export",
+            "in": "formData",
+            "name": "export_run[content_types]",
+            "type": "string"
+          },
+          {
+            "default": true,
+            "description": "Flag to send a confirmation email w/export link upon completion.",
+            "in": "formData",
+            "name": "export_run[send_confirmation]",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - An export has been enqueued for the requested backup_instance. The response is the export enqueued.",
+            "schema": {
+              "$ref": "#/definitions/export"
+            }
+          },
+          "400": {
+            "description": "Bad request - See the response body for more information on the error. May be caused by requesting an export on a backup_instance that has no successful backups."
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The requested backup_instance could not be found"
+          }
+        },
+        "summary": "Perform an export of the most recent backup of the specified backup_instance",
+        "tags": [
+          "exports"
+        ]
+      }
+    },
+    "/v1/backup_instances/{backup_instance_id}/exports/{export_id}": {
+      "get": {
+        "description": "You can only retrieve exports for backup_instances you have access to",
+        "operationId": "get_backup_instance_export_by_id",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance to retrieve an export for",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "ID of the export to retrieve",
+            "format": "int64",
+            "in": "path",
+            "name": "export_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The specified export for the specified backup_instance was successfully retrieved. The response is the requested export.",
+            "schema": {
+              "$ref": "#/definitions/export"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - Either the requested backup_instance or export could not be found. See error message for specific details."
+          }
+        },
+        "summary": "Retrieve a specific export for the specified backup_instance",
+        "tags": [
+          "exports"
+        ]
+      }
+    },
+    "/v1/backup_instances/{backup_instance_id}/exports/{export_id}/reauth": {
+      "post": {
+        "description": "You can only re-authorize an export when there's already a valid exported_data_url",
+        "operationId": "post_reauth_and_update_exported_data_url",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance to retrieve an export for",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "ID of the export to retrieve",
+            "format": "int64",
+            "in": "path",
+            "name": "export_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The specified export for the specified backup_instance was successfully retrieved. The response is the requested export.",
+            "schema": {
+              "$ref": "#/definitions/export_reauth"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - Either the requested backup_instance or export could not be found. See error message for specific details."
+          }
+        },
+        "summary": "Retrieve an updated exported_data_url for a specific export for the specified backup_instance",
+        "tags": [
+          "exports"
+        ]
+      }
+    },
+    "/v1/backup_instances/{backup_instance_id}/logs": {
+      "get": {
+        "operationId": "logs",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance to pull logs for",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "Date (format: YYYY-MM-DD) for which to fetch logs (default: today).",
+            "in": "query",
+            "name": "date",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The logs were successfully retrieved and are contained in the response body."
+          },
+          "400": {
+            "description": "Bad request - See the response body for more information on the error."
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The requested backup_instance could not be found"
+          }
+        },
+        "summary": "Returns the logs for a given backup instance",
+        "tags": [
+          "logs"
+        ]
+      }
+    },
+    "/v1/backup_instances/{backup_instance_id}/logs/{scroll_id}": {
+      "get": {
+        "operationId": "logs",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance to pull logs for",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "scroll_id for pagination",
+            "in": "path",
+            "name": "scroll_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The logs were successfully retrieved and are contained in the response body."
+          },
+          "400": {
+            "description": "Bad request - See the response body for more information on the error."
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The requested backup_instance could not be found"
+          }
+        },
+        "summary": "Returns the logs for a given backup instance",
+        "tags": [
+          "logs"
+        ]
+      }
+    },
+    "/v1/backup_instances/{backup_instance_id}/variables": {
+      "get": {
+        "description": "You can only retrieve variables for backup_instances you have access to. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
+        "operationId": "backup_instance_variables_index",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance to retrieve variables for",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The list of variables for the specified backup_instance was successfully retrieved. The response is a list of backup_instance_variables.",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/backup_instance_variable"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The requested backup_instance could not be found"
+          }
+        },
+        "summary": "Retrieve a list of variables for the specified backup_instance",
+        "tags": [
+          "backup_instance_variables"
+        ]
+      },
+      "post": {
+        "description": "The key specified must refer to the key of a previously defined backup_definition variable. It is only possible to create variables for backup_instances you have permission to manage.",
+        "operationId": "backup_instance_variable_create",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance to create a variable for",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The key, as defined by the backup_definition, to set a value for",
+            "in": "formData",
+            "name": "variable[key]",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The value or information to store for the specified key",
+            "in": "formData",
+            "name": "variable[value]",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The request completed successfully and the variable was created. The response is backup_instance_variable created.",
+            "schema": {
+              "$ref": "#/definitions/backup_instance_variable"
+            }
+          },
+          "400": {
+            "description": "Bad request - See the response body for more infomation on the error. May indicate that a variable is already defined for the provided key."
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The requested backup_instance or variable key could not be found"
+          }
+        },
+        "summary": "Create a custom variable value for the specified key for the specified backup_instance",
+        "tags": [
+          "backup_instance_variables"
+        ]
+      }
+    },
+    "/v1/backup_instances/{backup_instance_id}/variables/{key}": {
+      "get": {
+        "description": "You can only retrieve variables for backup_instances you have access to",
+        "operationId": "get_backup_instance_variable_by_key",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance to retrieve a variable for",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The key of the variable to retrieve as defined by the backup_definition of the specified backup_instance",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The specified variable for the specified backup_instance was successfully retrieved. The response is the requested backup_instance_variable.",
+            "schema": {
+              "$ref": "#/definitions/backup_instance_variable"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - Either the requested backup_instance or key could not be found. See error message for specific details."
+          }
+        },
+        "summary": "Retrieve a specific variable by key for the specified backup_instance",
+        "tags": [
+          "backup_instance_variables"
+        ]
+      },
+      "put": {
+        "description": "You can only alter variables for backup_instances you have access to manage",
+        "operationId": "update_backup_instance_variable",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance to update a variable for",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The key of the variable to update as defined by the backup_definition of the specified backup_instance",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The updated data to store at the specified key",
+            "in": "formData",
+            "name": "variable[value]",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The specified variable for the specified backup_instance was successfully updated. The response is the updated backup_instance_variable.",
+            "schema": {
+              "$ref": "#/definitions/backup_instance_variable"
+            }
+          },
+          "400": {
+            "description": "Bad request - See error body for specific details. Likely caused by the omission of a required parameter."
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action."
+          },
+          "404": {
+            "description": "Not found - Either the requested backup_instance or key could not be found. See error message for specific details."
+          }
+        },
+        "summary": "Update the value of a variable by key for the specified backup_instance",
+        "tags": [
+          "backup_instance_variables"
+        ]
+      }
+    },
+    "/v1/customers": {
+      "get": {
+        "description": "Requires Access Token granted from client credentials. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
+        "operationId": "customers_index",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - Customer list was successfully retrieved. Response body is a list of customers.",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/customer"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          }
+        },
+        "summary": "Retrieve a list of customers associated with the authenticated vendor",
+        "tags": [
+          "customers"
+        ]
+      },
+      "post": {
+        "description": "Requires Access Token granted from client credentials.",
+        "operationId": "customers_create",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Vendor provided ID uniquely identifying customer. This attribute is required and is provided to allow a vendor to map a customer instance to a user in their system.",
+            "in": "formData",
+            "name": "customer[name]",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Email address associated with the customer",
+            "in": "formData",
+            "name": "customer[email]",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - Customer was successfully created. Response body is the created object.",
+            "schema": {
+              "$ref": "#/definitions/customer"
+            }
+          },
+          "400": {
+            "description": "Bad request - Likely the result of the omission of one or more parameters or a validation error. Reference the response message for more information on the particular failure."
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          }
+        },
+        "summary": "Create a new customer instance identified by the given {name} identifier",
+        "tags": [
+          "customers"
+        ]
+      }
+    },
+    "/v1/customers/{customer_id}": {
+      "get": {
+        "description": "Requires Access Token granted from client credentials.",
+        "operationId": "customer_show",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the customer to retrieve",
+            "in": "path",
+            "name": "customer_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - Customer successfully retrieved. Response body is the customer.",
+            "schema": {
+              "$ref": "#/definitions/customer"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The requested customer could not be found"
+          }
+        },
+        "summary": "Retrieves the customer identified by customer_id",
+        "tags": [
+          "customers"
+        ]
+      },
+      "put": {
+        "description": "Requires Access Token granted from client credentials.",
+        "operationId": "customer_update",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the customer to modify",
+            "in": "path",
+            "name": "customer_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Vendor provided ID uniquely identifying customer. This attribute is required and is provided to allow a vendor to map a customer instance to a user in their system.",
+            "in": "formData",
+            "name": "customer[name]",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - Customer was successfully updated. Response body is the updated object.",
+            "schema": {
+              "$ref": "#/definitions/customer"
+            }
+          },
+          "400": {
+            "description": "Bad request - Likely the result of a validation error. Reference the response message for more information on the particular failure."
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The requested customer could not be found"
+          }
+        },
+        "summary": "Update a customer instance identified by the given customer_id",
+        "tags": [
+          "customers"
+        ]
+      }
+    },
+    "/v1/customers/{customer_id}/backup_instances": {
+      "get": {
+        "description": "It is only possible to retrieve backup_instances for customers you are authorized to access. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
+        "operationId": "index_backup_instance_by_customer",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the customer to retrieve backup_instances for",
+            "format": "int64",
+            "in": "path",
+            "name": "customer_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The backup_instances related to the customer specified were successfully retrieved. The response body is a list of the backup_instances.",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/backup_instance"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - Unable to retrieve backup_instances because the requested customer could not be found"
+          }
+        },
+        "summary": "Retrieves a list of backup_instances associated with the specified customer",
+        "tags": [
+          "customers"
+        ]
+      }
+    },
+    "/v1/ping": {
+      "get": {
+        "operationId": "utils_ping",
+        "responses": {
+          "200": {
+            "description": "Success - The connection succeeded. The response body is an empty JSON object."
+          }
+        },
+        "summary": "A simple method that returns a 200 response if the connection succeeds",
+        "tags": [
+          "utilities"
+        ]
+      }
+    },
+    "/v1/vendors/me": {
+      "get": {
+        "description": "Requires Access Token granted from client credentials.",
+        "operationId": "vendors_me",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - Information about the current vendor user was successfully retrieved. Response body is the current vendor user.",
+            "schema": {
+              "$ref": "#/definitions/vendor_user"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          }
+        },
+        "summary": "Provides information about the currently authenticated vendor user",
+        "tags": [
+          "vendors"
+        ]
+      }
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Backup index, retrieval, and creation",
+      "name": "backups"
+    },
+    {
+      "description": "BackupDefinition index and retrieval",
+      "name": "backup_definitions"
+    },
+    {
+      "description": "BackupDefinition Variable index, creation, retrieval, and modification",
+      "name": "backup_definition_variables"
+    },
+    {
+      "description": "BackupInstance creation, retrieval, backup, and export",
+      "name": "backup_instances"
+    },
+    {
+      "description": "BackupInstance Endpoints index and retrieval",
+      "name": "backup_instance_endpoints"
+    },
+    {
+      "description": "BackupInstance Variable index, creation, retrieval, and modification",
+      "name": "backup_instance_variables"
+    },
+    {
+      "description": "Customer index, creation, retrieval, and modification",
+      "name": "customers"
+    },
+    {
+      "description": "EndpointRecord index and retrieval",
+      "name": "endpoint_records"
+    },
+    {
+      "description": "Export index, retrieval, and creation",
+      "name": "exports"
+    },
+    {
+      "description": "OAuth2 Access Token retrieval",
+      "name": "tokens"
+    },
+    {
+      "name": "utilities"
+    },
+    {
+      "description": "Vendor retrieival",
+      "name": "vendors"
+    },
+    {
+      "description": "Log viewer",
+      "name": "logs"
+    }
+  ]
+}
