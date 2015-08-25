@@ -269,6 +269,18 @@
             "type": "string"
           },
           {
+            "description": "Filter the search to only include applications with this status.",
+            "enum": [
+              "All",
+              "InProgress",
+              "Submitted"
+            ],
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "type": "string"
+          },
+          {
             "description": "The named of the saved search to use to define the export list. Required.",
             "in": "query",
             "name": "searchName",
