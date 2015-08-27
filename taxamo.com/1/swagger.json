@@ -19,7 +19,8 @@
           "description": "Transaction count.",
           "type": "number"
         }
-      }
+      },
+      "type": "object"
     },
     "N": {
       "properties": {
@@ -39,7 +40,8 @@
           "description": "Transaction count.",
           "type": "number"
         }
-      }
+      },
+      "type": "object"
     },
     "additional_currencies": {
       "properties": {
@@ -47,7 +49,8 @@
           "$ref": "#/definitions/additional_currency",
           "description": "Invoicing currency information."
         }
-      }
+      },
+      "type": "object"
     },
     "additional_currency": {
       "properties": {
@@ -71,7 +74,8 @@
           "description": "Total amount in designated currency.",
           "type": "number"
         }
-      }
+      },
+      "type": "object"
     },
     "by_country": {
       "properties": {
@@ -91,7 +95,8 @@
           "description": "Tax amount",
           "type": "number"
         }
-      }
+      },
+      "type": "object"
     },
     "by_status": {
       "properties": {
@@ -109,7 +114,8 @@
           },
           "type": "array"
         }
-      }
+      },
+      "type": "object"
     },
     "by_taxation_type": {
       "properties": {
@@ -133,7 +139,8 @@
           "description": "Total number of transactions",
           "type": "number"
         }
-      }
+      },
+      "type": "object"
     },
     "calculateSimpleTaxIn": {
       "properties": {
@@ -188,7 +195,8 @@
       },
       "required": [
         "currency_code"
-      ]
+      ],
+      "type": "object"
     },
     "calculateSimpleTaxOut": {
       "properties": {
@@ -196,7 +204,8 @@
           "$ref": "#/definitions/transaction",
           "description": "Transaction data with tax calculated"
         }
-      }
+      },
+      "type": "object"
     },
     "calculateTaxIn": {
       "properties": {
@@ -207,7 +216,8 @@
       },
       "required": [
         "transaction"
-      ]
+      ],
+      "type": "object"
     },
     "calculateTaxLocationIn": {
       "properties": {
@@ -219,7 +229,8 @@
           "description": "Buyer's credit card prefix.",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "calculateTaxLocationOut": {
       "properties": {
@@ -255,7 +266,8 @@
           "description": "Is tax calculation supported for a detected tax location?",
           "type": "boolean"
         }
-      }
+      },
+      "type": "object"
     },
     "calculateTaxOut": {
       "properties": {
@@ -263,7 +275,8 @@
           "$ref": "#/definitions/transaction",
           "description": "Transaction data with tax calculated"
         }
-      }
+      },
+      "type": "object"
     },
     "cancelTransactionOut": {
       "properties": {
@@ -271,7 +284,8 @@
           "description": "Was operation successful?",
           "type": "boolean"
         }
-      }
+      },
+      "type": "object"
     },
     "capturePaymentOut": {
       "properties": {
@@ -279,7 +293,8 @@
           "description": "Was the operation successful?",
           "type": "boolean"
         }
-      }
+      },
+      "type": "object"
     },
     "confirmTransactionIn": {
       "properties": {
@@ -287,7 +302,8 @@
           "$ref": "#/definitions/input_transaction_update",
           "description": "Transaction."
         }
-      }
+      },
+      "type": "object"
     },
     "confirmTransactionOut": {
       "properties": {
@@ -295,7 +311,8 @@
           "$ref": "#/definitions/transaction",
           "description": "Transaction data."
         }
-      }
+      },
+      "type": "object"
     },
     "countries": {
       "properties": {
@@ -343,7 +360,8 @@
           "$ref": "#/definitions/country_schema",
           "description": "Self declared country as evidence."
         }
-      }
+      },
+      "type": "object"
     },
     "country": {
       "properties": {
@@ -397,7 +415,8 @@
           "description": "True if tax calculation supported for this country.",
           "type": "boolean"
         }
-      }
+      },
+      "type": "object"
     },
     "country_schema": {
       "properties": {
@@ -451,7 +470,8 @@
           "description": "True if tax calculation supported for this country.",
           "type": "boolean"
         }
-      }
+      },
+      "type": "object"
     },
     "createPaymentIn": {
       "properties": {
@@ -470,7 +490,8 @@
       },
       "required": [
         "amount"
-      ]
+      ],
+      "type": "object"
     },
     "createPaymentOut": {
       "properties": {
@@ -478,7 +499,8 @@
           "description": "Was the operation successful?",
           "type": "boolean"
         }
-      }
+      },
+      "type": "object"
     },
     "createRefundIn": {
       "properties": {
@@ -498,7 +520,8 @@
           "description": "Total amount, including tax, to be refunded. Either amount or total amount is required.",
           "type": "number"
         }
-      }
+      },
+      "type": "object"
     },
     "createRefundOut": {
       "properties": {
@@ -518,7 +541,8 @@
           "description": "Total amount, including tax, that was refunded in this call.",
           "type": "number"
         }
-      }
+      },
+      "type": "object"
     },
     "createSMSTokenIn": {
       "properties": {
@@ -534,7 +558,8 @@
       "required": [
         "country_code",
         "recipient"
-      ]
+      ],
+      "type": "object"
     },
     "createSMSTokenOut": {
       "properties": {
@@ -542,7 +567,8 @@
           "description": "Always set to true. Success means that the message has been queued for delivery. In some cases message may be undelivered at the end, e.g. mobile number is blacklisted. API errors are signalled with appropriate error codes.",
           "type": "boolean"
         }
-      }
+      },
+      "type": "object"
     },
     "createTransactionIn": {
       "properties": {
@@ -557,7 +583,8 @@
       },
       "required": [
         "transaction"
-      ]
+      ],
+      "type": "object"
     },
     "createTransactionOut": {
       "properties": {
@@ -565,7 +592,8 @@
           "$ref": "#/definitions/transaction",
           "description": "Stored transaction data"
         }
-      }
+      },
+      "type": "object"
     },
     "currency_schema": {
       "properties": {
@@ -589,7 +617,8 @@
           "description": "Number of minor units for currency.",
           "type": "integer"
         }
-      }
+      },
+      "type": "object"
     },
     "custom_fields": {
       "properties": {
@@ -601,7 +630,8 @@
           "description": "Field's value.",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "emailInvoiceIn": {
       "properties": {
@@ -609,7 +639,8 @@
           "description": "Email to send the invoice. If not provided, transaction.buyer_email will be used.",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "emailInvoiceOut": {
       "properties": {
@@ -617,7 +648,8 @@
           "description": "Was operation successful?",
           "type": "boolean"
         }
-      }
+      },
+      "type": "object"
     },
     "evidence": {
       "properties": {
@@ -665,7 +697,8 @@
           "$ref": "#/definitions/evidence_schema",
           "description": "Self declared country as evidence. Requires merchant setting to be active."
         }
-      }
+      },
+      "type": "object"
     },
     "evidence_schema": {
       "properties": {
@@ -685,7 +718,8 @@
           "description": "If the evidence was used to match the actual country.",
           "type": "boolean"
         }
-      }
+      },
+      "type": "object"
     },
     "getCountriesDictIn": {
       "properties": {
@@ -693,7 +727,8 @@
           "description": "Should only countries with tax supported be listed?",
           "type": "boolean"
         }
-      }
+      },
+      "type": "object"
     },
     "getCountriesDictOut": {
       "properties": {
@@ -704,7 +739,8 @@
           },
           "type": "array"
         }
-      }
+      },
+      "type": "object"
     },
     "getCurrenciesDictOut": {
       "properties": {
@@ -715,7 +751,8 @@
           },
           "type": "array"
         }
-      }
+      },
+      "type": "object"
     },
     "getDailySettlementStatsIn": {
       "properties": {
@@ -736,7 +773,8 @@
         "interval",
         "date_from",
         "date_to"
-      ]
+      ],
+      "type": "object"
     },
     "getDailySettlementStatsOut": {
       "properties": {
@@ -747,7 +785,8 @@
           },
           "type": "array"
         }
-      }
+      },
+      "type": "object"
     },
     "getProductTypesDictOut": {
       "properties": {
@@ -758,7 +797,8 @@
           },
           "type": "array"
         }
-      }
+      },
+      "type": "object"
     },
     "getRefundsIn": {
       "properties": {
@@ -777,7 +817,8 @@
       },
       "required": [
         "date_from"
-      ]
+      ],
+      "type": "object"
     },
     "getRefundsOut": {
       "properties": {
@@ -788,7 +829,8 @@
           },
           "type": "array"
         }
-      }
+      },
+      "type": "object"
     },
     "getSettlementIn": {
       "properties": {
@@ -804,7 +846,8 @@
           "description": "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used.",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "getSettlementOut": {
       "properties": {
@@ -831,7 +874,8 @@
           "description": "Quarter start date in yyyy-MM-dd'T'hh:mm:ss'Z' format.",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "getSettlementStatsByCountryIn": {
       "properties": {
@@ -847,7 +891,8 @@
       "required": [
         "date_from",
         "date_to"
-      ]
+      ],
+      "type": "object"
     },
     "getSettlementStatsByCountryOut": {
       "properties": {
@@ -858,7 +903,8 @@
           },
           "type": "array"
         }
-      }
+      },
+      "type": "object"
     },
     "getSettlementStatsByTaxationTypeIn": {
       "properties": {
@@ -874,7 +920,8 @@
       "required": [
         "date_from",
         "date_to"
-      ]
+      ],
+      "type": "object"
     },
     "getSettlementStatsByTaxationTypeOut": {
       "properties": {
@@ -882,7 +929,8 @@
           "$ref": "#/definitions/by_taxation_type",
           "description": "Settlements stats by taxation type."
         }
-      }
+      },
+      "type": "object"
     },
     "getSettlementSummaryIn": {
       "properties": {
@@ -890,7 +938,8 @@
           "description": "MOSS country code, used to determine currency. If ommited, merchant default setting is used.",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "getSettlementSummaryOut": {
       "properties": {
@@ -898,7 +947,8 @@
           "$ref": "#/definitions/summary",
           "description": "Settlement summary."
         }
-      }
+      },
+      "type": "object"
     },
     "getTransactionOut": {
       "properties": {
@@ -906,7 +956,8 @@
           "$ref": "#/definitions/transaction",
           "description": "Transaction data"
         }
-      }
+      },
+      "type": "object"
     },
     "getTransactionsStatsIn": {
       "properties": {
@@ -926,7 +977,8 @@
       "required": [
         "date_from",
         "date_to"
-      ]
+      ],
+      "type": "object"
     },
     "getTransactionsStatsOut": {
       "properties": {
@@ -934,7 +986,8 @@
           "$ref": "#/definitions/by_status",
           "description": "Transaction stats grouped by status."
         }
-      }
+      },
+      "type": "object"
     },
     "input_transaction": {
       "properties": {
@@ -1052,7 +1105,8 @@
       "required": [
         "currency_code",
         "transaction_lines"
-      ]
+      ],
+      "type": "object"
     },
     "input_transaction_line": {
       "properties": {
@@ -1122,7 +1176,8 @@
       },
       "required": [
         "custom_id"
-      ]
+      ],
+      "type": "object"
     },
     "input_transaction_update": {
       "properties": {
@@ -1236,7 +1291,8 @@
           "description": "Verification token",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "invoice_address": {
       "properties": {
@@ -1272,7 +1328,8 @@
           "description": " Street name.",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "listPaymentsIn": {
       "properties": {
@@ -1284,7 +1341,8 @@
           "description": "How many records need to be skipped, defaults to 0.",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "listPaymentsOut": {
       "properties": {
@@ -1295,7 +1353,8 @@
           },
           "type": "array"
         }
-      }
+      },
+      "type": "object"
     },
     "listTransactionsIn": {
       "properties": {
@@ -1355,7 +1414,8 @@
           "description": "Return only transactions with total amount less than a given number. Transactions with total amount equal to a given number (e.g. 1) are not returned.",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "listTransactionsOut": {
       "properties": {
@@ -1366,7 +1426,8 @@
           },
           "type": "array"
         }
-      }
+      },
+      "type": "object"
     },
     "locateGivenIPOut": {
       "properties": {
@@ -1382,7 +1443,8 @@
           "description": "Remote IP address.",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "locateMyIPOut": {
       "properties": {
@@ -1398,7 +1460,8 @@
           "description": "Remote IP address.",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "payments": {
       "properties": {
@@ -1414,7 +1477,8 @@
           "description": "When the payment was received in yyyy-MM-dd HH:mm:ss (24 hour format, UTC+0 timezone).",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "product_type_schema": {
       "properties": {
@@ -1422,7 +1486,8 @@
           "description": "Product type code.",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "report": {
       "properties": {
@@ -1454,7 +1519,8 @@
           "description": "Tax rate",
           "type": "number"
         }
-      }
+      },
+      "type": "object"
     },
     "settlement_daily_stats_schema": {
       "properties": {
@@ -1494,7 +1560,8 @@
           "description": "Untaxed transaction count.",
           "type": "integer"
         }
-      }
+      },
+      "type": "object"
     },
     "summary": {
       "properties": {
@@ -1522,7 +1589,8 @@
           "description": "Tax entity that the tax is due.",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "transaction": {
       "properties": {
@@ -1720,7 +1788,8 @@
       "required": [
         "currency_code",
         "transaction_lines"
-      ]
+      ],
+      "type": "object"
     },
     "transaction_lines": {
       "properties": {
@@ -1814,7 +1883,8 @@
       },
       "required": [
         "custom_id"
-      ]
+      ],
+      "type": "object"
     },
     "transactions": {
       "properties": {
@@ -2012,7 +2082,8 @@
       "required": [
         "currency_code",
         "transaction_lines"
-      ]
+      ],
+      "type": "object"
     },
     "unconfirmTransactionIn": {
       "properties": {
@@ -2020,7 +2091,8 @@
           "$ref": "#/definitions/input_transaction_update",
           "description": "Transaction."
         }
-      }
+      },
+      "type": "object"
     },
     "unconfirmTransactionOut": {
       "properties": {
@@ -2028,7 +2100,8 @@
           "$ref": "#/definitions/transaction",
           "description": "Transaction data."
         }
-      }
+      },
+      "type": "object"
     },
     "updateTransactionIn": {
       "properties": {
@@ -2036,7 +2109,8 @@
           "$ref": "#/definitions/transaction",
           "description": "Transaction."
         }
-      }
+      },
+      "type": "object"
     },
     "updateTransactionOut": {
       "properties": {
@@ -2044,7 +2118,8 @@
           "$ref": "#/definitions/transaction",
           "description": "Transaction data."
         }
-      }
+      },
+      "type": "object"
     },
     "validateTaxNumberIn": {
       "properties": {
@@ -2052,7 +2127,8 @@
           "description": "Two-letter ISO country code.",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "validateTaxNumberOut": {
       "properties": {
@@ -2072,7 +2148,8 @@
           "description": "If the transaction is in a country supported by Taxamo, but the tax is not calculated due to merchant settings or EU B2B transaction for example.",
           "type": "boolean"
         }
-      }
+      },
+      "type": "object"
     },
     "verifySMSTokenOut": {
       "properties": {
@@ -2080,7 +2157,8 @@
           "description": "Verified country code, returned if operation was successful.",
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     }
   },
   "host": "api.taxamo.com",
