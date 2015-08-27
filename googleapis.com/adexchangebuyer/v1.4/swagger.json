@@ -80,6 +80,145 @@
       },
       "type": "object"
     },
+    "AdSize": {
+      "properties": {
+        "height": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "width": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "AdSlotDto": {
+      "properties": {
+        "channelCode": {
+          "type": "string"
+        },
+        "channelId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string"
+        },
+        "webPropertyId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "AddOrderDealsRequest": {
+      "properties": {
+        "deals": {
+          "description": "The list of deals to add",
+          "items": {
+            "$ref": "#/definitions/MarketplaceDeal"
+          },
+          "type": "array"
+        },
+        "orderRevisionNumber": {
+          "description": "The last known order revision number.",
+          "format": "int64",
+          "type": "string"
+        },
+        "updateAction": {
+          "description": "Indicates an optional action to take on the order",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AddOrderDealsResponse": {
+      "properties": {
+        "deals": {
+          "description": "List of deals added (in the same order as passed in the request)",
+          "items": {
+            "$ref": "#/definitions/MarketplaceDeal"
+          },
+          "type": "array"
+        },
+        "orderRevisionNumber": {
+          "description": "The updated revision number for the order.",
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AddOrderNotesRequest": {
+      "properties": {
+        "notes": {
+          "description": "The list of notes to add.",
+          "items": {
+            "$ref": "#/definitions/MarketplaceNote"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "AddOrderNotesResponse": {
+      "properties": {
+        "notes": {
+          "items": {
+            "$ref": "#/definitions/MarketplaceNote"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "AdvertiserDto": {
+      "properties": {
+        "brands": {
+          "items": {
+            "$ref": "#/definitions/BrandDto"
+          },
+          "type": "array"
+        },
+        "id": {
+          "format": "int64",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AudienceSegment": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "format": "int64",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "numCookies": {
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "BillingInfo": {
       "description": "The configuration data for an Ad Exchange billing info.",
       "properties": {
@@ -125,6 +264,22 @@
       },
       "type": "object"
     },
+    "BrandDto": {
+      "properties": {
+        "advertiserId": {
+          "format": "int64",
+          "type": "string"
+        },
+        "id": {
+          "format": "int64",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Budget": {
       "description": "The configuration data for Ad Exchange RTB - Budget API.",
       "properties": {
@@ -155,6 +310,98 @@
           "default": "adexchangebuyer#budget",
           "description": "The kind of the resource, i.e. \"adexchangebuyer#budget\".",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Buyer": {
+      "properties": {
+        "accountId": {
+          "description": "Adx account id of the buyer.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "BuyerDto": {
+      "properties": {
+        "accountId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "customerId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "enabledForInterestTargetingDeals": {
+          "type": "boolean"
+        },
+        "enabledForPreferredDeals": {
+          "type": "boolean"
+        },
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "sponsorAccountId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "ClientAccessCapabilities": {
+      "properties": {
+        "capabilities": {
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "type": "array"
+        },
+        "clientAccountId": {
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ContactInformation": {
+      "properties": {
+        "email": {
+          "description": "Email address of the contact.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the contact.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CreateOrdersRequest": {
+      "properties": {
+        "orders": {
+          "description": "The list of orders to create.",
+          "items": {
+            "$ref": "#/definitions/MarketplaceOrder"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "CreateOrdersResponse": {
+      "properties": {
+        "orders": {
+          "description": "The list of orders successfully created.",
+          "items": {
+            "$ref": "#/definitions/MarketplaceOrder"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -265,6 +512,13 @@
           "format": "int32",
           "type": "integer"
         },
+        "impressionTrackingUrl": {
+          "description": "The set of urls to be called to record an impression.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "kind": {
           "default": "adexchangebuyer#creative",
           "description": "Resource type.",
@@ -374,6 +628,11 @@
           },
           "type": "array"
         },
+        "version": {
+          "description": "The version for this creative. Read-only. This field should not be set in requests.",
+          "format": "int32",
+          "type": "integer"
+        },
         "videoURL": {
           "description": "The url to fetch a video ad. If set, HTMLSnippet should not be set.",
           "type": "string"
@@ -404,6 +663,1195 @@
         "nextPageToken": {
           "description": "Continuation token used to page through creatives. To retrieve the next page of results, set the next request's \"pageToken\" value to this.",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DateTime": {
+      "properties": {
+        "day": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hour": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minute": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "month": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "second": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "timeZoneId": {
+          "type": "string"
+        },
+        "year": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "DealPartyDto": {
+      "properties": {
+        "buyer": {
+          "$ref": "#/definitions/BuyerDto"
+        },
+        "buyerSellerRole": {
+          "type": "string"
+        },
+        "customerId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "webProperty": {
+          "$ref": "#/definitions/WebPropertyDto"
+        }
+      },
+      "type": "object"
+    },
+    "DealTerms": {
+      "properties": {
+        "description": {
+          "description": "Description for the proposed terms of the deal.",
+          "type": "string"
+        },
+        "guaranteedFixedPriceTerms": {
+          "$ref": "#/definitions/DealTermsGuaranteedFixedPriceTerms",
+          "description": "The terms for guaranteed fixed price deals."
+        },
+        "nonGuaranteedAuctionTerms": {
+          "$ref": "#/definitions/DealTermsNonGuaranteedAuctionTerms",
+          "description": "The terms for non-guaranteed auction deals."
+        },
+        "nonGuaranteedFixedPriceTerms": {
+          "$ref": "#/definitions/DealTermsNonGuaranteedFixedPriceTerms",
+          "description": "The terms for non-guaranteed fixed price deals."
+        }
+      },
+      "type": "object"
+    },
+    "DealTermsGuaranteedFixedPriceTerms": {
+      "properties": {
+        "fixedPrices": {
+          "description": "Fixed price for the specified buyer.",
+          "items": {
+            "$ref": "#/definitions/PricePerBuyer"
+          },
+          "type": "array"
+        },
+        "guaranteedImpressions": {
+          "description": "Guaranteed impressions as a percentage. This is the percentage of guaranteed looks that the buyer is guaranteeing to buy.",
+          "format": "int64",
+          "type": "string"
+        },
+        "guaranteedLooks": {
+          "description": "Count of guaranteed looks. Required for deal, optional for offer.",
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DealTermsNonGuaranteedAuctionTerms": {
+      "properties": {
+        "privateAuctionId": {
+          "description": "Id of the corresponding private auction.",
+          "type": "string"
+        },
+        "reservePricePerBuyers": {
+          "description": "Reserve price for the specified buyer.",
+          "items": {
+            "$ref": "#/definitions/PricePerBuyer"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "DealTermsNonGuaranteedFixedPriceTerms": {
+      "properties": {
+        "fixedPrices": {
+          "description": "Fixed price for the specified buyer.",
+          "items": {
+            "$ref": "#/definitions/PricePerBuyer"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "DeleteOrderDealsRequest": {
+      "properties": {
+        "dealIds": {
+          "description": "List of deals to delete for a given order",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "orderRevisionNumber": {
+          "description": "The last known order revision number.",
+          "format": "int64",
+          "type": "string"
+        },
+        "updateAction": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DeleteOrderDealsResponse": {
+      "properties": {
+        "deals": {
+          "description": "List of deals deleted (in the same order as passed in the request)",
+          "items": {
+            "$ref": "#/definitions/MarketplaceDeal"
+          },
+          "type": "array"
+        },
+        "orderRevisionNumber": {
+          "description": "The updated revision number for the order.",
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DeliveryControl": {
+      "properties": {
+        "deliveryRateType": {
+          "type": "string"
+        },
+        "frequencyCaps": {
+          "items": {
+            "$ref": "#/definitions/DeliveryControlFrequencyCap"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "DeliveryControlFrequencyCap": {
+      "properties": {
+        "maxImpressions": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "numTimeUnits": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "timeUnitType": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EditAllOrderDealsRequest": {
+      "properties": {
+        "deals": {
+          "description": "List of deals to edit. Service may perform 3 different operations based on comparison of deals in this list vs deals already persisted in database: 1. Add new deal to order If a deal in this list does not exist in the order, the service will create a new deal and add it to the order. Validation will follow AddOrderDealsRequest. 2. Update existing deal in the order If a deal in this list already exist in the order, the service will update that existing deal to this new deal in the request. Validation will follow UpdateOrderDealsRequest. 3. Delete deals from the order (just need the id) If a existing deal in the order is not present in this list, the service will delete that deal from the order. Validation will follow DeleteOrderDealsRequest.",
+          "items": {
+            "$ref": "#/definitions/MarketplaceDeal"
+          },
+          "type": "array"
+        },
+        "order": {
+          "$ref": "#/definitions/MarketplaceOrder",
+          "description": "If specified, also updates the order in the batch transaction. This is useful when the order and the deals need to be updated in one transaction."
+        },
+        "orderRevisionNumber": {
+          "description": "The last known revision number for the order.",
+          "format": "int64",
+          "type": "string"
+        },
+        "updateAction": {
+          "description": "Indicates an optional action to take on the order",
+          "type": "string"
+        },
+        "updateFinalizedView": {
+          "description": "True, if the finalized view of the deal should be updated.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "EditAllOrderDealsResponse": {
+      "properties": {
+        "deals": {
+          "description": "List of all deals in the order after edit.",
+          "items": {
+            "$ref": "#/definitions/MarketplaceDeal"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "EditHistoryDto": {
+      "properties": {
+        "createdByLoginName": {
+          "type": "string"
+        },
+        "createdTimeStamp": {
+          "format": "int64",
+          "type": "string"
+        },
+        "lastUpdateTimeStamp": {
+          "format": "int64",
+          "type": "string"
+        },
+        "lastUpdatedByLoginName": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GetFinalizedNegotiationByExternalDealIdRequest": {
+      "properties": {
+        "includePrivateAuctions": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "GetNegotiationByIdRequest": {
+      "properties": {
+        "includePrivateAuctions": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "GetNegotiationsRequest": {
+      "properties": {
+        "finalized": {
+          "type": "boolean"
+        },
+        "includePrivateAuctions": {
+          "type": "boolean"
+        },
+        "sinceTimestampMillis": {
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GetNegotiationsResponse": {
+      "properties": {
+        "kind": {
+          "default": "adexchangebuyer#negotiationsList",
+          "type": "string"
+        },
+        "negotiations": {
+          "items": {
+            "$ref": "#/definitions/NegotiationDto"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "GetOffersResponse": {
+      "properties": {
+        "offers": {
+          "description": "The returned list of offers.",
+          "items": {
+            "$ref": "#/definitions/MarketplaceOffer"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "GetOrderDealsResponse": {
+      "properties": {
+        "deals": {
+          "description": "List of deals for the order",
+          "items": {
+            "$ref": "#/definitions/MarketplaceDeal"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "GetOrderNotesResponse": {
+      "properties": {
+        "notes": {
+          "description": "The list of matching notes.",
+          "items": {
+            "$ref": "#/definitions/MarketplaceNote"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "GetOrdersResponse": {
+      "properties": {
+        "orders": {
+          "description": "The list of matching orders.",
+          "items": {
+            "$ref": "#/definitions/MarketplaceOrder"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "InventorySegmentTargeting": {
+      "properties": {
+        "negativeAdSizes": {
+          "items": {
+            "$ref": "#/definitions/AdSize"
+          },
+          "type": "array"
+        },
+        "negativeAdTypeSegments": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "negativeAudienceSegments": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "negativeDeviceCategories": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "negativeIcmBrands": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "negativeIcmInterests": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "negativeInventorySlots": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "negativeKeyValues": {
+          "items": {
+            "$ref": "#/definitions/RuleKeyValuePair"
+          },
+          "type": "array"
+        },
+        "negativeLocations": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "negativeMobileApps": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "negativeOperatingSystemVersions": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "negativeOperatingSystems": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "negativeSiteUrls": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "negativeSizes": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "negativeVideoAdPositionSegments": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "negativeVideoDurationSegments": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "negativeXfpAdSlots": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "negativeXfpPlacements": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "positiveAdSizes": {
+          "items": {
+            "$ref": "#/definitions/AdSize"
+          },
+          "type": "array"
+        },
+        "positiveAdTypeSegments": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "positiveAudienceSegments": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "positiveDeviceCategories": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "positiveIcmBrands": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "positiveIcmInterests": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "positiveInventorySlots": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "positiveKeyValues": {
+          "items": {
+            "$ref": "#/definitions/RuleKeyValuePair"
+          },
+          "type": "array"
+        },
+        "positiveLocations": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "positiveMobileApps": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "positiveOperatingSystemVersions": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "positiveOperatingSystems": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "positiveSiteUrls": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "positiveSizes": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "positiveVideoAdPositionSegments": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "positiveVideoDurationSegments": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "positiveXfpAdSlots": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "positiveXfpPlacements": {
+          "items": {
+            "format": "int64",
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ListClientAccessCapabilitiesRequest": {
+      "properties": {
+        "sponsorAccountId": {
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ListClientAccessCapabilitiesResponse": {
+      "properties": {
+        "clientAccessPermissions": {
+          "items": {
+            "$ref": "#/definitions/ClientAccessCapabilities"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ListOffersRequest": {
+      "properties": {
+        "sinceTimestampMillis": {
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ListOffersResponse": {
+      "properties": {
+        "kind": {
+          "default": "adexchangebuyer#offersList",
+          "type": "string"
+        },
+        "offers": {
+          "items": {
+            "$ref": "#/definitions/OfferDto"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "MarketplaceDeal": {
+      "description": "An order can contain multiple deals. A deal contains the terms and targeting information that is used for serving.",
+      "properties": {
+        "buyerPrivateData": {
+          "$ref": "#/definitions/PrivateData",
+          "description": "Buyer private data (hidden from seller)."
+        },
+        "creationTimeMs": {
+          "description": "The time (ms since epoch) of the deal creation. (readonly)",
+          "format": "int64",
+          "type": "string"
+        },
+        "dealId": {
+          "description": "A unique deal=id for the deal (readonly).",
+          "type": "string"
+        },
+        "deliveryControl": {
+          "$ref": "#/definitions/DeliveryControl",
+          "description": "The set of fields around delivery control that are interesting for a buyer to see but are non-negotiable. These are set by the publisher. This message is assigned an id of 100 since some day we would want to model this as a protobuf extension."
+        },
+        "externalDealId": {
+          "description": "The external deal id assigned to this deal once the deal is finalized. This is the deal-id that shows up in serving/reporting etc. (readonly)",
+          "type": "string"
+        },
+        "flightEndTimeMs": {
+          "description": "Proposed flight end time of the deal (ms since epoch) This will generally be stored in a granularity of a second. (updatable)",
+          "format": "int64",
+          "type": "string"
+        },
+        "flightStartTimeMs": {
+          "description": "Proposed flight start time of the deal (ms since epoch) This will generally be stored in a granularity of a second. (updatable)",
+          "format": "int64",
+          "type": "string"
+        },
+        "inventoryDescription": {
+          "description": "Description for the deal terms. (updatable)",
+          "type": "string"
+        },
+        "kind": {
+          "default": "adexchangebuyer#marketplaceDeal",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"adexchangebuyer#marketplaceDeal\".",
+          "type": "string"
+        },
+        "lastUpdateTimeMs": {
+          "description": "The time (ms since epoch) when the deal was last updated. (readonly)",
+          "format": "int64",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the deal. (updatable)",
+          "type": "string"
+        },
+        "offerId": {
+          "description": "The offer-id from which this deal was created. (readonly, except on create)",
+          "type": "string"
+        },
+        "offerRevisionNumber": {
+          "description": "The revision number of the offer that the deal was created from (readonly, except on create)",
+          "format": "int64",
+          "type": "string"
+        },
+        "orderId": {
+          "type": "string"
+        },
+        "sellerContacts": {
+          "description": "Optional Seller contact information for the deal (buyer-readonly)",
+          "items": {
+            "$ref": "#/definitions/ContactInformation"
+          },
+          "type": "array"
+        },
+        "sharedTargetings": {
+          "description": "The shared targeting visible to buyers and sellers. (updatable)",
+          "items": {
+            "$ref": "#/definitions/SharedTargeting"
+          },
+          "type": "array"
+        },
+        "syndicationProduct": {
+          "description": "The syndication product associated with the deal. (readonly, except on create)",
+          "type": "string"
+        },
+        "terms": {
+          "$ref": "#/definitions/DealTerms",
+          "description": "The negotiable terms of the deal. (updatable)"
+        }
+      },
+      "type": "object"
+    },
+    "MarketplaceDealParty": {
+      "properties": {
+        "buyer": {
+          "$ref": "#/definitions/Buyer",
+          "description": "The buyer/seller associated with the deal. One of buyer/seller is specified for a deal-party."
+        },
+        "seller": {
+          "$ref": "#/definitions/Seller",
+          "description": "The buyer/seller associated with the deal. One of buyer/seller is specified for a deal party."
+        }
+      },
+      "type": "object"
+    },
+    "MarketplaceLabel": {
+      "properties": {
+        "accountId": {
+          "description": "The accountId of the party that created the label.",
+          "type": "string"
+        },
+        "createTimeMs": {
+          "description": "The creation time (in ms since epoch) for the label.",
+          "format": "int64",
+          "type": "string"
+        },
+        "deprecatedMarketplaceDealParty": {
+          "$ref": "#/definitions/MarketplaceDealParty",
+          "description": "Information about the party that created the label."
+        },
+        "label": {
+          "description": "The label to use.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MarketplaceNote": {
+      "description": "An order is associated with a bunch of notes which may optionally be associated with a deal and/or revision number.",
+      "properties": {
+        "creatorRole": {
+          "description": "The role of the person (buyer/seller) creating the note. (readonly)",
+          "type": "string"
+        },
+        "dealId": {
+          "description": "Notes can optionally be associated with a deal. (readonly, except on create)",
+          "type": "string"
+        },
+        "kind": {
+          "default": "adexchangebuyer#marketplaceNote",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"adexchangebuyer#marketplaceNote\".",
+          "type": "string"
+        },
+        "note": {
+          "description": "The actual note to attach. (readonly, except on create)",
+          "type": "string"
+        },
+        "noteId": {
+          "description": "The unique id for the note. (readonly)",
+          "type": "string"
+        },
+        "orderId": {
+          "description": "The order_id that a note is attached to. (readonly)",
+          "type": "string"
+        },
+        "orderRevisionNumber": {
+          "description": "If the note is associated with an order revision number, then store that here. (readonly, except on create)",
+          "format": "int64",
+          "type": "string"
+        },
+        "timestampMs": {
+          "description": "The timestamp (ms since epoch) that this note was created. (readonly)",
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "MarketplaceOffer": {
+      "description": "An offer is segment of inventory that a seller wishes to sell. It is associated with certain terms and targeting information which helps buyer know more about the inventory. Each field in an order can have one of the following setting:\n\n(readonly) - It is an error to try and set this field. (buyer-readonly) - Only the seller can set this field. (seller-readonly) - Only the buyer can set this field. (updatable) - The field is updatable at all times by either buyer or the seller.",
+      "properties": {
+        "creationTimeMs": {
+          "description": "Creation time in ms. since epoch (readonly)",
+          "format": "int64",
+          "type": "string"
+        },
+        "creatorContacts": {
+          "description": "Optional contact information for the creator of this offer. (buyer-readonly)",
+          "items": {
+            "$ref": "#/definitions/ContactInformation"
+          },
+          "type": "array"
+        },
+        "flightEndTimeMs": {
+          "description": "The proposed end time for the deal (ms since epoch) (buyer-readonly)",
+          "format": "int64",
+          "type": "string"
+        },
+        "flightStartTimeMs": {
+          "description": "Inventory availability dates. (times are in ms since epoch) The granularity is generally in the order of seconds. (buyer-readonly)",
+          "format": "int64",
+          "type": "string"
+        },
+        "hasCreatorSignedOff": {
+          "description": "If the creator has already signed off on the offer, then the buyer can finalize the deal by accepting the offer as is. When copying to an order, if any of the terms are changed, then auto_finalize is automatically set to false.",
+          "type": "boolean"
+        },
+        "kind": {
+          "default": "adexchangebuyer#marketplaceOffer",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"adexchangebuyer#marketplaceOffer\".",
+          "type": "string"
+        },
+        "labels": {
+          "description": "Optional List of labels for the offer (optional, buyer-readonly).",
+          "items": {
+            "$ref": "#/definitions/MarketplaceLabel"
+          },
+          "type": "array"
+        },
+        "lastUpdateTimeMs": {
+          "description": "Time of last update in ms. since epoch (readonly)",
+          "format": "int64",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name for this offer as set by the seller. (buyer-readonly)",
+          "type": "string"
+        },
+        "offerId": {
+          "description": "The unique id for the offer (readonly)",
+          "type": "string"
+        },
+        "revisionNumber": {
+          "description": "The revision number of the offer. (readonly)",
+          "format": "int64",
+          "type": "string"
+        },
+        "seller": {
+          "$ref": "#/definitions/Seller",
+          "description": "Information about the seller that created this offer (readonly, except on create)"
+        },
+        "sharedTargetings": {
+          "description": "Targeting that is shared between the buyer and the seller. Each targeting criteria has a specified key and for each key there is a list of inclusion value or exclusion values. (buyer-readonly)",
+          "items": {
+            "$ref": "#/definitions/SharedTargeting"
+          },
+          "type": "array"
+        },
+        "state": {
+          "description": "The state of the offer. (buyer-readonly)",
+          "type": "string"
+        },
+        "syndicationProduct": {
+          "description": "The syndication product associated with the deal. (readonly, except on create)",
+          "type": "string"
+        },
+        "terms": {
+          "$ref": "#/definitions/DealTerms",
+          "description": "The negotiable terms of the deal (buyer-readonly)"
+        }
+      },
+      "type": "object"
+    },
+    "MarketplaceOrder": {
+      "description": "Represents an order in the marketplace. An order is the unit of negotiation between a seller and a buyer and contains deals which are served. Each field in an order can have one of the following setting:\n\n(readonly) - It is an error to try and set this field. (buyer-readonly) - Only the seller can set this field. (seller-readonly) - Only the buyer can set this field. (updatable) - The field is updatable at all times by either buyer or the seller.",
+      "properties": {
+        "billedBuyer": {
+          "$ref": "#/definitions/Buyer",
+          "description": "Reference to the buyer that will get billed for this order. (readonly)"
+        },
+        "buyer": {
+          "$ref": "#/definitions/Buyer",
+          "description": "Reference to the buyer on the order. (readonly, except on create)"
+        },
+        "buyerContacts": {
+          "description": "Optional contact information fort the buyer. (seller-readonly)",
+          "items": {
+            "$ref": "#/definitions/ContactInformation"
+          },
+          "type": "array"
+        },
+        "buyerPrivateData": {
+          "$ref": "#/definitions/PrivateData",
+          "description": "Private data for buyer. (hidden from seller)."
+        },
+        "hasBuyerSignedOff": {
+          "description": "When an order is in an accepted state, indicates whether the buyer has signed off Once both sides have signed off on a deal, the order can be finalized by the seller. (seller-readonly)",
+          "type": "boolean"
+        },
+        "hasSellerSignedOff": {
+          "description": "When an order is in an accepted state, indicates whether the buyer has signed off Once both sides have signed off on a deal, the order can be finalized by the seller. (buyer-readonly)",
+          "type": "boolean"
+        },
+        "isRenegotiating": {
+          "description": "True if the order is being renegotiated (readonly).",
+          "type": "boolean"
+        },
+        "isSetupComplete": {
+          "description": "True, if the buyside inventory setup is complete for this order. (readonly)",
+          "type": "boolean"
+        },
+        "kind": {
+          "default": "adexchangebuyer#marketplaceOrder",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"adexchangebuyer#marketplaceOrder\".",
+          "type": "string"
+        },
+        "labels": {
+          "description": "List of labels associated with the order. (readonly)",
+          "items": {
+            "$ref": "#/definitions/MarketplaceLabel"
+          },
+          "type": "array"
+        },
+        "lastUpdaterOrCommentorRole": {
+          "description": "The role of the last user that either updated the order or left a comment. (readonly)",
+          "type": "string"
+        },
+        "lastUpdaterRole": {
+          "type": "string"
+        },
+        "name": {
+          "description": "The name for the order (updatable)",
+          "type": "string"
+        },
+        "orderId": {
+          "description": "The unique id of the order. (readonly).",
+          "type": "string"
+        },
+        "orderState": {
+          "description": "The current state of the order. (readonly)",
+          "type": "string"
+        },
+        "originatorRole": {
+          "description": "Indicates whether the buyer/seller created the offer.(readonly)",
+          "type": "string"
+        },
+        "revisionNumber": {
+          "description": "The revision number for the order (readonly).",
+          "format": "int64",
+          "type": "string"
+        },
+        "revisionTimeMs": {
+          "description": "The time (ms since epoch) when the order was last revised (readonly).",
+          "format": "int64",
+          "type": "string"
+        },
+        "seller": {
+          "$ref": "#/definitions/Seller",
+          "description": "Reference to the seller on the order. (readonly, except on create)"
+        },
+        "sellerContacts": {
+          "description": "Optional contact information for the seller (buyer-readonly).",
+          "items": {
+            "$ref": "#/definitions/ContactInformation"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "MoneyDto": {
+      "properties": {
+        "currencyCode": {
+          "type": "string"
+        },
+        "micros": {
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NegotiationDto": {
+      "properties": {
+        "billedBuyer": {
+          "$ref": "#/definitions/DealPartyDto",
+          "description": "The billed buyer; Specified by a buyer buying through an intermediary."
+        },
+        "buyer": {
+          "$ref": "#/definitions/DealPartyDto",
+          "description": "Details of the buyer party in this negotiation."
+        },
+        "buyerEmailContacts": {
+          "description": "The buyer party's contact email.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "dealType": {
+          "description": "The type of this deal.",
+          "type": "string"
+        },
+        "externalDealId": {
+          "description": "For finalized negotiations, the ID of the finalized deal.",
+          "format": "int64",
+          "type": "string"
+        },
+        "kind": {
+          "default": "adexchangebuyer#negotiation",
+          "type": "string"
+        },
+        "labelNames": {
+          "description": "A list of label names applicable to this negotiation.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "negotiationId": {
+          "description": "The unique ID of this negotiation.",
+          "format": "int64",
+          "type": "string"
+        },
+        "negotiationRounds": {
+          "description": "The series of negotiation rounds for this negotiation.",
+          "items": {
+            "$ref": "#/definitions/NegotiationRoundDto"
+          },
+          "type": "array"
+        },
+        "negotiationState": {
+          "description": "The state of this negotiation.",
+          "type": "string"
+        },
+        "offerId": {
+          "description": "The ID of this negotiation's original offer.",
+          "format": "int64",
+          "type": "string"
+        },
+        "seller": {
+          "$ref": "#/definitions/DealPartyDto",
+          "description": "Details of the seller party in this negotiation."
+        },
+        "sellerEmailContacts": {
+          "description": "The seller party's contact email.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "stats": {
+          "$ref": "#/definitions/StatsDto",
+          "description": "The stats for this negotiation."
+        },
+        "status": {
+          "description": "The status of this negotiation.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "NegotiationRoundDto": {
+      "properties": {
+        "action": {
+          "description": "The action performed by this negotiation round.",
+          "type": "string"
+        },
+        "dbmPartnerId": {
+          "description": "Stores DBM partner ID for use by DBM",
+          "format": "int64",
+          "type": "string"
+        },
+        "editHistory": {
+          "$ref": "#/definitions/EditHistoryDto",
+          "description": "The edit history of this negotiation round."
+        },
+        "kind": {
+          "default": "adexchangebuyer#negotiationRound",
+          "type": "string"
+        },
+        "negotiationId": {
+          "description": "The ID of the negotiation to which this negotiation round applies.",
+          "format": "int64",
+          "type": "string"
+        },
+        "notes": {
+          "description": "Notes regarding this negotiation round.",
+          "type": "string"
+        },
+        "originatorRole": {
+          "description": "The role, either buyer or seller, initiating this negotiation round.",
+          "type": "string"
+        },
+        "roundNumber": {
+          "description": "The number of this negotiation round, in sequence.",
+          "format": "int64",
+          "type": "string"
+        },
+        "terms": {
+          "$ref": "#/definitions/TermsDto",
+          "description": "The detailed terms proposed in this negotiation round."
+        }
+      },
+      "type": "object"
+    },
+    "OfferDto": {
+      "properties": {
+        "anonymous": {
+          "description": "Whether this offer is anonymous.",
+          "type": "boolean"
+        },
+        "billedBuyer": {
+          "$ref": "#/definitions/DealPartyDto",
+          "description": "The billed buyer; For buyer initiated offers, buying through an intermediary."
+        },
+        "closedToDealParties": {
+          "description": "The list of buyer or seller parties this offer is closed to.",
+          "items": {
+            "$ref": "#/definitions/DealPartyDto"
+          },
+          "type": "array"
+        },
+        "creator": {
+          "$ref": "#/definitions/DealPartyDto",
+          "description": "The creator of this offer."
+        },
+        "emailContacts": {
+          "description": "The list of email contacts for this offer.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "isOpen": {
+          "description": "Whether this offer is open.",
+          "type": "boolean"
+        },
+        "kind": {
+          "default": "adexchangebuyer#offer",
+          "type": "string"
+        },
+        "labelNames": {
+          "description": "The list of label names applicable to this offer.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "offerId": {
+          "description": "The unique ID of this offer.",
+          "format": "int64",
+          "type": "string"
+        },
+        "offerState": {
+          "description": "The state of this offer.",
+          "type": "string"
+        },
+        "openToDealParties": {
+          "description": "The list of buyer or seller parties this offer is open to.",
+          "items": {
+            "$ref": "#/definitions/DealPartyDto"
+          },
+          "type": "array"
+        },
+        "pointOfContact": {
+          "description": "The point of contact for this offer.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of this offer.",
+          "type": "string"
+        },
+        "terms": {
+          "$ref": "#/definitions/TermsDto",
+          "description": "The terms of this offer."
         }
       },
       "type": "object"
@@ -751,6 +2199,413 @@
         "kind": {
           "default": "adexchangebuyer#pretargetingConfigList",
           "description": "Resource type.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Price": {
+      "properties": {
+        "amountMicros": {
+          "description": "The CPM value in micros.",
+          "format": "double",
+          "type": "number"
+        },
+        "currencyCode": {
+          "description": "The currency code for the price.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PricePerBuyer": {
+      "description": "Used to specify pricing rules for buyers/advertisers. Each PricePerBuyer in an offer can become [0,1] deals. To check if there is a PricePerBuyer for a particular buyer or buyer/advertiser pair, we look for the most specific matching rule - we first look for a rule matching the buyer and advertiser, next a rule with the buyer but an empty advertiser list, and otherwise look for a matching rule where no buyer is set.",
+      "properties": {
+        "buyer": {
+          "$ref": "#/definitions/Buyer",
+          "description": "The buyer who will pay this price. If unset, all buyers can pay this price (if the advertisers match, and there's no more specific rule matching the buyer)."
+        },
+        "price": {
+          "$ref": "#/definitions/Price",
+          "description": "The specified price"
+        }
+      },
+      "type": "object"
+    },
+    "PrivateData": {
+      "properties": {
+        "referenceId": {
+          "type": "string"
+        },
+        "referencePayload": {
+          "format": "byte",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RuleKeyValuePair": {
+      "properties": {
+        "keyName": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Seller": {
+      "properties": {
+        "accountId": {
+          "description": "The unique id for the seller. The seller fills in this field. The seller account id is then available to buyer in the offer.",
+          "type": "string"
+        },
+        "subAccountId": {
+          "description": "Optional sub-account id for the seller.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SharedTargeting": {
+      "properties": {
+        "exclusions": {
+          "description": "The list of values to exclude from targeting.",
+          "items": {
+            "$ref": "#/definitions/TargetingValue"
+          },
+          "type": "array"
+        },
+        "inclusions": {
+          "description": "The list of value to include as part of the targeting.",
+          "items": {
+            "$ref": "#/definitions/TargetingValue"
+          },
+          "type": "array"
+        },
+        "key": {
+          "description": "The key representing the shared targeting criterion.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "StatsDto": {
+      "properties": {
+        "bids": {
+          "format": "int64",
+          "type": "string"
+        },
+        "goodBids": {
+          "format": "int64",
+          "type": "string"
+        },
+        "impressions": {
+          "format": "int64",
+          "type": "string"
+        },
+        "requests": {
+          "format": "int64",
+          "type": "string"
+        },
+        "revenue": {
+          "$ref": "#/definitions/MoneyDto"
+        },
+        "spend": {
+          "$ref": "#/definitions/MoneyDto"
+        }
+      },
+      "type": "object"
+    },
+    "TargetingValue": {
+      "properties": {
+        "creativeSizeValue": {
+          "$ref": "#/definitions/TargetingValueCreativeSize",
+          "description": "The creative size value to exclude/include."
+        },
+        "dayPartTargetingValue": {
+          "$ref": "#/definitions/TargetingValueDayPartTargeting",
+          "description": "The daypart targeting to include / exclude. Filled in when the key is GOOG_DAYPART_TARGETING."
+        },
+        "longValue": {
+          "description": "The long value to exclude/include.",
+          "format": "int64",
+          "type": "string"
+        },
+        "stringValue": {
+          "description": "The string value to exclude/include.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TargetingValueCreativeSize": {
+      "properties": {
+        "companionSizes": {
+          "description": "For video size type, the list of companion sizes.",
+          "items": {
+            "$ref": "#/definitions/TargetingValueSize"
+          },
+          "type": "array"
+        },
+        "creativeSizeType": {
+          "description": "The Creative size type.",
+          "type": "string"
+        },
+        "size": {
+          "$ref": "#/definitions/TargetingValueSize",
+          "description": "For regular creative size type, specifies the size of the creative."
+        }
+      },
+      "type": "object"
+    },
+    "TargetingValueDayPartTargeting": {
+      "properties": {
+        "dayParts": {
+          "items": {
+            "$ref": "#/definitions/TargetingValueDayPartTargetingDayPart"
+          },
+          "type": "array"
+        },
+        "timeZoneType": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TargetingValueDayPartTargetingDayPart": {
+      "properties": {
+        "dayOfWeek": {
+          "type": "string"
+        },
+        "endHour": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "endMinute": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "startHour": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "startMinute": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "TargetingValueSize": {
+      "properties": {
+        "height": {
+          "description": "The height of the creative.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "width": {
+          "description": "The width of the creative.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "TermsDto": {
+      "properties": {
+        "adSlots": {
+          "description": "The particular ad slots targeted by the offer.",
+          "items": {
+            "$ref": "#/definitions/AdSlotDto"
+          },
+          "type": "array"
+        },
+        "advertisers": {
+          "description": "A list of advertisers for this offer.",
+          "items": {
+            "$ref": "#/definitions/AdvertiserDto"
+          },
+          "type": "array"
+        },
+        "audienceSegment": {
+          "$ref": "#/definitions/AudienceSegment",
+          "description": "The audience segment for the offer."
+        },
+        "audienceSegmentDescription": {
+          "description": "A description of the audience segment for the offer.",
+          "type": "string"
+        },
+        "billingTerms": {
+          "description": "The billing terms.",
+          "type": "string"
+        },
+        "buyerBillingType": {
+          "description": "The buyer billing type.",
+          "type": "string"
+        },
+        "cpm": {
+          "$ref": "#/definitions/MoneyDto",
+          "description": "The cpm terms."
+        },
+        "creativeBlockingLevel": {
+          "description": "Whether to use or ignore publisher blocking rules.",
+          "type": "string"
+        },
+        "creativeReviewPolicy": {
+          "description": "Whether to use publisher review policy or AdX review policy.",
+          "type": "string"
+        },
+        "dealPremium": {
+          "$ref": "#/definitions/MoneyDto",
+          "description": "The premium terms."
+        },
+        "description": {
+          "description": "A description for these terms.",
+          "type": "string"
+        },
+        "descriptiveName": {
+          "description": "A descriptive name for these terms.",
+          "type": "string"
+        },
+        "endDate": {
+          "$ref": "#/definitions/DateTime",
+          "description": "The end date for the offer."
+        },
+        "estimatedImpressionsPerDay": {
+          "description": "The estimated daily impressions for the offer.",
+          "format": "int64",
+          "type": "string"
+        },
+        "estimatedSpend": {
+          "$ref": "#/definitions/MoneyDto",
+          "description": "The estimated spend for the offer."
+        },
+        "finalizeAutomatically": {
+          "description": "If true, the offer will finalize automatically when accepted.",
+          "type": "boolean"
+        },
+        "inventorySegmentTargeting": {
+          "$ref": "#/definitions/InventorySegmentTargeting",
+          "description": "The inventory segment targeting for the offer."
+        },
+        "isReservation": {
+          "description": "Whether the offer is a reservation.",
+          "type": "boolean"
+        },
+        "minimumSpendMicros": {
+          "description": "The minimum spend for the offer.",
+          "format": "int64",
+          "type": "string"
+        },
+        "minimumTrueLooks": {
+          "description": "The minimum true looks for the offer.",
+          "format": "int64",
+          "type": "string"
+        },
+        "monetizerType": {
+          "description": "The monetizer type.",
+          "type": "string"
+        },
+        "semiTransparent": {
+          "description": "Whether this offer is semi-transparent.",
+          "type": "boolean"
+        },
+        "startDate": {
+          "$ref": "#/definitions/DateTime",
+          "description": "The start date for the offer."
+        },
+        "targetByDealId": {
+          "description": "Whether to target by deal id.",
+          "type": "boolean"
+        },
+        "targetingAllAdSlots": {
+          "description": "If true, the offer targets all ad slots.",
+          "type": "boolean"
+        },
+        "termsAttributes": {
+          "description": "A list of terms attributes.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "urls": {
+          "description": "The urls applicable to the offer.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "UpdateOrderDealsRequest": {
+      "properties": {
+        "deals": {
+          "description": "List of deals to update",
+          "items": {
+            "$ref": "#/definitions/MarketplaceDeal"
+          },
+          "type": "array"
+        },
+        "orderRevisionNumber": {
+          "description": "The last known revision number for the order.",
+          "format": "int64",
+          "type": "string"
+        },
+        "updateAction": {
+          "type": "string"
+        },
+        "updatedFinalizedView": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "UpdateOrderDealsResponse": {
+      "properties": {
+        "deals": {
+          "description": "List of deals updated (in the same order as passed in the request)",
+          "items": {
+            "$ref": "#/definitions/MarketplaceDeal"
+          },
+          "type": "array"
+        },
+        "orderRevisionNumber": {
+          "description": "The updated revision number for the order.",
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WebPropertyDto": {
+      "properties": {
+        "allowInterestTargetedAds": {
+          "type": "boolean"
+        },
+        "enabledForPreferredDeals": {
+          "type": "boolean"
+        },
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "propertyCode": {
+          "type": "string"
+        },
+        "siteUrls": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "syndicationProduct": {
           "type": "string"
         }
       },
@@ -1263,6 +3118,277 @@
         ]
       }
     },
+    "/clientAccess": {
+      "get": {
+        "operationId": "adexchangebuyer.clientaccess.list",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ListClientAccessCapabilitiesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ListClientAccessCapabilitiesResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "clientaccess"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "operationId": "adexchangebuyer.clientaccess.insert",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "clientAccountId",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "sponsorAccountId",
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ClientAccessCapabilities"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ClientAccessCapabilities"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "clientaccess"
+        ]
+      }
+    },
+    "/clientAccess/{clientAccountId}": {
+      "delete": {
+        "operationId": "adexchangebuyer.clientaccess.delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "clientAccountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "sponsorAccountId",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "clientaccess"
+        ]
+      },
+      "get": {
+        "operationId": "adexchangebuyer.clientaccess.get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "clientAccountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "sponsorAccountId",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ClientAccessCapabilities"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "clientaccess"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "patch": {
+        "operationId": "adexchangebuyer.clientaccess.patch",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "clientAccountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "sponsorAccountId",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ClientAccessCapabilities"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ClientAccessCapabilities"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "clientaccess"
+        ]
+      },
+      "put": {
+        "operationId": "adexchangebuyer.clientaccess.update",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "clientAccountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "sponsorAccountId",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ClientAccessCapabilities"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ClientAccessCapabilities"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "clientaccess"
+        ]
+      }
+    },
     "/creatives": {
       "get": {
         "description": "Retrieves a list of the authenticated user's active creatives. A creative will be available 30-40 minutes after submission.",
@@ -1438,6 +3564,1202 @@
         ],
         "tags": [
           "creatives"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/deals/{dealId}": {
+      "get": {
+        "description": "Gets the requested deal.",
+        "operationId": "adexchangebuyer.deals.get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dealId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/GetFinalizedNegotiationByExternalDealIdRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/NegotiationDto"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "deals"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/marketplaceOffers/search": {
+      "get": {
+        "description": "Gets the requested negotiation.",
+        "operationId": "adexchangebuyer.marketplaceoffers.search",
+        "parameters": [
+          {
+            "description": "The pql query used to query for offers.",
+            "in": "query",
+            "name": "pqlQuery",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/GetOffersResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "marketplaceoffers"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/marketplaceOffers/{offerId}": {
+      "get": {
+        "description": "Gets the requested negotiation.",
+        "operationId": "adexchangebuyer.marketplaceoffers.get",
+        "parameters": [
+          {
+            "description": "The offerId for the offer to get the head revision for.",
+            "in": "path",
+            "name": "offerId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceOffer"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "marketplaceoffers"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/marketplaceOrders/create": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Create the given list of orders",
+        "operationId": "adexchangebuyer.marketplaceorders.create",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/CreateOrdersRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/CreateOrdersResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "marketplaceorders"
+        ]
+      }
+    },
+    "/marketplaceOrders/search": {
+      "get": {
+        "description": "Search for orders using pql query",
+        "operationId": "adexchangebuyer.marketplaceorders.search",
+        "parameters": [
+          {
+            "description": "Query string to retrieve specific orders.",
+            "in": "query",
+            "name": "pqlQuery",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/GetOrdersResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "marketplaceorders"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/marketplaceOrders/{orderId}": {
+      "get": {
+        "description": "Get an order given its id",
+        "operationId": "adexchangebuyer.marketplaceorders.get",
+        "parameters": [
+          {
+            "description": "Id of the order to retrieve.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceOrder"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "marketplaceorders"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "patch": {
+        "description": "Update the given order. This method supports patch semantics.",
+        "operationId": "adexchangebuyer.marketplaceorders.patch",
+        "parameters": [
+          {
+            "description": "The order id to update.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceOrder"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceOrder"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "marketplaceorders"
+        ]
+      },
+      "put": {
+        "description": "Update the given order",
+        "operationId": "adexchangebuyer.marketplaceorders.update",
+        "parameters": [
+          {
+            "description": "The order id to update.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceOrder"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceOrder"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "marketplaceorders"
+        ]
+      }
+    },
+    "/marketplaceOrders/{orderId}/deals": {
+      "get": {
+        "description": "List all the deals for a given order",
+        "operationId": "adexchangebuyer.marketplacedeals.list",
+        "parameters": [
+          {
+            "description": "The orderId to get deals for.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/GetOrderDealsResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "marketplacedeals"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/marketplaceOrders/{orderId}/deals/create": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Add new deals for the specified order",
+        "operationId": "adexchangebuyer.marketplacedeals.create",
+        "parameters": [
+          {
+            "description": "OrderId for which deals need to be added.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AddOrderDealsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AddOrderDealsResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "marketplacedeals"
+        ]
+      }
+    },
+    "/marketplaceOrders/{orderId}/deals/delete": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Delete the specified deals from the order",
+        "operationId": "adexchangebuyer.marketplacedeals.delete",
+        "parameters": [
+          {
+            "description": "The orderId to delete deals from.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DeleteOrderDealsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/DeleteOrderDealsResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "marketplacedeals"
+        ]
+      }
+    },
+    "/marketplaceOrders/{orderId}/deals/replace": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Replaces all the deals in the order with the passed in deals",
+        "operationId": "adexchangebuyer.marketplacedeals.replace",
+        "parameters": [
+          {
+            "description": "The orderId to edit deals on.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/EditAllOrderDealsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/EditAllOrderDealsResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "marketplacedeals"
+        ]
+      }
+    },
+    "/marketplaceOrders/{orderId}/deals/update": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Update the specified deals on the order",
+        "operationId": "adexchangebuyer.marketplacedeals.update",
+        "parameters": [
+          {
+            "description": "The orderId to update deals for.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/UpdateOrderDealsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/UpdateOrderDealsResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "marketplacedeals"
+        ]
+      }
+    },
+    "/marketplaceOrders/{orderId}/notes": {
+      "get": {
+        "description": "Get all the notes associated with an order",
+        "operationId": "adexchangebuyer.marketplacenotes.list",
+        "parameters": [
+          {
+            "description": "The orderId to get notes for.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/GetOrderNotesResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "marketplacenotes"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/marketplaceOrders/{orderId}/notes/add": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Add notes to the order",
+        "operationId": "adexchangebuyer.marketplacenotes.create",
+        "parameters": [
+          {
+            "description": "The orderId to add notes for.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AddOrderNotesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AddOrderNotesResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "marketplacenotes"
+        ]
+      }
+    },
+    "/negotiations": {
+      "get": {
+        "description": "Lists all negotiations the authenticated user has access to.",
+        "operationId": "adexchangebuyer.negotiations.list",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/GetNegotiationsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/GetNegotiationsResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "negotiations"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates or updates the requested negotiation.",
+        "operationId": "adexchangebuyer.negotiations.insert",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/NegotiationDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/NegotiationDto"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "negotiations"
+        ]
+      }
+    },
+    "/negotiations/{negotiationId}": {
+      "get": {
+        "description": "Gets the requested negotiation.",
+        "operationId": "adexchangebuyer.negotiations.get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "negotiationId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/GetNegotiationByIdRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/NegotiationDto"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "negotiations"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/negotiations/{negotiationId}/negotiationrounds": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Adds the requested negotiationRound to the requested negotiation.",
+        "operationId": "adexchangebuyer.negotiationrounds.insert",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "negotiationId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/NegotiationRoundDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/NegotiationRoundDto"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "negotiationrounds"
+        ]
+      }
+    },
+    "/offers": {
+      "get": {
+        "description": "Lists all offers the authenticated user has access to.",
+        "operationId": "adexchangebuyer.offers.list",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ListOffersRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ListOffersResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "offers"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates or updates the requested offer.",
+        "operationId": "adexchangebuyer.offers.insert",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/OfferDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OfferDto"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "offers"
+        ]
+      }
+    },
+    "/offers/{offerId}": {
+      "get": {
+        "description": "Gets the requested offer.",
+        "operationId": "adexchangebuyer.offers.get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "offerId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OfferDto"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "offers"
         ]
       },
       "parameters": [

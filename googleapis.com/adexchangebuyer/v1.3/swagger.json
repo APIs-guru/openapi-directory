@@ -281,6 +281,13 @@
           "format": "int32",
           "type": "integer"
         },
+        "impressionTrackingUrl": {
+          "description": "The set of urls to be called to record an impression.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "kind": {
           "default": "adexchangebuyer#creative",
           "description": "Resource type.",
@@ -321,6 +328,11 @@
             "type": "integer"
           },
           "type": "array"
+        },
+        "version": {
+          "description": "The version for this creative. Read-only. This field should not be set in requests.",
+          "format": "int32",
+          "type": "integer"
         },
         "videoURL": {
           "description": "The url to fetch a video ad. If set, HTMLSnippet should not be set.",
