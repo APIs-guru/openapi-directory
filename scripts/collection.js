@@ -44,6 +44,12 @@ program
   .action(updateGoogle);
 
 program
+  .command('api')
+  .description('generate API')
+  .arguments('<SPEC_ROOT_URL>')
+  .action(generateAPI);
+
+program
   .command('add')
   .description('add new spec')
   .arguments('<TYPE> <URL>')
@@ -67,6 +73,57 @@ function updateCollection() {
     });
   });
 }
+
+function generateAPI(specRootUrl) {
+  var list = {};
+
+  _.each(getSpecs(), function (swagger, filename) {
+    var id = getProviderName(swagger);
+    assert(id.indexOf(':') === -1);
+
+    var service = getServiceName(swagger);
+    if (!_.isUndefined(service)) {
+      assert(service.indexOf(':') === -1);
+      id += ':' + service;
+    }
+
+    var version = swagger.info.version;
+    if (_.isUndefined(list[id]))
+      list[id] = { versions: {} };
+
+    list[id].versions[version] = {
+      swaggerUrl: specRootUrl + getSwaggerPath(swagger),
+      info: swagger.info
+    };
+  });
+
+  _.each(list, function (api, id) {
+    if (_.size(api.versions) === 1)
+      api.preferred = _.keys(api.versions)[0];
+    else {
+      _.each(api.versions, function (spec, version) {
+        var preferred = spec.info['x-preferred'];
+        assert(_.isBoolean(preferred));
+        if (preferred) {
+          assert(!api.preferred);
+          api.preferred = version;
+        }
+      });
+    }
+  });
+
+  saveJson('api/v1/list.json', list);
+}
+
+/* TODO: automatic detection of version formats
+function compareVersions(ver1, ver2) {
+  assert(ver1 !== ver2);
+
+  var versionRegex = /^v(\d+(?:\.\d+)*)(?:beta(\d+))?$/
+  var ver1parts = ver1.match(versionRegex);
+  var ver2parts = ver2.match(versionRegex);
+}
+*/
 
 function validateCollection() {
   var specs = getSpecs();
