@@ -4,6 +4,7 @@
 var assert = require('assert');
 var _ = require('lodash');
 var fs = require('fs');
+var Path = require('path');
 var glob = require('glob')
 var async = require('async')
 var sortobject = require('deep-sort-object');
@@ -86,7 +87,7 @@ function validateCollection() {
 }
 
 function addToCollection(type, url) {
-  writeSpec(url, type, function () {});
+  writeSpec(url, type, _.noop);
 }
 
 function updateGoogle() {
@@ -148,9 +149,8 @@ function writeSpec(url, type, callback) {
         if (warnings)
           logJson(warnings);
 
-        var dirname = path.join('/');
-        var filename = saveSwagger(dirname, swagger);
-        callback(filename);
+        var filename = saveSwagger(swagger);
+        callback(swagger);
       });
     });
   });
@@ -199,10 +199,10 @@ function validateSwagger(swagger, callback) {
   });
 }
 
-function getSpecs(callback, finishCallback) {
+function getSpecs() {
   var files = glob.sync('**/swagger.json');
   return _.transform(files, function (result, filename) {
-    result[filename] = readSwagger(filename);
+    result[filename] = readJson(filename);
   }, {});
 }
 
@@ -219,13 +219,10 @@ function patchSwagger(swagger, pathComponents) {
   var path = '';
   _.each(pathComponents, function (dir) {
     path += dir + '/';
-    var patchFile = path + 'patch.json';
-    if (!fs.existsSync(patchFile))
-      return;
+    var subPatch = readJson(path + 'patch.json');
 
-    var subpatch = fs.readFileSync(patchFile, 'utf-8');
-    subpatch = JSON.parse(subpatch);
-    patch = jsonPatch.merge(patch, subpatch);
+    if (!_.isUndefined(subPatch))
+      patch = jsonPatch.merge(patch, subPatch);
   });
 
   jsonPatch.apply(swagger, patch);
@@ -267,7 +264,10 @@ function parseHost(swagger) {
   return host;
 }
 
-function readSwagger(filename) {
+function readJson(filename) {
+  if (!fs.existsSync(filename))
+    return;
+
   var data = fs.readFileSync(filename, 'utf-8');
   return JSON.parse(data);
 }
@@ -286,20 +286,37 @@ function getOriginUrl(swagger) {
   return getOrigin(swagger).url;
 }
 
+function getProviderName(swagger) {
+  return swagger.info['x-providerName'];
+}
+
+function getServiceName(swagger) {
+  return swagger.info['x-serviceName'];
+}
+
 function getPathComponents(swagger) {
-  var path = [swagger.info['x-providerName']];
-  if ('x-serviceName' in swagger.info)
-    path.push(swagger.info['x-serviceName']);
+  var serviceName = getServiceName(swagger);
+  var path = [getProviderName(swagger)];
+  if (serviceName)
+    path.push(serviceName);
   path.push(swagger.info.version);
 
   return path;
 }
 
-function saveSwagger(dirname, swagger) {
-  var str = Json2String(swagger);
-  mkdirp(dirname);
-  var path = dirname + '/swagger.json';
-  console.log(path);
+function getSwaggerPath(swagger) {
+  return getPathComponents(swagger).join('/') + '/swagger.json';
+}
+
+function saveJson(path, json) {
+  mkdirp(Path.dirname(path));
+  var str = Json2String(json);
   fs.writeFileSync(path, str);
+}
+
+function saveSwagger(swagger) {
+  var path = getSwaggerPath(swagger);
+  console.log(path);
+  saveJson(path, swagger);
   return path;
 }
