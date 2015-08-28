@@ -359,6 +359,10 @@
         "sqlExportOptions": {
           "description": "Options for exporting data as SQL statements.",
           "properties": {
+            "schemaOnly": {
+              "description": "Export only schema.",
+              "type": "boolean"
+            },
             "tables": {
               "description": "Tables to export, or that were exported, from the specified database. If you specify tables, specify one and only one database.",
               "items": {
@@ -951,6 +955,16 @@
       },
       "type": "object"
     },
+    "SslCertsCreateEphemeralRequest": {
+      "description": "SslCerts create ephemeral certificate request.",
+      "properties": {
+        "public_key": {
+          "description": "PEM encoded public key to include in the signed certificate.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "SslCertsInsertRequest": {
       "description": "SslCerts insert request.",
       "properties": {
@@ -993,16 +1007,6 @@
         "kind": {
           "default": "sql#sslCertsList",
           "description": "This is always sql#sslCertsList.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "SslCertsSignRequest": {
-      "description": "SslCerts sign request.",
-      "properties": {
-        "public_key": {
-          "description": "PEM encoded public key to include in the signed certificate.",
           "type": "string"
         }
       },
@@ -1616,6 +1620,52 @@
       ]
     },
     "/projects/{project}/instances/{instance}/backupRuns/{id}": {
+      "delete": {
+        "description": "Deletes the backup taken by a backup run.",
+        "operationId": "sql.backupRuns.delete",
+        "parameters": [
+          {
+            "description": "Project ID of the project that contains the instance.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "in": "path",
+            "name": "instance",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the Backup Run to delete.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
+        ],
+        "tags": [
+          "backupRuns"
+        ]
+      },
       "get": {
         "description": "Retrieves a resource containing information about a backup run.",
         "operationId": "sql.backupRuns.get",
@@ -1686,77 +1736,6 @@
         }
       ]
     },
-    "/projects/{project}/instances/{instance}/certSign": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Generates a short-lived X509 certificate containing the provided public key and signed by a private key specific to the target instance. Users may use the certificate to authenticate as themselves when connecting to the database.",
-        "operationId": "sql.sslCerts.sign",
-        "parameters": [
-          {
-            "description": "Project ID of the Cloud SQL project.",
-            "in": "path",
-            "name": "project",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Cloud SQL instance ID. This does not include the project ID.",
-            "in": "path",
-            "name": "instance",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/SslCertsSignRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/SslCert"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/sqlservice.admin"
-            ]
-          }
-        ],
-        "tags": [
-          "sslCerts"
-        ]
-      }
-    },
     "/projects/{project}/instances/{instance}/clone": {
       "parameters": [
         {
@@ -1825,6 +1804,77 @@
         ],
         "tags": [
           "instances"
+        ]
+      }
+    },
+    "/projects/{project}/instances/{instance}/createEphemeral": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Generates a short-lived X509 certificate containing the provided public key and signed by a private key specific to the target instance. Users may use the certificate to authenticate as themselves when connecting to the database.",
+        "operationId": "sql.sslCerts.createEphemeral",
+        "parameters": [
+          {
+            "description": "Project ID of the Cloud SQL project.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "in": "path",
+            "name": "instance",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SslCertsCreateEphemeralRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SslCert"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
+        ],
+        "tags": [
+          "sslCerts"
         ]
       }
     },

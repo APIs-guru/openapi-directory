@@ -1768,6 +1768,11 @@
           "description": "Date range during which the item is on sale (see product feed specifications).",
           "type": "string"
         },
+        "sellOnGoogleQuantity": {
+          "description": "The quantity of the product that is reserved for sell-on-google ads.",
+          "format": "int64",
+          "type": "string"
+        },
         "shipping": {
           "description": "Shipping rules.",
           "items": {
@@ -2366,7 +2371,7 @@
     }
   },
   "externalDocs": {
-    "url": "https://developers.google.com/shopping-content/v2/"
+    "url": "https://developers.google.com/shopping-content"
   },
   "host": "www.googleapis.com",
   "info": {
@@ -4686,7 +4691,7 @@
             "type": "string"
           },
           {
-            "description": "The maximum number of product statuses to return in the response, used for paging.",
+            "description": "The maximum number of product statuses to return in the response, used for paging. The default value is 25 and the maximum allowed value is 250.\nKnown issue: Note that for the time being all List calls will return by default all orders without limit.",
             "in": "query",
             "name": "maxResults",
             "type": "integer"
