@@ -91,7 +91,7 @@ function addToCollection(type, url) {
 }
 
 function updateGoogle() {
-  var knownUrls = _(getSpecs()).values().map(getOriginUrl).value();
+  var knownSpecs = _.mapKeys(getSpecs(), getOriginUrl);
   var discovery = new RestClient();
   discovery.get('https://www.googleapis.com/discovery/v1/apis', function (data) {
     data = JSON.parse(data);
@@ -123,13 +123,32 @@ function updateGoogle() {
            ].indexOf(api.id) >= 0) {
           return;
       }
-      var url = api.discoveryRestUrl;
-      if (knownUrls.indexOf(url) !== -1)
-        return;
 
-      writeSpec(url, 'google', _.noop);
+      assert(typeof api.preferred === 'boolean');
+      var addPath = {
+        info: {
+          'x-preferred': api.preferred
+        }
+      };
+
+      var url = api.discoveryRestUrl;
+      var knownSpec = knownSpecs[url];
+      if (!_.isUndefined(knownSpec)) {
+        mergePatch(knownSpec, addPath);
+        return;
+      }
+
+      writeSpec(url, 'google', function (swagger) {
+        mergePatch(swagger, addPath);
+      });
     });
   });
+}
+
+function mergePatch(swagger, addPatch) {
+  var path = getPathComponents(swagger).join('/') + '/patch.json';
+  var patch = jsonPatch.merge(readJson(path), addPatch);
+  saveJson(path, patch);
 }
 
 function writeSpec(url, type, callback) {
