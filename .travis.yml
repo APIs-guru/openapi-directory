@@ -6,6 +6,6 @@ env:
     - GH_REF: "github.com/APIs-guru/api-models.git"
 deploy:
   provider: script
-  script: ./scripts/deploy_gh_pages.sh 2>&1 | sed "s/${GH_TOKEN}/xxPASSxx/"
+  script: ./scripts/deploy_gh_pages.sh
   on:
     branch: master
