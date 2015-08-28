@@ -1,5 +1,5 @@
 #!/bin/bash
-set -o pipefail
+set -e
 set -x
 export GIT_COMMITTER_NAME=APIs-GuruBot
 ./scripts/gen_apilist.sh
