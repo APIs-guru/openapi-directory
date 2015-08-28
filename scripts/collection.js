@@ -60,7 +60,8 @@ function urlsCollection() {
 function updateCollection() {
   var specs = getSpecs();
   async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
-    writeSpec(getOriginUrl(swagger), getSpecType(swagger), function (newFilename) {
+    writeSpec(getOriginUrl(swagger), getSpecType(swagger), function (swagger) {
+      var newFilename = getSwaggerPath(swagger);
       assert(newFilename === filename);
       asyncCb(null);
     });
