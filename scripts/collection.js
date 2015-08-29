@@ -13,7 +13,6 @@ var parseDomain = require('parse-domain');
 var mkdirp = require('mkdirp').sync;
 var jsonPatch = require('json-merge-patch');
 var RestClient = require('node-rest-client').Client;
-var SwaggerTools = require('swagger-tools').specs.v2;
 
 var program = require('commander');
 
