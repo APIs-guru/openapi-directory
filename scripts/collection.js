@@ -4,6 +4,7 @@
 var assert = require('assert');
 var _ = require('lodash');
 var fs = require('fs');
+var exec = require('child_process').execSync;
 var Path = require('path');
 var glob = require('glob')
 var async = require('async')
@@ -92,11 +93,14 @@ function generateAPI(specRootUrl) {
 
     list[id].versions[version] = {
       swaggerUrl: specRootUrl + getSwaggerPath(swagger),
-      info: swagger.info
+      info: swagger.info,
+      added: gitLogDate('--follow --diff-filter=A -1', filename),
+      updated: gitLogDate('-1', filename)
     };
   });
 
   _.each(list, function (api, id) {
+    api.added = _(api.versions).values().pluck('added').min();
     if (_.size(api.versions) === 1)
       api.preferred = _.keys(api.versions)[0];
     else {
@@ -112,6 +116,12 @@ function generateAPI(specRootUrl) {
   });
 
   saveJson('api/v1/list.json', list);
+}
+
+function gitLogDate(options, filename) {
+  var result = exec('git log --format=%aD ' + options + ' -- \'' + filename + '\'');
+  result = result.toString();
+  return new Date(result);
 }
 
 /* TODO: automatic detection of version formats
