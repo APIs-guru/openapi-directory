@@ -66,7 +66,10 @@ function urlsCollection() {
 function updateCollection() {
   var specs = getSpecs();
   async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
-    writeSpec(getOriginUrl(swagger), getSpecType(swagger), function (swagger) {
+    writeSpec(getOriginUrl(swagger), getSpecType(swagger), function (error, swagger) {
+      if (error)
+        return logError(error);
+
       var newFilename = getSwaggerPath(swagger);
       assert(newFilename === filename);
       asyncCb(null);
@@ -154,7 +157,11 @@ function validateCollection() {
 }
 
 function addToCollection(type, url) {
-  writeSpec(url, type, _.noop);
+  writeSpec(url, type, function (error, swagger) {
+    if (error)
+      return logError(error);
+  });
+
 }
 
 function updateGoogle() {
@@ -205,7 +212,9 @@ function updateGoogle() {
         return;
       }
 
-      writeSpec(url, 'google', function (swagger) {
+      writeSpec(url, 'google', function (error, swagger) {
+        if (error)
+          return logError(error);
         mergePatch(swagger, addPath);
       });
     });
@@ -223,50 +232,71 @@ function writeSpec(url, type, callback) {
 
   getOriginSpec(url, type, function (spec) {
     convertToSwagger(spec, function (error, swagger) {
+      var errorObj = {
+        spec: spec,
+        errors: error
+      };
+
       if (error)
-        return logSpec(error, null, spec);
+        return callback(errorObj);
 
       var path = getPathComponents(swagger);
       patchSwagger(swagger, path);
+      errorObj.swagger = swagger;
 
       validateSwagger(swagger, function (errors, warnings) {
+        _.extend(errorObj, {
+          errors: errors,
+          warnings: warnings
+        });
+
         if (errors)
-          return logSpec(errors, warnings, spec, swagger);
+          return callback(errorObj);
 
         if (warnings)
           logJson(warnings);
 
         var filename = saveSwagger(swagger);
-        callback(swagger);
+        callback(null, swagger);
       });
     });
   });
 }
 
-function logSpec(error, warnings, spec, swagger) {
+function logError(errorObj) {
+  console.error(errorToString(errorObj));
+  process.exitCode = errExitCode;
+}
+
+function errorToString(errorObj) {
+  var spec = errorObj.spec;
+  var swagger = errorObj.swagger;
+  var errors = errorObj.errors;
+  var warnings = errorObj.warnings;
   var url = spec.source;
 
-  console.error('++++++++++++++++++++++++++ Begin ' + url + ' +++++++++++++++++++++++++');
+  var result = '++++++++++++++++++++++++++ Begin ' + url + ' +++++++++++++++++++++++++\n';
   if (spec.type !== 'swagger_2' || _.isUndefined(swagger)) {
-    logJson(spec.spec);
+    result += Json2String(spec.spec);
     if (spec.subResources)
-      logJson(spec.subResources);
+      result += Json2String(spec.subResources);
   }
   if (!_.isUndefined(swagger)) {
-    console.error('???????????????????? Swagger ' + url + ' ????????????????????????????');
-    logJson(swagger);
+    result += '???????????????????? Swagger ' + url + ' ????????????????????????????\n';
+    result += Json2String(swagger);
   }
-  console.error('!!!!!!!!!!!!!!!!!!!! Errors ' + url + ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-  if (_.isArray(error))
-    logJson(error);
+  result += '!!!!!!!!!!!!!!!!!!!! Errors ' + url + ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n';
+  if (_.isArray(errors))
+    result += Json2String(errors);
   else
-    console.error(error);
+    result += errors + '\n';
+
   if (warnings) {
-    console.error('******************** Warnings ' + url + ' ******************************');
-    logJson(warnings);
+    result += '******************** Warnings ' + url + ' ******************************\n';
+    result += Json2String(warnings);
   }
-  console.error('------------------------- End ' + url + ' ----------------------------');
-  process.exitCode = errExitCode;
+  result += '------------------------- End ' + url + ' ----------------------------\n';
+  return result;
 }
 
 function Json2String(json) {
