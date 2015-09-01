@@ -35,9 +35,7 @@
         }
       }
     },
-    "Void": {
-      "properties": {}
-    },
+    "Void": {},
     "WebServiceAccount": {
       "description": "WebServiceAccount",
       "properties": {
@@ -354,6 +352,7 @@
   "info": {
     "title": "www.zoomconnect.com",
     "version": "1",
+    "x-logo": "http://zoomconnect.com/assets/logo.png",
     "x-origin": {
       "format": "swagger",
       "url": "https://www.zoomconnect.com/zoom/api-docs",
@@ -435,14 +434,14 @@
       }
     },
     "/api/rest/v1/contacts/{contactId}": {
-      "get": {
+      "delete": {
         "consumes": [
           "application/json",
           "application/xml"
         ],
         "deprecated": false,
-        "description": "Returns details for a single contact",
-        "operationId": "get",
+        "description": "Deletes a  contact",
+        "operationId": "delete",
         "parameters": [
           {
             "description": "contactId",
@@ -459,22 +458,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/WebServiceContact"
-            }
+            "description": "Description was not specified"
+          },
+          "204": {
+            "description": "No Content"
           },
           "401": {
             "description": "Unauthorized"
           },
           "403": {
             "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
           }
         },
-        "summary": "get",
+        "summary": "delete",
         "tags": [
           "contacts"
         ]
@@ -517,14 +513,14 @@
       }
     },
     "/api/rest/v1/groups/{groupId}": {
-      "delete": {
+      "get": {
         "consumes": [
           "application/json",
           "application/xml"
         ],
         "deprecated": false,
-        "description": "Deletes a  group",
-        "operationId": "delete",
+        "description": "Returns details for a single group",
+        "operationId": "get",
         "parameters": [
           {
             "description": "groupId",
@@ -541,19 +537,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Description was not specified"
-          },
-          "204": {
-            "description": "No Content"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebServiceGroup"
+            }
           },
           "401": {
             "description": "Unauthorized"
           },
           "403": {
             "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           }
         },
-        "summary": "delete",
+        "summary": "get",
         "tags": [
           "groups"
         ]
@@ -771,24 +770,41 @@
       }
     },
     "/api/rest/v1/sms/send": {
-      "get": {
+      "post": {
         "consumes": [
           "application/json",
           "application/xml"
         ],
         "deprecated": false,
-        "description": "Returns an example of the data to POST to send a single message.",
+        "description": "Sends a single message. The <i>recipientNumber</i> and <i>message</i> fields are required. All other fields are optional.",
         "operationId": "send",
+        "parameters": [
+          {
+            "description": "request",
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/WebServiceSendSmsRequest"
+            }
+          }
+        ],
         "produces": [
           "application/json",
           "application/xml"
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Description was not specified",
             "schema": {
-              "$ref": "#/definitions/WebServiceSendSmsRequest"
+              "$ref": "#/definitions/WebServiceSendSmsResponse"
             }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Validation error</br></br>Code and message:<ul><li>2 - Invalid mobile number</li><li>3 - Message cannot be empty</li></ul>"
           },
           "401": {
             "description": "Unauthorized"
@@ -1030,14 +1046,14 @@
       }
     },
     "/api/rest/v1/templates/{templateId}": {
-      "delete": {
+      "get": {
         "consumes": [
           "application/json",
           "application/xml"
         ],
         "deprecated": false,
-        "description": "Deletes a  template",
-        "operationId": "delete",
+        "description": "Returns details for a single template",
+        "operationId": "get",
         "parameters": [
           {
             "description": "templateId",
@@ -1054,19 +1070,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Description was not specified"
-          },
-          "204": {
-            "description": "No Content"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebServiceTemplate"
+            }
           },
           "401": {
             "description": "Unauthorized"
           },
           "403": {
             "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           }
         },
-        "summary": "delete",
+        "summary": "get",
         "tags": [
           "templates"
         ]

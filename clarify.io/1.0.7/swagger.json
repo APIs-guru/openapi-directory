@@ -2,6 +2,7 @@
   "basePath": "/",
   "definitions": {
     "Bundle": {
+      "$ref": "#/definitions/object",
       "properties": {
         "_class": {
           "description": "Bundle",
@@ -54,6 +55,7 @@
       ]
     },
     "Collection": {
+      "$ref": "#/definitions/object",
       "properties": {
         "_class": {
           "description": "Collection",
@@ -84,6 +86,7 @@
       ]
     },
     "Insight": {
+      "$ref": "#/definitions/object",
       "properties": {
         "_class": {
           "description": "Class name of Insight",
@@ -139,6 +142,7 @@
       ]
     },
     "Insights": {
+      "$ref": "#/definitions/object",
       "properties": {
         "_class": {
           "description": "Insights",
@@ -170,6 +174,7 @@
       ]
     },
     "ItemResult": {
+      "$ref": "#/definitions/object",
       "properties": {
         "score": {
           "description": "Relevance of the item according to the search criteria. A value between 0 and 1",
@@ -189,6 +194,7 @@
       ]
     },
     "MatchHit": {
+      "$ref": "#/definitions/object",
       "properties": {
         "end": {
           "description": "For \"text\" matches, the index of the character in the string immediately after the matched term (exclusive.) For \"audio\" matches, the end time in seconds where the word was spoken",
@@ -204,6 +210,7 @@
       ]
     },
     "Metadata": {
+      "$ref": "#/definitions/object",
       "properties": {
         "_class": {
           "description": "Metadata",
@@ -245,6 +252,7 @@
       ]
     },
     "Ref": {
+      "$ref": "#/definitions/object",
       "properties": {
         "_class": {
           "description": "Ref",
@@ -261,6 +269,7 @@
       ]
     },
     "Ref (of Bundle)": {
+      "$ref": "#/definitions/object",
       "properties": {
         "_class": {
           "description": "Ref",
@@ -282,6 +291,7 @@
       ]
     },
     "SearchCollection": {
+      "$ref": "#/definitions/object",
       "properties": {
         "_class": {
           "description": "SearchCollection",
@@ -328,6 +338,7 @@
       ]
     },
     "SearchTerm": {
+      "$ref": "#/definitions/object",
       "properties": {
         "term": {
           "description": "A term from the query",
@@ -339,6 +350,7 @@
       ]
     },
     "TermMatch": {
+      "$ref": "#/definitions/object",
       "properties": {
         "field": {
           "description": "For \"text\" or \"array\" match types, specifies the metadata field that contains the match",
@@ -362,6 +374,7 @@
       ]
     },
     "TermResult": {
+      "$ref": "#/definitions/object",
       "properties": {
         "matches": {
           "description": "Array of locations where the search term was found in the bundle",
@@ -381,6 +394,7 @@
       ]
     },
     "Track": {
+      "$ref": "#/definitions/object",
       "properties": {
         "_class": {
           "description": "Track",
@@ -476,6 +490,7 @@
       ]
     },
     "Track (array item)": {
+      "$ref": "#/definitions/object",
       "properties": {
         "audio_channel": {
           "description": "The audio channel used for the track ( \"\" | left | right). Empty string means all channels of audio in the media file are used for the track",
@@ -561,6 +576,7 @@
       ]
     },
     "Tracks": {
+      "$ref": "#/definitions/object",
       "properties": {
         "_class": {
           "description": "Tracks",
@@ -610,7 +626,7 @@
       ]
     },
     "object": {
-      "properties": {}
+      "$ref": "#/definitions/object"
     }
   },
   "host": "api.clarify.io",

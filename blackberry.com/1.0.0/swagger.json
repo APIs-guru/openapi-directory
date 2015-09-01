@@ -111,8 +111,7 @@
         }
       },
       "required": [
-        "name",
-        "description"
+        "name"
       ]
     },
     "AppKeys": {
@@ -149,11 +148,7 @@
           "description": "The name of the application, such as \"My Awesome App\".",
           "type": "string"
         }
-      },
-      "required": [
-        "name",
-        "description"
-      ]
+      }
     },
     "Cap": {
       "properties": {
@@ -462,7 +457,10 @@
           "description": "The PEM-encoded Certificate Signing Request (CSR).",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "csr"
+      ]
     },
     "DeviceCapability": {
       "properties": {
