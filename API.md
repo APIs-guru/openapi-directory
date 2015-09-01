@@ -1,20 +1,43 @@
 **Warning**: this API is in **ALPHA** stage and subject to changes.<br>
 If you want to be notified about changes in advance please send us email to founders@APIs.guru
 
-This API implemented as `gh-pages` branch Github automatically mirror it's content to https://apis-guru.github.io/api-models/
+This API implemented as `gh-pages` branch Github automatically mirror it's content to<BR> https://apis-guru.github.io/api-models/<BR>
+That mean API served as static content and support both caching and compression.
 
-http://apis-guru.github.io/api-models/apilist.json - List all API specs in JSON format.
-`api` property is an array consting of path alement to Swagger files.
+http://apis-guru.github.io/api-models/api/v1/list.json - List all API specs.
+It consist of JSON object with API IDs("<provider>[:<service>]") as keys.
+Values have following are objects with following attributes:
+ - `added` - Timestamp when this API was first added to collection.
+ - `preferred` - recomended version.
+ - `version` - map of version to their descriptions:
+    - `added` - Timestamp when this version was added
+    - `info` - Copy of `info` section from Swagger spec
+    - `swaggerUrl` - URL of Swagger spec
+    - `updated` - Timestamp when this version was updated
+ 
 For example:
 ```json
 {
-  "api": [
-    ["gettyimages.com","3.0"],
-    ["googleapis.com","youtube","v3"]
-  ]
+  "googleapis.com:drive": {
+    "added": "2015-08-16T17:36:25.000Z",
+    "preferred": "v2",
+    "versions": {
+      "v1": {
+        "added": "2015-08-16T17:36:25.000Z",
+        "info": {
+          "title": "Drive API",
+          ...
+        },
+        "swaggerUrl": "https://apis-guru.github.io/api-models/googleapis.com/drive/v1/swagger.json",
+        "updated": "2015-08-28T20:44:24.000Z"
+      },
+      "v2": {
+        "added": "2015-08-16T17:36:25.000Z",
+        ...
+      }
+    }
+  },
+  ...
 }
 ```
-To get URL for a spec you should concat all path elemement with `/` as separator and append `swagger.json`.<br>
-So link from previous example would be:<br>
-https://apis-guru.github.io/api-models/gettyimages.com/3.0/swagger.json<br>
-https://apis-guru.github.io/api-models/googleapis.com/youtube/v3/swagger.json<br>
+
