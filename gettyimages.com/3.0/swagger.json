@@ -1,6 +1,14 @@
 {
   "basePath": "/",
   "definitions": {
+    "AssetToAdd": {
+      "properties": {
+        "note": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "KeyValuePair[String,String]": {
       "properties": {
         "Key": {
@@ -99,6 +107,31 @@
       },
       "type": "object"
     },
+    "asset": {
+      "properties": {
+        "asset_type": {
+          "enum": [
+            "image",
+            "video"
+          ],
+          "type": "string"
+        },
+        "date_added": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "display_sizes": {
+          "items": {
+            "$ref": "#/definitions/display_size"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "asset_usage": {
       "description": "Day level asset usage details",
       "properties": {
@@ -115,6 +148,82 @@
           "description": "Date of usage",
           "format": "date-time",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "board": {
+      "properties": {
+        "asset_count": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "date_created": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "date_last_updated": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "hero_asset": {
+          "$ref": "#/definitions/asset"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "board_detail": {
+      "properties": {
+        "asset_count": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "assets": {
+          "items": {
+            "$ref": "#/definitions/asset"
+          },
+          "type": "array"
+        },
+        "date_created": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "date_last_updated": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "board_list": {
+      "properties": {
+        "boards": {
+          "items": {
+            "$ref": "#/definitions/board"
+          },
+          "type": "array"
+        },
+        "result_count": {
+          "format": "int32",
+          "type": "integer"
         }
       },
       "type": "object"
@@ -326,9 +435,6 @@
     },
     "display_size": {
       "properties": {
-        "is_watermarked": {
-          "type": "boolean"
-        },
         "name": {
           "type": "string"
         },
@@ -1609,6 +1715,186 @@
         ]
       }
     },
+    "/v3/boards": {
+      "get": {
+        "consumes": [],
+        "operationId": "Boards_GetAllBoards",
+        "parameters": [
+          {
+            "description": "Api-Key",
+            "in": "header",
+            "name": "Api-Key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "in": "header",
+            "name": "Accept-Language",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/board_list"
+            }
+          },
+          "401": {
+            "description": "user_token_required"
+          }
+        },
+        "summary": "<b>***BETA***</b> Returns a list of boards for the authenticated user.",
+        "tags": [
+          "Boards"
+        ]
+      }
+    },
+    "/v3/boards/{board_id}": {
+      "get": {
+        "consumes": [],
+        "operationId": "Boards_GetBoard",
+        "parameters": [
+          {
+            "description": "Api-Key",
+            "in": "header",
+            "name": "Api-Key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "in": "header",
+            "name": "Accept-Language",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Id of board to get details and assets for.",
+            "in": "path",
+            "name": "board_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/board_detail"
+            }
+          },
+          "401": {
+            "description": "user_token_required"
+          },
+          "404": {
+            "description": "BoardNotFound"
+          }
+        },
+        "summary": "<b>***BETA***</b> Returns metadata for a specific board given its id.",
+        "tags": [
+          "Boards"
+        ]
+      }
+    },
+    "/v3/boards/{board_id}/assets/{asset_id}": {
+      "put": {
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "operationId": "Boards_AddAsset",
+        "parameters": [
+          {
+            "description": "Api-Key",
+            "in": "header",
+            "name": "Api-Key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "in": "header",
+            "name": "Accept-Language",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Id of the asset to add. If it is already in the board's asset collection, no action taken.",
+            "in": "path",
+            "name": "asset_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Id of board to add asset to.",
+            "in": "path",
+            "name": "board_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "201": {
+            "description": "success"
+          },
+          "401": {
+            "description": "user_token_required"
+          },
+          "403": {
+            "description": "asset not found"
+          },
+          "404": {
+            "description": "BoardNotFound"
+          }
+        },
+        "summary": "<b>***BETA***</b> Adds asset to board.",
+        "tags": [
+          "Boards"
+        ]
+      }
+    },
     "/v3/collections": {
       "get": {
         "consumes": [],
@@ -1876,10 +2162,10 @@
             }
           },
           "401": {
-            "description": "AuthorizationTokenRequired"
+            "description": "NoAgreement"
           },
           "404": {
-            "description": "FileDownloadSizeNotFound"
+            "description": "ImageNotFound"
           }
         },
         "summary": "Download an image",
@@ -1942,7 +2228,7 @@
             }
           },
           "401": {
-            "description": "NoAgreement"
+            "description": "AuthorizationTokenRequired"
           },
           "404": {
             "description": "VideoNotFound"
@@ -2044,10 +2330,10 @@
             }
           },
           "401": {
-            "description": "AuthorizationTokenRequired"
+            "description": "NoAgreement"
           },
           "404": {
-            "description": "FileDownloadSizeNotFound"
+            "description": "ImageNotFound"
           }
         },
         "summary": "Download an image",
@@ -2139,7 +2425,7 @@
             }
           },
           "400": {
-            "description": "InvalidParameterValue"
+            "description": "MalformedRequest"
           },
           "404": {
             "description": "EventNotFound"
@@ -2231,7 +2517,7 @@
             }
           },
           "400": {
-            "description": "InvalidParameterValue"
+            "description": "MalformedRequest"
           },
           "404": {
             "description": "EventNotFound"
@@ -2392,7 +2678,7 @@
             }
           },
           "400": {
-            "description": "MalformedRequest"
+            "description": "InvalidPageSize"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -2556,7 +2842,7 @@
             }
           },
           "400": {
-            "description": "MalformedRequest"
+            "description": "InvalidPageSize"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -2718,7 +3004,7 @@
             }
           },
           "400": {
-            "description": "MalformedRequest"
+            "description": "InvalidPageSize"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -2971,7 +3257,7 @@
             }
           },
           "400": {
-            "description": "InvalidPageSize"
+            "description": "MalformedRequest"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -3549,7 +3835,7 @@
             }
           },
           "400": {
-            "description": "InvalidPageSize"
+            "description": "MalformedRequest"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -4084,7 +4370,7 @@
             }
           },
           "400": {
-            "description": "InvalidPageSize"
+            "description": "MalformedRequest"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -4670,7 +4956,7 @@
             }
           },
           "400": {
-            "description": "InvalidPageSize"
+            "description": "MalformedRequest"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -5020,7 +5306,7 @@
             }
           },
           "400": {
-            "description": "InvalidPageSize"
+            "description": "MalformedRequest"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -5356,7 +5642,7 @@
             }
           },
           "400": {
-            "description": "InvalidPageSize"
+            "description": "MalformedRequest"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -5698,7 +5984,7 @@
             }
           },
           "400": {
-            "description": "InvalidPageSize"
+            "description": "MalformedRequest"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -6093,6 +6379,9 @@
     },
     {
       "name": "AssetChanges"
+    },
+    {
+      "name": "Boards"
     }
   ]
 }

@@ -812,6 +812,15 @@
           },
           "type": "array"
         },
+        "tagFiringOption": {
+          "description": "Option to fire this tag.",
+          "enum": [
+            "oncePerEvent",
+            "oncePerLoad",
+            "unlimited"
+          ],
+          "type": "string"
+        },
         "tagId": {
           "description": "The Tag ID uniquely identifies the GTM Tag.",
           "type": "string"

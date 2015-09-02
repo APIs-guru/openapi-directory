@@ -171,7 +171,7 @@
       "description": "The collection resources for the enterprise.",
       "properties": {
         "collection": {
-          "description": "An ordered collection of products which can be made visible on the Google Play Store app to a selected group of users.",
+          "description": "An ordered collection of products which can be made visible on the Google Play Store to a selected group of users.",
           "items": {
             "$ref": "#/definitions/Collection"
           },
@@ -288,6 +288,19 @@
         "kind": {
           "default": "androidenterprise#enterprisesListResponse",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"androidenterprise#enterprisesListResponse\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EnterprisesSendTestPushNotificationResponse": {
+      "properties": {
+        "messageId": {
+          "description": "The message ID of the test push notification that was sent.",
+          "type": "string"
+        },
+        "topicName": {
+          "description": "The name of the Cloud Pubsub topic to which notifications for this enterprise's enrolled account will be sent.",
           "type": "string"
         }
       },
@@ -2141,6 +2154,62 @@
         ],
         "tags": [
           "products"
+        ]
+      }
+    },
+    "/enterprises/{enterpriseId}/sendTestPushNotification": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Sends a test push notification to validate the MDM integration with the Google Cloud Pubsub service for this enterprise.",
+        "operationId": "androidenterprise.enterprises.sendTestPushNotification",
+        "parameters": [
+          {
+            "description": "The ID of the enterprise.",
+            "in": "path",
+            "name": "enterpriseId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/EnterprisesSendTestPushNotificationResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidenterprise"
+            ]
+          }
+        ],
+        "tags": [
+          "enterprises"
         ]
       }
     },
