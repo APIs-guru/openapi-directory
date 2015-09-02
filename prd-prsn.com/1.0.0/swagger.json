@@ -1,5 +1,119 @@
 {
   "basePath": "/",
+  "definitions": {
+    "DeliveryBean": {
+      "properties": {
+        "uri": {
+          "$ref": "#/definitions/URI"
+        },
+        "uris": {
+          "additionalProperties": {
+            "items": {
+              "$ref": "#/definitions/URI"
+            },
+            "type": "array"
+          }
+        }
+      }
+    },
+    "InstitutionBean": {
+      "properties": {
+        "config": {
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "delivery": {
+          "$ref": "#/definitions/DeliveryBean"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "filestoreId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "secondaryUrls": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "timeZone": {
+          "type": "string"
+        },
+        "uniqueId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "URI": {
+      "properties": {
+        "absolute": {
+          "type": "boolean"
+        },
+        "authority": {
+          "type": "string"
+        },
+        "fragment": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "opaque": {
+          "type": "boolean"
+        },
+        "path": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "query": {
+          "type": "string"
+        },
+        "rawAuthority": {
+          "type": "string"
+        },
+        "rawFragment": {
+          "type": "string"
+        },
+        "rawPath": {
+          "type": "string"
+        },
+        "rawQuery": {
+          "type": "string"
+        },
+        "rawSchemeSpecificPart": {
+          "type": "string"
+        },
+        "rawUserInfo": {
+          "type": "string"
+        },
+        "scheme": {
+          "type": "string"
+        },
+        "schemeSpecificPart": {
+          "type": "string"
+        },
+        "userInfo": {
+          "type": "string"
+        }
+      }
+    }
+  },
   "host": "epscass.prd-prsn.com",
   "info": {
     "title": "epscass.prd-prsn.com",
@@ -14,14 +128,18 @@
   "paths": {
     "/institution": {
       "get": {
-        "description": "",
         "operationId": "getInstitutions",
         "produces": [
           "application/json"
         ],
         "responses": {
           "200": {
-            "description": "No response was specified"
+            "description": "No response was specified",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/InstitutionBean"
+              }
+            }
           }
         },
         "summary": "List institution",
@@ -32,7 +150,6 @@
     },
     "/institution/{uniqueId}": {
       "get": {
-        "description": "",
         "operationId": "getInstitution",
         "parameters": [
           {
@@ -49,7 +166,10 @@
         ],
         "responses": {
           "200": {
-            "description": "No response was specified"
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/InstitutionBean"
+            }
           }
         },
         "summary": "Get an institution",
@@ -60,7 +180,6 @@
     },
     "/version/": {
       "get": {
-        "description": "",
         "operationId": "version",
         "produces": [
           "application/json"
