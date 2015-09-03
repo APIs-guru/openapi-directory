@@ -982,7 +982,7 @@
               "type": "boolean"
             },
             "restricted": {
-              "description": "Whether viewers are prevented from downloading this file.",
+              "description": "Whether viewers and commenters are prevented from downloading, printing, and copying this file.",
               "type": "boolean"
             },
             "starred": {
@@ -2669,7 +2669,7 @@
             "type": "boolean"
           },
           {
-            "description": "How the modifiedDate field should be updated. This overrides setModifiedDate.",
+            "description": "Determines the behavior in which modifiedDate is updated. This overrides setModifiedDate.",
             "enum": [
               "fromBody",
               "fromBodyIfNeeded",
@@ -2684,7 +2684,7 @@
           },
           {
             "default": true,
-            "description": "Whether a blob upload should create a new revision. If false, the blob data in the current head revision is replaced. If true or not set, a new blob is created as head revision, and previous unpinned revisions are preserved for a short period of time. Pinned revisions are stored indefinitely, using additional storage quota, up to a maximum of 200 revisions.",
+            "description": "Whether a blob upload should create a new revision. If false, the blob data in the current head revision is replaced. If true or not set, a new blob is created as head revision, and previous unpinned revisions are preserved for a short period of time. Pinned revisions are stored indefinitely, using additional storage quota, up to a maximum of 200 revisions. For details on how revisions are retained, see the Drive Help Center.",
             "in": "query",
             "name": "newRevision",
             "type": "boolean"
@@ -2808,7 +2808,7 @@
             "type": "boolean"
           },
           {
-            "description": "How the modifiedDate field should be updated. This overrides setModifiedDate.",
+            "description": "Determines the behavior in which modifiedDate is updated. This overrides setModifiedDate.",
             "enum": [
               "fromBody",
               "fromBodyIfNeeded",
@@ -2823,7 +2823,7 @@
           },
           {
             "default": true,
-            "description": "Whether a blob upload should create a new revision. If false, the blob data in the current head revision is replaced. If true or not set, a new blob is created as head revision, and previous unpinned revisions are preserved for a short period of time. Pinned revisions are stored indefinitely, using additional storage quota, up to a maximum of 200 revisions.",
+            "description": "Whether a blob upload should create a new revision. If false, the blob data in the current head revision is replaced. If true or not set, a new blob is created as head revision, and previous unpinned revisions are preserved for a short period of time. Pinned revisions are stored indefinitely, using additional storage quota, up to a maximum of 200 revisions. For details on how revisions are retained, see the Drive Help Center.",
             "in": "query",
             "name": "newRevision",
             "type": "boolean"

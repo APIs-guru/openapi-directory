@@ -3782,11 +3782,11 @@
       "description": "Sets the scheduling options for an Instance.",
       "properties": {
         "automaticRestart": {
-          "description": "Specifies whether the instance should be automatically restarted if it is terminated by Compute Engine (not terminated by a user).",
+          "description": "Specifies whether the instance should be automatically restarted if it is terminated by Compute Engine (not terminated by a user). You can only set the automatic restart option for standard instances. Preemptible instances cannot be automatically restarted.",
           "type": "boolean"
         },
         "onHostMaintenance": {
-          "description": "Defines the maintenance behavior for this instance. The default behavior is MIGRATE. For more information, see Setting maintenance behavior.",
+          "description": "Defines the maintenance behavior for this instance. For standard instances, the default behavior is MIGRATE. For preemptible instances, the default and only possible behavior is TERMINATE. For more information, see Setting maintenance behavior.",
           "enum": [
             "MIGRATE",
             "TERMINATE"
@@ -3794,7 +3794,7 @@
           "type": "string"
         },
         "preemptible": {
-          "description": "Whether the Instance is preemptible.",
+          "description": "Whether the instance is preemptible.",
           "type": "boolean"
         }
       },
