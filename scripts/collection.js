@@ -428,12 +428,12 @@ function getSwaggerPath(swagger) {
 function saveJson(path, json) {
   mkdirp(Path.dirname(path));
   var str = Json2String(json);
+  console.log(path);
   fs.writeFileSync(path, str);
 }
 
 function saveSwagger(swagger) {
   var path = getSwaggerPath(swagger);
-  console.log(path);
   saveJson(path, swagger);
   return path;
 }
