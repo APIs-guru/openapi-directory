@@ -240,8 +240,7 @@ function writeSpec(url, type, callback) {
       if (error)
         return callback(errorObj);
 
-      var path = getPathComponents(swagger);
-      patchSwagger(swagger, path);
+      patchSwagger(swagger);
       errorObj.swagger = swagger;
 
       validateSwagger(swagger, function (errors, warnings) {
@@ -330,8 +329,9 @@ function getOriginSpec(url, format, callback) {
   });
 }
 
-function patchSwagger(swagger, pathComponents) {
+function patchSwagger(swagger) {
   var patch = null;
+  var pathComponents = getPathComponents(swagger);
 
   var path = '';
   _.each(pathComponents, function (dir) {
