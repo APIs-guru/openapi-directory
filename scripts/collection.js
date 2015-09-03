@@ -15,6 +15,17 @@ var mkdirp = require('mkdirp').sync;
 var jsonPatch = require('json-merge-patch');
 var RestClient = require('node-rest-client').Client;
 
+var jsondiffpatch = require('jsondiffpatch').create({
+  arrays: {
+    includeValueOnMove: true
+  },
+  objectHash: function(obj) {
+    // this function is used only to when objects are not equal by ref
+    // add swagger specific properties
+    return obj._id || obj.id || obj.name || obj.operationId;
+  }
+});
+
 var program = require('commander');
 
 var errExitCode = 255;
@@ -342,6 +353,7 @@ function patchSwagger(swagger) {
       patch = jsonPatch.merge(patch, subPatch);
   });
 
+  swagger = jsondiffpatch.patch(swagger, readJson(path + 'fixup.json'));
   jsonPatch.apply(swagger, patch);
 }
 
