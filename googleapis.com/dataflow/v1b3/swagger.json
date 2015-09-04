@@ -86,6 +86,21 @@
       },
       "type": "object"
     },
+    "ConcatPosition": {
+      "description": "A position that encapsulates an inner position and an index for the inner position. A ConcatPosition can be used by a reader of a source that encapsulates a set of other sources.",
+      "properties": {
+        "index": {
+          "description": "Index of the inner source.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "position": {
+          "$ref": "#/definitions/Position",
+          "description": "Position within the inner source."
+        }
+      },
+      "type": "object"
+    },
     "CustomSourceLocation": {
       "description": "Identifies the location of a custom souce.",
       "properties": {
@@ -267,6 +282,10 @@
         },
         "name": {
           "description": "The user-provided name of this output.",
+          "type": "string"
+        },
+        "systemName": {
+          "description": "System-defined name of this output. Unique across the workflow.",
           "type": "string"
         }
       },
@@ -784,6 +803,10 @@
           "description": "Position is a byte offset.",
           "format": "int64",
           "type": "string"
+        },
+        "concatPosition": {
+          "$ref": "#/definitions/ConcatPosition",
+          "description": "CloudPosition is a concat position."
         },
         "end": {
           "description": "Position is past all other positions. Also useful for the end position of an unbounded range.",

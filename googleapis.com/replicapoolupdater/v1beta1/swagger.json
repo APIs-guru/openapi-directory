@@ -126,7 +126,7 @@
         },
         "kind": {
           "default": "replicapoolupdater#operation",
-          "description": "[Output Only] Type of the resource. Always kind#operation for Operation resources.",
+          "description": "[Output Only] Type of the resource. Always replicapoolupdater#operation for Operation resources.",
           "type": "string"
         },
         "name": {
@@ -207,6 +207,36 @@
         },
         "zone": {
           "description": "[Output Only] URL of the zone where the operation resides.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OperationList": {
+      "description": "Contains a list of Operation resources.",
+      "properties": {
+        "id": {
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
+          "type": "string"
+        },
+        "items": {
+          "description": "[Output Only] The Operation resources.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "replicapoolupdater#operationList",
+          "description": "[Output Only] Type of resource. Always replicapoolupdater#operations for Operations resource.",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "[Output Only] A token used to continue a truncate.",
+          "type": "string"
+        },
+        "selfLink": {
+          "description": "[Output Only] Server-defined URL for this resource.",
           "type": "string"
         }
       },
@@ -433,6 +463,91 @@
     }
   },
   "paths": {
+    "/{project}/zones/{zone}/operations": {
+      "get": {
+        "description": "Retrieves the list of Operation resources contained within the specified zone.",
+        "operationId": "replicapoolupdater.zoneOperations.list",
+        "parameters": [
+          {
+            "description": "Name of the project scoping this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the zone scoping this request.",
+            "in": "path",
+            "name": "zone",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Optional. Filter expression for filtering listed resources.",
+            "in": "query",
+            "name": "filter",
+            "type": "string"
+          },
+          {
+            "default": 500,
+            "description": "Optional. Maximum count of results to be returned. Maximum value is 500 and default value is 500.",
+            "in": "query",
+            "maximum": 500,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "Optional. Tag returned by a previous list request truncated by maxResults. Used to continue a previous list request.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/replicapool"
+            ]
+          }
+        ],
+        "tags": [
+          "zoneOperations"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/{project}/zones/{zone}/operations/{operation}": {
       "get": {
         "description": "Retrieves the specified zone-specific operation resource.",

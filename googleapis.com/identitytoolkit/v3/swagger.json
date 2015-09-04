@@ -750,6 +750,19 @@
           "description": "The RP local ID if it's already been mapped to the IdP account identified by the federated ID.",
           "type": "string"
         },
+        "oauthAccessToken": {
+          "description": "The OAuth2 access token.",
+          "type": "string"
+        },
+        "oauthAuthorizationCode": {
+          "description": "The OAuth2 authorization code.",
+          "type": "string"
+        },
+        "oauthExpireIn": {
+          "description": "The lifetime in seconds of the OAuth2 access token.",
+          "format": "int32",
+          "type": "integer"
+        },
         "photoUrl": {
           "description": "The URI of the user's photo at IdP",
           "type": "string"
