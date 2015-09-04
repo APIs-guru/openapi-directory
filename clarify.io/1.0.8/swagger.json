@@ -632,7 +632,7 @@
   "host": "api.clarify.io",
   "info": {
     "title": "api.clarify.io",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "x-origin": {
       "format": "swagger",
       "url": "https://api.clarify.io/api-docs",
@@ -912,14 +912,6 @@
             "name": "bundle_id",
             "required": true,
             "type": "string"
-          },
-          {
-            "description": "Track number. An integer from 0 to 3. If not specified, all tracks are deleted.",
-            "in": "formData",
-            "maximum": 3,
-            "name": "track",
-            "required": false,
-            "type": "integer"
           }
         ],
         "responses": {
