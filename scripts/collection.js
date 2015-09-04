@@ -7,11 +7,13 @@ var fs = require('fs');
 var exec = require('child_process').execSync;
 var Path = require('path');
 var glob = require('glob')
+var editor = require('editor');
 var async = require('async')
 var sortobject = require('deep-sort-object');
 var converter = require('api-spec-converter');
 var parseDomain = require('parse-domain');
 var mkdirp = require('mkdirp').sync;
+var mktemp = require('mktemp').createFileSync;
 var jsonPatch = require('json-merge-patch');
 var RestClient = require('node-rest-client').Client;
 
@@ -63,6 +65,7 @@ program
 program
   .command('add')
   .description('add new spec')
+  .option('-f, --fixup', 'try to fix spec')
   .arguments('<TYPE> <URL>')
   .action(addToCollection);
 
@@ -167,12 +170,60 @@ function validateCollection() {
   });
 }
 
-function addToCollection(type, url) {
+function addToCollection(type, url, command) {
   writeSpec(url, type, function (error, swagger) {
-    if (error)
-      return logError(error);
-  });
+    if (!error)
+      return;
 
+    if (!command.fixup)
+      return logError(error);
+
+    swagger = error.swagger;
+    if (!swagger) {
+      return logError(error);
+    }
+
+    editFile(errorToString(error), function (error, data) {
+      if (error) {
+        console.error(error);
+        process.exitCode = errExitCode;
+        return;
+      }
+
+      var match = data.match(/\?+ Swagger.*$((?:.|\n)*?)^\!+ Errors/m);
+      if (!match || !match[1]) {
+        console.error('Can not match edited Swagger');
+        process.exitCode = errExitCode;
+        return;
+      }
+      var editedSwagger = JSON.parse(match[1]);
+      saveFixup(swagger, editedSwagger);
+    });
+  });
+}
+
+function editFile(data, cb) {
+  var tmpfile = mktemp('/tmp/XXXXXX.fixup.txt');
+  fs.writeFileSync(tmpfile, data);
+
+  editor(tmpfile, function (code) {
+    if (code !== 0)
+      return cb(Error('Editor closed with code ' + code));
+
+    cb(null, fs.readFileSync(tmpfile, 'utf-8'));
+  });
+}
+
+function saveFixup(swagger, editedSwagger) {
+  var swaggerPath = getPathComponents(swagger).join('/');
+  //Before diff we need to unpatch, it's a way to appeand changes
+  var fixup = readJson(swaggerPath + '/fixup.json');
+  if (fixup)
+    jsondiffpatch.unpatch(swagger, fixup);
+
+  var diff = jsondiffpatch.diff(swagger, editedSwagger);
+  if (diff)
+    saveJson(swaggerPath + '/fixup.json', diff);
 }
 
 function updateGoogle() {
