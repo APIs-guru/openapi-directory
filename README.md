@@ -1,16 +1,17 @@
 # api-models
 
-[![Join the chat at https://gitter.im/APIs-guru/api-models](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/APIs-guru/api-models?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/APIs-guru/api-models](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/APIs-guru/api-models?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)<BR>
 Repository for API models in Swagger 2.0 format
 
 Our goal is to create machine-readable Wikipedia for REST APIs, with following principals:
-- Open source.
-- Community driven project
+- Open source, community driven project
 - Only publicly available APIs(free or paid).
 - Anyone can add/changes API, not only API owners.
-- All data could be accessed through [REST API](API.md)(free, but API key required).
+- All data could be accessed through [REST API](API.md).
 
-[You can also support project using BountySource](https://www.bountysource.com/teams/apis_guru)
+[You can also support project using BountySource](https://www.bountysource.com/teams/apis_guru)<br>
+Also we provide services and consultancy around Swagger spec and REST API in general.
+You can contact us at founders@apis.guru
 
 Licenses
 --------------------------
