@@ -247,6 +247,57 @@
         }
       }
     },
+    "WebServiceNumberContextLookupRequest": {
+      "description": "WebServiceNumberContextLookupRequest",
+      "properties": {
+        "links": {
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "type": "array"
+        },
+        "numbers": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "WebServiceNumberContextLookupResponse": {
+      "description": "WebServiceNumberContextLookupResponse",
+      "properties": {
+        "links": {
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "type": "array"
+        },
+        "number": {
+          "type": "string"
+        },
+        "numberValid": {
+          "type": "boolean"
+        }
+      }
+    },
+    "WebServiceNumberContextLookupResponses": {
+      "description": "WebServiceNumberContextLookupResponses",
+      "properties": {
+        "links": {
+          "items": {
+            "$ref": "#/definitions/Link"
+          },
+          "type": "array"
+        },
+        "numberContextLookupResponses": {
+          "items": {
+            "$ref": "#/definitions/WebServiceNumberContextLookupResponse"
+          },
+          "type": "array"
+        }
+      }
+    },
     "WebServiceSendSmsRequest": {
       "description": "WebServiceSendSmsRequest",
       "properties": {
@@ -434,14 +485,14 @@
       }
     },
     "/api/rest/v1/contacts/{contactId}": {
-      "delete": {
+      "get": {
         "consumes": [
           "application/json",
           "application/xml"
         ],
         "deprecated": false,
-        "description": "Deletes a  contact",
-        "operationId": "delete",
+        "description": "Returns details for a single contact",
+        "operationId": "get",
         "parameters": [
           {
             "description": "contactId",
@@ -458,21 +509,169 @@
         ],
         "responses": {
           "200": {
-            "description": "Description was not specified"
-          },
-          "204": {
-            "description": "No Content"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebServiceContact"
+            }
           },
           "401": {
             "description": "Unauthorized"
           },
           "403": {
             "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           }
         },
-        "summary": "delete",
+        "summary": "get",
         "tags": [
           "contacts"
+        ]
+      }
+    },
+    "/api/rest/v1/context/batch-lookup": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Returns context information for the batch of numbers provided. A maximum of 100 numbers may be provided per query.",
+        "operationId": "batchLookup",
+        "parameters": [
+          {
+            "description": "request",
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/WebServiceNumberContextLookupRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/WebServiceNumberContextLookupResponses"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "lookup",
+        "tags": [
+          "context"
+        ]
+      }
+    },
+    "/api/rest/v1/context/lookup": {
+      "get": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Returns context information for a single provided",
+        "operationId": "lookup",
+        "parameters": [
+          {
+            "description": "number",
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/WebServiceNumberContextLookupResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "lookup",
+        "tags": [
+          "context"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Returns context information for a single provided",
+        "operationId": "lookup",
+        "parameters": [
+          {
+            "description": "number",
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/WebServiceNumberContextLookupResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "lookup",
+        "tags": [
+          "context"
         ]
       }
     },
@@ -724,14 +923,14 @@
       }
     },
     "/api/rest/v1/messages/{messageId}": {
-      "get": {
+      "delete": {
         "consumes": [
           "application/json",
           "application/xml"
         ],
         "deprecated": false,
-        "description": "Returns details for a single message",
-        "operationId": "get",
+        "description": "Deletes a  message",
+        "operationId": "delete",
         "parameters": [
           {
             "description": "messageId",
@@ -748,22 +947,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/WebServiceMessage"
-            }
+            "description": "Description was not specified"
+          },
+          "204": {
+            "description": "No Content"
           },
           "401": {
             "description": "Unauthorized"
           },
           "403": {
             "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
           }
         },
-        "summary": "get",
+        "summary": "delete",
         "tags": [
           "messages"
         ]
@@ -1099,6 +1295,10 @@
   "tags": [
     {
       "name": "balance"
+    },
+    {
+      "description": "Number context service",
+      "name": "context"
     },
     {
       "description": "Send and schedule messages",
