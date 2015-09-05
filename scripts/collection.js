@@ -80,9 +80,9 @@ function urlsCollection() {
 function updateCollection() {
   var specs = getSpecs();
   async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
-    writeSpec(getOriginUrl(swagger), getSpecType(swagger), function (error, swagger) {
+    writeSpec(getOriginUrl(swagger), getSpecType(swagger), function (error, result) {
       if (error)
-        return logError(error);
+        return logError(error, result);
 
       var newFilename = getSwaggerPath(swagger);
       assert(newFilename === filename);
@@ -171,33 +171,28 @@ function validateCollection() {
 }
 
 function addToCollection(type, url, command) {
-  writeSpec(url, type, function (error, swagger) {
-    if (!error)
+  writeSpec(url, type, function (error, result) {
+    if (!error && !command.fixup)
       return;
 
-    if (!command.fixup)
-      return logError(error);
+    if (!command.fixup || !result.swagger)
+      return logError(error, result);
 
-    swagger = error.swagger;
-    if (!swagger) {
-      return logError(error);
-    }
-
-    editFile(errorToString(error), function (error, data) {
+    editFile(errorToString(error, result), function (error, data) {
       if (error) {
         console.error(error);
         process.exitCode = errExitCode;
         return;
       }
 
-      var match = data.match(/\?+ Swagger.*$((?:.|\n)*?)^\!+ Errors/m);
+      var match = data.match(/\?+ Swagger.*$((?:.|\n)*?^}$)/m);
       if (!match || !match[1]) {
         console.error('Can not match edited Swagger');
         process.exitCode = errExitCode;
         return;
       }
       var editedSwagger = JSON.parse(match[1]);
-      saveFixup(swagger, editedSwagger);
+      saveFixup(result.swagger, editedSwagger);
     });
   });
 }
@@ -274,10 +269,10 @@ function updateGoogle() {
         return;
       }
 
-      writeSpec(url, 'google', function (error, swagger) {
+      writeSpec(url, 'google', function (error, result) {
         if (error)
-          return logError(error);
-        mergePatch(swagger, addPath);
+          return logError(error, result);
+        mergePatch(result.swagger, addPath);
       });
     });
   });
@@ -294,46 +289,42 @@ function writeSpec(url, type, callback) {
 
   getOriginSpec(url, type, function (spec) {
     convertToSwagger(spec, function (error, swagger) {
-      var errorObj = {
+      var result = {
         spec: spec,
         errors: error
       };
 
       if (error)
-        return callback(errorObj);
+        return callback(error, result);
 
       patchSwagger(swagger);
-      errorObj.swagger = swagger;
+      result.swagger = swagger;
 
       validateSwagger(swagger, function (errors, warnings) {
-        _.extend(errorObj, {
-          errors: errors,
-          warnings: warnings
-        });
+        result.warnings = warnings;
 
         if (errors)
-          return callback(errorObj);
+          return callback(errors, result);
 
         if (warnings)
           logJson(warnings);
 
         var filename = saveSwagger(swagger);
-        callback(null, swagger);
+        callback(null, result);
       });
     });
   });
 }
 
-function logError(errorObj) {
-  console.error(errorToString(errorObj));
+function logError(error, context) {
+  console.error(errorToString(error, context));
   process.exitCode = errExitCode;
 }
 
-function errorToString(errorObj) {
-  var spec = errorObj.spec;
-  var swagger = errorObj.swagger;
-  var errors = errorObj.errors;
-  var warnings = errorObj.warnings;
+function errorToString(errors, context) {
+  var spec = context.spec;
+  var swagger = context.swagger;
+  var warnings = context.warnings;
   var url = spec.source;
 
   var result = '++++++++++++++++++++++++++ Begin ' + url + ' +++++++++++++++++++++++++\n';
@@ -342,15 +333,19 @@ function errorToString(errorObj) {
     if (spec.subResources)
       result += Json2String(spec.subResources);
   }
+
   if (!_.isUndefined(swagger)) {
     result += '???????????????????? Swagger ' + url + ' ????????????????????????????\n';
     result += Json2String(swagger);
   }
-  result += '!!!!!!!!!!!!!!!!!!!! Errors ' + url + ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n';
-  if (_.isArray(errors))
-    result += Json2String(errors);
-  else
-    result += errors + '\n';
+
+  if (errors) {
+    result += '!!!!!!!!!!!!!!!!!!!! Errors ' + url + ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n';
+    if (_.isArray(errors))
+      result += Json2String(errors);
+    else
+      result += errors + '\n';
+  }
 
   if (warnings) {
     result += '******************** Warnings ' + url + ' ******************************\n';
