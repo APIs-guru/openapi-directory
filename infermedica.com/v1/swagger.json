@@ -1,0 +1,644 @@
+{
+  "basePath": "/",
+  "definitions": {
+    "ChoiceModel": {
+      "properties": {
+        "id": {
+          "enum": [
+            "present",
+            "absent",
+            "unknown"
+          ],
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "label"
+      ]
+    },
+    "ConditionModel": {
+      "properties": {
+        "acuteness": {
+          "enum": [
+            "chronic",
+            "chronic_with_exacerbations",
+            "acute_potentially_chronic",
+            "acute"
+          ],
+          "type": "string"
+        },
+        "categories": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "prevalence": {
+          "enum": [
+            "very_rare",
+            "rare",
+            "moderate",
+            "common"
+          ],
+          "type": "string"
+        },
+        "severity": {
+          "enum": [
+            "mild",
+            "moderate",
+            "severe"
+          ],
+          "type": "string"
+        },
+        "sex_filter": {
+          "enum": [
+            "female",
+            "male",
+            "both"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "sex_filter",
+        "categories"
+      ]
+    },
+    "ConditionProbabilityModel": {
+      "properties": {
+        "id": {
+          "description": "condition id",
+          "type": "string"
+        },
+        "name": {
+          "description": "condition name",
+          "type": "string"
+        },
+        "probability": {
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "probability"
+      ]
+    },
+    "DatabaseInfoModel": {
+      "properties": {
+        "conditions_count": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "observations_count": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "updated_at": {
+          "description": "time of last database update in ISO 8601 format",
+          "type": "string"
+        }
+      },
+      "required": [
+        "updated_at",
+        "conditions_count",
+        "observations_count"
+      ]
+    },
+    "DiagnosisRequestModel": {
+      "properties": {
+        "age": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "evaluated_at": {
+          "description": "time when diagnosis was evaluated in ISO 8601 format",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/definitions/EvidenceModel"
+          },
+          "type": "array"
+        },
+        "extras": {
+          "type": "object"
+        },
+        "pursued": {
+          "description": "list of ids of pursued conditions",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "sex": {
+          "enum": [
+            "female",
+            "male"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "sex",
+        "age"
+      ]
+    },
+    "DiagnosisResponseModel": {
+      "properties": {
+        "conditions": {
+          "items": {
+            "$ref": "#/definitions/ConditionProbabilityModel"
+          },
+          "type": "array"
+        },
+        "extras": {
+          "type": "object"
+        },
+        "question": {
+          "$ref": "#/definitions/QuestionModel"
+        }
+      }
+    },
+    "EvidenceModel": {
+      "properties": {
+        "choice_id": {
+          "enum": [
+            "present",
+            "absent",
+            "unknown"
+          ],
+          "type": "string"
+        },
+        "id": {
+          "description": "id of observation, risk factor or condition",
+          "type": "string"
+        },
+        "observed_at": {
+          "description": "time when evidence was observed in ISO 8601 format",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "choice_id"
+      ]
+    },
+    "ObservationModel": {
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "children": {
+          "description": "ids of child observations grouped by their relation with this observation",
+          "type": "object"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parent_id": {
+          "description": "id of parent observation",
+          "type": "string"
+        },
+        "parent_relation_type": {
+          "description": "type of relation with parent observation",
+          "enum": [
+            "base",
+            "duration",
+            "severity",
+            "character",
+            "exacerbating_factor",
+            "diminishing_factor",
+            "location",
+            "radiation"
+          ],
+          "type": "string"
+        },
+        "sex_filter": {
+          "enum": [
+            "female",
+            "male",
+            "both"
+          ],
+          "type": "string"
+        },
+        "valid_for": {
+          "description": "number of days that this observation remains valid",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "sex_filter"
+      ]
+    },
+    "QuestionItemModel": {
+      "properties": {
+        "choices": {
+          "description": "list of available answer choices",
+          "items": {
+            "$ref": "#/definitions/ChoiceModel"
+          },
+          "type": "array"
+        },
+        "id": {
+          "description": "observation id",
+          "type": "string"
+        },
+        "name": {
+          "description": "name or alias of observation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "choices"
+      ]
+    },
+    "QuestionModel": {
+      "properties": {
+        "items": {
+          "description": "one or more observations to evaluate",
+          "items": {
+            "$ref": "#/definitions/QuestionItemModel"
+          },
+          "type": "array"
+        },
+        "text": {
+          "description": "question text",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "single",
+            "group_single",
+            "group_multiple"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "items"
+      ]
+    },
+    "RiskFactorModel": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    }
+  },
+  "host": "api.infermedica.com",
+  "info": {
+    "title": "api.infermedica.com",
+    "version": "v1",
+    "x-origin": {
+      "format": "swagger",
+      "url": "https://api.infermedica.com/api-docs",
+      "version": "1.2"
+    },
+    "x-providerName": "infermedica.com"
+  },
+  "paths": {
+    "/v1/conditions": {
+      "get": {
+        "description": "Returns a list of all available conditions.",
+        "operationId": "getAllConditions",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/ConditionModel"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "List all conditions",
+        "tags": [
+          "conditions"
+        ]
+      }
+    },
+    "/v1/conditions/{id}": {
+      "get": {
+        "description": "Returns details of a single condition specified by id parameter.",
+        "operationId": "getCondition",
+        "parameters": [
+          {
+            "description": "condition id",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/ConditionModel"
+            }
+          },
+          "400": {
+            "description": "Invalid id specified"
+          },
+          "404": {
+            "description": "Condition not found"
+          }
+        },
+        "summary": "Get condition by id",
+        "tags": [
+          "conditions"
+        ]
+      }
+    },
+    "/v1/diagnosis": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Computes possible diagnoses and relevant observations based on provided patient information.",
+        "operationId": "computeDiagnosis",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DiagnosisRequestModel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/DiagnosisResponseModel"
+            }
+          }
+        },
+        "summary": "Query diagnostic engine",
+        "tags": [
+          "diagnosis"
+        ]
+      }
+    },
+    "/v1/info": {
+      "get": {
+        "description": "Returns information about data used by diagnostic engine.",
+        "operationId": "getDatabaseInfo",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/DatabaseInfoModel"
+            }
+          }
+        },
+        "summary": "Get database information",
+        "tags": [
+          "info"
+        ]
+      }
+    },
+    "/v1/lookup": {
+      "get": {
+        "description": "Returns details of a single observation if matched by the given phrase.",
+        "operationId": "getMatchingObservation",
+        "parameters": [
+          {
+            "description": "phrase to match",
+            "in": "query",
+            "name": "phrase",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "sex filter",
+            "enum": [
+              "female",
+              "male"
+            ],
+            "in": "query",
+            "name": "sex",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/ObservationModel"
+            }
+          },
+          "400": {
+            "description": "Phrase missing or invalid sex specified"
+          },
+          "404": {
+            "description": "No observation matches given phrase"
+          }
+        },
+        "summary": "Find observation matching given phrase",
+        "tags": [
+          "lookup"
+        ]
+      }
+    },
+    "/v1/observations": {
+      "get": {
+        "description": "Returns a list of all available observations.",
+        "operationId": "getAllObservations",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/ObservationModel"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "List all observations",
+        "tags": [
+          "observations"
+        ]
+      }
+    },
+    "/v1/observations/{id}": {
+      "get": {
+        "description": "Returns details of a single observation specified by id parameter.",
+        "operationId": "getObservation",
+        "parameters": [
+          {
+            "description": "observation id",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/ObservationModel"
+            }
+          },
+          "400": {
+            "description": "Invalid id specified"
+          },
+          "404": {
+            "description": "Observation not found"
+          }
+        },
+        "summary": "Get observation by id",
+        "tags": [
+          "observations"
+        ]
+      }
+    },
+    "/v1/risk_factors": {
+      "get": {
+        "description": "Returns a list of all available risk factors.",
+        "operationId": "getAllRiskFactors",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/RiskFactorModel"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "summary": "List all risk factors",
+        "tags": [
+          "risk_factors"
+        ]
+      }
+    },
+    "/v1/risk_factors/{id}": {
+      "get": {
+        "description": "Returns details of a single risk factor specified by id parameter.",
+        "operationId": "getRiskFactor",
+        "parameters": [
+          {
+            "description": "risk factor id",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/RiskFactorModel"
+            }
+          },
+          "400": {
+            "description": "Invalid id specified"
+          },
+          "404": {
+            "description": "Risk factor not found"
+          }
+        },
+        "summary": "Get risk factor by id",
+        "tags": [
+          "risk_factors"
+        ]
+      }
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Dictionary lookup",
+      "name": "lookup"
+    },
+    {
+      "description": "Model information",
+      "name": "info"
+    },
+    {
+      "description": "Observations",
+      "name": "observations"
+    },
+    {
+      "description": "Conditions",
+      "name": "conditions"
+    },
+    {
+      "description": "Risk factors",
+      "name": "risk_factors"
+    },
+    {
+      "description": "Diagnosis",
+      "name": "diagnosis"
+    }
+  ]
+}

@@ -1,0 +1,714 @@
+{
+  "basePath": "/",
+  "definitions": {
+    "postTopup": {
+      "properties": {
+        "amount": {
+          "default": "500",
+          "description": "The amount, in cents, of the product you are purchasing. Ex: 500 = $5.00",
+          "type": "string"
+        },
+        "carrier_code": {
+          "default": "Claro",
+          "description": "Name of the mobile carrier. Ex: Claro",
+          "type": "string"
+        },
+        "client_transaction_id": {
+          "description": "UNIQUE 15 char ID you use to track topups. Ex: 012345",
+          "type": "string"
+        },
+        "country_code": {
+          "default": "GT",
+          "description": "2-digit code of the country in ISO 3166 format. Ex: Use GT for Guatemala",
+          "type": "string"
+        },
+        "mobile_number": {
+          "default": "50241234567",
+          "description": "Mobile number to topup. VALIDATE prior to submission. Ex: 50241234567",
+          "type": "string"
+        },
+        "origin_country": {
+          "default": "US",
+          "description": "ISO 3166 format of the country where the topup transaction is originating from. This is sometimes required by certain carriers. (Ex. US for United States)",
+          "type": "string"
+        },
+        "plan": {
+          "default": "Sandbox or Production",
+          "description": "The Application plan being used. Case-sensitive. Ex: Sandbox or Production",
+          "type": "string"
+        },
+        "terminal_id": {
+          "default": "KIOSK 1",
+          "description": "ID for the Terminal used to perform the topup. Ex: Kiosk 5",
+          "type": "string"
+        }
+      },
+      "required": [
+        "country_code",
+        "carrier_code",
+        "mobile_number",
+        "plan",
+        "amount"
+      ]
+    },
+    "postTopupReverse": {
+      "properties": {
+        "client_transaction_id": {
+          "default": "my_transaction_123",
+          "description": "UNIQUE 15 char ID you use to track topups. Ex: 012345",
+          "type": "string"
+        },
+        "to_service_number": {
+          "default": "1234567890",
+          "description": "UNIQUE IDT transaction number found in the response of a successful topup request. Ex: 1234567890",
+          "type": "string"
+        }
+      },
+      "required": [
+        "client_transaction_id",
+        "to_service_number"
+      ]
+    },
+    "queryTopup": {
+      "properties": {
+        "client_transaction_id": {
+          "default": "my_transaction_123",
+          "description": "enter your unique client_transaction_id that you used on the original topup transaction. Ex: my_transaction_123",
+          "type": "string"
+        },
+        "date_from": {
+          "default": "2015-03-01",
+          "description": "The beginning date of the search in YYYY-MM-DD format (America/New_York timezone). Ex: 2015-03-01",
+          "type": "string"
+        },
+        "date_to": {
+          "default": "2015-03-02",
+          "description": "The ending date of the search in YYYY-MM-DD format  (America/New_York timezone). Ex: 2015-03-02",
+          "type": "string"
+        },
+        "type_of_report": {
+          "default": "client_transaction_id",
+          "description": "The type of query you would like to search by. Ex: Use client_transaction_id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type_of_report",
+        "client_transaction_id",
+        "date_from",
+        "date_to"
+      ]
+    }
+  },
+  "host": "api.idtbeyond.com",
+  "info": {
+    "title": "api.idtbeyond.com",
+    "version": "1.0.0",
+    "x-origin": {
+      "format": "swagger",
+      "url": "https://portal.idtbeyond.com/swagger/spec.json",
+      "version": "1.2"
+    },
+    "x-providerName": "idtbeyond.com"
+  },
+  "paths": {
+    "/v1/iatu/balance": {
+      "get": {
+        "description": "Returns balance for an application",
+        "operationId": "Get Balance",
+        "parameters": [
+          {
+            "description": "Your access application id",
+            "in": "header",
+            "name": "x-idt-beyond-app-id",
+            "type": "string"
+          },
+          {
+            "description": "Your access application key",
+            "in": "header",
+            "name": "x-idt-beyond-app-key",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Returns balance for an application"
+      }
+    },
+    "/v1/iatu/charges/reports/all": {
+      "get": {
+        "description": "Returns charges by date range",
+        "operationId": "charges",
+        "parameters": [
+          {
+            "description": "Your access application id",
+            "in": "header",
+            "name": "x-idt-beyond-app-id",
+            "type": "string"
+          },
+          {
+            "description": "Your access application key",
+            "in": "header",
+            "name": "x-idt-beyond-app-key",
+            "type": "string"
+          },
+          {
+            "default": "2015-01-01",
+            "description": "The starting date of the search IN YYYY-MM-DD format (America/New_York timezone). Ex: 2014-01-28",
+            "in": "query",
+            "name": "date_from",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "2015-02-01",
+            "description": "The ending date of the search IN YYYY-MM-DD format (America/New_York timezone). Ex: 2016-01-28",
+            "in": "query",
+            "name": "date_to",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Returns charges by date range"
+      }
+    },
+    "/v1/iatu/charges/reports/all.csv": {
+      "get": {
+        "description": "Returns a CSV of charges (money added to the account) by date range",
+        "operationId": "Get charges.csv",
+        "parameters": [
+          {
+            "description": "Your access application id",
+            "in": "header",
+            "name": "x-idt-beyond-app-id",
+            "type": "string"
+          },
+          {
+            "description": "Your access application key",
+            "in": "header",
+            "name": "x-idt-beyond-app-key",
+            "type": "string"
+          },
+          {
+            "default": "2015-01-01",
+            "description": "The starting date of the search IN YYYY-MM-DD format (America/New_York timezone). Ex: 2015-01-28",
+            "in": "query",
+            "name": "date_from",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "2015-02-01",
+            "description": "The ending date of the search IN YYYY-MM-DD format (America/New_York timezone). Ex: 2015-01-28",
+            "in": "query",
+            "name": "date_to",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Returns a CSV of charges (money added to the account) by date range"
+      }
+    },
+    "/v1/iatu/number-validator": {
+      "get": {
+        "description": "Validates the phone number area code and digits for a given country",
+        "operationId": "Get Number Validator",
+        "parameters": [
+          {
+            "description": "Your access application id",
+            "in": "header",
+            "name": "x-idt-beyond-app-id",
+            "type": "string"
+          },
+          {
+            "description": "Your access application key",
+            "in": "header",
+            "name": "x-idt-beyond-app-key",
+            "type": "string"
+          },
+          {
+            "default": "BR",
+            "description": "2-digit code of the country in ISO 3166 format. Ex: BR for Brazil",
+            "in": "query",
+            "name": "country_code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "5521983115555",
+            "description": "The mobile number you would like to validate. Ex: 5521983115555",
+            "in": "query",
+            "name": "mobile_number",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Validates the phone number area code and digits for a given country"
+      }
+    },
+    "/v1/iatu/products/reports/all": {
+      "get": {
+        "description": "Returns a list of products",
+        "operationId": "Get a list of products",
+        "parameters": [
+          {
+            "description": "Your access application id",
+            "in": "header",
+            "name": "x-idt-beyond-app-id",
+            "type": "string"
+          },
+          {
+            "description": "Your access application key",
+            "in": "header",
+            "name": "x-idt-beyond-app-key",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Returns a list of products"
+      }
+    },
+    "/v1/iatu/products/reports/all.csv": {
+      "get": {
+        "description": "Returns a list of products in CSV",
+        "operationId": "Get a list of products in CSV",
+        "parameters": [
+          {
+            "description": "Your access application id",
+            "in": "header",
+            "name": "x-idt-beyond-app-id",
+            "type": "string"
+          },
+          {
+            "description": "Your access application key",
+            "in": "header",
+            "name": "x-idt-beyond-app-key",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Returns a list of products in CSV"
+      }
+    },
+    "/v1/iatu/products/reports/local-value": {
+      "get": {
+        "description": "Returns the local value of a product",
+        "operationId": "products",
+        "parameters": [
+          {
+            "description": "Your access application id",
+            "in": "header",
+            "name": "x-idt-beyond-app-id",
+            "type": "string"
+          },
+          {
+            "description": "Your access application key",
+            "in": "header",
+            "name": "x-idt-beyond-app-key",
+            "type": "string"
+          },
+          {
+            "default": "GT",
+            "description": "2-digit code of the country in ISO 3166 format. Ex: GT for Guatemala",
+            "in": "query",
+            "name": "country_code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "Claro",
+            "description": "Name of the mobile carrier. Ex: Claro",
+            "in": "query",
+            "name": "carrier_code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "500",
+            "description": "This is the amount, in cents, of the product you are purchasing. Ex: 500 = $5.00",
+            "in": "query",
+            "name": "amount",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "USD",
+            "description": "The currency code (ISO 4217) on the product you are querying. Ex: USD",
+            "in": "query",
+            "name": "currency_code",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Returns the local value of a product"
+      }
+    },
+    "/v1/iatu/topups": {
+      "post": {
+        "description": "Using the Country, Carrier, Amount, and Phone Number, you can Topup a mobile phone worldwide. This API call will also validate the phone number area code and correct amount of digits, prior to submission to the carrier.",
+        "operationId": "IDTBeyond-IATU-PostTopups",
+        "parameters": [
+          {
+            "description": "Your access application id",
+            "in": "header",
+            "name": "x-idt-beyond-app-id",
+            "type": "string"
+          },
+          {
+            "description": "Your access application key",
+            "in": "header",
+            "name": "x-idt-beyond-app-key",
+            "type": "string"
+          },
+          {
+            "description": "Field parameters in JSON format",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/postTopup"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          },
+          "201": {
+            "description": "The transaction has been completed successfully."
+          },
+          "202": {
+            "description": "The transaction has been received, but the final status is unknown. Please query by the client_transaction_id to get the current status of the transaction."
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "X not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          },
+          "500": {
+            "description": "There is an error in your transaction. Please check the error code contained in the result for more information."
+          }
+        },
+        "summary": "Topup of a mobile phone"
+      }
+    },
+    "/v1/iatu/topups/reports": {
+      "post": {
+        "description": "Search topups transactions, by date, with client_transaction_id",
+        "operationId": "IDTBeyond-IATU-TopupsReports",
+        "parameters": [
+          {
+            "description": "Your access application id",
+            "in": "header",
+            "name": "x-idt-beyond-app-id",
+            "type": "string"
+          },
+          {
+            "description": "Your access application key",
+            "in": "header",
+            "name": "x-idt-beyond-app-key",
+            "type": "string"
+          },
+          {
+            "description": "Field parameters in JSON format",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/queryTopup"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "X not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        },
+        "summary": "Search topups transactions"
+      }
+    },
+    "/v1/iatu/topups/reports/all": {
+      "get": {
+        "description": "Returns topup transactions by date range",
+        "operationId": "IDTBeyond-IATU-GetTopups",
+        "parameters": [
+          {
+            "description": "Your access application id",
+            "in": "header",
+            "name": "x-idt-beyond-app-id",
+            "type": "string"
+          },
+          {
+            "description": "Your access application key",
+            "in": "header",
+            "name": "x-idt-beyond-app-key",
+            "type": "string"
+          },
+          {
+            "default": "2015-01-01",
+            "description": "The starting date of the search in YYYY-MM-DD format (America/New_York timezone). Ex: 2015-01-01",
+            "in": "query",
+            "name": "date_from",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "2015-02-01",
+            "description": "The ending date of the search in YYYY-MM-DD format (America/New_York timezone). Ex: 2015-02-01",
+            "in": "query",
+            "name": "date_to",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Returns topup transactions by date range"
+      }
+    },
+    "/v1/iatu/topups/reports/all.csv": {
+      "get": {
+        "description": "Returns a CSV topup transactions by date range",
+        "operationId": "IDTBeyond-IATU-GetTopupsCSV",
+        "parameters": [
+          {
+            "description": "Your access application id",
+            "in": "header",
+            "name": "x-idt-beyond-app-id",
+            "type": "string"
+          },
+          {
+            "description": "Your access application key",
+            "in": "header",
+            "name": "x-idt-beyond-app-key",
+            "type": "string"
+          },
+          {
+            "default": "2015-01-01",
+            "description": "The starting date of the search in YYYY-MM-DD format (America/New_York timezone). Ex: 2014-01-28",
+            "in": "query",
+            "name": "date_from",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "2015-02-01",
+            "description": "The ending date of the search in YYYY-MM-DD format (America/New_York timezone). Ex: 2016-01-28",
+            "in": "query",
+            "name": "date_to",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Returns a CSV of topup transactions by date range"
+      }
+    },
+    "/v1/iatu/topups/reports/totals": {
+      "get": {
+        "description": "Returns topup transactions totals by date range",
+        "operationId": "IDTBeyond-IATU-GetTotals",
+        "parameters": [
+          {
+            "description": "Your access application id",
+            "in": "header",
+            "name": "x-idt-beyond-app-id",
+            "type": "string"
+          },
+          {
+            "description": "Your access application key",
+            "in": "header",
+            "name": "x-idt-beyond-app-key",
+            "type": "string"
+          },
+          {
+            "default": "2015-01-01",
+            "description": "The starting date of the search in YYYY-MM-DD format (America/New_York timezone). Ex: 2015-01-01",
+            "in": "query",
+            "name": "date_from",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "2015-02-01",
+            "description": "The ending date of the search in YYYY-MM-DD format (America/New_York timezone). Ex: 2015-02-01",
+            "in": "query",
+            "name": "date_to",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Returns topup transactions totals by date range"
+      }
+    },
+    "/v1/iatu/topups/reverse": {
+      "post": {
+        "description": "Occasionally, a carrier will not be able to successfully complete a topup request. In this case, we will attempt to automatically reverse the transaction for you, and return the money into your account. In the case when this is not possible, you may need to request a reverse on the transaction that has a status of 'transaction_status': 'notredeemed'.",
+        "operationId": "IDTBeyond-IATU-PostTopupReverse",
+        "parameters": [
+          {
+            "description": "Your access application id",
+            "in": "header",
+            "name": "x-idt-beyond-app-id",
+            "type": "string"
+          },
+          {
+            "description": "Your access application key",
+            "in": "header",
+            "name": "x-idt-beyond-app-key",
+            "type": "string"
+          },
+          {
+            "description": "Field parameters in JSON format",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/postTopupReverse"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "X not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        },
+        "summary": "Reversal of a Topup"
+      }
+    },
+    "/v1/status": {
+      "get": {
+        "description": "Returns the status of the API",
+        "operationId": "Get status ",
+        "parameters": [
+          {
+            "description": "Your access application id",
+            "in": "header",
+            "name": "x-idt-beyond-app-id",
+            "type": "string"
+          },
+          {
+            "description": "Your access application key",
+            "in": "header",
+            "name": "x-idt-beyond-app-key",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Returns the status of the API"
+      }
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0"
+}

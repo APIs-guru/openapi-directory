@@ -1,0 +1,65 @@
+{
+  "basePath": "/",
+  "host": "www.storecheckerapi.com",
+  "info": {
+    "title": "www.storecheckerapi.com",
+    "version": "0.1",
+    "x-origin": {
+      "format": "swagger",
+      "url": "http://www.storecheckerapi.com/v1/swagger_doc.json",
+      "version": "1.2"
+    },
+    "x-providerName": "storecheckerapi.com"
+  },
+  "paths": {
+    "/v1/is_ecommerce_store.json": {
+      "get": {
+        "operationId": "GET-v1-is_ecommerce_store---format-",
+        "parameters": [
+          {
+            "description": "<p>The website (ie. www.gilt.com)</p>\n",
+            "in": "query",
+            "name": "website",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "<p>Optional. The regex to test (instead of the standard ecommerce identifiers. Useful for e-commerce stores in other languages than English. Returns status = ‘success’ if completed successfully and data = ‘<result>'.</result></p>\n",
+            "in": "query",
+            "name": "custom_identifiers",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Determines if the site is an e-commerce site. An e-commerce site is a site that some underlying feature about it."
+      }
+    },
+    "/v1/ping.json": {
+      "get": {
+        "description": "<p>Returns ‘pong’ if the site is up</p>\n",
+        "operationId": "GET-v1-ping---format-",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Returns whether the system is up."
+      }
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0"
+}

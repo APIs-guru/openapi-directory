@@ -1,0 +1,169 @@
+{
+  "basePath": "/",
+  "host": "data.orghunter.com",
+  "info": {
+    "title": "data.orghunter.com",
+    "version": "1.0.0",
+    "x-origin": {
+      "format": "swagger",
+      "url": "https://orghunter.3scale.net/swagger/spec.json",
+      "version": "1.2"
+    },
+    "x-providerName": "orghunter.com"
+  },
+  "paths": {
+    "/v1/categories": {
+      "post": {
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "description": "<p>This operation provides a list of categories.</p>",
+        "operationId": "get categories",
+        "parameters": [
+          {
+            "description": "Your API access key",
+            "in": "query",
+            "name": "user_key",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Get categories!"
+      }
+    },
+    "/v1/charitybasic": {
+      "post": {
+        "description": "<p>This operation detail data.</p>",
+        "operationId": "get detail",
+        "parameters": [
+          {
+            "description": "Your API access key",
+            "in": "query",
+            "name": "user_key",
+            "type": "string"
+          },
+          {
+            "description": "ein (Employer Identification Number)",
+            "in": "query",
+            "name": "ein",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Get details!"
+      }
+    },
+    "/v1/charityfinancial": {
+      "post": {
+        "description": "<p>This operation detail data.</p>",
+        "operationId": "get detail",
+        "parameters": [
+          {
+            "description": "Your API access key",
+            "in": "query",
+            "name": "user_key",
+            "type": "string"
+          },
+          {
+            "description": "ein (Employer Identification Number)",
+            "in": "query",
+            "name": "ein",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Get details!"
+      }
+    },
+    "/v1/charitysearch": {
+      "post": {
+        "description": "<p>This operation provides summary data.</p>",
+        "operationId": "get summary",
+        "parameters": [
+          {
+            "description": "Your API access key",
+            "in": "query",
+            "name": "user_key",
+            "type": "string"
+          },
+          {
+            "description": "Employer Identification Number (EIN)",
+            "in": "query",
+            "name": "ein",
+            "type": "string"
+          },
+          {
+            "description": "Charity Name or Keyword. Example: humane society or cancer",
+            "in": "query",
+            "name": "searchTerm",
+            "type": "string"
+          },
+          {
+            "description": "City Name. Example: Miami",
+            "in": "query",
+            "name": "city",
+            "type": "string"
+          },
+          {
+            "description": "State Name - Two letter state abbreviation",
+            "in": "query",
+            "name": "state",
+            "type": "string"
+          },
+          {
+            "description": "Zipcode Value - 5 digit zipcode value",
+            "in": "query",
+            "name": "zipCode",
+            "type": "string"
+          },
+          {
+            "description": "Category Value Selected from Categories API",
+            "in": "query",
+            "name": "category",
+            "type": "string"
+          },
+          {
+            "description": "eligible=1 will return only organizations that are tax deductible and in good standing with the IRS",
+            "in": "query",
+            "name": "eligible",
+            "type": "string"
+          },
+          {
+            "description": "Record Set Start Position",
+            "in": "query",
+            "name": "start",
+            "type": "string"
+          },
+          {
+            "description": "Records Per Page. Default Value = 20",
+            "in": "query",
+            "name": "rows",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Get summary data!"
+      }
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0"
+}

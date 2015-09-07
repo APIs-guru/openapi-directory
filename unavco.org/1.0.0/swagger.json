@@ -1,0 +1,5952 @@
+{
+  "basePath": "/",
+  "host": "tls.unavco.org",
+  "info": {
+    "title": "tls.unavco.org",
+    "version": "1.0.0",
+    "x-origin": {
+      "format": "swagger",
+      "url": "http://tls.unavco.org/repository/swagger/api-docs",
+      "version": "1.2"
+    },
+    "x-providerName": "unavco.org"
+  },
+  "paths": {
+    "/repository/entry/show": {
+      "get": {
+        "description": "API to call: Extract sheets",
+        "operationId": "media_tabular_extractsheet",
+        "parameters": [
+          {
+            "default": "media_tabular_extractsheet",
+            "description": "Output type  -don't change",
+            "in": "query",
+            "name": "output",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Entry ID",
+            "in": "query",
+            "name": "entryid",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Sheets",
+            "in": "query",
+            "name": "arg1",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "API for Extract sheets"
+      }
+    },
+    "/repository/search/type/faq": {
+      "get": {
+        "description": "API to search for entries of type FAQ",
+        "operationId": "search_faq",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'FAQ' entry type"
+      }
+    },
+    "/repository/search/type/file": {
+      "get": {
+        "description": "API to search for entries of type File",
+        "operationId": "search_file",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'File' entry type"
+      }
+    },
+    "/repository/search/type/geo_gpx": {
+      "get": {
+        "description": "API to search for entries of type GPX GPS File",
+        "operationId": "search_geo_gpx",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'GPX GPS File' entry type"
+      }
+    },
+    "/repository/search/type/geo_kml": {
+      "get": {
+        "description": "API to search for entries of type KML/KMZ File",
+        "operationId": "search_geo_kml",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'KML/KMZ File' entry type"
+      }
+    },
+    "/repository/search/type/gps_solution_opus": {
+      "get": {
+        "description": "API to search for entries of type OPUS Solution",
+        "operationId": "search_gps_solution_opus",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'OPUS Solution' entry type"
+      }
+    },
+    "/repository/search/type/group": {
+      "get": {
+        "description": "API to search for entries of type Folder",
+        "operationId": "search_group",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Folder' entry type"
+      }
+    },
+    "/repository/search/type/homepage": {
+      "get": {
+        "description": "API to search for entries of type Home Page",
+        "operationId": "search_homepage",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Home Page' entry type"
+      }
+    },
+    "/repository/search/type/latlonimage": {
+      "get": {
+        "description": "API to search for entries of type WMS Image",
+        "operationId": "search_latlonimage",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'WMS Image' entry type"
+      }
+    },
+    "/repository/search/type/lidar": {
+      "get": {
+        "description": "API to search for entries of type LiDAR Data",
+        "operationId": "search_lidar",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'LiDAR Data' entry type"
+      }
+    },
+    "/repository/search/type/lidar_collection": {
+      "get": {
+        "description": "API to search for entries of type LiDAR Collection",
+        "operationId": "search_lidar_collection",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'LiDAR Collection' entry type"
+      }
+    },
+    "/repository/search/type/lidar_lvis": {
+      "get": {
+        "description": "API to search for entries of type LVIS Lidar Data",
+        "operationId": "search_lidar_lvis",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'LVIS Lidar Data' entry type"
+      }
+    },
+    "/repository/search/type/link": {
+      "get": {
+        "description": "API to search for entries of type Link",
+        "operationId": "search_link",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Link' entry type"
+      }
+    },
+    "/repository/search/type/localfiles": {
+      "get": {
+        "description": "API to search for entries of type Server Side Files",
+        "operationId": "search_localfiles",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Server Side Files' entry type"
+      }
+    },
+    "/repository/search/type/locations": {
+      "get": {
+        "description": "API to search for entries of type Locations",
+        "operationId": "search_locations",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Locations' entry type"
+      }
+    },
+    "/repository/search/type/media_photoalbum": {
+      "get": {
+        "description": "API to search for entries of type Photo Album",
+        "operationId": "search_media_photoalbum",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Photo Album' entry type"
+      }
+    },
+    "/repository/search/type/project_dataset": {
+      "get": {
+        "description": "API to search for entries of type Dataset",
+        "operationId": "search_project_dataset",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Dataset ID",
+            "in": "query",
+            "name": "search.project_dataset.dataset_id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Data Type",
+            "in": "query",
+            "name": "search.project_dataset.data_type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Data Level",
+            "in": "query",
+            "name": "search.project_dataset.data_level",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Dataset' entry type"
+      }
+    },
+    "/repository/search/type/project_fieldnote": {
+      "get": {
+        "description": "API to search for entries of type Field Note",
+        "operationId": "search_project_fieldnote",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Field Note' entry type"
+      }
+    },
+    "/repository/search/type/project_gps_controlpoints": {
+      "get": {
+        "description": "API to search for entries of type Control Points File",
+        "operationId": "search_project_gps_controlpoints",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Control Points File' entry type"
+      }
+    },
+    "/repository/search/type/project_gps_folder": {
+      "get": {
+        "description": "API to search for entries of type GPS Folder",
+        "operationId": "search_project_gps_folder",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'GPS Folder' entry type"
+      }
+    },
+    "/repository/search/type/project_gps_raw": {
+      "get": {
+        "description": "API to search for entries of type Raw GPS File",
+        "operationId": "search_project_gps_raw",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Raw GPS File' entry type"
+      }
+    },
+    "/repository/search/type/project_gps_rinex": {
+      "get": {
+        "description": "API to search for entries of type RINEX File",
+        "operationId": "search_project_gps_rinex",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'RINEX File' entry type"
+      }
+    },
+    "/repository/search/type/project_gps_trimble_vce": {
+      "get": {
+        "description": "API to search for entries of type Trimble Project File",
+        "operationId": "search_project_gps_trimble_vce",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Trimble Project File' entry type"
+      }
+    },
+    "/repository/search/type/project_gps_trimble_zip": {
+      "get": {
+        "description": "API to search for entries of type Trimble Business Center zip",
+        "operationId": "search_project_gps_trimble_zip",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Trimble Business Center zip' entry type"
+      }
+    },
+    "/repository/search/type/project_instrument": {
+      "get": {
+        "description": "API to search for entries of type Instrument Data Collection",
+        "operationId": "search_project_instrument",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Instrument Data Collection' entry type"
+      }
+    },
+    "/repository/search/type/project_program": {
+      "get": {
+        "description": "API to search for entries of type Program",
+        "operationId": "search_project_program",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Program' entry type"
+      }
+    },
+    "/repository/search/type/project_project": {
+      "get": {
+        "description": "API to search for entries of type Project",
+        "operationId": "search_project_project",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Project' entry type"
+      }
+    },
+    "/repository/search/type/project_site": {
+      "get": {
+        "description": "API to search for entries of type Site",
+        "operationId": "search_project_site",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Short Name",
+            "in": "query",
+            "name": "search.project_site.short_name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Site Type",
+            "in": "query",
+            "name": "search.project_site.site_type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Status",
+            "in": "query",
+            "name": "search.project_site.status",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Network",
+            "in": "query",
+            "name": "search.project_site.network",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Country",
+            "in": "query",
+            "name": "search.project_site.country",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "State/Province",
+            "in": "query",
+            "name": "search.project_site.state",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "County",
+            "in": "query",
+            "name": "search.project_site.county",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Site' entry type"
+      }
+    },
+    "/repository/search/type/project_tls_scan": {
+      "get": {
+        "description": "API to search for entries of type TLS Scan",
+        "operationId": "search_project_tls_scan",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'TLS Scan' entry type"
+      }
+    },
+    "/repository/search/type/project_visit": {
+      "get": {
+        "description": "API to search for entries of type Site Visit",
+        "operationId": "search_project_visit",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Site Visit' entry type"
+      }
+    },
+    "/repository/search/type/statusboard": {
+      "get": {
+        "description": "API to search for entries of type Status Board",
+        "operationId": "search_statusboard",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Status Board' entry type"
+      }
+    },
+    "/repository/search/type/todo": {
+      "get": {
+        "description": "API to search for entries of type Todo",
+        "operationId": "search_todo",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Todo' entry type"
+      }
+    },
+    "/repository/search/type/type_document_csv": {
+      "get": {
+        "description": "API to search for entries of type CSV File",
+        "operationId": "search_type_document_csv",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'CSV File' entry type"
+      }
+    },
+    "/repository/search/type/type_document_doc": {
+      "get": {
+        "description": "API to search for entries of type Microsoft Word File",
+        "operationId": "search_type_document_doc",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Microsoft Word File' entry type"
+      }
+    },
+    "/repository/search/type/type_document_html": {
+      "get": {
+        "description": "API to search for entries of type HTML File",
+        "operationId": "search_type_document_html",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'HTML File' entry type"
+      }
+    },
+    "/repository/search/type/type_document_pdf": {
+      "get": {
+        "description": "API to search for entries of type PDF File",
+        "operationId": "search_type_document_pdf",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'PDF File' entry type"
+      }
+    },
+    "/repository/search/type/type_document_ppt": {
+      "get": {
+        "description": "API to search for entries of type Microsoft Powerpoint File",
+        "operationId": "search_type_document_ppt",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Microsoft Powerpoint File' entry type"
+      }
+    },
+    "/repository/search/type/type_document_xls": {
+      "get": {
+        "description": "API to search for entries of type Microsoft Excel File",
+        "operationId": "search_type_document_xls",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Microsoft Excel File' entry type"
+      }
+    },
+    "/repository/search/type/type_image": {
+      "get": {
+        "description": "API to search for entries of type Image",
+        "operationId": "search_type_image",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Image' entry type"
+      }
+    },
+    "/repository/search/type/wikipage": {
+      "get": {
+        "description": "API to search for entries of type Wiki Page",
+        "operationId": "search_wikipage",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Wiki Text",
+            "in": "query",
+            "name": "search.wikipage.wikitext",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Wiki Page Category",
+            "in": "query",
+            "name": "search.wikipage.category",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Wiki Page' entry type"
+      }
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0"
+}
