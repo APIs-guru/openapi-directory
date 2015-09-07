@@ -4,6 +4,7 @@ set -o pipefail
   set -e
   set -x
   export GIT_COMMITTER_NAME=APIs-GuruBot
+  export GIT_COMMITTER_EMAIL=founders@APIs.guru
   npm install
   ./scripts/collection.js api https://apis-guru.github.io/api-models/
   git add ./api/v1/list.json
