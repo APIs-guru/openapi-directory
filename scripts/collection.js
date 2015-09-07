@@ -132,6 +132,8 @@ function generateAPI(specRootUrl) {
     }
   });
 
+  console.log('Generated list for ' + _.size(list) + ' API specs.');
+
   saveJson('api/v1/list.json', list);
 }
 
