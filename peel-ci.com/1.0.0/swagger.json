@@ -40,7 +40,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Gets related hashtags for a show."
+        "summary": "Gets related hashtags for a show.",
+        "tags": [
+          "hashtag"
+        ]
       }
     },
     "/hashtag/trendingShows": {
@@ -70,7 +73,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Gets trending shows."
+        "summary": "Gets trending shows.",
+        "tags": [
+          "hashtag"
+        ]
       }
     },
     "/hashtag/tuneinlinks": {
@@ -108,7 +114,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Gets tunein URLs (links) from either a tweet, hashtags, @mentions, or show ID."
+        "summary": "Gets tunein URLs (links) from either a tweet, hashtags, @mentions, or show ID.",
+        "tags": [
+          "hashtag"
+        ]
       }
     },
     "/health": {
@@ -122,7 +131,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get health of Tune-in service (which includes its uptime)."
+        "summary": "Get health of Tune-in service (which includes its uptime).",
+        "tags": [
+          "health"
+        ]
       }
     },
     "/status/{showID}": {
@@ -146,12 +158,29 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Gets the last 100 statuses for this show."
+        "summary": "Gets the last 100 statuses for this show.",
+        "tags": [
+          "status"
+        ]
       }
     }
   },
   "schemes": [
     "http"
   ],
-  "swagger": "2.0"
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Operations about hashtags",
+      "name": "hashtag"
+    },
+    {
+      "description": "Operations about statuses",
+      "name": "status"
+    },
+    {
+      "description": "Operations about health of Tune-in service",
+      "name": "health"
+    }
+  ]
 }

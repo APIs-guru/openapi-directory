@@ -42,7 +42,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Classifies the Document as adult or noadult"
+        "summary": "Classifies the Document as adult or noadult",
+        "tags": [
+          "Document-Classification"
+        ]
       }
     },
     "/1.0/CommercialDetection.json": {
@@ -74,7 +77,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Classifies the Document as commercial or nocommercial"
+        "summary": "Classifies the Document as commercial or nocommercial",
+        "tags": [
+          "Document-Classification"
+        ]
       }
     },
     "/1.0/DocumentSimilarity.json": {
@@ -113,7 +119,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Estimates the similarity between 2 Documents"
+        "summary": "Estimates the similarity between 2 Documents",
+        "tags": [
+          "Metrics"
+        ]
       }
     },
     "/1.0/EducationalDetection.json": {
@@ -145,7 +154,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Classifies the Document as educational or noeducational"
+        "summary": "Classifies the Document as educational or noeducational",
+        "tags": [
+          "Document-Classification"
+        ]
       }
     },
     "/1.0/GenderDetection.json": {
@@ -177,7 +189,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Gender Detection Service"
+        "summary": "Gender Detection Service",
+        "tags": [
+          "Document-Classification"
+        ]
       }
     },
     "/1.0/KeywordExtraction.json": {
@@ -218,7 +233,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Extracts the Keywords of the Document"
+        "summary": "Extracts the Keywords of the Document",
+        "tags": [
+          "Information-Retrieval"
+        ]
       }
     },
     "/1.0/LanguageDetection.json": {
@@ -250,7 +268,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Identifies the Language of the Document"
+        "summary": "Identifies the Language of the Document",
+        "tags": [
+          "Document-Classification"
+        ]
       }
     },
     "/1.0/ReadabilityAssessment.json": {
@@ -282,7 +303,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Evaluates the Readability of the Document"
+        "summary": "Evaluates the Readability of the Document",
+        "tags": [
+          "Document-Classification"
+        ]
       }
     },
     "/1.0/SentimentAnalysis.json": {
@@ -314,7 +338,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Identifies the Sentiment of the Document"
+        "summary": "Identifies the Sentiment of the Document",
+        "tags": [
+          "Document-Classification"
+        ]
       }
     },
     "/1.0/SpamDetection.json": {
@@ -346,7 +373,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Classifies the Document as spam or nospam"
+        "summary": "Classifies the Document as spam or nospam",
+        "tags": [
+          "Document-Classification"
+        ]
       }
     },
     "/1.0/SubjectivityAnalysis.json": {
@@ -378,7 +408,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Classifies Document as Subjective or Objective"
+        "summary": "Classifies Document as Subjective or Objective",
+        "tags": [
+          "Document-Classification"
+        ]
       }
     },
     "/1.0/TextExtraction.json": {
@@ -410,7 +443,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Extracts the clear text from Webpage"
+        "summary": "Extracts the clear text from Webpage",
+        "tags": [
+          "Information-Retrieval"
+        ]
       }
     },
     "/1.0/TopicClassification.json": {
@@ -442,7 +478,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Identifies the Topic of the Document"
+        "summary": "Identifies the Topic of the Document",
+        "tags": [
+          "Document-Classification"
+        ]
       }
     },
     "/1.0/TwitterSentimentAnalysis.json": {
@@ -474,12 +513,29 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Identifies the Sentiment of Twitter Messages"
+        "summary": "Identifies the Sentiment of Twitter Messages",
+        "tags": [
+          "Document-Classification"
+        ]
       }
     }
   },
   "schemes": [
     "http"
   ],
-  "swagger": "2.0"
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Document Classification Functions",
+      "name": "Document-Classification"
+    },
+    {
+      "description": "Information Retrieval Functions",
+      "name": "Information-Retrieval"
+    },
+    {
+      "description": "Metrics",
+      "name": "Metrics"
+    }
+  ]
 }

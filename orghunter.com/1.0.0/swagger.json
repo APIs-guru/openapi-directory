@@ -32,7 +32,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get categories!"
+        "summary": "Get categories!",
+        "tags": [
+          "categories"
+        ]
       }
     },
     "/v1/charitybasic": {
@@ -58,7 +61,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get details!"
+        "summary": "Get details!",
+        "tags": [
+          "details"
+        ]
       }
     },
     "/v1/charityfinancial": {
@@ -84,7 +90,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get details!"
+        "summary": "Get details!",
+        "tags": [
+          "CharityFinancial"
+        ]
       }
     },
     "/v1/charitysearch": {
@@ -158,12 +167,33 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get summary data!"
+        "summary": "Get summary data!",
+        "tags": [
+          "summary"
+        ]
       }
     }
   },
   "schemes": [
     "http"
   ],
-  "swagger": "2.0"
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Categories Test",
+      "name": "categories"
+    },
+    {
+      "description": "Summary Test",
+      "name": "summary"
+    },
+    {
+      "description": "Details Test",
+      "name": "details"
+    },
+    {
+      "description": "CharityFinancial",
+      "name": "CharityFinancial"
+    }
+  ]
 }

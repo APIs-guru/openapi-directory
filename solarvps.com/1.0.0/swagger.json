@@ -31,7 +31,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "View all contacts under your account"
+        "summary": "View all contacts under your account",
+        "tags": [
+          "contacts"
+        ]
       }
     },
     "/dns/{domain}": {
@@ -55,7 +58,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "View all your records for a given domain"
+        "summary": "View all your records for a given domain",
+        "tags": [
+          "dns"
+        ]
       }
     },
     "/dns/{domain}/add": {
@@ -114,7 +120,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Add dns record for given domain"
+        "summary": "Add dns record for given domain",
+        "tags": [
+          "dns"
+        ]
       }
     },
     "/dns/{domain}/delete": {
@@ -145,7 +154,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Delete dns record for a given domain"
+        "summary": "Delete dns record for a given domain",
+        "tags": [
+          "dns"
+        ]
       }
     },
     "/dns/{domain}/update": {
@@ -211,7 +223,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Update dns record for a given domain"
+        "summary": "Update dns record for a given domain",
+        "tags": [
+          "dns"
+        ]
       }
     },
     "/domains": {
@@ -226,7 +241,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "View all your domains managed by SolarVPS Distributed DNS"
+        "summary": "View all your domains managed by SolarVPS Distributed DNS",
+        "tags": [
+          "domains"
+        ]
       }
     },
     "/domains/add": {
@@ -250,7 +268,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Add domain to be managed by SolarVPS Distributed DNS"
+        "summary": "Add domain to be managed by SolarVPS Distributed DNS",
+        "tags": [
+          "domains"
+        ]
       }
     },
     "/domains/delete": {
@@ -274,7 +295,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Delete domain from SolarVPS Distributed DNS"
+        "summary": "Delete domain from SolarVPS Distributed DNS",
+        "tags": [
+          "domains"
+        ]
       }
     },
     "/key/generate": {
@@ -305,7 +329,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Generate API Key"
+        "summary": "Generate API Key",
+        "tags": [
+          "key"
+        ]
       }
     },
     "/key/get": {
@@ -336,7 +363,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get API Key"
+        "summary": "Get API Key",
+        "tags": [
+          "key"
+        ]
       }
     },
     "/pods": {
@@ -351,7 +381,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "View all your pods"
+        "summary": "View all your pods",
+        "tags": [
+          "pods"
+        ]
       }
     },
     "/pods/{podId}": {
@@ -375,7 +408,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "View information on a specific pod"
+        "summary": "View information on a specific pod",
+        "tags": [
+          "pods"
+        ]
       }
     },
     "/pods/{podId}/ping": {
@@ -399,7 +435,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Ping your specified pod"
+        "summary": "Ping your specified pod",
+        "tags": [
+          "pods"
+        ]
       }
     },
     "/pods/{podId}/{action}": {
@@ -430,7 +469,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Perform action on a specific pod"
+        "summary": "Perform action on a specific pod",
+        "tags": [
+          "pods"
+        ]
       }
     },
     "/solarray": {
@@ -445,7 +487,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "View all your monitors"
+        "summary": "View all your monitors",
+        "tags": [
+          "solarray"
+        ]
       }
     },
     "/solarray/critical": {
@@ -460,7 +505,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "View all your critical notifications"
+        "summary": "View all your critical notifications",
+        "tags": [
+          "solarray"
+        ]
       }
     },
     "/tickets": {
@@ -475,7 +523,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "View all your tickets"
+        "summary": "View all your tickets",
+        "tags": [
+          "tickets"
+        ]
       }
     },
     "/tickets/{department}/add": {
@@ -513,7 +564,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Open ticket with desired department"
+        "summary": "Open ticket with desired department",
+        "tags": [
+          "tickets"
+        ]
       }
     },
     "/tickets/{ticketId}": {
@@ -537,7 +591,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "View details on a specific ticket"
+        "summary": "View details on a specific ticket",
+        "tags": [
+          "tickets"
+        ]
       }
     },
     "/tickets/{ticketid}/update": {
@@ -567,12 +624,45 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Post a reply to a ticket"
+        "summary": "Post a reply to a ticket",
+        "tags": [
+          "tickets"
+        ]
       }
     }
   },
   "schemes": [
     "http"
   ],
-  "swagger": "2.0"
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Operations about pods",
+      "name": "pods"
+    },
+    {
+      "description": "Operations about SolarRay Monitoring",
+      "name": "solarray"
+    },
+    {
+      "description": "Operations about API Keys",
+      "name": "key"
+    },
+    {
+      "description": "Operations about DNS Domains",
+      "name": "domains"
+    },
+    {
+      "description": "Operations about DNS Records",
+      "name": "dns"
+    },
+    {
+      "description": "Operations about DNS Records",
+      "name": "contacts"
+    },
+    {
+      "description": "Operations about Support / Billing / Sales Tickets",
+      "name": "tickets"
+    }
+  ]
 }

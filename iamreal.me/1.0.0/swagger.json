@@ -176,7 +176,10 @@
             "description": "Description was not specified"
           }
         },
-        "summary": "Validate that the code typed by user and the code sent are identical"
+        "summary": "Validate that the code typed by user and the code sent are identical",
+        "tags": [
+          "sms"
+        ]
       }
     },
     "/sms/verify": {
@@ -233,7 +236,10 @@
             "description": "Description was not specified"
           }
         },
-        "summary": "Post sms validation request"
+        "summary": "Post sms validation request",
+        "tags": [
+          "sms"
+        ]
       }
     },
     "/users/{userId}/": {
@@ -271,7 +277,10 @@
             "description": "Description was not specified"
           }
         },
-        "summary": "Post a new / existing user for validation"
+        "summary": "Post a new / existing user for validation",
+        "tags": [
+          "social"
+        ]
       }
     },
     "/vfv": {
@@ -302,12 +311,29 @@
             "description": "Description was not specified"
           }
         },
-        "summary": "Setup video validation for specific user, and get global unique identifier (guid) to launch widget with"
+        "summary": "Setup video validation for specific user, and get global unique identifier (guid) to launch widget with",
+        "tags": [
+          "video"
+        ]
       }
     }
   },
   "schemes": [
     "http"
   ],
-  "swagger": "2.0"
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Validate a user's Social Network profile",
+      "name": "social"
+    },
+    {
+      "description": "Validate users by comparing live video of user with profile picture",
+      "name": "video"
+    },
+    {
+      "description": "Validate users phone number via SMS",
+      "name": "sms"
+    }
+  ]
 }

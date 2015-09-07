@@ -135,7 +135,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Returns balance for an application"
+        "summary": "Returns balance for an application",
+        "tags": [
+          "account"
+        ]
       }
     },
     "/v1/iatu/charges/reports/all": {
@@ -180,7 +183,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Returns charges by date range"
+        "summary": "Returns charges by date range",
+        "tags": [
+          "charges"
+        ]
       }
     },
     "/v1/iatu/charges/reports/all.csv": {
@@ -225,7 +231,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Returns a CSV of charges (money added to the account) by date range"
+        "summary": "Returns a CSV of charges (money added to the account) by date range",
+        "tags": [
+          "charges"
+        ]
       }
     },
     "/v1/iatu/number-validator": {
@@ -270,7 +279,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Validates the phone number area code and digits for a given country"
+        "summary": "Validates the phone number area code and digits for a given country",
+        "tags": [
+          "utilities"
+        ]
       }
     },
     "/v1/iatu/products/reports/all": {
@@ -299,7 +311,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Returns a list of products"
+        "summary": "Returns a list of products",
+        "tags": [
+          "products"
+        ]
       }
     },
     "/v1/iatu/products/reports/all.csv": {
@@ -328,7 +343,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Returns a list of products in CSV"
+        "summary": "Returns a list of products in CSV",
+        "tags": [
+          "products"
+        ]
       }
     },
     "/v1/iatu/products/reports/local-value": {
@@ -389,7 +407,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Returns the local value of a product"
+        "summary": "Returns the local value of a product",
+        "tags": [
+          "products"
+        ]
       }
     },
     "/v1/iatu/topups": {
@@ -445,7 +466,10 @@
             "description": "There is an error in your transaction. Please check the error code contained in the result for more information."
           }
         },
-        "summary": "Topup of a mobile phone"
+        "summary": "Topup of a mobile phone",
+        "tags": [
+          "topups"
+        ]
       }
     },
     "/v1/iatu/topups/reports": {
@@ -492,7 +516,10 @@
             "description": "Validation exception"
           }
         },
-        "summary": "Search topups transactions"
+        "summary": "Search topups transactions",
+        "tags": [
+          "topups"
+        ]
       }
     },
     "/v1/iatu/topups/reports/all": {
@@ -537,7 +564,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Returns topup transactions by date range"
+        "summary": "Returns topup transactions by date range",
+        "tags": [
+          "topups"
+        ]
       }
     },
     "/v1/iatu/topups/reports/all.csv": {
@@ -582,7 +612,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Returns a CSV of topup transactions by date range"
+        "summary": "Returns a CSV of topup transactions by date range",
+        "tags": [
+          "topups"
+        ]
       }
     },
     "/v1/iatu/topups/reports/totals": {
@@ -627,7 +660,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Returns topup transactions totals by date range"
+        "summary": "Returns topup transactions totals by date range",
+        "tags": [
+          "topups"
+        ]
       }
     },
     "/v1/iatu/topups/reverse": {
@@ -674,7 +710,10 @@
             "description": "Validation exception"
           }
         },
-        "summary": "Reversal of a Topup"
+        "summary": "Reversal of a Topup",
+        "tags": [
+          "topups"
+        ]
       }
     },
     "/v1/status": {
@@ -703,12 +742,37 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Returns the status of the API"
+        "summary": "Returns the status of the API",
+        "tags": [
+          "utilities"
+        ]
       }
     }
   },
   "schemes": [
     "https"
   ],
-  "swagger": "2.0"
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "API calls for Submitting and Searching IATU Topups",
+      "name": "topups"
+    },
+    {
+      "description": "Available IATU products API calls for your application.",
+      "name": "products"
+    },
+    {
+      "description": "Log of credit card charges, wire transfers, and balance adjustments.",
+      "name": "charges"
+    },
+    {
+      "description": "Account related queries.",
+      "name": "account"
+    },
+    {
+      "description": "Utilities for the IDTBeyond API",
+      "name": "utilities"
+    }
+  ]
 }
