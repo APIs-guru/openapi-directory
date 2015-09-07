@@ -10,5 +10,5 @@ set -o pipefail
   git add ./api/v1/list.json
   git commit -m 'Generate API'
   git push --force "https://${GH_TOKEN}@${GH_REF}" HEAD:gh-pages 2>&1
-  git clean -xd
+  git clean -xdf
 ) 2>&1 | sed "s/${GH_TOKEN}/xxPASSxx/"
