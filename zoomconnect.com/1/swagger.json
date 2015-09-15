@@ -281,23 +281,6 @@
         }
       }
     },
-    "WebServiceNumberContextLookupResponses": {
-      "description": "WebServiceNumberContextLookupResponses",
-      "properties": {
-        "links": {
-          "items": {
-            "$ref": "#/definitions/Link"
-          },
-          "type": "array"
-        },
-        "numberContextLookupResponses": {
-          "items": {
-            "$ref": "#/definitions/WebServiceNumberContextLookupResponse"
-          },
-          "type": "array"
-        }
-      }
-    },
     "WebServiceSendSmsRequest": {
       "description": "WebServiceSendSmsRequest",
       "properties": {
@@ -530,56 +513,6 @@
         ]
       }
     },
-    "/api/rest/v1/context/batch-lookup": {
-      "post": {
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "deprecated": false,
-        "description": "Returns context information for the batch of numbers provided. A maximum of 100 numbers may be provided per query.",
-        "operationId": "batchLookup",
-        "parameters": [
-          {
-            "description": "request",
-            "in": "body",
-            "name": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/WebServiceNumberContextLookupRequest"
-            }
-          }
-        ],
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/WebServiceNumberContextLookupResponses"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "summary": "lookup",
-        "tags": [
-          "context"
-        ]
-      }
-    },
     "/api/rest/v1/context/lookup": {
       "get": {
         "consumes": [
@@ -623,7 +556,7 @@
         },
         "summary": "lookup",
         "tags": [
-          "context"
+          "lookup"
         ]
       },
       "post": {
@@ -671,7 +604,7 @@
         },
         "summary": "lookup",
         "tags": [
-          "context"
+          "lookup"
         ]
       }
     },
@@ -712,14 +645,14 @@
       }
     },
     "/api/rest/v1/groups/{groupId}": {
-      "get": {
+      "delete": {
         "consumes": [
           "application/json",
           "application/xml"
         ],
         "deprecated": false,
-        "description": "Returns details for a single group",
-        "operationId": "get",
+        "description": "Deletes a  group",
+        "operationId": "delete",
         "parameters": [
           {
             "description": "groupId",
@@ -736,22 +669,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/WebServiceGroup"
-            }
+            "description": "Description was not specified"
+          },
+          "204": {
+            "description": "No Content"
           },
           "401": {
             "description": "Unauthorized"
           },
           "403": {
             "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
           }
         },
-        "summary": "get",
+        "summary": "delete",
         "tags": [
           "groups"
         ]
@@ -923,14 +853,14 @@
       }
     },
     "/api/rest/v1/messages/{messageId}": {
-      "get": {
+      "delete": {
         "consumes": [
           "application/json",
           "application/xml"
         ],
         "deprecated": false,
-        "description": "Returns details for a single message",
-        "operationId": "get",
+        "description": "Deletes a  message",
+        "operationId": "delete",
         "parameters": [
           {
             "description": "messageId",
@@ -947,22 +877,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/WebServiceMessage"
-            }
+            "description": "Description was not specified"
+          },
+          "204": {
+            "description": "No Content"
           },
           "401": {
             "description": "Unauthorized"
           },
           "403": {
             "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
           }
         },
-        "summary": "get",
+        "summary": "delete",
         "tags": [
           "messages"
         ]
@@ -1022,24 +949,38 @@
       }
     },
     "/api/rest/v1/sms/send-bulk": {
-      "get": {
+      "post": {
         "consumes": [
           "application/json",
           "application/xml"
         ],
         "deprecated": false,
-        "description": "Returns an example of the data to POST to send multiple messages in one transaction.",
+        "description": "Send multiple messages in one transaction.",
         "operationId": "sendBulk",
+        "parameters": [
+          {
+            "description": "requests",
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/WebServiceSendSmsRequests"
+            }
+          }
+        ],
         "produces": [
           "application/json",
           "application/xml"
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "Description was not specified",
             "schema": {
-              "$ref": "#/definitions/WebServiceSendSmsRequests"
+              "$ref": "#/definitions/WebServiceSendSmsResponses"
             }
+          },
+          "201": {
+            "description": "Created"
           },
           "401": {
             "description": "Unauthorized"
@@ -1294,11 +1235,12 @@
   "swagger": "2.0",
   "tags": [
     {
+      "description": "Core information related to your account",
       "name": "balance"
     },
     {
       "description": "Number context service",
-      "name": "context"
+      "name": "lookup"
     },
     {
       "description": "Send and schedule messages",

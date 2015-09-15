@@ -726,12 +726,22 @@
     },
     "JobStatistics2": {
       "properties": {
+        "billingTier": {
+          "description": "[Output-only] Billing tier for the job.",
+          "format": "int32",
+          "type": "integer"
+        },
         "cacheHit": {
           "description": "[Output-only] Whether the query result was fetched from the query cache.",
           "type": "boolean"
         },
+        "totalBytesBilled": {
+          "description": "[Output-only] Total bytes billed for the job.",
+          "format": "int64",
+          "type": "string"
+        },
         "totalBytesProcessed": {
-          "description": "[Output-only] Total bytes processed for this job.",
+          "description": "[Output-only] Total bytes processed for the job.",
           "format": "int64",
           "type": "string"
         }
@@ -741,7 +751,7 @@
     "JobStatistics3": {
       "properties": {
         "inputFileBytes": {
-          "description": "[Output-only] Number of bytes of source data in a joad job.",
+          "description": "[Output-only] Number of bytes of source data in a load job.",
           "format": "int64",
           "type": "string"
         },
@@ -751,7 +761,7 @@
           "type": "string"
         },
         "outputBytes": {
-          "description": "[Output-only] Size of the loaded data in bytes. Note that while an import job is in the running state, this value may change.",
+          "description": "[Output-only] Size of the loaded data in bytes. Note that while a load job is in the running state, this value may change.",
           "format": "int64",
           "type": "string"
         },
@@ -2717,7 +2727,7 @@
         "https://www.googleapis.com/auth/bigquery": "View and manage your data in Google BigQuery",
         "https://www.googleapis.com/auth/bigquery.insertdata": "Insert data into Google BigQuery",
         "https://www.googleapis.com/auth/cloud-platform": "View and manage your data across Google Cloud Platform services",
-        "https://www.googleapis.com/auth/cloud-platform.read-only": "View your data across Google Cloud Platform services",
+        "https://www.googleapis.com/auth/cloud-platform.read-only": "MESSAGE UNDER CONSTRUCTION View your data across Google Cloud Platform services",
         "https://www.googleapis.com/auth/devstorage.full_control": "Manage your data and permissions in Google Cloud Storage",
         "https://www.googleapis.com/auth/devstorage.read_only": "View your data in Google Cloud Storage",
         "https://www.googleapis.com/auth/devstorage.read_write": "Manage your data in Google Cloud Storage"

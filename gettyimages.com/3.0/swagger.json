@@ -2162,10 +2162,10 @@
             }
           },
           "401": {
-            "description": "NoAgreement"
+            "description": "AuthorizationTokenRequired"
           },
           "404": {
-            "description": "ImageNotFound"
+            "description": "FileDownloadSizeNotFound"
           }
         },
         "summary": "Download an image",
@@ -2228,7 +2228,7 @@
             }
           },
           "401": {
-            "description": "AuthorizationTokenRequired"
+            "description": "NoDownloadAuthorization"
           },
           "404": {
             "description": "VideoNotFound"
@@ -2330,10 +2330,10 @@
             }
           },
           "401": {
-            "description": "NoAgreement"
+            "description": "AuthorizationTokenRequired"
           },
           "404": {
-            "description": "ImageNotFound"
+            "description": "FileDownloadSizeNotFound"
           }
         },
         "summary": "Download an image",
@@ -6184,7 +6184,7 @@
             }
           },
           "400": {
-            "description": "InvalidParameterValue"
+            "description": "MalformedRequest"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -6320,7 +6320,7 @@
             }
           },
           "400": {
-            "description": "InvalidParameterValue"
+            "description": "MalformedRequest"
           },
           "401": {
             "description": "AuthorizationTokenRequired"

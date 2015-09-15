@@ -300,7 +300,7 @@
           "type": "string"
         },
         "topicName": {
-          "description": "The name of the Cloud Pubsub topic to which notifications for this enterprise's enrolled account will be sent.",
+          "description": "The name of the Cloud Pub/Sub topic to which notifications for this enterprise's enrolled account will be sent.",
           "type": "string"
         }
       },
@@ -2182,7 +2182,7 @@
         }
       ],
       "post": {
-        "description": "Sends a test push notification to validate the MDM integration with the Google Cloud Pubsub service for this enterprise.",
+        "description": "Sends a test push notification to validate the MDM integration with the Google Cloud Pub/Sub service for this enterprise.",
         "operationId": "androidenterprise.enterprises.sendTestPushNotification",
         "parameters": [
           {

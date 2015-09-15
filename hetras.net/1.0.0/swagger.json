@@ -1,6 +1,17 @@
 {
   "basePath": "/",
   "definitions": {
+    "KeyValuePair[String,link_object]": {
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "$ref": "#/definitions/link_object"
+        }
+      },
+      "type": "object"
+    },
     "SimpleAttribute": {
       "description": "Represents a simple attribute",
       "properties": {
@@ -16,23 +27,7 @@
     "accepted_guarantee_types": {
       "properties": {
         "accepted": {
-          "items": {
-            "enum": [
-              "PM4Hold",
-              "PM6Hold",
-              "GuaranteeToCreditCard",
-              "GuaranteeToGuestAccount",
-              "GuaranteeByTravelAgent",
-              "GuaranteeByCompany",
-              "Deposit",
-              "Voucher",
-              "Prepayment",
-              "NonGuaranteed",
-              "Tentative",
-              "Waitlist"
-            ],
-            "type": "string"
-          },
+          "items": {},
           "type": "array"
         },
         "minimum": {
@@ -344,6 +339,9 @@
             "Waitlist"
           ],
           "type": "string"
+        },
+        "valid_token": {
+          "type": "boolean"
         }
       },
       "type": "object"
@@ -377,6 +375,9 @@
     "hotel": {
       "properties": {
         "city": {
+          "type": "string"
+        },
+        "code": {
           "type": "string"
         },
         "country": {
@@ -424,6 +425,75 @@
       },
       "type": "object"
     },
+    "json_patch": {
+      "description": "Represents JSON Patch request",
+      "properties": {
+        "op": {
+          "enum": [
+            "add",
+            "remove",
+            "replace",
+            "move",
+            "copy",
+            "test"
+          ],
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "path",
+        "value"
+      ],
+      "type": "object"
+    },
+    "link_object": {
+      "description": "A Link Object represents a hyperlink from the containing resource to a URI.",
+      "properties": {
+        "Deprecation": {
+          "description": "The \"deprecation\" property is OPTIONAL. Its presence indicates that the link is to be deprecated (i.e.\r\n            removed) at a future date.  Its value is a URL that SHOULD provide\r\n            further information about the deprecation.\r\n            A client SHOULD provide some notification (for example, by logging a\r\n            warning message) whenever it traverses over a link that has this\r\n            property.  The notification SHOULD include the deprecation property's\r\n            value so that a client maintainer can easily find information about\r\n            the deprecation.",
+          "type": "string"
+        },
+        "HrefLang": {
+          "description": "The \"hreflang\" property is OPTIONAL. Its value is a string and is intended for indicating the language of\r\n            the target resource (as defined by [RFC5988]).",
+          "type": "string"
+        },
+        "Name": {
+          "description": "The \"name\" property is OPTIONAL. Its value MAY be used as a secondary key for selecting Link Objects\r\n            which share the same relation type.",
+          "type": "string"
+        },
+        "Profile": {
+          "description": "The \"profile\" property is OPTIONAL. Its value is a string which is a URI that hints about the profile.",
+          "type": "string"
+        },
+        "Templated": {
+          "description": "The \"templated\" property is OPTIONAL. Its value is boolean and SHOULD be true when the Link Object's \"href\"\r\n            property is a URI Template.\r\n            Its value SHOULD be considered false if it is undefined or any other\r\n            value than true.",
+          "type": "boolean"
+        },
+        "Title": {
+          "description": "The \"title\" property is OPTIONAL. Its value is a string and is intended for labelling the link with a\r\n            human-readable identifier (as defined by [RFC5988]).",
+          "type": "string"
+        },
+        "Type": {
+          "description": "The \"type\" property is OPTIONAL. Its value is a string used as a hint to indicate the media type\r\n            expected when dereferencing the target resource.",
+          "type": "string"
+        },
+        "Uri": {
+          "description": "The \"href\" property is REQUIRED. Its value is either a URI [RFC3986] or a URI Template [RFC6570].\r\n            If the value is a URI Template then the Link Object SHOULD have a\r\n            \"templated\" attribute whose value is true.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "Uri"
+      ],
+      "type": "object"
+    },
     "mailing_address": {
       "properties": {
         "address": {
@@ -464,6 +534,12 @@
     },
     "offer": {
       "properties": {
+        "_links": {
+          "items": {
+            "$ref": "#/definitions/KeyValuePair[String,link_object]"
+          },
+          "type": "array"
+        },
         "adults": {
           "format": "int32",
           "type": "integer"
@@ -512,6 +588,18 @@
           "$ref": "#/definitions/rate"
         }
       },
+      "type": "object"
+    },
+    "precheckin_request": {
+      "description": "Represents the pre-checkin request",
+      "properties": {
+        "device_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "device_id"
+      ],
       "type": "object"
     },
     "rate": {
@@ -688,6 +776,12 @@
     },
     "reservation_response": {
       "properties": {
+        "addon_services": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "adults": {
           "format": "int32",
           "type": "integer"
@@ -842,6 +936,10 @@
         "name": {
           "type": "string"
         },
+        "room_number": {
+          "format": "int32",
+          "type": "integer"
+        },
         "type": {
           "type": "string"
         }
@@ -918,6 +1016,16 @@
             "$ref": "#/definitions/SimpleAttribute"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "roomassignment_response": {
+      "description": "Defines the response for room assignment operation",
+      "properties": {
+        "room_number": {
+          "format": "int32",
+          "type": "integer"
         }
       },
       "type": "object"

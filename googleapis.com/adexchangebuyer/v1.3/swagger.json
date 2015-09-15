@@ -188,6 +188,11 @@
           "format": "int64",
           "type": "string"
         },
+        "api_upload_timestamp": {
+          "description": "The last upload timestamp of this creative if it was uploaded via API. Read-only. The value of this field is generated, and will be ignored for uploads. (formatted RFC 3339 timestamp).",
+          "format": "date-time",
+          "type": "string"
+        },
         "attribute": {
           "description": "All attributes for the ads that may be shown from this snippet.",
           "items": {
@@ -292,6 +297,102 @@
           "default": "adexchangebuyer#creative",
           "description": "Resource type.",
           "type": "string"
+        },
+        "nativeAd": {
+          "description": "If nativeAd is set, HTMLSnippet and videoURL should not be set.",
+          "properties": {
+            "advertiser": {
+              "type": "string"
+            },
+            "appIcon": {
+              "description": "The app icon, for app download ads.",
+              "properties": {
+                "height": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "width": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "body": {
+              "description": "A long description of the ad.",
+              "type": "string"
+            },
+            "callToAction": {
+              "description": "A label for the button that the user is supposed to click.",
+              "type": "string"
+            },
+            "clickTrackingUrl": {
+              "description": "The URL to use for click tracking.",
+              "type": "string"
+            },
+            "headline": {
+              "description": "A short title for the ad.",
+              "type": "string"
+            },
+            "image": {
+              "description": "A large image.",
+              "properties": {
+                "height": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "width": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "impressionTrackingUrl": {
+              "description": "The URLs are called when the impression is rendered.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "logo": {
+              "description": "A smaller image, for the advertiser logo.",
+              "properties": {
+                "height": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "width": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "price": {
+              "description": "The price of the promoted app including the currency info.",
+              "type": "string"
+            },
+            "starRating": {
+              "description": "The app rating in the app store. Must be in the range [0-5].",
+              "format": "double",
+              "type": "number"
+            },
+            "store": {
+              "description": "The URL to the app store to purchase/download the promoted app.",
+              "type": "string"
+            }
+          },
+          "type": "object"
         },
         "productCategories": {
           "description": "Detected product categories, if any. Read-only. This field should not be set in requests.",

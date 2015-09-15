@@ -390,6 +390,9 @@
             "$ref": "#/definitions/MarketplaceOrder"
           },
           "type": "array"
+        },
+        "webPropertyCode": {
+          "type": "string"
         }
       },
       "type": "object"
@@ -433,6 +436,11 @@
         "agencyId": {
           "description": "The agency id for this creative.",
           "format": "int64",
+          "type": "string"
+        },
+        "api_upload_timestamp": {
+          "description": "The last upload timestamp of this creative if it was uploaded via API. Read-only. The value of this field is generated, and will be ignored for uploads. (formatted RFC 3339 timestamp).",
+          "format": "date-time",
           "type": "string"
         },
         "attribute": {
@@ -523,6 +531,102 @@
           "default": "adexchangebuyer#creative",
           "description": "Resource type.",
           "type": "string"
+        },
+        "nativeAd": {
+          "description": "If nativeAd is set, HTMLSnippet and videoURL should not be set.",
+          "properties": {
+            "advertiser": {
+              "type": "string"
+            },
+            "appIcon": {
+              "description": "The app icon, for app download ads.",
+              "properties": {
+                "height": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "width": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "body": {
+              "description": "A long description of the ad.",
+              "type": "string"
+            },
+            "callToAction": {
+              "description": "A label for the button that the user is supposed to click.",
+              "type": "string"
+            },
+            "clickTrackingUrl": {
+              "description": "The URL to use for click tracking.",
+              "type": "string"
+            },
+            "headline": {
+              "description": "A short title for the ad.",
+              "type": "string"
+            },
+            "image": {
+              "description": "A large image.",
+              "properties": {
+                "height": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "width": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "impressionTrackingUrl": {
+              "description": "The URLs are called when the impression is rendered.",
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "logo": {
+              "description": "A smaller image, for the advertiser logo.",
+              "properties": {
+                "height": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "width": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "price": {
+              "description": "The price of the promoted app including the currency info.",
+              "type": "string"
+            },
+            "starRating": {
+              "description": "The app rating in the app store. Must be in the range [0-5].",
+              "format": "double",
+              "type": "number"
+            },
+            "store": {
+              "description": "The URL to the app store to purchase/download the promoted app.",
+              "type": "string"
+            }
+          },
+          "type": "object"
         },
         "openAuctionStatus": {
           "description": "Top-level open auction status. Read-only. This field should not be set in requests. If disapproved, an entry for auctionType=OPEN_AUCTION (or ALL) in servingRestrictions will also exist. Note that this may be nuanced with other contextual restrictions, in which case it may be preferable to read from ServingRestrictions directly.",
@@ -879,10 +983,6 @@
         "updateAction": {
           "description": "Indicates an optional action to take on the order",
           "type": "string"
-        },
-        "updateFinalizedView": {
-          "description": "True, if the finalized view of the deal should be updated.",
-          "type": "boolean"
         }
       },
       "type": "object"
@@ -1384,6 +1484,9 @@
         "terms": {
           "$ref": "#/definitions/DealTerms",
           "description": "The negotiable terms of the deal. (updatable)"
+        },
+        "webPropertyCode": {
+          "type": "string"
         }
       },
       "type": "object"
@@ -1545,6 +1648,9 @@
         "terms": {
           "$ref": "#/definitions/DealTerms",
           "description": "The negotiable terms of the deal (buyer-readonly)"
+        },
+        "webPropertyCode": {
+          "type": "string"
         }
       },
       "type": "object"
@@ -2537,46 +2643,6 @@
             "type": "string"
           },
           "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "UpdateOrderDealsRequest": {
-      "properties": {
-        "deals": {
-          "description": "List of deals to update",
-          "items": {
-            "$ref": "#/definitions/MarketplaceDeal"
-          },
-          "type": "array"
-        },
-        "orderRevisionNumber": {
-          "description": "The last known revision number for the order.",
-          "format": "int64",
-          "type": "string"
-        },
-        "updateAction": {
-          "type": "string"
-        },
-        "updatedFinalizedView": {
-          "type": "boolean"
-        }
-      },
-      "type": "object"
-    },
-    "UpdateOrderDealsResponse": {
-      "properties": {
-        "deals": {
-          "description": "List of deals updated (in the same order as passed in the request)",
-          "items": {
-            "$ref": "#/definitions/MarketplaceDeal"
-          },
-          "type": "array"
-        },
-        "orderRevisionNumber": {
-          "description": "The updated revision number for the order.",
-          "format": "int64",
-          "type": "string"
         }
       },
       "type": "object"
@@ -3764,7 +3830,7 @@
         }
       ]
     },
-    "/marketplaceOrders/create": {
+    "/marketplaceOrders/insert": {
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3790,7 +3856,7 @@
       ],
       "post": {
         "description": "Create the given list of orders",
-        "operationId": "adexchangebuyer.marketplaceorders.create",
+        "operationId": "adexchangebuyer.marketplaceorders.insert",
         "parameters": [
           {
             "in": "body",
@@ -3929,83 +3995,7 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ],
-      "patch": {
-        "description": "Update the given order. This method supports patch semantics.",
-        "operationId": "adexchangebuyer.marketplaceorders.patch",
-        "parameters": [
-          {
-            "description": "The order id to update.",
-            "in": "path",
-            "name": "orderId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/MarketplaceOrder"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/MarketplaceOrder"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/adexchange.buyer"
-            ]
-          }
-        ],
-        "tags": [
-          "marketplaceorders"
-        ]
-      },
-      "put": {
-        "description": "Update the given order",
-        "operationId": "adexchangebuyer.marketplaceorders.update",
-        "parameters": [
-          {
-            "description": "The order id to update.",
-            "in": "path",
-            "name": "orderId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/MarketplaceOrder"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/MarketplaceOrder"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/adexchange.buyer"
-            ]
-          }
-        ],
-        "tags": [
-          "marketplaceorders"
-        ]
-      }
+      ]
     },
     "/marketplaceOrders/{orderId}/deals": {
       "get": {
@@ -4062,69 +4052,6 @@
           "$ref": "#/parameters/userIp"
         }
       ]
-    },
-    "/marketplaceOrders/{orderId}/deals/create": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Add new deals for the specified order",
-        "operationId": "adexchangebuyer.marketplacedeals.create",
-        "parameters": [
-          {
-            "description": "OrderId for which deals need to be added.",
-            "in": "path",
-            "name": "orderId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/AddOrderDealsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AddOrderDealsResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/adexchange.buyer"
-            ]
-          }
-        ],
-        "tags": [
-          "marketplacedeals"
-        ]
-      }
     },
     "/marketplaceOrders/{orderId}/deals/delete": {
       "parameters": [
@@ -4189,7 +4116,7 @@
         ]
       }
     },
-    "/marketplaceOrders/{orderId}/deals/replace": {
+    "/marketplaceOrders/{orderId}/deals/insert": {
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4214,11 +4141,11 @@
         }
       ],
       "post": {
-        "description": "Replaces all the deals in the order with the passed in deals",
-        "operationId": "adexchangebuyer.marketplacedeals.replace",
+        "description": "Add new deals for the specified order",
+        "operationId": "adexchangebuyer.marketplacedeals.insert",
         "parameters": [
           {
-            "description": "The orderId to edit deals on.",
+            "description": "OrderId for which deals need to be added.",
             "in": "path",
             "name": "orderId",
             "required": true,
@@ -4228,7 +4155,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/EditAllOrderDealsRequest"
+              "$ref": "#/definitions/AddOrderDealsRequest"
             }
           }
         ],
@@ -4236,7 +4163,7 @@
           "200": {
             "description": "Successful response",
             "schema": {
-              "$ref": "#/definitions/EditAllOrderDealsResponse"
+              "$ref": "#/definitions/AddOrderDealsResponse"
             }
           }
         },
@@ -4277,11 +4204,11 @@
         }
       ],
       "post": {
-        "description": "Update the specified deals on the order",
+        "description": "Replaces all the deals in the order with the passed in deals",
         "operationId": "adexchangebuyer.marketplacedeals.update",
         "parameters": [
           {
-            "description": "The orderId to update deals for.",
+            "description": "The orderId to edit deals on.",
             "in": "path",
             "name": "orderId",
             "required": true,
@@ -4291,7 +4218,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/UpdateOrderDealsRequest"
+              "$ref": "#/definitions/EditAllOrderDealsRequest"
             }
           }
         ],
@@ -4299,7 +4226,7 @@
           "200": {
             "description": "Successful response",
             "schema": {
-              "$ref": "#/definitions/UpdateOrderDealsResponse"
+              "$ref": "#/definitions/EditAllOrderDealsResponse"
             }
           }
         },
@@ -4371,7 +4298,7 @@
         }
       ]
     },
-    "/marketplaceOrders/{orderId}/notes/add": {
+    "/marketplaceOrders/{orderId}/notes/insert": {
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4397,7 +4324,7 @@
       ],
       "post": {
         "description": "Add notes to the order",
-        "operationId": "adexchangebuyer.marketplacenotes.create",
+        "operationId": "adexchangebuyer.marketplacenotes.insert",
         "parameters": [
           {
             "description": "The orderId to add notes for.",
@@ -4431,6 +4358,149 @@
         ],
         "tags": [
           "marketplacenotes"
+        ]
+      }
+    },
+    "/marketplaceOrders/{orderId}/{revisionNumber}/{updateAction}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "patch": {
+        "description": "Update the given order. This method supports patch semantics.",
+        "operationId": "adexchangebuyer.marketplaceorders.patch",
+        "parameters": [
+          {
+            "description": "The order id to update.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The last known revision number to update. If the head revision in the marketplace database has since changed, an error will be thrown. The caller should then fetch the lastest order at head revision and retry the update at that revision.",
+            "in": "path",
+            "name": "revisionNumber",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The proposed action to take on the order.",
+            "enum": [
+              "accept",
+              "cancel",
+              "propose",
+              "unknownAction",
+              "updateFinalized"
+            ],
+            "in": "path",
+            "name": "updateAction",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceOrder"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceOrder"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "marketplaceorders"
+        ]
+      },
+      "put": {
+        "description": "Update the given order",
+        "operationId": "adexchangebuyer.marketplaceorders.update",
+        "parameters": [
+          {
+            "description": "The order id to update.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The last known revision number to update. If the head revision in the marketplace database has since changed, an error will be thrown. The caller should then fetch the lastest order at head revision and retry the update at that revision.",
+            "in": "path",
+            "name": "revisionNumber",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The proposed action to take on the order.",
+            "enum": [
+              "accept",
+              "cancel",
+              "propose",
+              "unknownAction",
+              "updateFinalized"
+            ],
+            "in": "path",
+            "name": "updateAction",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceOrder"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceOrder"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.buyer"
+            ]
+          }
+        ],
+        "tags": [
+          "marketplaceorders"
         ]
       }
     },
