@@ -513,7 +513,10 @@
             }
           }
         },
-        "summary": "Return a full list of laws and incentives that match your query."
+        "summary": "Return a full list of laws and incentives that match your query.",
+        "tags": [
+          "v1"
+        ]
       }
     },
     "/v1/category-list.{output_format}": {
@@ -561,7 +564,10 @@
             }
           }
         },
-        "summary": "Return the law categories for a given category type."
+        "summary": "Return the law categories for a given category type.",
+        "tags": [
+          "v1"
+        ]
       }
     },
     "/v1/pocs.{output_format}": {
@@ -604,7 +610,10 @@
             }
           }
         },
-        "summary": "Get the points of contact for a given jurisdiction."
+        "summary": "Get the points of contact for a given jurisdiction.",
+        "tags": [
+          "v1"
+        ]
       }
     },
     "/v1/{id}.{output_format}": {
@@ -654,12 +663,21 @@
             }
           }
         },
-        "summary": "Fetch the details of a specific law given the law's ID."
+        "summary": "Fetch the details of a specific law given the law's ID.",
+        "tags": [
+          "v1"
+        ]
       }
     }
   },
   "schemes": [
     "https"
   ],
-  "swagger": "2.0"
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Information about laws and incentives",
+      "name": "v1"
+    }
+  ]
 }

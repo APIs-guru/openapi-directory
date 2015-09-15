@@ -81,7 +81,10 @@
             }
           }
         },
-        "summary": "Cancels active call"
+        "summary": "Cancels active call",
+        "tags": [
+          "call"
+        ]
       },
       "get": {
         "operationId": "GET--version-call--token---format-",
@@ -107,7 +110,10 @@
             }
           }
         },
-        "summary": "Fetches call status"
+        "summary": "Fetches call status",
+        "tags": [
+          "call"
+        ]
       }
     },
     "/v1/calls.json": {
@@ -139,12 +145,23 @@
           "200": {
             "description": "No response was specified"
           }
-        }
+        },
+        "tags": [
+          "calls"
+        ]
       }
     }
   },
   "schemes": [
     "http"
   ],
-  "swagger": "2.0"
+  "swagger": "2.0",
+  "tags": [
+    {
+      "name": "calls"
+    },
+    {
+      "name": "call"
+    }
+  ]
 }

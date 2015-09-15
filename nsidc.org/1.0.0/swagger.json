@@ -120,7 +120,10 @@
             "description": "Internal server error"
           }
         },
-        "summary": "View the facet information corresponding to a search"
+        "summary": "View the facet information corresponding to a search",
+        "tags": [
+          "SwaggerDocs"
+        ]
       }
     },
     "/OpenSearch": {
@@ -228,7 +231,10 @@
             "description": "Internal server error"
           }
         },
-        "summary": "Search documents using the OpenSearch 1.1 Specification"
+        "summary": "Search documents using the OpenSearch 1.1 Specification",
+        "tags": [
+          "SwaggerDocs"
+        ]
       }
     },
     "/OpenSearchDescription": {
@@ -245,7 +251,10 @@
             }
           }
         },
-        "summary": "Describes the web interface of NSIDC's data search engine"
+        "summary": "Describes the web interface of NSIDC's data search engine",
+        "tags": [
+          "SwaggerDocs"
+        ]
       }
     },
     "/suggest": {
@@ -290,12 +299,21 @@
             "description": "Internal server error"
           }
         },
-        "summary": "Suggest search terms based on a partial query"
+        "summary": "Suggest search terms based on a partial query",
+        "tags": [
+          "SwaggerDocs"
+        ]
       }
     }
   },
   "schemes": [
     "http"
   ],
-  "swagger": "2.0"
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Dataset search",
+      "name": "SwaggerDocs"
+    }
+  ]
 }

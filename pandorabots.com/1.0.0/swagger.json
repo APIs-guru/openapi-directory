@@ -72,7 +72,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Anonymous Talk"
+        "summary": "Anonymous Talk",
+        "tags": [
+          "pandorabots_api_swagger_1_3"
+        ]
       }
     },
     "/bot/{app_id}": {
@@ -100,12 +103,15 @@
             "description": "No response was specified"
           }
         },
-        "summary": "List of bots"
+        "summary": "List of bots",
+        "tags": [
+          "pandorabots_api_swagger_1_3"
+        ]
       }
     },
     "/bot/{app_id}/{botname}": {
       "get": {
-        "description": "Retrieve a list of a bot's files. Returns a JSON object with each bot file associated with bot specified.<p>Returns a 400 error code for bot not found. Returns a 401 error code for invalid app_ID or user_key.</p><p>The <code color=blue>return=zip</code> option may not behave as expected using Active Docs 1.2</p><p><pre class='prettyprint'>curl -v  -X GET 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME?user_key=USER_KEY'</pre></p>",
+        "description": "Retrieve a list of a bot's files. Returns a JSON object with each bot file associated with bot specified.<p>Returns a 404 error code for bot not found. Returns a 401 error code for invalid app_ID or user_key.</p><p>The <code color=blue>return=zip</code> option may not behave as expected using Active Docs 1.2</p><p><pre class='prettyprint'>curl -v  -X GET 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME?user_key=USER_KEY'</pre></p>",
         "operationId": "listBotFiles",
         "parameters": [
           {
@@ -141,7 +147,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "List of bot files"
+        "summary": "List of bot files",
+        "tags": [
+          "pandorabots_api_swagger_1_3"
+        ]
       }
     },
     "/bot/{app_id}/{botname}/verify": {
@@ -176,7 +185,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Compile a bot"
+        "summary": "Compile a bot",
+        "tags": [
+          "pandorabots_api_swagger_1_3"
+        ]
       }
     },
     "/bot/{app_id}/{botname}/{file-kind}": {
@@ -218,7 +230,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Retrieve a bot file (pdefaults, properties)"
+        "summary": "Retrieve a bot file (pdefaults, properties)",
+        "tags": [
+          "pandorabots_api_swagger_1_3"
+        ]
       }
     },
     "/bot/{app_id}/{botname}/{file-kind}/{filename}": {
@@ -267,7 +282,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Retrieve a bot file (AIML, set, map, substitution)"
+        "summary": "Retrieve a bot file (AIML, set, map, substitution)",
+        "tags": [
+          "pandorabots_api_swagger_1_3"
+        ]
       }
     },
     "/talk/{app_id}/{botname}": {
@@ -364,12 +382,21 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Debug a bot conversation"
+        "summary": "Debug a bot conversation",
+        "tags": [
+          "pandorabots_api_swagger_1_3"
+        ]
       }
     }
   },
   "schemes": [
     "https"
   ],
-  "swagger": "2.0"
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "New API added \"Anonymous Talk\"",
+      "name": "pandorabots_api_swagger_1_3"
+    }
+  ]
 }

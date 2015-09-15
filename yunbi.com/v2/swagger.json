@@ -52,7 +52,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get details of specific deposit."
+        "summary": "Get details of specific deposit.",
+        "tags": [
+          "deposit"
+        ]
       }
     },
     "/v2/deposit_address.json": {
@@ -96,7 +99,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Where to deposit. The address field could be empty when a new address is generating (e.g. for bitcoin), you should try again later in that case."
+        "summary": "Where to deposit. The address field could be empty when a new address is generating (e.g. for bitcoin), you should try again later in that case.",
+        "tags": [
+          "deposit_address"
+        ]
       }
     },
     "/v2/deposits.json": {
@@ -153,7 +159,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get your deposits history."
+        "summary": "Get your deposits history.",
+        "tags": [
+          "deposits"
+        ]
       }
     },
     "/v2/depth.json": {
@@ -183,7 +192,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get depth or specified market. Both asks and bids are sorted from highest price to lowest."
+        "summary": "Get depth or specified market. Both asks and bids are sorted from highest price to lowest.",
+        "tags": [
+          "depth"
+        ]
       }
     },
     "/v2/k.json": {
@@ -227,7 +239,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get OHLC(k line) of specific market."
+        "summary": "Get OHLC(k line) of specific market.",
+        "tags": [
+          "k"
+        ]
       }
     },
     "/v2/k_with_pending_trades.json": {
@@ -278,7 +293,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get K data with pending trades, which are the trades not included in K data yet, because there's delay between trade generated and processed by K data generator."
+        "summary": "Get K data with pending trades, which are the trades not included in K data yet, because there's delay between trade generated and processed by K data generator.",
+        "tags": [
+          "k_with_pending_trades"
+        ]
       }
     },
     "/v2/markets.json": {
@@ -292,7 +310,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get all available markets."
+        "summary": "Get all available markets.",
+        "tags": [
+          "markets"
+        ]
       }
     },
     "/v2/members/me.json": {
@@ -329,7 +350,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get your profile and accounts info."
+        "summary": "Get your profile and accounts info.",
+        "tags": [
+          "members"
+        ]
       }
     },
     "/v2/order.json": {
@@ -373,7 +397,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get information of specified order."
+        "summary": "Get information of specified order.",
+        "tags": [
+          "order"
+        ]
       }
     },
     "/v2/order/delete.json": {
@@ -417,7 +444,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Cancel an order."
+        "summary": "Cancel an order.",
+        "tags": [
+          "order"
+        ]
       }
     },
     "/v2/order_book.json": {
@@ -454,7 +484,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get the order book of specified market."
+        "summary": "Get the order book of specified market.",
+        "tags": [
+          "order_book"
+        ]
       }
     },
     "/v2/orders.json": {
@@ -526,7 +559,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get your orders, results is paginated."
+        "summary": "Get your orders, results is paginated.",
+        "tags": [
+          "orders"
+        ]
       },
       "post": {
         "operationId": "POST--version-orders---format-",
@@ -595,7 +631,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Create a Sell/Buy order."
+        "summary": "Create a Sell/Buy order.",
+        "tags": [
+          "orders"
+        ]
       }
     },
     "/v2/orders/clear.json": {
@@ -639,7 +678,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Cancel all my orders."
+        "summary": "Cancel all my orders.",
+        "tags": [
+          "orders"
+        ]
       }
     },
     "/v2/orders/multi.json": {
@@ -719,7 +761,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Create multiple sell/buy orders."
+        "summary": "Create multiple sell/buy orders.",
+        "tags": [
+          "orders"
+        ]
       }
     },
     "/v2/tickers.json": {
@@ -733,7 +778,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get ticker of all markets."
+        "summary": "Get ticker of all markets.",
+        "tags": [
+          "tickers"
+        ]
       }
     },
     "/v2/tickers/{market}.json": {
@@ -756,7 +804,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get ticker of specific market."
+        "summary": "Get ticker of specific market.",
+        "tags": [
+          "tickers"
+        ]
       }
     },
     "/v2/timestamp.json": {
@@ -770,7 +821,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get server current time, in seconds since Unix epoch."
+        "summary": "Get server current time, in seconds since Unix epoch.",
+        "tags": [
+          "timestamp"
+        ]
       }
     },
     "/v2/trades.json": {
@@ -828,7 +882,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get recent trades on market, each trade is included only once. Trades are sorted in reverse creation order."
+        "summary": "Get recent trades on market, each trade is included only once. Trades are sorted in reverse creation order.",
+        "tags": [
+          "trades"
+        ]
       }
     },
     "/v2/trades/my.json": {
@@ -907,12 +964,59 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Get your executed trades. Trades are sorted in reverse creation order."
+        "summary": "Get your executed trades. Trades are sorted in reverse creation order.",
+        "tags": [
+          "trades"
+        ]
       }
     }
   },
   "schemes": [
     "https"
   ],
-  "swagger": "2.0"
+  "swagger": "2.0",
+  "tags": [
+    {
+      "name": "markets"
+    },
+    {
+      "name": "tickers"
+    },
+    {
+      "name": "members"
+    },
+    {
+      "name": "deposits"
+    },
+    {
+      "name": "deposit"
+    },
+    {
+      "name": "deposit_address"
+    },
+    {
+      "name": "orders"
+    },
+    {
+      "name": "order"
+    },
+    {
+      "name": "order_book"
+    },
+    {
+      "name": "depth"
+    },
+    {
+      "name": "trades"
+    },
+    {
+      "name": "timestamp"
+    },
+    {
+      "name": "k"
+    },
+    {
+      "name": "k_with_pending_trades"
+    }
+  ]
 }

@@ -443,7 +443,10 @@
             "description": "Result deleted due to a new data release"
           }
         },
-        "summary": "Downloads those identifiers found for a given analysis and a certain resource"
+        "summary": "Downloads those identifiers found for a given analysis and a certain resource",
+        "tags": [
+          "download"
+        ]
       }
     },
     "/download/{token}/entities/notfound/{filename}.csv": {
@@ -485,7 +488,10 @@
             "description": "Result deleted due to a new data release"
           }
         },
-        "summary": "Downloads a list of the not found identifiers"
+        "summary": "Downloads a list of the not found identifiers",
+        "tags": [
+          "download"
+        ]
       }
     },
     "/download/{token}/pathways/{resource}/{filename}.csv": {
@@ -545,7 +551,10 @@
             "description": "Result deleted due to a new data release"
           }
         },
-        "summary": "Downloads all hit pathways for a given analysis"
+        "summary": "Downloads all hit pathways for a given analysis",
+        "tags": [
+          "download"
+        ]
       }
     },
     "/identifier/{id}": {
@@ -649,7 +658,10 @@
             "description": "Not Found"
           }
         },
-        "summary": "Analyse the identifier over the different species in the database"
+        "summary": "Analyse the identifier over the different species in the database",
+        "tags": [
+          "identifier"
+        ]
       }
     },
     "/identifier/{id}/projection": {
@@ -753,7 +765,10 @@
             "description": "Not Found"
           }
         },
-        "summary": "Analyse the identifier over the different species in the database and projects the result to Homo Sapiens"
+        "summary": "Analyse the identifier over the different species in the database and projects the result to Homo Sapiens",
+        "tags": [
+          "identifier"
+        ]
       }
     },
     "/identifiers/": {
@@ -856,7 +871,10 @@
             "description": "Bad request"
           }
         },
-        "summary": "Analyse the post identifiers over the different species"
+        "summary": "Analyse the post identifiers over the different species",
+        "tags": [
+          "identifiers"
+        ]
       }
     },
     "/identifiers/form": {
@@ -960,7 +978,10 @@
             "description": "Unsupported Media Type (only 'text/plain')"
           }
         },
-        "summary": "Analyse the identifiers in the file over the different species"
+        "summary": "Analyse the identifiers in the file over the different species",
+        "tags": [
+          "identifiers"
+        ]
       }
     },
     "/identifiers/form/projection": {
@@ -1064,7 +1085,10 @@
             "description": "Unsupported Media Type (only 'text/plain')"
           }
         },
-        "summary": "Analyse the identifiers in the file over the different species and projects the result to Homo Sapiens"
+        "summary": "Analyse the identifiers in the file over the different species and projects the result to Homo Sapiens",
+        "tags": [
+          "identifiers"
+        ]
       }
     },
     "/identifiers/projection": {
@@ -1167,7 +1191,10 @@
             "description": "Bad request"
           }
         },
-        "summary": "Analyse the post identifiers over the different species and projects the result to Homo Sapiens"
+        "summary": "Analyse the post identifiers over the different species and projects the result to Homo Sapiens",
+        "tags": [
+          "identifiers"
+        ]
       }
     },
     "/identifiers/url": {
@@ -1276,7 +1303,10 @@
             "description": "The provided URL is not processable"
           }
         },
-        "summary": "Analyse the identifiers contained in the provided url over the different species"
+        "summary": "Analyse the identifiers contained in the provided url over the different species",
+        "tags": [
+          "identifiers"
+        ]
       }
     },
     "/identifiers/url/projection": {
@@ -1385,7 +1415,10 @@
             "description": "The provided URL is not processable"
           }
         },
-        "summary": "Analyse the identifiers contained in the provided url over the different species and projects the result to Homo Sapiens"
+        "summary": "Analyse the identifiers contained in the provided url over the different species and projects the result to Homo Sapiens",
+        "tags": [
+          "identifiers"
+        ]
       }
     },
     "/species/homoSapiens/{species}": {
@@ -1484,7 +1517,10 @@
             "description": "Species identifier does not match with any of the species in the current data"
           }
         },
-        "summary": "Compares Homo sapiens to the specified species"
+        "summary": "Compares Homo sapiens to the specified species",
+        "tags": [
+          "species"
+        ]
       }
     },
     "/token/{token}": {
@@ -1588,7 +1624,10 @@
             "description": "Result deleted due to a new data release"
           }
         },
-        "summary": "Returns the result associated with the token"
+        "summary": "Returns the result associated with the token",
+        "tags": [
+          "token"
+        ]
       }
     },
     "/token/{token}/filter/pathways": {
@@ -1655,7 +1694,10 @@
             "description": "Result deleted due to a new data release"
           }
         },
-        "summary": "Returns the result for the pathway ids sent by post (when they are present in the original result)"
+        "summary": "Returns the result for the pathway ids sent by post (when they are present in the original result)",
+        "tags": [
+          "token"
+        ]
       }
     },
     "/token/{token}/filter/species/{species}": {
@@ -1718,7 +1760,10 @@
             "description": "Result deleted due to a new data release"
           }
         },
-        "summary": "Filters the result by species"
+        "summary": "Filters the result by species",
+        "tags": [
+          "token"
+        ]
       }
     },
     "/token/{token}/notFound": {
@@ -1776,7 +1821,10 @@
             "description": "Result deleted due to a new data release"
           }
         },
-        "summary": "Returns a list of the identifiers not found for a given token"
+        "summary": "Returns a list of the identifiers not found for a given token",
+        "tags": [
+          "token"
+        ]
       }
     },
     "/token/{token}/page/{pathway}": {
@@ -1880,7 +1928,10 @@
             "description": "Result deleted due to a new data release"
           }
         },
-        "summary": "Returns the page where the corresponding pathway is taking into account the passed parameters"
+        "summary": "Returns the page where the corresponding pathway is taking into account the passed parameters",
+        "tags": [
+          "token"
+        ]
       }
     },
     "/token/{token}/reactions/pathways": {
@@ -1946,7 +1997,10 @@
             "description": "Result deleted due to a new data release"
           }
         },
-        "summary": "Returns the reaction ids of the pathway ids sent by post that are present in the original result"
+        "summary": "Returns the reaction ids of the pathway ids sent by post that are present in the original result",
+        "tags": [
+          "token"
+        ]
       }
     },
     "/token/{token}/reactions/{pathway}": {
@@ -2011,7 +2065,10 @@
             "description": "Result deleted due to a new data release"
           }
         },
-        "summary": "Returns the reaction ids of the provided pathway id that are present in the original result"
+        "summary": "Returns the reaction ids of the provided pathway id that are present in the original result",
+        "tags": [
+          "token"
+        ]
       }
     },
     "/token/{token}/resources": {
@@ -2051,7 +2108,10 @@
             "description": "Result deleted due to a new data release"
           }
         },
-        "summary": "Returns the resources summary associated with the token"
+        "summary": "Returns the resources summary associated with the token",
+        "tags": [
+          "token"
+        ]
       }
     },
     "/token/{token}/summary/{pathway}": {
@@ -2132,12 +2192,37 @@
             "description": "Result deleted due to a new data release"
           }
         },
-        "summary": "Returns a summary of the contained identifiers for a pathway in the result for a given token"
+        "summary": "Returns a summary of the contained identifiers for a pathway in the result for a given token",
+        "tags": [
+          "token"
+        ]
       }
     }
   },
   "schemes": [
     "http"
   ],
-  "swagger": "2.0"
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "download",
+      "name": "download"
+    },
+    {
+      "description": "identifier",
+      "name": "identifier"
+    },
+    {
+      "description": "identifiers",
+      "name": "identifiers"
+    },
+    {
+      "description": "species",
+      "name": "species"
+    },
+    {
+      "description": "token",
+      "name": "token"
+    }
+  ]
 }

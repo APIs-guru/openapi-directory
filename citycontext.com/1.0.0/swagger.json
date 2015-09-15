@@ -110,7 +110,10 @@
             }
           }
         },
-        "summary": "Query by coordinates (SRID 4326 - decimal degrees)"
+        "summary": "Query by coordinates (SRID 4326 - decimal degrees)",
+        "tags": [
+          "citycontext"
+        ]
       }
     },
     "/postcodes/{postcode}": {
@@ -143,12 +146,21 @@
             }
           }
         },
-        "summary": "Query by postcode"
+        "summary": "Query by postcode",
+        "tags": [
+          "citycontext"
+        ]
       }
     }
   },
   "schemes": [
     "http"
   ],
-  "swagger": "2.0"
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Core City Context API",
+      "name": "citycontext"
+    }
+  ]
 }

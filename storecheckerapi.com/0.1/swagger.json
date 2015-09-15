@@ -39,7 +39,10 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Determines if the site is an e-commerce site. An e-commerce site is a site that some underlying feature about it."
+        "summary": "Determines if the site is an e-commerce site. An e-commerce site is a site that some underlying feature about it.",
+        "tags": [
+          "is_ecommerce_store"
+        ]
       }
     },
     "/v1/ping.json": {
@@ -54,12 +57,23 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Returns whether the system is up."
+        "summary": "Returns whether the system is up.",
+        "tags": [
+          "ping"
+        ]
       }
     }
   },
   "schemes": [
     "http"
   ],
-  "swagger": "2.0"
+  "swagger": "2.0",
+  "tags": [
+    {
+      "name": "ping"
+    },
+    {
+      "name": "is_ecommerce_store"
+    }
+  ]
 }
