@@ -34,3 +34,6 @@ If you have API spec in any format(Swagger, RAML, WADL, ...) for any public API,
 Integration with 3rd-party services
 --------------------------
 You can use our [REST API](API.md)
+
+Existing integrations:
+ - https://any-api.com - Documentation and Test Consoles for Public APIs
