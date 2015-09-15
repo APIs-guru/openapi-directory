@@ -1516,6 +1516,1128 @@
       },
       "type": "object"
     },
+    "Order": {
+      "properties": {
+        "acknowledged": {
+          "description": "Whether the order was acknowledged.",
+          "type": "boolean"
+        },
+        "customer": {
+          "$ref": "#/definitions/OrderCustomer",
+          "description": "The details of the customer who placed the order."
+        },
+        "deliveryDetails": {
+          "$ref": "#/definitions/OrderDeliveryDetails",
+          "description": "The details for the delivery."
+        },
+        "id": {
+          "description": "The REST id of the order. Globally unique.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "content#order",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#order\".",
+          "type": "string"
+        },
+        "lineItems": {
+          "description": "Line items that are ordered.",
+          "items": {
+            "$ref": "#/definitions/OrderLineItem"
+          },
+          "type": "array"
+        },
+        "merchantId": {
+          "format": "uint64",
+          "type": "string"
+        },
+        "merchantOrderId": {
+          "description": "Merchant-provided id of the order.",
+          "type": "string"
+        },
+        "netAmount": {
+          "$ref": "#/definitions/Price",
+          "description": "The net amount for the order. For example, if an order was originally for a grand total of $100 and a refund was issued for $20, the net amount will be $80."
+        },
+        "paymentMethod": {
+          "$ref": "#/definitions/OrderPaymentMethod",
+          "description": "The details of the payment method."
+        },
+        "paymentStatus": {
+          "description": "The status of the payment.",
+          "type": "string"
+        },
+        "placedDate": {
+          "description": "The date when the order was placed, in ISO 8601 format.",
+          "type": "string"
+        },
+        "refunds": {
+          "description": "Refunds for the order.",
+          "items": {
+            "$ref": "#/definitions/OrderRefund"
+          },
+          "type": "array"
+        },
+        "shipments": {
+          "description": "Shipments of the order.",
+          "items": {
+            "$ref": "#/definitions/OrderShipment"
+          },
+          "type": "array"
+        },
+        "shippingCost": {
+          "$ref": "#/definitions/Price",
+          "description": "The total cost of shipping for all items."
+        },
+        "shippingCostTax": {
+          "$ref": "#/definitions/Price",
+          "description": "The tax for the total shipping cost."
+        },
+        "shippingOption": {
+          "description": "The requested shipping option.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the order.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrderAddress": {
+      "properties": {
+        "country": {
+          "description": "CLDR country code (e.g. \"US\").",
+          "type": "string"
+        },
+        "fullAddress": {
+          "description": "Strings representing the lines of the printed label for mailing the order, for example:\nJohn Smith\n1600 Amphitheatre Parkway\nMountain View, CA, 94043\nUnited States",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "isPostOfficeBox": {
+          "description": "Whether the address is a post office box.",
+          "type": "boolean"
+        },
+        "locality": {
+          "description": "City, town or commune. May also include dependent localities or sublocalities (e.g. neighborhoods or suburbs).",
+          "type": "string"
+        },
+        "postalCode": {
+          "description": "Postal Code or ZIP (e.g. \"94043\").",
+          "type": "string"
+        },
+        "recipientName": {
+          "description": "Name of the recipient.",
+          "type": "string"
+        },
+        "region": {
+          "description": "Top-level administrative subdivision of the country (e.g. \"CA\").",
+          "type": "string"
+        },
+        "streetAddress": {
+          "description": "Street-level part of the address.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "OrderCancellation": {
+      "properties": {
+        "actor": {
+          "description": "The actor that created the cancellation.",
+          "type": "string"
+        },
+        "creationDate": {
+          "description": "Date on which the cancellation has been created, in ISO 8601 format.",
+          "type": "string"
+        },
+        "quantity": {
+          "description": "The quantity that was canceled.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "reason": {
+          "description": "The reason for the cancellation.",
+          "type": "string"
+        },
+        "reasonText": {
+          "description": "The explanation of the reason.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrderCustomer": {
+      "properties": {
+        "email": {
+          "description": "Email address of the customer.",
+          "type": "string"
+        },
+        "explicitMarketingPreference": {
+          "description": "If set, this indicates the user had a choice to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the Purchases on Google checkout flow.",
+          "type": "boolean"
+        },
+        "fullName": {
+          "description": "Full name of the customer.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrderDeliveryDetails": {
+      "properties": {
+        "address": {
+          "$ref": "#/definitions/OrderAddress",
+          "description": "The delivery address"
+        },
+        "phoneNumber": {
+          "description": "The phone number of the person receiving the delivery.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrderLineItem": {
+      "properties": {
+        "cancellations": {
+          "description": "Cancellations of the line item.",
+          "items": {
+            "$ref": "#/definitions/OrderCancellation"
+          },
+          "type": "array"
+        },
+        "id": {
+          "description": "The id of the line item.",
+          "type": "string"
+        },
+        "price": {
+          "$ref": "#/definitions/Price",
+          "description": "Total price for the line item. For example, if two items for $10 are purchased, the total price will be $20."
+        },
+        "product": {
+          "$ref": "#/definitions/OrderLineItemProduct",
+          "description": "Product data from the time of the order placement."
+        },
+        "quantityCanceled": {
+          "description": "Number of items canceled.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "quantityDelivered": {
+          "description": "Number of items delivered.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "quantityOrdered": {
+          "description": "Number of items ordered.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "quantityPending": {
+          "description": "Number of items pending.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "quantityReturned": {
+          "description": "Number of items returned.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "quantityShipped": {
+          "description": "Number of items shipped.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "returnInfo": {
+          "$ref": "#/definitions/OrderLineItemReturnInfo",
+          "description": "Details of the return policy for the line item."
+        },
+        "returns": {
+          "description": "Returns of the line item.",
+          "items": {
+            "$ref": "#/definitions/OrderReturn"
+          },
+          "type": "array"
+        },
+        "shippingDetails": {
+          "$ref": "#/definitions/OrderLineItemShippingDetails",
+          "description": "Details of the requested shipping for the line item."
+        },
+        "tax": {
+          "$ref": "#/definitions/Price",
+          "description": "Total tax amount for the line item. For example, if two items are purchased, and each have a cost tax of $2, the total tax amount will be $4."
+        }
+      },
+      "type": "object"
+    },
+    "OrderLineItemProduct": {
+      "properties": {
+        "brand": {
+          "description": "Brand of the item.",
+          "type": "string"
+        },
+        "channel": {
+          "description": "The item's channel (online or local).",
+          "type": "string"
+        },
+        "condition": {
+          "description": "Condition or state of the item.",
+          "type": "string"
+        },
+        "contentLanguage": {
+          "description": "The two-letter ISO 639-1 language code for the item.",
+          "type": "string"
+        },
+        "gtin": {
+          "description": "Global Trade Item Number (GTIN) of the item.",
+          "type": "string"
+        },
+        "id": {
+          "description": "The REST id of the product.",
+          "type": "string"
+        },
+        "imageLink": {
+          "description": "URL of an image of the item.",
+          "type": "string"
+        },
+        "itemGroupId": {
+          "description": "Shared identifier for all variants of the same product.",
+          "type": "string"
+        },
+        "mpn": {
+          "description": "Manufacturer Part Number (MPN) of the item.",
+          "type": "string"
+        },
+        "offerId": {
+          "description": "An identifier of the item.",
+          "type": "string"
+        },
+        "price": {
+          "$ref": "#/definitions/Price",
+          "description": "Price of the item."
+        },
+        "shownImage": {
+          "description": "URL to the cached image shown to the user when order was placed.",
+          "type": "string"
+        },
+        "targetCountry": {
+          "description": "The CLDR territory code of the target country of the product.",
+          "type": "string"
+        },
+        "title": {
+          "description": "The title of the product.",
+          "type": "string"
+        },
+        "variantAttributes": {
+          "description": "Variant attributes for the item. These are dimensions of the product, such as color, gender, material, pattern, and size. You can find a comprehensive list of variant attributes here.",
+          "items": {
+            "$ref": "#/definitions/OrderLineItemProductVariantAttribute"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "OrderLineItemProductVariantAttribute": {
+      "properties": {
+        "dimension": {
+          "description": "The dimension of the variant.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value for the dimension.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrderLineItemReturnInfo": {
+      "properties": {
+        "daysToReturn": {
+          "description": "How many days later the item can be returned.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "isReturnable": {
+          "description": "Whether the item is returnable.",
+          "type": "boolean"
+        },
+        "policyUrl": {
+          "description": "URL of the item return policy.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrderLineItemShippingDetails": {
+      "properties": {
+        "deliverByDate": {
+          "description": "The delivery by date, in ISO 8601 format.",
+          "type": "string"
+        },
+        "method": {
+          "$ref": "#/definitions/OrderLineItemShippingDetailsMethod",
+          "description": "Details of the shipping method."
+        },
+        "shipByDate": {
+          "description": "The ship by date, in ISO 8601 format.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrderLineItemShippingDetailsMethod": {
+      "properties": {
+        "carrier": {
+          "description": "The carrier for the shipping. Optional.",
+          "type": "string"
+        },
+        "maxDaysInTransit": {
+          "description": "Maximum transit time.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "methodName": {
+          "description": "The name of the shipping method.",
+          "type": "string"
+        },
+        "minDaysInTransit": {
+          "description": "Minimum transit time.",
+          "format": "uint32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "OrderPaymentMethod": {
+      "properties": {
+        "billingAddress": {
+          "$ref": "#/definitions/OrderAddress",
+          "description": "The billing address."
+        },
+        "expirationMonth": {
+          "description": "The card expiration month (January = 1, February = 2 etc.).",
+          "format": "int32",
+          "type": "integer"
+        },
+        "expirationYear": {
+          "description": "The card expiration year (4-digit, e.g. 2015).",
+          "format": "int32",
+          "type": "integer"
+        },
+        "lastFourDigits": {
+          "description": "The last four digits of the card number.",
+          "type": "string"
+        },
+        "phoneNumber": {
+          "description": "The billing phone number.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of instrument (VISA, Mastercard, etc).",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrderRefund": {
+      "properties": {
+        "actor": {
+          "description": "The actor that created the refund.",
+          "type": "string"
+        },
+        "amount": {
+          "$ref": "#/definitions/Price",
+          "description": "The amount that is refunded."
+        },
+        "creationDate": {
+          "description": "Date on which the item has been created, in ISO 8601 format.",
+          "type": "string"
+        },
+        "reason": {
+          "description": "The reason for the refund.",
+          "type": "string"
+        },
+        "reasonText": {
+          "description": "The explanation of the reason.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrderReturn": {
+      "properties": {
+        "actor": {
+          "description": "The actor that created the refund.",
+          "type": "string"
+        },
+        "creationDate": {
+          "description": "Date on which the item has been created, in ISO 8601 format.",
+          "type": "string"
+        },
+        "quantity": {
+          "description": "Quantity that is returned.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "reason": {
+          "description": "The reason for the return.",
+          "type": "string"
+        },
+        "reasonText": {
+          "description": "The explanation of the reason.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrderShipment": {
+      "properties": {
+        "carrier": {
+          "description": "The carrier handling the shipment.",
+          "type": "string"
+        },
+        "creationDate": {
+          "description": "Date on which the shipment has been created, in ISO 8601 format.",
+          "type": "string"
+        },
+        "deliveryDate": {
+          "description": "Date on which the shipment has been delivered, in ISO 8601 format. Present only if status is delievered",
+          "type": "string"
+        },
+        "id": {
+          "description": "The id of the shipment.",
+          "type": "string"
+        },
+        "lineItems": {
+          "description": "The line items that are shipped.",
+          "items": {
+            "$ref": "#/definitions/OrderShipmentLineItemShipment"
+          },
+          "type": "array"
+        },
+        "status": {
+          "description": "The status of the shipment.",
+          "type": "string"
+        },
+        "trackingId": {
+          "description": "The tracking id for the shipment.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrderShipmentLineItemShipment": {
+      "properties": {
+        "lineItemId": {
+          "description": "The id of the line item that is shipped.",
+          "type": "string"
+        },
+        "quantity": {
+          "description": "The quantity that is shipped.",
+          "format": "uint32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersAcknowledgeRequest": {
+      "properties": {
+        "operationId": {
+          "description": "The ID of the operation. Unique across all operations for a given order.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersAcknowledgeResponse": {
+      "properties": {
+        "executionStatus": {
+          "description": "The status of the execution.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "content#ordersAcknowledgeResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#ordersAcknowledgeResponse\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersAdvanceTestOrderResponse": {
+      "properties": {
+        "kind": {
+          "default": "content#ordersAdvanceTestOrderResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#ordersAdvanceTestOrderResponse\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersCancelLineItemRequest": {
+      "properties": {
+        "lineItemId": {
+          "description": "The ID of the line item to cancel.",
+          "type": "string"
+        },
+        "operationId": {
+          "description": "The ID of the operation. Unique across all operations for a given order.",
+          "type": "string"
+        },
+        "quantity": {
+          "description": "The quantity to cancel.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "reason": {
+          "description": "The reason for the cancellation.",
+          "type": "string"
+        },
+        "reasonText": {
+          "description": "The explanation of the reason.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersCancelLineItemResponse": {
+      "properties": {
+        "executionStatus": {
+          "description": "The status of the execution.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "content#ordersCancelLineItemResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#ordersCancelLineItemResponse\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersCancelRequest": {
+      "properties": {
+        "operationId": {
+          "description": "The ID of the operation. Unique across all operations for a given order.",
+          "type": "string"
+        },
+        "reason": {
+          "description": "The reason for the cancellation.",
+          "type": "string"
+        },
+        "reasonText": {
+          "description": "The explanation of the reason.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersCancelResponse": {
+      "properties": {
+        "executionStatus": {
+          "description": "The status of the execution.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "content#ordersCancelResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#ordersCancelResponse\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersCreateTestOrderRequest": {
+      "properties": {
+        "templateName": {
+          "description": "The test order template to use. Specify as an alternative to testOrder as a shortcut for retrieving a template and then creating an order using that template.",
+          "type": "string"
+        },
+        "testOrder": {
+          "$ref": "#/definitions/TestOrder",
+          "description": "The test order to create."
+        }
+      },
+      "type": "object"
+    },
+    "OrdersCreateTestOrderResponse": {
+      "properties": {
+        "kind": {
+          "default": "content#ordersCreateTestOrderResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#ordersCreateTestOrderResponse\".",
+          "type": "string"
+        },
+        "orderId": {
+          "description": "The ID of the newly created test order.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersCustomBatchRequest": {
+      "properties": {
+        "entries": {
+          "description": "The request entries to be processed in the batch.",
+          "items": {
+            "$ref": "#/definitions/OrdersCustomBatchRequestEntry"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersCustomBatchRequestEntry": {
+      "properties": {
+        "batchId": {
+          "description": "An entry ID, unique within the batch request.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "cancel": {
+          "$ref": "#/definitions/OrdersCustomBatchRequestEntryCancel",
+          "description": "Required for cancel method."
+        },
+        "cancelLineItem": {
+          "$ref": "#/definitions/OrdersCustomBatchRequestEntryCancelLineItem",
+          "description": "Required for cancelLineItem method."
+        },
+        "merchantId": {
+          "description": "The ID of the managing account.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "merchantOrderId": {
+          "description": "The merchant order id. Required for updateMerchantOrderId and getByMerchantOrderId methods.",
+          "type": "string"
+        },
+        "method": {
+          "description": "The method to apply.",
+          "type": "string"
+        },
+        "operationId": {
+          "description": "The ID of the operation. Unique across all operations for a given order. Required for all methods beside get and getByMerchantOrderId.",
+          "type": "string"
+        },
+        "orderId": {
+          "description": "The ID of the order. Required for all methods beside getByMerchantOrderId.",
+          "type": "string"
+        },
+        "refund": {
+          "$ref": "#/definitions/OrdersCustomBatchRequestEntryRefund",
+          "description": "Required for refund method."
+        },
+        "returnLineItem": {
+          "$ref": "#/definitions/OrdersCustomBatchRequestEntryReturnLineItem",
+          "description": "Required for returnLineItem method."
+        },
+        "shipLineItems": {
+          "$ref": "#/definitions/OrdersCustomBatchRequestEntryShipLineItems",
+          "description": "Required for shipLineItems method."
+        },
+        "updateShipment": {
+          "$ref": "#/definitions/OrdersCustomBatchRequestEntryUpdateShipment",
+          "description": "Required for updateShipment method."
+        }
+      },
+      "type": "object"
+    },
+    "OrdersCustomBatchRequestEntryCancel": {
+      "properties": {
+        "reason": {
+          "description": "The reason for the cancellation.",
+          "type": "string"
+        },
+        "reasonText": {
+          "description": "The explanation of the reason.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersCustomBatchRequestEntryCancelLineItem": {
+      "properties": {
+        "lineItemId": {
+          "description": "The ID of the line item to cancel.",
+          "type": "string"
+        },
+        "quantity": {
+          "description": "The quantity to cancel.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "reason": {
+          "description": "The reason for the cancellation.",
+          "type": "string"
+        },
+        "reasonText": {
+          "description": "The explanation of the reason.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersCustomBatchRequestEntryRefund": {
+      "properties": {
+        "amount": {
+          "$ref": "#/definitions/Price",
+          "description": "The amount that is refunded."
+        },
+        "reason": {
+          "description": "The reason for the refund.",
+          "type": "string"
+        },
+        "reasonText": {
+          "description": "The explanation of the reason.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersCustomBatchRequestEntryReturnLineItem": {
+      "properties": {
+        "lineItemId": {
+          "description": "The ID of the line item to return.",
+          "type": "string"
+        },
+        "quantity": {
+          "description": "The quantity to return.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "reason": {
+          "description": "The reason for the return.",
+          "type": "string"
+        },
+        "reasonText": {
+          "description": "The explanation of the reason.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersCustomBatchRequestEntryShipLineItems": {
+      "properties": {
+        "carrier": {
+          "description": "The carrier handling the shipment.",
+          "type": "string"
+        },
+        "lineItems": {
+          "description": "Line items to ship.",
+          "items": {
+            "$ref": "#/definitions/OrderShipmentLineItemShipment"
+          },
+          "type": "array"
+        },
+        "shipmentId": {
+          "description": "The ID of the shipment.",
+          "type": "string"
+        },
+        "trackingId": {
+          "description": "The tracking id for the shipment.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersCustomBatchRequestEntryUpdateShipment": {
+      "properties": {
+        "carrier": {
+          "description": "The carrier handling the shipment. Not updated if missing.",
+          "type": "string"
+        },
+        "shipmentId": {
+          "description": "The ID of the shipment.",
+          "type": "string"
+        },
+        "status": {
+          "description": "New status for the shipment. Not updated if missing.",
+          "type": "string"
+        },
+        "trackingId": {
+          "description": "The tracking id for the shipment. Not updated if missing.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersCustomBatchResponse": {
+      "properties": {
+        "entries": {
+          "description": "The result of the execution of the batch requests.",
+          "items": {
+            "$ref": "#/definitions/OrdersCustomBatchResponseEntry"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "content#ordersCustomBatchResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#ordersCustomBatchResponse\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersCustomBatchResponseEntry": {
+      "properties": {
+        "batchId": {
+          "description": "The ID of the request entry this entry responds to.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "errors": {
+          "$ref": "#/definitions/Errors",
+          "description": "A list of errors defined if and only if the request failed."
+        },
+        "executionStatus": {
+          "description": "The status of the execution. Only defined if the method is not get or getByMerchantOrderId and if the request was successful.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "content#ordersCustomBatchResponseEntry",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#ordersCustomBatchResponseEntry\".",
+          "type": "string"
+        },
+        "order": {
+          "$ref": "#/definitions/Order",
+          "description": "The retrieved order. Only defined if the method is get and if the request was successful."
+        }
+      },
+      "type": "object"
+    },
+    "OrdersGetByMerchantOrderIdResponse": {
+      "properties": {
+        "kind": {
+          "default": "content#ordersGetByMerchantOrderIdResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#ordersGetByMerchantOrderIdResponse\".",
+          "type": "string"
+        },
+        "order": {
+          "$ref": "#/definitions/Order",
+          "description": "The requested order."
+        }
+      },
+      "type": "object"
+    },
+    "OrdersGetTestOrderTemplateResponse": {
+      "properties": {
+        "kind": {
+          "default": "content#ordersGetTestOrderTemplateResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#ordersGetTestOrderTemplateResponse\".",
+          "type": "string"
+        },
+        "template": {
+          "$ref": "#/definitions/TestOrder",
+          "description": "The requested test order template."
+        }
+      },
+      "type": "object"
+    },
+    "OrdersListResponse": {
+      "properties": {
+        "kind": {
+          "default": "content#ordersListResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#ordersListResponse\".",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "The token for the retrieval of the next page of orders.",
+          "type": "string"
+        },
+        "resources": {
+          "items": {
+            "$ref": "#/definitions/Order"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersRefundRequest": {
+      "properties": {
+        "amount": {
+          "$ref": "#/definitions/Price",
+          "description": "The amount that is refunded."
+        },
+        "operationId": {
+          "description": "The ID of the operation. Unique across all operations for a given order.",
+          "type": "string"
+        },
+        "reason": {
+          "description": "The reason for the refund.",
+          "type": "string"
+        },
+        "reasonText": {
+          "description": "The explanation of the reason.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersRefundResponse": {
+      "properties": {
+        "executionStatus": {
+          "description": "The status of the execution.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "content#ordersRefundResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#ordersRefundResponse\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersReturnLineItemRequest": {
+      "properties": {
+        "lineItemId": {
+          "description": "The ID of the line item to return.",
+          "type": "string"
+        },
+        "operationId": {
+          "description": "The ID of the operation. Unique across all operations for a given order.",
+          "type": "string"
+        },
+        "quantity": {
+          "description": "The quantity to return.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "reason": {
+          "description": "The reason for the return.",
+          "type": "string"
+        },
+        "reasonText": {
+          "description": "The explanation of the reason.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersReturnLineItemResponse": {
+      "properties": {
+        "executionStatus": {
+          "description": "The status of the execution.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "content#ordersReturnLineItemResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#ordersReturnLineItemResponse\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersShipLineItemsRequest": {
+      "properties": {
+        "carrier": {
+          "description": "The carrier handling the shipment.",
+          "type": "string"
+        },
+        "lineItems": {
+          "description": "Line items to ship.",
+          "items": {
+            "$ref": "#/definitions/OrderShipmentLineItemShipment"
+          },
+          "type": "array"
+        },
+        "operationId": {
+          "description": "The ID of the operation. Unique across all operations for a given order.",
+          "type": "string"
+        },
+        "shipmentId": {
+          "description": "The ID of the shipment.",
+          "type": "string"
+        },
+        "trackingId": {
+          "description": "The tracking id for the shipment.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersShipLineItemsResponse": {
+      "properties": {
+        "executionStatus": {
+          "description": "The status of the execution.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "content#ordersShipLineItemsResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#ordersShipLineItemsResponse\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersUpdateMerchantOrderIdRequest": {
+      "properties": {
+        "merchantOrderId": {
+          "description": "The merchant order id to be assigned to the order. Must be unique per merchant.",
+          "type": "string"
+        },
+        "operationId": {
+          "description": "The ID of the operation. Unique across all operations for a given order.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersUpdateMerchantOrderIdResponse": {
+      "properties": {
+        "executionStatus": {
+          "description": "The status of the execution.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "content#ordersUpdateMerchantOrderIdResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#ordersUpdateMerchantOrderIdResponse\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersUpdateShipmentRequest": {
+      "properties": {
+        "carrier": {
+          "description": "The carrier handling the shipment. Not updated if missing.",
+          "type": "string"
+        },
+        "operationId": {
+          "description": "The ID of the operation. Unique across all operations for a given order.",
+          "type": "string"
+        },
+        "shipmentId": {
+          "description": "The ID of the shipment.",
+          "type": "string"
+        },
+        "status": {
+          "description": "New status for the shipment. Not updated if missing.",
+          "type": "string"
+        },
+        "trackingId": {
+          "description": "The tracking id for the shipment. Not updated if missing.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrdersUpdateShipmentResponse": {
+      "properties": {
+        "executionStatus": {
+          "description": "The status of the execution.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "content#ordersUpdateShipmentResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#ordersUpdateShipmentResponse\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Price": {
       "properties": {
         "currency": {
@@ -2356,6 +3478,177 @@
       },
       "type": "object"
     },
+    "TestOrder": {
+      "properties": {
+        "customer": {
+          "$ref": "#/definitions/TestOrderCustomer",
+          "description": "The details of the customer who placed the order."
+        },
+        "kind": {
+          "default": "content#testOrder",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#testOrder\".",
+          "type": "string"
+        },
+        "lineItems": {
+          "description": "Line items that are ordered. At least one line item must be provided.",
+          "items": {
+            "$ref": "#/definitions/TestOrderLineItem"
+          },
+          "type": "array"
+        },
+        "paymentMethod": {
+          "$ref": "#/definitions/TestOrderPaymentMethod",
+          "description": "The details of the payment method."
+        },
+        "predefinedDeliveryAddress": {
+          "description": "Identifier of one of the predefined delivery addresses for the delivery.",
+          "type": "string"
+        },
+        "shippingCost": {
+          "$ref": "#/definitions/Price",
+          "description": "The total cost of shipping for all items."
+        },
+        "shippingCostTax": {
+          "$ref": "#/definitions/Price",
+          "description": "The tax for the total shipping cost."
+        },
+        "shippingOption": {
+          "description": "The requested shipping option.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TestOrderCustomer": {
+      "properties": {
+        "email": {
+          "description": "Email address of the customer.",
+          "type": "string"
+        },
+        "explicitMarketingPreference": {
+          "description": "If set, this indicates the user had a choice to opt in or out of providing marketing rights to the merchant. If unset, this indicates the user has already made this choice in a previous purchase, and was thus not shown the marketing right opt in/out checkbox during the Purchases on Google checkout flow. Optional.",
+          "type": "boolean"
+        },
+        "fullName": {
+          "description": "Full name of the customer.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TestOrderLineItem": {
+      "properties": {
+        "product": {
+          "$ref": "#/definitions/TestOrderLineItemProduct",
+          "description": "Product data from the time of the order placement."
+        },
+        "quantityOrdered": {
+          "description": "Number of items ordered.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "returnInfo": {
+          "$ref": "#/definitions/OrderLineItemReturnInfo",
+          "description": "Details of the return policy for the line item."
+        },
+        "shippingDetails": {
+          "$ref": "#/definitions/OrderLineItemShippingDetails",
+          "description": "Details of the requested shipping for the line item."
+        },
+        "unitTax": {
+          "$ref": "#/definitions/Price",
+          "description": "Unit tax for the line item."
+        }
+      },
+      "type": "object"
+    },
+    "TestOrderLineItemProduct": {
+      "properties": {
+        "brand": {
+          "description": "Brand of the item.",
+          "type": "string"
+        },
+        "channel": {
+          "description": "The item's channel.",
+          "type": "string"
+        },
+        "condition": {
+          "description": "Condition or state of the item.",
+          "type": "string"
+        },
+        "contentLanguage": {
+          "description": "The two-letter ISO 639-1 language code for the item.",
+          "type": "string"
+        },
+        "gtin": {
+          "description": "Global Trade Item Number (GTIN) of the item. Optional.",
+          "type": "string"
+        },
+        "imageLink": {
+          "description": "URL of an image of the item.",
+          "type": "string"
+        },
+        "itemGroupId": {
+          "description": "Shared identifier for all variants of the same product. Optional.",
+          "type": "string"
+        },
+        "mpn": {
+          "description": "Manufacturer Part Number (MPN) of the item. Optional.",
+          "type": "string"
+        },
+        "offerId": {
+          "description": "An identifier of the item.",
+          "type": "string"
+        },
+        "price": {
+          "$ref": "#/definitions/Price",
+          "description": "The price for the product."
+        },
+        "targetCountry": {
+          "description": "The CLDR territory code of the target country of the product.",
+          "type": "string"
+        },
+        "title": {
+          "description": "The title of the product.",
+          "type": "string"
+        },
+        "variantAttributes": {
+          "description": "Variant attributes for the item. Optional.",
+          "items": {
+            "$ref": "#/definitions/OrderLineItemProductVariantAttribute"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "TestOrderPaymentMethod": {
+      "properties": {
+        "expirationMonth": {
+          "description": "The card expiration month (January = 1, February = 2 etc.).",
+          "format": "int32",
+          "type": "integer"
+        },
+        "expirationYear": {
+          "description": "The card expiration year (4-digit, e.g. 2015).",
+          "format": "int32",
+          "type": "integer"
+        },
+        "lastFourDigits": {
+          "description": "The last four digits of the card number.",
+          "type": "string"
+        },
+        "predefinedBillingAddress": {
+          "description": "The billing address.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of instrument. Note that real orders might have different values than the four values accepted by createTestOrder.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Weight": {
       "properties": {
         "unit": {
@@ -2905,6 +4198,62 @@
         ],
         "tags": [
           "inventory"
+        ]
+      }
+    },
+    "/orders/batch": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Retrieves or modifies multiple orders in a single request.",
+        "operationId": "content.orders.custombatch",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/OrdersCustomBatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OrdersCustomBatchResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "orders"
         ]
       }
     },
@@ -4462,6 +5811,811 @@
         ]
       }
     },
+    "/{merchantId}/orders": {
+      "get": {
+        "description": "Lists the orders in your Merchant Center account.",
+        "operationId": "content.orders.list",
+        "parameters": [
+          {
+            "description": "The ID of the managing account.",
+            "in": "path",
+            "name": "merchantId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Obtains orders that match the acknowledgement status. When set to true, obtains orders that have been acknowledged. When false, obtains orders that have not been acknowledged.\nWe recommend using this filter set to false, in conjunction with the acknowledge call, such that only un-acknowledged orders are returned.",
+            "in": "query",
+            "name": "acknowledged",
+            "type": "boolean"
+          },
+          {
+            "description": "The maximum number of orders to return in the response, used for paging. The default value is 25 orders per page, and the maximum allowed value is 250 orders per page.\nKnown issue: All List calls will return all Orders without limit regardless of the value of this field.",
+            "in": "query",
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "The ordering of the returned list. The only supported value are placedDate desc and placedDate asc for now, which returns orders sorted by placement date. \"placedDate desc\" stands for listing orders by placement date, from oldest to most recent. \"placedDate asc\" stands for listing orders by placement date, from most recent to oldest. In future releases we'll support other sorting criteria.",
+            "enum": [
+              "placedDate asc",
+              "placedDate desc"
+            ],
+            "in": "query",
+            "name": "orderBy",
+            "type": "string"
+          },
+          {
+            "description": "The token returned by the previous request.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          },
+          {
+            "description": "Obtains orders placed before this date (exclusively), in ISO 8601 format.",
+            "in": "query",
+            "name": "placedDateEnd",
+            "type": "string"
+          },
+          {
+            "description": "Obtains orders placed after this date (inclusively), in ISO 8601 format.",
+            "in": "query",
+            "name": "placedDateStart",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Obtains orders that match any of the specified statuses. Multiple values can be specified with comma separation. Additionally, please note that active is a shortcut for pendingShipment and partiallyShipped, and completed is a shortcut for shipped , partiallyDelivered, delivered, partiallyReturned, returned, and canceled.",
+            "in": "query",
+            "items": {
+              "enum": [
+                "active",
+                "canceled",
+                "completed",
+                "delivered",
+                "inProgress",
+                "partiallyDelivered",
+                "partiallyReturned",
+                "partiallyShipped",
+                "pendingShipment",
+                "returned",
+                "shipped"
+              ],
+              "type": "string"
+            },
+            "name": "statuses",
+            "type": "array"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OrdersListResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "orders"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{merchantId}/orders/{orderId}": {
+      "get": {
+        "description": "Retrieves an order from your Merchant Center account.",
+        "operationId": "content.orders.get",
+        "parameters": [
+          {
+            "description": "The ID of the managing account.",
+            "in": "path",
+            "name": "merchantId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the order.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Order"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "orders"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{merchantId}/orders/{orderId}/acknowledge": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Marks an order as acknowledged.",
+        "operationId": "content.orders.acknowledge",
+        "parameters": [
+          {
+            "description": "The ID of the managing account.",
+            "in": "path",
+            "name": "merchantId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the order.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/OrdersAcknowledgeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OrdersAcknowledgeResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "orders"
+        ]
+      }
+    },
+    "/{merchantId}/orders/{orderId}/cancel": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Cancels all line items in an order.",
+        "operationId": "content.orders.cancel",
+        "parameters": [
+          {
+            "description": "The ID of the managing account.",
+            "in": "path",
+            "name": "merchantId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the order to cancel.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/OrdersCancelRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OrdersCancelResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "orders"
+        ]
+      }
+    },
+    "/{merchantId}/orders/{orderId}/cancelLineItem": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Cancels a line item.",
+        "operationId": "content.orders.cancellineitem",
+        "parameters": [
+          {
+            "description": "The ID of the managing account.",
+            "in": "path",
+            "name": "merchantId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the order.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/OrdersCancelLineItemRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OrdersCancelLineItemResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "orders"
+        ]
+      }
+    },
+    "/{merchantId}/orders/{orderId}/refund": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Refund a portion of the order, up to the full amount paid.",
+        "operationId": "content.orders.refund",
+        "parameters": [
+          {
+            "description": "The ID of the managing account.",
+            "in": "path",
+            "name": "merchantId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the order to refund.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/OrdersRefundRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OrdersRefundResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "orders"
+        ]
+      }
+    },
+    "/{merchantId}/orders/{orderId}/returnLineItem": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Returns a line item.",
+        "operationId": "content.orders.returnlineitem",
+        "parameters": [
+          {
+            "description": "The ID of the managing account.",
+            "in": "path",
+            "name": "merchantId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the order.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/OrdersReturnLineItemRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OrdersReturnLineItemResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "orders"
+        ]
+      }
+    },
+    "/{merchantId}/orders/{orderId}/shipLineItems": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Marks line item(s) as shipped.",
+        "operationId": "content.orders.shiplineitems",
+        "parameters": [
+          {
+            "description": "The ID of the managing account.",
+            "in": "path",
+            "name": "merchantId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the order.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/OrdersShipLineItemsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OrdersShipLineItemsResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "orders"
+        ]
+      }
+    },
+    "/{merchantId}/orders/{orderId}/updateMerchantOrderId": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Updates the merchant order ID for a given order.",
+        "operationId": "content.orders.updatemerchantorderid",
+        "parameters": [
+          {
+            "description": "The ID of the managing account.",
+            "in": "path",
+            "name": "merchantId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the order.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/OrdersUpdateMerchantOrderIdRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OrdersUpdateMerchantOrderIdResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "orders"
+        ]
+      }
+    },
+    "/{merchantId}/orders/{orderId}/updateShipment": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Updates a shipment's status, carrier, and/or tracking ID.",
+        "operationId": "content.orders.updateshipment",
+        "parameters": [
+          {
+            "description": "The ID of the managing account.",
+            "in": "path",
+            "name": "merchantId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the order.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/OrdersUpdateShipmentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OrdersUpdateShipmentResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "orders"
+        ]
+      }
+    },
+    "/{merchantId}/ordersbymerchantid/{merchantOrderId}": {
+      "get": {
+        "description": "Retrieves an order using merchant order id.",
+        "operationId": "content.orders.getbymerchantorderid",
+        "parameters": [
+          {
+            "description": "The ID of the managing account.",
+            "in": "path",
+            "name": "merchantId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The merchant order id to be looked for.",
+            "in": "path",
+            "name": "merchantOrderId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OrdersGetByMerchantOrderIdResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "orders"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/{merchantId}/products": {
       "get": {
         "description": "Lists the products in your Merchant Center account.",
@@ -4691,7 +6845,7 @@
             "type": "string"
           },
           {
-            "description": "The maximum number of product statuses to return in the response, used for paging. The default value is 25 and the maximum allowed value is 250.\nKnown issue: Note that for the time being all List calls will return by default all orders without limit.",
+            "description": "The maximum number of product statuses to return in the response, used for paging.",
             "in": "query",
             "name": "maxResults",
             "type": "integer"
@@ -4783,6 +6937,199 @@
         ],
         "tags": [
           "productstatuses"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{merchantId}/testorders": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Sandbox only. Creates a test order.",
+        "operationId": "content.orders.createtestorder",
+        "parameters": [
+          {
+            "description": "The ID of the managing account.",
+            "in": "path",
+            "name": "merchantId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/OrdersCreateTestOrderRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OrdersCreateTestOrderResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "orders"
+        ]
+      }
+    },
+    "/{merchantId}/testorders/{orderId}/advance": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Sandbox only. Moves a test order from state \"inProgress\" to state \"pendingShipment\".",
+        "operationId": "content.orders.advancetestorder",
+        "parameters": [
+          {
+            "description": "The ID of the managing account.",
+            "in": "path",
+            "name": "merchantId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The ID of the test order to modify.",
+            "in": "path",
+            "name": "orderId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OrdersAdvanceTestOrderResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "orders"
+        ]
+      }
+    },
+    "/{merchantId}/testordertemplates/{templateName}": {
+      "get": {
+        "description": "Sandbox only. Retrieves an order template that can be used to quickly create a new order in sandbox.",
+        "operationId": "content.orders.gettestordertemplate",
+        "parameters": [
+          {
+            "description": "The ID of the managing account.",
+            "in": "path",
+            "name": "merchantId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The name of the template to retrieve.",
+            "enum": [
+              "template1",
+              "template2"
+            ],
+            "in": "path",
+            "name": "templateName",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OrdersGetTestOrderTemplateResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "orders"
         ]
       },
       "parameters": [

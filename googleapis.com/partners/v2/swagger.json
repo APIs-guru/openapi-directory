@@ -151,7 +151,7 @@
       "type": "object"
     },
     "CreateLeadRequest": {
-      "description": "Request message for [CreateLead][google.partners.v2.Partner.CreateLead].",
+      "description": "Request message for CreateLead.",
       "properties": {
         "lead": {
           "$ref": "#/definitions/Lead",
@@ -169,7 +169,7 @@
       "type": "object"
     },
     "CreateLeadResponse": {
-      "description": "Response message for [CreateLead][google.partners.v2.Partner.CreateLead]. Debug information about this request.",
+      "description": "Response message for CreateLead. Debug information about this request.",
       "properties": {
         "lead": {
           "$ref": "#/definitions/Lead",
@@ -268,7 +268,7 @@
       "type": "object"
     },
     "GetCompanyResponse": {
-      "description": "Response message for [GetCompany][google.partners.v2.Partner.GetCompany].",
+      "description": "Response message for GetCompany.",
       "properties": {
         "company": {
           "$ref": "#/definitions/Company",
@@ -357,7 +357,7 @@
       "type": "object"
     },
     "ListCompaniesResponse": {
-      "description": "Response message for [ListCompanies][google.partners.v2.Partner.ListCompanies].",
+      "description": "Response message for ListCompanies.",
       "properties": {
         "companies": {
           "description": "The list of companies.",
@@ -367,7 +367,7 @@
           "type": "array"
         },
         "nextPageToken": {
-          "description": "A token to retrieve next page of results. Pass this value in the `ListCompaniesRequest.page_token` field in the subsequent call to [ListCompanies][google.partners.v2.Partner.ListCompanies] to retrieve the next page of results.",
+          "description": "A token to retrieve next page of results. Pass this value in the `ListCompaniesRequest.page_token` field in the subsequent call to ListCompanies to retrieve the next page of results.",
           "type": "string"
         },
         "responseMetadata": {
@@ -378,7 +378,7 @@
       "type": "object"
     },
     "ListUserStatesResponse": {
-      "description": "Response message for [ListUserStates][google.partners.v2.ClientAuditor.ListUserStates].",
+      "description": "Response message for ListUserStates.",
       "properties": {
         "responseMetadata": {
           "$ref": "#/definitions/ResponseMetadata",
@@ -438,7 +438,7 @@
       "type": "object"
     },
     "LogMessageRequest": {
-      "description": "Request message for [LogClientMessage][google.partners.v2.ClientAuditor.LogClientMessage].",
+      "description": "Request message for LogClientMessage.",
       "properties": {
         "clientInfo": {
           "additionalProperties": {
@@ -470,7 +470,7 @@
       "type": "object"
     },
     "LogMessageResponse": {
-      "description": "Response message for [LogClientMessage][google.partners.v2.ClientAuditor.LogClientMessage].",
+      "description": "Response message for LogClientMessage.",
       "properties": {
         "responseMetadata": {
           "$ref": "#/definitions/ResponseMetadata",
@@ -480,7 +480,7 @@
       "type": "object"
     },
     "LogUserEventRequest": {
-      "description": "Request message for [LogUserEvent][google.partners.v2.ClientAuditor.LogUserEvent].",
+      "description": "Request message for LogUserEvent.",
       "properties": {
         "eventAction": {
           "description": "The action that occurred.",
@@ -696,7 +696,7 @@
       "type": "object"
     },
     "LogUserEventResponse": {
-      "description": "Response message for [LogUserEvent][google.partners.v2.ClientAuditor.LogUserEvent].",
+      "description": "Response message for LogUserEvent.",
       "properties": {
         "responseMetadata": {
           "$ref": "#/definitions/ResponseMetadata",
@@ -1079,7 +1079,7 @@
             "type": "integer"
           },
           {
-            "description": "A token identifying a page of results that the server returns. Typically, this is the value of `ListCompaniesResponse.next_page_token` returned from the previous call to [ListCompanies][google.partners.v2.Partner.ListCompanies].",
+            "description": "A token identifying a page of results that the server returns. Typically, this is the value of `ListCompaniesResponse.next_page_token` returned from the previous call to ListCompanies.",
             "in": "query",
             "name": "pageToken",
             "type": "string"

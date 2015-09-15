@@ -359,7 +359,7 @@
           "type": "string"
         },
         "variantAttributes": {
-          "description": "Variant attributes for the item. These are dimensions of the product, like like color, gender, material, pattern, and size. See the comprehensive list of variant attributes here.",
+          "description": "Variant attributes for the item. These are dimensions of the product, such as color, gender, material, pattern, and size. You can find a comprehensive list of variant attributes here.",
           "items": {
             "$ref": "#/definitions/OrderLineItemProductVariantAttribute"
           },
@@ -1194,6 +1194,10 @@
           },
           "type": "array"
         },
+        "paymentMethod": {
+          "$ref": "#/definitions/TestOrderPaymentMethod",
+          "description": "The details of the payment method."
+        },
         "predefinedDeliveryAddress": {
           "description": "Identifier of one of the predefined delivery addresses for the delivery.",
           "type": "string"
@@ -1278,6 +1282,14 @@
           "description": "Global Trade Item Number (GTIN) of the item. Optional.",
           "type": "string"
         },
+        "imageLink": {
+          "description": "URL of an image of the item.",
+          "type": "string"
+        },
+        "itemGroupId": {
+          "description": "Shared identifier for all variants of the same product. Optional.",
+          "type": "string"
+        },
         "mpn": {
           "description": "Manufacturer Part Number (MPN) of the item. Optional.",
           "type": "string"
@@ -1304,6 +1316,33 @@
             "$ref": "#/definitions/OrderLineItemProductVariantAttribute"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "TestOrderPaymentMethod": {
+      "properties": {
+        "expirationMonth": {
+          "description": "The card expiration month (January = 1, February = 2 etc.).",
+          "format": "int32",
+          "type": "integer"
+        },
+        "expirationYear": {
+          "description": "The card expiration year (4-digit, e.g. 2015).",
+          "format": "int32",
+          "type": "integer"
+        },
+        "lastFourDigits": {
+          "description": "The last four digits of the card number.",
+          "type": "string"
+        },
+        "predefinedBillingAddress": {
+          "description": "The billing address.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of instrument. Note that real orders might have different values than the four values accepted by createTestOrder.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -1450,19 +1489,23 @@
             "type": "string"
           },
           {
-            "description": "Obtains orders that match the acknowledgement status. When set to true, obtains orders that have been acknowledged. When false, obtains orders that have not been acknowledged. We recommend using this filter set to true, in conjunction with the acknowledge call, such that orders that have already been ingested in the merchant's Order Management System, are not returned in future list calls.",
+            "description": "Obtains orders that match the acknowledgement status. When set to true, obtains orders that have been acknowledged. When false, obtains orders that have not been acknowledged.\nWe recommend using this filter set to false, in conjunction with the acknowledge call, such that only un-acknowledged orders are returned.",
             "in": "query",
             "name": "acknowledged",
             "type": "boolean"
           },
           {
-            "description": "The maximum number of orders to return in the response, used for paging.",
+            "description": "The maximum number of orders to return in the response, used for paging. The default value is 25 orders per page, and the maximum allowed value is 250 orders per page.\nKnown issue: All List calls will return all Orders without limit regardless of the value of this field.",
             "in": "query",
             "name": "maxResults",
             "type": "integer"
           },
           {
-            "description": "The ordering of the returned list. The only supported value is placedDate desc for now, which returns orders sorted by placement date, in descending order (oldest first). In future releases we'll support other sorting criteria and direction.",
+            "description": "The ordering of the returned list. The only supported value are placedDate desc and placedDate asc for now, which returns orders sorted by placement date. \"placedDate desc\" stands for listing orders by placement date, from oldest to most recent. \"placedDate asc\" stands for listing orders by placement date, from most recent to oldest. In future releases we'll support other sorting criteria.",
+            "enum": [
+              "placedDate asc",
+              "placedDate desc"
+            ],
             "in": "query",
             "name": "orderBy",
             "type": "string"
@@ -1487,7 +1530,7 @@
           },
           {
             "collectionFormat": "multi",
-            "description": "Obtains orders that match any of the specified statuses. Multiple values can be specified using comma as a separator. Additionally, please note that active is a shortcut for pendingShipment, partiallyShipped and completed is a shortcut for shipped , partiallyDelivered, delivered, partiallyReturned, returned, and canceled.",
+            "description": "Obtains orders that match any of the specified statuses. Multiple values can be specified with comma separation. Additionally, please note that active is a shortcut for pendingShipment and partiallyShipped, and completed is a shortcut for shipped , partiallyDelivered, delivered, partiallyReturned, returned, and canceled.",
             "in": "query",
             "items": {
               "enum": [

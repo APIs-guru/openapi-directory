@@ -468,14 +468,14 @@
       }
     },
     "/api/rest/v1/contacts/{contactId}": {
-      "get": {
+      "delete": {
         "consumes": [
           "application/json",
           "application/xml"
         ],
         "deprecated": false,
-        "description": "Returns details for a single contact",
-        "operationId": "get",
+        "description": "Deletes a  contact",
+        "operationId": "delete",
         "parameters": [
           {
             "description": "contactId",
@@ -492,22 +492,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/WebServiceContact"
-            }
+            "description": "Description was not specified"
+          },
+          "204": {
+            "description": "No Content"
           },
           "401": {
             "description": "Unauthorized"
           },
           "403": {
             "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
           }
         },
-        "summary": "get",
+        "summary": "delete",
         "tags": [
           "contacts"
         ]
@@ -896,41 +893,24 @@
       }
     },
     "/api/rest/v1/sms/send": {
-      "post": {
+      "get": {
         "consumes": [
           "application/json",
           "application/xml"
         ],
         "deprecated": false,
-        "description": "Sends a single message. The <i>recipientNumber</i> and <i>message</i> fields are required. All other fields are optional.",
+        "description": "Returns an example of the data to POST to send a single message.",
         "operationId": "send",
-        "parameters": [
-          {
-            "description": "request",
-            "in": "body",
-            "name": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/WebServiceSendSmsRequest"
-            }
-          }
-        ],
         "produces": [
           "application/json",
           "application/xml"
         ],
         "responses": {
           "200": {
-            "description": "Description was not specified",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/WebServiceSendSmsResponse"
+              "$ref": "#/definitions/WebServiceSendSmsRequest"
             }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "400": {
-            "description": "Validation error</br></br>Code and message:<ul><li>2 - Invalid mobile number</li><li>3 - Message cannot be empty</li></ul>"
           },
           "401": {
             "description": "Unauthorized"
@@ -949,38 +929,24 @@
       }
     },
     "/api/rest/v1/sms/send-bulk": {
-      "post": {
+      "get": {
         "consumes": [
           "application/json",
           "application/xml"
         ],
         "deprecated": false,
-        "description": "Send multiple messages in one transaction.",
+        "description": "Returns an example of the data to POST to send multiple messages in one transaction.",
         "operationId": "sendBulk",
-        "parameters": [
-          {
-            "description": "requests",
-            "in": "body",
-            "name": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/WebServiceSendSmsRequests"
-            }
-          }
-        ],
         "produces": [
           "application/json",
           "application/xml"
         ],
         "responses": {
           "200": {
-            "description": "Description was not specified",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/WebServiceSendSmsResponses"
+              "$ref": "#/definitions/WebServiceSendSmsRequests"
             }
-          },
-          "201": {
-            "description": "Created"
           },
           "401": {
             "description": "Unauthorized"
