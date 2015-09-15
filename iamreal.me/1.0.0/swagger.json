@@ -167,7 +167,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Description was not specified"
+            "description": "Description was not specified",
+            "schema": {
+              "$ref": "#/definitions/SmsValidationResponse"
+            }
           },
           "400": {
             "description": "Description was not specified"
@@ -299,7 +302,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Description was not specified"
+            "description": "Description was not specified",
+            "schema": {
+              "$ref": "#/definitions/UserValidationResponse"
+            }
           },
           "400": {
             "description": "Description was not specified"

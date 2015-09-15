@@ -1,7 +1,7 @@
 {
   "basePath": "/",
   "definitions": {
-    "ChoiceModel": {
+    "Choice": {
       "properties": {
         "id": {
           "enum": [
@@ -18,9 +18,10 @@
       "required": [
         "id",
         "label"
-      ]
+      ],
+      "type": "object"
     },
-    "ConditionModel": {
+    "Condition": {
       "properties": {
         "acuteness": {
           "enum": [
@@ -70,13 +71,14 @@
         }
       },
       "required": [
+        "categories",
         "id",
         "name",
-        "sex_filter",
-        "categories"
-      ]
+        "sex_filter"
+      ],
+      "type": "object"
     },
-    "ConditionProbabilityModel": {
+    "ConditionProbability": {
       "properties": {
         "id": {
           "description": "condition id",
@@ -95,9 +97,10 @@
         "id",
         "name",
         "probability"
-      ]
+      ],
+      "type": "object"
     },
-    "DatabaseInfoModel": {
+    "DatabaseInfo": {
       "properties": {
         "conditions_count": {
           "format": "int32",
@@ -113,12 +116,13 @@
         }
       },
       "required": [
-        "updated_at",
         "conditions_count",
-        "observations_count"
-      ]
+        "observations_count",
+        "updated_at"
+      ],
+      "type": "object"
     },
-    "DiagnosisRequestModel": {
+    "DiagnosisRequest": {
       "properties": {
         "age": {
           "format": "int32",
@@ -130,11 +134,14 @@
         },
         "evidence": {
           "items": {
-            "$ref": "#/definitions/EvidenceModel"
+            "$ref": "#/definitions/Evidence"
           },
           "type": "array"
         },
         "extras": {
+          "additionalProperties": {
+            "type": "object"
+          },
           "type": "object"
         },
         "pursued": {
@@ -153,27 +160,32 @@
         }
       },
       "required": [
-        "sex",
-        "age"
-      ]
+        "age",
+        "sex"
+      ],
+      "type": "object"
     },
-    "DiagnosisResponseModel": {
+    "DiagnosisResponse": {
       "properties": {
         "conditions": {
           "items": {
-            "$ref": "#/definitions/ConditionProbabilityModel"
+            "$ref": "#/definitions/ConditionProbability"
           },
           "type": "array"
         },
         "extras": {
+          "additionalProperties": {
+            "type": "object"
+          },
           "type": "object"
         },
         "question": {
-          "$ref": "#/definitions/QuestionModel"
+          "$ref": "#/definitions/Question"
         }
-      }
+      },
+      "type": "object"
     },
-    "EvidenceModel": {
+    "Evidence": {
       "properties": {
         "choice_id": {
           "enum": [
@@ -193,11 +205,12 @@
         }
       },
       "required": [
-        "id",
-        "choice_id"
-      ]
+        "choice_id",
+        "id"
+      ],
+      "type": "object"
     },
-    "ObservationModel": {
+    "Observation": {
       "properties": {
         "category": {
           "type": "string"
@@ -248,38 +261,15 @@
         "id",
         "name",
         "sex_filter"
-      ]
+      ],
+      "type": "object"
     },
-    "QuestionItemModel": {
-      "properties": {
-        "choices": {
-          "description": "list of available answer choices",
-          "items": {
-            "$ref": "#/definitions/ChoiceModel"
-          },
-          "type": "array"
-        },
-        "id": {
-          "description": "observation id",
-          "type": "string"
-        },
-        "name": {
-          "description": "name or alias of observation",
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "name",
-        "choices"
-      ]
-    },
-    "QuestionModel": {
+    "Question": {
       "properties": {
         "items": {
           "description": "one or more observations to evaluate",
           "items": {
-            "$ref": "#/definitions/QuestionItemModel"
+            "$ref": "#/definitions/QuestionItem"
           },
           "type": "array"
         },
@@ -297,11 +287,37 @@
         }
       },
       "required": [
-        "text",
-        "items"
-      ]
+        "items",
+        "text"
+      ],
+      "type": "object"
     },
-    "RiskFactorModel": {
+    "QuestionItem": {
+      "properties": {
+        "choices": {
+          "description": "list of available answer choices",
+          "items": {
+            "$ref": "#/definitions/Choice"
+          },
+          "type": "array"
+        },
+        "id": {
+          "description": "observation id",
+          "type": "string"
+        },
+        "name": {
+          "description": "name or alias of observation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "choices",
+        "id",
+        "name"
+      ],
+      "type": "object"
+    },
+    "RiskFactor": {
       "properties": {
         "id": {
           "type": "string"
@@ -313,17 +329,18 @@
       "required": [
         "id",
         "name"
-      ]
+      ],
+      "type": "object"
     }
   },
   "host": "api.infermedica.com",
   "info": {
-    "title": "api.infermedica.com",
+    "title": "Infermedica API",
     "version": "v1",
     "x-origin": {
       "format": "swagger",
-      "url": "https://api.infermedica.com/api-docs",
-      "version": "1.2"
+      "url": "https://api.infermedica.com/swagger.json",
+      "version": "2.0"
     },
     "x-providerName": "infermedica.com"
   },
@@ -332,15 +349,16 @@
       "get": {
         "description": "Returns a list of all available conditions.",
         "operationId": "getAllConditions",
+        "parameters": [],
         "produces": [
           "application/json"
         ],
         "responses": {
           "200": {
-            "description": "No response was specified",
+            "description": "successful operation",
             "schema": {
               "items": {
-                "$ref": "#/definitions/ConditionModel"
+                "$ref": "#/definitions/Condition"
               },
               "type": "array"
             }
@@ -370,9 +388,9 @@
         ],
         "responses": {
           "200": {
-            "description": "No response was specified",
+            "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/ConditionModel"
+              "$ref": "#/definitions/Condition"
             }
           },
           "400": {
@@ -401,7 +419,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DiagnosisRequestModel"
+              "$ref": "#/definitions/DiagnosisRequest"
             }
           }
         ],
@@ -410,9 +428,9 @@
         ],
         "responses": {
           "200": {
-            "description": "No response was specified",
+            "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/DiagnosisResponseModel"
+              "$ref": "#/definitions/DiagnosisResponse"
             }
           }
         },
@@ -426,14 +444,15 @@
       "get": {
         "description": "Returns information about data used by diagnostic engine.",
         "operationId": "getDatabaseInfo",
+        "parameters": [],
         "produces": [
           "application/json"
         ],
         "responses": {
           "200": {
-            "description": "No response was specified",
+            "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/DatabaseInfoModel"
+              "$ref": "#/definitions/DatabaseInfo"
             }
           }
         },
@@ -472,9 +491,9 @@
         ],
         "responses": {
           "200": {
-            "description": "No response was specified",
+            "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/ObservationModel"
+              "$ref": "#/definitions/Observation"
             }
           },
           "400": {
@@ -494,15 +513,16 @@
       "get": {
         "description": "Returns a list of all available observations.",
         "operationId": "getAllObservations",
+        "parameters": [],
         "produces": [
           "application/json"
         ],
         "responses": {
           "200": {
-            "description": "No response was specified",
+            "description": "successful operation",
             "schema": {
               "items": {
-                "$ref": "#/definitions/ObservationModel"
+                "$ref": "#/definitions/Observation"
               },
               "type": "array"
             }
@@ -532,9 +552,9 @@
         ],
         "responses": {
           "200": {
-            "description": "No response was specified",
+            "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/ObservationModel"
+              "$ref": "#/definitions/Observation"
             }
           },
           "400": {
@@ -554,15 +574,16 @@
       "get": {
         "description": "Returns a list of all available risk factors.",
         "operationId": "getAllRiskFactors",
+        "parameters": [],
         "produces": [
           "application/json"
         ],
         "responses": {
           "200": {
-            "description": "No response was specified",
+            "description": "successful operation",
             "schema": {
               "items": {
-                "$ref": "#/definitions/RiskFactorModel"
+                "$ref": "#/definitions/RiskFactor"
               },
               "type": "array"
             }
@@ -592,9 +613,9 @@
         ],
         "responses": {
           "200": {
-            "description": "No response was specified",
+            "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/RiskFactorModel"
+              "$ref": "#/definitions/RiskFactor"
             }
           },
           "400": {
@@ -617,28 +638,22 @@
   "swagger": "2.0",
   "tags": [
     {
-      "description": "Dictionary lookup",
-      "name": "lookup"
-    },
-    {
-      "description": "Model information",
-      "name": "info"
-    },
-    {
-      "description": "Observations",
-      "name": "observations"
-    },
-    {
-      "description": "Conditions",
-      "name": "conditions"
-    },
-    {
-      "description": "Risk factors",
       "name": "risk_factors"
     },
     {
-      "description": "Diagnosis",
       "name": "diagnosis"
+    },
+    {
+      "name": "conditions"
+    },
+    {
+      "name": "info"
+    },
+    {
+      "name": "observations"
+    },
+    {
+      "name": "lookup"
     }
   ]
 }
