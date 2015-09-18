@@ -10,6 +10,10 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "sudoer": {
+          "description": "[Output Only] Whether the user has the ability to elevate on the instance that requested the authorized keys.",
+          "type": "boolean"
         }
       },
       "type": "object"
@@ -360,7 +364,7 @@
         },
         "kind": {
           "default": "clouduseraccounts#operation",
-          "description": "[Output Only] Type of the resource. Always compute#Operation for Operation resources.",
+          "description": "[Output Only] Type of the resource. Always compute#operation for Operation resources.",
           "type": "string"
         },
         "name": {
@@ -368,7 +372,7 @@
           "type": "string"
         },
         "operationType": {
-          "description": "[Output Only] Type of the operation, such as insert, update, and delete.",
+          "description": "[Output Only] Type of the operation, such as insert, compute.instanceGroups.update, or compute.instanceGroups.delete.",
           "type": "string"
         },
         "progress": {
@@ -2204,6 +2208,12 @@
             "name": "instance",
             "required": true,
             "type": "string"
+          },
+          {
+            "description": "Whether the view was requested as part of a user-initiated login.",
+            "in": "query",
+            "name": "login",
+            "type": "boolean"
           }
         ],
         "responses": {
