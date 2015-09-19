@@ -1,0 +1,1186 @@
+{
+  "basePath": "/",
+  "definitions": {
+    "Article": {
+      "properties": {
+        "id": {
+          "description": "Id of the item",
+          "type": "number"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "ArticleDownload": {
+      "properties": {
+        "articleId": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "articleId"
+      ]
+    },
+    "ArticleReport": {
+      "properties": {
+        "date": {
+          "description": "Date when the event was happen (Use the format \"yyyy-MM-ddTHH:mm:ss.SSSZ\"",
+          "type": "string"
+        },
+        "maxUsageDuration": {
+          "description": "Maximal onblock duration in seconds (for usage-Event)",
+          "type": "number"
+        },
+        "offline": {
+          "default": false,
+          "description": "Information if the Track was listend offline (for usage-event) (Default false)",
+          "type": "boolean"
+        },
+        "realm": {
+          "default": "app",
+          "description": "Realm/Client of the event (Default app)",
+          "enum": [
+            "app",
+            "web"
+          ],
+          "type": "string"
+        },
+        "source": {
+          "description": "Key of the playlist, where this event occurs - Special: MyTracks for personal Playlist",
+          "type": "string"
+        },
+        "trigger": {
+          "default": "playlist",
+          "description": "Did the user trigger the play of this item (Play, Skip) (for usage-Event) (Default playlist)",
+          "enum": [
+            "user",
+            "playlist"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the status event (downloaded, removed, listened)",
+          "enum": [
+            "downloaded",
+            "removed",
+            "listened"
+          ],
+          "type": "string"
+        },
+        "usageDuration": {
+          "description": "Total duration in seconds (for usage-Event)",
+          "type": "number"
+        }
+      },
+      "required": [
+        "type",
+        "date"
+      ]
+    },
+    "ArticleStreaming": {
+      "properties": {
+        "articleId": {
+          "type": "number"
+        },
+        "preview": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "articleId"
+      ]
+    },
+    "Articles": {
+      "properties": {
+        "ids": {
+          "description": "Ids of the items",
+          "items": {
+            "type": "number"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "ids"
+      ]
+    },
+    "Binary": {
+      "properties": {
+        "encryption": {
+          "description": "used encryption for this song",
+          "type": "string"
+        },
+        "preview": {
+          "type": "boolean"
+        },
+        "ticket": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "Config": {
+      "properties": {
+        "client_template_key": {
+          "description": "Corresponding Client Template Key",
+          "type": "string"
+        },
+        "config_key": {
+          "type": "string"
+        },
+        "lifecycleAPI": {
+          "description": "Endpoint for the Lifecycle Service",
+          "type": "string"
+        },
+        "pages": {
+          "items": {},
+          "type": "array"
+        }
+      }
+    },
+    "CreatedEntityResponse": {
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "DownloadResponse": {
+      "properties": {
+        "articleId": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "articleId"
+      ]
+    },
+    "PersonalPlaylistIds": {
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/definitions/Article"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "PlaylistModel": {
+      "properties": {
+        "coverUrl": {
+          "type": "string"
+        },
+        "entities": {
+          "items": {
+            "$ref": "#/definitions/playlistEntity"
+          },
+          "type": "array"
+        },
+        "playlistDescription": {
+          "type": "string"
+        },
+        "playlistKey": {
+          "type": "string"
+        },
+        "playlistName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "playlistKey",
+        "playlistName"
+      ]
+    },
+    "StreamingLink": {
+      "properties": {
+        "preview": {
+          "type": "boolean"
+        },
+        "ticket": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "StreamingResponse": {
+      "properties": {
+        "articleId": {
+          "type": "number"
+        },
+        "preview": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "articleId"
+      ]
+    },
+    "null": {
+      "properties": {
+        "content": {},
+        "key": {
+          "type": "string"
+        },
+        "pageType": {
+          "type": "string"
+        },
+        "titles": {}
+      },
+      "required": [
+        "key",
+        "pageType"
+      ]
+    },
+    "playlist": {
+      "properties": {
+        "coverUrl": {
+          "type": "string"
+        },
+        "entities": {
+          "items": {
+            "$ref": "#/definitions/playlistEntity"
+          },
+          "type": "array"
+        },
+        "playlistDescription": {
+          "type": "string"
+        },
+        "playlistKey": {
+          "type": "string"
+        },
+        "playlistName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "playlistKey",
+        "playlistName"
+      ]
+    },
+    "playlistEntity": {
+      "properties": {
+        "song": {},
+        "type": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "host": "queen.mondiamedia.com",
+  "info": {
+    "contact": {
+      "email": "Research.and.Development.Music@mondiamedia.com"
+    },
+    "description": "<p>This is the API for building Mondia-Media-Products, like Tops.</p><p>Every call need a valid client or user-token.</p><p><ol><li>Client-Token can be get at our Police-API</li><li>User-Token can be get through a login on a customer specific Life-Cycle-Service</li><li>UseCases regarding Login, Register, Subscribe (incl. Payment) will be done by the Life-Cycle-Service</li></ol></p>",
+    "title": "Queen API",
+    "version": "2.9.10",
+    "x-logo": {
+      "url": "https://queen.mondiamedia.com/swagger/swaggerui/images/mm_developer_schwarz.png"
+    },
+    "x-origin": {
+      "format": "swagger",
+      "url": "https://queen.mondiamedia.com/swagger",
+      "version": "1.2"
+    },
+    "x-providerName": "mondiamedia.com"
+  },
+  "paths": {
+    "/api/v3/mmplaylist/article/download": {
+      "post": {
+        "description": "This call retrieve a download URL for a Article (Preview/Full).<p> Please note, that a Full-Binary is only available with a User-Token.</p>",
+        "operationId": "apiv3mmplaylistarticledownload",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArticleDownload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Binary"
+            }
+          },
+          "201": {
+            "description": "Created"
+          }
+        },
+        "summary": "(Client/User-Token) Get a download URL for a article.",
+        "tags": [
+          "api"
+        ]
+      }
+    },
+    "/api/v3/mmplaylist/article/report/{ticket}": {
+      "post": {
+        "description": "This call store a event for a article, that was downloaded, removed or listened.",
+        "operationId": "apiv3mmplaylistarticlereportticket",
+        "parameters": [
+          {
+            "description": "Ticket of the corresponding download",
+            "in": "path",
+            "name": "ticket",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArticleReport"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/CreatedEntityResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          }
+        },
+        "summary": "(Client/User-Token) Provide a event for a article.",
+        "tags": [
+          "api"
+        ]
+      }
+    },
+    "/api/v3/mmplaylist/article/search": {
+      "get": {
+        "description": "This call search the complete catalogue for this client. Please note, that you need a special client-configuration to use the results of this call for a Preview/Download or a personal playlist.",
+        "operationId": "apiv3mmplaylistarticlesearch",
+        "parameters": [
+          {
+            "description": "query",
+            "in": "query",
+            "name": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "title",
+            "in": "query",
+            "name": "title",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "title of album",
+            "in": "query",
+            "name": "albumTitle",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "artist",
+            "in": "query",
+            "name": "artist",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "genre",
+            "in": "query",
+            "name": "genre",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Universal Product Code",
+            "in": "query",
+            "name": "upc",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "European Article Number",
+            "in": "query",
+            "name": "ean",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Global Release Identifier",
+            "in": "query",
+            "name": "grid",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Rovi Ids (Artist, Song or Release)",
+            "in": "query",
+            "name": "rovi",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "MusicBrainz",
+            "in": "query",
+            "name": "musicbrainz",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Sony Reporting Code",
+            "in": "query",
+            "name": "sony",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "International Standard Recording Code",
+            "in": "query",
+            "name": "isrc",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "default": false,
+            "description": "Exclude Songs from Compilations (Default false)",
+            "in": "query",
+            "name": "excludeCompilations",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "default": false,
+            "description": "Exclude Karaoke Songs (Default false)",
+            "in": "query",
+            "name": "excludeKaraoke",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "default": 0,
+            "description": "zero-based offset the request (Default 0)",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "default": 10,
+            "description": "Number of items to be returned (Default 10)",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "(Client/User-Token) Search complete catalogue.",
+        "tags": [
+          "api"
+        ]
+      }
+    },
+    "/api/v3/mmplaylist/article/streaming": {
+      "post": {
+        "description": "This call retrieve a streaming URL for a Article (Preview/Full).<p> Please note, that a Full-Binary is only available with a User-Token.</p>",
+        "operationId": "apiv3mmplaylistarticlestreaming",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArticleStreaming"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/StreamingLink"
+            }
+          },
+          "201": {
+            "description": "Created"
+          }
+        },
+        "summary": "(Client/User-Token) Get a streaming URL for a article.",
+        "tags": [
+          "api"
+        ]
+      }
+    },
+    "/api/v3/mmplaylist/config": {
+      "get": {
+        "description": "This call retrieve the config for a MMPlaylist product.",
+        "operationId": "apiv3mmplaylistconfig",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/Config"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Valid Client-Token is needed for this call."
+          },
+          "404": {
+            "description": "Not-Found - No MMPlaylist Configuration configured for this Client"
+          }
+        },
+        "summary": "(Client-Token) Get MMPlaylist Config",
+        "tags": [
+          "api"
+        ]
+      }
+    },
+    "/api/v3/mmplaylist/playlist": {
+      "get": {
+        "description": "This call retrieve all available playlists for this client.",
+        "operationId": "apiv3mmplaylistplaylist",
+        "parameters": [
+          {
+            "default": false,
+            "description": "Include Items of the Playlist (Tracks, Collections, AudioBooks) (Default false)",
+            "in": "query",
+            "name": "includeEntities",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "default": false,
+            "description": "Include Items of the Playlist (Chapters, Tracks of a Collection (Default false)",
+            "in": "query",
+            "name": "includeSubEntities",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "default": false,
+            "description": "Keep Items of the Playlist that are not available. Items will be marked as \"notAvailable\": true (Default false)",
+            "in": "query",
+            "name": "keepUnavailableItems",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/playlist"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Valid Client-Token is needed for this call."
+          }
+        },
+        "summary": "(Client-Token) Get all available playlists of a MMPlaylist config.",
+        "tags": [
+          "api"
+        ]
+      }
+    },
+    "/api/v3/mmplaylist/playlist/{playlistKey}": {
+      "get": {
+        "description": "This call retrieve a playlist for a playlistKey.",
+        "operationId": "apiv3mmplaylistplaylistplaylistKey",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "playlistKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": false,
+            "description": "Include Sub-Items of the Playlist (Chapters, Tracks of a Collection (Default false)",
+            "in": "query",
+            "name": "includeSubEntities",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "default": false,
+            "description": "Keep Items of the Playlist that are not available. Items will be marked as \"notAvailable\": true (Default false)",
+            "in": "query",
+            "name": "keepUnavailableItems",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/PlaylistModel"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Valid Client-Token is needed for this call."
+          },
+          "404": {
+            "description": "Not Found - PlaylistKey not found for this client"
+          }
+        },
+        "summary": "(Client-Token) Get a playlist for a given key",
+        "tags": [
+          "api"
+        ]
+      }
+    },
+    "/api/v3/mmplaylist/playlist/{playlistKey}/entities": {
+      "get": {
+        "description": "This call retrieve all a playlist for a given key client.",
+        "operationId": "apiv3mmplaylistplaylistplaylistKeyentities",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "playlistKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": false,
+            "description": "Include Items of the Playlist (Chapters, Tracks of a Collection (Default false)",
+            "in": "query",
+            "name": "includeSubEntities",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "default": false,
+            "description": "Keep Items of the Playlist that are not available. Items will be marked as \"notAvailable\": true (Default false)",
+            "in": "query",
+            "name": "keepUnavailableItems",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/playlistEntity"
+              },
+              "type": "array"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Valid Client-Token is needed for this call."
+          },
+          "404": {
+            "description": "Not Found - PlaylistKey not found for this client"
+          }
+        },
+        "summary": "(Client-Token) Get a playlist for a given key",
+        "tags": [
+          "api"
+        ]
+      }
+    },
+    "/api/v3/mmplaylist/user/playlist": {
+      "put": {
+        "description": "This call put changes of the content (remove, position-change) for a personal playlist for the current user.",
+        "operationId": "apiv3mmplaylistuserplaylist",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PersonalPlaylistIds"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "(User-Token) Put new personal playlist.",
+        "tags": [
+          "api"
+        ]
+      }
+    },
+    "/api/v3/mmplaylist/user/playlist/article": {
+      "post": {
+        "description": "This call post a new article to the personal playlist for the current user.",
+        "operationId": "apiv3mmplaylistuserplaylistarticle",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Article"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "(User-Token) Add a article to the personal playlist",
+        "tags": [
+          "api"
+        ]
+      }
+    },
+    "/api/v3/mmplaylist/user/playlist/article/{id}": {
+      "delete": {
+        "description": "This call remove a new article to the personal playlist for the current user.",
+        "operationId": "apiv3mmplaylistuserplaylistarticleid",
+        "parameters": [
+          {
+            "description": "Id of the item",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "(User-Token) Remove a article to the personal playlist",
+        "tags": [
+          "api"
+        ]
+      }
+    },
+    "/api/v3/mmplaylist/user/playlist/articles": {
+      "post": {
+        "description": "This call post a new articles to the personal playlist for the current user.",
+        "operationId": "apiv3mmplaylistuserplaylistarticles",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Articles"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "(User-Token) Add articles to the personal playlist",
+        "tags": [
+          "api"
+        ]
+      }
+    },
+    "/api/v3/mmplaylist/user/playlist/{playlistKey}": {
+      "post": {
+        "description": "This call post a complete playlist to the personal playlist for the current user.",
+        "operationId": "apiv3mmplaylistuserplaylistplaylistKey",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "playlistKey",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "(User-Token) Add a complete playlist to the personal playlist",
+        "tags": [
+          "api"
+        ]
+      }
+    },
+    "/mmplaylist/article/download": {
+      "post": {
+        "operationId": "mmplaylistarticledownload",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DownloadResponse"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "tags": [
+          "mmplaylist"
+        ]
+      }
+    },
+    "/mmplaylist/article/report/{ticket}": {
+      "post": {
+        "operationId": "mmplaylistarticlereportticket",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ticket",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArticleReport"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "tags": [
+          "mmplaylist"
+        ]
+      }
+    },
+    "/mmplaylist/article/search": {
+      "get": {
+        "operationId": "mmplaylistarticlesearch",
+        "parameters": [
+          {
+            "description": "query",
+            "in": "query",
+            "name": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "title",
+            "in": "query",
+            "name": "title",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "title of album",
+            "in": "query",
+            "name": "albumTitle",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "artist",
+            "in": "query",
+            "name": "artist",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "genre",
+            "in": "query",
+            "name": "genre",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Universal Product Code",
+            "in": "query",
+            "name": "upc",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "European Article Number",
+            "in": "query",
+            "name": "ean",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Global Release Identifier",
+            "in": "query",
+            "name": "grid",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Rovi Ids (Artist, Song or Release)",
+            "in": "query",
+            "name": "rovi",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "MusicBrainz",
+            "in": "query",
+            "name": "musicbrainz",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Sony Reporting Code",
+            "in": "query",
+            "name": "sony",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "International Standard Recording Code",
+            "in": "query",
+            "name": "isrc",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "default": false,
+            "description": "Exclude Songs from Compilations (Default false)",
+            "in": "query",
+            "name": "excludeCompilations",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "default": false,
+            "description": "Exclude Karaoke Songs (Default false)",
+            "in": "query",
+            "name": "excludeKaraoke",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "default": 0,
+            "description": "zero-based offset the request (Default 0)",
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "default": 10,
+            "description": "Number of items to be returned (Default 10)",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "tags": [
+          "mmplaylist"
+        ]
+      }
+    },
+    "/mmplaylist/article/streaming": {
+      "post": {
+        "operationId": "mmplaylistarticlestreaming",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StreamingResponse"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "tags": [
+          "mmplaylist"
+        ]
+      }
+    },
+    "/mmplaylist/config": {
+      "get": {
+        "operationId": "mmplaylistconfig",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "tags": [
+          "mmplaylist"
+        ]
+      }
+    },
+    "/mmplaylist/playlist": {
+      "head": {
+        "operationId": "mmplaylistplaylist",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "tags": [
+          "mmplaylist"
+        ]
+      }
+    },
+    "/mmplaylist/playlist/{playlistKey}": {
+      "get": {
+        "operationId": "mmplaylistplaylistplaylistKey",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "playlistKey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": false,
+            "description": "null (Default false)",
+            "in": "query",
+            "name": "keepUnavailableItems",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "tags": [
+          "mmplaylist"
+        ]
+      }
+    },
+    "/mmplaylist/user/playlist": {
+      "put": {
+        "operationId": "mmplaylistuserplaylist",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PersonalPlaylistIds"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "tags": [
+          "mmplaylist"
+        ]
+      }
+    },
+    "/mmplaylist/user/playlist/article": {
+      "post": {
+        "operationId": "mmplaylistuserplaylistarticle",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "Body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Article"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "tags": [
+          "mmplaylist"
+        ]
+      }
+    },
+    "/mmplaylist/user/playlist/article/{id}": {
+      "delete": {
+        "operationId": "mmplaylistuserplaylistarticleid",
+        "parameters": [
+          {
+            "description": "Id of the item",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "tags": [
+          "mmplaylist"
+        ]
+      }
+    },
+    "/mmplaylist/user/playlist/{playlistKey}": {
+      "post": {
+        "operationId": "mmplaylistuserplaylistplaylistKey",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "playlistKey",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "tags": [
+          "mmplaylist"
+        ]
+      }
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "MMPlaylist Application",
+      "name": "mmplaylist"
+    },
+    {
+      "description": "MMPlaylist Application - Next Generation",
+      "name": "api"
+    }
+  ]
+}
