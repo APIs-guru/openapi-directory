@@ -81,7 +81,12 @@ function urlsCollection() {
 function updateCollection(dir) {
   var specs = getSpecs(dir);
   async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
-    writeSpec(getOriginUrl(swagger), getSpecType(swagger), function (error, result) {
+    var exPatch = {info: {}};
+    var serviceName = getServiceName(swagger);
+    if (serviceName)
+      exPatch.info['x-serviceName'] = serviceName;
+
+    writeSpec(getOriginUrl(swagger), getSpecType(swagger), exPatch, function (error, result) {
       if (error)
         return logError(error, result);
 
@@ -174,7 +179,7 @@ function validateCollection() {
 }
 
 function addToCollection(type, url, command) {
-  writeSpec(url, type, function (error, result) {
+  writeSpec(url, type, {}, function (error, result) {
     if (!error && !command.fixup)
       return;
 
@@ -272,7 +277,7 @@ function updateGoogle() {
         return;
       }
 
-      writeSpec(url, 'google', function (error, result) {
+      writeSpec(url, 'google', {}, function (error, result) {
         if (error)
           return logError(error, result);
         mergePatch(result.swagger, addPath);
@@ -287,7 +292,7 @@ function mergePatch(swagger, addPatch) {
   saveJson(path, patch);
 }
 
-function writeSpec(url, type, callback) {
+function writeSpec(url, type, exPatch, callback) {
   console.log(url);
 
   converter.getSpec(url, type, function (err, spec) {
@@ -302,7 +307,7 @@ function writeSpec(url, type, callback) {
       if (error)
         return callback(error, result);
 
-      patchSwagger(swagger);
+      patchSwagger(swagger, exPatch);
       result.swagger = swagger;
 
       validateSwagger(swagger, function (errors, warnings) {
@@ -385,7 +390,9 @@ function getSpecs(dir) {
   }, {});
 }
 
-function patchSwagger(swagger) {
+function patchSwagger(swagger, exPatch) {
+  jsonPatch.apply(swagger, exPatch);
+
   var patch = null;
   var pathComponents = getPathComponents(swagger);
 
