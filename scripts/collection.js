@@ -290,7 +290,9 @@ function mergePatch(swagger, addPatch) {
 function writeSpec(url, type, callback) {
   console.log(url);
 
-  getOriginSpec(url, type, function (spec) {
+  converter.getSpec(url, type, function (err, spec) {
+    assert(!err, err);
+
     convertToSwagger(spec, function (error, swagger) {
       var result = {
         spec: spec,
@@ -381,13 +383,6 @@ function getSpecs(dir) {
   return _.transform(files, function (result, filename) {
     result[filename] = readJson(filename);
   }, {});
-}
-
-function getOriginSpec(url, format, callback) {
-  converter.getSpec(url, format, function (err, spec) {
-    assert(!err, err);
-    callback(spec);
-  });
 }
 
 function patchSwagger(swagger) {
