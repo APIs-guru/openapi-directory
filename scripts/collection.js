@@ -44,6 +44,7 @@ program
 program
   .command('update')
   .description('run update')
+  .arguments('[DIR]')
   .action(updateCollection);
 
 program
@@ -77,8 +78,8 @@ function urlsCollection() {
   });
 }
 
-function updateCollection() {
-  var specs = getSpecs();
+function updateCollection(dir) {
+  var specs = getSpecs(dir);
   async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
     writeSpec(getOriginUrl(swagger), getSpecType(swagger), function (error, result) {
       if (error)
@@ -374,8 +375,9 @@ function validateSwagger(swagger, callback) {
   });
 }
 
-function getSpecs() {
-  var files = glob.sync('**/swagger.json');
+function getSpecs(dir) {
+  dir = dir || '';
+  var files = glob.sync(dir + '**/swagger.json');
   return _.transform(files, function (result, filename) {
     result[filename] = readJson(filename);
   }, {});
