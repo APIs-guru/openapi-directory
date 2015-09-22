@@ -67,6 +67,7 @@ program
   .command('add')
   .description('add new spec')
   .option('-f, --fixup', 'try to fix spec')
+  .option('-s, --service <NAME>', 'supply service name')
   .arguments('<TYPE> <URL>')
   .action(addToCollection);
 
@@ -179,7 +180,11 @@ function validateCollection() {
 }
 
 function addToCollection(type, url, command) {
-  writeSpec(url, type, {}, function (error, result) {
+  var exPatch = {info: {}};
+  if (command.service)
+    exPatch.info['x-serviceName'] = command.service;
+
+  writeSpec(url, type, exPatch, function (error, result) {
     if (!error && !command.fixup)
       return;
 
