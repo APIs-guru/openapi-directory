@@ -1,0 +1,108 @@
+{
+  "definitions": {
+    "Object": {
+      "properties": {},
+      "type": "object"
+    }
+  },
+  "host": "passwordutility.net:80",
+  "info": {
+    "title": "PasswordUtility.Web",
+    "version": "v1",
+    "x-origin": {
+      "format": "swagger",
+      "url": "http://passwordutility.net/swagger/docs/v1",
+      "version": "2.0"
+    },
+    "x-providerName": "passwordutility.net"
+  },
+  "paths": {
+    "/api/password/generate": {
+      "post": {
+        "consumes": [],
+        "deprecated": false,
+        "operationId": "Password_Generate",
+        "parameters": [
+          {
+            "format": "int32",
+            "in": "query",
+            "name": "length",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "query",
+            "name": "upperCase",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "digits",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "in": "query",
+            "name": "specialCharacters",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "tags": [
+          "Password"
+        ]
+      }
+    },
+    "/api/password/validate": {
+      "post": {
+        "consumes": [],
+        "deprecated": false,
+        "operationId": "Password_Validate",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "password",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "tags": [
+          "Password"
+        ]
+      }
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0"
+}
