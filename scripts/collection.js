@@ -124,6 +124,7 @@ function generateAPI(specRootUrl) {
   });
 
   _.each(list, function (api, id) {
+    //FIXME: here we don't track deleted version, not a problem for right now :)
     api.added = _(api.versions).values().pluck('added').min();
     if (_.size(api.versions) === 1)
       api.preferred = _.keys(api.versions)[0];
