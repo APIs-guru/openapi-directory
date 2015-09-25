@@ -1005,6 +1005,7 @@
           "type": "array"
         },
         "largest_downloads": {
+          "description": "Returns hypermedia download links to the largest available size.",
           "items": {
             "$ref": "#/definitions/download"
           },
@@ -2681,7 +2682,7 @@
             }
           },
           "400": {
-            "description": "InvalidPageSize"
+            "description": "ImageIdMustBeSpecified"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -2845,7 +2846,7 @@
             }
           },
           "400": {
-            "description": "InvalidPageSize"
+            "description": "ImageIdMustBeSpecified"
           },
           "401": {
             "description": "AuthorizationTokenRequired"
@@ -3007,7 +3008,7 @@
             }
           },
           "400": {
-            "description": "InvalidPageSize"
+            "description": "ImageIdMustBeSpecified"
           },
           "401": {
             "description": "AuthorizationTokenRequired"

@@ -697,6 +697,29 @@
       }
     },
     "/api/v3/mmplaylist/user/playlist": {
+      "get": {
+        "description": "This call retrieve the personal playlist for the current user.",
+        "operationId": "apiv3mmplaylistuserplaylist",
+        "parameters": [
+          {
+            "default": false,
+            "description": "Include Sub-Items of the Playlist (Chapters, Tracks of a Collection (Default false)",
+            "in": "query",
+            "name": "includeSubEntities",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "(User-Token) Get the personal playlist for the curren user.",
+        "tags": [
+          "api"
+        ]
+      },
       "put": {
         "description": "This call put changes of the content (remove, position-change) for a personal playlist for the current user.",
         "operationId": "apiv3mmplaylistuserplaylist",
@@ -1038,6 +1061,27 @@
       }
     },
     "/mmplaylist/playlist": {
+      "get": {
+        "operationId": "mmplaylistplaylist",
+        "parameters": [
+          {
+            "default": true,
+            "description": "null (Default true)",
+            "in": "query",
+            "name": "includeSongs",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "tags": [
+          "mmplaylist"
+        ]
+      },
       "head": {
         "operationId": "mmplaylistplaylist",
         "responses": {
@@ -1080,6 +1124,17 @@
       }
     },
     "/mmplaylist/user/playlist": {
+      "get": {
+        "operationId": "mmplaylistuserplaylist",
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "tags": [
+          "mmplaylist"
+        ]
+      },
       "put": {
         "operationId": "mmplaylistuserplaylist",
         "parameters": [

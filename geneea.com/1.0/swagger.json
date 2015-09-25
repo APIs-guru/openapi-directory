@@ -375,6 +375,52 @@
         "tags": [
           "s1"
         ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "deprecated": false,
+        "description": "<strong>Notes:</strong><br/>Valid JSON cannot contain newline characters. These have to be escaped. (See also <a href=\"https://geneea.atlassian.net/wiki/display/IPD/The+Interpretor+API+Public+Documentation#TheInterpretorAPIPublicDocumentation-Interactiveonlinedocumentation\" target=\"_blank\">Interpretor documentation</a>)<br/>Fields <code>text</code> and <code>url</code> are mutually exclusive.<br/><strong>Examples:</strong><pre><code>{\"text\": \"Hello world!\"}</code></pre><pre><code>{\"url\": \"https://en.wikipedia.org/wiki/Pyrrhuloxia\"}</code></pre><br/><strong>Possible options:</strong><p class=\"markdown\">An optional parameter <code>diacritize</code> with values <code>yes</code>, <code>no</code> or <code>auto</code> indicate whether the text diacritization will be performed. The default value is <code>auto</code>.</p>",
+        "operationId": "correctionPost",
+        "parameters": [
+          {
+            "description": "request",
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Request"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Description was not specified",
+            "schema": {
+              "$ref": "#/definitions/Response for the text correction"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "Performs text correction (diacritization) on the given document",
+        "tags": [
+          "s1"
+        ]
       }
     },
     "/s1/entities": {
@@ -450,9 +496,128 @@
         "tags": [
           "s1"
         ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "deprecated": false,
+        "description": "<strong>Notes:</strong><br/>Valid JSON cannot contain newline characters. These have to be escaped. (See also <a href=\"https://geneea.atlassian.net/wiki/display/IPD/The+Interpretor+API+Public+Documentation#TheInterpretorAPIPublicDocumentation-Interactiveonlinedocumentation\" target=\"_blank\">Interpretor documentation</a>)<br/>Fields <code>text</code> and <code>url</code> are mutually exclusive.<br/><strong>Examples:</strong><pre><code>{\"text\": \"Hello world!\"}</code></pre><pre><code>{\"url\": \"https://en.wikipedia.org/wiki/Pyrrhuloxia\"}</code></pre>",
+        "operationId": "entitiesPost",
+        "parameters": [
+          {
+            "description": "request",
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Request"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Description was not specified",
+            "schema": {
+              "$ref": "#/definitions/EntitiesResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "Performs named-entity recognition on the given document",
+        "tags": [
+          "s1"
+        ]
       }
     },
     "/s1/lemmatize": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "deprecated": false,
+        "description": "lemmatizeGet",
+        "operationId": "lemmatizeGet",
+        "parameters": [
+          {
+            "description": "raw document text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "document URL",
+            "in": "query",
+            "name": "url",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "document extractor",
+            "enum": [
+              "default",
+              "article",
+              "keep-everything"
+            ],
+            "in": "query",
+            "name": "extractor",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "document language",
+            "in": "query",
+            "name": "language",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "returnTextInfo",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LemmatizeResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "Performs lemmatization on the given document",
+        "tags": [
+          "s1"
+        ]
+      },
       "post": {
         "consumes": [
           "application/json"
@@ -573,9 +738,128 @@
         "tags": [
           "s1"
         ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "deprecated": false,
+        "description": "<strong>Notes:</strong><br/>Valid JSON cannot contain newline characters. These have to be escaped. (See also <a href=\"https://geneea.atlassian.net/wiki/display/IPD/The+Interpretor+API+Public+Documentation#TheInterpretorAPIPublicDocumentation-Interactiveonlinedocumentation\" target=\"_blank\">Interpretor documentation</a>)<br/>Fields <code>text</code> and <code>url</code> are mutually exclusive.<br/><strong>Examples:</strong><pre><code>{\"text\": \"Hello world!\"}</code></pre><pre><code>{\"url\": \"https://en.wikipedia.org/wiki/Pyrrhuloxia\"}</code></pre>",
+        "operationId": "sentimentPost",
+        "parameters": [
+          {
+            "description": "request",
+            "in": "body",
+            "name": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/Request"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Description was not specified",
+            "schema": {
+              "$ref": "#/definitions/SentimentResponse"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "Performs sentiment analysis on the given document",
+        "tags": [
+          "s1"
+        ]
       }
     },
     "/s1/topic": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "deprecated": false,
+        "description": "topicGet",
+        "operationId": "topicGet",
+        "parameters": [
+          {
+            "description": "raw document text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "document URL",
+            "in": "query",
+            "name": "url",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "document extractor",
+            "enum": [
+              "default",
+              "article",
+              "keep-everything"
+            ],
+            "in": "query",
+            "name": "extractor",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "document language",
+            "in": "query",
+            "name": "language",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "returnTextInfo",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TopicResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "Performs topic detection on the given document",
+        "tags": [
+          "s1"
+        ]
+      },
       "post": {
         "consumes": [
           "application/json"

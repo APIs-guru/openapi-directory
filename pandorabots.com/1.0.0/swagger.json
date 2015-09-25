@@ -110,6 +110,42 @@
       }
     },
     "/bot/{app_id}/{botname}": {
+      "delete": {
+        "description": "Delete a bot on the Pandorabots server.<p>Deleting a bot that does not exist returns a 412 error. Invalid botname will return a 400 error. Invalid app_d or user_key will return a 401 error.</p><p><pre class='prettyprint'>curl -v  -X DELETE 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME?user_key=USER_KEY'</pre></p>",
+        "operationId": "deleteBot",
+        "parameters": [
+          {
+            "description": "Your Application ID",
+            "in": "path",
+            "name": "app_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the bot to delete.",
+            "in": "path",
+            "name": "botname",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Your application's user key.",
+            "in": "query",
+            "name": "user_key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Delete a bot",
+        "tags": [
+          "pandorabots_api_swagger_1_3"
+        ]
+      },
       "get": {
         "description": "Retrieve a list of a bot's files. Returns a JSON object with each bot file associated with bot specified.<p>Returns a 404 error code for bot not found. Returns a 401 error code for invalid app_ID or user_key.</p><p>The <code color=blue>return=zip</code> option may not behave as expected using Active Docs 1.2</p><p><pre class='prettyprint'>curl -v  -X GET 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME?user_key=USER_KEY'</pre></p>",
         "operationId": "listBotFiles",
@@ -148,6 +184,42 @@
           }
         },
         "summary": "List of bot files",
+        "tags": [
+          "pandorabots_api_swagger_1_3"
+        ]
+      },
+      "put": {
+        "description": "Create a new instance of a bot on the Pandorabots server.<p>If there is already a bot under the same app_id and botname, a 409 error is returned. Invalid botname will return a 400 error.</p><p>Creating more bots than your plan allows for or using an invalid app_id or user_key returns a 401 error.</p><p><pre class='prettyprint'>curl -v  -X PUT 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME?user_key=USER_KEY'</pre></p>",
+        "operationId": "createBot",
+        "parameters": [
+          {
+            "description": "Your Application ID",
+            "in": "path",
+            "name": "app_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Must be unique from all the other bots you have created under this app_id. Can only be numbers and lowercase letters, and must be between 3 and 64 characters long.",
+            "in": "path",
+            "name": "botname",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Your application's user key.",
+            "in": "query",
+            "name": "user_key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Create a bot",
         "tags": [
           "pandorabots_api_swagger_1_3"
         ]
@@ -192,6 +264,49 @@
       }
     },
     "/bot/{app_id}/{botname}/{file-kind}": {
+      "delete": {
+        "description": "Delete pdefaults or properties bot file.<p>For malformed file-kind, a 404 error is returned. For invalid botname, a 412 error is returned.</p><pre><p>curl -v -X DELETE 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME/FILE-KIND?user_key=USER_KEY'</p></pre>",
+        "operationId": "deleteBotFile2",
+        "parameters": [
+          {
+            "description": "Your Application ID",
+            "in": "path",
+            "name": "app_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the bot.",
+            "in": "path",
+            "name": "botname",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Specify the type of file being deleted: pdefaults, properties",
+            "in": "path",
+            "name": "file-kind",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Your application's user key.",
+            "in": "query",
+            "name": "user_key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Delete a bot file (pdefaults, properties)",
+        "tags": [
+          "pandorabots_api_swagger_1_3"
+        ]
+      },
       "get": {
         "description": "Retrieve pdefaults or properties bot file.<p>For malformed file-kind, a 404 error is returned. For invalid botname, a 400 error is returned. For unknown bot or file, a 412 error is returned.</p><pre><p>curl -v -X GET 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME/FILE-KIND?user_key=USER_KEY'</p></pre>",
         "operationId": "getBotFile2",
@@ -234,9 +349,114 @@
         "tags": [
           "pandorabots_api_swagger_1_3"
         ]
+      },
+      "put": {
+        "consumes": [
+          "application/xml"
+        ],
+        "description": "Upload bot personality files to your bot. Files must be named with only lowercase letters and numbers with one of the following extensions: <p><b>Properties: </b>Extension - .properties, file-kind - properties, No filename required in path</p><p><b>Predicate defaults: </b>Extension - .pdefaults, file-kind - pdefaults, No filename required in path</p><p>The system will overwrite existing files with the file being uploaded.</p><p>For malformed JSON in non-AIML files, a 400 error is returned. For malformed file-kind, a 404 error is returned. For invalid file or botname, a 412 error is returned. </p><p>If Active Doc spec is not working with this API, please use the following curl command examples:</p><pre class='prettyprint'><p>curl -v -X PUT 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME/properties?user_key=USER_KEY'<br/>&nbsp;&nbsp;--data-binary @/home/foo/foobot.properties</p></pre>",
+        "operationId": "uploadFile2",
+        "parameters": [
+          {
+            "description": "Your Application ID",
+            "in": "path",
+            "name": "app_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Your bot's name",
+            "in": "path",
+            "name": "botname",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Specify the type of file being uploaded: pdefaults, properties",
+            "in": "path",
+            "name": "file-kind",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Type or Paste in file contents.",
+            "in": "body",
+            "name": "content",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Your application's user key.",
+            "in": "query",
+            "name": "user_key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Upload a bot file (pdefaults, properties)",
+        "tags": [
+          "pandorabots_api_swagger_1_3"
+        ]
       }
     },
     "/bot/{app_id}/{botname}/{file-kind}/{filename}": {
+      "delete": {
+        "description": "Delete an AIML, set, map or substitution bot file<p>For malformed file-kind, a 404 error is returned. For invalid file or botname, a 412 error is returned.</p><pre><p>curl -v -X DELETE 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME/FILE-KIND/FILENAME?user_key=USER_KEY'</p></pre>",
+        "operationId": "deleteBotFile1",
+        "parameters": [
+          {
+            "description": "Your Application ID",
+            "in": "path",
+            "name": "app_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the bot.",
+            "in": "path",
+            "name": "botname",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Specify the type of file being deleted: file (for AIML files), map, substitution, set",
+            "in": "path",
+            "name": "file-kind",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Filename to delete. Note: for non-AIML files, do not include the file extension in the path.",
+            "in": "path",
+            "name": "filename",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Your application's user key.",
+            "in": "query",
+            "name": "user_key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Delete a bot file (AIML, set, map, substitution)",
+        "tags": [
+          "pandorabots_api_swagger_1_3"
+        ]
+      },
       "get": {
         "description": "Retrieve an AIML, set, map or substitution bot file.<p>For malformed file-kind, a 404 error is returned. For invalid filename or botname, a 400 error is returned. For unknown bot or file, a 412 error is returned.</p><pre><p>curl -v -X GET 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME/FILE-KIND/FILENAME?user_key=USER_KEY'</p></pre>",
         "operationId": "getBotFile1",
@@ -283,6 +503,68 @@
           }
         },
         "summary": "Retrieve a bot file (AIML, set, map, substitution)",
+        "tags": [
+          "pandorabots_api_swagger_1_3"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/xml"
+        ],
+        "description": "Upload bot personality files to your bot. Files must be named with only lowercase letters and numbers with one of the following extensions: <p><b>AIML: </b>Extention - .aiml, file-kind - file</p><p><b>Sets: </b>Extension - .set, file-kind - set</p><p><b>Maps: </b>Extension - .map, file-kind - map</p><p><b>Substitutions: </b>Extension - .substitution, file-kind - substitution</p><p>The system will overwrite existing files with the file being uploaded.</p><p>If the request is malformed because the file name is invalid or malformed JSON for non-AIML files, a 400 error is returned. For malformed file-kind, a 404 error is returned. For invalid file or botname, a 412 error is returned. </p><p>If Active Doc spec is not working with this API, please use the following curl command examples:</p><pre class='prettyprint'><p>curl -v -X PUT 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME/file/foobot.aiml?user_key=USER_KEY'<br/>&nbsp;&nbsp;--data-binary @/home/foo/foobot.aiml</p></pre><br/><pre class='prettyprint'><p>curl -v -X PUT 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME/set/colors?user_key=USER_KEY'<br/>&nbsp;&nbsp;--data-binary @/home/foo/colors.set</p></pre>",
+        "operationId": "uploadFile1",
+        "parameters": [
+          {
+            "description": "Your Application ID",
+            "in": "path",
+            "name": "app_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Your bot's name",
+            "in": "path",
+            "name": "botname",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Specify the type of file being uploaded: file (for AIML files), map, substitution, set",
+            "in": "path",
+            "name": "file-kind",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Filename to upload; Note: for non-AIML files, do not include the file extension in the path.",
+            "in": "path",
+            "name": "filename",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Type or Paste in file contents.",
+            "in": "body",
+            "name": "content",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Your application's user key.",
+            "in": "query",
+            "name": "user_key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Upload a bot file (AIML, set, substitution, map)",
         "tags": [
           "pandorabots_api_swagger_1_3"
         ]

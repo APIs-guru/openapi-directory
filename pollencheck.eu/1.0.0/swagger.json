@@ -452,6 +452,40 @@
       }
     },
     "/api/1/locations/{woeid}": {
+      "get": {
+        "description": "\nA Location identify a city or town. \nAll Location have a Where On Earth ID (WOEID) as defined by Yahoo [https://developer.yahoo.com/geo/geoplanet/guide/concepts.html#woeids].\n",
+        "operationId": "getLocationByWoeid",
+        "parameters": [
+          {
+            "description": "Where On Earth ID (WOEID) as defined by Yahoo",
+            "in": "path",
+            "name": "woeid",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Location found",
+            "schema": {
+              "$ref": "#/definitions/Location"
+            }
+          },
+          "401": {
+            "description": "Unauthorized - missing or invalid auth token header"
+          },
+          "404": {
+            "description": "Location not found"
+          },
+          "500": {
+            "description": "Internal error"
+          }
+        },
+        "summary": "Get a Location",
+        "tags": [
+          "locations"
+        ]
+      },
       "put": {
         "description": "\nA Location identify a city or town. \nAll Location have a Where On Earth ID (WOEID) as defined by Yahoo [https://developer.yahoo.com/geo/geoplanet/guide/concepts.html#woeids]. \nAll location must have WOEID of type Town in Europe.\nWhen a location is registered the forecasts are not generated. The pollen forecasts for this new location will be available \nin the next forecasts generation (next day)\n",
         "operationId": "registerLocationByWoeid",
@@ -491,12 +525,12 @@
   "swagger": "2.0",
   "tags": [
     {
-      "description": "Operations about Locations",
-      "name": "locations"
-    },
-    {
       "description": "Get Pollen Forecasts",
       "name": "forecasts"
+    },
+    {
+      "description": "Operations about Locations",
+      "name": "locations"
     }
   ]
 }

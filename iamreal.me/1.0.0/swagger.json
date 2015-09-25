@@ -249,6 +249,57 @@
       }
     },
     "/users/{userId}/": {
+      "get": {
+        "operationId": "GET USER",
+        "parameters": [
+          {
+            "description": "User Id given by provider (e.g. Facebook Id)",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Application Id received when registered",
+            "in": "query",
+            "name": "appId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "\nApplication secret received when registered",
+            "in": "query",
+            "name": "appSecret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Social network user token",
+            "in": "query",
+            "name": "token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Description was not specified",
+            "schema": {
+              "$ref": "#/definitions/UserValidationResponse"
+            }
+          },
+          "401": {
+            "description": "Description was not specified"
+          },
+          "404": {
+            "description": "Description was not specified"
+          }
+        },
+        "summary": "Get Score and Significance for existing user",
+        "tags": [
+          "social"
+        ]
+      },
       "post": {
         "operationId": "POST User",
         "parameters": [

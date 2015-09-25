@@ -2802,6 +2802,44 @@
         "tags": [
           "tax"
         ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "calculateTax",
+        "parameters": [
+          {
+            "description": "Input",
+            "in": "body",
+            "name": "input",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/calculateTaxIn"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/calculateTaxOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        },
+        "summary": "Calculate tax",
+        "tags": [
+          "tax"
+        ]
       }
     },
     "/api/v1/tax/location/calculate": {
@@ -3021,6 +3059,44 @@
         "tags": [
           "transactions"
         ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "createTransaction",
+        "parameters": [
+          {
+            "description": "Input",
+            "in": "body",
+            "name": "input",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createTransactionIn"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/createTransactionOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        },
+        "summary": "Store transaction",
+        "tags": [
+          "transactions"
+        ]
       }
     },
     "/api/v1/transactions/{key}": {
@@ -3056,6 +3132,87 @@
           }
         },
         "summary": "Delete transaction",
+        "tags": [
+          "transactions"
+        ]
+      },
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getTransaction",
+        "parameters": [
+          {
+            "description": "Transaction key",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/getTransactionOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        },
+        "summary": "Retrieve transaction data.",
+        "tags": [
+          "transactions"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "updateTransaction",
+        "parameters": [
+          {
+            "description": "Transaction key.",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Input",
+            "in": "body",
+            "name": "input",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updateTransactionIn"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/updateTransactionOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        },
+        "summary": "Update transaction",
         "tags": [
           "transactions"
         ]
@@ -3202,6 +3359,51 @@
           }
         },
         "summary": "List payments",
+        "tags": [
+          "payments"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "createPayment",
+        "parameters": [
+          {
+            "description": "Transaction key.",
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Input",
+            "in": "body",
+            "name": "input",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createPaymentIn"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/createPaymentOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        },
+        "summary": "Register a payment",
         "tags": [
           "payments"
         ]

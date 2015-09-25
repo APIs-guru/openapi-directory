@@ -646,6 +646,53 @@
   },
   "paths": {
     "/v1/bundles": {
+      "get": {
+        "description": "Gets the list of bundles. Links to each item are in the _links with link relation <b>items</b>.<br/><br/>After getting the initial list, use the <b>first</b>, <b>last</b>, <b>next</b>, <b>prev</b> link relations to get more bundles in the list. Note that <b>next</b> will not be available at the end of the list and <b>prev</b> will not be available at the start of the list. If the results are exactly one page neither <b>prev</b> nor <b>next</b> will be available.<br/><br/>The <b>embed</b> parameter specifies link relations to embed in the results. The models for the specified link relations will be in an array in the embedded object with the link relation as the key. For example, if you do embed=items, _embedded will contain a property <b>items</b> whose value is the array of bundle models. For link relations that are curies (ex. \"clarify:metadata\"), you may simply use the base name (ex. \"metadata\").",
+        "operationId": "v1bundles",
+        "parameters": [
+          {
+            "description": "limit results to specified number of bundles. Default is 10. Max 20.",
+            "in": "query",
+            "maximum": 20,
+            "minimum": 1,
+            "name": "limit",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "list of link relations to embed in the result collection. Zero or more of: items, tracks, metadata, insights. List is space or comma separated single string or an array of strings",
+            "in": "query",
+            "name": "embed",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "opaque value, automatically provided in next/prev links",
+            "in": "query",
+            "name": "iterator",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/hal+json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Collection"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        },
+        "summary": "List bundles",
+        "tags": [
+          "bundles"
+        ]
+      },
       "post": {
         "description": "Create a new bundle with the specified name, media url, and optional JSON metadata.<br/><br/><b>name</b> can be any string you wish to associate with the bundle.<br/><br/><b>media_url</b> must be a publicly accessible url to a media file. It will be fetched asynchronously after the REST call returns. The audio can be mono or stereo.<br/><br/><b>audio_channel</b> is used to specify audio channels if the media is a stereo file. A value of <i>left</i> or <i>right</i> signifies that only the specified channel will be used. If no value or an empty string is specified for <b>audio_channel</b>, all channels will be used in a single track. If your stereo channels were recorded separately with each channel containing distinct content (for example if 2 legs of a phone call were recorded separately and combined into a single stereo file), for best speech recognition, create two tracks, with <b>audio_channel</b> set to <i>left</i> and <i>right</i> in each track respectively. If your stereo file is simply a recording made with a stereo microphone, <b>audio_channel</b> should be set to an empty string (or not be specified.) If you have audio channels as separate media files, after creating the bundle with one <b>media_url</b>, POST another <b>media_url</b> to /bundles/{bundle_id}/tracks.<br/><br/><b>metadata</b> is a single-level JSON object of your own definition, containing key-values that can be searched and filtered on. Metadata can be used to hold text such as names, titles, descriptions and values for segregating bundles, for example by user, topic, folder name etc. The keys (property names) can be up to 64 characters and must contain only alphanumeric characters and underscore (but not start with underscore) and must not be a reserved name. Reserved names are &quot;true&quot;, &quot;false&quot;, and &quot;null&quot;. Values can be strings, numbers, boolean true/false, date-times represented as a string in ISO 8601 format (ex. &quot;2014-02-25T14:23:45.000Z&quot;), or an array of these primitive types. Strings can be up to 2000 characters and strings in arrays can be up to 128 characters each. Nested objects are not allowed. Metadata can contain up to 50 key-value pairs up to a total JSON size of 4000 characters.<br/><br/><b>external_id</b> is an optional parameter that can be used to logically link a bundle to an item in an external system. The <b>external_id</b> can be whatever you use to identify items in your own database.<br/><br/><b>notify_url</b> is a webhook. It must be a publicly accessible url (http or https) on your server to which notifications for the bundle will be POSTed.<br/><br/>There are two types of notifications: Track Notifications and Bundle Notifications. Track Notifications are sent when the status of a track in the bundle changes to an end state, either <b>ready</b> or <b>error</b>. Handling Track Notifications will allow you to know if a media fetch or media format error has occurred. Bundle Notifications are sent when media processing has completed on a bundle and they will allow you to know the cost of the media processing. For both types of notifications, the POST body is a HAL JSON message containing the <b>bundle_id</b>, bundle <b>name</b> and <b>external_id</b> if they have been set, as well as other data and standard Clarify link relations. See <a href=\"#bundles_v1bundlesbundle_id_put_3\" onclick=\"window.swaggerDocsLink(this);return true;\">PUT /v1/bundles/{bundle_id}</a> for more details.",
         "operationId": "v1bundles",
@@ -751,9 +798,152 @@
         "tags": [
           "bundles"
         ]
+      },
+      "get": {
+        "description": "Get a bundle that has previously been created.",
+        "operationId": "v1bundlesbundle_id",
+        "parameters": [
+          {
+            "description": "id of a bundle",
+            "in": "path",
+            "name": "bundle_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "list of link relations to embed in the result bundle. Zero or more of: tracks, metadata, insights. List is space or comma separated single string or an array of strings",
+            "in": "query",
+            "name": "embed",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/hal+json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Bundle"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "summary": "Get a bundle",
+        "tags": [
+          "bundles"
+        ]
+      },
+      "put": {
+        "description": "Update a bundle. To update the tracks, media, or metadata of a bundle, use the tracks and metadata endpoints.<br/><br/><b>name</b> can be any string you wish to associate with the bundle.<br/><br/><b>external_id</b> is an optional parameter that can be used to logically link a bundle to an item in an external system. The <b>external_id</b> can be whatever you use to identify items in your own database.<br/><br/><b>notify_url</b> is a webhook. It must be a publicly accessible url (http or https) on your server to which notifications for the bundle will be POSTed.<br/><br/>There are two types of notifications: Track Notifications and Bundle Notifications. Track Notifications are sent when the status of a track in the bundle changes to an end state, either <b>ready</b> or <b>error</b>. Handling Track Notifications will allow you to know if a media fetch or media format error has occurred. Bundle Notifications are sent when media processing has completed on a bundle and they will allow you to know the cost of the media processing. For both types of notifications, the POST body is a HAL JSON message containing the <b>bundle_id</b>, bundle <b>name</b> and <b>external_id</b> if they have been set, as well as other data and standard Clarify link relations.<br><br>Example Bundle Notification POST body sent to a <b>notify_url</b>:<br><pre class=\"code-snippet\">{\n    \"bundle_id\":\"56b384d9749e4671960245a636701434\",\n    \"updated\":\"2014-08-25T22:12:39.574Z\",\n    \"bundle_processing_cost\":0.1,\n    \"name\":\"Harvard Sentences 1\",\n    \"external_id\":\"my_id_123\",\n    \"_class\":\"BundleNotification\",\n    \"_links\":{\n        \"curies\":[{\n            \"href\":\"/docs/rels/{rel}\",\"name\":\"clarify\",\"templated\":true\n        }],\n        \"clarify:bundle\":{\n            \"href\":\"/v1/bundles/56b384d9749e4671960245a636701434\"\n        },\n        \"clarify:tracks\":{\n            \"href\":\"/v1/bundles/56b384d9749e4671960245a636701434/tracks\"\n        },\n        \"clarify:metadata\":{\n            \"href\":\"/v1/bundles/56b384d9749e4671960245a636701434/metadata\"\n        }\n    }\n}\n</pre><p><br><br>Example Track Notification POST body sent to a <b>notify_url</b>:<br><pre class=\"code-snippet\">{\n    \"bundle_id\":\"56b384d9749e4671960245a636701434\",\n    \"track_id\":\"fef68854fe6e4e92aa1aa6ee2ab3cb99\",\n    \"updated\":\"2014-08-25T22:12:39.574Z\",\n    \"name\":\"Harvard Sentences 1\",\n    \"external_id\":\"my_id_123\",\n    \"_class\":\"TrackNotification\",\n    \"_links\":{\n        \"curies\":[{\n            \"href\":\"/docs/rels/{rel}\",\"name\":\"clarify\",\"templated\":true\n        }],\n        \"clarify:track\":{\n            \"href\":\"/v1/bundles/56b384d9749e4671960245a636701434/tracks/fef68854fe6e4e92aa1aa6ee2ab3cb99\"\n        },\n        \"clarify:tracks\":{\n            \"href\":\"/v1/bundles/56b384d9749e4671960245a636701434/tracks\"\n        },\n        \"clarify:bundle\":{\n            \"href\":\"/v1/bundles/56b384d9749e4671960245a636701434\"\n        }\n    },\n    \"_embedded\":{\n        \"clarify:track\":{\n            \"id\": \"fef68854fe6e4e92aa1aa6ee2ab3cb99\",\n            \"track\": 0,\n            \"label\": \"\",\n            \"media_url\": \"http://media.clarify.io/audio/samples/harvard-sentences-1.wav\",\n            \"audio_channel\": \"\",\n            \"audio_language\": \"\",\n            \"created\": \"2014-08-25T19:54:26.123Z\",\n            \"updated\": \"2014-08-25T19:54:26.552Z\",\n            \"status\": \"ready\",\n            \"mime_type\": \"audio/x-wav\",\n            \"media_size\": 1030810,\n            \"duration\": 64.422875,\n            \"fetch_response_code\": -1,\n            \"fetch_response_message\": \"\",\n            \"media_code\": -1,\n            \"media_message\": \"\",\n            \"_class\":\"Track\",\n            \"_links\":{\n                \"self\":{\n                    \"href\":\"/v1/bundles/56b384d9749e4671960245a636701434/tracks/fef68854fe6e4e92aa1aa6ee2ab3cb99\"\n                },\n                \"parent\":{\n                    \"href\":\"/v1/bundles/56b384d9749e4671960245a636701434/tracks\"\n                },\n                \"clarify:bundle\":{\n                    \"href\":\"/v1/bundles/56b384d9749e4671960245a636701434\"\n                }\n            }\n        }\n    }\n}\n</pre><p><br/><br/>If <b>version</b> is specified, the bundle will only be updated if the current version matches this parameter value. If the version doesn't match, a 409 Conflict error will be returned. If version not specified, the bundle will always be updated.",
+        "operationId": "v1bundlesbundle_id",
+        "parameters": [
+          {
+            "description": "id of a bundle",
+            "in": "path",
+            "name": "bundle_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the bundle. Up to 128 characters.",
+            "in": "formData",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "URL for notifications on this bundle. Up to 2083 characters.",
+            "in": "formData",
+            "name": "notify_url",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "A string that can refer to an item in an external system. Up to 64 characters.",
+            "in": "formData",
+            "name": "external_id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Object version.",
+            "in": "formData",
+            "name": "version",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/hal+json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Ref (of Bundle)"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        },
+        "summary": "Update a bundle",
+        "tags": [
+          "bundles"
+        ]
       }
     },
     "/v1/bundles/{bundle_id}/insights": {
+      "get": {
+        "description": "Gets the insights for a bundle.<br/><br/>URLs of the available insights for the bundle are in the _links object, with the link relations (keys) of the format <b>insight:insight_name</b>.",
+        "operationId": "v1bundlesbundle_idinsights",
+        "parameters": [
+          {
+            "description": "id of a bundle",
+            "in": "path",
+            "name": "bundle_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/hal+json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Insights"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "summary": "Get bundle insights <span class=\"label\">beta</span>",
+        "tags": [
+          "bundles"
+        ]
+      },
       "post": {
         "description": "Request an insight to be run on a bundle. Note that most insights are set to automatically run on all bundles so you commonly won&apos;t need to call this endpoint except to request transcripts. To configure which insights are automatically run for an app, visit the <a href=\"https://developer.clarify.io\" target=\"clarify\">Clarify Developer Portal</a>.<br/><br/> Insights that are not configured to autorun can be requested to run on an individual bundle using this endpoint. The following insights can be requested:<br/><br/><b>transcript_r9</b> - High-accuracy transcript of the speech in the audio media.<br/><br/>Transcripts will produced on the mixed audio of all tracks in the bundle and are charged at $1 per minute (rounded up for partial minutes), based on the duration of the longest track. If the request has already been made, this method has no effect other than to return the existing insight.<br/><br/>Transcripts will typically take about 24 hours. When the transcript is ready, an InsightNotification webhook will be POSTed to the bundle <b>notify_url</b>.<br/><br/><b>spoken_keywords</b> - Spoken words of interest found in the audio media.<br/><br/>This insight is charged at $0 per minute. <b>Note:</b> Normally spoken_keywords is set to autorun so you do not need to run it explicitly.<br/><br/><br/>Example InsightNotification POST body sent to a <b>notify_url</b>:<br><pre class=\"code-snippet\">{\n  \"bundle_id\": \"56b384d9749e4671960245a636701434\",\n  \"name\": \"bundle name\",\n  \"external_id\": \"external_123\",\n  \"insight\": \"transcript_r9\",\n  \"insight_id\": \"cba6d1fd1ca3426db41678887ac240b6\",\n  \"updated\": \"2015-04-30T01:11:19.889Z\",\n  \"_class\": \"InsightNotification\",\n  \"_links\": {\n    \"curies\": [\n      {\n        \"href\": \"/docs/rels/{rel}\",\n        \"name\": \"clarify\",\n        \"templated\": true\n      },\n      {\n        \"href\": \"/docs/insights/{rel}\",\n        \"name\": \"insight\",\n        \"templated\": true\n      }\n    ],\n    \"clarify:insights\": {\n      \"href\": \"/v1/bundles/56b384d9749e4671960245a636701434/insights\"\n    },\n    \"clarify:bundle\": {\n      \"href\": \"/v1/bundles/56b384d9749e4671960245a636701434\"\n    },\n    \"clarify:tracks\": {\n      \"href\": \"/v1/bundles/56b384d9749e4671960245a636701434/tracks\"\n    },\n    \"insight:transcript_r9\": {\n      \"href\": \"/v1/bundles/56b384d9749e4671960245a636701434/insights/cba6d1fd1ca3426db41678887ac240b6\"\n    }\n  }\n}\n</pre><p>",
         "operationId": "v1bundlesbundle_idinsights",
@@ -850,6 +1040,71 @@
       }
     },
     "/v1/bundles/{bundle_id}/metadata": {
+      "delete": {
+        "description": "Delete the metadata of a bundle and set data to {} (empty object.) This is functionally equivalent to an update metadata request with data set to {}.<br/><br/>Successful response will be a HTTP code 204 with an empty body.",
+        "operationId": "v1bundlesbundle_idmetadata",
+        "parameters": [
+          {
+            "description": "id of a bundle",
+            "in": "path",
+            "name": "bundle_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          },
+          "204": {
+            "description": "No Content (success)"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "summary": "Delete bundle metadata",
+        "tags": [
+          "bundles"
+        ]
+      },
+      "get": {
+        "description": "Gets the metadata for a bundle.",
+        "operationId": "v1bundlesbundle_idmetadata",
+        "parameters": [
+          {
+            "description": "id of a bundle",
+            "in": "path",
+            "name": "bundle_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/hal+json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Metadata"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "summary": "Get bundle metadata",
+        "tags": [
+          "bundles"
+        ]
+      },
       "put": {
         "description": "Update the metadata for a bundle.<br/><br/>The metadata is a single-level JSON object of your own definition, containing key-values that can be searched and filtered on. Metadata can be used to hold text such as names, titles, descriptions and values for segregating bundles, for example by user, topic, folder name etc. The keys (property names) can be up to 64 characters and must contain only alphanumeric characters and underscore (but not start with underscore) and must not be a reserved name. Reserved names are &quot;true&quot;, &quot;false&quot;, and &quot;null&quot;. Values can be strings, numbers, boolean true/false, date-times represented as a string in ISO 8601 format (ex. &quot;2014-02-25T14:23:45.000Z&quot;), or an array of these primitive types. Strings can be up to 2000 characters and strings in arrays can be up to 128 characters each. Nested objects are not allowed. Metadata can contain up to 50 key-value pairs up to a total JSON size of 4000 characters.<br/><br/>To clear the metadata for a bundle, send <b>data</b>={}.<br/><br/>If <b>version</b> specified, the metadata will only be updated if the current version matches this parameter value. If the version doesn't match, a 409 Conflict will be returned. If version not specified, the metadata will always be updated.",
         "operationId": "v1bundlesbundle_idmetadata",
@@ -936,6 +1191,133 @@
         "tags": [
           "bundles"
         ]
+      },
+      "get": {
+        "description": "Gets the array of tracks for a bundle. This includes the specification of the media and the status of fetching and processing it.<br/><br/>Media for tracks is fetched asynchronously. Until media has been retrieved, a track&apos;s <b>duration</b> and <b>size</b> will both be set to -1.",
+        "operationId": "v1bundlesbundle_idtracks",
+        "parameters": [
+          {
+            "description": "id of a bundle",
+            "in": "path",
+            "name": "bundle_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/hal+json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Tracks"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "summary": "Get bundle tracks",
+        "tags": [
+          "bundles"
+        ]
+      },
+      "post": {
+        "description": "Add a new track to a bundle. This will insert or append a new track in the tracks array or return an error if the maximum number of tracks (4) has been reached or the track number specifies an invalid index.<br/><br/>A track is immutable, meaning that once it has been added, it cannot be modified. If you wish to modify a track, simply add a new one and delete the existing one.<br/><br/><b>label</b> is a short name for the track.<br/><br/><b>media_url</b> must be a publicly accessible url to a media file. It will be fetched asynchronously after the REST call returns. The audio can be mono or stereo.<br/><br/><b>audio_channel</b> is used to specify audio channels if the media is a stereo file. A value of <i>left</i> or <i>right</i> signifies that only the specified channel will be used. If no value or an empty string is specified for <b>audio_channel</b>, all channels will be used in a single track. If your stereo channels were recorded separately with each channel containing distinct content (for example if 2 legs of a phone call were recorded separately and combined into a single stereo file), for best speech recognition, create two tracks with <b>audio_channel</b> to be <i>left</i> and <i>right</i>. If your stereo file is simply a recording made with a stereo microphone, <b>audio_channel</b> should be set to an empty string (or not be specified.)<br/><br/><b>audio_language</b> can be used to specify the language of the audio media. This is an optional parameter and if not specified or an empty string, the language of the track will be automatically detected. If specified, it must be a language code as described in RFC5646 (see <a href=\"http://tools.ietf.org/html/rfc5646\" target=\"_blank\">http://tools.ietf.org/html/rfc5646</a>). Supported languages: en-US, en-UK, es, fr.<br/><br/><b>track</b> is the index in the tracks array where the new track will be added. Track numbers start at 0. If this parameter is not specified the new track will always be appended to the end of the array. If the track specified is greater than the last index of the array + 1, an error will be returned.<br/><br/>If <b>version</b> specified, the track will only be added if the current version matches this parameter value. If the version doesn't match, a 409 Conflict error will be returned. If version not specified, the track will always be updated.",
+        "operationId": "v1bundlesbundle_idtracks",
+        "parameters": [
+          {
+            "description": "id of a bundle",
+            "in": "path",
+            "name": "bundle_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Label for the track. Up to 128 characters.",
+            "in": "formData",
+            "name": "label",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "URL of a media file for this bundle. Up to 2083 characters.",
+            "in": "formData",
+            "name": "media_url",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The audio channel to use for the track ( \"\" | left | right ). Default is empty string which means all channels of audio in the media file are used for the track.",
+            "enum": [
+              "left",
+              "right"
+            ],
+            "in": "formData",
+            "name": "audio_channel",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Language of the audio in the track, specified with an RFC5646 code.",
+            "enum": [
+              "en-US",
+              "en-UK",
+              "es",
+              "fr"
+            ],
+            "in": "formData",
+            "name": "audio_language",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Track number specifies the index of the new track in the tracks array. An integer from 0 to 3. If not specified, the new track is appended to the array.",
+            "in": "formData",
+            "maximum": 3,
+            "name": "track",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Object version.",
+            "in": "formData",
+            "name": "version",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/hal+json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/Ref"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        },
+        "summary": "Add a track for a bundle",
+        "tags": [
+          "bundles"
+        ]
       }
     },
     "/v1/bundles/{bundle_id}/tracks/{track_id}": {
@@ -973,6 +1355,47 @@
           }
         },
         "summary": "Delete a bundle track",
+        "tags": [
+          "bundles"
+        ]
+      },
+      "get": {
+        "description": "Gets a single track in a bundle. This includes the specification of the media and the status of fetching and processing it.<br/><br/>Media for a track is fetched asynchronously. Until media has been retrieved, a track&apos;s <b>duration</b> and <b>size</b> will both be set to -1.",
+        "operationId": "v1bundlesbundle_idtrackstrack_id",
+        "parameters": [
+          {
+            "description": "id of a bundle",
+            "in": "path",
+            "name": "bundle_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "id of a track",
+            "in": "path",
+            "name": "track_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/hal+json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Track"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "summary": "Get bundle track",
         "tags": [
           "bundles"
         ]
