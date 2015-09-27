@@ -6,6 +6,7 @@ var _ = require('lodash');
 var fs = require('fs');
 var exec = require('child_process').execSync;
 var Path = require('path');
+var jp = require('json-pointer');
 var glob = require('glob')
 var editor = require('editor');
 var async = require('async')
@@ -316,7 +317,7 @@ function writeSpec(url, type, exPatch, callback) {
       patchSwagger(swagger, exPatch);
       result.swagger = swagger;
 
-      validateSwagger(swagger, function (errors, warnings) {
+      function done(errors, warnings) {
         result.warnings = warnings;
 
         if (errors)
@@ -327,9 +328,50 @@ function writeSpec(url, type, exPatch, callback) {
 
         var filename = saveSwagger(swagger);
         callback(null, result);
-      });
+      }
+
+      function validateAndFix() {
+        validateSwagger(swagger, function (errors, warnings) {
+          if (!errors)
+            done(errors, warnings);
+
+          if (fixSpec(swagger, errors))
+            validateAndFix();
+          else
+            validateSwagger(swagger, done);
+        });
+      }
+
+      validateAndFix();
     });
   });
+}
+
+function fixSpec(swagger, errors) {
+  var fixed = false;
+
+  _.each(errors, function (error) {
+    var path = jp.compile(error.path);
+    var value = jp(swagger, path);
+    var newValue;
+    switch(error.code) {
+      case 'ONE_OF_MISSING':
+        if (value.in === 'path' && !value.required) {
+          newValue = _.clone(value)
+          newValue.required = true;
+        }
+        break;
+      case 'UNRESOLVABLE_REFERENCE':
+        if (typeof swagger.definitions[value] !== 'undefined')
+          newValue = '#/definitions/' + value;
+        break;
+    }
+    if (!_.isUndefined(newValue)) {
+      jp(swagger, path, newValue);
+      fixed = true;
+    }
+  });
+  return fixed;
 }
 
 function logError(error, context) {
