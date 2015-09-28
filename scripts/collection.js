@@ -263,6 +263,7 @@ function updateGoogle() {
              'storagetransfer:v1',
              'cloudbilling:v1',
              'proximitybeacon:v1beta1',
+             'youtubereporting:v1',
              //circular reference in MapFolder/MapItem
              'mapsengine:exp2',
              'mapsengine:v1',
