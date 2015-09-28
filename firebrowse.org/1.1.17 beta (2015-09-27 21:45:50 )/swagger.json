@@ -3,7 +3,7 @@
   "host": "firebrowse.org",
   "info": {
     "title": "firebrowse.org",
-    "version": "1.1.15 beta (2015-08-24 18:25:33 )",
+    "version": "1.1.17 beta (2015-09-27 21:45:50 )",
     "x-logo": {
       "url": "http://firebrowse.org/img/beta_smaller.png"
     },
@@ -117,7 +117,7 @@
             "type": "array"
           },
           {
-            "description": "Number of records per page of results.  Maximum is 2000.",
+            "description": "Number of records per page of results.  Max is 2000.",
             "in": "query",
             "items": {
               "default": 250,
@@ -260,7 +260,7 @@
             "type": "array"
           },
           {
-            "description": "Number of records per page of results.  Maximum is 2000.",
+            "description": "Number of records per page of results.  Max is 2000.",
             "in": "query",
             "items": {
               "default": 250,
@@ -403,7 +403,7 @@
             "type": "array"
           },
           {
-            "description": "Number of records per page of results.  Maximum is 2000.",
+            "description": "Number of records per page of results.  Max is 2000.",
             "in": "query",
             "items": {
               "default": 250,
@@ -548,7 +548,7 @@
             "type": "array"
           },
           {
-            "description": "Number of records per page of results.  Maximum is 2000.",
+            "description": "Number of records per page of results.  Max is 2000.",
             "in": "query",
             "items": {
               "default": 250,
@@ -693,7 +693,7 @@
             "type": "array"
           },
           {
-            "description": "Number of records per page of results.  Maximum is 2000.",
+            "description": "Number of records per page of results.  Max is 2000.",
             "in": "query",
             "items": {
               "default": 250,
@@ -843,7 +843,7 @@
             "type": "array"
           },
           {
-            "description": "Number of records per page of results.  Maximum is 2000.",
+            "description": "Number of records per page of results.  Max is 2000.",
             "in": "query",
             "items": {
               "default": 250,
@@ -1002,7 +1002,7 @@
             "type": "array"
           },
           {
-            "description": "Number of records per page of results.  Maximum is 2000.",
+            "description": "Number of records per page of results.  Max is 2000.",
             "in": "query",
             "items": {
               "default": 250,
@@ -1171,7 +1171,7 @@
             "type": "array"
           },
           {
-            "description": "Number of records per page of results.  Maximum is 2000.",
+            "description": "Number of records per page of results.  Max is 2000.",
             "in": "query",
             "items": {
               "default": 250,
@@ -1414,7 +1414,7 @@
             "type": "array"
           },
           {
-            "description": "Number of records per page of results.  Maximum is 2000.",
+            "description": "Number of records per page of results.  Max is 2000.",
             "in": "query",
             "items": {
               "default": 250,
@@ -1557,20 +1557,20 @@
                 "tumors",
                 "normals",
                 "TP",
-                "TR",
                 "TB",
+                "TAM",
+                "TBM",
+                "NBC",
+                "TRB",
+                "TR",
                 "TRBM",
                 "TAP",
                 "TM",
-                "TAM",
                 "THOC",
-                "TBM",
                 "NB",
                 "NT",
-                "NBC",
                 "NEBV",
-                "NBM",
-                "TRB"
+                "NBM"
               ],
               "type": "string"
             },
@@ -1627,8 +1627,9 @@
             "description": "Select one or more date stamps.",
             "in": "query",
             "items": {
-              "default": "2015_06_01",
+              "default": "2015_08_21",
               "enum": [
+                "2015_08_21",
                 "2015_06_01",
                 "2015_04_02",
                 "2015_02_04",
@@ -1644,7 +1645,7 @@
               "type": "string"
             },
             "name": "date",
-            "required": true,
+            "required": false,
             "type": "array"
           },
           {
@@ -1796,6 +1797,8 @@
                 "mRNAseq_Preprocess",
                 "Mutation_Packager_Calls",
                 "Mutation_Packager_Coverage",
+                "Mutation_Packager_Oncotated_Calls",
+                "Mutation_Packager_Oncotated_Raw_Calls",
                 "Mutation_Packager_Raw_Calls",
                 "Mutation_Packager_Raw_Coverage",
                 "RPPA_AnnotateWithGene"
@@ -2003,7 +2006,7 @@
             "type": "array"
           },
           {
-            "description": "Number of records per page of results.  Maximum is 2000.",
+            "description": "Number of records per page of results.  Max is 2000.",
             "in": "query",
             "items": {
               "default": 250,
@@ -2119,10 +2122,10 @@
         ]
       }
     },
-    "/Metadata/ClinicalTier1": {
+    "/Metadata/ClinicalNames": {
       "get": {
-        "description": "Retrieve names of all available tier 1 clinical data elements (CDEs), unioned across all disease cohorts and patients. For more information on how these CDEs are processed see our <a href=\"https://confluence.broadinstitute.org/display/GDAC/Documentation\">pipeline documentation</a>.",
-        "operationId": "ClinicalTier1",
+        "description": "Retrieve names of all patient-level clinical data elements (CDES) available in TCGA, unioned across all disease cohorts. A CDE will be listed here only when it has a value other than NA for at least 1 patient case in any disease cohort. For more information on how these CDEs are processed see our <a href=\"https://confluence.broadinstitute.org/display/GDAC/Documentation\">pipeline documentation</a>.",
+        "operationId": "ClinicalNames",
         "parameters": [
           {
             "default": "json",
@@ -2148,7 +2151,42 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Retrieve names of all available clinical data elements (CDEs).",
+        "summary": "Retrieve names of all TCGA clinical data elements (CDEs).",
+        "tags": [
+          "Metadata"
+        ]
+      }
+    },
+    "/Metadata/ClinicalNames_FH": {
+      "get": {
+        "description": "This service returns the names of patient-level clinical data elements (CDEs) that have been normalized by Firehose for use in analyses, unioned across all disease cohorts. For more information on how these CDEs are processed, see our <a href=\"https://confluence.broadinstitute.org/display/GDAC/Documentation\">pipeline documentation</a>.",
+        "operationId": "ClinicalNames_FH",
+        "parameters": [
+          {
+            "default": "json",
+            "description": "Format of result.",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ],
+            "in": "query",
+            "name": "format",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Retrieve names of CDEs normalized by Firehose and selected for analyses.",
         "tags": [
           "Metadata"
         ]
@@ -2345,8 +2383,9 @@
             "description": "Select one or more date stamps.",
             "in": "query",
             "items": {
-              "default": "2015_06_01",
+              "default": "2015_08_21",
               "enum": [
+                "2015_08_21",
                 "2015_06_01",
                 "2015_04_02",
                 "2015_02_04",
@@ -2362,7 +2401,7 @@
               "type": "string"
             },
             "name": "date",
-            "required": true,
+            "required": false,
             "type": "array"
           },
           {
@@ -2516,7 +2555,7 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Retrieve list of Firehose standard data and analyses dates.",
+        "summary": "Retrieve datestamps of all GDAC Firehose standard data and analyses runs that have been ingested into FireBrowse.",
         "tags": [
           "Metadata"
         ]
@@ -2639,7 +2678,7 @@
             "type": "array"
           },
           {
-            "description": "Number of records per page of results.  Maximum is 2000.",
+            "description": "Number of records per page of results.  Max is 2000.",
             "in": "query",
             "items": {
               "default": 250,
@@ -2870,21 +2909,21 @@
             "items": {
               "enum": [
                 "01",
-                "02",
                 "03",
+                "07",
+                "09",
+                "12",
+                "20",
+                "40",
+                "02",
                 "04",
                 "05",
                 "06",
-                "07",
                 "08",
-                "09",
                 "10",
                 "11",
-                "12",
                 "13",
                 "14",
-                "20",
-                "40",
                 "50",
                 "60",
                 "61"
@@ -2931,26 +2970,26 @@
             "type": "string"
           },
           {
-            "description": "TCGA sample type short letter code(s) (e.g. TP, TM, NB, etc.). ",
+            "description": "TCGA sample type short letter code(s) (e.g. TP, NB, etc.). ",
             "in": "path",
             "items": {
               "enum": [
                 "TP",
-                "TR",
                 "TB",
+                "TAM",
+                "TBM",
+                "NBC",
+                "CELLC",
+                "TRB",
+                "TR",
                 "TRBM",
                 "TAP",
                 "TM",
-                "TAM",
                 "THOC",
-                "TBM",
                 "NB",
                 "NT",
-                "NBC",
                 "NEBV",
                 "NBM",
-                "CELLC",
-                "TRB",
                 "CELL",
                 "XP",
                 "XCL"
@@ -3012,10 +3051,10 @@
         ]
       }
     },
-    "/Samples/ClinicalTier1": {
+    "/Samples/Clinical": {
       "get": {
-        "description": "This service returns patient-level tier 1 clinical data elements (CDEs).  Results may be selected by disease cohort, patient barcode or CDE name, but at least one cohort or barcode must be provided. When filtering by CDE note that only when a  patient record contains one or more of the selected CDEs will it be returned. Visit <a href=\"http://gdac.broadinstitute.org/runs/info/clinical\">this table of CDEs</a> to see what's available for every disase cohort; for more information on how these CDEs are processed see our <a href=\"https://confluence.broadinstitute.org/display/GDAC/Documentation#Documentation-ClinicalPipeline\">pipeline documentation</a>.",
-        "operationId": "ClinicalTier1",
+        "description": "This service returns patient clinical data from TCGA, verbatim. It differs from the Samples/Clinical_FH method by providing access to all TCGA CDEs in their original form, not merely the subset of CDEs normalized by Firehose for analyses.  Results may be selected by disease cohort, patient barcode or CDE name, but at least one cohort, barcode, or CDE must be provided. When filtering by CDE note that only when a patient record contains one or more of the selected CDEs will it be returned. Visit the Metadata/ClinicalNames api function to see the entire list of TCGA CDEs that may be queried via this method. For more information on how clinical data are processed, see our <a href=\"https://confluence.broadinstitute.org/display/GDAC/Documentation#Documentation-ClinicalPipeline\">pipeline documentation</a>.",
+        "operationId": "Clinical",
         "parameters": [
           {
             "default": "json",
@@ -3091,100 +3130,12 @@
             "type": "array"
           },
           {
-            "description": "Shrink results set to include only the CDEs selected from the scrollable list.",
+            "description": "Retrieve results only for specified CDEs, per the Metadata/ClinicalNames function",
             "in": "query",
             "items": {
-              "enum": [
-                "age_at_diagnosis",
-                "ajcc_tumor_pathologic_pt",
-                "batch_number",
-                "Breslow_thickness",
-                "cause_of_death",
-                "cervix_suv_results",
-                "chemo_concurrent_type",
-                "chemotherapy",
-                "completeness_of_resection",
-                "corpus_involvement",
-                "date_of_initial_pathologic_diagnosis",
-                "days_to_death",
-                "days_to_last_followup",
-                "days_to_last_known_alive",
-                "days_to_preop_psa",
-                "days_to_psa",
-                "days_to_submitted_specimen_dx",
-                "days_to_tumor_recurrence",
-                "dcc_upload_date",
-                "ethnicity",
-                "examinations_examination_karnofskyperformancescore",
-                "extrathyroidal_extension",
-                "fedpet_or_ct_results",
-                "gender",
-                "gleason_score",
-                "gleason_score_combined",
-                "gleason_score_primary",
-                "gleason_score_secondary",
-                "height_cm_at_diagnosis",
-                "highest_gleason_score",
-                "histological_type",
-                "history_hormonal_contraceptives_use",
-                "hysterectomy_type",
-                "initial_pathologic_dx_year",
-                "karnofsky_performance_score",
-                "keratinization_squamous_cell",
-                "lymph_node_location",
-                "lymph_nodes_examined",
-                "lymph_nodes_examined_he_count",
-                "lymphovascular_involvement",
-                "melanoma_primary_known",
-                "melanoma_ulceration",
-                "menopause_status",
-                "multifocality",
-                "neoplasm_diseasestage",
-                "neoplasm_histologic_grade",
-                "number_of_lymph_nodes",
-                "number_pack_years_smoked",
-                "pathology_M_stage",
-                "pathology_N_stage",
-                "pathology_T_stage",
-                "patient_agebegansmokinginyears",
-                "patient_cervicalcarcinomapelvicextensiontext",
-                "patient_patientpregnancyspontaneousabortioncount",
-                "patient_patientpregnancytherapeuticabortioncount",
-                "patient_tumor_recurrence_status",
-                "pos_lymph_node_location",
-                "pregnancies_count_ectopic",
-                "pregnancies_count_live_birth",
-                "pregnancies_count_stillbirth",
-                "pregnancies_count_total",
-                "primary_site_of_disease",
-                "psa_result_preop",
-                "psa_value",
-                "race",
-                "radiation_adjuvant_units",
-                "radiation_exposure",
-                "radiation_therapy",
-                "radiation_therapy_site",
-                "radiation_therapy_status",
-                "radiation_therapy_type",
-                "radiation_total_dose",
-                "radiation_treatment_adjuvant",
-                "radiations_radiation_regimenindication",
-                "stage_event_clinical_stage",
-                "tobacco_smoking_history",
-                "tobacco_smoking_pack_years_smoked",
-                "tobacco_smoking_year_stopped",
-                "tumor_grade",
-                "tumor_sample_procurement_country",
-                "tumor_size",
-                "tumor_stage",
-                "tumor_status",
-                "vital_status",
-                "weight_kg_at_diagnosis",
-                "year_of_tobacco_smoking_onset"
-              ],
               "type": "string"
             },
-            "name": "tier1_cde_name",
+            "name": "cde_name",
             "required": false,
             "type": "array"
           },
@@ -3202,7 +3153,218 @@
             "type": "array"
           },
           {
-            "description": "Number of records per page of results.  Maximum is 2000.",
+            "description": "Number of records per page of results.  Max is 2000.",
+            "in": "query",
+            "items": {
+              "default": 150,
+              "format": "int32",
+              "maximum": 2000,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "name": "page_size",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "default": "cohort",
+            "description": "Which column in the results should be used for sorting paginated results?",
+            "enum": [
+              "tcga_participant_barcode",
+              "cohort",
+              "cde_name"
+            ],
+            "in": "query",
+            "name": "sort_by",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/tab-separated-values",
+          "text/plain"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Retrieve TCGA CDEs verbatim, i.e. not normalized by Firehose.",
+        "tags": [
+          "Samples"
+        ]
+      }
+    },
+    "/Samples/Clinical_FH": {
+      "get": {
+        "description": "This service returns patient-level clinical data elements (CDEs) that have been normalized by Firehose for use in analyses. Results may be selected by disease cohort, patient barcode or CDE name, but at least one cohort, barcode or CDE must be provided. When filtering by CDE note that only when a  patient record contains one or more of the selected CDEs will it be returned. Visit <a href=\"http://gdac.broadinstitute.org/runs/info/clinical\">this table of CDEs</a> to see what's available for every disase cohort; for more information on how these CDEs are processed see our <a href=\"https://confluence.broadinstitute.org/display/GDAC/Documentation#Documentation-ClinicalPipeline\">pipeline documentation</a>.",
+        "operationId": "Clinical_FH",
+        "parameters": [
+          {
+            "default": "json",
+            "description": "Format of result.",
+            "enum": [
+              "json",
+              "tsv",
+              "csv"
+            ],
+            "in": "query",
+            "name": "format",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Narrow search to one or more TCGA disease cohorts from the scrollable list.",
+            "in": "query",
+            "items": {
+              "enum": [
+                "ACC",
+                "BLCA",
+                "BRCA",
+                "CESC",
+                "CHOL",
+                "COAD",
+                "COADREAD",
+                "DLBC",
+                "ESCA",
+                "FPPP",
+                "GBM",
+                "GBMLGG",
+                "HNSC",
+                "KICH",
+                "KIPAN",
+                "KIRC",
+                "KIRP",
+                "LAML",
+                "LGG",
+                "LIHC",
+                "LUAD",
+                "LUSC",
+                "MESO",
+                "OV",
+                "PAAD",
+                "PCPG",
+                "PRAD",
+                "READ",
+                "SARC",
+                "SKCM",
+                "STAD",
+                "STES",
+                "TGCT",
+                "THCA",
+                "THYM",
+                "UCEC",
+                "UCS",
+                "UVM"
+              ],
+              "type": "string"
+            },
+            "name": "cohort",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "description": "Comma separated list of TCGA participant barcodes (e.g. TCGA-GF-A4EO).",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "tcga_participant_barcode",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "description": "Retrieve results only for the CDEs specified from the scrollable list.",
+            "in": "query",
+            "items": {
+              "enum": [
+                "age_at_diagnosis",
+                "age_began_smoking_in_years",
+                "Breslow_thickness",
+                "cause_of_death",
+                "cervical_carcinoma_pelvic_extension_text",
+                "cervix_suv_results",
+                "chemo_concurrent_type",
+                "clinical_stage",
+                "corpus_involvement",
+                "date_of_initial_pathologic_diagnosis",
+                "days_to_death",
+                "days_to_last_followup",
+                "days_to_last_known_alive",
+                "days_to_psa",
+                "days_to_submitted_specimen_dx",
+                "ethnicity",
+                "extrathyroidal_extension",
+                "gender",
+                "gleason_score",
+                "height_cm_at_diagnosis",
+                "histological_type",
+                "history_hormonal_contraceptives_use",
+                "hysterectomy_type",
+                "initial_pathologic_dx_year",
+                "karnofsky_performance_score",
+                "keratinization_squamous_cell",
+                "lymph_node_location",
+                "lymph_nodes_examined",
+                "lymph_nodes_examined_he_count",
+                "lymphovascular_involvement",
+                "melanoma_primary_known",
+                "melanoma_ulceration",
+                "menopause_status",
+                "multifocality",
+                "neoplasm_histologic_grade",
+                "number_of_lymph_nodes",
+                "number_pack_years_smoked",
+                "pathologic_stage",
+                "pathology_M_stage",
+                "pathology_N_stage",
+                "pathology_T_stage",
+                "pos_lymph_node_location",
+                "pregnancies_count_ectopic",
+                "pregnancies_count_live_birth",
+                "pregnancies_count_stillbirth",
+                "pregnancies_count_total",
+                "pregnancy_spontaneous_abortion_count",
+                "pregnancy_therapeutic_abortion_count",
+                "psa_value",
+                "race",
+                "radiation_exposure",
+                "radiation_therapy",
+                "radiation_therapy_status",
+                "residual_tumor",
+                "tobacco_smoking_history",
+                "tobacco_smoking_pack_years_smoked",
+                "tobacco_smoking_year_stopped",
+                "tumor_size",
+                "tumor_status",
+                "tumor_tissue_site",
+                "vital_status",
+                "weight_kg_at_diagnosis",
+                "year_of_tobacco_smoking_onset",
+                "years_to_birth"
+              ],
+              "type": "string"
+            },
+            "name": "fh_cde_name",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "description": "Which page (slice) of entire results set should be returned. ",
+            "in": "query",
+            "items": {
+              "default": 1,
+              "format": "int32",
+              "minimum": 1,
+              "type": "integer"
+            },
+            "name": "page",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "description": "Number of records per page of results.  Max is 2000.",
             "in": "query",
             "items": {
               "default": 250,
@@ -3221,7 +3383,7 @@
             "enum": [
               "tcga_participant_barcode",
               "cohort",
-              "tier1_cde_name"
+              "fh_cde_name"
             ],
             "in": "query",
             "name": "sort_by",
@@ -3239,7 +3401,7 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Retrieve clinical pick tier 1 data.",
+        "summary": "Retrieve CDEs normalized by Firehose and selected for analyses.",
         "tags": [
           "Samples"
         ]
@@ -3384,7 +3546,7 @@
             "type": "array"
           },
           {
-            "description": "Number of records per page of results.  Maximum is 2000.",
+            "description": "Number of records per page of results.  Max is 2000.",
             "in": "query",
             "items": {
               "default": 250,
@@ -3568,7 +3730,7 @@
             "type": "array"
           },
           {
-            "description": "Number of records per page of results.  Maximum is 2000.",
+            "description": "Number of records per page of results.  Max is 2000.",
             "in": "query",
             "items": {
               "default": 250,
