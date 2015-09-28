@@ -92,7 +92,7 @@ function updateCollection(dir) {
       if (error)
         return logError(error, result);
 
-      var newFilename = getSwaggerPath(swagger);
+      var newFilename = getSwaggerPath(result.swagger);
       assert(newFilename === filename);
       asyncCb(null);
     });
