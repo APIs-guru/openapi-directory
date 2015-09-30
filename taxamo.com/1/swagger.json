@@ -168,6 +168,18 @@
           "description": "Two-letter ISO country code, e.g. FR. Use it to force country code for tax calculation.",
           "type": "string"
         },
+        "invoice_address_city": {
+          "description": "Invoice address/postal_code",
+          "type": "string"
+        },
+        "invoice_address_postal_code": {
+          "description": "Invoice address/postal_code",
+          "type": "string"
+        },
+        "invoice_address_region": {
+          "description": "Invoice address/region",
+          "type": "string"
+        },
         "order_date": {
           "description": "Order date in yyyy-MM-dd format, in merchant's timezone. If provided by the API caller, no timezone conversion is performed. Default value is current date and time. When using public token, the default value is used.",
           "type": "string"
@@ -200,9 +212,23 @@
     },
     "calculateSimpleTaxOut": {
       "properties": {
+        "storage_required_fields": {
+          "description": "Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.",
+          "items": {
+            "$ref": "#/definitions/storage_required_fields"
+          },
+          "type": "array"
+        },
+        "tax_required_fields": {
+          "description": "Fields required for tax calculation. Depends on the region/transaction type.",
+          "items": {
+            "$ref": "#/definitions/tax_required_fields"
+          },
+          "type": "array"
+        },
         "transaction": {
           "$ref": "#/definitions/transaction",
-          "description": "Transaction data with tax calculated"
+          "description": "Transaction data"
         }
       },
       "type": "object"
@@ -271,9 +297,23 @@
     },
     "calculateTaxOut": {
       "properties": {
+        "storage_required_fields": {
+          "description": "Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.",
+          "items": {
+            "$ref": "#/definitions/storage_required_fields"
+          },
+          "type": "array"
+        },
+        "tax_required_fields": {
+          "description": "Fields required for tax calculation. Depends on the region/transaction type.",
+          "items": {
+            "$ref": "#/definitions/tax_required_fields"
+          },
+          "type": "array"
+        },
         "transaction": {
           "$ref": "#/definitions/transaction",
-          "description": "Transaction data with tax calculated"
+          "description": "Transaction data"
         }
       },
       "type": "object"
@@ -307,9 +347,23 @@
     },
     "confirmTransactionOut": {
       "properties": {
+        "storage_required_fields": {
+          "description": "Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.",
+          "items": {
+            "$ref": "#/definitions/storage_required_fields"
+          },
+          "type": "array"
+        },
+        "tax_required_fields": {
+          "description": "Fields required for tax calculation. Depends on the region/transaction type.",
+          "items": {
+            "$ref": "#/definitions/tax_required_fields"
+          },
+          "type": "array"
+        },
         "transaction": {
           "$ref": "#/definitions/transaction",
-          "description": "Transaction data."
+          "description": "Transaction data"
         }
       },
       "type": "object"
@@ -411,6 +465,10 @@
           "description": "VAT number country code. Important for Greece.",
           "type": "string"
         },
+        "tax_region": {
+          "description": "Tax region code - e.g. EU, US, NO, JP...",
+          "type": "string"
+        },
         "tax_supported": {
           "description": "True if tax calculation supported for this country.",
           "type": "boolean"
@@ -464,6 +522,10 @@
         },
         "tax_number_country_code": {
           "description": "VAT number country code. Important for Greece.",
+          "type": "string"
+        },
+        "tax_region": {
+          "description": "Tax region code - e.g. EU, US, NO, JP...",
           "type": "string"
         },
         "tax_supported": {
@@ -588,9 +650,23 @@
     },
     "createTransactionOut": {
       "properties": {
+        "storage_required_fields": {
+          "description": "Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.",
+          "items": {
+            "$ref": "#/definitions/storage_required_fields"
+          },
+          "type": "array"
+        },
+        "tax_required_fields": {
+          "description": "Fields required for tax calculation. Depends on the region/transaction type.",
+          "items": {
+            "$ref": "#/definitions/tax_required_fields"
+          },
+          "type": "array"
+        },
         "transaction": {
           "$ref": "#/definitions/transaction",
-          "description": "Stored transaction data"
+          "description": "Transaction data"
         }
       },
       "type": "object"
@@ -813,6 +889,10 @@
         "moss_country_code": {
           "description": "MOSS country code, used to determine currency. If ommited, merchant default setting is used.",
           "type": "string"
+        },
+        "tax_region": {
+          "description": "Tax region key, defaults to EU for backwards compatibility.",
+          "type": "string"
         }
       },
       "required": [
@@ -834,16 +914,36 @@
     },
     "getSettlementIn": {
       "properties": {
+        "currency_code": {
+          "description": "ISO 3-letter currency code, e.g. EUR or USD. If provided, all amounts will be coerced for this currency. Defaults to region's currency code.",
+          "type": "string"
+        },
+        "end_month": {
+          "description": "Period end month in yyyy-MM-dd format. Either quarter or start-month and end-month have to be provided.",
+          "type": "string"
+        },
         "format": {
           "description": "Output format. 'csv' value is accepted as well",
           "type": "string"
         },
         "moss_country_code": {
-          "description": "MOSS country code, used to determine currency. If ommited, merchant default setting is used.",
+          "description": "MOSS country code, used to determine currency/region. If ommited, merchant default setting is used. Deprecated: please use tax-country-code.",
           "type": "string"
         },
         "moss_tax_id": {
-          "description": "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used.",
+          "description": "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id.",
+          "type": "string"
+        },
+        "start_month": {
+          "description": "Period start month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.",
+          "type": "string"
+        },
+        "tax_country_code": {
+          "description": "Tax entity country code, used to determine currency/region. ",
+          "type": "string"
+        },
+        "tax_id": {
+          "description": "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id.",
           "type": "string"
         }
       },
@@ -852,11 +952,11 @@
     "getSettlementOut": {
       "properties": {
         "end_date": {
-          "description": "Quarter end date in yyyy-MM-dd'T'hh:mm:ss'Z' format.",
+          "description": "Period end date in yyyy-MM-dd'T'hh:mm:ss'Z' format.",
           "type": "string"
         },
         "fx_rate_date": {
-          "description": "Date of ECB FX rate used for conversions in yyyy-MM-dd'T'hh:mm:ss'Z' format.",
+          "description": "Date of ECB FX rate used for conversions in yyyy-MM-dd'T'hh:mm:ss'Z' format. Applies to tax regions where ",
           "type": "string"
         },
         "indicative": {
@@ -871,7 +971,7 @@
           "type": "array"
         },
         "start_date": {
-          "description": "Quarter start date in yyyy-MM-dd'T'hh:mm:ss'Z' format.",
+          "description": "Period start date in yyyy-MM-dd'T'hh:mm:ss'Z' format.",
           "type": "string"
         }
       },
@@ -934,8 +1034,20 @@
     },
     "getSettlementSummaryIn": {
       "properties": {
+        "end_month": {
+          "description": "Period end month in yyyy-MM-dd format. Either quarter or start-month and end-month have to be provided.",
+          "type": "string"
+        },
         "moss_country_code": {
           "description": "MOSS country code, used to determine currency. If ommited, merchant default setting is used.",
+          "type": "string"
+        },
+        "start_month": {
+          "description": "Period start month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.",
+          "type": "string"
+        },
+        "tax_region": {
+          "description": "Tax region key",
           "type": "string"
         }
       },
@@ -952,9 +1064,56 @@
     },
     "getTransactionOut": {
       "properties": {
+        "storage_required_fields": {
+          "description": "Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.",
+          "items": {
+            "$ref": "#/definitions/storage_required_fields"
+          },
+          "type": "array"
+        },
+        "tax_required_fields": {
+          "description": "Fields required for tax calculation. Depends on the region/transaction type.",
+          "items": {
+            "$ref": "#/definitions/tax_required_fields"
+          },
+          "type": "array"
+        },
         "transaction": {
           "$ref": "#/definitions/transaction",
           "description": "Transaction data"
+        }
+      },
+      "type": "object"
+    },
+    "getTransactionsStatsByCountryIn": {
+      "properties": {
+        "date_from": {
+          "description": "Date from in yyyy-MM format.",
+          "type": "string"
+        },
+        "date_to": {
+          "description": "Date to in yyyy-MM format.",
+          "type": "string"
+        },
+        "global_currency_code": {
+          "description": "Global currency code to use for conversion - in addition to country's currency if rate is available. Conversion is indicative and based on most-recent rate from ECB.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "date_from",
+        "date_to"
+      ],
+      "type": "object"
+    },
+    "getTransactionsStatsByCountryOut": {
+      "properties": {
+        "by_country": {
+          "description": "Settlement stats.",
+          "items": {
+            "$ref": "#/definitions/by_country"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -1038,6 +1197,10 @@
           "description": "Custom identifier provided upon transaction creation.",
           "type": "string"
         },
+        "customer_id": {
+          "description": "Free-form field for storing customer id.",
+          "type": "string"
+        },
         "description": {
           "description": "Transaction description.",
           "type": "string"
@@ -1086,8 +1249,12 @@
           "description": "Two-letter ISO country code, e.g. FR. This code applies to detected/set country for transaction, but can be set using manual mode.",
           "type": "string"
         },
+        "tax_data": {
+          "$ref": "#/definitions/tax_data_schema",
+          "description": "Tax additional information - e.g. US sales tax exemption certificate data."
+        },
         "tax_deducted": {
-          "description": "True if the transaction deducted from tax and no tax is applied. Either set automatically when VAT number validates with VIES correctly, but can also be provided in manual mode.",
+          "description": "True if the transaction is deducted from tax and no tax is applied (it is untaxed). Either set automatically when VAT number validates with VIES correctly, but can also be provided in manual mode.",
           "type": "boolean"
         },
         "transaction_lines": {
@@ -1139,6 +1306,10 @@
         },
         "product_code": {
           "description": "Internal product code, used for invoicing for example.",
+          "type": "string"
+        },
+        "product_tax_code": {
+          "description": "External product tax code for a line, for example TIC in US Sales tax.",
           "type": "string"
         },
         "product_type": {
@@ -1228,6 +1399,10 @@
           "description": "Custom identifier provided upon transaction creation.",
           "type": "string"
         },
+        "customer_id": {
+          "description": "Free-form field for storing customer id.",
+          "type": "string"
+        },
         "description": {
           "description": "Transaction description.",
           "type": "string"
@@ -1276,8 +1451,12 @@
           "description": "Two-letter ISO country code, e.g. FR. This code applies to detected/set country for transaction, but can be set using manual mode.",
           "type": "string"
         },
+        "tax_data": {
+          "$ref": "#/definitions/tax_data_schema",
+          "description": "Tax additional information - e.g. US sales tax exemption certificate data."
+        },
         "tax_deducted": {
-          "description": "True if the transaction deducted from tax and no tax is applied. Either set automatically when VAT number validates with VIES correctly, but can also be provided in manual mode.",
+          "description": "True if the transaction is deducted from tax and no tax is applied (it is untaxed). Either set automatically when VAT number validates with VIES correctly, but can also be provided in manual mode.",
           "type": "boolean"
         },
         "transaction_lines": {
@@ -1321,7 +1500,7 @@
           "type": "string"
         },
         "region": {
-          "description": "Region.",
+          "description": "Region, for United States - state code - e.g. NJ.",
           "type": "string"
         },
         "street_name": {
@@ -1503,6 +1682,10 @@
           "description": "Country name",
           "type": "string"
         },
+        "country_subdivision": {
+          "description": "Country subdivision (e.g. state or provice or county)",
+          "type": "string"
+        },
         "currency_code": {
           "description": "Three-letter ISO currency code.",
           "type": "string"
@@ -1518,6 +1701,10 @@
         "tax_rate": {
           "description": "Tax rate",
           "type": "number"
+        },
+        "tax_region": {
+          "description": "Tax region key",
+          "type": "string"
         }
       },
       "type": "object"
@@ -1563,10 +1750,23 @@
       },
       "type": "object"
     },
+    "storage_required_fields": {
+      "properties": {
+        "field_name": {
+          "description": "Required field name.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "summary": {
       "properties": {
         "currency_code": {
           "description": "In which currency code the settlement was calculated.",
+          "type": "string"
+        },
+        "end_date": {
+          "description": "Period end date in yyyy-MM-dd'T'hh:mm:ss'Z' format.",
           "type": "string"
         },
         "fx_rate_date": {
@@ -1581,12 +1781,34 @@
           "description": "Quarter that this summary applies to.",
           "type": "string"
         },
+        "start_date": {
+          "description": "Period start date in yyyy-MM-dd'T'hh:mm:ss'Z' format.",
+          "type": "string"
+        },
         "tax_amount": {
           "description": "Tax amount due in this quarter.",
           "type": "number"
         },
         "tax_entity_name": {
           "description": "Tax entity that the tax is due.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "tax_data_schema": {
+      "properties": {
+        "us_tax_exemption_certificate": {
+          "$ref": "#/definitions/us_tax_exemption_certificate_schema",
+          "description": "US sales tax exemption certificate."
+        }
+      },
+      "type": "object"
+    },
+    "tax_required_fields": {
+      "properties": {
+        "field_name": {
+          "description": "Required field name.",
           "type": "string"
         }
       },
@@ -1661,6 +1883,10 @@
           "description": "Custom identifier provided upon transaction creation.",
           "type": "string"
         },
+        "customer_id": {
+          "description": "Free-form field for storing customer id.",
+          "type": "string"
+        },
         "deducted_tax_amount": {
           "description": "How much tax has been deducted.",
           "type": "number"
@@ -1672,6 +1898,10 @@
         "evidence": {
           "$ref": "#/definitions/evidence",
           "description": "Tax country of residence evidence."
+        },
+        "external_key": {
+          "description": "Transaction external key",
+          "type": "string"
         },
         "force_country_code": {
           "description": "Two-letter ISO country code, e.g. FR. Use it to force country code for tax calculation.",
@@ -1748,6 +1978,10 @@
         "tax_country_code": {
           "description": "Two-letter ISO country code, e.g. FR. This code applies to detected/set country for transaction, but can be set using manual mode.",
           "type": "string"
+        },
+        "tax_data": {
+          "$ref": "#/definitions/tax_data_schema",
+          "description": "Tax additional information - e.g. US sales tax exemption certificate data."
         },
         "tax_deducted": {
           "description": "If the transaction is in a country supported by Taxamo, but the tax is not calculated due to merchant settings or EU B2B transaction for example.",
@@ -1834,6 +2068,10 @@
         },
         "product_code": {
           "description": "Internal product code, used for invoicing for example.",
+          "type": "string"
+        },
+        "product_tax_code": {
+          "description": "External product tax code for a line, for example TIC in US Sales tax.",
           "type": "string"
         },
         "product_type": {
@@ -1955,6 +2193,10 @@
           "description": "Custom identifier provided upon transaction creation.",
           "type": "string"
         },
+        "customer_id": {
+          "description": "Free-form field for storing customer id.",
+          "type": "string"
+        },
         "deducted_tax_amount": {
           "description": "How much tax has been deducted.",
           "type": "number"
@@ -1966,6 +2208,10 @@
         "evidence": {
           "$ref": "#/definitions/evidence",
           "description": "Tax country of residence evidence."
+        },
+        "external_key": {
+          "description": "Transaction external key",
+          "type": "string"
         },
         "force_country_code": {
           "description": "Two-letter ISO country code, e.g. FR. Use it to force country code for tax calculation.",
@@ -2043,6 +2289,10 @@
           "description": "Two-letter ISO country code, e.g. FR. This code applies to detected/set country for transaction, but can be set using manual mode.",
           "type": "string"
         },
+        "tax_data": {
+          "$ref": "#/definitions/tax_data_schema",
+          "description": "Tax additional information - e.g. US sales tax exemption certificate data."
+        },
         "tax_deducted": {
           "description": "If the transaction is in a country supported by Taxamo, but the tax is not calculated due to merchant settings or EU B2B transaction for example.",
           "type": "boolean"
@@ -2096,9 +2346,23 @@
     },
     "unconfirmTransactionOut": {
       "properties": {
+        "storage_required_fields": {
+          "description": "Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.",
+          "items": {
+            "$ref": "#/definitions/storage_required_fields"
+          },
+          "type": "array"
+        },
+        "tax_required_fields": {
+          "description": "Fields required for tax calculation. Depends on the region/transaction type.",
+          "items": {
+            "$ref": "#/definitions/tax_required_fields"
+          },
+          "type": "array"
+        },
         "transaction": {
           "$ref": "#/definitions/transaction",
-          "description": "Transaction data."
+          "description": "Transaction data"
         }
       },
       "type": "object"
@@ -2114,11 +2378,163 @@
     },
     "updateTransactionOut": {
       "properties": {
+        "storage_required_fields": {
+          "description": "Fields required for transaction storage (can be added later - it's up to merchant software). Depends on the region/transaction type.",
+          "items": {
+            "$ref": "#/definitions/storage_required_fields"
+          },
+          "type": "array"
+        },
+        "tax_required_fields": {
+          "description": "Fields required for tax calculation. Depends on the region/transaction type.",
+          "items": {
+            "$ref": "#/definitions/tax_required_fields"
+          },
+          "type": "array"
+        },
         "transaction": {
           "$ref": "#/definitions/transaction",
-          "description": "Transaction data."
+          "description": "Transaction data"
         }
       },
+      "type": "object"
+    },
+    "us_tax_exempt_state": {
+      "properties": {
+        "identifier_for_exemption_reason": {
+          "description": "Identifier for exemption reason.",
+          "type": "string"
+        },
+        "reason_for_exemption": {
+          "description": "Exemption reason",
+          "type": "string"
+        },
+        "state_abbr": {
+          "description": "Two character state abbreviation.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "state_abbr"
+      ],
+      "type": "object"
+    },
+    "us_tax_exemption_certificate_details_schema": {
+      "properties": {
+        "exempt_states": {
+          "description": "List of states where the certificate is valid.",
+          "items": {
+            "$ref": "#/definitions/us_tax_exempt_state"
+          },
+          "type": "array"
+        },
+        "purchaser_address1": {
+          "description": "Purchaser's first address line.",
+          "type": "string"
+        },
+        "purchaser_address2": {
+          "description": "Purchaser's second address line.",
+          "type": "string"
+        },
+        "purchaser_business_type": {
+          "description": "Purchaser business type.",
+          "type": "string"
+        },
+        "purchaser_business_type_other_value": {
+          "description": "If business type is other, a short description must be provided.",
+          "type": "string"
+        },
+        "purchaser_city": {
+          "description": "Purchaser's city.",
+          "type": "string"
+        },
+        "purchaser_exemption_reason": {
+          "description": "The reason for exemption reason.",
+          "type": "string"
+        },
+        "purchaser_exemption_reason_value": {
+          "description": "The value of exemption reason.",
+          "type": "string"
+        },
+        "purchaser_first_name": {
+          "description": "Purchaser's first name.",
+          "type": "string"
+        },
+        "purchaser_last_name": {
+          "description": "Purchaser's last name.",
+          "type": "string"
+        },
+        "purchaser_state": {
+          "description": "Purchaser's state.",
+          "type": "string"
+        },
+        "purchaser_tax_id": {
+          "$ref": "#/definitions/us_tax_id",
+          "description": "Purchaser's TAX ID."
+        },
+        "purchaser_title": {
+          "description": "Purchaser's title.",
+          "type": "string"
+        },
+        "purchaser_zip": {
+          "description": "Purchaser's zip code.",
+          "type": "string"
+        },
+        "single_purchase": {
+          "description": "Set to true if this certificate is valid for single purchase only.",
+          "type": "boolean"
+        },
+        "single_purchase_order_identifier": {
+          "description": "Purchase/order identifier for single purchase.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "purchaser_business_type",
+        "purchaser_exemption_reason_value",
+        "purchaser_state",
+        "purchaser_zip",
+        "purchaser_city",
+        "purchaser_last_name",
+        "purchaser_exemption_reason",
+        "purchaser_tax_id",
+        "purchaser_address1",
+        "purchaser_first_name",
+        "exempt_states"
+      ],
+      "type": "object"
+    },
+    "us_tax_exemption_certificate_schema": {
+      "properties": {
+        "certificate_id": {
+          "description": "The exemption certificate number.",
+          "type": "string"
+        },
+        "detail": {
+          "$ref": "#/definitions/us_tax_exemption_certificate_details_schema",
+          "description": "US tax exemption ertificate detail."
+        }
+      },
+      "type": "object"
+    },
+    "us_tax_id": {
+      "properties": {
+        "state_of_issue": {
+          "description": "State of issue",
+          "type": "string"
+        },
+        "tax_id": {
+          "description": "Tax ID",
+          "type": "string"
+        },
+        "tax_id_type": {
+          "description": "Tax id type.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tax_id_type"
+      ],
       "type": "object"
     },
     "validateTaxNumberIn": {
@@ -2361,6 +2777,13 @@
             "type": "string"
           },
           {
+            "description": "Tax region key, defaults to EU for backwards compatibility.",
+            "in": "query",
+            "name": "tax_region",
+            "required": false,
+            "type": "string"
+          },
+          {
             "description": "Take only refunds issued at or after the date. Format: yyyy-MM-dd",
             "in": "query",
             "name": "date_from",
@@ -2406,7 +2829,28 @@
             "type": "string"
           },
           {
-            "description": "Quarter in yyyy-MM format.",
+            "description": "Tax region key",
+            "in": "query",
+            "name": "tax_region",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Period start month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.",
+            "in": "query",
+            "name": "start_month",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Period end month in yyyy-MM-dd format. Either quarter or start-month and end-month have to be provided.",
+            "in": "query",
+            "name": "end_month",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Quarter in yyyy-MM format. If start-date and end-date are provided, quarter is ignored and should be set to 'range'.",
             "in": "path",
             "name": "quarter",
             "required": true,
@@ -2451,21 +2895,56 @@
             "type": "string"
           },
           {
-            "description": "MOSS country code, used to determine currency. If ommited, merchant default setting is used.",
+            "description": "MOSS country code, used to determine currency/region. If ommited, merchant default setting is used. Deprecated: please use tax-country-code.",
             "in": "query",
             "name": "moss_country_code",
             "required": false,
             "type": "string"
           },
           {
-            "description": "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used.",
+            "description": "Tax entity country code, used to determine currency/region. ",
+            "in": "query",
+            "name": "tax_country_code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "ISO 3-letter currency code, e.g. EUR or USD. If provided, all amounts will be coerced for this currency. Defaults to region's currency code.",
+            "in": "query",
+            "name": "currency_code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id.",
             "in": "query",
             "name": "moss_tax_id",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Quarter in yyyy-MM format.",
+            "description": "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id.",
+            "in": "query",
+            "name": "tax_id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Period start month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.",
+            "in": "query",
+            "name": "start_month",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Period end month in yyyy-MM-dd format. Either quarter or start-month and end-month have to be provided.",
+            "in": "query",
+            "name": "end_month",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Quarter in yyyy-MM format. If start-date and end-date are provided, quarter is ignored and should be set to 'range'.",
             "in": "path",
             "name": "quarter",
             "required": true,
@@ -2689,6 +3168,58 @@
         ]
       }
     },
+    "/api/v1/stats/transactions/by_country": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getTransactionsStatsByCountry",
+        "parameters": [
+          {
+            "description": "Global currency code to use for conversion - in addition to country's currency if rate is available. Conversion is indicative and based on most-recent rate from ECB.",
+            "in": "query",
+            "name": "global_currency_code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Date from in yyyy-MM format.",
+            "in": "query",
+            "name": "date_from",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Date to in yyyy-MM format.",
+            "in": "query",
+            "name": "date_to",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/getTransactionsStatsByCountryOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        },
+        "summary": "Settlement by country",
+        "tags": [
+          "stats"
+        ]
+      }
+    },
     "/api/v1/tax/calculate": {
       "get": {
         "consumes": [
@@ -2704,6 +3235,13 @@
             "type": "string"
           },
           {
+            "description": "Invoice address/postal_code",
+            "in": "query",
+            "name": "invoice_address_city",
+            "required": false,
+            "type": "string"
+          },
+          {
             "description": "Buyer's credit card prefix.",
             "in": "query",
             "name": "buyer_credit_card_prefix",
@@ -2715,6 +3253,13 @@
             "in": "query",
             "name": "currency_code",
             "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Invoice address/region",
+            "in": "query",
+            "name": "invoice_address_region",
+            "required": false,
             "type": "string"
           },
           {
@@ -2763,6 +3308,13 @@
             "description": "Billing two letter ISO country code.",
             "in": "query",
             "name": "billing_country_code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Invoice address/postal_code",
+            "in": "query",
+            "name": "invoice_address_postal_code",
             "required": false,
             "type": "string"
           },
