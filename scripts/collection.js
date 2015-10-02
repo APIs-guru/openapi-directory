@@ -7,6 +7,7 @@ var fs = require('fs');
 var exec = require('child_process').execSync;
 var Path = require('path');
 var jp = require('json-pointer');
+var jsonPath = require('jsonpath');
 var glob = require('glob')
 var editor = require('editor');
 var async = require('async')
@@ -352,9 +353,14 @@ function fixSpec(swagger, errors) {
   var fixed = false;
 
   _.each(errors, function (error) {
+    var parentPath = jp.compile(_.dropRight(error.path));
     var path = jp.compile(error.path);
+
+    var parentValue = jp(swagger, parentPath);
     var value = jp(swagger, path);
+
     var newValue;
+
     switch(error.code) {
       case 'ONE_OF_MISSING':
         if (value.in === 'path' && !value.required) {
@@ -365,6 +371,20 @@ function fixSpec(swagger, errors) {
       case 'UNRESOLVABLE_REFERENCE':
         if (typeof swagger.definitions[value] !== 'undefined')
           newValue = '#/definitions/' + value;
+        break;
+      case 'DUPLICATE_OPERATIONID':
+        //FIXME: find better solutions than strip all 'operationId'
+        jsonPath.apply(swagger, '$.paths[*][*].operationId', function (value) {
+          return undefined;
+        });
+        fixed = true;
+        break;
+      case 'INVALID_TYPE':
+        if (_.last(error.path) !== 'default')
+          break;
+        //FIXME: try to convert
+        delete parentValue.default;
+        //TODO: add warning
         break;
     }
     if (!_.isUndefined(newValue)) {
