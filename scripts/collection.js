@@ -226,15 +226,18 @@ function editFile(data, cb) {
 }
 
 function saveFixup(swagger, editedSwagger) {
-  var swaggerPath = getPathComponents(swagger).join('/');
   //Before diff we need to unpatch, it's a way to appeand changes
-  var fixup = readJson(swaggerPath + '/fixup.json');
-  if (fixup)
-    jsondiffpatch.unpatch(swagger, fixup);
+  revertFixup(swagger);
 
   var diff = jsondiffpatch.diff(swagger, editedSwagger);
   if (diff)
     saveJson(swaggerPath + '/fixup.json', diff);
+}
+
+function revertFixup(swagger) {
+  var fixup = readJson(getSwaggerPath(swagger, 'fixup.json'));
+  if (fixup)
+    jsondiffpatch.unpatch(swagger, fixup);
 }
 
 function updateGoogle() {
@@ -296,7 +299,7 @@ function updateGoogle() {
 }
 
 function mergePatch(swagger, addPatch) {
-  var path = getPathComponents(swagger).join('/') + '/patch.json';
+  var path = getSwaggerPath(swagger, 'patch.json');
   var patch = jsonPatch.merge(readJson(path), addPatch);
   saveJson(path, patch);
 }
@@ -461,7 +464,13 @@ function getSpecs(dir) {
 
 function patchSwagger(swagger, exPatch) {
   jsonPatch.apply(swagger, exPatch);
+  jsonPatch.apply(swagger, getMergePatch(swagger));
 
+  var fixup = readJson(getSwaggerPath(swagger, 'fixup.json'));
+  swagger = jsondiffpatch.patch(swagger, fixup);
+}
+
+function getMergePatch(swagger) {
   var patch = null;
   var pathComponents = getPathComponents(swagger);
 
@@ -474,8 +483,7 @@ function patchSwagger(swagger, exPatch) {
       patch = jsonPatch.merge(patch, subPatch);
   });
 
-  swagger = jsondiffpatch.patch(swagger, readJson(path + 'fixup.json'));
-  jsonPatch.apply(swagger, patch);
+  return patch;
 }
 
 function convertToSwagger(spec, callback) {
@@ -554,8 +562,9 @@ function getPathComponents(swagger) {
   return path;
 }
 
-function getSwaggerPath(swagger) {
-  return getPathComponents(swagger).join('/') + '/swagger.json';
+function getSwaggerPath(swagger, filename) {
+  filename = filename || 'swagger.json';
+  return getPathComponents(swagger).join('/') + '/' + filename;
 }
 
 function saveJson(path, json) {
