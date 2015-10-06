@@ -384,6 +384,14 @@ function fixSpec(swagger, errors) {
         });
         fixed = true;
         break;
+      case 'OBJECT_MISSING_REQUIRED_PROPERTY':
+        if (value.type === 'array' && _.isUndefined(value.items)) {
+          newValue = _.clone(value);
+          newValue.items = {};
+        }
+        break;
+      case 'ENUM_MISMATCH':
+      case 'INVALID_FORMAT':
       case 'INVALID_TYPE':
         if (_.last(error.path) !== 'default')
           break;
