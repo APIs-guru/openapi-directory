@@ -293,7 +293,6 @@
     "/api/v3/mmplaylist/article/download": {
       "post": {
         "description": "This call retrieve a download URL for a Article (Preview/Full).<p> Please note, that a Full-Binary is only available with a User-Token.</p>",
-        "operationId": "apiv3mmplaylistarticledownload",
         "parameters": [
           {
             "in": "body",
@@ -324,7 +323,6 @@
     "/api/v3/mmplaylist/article/report/{ticket}": {
       "post": {
         "description": "This call store a event for a article, that was downloaded, removed or listened.",
-        "operationId": "apiv3mmplaylistarticlereportticket",
         "parameters": [
           {
             "description": "Ticket of the corresponding download",
@@ -362,7 +360,6 @@
     "/api/v3/mmplaylist/article/search": {
       "get": {
         "description": "This call search the complete catalogue for this client. Please note, that you need a special client-configuration to use the results of this call for a Preview/Download or a personal playlist.",
-        "operationId": "apiv3mmplaylistarticlesearch",
         "parameters": [
           {
             "description": "query",
@@ -495,7 +492,6 @@
     "/api/v3/mmplaylist/article/streaming": {
       "post": {
         "description": "This call retrieve a streaming URL for a Article (Preview/Full).<p> Please note, that a Full-Binary is only available with a User-Token.</p>",
-        "operationId": "apiv3mmplaylistarticlestreaming",
         "parameters": [
           {
             "in": "body",
@@ -526,7 +522,6 @@
     "/api/v3/mmplaylist/config": {
       "get": {
         "description": "This call retrieve the config for a MMPlaylist product.",
-        "operationId": "apiv3mmplaylistconfig",
         "responses": {
           "200": {
             "description": "Ok",
@@ -550,7 +545,6 @@
     "/api/v3/mmplaylist/playlist": {
       "get": {
         "description": "This call retrieve all available playlists for this client.",
-        "operationId": "apiv3mmplaylistplaylist",
         "parameters": [
           {
             "default": false,
@@ -600,7 +594,6 @@
     "/api/v3/mmplaylist/playlist/{playlistKey}": {
       "get": {
         "description": "This call retrieve a playlist for a playlistKey.",
-        "operationId": "apiv3mmplaylistplaylistplaylistKey",
         "parameters": [
           {
             "in": "path",
@@ -648,7 +641,6 @@
     "/api/v3/mmplaylist/playlist/{playlistKey}/entities": {
       "get": {
         "description": "This call retrieve all a playlist for a given key client.",
-        "operationId": "apiv3mmplaylistplaylistplaylistKeyentities",
         "parameters": [
           {
             "in": "path",
@@ -699,7 +691,6 @@
     "/api/v3/mmplaylist/user/playlist": {
       "get": {
         "description": "This call retrieve the personal playlist for the current user.",
-        "operationId": "apiv3mmplaylistuserplaylist",
         "parameters": [
           {
             "default": false,
@@ -722,7 +713,6 @@
       },
       "put": {
         "description": "This call put changes of the content (remove, position-change) for a personal playlist for the current user.",
-        "operationId": "apiv3mmplaylistuserplaylist",
         "parameters": [
           {
             "in": "body",
@@ -747,7 +737,6 @@
     "/api/v3/mmplaylist/user/playlist/article": {
       "post": {
         "description": "This call post a new article to the personal playlist for the current user.",
-        "operationId": "apiv3mmplaylistuserplaylistarticle",
         "parameters": [
           {
             "in": "body",
@@ -772,7 +761,6 @@
     "/api/v3/mmplaylist/user/playlist/article/{id}": {
       "delete": {
         "description": "This call remove a new article to the personal playlist for the current user.",
-        "operationId": "apiv3mmplaylistuserplaylistarticleid",
         "parameters": [
           {
             "description": "Id of the item",
@@ -796,7 +784,6 @@
     "/api/v3/mmplaylist/user/playlist/articles": {
       "post": {
         "description": "This call post a new articles to the personal playlist for the current user.",
-        "operationId": "apiv3mmplaylistuserplaylistarticles",
         "parameters": [
           {
             "in": "body",
@@ -821,7 +808,6 @@
     "/api/v3/mmplaylist/user/playlist/{playlistKey}": {
       "post": {
         "description": "This call post a complete playlist to the personal playlist for the current user.",
-        "operationId": "apiv3mmplaylistuserplaylistplaylistKey",
         "parameters": [
           {
             "in": "path",
@@ -843,7 +829,6 @@
     },
     "/mmplaylist/article/download": {
       "post": {
-        "operationId": "mmplaylistarticledownload",
         "parameters": [
           {
             "in": "body",
@@ -866,7 +851,6 @@
     },
     "/mmplaylist/article/report/{ticket}": {
       "post": {
-        "operationId": "mmplaylistarticlereportticket",
         "parameters": [
           {
             "in": "path",
@@ -895,7 +879,6 @@
     },
     "/mmplaylist/article/search": {
       "get": {
-        "operationId": "mmplaylistarticlesearch",
         "parameters": [
           {
             "description": "query",
@@ -1026,7 +1009,6 @@
     },
     "/mmplaylist/article/streaming": {
       "post": {
-        "operationId": "mmplaylistarticlestreaming",
         "parameters": [
           {
             "in": "body",
@@ -1049,7 +1031,6 @@
     },
     "/mmplaylist/config": {
       "get": {
-        "operationId": "mmplaylistconfig",
         "responses": {
           "200": {
             "description": "No response was specified"
@@ -1062,7 +1043,6 @@
     },
     "/mmplaylist/playlist": {
       "get": {
-        "operationId": "mmplaylistplaylist",
         "parameters": [
           {
             "default": true,
@@ -1083,7 +1063,6 @@
         ]
       },
       "head": {
-        "operationId": "mmplaylistplaylist",
         "responses": {
           "200": {
             "description": "No response was specified"
@@ -1096,7 +1075,6 @@
     },
     "/mmplaylist/playlist/{playlistKey}": {
       "get": {
-        "operationId": "mmplaylistplaylistplaylistKey",
         "parameters": [
           {
             "in": "path",
@@ -1125,7 +1103,6 @@
     },
     "/mmplaylist/user/playlist": {
       "get": {
-        "operationId": "mmplaylistuserplaylist",
         "responses": {
           "200": {
             "description": "No response was specified"
@@ -1136,7 +1113,6 @@
         ]
       },
       "put": {
-        "operationId": "mmplaylistuserplaylist",
         "parameters": [
           {
             "in": "body",
@@ -1159,7 +1135,6 @@
     },
     "/mmplaylist/user/playlist/article": {
       "post": {
-        "operationId": "mmplaylistuserplaylistarticle",
         "parameters": [
           {
             "in": "body",
@@ -1182,7 +1157,6 @@
     },
     "/mmplaylist/user/playlist/article/{id}": {
       "delete": {
-        "operationId": "mmplaylistuserplaylistarticleid",
         "parameters": [
           {
             "description": "Id of the item",
@@ -1204,7 +1178,6 @@
     },
     "/mmplaylist/user/playlist/{playlistKey}": {
       "post": {
-        "operationId": "mmplaylistuserplaylistplaylistKey",
         "parameters": [
           {
             "in": "path",

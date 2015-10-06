@@ -394,7 +394,6 @@
       "get": {
         "deprecated": false,
         "description": "The identifiers are filtered by the selected resource. The filename is the one to be suggested in the download window.",
-        "operationId": "downloadMappingResult",
         "parameters": [
           {
             "description": "The token associated with the data to download",
@@ -457,7 +456,6 @@
       "get": {
         "deprecated": false,
         "description": "Those identifiers from the user sample that are not present up to the current data version. The filename is the one to be suggested in the download window.",
-        "operationId": "downloadNotFound",
         "parameters": [
           {
             "description": "The token associated with the data to download",
@@ -502,7 +500,6 @@
       "get": {
         "deprecated": false,
         "description": "The results are filtered by the selected resource. The filename is the one to be suggested in the download window.",
-        "operationId": "downloadHitPathways",
         "parameters": [
           {
             "description": "The token associated with the data to download",
@@ -565,7 +562,6 @@
       "get": {
         "deprecated": false,
         "description": "Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
-        "operationId": "getIdentifier",
         "parameters": [
           {
             "description": "The identifier of the element to be retrieved",
@@ -672,7 +668,6 @@
       "get": {
         "deprecated": false,
         "description": "The projection is calculated by the orthologous slot in the Reactome database. Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
-        "operationId": "getIdentifierToHuman",
         "parameters": [
           {
             "description": "The identifier of the element to be retrieved",
@@ -782,7 +777,6 @@
         ],
         "deprecated": false,
         "description": "Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
-        "operationId": "getPostText",
         "parameters": [
           {
             "description": "Identifiers to analyse followed by their expression (when applies)",
@@ -888,7 +882,6 @@
         ],
         "deprecated": false,
         "description": "Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
-        "operationId": "getPostFile",
         "parameters": [
           {
             "description": "A file with the data to be analysed",
@@ -995,7 +988,6 @@
         ],
         "deprecated": false,
         "description": "The projection is calculated by the orthologous slot in the Reactome database. Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
-        "operationId": "getPostFileToHuman",
         "parameters": [
           {
             "description": "A file with the data to be analysed",
@@ -1102,7 +1094,6 @@
         ],
         "deprecated": false,
         "description": "The projection is calculated by the orthologous slot in the Reactome database. Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
-        "operationId": "getPostTextToHuman",
         "parameters": [
           {
             "description": "Identifiers to analyse followed by their expression (when applies)",
@@ -1208,7 +1199,6 @@
         ],
         "deprecated": false,
         "description": "Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
-        "operationId": "getPostURL",
         "parameters": [
           {
             "description": "A URL pointing to the data to be analysed",
@@ -1320,7 +1310,6 @@
         ],
         "deprecated": false,
         "description": "The projection is calculated by the orthologous slot in the Reactome database. Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
-        "operationId": "getPostURLToHuman",
         "parameters": [
           {
             "description": "A URL pointing to the data to be analysed",
@@ -1429,7 +1418,6 @@
       "get": {
         "deprecated": false,
         "description": "Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
-        "operationId": "compareHomoSapiensTo",
         "parameters": [
           {
             "description": "The dbId of the species to compare to",
@@ -1534,7 +1522,6 @@
         ],
         "deprecated": false,
         "description": "Use page and pageSize to reduce the amount of data retrieved. Use sortBy and order to sort the result by your preferred option. The resource field will filter the results to show only those corresponding to the preferred molecule type (TOTAL includes all the different molecules type)",
-        "operationId": "getToken",
         "parameters": [
           {
             "description": "The token associated with the data to query",
@@ -1641,7 +1628,6 @@
         ],
         "deprecated": false,
         "description": "For a given list of pathway identifiers (dbId) it will retrieve a list containing those that are present in the result (with the results for the indicated molecule type)",
-        "operationId": "getTokenFilterPathways",
         "parameters": [
           {
             "description": "The token associated with the data to query",
@@ -1711,7 +1697,6 @@
         ],
         "deprecated": false,
         "description": "filterBySpecies",
-        "operationId": "filterBySpecies",
         "parameters": [
           {
             "description": "The token associated with the data to query",
@@ -1777,7 +1762,6 @@
         ],
         "deprecated": false,
         "description": "Those identifiers that have not been found in the Reactome database",
-        "operationId": "getNotFoundIdentifiers",
         "parameters": [
           {
             "description": "The token associated with the data to query",
@@ -1838,7 +1822,6 @@
         ],
         "deprecated": false,
         "description": "Useful when implementing UI with tables showing the results in a page way and the user needs to know in which page a certain pathway is present for a given set of sorting and filtering options.",
-        "operationId": "getPageOfPathway",
         "parameters": [
           {
             "description": "The token associated with the data to query",
@@ -1945,7 +1928,6 @@
         ],
         "deprecated": false,
         "description": "It filters the submitted list and retrieves back only those that at least one of the participating molecules has been hit with the user submitted data.",
-        "operationId": "getTokenFilterReactions",
         "parameters": [
           {
             "description": "The token associated with the data to query",
@@ -2014,7 +1996,6 @@
         ],
         "deprecated": false,
         "description": "For a given pathway it returns the identifiers (dbId) of the reactions in the pathway that have been hit with the sample taking into account their participating molecules.",
-        "operationId": "getTokenFilterReactions",
         "parameters": [
           {
             "description": "The token associated with the data to query",
@@ -2082,7 +2063,6 @@
         ],
         "deprecated": false,
         "description": "A summary of the molecules type associated to the submitted data.",
-        "operationId": "getResources",
         "parameters": [
           {
             "description": "The token associated with the data to query",
@@ -2125,7 +2105,6 @@
         ],
         "deprecated": false,
         "description": "The identifiers submitted by the user that have a match in Reactome database. It also retrieves the mapping to the main identifiers for those that have been found.",
-        "operationId": "getTokenSummaryPathway",
         "parameters": [
           {
             "description": "The token associated with the data to query",

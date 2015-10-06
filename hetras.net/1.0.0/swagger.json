@@ -1367,7 +1367,6 @@
       "get": {
         "consumes": [],
         "description": "The booking addons endpoint gives the client all service addon\r\n             combinations for the given rate plan, room type, timeframe, for the given number of adults and\r\n             number of children per room",
-        "operationId": "Addons_Get",
         "parameters": [
           {
             "description": "Specifies the hotel id to process.",
@@ -1490,7 +1489,6 @@
           "application/x-www-form-urlencoded"
         ],
         "description": "Create a reservation based on the payload. If the client making the request is not subscribed to the hotel specified in the request\r\n            the API will return 403.",
-        "operationId": "Reservation_Post",
         "parameters": [
           {
             "description": "Specifies the reservation payload.",
@@ -1554,7 +1552,6 @@
     "/api/booking/v0/bookings/{confirmationId}": {
       "get": {
         "consumes": [],
-        "operationId": "Reservation_Get",
         "parameters": [
           {
             "description": "Specifies the booking confirmation id to process.",
@@ -1610,7 +1607,6 @@
     "/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}": {
       "get": {
         "consumes": [],
-        "operationId": "Reservation_Get",
         "parameters": [
           {
             "description": "Specifies the booking confirmation id to process.",
@@ -1674,7 +1670,6 @@
     "/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/cancel": {
       "post": {
         "consumes": [],
-        "operationId": "Reservation_Post",
         "parameters": [
           {
             "description": "Specifies the booking confirmation id to process.",
@@ -1730,7 +1725,6 @@
       "get": {
         "consumes": [],
         "description": "The booking availability endpoint gives the client all room and rate\r\n             combinations for the given timeframe, for the given number of adults and\r\n             number of children per room. The resultset can be further reduced by\r\n             specifying a channel, rate plan or room type.",
-        "operationId": "Rates_Get",
         "parameters": [
           {
             "description": "Specifies the hotel id to process.",
@@ -1853,7 +1847,6 @@
     "/api/hotel/v0/hotels": {
       "get": {
         "consumes": [],
-        "operationId": "Hotel_Get",
         "parameters": [
           {
             "description": "Application identifier.",
@@ -1906,7 +1899,6 @@
       "get": {
         "consumes": [],
         "description": "Based on the url parameter hotelId the API evaluates if the client making the request is allowed to access the data and \r\n            returns 403 if the client is not subscribed to that hotel.",
-        "operationId": "Hotel_Get",
         "parameters": [
           {
             "description": "Specifies the hotel id to process.",
@@ -1963,7 +1955,6 @@
     "/api/hotel/v0/hotels/{hotelId}/room_types": {
       "get": {
         "consumes": [],
-        "operationId": "RoomType_GetRoomTypes",
         "parameters": [
           {
             "description": "Specifies the hotel id to process.",
@@ -2020,7 +2011,6 @@
     "/api/hotel/v0/hotels/{hotelId}/room_types/{code}": {
       "get": {
         "consumes": [],
-        "operationId": "RoomType_GetRoomType",
         "parameters": [
           {
             "description": "Specifies the hotel id to process.",
@@ -2081,7 +2071,6 @@
     "/api/hotel/v0/hotels/{hotelId}/rooms/{roomNumber}": {
       "get": {
         "consumes": [],
-        "operationId": "Room_GetRoom",
         "parameters": [
           {
             "description": "Specifies the hotel id to process.",

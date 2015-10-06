@@ -364,7 +364,6 @@
     "/events": {
       "get": {
         "description": "There are two types of events: for folders and for files.<br/>\nAll events will contain latest resource information about folder or file.\nIf `folder` or `file` key is set to `null`, this means what this object was deleted.<br/>\nTo access this resource, scope `read.events` is required.",
-        "operationId": "index",
         "parameters": [
           {
             "description": "Get events for root folder",
@@ -405,7 +404,6 @@
     "/files": {
       "delete": {
         "description": "File will be permanently deleted, recovery is not possible. You can delete multiple files by joining id's with comma. <br/>\nTo access this resource, scope `delete.file` is required.",
-        "operationId": "index",
         "parameters": [
           {
             "description": "ID of file",
@@ -433,7 +431,6 @@
       },
       "get": {
         "description": "You can get multiple files by joining id's with comma.<br/>\n To access this resource, scope `read.file` is required.",
-        "operationId": "index",
         "parameters": [
           {
             "description": "ID of file that needs to be fetched",
@@ -465,7 +462,6 @@
       },
       "put": {
         "description": "You can update multiple files by joining id's with comma. <br/>\nTo access this resource, scope `update.file` is required.",
-        "operationId": "index",
         "parameters": [
           {
             "description": "ID of file",
@@ -523,7 +519,6 @@
     "/files/link": {
       "post": {
         "description": "You can get multiple links by joining id's with comma.<br/>\n To access this resource, scope `read.file` is required.",
-        "operationId": "link",
         "parameters": [
           {
             "description": "file id",
@@ -550,7 +545,6 @@
     "/files/share": {
       "delete": {
         "description": "Delete shared email.<br/>\nTo access this resource, scope `share.file` is required.",
-        "operationId": "share",
         "parameters": [
           {
             "description": "file id",
@@ -588,7 +582,6 @@
       },
       "get": {
         "description": "Get shared emails.<br/>\n To access this resource, scope `share.file` is required.",
-        "operationId": "share",
         "parameters": [
           {
             "description": "file id",
@@ -613,7 +606,6 @@
       },
       "post": {
         "description": "Be sure that user is verified.<br/>\n To access this resource, scope `share.file` is required.",
-        "operationId": "share",
         "parameters": [
           {
             "description": "file id",
@@ -647,7 +639,6 @@
     "/folders": {
       "delete": {
         "description": "You can delete multiple folders by joining id's with comma.<br/>\n To access this resource, scope `delete.folder` is required.",
-        "operationId": "index",
         "parameters": [
           {
             "description": "folder id",
@@ -672,7 +663,6 @@
       },
       "get": {
         "description": "You can get multiple folders by joining id's with comma.<br/>\n To access this resource, scope `read.folder` is required.",
-        "operationId": "index",
         "parameters": [
           {
             "description": "ID of folder that needs to be fetched",
@@ -697,7 +687,6 @@
       },
       "post": {
         "description": "Create new folder.<br/>\n To access this resource, scope `create.folder` is required.",
-        "operationId": "index",
         "parameters": [
           {
             "description": "folder name",
@@ -729,7 +718,6 @@
       },
       "put": {
         "description": "You can update multiple folders by joining id's with comma. <br/>\n To access this resource, scope `update.folder` is required.",
-        "operationId": "index",
         "parameters": [
           {
             "description": "ID of folder that needs to be updated",
@@ -770,7 +758,6 @@
     "/folders/children": {
       "get": {
         "description": "To access this resource, scope `read.folder` is required.",
-        "operationId": "index",
         "parameters": [
           {
             "description": "ID of parent folder",
@@ -811,7 +798,6 @@
     "/folders/path": {
       "get": {
         "description": "Folders are returned in strict order. From root folder to folder specified by id.<br/>\n To access this resource, scope `read.folder` is required.",
-        "operationId": "index",
         "parameters": [
           {
             "description": "folder id",
@@ -838,7 +824,6 @@
     "/upload": {
       "post": {
         "description": "Files are uploaded to https://content.uploady.com/v1/api/upload.<br/>\n                    To access this resource, scope `create.file` is required.",
-        "operationId": "index",
         "parameters": [
           {
             "description": "file to store",
@@ -889,7 +874,6 @@
     "/users": {
       "post": {
         "description": "This api is only available for clients with static type.<br/>\nScope `register` is required.<br/>\nAccess token can be created with `client credentials` grant type.<br/>\nThis resource can not be accessed with cross origin request.",
-        "operationId": "index",
         "parameters": [
           {
             "description": "Available values: storage,folders",
@@ -923,7 +907,6 @@
     "/users/logout": {
       "post": {
         "description": "Logout user. User will be detached from access token. \n Implicit grant does not provide a refresh token, but provided access token will be destroyed.",
-        "operationId": "logout",
         "parameters": [
           {
             "description": "Refresh token to be deleted",
@@ -949,7 +932,6 @@
     },
     "/users/storage": {
       "get": {
-        "operationId": "storage",
         "responses": {
           "200": {
             "description": "No response was specified",

@@ -1495,7 +1495,6 @@
     "/v3/asset-changes/change-sets": {
       "put": {
         "consumes": [],
-        "operationId": "AssetChanges_PutAssetChanges",
         "parameters": [
           {
             "description": "Api-Key",
@@ -1562,7 +1561,6 @@
     "/v3/asset-changes/change-sets/{change-set-id}": {
       "delete": {
         "consumes": [],
-        "operationId": "AssetChanges_DeleteAssetChanges",
         "parameters": [
           {
             "description": "Api-Key",
@@ -1620,7 +1618,6 @@
     "/v3/asset-changes/channels": {
       "get": {
         "consumes": [],
-        "operationId": "AssetChanges_GetPartnerChannel",
         "parameters": [
           {
             "description": "Api-Key",
@@ -1668,7 +1665,6 @@
           "application/json",
           "text/json"
         ],
-        "operationId": "AssetRegistration_Register",
         "parameters": [
           {
             "description": "Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
@@ -1722,7 +1718,6 @@
     "/v3/boards": {
       "get": {
         "consumes": [],
-        "operationId": "Boards_GetAllBoards",
         "parameters": [
           {
             "description": "Api-Key",
@@ -1770,7 +1765,6 @@
     "/v3/boards/{board_id}": {
       "get": {
         "consumes": [],
-        "operationId": "Boards_GetBoard",
         "parameters": [
           {
             "description": "Api-Key",
@@ -1831,7 +1825,6 @@
           "application/json",
           "text/json"
         ],
-        "operationId": "Boards_AddAsset",
         "parameters": [
           {
             "description": "Api-Key",
@@ -1902,7 +1895,6 @@
     "/v3/collections": {
       "get": {
         "consumes": [],
-        "operationId": "Collections_GetCollections",
         "parameters": [
           {
             "description": "Api-Key",
@@ -1947,7 +1939,6 @@
     "/v3/countries": {
       "get": {
         "consumes": [],
-        "operationId": "Countries_GetCountries",
         "parameters": [
           {
             "description": "Api-Key",
@@ -1992,7 +1983,6 @@
     "/v3/downloads": {
       "get": {
         "consumes": [],
-        "operationId": "Downloads_GetDownloads",
         "parameters": [
           {
             "description": "Api-Key",
@@ -2083,7 +2073,6 @@
           "text/json"
         ],
         "description": "The single step download call returns either a redirect or a response message with the URI to download the largest\r\n                image available.\r\n                Returns HTTP status code 303 Redirect to download URI or HTTP status code 200.",
-        "operationId": "Downloads_PostDownloads",
         "parameters": [
           {
             "description": "Api-Key",
@@ -2182,7 +2171,6 @@
       "post": {
         "consumes": [],
         "description": "The single step download call returns either a redirect or a response message with the URI to download the largest\r\n                video available.\r\n                Returns HTTP status code 303 Redirect to download URI or HTTP status code 200.",
-        "operationId": "Downloads_PostVideoDownloads",
         "parameters": [
           {
             "description": "Api-Key",
@@ -2251,7 +2239,6 @@
           "text/json"
         ],
         "description": "The single step download call returns either a redirect or a response message with the URI to download the largest\r\n                image available.\r\n                Returns HTTP status code 303 Redirect to download URI or HTTP status code 200.",
-        "operationId": "Downloads_PostDownloads",
         "parameters": [
           {
             "description": "Api-Key",
@@ -2350,7 +2337,6 @@
       "get": {
         "consumes": [],
         "description": "Returns an array of event metadata",
-        "operationId": "Events_GetBatch",
         "parameters": [
           {
             "description": "Api-Key",
@@ -2445,7 +2431,6 @@
       "get": {
         "consumes": [],
         "description": "Returns an array of event metadata",
-        "operationId": "Events_Get",
         "parameters": [
           {
             "description": "Api-Key",
@@ -2536,7 +2521,6 @@
     "/v3/images": {
       "get": {
         "consumes": [],
-        "operationId": "Images_GetBatch",
         "parameters": [
           {
             "description": "Api-Key",
@@ -2703,7 +2687,6 @@
     "/v3/images/{id}": {
       "get": {
         "consumes": [],
-        "operationId": "Images_Get",
         "parameters": [
           {
             "description": "Api-Key",
@@ -2867,7 +2850,6 @@
     "/v3/images/{id}/similar": {
       "get": {
         "consumes": [],
-        "operationId": "Images_GetSimilarImages",
         "parameters": [
           {
             "description": "Api-Key",
@@ -3029,7 +3011,6 @@
     "/v3/products": {
       "get": {
         "consumes": [],
-        "operationId": "Products_GetProducts",
         "parameters": [
           {
             "description": "Api-Key",
@@ -3092,7 +3073,6 @@
     "/v3/purchased-images": {
       "get": {
         "consumes": [],
-        "operationId": "Purchases_GetPreviousPurchases",
         "parameters": [
           {
             "description": "Api-Key",
@@ -3162,7 +3142,6 @@
     "/v3/search/events": {
       "get": {
         "consumes": [],
-        "operationId": "Search_GetEvents",
         "parameters": [
           {
             "description": "Api-Key",
@@ -3279,7 +3258,6 @@
     "/v3/search/images": {
       "get": {
         "consumes": [],
-        "operationId": "Search_GetImagesByPhrase",
         "parameters": [
           {
             "description": "Api-Key",
@@ -3857,7 +3835,6 @@
     "/v3/search/images/creative": {
       "get": {
         "consumes": [],
-        "operationId": "Search_GetCreativeImagesByPhrase",
         "parameters": [
           {
             "description": "Api-Key",
@@ -4392,7 +4369,6 @@
     "/v3/search/images/editorial": {
       "get": {
         "consumes": [],
-        "operationId": "Search_GetEditorialImagesByPhrase",
         "parameters": [
           {
             "description": "Api-Key",
@@ -4978,7 +4954,6 @@
     "/v3/search/videos": {
       "get": {
         "consumes": [],
-        "operationId": "Search_GetVideosByPhrase",
         "parameters": [
           {
             "description": "Api-Key",
@@ -5328,7 +5303,6 @@
     "/v3/search/videos/creative": {
       "get": {
         "consumes": [],
-        "operationId": "Search_GetCreativeVideosByPhrase",
         "parameters": [
           {
             "description": "Api-Key",
@@ -5664,7 +5638,6 @@
     "/v3/search/videos/editorial": {
       "get": {
         "consumes": [],
-        "operationId": "Search_GetEditorialVideosByPhrase",
         "parameters": [
           {
             "description": "Api-Key",
@@ -6009,7 +5982,6 @@
           "application/json",
           "text/json"
         ],
-        "operationId": "Usage_Put",
         "parameters": [
           {
             "description": "Api-Key",
@@ -6070,7 +6042,6 @@
     "/v3/videos": {
       "get": {
         "consumes": [],
-        "operationId": "Videos_GetBatch",
         "parameters": [
           {
             "description": "Api-Key",
@@ -6209,7 +6180,6 @@
     "/v3/videos/{id}": {
       "get": {
         "consumes": [],
-        "operationId": "Videos_Get",
         "parameters": [
           {
             "description": "Api-Key",

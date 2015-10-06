@@ -405,7 +405,6 @@
         ],
         "deprecated": false,
         "description": "Returns your account's credit balance",
-        "operationId": "getBalance",
         "produces": [
           "application/json",
           "application/xml"
@@ -441,7 +440,6 @@
         ],
         "deprecated": false,
         "description": "Returns all contacts",
-        "operationId": "getAll",
         "produces": [
           "application/json",
           "application/xml"
@@ -477,7 +475,6 @@
         ],
         "deprecated": false,
         "description": "Deletes a  contact",
-        "operationId": "delete",
         "parameters": [
           {
             "description": "contactId",
@@ -518,7 +515,6 @@
         ],
         "deprecated": false,
         "description": "Returns details for a single contact",
-        "operationId": "get",
         "parameters": [
           {
             "description": "contactId",
@@ -564,7 +560,6 @@
         ],
         "deprecated": false,
         "description": "Returns context information for a single provided",
-        "operationId": "lookup",
         "parameters": [
           {
             "description": "number",
@@ -609,7 +604,6 @@
         ],
         "deprecated": false,
         "description": "Returns context information for a single provided",
-        "operationId": "lookup",
         "parameters": [
           {
             "description": "number",
@@ -659,7 +653,6 @@
         ],
         "deprecated": false,
         "description": "Returns all groups",
-        "operationId": "getAll",
         "produces": [
           "application/json",
           "application/xml"
@@ -695,7 +688,6 @@
         ],
         "deprecated": false,
         "description": "Deletes a  group",
-        "operationId": "delete",
         "parameters": [
           {
             "description": "groupId",
@@ -736,7 +728,6 @@
         ],
         "deprecated": false,
         "description": "Returns details for a single group",
-        "operationId": "get",
         "parameters": [
           {
             "description": "groupId",
@@ -782,7 +773,6 @@
         ],
         "deprecated": false,
         "description": "Returns all messages",
-        "operationId": "getAll",
         "parameters": [
           {
             "default": 100,
@@ -947,7 +937,6 @@
         ],
         "deprecated": false,
         "description": "Deletes a  message",
-        "operationId": "delete",
         "parameters": [
           {
             "description": "messageId",
@@ -988,7 +977,6 @@
         ],
         "deprecated": false,
         "description": "Returns details for a single message",
-        "operationId": "get",
         "parameters": [
           {
             "description": "messageId",
@@ -1034,7 +1022,6 @@
         ],
         "deprecated": false,
         "description": "Returns an example of the data to POST to send a single message.",
-        "operationId": "send",
         "produces": [
           "application/json",
           "application/xml"
@@ -1068,7 +1055,6 @@
         ],
         "deprecated": false,
         "description": "Sends a single message. The <i>recipientNumber</i> and <i>message</i> fields are required. All other fields are optional.",
-        "operationId": "send",
         "parameters": [
           {
             "description": "request",
@@ -1124,7 +1110,6 @@
         ],
         "deprecated": false,
         "description": "Returns an example of the data to POST to send multiple messages in one transaction.",
-        "operationId": "sendBulk",
         "produces": [
           "application/json",
           "application/xml"
@@ -1158,7 +1143,6 @@
         ],
         "deprecated": false,
         "description": "Send multiple messages in one transaction.",
-        "operationId": "sendBulk",
         "parameters": [
           {
             "description": "requests",
@@ -1208,7 +1192,6 @@
         ],
         "deprecated": false,
         "description": "Send a single message using URL parameters.The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional.",
-        "operationId": "sendUrlParameters",
         "parameters": [
           {
             "description": "the phone number of the recipient to send to",
@@ -1281,7 +1264,6 @@
         ],
         "deprecated": false,
         "description": "Send a single message using URL parameters.The <i>recipientNumber</i> and <i>message</i> parameters are required. All other parameters are optional.",
-        "operationId": "sendUrlParameters",
         "parameters": [
           {
             "description": "the phone number of the recipient to send to",
@@ -1359,7 +1341,6 @@
         ],
         "deprecated": false,
         "description": "Returns all templates",
-        "operationId": "getAll",
         "produces": [
           "application/json",
           "application/xml"
@@ -1395,7 +1376,6 @@
         ],
         "deprecated": false,
         "description": "Deletes a  template",
-        "operationId": "delete",
         "parameters": [
           {
             "description": "templateId",
@@ -1436,7 +1416,6 @@
         ],
         "deprecated": false,
         "description": "Returns details for a single template",
-        "operationId": "get",
         "parameters": [
           {
             "description": "templateId",

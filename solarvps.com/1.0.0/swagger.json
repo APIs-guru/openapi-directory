@@ -25,7 +25,6 @@
     "/contacts": {
       "get": {
         "description": "Shows all contacts under the client account.",
-        "operationId": "getContacts",
         "produces": [
           "application/json"
         ],
@@ -43,7 +42,6 @@
     "/dns/{domain}": {
       "get": {
         "description": "Shows all your records for a specific domain. You can try example.com below.",
-        "operationId": "getDns",
         "parameters": [
           {
             "description": "Domain name you want to get records for",
@@ -70,7 +68,6 @@
     "/dns/{domain}/add": {
       "post": {
         "description": "You can try example.com below. Types allowed are: A CNAME NS TXT MX SRV SPF",
-        "operationId": "getDns",
         "parameters": [
           {
             "description": "Domain you want to add records for",
@@ -132,7 +129,6 @@
     "/dns/{domain}/delete": {
       "post": {
         "description": "Shows all your records for a specific domain. You can try example.com below.",
-        "operationId": "getDns",
         "parameters": [
           {
             "description": "Domain name you want to get records for",
@@ -166,7 +162,6 @@
     "/dns/{domain}/update": {
       "post": {
         "description": "You can try example.com below.",
-        "operationId": "getDns",
         "parameters": [
           {
             "description": "Domain name to add record under",
@@ -235,7 +230,6 @@
     "/domains": {
       "get": {
         "description": "Shows all your domains",
-        "operationId": "getDomains",
         "produces": [
           "application/json"
         ],
@@ -253,7 +247,6 @@
     "/domains/add": {
       "post": {
         "description": "Adds domain to SolarVPS Distributed DNS",
-        "operationId": "addDomains",
         "parameters": [
           {
             "description": "Domain to add to SolarVPS Distributed DNS",
@@ -280,7 +273,6 @@
     "/domains/delete": {
       "post": {
         "description": "Deletes domain from SolarVPS Distributed DNS",
-        "operationId": "deleteDomains",
         "parameters": [
           {
             "description": "Domain to delete from SolarVPS Distributed DNS",
@@ -307,7 +299,6 @@
     "/key/generate": {
       "get": {
         "description": "API Key is regenerated if it already exists",
-        "operationId": "generateKey",
         "parameters": [
           {
             "description": "Email address used to login to SolarSystem",
@@ -341,7 +332,6 @@
     "/key/get": {
       "get": {
         "description": "Gets the API Key for user",
-        "operationId": "getKey",
         "parameters": [
           {
             "description": "Email address used to login to SolarSystem",
@@ -375,7 +365,6 @@
     "/pods": {
       "get": {
         "description": "Shows all your pods",
-        "operationId": "getPods",
         "produces": [
           "application/json"
         ],
@@ -393,7 +382,6 @@
     "/pods/{podId}": {
       "get": {
         "description": "Shows details of a specific pod. Enter 1 below to see an example",
-        "operationId": "getPodById",
         "parameters": [
           {
             "description": "Id of the pod you want to perform actions on",
@@ -420,7 +408,6 @@
     "/pods/{podId}/ping": {
       "get": {
         "description": "Returns the ping response from your server.",
-        "operationId": "pingPod",
         "parameters": [
           {
             "description": "Id of the pod you want to ping check",
@@ -447,7 +434,6 @@
     "/pods/{podId}/{action}": {
       "get": {
         "description": "Allowed actions are reboot, shutdown, boot",
-        "operationId": "actionByPodId",
         "parameters": [
           {
             "description": "Id of the pod you want to perform actions on",
@@ -481,7 +467,6 @@
     "/solarray": {
       "get": {
         "description": "Shows all your monitors",
-        "operationId": "getMonitors",
         "produces": [
           "application/json"
         ],
@@ -499,7 +484,6 @@
     "/solarray/critical": {
       "get": {
         "description": "Shows all your critical notifications",
-        "operationId": "getCriticalNotifications",
         "produces": [
           "application/json"
         ],
@@ -517,7 +501,6 @@
     "/tickets": {
       "get": {
         "description": "Shows all your tickets",
-        "operationId": "getTickets",
         "produces": [
           "application/json"
         ],
@@ -535,7 +518,6 @@
     "/tickets/{department}/add": {
       "post": {
         "description": "Available departments are support, billing, sales",
-        "operationId": "newTicket",
         "parameters": [
           {
             "description": "Department you want to open a ticket with",
@@ -576,7 +558,6 @@
     "/tickets/{ticketId}": {
       "get": {
         "description": "Shows all information of a specific ticketId",
-        "operationId": "getTicketData",
         "parameters": [
           {
             "description": "TicketId you want to see",
@@ -602,7 +583,6 @@
     },
     "/tickets/{ticketid}/update": {
       "post": {
-        "operationId": "pingPod",
         "parameters": [
           {
             "description": "TicketId of the ticket you want to post an update to",
