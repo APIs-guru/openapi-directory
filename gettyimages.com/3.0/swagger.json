@@ -353,7 +353,7 @@
         },
         "keywords": {
           "items": {
-            "$ref": "#/definitions/keywords"
+            "$ref": "#/definitions/keyword"
           },
           "type": "array"
         },
@@ -601,7 +601,7 @@
         },
         "keywords": {
           "items": {
-            "$ref": "#/definitions/keywords"
+            "$ref": "#/definitions/keyword"
           },
           "type": "array"
         },
@@ -742,12 +742,15 @@
     "hero_display_size": {
       "properties": {
         "is_watermarked": {
+          "description": "Indicates whether the image is watermarked.",
           "type": "boolean"
         },
         "name": {
+          "description": "Identifies the name of the display size.",
           "type": "string"
         },
         "uri": {
+          "description": "GET this URI to retrieve the display size image.",
           "type": "string"
         }
       },
@@ -756,6 +759,7 @@
     "hero_image": {
       "properties": {
         "display_sizes": {
+          "description": "Specifies the list of available display sizes.",
           "items": {
             "$ref": "#/definitions/hero_display_size"
           },
@@ -862,7 +866,7 @@
         },
         "keywords": {
           "items": {
-            "$ref": "#/definitions/keywords"
+            "$ref": "#/definitions/keyword"
           },
           "type": "array"
         },
@@ -1000,7 +1004,7 @@
         },
         "keywords": {
           "items": {
-            "$ref": "#/definitions/keywords"
+            "$ref": "#/definitions/keyword"
           },
           "type": "array"
         },
@@ -1897,21 +1901,21 @@
         "consumes": [],
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "description": "Specifies the language of result values.",
             "in": "header",
             "name": "Accept-Language",
             "required": false,
@@ -1941,21 +1945,21 @@
         "consumes": [],
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "description": "Specifies the language of result values.",
             "in": "header",
             "name": "Accept-Language",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Authorization token optional. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": false,
@@ -1985,14 +1989,14 @@
         "consumes": [],
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": true,
@@ -2075,14 +2079,14 @@
         "description": "The single step download call returns either a redirect or a response message with the URI to download the largest\r\n                image available.\r\n                Returns HTTP status code 303 Redirect to download URI or HTTP status code 200.",
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": true,
@@ -2173,14 +2177,14 @@
         "description": "The single step download call returns either a redirect or a response message with the URI to download the largest\r\n                video available.\r\n                Returns HTTP status code 303 Redirect to download URI or HTTP status code 200.",
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": true,
@@ -2220,7 +2224,7 @@
             }
           },
           "401": {
-            "description": "NoDownloadAuthorization"
+            "description": "AuthorizationTokenRequired"
           },
           "404": {
             "description": "VideoNotFound"
@@ -2241,14 +2245,14 @@
         "description": "The single step download call returns either a redirect or a response message with the URI to download the largest\r\n                image available.\r\n                Returns HTTP status code 303 Redirect to download URI or HTTP status code 200.",
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": true,
@@ -2339,21 +2343,21 @@
         "description": "Returns an array of event metadata",
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "description": "Specifies the language of result values.",
             "in": "header",
             "name": "Accept-Language",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Authorization token optional. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": false,
@@ -2433,21 +2437,21 @@
         "description": "Returns an array of event metadata",
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "description": "Specifies the language of result values.",
             "in": "header",
             "name": "Accept-Language",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Authorization token optional. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": false,
@@ -2523,28 +2527,28 @@
         "consumes": [],
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "description": "Specifies the language of result values.",
             "in": "header",
             "name": "Accept-Language",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Authorization token optional. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Comma separated list of image ids.",
+            "description": "Specifies one or more image ids to return. Use comma delimiter when requesting multiple ids.",
             "in": "query",
             "items": {
               "type": "string"
@@ -2554,7 +2558,7 @@
             "type": "array"
           },
           {
-            "description": "Comma separated list of fields. Allows restricting which fields are returned. If no fields are\r\n                selected, the summary_set of fields are returned.",
+            "description": "Specifies fields to return. Defaults to 'summary_set'.",
             "enum": [
               "allowed_use",
               "alternative_ids",
@@ -2689,21 +2693,21 @@
         "consumes": [],
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "description": "Specifies the language of result values.",
             "in": "header",
             "name": "Accept-Language",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Authorization token optional. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": false,
@@ -2852,21 +2856,21 @@
         "consumes": [],
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "description": "Specifies the language of result values.",
             "in": "header",
             "name": "Accept-Language",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Authorization token optional. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": false,
@@ -3013,21 +3017,21 @@
         "consumes": [],
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "description": "Specifies the language of result values.",
             "in": "header",
             "name": "Accept-Language",
             "required": false,
@@ -3075,14 +3079,14 @@
         "consumes": [],
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Authorization token required. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": true,
@@ -3144,28 +3148,28 @@
         "consumes": [],
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "description": "Specifies the language of result values.",
             "in": "header",
             "name": "Accept-Language",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Authorization token optional. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Identifies an editorial segment for the event.",
+            "description": "Filters to events with a matching editorial segment.",
             "enum": [
               "archival",
               "entertainment",
@@ -3180,7 +3184,7 @@
             "type": "string"
           },
           {
-            "description": "If specified, include only events that start on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).",
+            "description": "Filters to events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31).",
             "format": "date-time",
             "in": "query",
             "name": "date_from",
@@ -3188,7 +3192,7 @@
             "type": "string"
           },
           {
-            "description": "If specified, include only events that start on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).",
+            "description": "Filters to events that start on or before this date. Use ISO 8601 format (e.g., 1999-12-31).",
             "format": "date-time",
             "in": "query",
             "name": "date_to",
@@ -3196,7 +3200,7 @@
             "type": "string"
           },
           {
-            "description": "Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.",
+            "description": "Specifies fields to return. Defaults to 'summary_set'.",
             "enum": [
               "id",
               "child_event_count",
@@ -3260,28 +3264,28 @@
         "consumes": [],
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "description": "Specifies the language of result values.",
             "in": "header",
             "name": "Accept-Language",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Authorization token optional. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Allows for filtering based on age of individuals in an image.",
+            "description": "Filter based on the age of individuals in an image.",
             "enum": [
               "newborn",
               "baby",
@@ -3379,14 +3383,14 @@
             "type": "array"
           },
           {
-            "description": "Free-text search, comma-separated artist search query.",
+            "description": "Search for images by specific artists (free-text, comma-separated list of artists).",
             "in": "query",
             "name": "artists",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Allows filtering by collection code.",
+            "description": "Filter by collection codes (comma-separated list). Include or exclude based on collections_filter_type.",
             "in": "query",
             "items": {
               "type": "string"
@@ -3396,7 +3400,7 @@
             "type": "array"
           },
           {
-            "description": "Allows searching based on included or excluded collections.",
+            "description": "Use to include or exclude collections from search.",
             "enum": [
               "include",
               "exclude"
@@ -3407,7 +3411,7 @@
             "type": "string"
           },
           {
-            "description": "Allows for filtering based on image composition.",
+            "description": "Filter based on image composition.",
             "enum": [
               "abstract",
               "candid",
@@ -3451,7 +3455,7 @@
             "type": "array"
           },
           {
-            "description": "If specified, include only images created on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).",
+            "description": "Filters to events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31).",
             "format": "date-time",
             "in": "query",
             "name": "date_from",
@@ -3459,7 +3463,7 @@
             "type": "string"
           },
           {
-            "description": "If specified, include only images created on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).",
+            "description": "Filters to events that start on or before this date. Use ISO 8601 format (e.g., 1999-12-31).",
             "format": "date-time",
             "in": "query",
             "name": "date_to",
@@ -3837,28 +3841,28 @@
         "consumes": [],
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "description": "Specifies the language of result values.",
             "in": "header",
             "name": "Accept-Language",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Authorization token optional. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Allows for filtering based on age of individuals in an image",
+            "description": "Filter based on the age of individuals in an image.",
             "enum": [
               "newborn",
               "baby",
@@ -3956,14 +3960,14 @@
             "type": "array"
           },
           {
-            "description": "Free-text search, comma-separated artist search query.",
+            "description": "Search for images by specific artists (free-text, comma-separated list of artists).",
             "in": "query",
             "name": "artists",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Allows filtering by collection code.",
+            "description": "Filter by collection codes (comma-separated list). Include or exclude based on collections_filter_type.",
             "in": "query",
             "items": {
               "type": "string"
@@ -3973,7 +3977,7 @@
             "type": "array"
           },
           {
-            "description": "Allows searching based on included or excluded collections.",
+            "description": "Use to include or exclude collections from search.",
             "enum": [
               "include",
               "exclude"
@@ -3984,7 +3988,7 @@
             "type": "string"
           },
           {
-            "description": "Allows for filtering based on image composition",
+            "description": "Filter based on image composition.",
             "enum": [
               "abstract",
               "candid",
@@ -4371,28 +4375,28 @@
         "consumes": [],
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "description": "Specifies the language of result values.",
             "in": "header",
             "name": "Accept-Language",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Authorization token optional. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Allows for filtering based on age of individuals in an image",
+            "description": "Filter based on the age of individuals in an image.",
             "enum": [
               "newborn",
               "baby",
@@ -4490,14 +4494,14 @@
             "type": "array"
           },
           {
-            "description": "Free-text search, comma-separated artist search query.",
+            "description": "Search for images by specific artists (free-text, comma-separated list of artists).",
             "in": "query",
             "name": "artists",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Allows filtering by collection code.",
+            "description": "Filter by collections (comma-separated list of collection codes). Include or exclude based on collections_filter_type.",
             "in": "query",
             "items": {
               "type": "string"
@@ -4507,7 +4511,7 @@
             "type": "array"
           },
           {
-            "description": "Allows searching based on included or excluded collections.",
+            "description": "Use to include or exclude collections from search.",
             "enum": [
               "include",
               "exclude"
@@ -4518,7 +4522,7 @@
             "type": "string"
           },
           {
-            "description": "Allows for filtering based on image composition",
+            "description": "Filter based on image composition.",
             "enum": [
               "abstract",
               "candid",
@@ -4562,7 +4566,7 @@
             "type": "array"
           },
           {
-            "description": "If specified, include only images created on or after this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).",
+            "description": "Filters to events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31).",
             "format": "date-time",
             "in": "query",
             "name": "date_from",
@@ -4570,7 +4574,7 @@
             "type": "string"
           },
           {
-            "description": "If specified, include only images created on or before this date. Dates should be submitted in ISO 8601 format (i.e., YYYY-MM-DD).",
+            "description": "Filters to events that start on or before this date. Use ISO 8601 format (e.g., 1999-12-31).",
             "format": "date-time",
             "in": "query",
             "name": "date_to",
@@ -4578,7 +4582,7 @@
             "type": "string"
           },
           {
-            "description": "Identifies a editorial segment for the image.",
+            "description": "Filters to events with a matching editorial segment.",
             "enum": [
               "archival",
               "entertainment",
@@ -4956,21 +4960,21 @@
         "consumes": [],
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "description": "Specifies the language of result values.",
             "in": "header",
             "name": "Accept-Language",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Authorization token optional. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": false,
@@ -5305,21 +5309,21 @@
         "consumes": [],
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "description": "Specifies the language of result values.",
             "in": "header",
             "name": "Accept-Language",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Authorization token optional. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": false,
@@ -5640,21 +5644,21 @@
         "consumes": [],
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "description": "Specifies the language of result values.",
             "in": "header",
             "name": "Accept-Language",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Authorization token optional. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": false,
@@ -6044,21 +6048,21 @@
         "consumes": [],
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "description": "Specifies the language of result values.",
             "in": "header",
             "name": "Accept-Language",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Authorization token optional. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": false,
@@ -6182,21 +6186,21 @@
         "consumes": [],
         "parameters": [
           {
-            "description": "Api-Key",
+            "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Accept-Language parameter optional. Used to restrict the set of natural languages that are preferred as a response to the request.",
+            "description": "Specifies the language of result values.",
             "in": "header",
             "name": "Accept-Language",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Authorization token optional. Used for applying content access restrictions. Use one of the OAuth2 grants to auto-populate this value.",
+            "description": "Provide access token in the format of 'Bearer: {token}'.",
             "in": "header",
             "name": "Authorization",
             "required": false,

@@ -360,7 +360,7 @@
           "description": "Options for exporting data as SQL statements.",
           "properties": {
             "schemaOnly": {
-              "description": "Export only schema.",
+              "description": "Export only schemas.",
               "type": "boolean"
             },
             "tables": {
@@ -380,6 +380,22 @@
       },
       "type": "object"
     },
+    "FailoverContext": {
+      "description": "Database instance failover context.",
+      "properties": {
+        "kind": {
+          "default": "sql#failoverContext",
+          "description": "This is always sql#failoverContext.",
+          "type": "string"
+        },
+        "settingsVersion": {
+          "description": "The current settings version of this instance. Request will be rejected if this version doesn't match the current settings version.",
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Flag": {
       "description": "A Google Cloud SQL service flag resource.",
       "properties": {
@@ -391,7 +407,7 @@
           "type": "array"
         },
         "appliesTo": {
-          "description": "The database version this flag applies to. Currently this can only be [MYSQL_5_5].",
+          "description": "The database version this flag applies to. Can be MYSQL_5_5, MYSQL_5_6, or both.",
           "items": {
             "type": "string"
           },
@@ -497,6 +513,16 @@
         "exportContext": {
           "$ref": "#/definitions/ExportContext",
           "description": "Contains details about the export operation."
+        }
+      },
+      "type": "object"
+    },
+    "InstancesFailoverRequest": {
+      "description": "Instance failover request.",
+      "properties": {
+        "failoverContext": {
+          "$ref": "#/definitions/FailoverContext",
+          "description": "Failover Context."
         }
       },
       "type": "object"
@@ -798,6 +824,10 @@
     "ReplicaConfiguration": {
       "description": "Read-replica configuration for connecting to the master.",
       "properties": {
+        "failoverTarget": {
+          "description": "Specifies if the replica is the failover target. If the field is set to true the replica will be designated as a failover replica. In case the master instance fails, the replica instance will be promoted as the new master instance.\nOnly one replica can be specified as failover target, and the replica has to be in different zone with the master instance.",
+          "type": "boolean"
+        },
         "kind": {
           "default": "sql#replicaConfiguration",
           "description": "This is always sql#replicaConfiguration.",
@@ -1641,7 +1671,7 @@
             "type": "string"
           },
           {
-            "description": "The ID of the Backup Run to delete.",
+            "description": "The ID of the Backup Run to delete. To find a Backup Run ID, use the list method.",
             "in": "path",
             "name": "id",
             "required": true,
@@ -2275,6 +2305,77 @@
           {
             "Oauth2": [
               "https://www.googleapis.com/auth/cloud-platform"
+            ]
+          }
+        ],
+        "tags": [
+          "instances"
+        ]
+      }
+    },
+    "/projects/{project}/instances/{instance}/failover": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Failover the instance to its failover replica instance.",
+        "operationId": "sql.instances.failover",
+        "parameters": [
+          {
+            "description": "ID of the project that contains the read replica.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Cloud SQL instance ID. This does not include the project ID.",
+            "in": "path",
+            "name": "instance",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/InstancesFailoverRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
             ]
           }
         ],
