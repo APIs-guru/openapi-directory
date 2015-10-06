@@ -350,7 +350,6 @@
     "/oauth/token": {
       "post": {
         "description": "All actions and visibility is limited in scope to items that are descendents of the authenticated vendor and the backup_definitions owned thereby. At this time, all Access Tokens are scoped with full write capabilities.",
-        "operationId": "access_token_from_client_credentials",
         "parameters": [
           {
             "description": "API Client ID",
@@ -407,7 +406,6 @@
     "/v1/authenticate_customer": {
       "get": {
         "description": "Requires Access Token granted for a customer",
-        "operationId": "utils_authenticate_customer",
         "parameters": [
           {
             "description": "Bearer Access Token granted for customer",
@@ -434,7 +432,6 @@
     "/v1/authenticate_vendor": {
       "get": {
         "description": "Requires Access Token granted from client_credentials",
-        "operationId": "utils_authenticate_vendor",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client_credentials for vendor",
@@ -461,7 +458,6 @@
     "/v1/backup_definitions": {
       "get": {
         "description": "This will retrieve a list of backup_defintions from all vendors. To view backup_defintions for a particular vendor, see the vendors API. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
-        "operationId": "index_backup_definitions",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -500,7 +496,6 @@
         ]
       },
       "post": {
-        "operationId": "backup_definition_create",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -554,7 +549,6 @@
     "/v1/backup_definitions/{backup_definition_id}": {
       "get": {
         "description": "Only backup_definitions you have permission to view will be returned",
-        "operationId": "get_backup_definition_by_id",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -593,7 +587,6 @@
       },
       "put": {
         "description": "Only backup_definitions you have permission to change can be modified",
-        "operationId": "update_backup_definition",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -655,7 +648,6 @@
     "/v1/backup_definitions/{backup_definition_id}/variables": {
       "get": {
         "description": "You can only retrieve variables for backup_definitions you have access to. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
-        "operationId": "backup_definition_variables_index",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -697,7 +689,6 @@
       },
       "post": {
         "description": "It is only possible to create variables for backup_definitions you have permission to manage.",
-        "operationId": "backup_definition_variable_create",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -773,7 +764,6 @@
     "/v1/backup_definitions/{backup_definition_id}/variables/{key}": {
       "get": {
         "description": "You can only retrieve variables for backup_definitions you have access to",
-        "operationId": "get_backup_definition_variable_by_key",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -819,7 +809,6 @@
       },
       "put": {
         "description": "You can only update variables for backup_definitions you have access to. Additionally, it is not possible to update a variable's key. Requests including a modified key name will result in an error.",
-        "operationId": "update_backup_definition_variable_by_key",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -895,7 +884,6 @@
     "/v1/backup_instances": {
       "get": {
         "description": "It is only possible to retrieve backup_instances for customers you are authorized to access. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
-        "operationId": "index_backup_instance",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -940,7 +928,6 @@
       },
       "post": {
         "description": "It is only possible to create backup_instances for customers you are authorized to modify",
-        "operationId": "create_backup_instance",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1000,7 +987,6 @@
     "/v1/backup_instances/{backup_instance_id}": {
       "get": {
         "description": "Only backup_instances you have permission to view will be returned",
-        "operationId": "get_backup_instance_by_id",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1039,7 +1025,6 @@
       },
       "put": {
         "description": "Only backup_instances you have permission to change can be modified",
-        "operationId": "update_backup_instance",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1094,7 +1079,6 @@
     "/v1/backup_instances/{backup_instance_id}/backups": {
       "get": {
         "description": "Only backups belonging to backup_instances you have permission to manage can be retrieved. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
-        "operationId": "index_backups",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1136,7 +1120,6 @@
       },
       "post": {
         "description": "Only backup_instances you have permission to manage can be backed up",
-        "operationId": "create_backup",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1177,7 +1160,6 @@
     "/v1/backup_instances/{backup_instance_id}/backups/active": {
       "get": {
         "description": "Only backups belonging to backup_instances you have permission to access can be retrieved",
-        "operationId": "get_active_backup_run",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1221,7 +1203,6 @@
     "/v1/backup_instances/{backup_instance_id}/backups/{backup_id}": {
       "get": {
         "description": "Only backups belonging to backup_instances you have permission to access can be retrieved",
-        "operationId": "get_backup_by_id",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1270,7 +1251,6 @@
     "/v1/backup_instances/{backup_instance_id}/endpoints": {
       "get": {
         "description": "You can only retrieve endpoints for backup_instances you have access to. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
-        "operationId": "backup_instance_endpoint_index",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1311,7 +1291,6 @@
     "/v1/backup_instances/{backup_instance_id}/endpoints/{endpoint_name}": {
       "get": {
         "description": "You can only retrieve endpoints for backup_instances you have access to",
-        "operationId": "get_backup_instance_endpoint_by_name",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1359,7 +1338,6 @@
     "/v1/backup_instances/{backup_instance_id}/endpoints/{endpoint_name}/records": {
       "get": {
         "description": "You can only retrieve records for endpoints that belong to backup_instances you have access to. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
-        "operationId": "endpoint_records_index",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1407,7 +1385,6 @@
     "/v1/backup_instances/{backup_instance_id}/endpoints/{endpoint_name}/records/{record_id}": {
       "get": {
         "description": "You can only retrieve records for endpoints of backup_instances you have access to",
-        "operationId": "get_endpoint_record_by_id",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1462,7 +1439,6 @@
     "/v1/backup_instances/{backup_instance_id}/endpoints/{endpoint_name}/records/{record_id}/blob": {
       "get": {
         "description": "You can only retrieve blobs for endpoints of backup_instances you have access to",
-        "operationId": "get_endpoint_record_blob",
         "parameters": [
           {
             "description": "Access Token granted from client credentials authorizing vendor to perform action",
@@ -1517,7 +1493,6 @@
     "/v1/backup_instances/{backup_instance_id}/exports": {
       "get": {
         "description": "You can only retrieve exports for backup_instances you have access to. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
-        "operationId": "backup_instance_exports",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1556,7 +1531,6 @@
       },
       "post": {
         "description": "Only backup_instances you have permission to manage can be exported",
-        "operationId": "backup_instance_export",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1639,7 +1613,6 @@
     "/v1/backup_instances/{backup_instance_id}/exports/{export_id}": {
       "get": {
         "description": "You can only retrieve exports for backup_instances you have access to",
-        "operationId": "get_backup_instance_export_by_id",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1688,7 +1661,6 @@
     "/v1/backup_instances/{backup_instance_id}/exports/{export_id}/reauth": {
       "post": {
         "description": "You can only re-authorize an export when there's already a valid exported_data_url",
-        "operationId": "post_reauth_and_update_exported_data_url",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1736,7 +1708,6 @@
     },
     "/v1/backup_instances/{backup_instance_id}/logs": {
       "get": {
-        "operationId": "logs",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1782,7 +1753,6 @@
     },
     "/v1/backup_instances/{backup_instance_id}/logs/{scroll_id}": {
       "get": {
-        "operationId": "logs",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1830,7 +1800,6 @@
     "/v1/backup_instances/{backup_instance_id}/variables": {
       "get": {
         "description": "You can only retrieve variables for backup_instances you have access to. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
-        "operationId": "backup_instance_variables_index",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1872,7 +1841,6 @@
       },
       "post": {
         "description": "The key specified must refer to the key of a previously defined backup_definition variable. It is only possible to create variables for backup_instances you have permission to manage.",
-        "operationId": "backup_instance_variable_create",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1930,7 +1898,6 @@
     "/v1/backup_instances/{backup_instance_id}/variables/{key}": {
       "get": {
         "description": "You can only retrieve variables for backup_instances you have access to",
-        "operationId": "get_backup_instance_variable_by_key",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -1976,7 +1943,6 @@
       },
       "put": {
         "description": "You can only alter variables for backup_instances you have access to manage",
-        "operationId": "update_backup_instance_variable",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -2034,7 +2000,6 @@
     "/v1/customers": {
       "get": {
         "description": "Requires Access Token granted from client credentials. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
-        "operationId": "customers_index",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -2065,7 +2030,6 @@
       },
       "post": {
         "description": "Requires Access Token granted from client credentials.",
-        "operationId": "customers_create",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -2112,7 +2076,6 @@
     "/v1/customers/{customer_id}": {
       "get": {
         "description": "Requires Access Token granted from client credentials.",
-        "operationId": "customer_show",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -2150,7 +2113,6 @@
       },
       "put": {
         "description": "Requires Access Token granted from client credentials.",
-        "operationId": "customer_update",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -2200,7 +2162,6 @@
     "/v1/customers/{customer_id}/backup_instances": {
       "get": {
         "description": "It is only possible to retrieve backup_instances for customers you are authorized to access. Records are returned in ascending order (by id), with a default of 20 per page. Links to the next, previous, first, and last pages can be found in the response headers.",
-        "operationId": "index_backup_instance_by_customer",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
@@ -2243,7 +2204,6 @@
     },
     "/v1/ping": {
       "get": {
-        "operationId": "utils_ping",
         "responses": {
           "200": {
             "description": "Success - The connection succeeded. The response body is an empty JSON object."
@@ -2258,7 +2218,6 @@
     "/v1/vendors/me": {
       "get": {
         "description": "Requires Access Token granted from client credentials.",
-        "operationId": "vendors_me",
         "parameters": [
           {
             "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
