@@ -89,7 +89,10 @@ function updateCollection(dir) {
     if (serviceName)
       exPatch.info['x-serviceName'] = serviceName;
 
-    writeSpec(getOriginUrl(swagger), getSpecType(swagger), exPatch, function (error, result) {
+    var url = getOriginUrl(swagger);
+    console.error(url);
+
+    writeSpec(url, getSpecType(swagger), exPatch, function (error, result) {
       if (error)
         return logError(error, result);
 
@@ -289,6 +292,7 @@ function updateGoogle() {
         return;
       }
 
+      console.error(url);
       writeSpec(url, 'google', {}, function (error, result) {
         if (error)
           return logError(error, result);
@@ -304,10 +308,8 @@ function mergePatch(swagger, addPatch) {
   saveJson(path, patch);
 }
 
-function writeSpec(url, type, exPatch, callback) {
-  console.log(url);
-
-  converter.getSpec(url, type, function (err, spec) {
+function writeSpec(source, type, exPatch, callback) {
+  converter.getSpec(source, type, function (err, spec) {
     assert(!err, err);
 
     convertToSwagger(spec, function (error, swagger) {
