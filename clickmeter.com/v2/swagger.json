@@ -1507,7 +1507,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Account_Get",
         "produces": [
           "application/json",
           "text/json",
@@ -1542,7 +1541,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Account_Post",
         "parameters": [
           {
             "in": "body",
@@ -1583,7 +1581,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Account_GetDomainWhitelist",
         "parameters": [
           {
             "description": "Offset where to start from",
@@ -1637,7 +1634,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Account_PutDomainWhitelist",
         "parameters": [
           {
             "description": "The entry to add",
@@ -1679,7 +1675,6 @@
       "delete": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Account_DeleteDomainWhitelist",
         "parameters": [
           {
             "description": "The id of the domain to delete",
@@ -1719,7 +1714,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Account_GetGuests",
         "parameters": [
           {
             "description": "Offset where to start from",
@@ -1798,7 +1792,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Account_PutGuest",
         "parameters": [
           {
             "description": "Guest object to create",
@@ -1840,7 +1833,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Account_GetGuestsCount",
         "parameters": [
           {
             "description": "Filter fields by this pattern",
@@ -1880,7 +1872,6 @@
       "delete": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Account_DeleteGuest",
         "parameters": [
           {
             "description": "Id of the guest",
@@ -1919,7 +1910,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Account_GetGuest",
         "parameters": [
           {
             "description": "Id of the guest",
@@ -1964,7 +1954,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Account_PostGuest",
         "parameters": [
           {
             "description": "Id of the guest",
@@ -2014,7 +2003,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Account_GetPermissions",
         "parameters": [
           {
             "description": "Id of the guest",
@@ -2102,7 +2090,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Account_GetPermissionsCount",
         "parameters": [
           {
             "description": "Id of the guest",
@@ -2179,7 +2166,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Account_PatchPermissions",
         "parameters": [
           {
             "description": "Id of the guest",
@@ -2244,7 +2230,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Account_PatchPermissions",
         "parameters": [
           {
             "description": "Id of the guest",
@@ -2305,7 +2290,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Account_GetIpBlacklist",
         "parameters": [
           {
             "description": "Offset where to start from",
@@ -2359,7 +2343,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Account_PutIpBlacklist",
         "parameters": [
           {
             "description": "The entry to add",
@@ -2401,7 +2384,6 @@
       "delete": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Account_DeleteIpBlacklist",
         "parameters": [
           {
             "description": "The id of the ip to delete",
@@ -2441,7 +2423,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Account_GetPlan",
         "produces": [
           "application/json",
           "text/json",
@@ -2472,7 +2453,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Aggregated_GetStatisticsSingle",
         "parameters": [
           {
             "description": "Timeframe of the request. See list at $timeframeList",
@@ -2555,7 +2535,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Aggregated_GetStatisticsList",
         "parameters": [
           {
             "description": "Timeframe of the request. See list at $timeframeList",
@@ -2635,7 +2614,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Aggregated_GetConversionsSummary",
         "parameters": [
           {
             "description": "Timeframe of the request. See list at $timeframeList",
@@ -2759,7 +2737,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Aggregated_GetDatapointsSummary",
         "parameters": [
           {
             "description": "Timeframe of the request. See list at $timeframeList",
@@ -2918,7 +2895,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Aggregated_GetGroupsSummary",
         "parameters": [
           {
             "description": "Timeframe of the request. See list at $timeframeList",
@@ -3056,7 +3032,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "ClickStream_Get",
         "parameters": [
           {
             "description": "Filter by this group id (mutually exclusive with \"datapoint\" and \"conversion\")",
@@ -3134,7 +3109,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Conversions_Get",
         "parameters": [
           {
             "description": "Offset where to start from",
@@ -3220,7 +3194,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Conversions_Put",
         "parameters": [
           {
             "description": "The body of the conversion",
@@ -3265,7 +3238,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Conversions_GetStatisticsAllList",
         "parameters": [
           {
             "description": "Timeframe of the request. See list at $timeframeList",
@@ -3356,7 +3328,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Conversions_Count",
         "parameters": [
           {
             "description": "Status of conversion (\"deleted\"/\"active\")",
@@ -3421,7 +3392,6 @@
       "delete": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Conversions_Delete",
         "parameters": [
           {
             "description": "Id of the conversion",
@@ -3463,7 +3433,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Conversions_Get",
         "parameters": [
           {
             "description": "Id of the conversion",
@@ -3511,7 +3480,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Conversions_Post",
         "parameters": [
           {
             "description": "Id of the conversion",
@@ -3564,7 +3532,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Conversions_GetStatisticsSingle",
         "parameters": [
           {
             "description": "Id of the conversion",
@@ -3662,7 +3629,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Conversions_GetStatisticsList",
         "parameters": [
           {
             "description": "Id of the conversion",
@@ -3750,7 +3716,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Conversions_GetDatapoints",
         "parameters": [
           {
             "description": "Id of the conversion",
@@ -3864,7 +3829,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Conversions_Patch",
         "parameters": [
           {
             "description": "Id of the conversion",
@@ -3917,7 +3881,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Conversions_GetDatapointsCount",
         "parameters": [
           {
             "description": "Id of the conversion",
@@ -4006,7 +3969,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Conversions_Patch",
         "parameters": [
           {
             "description": "Id of the conversion",
@@ -4059,7 +4021,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Conversions_GetHits",
         "parameters": [
           {
             "description": "Id of the conversion",
@@ -4167,7 +4128,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Conversions_PatchNotes",
         "parameters": [
           {
             "description": "Id of the conversion",
@@ -4223,7 +4183,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Conversions_GetTops",
         "parameters": [
           {
             "description": "Id of the conversion",
@@ -4332,7 +4291,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "DataPoints_Get",
         "parameters": [
           {
             "default": 0,
@@ -4466,7 +4424,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "DataPoints_Put",
         "parameters": [
           {
             "description": "The body of the datapoint",
@@ -4511,7 +4468,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "DataPoints_GetStatisticsAggregatedSingle",
         "parameters": [
           {
             "description": "Timeframe of the request. See list at $timeframeList",
@@ -4625,7 +4581,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "DataPoints_GetStatisticsAllList",
         "parameters": [
           {
             "description": "Type of datapoint (\"tl\"/\"tp\")",
@@ -4747,7 +4702,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "DataPoints_BatchDelete",
         "parameters": [
           {
             "description": "A json containing the datapoints to delete.",
@@ -4792,7 +4746,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "DataPoints_BatchPost",
         "parameters": [
           {
             "description": "A json containing the datapoints to update.",
@@ -4837,7 +4790,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "DataPoints_BatchPut",
         "parameters": [
           {
             "description": "A json containing the datapoints to create.",
@@ -4880,7 +4832,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "DataPoints_Count",
         "parameters": [
           {
             "description": "Type of the datapoint (\"tp\"/\"tl\")",
@@ -4975,7 +4926,6 @@
       "delete": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "DataPoints_Delete",
         "parameters": [
           {
             "description": "The id of the datapoint",
@@ -5017,7 +4967,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "DataPoints_Get",
         "parameters": [
           {
             "description": "The id of the datapoint",
@@ -5061,7 +5010,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "DataPoints_Post",
         "parameters": [
           {
             "description": "The id of the datapoint",
@@ -5114,7 +5062,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "DataPoints_GetStatisticsSingle",
         "parameters": [
           {
             "description": "Id of the datapoint",
@@ -5198,7 +5145,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "DataPoints_GetStatisticsList",
         "parameters": [
           {
             "description": "Id of the datapoint",
@@ -5286,7 +5232,6 @@
       "put": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "DataPoints_PatchFavourite",
         "parameters": [
           {
             "description": "Id of the datapoint",
@@ -5333,7 +5278,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "DataPoints_GetHits",
         "parameters": [
           {
             "description": "Id of the datapoint",
@@ -5441,7 +5385,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "DataPoints_PatchNotes",
         "parameters": [
           {
             "description": "Id of the datapoint",
@@ -5497,7 +5440,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "DataPoints_GetTops",
         "parameters": [
           {
             "description": "Id of the datapoint",
@@ -5596,7 +5538,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Domains_Get",
         "parameters": [
           {
             "description": "Offset where to start from",
@@ -5671,7 +5612,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Domains_Put",
         "parameters": [
           {
             "description": "The domain to create",
@@ -5713,7 +5653,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Domains_Count",
         "parameters": [
           {
             "default": "system",
@@ -5767,7 +5706,6 @@
       "delete": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Domains_Delete",
         "parameters": [
           {
             "description": "Id of domain",
@@ -5806,7 +5744,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Domains_Get",
         "parameters": [
           {
             "description": "Id of domain",
@@ -5851,7 +5788,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Domains_Update",
         "parameters": [
           {
             "description": "Id of domain",
@@ -5901,7 +5837,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Groups_Get",
         "parameters": [
           {
             "default": 0,
@@ -6004,7 +5939,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Groups_Put",
         "parameters": [
           {
             "description": "The body of the group",
@@ -6049,7 +5983,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Groups_GetStatisticsAggregatedSingle",
         "parameters": [
           {
             "description": "Timeframe of the request. See list at $timeframeList",
@@ -6150,7 +6083,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Groups_GetStatisticsAllList",
         "parameters": [
           {
             "description": "Timeframe of the request. See list at $timeframeList",
@@ -6251,7 +6183,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Groups_Count",
         "parameters": [
           {
             "description": "Status of the datapoint",
@@ -6333,7 +6264,6 @@
       "delete": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Groups_Delete",
         "parameters": [
           {
             "description": "Id of the group",
@@ -6375,7 +6305,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Groups_Get",
         "parameters": [
           {
             "description": "The id of the group",
@@ -6419,7 +6348,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Groups_Post",
         "parameters": [
           {
             "description": "The id of the group",
@@ -6472,7 +6400,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Groups_GetStatisticsSingle",
         "parameters": [
           {
             "description": "Id of the group",
@@ -6556,7 +6483,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Groups_GetStatisticsList",
         "parameters": [
           {
             "description": "Id of the group",
@@ -6644,7 +6570,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Groups_GetDatapointsSummary",
         "parameters": [
           {
             "description": "Filter by this group id",
@@ -6803,7 +6728,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Groups_GetDatapoints",
         "parameters": [
           {
             "description": "Id of the group",
@@ -6945,7 +6869,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Groups_PutDatapoint",
         "parameters": [
           {
             "description": "The id of the group",
@@ -6998,7 +6921,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Groups_GetDatapointsCount",
         "parameters": [
           {
             "description": "Id of the group",
@@ -7101,7 +7023,6 @@
       "put": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Groups_PatchFavourite",
         "parameters": [
           {
             "description": "Id of the group",
@@ -7148,7 +7069,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Groups_GetHits",
         "parameters": [
           {
             "description": "Id of the group",
@@ -7256,7 +7176,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Groups_PatchNotes",
         "parameters": [
           {
             "description": "Id of the group",
@@ -7312,7 +7231,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Groups_GetTops",
         "parameters": [
           {
             "description": "Id of the group",
@@ -7422,7 +7340,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Hits_GetHits",
         "parameters": [
           {
             "description": "Timeframe of the request. See list at $timeframeList",
@@ -7514,7 +7431,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Me_GetMe",
         "produces": [
           "application/json",
           "text/json",
@@ -7545,7 +7461,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Me_GetMePlan",
         "produces": [
           "application/json",
           "text/json",
@@ -7576,7 +7491,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Reports_Get",
         "parameters": [
           {
             "description": "Type of the report.",
@@ -7698,7 +7612,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Retargeting_Get",
         "parameters": [
           {
             "default": 0,
@@ -7757,7 +7670,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Retargeting_Put",
         "parameters": [
           {
             "description": "The body of the retargeting script",
@@ -7802,7 +7714,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Retargeting_Count",
         "produces": [
           "application/json",
           "text/json",
@@ -7833,7 +7744,6 @@
       "delete": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Retargeting_Delete",
         "parameters": [
           {
             "description": "The id of the retargeting script",
@@ -7875,7 +7785,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Retargeting_Get",
         "parameters": [
           {
             "description": "The id of the retargeting script",
@@ -7923,7 +7832,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Retargeting_Post",
         "parameters": [
           {
             "description": "The id of the retargeting script",
@@ -7976,7 +7884,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Retargeting_GetDatapoints",
         "parameters": [
           {
             "description": "Id of the retargeting script",
@@ -8105,7 +8012,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Retargeting_GetDatapointsCount",
         "parameters": [
           {
             "description": "Id of the group",
@@ -8197,7 +8103,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Tags_Get",
         "parameters": [
           {
             "default": 0,
@@ -8288,7 +8193,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Tags_Put",
         "parameters": [
           {
             "description": "The body of the tag",
@@ -8333,7 +8237,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Tags_Count",
         "parameters": [
           {
             "description": "Name of the tag",
@@ -8401,7 +8304,6 @@
       "delete": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Tags_Delete",
         "parameters": [
           {
             "description": "Id of the tag",
@@ -8438,7 +8340,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Tags_Get",
         "parameters": [
           {
             "description": "Id of the tag",
@@ -8477,7 +8378,6 @@
       "delete": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Tags_DeleteRelatedDatapoints",
         "parameters": [
           {
             "description": "Id of the tag",
@@ -8516,7 +8416,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Tags_GetDatapoints",
         "parameters": [
           {
             "description": "Id of the tag.",
@@ -8624,7 +8523,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Tags_GetDatapointsCount",
         "parameters": [
           {
             "description": "Id of the tag.",
@@ -8719,7 +8617,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Tags_PatchDataPoint",
         "parameters": [
           {
             "description": "Id of the tag",
@@ -8772,7 +8669,6 @@
       "delete": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Tags_DeleteRelatedGroups",
         "parameters": [
           {
             "description": "Id of the tag",
@@ -8811,7 +8707,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Tags_GetGroups",
         "parameters": [
           {
             "description": "Id of the tag.",
@@ -8906,7 +8801,6 @@
       "get": {
         "consumes": [],
         "deprecated": false,
-        "operationId": "Tags_GetGroupsCount",
         "parameters": [
           {
             "description": "Id of the tag.",
@@ -8988,7 +8882,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Tags_PatchGroup",
         "parameters": [
           {
             "description": "Id of the tag",
@@ -9047,7 +8940,6 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "Tags_PatchTagName",
         "parameters": [
           {
             "description": "Id of the tag",

@@ -44,7 +44,6 @@
     "/rand": {
       "get": {
         "description": "Returns a list of true random bytes from the MassiveRand True Random Number Generator as blank-separated decimal strings.",
-        "operationId": "rand",
         "parameters": [
           {
             "description": "Number of bytes to return",
@@ -84,7 +83,6 @@
     "/randb58": {
       "get": {
         "description": "Returns a <a href='http://en.wikipedia.org/wiki/Base58'>base58</a> string of true random bytes from the MassiveRand True Random Number Generator.",
-        "operationId": "rand",
         "produces": [
           "application/octetstream"
         ],
@@ -105,7 +103,6 @@
     "/randb64": {
       "get": {
         "description": "Returns a <a href='http://en.wikipedia.org/wiki/Base64'>base64</a> string of true random bytes from the MassiveRand True Random Number Generator.",
-        "operationId": "rand",
         "produces": [
           "application/octetstream"
         ],
@@ -126,7 +123,6 @@
     "/randbindl": {
       "get": {
         "description": "Returns a binary blob of true random bytes from the MassiveRand True Random Number Generator as an attached file 'rand.raw'.",
-        "operationId": "rand",
         "parameters": [
           {
             "description": "Number of bytes to return",
@@ -156,7 +152,6 @@
     "/randbinds": {
       "get": {
         "description": "Returns a binary blob of true random bytes from the MassiveRand True Random Number Generator.",
-        "operationId": "rand",
         "parameters": [
           {
             "description": "Number of bytes to return",
@@ -186,7 +181,6 @@
     "/randjson": {
       "get": {
         "description": "Returns a list of true random bytes from the MassiveRand True Random Number Generator as a JSON string.",
-        "operationId": "rand",
         "parameters": [
           {
             "description": "Number of bytes to return",
@@ -226,7 +220,6 @@
     "/randprime": {
       "get": {
         "description": "Returns a large prime number (1536b long) from MassiveRand's Million Prime Database, as an hexadecimal string.",
-        "operationId": "randprime",
         "parameters": [],
         "produces": [
           "text/plain"

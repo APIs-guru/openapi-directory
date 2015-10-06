@@ -637,7 +637,6 @@
     "/articles/get": {
       "post": {
         "description": "Method accepts a JSON array of CORE IDs and retrieves a list of articles. The response array is ordered based on the order of the IDs in the request array.",
-        "operationId": "getArticleByCoreIdBatch",
         "parameters": [
           {
             "description": "JSON array with CORE IDs of articles that need to be fetched",
@@ -758,7 +757,6 @@
     "/articles/get/{coreId}": {
       "get": {
         "description": "Method will retrieve an article based on given CORE ID.",
-        "operationId": "getArticleByCoreId",
         "parameters": [
           {
             "description": "CORE ID of the article that needs to be fetched.",
@@ -869,7 +867,6 @@
     "/articles/get/{coreId}/download/pdf": {
       "get": {
         "description": "Method will retrieve an article based on given CORE ID.",
-        "operationId": "getArticlePdfByCoreId",
         "parameters": [
           {
             "description": "ID of article history that needs to be fetched",
@@ -912,7 +909,6 @@
     "/articles/get/{coreId}/history": {
       "get": {
         "description": "Method accepts a single CORE ID and returns a list of all historical versions of the article, which are stored in CORE database. The results are ordered from the newest one to the oldest one.",
-        "operationId": "getArticleHistoryByCoreId",
         "parameters": [
           {
             "description": "CORE ID of the article which history should be fetched",
@@ -980,7 +976,6 @@
     "/articles/search": {
       "post": {
         "description": "Method accepts a JSON array of search queries and parameters. It then searches through all articles and returns a JSON array of search results for each of the queries. Method searches through all article fields (title, authors, subjects, identifiers, etc.).",
-        "operationId": "searchArticlesBatch",
         "parameters": [
           {
             "description": "JSON array with search queries and parameters. One request can contain up to 100 queries",
@@ -1101,7 +1096,6 @@
     "/articles/search/{query}": {
       "get": {
         "description": "Searches through all articles and returns a JSON array with search results. Method searches through all article fields.",
-        "operationId": "searchArticles",
         "parameters": [
           {
             "description": "The search query",
@@ -1234,7 +1228,6 @@
     "/articles/similar": {
       "post": {
         "description": "Method accepts a text and retrieves a JSON array of articles which are similar to the given text. The response array is ordered based on similarity score, starting from the most similar.",
-        "operationId": "similarArticles",
         "parameters": [
           {
             "description": "The text that requires similar articles to be calculated on",
@@ -1356,7 +1349,6 @@
     "/journals/get": {
       "post": {
         "description": "Method accepts a JSON array of ISSNs and retrieves a list of journals.",
-        "operationId": "getJournalByIssnBatch",
         "parameters": [
           {
             "description": "JSON array with ISSNs of journals that need to be fetched",
@@ -1410,7 +1402,6 @@
     "/journals/get/{issn}": {
       "get": {
         "description": "Returns a journal with given ISSN identifier.",
-        "operationId": "getJournalByIssn",
         "parameters": [
           {
             "description": "ISSN identifier of journal that needs to be fetched.",
@@ -1453,7 +1444,6 @@
     "/journals/search": {
       "post": {
         "description": "Method accepts a JSON array of search queries and parameters. It then searches through all journals and returns a JSON array of search results for each of the queries. Method searches through all journal fields (title, identifiers, subjects, language, rights and publisher).",
-        "operationId": "searchBatch",
         "parameters": [
           {
             "description": "JSON array with search queries and parameters. One request can contain up to 100 queries.",
@@ -1507,7 +1497,6 @@
     "/journals/search/{query}": {
       "get": {
         "description": "Searches through all journals and returns a JSON array of search results. Method searches through all journal fields (title, identifiers, subjects, language, rights and publisher).",
-        "operationId": "search",
         "parameters": [
           {
             "description": "Search query",
@@ -1572,7 +1561,6 @@
     "/repositories/get": {
       "post": {
         "description": "Method accepts a JSON array of CORE repository IDs and retrieves a list of repositories. The response array is ordered based on the order of the IDs in the request array. The maximum number of IDs in request is 100.",
-        "operationId": "getRepositoryByIdBatch",
         "parameters": [
           {
             "description": "JSON array with CORE repository IDs of repositories that need to be fetched",
@@ -1629,7 +1617,6 @@
     "/repositories/get/{repositoryId}": {
       "get": {
         "description": "Method will retrieve a repository based on given CORE repository ID.",
-        "operationId": "getRepositoryById",
         "parameters": [
           {
             "description": "CORE repository ID of the article that needs to be fetched.",
@@ -1675,7 +1662,6 @@
     "/repositories/search": {
       "post": {
         "description": "Method accepts a JSON array of search queries and parameters. It then searches through all repositories and returns a JSON array of search results for each of the queries. Method searches through all repository fields.",
-        "operationId": "searchBatch",
         "parameters": [
           {
             "description": "JSON array with search queries and parameters. One request can contain up to 100 queries",
@@ -1729,7 +1715,6 @@
     "/repositories/search/{query}": {
       "get": {
         "description": "Searches through all repositories and returns a JSON array with search results. Method searches through all repository fields.",
-        "operationId": "search",
         "parameters": [
           {
             "description": "The search query",
@@ -1797,7 +1782,6 @@
     "/search": {
       "post": {
         "description": "Method accepts a JSON array of search queries. It searches through all resources and returns a JSON array with search results for each of the queries. Method searches through all resources and all fields. The results are ordered by relevance score and contain type of the relevant resource and its ID. Furthermore, the responses are oredered based on the order of the request items. The metadata of each resource need to be obtained through an appropriate method.",
-        "operationId": "searchBatch",
         "parameters": [
           {
             "description": "JSON array with search queries and pagination parameters. One request can contain up to 100 queries",
@@ -1854,7 +1838,6 @@
     "/search/{query}": {
       "get": {
         "description": "Searches through all resources and returns a JSON array with search results. Method searches through all resources and all fields. The results are ordered by relevance score and contain type of the relevant resource and its ID. The metadata of each resource need to be obtained through an appropriate method.",
-        "operationId": "search",
         "parameters": [
           {
             "description": "The search query",

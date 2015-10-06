@@ -1414,7 +1414,6 @@
     "/apps": {
       "get": {
         "description": "Retrieve a list of applications that belong to an organization ('org_id') or that have a specific API KEY ('api_key'). The calling device requires the app.read.by.org capability on the organization and app.read capability on the applications being listed. Don&#39;t provide both 'org_id' and 'api_key' parameters, otherwise you get a 400 response (bad request).\n",
-        "operationId": "list",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the organization to get applications from.",
@@ -1450,7 +1449,6 @@
           "application/json"
         ],
         "description": "Devices are instances of applications that are used to connect into the system. In most cases, you would have a different application for each type of device that connects to the system. When you use this API, you can create an application. To be able to call this method, the calling device requires the app.create capability on the specified organization ('org_id').\n",
-        "operationId": "create",
         "parameters": [
           {
             "description": "The JSON-formatted string containing information about the application to create.",
@@ -1479,7 +1477,6 @@
     "/apps/{id}": {
       "delete": {
         "description": "Remove an application from the system. In addition to removing the application, this call causes all the devices for the specified application and the associated data for the devices to be removed from the system. The calling device must have the app.delete capability on the specified application to perform the action.\n",
-        "operationId": "remove",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the application to delete.",
@@ -1501,7 +1498,6 @@
       },
       "get": {
         "description": "Read a single application based on its universally unique identifier (UUID). To be able to read an application, the calling device must have the app.read capability for the specified application.\n",
-        "operationId": "get",
         "parameters": [
           {
             "description": "The application UUID to read.",
@@ -1529,7 +1525,6 @@
           "application/json"
         ],
         "description": "Update the metadata for an application. The calling device requires the app.update capability for the specified application.\n",
-        "operationId": "update",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the application to update.",
@@ -1562,7 +1557,6 @@
     "/apps/{id}/caps": {
       "get": {
         "description": "Retrieve the list of capabilities. You can retrieve either the capabilities that this application has on other entities, or the capabilities that other entities have been granted on this application. Capabilities grant entities the permissions to perform certain actions on the system. Devices inherit all the capabilities of an application. The calling device must have the cap.read permission on the specified application to perform this action.\n",
-        "operationId": "list_caps",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the application.",
@@ -1608,7 +1602,6 @@
     "/apps/{id}/caps/{cap_name}/{granted_to}": {
       "delete": {
         "description": "Remove a capability from an entity (specified using 'granted_to') on the specified application. The calling device must have the cap.delete capability on the specified application to remove a capability.\n",
-        "operationId": "remove_cap",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the application to remove the capability from.",
@@ -1653,7 +1646,6 @@
       },
       "put": {
         "description": "Grant a capability to an entity. The created capability allows actions to be performed on the specified application. Use this method to give permissions to other entities in the system to perform actions to the specified application. The calling device must have the cap.create capability on the specified application. You can use the \"List all the capabilities\" from the Capabilities REST API (https://iot.blackberry.com/restdoc/#!/caps/list) to determine the valid strings that you can use.\n",
-        "operationId": "create_cap",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the application.",
@@ -1725,7 +1717,6 @@
     "/apps/{id}/data_retentions": {
       "get": {
         "description": "Return all the data retention policies for the specified application. Data retention policies describe what data should be indexed and how long that data should be retained in the system. The calling device must have the data.retention.read capability for the specified application.\n",
-        "operationId": "list_data_retentions",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the application.",
@@ -1756,7 +1747,6 @@
           "application/json"
         ],
         "description": "Create a data retention policy in the system. Data retention policies describe what data should be indexed and how long that data should be retained in the system. The calling device must have the data.retention.create capability on the specified application.\n",
-        "operationId": "create_data_retention",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the application.",
@@ -1792,7 +1782,6 @@
     "/apps/{id}/data_retentions/{data_retention_id}": {
       "delete": {
         "description": "Delete a data retention policy from the system. Data retention policies describe what data should be  indexed and how long that data should be retained in the system. The calling device must have the data.retention.delete capability for the specified application.\n",
-        "operationId": "remove_data_retention",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the application.",
@@ -1821,7 +1810,6 @@
       },
       "get": {
         "description": "Read a single data retention policy. Data retention policies describe what data should be indexed and how long that data should be retained in the system. The calling device must have the data.retention.read permission for the specified application.\n",
-        "operationId": "get_data_retention",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the application.",
@@ -1856,7 +1844,6 @@
           "application/json"
         ],
         "description": "Update a data retention policy with new policy settings. Data retention policies describe what data should be indexed and how long that data should be retained in the system. The calling device must have the data.retention.update permission for the specified application.\n",
-        "operationId": "update_data_retention",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the application.",
@@ -1896,7 +1883,6 @@
     "/apps/{id}/keys": {
       "get": {
         "description": "Read a single application API KEY and API SECRET based on its universally unique identifier (UUID). To read the key and secret, the calling device must have the app.read.keys capability on the specified application.\n",
-        "operationId": "get_keys",
         "parameters": [
           {
             "description": "The UUID of the application to read.",
@@ -1924,7 +1910,6 @@
           "application/json"
         ],
         "description": "Update the API KEY and API SECRET for an application. The calling device must have the app.update.keys capability for the specified application.\n",
-        "operationId": "update_keys",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the application to update.",
@@ -1957,7 +1942,6 @@
     "/apps/{id}/tags/{tag_id}": {
       "delete": {
         "description": "Remove a tag from an application. The calling device must have the app.untag capability for the specified application and the tag.grant capability for the specified tag.\n",
-        "operationId": "remove_tag",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the application to remove the tag from.",
@@ -1986,7 +1970,6 @@
       },
       "put": {
         "description": "Add an existing tag to an application. Before making this call, the specified tag must be created. After the tag is created, it can be applied to an application. The calling device must have the app.tag capability for the specified application and the tag.grant capability for the specified tag.\n",
-        "operationId": "add_tag",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the application to apply the tag to.",
@@ -2017,7 +2000,6 @@
     "/caps": {
       "get": {
         "description": "Get the list of capabilities. This list contains the action name, the display name, and the supported targets. This list contains only system-defined capabilities and doesn&#39;t contain user-created capabilities. Since user-defined capabilities are application-specific, there is no available mechanism to discover user-defined capabilities. However, if your user-defined capabilities are granted on an entity, you can find the user-defined capabilities using the GET operation to retrieve the list of capabilities on any entity. For example, if you have an application that grants a user-defined permission, you can use the GET operation (List the capabilities for an application) and the UUID of the application to retrieve the list capabilities, which includes both system-defined and user-defined capabilities. You can use 'target_type' to determine which capabilities can be applied to a target. For example, set the 'target_type' to \"file\" to get the capabilities that a file entity can grant to other entities.\nNo special capabilities are required to perform this operation.\n",
-        "operationId": "list",
         "parameters": [
           {
             "description": "The target entity that the capability supports. The valid values you can enter include: \"org\" (organization), \"app\" (application), \"device\" (devices), \"user\" (users), \"tag\" (tags), and \"firehose\" (firehoses). You can also use \"association\" to determine the capabilities that can be granted as an association.\n",
@@ -2046,7 +2028,6 @@
     "/devices": {
       "get": {
         "description": "Return all the devices that are associated with the specified user. Without any additional capabilities, a user can always retrieve the list of devices that their UUID is associated with. For users to retrieve a list of devices associated with another user, they must be granted the device.read.by.user capability to perform this operation. For example, if you grant another user entity the device.read.by.user capability, the capability permits the other user to retrieve the list of devices that are associated with your UUID.\n",
-        "operationId": "list",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the user to query devices for. If this parameter is not provided, for user-based authenticated devices, the UUID of associated user from the device is used. For device-based authenticated devices, if no UUID is specified, a 400 error is returned.\n",
@@ -2076,7 +2057,6 @@
           "application/json"
         ],
         "description": "Call this method to create a device.  If you have a manufacturing line, you can automate the process of creating devices using this method. The calling device must have the device.create capability for the application that the new device is being created on.\n",
-        "operationId": "create",
         "parameters": [
           {
             "in": "body",
@@ -2103,7 +2083,6 @@
     "/devices/{id}": {
       "delete": {
         "description": "Delete a device from the system. This call also deletes all associated data with the device (i.e., logs, states, etc). The calling device must have device.delete to perform this operation.\n",
-        "operationId": "remove",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the device to delete.  The calling device must have the device.delete capability on the specified device.\n",
@@ -2125,7 +2104,6 @@
       },
       "get": {
         "description": "Read a device to get its associated metadata. The calling device must have the device.read capability on the target device.\n",
-        "operationId": "get",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the device to read.",
@@ -2153,7 +2131,6 @@
           "application/json"
         ],
         "description": "Update the metadata for a device. The calling device must have the device.update capability for the specified device.\n",
-        "operationId": "update",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the device to update.",
@@ -2184,7 +2161,6 @@
     "/devices/{id}/caps": {
       "get": {
         "description": "Retrieve the list of capabilities. You can retrieve either the capabilities that this device has on other entities, or the capabilities that other entities has been granted on this device. Capabilities grant entities the permissions to perform certain actions on the system. Devices inherit all the capabilities of an application. The calling device must have the cap.read permission on the specified application to perform this action.\n",
-        "operationId": "list_caps",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the device to retrieve capabilities from.",
@@ -2230,7 +2206,6 @@
     "/devices/{id}/caps/{cap_name}/{granted_to}": {
       "delete": {
         "description": "Revoke a capability that an entity ('granted_to') has been granted to perform on the specified device. The calling device requires the cap.delete capability on the specified device.\n",
-        "operationId": "remove_cap",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) that the 'granted_to' entity has permissions on.",
@@ -2275,7 +2250,6 @@
       },
       "put": {
         "description": "Grant a capability to an entity. The created capability allows actions to be performed on the specified device. Use this method to give permissions to other entities in the system to perform actions to the specified device. The calling device must have the cap.create capability on the specified device.\n",
-        "operationId": "create_cap",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the device to grant capabilities on.  Note that this device doesn&#39;t retrieve the capability. Capabilities are granted using 'granted_to' to perform actions on this UUID.\n",
@@ -2346,7 +2320,6 @@
     },
     "/devices/{id}/certificates": {
       "get": {
-        "operationId": "list_certificates",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the device to get the list of certificates for. The device.read capability is required to perform this operation. The caller must have the device.read capability to perform this operation.\n",
@@ -2374,7 +2347,6 @@
           "application/json"
         ],
         "description": "This method takes a Certificate Signing Request (CSR) and returns a certificate, which can be used to authenticate as this device. The caller must have the device.update capability to perform this operation.\n",
-        "operationId": "create_certificate",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the device to associate this certificate with.\n",
@@ -2409,7 +2381,6 @@
     "/devices/{id}/certificates/{serial_number}": {
       "delete": {
         "description": "This method revokes a certificate (identified by its serial number) that&#39;s associated with the device. After a certificate has been revoked, it can&#39;t be used to authenticate the device. The device.update capability is required to perform this operation.\n",
-        "operationId": "revoke_certificate",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the device to revoke a certificate from.\n",
@@ -2446,7 +2417,6 @@
           "application/json"
         ],
         "description": "Allow a device to store data on the system associated with it. The data is provided in bulk format with 1-100 data points allowed. No capabilities are required to create the data, but devices can create data only for themselves.\n",
-        "operationId": "create_data",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the device to associate this data with.  Currently, this can be only the same as the calling device. An error is returned if the device ID doesn&#39;t match the one assigned to the access token that&#39;s used.\n",
@@ -2477,7 +2447,6 @@
     "/devices/{id}/data/{data_id}": {
       "delete": {
         "description": "Delete the named data object of a device. Calling devices can always delete data on themselves.  To delete data on other devices, the calling device must have the data.delete capability on the target device.\n",
-        "operationId": "remove_data",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the device to delete data from.",
@@ -2524,7 +2493,6 @@
       },
       "get": {
         "description": "Return the named data for a device. Devices can read their own data. To read the data of other devices, the caller must have the data.read capability on the target device.\n",
-        "operationId": "get_data",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the device to read from.",
@@ -2576,7 +2544,6 @@
     "/devices/{id}/tags/{tag_id}": {
       "delete": {
         "description": "Remove a previously associated tag from a device. To be able to call this method, the calling device must have the device.untag capability on the specified device and the tag.grant capability on the specified tag.\n",
-        "operationId": "remove_tag",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the device to tag",
@@ -2608,7 +2575,6 @@
           "application/json"
         ],
         "description": "Add an existing tag to the specified device. To use this method, the calling device must have the device.tag capability on the specified device and the tag.grant capability on the specified tag.\n",
-        "operationId": "add_tag",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the device to tag.",
@@ -2639,7 +2605,6 @@
     "/files": {
       "get": {
         "description": "Returns the filename, universally unique identifiers (UUIDs) of files, and other information about the files associated with the device. The calling device must have the file.read permission to perform this operation.\n",
-        "operationId": "list",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the device to get files listed under.\n",
@@ -2670,7 +2635,6 @@
           "application/json"
         ],
         "description": "Create a file object in the system. You provide the file as part multipart form data with this method. Files receive a universally unique identifier (UUID) that identifies the file in the system. The calling device must have the file.create capability to perform  this operation.\n",
-        "operationId": "create",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the device to create a file for. If you don&#39;t provide a UUID, the file that&#39;s created from this method is associated with the UUID  of the calling device.\n",
@@ -2720,7 +2684,6 @@
     "/files/{id}": {
       "delete": {
         "description": "Delete a previously created file. The calling device must have the file.delete capability on the specified file to perform this operation.\n",
-        "operationId": "remove",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the file.",
@@ -2742,7 +2705,6 @@
       },
       "get": {
         "description": "Get information about a file using its universally unique identifier (UUID). The UUID for the file that can be shared with others. Information about the file includes the URL where to download the file, the filename, description of the file, when the file was created and uploaded, the size of the file, and any metadata to describe the file. The calling device must have the file.read capability to perform this operation.\n",
-        "operationId": "get",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the file.",
@@ -2767,7 +2729,6 @@
       },
       "put": {
         "description": "Update the metadata relating to a file. It isn&#39;t possible to change the file content directly. To change the file content, delete the file and recreate the file. The calling device must have the file.update capability on the specified file to perform this operation.\n",
-        "operationId": "update",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the file.",
@@ -2799,7 +2760,6 @@
     "/files/{id}/caps": {
       "get": {
         "description": "Retrieve the list of capabilities that other entities have been granted on this file. The calling device must have the cap.read capability on the specified file to perform this operation.\n",
-        "operationId": "list_caps",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the file.",
@@ -2829,7 +2789,6 @@
     "/files/{id}/caps/{cap_name}/{granted_to}": {
       "delete": {
         "description": "Remove a capability from an entity (granted_to) on the specified universally unique identifier (UUID) of the file. To be able to remove a capability, the calling device must have the cap.delete capability on the specified UUID of the file.\n",
-        "operationId": "remove_cap",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) to remove the capability from.",
@@ -2874,7 +2833,6 @@
       },
       "put": {
         "description": "Grant a capability to an entity. The created capability allows operations to be performed on the specified file. Use this method to give capabilities to other entities in the system to perform operations on the specified file. The calling device must have the cap.create capability on the specified file. You can use the \"List all the capabilities\" from the Capabilities REST API (https://iot.blackberry.com/restdoc/#!/caps/list) to determine the valid capabilities that you can use.\n",
-        "operationId": "create_cap",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the file.",
@@ -2946,7 +2904,6 @@
     "/files/{id}/content": {
       "get": {
         "description": "Return a 302, with the location of the content as the location header.\n For redirects, an error may occur if the client does not remove the\n authorization header. When this error occurs, use the 'download_url'\n value from the GET /files{id} route.  The calling device must have the file.read\n capability on the specified file to perform this operation.\n",
-        "operationId": "download",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the file.",
@@ -2970,7 +2927,6 @@
     "/firehoses": {
       "get": {
         "description": "Read a list of firehoses belonging to an organization. The calling device must have the firehose.list capability on the organization.\n",
-        "operationId": "list",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the organization from which to get the list of firehoses.",
@@ -3000,7 +2956,6 @@
           "application/json"
         ],
         "description": "Creates a data pipe that stream events and data from devices. The calling device must have the firehose.create capability on the organization.\n",
-        "operationId": "create",
         "parameters": [
           {
             "in": "body",
@@ -3028,7 +2983,6 @@
     "/firehoses/{id}": {
       "delete": {
         "description": "Remove a firehose from the system. In addition to removing the firehose, this call causes all the subscriptions for the specified firehose to be removed from the system. The calling device must have the firehose.delete capability on the organization.\n",
-        "operationId": "remove",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the firehose to delete.",
@@ -3050,7 +3004,6 @@
       },
       "get": {
         "description": "Read a single firehose based on its universally unique identifier (UUID). The calling device must have the firehose.read capability on the organization.\n",
-        "operationId": "get",
         "parameters": [
           {
             "description": "The firehose UUID to read",
@@ -3078,7 +3031,6 @@
           "application/json"
         ],
         "description": "Update the metadata for a firehose. The calling device must have the firehose.update capability on the organization.\n",
-        "operationId": "update",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the firehose to update.",
@@ -3110,7 +3062,6 @@
     "/firehoses/{id}/caps": {
       "get": {
         "description": "Retrieve the entities (organizations, applications, users, devices and tags) that have been granted the firehose.attach capability. This capability permits devices to attach and consume event data from the firehose.\n",
-        "operationId": "list_caps",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the firehose.",
@@ -3140,7 +3091,6 @@
     "/firehoses/{id}/caps/{cap_name}/{granted_to}": {
       "delete": {
         "description": "Remove a capability from an entity (specified using 'granted_to') on the specified firehose. The calling device must have the cap.delete capability on the specified firehose to remove a capability.\n",
-        "operationId": "remove_cap",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the firehose to remove the capability from.",
@@ -3176,7 +3126,6 @@
       },
       "put": {
         "description": "Grant a capability to an entity. The created capability allows actions to be performed on the specified firehose. Use this method to give permissions to other entities in the system to perform actions to the specified firehose. The calling device must have the cap.create capability on the specified firehose.\n",
-        "operationId": "create_cap",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the firehose.",
@@ -3236,7 +3185,6 @@
     "/firehoses/{id}/data": {
       "get": {
         "description": "Begins streaming from the specified firehose. The calling device must have the firehose.attach capability.\n",
-        "operationId": "attach",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the firehose.",
@@ -3260,7 +3208,6 @@
     "/firehoses/{id}/subscriptions": {
       "get": {
         "description": "Returns all the subscriptions for the specified firehose. The calling device must have the firehose.subscription.list capability on the organization.\n",
-        "operationId": "list_subscriptions",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the firehose.",
@@ -3291,7 +3238,6 @@
           "application/json"
         ],
         "description": "Creates a subscription for a firehose. Firehose subscriptions describe what data is streamed to the recipient. The calling device must have the firehose.subscription.create capability on the organization.\n",
-        "operationId": "create_subscription",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the firehose.",
@@ -3329,7 +3275,6 @@
           "application/x-www-form-urlencoded"
         ],
         "description": "Deletes a subscription from firehose. The calling device must have the firehose.subscription.delete capability for the organization.\n",
-        "operationId": "remove_subscription",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the firehose.",
@@ -3358,7 +3303,6 @@
       },
       "get": {
         "description": "Reads a single firehose subscription. The calling device must have the firehose.subscription.read capability on the organization.\n",
-        "operationId": "get_subscription",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the firehose",
@@ -3395,7 +3339,6 @@
           "application/json"
         ],
         "description": "Acknowledge the point of event data that is received on a firehose using a token. The token specifies the starting point of where to start sending event data if the device later reconnects.\n",
-        "operationId": "ack",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the firehose.",
@@ -3427,7 +3370,6 @@
     "/messages": {
       "get": {
         "description": "Return the first 'limit' number of messages waiting to be delivered (not acknowledged) to the authenticated device. No capabilities are required for this action, devices can always retrieve their own messages.\n",
-        "operationId": "get",
         "parameters": [
           {
             "description": "The maximum number of messages to return. You can specify a range of 1-25.\n",
@@ -3457,7 +3399,6 @@
           "application/json"
         ],
         "description": "Send a message from the authenticated device to another device. The authenticated device requires the message.create.<message_type> capability (where message_type is application-specific) for the target device. For example, to send the message.create.wipe message, the device that sends the message must be granted the message.create.wipe capability on the target device.\n",
-        "operationId": "create",
         "parameters": [
           {
             "description": "The JSON-formatted string containing message information.",
@@ -3486,7 +3427,6 @@
           "application/json"
         ],
         "description": "Acknowledge received messages up to the watermark.\n",
-        "operationId": "acknowledge",
         "parameters": [
           {
             "in": "body",
@@ -3513,7 +3453,6 @@
           "application/json"
         ],
         "description": "Any device can post to this path and it will get its own unique stream of notifications.  This REST route doesn&#39;t close and continues to stay open. The route also sends keep-alive messages approximately every five minutes. The keep-alive messages are \"\\r\\n\" characters. Notifications are JSON-formatted objects that are separated with \"\\r\\n\" characters. The notifications with the \"\\r\\n\" separators are delivered on one line to make it easier to parse. To get notifications for data, the device must have data.read capability on the device where the data resides. To receive notifications for updates to files, you must have the file.read\n",
-        "operationId": "register",
         "parameters": [
           {
             "in": "body",
@@ -3543,7 +3482,6 @@
     "/orgs/{id}": {
       "get": {
         "description": "Retrieve the information of an organization. The capability organization.read is required to perform this action.\n",
-        "operationId": "get",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the organization to get information about.",
@@ -3570,7 +3508,6 @@
     "/orgs/{id}/caps": {
       "get": {
         "description": "Retrieve the list of capabilities. You can retrieve either the capabilities that this organization has on other entities, or the capabilities that other entities have been granted on this organization. Capabilities grant entities the permissions to perform certain actions on the system. The calling device must have the cap.read permission on the specified organization to perform this action.\n",
-        "operationId": "list_caps",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the target organization.",
@@ -3617,7 +3554,6 @@
     "/orgs/{id}/caps/{cap_name}/{granted_to}": {
       "delete": {
         "description": "Revoke a capability from an organization.  The cap.delete capability is required to perform this action.\n",
-        "operationId": "remove_cap",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the organization.",
@@ -3663,7 +3599,6 @@
       },
       "put": {
         "description": "Grant a capability to an entity. The created capability allows actions to be performed on the specified organization. Use this method to give permissions to other entities in the system to perform actions to the specified organization. The calling device must have the cap.create capability on the specified organization.\n",
-        "operationId": "create_cap",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the organization.",
@@ -3733,7 +3668,6 @@
     "/orgs/{id}/invite/{email}": {
       "put": {
         "description": "Add a user to an organization using their email. The calling device must have the user.add.org capability to perform this operation.\n",
-        "operationId": "invite_user",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the organization.",
@@ -3764,7 +3698,6 @@
     "/orgs/{id}/tags/{tag_id}": {
       "delete": {
         "description": "Remove a tag from an organization.  To be able to call this method the calling device must have the organization.tag capability on the organization and the tag.grant capability on the tag.\n",
-        "operationId": "remove_tag",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the target organization.",
@@ -3793,7 +3726,6 @@
       },
       "put": {
         "description": "Add a tag to an organization.  Tags can have permissions applied to them. Using a tag on an organization allows you to grant permissions to that organization. To be able to call this method, the calling device must have the organization.tag capability on the target organization and the tag.grant permission on the tag.\n",
-        "operationId": "add_tag",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the target organization.",
@@ -3824,7 +3756,6 @@
     "/orgs/{id}/users/{user_id}": {
       "delete": {
         "description": "Remove a user from an organization. The caller must have the user.remove.org capability to perform this operation.\n",
-        "operationId": "remove_user",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the organization to remove the user from.",
@@ -3853,7 +3784,6 @@
       },
       "put": {
         "description": "Organizations can have many users inside them. Organizations are created by one user who is automatically tagged as an administer for that new organization. That administrator can add more users using this method. Before a user can be added to an organization, the user must exist in the system. The caller must have the user.add.org capability to perform this operation.\n",
-        "operationId": "add_user",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the organization.",
@@ -3887,7 +3817,6 @@
           "application/json"
         ],
         "description": "Return the Elasticsearch results of the provided query. The available capabilities augment this query. For information about Elasticsearch queries, see the Elasticsearch documentation at: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl.html. To get results for your search, which  include devices, file metadata, or search data, you must grant the proper capability. You can grant the the search.device capability to allow information about devices to be searched, the search.file capability to allow file metadata to be searched, or the search.data capability to allow data that&#39;s saved on the platform by devices to be searched. For data, you can specify categories or specific data objects to limit what can be searched. For example, you can grant the search.data.default.alarm capability to permit only alarm categories to be searched.\n",
-        "operationId": "equery",
         "parameters": [
           {
             "description": "The indexed document type you want to search for.\n",
@@ -3960,7 +3889,6 @@
     "/tags": {
       "get": {
         "description": "Return a list of all the tags and the information for each tag. To get the list of tags, the caller must have the tag.read capability.\n",
-        "operationId": "list",
         "responses": {
           "200": {
             "description": "No response was specified",
@@ -3982,7 +3910,6 @@
           "application/json"
         ],
         "description": "Create a named exposing or non-exposing tag. Non-exposing tags can be granted capabilities to perform actions on other entities. When an entity is tagged with a non-exposing tag, the capabilities are transposed to the tagged entity. This transposition causes the tagged entity to be granted the same capabilities that were granted to the tag. Exposing tags work like non-exposing tags to grant capabilities on targets. In addition, exposing tags can be targets that grant capabilities to other entities. Therefore, any capabilities that were granted by an exposing tag, as well as any capabilities granted to the tag are transposed to the tagged entity. The effect of the transposition is that the tagged entity is granted the same capabilities that were granted to the tag and the tagged entity grants the same capabilities to other entities as the tag. To create a tag, the caller must have the tag.create capability.\n",
-        "operationId": "create",
         "parameters": [
           {
             "description": "The JSON-formatted string containing information about the tag to create.",
@@ -4010,7 +3937,6 @@
     "/tags/{id}": {
       "delete": {
         "description": "Delete a tag from the entity.  After the tag is deleted, the tag is removed from all entities that were assigned the removed tag. To delete a tag, the caller must have the tag.delete capability.\n",
-        "operationId": "remove",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the tag to delete.",
@@ -4032,7 +3958,6 @@
       },
       "get": {
         "description": "Read a particular tag by its universally unique identifier (UUID).  This method returns the information of a particular tag. To read a tag, the caller must have the tag.read capability.\n",
-        "operationId": "get",
         "parameters": [
           {
             "description": "The UUID of the tag to read.",
@@ -4060,7 +3985,6 @@
           "application/json"
         ],
         "description": "Update a tag with new values. To update a tag, the caller must have the tag.update capability.\n",
-        "operationId": "update",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the tag to update.",
@@ -4095,7 +4019,6 @@
     "/tags/{id}/caps": {
       "get": {
         "description": "Retrieve the list of capabilities. You can retrieve either capabilities that this tag has on other entities, or the capabilities that other entities have been granted on this tag. Capabilities grant entities the permissions to perform certain actions on the system. The calling device must have the cap.read permission on the specified application to perform this action.\n",
-        "operationId": "list_caps",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the tag to list capabilities for.",
@@ -4141,7 +4064,6 @@
     "/tags/{id}/caps/{cap_name}/{granted_to}": {
       "delete": {
         "description": "Remove a capability from a tag. Entities that have been assigned the specified tag no longer have the specified capability. The calling device must have the cap.delete capability to perform this operation.\n",
-        "operationId": "remove_cap",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the tag from which to revoke a granted capability.",
@@ -4186,7 +4108,6 @@
       },
       "put": {
         "description": "Grant a capability to another entity. The created capability allows actions to be performed on entities that are tagged with this tag. Use this method to give permissions to other entities in the system to perform actions to other entities tagged with this tag. The calling device must have the cap.create capability on the specified application and the tag must be an exposing tag. If you  use this call on a non-exposing tag, you get a 400 response code.\n",
-        "operationId": "create_cap",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the tag to which to add the capability.",
@@ -4255,7 +4176,6 @@
     "/tags/{id}/entities": {
       "get": {
         "description": "Retrieve the list of entities that are tagged with the specified tag.\n",
-        "operationId": "entities",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the tag to list entities for.",
@@ -4285,7 +4205,6 @@
     "/users": {
       "get": {
         "description": "Provide a list of all users belonging to an organization.\n",
-        "operationId": "list",
         "parameters": [
           {
             "description": "The UUID of the organization.",
@@ -4314,7 +4233,6 @@
     "/users/id/{email}": {
       "get": {
         "description": "Get the user id in the format of universally unique identifier (UUID) by providing the user email address.\n",
-        "operationId": "user_id",
         "parameters": [
           {
             "description": "The email address of the user.",
@@ -4341,7 +4259,6 @@
     "/users/{id}": {
       "get": {
         "description": "Read a user using its universally unique identifier (UUID). The user.read capability is required to perform this action.\n",
-        "operationId": "get",
         "parameters": [
           {
             "description": "The UUID of the user.",
@@ -4368,7 +4285,6 @@
     "/users/{id}/caps": {
       "get": {
         "description": "Get the list of capabilities. You can retrieve either the capabilities that this user has on other entities, or the capabilities that other entities have been granted on this user. Devices that are associated with the user (i.e., the user logged into the device), inherit the capabilities when the device is granted the \"inherit_user\" (specified in \"scope\" parameter of the https://iot.blackberry.com/auth/dialog/authorize endpoint) during the authorization process. The cap.read capability is required to perform this operation.\n",
-        "operationId": "list_caps",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the user.",
@@ -4414,7 +4330,6 @@
     "/users/{id}/caps/{cap_name}/{granted_to}": {
       "delete": {
         "description": "Revoke a capability from a user.  The cap.delete capability is required to perform this action.\n",
-        "operationId": "remove_cap",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the user.",
@@ -4460,7 +4375,6 @@
       },
       "put": {
         "description": "Grant a capability to an entity. The created capability allows actions to be performed on the specified user. Use this method to give permissions to other entities in the system to perform actions to the specified user. The calling device must have the cap.create capability on the specified user.\n",
-        "operationId": "create_cap",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the user.",
@@ -4533,7 +4447,6 @@
     "/users/{id}/profile": {
       "get": {
         "description": "Read a user&#39;s profile information. The user.read.profile capability is required to perform this action.\n",
-        "operationId": "get_profile",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the user.",
@@ -4560,7 +4473,6 @@
     "/users/{id}/tags/{tag_id}": {
       "delete": {
         "description": "Remove a tag from a user. The calling device must have the user.untag capability for the specified user and the tag.grant capability for the specified tag.\n",
-        "operationId": "remove_tag",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the user.",
@@ -4589,7 +4501,6 @@
       },
       "put": {
         "description": "Add a tag to a user. The calling device must have the user.tag capability for the specified user and the tag.grant capability for the specified tag.\n",
-        "operationId": "add_tag",
         "parameters": [
           {
             "description": "The universally unique identifier (UUID) of the user.",

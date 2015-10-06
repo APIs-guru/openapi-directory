@@ -16,7 +16,6 @@
     "/currencies": {
       "get": {
         "description": "<p>Use this to search for currencies supported by Bitdango.</p>\r\n<p>Authentication Level = 0 (\r\npublic / no authentication\r\n)</p>\r\n<h4>Facet Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">currencyTypes</td><td>Get a facet of types of currencies.</td></tr>\r\n</tbody></table>\r\n",
-        "operationId": "currencies",
         "parameters": [
           {
             "default": 1,
@@ -87,7 +86,6 @@
     "/currencies/{currencyCode}": {
       "get": {
         "description": "<p>Get a specific currency.</p>\r\n<p>Authentication Level = 0 (\r\npublic / no authentication\r\n)</p>\r\n",
-        "operationId": "currencies",
         "parameters": [
           {
             "description": "<ul>\r\n</ul>\r\n",
@@ -123,7 +121,6 @@
     "/currencypairs": {
       "get": {
         "description": "<p>Use this to search currency pairs. This is where you get the exchange rate between currencies.</p>\r\n<p>Authentication Level = 0 (\r\npublic / no authentication\r\n)</p>\r\n<h4>Expand Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">exchangeRateHistory</td><td>Use this to get the exchange rate history for currency pairs.</td></tr>\r\n</tbody></table>\r\n",
-        "operationId": "currencypairs",
         "parameters": [
           {
             "default": 1,
@@ -201,7 +198,6 @@
     "/currencypairs/{currencyPairCode}": {
       "get": {
         "description": "<p>Return a specific currency pair.</p>\r\n<p>Authentication Level = 0 (\r\npublic / no authentication\r\n)</p>\r\n<h4>Expand Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">exchangeRateHistory</td><td>Use this to get the exchange rate history for currency pairs.</td></tr>\r\n</tbody></table>\r\n",
-        "operationId": "currencypairs",
         "parameters": [
           {
             "description": "<ul>\r\n</ul>\r\n",
@@ -244,7 +240,6 @@
     "/exchanges": {
       "get": {
         "description": "<p>Use this to search exchanges.</p>\r\n<p>Authentication Level = 0 (\r\npublic / no authentication\r\n)</p>\r\n<h4>Facet Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">countries</td><td>Include a facet of the countries of exchanges.</td></tr>\r\n<tr><td class=\"code\">depositMethods</td><td>Include a facet of methods for depositing currency into an exchange.</td></tr>\r\n<tr><td class=\"code\">withdrawlMethods</td><td>Include a facet of methods for withdrawing currency from an exchange.</td></tr>\r\n</tbody></table>\r\n<h4>Expand Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">limits</td><td>Include the limits enforced by this exchange.</td></tr>\r\n<tr><td class=\"code\">transferPolicies</td><td>Include the transfer policies enforced by this exchange.</td></tr>\r\n<tr><td class=\"code\">credentials</td><td>Include the credentials required to authenticate with this exchange.</td></tr>\r\n<tr><td class=\"code\">markets</td><td>Include the markets listed on this exchange.</td></tr>\r\n</tbody></table>\r\n",
-        "operationId": "exchanges",
         "parameters": [
           {
             "default": 1,
@@ -322,7 +317,6 @@
     "/exchanges/{exchangeCode}": {
       "get": {
         "description": "<p>Use this to get a specific exchange.</p>\r\n<p>Authentication Level = 0 (\r\npublic / no authentication\r\n)</p>\r\n<h4>Expand Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">credentials</td><td>Include the credentials required to authenticate with this exchange.</td></tr>\r\n<tr><td class=\"code\">limits</td><td>Include the limits enforced by this exchange.</td></tr>\r\n<tr><td class=\"code\">transferPolicies</td><td>Include the transfer policies enforced by this exchange.</td></tr>\r\n<tr><td class=\"code\">markets</td><td>Include the markets listed on this exchange.</td></tr>\r\n</tbody></table>\r\n",
-        "operationId": "exchanges",
         "parameters": [
           {
             "description": "<ul>\r\n</ul>\r\n",
@@ -365,7 +359,6 @@
     "/marketpairs": {
       "get": {
         "description": "<p>Use this to search for market pairs. This is how you find arbitrage opportunities.</p>\r\n<p>Authentication Level = 1 (\r\naccessToken header\r\n)</p>\r\n<h4>Facet Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">buyBaseCurrencies</td><td>Use this to get a facet of the Buy Base Currencies.</td></tr>\r\n<tr><td class=\"code\">buyMarkets</td><td>Use this to get a facet of the Buy Markets.</td></tr>\r\n<tr><td class=\"code\">sellBaseCurrencies</td><td>Use this to get a facet of the Sell Base Currencies.</td></tr>\r\n<tr><td class=\"code\">sellQuoteCurrencies</td><td>Use this to get a facet of the Sell Quote Currencies.</td></tr>\r\n<tr><td class=\"code\">sellMarkets</td><td>Use this to get a facet of the Sell Markets.</td></tr>\r\n<tr><td class=\"code\">buyQuoteCurrencies</td><td>Use this to get a facet of the Buy Quote Currencies.</td></tr>\r\n</tbody></table>\r\n<h4>Expand Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">tickers</td><td>Use this to include the tickers for markets.</td></tr>\r\n<tr><td class=\"code\">orderbooks</td><td>Use this to return the order books for both markets in the market pair.</td></tr>\r\n<tr><td class=\"code\">profitCurve</td><td>Use this to include the profit at different traded amounts.</td></tr>\r\n<tr><td class=\"code\">trades</td><td>Use this to include profitable trades that can be made.</td></tr>\r\n</tbody></table>\r\n",
-        "operationId": "marketpairs",
         "parameters": [
           {
             "description": "<p>The access token for the user (<a href=\"http://self-issued.info/docs/draft-ietf-oauth-v2-bearer.html#authz-header\">format</a>: Bearer access_token).</p><p>Example: Bearer DI83JE3H8FEUIFJKWEKJ8E9383</p>",
@@ -505,7 +498,6 @@
     "/marketpairs/{marketPairCode}": {
       "get": {
         "description": "<p>Use this get a specific market pair.</p>\r\n<p>Authentication Level = 1 (\r\naccessToken header\r\n)</p>\r\n<h4>Expand Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">trades</td><td>Use this to include profitable trades that can be made.</td></tr>\r\n<tr><td class=\"code\">orderbooks</td><td>Use this to return the order books for both markets in the market pair.</td></tr>\r\n<tr><td class=\"code\">tickers</td><td>Use this to include the tickers for markets.</td></tr>\r\n<tr><td class=\"code\">profitCurve</td><td>Use this to include the profit at different traded amounts.</td></tr>\r\n</tbody></table>\r\n",
-        "operationId": "marketpairs",
         "parameters": [
           {
             "description": "<p>The access token for the user (<a href=\"http://self-issued.info/docs/draft-ietf-oauth-v2-bearer.html#authz-header\">format</a>: Bearer access_token).</p><p>Example: Bearer DI83JE3H8FEUIFJKWEKJ8E9383</p>",
@@ -561,7 +553,6 @@
     "/markets": {
       "get": {
         "description": "<p>Use this to search markets. This is how you find current prices at specific markets.</p>\r\n<p>Authentication Level = 1 (\r\naccessToken header\r\n)</p>\r\n<h4>Facet Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">baseCurrencies</td><td>Use this to get the base currencies of markets.</td></tr>\r\n<tr><td class=\"code\">quoteCurrencies</td><td>Use this to get the quote currencies of markets.</td></tr>\r\n<tr><td class=\"code\">exchanges</td><td>Use this to a list of exchanges.</td></tr>\r\n</tbody></table>\r\n<h4>Expand Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">ticker</td><td>This will include the ticker for the market.</td></tr>\r\n<tr><td class=\"code\">tickerHistory</td><td>This will include the historical prices for the ticker.</td></tr>\r\n<tr><td class=\"code\">orderBook</td><td>This will include the order book for the market.</td></tr>\r\n</tbody></table>\r\n",
-        "operationId": "markets",
         "parameters": [
           {
             "description": "<p>The access token for the user (<a href=\"http://self-issued.info/docs/draft-ietf-oauth-v2-bearer.html#authz-header\">format</a>: Bearer access_token).</p><p>Example: Bearer DI83JE3H8FEUIFJKWEKJ8E9383</p>",
@@ -673,7 +664,6 @@
     "/markets/{marketCode}": {
       "get": {
         "description": "<p>Use this to get a specific market.</p>\r\n<p>Authentication Level = 1 (\r\naccessToken header\r\n)</p>\r\n<h4>Expand Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">tickerHistory</td><td>This will include the historical prices for the ticker.</td></tr>\r\n<tr><td class=\"code\">orderBook</td><td>This will include the order book for the market.</td></tr>\r\n<tr><td class=\"code\">ticker</td><td>This will include the ticker for the market.</td></tr>\r\n</tbody></table>\r\n",
-        "operationId": "markets",
         "parameters": [
           {
             "description": "<p>The access token for the user (<a href=\"http://self-issued.info/docs/draft-ietf-oauth-v2-bearer.html#authz-header\">format</a>: Bearer access_token).</p><p>Example: Bearer DI83JE3H8FEUIFJKWEKJ8E9383</p>",
@@ -729,7 +719,6 @@
     "/sessions": {
       "get": {
         "description": "<p>Use this to search your session history.</p>\r\n<p>Authentication Level = 1 (\r\naccessToken header\r\n)</p>\r\n<h4>Facet Codes</h4>\r\n<table class=\"fullwidth\"><thead><tr><th>Code</th><th>Description</th></tr></thead><tbody>\r\n<tr><td class=\"code\">countries</td><td>Get a facet of countires where sessions have been initiated.</td></tr>\r\n<tr><td class=\"code\">applications</td><td>Get a facet of applications used to create sessions.</td></tr>\r\n<tr><td class=\"code\">ipAddresses</td><td>Get a facet of IP Addresses used to create sessions.</td></tr>\r\n<tr><td class=\"code\">cities</td><td>Get a facet of cities where sessions have been initiated.</td></tr>\r\n<tr><td class=\"code\">regions</td><td>Get a facet of regions where sessions have been initiated.</td></tr>\r\n</tbody></table>\r\n",
-        "operationId": "sessions",
         "parameters": [
           {
             "description": "<p>The access token for the user (<a href=\"http://self-issued.info/docs/draft-ietf-oauth-v2-bearer.html#authz-header\">format</a>: Bearer access_token).</p><p>Example: Bearer DI83JE3H8FEUIFJKWEKJ8E9383</p>",

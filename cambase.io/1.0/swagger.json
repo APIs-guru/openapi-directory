@@ -17,7 +17,6 @@
   "paths": {
     "/api/v1/models.json": {
       "get": {
-        "operationId": "Api::V1::Models#index",
         "parameters": [
           {
             "description": "Page number",
@@ -54,7 +53,6 @@
         ]
       },
       "post": {
-        "operationId": "Api::V1::Models#create",
         "parameters": [
           {
             "description": "Vendor ID",
@@ -202,7 +200,6 @@
     },
     "/api/v1/models/search.json": {
       "get": {
-        "operationId": "Api::V1::Models#search",
         "parameters": [
           {
             "description": "Page number",
@@ -325,7 +322,6 @@
     },
     "/api/v1/models/{id}.json": {
       "get": {
-        "operationId": "Api::V1::Models#show",
         "parameters": [
           {
             "description": "Model ID",
@@ -355,7 +351,6 @@
         ]
       },
       "patch": {
-        "operationId": "Api::V1::Models#update",
         "parameters": [
           {
             "description": "Model ID",
@@ -511,7 +506,6 @@
         ]
       },
       "put": {
-        "operationId": "Api::V1::Models#update",
         "parameters": [
           {
             "description": "Model ID",
@@ -669,7 +663,6 @@
     },
     "/api/v1/recorders.json": {
       "get": {
-        "operationId": "Api::V1::Recorders#index",
         "parameters": [
           {
             "description": "Page number",
@@ -706,7 +699,6 @@
         ]
       },
       "post": {
-        "operationId": "Api::V1::Recorders#create",
         "parameters": [
           {
             "description": "Vendor ID",
@@ -952,7 +944,6 @@
     },
     "/api/v1/recorders/search.json": {
       "get": {
-        "operationId": "Api::V1::Recorders#search",
         "parameters": [
           {
             "description": "Page number",
@@ -1110,7 +1101,6 @@
     },
     "/api/v1/recorders/{id}.json": {
       "get": {
-        "operationId": "Api::V1::Recorders#show",
         "parameters": [
           {
             "description": "Recorder ID",
@@ -1140,7 +1130,6 @@
         ]
       },
       "patch": {
-        "operationId": "Api::V1::Recorders#update",
         "parameters": [
           {
             "description": "Recorder ID",
@@ -1394,7 +1383,6 @@
         ]
       },
       "put": {
-        "operationId": "Api::V1::Recorders#update",
         "parameters": [
           {
             "description": "Recorder ID",
@@ -1650,7 +1638,6 @@
     },
     "/api/v1/vendors.json": {
       "get": {
-        "operationId": "Api::V1::Vendors#index",
         "parameters": [
           {
             "description": "Page number",
@@ -1687,7 +1674,6 @@
         ]
       },
       "post": {
-        "operationId": "Api::V1::Vendors#create",
         "parameters": [
           {
             "description": "Name",
@@ -1737,7 +1723,6 @@
     },
     "/api/v1/vendors/{id}.json": {
       "get": {
-        "operationId": "Api::V1::Vendors#show",
         "parameters": [
           {
             "description": "Vendor ID",
@@ -1774,7 +1759,6 @@
         ]
       },
       "patch": {
-        "operationId": "Api::V1::Vendors#update",
         "parameters": [
           {
             "description": "Vendor ID",
@@ -1832,7 +1816,6 @@
         ]
       },
       "put": {
-        "operationId": "Api::V1::Vendors#update",
         "parameters": [
           {
             "description": "Vendor ID",

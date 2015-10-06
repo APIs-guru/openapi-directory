@@ -1772,7 +1772,6 @@
     "/publishers": {
       "get": {
         "description": "Returns a set of publishers",
-        "operationId": "getAll",
         "parameters": [
           {
             "default": 1,
@@ -1819,7 +1818,6 @@
     "/publishers/{publisher_id}": {
       "get": {
         "description": "Returns a publisher by ID",
-        "operationId": "get",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -1857,7 +1855,6 @@
     "/publishers/{publisher_id}/account": {
       "get": {
         "description": "Returns account, contact, business, financial & payment information",
-        "operationId": "get",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -1892,7 +1889,6 @@
     "/publishers/{publisher_id}/clicks": {
       "get": {
         "description": "Returns a set of click",
-        "operationId": "getAll",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -2038,7 +2034,6 @@
     "/publishers/{publisher_id}/financial/income": {
       "get": {
         "description": "Returns publisher income",
-        "operationId": "getIncome",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -2079,7 +2074,6 @@
     "/publishers/{publisher_id}/material/adgroups": {
       "get": {
         "description": "Returns a set of adgroups",
-        "operationId": "getAllAdgroups",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -2170,7 +2164,6 @@
     "/publishers/{publisher_id}/material/adgroups/{adgroup_id}": {
       "get": {
         "description": "Returns a adgroup",
-        "operationId": "getAdgroup",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -2217,7 +2210,6 @@
     "/publishers/{publisher_id}/material/adgroups/{adgroup_id}/ads": {
       "get": {
         "description": "Returns a set of ads for the adgroup",
-        "operationId": "getAllAdgroupAds",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -2330,7 +2322,6 @@
     "/publishers/{publisher_id}/material/adgroups/{adgroup_id}/ads/{ad_id}": {
       "get": {
         "description": "Returns a ad",
-        "operationId": "getAd",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -2402,7 +2393,6 @@
     "/publishers/{publisher_id}/material/adpools": {
       "get": {
         "description": "Returns a set of adpools",
-        "operationId": "getAllAdPools",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -2515,7 +2505,6 @@
     "/publishers/{publisher_id}/material/adpools/{adpool_id}": {
       "get": {
         "description": "Returns a adpool",
-        "operationId": "getAdpool",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -2570,7 +2559,6 @@
     "/publishers/{publisher_id}/material/ads": {
       "get": {
         "description": "Returns a set of ads",
-        "operationId": "getAllAds",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -2685,7 +2673,6 @@
     "/publishers/{publisher_id}/material/promotioncodes": {
       "get": {
         "description": "Returns a set of promotioncodes",
-        "operationId": "getAllPromotioncodes",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -2820,7 +2807,6 @@
     "/publishers/{publisher_id}/material/promotioncodes/{promotioncode_id}": {
       "get": {
         "description": "Returns a promotioncode",
-        "operationId": "getPromotioncode",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -2883,7 +2869,6 @@
     "/publishers/{publisher_id}/media": {
       "get": {
         "description": "Returns a set of media",
-        "operationId": "getAll",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -3108,7 +3093,6 @@
     "/publishers/{publisher_id}/media/{media_id}": {
       "get": {
         "description": "Returns a media",
-        "operationId": "get",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -3155,7 +3139,6 @@
     "/publishers/{publisher_id}/media/{media_id}/commissions": {
       "get": {
         "description": "Returns program commissions",
-        "operationId": "getCommission",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -3237,7 +3220,6 @@
     "/publishers/{publisher_id}/media/{media_id}/subscriptions": {
       "get": {
         "description": "Returns a set of media subscriptions",
-        "operationId": "getAllMediaSubscriptions",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -3365,7 +3347,6 @@
     "/publishers/{publisher_id}/news": {
       "get": {
         "description": "Returns a set of news items",
-        "operationId": "getAll",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -3522,7 +3503,6 @@
     "/publishers/{publisher_id}/news/{newsitem_id}": {
       "get": {
         "description": "Returns a newsitem",
-        "operationId": "get",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -3569,7 +3549,6 @@
     "/publishers/{publisher_id}/productfeeds": {
       "get": {
         "description": "Returns a set of productfeeds",
-        "operationId": "getAll",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -3673,7 +3652,6 @@
     "/publishers/{publisher_id}/productfeeds/{productfeed_id}": {
       "get": {
         "description": "Returns a productfeed",
-        "operationId": "get",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -3736,7 +3714,6 @@
     "/publishers/{publisher_id}/programs": {
       "get": {
         "description": "Returns a set of publishers",
-        "operationId": "getAll",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -3986,7 +3963,6 @@
     "/publishers/{publisher_id}/programs/{program_id}": {
       "get": {
         "description": "Returns a program",
-        "operationId": "get",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -4049,7 +4025,6 @@
     "/publishers/{publisher_id}/programs/{program_id}/subscriptions": {
       "get": {
         "description": "Returns a set of media subscriptions",
-        "operationId": "getAll",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -4177,7 +4152,6 @@
           "application/json"
         ],
         "description": "",
-        "operationId": "add",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -4237,7 +4211,6 @@
           "application/json"
         ],
         "description": "",
-        "operationId": "add",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -4296,7 +4269,6 @@
     "/publishers/{publisher_id}/statistics/cpc": {
       "get": {
         "description": "Returns statistics grouped by cpc",
-        "operationId": "getCPC",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -4427,7 +4399,6 @@
     "/publishers/{publisher_id}/statistics/date": {
       "get": {
         "description": "Returns statistics grouped by transaction date",
-        "operationId": "getDate",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -4558,7 +4529,6 @@
     "/publishers/{publisher_id}/statistics/day": {
       "get": {
         "description": "Returns statistics grouped by day",
-        "operationId": "getDay",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -4689,7 +4659,6 @@
     "/publishers/{publisher_id}/statistics/description": {
       "get": {
         "description": "Returns statistics grouped by description",
-        "operationId": "getDescription",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -4820,7 +4789,6 @@
     "/publishers/{publisher_id}/statistics/hour": {
       "get": {
         "description": "Returns statistics grouped by hour",
-        "operationId": "getHour",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -4951,7 +4919,6 @@
     "/publishers/{publisher_id}/statistics/media": {
       "get": {
         "description": "Returns statistics grouped by media",
-        "operationId": "getMedia",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -5082,7 +5049,6 @@
     "/publishers/{publisher_id}/statistics/month": {
       "get": {
         "description": "Returns statistics grouped by month",
-        "operationId": "getMonth",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -5213,7 +5179,6 @@
     "/publishers/{publisher_id}/statistics/program": {
       "get": {
         "description": "Returns statistics grouped by program",
-        "operationId": "getProgram",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -5344,7 +5309,6 @@
     "/publishers/{publisher_id}/statistics/subid": {
       "get": {
         "description": "Returns statistics grouped by subid",
-        "operationId": "getSubID",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -5475,7 +5439,6 @@
     "/publishers/{publisher_id}/statistics/weekday": {
       "get": {
         "description": "Returns statistics grouped by weekday",
-        "operationId": "getDay",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -5606,7 +5569,6 @@
     "/publishers/{publisher_id}/statistics/year": {
       "get": {
         "description": "Returns statistics grouped by year",
-        "operationId": "getYear",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -5737,7 +5699,6 @@
     "/publishers/{publisher_id}/transactions": {
       "get": {
         "description": "Returns a set of transactions<br/>You must provide a start and end date filter OR provide a approval, click or modified (start and/or end) date",
-        "operationId": "getAll",
         "parameters": [
           {
             "description": "Publisher ID",
@@ -5967,7 +5928,6 @@
     "/publishers/{publisher_id}/transactions/{affiliatemarketing_id}": {
       "get": {
         "description": "Returns a transaction",
-        "operationId": "get",
         "parameters": [
           {
             "description": "Publisher ID",
