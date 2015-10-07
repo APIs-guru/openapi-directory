@@ -660,6 +660,70 @@
       },
       "type": "object"
     },
+    "Discoveryclusters": {
+      "properties": {
+        "clusters": {
+          "items": {
+            "properties": {
+              "banner_with_content_container": {
+                "properties": {
+                  "fillColorArgb": {
+                    "type": "string"
+                  },
+                  "imageUrl": {
+                    "type": "string"
+                  },
+                  "maskColorArgb": {
+                    "type": "string"
+                  },
+                  "moreButtonText": {
+                    "type": "string"
+                  },
+                  "moreButtonUrl": {
+                    "type": "string"
+                  },
+                  "textColorArgb": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "subTitle": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "totalVolumes": {
+                "format": "int32",
+                "type": "integer"
+              },
+              "uid": {
+                "type": "string"
+              },
+              "volumes": {
+                "items": {
+                  "$ref": "#/definitions/Volume"
+                },
+                "type": "array"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "books#discovery#clusters",
+          "description": "Resorce type.",
+          "type": "string"
+        },
+        "totalClusters": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
     "DownloadAccessRestriction": {
       "properties": {
         "deviceAllowed": {
@@ -973,6 +1037,28 @@
       },
       "type": "object"
     },
+    "Notification": {
+      "properties": {
+        "body": {
+          "type": "string"
+        },
+        "iconUrl": {
+          "type": "string"
+        },
+        "kind": {
+          "default": "books#notification",
+          "description": "Resource type.",
+          "type": "string"
+        },
+        "linkUrl": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Offers": {
       "properties": {
         "items": {
@@ -1161,6 +1247,19 @@
             },
             "isEnabled": {
               "type": "boolean"
+            }
+          },
+          "type": "object"
+        },
+        "notification": {
+          "properties": {
+            "moreFromAuthors": {
+              "properties": {
+                "opted_state": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
             }
           },
           "type": "object"
@@ -1433,6 +1532,11 @@
         "userInfo": {
           "description": "User specific information related to this volume. (e.g. page this user last read or whether they purchased this book)",
           "properties": {
+            "acquisitionType": {
+              "description": "How this volume was acquired.",
+              "format": "int32",
+              "type": "integer"
+            },
             "copy": {
               "description": "Copy/Paste accounting information.",
               "properties": {
@@ -1453,6 +1557,11 @@
                 }
               },
               "type": "object"
+            },
+            "entitlementType": {
+              "description": "Whether this volume is purchased, sample, pd download etc.",
+              "format": "int32",
+              "type": "integer"
             },
             "isInMyBooks": {
               "description": "Whether or not this volume is currently in \"my books.\"",
@@ -2097,7 +2206,7 @@
     },
     "/dictionary/listOfflineMetadata": {
       "get": {
-        "description": "Returns a list of offline dictionary meatadata available",
+        "description": "Returns a list of offline dictionary metadata available",
         "operationId": "books.dictionary.listOfflineMetadata",
         "parameters": [
           {
@@ -3538,6 +3647,74 @@
         ]
       }
     },
+    "/notification/get": {
+      "get": {
+        "description": "Returns notification details for a given notification id.",
+        "operationId": "books.notification.get",
+        "parameters": [
+          {
+            "description": "String to identify the notification.",
+            "in": "query",
+            "name": "notification_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'. Used for generating notification title and body.",
+            "in": "query",
+            "name": "locale",
+            "type": "string"
+          },
+          {
+            "description": "String to identify the originator of this request.",
+            "in": "query",
+            "name": "source",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Notification"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
+        ],
+        "tags": [
+          "notification"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/onboarding/listCategories": {
       "get": {
         "description": "List categories for onboarding experience.",
@@ -3654,6 +3831,77 @@
         ],
         "tags": [
           "onboarding"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/personalizedstream/get": {
+      "get": {
+        "description": "Returns a stream of personalized book clusters",
+        "operationId": "books.personalizedstream.get",
+        "parameters": [
+          {
+            "description": "ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'. Used for generating recommendations.",
+            "in": "query",
+            "name": "locale",
+            "type": "string"
+          },
+          {
+            "description": "The maximum allowed maturity rating of returned recommendations. Books with a higher maturity rating are filtered out.",
+            "enum": [
+              "mature",
+              "not-mature"
+            ],
+            "in": "query",
+            "name": "maxAllowedMaturityRating",
+            "type": "string"
+          },
+          {
+            "description": "String to identify the originator of this request.",
+            "in": "query",
+            "name": "source",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Discoveryclusters"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
+        ],
+        "tags": [
+          "personalizedstream"
         ]
       },
       "parameters": [
