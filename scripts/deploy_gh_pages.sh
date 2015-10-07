@@ -3,7 +3,6 @@ set -o pipefail
 (
   set -e
   set -x
-  npm install
   ./scripts/collection.js api https://apis-guru.github.io/api-models/
   git add ./api/v1/list.json
   git config user.name "APIs-GuruBot"

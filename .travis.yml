@@ -5,6 +5,7 @@ env:
   global:
     - GH_REF: "github.com/APIs-guru/api-models.git"
 deploy:
+  skip_cleanup: true
   provider: script
   script: ./scripts/deploy_gh_pages.sh
   on:
