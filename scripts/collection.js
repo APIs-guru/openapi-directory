@@ -395,7 +395,13 @@ function fixSpec(swagger, errors) {
       case 'INVALID_TYPE':
         if (_.last(error.path) !== 'default')
           break;
-        //FIXME: try to convert
+        var type = parentValue.type;
+        if (_.isString(value) && !_.isUndefined(type) && type !== 'string') {
+          try {
+            newValue = JSON.parse(value);
+          }
+          catch (e) {}
+        }
         delete parentValue.default;
         //TODO: add warning
         break;
