@@ -9,6 +9,8 @@ Our goal is to create machine-readable Wikipedia for REST APIs, with following p
 - Anyone can add/changes API, not only API owners.
 - All data could be accessed through [REST API](API.md).
 
+If you want refence this project, and you need icon or even banner check our [branding guide](branding/README.md)
+
 [You can also support project using BountySource](https://www.bountysource.com/teams/apis_guru)<br>
 Also we provide services and consultancy around Swagger spec and REST API in general.
 You can contact us at founders@apis.guru
