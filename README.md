@@ -1,4 +1,4 @@
-# api-models
+![logo]
 
 [![Join the chat at https://gitter.im/APIs-guru/api-models](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/APIs-guru/api-models?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)<BR>
 Repository for API models in Swagger 2.0 format
@@ -39,3 +39,4 @@ You can use our [REST API](API.md)
 
 Existing integrations:
  - https://any-api.com - Documentation and Test Consoles for Public APIs
+[logo]: https://apis-guru.github.io/api-models/branding/logo_horizontal.svg "APIs.guru"
