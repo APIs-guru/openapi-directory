@@ -480,6 +480,8 @@ function getSpecs(dir) {
 }
 
 function patchSwagger(swagger, exPatch) {
+  removeEmpty(swagger.info);
+
   var patch = exPatch;
   var pathComponents = getPathComponents(swagger);
 
@@ -493,13 +495,24 @@ function patchSwagger(swagger, exPatch) {
   });
 
   //swagger-converter if title is absent use host as default
-  if ((swagger.info.title === swagger.host || swagger.info.title === '') && !_.isUndefined(patch.info.title))
+  if (swagger.info.title === swagger.host && !_.isUndefined(patch.info.title))
     delete swagger.info.title;
 
   applyMergePatch(swagger, patch);
 
   var fixup = readJson(getSwaggerPath(swagger, 'fixup.json'));
   swagger = jsondiffpatch.patch(swagger, fixup);
+}
+
+function removeEmpty(obj) {
+  if (!_.isObject(obj))
+    return;
+
+  _.forEach(obj, function (value, key) {
+    removeEmpty(value);
+    if (value === '' || _.isEmpty(value))
+      delete obj[key];
+  });
 }
 
 function convertToSwagger(spec, callback) {
