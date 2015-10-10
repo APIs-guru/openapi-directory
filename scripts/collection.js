@@ -86,13 +86,14 @@ function updateCollection(dir) {
   async.forEachOfSeries(specs, function (swagger, filename, asyncCb) {
     var exPatch = {info: {}};
     var serviceName = getServiceName(swagger);
-    if (serviceName)
+    var type = getSpecType(swagger);
+    if (type !== 'google' && serviceName)
       exPatch.info['x-serviceName'] = serviceName;
 
     var url = getOriginUrl(swagger);
     console.error(url);
 
-    writeSpec(url, getSpecType(swagger), exPatch, function (error, result) {
+    writeSpec(url, type, exPatch, function (error, result) {
       if (error)
         return logError(error, result);
 
@@ -293,7 +294,7 @@ function updateGoogle() {
       }
 
       console.error(url);
-      writeSpec(url, 'google', {}, function (error, result) {
+      writeSpec(url, 'google', null, function (error, result) {
         if (error)
           return logError(error, result);
         mergePatch(result.swagger, addPath);
@@ -479,15 +480,7 @@ function getSpecs(dir) {
 }
 
 function patchSwagger(swagger, exPatch) {
-  jsonPatch.apply(swagger, exPatch);
-  jsonPatch.apply(swagger, getMergePatch(swagger));
-
-  var fixup = readJson(getSwaggerPath(swagger, 'fixup.json'));
-  swagger = jsondiffpatch.patch(swagger, fixup);
-}
-
-function getMergePatch(swagger) {
-  var patch = null;
+  var patch = exPatch;
   var pathComponents = getPathComponents(swagger);
 
   var path = '';
@@ -499,7 +492,14 @@ function getMergePatch(swagger) {
       patch = jsonPatch.merge(patch, subPatch);
   });
 
-  return patch;
+  //swagger-converter if title is absent use host as default
+  if ((swagger.info.title === swagger.host || swagger.info.title === '') && !_.isUndefined(patch.info.title))
+    delete swagger.info.title;
+
+  applyMergePatch(swagger, patch);
+
+  var fixup = readJson(getSwaggerPath(swagger, 'fixup.json'));
+  swagger = jsondiffpatch.patch(swagger, fixup);
 }
 
 function convertToSwagger(spec, callback) {
@@ -595,3 +595,22 @@ function saveSwagger(swagger) {
   saveJson(path, swagger);
   return path;
 }
+
+//code is taken from 'json-merge-patch' package and simplify to allow only adding props
+function applyMergePatch(target, patch) {
+  assert(_.isPlainObject(target));
+
+  if (patch === null)
+    return;
+
+  var keys = Object.keys(patch);
+  _.forEach(patch, function (value, key) {
+    assert(value !== null, 'Patch tried to delete property: ' + key);
+
+    if (_.isPlainObject(target[key]))
+      return applyMergePatch(target[key], value);
+
+    assert(_.isUndefined(target[key]), 'Patch tried to override property: ' + key);
+    target[key] = value;
+  });
+};
