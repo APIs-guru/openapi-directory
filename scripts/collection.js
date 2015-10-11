@@ -17,7 +17,7 @@ var parseDomain = require('parse-domain');
 var mkdirp = require('mkdirp').sync;
 var mktemp = require('mktemp').createFileSync;
 var jsonPatch = require('json-merge-patch');
-var RestClient = require('node-rest-client').Client;
+var Request = require('request');
 
 var jsondiffpatch = require('jsondiffpatch').create({
   arrays: {
@@ -246,8 +246,11 @@ function revertFixup(swagger) {
 
 function updateGoogle() {
   var knownSpecs = _.mapKeys(getSpecs(), getOriginUrl);
-  var discovery = new RestClient();
-  discovery.get('https://www.googleapis.com/discovery/v1/apis', function (data) {
+
+  new Request('https://www.googleapis.com/discovery/v1/apis', function(err, response, data) {
+    assert(!err);
+    assert(response.statusCode === 200, 'Can not GET API list: ' + response.statusMessage);
+
     data = JSON.parse(data);
     assert.equal(data.kind, 'discovery#directoryList');
     assert.equal(data.discoveryVersion, 'v1');
