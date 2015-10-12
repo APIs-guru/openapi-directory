@@ -118,7 +118,7 @@ function cacheResources(specRootUrl) {
       return;
 
     var url = swagger.info['x-logo'].url;
-    new Request(url, function(err, response, data) {
+    new Request({ method: 'GET', url: url, encoding: null}, function(err, response, data) {
       assert(!err, 'Can not GET "' + url +'": ' + err);
       assert(response.statusCode === 200, 'Can not GET "' + url +'": ' + response.statusMessage);
       console.log(url);
