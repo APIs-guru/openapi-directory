@@ -126,9 +126,8 @@ function cacheResources(specRootUrl) {
       assert(mime.match('image/'));
       var extension = MIME.extension(mime);
       assert(extension);
-      var logoFile = filename.replace(/swagger.json$/, 'logo.' + extension);
-      fs.writeFileSync(logoFile, data);
-      console.log(logoFile);
+      var logoFile = 'cache/' + filename.replace(/swagger.json$/, 'logo.' + extension);
+      saveFile(logoFile, data);
       swagger.info['x-logo'].url = specRootUrl + logoFile;
       saveJson(filename, swagger);
     });
@@ -631,10 +630,13 @@ function getSwaggerPath(swagger, filename) {
 }
 
 function saveJson(path, json) {
-  mkdirp(Path.dirname(path));
-  var str = Json2String(json);
+  saveFile(path, Json2String(json));
+}
+
+function saveFile(path, data) {
   console.log(path);
-  fs.writeFileSync(path, str);
+  mkdirp(Path.dirname(path));
+  fs.writeFileSync(path, data);
 }
 
 function saveSwagger(swagger) {

@@ -9,7 +9,7 @@ set -o pipefail
   #FIXME: remove
   export NODE_TLS_REJECT_UNAUTHORIZED=0
   ./scripts/collection.js cache https://apis-guru.github.io/api-models/
-  git add "$(find -name logo.*)"
+  git add ./cache
   git commit -am 'Cache logo'
 
   ./scripts/collection.js api https://apis-guru.github.io/api-models/
