@@ -93,12 +93,15 @@
     "allowed_use": {
       "properties": {
         "how_can_i_use_it": {
+          "description": "Specifies how the asset can be used.",
           "type": "string"
         },
         "release_info": {
+          "description": "Specifies the release status.",
           "type": "string"
         },
         "usage_restrictions": {
+          "description": "Specifies asset usage restriction.",
           "items": {
             "type": "string"
           },
@@ -329,7 +332,7 @@
           "type": "string"
         },
         "color_type": {
-          "description": "Indicates whether the image is color or black and white. Possible values are color, black_and_white, and null",
+          "description": "Specifies if it is color or black and white. Possible values are color, black_and_white, and null",
           "type": "string"
         },
         "copyright": {
@@ -466,47 +469,60 @@
     "download_size": {
       "properties": {
         "bit_depth": {
+          "description": "Specifies the bit depth of the video",
           "type": "string"
         },
         "broadcast_video_standard": {
+          "description": "Indicates broadcast video standard of the video (e.g., NTSC, PAL)",
           "type": "string"
         },
         "compression": {
+          "description": "Specifies video compression",
           "type": "string"
         },
         "content_type": {
+          "description": "Indicates content type of the video (e.g., \"video/mp4\")",
           "type": "string"
         },
         "description": {
+          "description": "Description of video",
           "type": "string"
         },
         "downloads": {
+          "description": "List of video download information",
           "items": {
             "$ref": "#/definitions/download"
           },
           "type": "array"
         },
         "format": {
+          "description": "Specifies the video format (e.g., SD, HD, 4K, Multimedia, or Web)",
           "type": "string"
         },
         "frame_rate": {
+          "description": "Specifies the video frame rate (e.g., 24, 25, 29.97)",
           "format": "double",
           "type": "number"
         },
         "frame_size": {
+          "description": "Specifies the video frame size (e.g., \"640x360\")",
           "type": "string"
         },
         "height": {
+          "description": "Specifies the height in pixels",
           "format": "double",
           "type": "number"
         },
         "interlaced": {
+          "description": "Indicates whether the video is interlaced",
           "type": "boolean"
         },
         "name": {
+          "description": "Specifies the name of the video size",
           "type": "string"
         },
         "width": {
+          "description": "Specifies the width",
           "format": "int32",
           "type": "integer"
         }
@@ -563,7 +579,7 @@
           "type": "string"
         },
         "color_type": {
-          "description": "Indicates whether the image is color or black and white. Possible values are color, black_and_white, and null",
+          "description": "Specifies if it is color or black and white. Possible values are color, black_and_white, and null",
           "type": "string"
         },
         "copyright": {
@@ -580,7 +596,7 @@
           "type": "array"
         },
         "editorial_segments": {
-          "description": "List of editorial segments for the image. Possible values are archival, entertainment, news, publicity, royalty, sport",
+          "description": "List of editorial segments. Possible values are archival, entertainment, news, publicity, royalty, sport",
           "items": {
             "type": "string"
           },
@@ -687,34 +703,41 @@
     "event": {
       "properties": {
         "child_event_count": {
+          "description": "Indicates the count of child events.",
           "format": "int32",
           "type": "integer"
         },
         "editorial_segments": {
-          "description": "List of editorial segments for the image. Possible values are archival, entertainment, news, publicity, royalty, sport",
+          "description": "List of editorial segments. Possible values are archival, entertainment, news, publicity, royalty, sport",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "hero_image": {
-          "$ref": "#/definitions/hero_image"
+          "$ref": "#/definitions/hero_image",
+          "description": "Identifies the image which best represents the event."
         },
         "id": {
+          "description": "Identifies the event.",
           "format": "int32",
           "type": "integer"
         },
         "image_count": {
+          "description": "Indicates the number of images related to the event.",
           "format": "int32",
           "type": "integer"
         },
         "location": {
-          "$ref": "#/definitions/location"
+          "$ref": "#/definitions/location",
+          "description": "Indicates the geographic location where the event took place."
         },
         "name": {
+          "description": "Indicates the name of the event.",
           "type": "string"
         },
         "start_date": {
+          "description": "Indicates the date the event started.",
           "format": "date-time",
           "type": "string"
         }
@@ -766,6 +789,7 @@
           "type": "array"
         },
         "id": {
+          "description": "Identifies the image.",
           "type": "string"
         }
       },
@@ -774,18 +798,22 @@
     "image_detail": {
       "properties": {
         "allowed_use": {
-          "$ref": "#/definitions/allowed_use"
+          "$ref": "#/definitions/allowed_use",
+          "description": "Identifies how customers are allowed to use the image."
         },
         "alternative_ids": {
+          "description": "All the alternative ids for asset id.",
           "items": {
             "$ref": "#/definitions/KeyValuePair[String,String]"
           },
           "type": "array"
         },
         "artist": {
+          "description": "Identifies the creator.",
           "type": "string"
         },
         "artist_title": {
+          "description": "Identifies the title given by the artist.",
           "type": "string"
         },
         "asset_family": {
@@ -793,65 +821,79 @@
           "type": "string"
         },
         "call_for_image": {
+          "description": "Notifies customers if they need to call Getty Images in order to license this image",
           "type": "boolean"
         },
         "caption": {
+          "description": "Describes the image",
           "type": "string"
         },
         "city": {
+          "description": "Indicates the city where the image was created.",
           "type": "string"
         },
         "collection_code": {
+          "description": "Identifies the code of the collection to which the image belongs.",
           "type": "string"
         },
         "collection_id": {
+          "description": "Identifies the id of the collection to which the image belongs.",
           "format": "int32",
           "type": "integer"
         },
         "collection_name": {
+          "description": "Identifies the name of the collection to which the image belongs.",
           "type": "string"
         },
         "color_type": {
-          "description": "Indicates whether the image is color or black and white. Possible values are color, black_and_white, and null",
+          "description": "Specifies if it is color or black and white. Possible values are color, black_and_white, and null",
           "type": "string"
         },
         "copyright": {
+          "description": "Indicates copyright of the image.",
           "type": "string"
         },
         "country": {
+          "description": "Indicates the country where the image was created.",
           "type": "string"
         },
         "credit_line": {
+          "description": "Indicates the credit line of the image.",
           "type": "string"
         },
         "date_created": {
+          "description": "Indicates the date the image was created, in ISO 8601 format (e.g., 1999-12-31).",
           "format": "date-time",
           "type": "string"
         },
         "date_submitted": {
+          "description": "Identifies the date the image was submitted, in ISO 8601 format (e.g., 1999-12-31).",
           "format": "date-time",
           "type": "string"
         },
         "display_sizes": {
+          "description": "Identifies the sizes available for display.",
           "items": {
             "$ref": "#/definitions/display_size"
           },
           "type": "array"
         },
         "download_sizes": {
+          "description": "Identifies the sizes available for download.",
           "items": {
             "$ref": "#/definitions/download_size"
           },
           "type": "array"
         },
         "editorial_segments": {
-          "description": "List of editorial segments for the image. Possible values are archival, entertainment, news, publicity, royalty, sport",
+          "description": "List of editorial segments. Possible values are archival, entertainment, news, publicity, royalty, sport",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "event_ids": {
+          "description": "List of event Ids for the image.",
           "items": {
             "format": "int32",
             "type": "integer"
@@ -859,18 +901,22 @@
           "type": "array"
         },
         "graphical_style": {
+          "description": "Identifies the graphical style for the image.",
           "type": "string"
         },
         "id": {
+          "description": "Identifies the image",
           "type": "string"
         },
         "keywords": {
+          "description": "Contains a keyword entry for each keyword related to the image.",
           "items": {
             "$ref": "#/definitions/keyword"
           },
           "type": "array"
         },
         "largest_downloads": {
+          "description": "Indicates the authorization for the largest download size.",
           "items": {
             "$ref": "#/definitions/download_size"
           },
@@ -881,25 +927,29 @@
           "type": "string"
         },
         "links": {
+          "description": "Provides links to explore related content, such as similiar images and images from the same artist.",
           "items": {
             "$ref": "#/definitions/link"
           },
           "type": "array"
         },
         "max_dimensions": {
-          "$ref": "#/definitions/max_dimensions"
+          "$ref": "#/definitions/max_dimensions",
+          "description": "Indicates the dimensions of the largest available size."
         },
         "orientation": {
           "description": "Indicates orientation of the image. Possible values are: Horizontal, PanoramicHorizontal, PanoramicVertical, Square, Vertical, and null",
           "type": "string"
         },
         "people": {
+          "description": "List of people in the image.",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "prestige": {
+          "description": "Identifies Prestige curated imagery.",
           "type": "boolean"
         },
         "product_types": {
@@ -910,22 +960,27 @@
           "type": "array"
         },
         "quality_rank": {
+          "description": "Assigned to editorial images to rank their relevance to the event they belong to. This number has no relevance for creative images even though it does appear in the metadata. Possible values are: 1 - most relevant, 2 - tells story from a wider perspective, 3 - stock/repeats/less important.",
           "format": "int32",
           "type": "integer"
         },
         "referral_destinations": {
+          "description": "The referral destinations for Getty Images properties",
           "items": {
             "$ref": "#/definitions/referral_destination"
           },
           "type": "array"
         },
         "state_province": {
+          "description": "Indicates the state or province where the image was created.",
           "type": "string"
         },
         "title": {
+          "description": "Indicates the image title.",
           "type": "string"
         },
         "uri_oembed": {
+          "description": "Identifies a URI that can be used to get oEmbed data for the image, if embeddable.",
           "type": "string"
         }
       },
@@ -966,7 +1021,7 @@
           "type": "string"
         },
         "color_type": {
-          "description": "Indicates whether the image is color or black and white. Possible values are color, black_and_white, and null",
+          "description": "Specifies if it is color or black and white. Possible values are color, black_and_white, and null",
           "type": "string"
         },
         "copyright": {
@@ -983,7 +1038,7 @@
           "type": "array"
         },
         "editorial_segments": {
-          "description": "List of editorial segments for the image. Possible values are archival, entertainment, news, publicity, royalty, sport",
+          "description": "List of editorial segments. Possible values are archival, entertainment, news, publicity, royalty, sport",
           "items": {
             "type": "string"
           },
@@ -1143,15 +1198,19 @@
     "location": {
       "properties": {
         "city": {
+          "description": "Identifies the city where the event took place.",
           "type": "string"
         },
         "country": {
+          "description": "Identifies the country where the event took place.",
           "type": "string"
         },
         "state_province": {
+          "description": "Identifies the state or province where the event took place.",
           "type": "string"
         },
         "venue": {
+          "description": "Identifies the venue where the event took place.",
           "type": "string"
         }
       },
@@ -1160,10 +1219,12 @@
     "max_dimensions": {
       "properties": {
         "height": {
+          "description": "Indicates the height in pixels.",
           "format": "int32",
           "type": "integer"
         },
         "width": {
+          "description": "Indicates the width in pixels.",
           "format": "int32",
           "type": "integer"
         }
@@ -1244,9 +1305,11 @@
     "referral_destination": {
       "properties": {
         "site_name": {
+          "description": "TBD.",
           "type": "string"
         },
         "uri": {
+          "description": "Identifies a URI that can be used to get oEmbed data for the image, if embeddable.",
           "type": "string"
         }
       },
@@ -1268,9 +1331,11 @@
     "video_detail": {
       "properties": {
         "allowed_use": {
-          "$ref": "#/definitions/allowed_use"
+          "$ref": "#/definitions/allowed_use",
+          "description": "Specifies how a customer is allowed to use this video"
         },
         "artist": {
+          "description": "Identifies the artist",
           "type": "string"
         },
         "asset_family": {
@@ -1278,46 +1343,55 @@
           "type": "string"
         },
         "caption": {
+          "description": "Describes the video",
           "type": "string"
         },
         "clip_length": {
+          "description": "Specifies the length of the film clip (e.g., \"00:00:12:08\")",
           "type": "string"
         },
         "collection_code": {
+          "description": "Identifies the collection code which this video belongs to",
           "type": "string"
         },
         "collection_id": {
+          "description": "Identifies the collection which this video belongs to",
           "format": "int32",
           "type": "integer"
         },
         "collection_name": {
+          "description": "Identifies the collection name which this video belongs to",
           "type": "string"
         },
         "color_type": {
-          "description": "Indicates whether the image is color or black and white. Possible values are color, black_and_white, and null",
+          "description": "Specifies if it is color or black and white. Possible values are color, black_and_white, and null",
           "type": "string"
         },
         "copyright": {
+          "description": "Specifies the copyright",
           "type": "string"
         },
         "date_created": {
+          "description": "Specifies the date the video was created in ISO 8601 format (e.g., 1999-12-31T00:00:00-00:00)",
           "format": "date-time",
           "type": "string"
         },
         "display_sizes": {
+          "description": "List of display size information",
           "items": {
             "$ref": "#/definitions/display_size"
           },
           "type": "array"
         },
         "download_sizes": {
+          "description": "List of available download size information",
           "items": {
             "$ref": "#/definitions/download_size"
           },
           "type": "array"
         },
         "editorial_segments": {
-          "description": "List of editorial segments for the image. Possible values are archival, entertainment, news, publicity, royalty, sport",
+          "description": "List of editorial segments. Possible values are archival, entertainment, news, publicity, royalty, sport",
           "items": {
             "type": "string"
           },
@@ -1328,16 +1402,19 @@
           "type": "string"
         },
         "id": {
+          "description": "Identifies the video",
           "type": "string"
         },
         "license_model": {
-          "description": "Identifies a licensing model for the image. Possible values are: royaltyfree, rightsready",
+          "description": "Identifies a licensing model for the video. Possible values are: royaltyfree, rightsready",
           "type": "string"
         },
         "mastered_to": {
+          "description": "Specifies video format of the master",
           "type": "string"
         },
         "originally_shot_on": {
+          "description": "Specifies where this video was originally shot on",
           "type": "string"
         },
         "product_types": {
@@ -1355,6 +1432,7 @@
           "type": "string"
         },
         "title": {
+          "description": "Specifies the title of this video",
           "type": "string"
         }
       },
@@ -1389,7 +1467,7 @@
           "type": "string"
         },
         "color_type": {
-          "description": "Indicates whether the image is color or black and white. Possible values are color, black_and_white, and null",
+          "description": "Specifies if it is color or black and white. Possible values are color, black_and_white, and null",
           "type": "string"
         },
         "copyright": {
@@ -1419,7 +1497,7 @@
           "type": "array"
         },
         "license_model": {
-          "description": "Identifies a licensing model for the image. Possible values are: royaltyfree, rightsready",
+          "description": "Identifies a licensing model for the video. Possible values are: royaltyfree, rightsready",
           "type": "string"
         },
         "mastered_to": {
@@ -1466,12 +1544,14 @@
     "videos_detail": {
       "properties": {
         "Videos": {
+          "description": "Contains an entry for each video found",
           "items": {
             "$ref": "#/definitions/video_detail"
           },
           "type": "array"
         },
         "images_not_found": {
+          "description": "A list of video identifiers not found",
           "items": {
             "type": "string"
           },
@@ -2020,7 +2100,7 @@
             "type": "string"
           },
           {
-            "description": "Page number",
+            "description": "Identifies page to return. Default is 1.",
             "format": "int32",
             "in": "query",
             "name": "page",
@@ -2028,7 +2108,7 @@
             "type": "integer"
           },
           {
-            "description": "Size of page",
+            "description": "Specifies page size. Default is 30, maximum page_size is 100.",
             "format": "int32",
             "in": "query",
             "name": "page_size",
@@ -2665,7 +2745,7 @@
         ],
         "responses": {
           "200": {
-            "description": "No response was specified",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/images_detail"
             }
@@ -2722,7 +2802,7 @@
             "type": "string"
           },
           {
-            "description": "Comma separated list of fields. Allows restricting which fields are returned. If no fields are\r\n                selected, the summary_set of fields are returned.",
+            "description": "Specifies fields to return. Defaults to 'summary_set'.",
             "enum": [
               "allowed_use",
               "alternative_ids",
@@ -2885,7 +2965,7 @@
             "type": "string"
           },
           {
-            "description": "Comma separated list of fields. Allows restricting which fields are returned. If no fields are\r\n                selected, the summary_set of fields are returned.",
+            "description": "Specifies fields to return. Defaults to 'summary_set'.",
             "enum": [
               "allowed_use",
               "alternative_ids",
@@ -2967,7 +3047,7 @@
             "type": "array"
           },
           {
-            "description": "Page number.",
+            "description": "Identifies page to return. Default is 1.",
             "format": "int32",
             "in": "query",
             "name": "page",
@@ -2975,7 +3055,7 @@
             "type": "integer"
           },
           {
-            "description": "Size of page.",
+            "description": "Specifies page size. Default is 30, maximum page_size is 100.",
             "format": "int32",
             "in": "query",
             "name": "page_size",
@@ -3110,7 +3190,7 @@
             "type": "string"
           },
           {
-            "description": "Current page number for results. The default is 1.",
+            "description": "Identifies page to return. Default is 1.",
             "format": "int32",
             "in": "query",
             "name": "page",
@@ -3118,7 +3198,7 @@
             "type": "integer"
           },
           {
-            "description": "Page size for results The default is 75.",
+            "description": "Specifies page size. Default is 75, maximum page_size is 100.",
             "format": "int32",
             "in": "query",
             "name": "page_size",
@@ -3239,7 +3319,7 @@
         ],
         "responses": {
           "200": {
-            "description": "No response was specified",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/events_result"
             }
@@ -3456,7 +3536,7 @@
             "type": "array"
           },
           {
-            "description": "Filters to events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31).",
+            "description": "Return only events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31).",
             "format": "date-time",
             "in": "query",
             "name": "date_from",
@@ -3464,7 +3544,7 @@
             "type": "string"
           },
           {
-            "description": "Filters to events that start on or before this date. Use ISO 8601 format (e.g., 1999-12-31).",
+            "description": "Return only events that start on or before this date. Use ISO 8601 format (e.g., 1999-12-31).",
             "format": "date-time",
             "in": "query",
             "name": "date_to",
@@ -3479,7 +3559,7 @@
             "type": "boolean"
           },
           {
-            "description": "Filters search results based on the ethnicity of individuals in an image.",
+            "description": "Filter search results based on the ethnicity of individuals in an image.",
             "enum": [
               "black",
               "caucasian",
@@ -3517,7 +3597,7 @@
             "type": "array"
           },
           {
-            "description": "Allows for searching based on specific events",
+            "description": "Filter based on specific events",
             "in": "query",
             "items": {
               "format": "int32",
@@ -3535,7 +3615,7 @@
             "type": "boolean"
           },
           {
-            "description": "Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.",
+            "description": "Restrict the set of fields that are returned. Specify using a comma separated list of fields. If no fields are selected, the summary_set of fields are returned.",
             "enum": [
               "allowed_use",
               "alternative_ids",
@@ -3617,7 +3697,7 @@
             "type": "array"
           },
           {
-            "description": "Identifies a file type for the image.",
+            "description": "Return only images having a specific file type.",
             "enum": [
               "eps",
               "gif",
@@ -3639,7 +3719,7 @@
             "type": "array"
           },
           {
-            "description": "Identifies a graphical style for the image.",
+            "description": "Filter based on graphical style of the image.",
             "enum": [
               "fine_art",
               "illustration",
@@ -3659,7 +3739,7 @@
             "type": "array"
           },
           {
-            "description": "Comma separated-list of keyword IDs.  If specified, returns images containing the requested keyword(s).  If keyword IDs and phrase are both specified, returns only those images matching the query phrase which also contain the requested keyword(s).",
+            "description": "Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.",
             "in": "query",
             "items": {
               "format": "int32",
@@ -3670,7 +3750,7 @@
             "type": "array"
           },
           {
-            "description": "Identifies a licensing model for the image.",
+            "description": "Return only images allowing a specific licensing model.",
             "enum": [
               "rightsmanaged",
               "royaltyfree"
@@ -3688,7 +3768,7 @@
             "type": "array"
           },
           {
-            "description": "Allows for filtering based on the number of people in the image",
+            "description": "Filter based on the number of people in the image.",
             "enum": [
               "none",
               "one",
@@ -3710,7 +3790,7 @@
             "type": "array"
           },
           {
-            "description": "Choose images based on their aspect ratios.",
+            "description": "Return only images with selected aspect ratios.",
             "enum": [
               "Horizontal",
               "Vertical",
@@ -3734,7 +3814,7 @@
             "type": "array"
           },
           {
-            "description": "Page number.",
+            "description": "Request results starting at a page number (default is 1).",
             "format": "int32",
             "in": "query",
             "name": "page",
@@ -3742,7 +3822,7 @@
             "type": "integer"
           },
           {
-            "description": "Size of page.",
+            "description": "Request number of images to return in each page.",
             "format": "int32",
             "in": "query",
             "name": "page_size",
@@ -3750,21 +3830,21 @@
             "type": "integer"
           },
           {
-            "description": "Free-text search query.",
+            "description": "Search images using a search phrase.",
             "in": "query",
             "name": "phrase",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Restrict search results to prestige images.  The default is false.",
+            "description": "Restrict search results to prestige images. The default is false.",
             "in": "query",
             "name": "prestige_content_only",
             "required": false,
             "type": "boolean"
           },
           {
-            "description": "Allows filtering by a list of product types.",
+            "description": "Filter images to those having product types from the selected list.",
             "enum": [
               "easyaccess",
               "editorialsubscription",
@@ -3788,7 +3868,7 @@
             "type": "array"
           },
           {
-            "description": "Allows sorting of results.",
+            "description": "Select sort order of results.",
             "enum": [
               "best_match",
               "most_popular",
@@ -3800,7 +3880,7 @@
             "type": "string"
           },
           {
-            "description": "Allows for filtering based on specific people keywords.",
+            "description": "Return only images associated with specific people (using a comma-delimited list).",
             "in": "query",
             "items": {
               "type": "string"
@@ -4040,7 +4120,7 @@
             "type": "boolean"
           },
           {
-            "description": "Filters search results based on the ethnicity of individuals in an image.",
+            "description": "Filter search results based on the ethnicity of individuals in an image.",
             "enum": [
               "black",
               "caucasian",
@@ -4085,7 +4165,7 @@
             "type": "boolean"
           },
           {
-            "description": "Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.",
+            "description": "Restrict the set of fields that are returned. Specify using a comma separated list of fields. If no fields are selected, the summary_set of fields are returned.",
             "enum": [
               "allowed_use",
               "alternative_ids",
@@ -4161,7 +4241,7 @@
             "type": "array"
           },
           {
-            "description": "Identifies a file type for the image.",
+            "description": "Return only images having a specific file type.",
             "enum": [
               "eps",
               "gif",
@@ -4183,7 +4263,7 @@
             "type": "array"
           },
           {
-            "description": "Identifies a graphical style for the image.",
+            "description": "Filter based on graphical style of the image.",
             "enum": [
               "fine_art",
               "illustration",
@@ -4203,7 +4283,7 @@
             "type": "array"
           },
           {
-            "description": "Comma separated-list of keyword IDs.  If specified, returns images containing the requested keyword(s).  If keyword IDs and phrase are both specified, returns only those images matching the query phrase which also contain the requested keyword(s).",
+            "description": "Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.",
             "in": "query",
             "items": {
               "format": "int32",
@@ -4214,7 +4294,7 @@
             "type": "array"
           },
           {
-            "description": "Identifies a licensing model for the image. Possible values are: royaltyfree, rightsmanaged",
+            "description": "Return only images allowing a specific licensing model.",
             "enum": [
               "rightsmanaged",
               "royaltyfree"
@@ -4232,7 +4312,7 @@
             "type": "array"
           },
           {
-            "description": "Allows for filtering based on the number of people in the image",
+            "description": "Filter based on the number of people in the image.",
             "enum": [
               "none",
               "one",
@@ -4254,7 +4334,7 @@
             "type": "array"
           },
           {
-            "description": "Choose images based on their aspect ratios.",
+            "description": "Return only images with selected aspect ratios.",
             "enum": [
               "Horizontal",
               "Vertical",
@@ -4278,7 +4358,7 @@
             "type": "array"
           },
           {
-            "description": "Page number.",
+            "description": "Request results starting at a page number (default is 1).",
             "format": "int32",
             "in": "query",
             "name": "page",
@@ -4286,7 +4366,7 @@
             "type": "integer"
           },
           {
-            "description": "Size of page.",
+            "description": "Request number of images to return in each page.",
             "format": "int32",
             "in": "query",
             "name": "page_size",
@@ -4294,7 +4374,7 @@
             "type": "integer"
           },
           {
-            "description": "Free-text search query.",
+            "description": "Search images using a search phrase.",
             "in": "query",
             "name": "phrase",
             "required": false,
@@ -4308,7 +4388,7 @@
             "type": "boolean"
           },
           {
-            "description": "Allows filtering by a list of product types.",
+            "description": "Filter images to those having product types from the selected list.",
             "enum": [
               "easyaccess",
               "editorialsubscription",
@@ -4332,7 +4412,7 @@
             "type": "array"
           },
           {
-            "description": "Allows sorting of results.",
+            "description": "Select sort order of results.",
             "enum": [
               "best_match",
               "most_popular",
@@ -4567,7 +4647,7 @@
             "type": "array"
           },
           {
-            "description": "Filters to events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31).",
+            "description": "Return only events that start on or after this date. Use ISO 8601 format (e.g., 1999-12-31).",
             "format": "date-time",
             "in": "query",
             "name": "date_from",
@@ -4575,7 +4655,7 @@
             "type": "string"
           },
           {
-            "description": "Filters to events that start on or before this date. Use ISO 8601 format (e.g., 1999-12-31).",
+            "description": "Return only events that start on or before this date. Use ISO 8601 format (e.g., 1999-12-31).",
             "format": "date-time",
             "in": "query",
             "name": "date_to",
@@ -4583,7 +4663,7 @@
             "type": "string"
           },
           {
-            "description": "Filters to events with a matching editorial segment.",
+            "description": "Return only events with a matching editorial segment.",
             "enum": [
               "archival",
               "entertainment",
@@ -4609,7 +4689,7 @@
             "type": "array"
           },
           {
-            "description": "Include only images that embeddable. The default is false.",
+            "description": "Restrict search results to embeddable images. The default is false.",
             "in": "query",
             "name": "embed_content_only",
             "required": false,
@@ -4626,7 +4706,7 @@
             "type": "array"
           },
           {
-            "description": "Filters search results based on the ethnicity of individuals in an image.",
+            "description": "Filter search results based on the ethnicity of individuals in an image.",
             "enum": [
               "black",
               "caucasian",
@@ -4664,7 +4744,7 @@
             "type": "array"
           },
           {
-            "description": "Allows for searching based on specific events",
+            "description": "Filter based on specific events",
             "in": "query",
             "items": {
               "format": "int32",
@@ -4682,7 +4762,7 @@
             "type": "boolean"
           },
           {
-            "description": "Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.",
+            "description": "Restrict the set of fields that are returned. Specify using a comma separated list of fields. If no fields are selected, the summary_set of fields are returned.",
             "enum": [
               "allowed_use",
               "alternative_ids",
@@ -4762,7 +4842,7 @@
             "type": "array"
           },
           {
-            "description": "Identifies a file type for the image.",
+            "description": "Return only images having a specific file type.",
             "enum": [
               "eps",
               "gif",
@@ -4784,7 +4864,7 @@
             "type": "array"
           },
           {
-            "description": "Identifies a graphical style for the image.",
+            "description": "Filter based on graphical style of the image.",
             "enum": [
               "photography",
               "illustration"
@@ -4802,7 +4882,7 @@
             "type": "array"
           },
           {
-            "description": "Comma separated-list of keyword IDs.  If specified, returns images containing the requested keyword(s).  If keyword IDs and phrase are both specified, returns only those images matching the query phrase which also contain the requested keyword(s).",
+            "description": "Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.",
             "in": "query",
             "items": {
               "format": "int32",
@@ -4813,7 +4893,7 @@
             "type": "array"
           },
           {
-            "description": "Allows for filtering based on the number of people in the image",
+            "description": "Filter based on the number of people in the image.",
             "enum": [
               "none",
               "one",
@@ -4835,7 +4915,7 @@
             "type": "array"
           },
           {
-            "description": "Choose images based on their aspect ratios.",
+            "description": "Return only images with selected aspect ratios.",
             "enum": [
               "Horizontal",
               "Vertical",
@@ -4859,7 +4939,7 @@
             "type": "array"
           },
           {
-            "description": "Page number.",
+            "description": "Request results starting at a page number (default is 1).",
             "format": "int32",
             "in": "query",
             "name": "page",
@@ -4867,7 +4947,7 @@
             "type": "integer"
           },
           {
-            "description": "Size of page.",
+            "description": "Request number of images to return in each page.",
             "format": "int32",
             "in": "query",
             "name": "page_size",
@@ -4875,14 +4955,14 @@
             "type": "integer"
           },
           {
-            "description": "Free-text search query.",
+            "description": "Search images using a search phrase.",
             "in": "query",
             "name": "phrase",
             "required": false,
             "type": "string"
           },
           {
-            "description": "Allows filtering by a list of product types.",
+            "description": "Filter images to those having product types from the selected list.",
             "enum": [
               "easyaccess",
               "editorialsubscription",
@@ -4906,7 +4986,7 @@
             "type": "array"
           },
           {
-            "description": "Allows sorting of results.",
+            "description": "Select sort order of results.",
             "enum": [
               "best_match",
               "most_popular",
@@ -4919,7 +4999,7 @@
             "type": "string"
           },
           {
-            "description": "Allows for filtering based on specific people keywords.",
+            "description": "Return only images associated with specific people (using a comma-delimited list).",
             "in": "query",
             "items": {
               "type": "string"
@@ -4982,7 +5062,7 @@
             "type": "string"
           },
           {
-            "description": "Allows for filtering based on age of individuals in a video",
+            "description": "Provides filtering according to the age of individuals in a video.",
             "enum": [
               "newborn",
               "baby",
@@ -5080,7 +5160,7 @@
             "type": "array"
           },
           {
-            "description": "Allows filtering by collection code.",
+            "description": "Provides filtering by collection code.",
             "in": "query",
             "items": {
               "type": "string"
@@ -5090,7 +5170,7 @@
             "type": "array"
           },
           {
-            "description": "Allows searching based on included or excluded collections.",
+            "description": "Provides searching based on specified collection(s).",
             "enum": [
               "include",
               "exclude"
@@ -5101,14 +5181,14 @@
             "type": "string"
           },
           {
-            "description": "Exclude images tagged as containing nudity. The default is false.",
+            "description": "Excludes images containing nudity. The default is false.",
             "in": "query",
             "name": "exclude_nudity",
             "required": false,
             "type": "boolean"
           },
           {
-            "description": "Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.",
+            "description": "Specifies fields to return. Defaults to 'summary_set'.",
             "enum": [
               "allowed_use",
               "artist",
@@ -5178,7 +5258,7 @@
             "type": "array"
           },
           {
-            "description": "Allows filtering by the digital video format available on a film asset, i.e. Standard Definition, High Definition, or 4k Ultra High Definition",
+            "description": "Filters according to the digital video format available on a film asset.",
             "enum": [
               "sd",
               "hd",
@@ -5190,7 +5270,7 @@
             "type": "string"
           },
           {
-            "description": "Identifies a licensing model for the image.",
+            "description": "Specifies the image licensing model(s).",
             "enum": [
               "rightsready",
               "royaltyfree"
@@ -5208,7 +5288,7 @@
             "type": "array"
           },
           {
-            "description": "Page number.",
+            "description": "Identifies page to return. Default is 1.",
             "format": "int32",
             "in": "query",
             "name": "page",
@@ -5216,7 +5296,7 @@
             "type": "integer"
           },
           {
-            "description": "Size of page.",
+            "description": "Specifies page size. Default is 30, maximum page_size is 100.",
             "format": "int32",
             "in": "query",
             "name": "page_size",
@@ -5231,7 +5311,7 @@
             "type": "string"
           },
           {
-            "description": "Allows filtering by a list of product types.",
+            "description": "Provides filtering by a list of product types.",
             "enum": [
               "easyaccess",
               "editorialsubscription",
@@ -5268,7 +5348,7 @@
             "type": "string"
           },
           {
-            "description": "Allows filtering by specific peoples' names.",
+            "description": "Provides filtering by specific peoples' names.",
             "in": "query",
             "items": {
               "type": "string"
@@ -5555,7 +5635,7 @@
             "type": "array"
           },
           {
-            "description": "Page number.",
+            "description": "Identifies page to return. Default is 1.",
             "format": "int32",
             "in": "query",
             "name": "page",
@@ -5563,7 +5643,7 @@
             "type": "integer"
           },
           {
-            "description": "Size of page.",
+            "description": "Specifies page size. Default is 30, maximum page_size is 100.",
             "format": "int32",
             "in": "query",
             "name": "page_size",
@@ -5884,7 +5964,7 @@
             "type": "string"
           },
           {
-            "description": "Page number.",
+            "description": "Identifies page to return. Default is 1.",
             "format": "int32",
             "in": "query",
             "name": "page",
@@ -5892,7 +5972,7 @@
             "type": "integer"
           },
           {
-            "description": "Size of page.",
+            "description": "Specifies page size. Default is 30, maximum page_size is 100.",
             "format": "int32",
             "in": "query",
             "name": "page_size",
@@ -6070,7 +6150,7 @@
             "type": "string"
           },
           {
-            "description": "Comma separated list of video ids.",
+            "description": "Specifies one or more video ids to return. Use comma delimiter when requesting multiple ids.",
             "in": "query",
             "items": {
               "type": "string"
@@ -6080,7 +6160,7 @@
             "type": "array"
           },
           {
-            "description": "Comma separated list of fields. Allows restricting which fields are returned. If no fields are\r\n                selected, the summary_set of fields are returned.",
+            "description": "Specifies fields to return. Defaults to 'summary_set'.",
             "enum": [
               "id",
               "allowed_use",
@@ -6158,7 +6238,7 @@
         ],
         "responses": {
           "200": {
-            "description": "No response was specified",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/videos_detail"
             }
