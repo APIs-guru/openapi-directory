@@ -20,6 +20,7 @@ var jsonPatch = require('json-merge-patch');
 var Request = require('request');
 var MimeLookup = require('mime-lookup');
 var MIME = new MimeLookup(require('mime-db'));
+var URI = require('urijs');
 
 var jsondiffpatch = require('jsondiffpatch').create({
   arrays: {
@@ -128,7 +129,12 @@ function cacheResources(specRootUrl) {
       assert(extension);
       var logoFile = 'cache/' + filename.replace(/swagger.json$/, 'logo.' + extension);
       saveFile(logoFile, data);
-      swagger.info['x-logo'].url = specRootUrl + logoFile;
+
+      var fragment = URI(url).fragment();
+      if (fragment)
+        fragment = '#' + fragment;
+
+      swagger.info['x-logo'].url = specRootUrl + logoFile + fragment;
       saveJson(filename, swagger);
     });
   });
