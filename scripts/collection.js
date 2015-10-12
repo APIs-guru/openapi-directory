@@ -18,6 +18,8 @@ var mkdirp = require('mkdirp').sync;
 var mktemp = require('mktemp').createFileSync;
 var jsonPatch = require('json-merge-patch');
 var Request = require('request');
+var MimeLookup = require('mime-lookup');
+var MIME = new MimeLookup(require('mime-db'));
 
 var jsondiffpatch = require('jsondiffpatch').create({
   arrays: {
@@ -60,6 +62,12 @@ program
   .action(updateGoogle);
 
 program
+  .command('cache')
+  .description('cache external resources')
+  .arguments('<SPEC_ROOT_URL>')
+  .action(cacheResources);
+
+program
   .command('api')
   .description('generate API')
   .arguments('<SPEC_ROOT_URL>')
@@ -100,6 +108,29 @@ function updateCollection(dir) {
       var newFilename = getSwaggerPath(result.swagger);
       assert(newFilename === filename);
       asyncCb(null);
+    });
+  });
+}
+
+function cacheResources(specRootUrl) {
+  _.each(getSpecs(), function (swagger, filename) {
+    if (_.isUndefined(swagger.info['x-logo']))
+      return;
+
+    var url = swagger.info['x-logo'].url;
+    new Request(url, function(err, response, data) {
+      assert(!err, 'Can not GET "' + url +'": ' + err);
+      assert(response.statusCode === 200, 'Can not GET "' + url +'": ' + response.statusMessage);
+      console.log(url);
+      var mime = response.headers['content-type'];
+      assert(mime.match('image/'));
+      var extension = MIME.extension(mime);
+      assert(extension);
+      var logoFile = filename.replace(/swagger.json$/, 'logo.' + extension);
+      fs.writeFileSync(logoFile, data);
+      console.log(logoFile);
+      swagger.info['x-logo'].url = specRootUrl + logoFile;
+      saveJson(filename, swagger);
     });
   });
 }
