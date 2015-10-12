@@ -260,18 +260,16 @@ function editFile(data, cb) {
 }
 
 function saveFixup(swagger, editedSwagger) {
+  var fixupPath = getSwaggerPath(swagger, 'fixup.json');
+
   //Before diff we need to unpatch, it's a way to appeand changes
-  revertFixup(swagger);
+  var fixup = readJson(fixupPath);
+  if (fixup)
+    jsondiffpatch.unpatch(swagger, fixup);
 
   var diff = jsondiffpatch.diff(swagger, editedSwagger);
   if (diff)
-    saveJson(swaggerPath + '/fixup.json', diff);
-}
-
-function revertFixup(swagger) {
-  var fixup = readJson(getSwaggerPath(swagger, 'fixup.json'));
-  if (fixup)
-    jsondiffpatch.unpatch(swagger, fixup);
+    saveJson(fixupPath, diff);
 }
 
 function updateGoogle() {
