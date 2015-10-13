@@ -157,12 +157,15 @@ function generateAPI(specRootUrl) {
     if (_.isUndefined(list[id]))
       list[id] = { versions: {} };
 
-    list[id].versions[version] = {
+    var versionObj = list[id].versions[version] = {
       swaggerUrl: specRootUrl + getSwaggerPath(swagger),
       info: swagger.info,
       added: gitLogDate('--follow --diff-filter=A -1', filename),
       updated: gitLogDate('-1', filename)
     };
+
+    if (swagger.externalDocs)
+      versionObj.externalDocs = swagger.externalDocs;
   });
 
   _.each(list, function (api, id) {
