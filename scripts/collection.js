@@ -21,6 +21,7 @@ var Request = require('request');
 var MimeLookup = require('mime-lookup');
 var MIME = new MimeLookup(require('mime-db'));
 var URI = require('urijs');
+var csvStringify = require('csv-stringify');
 
 var jsondiffpatch = require('jsondiffpatch').create({
   arrays: {
@@ -188,6 +189,43 @@ function generateAPI(specRootUrl) {
   console.log('Generated list for ' + _.size(list) + ' API specs.');
 
   saveJson('api/v1/list.json', list);
+  generateCSV(list);
+}
+
+function generateCSV(list) {
+  var header = [
+    'id',
+    'info_title',
+    'info_description',
+    'info_termsOfService',
+    'info_contact_name',
+    'info_contact_url',
+    'info_contact_email',
+    'info_license_name',
+    'info_license_url',
+    'info_x-logo_url',
+    'info_x-logo_background',
+    'externalDocs_description',
+    'externalDocs_url',
+  ];
+
+  var table = [header];
+  _.forEach(list, function (api, id) {
+    var apiData = api.versions[api.preferred];
+    var row = [id];
+    _.forEach(header, function (column) {
+      if (column === 'id') return;
+
+      var path = column.replace(/_/g, '.');
+      row.push(_.get(apiData, path));
+    });
+    table.push(row);
+  });
+
+  csvStringify(table, function (err, output) {
+    assert(!err, 'Failed stringify: ' + err);
+    saveFile('api/v1/list.csv', output);
+  });
 }
 
 function gitLogDate(options, filename) {
