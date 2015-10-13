@@ -13,7 +13,7 @@ set -o pipefail
   git commit -am 'Cache logo'
 
   ./scripts/collection.js api https://apis-guru.github.io/api-models/
-  git add ./api/v1/list.json
+  git add ./api/
   git commit -m 'Generate API'
 
   git push --force "https://${GH_TOKEN}@${GH_REF}" HEAD:gh-pages
