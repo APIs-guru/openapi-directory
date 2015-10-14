@@ -136,19 +136,19 @@
       "type": "object"
     },
     "asset_usage": {
-      "description": "Day level asset usage details",
+      "description": "Specifies the id, usage quantity, and date of when an asset was used.",
       "properties": {
         "asset_id": {
-          "description": "Id of the asset used",
+          "description": "Specifies the Id of the asset that was used.",
           "type": "string"
         },
         "quantity": {
-          "description": "The number of times the asset was used",
+          "description": "Specifies the number of times the asset was used.",
           "format": "int32",
           "type": "integer"
         },
         "usage_date": {
-          "description": "Date of usage",
+          "description": "Identifies the date the asset was used.",
           "format": "date-time",
           "type": "string"
         }
@@ -356,7 +356,7 @@
         },
         "keywords": {
           "items": {
-            "$ref": "#/definitions/keyword"
+            "$ref": "#/definitions/keywords"
           },
           "type": "array"
         },
@@ -617,7 +617,7 @@
         },
         "keywords": {
           "items": {
-            "$ref": "#/definitions/keyword"
+            "$ref": "#/definitions/keywords"
           },
           "type": "array"
         },
@@ -911,7 +911,7 @@
         "keywords": {
           "description": "Contains a keyword entry for each keyword related to the image.",
           "items": {
-            "$ref": "#/definitions/keyword"
+            "$ref": "#/definitions/keywords"
           },
           "type": "array"
         },
@@ -1059,7 +1059,7 @@
         },
         "keywords": {
           "items": {
-            "$ref": "#/definitions/keyword"
+            "$ref": "#/definitions/keywords"
           },
           "type": "array"
         },
@@ -1144,24 +1144,6 @@
             "type": "string"
           },
           "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "keyword": {
-      "properties": {
-        "keyword_id": {
-          "type": "string"
-        },
-        "relevance": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "text": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
         }
       },
       "type": "object"
@@ -1316,10 +1298,10 @@
       "type": "object"
     },
     "report_usage_batch_request": {
-      "description": "Request structure",
+      "description": "Specifies the request information for the Batch Usages endpoint.",
       "properties": {
         "asset_usages": {
-          "description": "List of AssetUsage Entries",
+          "description": "Identifies the list of asset usage combinations.",
           "items": {
             "$ref": "#/definitions/asset_usage"
           },
@@ -1405,6 +1387,13 @@
           "description": "Identifies the video",
           "type": "string"
         },
+        "keywords": {
+          "description": "Contains a keyword entry for each keyword related to the image.",
+          "items": {
+            "$ref": "#/definitions/keywords"
+          },
+          "type": "array"
+        },
         "license_model": {
           "description": "Identifies a licensing model for the video. Possible values are: royaltyfree, rightsready",
           "type": "string"
@@ -1489,6 +1478,12 @@
         },
         "id": {
           "type": "string"
+        },
+        "keywords": {
+          "items": {
+            "$ref": "#/definitions/keywords"
+          },
+          "type": "array"
         },
         "largest_downloads": {
           "items": {
@@ -2160,6 +2155,15 @@
         "description": "The single step download call returns either a redirect or a response message with the URI to download the largest\r\n                image available.\r\n                Returns HTTP status code 303 Redirect to download URI or HTTP status code 200.",
         "parameters": [
           {
+            "description": "Additional information required from specific customers when downloading.\r\n                    Includes potentially notes and project codes.",
+            "in": "body",
+            "name": "download_details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PremiumAccessDownloadData"
+            }
+          },
+          {
             "description": "Provide your API key.",
             "in": "header",
             "name": "Api-Key",
@@ -2325,6 +2329,15 @@
         ],
         "description": "The single step download call returns either a redirect or a response message with the URI to download the largest\r\n                image available.\r\n                Returns HTTP status code 303 Redirect to download URI or HTTP status code 200.",
         "parameters": [
+          {
+            "description": "Additional information required from specific customers when downloading.\r\n                    Includes potentially notes and project codes.",
+            "in": "body",
+            "name": "download_details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PremiumAccessDownloadData"
+            }
+          },
           {
             "description": "Provide your API key.",
             "in": "header",
@@ -5207,6 +5220,7 @@
               "editorial_segments",
               "era",
               "id",
+              "keywords",
               "largest_downloads",
               "license_model",
               "mastered_to",
@@ -5239,6 +5253,7 @@
                 "editorial_segments",
                 "era",
                 "id",
+                "keywords",
                 "largest_downloads",
                 "license_model",
                 "mastered_to",
@@ -5268,6 +5283,17 @@
             "name": "format_available",
             "required": false,
             "type": "string"
+          },
+          {
+            "description": "Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.",
+            "in": "query",
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "name": "keyword_ids",
+            "required": false,
+            "type": "array"
           },
           {
             "description": "Specifies the image licensing model(s).",
@@ -5555,6 +5581,7 @@
               "display_set",
               "era",
               "id",
+              "keywords",
               "largest_downloads",
               "license_model",
               "mastered_to",
@@ -5586,6 +5613,7 @@
                 "display_set",
                 "era",
                 "id",
+                "keywords",
                 "largest_downloads",
                 "license_model",
                 "mastered_to",
@@ -5615,6 +5643,17 @@
             "name": "format_available",
             "required": false,
             "type": "string"
+          },
+          {
+            "description": "Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.",
+            "in": "query",
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "name": "keyword_ids",
+            "required": false,
+            "type": "array"
           },
           {
             "description": "Identifies a licensing model for the image.",
@@ -5901,6 +5940,7 @@
               "editorial_segments",
               "era",
               "id",
+              "keywords",
               "largest_downloads",
               "license_model",
               "mastered_to",
@@ -5933,6 +5973,7 @@
                 "editorial_segments",
                 "era",
                 "id",
+                "keywords",
                 "largest_downloads",
                 "license_model",
                 "mastered_to",
@@ -5962,6 +6003,17 @@
             "name": "format_available",
             "required": false,
             "type": "string"
+          },
+          {
+            "description": "Return only images tagged with specific keyword(s). Specify using a comma-separated list of keyword Ids. If keyword Ids and phrase are both specified, only those images matching the query phrase which also contain the requested keyword(s) are returned.",
+            "in": "query",
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "name": "keyword_ids",
+            "required": false,
+            "type": "array"
           },
           {
             "description": "Identifies page to return. Default is 1.",
@@ -6083,7 +6135,7 @@
             "type": "string"
           },
           {
-            "description": "Json model with asset usages to report. Supports up to 1000 usages per batch. Given the atomic nature of the operation,\r\n             all Image Ids included in a request must be valid for the batch to be recorded. Batches containing an invalid Image Id will cause the operation\r\n             to fail and return an error response. In this case, none of the reported usages will be recorded.",
+            "description": "Specifies up to 1000 assets and usage count that you want to submit usages for. \r\n            Note that all asset Ids specified must be valid or the operation will fail causing no usages to be recorded.",
             "in": "body",
             "name": "request",
             "required": true,
@@ -6092,7 +6144,7 @@
             }
           },
           {
-            "description": "Batch Id to record with the report. Must be unique.",
+            "description": "Specifies a unique Batch Id to identify the report.",
             "in": "path",
             "name": "id",
             "required": true,
@@ -6181,6 +6233,7 @@
               "downloads",
               "era",
               "editorial_segments",
+              "keywords",
               "license_model",
               "mastered_to",
               "originally_shot_on",
@@ -6214,6 +6267,7 @@
                 "downloads",
                 "era",
                 "editorial_segments",
+                "keywords",
                 "license_model",
                 "mastered_to",
                 "originally_shot_on",
@@ -6316,6 +6370,7 @@
               "downloads",
               "era",
               "editorial_segments",
+              "keywords",
               "license_model",
               "mastered_to",
               "originally_shot_on",
@@ -6349,6 +6404,7 @@
                 "downloads",
                 "era",
                 "editorial_segments",
+                "keywords",
                 "license_model",
                 "mastered_to",
                 "originally_shot_on",

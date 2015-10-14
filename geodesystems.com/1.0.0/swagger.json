@@ -18,78 +18,15 @@
   "paths": {
     "/repository/entry/show": {
       "get": {
-        "description": "API to call: NCO Weighted Average",
-        "operationId": "geo_nco_ncwa",
+        "description": "API to call: View GPS QC",
+        "operationId": "gps.teqc.qc",
         "parameters": [
           {
-            "default": "geo_nco_ncwa",
+            "default": "gps.teqc.qc",
             "description": "Output type  -don't change",
             "in": "query",
             "name": "output",
             "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Operation",
-            "in": "query",
-            "name": "nco.operation",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Variable",
-            "in": "query",
-            "name": "nco.variable",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Exclude",
-            "in": "query",
-            "name": "nco.variable.exclude",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Averaging Dimensions",
-            "in": "query",
-            "name": "nco.coord",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Mask",
-            "in": "query",
-            "name": "nco.mask.variable",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "nco.mask.comp",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Mask Value",
-            "format": "float",
-            "in": "query",
-            "name": "nco.mask.value",
-            "required": false,
-            "type": "number"
-          },
-          {
-            "description": "Weight by",
-            "in": "query",
-            "name": "nco.weight",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "NetCDF Format",
-            "in": "query",
-            "name": "nco.format",
-            "required": false,
             "type": "string"
           },
           {
@@ -106,9 +43,9 @@
             "description": "No response was specified"
           }
         },
-        "summary": "API for NCO Weighted Average",
+        "summary": "API for View GPS QC",
         "tags": [
-          "geo_nco_ncwa"
+          "gps.teqc.qc"
         ]
       }
     },
@@ -7681,6 +7618,158 @@
         ]
       }
     },
+    "/repository/search/type/hipchat_group": {
+      "get": {
+        "description": "API to search for entries of type HipChat Group",
+        "operationId": "search_hipchat_group",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'HipChat Group' entry type",
+        "tags": [
+          "hipchat_group"
+        ]
+      }
+    },
     "/repository/search/type/homepage": {
       "get": {
         "description": "API to search for entries of type Home Page",
@@ -13749,6 +13838,158 @@
         "summary": "Search API for 'Dataset' entry type",
         "tags": [
           "project_dataset"
+        ]
+      }
+    },
+    "/repository/search/type/project_deployment": {
+      "get": {
+        "description": "API to search for entries of type Deployment",
+        "operationId": "search_project_deployment",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'Deployment' entry type",
+        "tags": [
+          "project_deployment"
         ]
       }
     },
@@ -24526,6 +24767,158 @@
         ]
       }
     },
+    "/repository/search/type/type_point_gcnet": {
+      "get": {
+        "description": "API to search for entries of type GC-Net Point Data",
+        "operationId": "search_type_point_gcnet",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'GC-Net Point Data' entry type",
+        "tags": [
+          "type_point_gcnet"
+        ]
+      }
+    },
     "/repository/search/type/type_point_geomag_iaga2002": {
       "get": {
         "description": "API to search for entries of type IAGA 2002 Geomagnetism Data",
@@ -26289,6 +26682,380 @@
         ]
       }
     },
+    "/repository/search/type/type_point_noaa_flask_event": {
+      "get": {
+        "description": "API to search for entries of type NOAA Flask Event Measurements",
+        "operationId": "search_type_point_noaa_flask_event",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Site ID",
+            "in": "query",
+            "name": "search.type_point_noaa_flask_event.site_id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parameter",
+            "in": "query",
+            "name": "search.type_point_noaa_flask_event.parameter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Project",
+            "in": "query",
+            "name": "search.type_point_noaa_flask_event.project",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Lab ID Number",
+            "in": "query",
+            "name": "search.type_point_noaa_flask_event.lab_id_number",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Measurement Group",
+            "in": "query",
+            "name": "search.type_point_noaa_flask_event.measurement_group",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'NOAA Flask Event Measurements' entry type",
+        "tags": [
+          "type_point_noaa_flask_event"
+        ]
+      }
+    },
+    "/repository/search/type/type_point_noaa_flask_month": {
+      "get": {
+        "description": "API to search for entries of type NOAA Flask Month Measurements",
+        "operationId": "search_type_point_noaa_flask_month",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Site ID",
+            "in": "query",
+            "name": "search.type_point_noaa_flask_month.site_id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parameter",
+            "in": "query",
+            "name": "search.type_point_noaa_flask_month.parameter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Project",
+            "in": "query",
+            "name": "search.type_point_noaa_flask_month.project",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Lab ID Number",
+            "in": "query",
+            "name": "search.type_point_noaa_flask_month.lab_id_number",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Measurement Group",
+            "in": "query",
+            "name": "search.type_point_noaa_flask_month.measurement_group",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'NOAA Flask Month Measurements' entry type",
+        "tags": [
+          "type_point_noaa_flask_month"
+        ]
+      }
+    },
     "/repository/search/type/type_point_noaa_madis": {
       "get": {
         "description": "API to search for entries of type NOAA MADIS Point Data",
@@ -26438,6 +27205,165 @@
         "summary": "Search API for 'NOAA MADIS Point Data' entry type",
         "tags": [
           "type_point_noaa_madis"
+        ]
+      }
+    },
+    "/repository/search/type/type_point_noaa_tower": {
+      "get": {
+        "description": "API to search for entries of type NOAA Tower Network",
+        "operationId": "search_type_point_noaa_tower",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Site ID",
+            "in": "query",
+            "name": "search.type_point_noaa_tower.site_id",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'NOAA Tower Network' entry type",
+        "tags": [
+          "type_point_noaa_tower"
         ]
       }
     },
@@ -30140,6 +31066,34 @@
       "name": "bio_hmmer_fetch"
     },
     {
+      "description": " API for Convert SRA to ABI format",
+      "name": "bio_sra_to_abi"
+    },
+    {
+      "description": " API for Convert SRA to FASTQ",
+      "name": "bio_sra_to_fastq"
+    },
+    {
+      "description": " API for Convert SRA to ILLUMA format",
+      "name": "bio_sra_to_illuma"
+    },
+    {
+      "description": " API for Convert SRA to SAM",
+      "name": "bio_sra_to_sam"
+    },
+    {
+      "description": " API for Convert SRA to SFF format",
+      "name": "bio_sra_to_sff"
+    },
+    {
+      "description": " API for SRA stats",
+      "name": "bio_sra_stat"
+    },
+    {
+      "description": " API for SRA pileup",
+      "name": "bio_sra_pileup"
+    },
+    {
       "description": " API for Convert FASTQ to SAM",
       "name": "bio_picard_fastqtosam"
     },
@@ -30230,6 +31184,30 @@
     {
       "description": " API for NCO Weighted Average",
       "name": "geo_nco_ncwa"
+    },
+    {
+      "description": " API for CDO Info",
+      "name": "geo_cdo_info"
+    },
+    {
+      "description": " API for CDO Date Select",
+      "name": "geo_cdo_seldate"
+    },
+    {
+      "description": " API for H5 LS",
+      "name": "geo_h5_ls"
+    },
+    {
+      "description": " API for Create image from GeoTIFF",
+      "name": "gdal_tiff2image"
+    },
+    {
+      "description": " API for Convert to RINEX",
+      "name": "gps.teqc.torinex"
+    },
+    {
+      "description": " API for View GPS QC",
+      "name": "gps.teqc.qc"
     },
     {
       "description": "Search API for 'Folder' entry type",
@@ -30342,46 +31320,6 @@
     {
       "description": "Search API for 'Taxonomic Entry' entry type",
       "name": "bio_taxonomy"
-    },
-    {
-      "description": "Search API for 'SEC EDGAR Filing' entry type",
-      "name": "type_edgar_filing"
-    },
-    {
-      "description": "Search API for 'FRED Category' entry type",
-      "name": "type_fred_category"
-    },
-    {
-      "description": "Search API for 'FRED Series' entry type",
-      "name": "type_fred_series"
-    },
-    {
-      "description": "Search API for 'EIA Category' entry type",
-      "name": "type_eia_category"
-    },
-    {
-      "description": "Search API for 'EIA Series' entry type",
-      "name": "type_eia_series"
-    },
-    {
-      "description": "Search API for 'Stock Ticker Data' entry type",
-      "name": "type_biz_stockseries"
-    },
-    {
-      "description": "Search API for 'QUANDL Series' entry type",
-      "name": "type_quandl_series"
-    },
-    {
-      "description": "Search API for 'Enigma Table' entry type",
-      "name": "type_enigma_table"
-    },
-    {
-      "description": "Search API for 'Resiliency Project' entry type",
-      "name": "type_resilience_project"
-    },
-    {
-      "description": "Search API for 'Resiliency Assessment' entry type",
-      "name": "type_resilience_assessment"
     },
     {
       "description": "Search API for 'Before and After Images' entry type",
@@ -30672,6 +31610,10 @@
       "name": "project_instrument"
     },
     {
+      "description": "Search API for 'Deployment' entry type",
+      "name": "project_deployment"
+    },
+    {
       "description": "Search API for 'Campaign' entry type",
       "name": "project_campaign"
     },
@@ -30784,6 +31726,10 @@
       "name": "type_point_czo"
     },
     {
+      "description": "Search API for 'GC-Net Point Data' entry type",
+      "name": "type_point_gcnet"
+    },
+    {
       "description": "Search API for 'IAGA 2002 Geomagnetism Data' entry type",
       "name": "type_point_geomag_iaga2002"
     },
@@ -30816,8 +31762,20 @@
       "name": "type_point_netcdf"
     },
     {
+      "description": "Search API for 'NOAA Tower Network' entry type",
+      "name": "type_point_noaa_tower"
+    },
+    {
       "description": "Search API for 'NOAA Carbon Measurements' entry type",
       "name": "type_point_noaa_carbon"
+    },
+    {
+      "description": "Search API for 'NOAA Flask Event Measurements' entry type",
+      "name": "type_point_noaa_flask_event"
+    },
+    {
+      "description": "Search API for 'NOAA Flask Month Measurements' entry type",
+      "name": "type_point_noaa_flask_month"
     },
     {
       "description": "Search API for 'NOAA MADIS Point Data' entry type",
@@ -30868,14 +31826,6 @@
       "name": "type_point_wsbb_ggp"
     },
     {
-      "description": "Search API for 'Incident' entry type",
-      "name": "incident"
-    },
-    {
-      "description": "Search API for 'Basement Flooding' entry type",
-      "name": "incident_basement"
-    },
-    {
       "description": "Search API for 'Investigation' entry type",
       "name": "investigation_case"
     },
@@ -30890,6 +31840,66 @@
     {
       "description": "Search API for 'Event' entry type",
       "name": "investigation_event"
+    },
+    {
+      "description": "Search API for 'HipChat Group' entry type",
+      "name": "hipchat_group"
+    },
+    {
+      "description": "Search API for 'SEC EDGAR Filing' entry type",
+      "name": "type_edgar_filing"
+    },
+    {
+      "description": "Search API for 'FRED Category' entry type",
+      "name": "type_fred_category"
+    },
+    {
+      "description": "Search API for 'FRED Series' entry type",
+      "name": "type_fred_series"
+    },
+    {
+      "description": "Search API for 'EIA Category' entry type",
+      "name": "type_eia_category"
+    },
+    {
+      "description": "Search API for 'EIA Series' entry type",
+      "name": "type_eia_series"
+    },
+    {
+      "description": "Search API for 'Stock Ticker Data' entry type",
+      "name": "type_biz_stockseries"
+    },
+    {
+      "description": "Search API for 'QUANDL Series' entry type",
+      "name": "type_quandl_series"
+    },
+    {
+      "description": "Search API for 'Enigma Table' entry type",
+      "name": "type_enigma_table"
+    },
+    {
+      "description": "Search API for 'Resiliency Project' entry type",
+      "name": "type_resilience_project"
+    },
+    {
+      "description": "Search API for 'Resiliency Assessment' entry type",
+      "name": "type_resilience_assessment"
+    },
+    {
+      "description": "Search API for 'Incident' entry type",
+      "name": "incident"
+    },
+    {
+      "description": "Search API for 'Basement Flooding' entry type",
+      "name": "incident_basement"
+    },
+    {
+      "description": "Search API for 'MISO Foreacast XML' entry type",
+      "name": "type_power_miso_forecast"
+    },
+    {
+      "description": "Search API for 'Slack Team' entry type",
+      "name": "slack_team"
     },
     {
       "description": "Search API for 'CODATA Fundamental Physical Constants' entry type",
@@ -30922,14 +31932,6 @@
     {
       "description": "Search API for 'GLAS Lidar Data' entry type",
       "name": "lidar_glas"
-    },
-    {
-      "description": "Search API for 'MISO Foreacast XML' entry type",
-      "name": "type_power_miso_forecast"
-    },
-    {
-      "description": "Search API for 'Slack Team' entry type",
-      "name": "slack_team"
     },
     {
       "description": "Search API for 'SOCRATA Series' entry type",

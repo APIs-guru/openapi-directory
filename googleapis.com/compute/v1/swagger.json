@@ -1566,6 +1566,102 @@
       },
       "type": "object"
     },
+    "HttpsHealthCheck": {
+      "description": "An HttpsHealthCheck resource. This resource defines a template for how individual instances should be checked for health, via HTTPS.",
+      "properties": {
+        "checkIntervalSec": {
+          "description": "How often (in seconds) to send a health check. The default value is 5 seconds.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "creationTimestamp": {
+          "description": "[Output Only] Creation timestamp in RFC3339 text format.",
+          "type": "string"
+        },
+        "description": {
+          "description": "An optional textual description of the resource; provided by the client when the resource is created.",
+          "type": "string"
+        },
+        "healthyThreshold": {
+          "description": "A so-far unhealthy instance will be marked healthy after this many consecutive successes. The default value is 2.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "host": {
+          "description": "The value of the host header in the HTTPS health check request. If left empty (default value), the public IP on behalf of which this health check is performed will be used.",
+          "type": "string"
+        },
+        "id": {
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "kind": {
+          "default": "compute#httpsHealthCheck",
+          "description": "Type of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
+          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+          "type": "string"
+        },
+        "port": {
+          "description": "The TCP port number for the HTTPS health check request. The default value is 443.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "requestPath": {
+          "description": "The request path of the HTTPS health check request. The default value is \"/\".",
+          "type": "string"
+        },
+        "selfLink": {
+          "description": "[Output Only] Server-defined URL for the resource.",
+          "type": "string"
+        },
+        "timeoutSec": {
+          "description": "How long (in seconds) to wait before claiming failure. The default value is 5 seconds. It is invalid for timeoutSec to have a greater value than checkIntervalSec.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "unhealthyThreshold": {
+          "description": "A so-far healthy instance will be marked unhealthy after this many consecutive failures. The default value is 2.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "HttpsHealthCheckList": {
+      "description": "Contains a list of HttpsHealthCheck resources.",
+      "properties": {
+        "id": {
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
+          "type": "string"
+        },
+        "items": {
+          "description": "A list of HttpsHealthCheck resources.",
+          "items": {
+            "$ref": "#/definitions/HttpsHealthCheck"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "compute#httpsHealthCheckList",
+          "description": "Type of resource.",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "[Output Only] A token used to continue a truncated list request.",
+          "type": "string"
+        },
+        "selfLink": {
+          "description": "[Output Only] Server-defined URL for this resource.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Image": {
       "description": "An Image resource.",
       "properties": {
@@ -3944,6 +4040,77 @@
       },
       "type": "object"
     },
+    "SslCertificate": {
+      "description": "An SslCertificate resource. This resource provides a mechanism to upload an SSL key and certificate to global HTTPS loadbalancer to serve secure connections.",
+      "properties": {
+        "certificate": {
+          "description": "A local certificate file. The certificate must be in PEM format. The certificate chain must be no greater than 5 certs long. The chain must include at least one intermediate cert.",
+          "type": "string"
+        },
+        "creationTimestamp": {
+          "description": "[Output Only] Creation timestamp in RFC3339 text format.",
+          "type": "string"
+        },
+        "description": {
+          "description": "An optional textual description of the resource. Provided by the client when the resource is created.",
+          "type": "string"
+        },
+        "id": {
+          "description": "[Output Only] Unique identifier for the resource. Defined by the server.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "kind": {
+          "default": "compute#sslCertificate",
+          "description": "[Output Only] Type of the resource. Always compute#sslCertificate for SSL certificates.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
+          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+          "type": "string"
+        },
+        "privateKey": {
+          "description": "A write-only private key in PEM format. Only insert RPCs will include this field.",
+          "type": "string"
+        },
+        "selfLink": {
+          "description": "[Output only] Server-defined URL for the resource.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SslCertificateList": {
+      "description": "Contains a list of SslCertificate resources.",
+      "properties": {
+        "id": {
+          "description": "[Output Only] Unique identifier for the resource. Defined by the server.",
+          "type": "string"
+        },
+        "items": {
+          "description": "A list of SslCertificate resources.",
+          "items": {
+            "$ref": "#/definitions/SslCertificate"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "compute#sslCertificateList",
+          "description": "Type of resource.",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "[Output Only] A token used to continue a truncated list request.",
+          "type": "string"
+        },
+        "selfLink": {
+          "description": "[Output Only] Server-defined URL for this resource.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Tags": {
       "description": "A set of instance tags.",
       "properties": {
@@ -4016,6 +4183,92 @@
         "kind": {
           "default": "compute#targetHttpProxyList",
           "description": "Type of resource. Always compute#targetHttpProxyList for lists of Target HTTP proxies.",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "[Output Only] A token used to continue a truncated list request.",
+          "type": "string"
+        },
+        "selfLink": {
+          "description": "[Output Only] Server-defined URL for this resource.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TargetHttpsProxiesSetSslCertificatesRequest": {
+      "properties": {
+        "sslCertificates": {
+          "description": "New set of URLs to SslCertificate resources to associate with this TargetHttpProxy. Currently exactly one ssl certificate must be specified.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "TargetHttpsProxy": {
+      "description": "A TargetHttpsProxy resource. This resource defines an HTTPS proxy.",
+      "properties": {
+        "creationTimestamp": {
+          "description": "[Output Only] Creation timestamp in RFC3339 text format.",
+          "type": "string"
+        },
+        "description": {
+          "description": "An optional textual description of the resource. Provided by the client when the resource is created.",
+          "type": "string"
+        },
+        "id": {
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "kind": {
+          "default": "compute#targetHttpsProxy",
+          "description": "Type of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])? which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.",
+          "pattern": "[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?",
+          "type": "string"
+        },
+        "selfLink": {
+          "description": "[Output Only] Server-defined URL for the resource.",
+          "type": "string"
+        },
+        "sslCertificates": {
+          "description": "URLs to SslCertificate resources that are used to authenticate connections to Backends. Currently exactly one SSL certificate must be specified.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "urlMap": {
+          "description": "URL to the UrlMap resource that defines the mapping from URL to the BackendService.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TargetHttpsProxyList": {
+      "description": "Contains a list of TargetHttpsProxy resources.",
+      "properties": {
+        "id": {
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
+          "type": "string"
+        },
+        "items": {
+          "description": "A list of TargetHttpsProxy resources.",
+          "items": {
+            "$ref": "#/definitions/TargetHttpsProxy"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "compute#targetHttpsProxyList",
+          "description": "Type of resource.",
           "type": "string"
         },
         "nextPageToken": {
@@ -5827,6 +6080,7 @@
     },
     "/{project}/aggregated/instances": {
       "get": {
+        "description": "Retrieves aggregated list of instance resources.",
         "operationId": "compute.instances.aggregatedList",
         "parameters": [
           {
@@ -7905,6 +8159,320 @@
         ]
       }
     },
+    "/{project}/global/httpsHealthChecks": {
+      "get": {
+        "description": "Retrieves the list of HttpsHealthCheck resources available to the specified project.",
+        "operationId": "compute.httpsHealthChecks.list",
+        "parameters": [
+          {
+            "description": "Name of the project scoping this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.\n\nThe FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.\n\nFor example, filter=name ne example-instance.",
+            "in": "query",
+            "name": "filter",
+            "type": "string"
+          },
+          {
+            "default": 500,
+            "description": "Maximum count of results to be returned.",
+            "in": "query",
+            "maximum": 500,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "Specifies a page token to use. Use this parameter if you want to list the next page of results. Set pageToken to the nextPageToken returned by a previous list request.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/HttpsHealthCheckList"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute",
+              "https://www.googleapis.com/auth/compute.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "httpsHealthChecks"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates a HttpsHealthCheck resource in the specified project using the data included in the request.",
+        "operationId": "compute.httpsHealthChecks.insert",
+        "parameters": [
+          {
+            "description": "Name of the project scoping this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/HttpsHealthCheck"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
+          }
+        ],
+        "tags": [
+          "httpsHealthChecks"
+        ]
+      }
+    },
+    "/{project}/global/httpsHealthChecks/{httpsHealthCheck}": {
+      "delete": {
+        "description": "Deletes the specified HttpsHealthCheck resource.",
+        "operationId": "compute.httpsHealthChecks.delete",
+        "parameters": [
+          {
+            "description": "Name of the project scoping this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the HttpsHealthCheck resource to delete.",
+            "in": "path",
+            "name": "httpsHealthCheck",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
+          }
+        ],
+        "tags": [
+          "httpsHealthChecks"
+        ]
+      },
+      "get": {
+        "description": "Returns the specified HttpsHealthCheck resource.",
+        "operationId": "compute.httpsHealthChecks.get",
+        "parameters": [
+          {
+            "description": "Name of the project scoping this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the HttpsHealthCheck resource to return.",
+            "in": "path",
+            "name": "httpsHealthCheck",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/HttpsHealthCheck"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute",
+              "https://www.googleapis.com/auth/compute.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "httpsHealthChecks"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "patch": {
+        "description": "Updates a HttpsHealthCheck resource in the specified project using the data included in the request. This method supports patch semantics.",
+        "operationId": "compute.httpsHealthChecks.patch",
+        "parameters": [
+          {
+            "description": "Name of the project scoping this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the HttpsHealthCheck resource to update.",
+            "in": "path",
+            "name": "httpsHealthCheck",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/HttpsHealthCheck"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
+          }
+        ],
+        "tags": [
+          "httpsHealthChecks"
+        ]
+      },
+      "put": {
+        "description": "Updates a HttpsHealthCheck resource in the specified project using the data included in the request.",
+        "operationId": "compute.httpsHealthChecks.update",
+        "parameters": [
+          {
+            "description": "Name of the project scoping this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the HttpsHealthCheck resource to update.",
+            "in": "path",
+            "name": "httpsHealthCheck",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/HttpsHealthCheck"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
+          }
+        ],
+        "tags": [
+          "httpsHealthChecks"
+        ]
+      }
+    },
     "/{project}/global/images": {
       "get": {
         "description": "Retrieves the list of private images available to the specified project. Private images are images you create that belong to your project. This method does not get any images that belong to other projects, including publicly-available images, like Debian 7. If you want to get a list of publicly-available images, use this method to make a request to the respective image project, such as debian-cloud or windows-cloud.\n\nSee Accessing images for more information.",
@@ -9295,6 +9863,228 @@
         }
       ]
     },
+    "/{project}/global/sslCertificates": {
+      "get": {
+        "description": "Retrieves the list of SslCertificate resources available to the specified project.",
+        "operationId": "compute.sslCertificates.list",
+        "parameters": [
+          {
+            "description": "Name of the project scoping this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.\n\nThe FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.\n\nFor example, filter=name ne example-instance.",
+            "in": "query",
+            "name": "filter",
+            "type": "string"
+          },
+          {
+            "default": 500,
+            "description": "Maximum count of results to be returned.",
+            "in": "query",
+            "maximum": 500,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "Specifies a page token to use. Use this parameter if you want to list the next page of results. Set pageToken to the nextPageToken returned by a previous list request.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SslCertificateList"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute",
+              "https://www.googleapis.com/auth/compute.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "sslCertificates"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates a SslCertificate resource in the specified project using the data included in the request.",
+        "operationId": "compute.sslCertificates.insert",
+        "parameters": [
+          {
+            "description": "Name of the project scoping this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SslCertificate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
+          }
+        ],
+        "tags": [
+          "sslCertificates"
+        ]
+      }
+    },
+    "/{project}/global/sslCertificates/{sslCertificate}": {
+      "delete": {
+        "description": "Deletes the specified SslCertificate resource.",
+        "operationId": "compute.sslCertificates.delete",
+        "parameters": [
+          {
+            "description": "Name of the project scoping this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the SslCertificate resource to delete.",
+            "in": "path",
+            "name": "sslCertificate",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
+          }
+        ],
+        "tags": [
+          "sslCertificates"
+        ]
+      },
+      "get": {
+        "description": "Returns the specified SslCertificate resource.",
+        "operationId": "compute.sslCertificates.get",
+        "parameters": [
+          {
+            "description": "Name of the project scoping this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the SslCertificate resource to return.",
+            "in": "path",
+            "name": "sslCertificate",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SslCertificate"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute",
+              "https://www.googleapis.com/auth/compute.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "sslCertificates"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/{project}/global/targetHttpProxies": {
       "get": {
         "description": "Retrieves the list of TargetHttpProxy resources available to the specified project.",
@@ -9491,6 +10281,228 @@
         ],
         "tags": [
           "targetHttpProxies"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{project}/global/targetHttpsProxies": {
+      "get": {
+        "description": "Retrieves the list of TargetHttpsProxy resources available to the specified project.",
+        "operationId": "compute.targetHttpsProxies.list",
+        "parameters": [
+          {
+            "description": "Name of the project scoping this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.\n\nThe FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.\n\nFor example, filter=name ne example-instance.",
+            "in": "query",
+            "name": "filter",
+            "type": "string"
+          },
+          {
+            "default": 500,
+            "description": "Maximum count of results to be returned.",
+            "in": "query",
+            "maximum": 500,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "Specifies a page token to use. Use this parameter if you want to list the next page of results. Set pageToken to the nextPageToken returned by a previous list request.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TargetHttpsProxyList"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute",
+              "https://www.googleapis.com/auth/compute.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "targetHttpsProxies"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates a TargetHttpsProxy resource in the specified project using the data included in the request.",
+        "operationId": "compute.targetHttpsProxies.insert",
+        "parameters": [
+          {
+            "description": "Name of the project scoping this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/TargetHttpsProxy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
+          }
+        ],
+        "tags": [
+          "targetHttpsProxies"
+        ]
+      }
+    },
+    "/{project}/global/targetHttpsProxies/{targetHttpsProxy}": {
+      "delete": {
+        "description": "Deletes the specified TargetHttpsProxy resource.",
+        "operationId": "compute.targetHttpsProxies.delete",
+        "parameters": [
+          {
+            "description": "Name of the project scoping this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the TargetHttpsProxy resource to delete.",
+            "in": "path",
+            "name": "targetHttpsProxy",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
+          }
+        ],
+        "tags": [
+          "targetHttpsProxies"
+        ]
+      },
+      "get": {
+        "description": "Returns the specified TargetHttpsProxy resource.",
+        "operationId": "compute.targetHttpsProxies.get",
+        "parameters": [
+          {
+            "description": "Name of the project scoping this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the TargetHttpsProxy resource to return.",
+            "in": "path",
+            "name": "targetHttpsProxy",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TargetHttpsProxy"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute",
+              "https://www.googleapis.com/auth/compute.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "targetHttpsProxies"
         ]
       },
       "parameters": [
@@ -12372,6 +13384,148 @@
         ],
         "tags": [
           "targetHttpProxies"
+        ]
+      }
+    },
+    "/{project}/targetHttpsProxies/{targetHttpsProxy}/setSslCertificates": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Replaces SslCertificates for TargetHttpsProxy.",
+        "operationId": "compute.targetHttpsProxies.setSslCertificates",
+        "parameters": [
+          {
+            "description": "Name of the project scoping this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the TargetHttpsProxy resource whose URL map is to be set.",
+            "in": "path",
+            "name": "targetHttpsProxy",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/TargetHttpsProxiesSetSslCertificatesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
+          }
+        ],
+        "tags": [
+          "targetHttpsProxies"
+        ]
+      }
+    },
+    "/{project}/targetHttpsProxies/{targetHttpsProxy}/setUrlMap": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Changes the URL map for TargetHttpsProxy.",
+        "operationId": "compute.targetHttpsProxies.setUrlMap",
+        "parameters": [
+          {
+            "description": "Name of the project scoping this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the TargetHttpsProxy resource whose URL map is to be set.",
+            "in": "path",
+            "name": "targetHttpsProxy",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/UrlMapReference"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute"
+            ]
+          }
+        ],
+        "tags": [
+          "targetHttpsProxies"
         ]
       }
     },
