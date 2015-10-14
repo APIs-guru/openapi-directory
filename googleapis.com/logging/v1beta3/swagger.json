@@ -54,6 +54,23 @@
       },
       "type": "object"
     },
+    "ListLogMetricsResponse": {
+      "description": "Result returned from ListLogMetrics.",
+      "properties": {
+        "metrics": {
+          "description": "The list of metrics that was requested.",
+          "items": {
+            "$ref": "#/definitions/LogMetric"
+          },
+          "type": "array"
+        },
+        "nextPageToken": {
+          "description": "If there are more results, then `nextPageToken` is returned in the response. To get the next batch of entries, use the value of `nextPageToken` as `pageToken` in the next call of `ListLogMetrics`. If `nextPageToken` is empty, then there are no more results.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "ListLogServiceIndexesResponse": {
       "description": "Result returned from ListLogServiceIndexesRequest.",
       "properties": {
@@ -301,6 +318,24 @@
         },
         "time": {
           "description": "Time when log entry was made. May be inaccurate.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "LogMetric": {
+      "description": "Describes a collected, logs-based metric. The value of the metric is the number of log entries in the project that match the advanced logs filter in the `filter` field.",
+      "properties": {
+        "description": {
+          "description": "A description of this metric.",
+          "type": "string"
+        },
+        "filter": {
+          "description": "An [advanced logs filter](/logging/docs/view/advanced_filters). Example: `\"log:syslog AND metadata.severity>=ERROR\"`.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The client-assigned name for this metric, such as `\"severe_errors\"`. Metric names are limited to 1000 characters and can include only the following characters: `-A-Za-z0-9_.,+!*',()%/\\`. The slash character `/` implies a hierarchy of name pieces, and cannot be the first character of the name.",
           "type": "string"
         }
       },
@@ -1776,6 +1811,303 @@
             "description": "Successful response",
             "schema": {
               "$ref": "#/definitions/LogSink"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/logging.admin"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/v1beta3/projects/{projectsId}/metrics": {
+      "get": {
+        "description": "List log metrics associated with the specified project.",
+        "operationId": "logging.projects.metrics.list",
+        "parameters": [
+          {
+            "description": "Part of `projectName`. The resource name for the project whose metrics are wanted.",
+            "in": "path",
+            "name": "projectsId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "An opaque token, returned as `nextPageToken` by a prior `ListLogMetrics` operation. If `pageToken` is supplied, then the other fields of this request are ignored, and instead the previous `ListLogMetrics` operation is continued.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          },
+          {
+            "description": "The maximum number of `LogMetric` objects to return in one operation.",
+            "in": "query",
+            "name": "pageSize",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ListLogMetricsResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/cloud-platform.read-only",
+              "https://www.googleapis.com/auth/logging.admin",
+              "https://www.googleapis.com/auth/logging.read"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/access_token"
+        },
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/bearer_token"
+        },
+        {
+          "$ref": "#/parameters/callback"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/pp"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/parameters/uploadType"
+        },
+        {
+          "$ref": "#/parameters/$.xgafv"
+        }
+      ],
+      "post": {
+        "description": "Create the specified log metric resource.",
+        "operationId": "logging.projects.metrics.create",
+        "parameters": [
+          {
+            "description": "Part of `projectName`. The resource name of the project in which to create the metric.",
+            "in": "path",
+            "name": "projectsId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/LogMetric"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/LogMetric"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/logging.admin"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/v1beta3/projects/{projectsId}/metrics/{metricsId}": {
+      "delete": {
+        "description": "Deletes the specified log metric.",
+        "operationId": "logging.projects.metrics.delete",
+        "parameters": [
+          {
+            "description": "Part of `metricName`. The resource name of the metric to delete.",
+            "in": "path",
+            "name": "projectsId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Part of `metricName`. See documentation of `projectsId`.",
+            "in": "path",
+            "name": "metricsId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/logging.admin"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "get": {
+        "description": "Get the specified log metric resource.",
+        "operationId": "logging.projects.metrics.get",
+        "parameters": [
+          {
+            "description": "Part of `metricName`. The resource name of the desired metric.",
+            "in": "path",
+            "name": "projectsId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Part of `metricName`. See documentation of `projectsId`.",
+            "in": "path",
+            "name": "metricsId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/LogMetric"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/cloud-platform.read-only",
+              "https://www.googleapis.com/auth/logging.admin",
+              "https://www.googleapis.com/auth/logging.read"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/access_token"
+        },
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/bearer_token"
+        },
+        {
+          "$ref": "#/parameters/callback"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/pp"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/parameters/uploadType"
+        },
+        {
+          "$ref": "#/parameters/$.xgafv"
+        }
+      ],
+      "put": {
+        "description": "Create or update the specified log metric resource.",
+        "operationId": "logging.projects.metrics.update",
+        "parameters": [
+          {
+            "description": "Part of `metricName`. The resource name of the metric to update.",
+            "in": "path",
+            "name": "projectsId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Part of `metricName`. See documentation of `projectsId`.",
+            "in": "path",
+            "name": "metricsId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/LogMetric"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/LogMetric"
             }
           }
         },
