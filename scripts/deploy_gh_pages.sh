@@ -10,10 +10,10 @@ set -o pipefail
   export NODE_TLS_REJECT_UNAUTHORIZED=0
   ./scripts/collection.js cache https://apis-guru.github.io/api-models/
   git add ./cache
-  git commit -am 'Cache logo'
 
   ./scripts/collection.js api https://apis-guru.github.io/api-models/
   git add ./api/
+
   git commit -m 'Generate API'
 
   git push --force "https://${GH_TOKEN}@${GH_REF}" HEAD:gh-pages
