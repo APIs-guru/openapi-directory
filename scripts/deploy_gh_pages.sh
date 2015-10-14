@@ -6,13 +6,16 @@ set -o pipefail
   git config user.name "APIs-GuruBot"
   git config user.email "founders@APIs.guru"
 
+  ./script/collection.js csv
+  git add ./internal_api/list.csv
+
   #FIXME: remove
   export NODE_TLS_REJECT_UNAUTHORIZED=0
   ./scripts/collection.js cache https://apis-guru.github.io/api-models/
   git add ./cache
 
   ./scripts/collection.js api https://apis-guru.github.io/api-models/
-  git add ./api/
+  git add ./api/v1/list.json
 
   git commit -m 'Generate API'
 

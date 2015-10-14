@@ -76,6 +76,11 @@ program
   .action(generateAPI);
 
 program
+  .command('csv')
+  .description('generate CSV list')
+  .action(generateCSV);
+
+program
   .command('add')
   .description('add new spec')
   .option('-f, --fixup', 'try to fix spec')
@@ -141,7 +146,7 @@ function cacheResources(specRootUrl) {
   });
 }
 
-function generateAPI(specRootUrl) {
+function generateList() {
   var list = {};
 
   _.each(getSpecs(), function (swagger, filename) {
@@ -158,20 +163,10 @@ function generateAPI(specRootUrl) {
     if (_.isUndefined(list[id]))
       list[id] = { versions: {} };
 
-    var versionObj = list[id].versions[version] = {
-      swaggerUrl: specRootUrl + getSwaggerPath(swagger),
-      info: swagger.info,
-      added: gitLogDate('--follow --diff-filter=A -1', filename),
-      updated: gitLogDate('-1', filename)
-    };
-
-    if (swagger.externalDocs)
-      versionObj.externalDocs = swagger.externalDocs;
+    list[id].versions[version] = swagger;
   });
 
   _.each(list, function (api, id) {
-    //FIXME: here we don't track deleted version, not a problem for right now :)
-    api.added = _(api.versions).values().pluck('added').min();
     if (_.size(api.versions) === 1)
       api.preferred = _.keys(api.versions)[0];
     else {
@@ -186,10 +181,38 @@ function generateAPI(specRootUrl) {
     }
   });
 
+  return list;
+}
+
+function generateAPI(specRootUrl) {
+  var list = {};
+
+  _.each(generateList(), function (api, id) {
+    var dir = id.replace(/:/, '/');
+    list[id] = {
+      preferred: api.preferred,
+      versions: {}
+    };
+    _.each(api.versions, function (swagger, version) {
+      var filename = dir + '/' + version + '/swagger.json';
+
+      var versionObj = list[id].versions[version] = {
+        swaggerUrl: specRootUrl + getSwaggerPath(swagger),
+        info: swagger.info,
+        added: gitLogDate('--follow --diff-filter=A -1', filename),
+        updated: gitLogDate('-1', filename)
+      };
+
+      if (swagger.externalDocs)
+        versionObj.externalDocs = swagger.externalDocs;
+    });
+    //FIXME: here we don't track deleted version, not a problem for right now :)
+    list[id].added = _(list[id].versions).values().pluck('added').min();
+  });
+
   console.log('Generated list for ' + _.size(list) + ' API specs.');
 
   saveJson('api/v1/list.json', list);
-  generateCSV(list);
 }
 
 function generateCSV(list) {
@@ -210,7 +233,7 @@ function generateCSV(list) {
   ];
 
   var table = [header];
-  _.forEach(list, function (api, id) {
+  _.forEach(generateList(), function (api, id) {
     var apiData = api.versions[api.preferred];
     var row = [id];
     _.forEach(header, function (column) {
@@ -224,7 +247,7 @@ function generateCSV(list) {
 
   csvStringify(table, function (err, output) {
     assert(!err, 'Failed stringify: ' + err);
-    saveFile('api/v1/list.csv', output);
+    saveFile('internal_api/list.csv', output);
   });
 }
 
