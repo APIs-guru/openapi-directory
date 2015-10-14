@@ -6,7 +6,7 @@ set -o pipefail
   git config user.name "APIs-GuruBot"
   git config user.email "founders@APIs.guru"
 
-  ./script/collection.js csv
+  ./scripts/collection.js csv
   git add ./internal_api/list.csv
 
   #FIXME: remove
