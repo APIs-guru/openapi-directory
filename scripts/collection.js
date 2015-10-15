@@ -232,6 +232,7 @@ function generateCSV(list) {
     'info_contact_email',
     'info_license_name',
     'info_license_url',
+    'info_x-website',
     'info_x-logo_url',
     'info_x-logo_background',
     'info_x-apiClientRegistration_url',
