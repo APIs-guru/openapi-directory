@@ -234,6 +234,9 @@ function generateCSV(list) {
     'info_license_url',
     'info_x-logo_url',
     'info_x-logo_background',
+    'info_x-apiClientRegistration_url',
+    'info_x-pricing_type',
+    'info_x-pricing_url',
     'externalDocs_description',
     'externalDocs_url',
   ];
