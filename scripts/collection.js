@@ -81,6 +81,12 @@ program
   .action(generateCSV);
 
 program
+  .command('apisjson')
+  .description('generate APIs.json file')
+  .arguments('<SPEC_ROOT_URL>')
+  .action(generateAPIsJSON);
+
+program
   .command('add')
   .description('add new spec')
   .option('-f, --fixup', 'try to fix spec')
@@ -249,6 +255,42 @@ function generateCSV(list) {
     assert(!err, 'Failed stringify: ' + err);
     saveFile('internal_api/list.csv', output);
   });
+}
+
+function generateAPIsJSON(specRootUrl) {
+  var collection = {
+    name: 'APIs.guru',
+    description: 'Wikipedia for Web APIs',
+    image: 'https://apis-guru.github.io/api-models/branding/logo_horizontal.svg',
+    added: '2015-10-15',
+    modified: new Date().toISOString().substring(0, 10),
+    url: specRootUrl + 'apis.json',
+    specificationVersion: '0.15',
+    apis: [],
+    maintainers: [{
+      FN: 'APIs.guru',
+      email: 'founders@APIs.guru',
+      photo: 'https://apis-guru.github.io/api-models/branding/logo_horizontal.svg'
+    }]
+  };
+
+  _.each(getSpecs(), function (swagger) {
+    var info = swagger.info;
+    collection.apis.push({
+      name: info.title,
+      description: info.description,
+      image: info['x-logo'] && info['x-logo'].url,
+      humanUrl: swagger.externalDocs && swagger.externalDocs.url,
+      baseUrl: swagger.schemes[0] + '://' + swagger.host + swagger.basePath,
+      version: info.version,
+      properties: [{
+        type: 'Swagger',
+        url: specRootUrl + getSwaggerPath(swagger)
+      }]
+    });
+  });
+
+  saveJson('apis.json', collection);
 }
 
 function gitLogDate(options, filename) {
