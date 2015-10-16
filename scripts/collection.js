@@ -452,8 +452,11 @@ function updateGoogle() {
 
 function mergePatch(swagger, addPatch) {
   var path = getSwaggerPath(swagger, 'patch.json');
-  var patch = jsonPatch.merge(readJson(path), addPatch);
-  saveJson(path, patch);
+  var patch = readJson(path);
+  var newPatch = jsonPatch.merge(patch, addPatch);
+
+  if (!_.isEqual(patch, newPatch))
+    saveJson(path, newPatch);
 }
 
 function writeSpec(source, type, exPatch, callback) {
