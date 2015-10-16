@@ -332,7 +332,11 @@
           "type": "string"
         },
         "platformSource": {
-          "description": "The platform that is used to provide data for the custom dimension. Acceptable values are \"Floodlight\".",
+          "description": "The platform that is used to provide data for the custom dimension. Acceptable values are \"floodlight\".",
+          "type": "string"
+        },
+        "productReportPerspective": {
+          "description": "Provide different source for product items. Acceptable values are \"advertised\" and \"sold\".",
           "type": "string"
         },
         "savedColumnName": {

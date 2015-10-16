@@ -882,6 +882,11 @@
           "description": "Configuration specific to read replica instances. Indicates whether database flags for crash-safe replication are enabled.",
           "type": "boolean"
         },
+        "dataDiskSizeGb": {
+          "description": "The size of data disk for the performance instance, specified in GB. Setting this value for non-performance instances will result in an error.",
+          "format": "int64",
+          "type": "string"
+        },
         "databaseFlags": {
           "description": "The database flags passed to the instance at startup.",
           "items": {

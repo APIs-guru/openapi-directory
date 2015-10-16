@@ -170,6 +170,9 @@
           "format": "date-time",
           "type": "string"
         },
+        "MessageId": {
+          "type": "string"
+        },
         "Model": {
           "type": "string"
         },
@@ -182,7 +185,17 @@
         "Store": {
           "type": "string"
         },
+        "frameworkId": {
+          "format": "int32",
+          "type": "integer"
+        },
         "installerPackage": {
+          "type": "string"
+        },
+        "isLicensed": {
+          "type": "boolean"
+        },
+        "platform": {
           "type": "string"
         }
       },
@@ -193,10 +206,10 @@
       "type": "object"
     }
   },
-  "host": "ingress.quixxi.com:80",
+  "host": "ingress.quixxi.com",
   "info": {
     "description": "With the Quixxi Analytics API you will be able to have a high level picture of the progress of your application, interact with your users and much more.",
-    "title": "AnalyticsAPI",
+    "title": "IngressAPI",
     "version": "v1",
     "x-logo": {
       "backgroundColor": "#222222",
@@ -229,6 +242,28 @@
             }
           }
         ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "tags": [
+          "ErrorReport"
+        ]
+      }
+    },
+    "/api/Analytics/ErrorReport/testNotifi": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "operationId": "ErrorReport_testNotifi",
         "produces": [
           "application/json",
           "text/json"
@@ -373,6 +408,42 @@
         },
         "tags": [
           "User"
+        ]
+      }
+    },
+    "/api/device/register": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "deprecated": false,
+        "operationId": "device_register",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "devicemodel",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserModel"
+            }
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          }
+        },
+        "tags": [
+          "device"
         ]
       }
     }

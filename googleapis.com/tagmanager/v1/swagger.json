@@ -47,7 +47,7 @@
       "description": "Represents a predicate.",
       "properties": {
         "parameter": {
-          "description": "A list of named parameters (key/value), depending on the condition's type. Notes: \n- For binary operators, include parameters named arg0 and arg1 for specifying the left and right operands, respectively. \n- At this time, the left operand (arg0) must be a reference to a macro. \n- For case-insensitive Regex matching, include a boolean parameter named ignore_case that is set to true. If not specified or set to any other value, the matching will be case sensitive. \n- To negate an operator, include a boolean parameter named negate boolean parameter that is set to true.",
+          "description": "A list of named parameters (key/value), depending on the condition's type. Notes: \n- For binary operators, include parameters named arg0 and arg1 for specifying the left and right operands, respectively. \n- At this time, the left operand (arg0) must be a reference to a variable. \n- For case-insensitive Regex matching, include a boolean parameter named ignore_case that is set to true. If not specified or set to any other value, the matching will be case sensitive. \n- To negate an operator, include a boolean parameter named negate boolean parameter that is set to true.",
           "items": {
             "$ref": "#/definitions/Parameter"
           },
@@ -620,7 +620,7 @@
           "type": "array"
         },
         "type": {
-          "description": "The parameter type. Valid values are: \n- boolean: The value represents a boolean, represented as 'true' or 'false' \n- integer: The value represents a 64-bit signed integer value, in base 10 \n- list: A list of parameters should be specified \n- map: A map of parameters should be specified \n- template: The value represents any text; this can include macro references (even macro references that might return non-string types)",
+          "description": "The parameter type. Valid values are: \n- boolean: The value represents a boolean, represented as 'true' or 'false' \n- integer: The value represents a 64-bit signed integer value, in base 10 \n- list: A list of parameters should be specified \n- map: A map of parameters should be specified \n- template: The value represents any text; this can include variable references (even variable references that might return non-string types)",
           "enum": [
             "boolean",
             "integer",
@@ -631,7 +631,7 @@
           "type": "string"
         },
         "value": {
-          "description": "A parameter's value (may contain macro references such as \"{{myMacro}}\") as appropriate to the specified type.",
+          "description": "A parameter's value (may contain variable references such as \"{{myVariable}}\") as appropriate to the specified type.",
           "type": "string"
         }
       },
@@ -3177,7 +3177,7 @@
         }
       ],
       "post": {
-        "description": "Restores a Container Version. This will overwrite the container's current configuration (including its macros, rules and tags). The operation will not have any effect on the version that is being served (i.e. the published version).",
+        "description": "Restores a Container Version. This will overwrite the container's current configuration (including its variables, triggers and tags). The operation will not have any effect on the version that is being served (i.e. the published version).",
         "operationId": "tagmanager.accounts.containers.versions.restore",
         "parameters": [
           {
