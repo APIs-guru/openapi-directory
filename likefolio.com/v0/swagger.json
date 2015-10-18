@@ -270,47 +270,6 @@
         ]
       }
     },
-    "/v0/companies/allStatistics.json": {
-      "get": {
-        "operationId": "GET--version-companies-allStatistics---format-",
-        "parameters": [
-          {
-            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
-            "in": "query",
-            "name": "apiKey",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Single date and time to query data. Must be in ISO8601 format.",
-            "format": "date-time",
-            "in": "query",
-            "name": "date",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Specifies how small the period to fetch is. Posible values are: 'hourly' and 'daily'",
-            "in": "query",
-            "name": "resolution",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Returns all statistics for all companies on a single day.",
-        "tags": [
-          "companies"
-        ]
-      }
-    },
     "/v0/companies/cei.json": {
       "get": {
         "operationId": "GET--version-companies-cei---format-",
@@ -521,55 +480,6 @@
         ]
       }
     },
-    "/v0/companies/indexes.json": {
-      "get": {
-        "operationId": "GET--version-companies-indexes---format-",
-        "parameters": [
-          {
-            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
-            "in": "query",
-            "name": "apiKey",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "ID number of a company",
-            "in": "query",
-            "name": "id",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "Start of the period. Must be in ISO8601 format",
-            "format": "date-time",
-            "in": "query",
-            "name": "startDate",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "End of period. Must be in ISO8601 format",
-            "format": "date-time",
-            "in": "query",
-            "name": "endDate",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Returns a collection of indexes by day for the given company.",
-        "tags": [
-          "companies"
-        ]
-      }
-    },
     "/v0/companies/mentionQty.json": {
       "get": {
         "operationId": "GET--version-companies-mentionQty---format-",
@@ -679,7 +589,7 @@
             "type": "string"
           },
           {
-            "description": "Number of days/hours to get daya from. Period is calculated backwards from now. For example, 1day means today. 7days means past 7 days and so on. The YTD value is the period from the beginning of the current year to now, different from 1year, which means the past 365 days.",
+            "description": "Number of days/hours to get daya from. Period is calculated backwards from now. For example, 1day means today. 7days means past 7 days and so on. The YTD value is the period from the beginning of the current year to now, different from 1year, which means the past 365 days. Posible values: [\"1hour\", \"6hours\", \"12hours\", \"24hours\", \"72hours\", \"120hours\", \"168hours\", \"240hours\", \"336hours\", \"1day\", \"3days\", \"5days\", \"7days\", \"10days\", \"14days\", \"1month\", \"3months\", \"6months\", \"9months\", \"YTD\", \"1year\", \"2years\", \"3years\"]",
             "in": "query",
             "name": "period",
             "required": false,
