@@ -82,8 +82,10 @@
       "type": "object"
     },
     "RegisterAssetsRequest": {
+      "description": "Specify request containing the list of asset ids you want to register.",
       "properties": {
         "asset_ids": {
+          "description": "Specifies the list of asset ids you want to register.",
           "items": {
             "type": "string"
           },
@@ -1303,11 +1305,29 @@
       "description": "Specifies the request information for the Batch Usages endpoint.",
       "properties": {
         "asset_usages": {
-          "description": "Identifies the list of asset usage combinations.",
+          "description": "Identifies the list of asset id, usage count and date of usage combinations to record.",
           "items": {
             "$ref": "#/definitions/asset_usage"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "report_usage_batch_response": {
+      "description": "Specifies the response from the Batch Usages endpoint.",
+      "properties": {
+        "invalid_assets": {
+          "description": "Identifies a list of asset ids submitted that did not match known Getty asset ids.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "total_asset_usages_processed": {
+          "description": "Specifies the number of asset usage records that were successfully recorded.",
+          "format": "int32",
+          "type": "integer"
         }
       },
       "type": "object"
@@ -1770,7 +1790,7 @@
             "type": "string"
           },
           {
-            "description": "JSON model containing comma-separated list of asset ids to register with Getty.  Limited to 500 asset ids per call.",
+            "description": "Specify JSON containing an array of asset ids to register.  Limited to 500 asset ids per call.",
             "in": "body",
             "name": "request",
             "required": true,
@@ -1791,7 +1811,7 @@
             }
           }
         },
-        "summary": "Registers a list of assets that a customer has stored in their system.",
+        "summary": "Register a list of customer assets.",
         "tags": [
           "AssetRegistration"
         ]
@@ -6168,7 +6188,7 @@
           "200": {
             "description": "No response was specified",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/report_usage_batch_response"
             }
           }
         },
