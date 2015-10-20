@@ -1,0 +1,164 @@
+{
+  "definitions": {
+    "Shout": {
+      "properties": {
+        "Handle": {
+          "type": "string"
+        },
+        "Keywords": {
+          "type": "string"
+        },
+        "MP3Url": {
+          "type": "string"
+        },
+        "Score": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ShoutDateTime": {
+          "type": "string"
+        },
+        "Sid": {
+          "type": "string"
+        },
+        "State": {
+          "type": "string"
+        },
+        "TimeAgo": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Shouts[Shout]": {
+      "properties": {
+        "ct": {
+          "type": "string"
+        },
+        "recs": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "results": {
+          "items": {
+            "$ref": "#/definitions/Shout"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "externalDocs": {
+    "url": "http://api.funshouts.com/"
+  },
+  "host": "api.funshouts.com:80",
+  "info": {
+    "description": "FunShouts allows you to leave a simple voice mail message (a 'shout') by calling the hotline.",
+    "title": "FunShoutsAPI",
+    "version": "v1",
+    "x-apiClientRegistration": {
+      "url": "http://api.funshouts.com/"
+    },
+    "x-logo": {
+      "url": "http://www.funshouts.com/images/FunShoutsWebLogo.jpg"
+    },
+    "x-origin": {
+      "format": "swagger",
+      "url": "http://api.funshouts.com/swagger/docs/v1",
+      "version": "2.0"
+    },
+    "x-providerName": "funshouts.com"
+  },
+  "paths": {
+    "/api/shouts": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Shouts[Shout]"
+            }
+          }
+        },
+        "tags": [
+          "Shouts"
+        ]
+      }
+    },
+    "/api/shouts/top": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Shouts[Shout]"
+            }
+          }
+        },
+        "tags": [
+          "Shouts"
+        ]
+      }
+    },
+    "/api/shouts/{Handle}": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Handle",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Shouts[Shout]"
+            }
+          }
+        },
+        "tags": [
+          "Shouts"
+        ]
+      }
+    }
+  },
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "apiKey": {
+      "description": "API Key Authentication",
+      "in": "query",
+      "name": "apiKey",
+      "type": "apiKey"
+    }
+  },
+  "swagger": "2.0"
+}
