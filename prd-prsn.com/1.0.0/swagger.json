@@ -1,5 +1,5 @@
 {
-  "basePath": "/api/",
+  "basePath": "/",
   "definitions": {
     "DeliveryBean": {
       "properties": {
@@ -130,11 +130,11 @@
     "x-providerName": "prd-prsn.com"
   },
   "paths": {
-    "/institution": {
+    "/api/institution": {
       "get": {
         "operationId": "getInstitutions",
         "produces": [
-          "application/json"
+          "application/json;charset=UTF-8"
         ],
         "responses": {
           "200": {
@@ -152,7 +152,7 @@
         ]
       }
     },
-    "/institution/{uniqueId}": {
+    "/api/institution/{uniqueId}": {
       "get": {
         "operationId": "getInstitution",
         "parameters": [
@@ -166,7 +166,7 @@
           }
         ],
         "produces": [
-          "application/json"
+          "application/json;charset=UTF-8"
         ],
         "responses": {
           "200": {
@@ -182,11 +182,11 @@
         ]
       }
     },
-    "/version/": {
+    "/api/version/": {
       "get": {
         "operationId": "version",
         "produces": [
-          "application/json"
+          "application/json;charset=UTF-8"
         ],
         "responses": {
           "200": {
@@ -196,6 +196,23 @@
         "summary": "Get the server version",
         "tags": [
           "version"
+        ]
+      }
+    },
+    "/health/": {
+      "get": {
+        "operationId": "health",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Get health",
+        "tags": [
+          "health"
         ]
       }
     }
@@ -212,6 +229,10 @@
     {
       "description": "Version",
       "name": "version"
+    },
+    {
+      "description": "Health check",
+      "name": "health"
     }
   ]
 }

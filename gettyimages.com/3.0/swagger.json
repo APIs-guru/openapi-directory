@@ -9,6 +9,19 @@
       },
       "type": "object"
     },
+    "DownloadData": {
+      "properties": {
+        "download_notes": {
+          "description": "Associated note saved by customer for downloaded image.",
+          "type": "string"
+        },
+        "project_code": {
+          "description": "Associated project code saved by customer for downloaded image.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "KeyValuePair[String,String]": {
       "properties": {
         "Key": {
@@ -43,7 +56,7 @@
           "type": "string"
         },
         "license_model": {
-          "description": "Identifies a licensing model for the image. Possible values are: royaltyfree, rightsmanaged",
+          "description": "Identifies the licensing model for the image. Possible values are: royaltyfree, rightsmanaged",
           "type": "string"
         },
         "order_id": {
@@ -304,15 +317,18 @@
     "creative_image_search_item": {
       "properties": {
         "allowed_use": {
-          "$ref": "#/definitions/allowed_use"
+          "$ref": "#/definitions/allowed_use",
+          "description": "Lists the allowed terms of use for an image"
         },
         "alternative_ids": {
+          "description": "Lists all of the alternative ids for the asset.",
           "items": {
             "$ref": "#/definitions/KeyValuePair[String,String]"
           },
           "type": "array"
         },
         "artist": {
+          "description": "Identifies the artist for the asset.",
           "type": "string"
         },
         "asset_family": {
@@ -320,82 +336,98 @@
           "type": "string"
         },
         "call_for_image": {
+          "description": "Indicates whether a customer needs to call Getty Images in order to license this image",
           "type": "boolean"
         },
         "caption": {
+          "description": "Gives a brief description of the image",
           "type": "string"
         },
         "collection_code": {
+          "description": "Code that identifies the collection to which the image belongs",
           "type": "string"
         },
         "collection_id": {
+          "description": "Numerical id that identifies the collection to which the image belongs",
           "format": "int32",
           "type": "integer"
         },
         "collection_name": {
+          "description": "Name of the collection to which the image belongs",
           "type": "string"
         },
         "color_type": {
-          "description": "Specifies if it is color or black and white. Possible values are color, black_and_white, and null",
+          "description": "Specifies whether the image is color or black and white. Possible values are color, black_and_white, and null",
           "type": "string"
         },
         "copyright": {
+          "description": "Gives the copyright of the image",
           "type": "string"
         },
         "date_created": {
+          "description": "Indicates the date the image was created, in ISO 8601 format (e.g., 1999-12-31)",
           "format": "date-time",
           "type": "string"
         },
         "display_sizes": {
+          "description": "Lists the display sizes available for this image",
           "items": {
             "$ref": "#/definitions/display_size"
           },
           "type": "array"
         },
         "graphical_style": {
+          "description": "Identifies the graphical style for the image. Possible values are Photography, Fine Art, and Illustration",
           "type": "string"
         },
         "id": {
+          "description": "Unique identifier for the image",
           "type": "string"
         },
         "keywords": {
+          "description": "Lists the keywords that are associated with this image",
           "items": {
             "$ref": "#/definitions/keywords"
           },
           "type": "array"
         },
         "largest_downloads": {
+          "description": "Specifies the URI that can be used to download the largest size for the asset",
           "items": {
             "$ref": "#/definitions/download"
           },
           "type": "array"
         },
         "license_model": {
-          "description": "Identifies a licensing model for the image. Possible values are: royaltyfree, rightsmanaged",
+          "description": "Identifies the licensing model for the image. Possible values are: royaltyfree, rightsmanaged",
           "type": "string"
         },
         "max_dimensions": {
-          "$ref": "#/definitions/max_dimensions"
+          "$ref": "#/definitions/max_dimensions",
+          "description": "Specifies the maximum height and width of any size for this image"
         },
         "orientation": {
           "description": "Indicates orientation of the image. Possible values are: Horizontal, PanoramicHorizontal, PanoramicVertical, Square, Vertical, and null",
           "type": "string"
         },
         "prestige": {
+          "description": "Indicates that the image is in the curated Prestige collection",
           "type": "boolean"
         },
         "product_types": {
-          "description": "License agreements for the image. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription",
+          "description": "List product types for the image. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "quality_rank": {
+          "description": "Specifies the quality ranking of the image",
           "format": "int32",
           "type": "integer"
         },
         "referral_destinations": {
+          "description": "Lists the referral destinations for Getty Images assets",
           "items": {
             "$ref": "#/definitions/referral_destination"
           },
@@ -428,6 +460,7 @@
     "creative_video_search_results": {
       "properties": {
         "result_count": {
+          "description": "Indicates the count of matching videos returned.",
           "format": "int32",
           "type": "integer"
         },
@@ -454,10 +487,16 @@
     "download": {
       "properties": {
         "date_downloaded": {
+          "description": "Specifies the date the asset was downloaded, in ISO 8601 format (e.g., 1999-12-31).",
           "format": "date-time",
           "type": "string"
         },
+        "download_details": {
+          "$ref": "#/definitions/DownloadData",
+          "description": "Customer stored details associated with this download."
+        },
         "id": {
+          "description": "Specifies the unique identifier of the asset.",
           "type": "string"
         },
         "product_type": {
@@ -465,6 +504,7 @@
           "type": "string"
         },
         "thumb_uri": {
+          "description": "Indicates the thumbnail download URI.",
           "type": "string"
         }
       },
@@ -536,12 +576,14 @@
     "downloads_response": {
       "properties": {
         "downloads": {
+          "description": "Provides a collection of download items.",
           "items": {
             "$ref": "#/definitions/download"
           },
           "type": "array"
         },
         "result_count": {
+          "description": "Indicates the count of matching assets returned.",
           "format": "int32",
           "type": "integer"
         }
@@ -551,15 +593,18 @@
     "editorial_image_search_item": {
       "properties": {
         "allowed_use": {
-          "$ref": "#/definitions/allowed_use"
+          "$ref": "#/definitions/allowed_use",
+          "description": "Lists the allowed terms of use for an image"
         },
         "alternative_ids": {
+          "description": "Lists all of the alternative ids for the asset.",
           "items": {
             "$ref": "#/definitions/KeyValuePair[String,String]"
           },
           "type": "array"
         },
         "artist": {
+          "description": "Identifies the artist for the asset.",
           "type": "string"
         },
         "asset_family": {
@@ -567,46 +612,55 @@
           "type": "string"
         },
         "call_for_image": {
+          "description": "Indicates whether a customer needs to call Getty Images in order to license this image",
           "type": "boolean"
         },
         "caption": {
+          "description": "Gives a brief description of the image",
           "type": "string"
         },
         "collection_code": {
+          "description": "Code that identifies the collection to which the image belongs",
           "type": "string"
         },
         "collection_id": {
+          "description": "Numerical id that identifies the collection to which the image belongs",
           "format": "int32",
           "type": "integer"
         },
         "collection_name": {
+          "description": "Name of the collection to which the image belongs",
           "type": "string"
         },
         "color_type": {
-          "description": "Specifies if it is color or black and white. Possible values are color, black_and_white, and null",
+          "description": "Specifies whether the image is color or black and white. Possible values are color, black_and_white, and null",
           "type": "string"
         },
         "copyright": {
+          "description": "Gives the copyright of the image",
           "type": "string"
         },
         "date_created": {
+          "description": "Indicates the date the image was created, in ISO 8601 format (e.g., 1999-12-31)",
           "format": "date-time",
           "type": "string"
         },
         "display_sizes": {
+          "description": "Lists the display sizes available for this image",
           "items": {
             "$ref": "#/definitions/display_size"
           },
           "type": "array"
         },
         "editorial_segments": {
-          "description": "List of editorial segments. Possible values are archival, entertainment, news, publicity, royalty, sport",
+          "description": "List of editorial segments for this asset. Possible values are archival, entertainment, news, publicity, royalty, sport",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "event_ids": {
+          "description": "Lists the events that are relevant for this image",
           "items": {
             "format": "int32",
             "type": "integer"
@@ -614,52 +668,60 @@
           "type": "array"
         },
         "graphical_style": {
+          "description": "Identifies the graphical style for the image. Possible values are Photography, Fine Art, and Illustration",
           "type": "string"
         },
         "id": {
+          "description": "Unique identifier for the image",
           "type": "string"
         },
         "keywords": {
+          "description": "Lists the keywords that are associated with this image",
           "items": {
             "$ref": "#/definitions/keywords"
           },
           "type": "array"
         },
         "largest_downloads": {
+          "description": "Specifies the URI that can be used to download the largest size for the asset",
           "items": {
             "$ref": "#/definitions/download"
           },
           "type": "array"
         },
         "license_model": {
-          "description": "Identifies a licensing model for the image. Possible values are: royaltyfree, rightsmanaged",
+          "description": "Identifies the licensing model for the image. Possible values are: royaltyfree, rightsmanaged",
           "type": "string"
         },
         "max_dimensions": {
-          "$ref": "#/definitions/max_dimensions"
+          "$ref": "#/definitions/max_dimensions",
+          "description": "Specifies the maximum height and width of any size for this image"
         },
         "orientation": {
           "description": "Indicates orientation of the image. Possible values are: Horizontal, PanoramicHorizontal, PanoramicVertical, Square, Vertical, and null",
           "type": "string"
         },
         "people": {
+          "description": "List of people appearing in the image",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "product_types": {
-          "description": "License agreements for the image. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription",
+          "description": "List product types for the image. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "quality_rank": {
+          "description": "Specifies the quality ranking of the image",
           "format": "int32",
           "type": "integer"
         },
         "referral_destinations": {
+          "description": "Lists the referral destinations for Getty Images assets",
           "items": {
             "$ref": "#/definitions/referral_destination"
           },
@@ -692,6 +754,7 @@
     "editorial_video_search_results": {
       "properties": {
         "result_count": {
+          "description": "Indicates the count of matching videos returned.",
           "format": "int32",
           "type": "integer"
         },
@@ -712,7 +775,7 @@
           "type": "integer"
         },
         "editorial_segments": {
-          "description": "List of editorial segments. Possible values are archival, entertainment, news, publicity, royalty, sport",
+          "description": "List of editorial segments for this asset. Possible values are archival, entertainment, news, publicity, royalty, sport",
           "items": {
             "type": "string"
           },
@@ -803,21 +866,21 @@
       "properties": {
         "allowed_use": {
           "$ref": "#/definitions/allowed_use",
-          "description": "Identifies how customers are allowed to use the image."
+          "description": "Specifies how customers are allowed to use the image."
         },
         "alternative_ids": {
-          "description": "All the alternative ids for asset id.",
+          "description": "Specifies list all alternative ids for asset id.",
           "items": {
             "$ref": "#/definitions/KeyValuePair[String,String]"
           },
           "type": "array"
         },
         "artist": {
-          "description": "Identifies the creator.",
+          "description": "Specifies image creator.",
           "type": "string"
         },
         "artist_title": {
-          "description": "Identifies the title given by the artist.",
+          "description": "Specifies the title given by the artist.",
           "type": "string"
         },
         "asset_family": {
@@ -825,72 +888,72 @@
           "type": "string"
         },
         "call_for_image": {
-          "description": "Notifies customers if they need to call Getty Images in order to license this image",
+          "description": "Specifies if customers need to call Getty Images in order to license this image",
           "type": "boolean"
         },
         "caption": {
-          "description": "Describes the image",
+          "description": "Describes the image in detail.",
           "type": "string"
         },
         "city": {
-          "description": "Indicates the city where the image was created.",
+          "description": "Specifies the city where the image was created.",
           "type": "string"
         },
         "collection_code": {
-          "description": "Identifies the code of the collection to which the image belongs.",
+          "description": "Specifies the code of the collection to which the image belongs.",
           "type": "string"
         },
         "collection_id": {
-          "description": "Identifies the id of the collection to which the image belongs.",
+          "description": "Specifies the id of the collection to which the image belongs.",
           "format": "int32",
           "type": "integer"
         },
         "collection_name": {
-          "description": "Identifies the name of the collection to which the image belongs.",
+          "description": "Specifies the name of the collection to which the image belongs.",
           "type": "string"
         },
         "color_type": {
-          "description": "Specifies if it is color or black and white. Possible values are color, black_and_white, and null",
+          "description": "Specifies whether the image is color or black and white. Possible values are color, black_and_white, and null",
           "type": "string"
         },
         "copyright": {
-          "description": "Indicates copyright of the image.",
+          "description": "Specifies copyright of the image.",
           "type": "string"
         },
         "country": {
-          "description": "Indicates the country where the image was created.",
+          "description": "Specifies the country where the image was created.",
           "type": "string"
         },
         "credit_line": {
-          "description": "Indicates the credit line of the image.",
+          "description": "Specifies the credit line of the image.",
           "type": "string"
         },
         "date_created": {
-          "description": "Indicates the date the image was created, in ISO 8601 format (e.g., 1999-12-31).",
+          "description": "Specifies the date the image was created, in ISO 8601 format (e.g., 1999-12-31).",
           "format": "date-time",
           "type": "string"
         },
         "date_submitted": {
-          "description": "Identifies the date the image was submitted, in ISO 8601 format (e.g., 1999-12-31).",
+          "description": "Specifies the date the image was submitted, in ISO 8601 format (e.g., 1999-12-31).",
           "format": "date-time",
           "type": "string"
         },
         "display_sizes": {
-          "description": "Identifies the sizes available for display.",
+          "description": "Specifies the sizes available for display.",
           "items": {
             "$ref": "#/definitions/display_size"
           },
           "type": "array"
         },
         "download_sizes": {
-          "description": "Identifies the sizes available for download.",
+          "description": "Lists the sizes available for download.",
           "items": {
             "$ref": "#/definitions/download_size"
           },
           "type": "array"
         },
         "editorial_segments": {
-          "description": "List of editorial segments. Possible values are archival, entertainment, news, publicity, royalty, sport",
+          "description": "List of editorial segments for this asset. Possible values are archival, entertainment, news, publicity, royalty, sport",
           "items": {
             "type": "string"
           },
@@ -905,22 +968,22 @@
           "type": "array"
         },
         "graphical_style": {
-          "description": "Identifies the graphical style for the image.",
+          "description": "Specifies the graphical style for the image.",
           "type": "string"
         },
         "id": {
-          "description": "Identifies the image",
+          "description": "Specifies the unique identifier of the asset.",
           "type": "string"
         },
         "keywords": {
-          "description": "Contains a keyword entry for each keyword related to the image.",
+          "description": "List of keyword entries associated with image/asset.",
           "items": {
             "$ref": "#/definitions/keywords"
           },
           "type": "array"
         },
         "largest_downloads": {
-          "description": "Indicates the authorization for the largest download size.",
+          "description": "Specifies the largest authorized download size for the current token context.",
           "items": {
             "$ref": "#/definitions/download_size"
           },
@@ -931,7 +994,7 @@
           "type": "string"
         },
         "links": {
-          "description": "Provides links to explore related content, such as similiar images and images from the same artist.",
+          "description": "List of links to explore related content, such as similar images and images from the same artist.",
           "items": {
             "$ref": "#/definitions/link"
           },
@@ -939,7 +1002,7 @@
         },
         "max_dimensions": {
           "$ref": "#/definitions/max_dimensions",
-          "description": "Indicates the dimensions of the largest available size."
+          "description": "Specifies the dimensions of the largest available size."
         },
         "orientation": {
           "description": "Indicates orientation of the image. Possible values are: Horizontal, PanoramicHorizontal, PanoramicVertical, Square, Vertical, and null",
@@ -953,11 +1016,11 @@
           "type": "array"
         },
         "prestige": {
-          "description": "Identifies Prestige curated imagery.",
+          "description": "Specifies if imagery is Prestige curated.",
           "type": "boolean"
         },
         "product_types": {
-          "description": "License agreements for the image. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription",
+          "description": "List product types for the image. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription",
           "items": {
             "type": "string"
           },
@@ -969,22 +1032,22 @@
           "type": "integer"
         },
         "referral_destinations": {
-          "description": "The referral destinations for Getty Images properties",
+          "description": "Specifies a URI to refer for this Getty Images property",
           "items": {
             "$ref": "#/definitions/referral_destination"
           },
           "type": "array"
         },
         "state_province": {
-          "description": "Indicates the state or province where the image was created.",
+          "description": "Specifies the state or province where the image was created.",
           "type": "string"
         },
         "title": {
-          "description": "Indicates the image title.",
+          "description": "Specifies the title given by the artist.",
           "type": "string"
         },
         "uri_oembed": {
-          "description": "Identifies a URI that can be used to get oEmbed data for the image, if embeddable.",
+          "description": "GET this URI to retrieve the display image, if embeddable.",
           "type": "string"
         }
       },
@@ -993,15 +1056,18 @@
     "image_search_item": {
       "properties": {
         "allowed_use": {
-          "$ref": "#/definitions/allowed_use"
+          "$ref": "#/definitions/allowed_use",
+          "description": "Specifies how customers are allowed to use the image."
         },
         "alternative_ids": {
+          "description": "Lists all of the alternative ids for the asset",
           "items": {
             "$ref": "#/definitions/KeyValuePair[String,String]"
           },
           "type": "array"
         },
         "artist": {
+          "description": "Specifies image creator.",
           "type": "string"
         },
         "asset_family": {
@@ -1009,46 +1075,55 @@
           "type": "string"
         },
         "call_for_image": {
+          "description": "Indicates whether a customer needs to call Getty Images in order to license this image",
           "type": "boolean"
         },
         "caption": {
+          "description": "Describes the image in detail.",
           "type": "string"
         },
         "collection_code": {
+          "description": "Specifies the code of the collection to which the image belongs.",
           "type": "string"
         },
         "collection_id": {
+          "description": "Specifies the id of the collection to which the image belongs.",
           "format": "int32",
           "type": "integer"
         },
         "collection_name": {
+          "description": "Specifies the name of the collection to which the image belongs.",
           "type": "string"
         },
         "color_type": {
-          "description": "Specifies if it is color or black and white. Possible values are color, black_and_white, and null",
+          "description": "Specifies whether the image is color or black and white. Possible values are color, black_and_white, and null",
           "type": "string"
         },
         "copyright": {
+          "description": "Specifies copyright of the image.",
           "type": "string"
         },
         "date_created": {
+          "description": "Specifies the date the image was created, in ISO 8601 format (e.g., 1999-12-31).",
           "format": "date-time",
           "type": "string"
         },
         "display_sizes": {
+          "description": "Specifies the sizes available for display.",
           "items": {
             "$ref": "#/definitions/display_size"
           },
           "type": "array"
         },
         "editorial_segments": {
-          "description": "List of editorial segments. Possible values are archival, entertainment, news, publicity, royalty, sport",
+          "description": "List of editorial segments for this asset. Possible values are archival, entertainment, news, publicity, royalty, sport",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "event_ids": {
+          "description": "Lists the events that are relevant for this image",
           "items": {
             "format": "int32",
             "type": "integer"
@@ -1056,56 +1131,64 @@
           "type": "array"
         },
         "graphical_style": {
+          "description": "Identifies the graphical style for the image. Possible values are Photography, Fine Art, and Illustration",
           "type": "string"
         },
         "id": {
+          "description": "Unique identifier for the image",
           "type": "string"
         },
         "keywords": {
+          "description": "Lists the keywords that are associated with this image",
           "items": {
             "$ref": "#/definitions/keywords"
           },
           "type": "array"
         },
         "largest_downloads": {
-          "description": "Returns hypermedia download links to the largest available size.",
+          "description": "Specifies the largest authorized download size for the current token context.",
           "items": {
             "$ref": "#/definitions/download"
           },
           "type": "array"
         },
         "license_model": {
-          "description": "Identifies a licensing model for the image. Possible values are: royaltyfree, rightsmanaged",
+          "description": "Identifies the licensing model for the image. Possible values are: royaltyfree, rightsmanaged",
           "type": "string"
         },
         "max_dimensions": {
-          "$ref": "#/definitions/max_dimensions"
+          "$ref": "#/definitions/max_dimensions",
+          "description": "Specifies the maximum height and width of any size for this image"
         },
         "orientation": {
           "description": "Indicates orientation of the image. Possible values are: Horizontal, PanoramicHorizontal, PanoramicVertical, Square, Vertical, and null",
           "type": "string"
         },
         "people": {
+          "description": "List of people appearing in the image",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "prestige": {
+          "description": "Indicates that the image is in the curated Prestige collection",
           "type": "boolean"
         },
         "product_types": {
-          "description": "License agreements for the image. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription",
+          "description": "List product types for the image. Possible values are: premiumaccess, easyaccess, editorialsubscription, imagepack, royaltyfreesubscription",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "quality_rank": {
+          "description": "Specifies the quality ranking of the image",
           "format": "int32",
           "type": "integer"
         },
         "referral_destinations": {
+          "description": "Lists the referral destinations for Getty Images assets",
           "items": {
             "$ref": "#/definitions/referral_destination"
           },
@@ -1155,16 +1238,20 @@
     "keywords": {
       "properties": {
         "keyword_id": {
+          "description": "Identifies the keyword",
           "type": "string"
         },
         "relevance": {
+          "description": "Relevancy of the keyword to the asset. 0-5 or null, 5 being most relevant.",
           "format": "int32",
           "type": "integer"
         },
         "text": {
+          "description": "Provides localized text of the keyword",
           "type": "string"
         },
         "type": {
+          "description": "Specifies the keyword type",
           "type": "string"
         }
       },
@@ -1173,9 +1260,11 @@
     "link": {
       "properties": {
         "rel": {
+          "description": "Specifies relationship type for associated URI.",
           "type": "string"
         },
         "uri": {
+          "description": "GET this URI to retrieve a list of related assets.",
           "type": "string"
         }
       },
@@ -1205,12 +1294,12 @@
     "max_dimensions": {
       "properties": {
         "height": {
-          "description": "Indicates the height in pixels.",
+          "description": "Specifies the height in pixels.",
           "format": "int32",
           "type": "integer"
         },
         "width": {
-          "description": "Indicates the width in pixels.",
+          "description": "Specifies the width in pixels.",
           "format": "int32",
           "type": "integer"
         }
@@ -1291,11 +1380,11 @@
     "referral_destination": {
       "properties": {
         "site_name": {
-          "description": "TBD.",
+          "description": "Specifies asset domain name.",
           "type": "string"
         },
         "uri": {
-          "description": "Identifies a URI that can be used to get oEmbed data for the image, if embeddable.",
+          "description": "Indicates the resource URI.",
           "type": "string"
         }
       },
@@ -1368,7 +1457,7 @@
           "type": "string"
         },
         "color_type": {
-          "description": "Specifies if it is color or black and white. Possible values are color, black_and_white, and null",
+          "description": "Specifies whether the image is color or black and white. Possible values are color, black_and_white, and null",
           "type": "string"
         },
         "copyright": {
@@ -1395,7 +1484,7 @@
           "type": "array"
         },
         "editorial_segments": {
-          "description": "List of editorial segments. Possible values are archival, entertainment, news, publicity, royalty, sport",
+          "description": "List of editorial segments for this asset. Possible values are archival, entertainment, news, publicity, royalty, sport",
           "items": {
             "type": "string"
           },
@@ -1410,7 +1499,7 @@
           "type": "string"
         },
         "keywords": {
-          "description": "Contains a keyword entry for each keyword related to the image.",
+          "description": "List of keyword entries associated with image/asset.",
           "items": {
             "$ref": "#/definitions/keywords"
           },
@@ -1436,10 +1525,11 @@
           "type": "array"
         },
         "shot_speed": {
-          "description": "The speed the video was shot. Possible values are: real_time, slow_motion, time_lapse, and null",
+          "description": "The speed the at which the video was shot. Possible values are: real_time, slow_motion, time_lapse, and null",
           "type": "string"
         },
         "source": {
+          "description": "Specifies the editorial source of this video",
           "type": "string"
         },
         "title": {
@@ -1452,9 +1542,11 @@
     "video_search_item": {
       "properties": {
         "allowed_use": {
-          "$ref": "#/definitions/allowed_use"
+          "$ref": "#/definitions/allowed_use",
+          "description": "Specifies how customers are allowed to use the video."
         },
         "artist": {
+          "description": "Specifies video creator.",
           "type": "string"
         },
         "asset_family": {
@@ -1462,33 +1554,41 @@
           "type": "string"
         },
         "caption": {
+          "description": "Describes the video in detail.",
           "type": "string"
         },
         "clip_length": {
+          "description": "Specifies Length of the film clip (Example: \"00:00:12:08\").",
           "type": "string"
         },
         "collection_code": {
+          "description": "Specifies the code of the collection to which the video belongs.",
           "type": "string"
         },
         "collection_id": {
+          "description": "Specifies the id of the collection to which the video belongs.",
           "format": "int32",
           "type": "integer"
         },
         "collection_name": {
+          "description": "Specifies the name of the collection to which the video belongs.",
           "type": "string"
         },
         "color_type": {
-          "description": "Specifies if it is color or black and white. Possible values are color, black_and_white, and null",
+          "description": "Specifies whether the image is color or black and white. Possible values are color, black_and_white, and null",
           "type": "string"
         },
         "copyright": {
+          "description": "Specifies copyright of the video.",
           "type": "string"
         },
         "date_created": {
+          "description": "Specifies the date the video was created, in ISO 8601 format (e.g., 1999-12-31).",
           "format": "date-time",
           "type": "string"
         },
         "display_sizes": {
+          "description": "Specifies the sizes available for display.",
           "items": {
             "$ref": "#/definitions/display_size"
           },
@@ -1499,15 +1599,18 @@
           "type": "string"
         },
         "id": {
+          "description": "Specifies the unique identifier of the asset.",
           "type": "string"
         },
         "keywords": {
+          "description": "List of keyword entries associated with image/asset.",
           "items": {
             "$ref": "#/definitions/keywords"
           },
           "type": "array"
         },
         "largest_downloads": {
+          "description": "Specifies the largest authorized download size for the current token context.",
           "items": {
             "$ref": "#/definitions/download"
           },
@@ -1518,9 +1621,11 @@
           "type": "string"
         },
         "mastered_to": {
+          "description": "Specifies mastered to media.",
           "type": "string"
         },
         "originally_shot_on": {
+          "description": "Specifies film stock originally shot on.",
           "type": "string"
         },
         "product_types": {
@@ -1531,13 +1636,15 @@
           "type": "array"
         },
         "shot_speed": {
-          "description": "The speed the video was shot. Possible values are: real_time, slow_motion, time_lapse, and null",
+          "description": "The speed the at which the video was shot. Possible values are: real_time, slow_motion, time_lapse, and null",
           "type": "string"
         },
         "source": {
+          "description": "Specifies editorial source.",
           "type": "string"
         },
         "title": {
+          "description": "Specifies the title given by the artist.",
           "type": "string"
         }
       },
@@ -1546,6 +1653,7 @@
     "video_search_results": {
       "properties": {
         "result_count": {
+          "description": "Indicates the count of matching videos returned.",
           "format": "int32",
           "type": "integer"
         },
@@ -2153,13 +2261,19 @@
         ],
         "responses": {
           "200": {
-            "description": "No response was specified",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/downloads_response"
             }
           },
           "400": {
             "description": "InvalidRequest"
+          },
+          "401": {
+            "description": "AuthorizationTokenRequired"
+          },
+          "403": {
+            "description": "Account Inactive"
           }
         },
         "summary": "Returns information about a customer's downloaded assets.",
@@ -3516,7 +3630,7 @@
             "type": "array"
           },
           {
-            "description": "Use to include or exclude collections from search.",
+            "description": "Provides searching based on specified collection(s).",
             "enum": [
               "include",
               "exclude"
@@ -3643,14 +3757,14 @@
             "type": "array"
           },
           {
-            "description": "Exclude images tagged as containing nudity. The default is false.",
+            "description": "Excludes images containing nudity. The default is false.",
             "in": "query",
             "name": "exclude_nudity",
             "required": false,
             "type": "boolean"
           },
           {
-            "description": "Restrict the set of fields that are returned. Specify using a comma separated list of fields. If no fields are selected, the summary_set of fields are returned.",
+            "description": "Specifies fields to return. Defaults to 'summary_set'.",
             "enum": [
               "allowed_use",
               "alternative_ids",
@@ -3785,7 +3899,7 @@
             "type": "array"
           },
           {
-            "description": "Return only images allowing a specific licensing model.",
+            "description": "Specifies the image licensing model(s).",
             "enum": [
               "rightsmanaged",
               "royaltyfree"
@@ -4193,14 +4307,14 @@
             "type": "array"
           },
           {
-            "description": "Exclude images tagged as containing nudity. The default is false.",
+            "description": "Excludes images containing nudity. The default is false.",
             "in": "query",
             "name": "exclude_nudity",
             "required": false,
             "type": "boolean"
           },
           {
-            "description": "Restrict the set of fields that are returned. Specify using a comma separated list of fields. If no fields are selected, the summary_set of fields are returned.",
+            "description": "Specifies fields to return. Defaults to 'summary_set'.",
             "enum": [
               "allowed_use",
               "alternative_ids",
@@ -4329,7 +4443,7 @@
             "type": "array"
           },
           {
-            "description": "Return only images allowing a specific licensing model.",
+            "description": "Specifies the image licensing model(s).",
             "enum": [
               "rightsmanaged",
               "royaltyfree"
@@ -4790,14 +4904,14 @@
             "type": "array"
           },
           {
-            "description": "Exclude images tagged as containing nudity. The default is false.",
+            "description": "Excludes images containing nudity. The default is false.",
             "in": "query",
             "name": "exclude_nudity",
             "required": false,
             "type": "boolean"
           },
           {
-            "description": "Restrict the set of fields that are returned. Specify using a comma separated list of fields. If no fields are selected, the summary_set of fields are returned.",
+            "description": "Specifies fields to return. Defaults to 'summary_set'.",
             "enum": [
               "allowed_use",
               "alternative_ids",
@@ -5318,7 +5432,7 @@
             "type": "array"
           },
           {
-            "description": "Specifies the image licensing model(s).",
+            "description": "Specifies the video licensing model(s).",
             "enum": [
               "rightsready",
               "royaltyfree"
@@ -5459,7 +5573,7 @@
             "type": "string"
           },
           {
-            "description": "Allows for filtering based on age of individuals in a video",
+            "description": "Provides filtering according to the age of individuals in a video.",
             "enum": [
               "newborn",
               "baby",
@@ -5557,7 +5671,7 @@
             "type": "array"
           },
           {
-            "description": "Allows filtering by collection code.",
+            "description": "Provides filtering by collection code.",
             "in": "query",
             "items": {
               "type": "string"
@@ -5567,7 +5681,7 @@
             "type": "array"
           },
           {
-            "description": "Allows searching based on included or excluded collections.",
+            "description": "Provides searching based on specified collection(s).",
             "enum": [
               "include",
               "exclude"
@@ -5578,14 +5692,14 @@
             "type": "string"
           },
           {
-            "description": "Exclude images tagged as containing nudity. The default is false.",
+            "description": "Excludes images containing nudity. The default is false.",
             "in": "query",
             "name": "exclude_nudity",
             "required": false,
             "type": "boolean"
           },
           {
-            "description": "Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.",
+            "description": "Specifies fields to return. Defaults to 'summary_set'.",
             "enum": [
               "allowed_use",
               "artist",
@@ -5655,7 +5769,7 @@
             "type": "array"
           },
           {
-            "description": "Allows filtering by the digital video format available on a film asset, i.e. Standard Definition, High Definition, or 4k Ultra High Definition",
+            "description": "Filters according to the digital video format available on a film asset.",
             "enum": [
               "sd",
               "hd",
@@ -5678,7 +5792,7 @@
             "type": "array"
           },
           {
-            "description": "Identifies a licensing model for the image.",
+            "description": "Specifies the video licensing model(s).",
             "enum": [
               "rightsready",
               "royaltyfree"
@@ -5807,7 +5921,7 @@
             "type": "string"
           },
           {
-            "description": "Allows for filtering based on age of individuals in a video",
+            "description": "Provides filtering according to the age of individuals in a video.",
             "enum": [
               "newborn",
               "baby",
@@ -5905,7 +6019,7 @@
             "type": "array"
           },
           {
-            "description": "Allows filtering by collection code.",
+            "description": "Provides filtering by collection code.",
             "in": "query",
             "items": {
               "type": "string"
@@ -5915,7 +6029,7 @@
             "type": "array"
           },
           {
-            "description": "Allows searching based on included or excluded collections.",
+            "description": "Provides searching based on specified collection(s).",
             "enum": [
               "include",
               "exclude"
@@ -5936,14 +6050,14 @@
             "type": "array"
           },
           {
-            "description": "Exclude images tagged as containing nudity. The default is false.",
+            "description": "Excludes images containing nudity. The default is false.",
             "in": "query",
             "name": "exclude_nudity",
             "required": false,
             "type": "boolean"
           },
           {
-            "description": "Comma separated list of fields. Allows restricting which fields are returned. If no fields are selected, the summary_set of fields are returned.",
+            "description": "Specifies fields to return. Defaults to 'summary_set'.",
             "enum": [
               "allowed_use",
               "artist",
@@ -6015,7 +6129,7 @@
             "type": "array"
           },
           {
-            "description": "Allows filtering by the digital video format available on a film asset, i.e. Standard Definition, High Definition, or 4k Ultra High Definition",
+            "description": "Filters according to the digital video format available on a film asset.",
             "enum": [
               "sd",
               "hd",
@@ -6451,7 +6565,7 @@
         ],
         "responses": {
           "200": {
-            "description": "No response was specified",
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/video_detail"
             }
