@@ -1,0 +1,1953 @@
+{
+  "basePath": "/api/v1",
+  "definitions": {
+    "AppAccessData": {
+      "properties": {
+        "customerAppId": {
+          "description": "App id to check if user is allowed to access product",
+          "type": "string"
+        },
+        "customerId": {
+          "description": "Customer Id.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Customer's description for this app",
+          "type": "string"
+        },
+        "productId": {
+          "description": "Id of the product represented by this app id",
+          "type": "string"
+        }
+      }
+    },
+    "AppAccessList": {
+      "properties": {
+        "apps": {
+          "description": "Array of app access data details",
+          "items": {
+            "$ref": "#/definitions/AppAccessData"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "AppAccessRequest": {
+      "properties": {
+        "accessToken": {
+          "description": "Access token requested before",
+          "type": "string"
+        },
+        "companyId": {
+          "description": "Unique Id of the company, it can be retrieved from the company administration area",
+          "type": "string"
+        },
+        "secret": {
+          "description": "Company secret, it can be retrieved from the company administration area",
+          "type": "string"
+        },
+        "testMode": {
+          "description": "Flag indicating if test mode should be used",
+          "type": "boolean"
+        }
+      }
+    },
+    "AppAccessToken": {
+      "properties": {
+        "customerId": {
+          "description": "Customer Id.",
+          "type": "string"
+        },
+        "token": {
+          "description": "Token needed to request the customer's app id",
+          "type": "string"
+        }
+      }
+    },
+    "AppAccessTokenRequest": {
+      "properties": {
+        "companyId": {
+          "description": "Unique Id of the company, it can be retrieved from the company administration area",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description for the user to identify app later",
+          "type": "string"
+        },
+        "productId": {
+          "description": "Product access should be granted to",
+          "type": "string"
+        },
+        "secret": {
+          "description": "Company secret, it can be retrieved from the company administration area",
+          "type": "string"
+        },
+        "testMode": {
+          "description": "Flag indicating if test mode should be used",
+          "type": "boolean"
+        }
+      }
+    },
+    "Category": {
+      "properties": {
+        "currency": {
+          "description": "Currency as ISO 4217, e.g. EUR",
+          "type": "string"
+        },
+        "id": {
+          "description": "Id of the category",
+          "type": "string"
+        },
+        "price": {
+          "description": "Price of the product in format ##.##",
+          "format": "double",
+          "type": "number"
+        },
+        "taxes": {
+          "description": "Tax in percent as number, e.g. 19.6",
+          "type": "number"
+        },
+        "title": {
+          "description": "Title of the category",
+          "type": "string"
+        },
+        "validityTime": {
+          "description": "Validity time in days an article is accessible after the article is bought (0 is forever)",
+          "type": "string"
+        }
+      }
+    },
+    "CategoryItem": {
+      "properties": {
+        "categoryId": {
+          "description": "Category Id",
+          "type": "string"
+        },
+        "title": {
+          "description": "Category title",
+          "type": "string"
+        }
+      }
+    },
+    "CategoryList": {
+      "properties": {
+        "elements": {
+          "description": "Array of category items",
+          "items": {
+            "$ref": "#/definitions/CategoryItem"
+          },
+          "type": "array"
+        },
+        "lastId": {
+          "description": "Id of last element in page",
+          "type": "string"
+        },
+        "size": {
+          "description": "Page size",
+          "format": "int32",
+          "type": "integer"
+        },
+        "totalElements": {
+          "description": "Amount of total elements",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "CompanyUserItem": {
+      "properties": {
+        "additionalAddressInfo": {
+          "description": "the user's additional address info",
+          "type": "string"
+        },
+        "agreementState": {
+          "description": "the user's newsletter agreement state",
+          "type": "string"
+        },
+        "birthday": {
+          "description": "the user's birth date",
+          "type": "string"
+        },
+        "city": {
+          "description": "the user's city",
+          "type": "string"
+        },
+        "country": {
+          "description": "the user's country",
+          "type": "string"
+        },
+        "customerId": {
+          "description": "The user id",
+          "type": "string"
+        },
+        "email": {
+          "description": "the email address",
+          "type": "string"
+        },
+        "firstName": {
+          "description": "the user's first name",
+          "type": "string"
+        },
+        "gender": {
+          "description": "the user's gender",
+          "type": "string"
+        },
+        "language": {
+          "description": "the user's language",
+          "type": "string"
+        },
+        "mobileNumber": {
+          "description": "the user's mobile phone number",
+          "type": "string"
+        },
+        "name": {
+          "description": "the user's last name",
+          "type": "string"
+        },
+        "postCode": {
+          "description": "the user's postal code address",
+          "type": "string"
+        },
+        "state": {
+          "description": "the user's state address",
+          "type": "string"
+        },
+        "street": {
+          "description": "the user's street address",
+          "type": "string"
+        },
+        "userState": {
+          "description": "the user's account status",
+          "type": "string"
+        },
+        "username": {
+          "description": "the user login",
+          "type": "string"
+        }
+      }
+    },
+    "CompanyUserList": {
+      "properties": {
+        "elements": {
+          "description": "Array of company user items",
+          "items": {
+            "$ref": "#/definitions/CompanyUserItem"
+          },
+          "type": "array"
+        },
+        "page": {
+          "description": "Page number",
+          "format": "int32",
+          "type": "integer"
+        },
+        "size": {
+          "description": "Page size",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "CreateMobileSecretRequest": {
+      "properties": {
+        "companyId": {
+          "description": "Unique Id of the company, it can be retrieved from the company administration area",
+          "type": "string"
+        },
+        "secret": {
+          "description": "Company secret, it can be retrieved from the company administration area",
+          "type": "string"
+        },
+        "size": {
+          "description": "Size of the company secret to generate",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "CustomerProduct": {
+      "properties": {
+        "buyDate": {
+          "description": "Date the product was bought",
+          "type": "string"
+        },
+        "productId": {
+          "description": "Id of the product",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title of the product",
+          "type": "string"
+        }
+      }
+    },
+    "CustomerProductsList": {
+      "properties": {
+        "singleProducts": {
+          "description": "Array of customer products",
+          "items": {
+            "$ref": "#/definitions/CustomerProduct"
+          },
+          "type": "array"
+        },
+        "subscription": {
+          "description": "Array of customer subscriptions",
+          "items": {
+            "$ref": "#/definitions/CustomerSubscription"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "CustomerSubscription": {
+      "properties": {
+        "buyDate": {
+          "description": "Date the subscription was bought",
+          "type": "string"
+        },
+        "endDate": {
+          "description": "Date the subscription will end",
+          "type": "string"
+        },
+        "productId": {
+          "description": "Id of the subscription",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title of the subscription",
+          "type": "string"
+        }
+      }
+    },
+    "Image": {
+      "properties": {
+        "altText": {
+          "description": "Alternative text for this image to be shown to the user if image is not available",
+          "type": "string"
+        },
+        "description": {
+          "description": "Image description text",
+          "type": "string"
+        },
+        "url": {
+          "description": "Url to get this image",
+          "type": "string"
+        }
+      }
+    },
+    "MobileSecretData": {
+      "properties": {
+        "email": {
+          "description": "Email address of the user",
+          "type": "string"
+        },
+        "mobileAppSecret": {
+          "description": "Mobile app secret for the user",
+          "type": "string"
+        }
+      }
+    },
+    "MobileSecretVerificationResult": {
+      "properties": {
+        "customerId": {
+          "description": "Id of the customer",
+          "type": "string"
+        }
+      }
+    },
+    "OAuthError": {},
+    "PaywallState": {
+      "properties": {
+        "enabled": {
+          "description": "Indicates if the paywall is enabled or not",
+          "type": "boolean"
+        }
+      }
+    },
+    "Product": {
+      "properties": {
+        "accountingPeriod": {
+          "description": "Counting period selected for subscription in month",
+          "type": "string"
+        },
+        "actionPeriodName": {
+          "description": "Name of the action period if one is defined",
+          "type": "string"
+        },
+        "actionPeriodPrice": {
+          "description": "Price of the action period if one is defined",
+          "format": "double",
+          "type": "number"
+        },
+        "actionPeriodTerm": {
+          "description": "Term in months of the action period if one is defined",
+          "type": "string"
+        },
+        "autoRenewal": {
+          "description": "Flag indicating if the subscription is auto renewed",
+          "type": "boolean"
+        },
+        "cancellationPeriod": {
+          "description": "Cancellation period for the subscription in days",
+          "type": "string"
+        },
+        "categoryId": {
+          "description": "Category Id product belongs to",
+          "type": "string"
+        },
+        "choosePrice": {
+          "description": "Flag indicating if the product price can be freely selected by the user",
+          "type": "boolean"
+        },
+        "companyId": {
+          "description": "Unique Id of the company can be retrieved from the company dashboard",
+          "type": "string"
+        },
+        "currency": {
+          "description": "Currency as ISO 4217, e.g. EUR",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the product",
+          "type": "string"
+        },
+        "id": {
+          "description": "Id of the product",
+          "type": "string"
+        },
+        "images": {
+          "description": "Image information related to the product",
+          "items": {
+            "$ref": "#/definitions/Image"
+          },
+          "type": "array"
+        },
+        "price": {
+          "description": "Price of the product in format ##.##",
+          "format": "double",
+          "type": "number"
+        },
+        "secret": {
+          "description": "Company secret can be retrieved from the company administration area",
+          "type": "string"
+        },
+        "shippingCosts": {
+          "description": "Shipping costs of the product",
+          "format": "double",
+          "type": "number"
+        },
+        "subscription": {
+          "description": "Flag indicating if product represents a subscription",
+          "type": "boolean"
+        },
+        "taxes": {
+          "description": "Tax in percent as a number, e.g. 19.6",
+          "format": "double",
+          "type": "number"
+        },
+        "term": {
+          "description": "Subscription term in month",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title of the product",
+          "type": "string"
+        },
+        "url": {
+          "description": "Product url",
+          "type": "string"
+        },
+        "validityTime": {
+          "description": "Validity time in days a product is accessible after the product is bought (0 is forever)",
+          "format": "int32",
+          "type": "integer"
+        },
+        "videoPrequelTime": {
+          "description": "Video prequel time if one is defined",
+          "format": "int32",
+          "type": "number"
+        }
+      }
+    },
+    "ProductItem": {
+      "properties": {
+        "description": {
+          "description": "Product description",
+          "type": "string"
+        },
+        "productId": {
+          "description": "Product Id",
+          "type": "string"
+        },
+        "title": {
+          "description": "Product title",
+          "type": "string"
+        }
+      }
+    },
+    "ProductList": {
+      "properties": {
+        "elements": {
+          "description": "Array of product items",
+          "items": {
+            "$ref": "#/definitions/ProductItem"
+          },
+          "type": "array"
+        },
+        "lastId": {
+          "description": "Id of last element in page",
+          "type": "string"
+        },
+        "size": {
+          "description": "Page size",
+          "format": "int32",
+          "type": "integer"
+        },
+        "totalElements": {
+          "description": "Amount of total elements",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "SubscriptionItem": {
+      "properties": {
+        "currency": {
+          "description": "Currency of the amounts",
+          "type": "string"
+        },
+        "customerId": {
+          "description": "Customer Id",
+          "type": "string"
+        },
+        "paymentMethod": {
+          "description": "The payment method",
+          "type": "string"
+        },
+        "price": {
+          "description": "Price of the subscription",
+          "format": "double",
+          "type": "number"
+        },
+        "productId": {
+          "description": "Product Id",
+          "type": "string"
+        },
+        "startDate": {
+          "description": "The subscription start date",
+          "type": "string"
+        },
+        "term": {
+          "description": "The subscription term",
+          "format": "int32",
+          "type": "number"
+        },
+        "title": {
+          "description": "Title",
+          "type": "string"
+        }
+      }
+    },
+    "SubscriptionList": {
+      "properties": {
+        "elements": {
+          "description": "Array of subscription items",
+          "items": {
+            "$ref": "#/definitions/SubscriptionItem"
+          },
+          "type": "array"
+        },
+        "page": {
+          "description": "Page number",
+          "format": "int32",
+          "type": "integer"
+        },
+        "size": {
+          "description": "Page size",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "TransactionItem": {
+      "properties": {
+        "currency": {
+          "description": "Currency of the amounts",
+          "type": "string"
+        },
+        "customerId": {
+          "description": "Customer Id",
+          "type": "string"
+        },
+        "paymentMethod": {
+          "description": "The payment method",
+          "type": "string"
+        },
+        "price": {
+          "description": "Price of the transaction",
+          "format": "double",
+          "type": "number"
+        },
+        "productId": {
+          "description": "Product Id",
+          "type": "string"
+        },
+        "shippingCosts": {
+          "description": "Amount of the shipping costs",
+          "format": "double",
+          "type": "number"
+        },
+        "shippingCostsTaxesAmount": {
+          "description": "Amount of the shipping costs taxes amount",
+          "format": "double",
+          "type": "number"
+        },
+        "shippingCostsTaxesPercentage": {
+          "description": "Amount of the shipping costs taxes percentage",
+          "format": "double",
+          "type": "number"
+        },
+        "status": {
+          "description": "The transaction status",
+          "type": "string"
+        },
+        "taxesAmount": {
+          "description": "Amount of the tax",
+          "format": "double",
+          "type": "number"
+        },
+        "taxesCountry": {
+          "description": "The country of the tax",
+          "type": "string"
+        },
+        "taxesPercentage": {
+          "description": "Tax percentage of the transaction",
+          "format": "double",
+          "type": "number"
+        },
+        "title": {
+          "description": "Title",
+          "type": "string"
+        },
+        "transactionDate": {
+          "description": "The transaction date",
+          "type": "string"
+        },
+        "transactionId": {
+          "description": "Transaction Id",
+          "type": "string"
+        }
+      }
+    },
+    "TransactionList": {
+      "properties": {
+        "elements": {
+          "description": "Array of transaction items",
+          "items": {
+            "$ref": "#/definitions/TransactionItem"
+          },
+          "type": "array"
+        },
+        "page": {
+          "description": "Page number",
+          "format": "int32",
+          "type": "integer"
+        },
+        "size": {
+          "description": "Page size",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "User": {
+      "properties": {
+        "email": {
+          "description": "Email of the user",
+          "type": "string"
+        },
+        "userId": {
+          "description": "Id of the user",
+          "type": "string"
+        },
+        "username": {
+          "description": "Username/nickname of the user",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "url": "https://developer.plenigo.com/"
+  },
+  "host": "api.plenigo.com",
+  "info": {
+    "description": "This is the API Documentation for the public plenigo server interfaces",
+    "title": "Plenigo API Documentation",
+    "version": "1.0.0",
+    "x-logo": {
+      "url": "https://static.plenigo.com/assets/logo.png"
+    },
+    "x-origin": {
+      "format": "swagger",
+      "url": "https://api.plenigo.com/swagger.json",
+      "version": "2.0"
+    },
+    "x-providerName": "plenigo.com"
+  },
+  "paths": {
+    "/access/app/token/{customerId}": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns the app access token and the customer id necessary for requesting an customer app id",
+        "operationId": "requestAppAccessToken",
+        "parameters": [
+          {
+            "description": "Unique Id of the customer to get products for",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "App access token request data",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppAccessTokenRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Correct parameters",
+            "schema": {
+              "$ref": "#/definitions/AppAccessToken"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "412": {
+            "description": "If product is not owned by the user"
+          },
+          "423": {
+            "description": "If the user has reached the limit of parallel app accesses"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Request an app access token",
+        "tags": [
+          "app management"
+        ]
+      }
+    },
+    "/access/app/{customerId}": {
+      "get": {
+        "description": "Returns all customer apps",
+        "operationId": "getCustomerApps",
+        "parameters": [
+          {
+            "description": "Unique Id of the customer to get products for",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Unique Id of the company, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Company secret, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "secret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Flag indicating if test mode should be used",
+            "in": "query",
+            "name": "testMode",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "List with all customer apps",
+            "schema": {
+              "$ref": "#/definitions/AppAccessList"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Get all customer apps",
+        "tags": [
+          "app management"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns the customer app id",
+        "operationId": "requestCustomerAppId",
+        "parameters": [
+          {
+            "description": "Unique Id of the customer to get products for",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "App access request data",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AppAccessRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "App access data",
+            "schema": {
+              "$ref": "#/definitions/AppAccessData"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "403": {
+            "description": "If access token is not valid"
+          },
+          "423": {
+            "description": "If the user has reached the limit of parallel app accesses"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Request a customer app id",
+        "tags": [
+          "app management"
+        ]
+      }
+    },
+    "/access/app/{customerId}/{customerAppId}": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Deletes a customer app id to allow access with another app",
+        "operationId": "deleteCustomerApp",
+        "parameters": [
+          {
+            "description": "Unique Id of the customer to delete app id for",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Unique Id of the company, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Company secret, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "secret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Flag indicating if test mode should be used",
+            "in": "query",
+            "name": "testMode",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "description": "Customer app id that shall grant access",
+            "in": "path",
+            "name": "customerAppId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "App id successfully deleted"
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Deletes a customer app id",
+        "tags": [
+          "app management"
+        ]
+      }
+    },
+    "/access/app/{customerId}/{productId}/{customerAppId}": {
+      "get": {
+        "description": "Verify if customer app is having access to a specific product",
+        "operationId": "verifyCustomerAppAccess",
+        "parameters": [
+          {
+            "description": "Unique Id of the customer to verify app access for",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Unique Id of the company, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Company secret, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "secret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Flag indicating if test mode should be used",
+            "in": "query",
+            "name": "testMode",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "description": "Product id user access should be tested for",
+            "in": "path",
+            "name": "productId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Customer app id that shall grant access",
+            "in": "path",
+            "name": "customerAppId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "Access is granted"
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "403": {
+            "description": "Access is not allowed"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Verify customer app access",
+        "tags": [
+          "app management"
+        ]
+      }
+    },
+    "/access/mobileSecret/verify": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "operationId": "verifyMobileSecret",
+        "parameters": [
+          {
+            "description": "Unique Id of the company, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Company secret, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "secret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Email of the user",
+            "in": "query",
+            "name": "email",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Mobile secret entered by user",
+            "in": "query",
+            "name": "mobileSecret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Mobile secret is correct",
+            "schema": {
+              "$ref": "#/definitions/MobileSecretVerificationResult"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "403": {
+            "description": "Mobile secret is not correct"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Test if user mobile secret is correct.",
+        "tags": [
+          "mobile secret"
+        ]
+      }
+    },
+    "/access/mobileSecret/{customerId}": {
+      "delete": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Deletes a mobile secret from the customer",
+        "operationId": "deleteMobileSecret",
+        "parameters": [
+          {
+            "description": "Unique Id of the customer to delete mobile secret for",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Unique Id of the company, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Company secret, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "Mobile secret successfully deleted"
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Deletes the mobile secret for a customer",
+        "tags": [
+          "mobile secret"
+        ]
+      },
+      "get": {
+        "description": "Returns customer mobile secret",
+        "operationId": "getMobileSecret",
+        "parameters": [
+          {
+            "description": "Unique Id of the customer to get mobile secret for",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Unique Id of the company, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Company secret, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Mobile secret",
+            "schema": {
+              "$ref": "#/definitions/MobileSecretData"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "404": {
+            "description": "No mobile secret created yet"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Get customer mobile secret",
+        "tags": [
+          "mobile secret"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Returns the mobile secret",
+        "operationId": "createMobileSecret",
+        "parameters": [
+          {
+            "description": "Unique Id of the customer to create mobile secret for",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "App access request data",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateMobileSecretRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Mobile secret",
+            "schema": {
+              "$ref": "#/definitions/MobileSecretData"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Create or recreate mobile secret",
+        "tags": [
+          "mobile secret"
+        ]
+      }
+    },
+    "/categories": {
+      "get": {
+        "description": "Returns a list of categories of the specified company",
+        "operationId": "getCategories",
+        "parameters": [
+          {
+            "description": "Unique Id of the company, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Company secret can be retrieved from the company administration area.",
+            "in": "query",
+            "name": "secret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 10,
+            "description": "Size of the page - must be between 10 and 100",
+            "format": "int32",
+            "in": "query",
+            "maximum": 100,
+            "minimum": 10,
+            "name": "size",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Categories queried",
+            "schema": {
+              "$ref": "#/definitions/CategoryList"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          }
+        },
+        "summary": "Query categories",
+        "tags": [
+          "category"
+        ]
+      }
+    },
+    "/category/{categoryId}": {
+      "get": {
+        "description": "Returns general category information",
+        "operationId": "getCategory",
+        "parameters": [
+          {
+            "description": "Unique Id of the company, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Company secret, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "secret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Id of category that needs to be fetched",
+            "in": "path",
+            "name": "categoryId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Category found",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "404": {
+            "description": "If product Id is not valid"
+          }
+        },
+        "summary": "Find category by Id",
+        "tags": [
+          "category"
+        ]
+      }
+    },
+    "/company/users": {
+      "get": {
+        "description": "Returns a list of users of the specified company",
+        "operationId": "getCompanyUsers",
+        "parameters": [
+          {
+            "description": "Unique Id of the company, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Company secret can be retrieved from the company administration area.",
+            "in": "query",
+            "name": "secret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 10,
+            "description": "Size of the page - must be between 10 and 100",
+            "format": "int32",
+            "in": "query",
+            "maximum": 100,
+            "minimum": 10,
+            "name": "size",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "default": 0,
+            "description": "Number of the page",
+            "format": "int32",
+            "in": "query",
+            "minimum": 0,
+            "name": "page",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Company Users queried",
+            "schema": {
+              "$ref": "#/definitions/CompanyUserList"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Query company users",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/paywall/state": {
+      "get": {
+        "description": "Check if the paywall has been enabled",
+        "operationId": "isPaywallEnabled",
+        "parameters": [
+          {
+            "description": "Unique Id of the company, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Company secret, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "secret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "If request could be handled",
+            "schema": {
+              "$ref": "#/definitions/PaywallState"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          }
+        },
+        "summary": "Check Paywall Status",
+        "tags": [
+          "paywall"
+        ]
+      }
+    },
+    "/product/{productId}": {
+      "get": {
+        "description": "Returns general product information for a plenigo managed product",
+        "operationId": "getProduct",
+        "parameters": [
+          {
+            "description": "Unique Id of the company, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Company secret, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "secret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Id of product that needs to be fetched",
+            "in": "path",
+            "name": "productId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Product found",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "404": {
+            "description": "If product Id is not valid"
+          }
+        },
+        "summary": "Find product by Id",
+        "tags": [
+          "product"
+        ]
+      }
+    },
+    "/products": {
+      "get": {
+        "description": "Returns a list of products of the specified company",
+        "operationId": "getProducts",
+        "parameters": [
+          {
+            "description": "Unique Id of the company, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Company secret can be retrieved from the company administration area.",
+            "in": "query",
+            "name": "secret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": 10,
+            "description": "Size of the page - must be between 10 and 100",
+            "format": "int32",
+            "in": "query",
+            "maximum": 100,
+            "minimum": 10,
+            "name": "size",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Products queried",
+            "schema": {
+              "$ref": "#/definitions/ProductList"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          }
+        },
+        "summary": "Query products",
+        "tags": [
+          "product"
+        ]
+      }
+    },
+    "/subscriptions/search": {
+      "get": {
+        "description": "Returns a list of subscriptions of the specified company",
+        "operationId": "getSubscriptions",
+        "parameters": [
+          {
+            "description": "Unique Id of the company, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Company secret can be retrieved from the company administration area.",
+            "in": "query",
+            "name": "secret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Start date range of the subscription, must be in the following format: YYYY-MM-DD (Date range must not exceed 6 months).",
+            "format": "date",
+            "in": "query",
+            "name": "startDate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "End date range of the subscription, must be in the following format: YYYY-MM-DD (Date range must not exceed 6 months).",
+            "format": "date",
+            "in": "query",
+            "name": "endDate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Payment method used to pay the subscription.",
+            "enum": [
+              "BANK_ACCOUNT",
+              "CREDIT_CARD",
+              "PAYPAL",
+              "BILLING",
+              "ZERO",
+              "SOFORT",
+              "POST_FINANCE"
+            ],
+            "in": "query",
+            "name": "paymentMethod",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "default": 10,
+            "description": "Size of the page - must be between 10 and 100",
+            "format": "int32",
+            "in": "query",
+            "maximum": 100,
+            "minimum": 10,
+            "name": "size",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "default": 0,
+            "description": "Number of the page",
+            "format": "int32",
+            "in": "query",
+            "minimum": 0,
+            "name": "page",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Subscriptions queried",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionList"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Query Subscriptions",
+        "tags": [
+          "subscription"
+        ]
+      }
+    },
+    "/transactions/search": {
+      "get": {
+        "description": "Returns a list of transactions of the specified company",
+        "operationId": "getTransactions",
+        "parameters": [
+          {
+            "description": "Unique Id of the company, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Company secret can be retrieved from the company administration area.",
+            "in": "query",
+            "name": "secret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Start date range of the transaction, must be in the following format: YYYY-MM-DD (Date range must not exceed 6 months).",
+            "format": "date",
+            "in": "query",
+            "name": "startDate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "End date range of the transaction, must be in the following format: YYYY-MM-DD (Date range must not exceed 6 months).",
+            "format": "date",
+            "in": "query",
+            "name": "endDate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Payment method used to pay the transaction.",
+            "enum": [
+              "BANK_ACCOUNT",
+              "CREDIT_CARD",
+              "PAYPAL",
+              "BILLING",
+              "ZERO",
+              "SOFORT",
+              "POST_FINANCE"
+            ],
+            "in": "query",
+            "name": "paymentMethod",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Status of the transaction.",
+            "enum": [
+              "BOOKED",
+              "DONE",
+              "CANCELED",
+              "CHARGEBACK"
+            ],
+            "in": "query",
+            "name": "transactionStatus",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "default": 10,
+            "description": "Size of the page - must be between 10 and 100",
+            "format": "int32",
+            "in": "query",
+            "maximum": 100,
+            "minimum": 10,
+            "name": "size",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "default": 0,
+            "description": "Number of the page",
+            "format": "int32",
+            "in": "query",
+            "minimum": 0,
+            "name": "page",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Transactions queried",
+            "schema": {
+              "$ref": "#/definitions/TransactionList"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Query transactions",
+        "tags": [
+          "transaction"
+        ]
+      }
+    },
+    "/user/product": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "operationId": "hasBoughtProduct",
+        "parameters": [
+          {
+            "description": "Unique Id of the company, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Company secret, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "secret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Id of the customer to test if product is currently paid",
+            "in": "query",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Id of the product that wants to be queried",
+            "in": "query",
+            "name": "productId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Flag indicating if this product was bought in test mode",
+            "in": "query",
+            "name": "testMode",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Access is allowed"
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "403": {
+            "description": "Customer is not allowed to access the product"
+          }
+        },
+        "summary": "Find out if a product is accessible for a specified customer",
+        "tags": [
+          "product"
+        ]
+      }
+    },
+    "/user/profile": {
+      "get": {
+        "description": "Returns the user profile information that belongs to the token",
+        "operationId": "getUserProfile",
+        "parameters": [
+          {
+            "description": "Unique Id of the company, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Company secret, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "secret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "OAuth2 access token",
+            "in": "query",
+            "name": "token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Correct parameters",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect",
+            "schema": {
+              "$ref": "#/definitions/OAuthError"
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Get user profile information",
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "/user/{customerId}/products": {
+      "get": {
+        "description": "Returns the products the user has bought only including active subscriptions",
+        "operationId": "getProductsBought",
+        "parameters": [
+          {
+            "description": "Unique Id of the customer to get products for",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Unique Id of the company, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Company secret, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "secret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Flag indicating if products from test mode should be returned",
+            "in": "query",
+            "name": "testMode",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Correct parameters",
+            "schema": {
+              "$ref": "#/definitions/CustomerProductsList"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Get products a user has bought",
+        "tags": [
+          "user"
+        ]
+      }
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0"
+}
