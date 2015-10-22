@@ -518,6 +518,16 @@ function fixSpec(swagger, errors) {
     var newValue;
 
     switch(error.code) {
+      case 'OBJECT_MISSING_REQUIRED_PROPERTY_DEFINITION':
+        newValue = _.clone(value);
+        newValue.required = [];
+        _.each(value.required, function (name) {
+          if (!_.isUndefined(value.properties[name]))
+            newValue.required.push(name);
+        });
+        if (_.isEmpty(newValue.required))
+          delete newValue.required;
+        break;
       case 'ONE_OF_MISSING':
         if (value.in === 'path' && !value.required) {
           newValue = _.clone(value)
