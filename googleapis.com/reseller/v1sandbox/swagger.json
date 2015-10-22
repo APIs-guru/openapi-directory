@@ -82,6 +82,10 @@
           "description": "The domain name of the customer.",
           "type": "string"
         },
+        "customerDomainVerified": {
+          "description": "Whether the customer's primary domain has been verified.",
+          "type": "boolean"
+        },
         "customerId": {
           "description": "The id of the customer.",
           "type": "string"
@@ -227,7 +231,7 @@
           "type": "string"
         },
         "suspensionReasons": {
-          "description": "Suspension Reasons",
+          "description": "field listing all current reasons the subscription is suspended. It is possible for a subscription to have multiple suspension reasons. A subscription's status is SUSPENDED until all pending suspensions are removed. Possible options include:  \n- PENDING_TOS_ACCEPTANCE — The customer has not logged in and accepted the Google Apps Resold Terms of Services.  \n- RENEWAL_WITH_TYPE_CANCEL — The customer's commitment ended and their service was cancelled at the end of their term.  \n- RESELLER_INITIATED — A manual suspension invoked by a Reseller.  \n- TRIAL_ENDED — The customer's trial expired without a plan selected.  \n- OTHER — The customer is suspended for an internal Google reason (e.g. abuse or otherwise).",
           "items": {
             "type": "string"
           },

@@ -1315,6 +1315,7 @@
           "type": "boolean"
         },
         "project_codes": {
+          "description": "Only users who have been set up with a project code by Getty Images Sales need to use this field.",
           "items": {
             "type": "string"
           },
@@ -2291,7 +2292,7 @@
         "description": "The single step download call returns either a redirect or a response message with the URI to download the largest\r\n                image available.\r\n                Returns HTTP status code 303 Redirect to download URI or HTTP status code 200.",
         "parameters": [
           {
-            "description": "Additional information required from specific customers when downloading.\r\n                    Includes potentially notes and project codes.",
+            "description": "Additional information required from specific customers when downloading. \r\n                    Only users who have been set up with a project code by Getty Images Sales need to use this field.",
             "in": "body",
             "name": "download_details",
             "required": true,
@@ -2466,7 +2467,7 @@
         "description": "The single step download call returns either a redirect or a response message with the URI to download the largest\r\n                image available.\r\n                Returns HTTP status code 303 Redirect to download URI or HTTP status code 200.",
         "parameters": [
           {
-            "description": "Additional information required from specific customers when downloading.\r\n                    Includes potentially notes and project codes.",
+            "description": "Additional information required from specific customers when downloading. \r\n                    Only users who have been set up with a project code by Getty Images Sales need to use this field.",
             "in": "body",
             "name": "download_details",
             "required": true,
@@ -3266,6 +3267,22 @@
             "name": "Accept-Language",
             "required": false,
             "type": "string"
+          },
+          {
+            "description": "Comma separated list of fields. Allows product download requirements to be returned.",
+            "enum": [
+              "download_requirements"
+            ],
+            "in": "query",
+            "items": {
+              "enum": [
+                "download_requirements"
+              ],
+              "type": "string"
+            },
+            "name": "fields",
+            "required": false,
+            "type": "array"
           },
           {
             "description": "Filter results based on the product status.  If not set, this filter defaults to Active.",
