@@ -518,6 +518,17 @@ function fixSpec(swagger, errors) {
     var newValue;
 
     switch(error.code) {
+      case 'MISSING_PATH_PARAMETER_DEFINITION':
+        var field = error.message.match(': (.+)$')[1];
+        newValue = _.clone(value);
+        newValue.parameters = value.parameters || [];
+        newValue.parameters.push({
+          name: field,
+          type: 'string',
+          in: 'path',
+          required: true
+        });
+        break;
       case 'OBJECT_MISSING_REQUIRED_PROPERTY_DEFINITION':
         newValue = _.clone(value);
         newValue.required = [];
