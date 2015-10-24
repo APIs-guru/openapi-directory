@@ -1,9 +1,44 @@
 {
   "basePath": "/",
   "definitions": {
+    "AssetChanges": {
+      "properties": {
+        "ChangeSetId": {
+          "type": "string"
+        },
+        "ChangedAssetList": {
+          "items": {
+            "$ref": "#/definitions/ChangedAssetDetail"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "AssetToAdd": {
       "properties": {
         "note": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ChangedAssetDetail": {
+      "properties": {
+        "AssetChangedUtcDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "AssetLifecycle": {
+          "type": "string"
+        },
+        "AssetType": {
+          "type": "string"
+        },
+        "Id": {
+          "type": "string"
+        },
+        "Uri": {
           "type": "string"
         }
       },
@@ -29,6 +64,39 @@
         },
         "Value": {
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PartnerChannel": {
+      "description": "partner_channel",
+      "properties": {
+        "AssetFamily": {
+          "type": "string"
+        },
+        "ChannelId": {
+          "description": "The id to the channel of content",
+          "format": "int32",
+          "type": "integer"
+        },
+        "ChannelType": {
+          "description": "Contains the channel type (i.e. \"New,\" \"Updated\" or \"Deleted\")",
+          "type": "string"
+        },
+        "StartDate": {
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PartnerChannelList": {
+      "properties": {
+        "Channels": {
+          "items": {
+            "$ref": "#/definitions/PartnerChannel"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -1722,7 +1790,7 @@
             "type": "string"
           },
           {
-            "description": "Specify the channel of content for the GetAssetChanges request. \r\n             Each channel contains changed assets based on criteria such as asset family,\r\n             changed asset metadata, or the type of change to the asset (i.e. new, deleted, updated)",
+            "description": "Specifies the id of the channel for the asset data. Valid channel ids can be found in the results of the Get Partner Channel query.",
             "format": "int32",
             "in": "query",
             "name": "channel_id",
@@ -1730,7 +1798,7 @@
             "type": "integer"
           },
           {
-            "description": "Number of assets to return in the response. Default is 10; maximum is 500.",
+            "description": "Specifies the number of assets to return. The default is 10; maximum is 500.",
             "format": "int32",
             "in": "query",
             "name": "batch_size",
@@ -1753,14 +1821,14 @@
           "200": {
             "description": "No response was specified",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/AssetChanges"
             }
           },
           "403": {
             "description": "Your access token does not authorize access to this resource"
           },
           "404": {
-            "description": "The requested channel does not exist"
+            "description": "The channel you specified does not exist"
           }
         },
         "summary": "Generates asset changes.",
@@ -1788,6 +1856,7 @@
             "type": "string"
           },
           {
+            "description": "Specify the change-set-id associated with a transaction resource whose receipt you want to confirm.",
             "format": "int64",
             "in": "path",
             "name": "change-set-id",
@@ -1860,11 +1929,11 @@
           "200": {
             "description": "No response was specified",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/PartnerChannelList"
             }
           }
         },
-        "summary": "Gets the partners channel data",
+        "summary": "Retrieves the channel data for the partner. This data can be used to populate the channel_id parameter in the Put Asset Changes query.",
         "tags": [
           "AssetChanges"
         ]
