@@ -557,6 +557,11 @@ function fixSpec(swagger, errors) {
         fixed = true;
         break;
       case 'OBJECT_MISSING_REQUIRED_PROPERTY':
+        if (error.message === 'Missing required property: version') {
+          newValue = _.clone(value);
+          newValue.version = '1.0.0';
+          break;
+        }
         if (value.type === 'array' && _.isUndefined(value.items)) {
           newValue = _.clone(value);
           newValue.items = {};
