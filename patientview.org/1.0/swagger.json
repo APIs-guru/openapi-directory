@@ -810,18 +810,6 @@
         }
       }
     },
-    "UUID": {
-      "properties": {
-        "leastSignificantBits": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "mostSignificantBits": {
-          "format": "int64",
-          "type": "integer"
-        }
-      }
-    },
     "User": {
       "properties": {
         "changePassword": {
@@ -936,6 +924,18 @@
           "type": "boolean"
         }
       }
+    },
+    "UUID": {
+      "properties": {
+        "leastSignificantBits": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "mostSignificantBits": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
     }
   },
   "host": "www.patientview.org",
@@ -955,6 +955,49 @@
     "x-providerName": "patientview.org"
   },
   "paths": {
+    "/auth/{token}/basicuserinformation": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "deprecated": false,
+        "description": "Once logged in and have a token, get basic user information including group role membership",
+        "operationId": "getBasicUserInformation",
+        "parameters": [
+          {
+            "description": "token",
+            "in": "path",
+            "name": "token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "Get Basic User Information",
+        "tags": [
+          "auth"
+        ]
+      }
+    },
     "/auth/login": {
       "post": {
         "consumes": [
@@ -1038,49 +1081,6 @@
           }
         },
         "summary": "Log Out",
-        "tags": [
-          "auth"
-        ]
-      }
-    },
-    "/auth/{token}/basicuserinformation": {
-      "get": {
-        "consumes": [
-          "application/json"
-        ],
-        "deprecated": false,
-        "description": "Once logged in and have a token, get basic user information including group role membership",
-        "operationId": "getBasicUserInformation",
-        "parameters": [
-          {
-            "description": "token",
-            "in": "path",
-            "name": "token",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "*/*"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "summary": "Get Basic User Information",
         "tags": [
           "auth"
         ]

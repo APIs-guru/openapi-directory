@@ -94,20 +94,6 @@
       },
       "type": "object"
     },
-    "DeployState": {
-      "description": "[Output Only] The current state of a replica or module.",
-      "properties": {
-        "details": {
-          "description": "[Output Only] Human readable details about the current state.",
-          "type": "string"
-        },
-        "status": {
-          "description": "[Output Only] The status of the deployment. Possible values include: \n- UNKNOWN\n- DEPLOYING\n- DEPLOYED\n- DEPLOYMENT_FAILED\n- DELETING\n- DELETED\n- DELETE_FAILED",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "Deployment": {
       "description": "A deployment represents a physical instantiation of a Template.",
       "properties": {
@@ -159,6 +145,20 @@
             "$ref": "#/definitions/Deployment"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "DeployState": {
+      "description": "[Output Only] The current state of a replica or module.",
+      "properties": {
+        "details": {
+          "description": "[Output Only] Human readable details about the current state.",
+          "type": "string"
+        },
+        "status": {
+          "description": "[Output Only] The status of the deployment. Possible values include: \n- UNKNOWN\n- DEPLOYING\n- DEPLOYED\n- DEPLOYMENT_FAILED\n- DELETING\n- DELETED\n- DELETE_FAILED",
+          "type": "string"
         }
       },
       "type": "object"
@@ -469,16 +469,16 @@
     },
     "NetworkModule": {
       "properties": {
-        "IPv4Range": {
-          "description": "Required; The range of internal addresses that are legal on this network. This range is a CIDR specification, for example: 192.168.0.0/16.",
-          "type": "string"
-        },
         "description": {
           "description": "The description of the network.",
           "type": "string"
         },
         "gatewayIPv4": {
           "description": "An optional address that is used for default routing to other networks. This must be within the range specified by IPv4Range, and is typicall the first usable address in that range. If not specified, the default value is the first usable address in IPv4Range.",
+          "type": "string"
+        },
+        "IPv4Range": {
+          "description": "Required; The range of internal addresses that are legal on this network. This range is a CIDR specification, for example: 192.168.0.0/16.",
           "type": "string"
         }
       },

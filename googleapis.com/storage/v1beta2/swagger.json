@@ -1815,112 +1815,6 @@
         ]
       }
     },
-    "/b/{bucket}/o/watch": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Watch for changes on all objects in a bucket.",
-        "operationId": "storage.objects.watchAll",
-        "parameters": [
-          {
-            "description": "Name of the bucket in which to look for objects.",
-            "in": "path",
-            "name": "bucket",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Returns results in a directory-like mode. items will contain only objects whose names, aside from the prefix, do not contain delimiter. Objects whose names, aside from the prefix, contain delimiter will have their name, truncated after the delimiter, returned in prefixes. Duplicate prefixes are omitted.",
-            "in": "query",
-            "name": "delimiter",
-            "type": "string"
-          },
-          {
-            "description": "Maximum number of items plus prefixes to return. As duplicate prefixes are omitted, fewer total results may be returned than requested.",
-            "in": "query",
-            "minimum": 0,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "description": "A previously-returned page token representing part of the larger set of results to view.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          },
-          {
-            "description": "Filter results to objects whose names begin with this prefix.",
-            "in": "query",
-            "name": "prefix",
-            "type": "string"
-          },
-          {
-            "description": "Set of properties to return. Defaults to noAcl.",
-            "enum": [
-              "full",
-              "noAcl"
-            ],
-            "in": "query",
-            "name": "projection",
-            "type": "string"
-          },
-          {
-            "description": "If true, lists all versions of a file as distinct results.",
-            "in": "query",
-            "name": "versions",
-            "type": "boolean"
-          },
-          {
-            "in": "body",
-            "name": "resource",
-            "schema": {
-              "$ref": "#/definitions/Channel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Channel"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/devstorage.full_control",
-              "https://www.googleapis.com/auth/devstorage.read_only",
-              "https://www.googleapis.com/auth/devstorage.read_write"
-            ]
-          }
-        ],
-        "tags": [
-          "objects"
-        ]
-      }
-    },
     "/b/{bucket}/o/{object}": {
       "delete": {
         "description": "Deletes data blobs and associated metadata. Deletions are permanent if versioning is not enabled for the bucket, or if the generation parameter is used.",
@@ -2621,6 +2515,112 @@
         ],
         "tags": [
           "objectAccessControls"
+        ]
+      }
+    },
+    "/b/{bucket}/o/watch": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Watch for changes on all objects in a bucket.",
+        "operationId": "storage.objects.watchAll",
+        "parameters": [
+          {
+            "description": "Name of the bucket in which to look for objects.",
+            "in": "path",
+            "name": "bucket",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Returns results in a directory-like mode. items will contain only objects whose names, aside from the prefix, do not contain delimiter. Objects whose names, aside from the prefix, contain delimiter will have their name, truncated after the delimiter, returned in prefixes. Duplicate prefixes are omitted.",
+            "in": "query",
+            "name": "delimiter",
+            "type": "string"
+          },
+          {
+            "description": "Maximum number of items plus prefixes to return. As duplicate prefixes are omitted, fewer total results may be returned than requested.",
+            "in": "query",
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A previously-returned page token representing part of the larger set of results to view.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          },
+          {
+            "description": "Filter results to objects whose names begin with this prefix.",
+            "in": "query",
+            "name": "prefix",
+            "type": "string"
+          },
+          {
+            "description": "Set of properties to return. Defaults to noAcl.",
+            "enum": [
+              "full",
+              "noAcl"
+            ],
+            "in": "query",
+            "name": "projection",
+            "type": "string"
+          },
+          {
+            "description": "If true, lists all versions of a file as distinct results.",
+            "in": "query",
+            "name": "versions",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "resource",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/devstorage.full_control",
+              "https://www.googleapis.com/auth/devstorage.read_only",
+              "https://www.googleapis.com/auth/devstorage.read_write"
+            ]
+          }
+        ],
+        "tags": [
+          "objects"
         ]
       }
     },

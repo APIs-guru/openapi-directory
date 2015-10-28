@@ -255,6 +255,49 @@
         ]
       }
     },
+    "/rest/v1/neo/{asteroid_id}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "deprecated": false,
+        "description": "Retieve a Near Earth Objects with a given id",
+        "operationId": "retrieveNearEarthObjectById",
+        "parameters": [
+          {
+            "description": "ID of Near Earth Object - (ex: 3729835)",
+            "in": "path",
+            "name": "asteroid_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NearEarthObjectFeedDto"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "Find Near Earth Objects by id",
+        "tags": [
+          "neo"
+        ]
+      }
+    },
     "/rest/v1/neo/browse": {
       "get": {
         "consumes": [
@@ -304,49 +347,6 @@
           }
         },
         "summary": "Browse the Near Earth Objects service",
-        "tags": [
-          "neo"
-        ]
-      }
-    },
-    "/rest/v1/neo/{asteroid_id}": {
-      "get": {
-        "consumes": [
-          "application/json"
-        ],
-        "deprecated": false,
-        "description": "Retieve a Near Earth Objects with a given id",
-        "operationId": "retrieveNearEarthObjectById",
-        "parameters": [
-          {
-            "description": "ID of Near Earth Object - (ex: 3729835)",
-            "in": "path",
-            "name": "asteroid_id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/NearEarthObjectFeedDto"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "summary": "Find Near Earth Objects by id",
         "tags": [
           "neo"
         ]

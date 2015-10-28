@@ -1660,69 +1660,6 @@
         ]
       }
     },
-    "/userprofiles/{profileId}/reports/compatiblefields/query": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Returns the fields that are compatible to be selected in the respective sections of a report criteria, given the fields already selected in the input report and user permissions.",
-        "operationId": "dfareporting.reports.compatibleFields.query",
-        "parameters": [
-          {
-            "description": "The DFA user profile ID.",
-            "in": "path",
-            "name": "profileId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/Report"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/CompatibleFields"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/dfareporting"
-            ]
-          }
-        ],
-        "tags": [
-          "reports"
-        ]
-      }
-    },
     "/userprofiles/{profileId}/reports/{reportId}": {
       "delete": {
         "description": "Deletes a report by its ID.",
@@ -2134,6 +2071,69 @@
             "description": "Successful response",
             "schema": {
               "$ref": "#/definitions/File"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfareporting"
+            ]
+          }
+        ],
+        "tags": [
+          "reports"
+        ]
+      }
+    },
+    "/userprofiles/{profileId}/reports/compatiblefields/query": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Returns the fields that are compatible to be selected in the respective sections of a report criteria, given the fields already selected in the input report and user permissions.",
+        "operationId": "dfareporting.reports.compatibleFields.query",
+        "parameters": [
+          {
+            "description": "The DFA user profile ID.",
+            "in": "path",
+            "name": "profileId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/CompatibleFields"
             }
           }
         },

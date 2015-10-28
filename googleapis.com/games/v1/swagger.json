@@ -1924,22 +1924,6 @@
       },
       "type": "object"
     },
-    "RoomAutoMatchStatus": {
-      "description": "This is a JSON template for status of room automatching that is in progress.",
-      "properties": {
-        "kind": {
-          "default": "games#roomAutoMatchStatus",
-          "description": "Uniquely identifies the type of this resource. Value is always the fixed string games#roomAutoMatchStatus.",
-          "type": "string"
-        },
-        "waitEstimateSeconds": {
-          "description": "An estimate for the amount of time (in seconds) that auto-matching is expected to take to complete.",
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
     "RoomAutoMatchingCriteria": {
       "description": "This is a JSON template for a room auto-match criteria object.",
       "properties": {
@@ -1960,6 +1944,22 @@
         },
         "minAutoMatchingPlayers": {
           "description": "The minimum number of players that should be added to the room by auto-matching.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "RoomAutoMatchStatus": {
+      "description": "This is a JSON template for status of room automatching that is in progress.",
+      "properties": {
+        "kind": {
+          "default": "games#roomAutoMatchStatus",
+          "description": "Uniquely identifies the type of this resource. Value is always the fixed string games#roomAutoMatchStatus.",
+          "type": "string"
+        },
+        "waitEstimateSeconds": {
+          "description": "An estimate for the amount of time (in seconds) that auto-matching is expected to take to complete.",
           "format": "int32",
           "type": "integer"
         }
@@ -2948,63 +2948,6 @@
         }
       ]
     },
-    "/achievements/updateMultiple": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Updates multiple achievements for the currently authenticated player.",
-        "operationId": "games.achievements.updateMultiple",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/AchievementUpdateMultipleRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AchievementUpdateMultipleResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/games",
-              "https://www.googleapis.com/auth/plus.login"
-            ]
-          }
-        ],
-        "tags": [
-          "achievements"
-        ]
-      }
-    },
     "/achievements/{achievementId}/increment": {
       "parameters": [
         {
@@ -3255,7 +3198,7 @@
         ]
       }
     },
-    "/applications/played": {
+    "/achievements/updateMultiple": {
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -3280,11 +3223,23 @@
         }
       ],
       "post": {
-        "description": "Indicate that the the currently authenticated user is playing your application.",
-        "operationId": "games.applications.played",
+        "description": "Updates multiple achievements for the currently authenticated player.",
+        "operationId": "games.achievements.updateMultiple",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AchievementUpdateMultipleRequest"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AchievementUpdateMultipleResponse"
+            }
           }
         },
         "security": [
@@ -3296,7 +3251,7 @@
           }
         ],
         "tags": [
-          "applications"
+          "achievements"
         ]
       }
     },
@@ -3373,6 +3328,51 @@
           "$ref": "#/parameters/userIp"
         }
       ]
+    },
+    "/applications/played": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Indicate that the the currently authenticated user is playing your application.",
+        "operationId": "games.applications.played",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ],
+        "tags": [
+          "applications"
+        ]
+      }
     },
     "/eventDefinitions": {
       "get": {
@@ -3621,69 +3621,6 @@
           "$ref": "#/parameters/userIp"
         }
       ]
-    },
-    "/leaderboards/scores": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Submits multiple scores to leaderboards.",
-        "operationId": "games.scores.submitMultiple",
-        "parameters": [
-          {
-            "description": "The preferred language to use for strings returned by this method.",
-            "in": "query",
-            "name": "language",
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/PlayerScoreSubmissionList"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/PlayerScoreListResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/games",
-              "https://www.googleapis.com/auth/plus.login"
-            ]
-          }
-        ],
-        "tags": [
-          "scores"
-        ]
-      }
     },
     "/leaderboards/{leaderboardId}": {
       "get": {
@@ -4036,30 +3973,7 @@
         }
       ]
     },
-    "/metagameConfig": {
-      "get": {
-        "description": "Return the metagame configuration data for the calling application.",
-        "operationId": "games.metagame.getMetagameConfig",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/MetagameConfig"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/games",
-              "https://www.googleapis.com/auth/plus.login"
-            ]
-          }
-        ],
-        "tags": [
-          "metagame"
-        ]
-      },
+    "/leaderboards/scores": {
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4082,25 +3996,11 @@
         {
           "$ref": "#/parameters/userIp"
         }
-      ]
-    },
-    "/players/me/players/{collection}": {
-      "get": {
-        "description": "Get the collection of players for the currently authenticated user.",
-        "operationId": "games.players.list",
+      ],
+      "post": {
+        "description": "Submits multiple scores to leaderboards.",
+        "operationId": "games.scores.submitMultiple",
         "parameters": [
-          {
-            "description": "Collection of players being retrieved",
-            "enum": [
-              "connected",
-              "playedWith",
-              "played_with"
-            ],
-            "in": "path",
-            "name": "collection",
-            "required": true,
-            "type": "string"
-          },
           {
             "description": "The preferred language to use for strings returned by this method.",
             "in": "query",
@@ -4108,25 +4008,18 @@
             "type": "string"
           },
           {
-            "description": "The maximum number of player resources to return in the response, used for paging. For any response, the actual number of player resources returned may be less than the specified maxResults.",
-            "in": "query",
-            "maximum": 50,
-            "minimum": 1,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "description": "The token returned by the previous request.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/PlayerScoreSubmissionList"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Successful response",
             "schema": {
-              "$ref": "#/definitions/PlayerListResponse"
+              "$ref": "#/definitions/PlayerScoreListResponse"
             }
           }
         },
@@ -4139,7 +4032,32 @@
           }
         ],
         "tags": [
-          "players"
+          "scores"
+        ]
+      }
+    },
+    "/metagameConfig": {
+      "get": {
+        "description": "Return the metagame configuration data for the calling application.",
+        "operationId": "games.metagame.getMetagameConfig",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/MetagameConfig"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ],
+        "tags": [
+          "metagame"
         ]
       },
       "parameters": [
@@ -4668,6 +4586,88 @@
         }
       ]
     },
+    "/players/me/players/{collection}": {
+      "get": {
+        "description": "Get the collection of players for the currently authenticated user.",
+        "operationId": "games.players.list",
+        "parameters": [
+          {
+            "description": "Collection of players being retrieved",
+            "enum": [
+              "connected",
+              "playedWith",
+              "played_with"
+            ],
+            "in": "path",
+            "name": "collection",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The preferred language to use for strings returned by this method.",
+            "in": "query",
+            "name": "language",
+            "type": "string"
+          },
+          {
+            "description": "The maximum number of player resources to return in the response, used for paging. For any response, the actual number of player resources returned may be less than the specified maxResults.",
+            "in": "query",
+            "maximum": 50,
+            "minimum": 1,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "The token returned by the previous request.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/PlayerListResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ],
+        "tags": [
+          "players"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/pushtokens": {
       "parameters": [
         {
@@ -5033,69 +5033,6 @@
           "$ref": "#/parameters/userIp"
         }
       ]
-    },
-    "/rooms/create": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Create a room. For internal use by the Games SDK only. Calling this method directly is unsupported.",
-        "operationId": "games.rooms.create",
-        "parameters": [
-          {
-            "description": "The preferred language to use for strings returned by this method.",
-            "in": "query",
-            "name": "language",
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/RoomCreateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Room"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/games",
-              "https://www.googleapis.com/auth/plus.login"
-            ]
-          }
-        ],
-        "tags": [
-          "rooms"
-        ]
-      }
     },
     "/rooms/{roomId}": {
       "get": {
@@ -5487,6 +5424,69 @@
         ]
       }
     },
+    "/rooms/create": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Create a room. For internal use by the Games SDK only. Calling this method directly is unsupported.",
+        "operationId": "games.rooms.create",
+        "parameters": [
+          {
+            "description": "The preferred language to use for strings returned by this method.",
+            "in": "query",
+            "name": "language",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/RoomCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Room"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ],
+        "tags": [
+          "rooms"
+        ]
+      }
+    },
     "/snapshots/{snapshotId}": {
       "get": {
         "description": "Retrieves the metadata for a given snapshot ID.",
@@ -5596,153 +5596,6 @@
             "description": "Successful response",
             "schema": {
               "$ref": "#/definitions/TurnBasedMatchList"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/games",
-              "https://www.googleapis.com/auth/plus.login"
-            ]
-          }
-        ],
-        "tags": [
-          "turnBasedMatches"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/turnbasedmatches/create": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Create a turn-based match.",
-        "operationId": "games.turnBasedMatches.create",
-        "parameters": [
-          {
-            "description": "The preferred language to use for strings returned by this method.",
-            "in": "query",
-            "name": "language",
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/TurnBasedMatchCreateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/TurnBasedMatch"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/games",
-              "https://www.googleapis.com/auth/plus.login"
-            ]
-          }
-        ],
-        "tags": [
-          "turnBasedMatches"
-        ]
-      }
-    },
-    "/turnbasedmatches/sync": {
-      "get": {
-        "description": "Returns turn-based matches the player is or was involved in that changed since the last sync call, with the least recent changes coming first. Matches that should be removed from the local cache will have a status of MATCH_DELETED.",
-        "operationId": "games.turnBasedMatches.sync",
-        "parameters": [
-          {
-            "description": "True if match data should be returned in the response. Note that not all data will necessarily be returned if include_match_data is true; the server may decide to only return data for some of the matches to limit download size for the client. The remainder of the data for these matches will be retrievable on request.",
-            "in": "query",
-            "name": "includeMatchData",
-            "type": "boolean"
-          },
-          {
-            "description": "The preferred language to use for strings returned by this method.",
-            "in": "query",
-            "name": "language",
-            "type": "string"
-          },
-          {
-            "description": "The maximum number of completed or canceled matches to return in the response. If not set, all matches returned could be completed or canceled.",
-            "in": "query",
-            "maximum": 500,
-            "minimum": 0,
-            "name": "maxCompletedMatches",
-            "type": "integer"
-          },
-          {
-            "description": "The maximum number of matches to return in the response, used for paging. For any response, the actual number of matches to return may be less than the specified maxResults.",
-            "in": "query",
-            "maximum": 500,
-            "minimum": 1,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "description": "The token returned by the previous request.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/TurnBasedMatchSync"
             }
           }
         },
@@ -6432,6 +6285,153 @@
           "turnBasedMatches"
         ]
       }
+    },
+    "/turnbasedmatches/create": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Create a turn-based match.",
+        "operationId": "games.turnBasedMatches.create",
+        "parameters": [
+          {
+            "description": "The preferred language to use for strings returned by this method.",
+            "in": "query",
+            "name": "language",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/TurnBasedMatchCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TurnBasedMatch"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ],
+        "tags": [
+          "turnBasedMatches"
+        ]
+      }
+    },
+    "/turnbasedmatches/sync": {
+      "get": {
+        "description": "Returns turn-based matches the player is or was involved in that changed since the last sync call, with the least recent changes coming first. Matches that should be removed from the local cache will have a status of MATCH_DELETED.",
+        "operationId": "games.turnBasedMatches.sync",
+        "parameters": [
+          {
+            "description": "True if match data should be returned in the response. Note that not all data will necessarily be returned if include_match_data is true; the server may decide to only return data for some of the matches to limit download size for the client. The remainder of the data for these matches will be retrievable on request.",
+            "in": "query",
+            "name": "includeMatchData",
+            "type": "boolean"
+          },
+          {
+            "description": "The preferred language to use for strings returned by this method.",
+            "in": "query",
+            "name": "language",
+            "type": "string"
+          },
+          {
+            "description": "The maximum number of completed or canceled matches to return in the response. If not set, all matches returned could be completed or canceled.",
+            "in": "query",
+            "maximum": 500,
+            "minimum": 0,
+            "name": "maxCompletedMatches",
+            "type": "integer"
+          },
+          {
+            "description": "The maximum number of matches to return in the response, used for paging. For any response, the actual number of matches to return may be less than the specified maxResults.",
+            "in": "query",
+            "maximum": 500,
+            "minimum": 1,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "The token returned by the previous request.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/TurnBasedMatchSync"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ],
+        "tags": [
+          "turnBasedMatches"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "schemes": [

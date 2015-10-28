@@ -914,77 +914,6 @@
         ]
       }
     },
-    "/tables/import": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "consumes": [
-          "application/octet-stream"
-        ],
-        "description": "Import a new table.",
-        "operationId": "fusiontables.table.importTable",
-        "parameters": [
-          {
-            "description": "The name to be assigned to the new table.",
-            "in": "query",
-            "name": "name",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The delimiter used to separate cell values. This can only consist of a single character. Default is ','.",
-            "in": "query",
-            "name": "delimiter",
-            "type": "string"
-          },
-          {
-            "description": "The encoding of the content. Default is UTF-8. Use 'auto-detect' if you are unsure of the encoding.",
-            "in": "query",
-            "name": "encoding",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Table"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/fusiontables"
-            ]
-          }
-        ],
-        "tags": [
-          "table"
-        ]
-      }
-    },
     "/tables/{tableId}": {
       "delete": {
         "description": "Deletes a table.",
@@ -2369,6 +2298,77 @@
         ],
         "tags": [
           "template"
+        ]
+      }
+    },
+    "/tables/import": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "description": "Import a new table.",
+        "operationId": "fusiontables.table.importTable",
+        "parameters": [
+          {
+            "description": "The name to be assigned to the new table.",
+            "in": "query",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The delimiter used to separate cell values. This can only consist of a single character. Default is ','.",
+            "in": "query",
+            "name": "delimiter",
+            "type": "string"
+          },
+          {
+            "description": "The encoding of the content. Default is UTF-8. Use 'auto-detect' if you are unsure of the encoding.",
+            "in": "query",
+            "name": "encoding",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Table"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fusiontables"
+            ]
+          }
+        ],
+        "tags": [
+          "table"
         ]
       }
     }

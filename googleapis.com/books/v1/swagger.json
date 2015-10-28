@@ -206,6 +206,32 @@
       },
       "type": "object"
     },
+    "Annotationsdata": {
+      "properties": {
+        "items": {
+          "description": "A list of Annotation Data.",
+          "items": {
+            "$ref": "#/definitions/Annotationdata"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "books#annotationsdata",
+          "description": "Resource type",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "Token to pass in for pagination for the next page. This will not be present if this request does not have more results.",
+          "type": "string"
+        },
+        "totalItems": {
+          "description": "The total number of volume annotations found.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
     "AnnotationsSummary": {
       "properties": {
         "kind": {
@@ -237,32 +263,6 @@
             "type": "object"
           },
           "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "Annotationsdata": {
-      "properties": {
-        "items": {
-          "description": "A list of Annotation Data.",
-          "items": {
-            "$ref": "#/definitions/Annotationdata"
-          },
-          "type": "array"
-        },
-        "kind": {
-          "default": "books#annotationsdata",
-          "description": "Resource type",
-          "type": "string"
-        },
-        "nextPageToken": {
-          "description": "Token to pass in for pagination for the next page. This will not be present if this request does not have more results.",
-          "type": "string"
-        },
-        "totalItems": {
-          "description": "The total number of volume annotations found.",
-          "format": "int32",
-          "type": "integer"
         }
       },
       "type": "object"
@@ -300,14 +300,6 @@
           "type": "string"
         },
         "volumeId": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "BooksVolumesRecommendedRateResponse": {
-      "properties": {
-        "consistency_token": {
           "type": "string"
         }
       },
@@ -376,6 +368,14 @@
         "kind": {
           "default": "books#bookshelves",
           "description": "Resource type.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "BooksVolumesRecommendedRateResponse": {
+      "properties": {
+        "consistency_token": {
           "type": "string"
         }
       },
@@ -724,6 +724,23 @@
       },
       "type": "object"
     },
+    "DownloadAccesses": {
+      "properties": {
+        "downloadAccessList": {
+          "description": "A list of download access responses.",
+          "items": {
+            "$ref": "#/definitions/DownloadAccessRestriction"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "books#downloadAccesses",
+          "description": "Resource type.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "DownloadAccessRestriction": {
       "properties": {
         "deviceAllowed": {
@@ -775,23 +792,6 @@
         },
         "volumeId": {
           "description": "Identifies the volume for which this entry applies.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "DownloadAccesses": {
-      "properties": {
-        "downloadAccessList": {
-          "description": "A list of download access responses.",
-          "items": {
-            "$ref": "#/definitions/DownloadAccessRestriction"
-          },
-          "type": "array"
-        },
-        "kind": {
-          "default": "books#downloadAccesses",
-          "description": "Resource type.",
           "type": "string"
         }
       },
@@ -944,13 +944,6 @@
           "format": "int32",
           "type": "integer"
         },
-        "annotationTypes": {
-          "description": "The list of annotation types contained for this layer.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
         "annotationsDataLink": {
           "description": "Link to get data for this annotation.",
           "type": "string"
@@ -958,6 +951,13 @@
         "annotationsLink": {
           "description": "The link to get the annotations for this layer.",
           "type": "string"
+        },
+        "annotationTypes": {
+          "description": "The list of annotation types contained for this layer.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "contentVersion": {
           "description": "The content version this resource is for.",
@@ -1344,12 +1344,12 @@
               "description": "Whether text-to-speech is permitted for this volume. Values can be ALLOWED, ALLOWED_FOR_ACCESSIBILITY, or NOT_ALLOWED.",
               "type": "string"
             },
-            "viewOrderUrl": {
-              "description": "For ordered but not yet processed orders, we give a URL that can be used to go to the appropriate Google Wallet page.",
-              "type": "string"
-            },
             "viewability": {
               "description": "The read access of a volume. Possible values are PARTIAL, ALL_PAGES, NO_PAGES or UNKNOWN. This value depends on the country listed above. A value of PARTIAL means that the publisher has allowed some portion of the volume to be viewed publicly, without purchase. This can apply to eBooks as well as non-eBooks. Public domain books will always have a value of ALL_PAGES.",
+              "type": "string"
+            },
+            "viewOrderUrl": {
+              "description": "For ordered but not yet processed orders, we give a URL that can be used to go to the appropriate Google Wallet page.",
               "type": "string"
             },
             "webReaderLink": {
@@ -1748,14 +1748,14 @@
               "description": "URL to preview this volume on the Google Books site.",
               "type": "string"
             },
-            "printType": {
-              "description": "Type of publication of this volume. Possible values are BOOK or MAGAZINE.",
-              "type": "string"
-            },
             "printedPageCount": {
               "description": "Total number of printed pages in generated pdf representation.",
               "format": "int32",
               "type": "integer"
+            },
+            "printType": {
+              "description": "Type of publication of this volume. Possible values are BOOK or MAGAZINE.",
+              "type": "string"
             },
             "publishedDate": {
               "description": "Date of publication. (In LITE projection.)",
@@ -2808,73 +2808,6 @@
         ]
       }
     },
-    "/mylibrary/annotations/summary": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Gets the summary of specified layers.",
-        "operationId": "books.mylibrary.annotations.summary",
-        "parameters": [
-          {
-            "collectionFormat": "multi",
-            "description": "Array of layer IDs to get the summary for.",
-            "in": "query",
-            "items": {
-              "type": "string"
-            },
-            "name": "layerIds",
-            "required": true,
-            "type": "array"
-          },
-          {
-            "description": "Volume id to get the summary for.",
-            "in": "query",
-            "name": "volumeId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AnnotationsSummary"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/books"
-            ]
-          }
-        ],
-        "tags": [
-          "mylibrary"
-        ]
-      }
-    },
     "/mylibrary/annotations/{annotationId}": {
       "delete": {
         "description": "Deletes an annotation.",
@@ -2963,6 +2896,73 @@
             "description": "Successful response",
             "schema": {
               "$ref": "#/definitions/Annotation"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
+        ],
+        "tags": [
+          "mylibrary"
+        ]
+      }
+    },
+    "/mylibrary/annotations/summary": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Gets the summary of specified layers.",
+        "operationId": "books.mylibrary.annotations.summary",
+        "parameters": [
+          {
+            "collectionFormat": "multi",
+            "description": "Array of layer IDs to get the summary for.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "layerIds",
+            "required": true,
+            "type": "array"
+          },
+          {
+            "description": "Volume id to get the summary for.",
+            "in": "query",
+            "name": "volumeId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AnnotationsSummary"
             }
           }
         },
@@ -4575,367 +4575,6 @@
         }
       ]
     },
-    "/volumes/mybooks": {
-      "get": {
-        "description": "Return a list of books in My Library.",
-        "operationId": "books.volumes.mybooks.list",
-        "parameters": [
-          {
-            "collectionFormat": "multi",
-            "description": "How the book was aquired",
-            "in": "query",
-            "items": {
-              "enum": [
-                "PREORDERED",
-                "PREVIOUSLY_RENTED",
-                "PUBLIC_DOMAIN",
-                "PURCHASED",
-                "RENTED",
-                "SAMPLE",
-                "UPLOADED"
-              ],
-              "type": "string"
-            },
-            "name": "acquireMethod",
-            "type": "array"
-          },
-          {
-            "description": "ISO-639-1 language and ISO-3166-1 country code. Ex:'en_US'. Used for generating recommendations.",
-            "in": "query",
-            "name": "locale",
-            "type": "string"
-          },
-          {
-            "description": "Maximum number of results to return.",
-            "in": "query",
-            "maximum": 100,
-            "minimum": 0,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "collectionFormat": "multi",
-            "description": "The processing state of the user uploaded volumes to be returned. Applicable only if the UPLOADED is specified in the acquireMethod.",
-            "in": "query",
-            "items": {
-              "enum": [
-                "COMPLETED_FAILED",
-                "COMPLETED_SUCCESS",
-                "RUNNING"
-              ],
-              "type": "string"
-            },
-            "name": "processingState",
-            "type": "array"
-          },
-          {
-            "description": "String to identify the originator of this request.",
-            "in": "query",
-            "name": "source",
-            "type": "string"
-          },
-          {
-            "description": "Index of the first result to return (starts at 0)",
-            "in": "query",
-            "minimum": 0,
-            "name": "startIndex",
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Volumes"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/books"
-            ]
-          }
-        ],
-        "tags": [
-          "volumes"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/volumes/recommended": {
-      "get": {
-        "description": "Return a list of recommended books for the current user.",
-        "operationId": "books.volumes.recommended.list",
-        "parameters": [
-          {
-            "description": "ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'. Used for generating recommendations.",
-            "in": "query",
-            "name": "locale",
-            "type": "string"
-          },
-          {
-            "description": "The maximum allowed maturity rating of returned recommendations. Books with a higher maturity rating are filtered out.",
-            "enum": [
-              "mature",
-              "not-mature"
-            ],
-            "in": "query",
-            "name": "maxAllowedMaturityRating",
-            "type": "string"
-          },
-          {
-            "description": "String to identify the originator of this request.",
-            "in": "query",
-            "name": "source",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Volumes"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/books"
-            ]
-          }
-        ],
-        "tags": [
-          "volumes"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/volumes/recommended/rate": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Rate a recommended book for the current user.",
-        "operationId": "books.volumes.recommended.rate",
-        "parameters": [
-          {
-            "description": "Rating to be given to the volume.",
-            "enum": [
-              "HAVE_IT",
-              "NOT_INTERESTED"
-            ],
-            "in": "query",
-            "name": "rating",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "ID of the source volume.",
-            "in": "query",
-            "name": "volumeId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'. Used for generating recommendations.",
-            "in": "query",
-            "name": "locale",
-            "type": "string"
-          },
-          {
-            "description": "String to identify the originator of this request.",
-            "in": "query",
-            "name": "source",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/BooksVolumesRecommendedRateResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/books"
-            ]
-          }
-        ],
-        "tags": [
-          "volumes"
-        ]
-      }
-    },
-    "/volumes/useruploaded": {
-      "get": {
-        "description": "Return a list of books uploaded by the current user.",
-        "operationId": "books.volumes.useruploaded.list",
-        "parameters": [
-          {
-            "description": "ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'. Used for generating recommendations.",
-            "in": "query",
-            "name": "locale",
-            "type": "string"
-          },
-          {
-            "description": "Maximum number of results to return.",
-            "in": "query",
-            "maximum": 40,
-            "minimum": 0,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "collectionFormat": "multi",
-            "description": "The processing state of the user uploaded volumes to be returned.",
-            "in": "query",
-            "items": {
-              "enum": [
-                "COMPLETED_FAILED",
-                "COMPLETED_SUCCESS",
-                "RUNNING"
-              ],
-              "type": "string"
-            },
-            "name": "processingState",
-            "type": "array"
-          },
-          {
-            "description": "String to identify the originator of this request.",
-            "in": "query",
-            "name": "source",
-            "type": "string"
-          },
-          {
-            "description": "Index of the first result to return (starts at 0)",
-            "in": "query",
-            "minimum": 0,
-            "name": "startIndex",
-            "type": "integer"
-          },
-          {
-            "collectionFormat": "multi",
-            "description": "The ids of the volumes to be returned. If not specified all that match the processingState are returned.",
-            "in": "query",
-            "items": {
-              "type": "string"
-            },
-            "name": "volumeId",
-            "type": "array"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Volumes"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/books"
-            ]
-          }
-        ],
-        "tags": [
-          "volumes"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
     "/volumes/{volumeId}": {
       "get": {
         "description": "Gets volume information for a single volume.",
@@ -5722,6 +5361,367 @@
         ],
         "tags": [
           "layers"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/volumes/mybooks": {
+      "get": {
+        "description": "Return a list of books in My Library.",
+        "operationId": "books.volumes.mybooks.list",
+        "parameters": [
+          {
+            "collectionFormat": "multi",
+            "description": "How the book was aquired",
+            "in": "query",
+            "items": {
+              "enum": [
+                "PREORDERED",
+                "PREVIOUSLY_RENTED",
+                "PUBLIC_DOMAIN",
+                "PURCHASED",
+                "RENTED",
+                "SAMPLE",
+                "UPLOADED"
+              ],
+              "type": "string"
+            },
+            "name": "acquireMethod",
+            "type": "array"
+          },
+          {
+            "description": "ISO-639-1 language and ISO-3166-1 country code. Ex:'en_US'. Used for generating recommendations.",
+            "in": "query",
+            "name": "locale",
+            "type": "string"
+          },
+          {
+            "description": "Maximum number of results to return.",
+            "in": "query",
+            "maximum": 100,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "The processing state of the user uploaded volumes to be returned. Applicable only if the UPLOADED is specified in the acquireMethod.",
+            "in": "query",
+            "items": {
+              "enum": [
+                "COMPLETED_FAILED",
+                "COMPLETED_SUCCESS",
+                "RUNNING"
+              ],
+              "type": "string"
+            },
+            "name": "processingState",
+            "type": "array"
+          },
+          {
+            "description": "String to identify the originator of this request.",
+            "in": "query",
+            "name": "source",
+            "type": "string"
+          },
+          {
+            "description": "Index of the first result to return (starts at 0)",
+            "in": "query",
+            "minimum": 0,
+            "name": "startIndex",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Volumes"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
+        ],
+        "tags": [
+          "volumes"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/volumes/recommended": {
+      "get": {
+        "description": "Return a list of recommended books for the current user.",
+        "operationId": "books.volumes.recommended.list",
+        "parameters": [
+          {
+            "description": "ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'. Used for generating recommendations.",
+            "in": "query",
+            "name": "locale",
+            "type": "string"
+          },
+          {
+            "description": "The maximum allowed maturity rating of returned recommendations. Books with a higher maturity rating are filtered out.",
+            "enum": [
+              "mature",
+              "not-mature"
+            ],
+            "in": "query",
+            "name": "maxAllowedMaturityRating",
+            "type": "string"
+          },
+          {
+            "description": "String to identify the originator of this request.",
+            "in": "query",
+            "name": "source",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Volumes"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
+        ],
+        "tags": [
+          "volumes"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/volumes/recommended/rate": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Rate a recommended book for the current user.",
+        "operationId": "books.volumes.recommended.rate",
+        "parameters": [
+          {
+            "description": "Rating to be given to the volume.",
+            "enum": [
+              "HAVE_IT",
+              "NOT_INTERESTED"
+            ],
+            "in": "query",
+            "name": "rating",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the source volume.",
+            "in": "query",
+            "name": "volumeId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'. Used for generating recommendations.",
+            "in": "query",
+            "name": "locale",
+            "type": "string"
+          },
+          {
+            "description": "String to identify the originator of this request.",
+            "in": "query",
+            "name": "source",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/BooksVolumesRecommendedRateResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
+        ],
+        "tags": [
+          "volumes"
+        ]
+      }
+    },
+    "/volumes/useruploaded": {
+      "get": {
+        "description": "Return a list of books uploaded by the current user.",
+        "operationId": "books.volumes.useruploaded.list",
+        "parameters": [
+          {
+            "description": "ISO-639-1 language and ISO-3166-1 country code. Ex: 'en_US'. Used for generating recommendations.",
+            "in": "query",
+            "name": "locale",
+            "type": "string"
+          },
+          {
+            "description": "Maximum number of results to return.",
+            "in": "query",
+            "maximum": 40,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "The processing state of the user uploaded volumes to be returned.",
+            "in": "query",
+            "items": {
+              "enum": [
+                "COMPLETED_FAILED",
+                "COMPLETED_SUCCESS",
+                "RUNNING"
+              ],
+              "type": "string"
+            },
+            "name": "processingState",
+            "type": "array"
+          },
+          {
+            "description": "String to identify the originator of this request.",
+            "in": "query",
+            "name": "source",
+            "type": "string"
+          },
+          {
+            "description": "Index of the first result to return (starts at 0)",
+            "in": "query",
+            "minimum": 0,
+            "name": "startIndex",
+            "type": "integer"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "The ids of the volumes to be returned. If not specified all that match the processingState are returned.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "volumeId",
+            "type": "array"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Volumes"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/books"
+            ]
+          }
+        ],
+        "tags": [
+          "volumes"
         ]
       },
       "parameters": [

@@ -26,6 +26,16 @@
         }
       }
     },
+    "basic_results": {
+      "properties": {
+        "company": {
+          "items": {
+            "$ref": "#/definitions/CompanyBasicSearchVO"
+          },
+          "type": "array"
+        }
+      }
+    },
     "Ceo": {
       "properties": {
         "first_name": {
@@ -38,6 +48,74 @@
           "type": "string"
         }
       }
+    },
+    "company": {
+      "properties": {
+        "ceo": {
+          "$ref": "#/definitions/Ceo"
+        },
+        "company_id": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "company_type": {
+          "enum": [
+            "Private",
+            "Public",
+            "Product/Brand/Service",
+            "NGO/NPO/NFP/Organization/Association",
+            "Investment Company",
+            "Government"
+          ],
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "employee_count": {
+          "type": "string"
+        },
+        "founded_date": {
+          "type": "string"
+        },
+        "hq_address": {
+          "$ref": "#/definitions/Address"
+        },
+        "industries": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "logo_url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "profile_url": {
+          "type": "string"
+        },
+        "revenue": {
+          "type": "string"
+        },
+        "short_name": {
+          "type": "string"
+        },
+        "stock": {
+          "$ref": "#/definitions/Stock"
+        },
+        "website": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "company_id",
+        "name",
+        "website",
+        "logo_url",
+        "profile_url"
+      ]
     },
     "CompanyBasicSearchVO": {
       "properties": {
@@ -186,94 +264,6 @@
         }
       }
     },
-    "Stock": {
-      "properties": {
-        "exchange": {
-          "type": "string"
-        },
-        "ticker": {
-          "type": "string"
-        }
-      }
-    },
-    "basic_results": {
-      "properties": {
-        "company": {
-          "items": {
-            "$ref": "#/definitions/CompanyBasicSearchVO"
-          },
-          "type": "array"
-        }
-      }
-    },
-    "company": {
-      "properties": {
-        "ceo": {
-          "$ref": "#/definitions/Ceo"
-        },
-        "company_id": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "company_type": {
-          "enum": [
-            "Private",
-            "Public",
-            "Product/Brand/Service",
-            "NGO/NPO/NFP/Organization/Association",
-            "Investment Company",
-            "Government"
-          ],
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "employee_count": {
-          "type": "string"
-        },
-        "founded_date": {
-          "type": "string"
-        },
-        "hq_address": {
-          "$ref": "#/definitions/Address"
-        },
-        "industries": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "logo_url": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "profile_url": {
-          "type": "string"
-        },
-        "revenue": {
-          "type": "string"
-        },
-        "short_name": {
-          "type": "string"
-        },
-        "stock": {
-          "$ref": "#/definitions/Stock"
-        },
-        "website": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "company_id",
-        "name",
-        "website",
-        "logo_url",
-        "profile_url"
-      ]
-    },
     "results": {
       "properties": {
         "feeds": {
@@ -283,6 +273,16 @@
           "type": "array"
         },
         "pagination_id": {
+          "type": "string"
+        }
+      }
+    },
+    "Stock": {
+      "properties": {
+        "exchange": {
+          "type": "string"
+        },
+        "ticker": {
           "type": "string"
         }
       }

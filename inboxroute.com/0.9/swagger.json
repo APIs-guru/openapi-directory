@@ -348,6 +348,82 @@
         ]
       }
     },
+    "/contacts/{contactid}": {
+      "delete": {
+        "description": "Delete an existing contact",
+        "parameters": [
+          {
+            "description": "Unique 16 characters ID of the contact",
+            "in": "path",
+            "name": "contactid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty response"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          }
+        },
+        "security": [
+          {
+            "mqApiKey": []
+          }
+        ],
+        "tags": [
+          "contacts"
+        ]
+      },
+      "put": {
+        "description": "Update an existing contact",
+        "parameters": [
+          {
+            "description": "Unique 16 characters ID of the contact",
+            "in": "path",
+            "name": "contactid",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Contact properties to update",
+            "in": "body",
+            "name": "contact",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContactUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty response"
+          },
+          "401": {
+            "$ref": "#/responses/401"
+          },
+          "404": {
+            "$ref": "#/responses/404"
+          },
+          "422": {
+            "$ref": "#/responses/422"
+          }
+        },
+        "security": [
+          {
+            "mqApiKey": []
+          }
+        ],
+        "tags": [
+          "contacts"
+        ]
+      }
+    },
     "/contacts/lists": {
       "get": {
         "description": "Get a paged result of contact lists.",
@@ -505,82 +581,6 @@
         ],
         "tags": [
           "lists"
-        ]
-      }
-    },
-    "/contacts/{contactid}": {
-      "delete": {
-        "description": "Delete an existing contact",
-        "parameters": [
-          {
-            "description": "Unique 16 characters ID of the contact",
-            "in": "path",
-            "name": "contactid",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Empty response"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          }
-        },
-        "security": [
-          {
-            "mqApiKey": []
-          }
-        ],
-        "tags": [
-          "contacts"
-        ]
-      },
-      "put": {
-        "description": "Update an existing contact",
-        "parameters": [
-          {
-            "description": "Unique 16 characters ID of the contact",
-            "in": "path",
-            "name": "contactid",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Contact properties to update",
-            "in": "body",
-            "name": "contact",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ContactUpdate"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Empty response"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "422": {
-            "$ref": "#/responses/422"
-          }
-        },
-        "security": [
-          {
-            "mqApiKey": []
-          }
-        ],
-        "tags": [
-          "contacts"
         ]
       }
     },

@@ -841,61 +841,6 @@
     }
   },
   "paths": {
-    "/inappproducts/batch": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "operationId": "androidpublisher.inappproducts.batch",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/InappproductsBatchRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/InappproductsBatchResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/androidpublisher"
-            ]
-          }
-        ],
-        "tags": [
-          "inappproducts"
-        ]
-      }
-    },
     "/{packageName}/edits": {
       "parameters": [
         {
@@ -1057,6 +1002,132 @@
         }
       ]
     },
+    "/{packageName}/edits/{editId}:commit": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Commits/applies the changes made in this edit back to the app.",
+        "operationId": "androidpublisher.edits.commit",
+        "parameters": [
+          {
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "in": "path",
+            "name": "packageName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Unique identifier for this edit.",
+            "in": "path",
+            "name": "editId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AppEdit"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidpublisher"
+            ]
+          }
+        ],
+        "tags": [
+          "edits"
+        ]
+      }
+    },
+    "/{packageName}/edits/{editId}:validate": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Checks that the edit can be successfully committed. The edit's changes are not applied to the live app.",
+        "operationId": "androidpublisher.edits.validate",
+        "parameters": [
+          {
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "in": "path",
+            "name": "packageName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Unique identifier for this edit.",
+            "in": "path",
+            "name": "editId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AppEdit"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidpublisher"
+            ]
+          }
+        ],
+        "tags": [
+          "edits"
+        ]
+      }
+    },
     "/{packageName}/edits/{editId}/apks": {
       "get": {
         "operationId": "androidpublisher.edits.apks.list",
@@ -1145,76 +1216,6 @@
             "description": "Successful response",
             "schema": {
               "$ref": "#/definitions/Apk"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/androidpublisher"
-            ]
-          }
-        ],
-        "tags": [
-          "edits"
-        ]
-      }
-    },
-    "/{packageName}/edits/{editId}/apks/externallyHosted": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Creates a new APK without uploading the APK itself to Google Play, instead hosting the APK at a specified URL. This function is only available to enterprises using Google Play for Work whose application is configured to restrict distribution to the enterprise domain.",
-        "operationId": "androidpublisher.edits.apks.addexternallyhosted",
-        "parameters": [
-          {
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
-            "in": "path",
-            "name": "packageName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Unique identifier for this edit.",
-            "in": "path",
-            "name": "editId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/ApksAddExternallyHostedRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/ApksAddExternallyHostedResponse"
             }
           }
         },
@@ -1833,6 +1834,76 @@
             "description": "Successful response",
             "schema": {
               "$ref": "#/definitions/ApkListing"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidpublisher"
+            ]
+          }
+        ],
+        "tags": [
+          "edits"
+        ]
+      }
+    },
+    "/{packageName}/edits/{editId}/apks/externallyHosted": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates a new APK without uploading the APK itself to Google Play, instead hosting the APK at a specified URL. This function is only available to enterprises using Google Play for Work whose application is configured to restrict distribution to the enterprise domain.",
+        "operationId": "androidpublisher.edits.apks.addexternallyhosted",
+        "parameters": [
+          {
+            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
+            "in": "path",
+            "name": "packageName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Unique identifier for this edit.",
+            "in": "path",
+            "name": "editId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ApksAddExternallyHostedRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ApksAddExternallyHostedResponse"
             }
           }
         },
@@ -3129,132 +3200,6 @@
         ]
       }
     },
-    "/{packageName}/edits/{editId}:commit": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Commits/applies the changes made in this edit back to the app.",
-        "operationId": "androidpublisher.edits.commit",
-        "parameters": [
-          {
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
-            "in": "path",
-            "name": "packageName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Unique identifier for this edit.",
-            "in": "path",
-            "name": "editId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AppEdit"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/androidpublisher"
-            ]
-          }
-        ],
-        "tags": [
-          "edits"
-        ]
-      }
-    },
-    "/{packageName}/edits/{editId}:validate": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Checks that the edit can be successfully committed. The edit's changes are not applied to the live app.",
-        "operationId": "androidpublisher.edits.validate",
-        "parameters": [
-          {
-            "description": "Unique identifier for the Android app that is being updated; for example, \"com.spiffygame\".",
-            "in": "path",
-            "name": "packageName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Unique identifier for this edit.",
-            "in": "path",
-            "name": "editId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AppEdit"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/androidpublisher"
-            ]
-          }
-        ],
-        "tags": [
-          "edits"
-        ]
-      }
-    },
     "/{packageName}/entitlements": {
       "get": {
         "description": "Lists the user's current inapp item or subscription entitlements",
@@ -4054,6 +3999,61 @@
         ],
         "tags": [
           "purchases"
+        ]
+      }
+    },
+    "/inappproducts/batch": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "operationId": "androidpublisher.inappproducts.batch",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/InappproductsBatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/InappproductsBatchResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidpublisher"
+            ]
+          }
+        ],
+        "tags": [
+          "inappproducts"
         ]
       }
     }

@@ -170,37 +170,6 @@
         "status"
       ]
     },
-    "IP_Check": {
-      "properties": {
-        "country": {
-          "description": "The country name",
-          "type": "string"
-        },
-        "country_code": {
-          "description": "The 2 digit country code",
-          "type": "string"
-        },
-        "rates": {
-          "$ref": "#/definitions/Country_Rates",
-          "description": "An array of the EU VAT rates for that country"
-        },
-        "status": {
-          "description": "Response code",
-          "type": "integer"
-        },
-        "vat_applies": {
-          "description": "TRUE or FALSE, depending if country is within the EU.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "country",
-        "country_code",
-        "rates",
-        "status",
-        "vat_applies"
-      ]
-    },
     "Invoice_Array": {
       "properties": {
         "business_address": {
@@ -421,6 +390,85 @@
         "vat_rate"
       ]
     },
+    "IP_Check": {
+      "properties": {
+        "country": {
+          "description": "The country name",
+          "type": "string"
+        },
+        "country_code": {
+          "description": "The 2 digit country code",
+          "type": "string"
+        },
+        "rates": {
+          "$ref": "#/definitions/Country_Rates",
+          "description": "An array of the EU VAT rates for that country"
+        },
+        "status": {
+          "description": "Response code",
+          "type": "integer"
+        },
+        "vat_applies": {
+          "description": "TRUE or FALSE, depending if country is within the EU.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "country",
+        "country_code",
+        "rates",
+        "status",
+        "vat_applies"
+      ]
+    },
+    "parking": {
+      "properties": {
+        "applies_to": {
+          "description": "The type of goods the rate applies to",
+          "type": "string"
+        },
+        "value": {
+          "description": "The % VAT rate",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "applies_to",
+        "value"
+      ]
+    },
+    "reduced": {
+      "properties": {
+        "applies_to": {
+          "description": "The type of goods the rate applies to",
+          "type": "string"
+        },
+        "value": {
+          "description": "The % VAT rate",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "applies_to",
+        "value"
+      ]
+    },
+    "reduced_alt": {
+      "properties": {
+        "applies_to": {
+          "description": "The type of goods the rate applies to",
+          "type": "string"
+        },
+        "value": {
+          "description": "The % VAT rate",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "applies_to",
+        "value"
+      ]
+    },
     "Retrieve_Invoice": {
       "properties": {
         "invoice": {
@@ -556,6 +604,33 @@
         "vat_total"
       ]
     },
+    "standard": {
+      "properties": {
+        "value": {
+          "description": "The % VAT rate",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "super_reduced": {
+      "properties": {
+        "applies_to": {
+          "description": "The type of goods the rate applies to",
+          "type": "string"
+        },
+        "value": {
+          "description": "The % VAT rate",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "applies_to",
+        "value"
+      ]
+    },
     "Update_Invoice": {
       "properties": {
         "invoice": {
@@ -679,81 +754,6 @@
       },
       "required": [
         "country_code"
-      ]
-    },
-    "parking": {
-      "properties": {
-        "applies_to": {
-          "description": "The type of goods the rate applies to",
-          "type": "string"
-        },
-        "value": {
-          "description": "The % VAT rate",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "applies_to",
-        "value"
-      ]
-    },
-    "reduced": {
-      "properties": {
-        "applies_to": {
-          "description": "The type of goods the rate applies to",
-          "type": "string"
-        },
-        "value": {
-          "description": "The % VAT rate",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "applies_to",
-        "value"
-      ]
-    },
-    "reduced_alt": {
-      "properties": {
-        "applies_to": {
-          "description": "The type of goods the rate applies to",
-          "type": "string"
-        },
-        "value": {
-          "description": "The % VAT rate",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "applies_to",
-        "value"
-      ]
-    },
-    "standard": {
-      "properties": {
-        "value": {
-          "description": "The % VAT rate",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "super_reduced": {
-      "properties": {
-        "applies_to": {
-          "description": "The type of goods the rate applies to",
-          "type": "string"
-        },
-        "value": {
-          "description": "The % VAT rate",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "applies_to",
-        "value"
       ]
     }
   },

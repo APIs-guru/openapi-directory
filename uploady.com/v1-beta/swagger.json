@@ -141,6 +141,20 @@
         "direct_link"
       ]
     },
+    "Files": {
+      "properties": {
+        "files": {
+          "items": {
+            "$ref": "#/definitions/File"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "files"
+      ]
+    },
     "FileShare": {
       "properties": {
         "emails": {
@@ -167,20 +181,6 @@
       "required": [
         "id",
         "email"
-      ]
-    },
-    "Files": {
-      "properties": {
-        "files": {
-          "items": {
-            "$ref": "#/definitions/File"
-          },
-          "type": "array",
-          "uniqueItems": true
-        }
-      },
-      "required": [
-        "files"
       ]
     },
     "FilesLinks": {

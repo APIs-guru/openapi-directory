@@ -1,12 +1,4 @@
 {
-  "private": true,
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/APIs-guru/api-models.git"
-  },
-  "scripts": {
-    "test": "scripts/collection.js validate"
-  },
   "dependencies": {
     "api-spec-converter": "git://github.com/APIs-guru/api-spec-converter",
     "async": "^1.2.1",
@@ -27,5 +19,13 @@
     "parse-domain": "^0.2.0",
     "request": "^2.64.0",
     "urijs": "^1.16.1"
+  },
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/APIs-guru/api-models.git"
+  },
+  "scripts": {
+    "test": "scripts/collection.js validate"
   }
 }

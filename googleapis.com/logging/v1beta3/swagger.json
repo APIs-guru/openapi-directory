@@ -706,537 +706,20 @@
       "name": "quotaUser",
       "type": "string"
     },
-    "uploadType": {
-      "description": "Legacy upload protocol for media (e.g. \"media\", \"multipart\").",
-      "in": "query",
-      "name": "uploadType",
-      "type": "string"
-    },
     "upload_protocol": {
       "description": "Upload protocol for media (e.g. \"raw\", \"multipart\").",
       "in": "query",
       "name": "upload_protocol",
       "type": "string"
+    },
+    "uploadType": {
+      "description": "Legacy upload protocol for media (e.g. \"media\", \"multipart\").",
+      "in": "query",
+      "name": "uploadType",
+      "type": "string"
     }
   },
   "paths": {
-    "/v1beta3/projects/{projectsId}/logServices": {
-      "get": {
-        "description": "Lists the log services that have log entries in this project.",
-        "operationId": "logging.projects.logServices.list",
-        "parameters": [
-          {
-            "description": "Part of `projectName`. The resource name of the project whose services are to be listed.",
-            "in": "path",
-            "name": "projectsId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The maximum number of `LogService` objects to return in one operation.",
-            "in": "query",
-            "name": "pageSize",
-            "type": "integer"
-          },
-          {
-            "description": "An opaque token, returned as `nextPageToken` by a prior `ListLogServices` operation. If `pageToken` is supplied, then the other fields of this request are ignored, and instead the previous `ListLogServices` operation is continued.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/ListLogServicesResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/cloud-platform.read-only",
-              "https://www.googleapis.com/auth/logging.admin",
-              "https://www.googleapis.com/auth/logging.read"
-            ]
-          }
-        ],
-        "tags": [
-          "projects"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/access_token"
-        },
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/bearer_token"
-        },
-        {
-          "$ref": "#/parameters/callback"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/pp"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/upload_protocol"
-        },
-        {
-          "$ref": "#/parameters/uploadType"
-        },
-        {
-          "$ref": "#/parameters/$.xgafv"
-        }
-      ]
-    },
-    "/v1beta3/projects/{projectsId}/logServices/{logServicesId}/indexes": {
-      "get": {
-        "description": "Lists the current index values for a log service.",
-        "operationId": "logging.projects.logServices.indexes.list",
-        "parameters": [
-          {
-            "description": "Part of `serviceName`. The resource name of a log service whose service indexes are requested. Example: `\"projects/my-project-id/logServices/appengine.googleapis.com\"`.",
-            "in": "path",
-            "name": "projectsId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Part of `serviceName`. See documentation of `projectsId`.",
-            "in": "path",
-            "name": "logServicesId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Restricts the index values returned to be those with a specified prefix for each index key. This field has the form `\"/prefix1/prefix2/...\"`, in order corresponding to the `LogService indexKeys`. Non-empty prefixes must begin with `/`. For example, App Engine's two keys are the module ID and the version ID. Following is the effect of using various values for `indexPrefix`: + `\"/Mod/\"` retrieves `/Mod/10` and `/Mod/11` but not `/ModA/10`. + `\"/Mod` retrieves `/Mod/10`, `/Mod/11` and `/ModA/10` but not `/XXX/33`. + `\"/Mod/1\"` retrieves `/Mod/10` and `/Mod/11` but not `/ModA/10`. + `\"/Mod/10/\"` retrieves `/Mod/10` only. + An empty prefix or `\"/\"` retrieves all values.",
-            "in": "query",
-            "name": "indexPrefix",
-            "type": "string"
-          },
-          {
-            "description": "A non-negative integer that limits the number of levels of the index hierarchy that are returned. If `depth` is 1 (default), only the first index key value is returned. If `depth` is 2, both primary and secondary key values are returned. If `depth` is 0, the depth is the number of slash-separators in the `indexPrefix` field, not counting a slash appearing as the last character of the prefix. If the `indexPrefix` field is empty, the default depth is 1. It is an error for `depth` to be any positive value less than the number of components in `indexPrefix`.",
-            "in": "query",
-            "name": "depth",
-            "type": "integer"
-          },
-          {
-            "description": "The maximum number of log service index resources to return in one operation.",
-            "in": "query",
-            "name": "pageSize",
-            "type": "integer"
-          },
-          {
-            "description": "An opaque token, returned as `nextPageToken` by a prior `ListLogServiceIndexes` operation. If `pageToken` is supplied, then the other fields of this request are ignored, and instead the previous `ListLogServiceIndexes` operation is continued.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/ListLogServiceIndexesResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/cloud-platform.read-only",
-              "https://www.googleapis.com/auth/logging.admin",
-              "https://www.googleapis.com/auth/logging.read"
-            ]
-          }
-        ],
-        "tags": [
-          "projects"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/access_token"
-        },
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/bearer_token"
-        },
-        {
-          "$ref": "#/parameters/callback"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/pp"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/upload_protocol"
-        },
-        {
-          "$ref": "#/parameters/uploadType"
-        },
-        {
-          "$ref": "#/parameters/$.xgafv"
-        }
-      ]
-    },
-    "/v1beta3/projects/{projectsId}/logServices/{logServicesId}/sinks": {
-      "get": {
-        "description": "Lists log service sinks associated with a log service.",
-        "operationId": "logging.projects.logServices.sinks.list",
-        "parameters": [
-          {
-            "description": "Part of `serviceName`. The log service whose sinks are wanted.",
-            "in": "path",
-            "name": "projectsId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Part of `serviceName`. See documentation of `projectsId`.",
-            "in": "path",
-            "name": "logServicesId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/ListLogServiceSinksResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/cloud-platform.read-only",
-              "https://www.googleapis.com/auth/logging.admin",
-              "https://www.googleapis.com/auth/logging.read"
-            ]
-          }
-        ],
-        "tags": [
-          "projects"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/access_token"
-        },
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/bearer_token"
-        },
-        {
-          "$ref": "#/parameters/callback"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/pp"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/upload_protocol"
-        },
-        {
-          "$ref": "#/parameters/uploadType"
-        },
-        {
-          "$ref": "#/parameters/$.xgafv"
-        }
-      ],
-      "post": {
-        "description": "Creates a log service sink. All log entries from a specified log service are written to the destination.",
-        "operationId": "logging.projects.logServices.sinks.create",
-        "parameters": [
-          {
-            "description": "Part of `serviceName`. The resource name of the log service to which the sink is bound.",
-            "in": "path",
-            "name": "projectsId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Part of `serviceName`. See documentation of `projectsId`.",
-            "in": "path",
-            "name": "logServicesId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/LogSink"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/LogSink"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/logging.admin"
-            ]
-          }
-        ],
-        "tags": [
-          "projects"
-        ]
-      }
-    },
-    "/v1beta3/projects/{projectsId}/logServices/{logServicesId}/sinks/{sinksId}": {
-      "delete": {
-        "description": "Deletes a log service sink. After deletion, no new log entries are written to the destination.",
-        "operationId": "logging.projects.logServices.sinks.delete",
-        "parameters": [
-          {
-            "description": "Part of `sinkName`. The resource name of the log service sink to delete.",
-            "in": "path",
-            "name": "projectsId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Part of `sinkName`. See documentation of `projectsId`.",
-            "in": "path",
-            "name": "logServicesId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Part of `sinkName`. See documentation of `projectsId`.",
-            "in": "path",
-            "name": "sinksId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Empty"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/logging.admin"
-            ]
-          }
-        ],
-        "tags": [
-          "projects"
-        ]
-      },
-      "get": {
-        "description": "Gets a log service sink.",
-        "operationId": "logging.projects.logServices.sinks.get",
-        "parameters": [
-          {
-            "description": "Part of `sinkName`. The resource name of the log service sink to return.",
-            "in": "path",
-            "name": "projectsId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Part of `sinkName`. See documentation of `projectsId`.",
-            "in": "path",
-            "name": "logServicesId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Part of `sinkName`. See documentation of `projectsId`.",
-            "in": "path",
-            "name": "sinksId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/LogSink"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/cloud-platform.read-only",
-              "https://www.googleapis.com/auth/logging.admin",
-              "https://www.googleapis.com/auth/logging.read"
-            ]
-          }
-        ],
-        "tags": [
-          "projects"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/access_token"
-        },
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/bearer_token"
-        },
-        {
-          "$ref": "#/parameters/callback"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/pp"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/upload_protocol"
-        },
-        {
-          "$ref": "#/parameters/uploadType"
-        },
-        {
-          "$ref": "#/parameters/$.xgafv"
-        }
-      ],
-      "put": {
-        "description": "Updates a log service sink. If the sink does not exist, it is created.",
-        "operationId": "logging.projects.logServices.sinks.update",
-        "parameters": [
-          {
-            "description": "Part of `sinkName`. The resource name of the log service sink to update.",
-            "in": "path",
-            "name": "projectsId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Part of `sinkName`. See documentation of `projectsId`.",
-            "in": "path",
-            "name": "logServicesId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Part of `sinkName`. See documentation of `projectsId`.",
-            "in": "path",
-            "name": "sinksId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/LogSink"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/LogSink"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/logging.admin"
-            ]
-          }
-        ],
-        "tags": [
-          "projects"
-        ]
-      }
-    },
     "/v1beta3/projects/{projectsId}/logs": {
       "get": {
         "description": "Lists the logs in the project. Only logs that have entries are listed.",
@@ -1791,6 +1274,523 @@
             "description": "Part of `sinkName`. See documentation of `projectsId`.",
             "in": "path",
             "name": "logsId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Part of `sinkName`. See documentation of `projectsId`.",
+            "in": "path",
+            "name": "sinksId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/LogSink"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/LogSink"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/logging.admin"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/v1beta3/projects/{projectsId}/logServices": {
+      "get": {
+        "description": "Lists the log services that have log entries in this project.",
+        "operationId": "logging.projects.logServices.list",
+        "parameters": [
+          {
+            "description": "Part of `projectName`. The resource name of the project whose services are to be listed.",
+            "in": "path",
+            "name": "projectsId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The maximum number of `LogService` objects to return in one operation.",
+            "in": "query",
+            "name": "pageSize",
+            "type": "integer"
+          },
+          {
+            "description": "An opaque token, returned as `nextPageToken` by a prior `ListLogServices` operation. If `pageToken` is supplied, then the other fields of this request are ignored, and instead the previous `ListLogServices` operation is continued.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ListLogServicesResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/cloud-platform.read-only",
+              "https://www.googleapis.com/auth/logging.admin",
+              "https://www.googleapis.com/auth/logging.read"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/access_token"
+        },
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/bearer_token"
+        },
+        {
+          "$ref": "#/parameters/callback"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/pp"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/parameters/uploadType"
+        },
+        {
+          "$ref": "#/parameters/$.xgafv"
+        }
+      ]
+    },
+    "/v1beta3/projects/{projectsId}/logServices/{logServicesId}/indexes": {
+      "get": {
+        "description": "Lists the current index values for a log service.",
+        "operationId": "logging.projects.logServices.indexes.list",
+        "parameters": [
+          {
+            "description": "Part of `serviceName`. The resource name of a log service whose service indexes are requested. Example: `\"projects/my-project-id/logServices/appengine.googleapis.com\"`.",
+            "in": "path",
+            "name": "projectsId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Part of `serviceName`. See documentation of `projectsId`.",
+            "in": "path",
+            "name": "logServicesId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Restricts the index values returned to be those with a specified prefix for each index key. This field has the form `\"/prefix1/prefix2/...\"`, in order corresponding to the `LogService indexKeys`. Non-empty prefixes must begin with `/`. For example, App Engine's two keys are the module ID and the version ID. Following is the effect of using various values for `indexPrefix`: + `\"/Mod/\"` retrieves `/Mod/10` and `/Mod/11` but not `/ModA/10`. + `\"/Mod` retrieves `/Mod/10`, `/Mod/11` and `/ModA/10` but not `/XXX/33`. + `\"/Mod/1\"` retrieves `/Mod/10` and `/Mod/11` but not `/ModA/10`. + `\"/Mod/10/\"` retrieves `/Mod/10` only. + An empty prefix or `\"/\"` retrieves all values.",
+            "in": "query",
+            "name": "indexPrefix",
+            "type": "string"
+          },
+          {
+            "description": "A non-negative integer that limits the number of levels of the index hierarchy that are returned. If `depth` is 1 (default), only the first index key value is returned. If `depth` is 2, both primary and secondary key values are returned. If `depth` is 0, the depth is the number of slash-separators in the `indexPrefix` field, not counting a slash appearing as the last character of the prefix. If the `indexPrefix` field is empty, the default depth is 1. It is an error for `depth` to be any positive value less than the number of components in `indexPrefix`.",
+            "in": "query",
+            "name": "depth",
+            "type": "integer"
+          },
+          {
+            "description": "The maximum number of log service index resources to return in one operation.",
+            "in": "query",
+            "name": "pageSize",
+            "type": "integer"
+          },
+          {
+            "description": "An opaque token, returned as `nextPageToken` by a prior `ListLogServiceIndexes` operation. If `pageToken` is supplied, then the other fields of this request are ignored, and instead the previous `ListLogServiceIndexes` operation is continued.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ListLogServiceIndexesResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/cloud-platform.read-only",
+              "https://www.googleapis.com/auth/logging.admin",
+              "https://www.googleapis.com/auth/logging.read"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/access_token"
+        },
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/bearer_token"
+        },
+        {
+          "$ref": "#/parameters/callback"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/pp"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/parameters/uploadType"
+        },
+        {
+          "$ref": "#/parameters/$.xgafv"
+        }
+      ]
+    },
+    "/v1beta3/projects/{projectsId}/logServices/{logServicesId}/sinks": {
+      "get": {
+        "description": "Lists log service sinks associated with a log service.",
+        "operationId": "logging.projects.logServices.sinks.list",
+        "parameters": [
+          {
+            "description": "Part of `serviceName`. The log service whose sinks are wanted.",
+            "in": "path",
+            "name": "projectsId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Part of `serviceName`. See documentation of `projectsId`.",
+            "in": "path",
+            "name": "logServicesId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ListLogServiceSinksResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/cloud-platform.read-only",
+              "https://www.googleapis.com/auth/logging.admin",
+              "https://www.googleapis.com/auth/logging.read"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/access_token"
+        },
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/bearer_token"
+        },
+        {
+          "$ref": "#/parameters/callback"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/pp"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/parameters/uploadType"
+        },
+        {
+          "$ref": "#/parameters/$.xgafv"
+        }
+      ],
+      "post": {
+        "description": "Creates a log service sink. All log entries from a specified log service are written to the destination.",
+        "operationId": "logging.projects.logServices.sinks.create",
+        "parameters": [
+          {
+            "description": "Part of `serviceName`. The resource name of the log service to which the sink is bound.",
+            "in": "path",
+            "name": "projectsId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Part of `serviceName`. See documentation of `projectsId`.",
+            "in": "path",
+            "name": "logServicesId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/LogSink"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/LogSink"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/logging.admin"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      }
+    },
+    "/v1beta3/projects/{projectsId}/logServices/{logServicesId}/sinks/{sinksId}": {
+      "delete": {
+        "description": "Deletes a log service sink. After deletion, no new log entries are written to the destination.",
+        "operationId": "logging.projects.logServices.sinks.delete",
+        "parameters": [
+          {
+            "description": "Part of `sinkName`. The resource name of the log service sink to delete.",
+            "in": "path",
+            "name": "projectsId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Part of `sinkName`. See documentation of `projectsId`.",
+            "in": "path",
+            "name": "logServicesId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Part of `sinkName`. See documentation of `projectsId`.",
+            "in": "path",
+            "name": "sinksId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Empty"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/logging.admin"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "get": {
+        "description": "Gets a log service sink.",
+        "operationId": "logging.projects.logServices.sinks.get",
+        "parameters": [
+          {
+            "description": "Part of `sinkName`. The resource name of the log service sink to return.",
+            "in": "path",
+            "name": "projectsId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Part of `sinkName`. See documentation of `projectsId`.",
+            "in": "path",
+            "name": "logServicesId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Part of `sinkName`. See documentation of `projectsId`.",
+            "in": "path",
+            "name": "sinksId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/LogSink"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/cloud-platform.read-only",
+              "https://www.googleapis.com/auth/logging.admin",
+              "https://www.googleapis.com/auth/logging.read"
+            ]
+          }
+        ],
+        "tags": [
+          "projects"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/access_token"
+        },
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/bearer_token"
+        },
+        {
+          "$ref": "#/parameters/callback"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/pp"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/upload_protocol"
+        },
+        {
+          "$ref": "#/parameters/uploadType"
+        },
+        {
+          "$ref": "#/parameters/$.xgafv"
+        }
+      ],
+      "put": {
+        "description": "Updates a log service sink. If the sink does not exist, it is created.",
+        "operationId": "logging.projects.logServices.sinks.update",
+        "parameters": [
+          {
+            "description": "Part of `sinkName`. The resource name of the log service sink to update.",
+            "in": "path",
+            "name": "projectsId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Part of `sinkName`. See documentation of `projectsId`.",
+            "in": "path",
+            "name": "logServicesId",
             "required": true,
             "type": "string"
           },

@@ -191,10 +191,6 @@
           "description": "Email address of the assignee, or the string \"DELETED_USER\" if the account is no longer available.",
           "type": "string"
         },
-        "customFields": {
-          "$ref": "#/definitions/CustomFields",
-          "description": "Custom fields."
-        },
         "customerName": {
           "description": "Customer name.",
           "type": "string"
@@ -202,6 +198,10 @@
         "customerPhoneNumber": {
           "description": "Customer phone number.",
           "type": "string"
+        },
+        "customFields": {
+          "$ref": "#/definitions/CustomFields",
+          "description": "Custom fields."
         },
         "kind": {
           "default": "coordinate#jobState",

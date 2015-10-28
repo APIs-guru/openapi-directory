@@ -433,41 +433,6 @@
         ]
       }
     },
-    "/api/rest/v1/contacts/all": {
-      "get": {
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "deprecated": false,
-        "description": "Returns all contacts",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/WebServiceContacts"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "summary": "all",
-        "tags": [
-          "contacts"
-        ]
-      }
-    },
     "/api/rest/v1/contacts/{contactId}": {
       "delete": {
         "consumes": [
@@ -548,6 +513,41 @@
           }
         },
         "summary": "get",
+        "tags": [
+          "contacts"
+        ]
+      }
+    },
+    "/api/rest/v1/contacts/all": {
+      "get": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Returns all contacts",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebServiceContacts"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "all",
         "tags": [
           "contacts"
         ]
@@ -646,41 +646,6 @@
         ]
       }
     },
-    "/api/rest/v1/groups/all": {
-      "get": {
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "deprecated": false,
-        "description": "Returns all groups",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/WebServiceGroups"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "summary": "all",
-        "tags": [
-          "groups"
-        ]
-      }
-    },
     "/api/rest/v1/groups/{groupId}": {
       "delete": {
         "consumes": [
@@ -763,6 +728,126 @@
         "summary": "get",
         "tags": [
           "groups"
+        ]
+      }
+    },
+    "/api/rest/v1/groups/all": {
+      "get": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Returns all groups",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebServiceGroups"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "all",
+        "tags": [
+          "groups"
+        ]
+      }
+    },
+    "/api/rest/v1/messages/{messageId}": {
+      "delete": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Deletes a  message",
+        "parameters": [
+          {
+            "description": "messageId",
+            "format": "int64",
+            "in": "path",
+            "name": "messageId",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "Description was not specified"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "summary": "delete",
+        "tags": [
+          "messages"
+        ]
+      },
+      "get": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Returns details for a single message",
+        "parameters": [
+          {
+            "description": "messageId",
+            "format": "int64",
+            "in": "path",
+            "name": "messageId",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebServiceMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "get",
+        "tags": [
+          "messages"
         ]
       }
     },
@@ -925,91 +1010,6 @@
           }
         },
         "summary": "all",
-        "tags": [
-          "messages"
-        ]
-      }
-    },
-    "/api/rest/v1/messages/{messageId}": {
-      "delete": {
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "deprecated": false,
-        "description": "Deletes a  message",
-        "parameters": [
-          {
-            "description": "messageId",
-            "format": "int64",
-            "in": "path",
-            "name": "messageId",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "Description was not specified"
-          },
-          "204": {
-            "description": "No Content"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "summary": "delete",
-        "tags": [
-          "messages"
-        ]
-      },
-      "get": {
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "deprecated": false,
-        "description": "Returns details for a single message",
-        "parameters": [
-          {
-            "description": "messageId",
-            "format": "int64",
-            "in": "path",
-            "name": "messageId",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/WebServiceMessage"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "summary": "get",
         "tags": [
           "messages"
         ]
@@ -1334,41 +1334,6 @@
         ]
       }
     },
-    "/api/rest/v1/templates/all": {
-      "get": {
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "deprecated": false,
-        "description": "Returns all templates",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/WebServiceTemplates"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "summary": "all",
-        "tags": [
-          "templates"
-        ]
-      }
-    },
     "/api/rest/v1/templates/{templateId}": {
       "delete": {
         "consumes": [
@@ -1449,6 +1414,41 @@
           }
         },
         "summary": "get",
+        "tags": [
+          "templates"
+        ]
+      }
+    },
+    "/api/rest/v1/templates/all": {
+      "get": {
+        "consumes": [
+          "application/json",
+          "application/xml"
+        ],
+        "deprecated": false,
+        "description": "Returns all templates",
+        "produces": [
+          "application/json",
+          "application/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebServiceTemplates"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "summary": "all",
         "tags": [
           "templates"
         ]

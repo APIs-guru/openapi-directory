@@ -1141,62 +1141,6 @@
         ]
       }
     },
-    "/reports/generate": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Generates and returns a report immediately.",
-        "operationId": "doubleclicksearch.reports.generate",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "reportRequest",
-            "schema": {
-              "$ref": "#/definitions/ReportRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Report"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/doubleclicksearch"
-            ]
-          }
-        ],
-        "tags": [
-          "reports"
-        ]
-      }
-    },
     "/reports/{reportId}": {
       "get": {
         "description": "Polls for the status of a report request.",
@@ -1313,6 +1257,62 @@
           "$ref": "#/parameters/userIp"
         }
       ]
+    },
+    "/reports/generate": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Generates and returns a report immediately.",
+        "operationId": "doubleclicksearch.reports.generate",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "reportRequest",
+            "schema": {
+              "$ref": "#/definitions/ReportRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/doubleclicksearch"
+            ]
+          }
+        ],
+        "tags": [
+          "reports"
+        ]
+      }
     }
   },
   "schemes": [

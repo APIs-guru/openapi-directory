@@ -106,6 +106,73 @@
       },
       "type": "object"
     },
+    "AdsenseReportsGenerateResponse": {
+      "properties": {
+        "averages": {
+          "description": "The averages of the report. This is the same length as any other row in the report; cells corresponding to dimension columns are empty.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "headers": {
+          "description": "The header information of the columns requested in the report. This is a list of headers; one for each dimension in the request, followed by one for each metric in the request.",
+          "items": {
+            "properties": {
+              "currency": {
+                "description": "The currency of this column. Only present if the header type is METRIC_CURRENCY.",
+                "type": "string"
+              },
+              "name": {
+                "description": "The name of the header.",
+                "type": "string"
+              },
+              "type": {
+                "description": "The type of the header; one of DIMENSION, METRIC_TALLY, METRIC_RATIO, or METRIC_CURRENCY.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "adsense#report",
+          "description": "Kind this is, in this case adsense#report.",
+          "type": "string"
+        },
+        "rows": {
+          "description": "The output rows of the report. Each row is a list of cells; one for each dimension in the request, followed by one for each metric in the request. The dimension cells contain strings, and the metric cells contain numbers.",
+          "items": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "type": "array"
+        },
+        "totalMatchedRows": {
+          "description": "The total number of rows matched by the report request. Fewer rows may be returned in the response due to being limited by the row count requested or the report row limit.",
+          "format": "int64",
+          "type": "string"
+        },
+        "totals": {
+          "description": "The totals of the report. This is the same length as any other row in the report; cells corresponding to dimension columns are empty.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "warnings": {
+          "description": "Any warnings associated with generation of the report.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "AdStyle": {
       "properties": {
         "colors": {
@@ -293,73 +360,6 @@
         "nextPageToken": {
           "description": "Continuation token used to page through ad units. To retrieve the next page of results, set the next request's \"pageToken\" value to this.",
           "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AdsenseReportsGenerateResponse": {
-      "properties": {
-        "averages": {
-          "description": "The averages of the report. This is the same length as any other row in the report; cells corresponding to dimension columns are empty.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "headers": {
-          "description": "The header information of the columns requested in the report. This is a list of headers; one for each dimension in the request, followed by one for each metric in the request.",
-          "items": {
-            "properties": {
-              "currency": {
-                "description": "The currency of this column. Only present if the header type is METRIC_CURRENCY.",
-                "type": "string"
-              },
-              "name": {
-                "description": "The name of the header.",
-                "type": "string"
-              },
-              "type": {
-                "description": "The type of the header; one of DIMENSION, METRIC_TALLY, METRIC_RATIO, or METRIC_CURRENCY.",
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "kind": {
-          "default": "adsense#report",
-          "description": "Kind this is, in this case adsense#report.",
-          "type": "string"
-        },
-        "rows": {
-          "description": "The output rows of the report. Each row is a list of cells; one for each dimension in the request, followed by one for each metric in the request. The dimension cells contain strings, and the metric cells contain numbers.",
-          "items": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "type": "array"
-        },
-        "totalMatchedRows": {
-          "description": "The total number of rows matched by the report request. Fewer rows may be returned in the response due to being limited by the row count requested or the report row limit.",
-          "format": "int64",
-          "type": "string"
-        },
-        "totals": {
-          "description": "The totals of the report. This is the same length as any other row in the report; cells corresponding to dimension columns are empty.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "warnings": {
-          "description": "Any warnings associated with generation of the report.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
         }
       },
       "type": "object"
@@ -1540,77 +1540,6 @@
         }
       ]
     },
-    "/accounts/{accountId}/reports/saved": {
-      "get": {
-        "description": "List all saved reports in the specified AdSense account.",
-        "operationId": "adsense.accounts.reports.saved.list",
-        "parameters": [
-          {
-            "description": "Account to which the saved reports belong.",
-            "in": "path",
-            "name": "accountId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The maximum number of saved reports to include in the response, used for paging.",
-            "in": "query",
-            "maximum": 100,
-            "minimum": 0,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "description": "A continuation token, used to page through saved reports. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/SavedReports"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/adsense",
-              "https://www.googleapis.com/auth/adsense.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "accounts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
     "/accounts/{accountId}/reports/{savedReportId}": {
       "get": {
         "description": "Generate an AdSense report based on the saved report ID sent in the query parameters.",
@@ -1658,6 +1587,77 @@
             "description": "Successful response",
             "schema": {
               "$ref": "#/definitions/AdsenseReportsGenerateResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsense",
+              "https://www.googleapis.com/auth/adsense.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/accounts/{accountId}/reports/saved": {
+      "get": {
+        "description": "List all saved reports in the specified AdSense account.",
+        "operationId": "adsense.accounts.reports.saved.list",
+        "parameters": [
+          {
+            "description": "Account to which the saved reports belong.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The maximum number of saved reports to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 100,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through saved reports. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SavedReports"
             }
           }
         },
@@ -2547,70 +2547,6 @@
         }
       ]
     },
-    "/reports/saved": {
-      "get": {
-        "description": "List all saved reports in this AdSense account.",
-        "operationId": "adsense.reports.saved.list",
-        "parameters": [
-          {
-            "description": "The maximum number of saved reports to include in the response, used for paging.",
-            "in": "query",
-            "maximum": 100,
-            "minimum": 0,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "description": "A continuation token, used to page through saved reports. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/SavedReports"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/adsense",
-              "https://www.googleapis.com/auth/adsense.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "reports"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
     "/reports/{savedReportId}": {
       "get": {
         "description": "Generate an AdSense report based on the saved report ID sent in the query parameters.",
@@ -2651,6 +2587,70 @@
             "description": "Successful response",
             "schema": {
               "$ref": "#/definitions/AdsenseReportsGenerateResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adsense",
+              "https://www.googleapis.com/auth/adsense.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "reports"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/reports/saved": {
+      "get": {
+        "description": "List all saved reports in this AdSense account.",
+        "operationId": "adsense.reports.saved.list",
+        "parameters": [
+          {
+            "description": "The maximum number of saved reports to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 100,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through saved reports. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SavedReports"
             }
           }
         },

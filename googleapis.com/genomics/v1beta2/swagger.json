@@ -2212,286 +2212,6 @@
     }
   },
   "paths": {
-    "/annotationSets": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Creates a new annotation set. Caller must have WRITE permission for the associated dataset.",
-        "operationId": "genomics.annotationSets.create",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/AnnotationSet"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AnnotationSet"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/genomics"
-            ]
-          }
-        ],
-        "tags": [
-          "annotationSets"
-        ]
-      }
-    },
-    "/annotationSets/search": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Searches for annotation sets that match the given criteria. Results are returned in a deterministic order. Caller must have READ permission for the queried datasets.",
-        "operationId": "genomics.annotationSets.search",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/SearchAnnotationSetsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/SearchAnnotationSetsResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/genomics",
-              "https://www.googleapis.com/auth/genomics.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "annotationSets"
-        ]
-      }
-    },
-    "/annotationSets/{annotationSetId}": {
-      "delete": {
-        "description": "Deletes an annotation set. Caller must have WRITE permission for the associated annotation set.",
-        "operationId": "genomics.annotationSets.delete",
-        "parameters": [
-          {
-            "description": "The ID of the annotation set to be deleted.",
-            "in": "path",
-            "name": "annotationSetId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/genomics"
-            ]
-          }
-        ],
-        "tags": [
-          "annotationSets"
-        ]
-      },
-      "get": {
-        "description": "Gets an annotation set. Caller must have READ permission for the associated dataset.",
-        "operationId": "genomics.annotationSets.get",
-        "parameters": [
-          {
-            "description": "The ID of the annotation set to be retrieved.",
-            "in": "path",
-            "name": "annotationSetId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AnnotationSet"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/genomics",
-              "https://www.googleapis.com/auth/genomics.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "annotationSets"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "patch": {
-        "description": "Updates an annotation set. The update must respect all mutability restrictions and other invariants described on the annotation set resource. Caller must have WRITE permission for the associated dataset. This method supports patch semantics.",
-        "operationId": "genomics.annotationSets.patch",
-        "parameters": [
-          {
-            "description": "The ID of the annotation set to be updated.",
-            "in": "path",
-            "name": "annotationSetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/AnnotationSet"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AnnotationSet"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/genomics"
-            ]
-          }
-        ],
-        "tags": [
-          "annotationSets"
-        ]
-      },
-      "put": {
-        "description": "Updates an annotation set. The update must respect all mutability restrictions and other invariants described on the annotation set resource. Caller must have WRITE permission for the associated dataset.",
-        "operationId": "genomics.annotationSets.update",
-        "parameters": [
-          {
-            "description": "The ID of the annotation set to be updated.",
-            "in": "path",
-            "name": "annotationSetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/AnnotationSet"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AnnotationSet"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/genomics"
-            ]
-          }
-        ],
-        "tags": [
-          "annotationSets"
-        ]
-      }
-    },
     "/annotations": {
       "parameters": [
         {
@@ -2549,7 +2269,7 @@
         ]
       }
     },
-    "/annotations/search": {
+    "/annotations:batchCreate": {
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2574,14 +2294,14 @@
         }
       ],
       "post": {
-        "description": "Searches for annotations that match the given criteria. Results are returned ordered by start position. Annotations that have matching start positions are ordered deterministically. Caller must have READ permission for the queried annotation sets.",
-        "operationId": "genomics.annotations.search",
+        "description": "Creates one or more new annotations atomically. All annotations must belong to the same annotation set. Caller must have WRITE permission for this annotation set. For optimal performance, batch positionally adjacent annotations together.\n\n\nIf the request has a systemic issue, such as an attempt to write to an inaccessible annotation set, the entire RPC will fail accordingly. For lesser data issues, when possible an error will be isolated to the corresponding batch entry in the response; the remaining well formed annotations will be created normally.",
+        "operationId": "genomics.annotations.batchCreate",
         "parameters": [
           {
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/SearchAnnotationsRequest"
+              "$ref": "#/definitions/BatchCreateAnnotationsRequest"
             }
           }
         ],
@@ -2589,7 +2309,7 @@
           "200": {
             "description": "Successful response",
             "schema": {
-              "$ref": "#/definitions/SearchAnnotationsResponse"
+              "$ref": "#/definitions/BatchAnnotationsResponse"
             }
           }
         },
@@ -2597,8 +2317,7 @@
           {
             "Oauth2": [
               "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/genomics",
-              "https://www.googleapis.com/auth/genomics.readonly"
+              "https://www.googleapis.com/auth/genomics"
             ]
           }
         ],
@@ -2772,7 +2491,7 @@
         ]
       }
     },
-    "/annotations:batchCreate": {
+    "/annotations/search": {
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -2797,14 +2516,14 @@
         }
       ],
       "post": {
-        "description": "Creates one or more new annotations atomically. All annotations must belong to the same annotation set. Caller must have WRITE permission for this annotation set. For optimal performance, batch positionally adjacent annotations together.\n\n\nIf the request has a systemic issue, such as an attempt to write to an inaccessible annotation set, the entire RPC will fail accordingly. For lesser data issues, when possible an error will be isolated to the corresponding batch entry in the response; the remaining well formed annotations will be created normally.",
-        "operationId": "genomics.annotations.batchCreate",
+        "description": "Searches for annotations that match the given criteria. Results are returned ordered by start position. Annotations that have matching start positions are ordered deterministically. Caller must have READ permission for the queried annotation sets.",
+        "operationId": "genomics.annotations.search",
         "parameters": [
           {
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/BatchCreateAnnotationsRequest"
+              "$ref": "#/definitions/SearchAnnotationsRequest"
             }
           }
         ],
@@ -2812,7 +2531,65 @@
           "200": {
             "description": "Successful response",
             "schema": {
-              "$ref": "#/definitions/BatchAnnotationsResponse"
+              "$ref": "#/definitions/SearchAnnotationsResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "annotations"
+        ]
+      }
+    },
+    "/annotationSets": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates a new annotation set. Caller must have WRITE permission for the associated dataset.",
+        "operationId": "genomics.annotationSets.create",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AnnotationSet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AnnotationSet"
             }
           }
         },
@@ -2825,7 +2602,230 @@
           }
         ],
         "tags": [
-          "annotations"
+          "annotationSets"
+        ]
+      }
+    },
+    "/annotationSets/{annotationSetId}": {
+      "delete": {
+        "description": "Deletes an annotation set. Caller must have WRITE permission for the associated annotation set.",
+        "operationId": "genomics.annotationSets.delete",
+        "parameters": [
+          {
+            "description": "The ID of the annotation set to be deleted.",
+            "in": "path",
+            "name": "annotationSetId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
+        ],
+        "tags": [
+          "annotationSets"
+        ]
+      },
+      "get": {
+        "description": "Gets an annotation set. Caller must have READ permission for the associated dataset.",
+        "operationId": "genomics.annotationSets.get",
+        "parameters": [
+          {
+            "description": "The ID of the annotation set to be retrieved.",
+            "in": "path",
+            "name": "annotationSetId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AnnotationSet"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "annotationSets"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "patch": {
+        "description": "Updates an annotation set. The update must respect all mutability restrictions and other invariants described on the annotation set resource. Caller must have WRITE permission for the associated dataset. This method supports patch semantics.",
+        "operationId": "genomics.annotationSets.patch",
+        "parameters": [
+          {
+            "description": "The ID of the annotation set to be updated.",
+            "in": "path",
+            "name": "annotationSetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AnnotationSet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AnnotationSet"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
+        ],
+        "tags": [
+          "annotationSets"
+        ]
+      },
+      "put": {
+        "description": "Updates an annotation set. The update must respect all mutability restrictions and other invariants described on the annotation set resource. Caller must have WRITE permission for the associated dataset.",
+        "operationId": "genomics.annotationSets.update",
+        "parameters": [
+          {
+            "description": "The ID of the annotation set to be updated.",
+            "in": "path",
+            "name": "annotationSetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AnnotationSet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AnnotationSet"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
+        ],
+        "tags": [
+          "annotationSets"
+        ]
+      }
+    },
+    "/annotationSets/search": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Searches for annotation sets that match the given criteria. Results are returned in a deterministic order. Caller must have READ permission for the queried datasets.",
+        "operationId": "genomics.annotationSets.search",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SearchAnnotationSetsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SearchAnnotationSetsResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "annotationSets"
         ]
       }
     },
@@ -2878,64 +2878,6 @@
             "Oauth2": [
               "https://www.googleapis.com/auth/cloud-platform",
               "https://www.googleapis.com/auth/genomics"
-            ]
-          }
-        ],
-        "tags": [
-          "callsets"
-        ]
-      }
-    },
-    "/callsets/search": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Gets a list of call sets matching the criteria.\n\nImplements GlobalAllianceApi.searchCallSets.",
-        "operationId": "genomics.callsets.search",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/SearchCallSetsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/SearchCallSetsResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/genomics",
-              "https://www.googleapis.com/auth/genomics.readonly"
             ]
           }
         ],
@@ -3101,6 +3043,64 @@
             "Oauth2": [
               "https://www.googleapis.com/auth/cloud-platform",
               "https://www.googleapis.com/auth/genomics"
+            ]
+          }
+        ],
+        "tags": [
+          "callsets"
+        ]
+      }
+    },
+    "/callsets/search": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Gets a list of call sets matching the criteria.\n\nImplements GlobalAllianceApi.searchCallSets.",
+        "operationId": "genomics.callsets.search",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SearchCallSetsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SearchCallSetsResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
             ]
           }
         ],
@@ -3490,64 +3490,6 @@
         ]
       }
     },
-    "/jobs/search": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Gets a list of jobs matching the criteria.",
-        "operationId": "genomics.jobs.search",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/SearchJobsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/SearchJobsResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/genomics",
-              "https://www.googleapis.com/auth/genomics.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "jobs"
-        ]
-      }
-    },
     "/jobs/{jobId}": {
       "get": {
         "description": "Gets a job by ID.",
@@ -3659,6 +3601,323 @@
           "jobs"
         ]
       }
+    },
+    "/jobs/search": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Gets a list of jobs matching the criteria.",
+        "operationId": "genomics.jobs.search",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SearchJobsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SearchJobsResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "jobs"
+        ]
+      }
+    },
+    "/readgroupsets/{readGroupSetId}": {
+      "delete": {
+        "description": "Deletes a read group set.",
+        "operationId": "genomics.readgroupsets.delete",
+        "parameters": [
+          {
+            "description": "The ID of the read group set to be deleted. The caller must have WRITE permissions to the dataset associated with this read group set.",
+            "in": "path",
+            "name": "readGroupSetId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
+        ],
+        "tags": [
+          "readgroupsets"
+        ]
+      },
+      "get": {
+        "description": "Gets a read group set by ID.",
+        "operationId": "genomics.readgroupsets.get",
+        "parameters": [
+          {
+            "description": "The ID of the read group set.",
+            "in": "path",
+            "name": "readGroupSetId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ReadGroupSet"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "readgroupsets"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "patch": {
+        "description": "Updates a read group set. This method supports patch semantics.",
+        "operationId": "genomics.readgroupsets.patch",
+        "parameters": [
+          {
+            "description": "The ID of the read group set to be updated. The caller must have WRITE permissions to the dataset associated with this read group set.",
+            "in": "path",
+            "name": "readGroupSetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ReadGroupSet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ReadGroupSet"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
+        ],
+        "tags": [
+          "readgroupsets"
+        ]
+      },
+      "put": {
+        "description": "Updates a read group set.",
+        "operationId": "genomics.readgroupsets.update",
+        "parameters": [
+          {
+            "description": "The ID of the read group set to be updated. The caller must have WRITE permissions to the dataset associated with this read group set.",
+            "in": "path",
+            "name": "readGroupSetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ReadGroupSet"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ReadGroupSet"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/genomics"
+            ]
+          }
+        ],
+        "tags": [
+          "readgroupsets"
+        ]
+      }
+    },
+    "/readgroupsets/{readGroupSetId}/coveragebuckets": {
+      "get": {
+        "description": "Lists fixed width coverage buckets for a read group set, each of which correspond to a range of a reference sequence. Each bucket summarizes coverage information across its corresponding genomic range.\n\nCoverage is defined as the number of reads which are aligned to a given base in the reference sequence. Coverage buckets are available at several precomputed bucket widths, enabling retrieval of various coverage 'zoom levels'. The caller must have READ permissions for the target read group set.",
+        "operationId": "genomics.readgroupsets.coveragebuckets.list",
+        "parameters": [
+          {
+            "description": "Required. The ID of the read group set over which coverage is requested.",
+            "in": "path",
+            "name": "readGroupSetId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The maximum number of results to return in a single page. If unspecified, defaults to 1024. The maximum value is 2048.",
+            "in": "query",
+            "name": "pageSize",
+            "type": "integer"
+          },
+          {
+            "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of nextPageToken from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          },
+          {
+            "description": "The end position of the range on the reference, 0-based exclusive. If specified, referenceName must also be specified.",
+            "in": "query",
+            "name": "range.end",
+            "type": "string"
+          },
+          {
+            "description": "The reference sequence name, for example chr1, 1, or chrX.",
+            "in": "query",
+            "name": "range.referenceName",
+            "type": "string"
+          },
+          {
+            "description": "The start position of the range on the reference, 0-based inclusive. If specified, referenceName must also be specified.",
+            "in": "query",
+            "name": "range.start",
+            "type": "string"
+          },
+          {
+            "description": "The desired width of each reported coverage bucket in base pairs. This will be rounded down to the nearest precomputed bucket width; the value of which is returned as bucketWidth in the response. Defaults to infinity (each bucket spans an entire reference sequence) or the length of the target range, if specified. The smallest precomputed bucketWidth is currently 2048 base pairs; this is subject to change.",
+            "in": "query",
+            "name": "targetBucketWidth",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ListCoverageBucketsResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "readgroupsets"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     },
     "/readgroupsets/align": {
       "parameters": [
@@ -3950,265 +4209,6 @@
         ]
       }
     },
-    "/readgroupsets/{readGroupSetId}": {
-      "delete": {
-        "description": "Deletes a read group set.",
-        "operationId": "genomics.readgroupsets.delete",
-        "parameters": [
-          {
-            "description": "The ID of the read group set to be deleted. The caller must have WRITE permissions to the dataset associated with this read group set.",
-            "in": "path",
-            "name": "readGroupSetId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/genomics"
-            ]
-          }
-        ],
-        "tags": [
-          "readgroupsets"
-        ]
-      },
-      "get": {
-        "description": "Gets a read group set by ID.",
-        "operationId": "genomics.readgroupsets.get",
-        "parameters": [
-          {
-            "description": "The ID of the read group set.",
-            "in": "path",
-            "name": "readGroupSetId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/ReadGroupSet"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/genomics",
-              "https://www.googleapis.com/auth/genomics.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "readgroupsets"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "patch": {
-        "description": "Updates a read group set. This method supports patch semantics.",
-        "operationId": "genomics.readgroupsets.patch",
-        "parameters": [
-          {
-            "description": "The ID of the read group set to be updated. The caller must have WRITE permissions to the dataset associated with this read group set.",
-            "in": "path",
-            "name": "readGroupSetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/ReadGroupSet"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/ReadGroupSet"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/genomics"
-            ]
-          }
-        ],
-        "tags": [
-          "readgroupsets"
-        ]
-      },
-      "put": {
-        "description": "Updates a read group set.",
-        "operationId": "genomics.readgroupsets.update",
-        "parameters": [
-          {
-            "description": "The ID of the read group set to be updated. The caller must have WRITE permissions to the dataset associated with this read group set.",
-            "in": "path",
-            "name": "readGroupSetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/ReadGroupSet"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/ReadGroupSet"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/genomics"
-            ]
-          }
-        ],
-        "tags": [
-          "readgroupsets"
-        ]
-      }
-    },
-    "/readgroupsets/{readGroupSetId}/coveragebuckets": {
-      "get": {
-        "description": "Lists fixed width coverage buckets for a read group set, each of which correspond to a range of a reference sequence. Each bucket summarizes coverage information across its corresponding genomic range.\n\nCoverage is defined as the number of reads which are aligned to a given base in the reference sequence. Coverage buckets are available at several precomputed bucket widths, enabling retrieval of various coverage 'zoom levels'. The caller must have READ permissions for the target read group set.",
-        "operationId": "genomics.readgroupsets.coveragebuckets.list",
-        "parameters": [
-          {
-            "description": "Required. The ID of the read group set over which coverage is requested.",
-            "in": "path",
-            "name": "readGroupSetId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The maximum number of results to return in a single page. If unspecified, defaults to 1024. The maximum value is 2048.",
-            "in": "query",
-            "name": "pageSize",
-            "type": "integer"
-          },
-          {
-            "description": "The continuation token, which is used to page through large result sets. To get the next page of results, set this parameter to the value of nextPageToken from the previous response.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          },
-          {
-            "description": "The end position of the range on the reference, 0-based exclusive. If specified, referenceName must also be specified.",
-            "in": "query",
-            "name": "range.end",
-            "type": "string"
-          },
-          {
-            "description": "The reference sequence name, for example chr1, 1, or chrX.",
-            "in": "query",
-            "name": "range.referenceName",
-            "type": "string"
-          },
-          {
-            "description": "The start position of the range on the reference, 0-based inclusive. If specified, referenceName must also be specified.",
-            "in": "query",
-            "name": "range.start",
-            "type": "string"
-          },
-          {
-            "description": "The desired width of each reported coverage bucket in base pairs. This will be rounded down to the nearest precomputed bucket width; the value of which is returned as bucketWidth in the response. Defaults to infinity (each bucket spans an entire reference sequence) or the length of the target range, if specified. The smallest precomputed bucketWidth is currently 2048 base pairs; this is subject to change.",
-            "in": "query",
-            "name": "targetBucketWidth",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/ListCoverageBucketsResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/genomics",
-              "https://www.googleapis.com/auth/genomics.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "readgroupsets"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
     "/reads/search": {
       "parameters": [
         {
@@ -4264,64 +4264,6 @@
         ],
         "tags": [
           "reads"
-        ]
-      }
-    },
-    "/references/search": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Searches for references which match the given criteria.\n\nImplements GlobalAllianceApi.searchReferences.",
-        "operationId": "genomics.references.search",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/SearchReferencesRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/SearchReferencesResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/genomics",
-              "https://www.googleapis.com/auth/genomics.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "references"
         ]
       }
     },
@@ -4465,7 +4407,7 @@
         }
       ]
     },
-    "/referencesets/search": {
+    "/references/search": {
       "parameters": [
         {
           "$ref": "#/parameters/alt"
@@ -4490,14 +4432,14 @@
         }
       ],
       "post": {
-        "description": "Searches for reference sets which match the given criteria.\n\nImplements GlobalAllianceApi.searchReferenceSets.",
-        "operationId": "genomics.referencesets.search",
+        "description": "Searches for references which match the given criteria.\n\nImplements GlobalAllianceApi.searchReferences.",
+        "operationId": "genomics.references.search",
         "parameters": [
           {
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/SearchReferenceSetsRequest"
+              "$ref": "#/definitions/SearchReferencesRequest"
             }
           }
         ],
@@ -4505,7 +4447,7 @@
           "200": {
             "description": "Successful response",
             "schema": {
-              "$ref": "#/definitions/SearchReferenceSetsResponse"
+              "$ref": "#/definitions/SearchReferencesResponse"
             }
           }
         },
@@ -4519,7 +4461,7 @@
           }
         ],
         "tags": [
-          "referencesets"
+          "references"
         ]
       }
     },
@@ -4581,6 +4523,64 @@
         }
       ]
     },
+    "/referencesets/search": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Searches for reference sets which match the given criteria.\n\nImplements GlobalAllianceApi.searchReferenceSets.",
+        "operationId": "genomics.referencesets.search",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SearchReferenceSetsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SearchReferenceSetsResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "referencesets"
+        ]
+      }
+    },
     "/variants": {
       "parameters": [
         {
@@ -4630,64 +4630,6 @@
             "Oauth2": [
               "https://www.googleapis.com/auth/cloud-platform",
               "https://www.googleapis.com/auth/genomics"
-            ]
-          }
-        ],
-        "tags": [
-          "variants"
-        ]
-      }
-    },
-    "/variants/search": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Gets a list of variants matching the criteria.\n\nImplements GlobalAllianceApi.searchVariants.",
-        "operationId": "genomics.variants.search",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/SearchVariantsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/SearchVariantsResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/genomics",
-              "https://www.googleapis.com/auth/genomics.readonly"
             ]
           }
         ],
@@ -4822,6 +4764,64 @@
         ]
       }
     },
+    "/variants/search": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Gets a list of variants matching the criteria.\n\nImplements GlobalAllianceApi.searchVariants.",
+        "operationId": "genomics.variants.search",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SearchVariantsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SearchVariantsResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "variants"
+        ]
+      }
+    },
     "/variantsets": {
       "parameters": [
         {
@@ -4866,64 +4866,6 @@
             }
           }
         },
-        "tags": [
-          "variantsets"
-        ]
-      }
-    },
-    "/variantsets/search": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Returns a list of all variant sets matching search criteria.\n\nImplements GlobalAllianceApi.searchVariantSets.",
-        "operationId": "genomics.variantsets.search",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/SearchVariantSetsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/SearchVariantSetsResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/genomics",
-              "https://www.googleapis.com/auth/genomics.readonly"
-            ]
-          }
-        ],
         "tags": [
           "variantsets"
         ]
@@ -5277,6 +5219,64 @@
             "Oauth2": [
               "https://www.googleapis.com/auth/cloud-platform",
               "https://www.googleapis.com/auth/genomics"
+            ]
+          }
+        ],
+        "tags": [
+          "variantsets"
+        ]
+      }
+    },
+    "/variantsets/search": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Returns a list of all variant sets matching search criteria.\n\nImplements GlobalAllianceApi.searchVariantSets.",
+        "operationId": "genomics.variantsets.search",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SearchVariantSetsRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SearchVariantSetsResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/genomics",
+              "https://www.googleapis.com/auth/genomics.readonly"
             ]
           }
         ],

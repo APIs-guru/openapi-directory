@@ -89,21 +89,6 @@
       },
       "type": "object"
     },
-    "AppVersion": {
-      "description": "This represents a single version of the app.",
-      "properties": {
-        "versionCode": {
-          "description": "Unique increasing identifier for the app version.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "versionString": {
-          "description": "The string used in the Play Store by the app developer to identify the version. The string is not necessarily unique or localized (for example, the string could be \"1.4\").",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "ApprovalUrlInfo": {
       "description": "Information on an approval URL.",
       "properties": {
@@ -114,6 +99,21 @@
         "kind": {
           "default": "androidenterprise#approvalUrlInfo",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"androidenterprise#approvalUrlInfo\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AppVersion": {
+      "description": "This represents a single version of the app.",
+      "properties": {
+        "versionCode": {
+          "description": "Unique increasing identifier for the app version.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "versionString": {
+          "description": "The string used in the Play Store by the app developer to identify the version. The string is not necessarily unique or localized (for example, the string could be \"1.4\").",
           "type": "string"
         }
       },
@@ -149,24 +149,6 @@
       },
       "type": "object"
     },
-    "CollectionViewersListResponse": {
-      "description": "The user resources for the collection.",
-      "properties": {
-        "kind": {
-          "default": "androidenterprise#collectionViewersListResponse",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"androidenterprise#collectionViewersListResponse\".",
-          "type": "string"
-        },
-        "user": {
-          "description": "A user of an enterprise.",
-          "items": {
-            "$ref": "#/definitions/User"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
     "CollectionsListResponse": {
       "description": "The collection resources for the enterprise.",
       "properties": {
@@ -181,6 +163,24 @@
           "default": "androidenterprise#collectionsListResponse",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"androidenterprise#collectionsListResponse\".",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "CollectionViewersListResponse": {
+      "description": "The user resources for the collection.",
+      "properties": {
+        "kind": {
+          "default": "androidenterprise#collectionViewersListResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"androidenterprise#collectionViewersListResponse\".",
+          "type": "string"
+        },
+        "user": {
+          "description": "A user of an enterprise.",
+          "items": {
+            "$ref": "#/definitions/User"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -204,21 +204,6 @@
       },
       "type": "object"
     },
-    "DeviceState": {
-      "description": "The state of a user's device, as accessed by the getState and setState methods on device resources.",
-      "properties": {
-        "accountState": {
-          "description": "The state of the Google account on the device. \"enabled\" indicates that the Google account on the device can be used to access Google services (including Google Play), while \"disabled\" means that it cannot. A new device is initially in the \"disabled\" state.",
-          "type": "string"
-        },
-        "kind": {
-          "default": "androidenterprise#deviceState",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"androidenterprise#deviceState\".",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "DevicesListResponse": {
       "description": "The device resources for the user.",
       "properties": {
@@ -232,6 +217,21 @@
         "kind": {
           "default": "androidenterprise#devicesListResponse",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"androidenterprise#devicesListResponse\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DeviceState": {
+      "description": "The state of a user's device, as accessed by the getState and setState methods on device resources.",
+      "properties": {
+        "accountState": {
+          "description": "The state of the Google account on the device. \"enabled\" indicates that the Google account on the device can be used to access Google services (including Google Play), while \"disabled\" means that it cannot. A new device is initially in the \"disabled\" state.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "androidenterprise#deviceState",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"androidenterprise#deviceState\".",
           "type": "string"
         }
       },
@@ -376,24 +376,6 @@
       },
       "type": "object"
     },
-    "GroupLicenseUsersListResponse": {
-      "description": "The user resources for the group license.",
-      "properties": {
-        "kind": {
-          "default": "androidenterprise#groupLicenseUsersListResponse",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"androidenterprise#groupLicenseUsersListResponse\".",
-          "type": "string"
-        },
-        "user": {
-          "description": "A user of an enterprise.",
-          "items": {
-            "$ref": "#/definitions/User"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
     "GroupLicensesListResponse": {
       "description": "The grouplicense resources for the enterprise.",
       "properties": {
@@ -408,6 +390,24 @@
           "default": "androidenterprise#groupLicensesListResponse",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"androidenterprise#groupLicensesListResponse\".",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "GroupLicenseUsersListResponse": {
+      "description": "The user resources for the group license.",
+      "properties": {
+        "kind": {
+          "default": "androidenterprise#groupLicenseUsersListResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"androidenterprise#groupLicenseUsersListResponse\".",
+          "type": "string"
+        },
+        "user": {
+          "description": "A user of an enterprise.",
+          "items": {
+            "$ref": "#/definitions/User"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -563,6 +563,15 @@
       },
       "type": "object"
     },
+    "ProductsApproveRequest": {
+      "properties": {
+        "approvalUrlInfo": {
+          "$ref": "#/definitions/ApprovalUrlInfo",
+          "description": "The approval URL that was shown to the user. Only the permissions shown to the user with that URL will be accepted, which may not be the product's entire set of permissions. For example, the URL may only display new permissions from an update after the product was approved, or not include new permissions if the product was updated since the URL was generated."
+        }
+      },
+      "type": "object"
+    },
     "ProductSet": {
       "description": "A set of products.",
       "properties": {
@@ -577,15 +586,6 @@
             "type": "string"
           },
           "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "ProductsApproveRequest": {
-      "properties": {
-        "approvalUrlInfo": {
-          "$ref": "#/definitions/ApprovalUrlInfo",
-          "description": "The approval URL that was shown to the user. Only the permissions shown to the user with that URL will be accepted, which may not be the product's entire set of permissions. For example, the URL may only display new permissions from an update after the product was approved, or not include new permissions if the product was updated since the URL was generated."
         }
       },
       "type": "object"
@@ -618,6 +618,24 @@
       },
       "type": "object"
     },
+    "UsersListResponse": {
+      "description": "The matching user resources.",
+      "properties": {
+        "kind": {
+          "default": "androidenterprise#usersListResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"androidenterprise#usersListResponse\".",
+          "type": "string"
+        },
+        "user": {
+          "description": "A user of an enterprise.",
+          "items": {
+            "$ref": "#/definitions/User"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "UserToken": {
       "description": "A UserToken is used by a user when setting up a managed device or profile with their work account on a device. When the user enters their email address and token (activation code) the appropriate MDM app can be automatically downloaded.",
       "properties": {
@@ -633,24 +651,6 @@
         "userId": {
           "description": "The unique ID for the user.",
           "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "UsersListResponse": {
-      "description": "The matching user resources.",
-      "properties": {
-        "kind": {
-          "default": "androidenterprise#usersListResponse",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"androidenterprise#usersListResponse\".",
-          "type": "string"
-        },
-        "user": {
-          "description": "A user of an enterprise.",
-          "items": {
-            "$ref": "#/definitions/User"
-          },
-          "type": "array"
         }
       },
       "type": "object"
@@ -791,69 +791,6 @@
       "post": {
         "description": "Establishes the binding between the MDM and an enterprise. This is now deprecated; use enroll instead.",
         "operationId": "androidenterprise.enterprises.insert",
-        "parameters": [
-          {
-            "description": "The token provided by the enterprise to register the MDM.",
-            "in": "query",
-            "name": "token",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/Enterprise"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Enterprise"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/androidenterprise"
-            ]
-          }
-        ],
-        "tags": [
-          "enterprises"
-        ]
-      }
-    },
-    "/enterprises/enroll": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Enrolls an enterprise with the calling MDM.",
-        "operationId": "androidenterprise.enterprises.enroll",
         "parameters": [
           {
             "description": "The token provided by the enterprise to register the MDM.",
@@ -3460,6 +3397,69 @@
         ],
         "tags": [
           "users"
+        ]
+      }
+    },
+    "/enterprises/enroll": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Enrolls an enterprise with the calling MDM.",
+        "operationId": "androidenterprise.enterprises.enroll",
+        "parameters": [
+          {
+            "description": "The token provided by the enterprise to register the MDM.",
+            "in": "query",
+            "name": "token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Enterprise"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Enterprise"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/androidenterprise"
+            ]
+          }
+        ],
+        "tags": [
+          "enterprises"
         ]
       }
     },

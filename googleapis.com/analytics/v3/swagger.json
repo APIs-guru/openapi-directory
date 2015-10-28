@@ -86,6 +86,51 @@
       },
       "type": "object"
     },
+    "Accounts": {
+      "description": "An account collection provides a list of Analytics accounts to which a user has access. The account collection is the entry point to all management information. Each resource in the collection corresponds to a single Analytics account.",
+      "properties": {
+        "items": {
+          "description": "A list of accounts.",
+          "items": {
+            "$ref": "#/definitions/Account"
+          },
+          "type": "array"
+        },
+        "itemsPerPage": {
+          "description": "The maximum number of entries the response can contain, regardless of the actual number of entries returned. Its value ranges from 1 to 1000 with a value of 1000 by default, or otherwise specified by the max-results query parameter.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "kind": {
+          "default": "analytics#accounts",
+          "description": "Collection type.",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "Next link for this account collection.",
+          "type": "string"
+        },
+        "previousLink": {
+          "description": "Previous link for this account collection.",
+          "type": "string"
+        },
+        "startIndex": {
+          "description": "The starting index of the entries, which is 1 by default or otherwise specified by the start-index query parameter.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "totalResults": {
+          "description": "The total number of results for the query, regardless of the number of results in the response.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "username": {
+          "description": "Email ID of the authenticated user",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "AccountSummaries": {
       "description": "An AccountSummary collection lists a summary of accounts, properties and views (profiles) to which the user has access. Each resource in the collection corresponds to a single AccountSummary.",
       "properties": {
@@ -184,51 +229,6 @@
         "webproperty": {
           "$ref": "#/definitions/Webproperty",
           "description": "Web property for the account."
-        }
-      },
-      "type": "object"
-    },
-    "Accounts": {
-      "description": "An account collection provides a list of Analytics accounts to which a user has access. The account collection is the entry point to all management information. Each resource in the collection corresponds to a single Analytics account.",
-      "properties": {
-        "items": {
-          "description": "A list of accounts.",
-          "items": {
-            "$ref": "#/definitions/Account"
-          },
-          "type": "array"
-        },
-        "itemsPerPage": {
-          "description": "The maximum number of entries the response can contain, regardless of the actual number of entries returned. Its value ranges from 1 to 1000 with a value of 1000 by default, or otherwise specified by the max-results query parameter.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "kind": {
-          "default": "analytics#accounts",
-          "description": "Collection type.",
-          "type": "string"
-        },
-        "nextLink": {
-          "description": "Next link for this account collection.",
-          "type": "string"
-        },
-        "previousLink": {
-          "description": "Previous link for this account collection.",
-          "type": "string"
-        },
-        "startIndex": {
-          "description": "The starting index of the entries, which is 1 by default or otherwise specified by the start-index query parameter.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "totalResults": {
-          "description": "The total number of results for the query, regardless of the number of results in the response.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "username": {
-          "description": "Email ID of the authenticated user",
-          "type": "string"
         }
       },
       "type": "object"
@@ -2311,29 +2311,6 @@
       },
       "type": "object"
     },
-    "ProfileSummary": {
-      "description": "JSON template for an Analytics ProfileSummary. ProfileSummary returns basic information (i.e., summary) for a profile.",
-      "properties": {
-        "id": {
-          "description": "View (profile) ID.",
-          "type": "string"
-        },
-        "kind": {
-          "default": "analytics#profileSummary",
-          "description": "Resource type for Analytics ProfileSummary.",
-          "type": "string"
-        },
-        "name": {
-          "description": "View (profile) name.",
-          "type": "string"
-        },
-        "type": {
-          "description": "View (Profile) type. Supported types: WEB or APP.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "Profiles": {
       "description": "A view (profile) collection lists Analytics views (profiles) to which the user has access. Each resource in the collection corresponds to a single Analytics view (profile).",
       "properties": {
@@ -2374,6 +2351,29 @@
         },
         "username": {
           "description": "Email ID of the authenticated user",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ProfileSummary": {
+      "description": "JSON template for an Analytics ProfileSummary. ProfileSummary returns basic information (i.e., summary) for a profile.",
+      "properties": {
+        "id": {
+          "description": "View (profile) ID.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "analytics#profileSummary",
+          "description": "Resource type for Analytics ProfileSummary.",
+          "type": "string"
+        },
+        "name": {
+          "description": "View (profile) name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "View (Profile) type. Supported types: WEB or APP.",
           "type": "string"
         }
       },
@@ -2847,75 +2847,6 @@
       },
       "type": "object"
     },
-    "WebPropertyRef": {
-      "description": "JSON template for a web property reference.",
-      "properties": {
-        "accountId": {
-          "description": "Account ID to which this web property belongs.",
-          "type": "string"
-        },
-        "href": {
-          "description": "Link for this web property.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Web property ID of the form UA-XXXXX-YY.",
-          "type": "string"
-        },
-        "internalWebPropertyId": {
-          "description": "Internal ID for this web property.",
-          "type": "string"
-        },
-        "kind": {
-          "default": "analytics#webPropertyRef",
-          "description": "Analytics web property reference.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of this web property.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "WebPropertySummary": {
-      "description": "JSON template for an Analytics WebPropertySummary. WebPropertySummary returns basic information (i.e., summary) for a web property.",
-      "properties": {
-        "id": {
-          "description": "Web property ID of the form UA-XXXXX-YY.",
-          "type": "string"
-        },
-        "internalWebPropertyId": {
-          "description": "Internal ID for this web property.",
-          "type": "string"
-        },
-        "kind": {
-          "default": "analytics#webPropertySummary",
-          "description": "Resource type for Analytics WebPropertySummary.",
-          "type": "string"
-        },
-        "level": {
-          "description": "Level for this web property. Possible values are STANDARD or PREMIUM.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Web property name.",
-          "type": "string"
-        },
-        "profiles": {
-          "description": "List of profiles under this web property.",
-          "items": {
-            "$ref": "#/definitions/ProfileSummary"
-          },
-          "type": "array"
-        },
-        "websiteUrl": {
-          "description": "Website url for this web property.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "Webproperties": {
       "description": "A web property collection lists Analytics web properties to which the user has access. Each resource in the collection corresponds to a single Analytics web property.",
       "properties": {
@@ -3067,6 +2998,75 @@
           "format": "date-time",
           "readOnly": true,
           "type": "string"
+        },
+        "websiteUrl": {
+          "description": "Website url for this web property.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WebPropertyRef": {
+      "description": "JSON template for a web property reference.",
+      "properties": {
+        "accountId": {
+          "description": "Account ID to which this web property belongs.",
+          "type": "string"
+        },
+        "href": {
+          "description": "Link for this web property.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Web property ID of the form UA-XXXXX-YY.",
+          "type": "string"
+        },
+        "internalWebPropertyId": {
+          "description": "Internal ID for this web property.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "analytics#webPropertyRef",
+          "description": "Analytics web property reference.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of this web property.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WebPropertySummary": {
+      "description": "JSON template for an Analytics WebPropertySummary. WebPropertySummary returns basic information (i.e., summary) for a web property.",
+      "properties": {
+        "id": {
+          "description": "Web property ID of the form UA-XXXXX-YY.",
+          "type": "string"
+        },
+        "internalWebPropertyId": {
+          "description": "Internal ID for this web property.",
+          "type": "string"
+        },
+        "kind": {
+          "default": "analytics#webPropertySummary",
+          "description": "Resource type for Analytics WebPropertySummary.",
+          "type": "string"
+        },
+        "level": {
+          "description": "Level for this web property. Possible values are STANDARD or PREMIUM.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Web property name.",
+          "type": "string"
+        },
+        "profiles": {
+          "description": "List of profiles under this web property.",
+          "items": {
+            "$ref": "#/definitions/ProfileSummary"
+          },
+          "type": "array"
         },
         "websiteUrl": {
           "description": "Website url for this web property.",
@@ -3471,69 +3471,6 @@
         ],
         "tags": [
           "data"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/management/accountSummaries": {
-      "get": {
-        "description": "Lists account summaries (lightweight tree comprised of accounts/properties/profiles) to which the user has access.",
-        "operationId": "analytics.management.accountSummaries.list",
-        "parameters": [
-          {
-            "description": "The maximum number of account summaries to include in this response, where the largest acceptable value is 1000.",
-            "in": "query",
-            "name": "max-results",
-            "type": "integer"
-          },
-          {
-            "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
-            "in": "query",
-            "minimum": 1,
-            "name": "start-index",
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AccountSummaries"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/analytics.edit",
-              "https://www.googleapis.com/auth/analytics.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "management"
         ]
       },
       "parameters": [
@@ -7864,6 +7801,69 @@
           {
             "Oauth2": [
               "https://www.googleapis.com/auth/analytics",
+              "https://www.googleapis.com/auth/analytics.edit",
+              "https://www.googleapis.com/auth/analytics.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "management"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/management/accountSummaries": {
+      "get": {
+        "description": "Lists account summaries (lightweight tree comprised of accounts/properties/profiles) to which the user has access.",
+        "operationId": "analytics.management.accountSummaries.list",
+        "parameters": [
+          {
+            "description": "The maximum number of account summaries to include in this response, where the largest acceptable value is 1000.",
+            "in": "query",
+            "name": "max-results",
+            "type": "integer"
+          },
+          {
+            "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
+            "in": "query",
+            "minimum": 1,
+            "name": "start-index",
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AccountSummaries"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
               "https://www.googleapis.com/auth/analytics.edit",
               "https://www.googleapis.com/auth/analytics.readonly"
             ]

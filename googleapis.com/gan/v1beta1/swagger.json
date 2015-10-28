@@ -198,10 +198,6 @@
           },
           "type": "array"
         },
-        "carRentalInsurance": {
-          "description": "If you get coverage when you use the card for the given activity, this field describes it.",
-          "type": "string"
-        },
         "cardBenefits": {
           "description": "A list of what the issuer thinks are the most important benefits of the card. Usually summarizes the rewards program, if there is one. A summary field.",
           "items": {
@@ -215,6 +211,10 @@
         },
         "cardType": {
           "description": "What kind of credit card this is, for example secured or unsecured.",
+          "type": "string"
+        },
+        "carRentalInsurance": {
+          "description": "If you get coverage when you use the card for the given activity, this field describes it.",
           "type": "string"
         },
         "cashAdvanceTerms": {
@@ -353,14 +353,14 @@
           "format": "double",
           "type": "number"
         },
+        "minimumFinanceCharge": {
+          "description": "Text describing how much missing the grace period will cost.",
+          "type": "string"
+        },
         "minPurchaseRate": {
           "description": "The lowest interest rate the issuer charges on this card. Expressed as an absolute number, not as a percentage.",
           "format": "double",
           "type": "number"
-        },
-        "minimumFinanceCharge": {
-          "description": "Text describing how much missing the grace period will cost.",
-          "type": "string"
         },
         "network": {
           "description": "Which network (eg Visa) the card belongs to. A summary field.",
@@ -399,10 +399,6 @@
         },
         "rewardPartner": {
           "description": "The company that redeems the rewards, if different from the issuer.",
-          "type": "string"
-        },
-        "rewardUnit": {
-          "description": "For cards with rewards programs, the unit of reward. For example, miles, cash back, points.",
           "type": "string"
         },
         "rewards": {
@@ -449,6 +445,10 @@
         "rewardsHaveBlackoutDates": {
           "description": "For airline miles rewards, tells whether blackout dates apply to the miles.",
           "type": "boolean"
+        },
+        "rewardUnit": {
+          "description": "For cards with rewards programs, the unit of reward. For example, miles, cash back, points.",
+          "type": "string"
         },
         "statementCopyFee": {
           "description": "Fee for requesting a copy of your statement.",
@@ -1014,75 +1014,6 @@
     }
   },
   "paths": {
-    "/publishers/{publisher}/ccOffers": {
-      "get": {
-        "description": "Retrieves credit card offers for the given publisher.",
-        "operationId": "gan.ccOffers.list",
-        "parameters": [
-          {
-            "description": "The ID of the publisher in question.",
-            "in": "path",
-            "name": "publisher",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "collectionFormat": "multi",
-            "description": "The advertiser ID of a card issuer whose offers to include. Optional, may be repeated.",
-            "in": "query",
-            "items": {
-              "type": "string"
-            },
-            "name": "advertiser",
-            "type": "array"
-          },
-          {
-            "description": "The set of fields to return.",
-            "enum": [
-              "full",
-              "summary"
-            ],
-            "in": "query",
-            "name": "projection",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/CcOffers"
-            }
-          }
-        },
-        "tags": [
-          "ccOffers"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
     "/{role}/{roleId}/advertiser": {
       "get": {
         "description": "Retrieves data about a single advertiser if that the requesting advertiser/publisher has access to it. Only publishers can lookup advertisers. Advertisers can request information about themselves by omitting the advertiserId query parameter.",
@@ -2059,6 +1990,75 @@
         },
         "tags": [
           "reports"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/publishers/{publisher}/ccOffers": {
+      "get": {
+        "description": "Retrieves credit card offers for the given publisher.",
+        "operationId": "gan.ccOffers.list",
+        "parameters": [
+          {
+            "description": "The ID of the publisher in question.",
+            "in": "path",
+            "name": "publisher",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "The advertiser ID of a card issuer whose offers to include. Optional, may be repeated.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "advertiser",
+            "type": "array"
+          },
+          {
+            "description": "The set of fields to return.",
+            "enum": [
+              "full",
+              "summary"
+            ],
+            "in": "query",
+            "name": "projection",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/CcOffers"
+            }
+          }
+        },
+        "tags": [
+          "ccOffers"
         ]
       },
       "parameters": [

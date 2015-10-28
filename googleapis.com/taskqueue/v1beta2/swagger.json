@@ -406,96 +406,6 @@
         ]
       }
     },
-    "/{project}/taskqueues/{taskqueue}/tasks/lease": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Lease 1 or more tasks from a TaskQueue.",
-        "operationId": "taskqueue.tasks.lease",
-        "parameters": [
-          {
-            "description": "The project under which the queue lies.",
-            "in": "path",
-            "name": "project",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The taskqueue to lease a task from.",
-            "in": "path",
-            "name": "taskqueue",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The number of tasks to lease.",
-            "in": "query",
-            "name": "numTasks",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The lease in seconds.",
-            "in": "query",
-            "name": "leaseSecs",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "When true, all returned tasks will have the same tag",
-            "in": "query",
-            "name": "groupByTag",
-            "type": "boolean"
-          },
-          {
-            "description": "The tag allowed for tasks in the response. Must only be specified if group_by_tag is true. If group_by_tag is true and tag is not specified the tag will be that of the oldest task by eta, i.e. the first available tag",
-            "in": "query",
-            "name": "tag",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Tasks"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/taskqueue",
-              "https://www.googleapis.com/auth/taskqueue.consumer"
-            ]
-          }
-        ],
-        "tags": [
-          "tasks"
-        ]
-      }
-    },
     "/{project}/taskqueues/{taskqueue}/tasks/{task}": {
       "delete": {
         "description": "Delete a task from a TaskQueue.",
@@ -710,6 +620,96 @@
             "description": "Successful response",
             "schema": {
               "$ref": "#/definitions/Task"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/taskqueue",
+              "https://www.googleapis.com/auth/taskqueue.consumer"
+            ]
+          }
+        ],
+        "tags": [
+          "tasks"
+        ]
+      }
+    },
+    "/{project}/taskqueues/{taskqueue}/tasks/lease": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Lease 1 or more tasks from a TaskQueue.",
+        "operationId": "taskqueue.tasks.lease",
+        "parameters": [
+          {
+            "description": "The project under which the queue lies.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The taskqueue to lease a task from.",
+            "in": "path",
+            "name": "taskqueue",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The number of tasks to lease.",
+            "in": "query",
+            "name": "numTasks",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The lease in seconds.",
+            "in": "query",
+            "name": "leaseSecs",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "When true, all returned tasks will have the same tag",
+            "in": "query",
+            "name": "groupByTag",
+            "type": "boolean"
+          },
+          {
+            "description": "The tag allowed for tasks in the response. Must only be specified if group_by_tag is true. If group_by_tag is true and tag is not specified the tag will be that of the oldest task by eta, i.e. the first available tag",
+            "in": "query",
+            "name": "tag",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Tasks"
             }
           }
         },

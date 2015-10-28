@@ -242,16 +242,16 @@
           "description": "The webinar subject",
           "type": "string"
         },
-        "timeZone": {
-          "description": "The timezone where the webinar is taking place",
-          "type": "string"
-        },
         "times": {
           "description": "Array with startTime and endTime for the webinar sessions",
           "items": {
             "$ref": "#/definitions/DateTimeRange"
           },
           "type": "array"
+        },
+        "timeZone": {
+          "description": "The timezone where the webinar is taking place",
+          "type": "string"
         },
         "webinarKey": {
           "description": "The unique key of the webinar",
@@ -897,16 +897,16 @@
           "description": "The webinar subject",
           "type": "string"
         },
-        "timeZone": {
-          "description": "The timezone where the webinar is taking place",
-          "type": "string"
-        },
         "times": {
           "description": "Array with startTime and endTime for the webinar sessions",
           "items": {
             "$ref": "#/definitions/DateTimeRange"
           },
           "type": "array"
+        },
+        "timeZone": {
+          "description": "The timezone where the webinar is taking place",
+          "type": "string"
         },
         "webinarKey": {
           "description": "The unique key of the webinar",
@@ -954,16 +954,16 @@
           "description": "The webinar subject",
           "type": "string"
         },
-        "timeZone": {
-          "description": "The timezone where the webinar is taking place",
-          "type": "string"
-        },
         "times": {
           "description": "Array with startTime and endTime for the webinar sessions",
           "items": {
             "$ref": "#/definitions/DateTimeRange"
           },
           "type": "array"
+        },
+        "timeZone": {
+          "description": "The timezone where the webinar is taking place",
+          "type": "string"
         },
         "webinarKey": {
           "description": "The unique key of the webinar",
@@ -1022,16 +1022,16 @@
           "description": "The webinar subject.",
           "type": "string"
         },
-        "timeZone": {
-          "description": "The timezone where the webinar is taking place",
-          "type": "string"
-        },
         "times": {
           "description": "Array with startTime and endTime for the webinar sessions",
           "items": {
             "$ref": "#/definitions/DateTimeRange"
           },
           "type": "array"
+        },
+        "timeZone": {
+          "description": "The timezone where the webinar is taking place",
+          "type": "string"
         },
         "webinarKey": {
           "description": "The unique key of the webinar",
@@ -1064,16 +1064,16 @@
           "description": "The name/subject of the webinar (128 characters maximum)",
           "type": "string"
         },
-        "timeZone": {
-          "description": "The time zone where the webinar is taking place (must be a valid time zone ID, see https://developer.citrixonline.com/citrix-rest-api-date-formats-and-time-zones). If this parameter is not passed the timezone of the organizer's profile will be used",
-          "type": "string"
-        },
         "times": {
           "description": "Array with startTime and endTime for webinar. Since this call creates single session webinars, the array can only contain a single pair of startTime and endTime",
           "items": {
             "$ref": "#/definitions/DateTimeRange"
           },
           "type": "array"
+        },
+        "timeZone": {
+          "description": "The time zone where the webinar is taking place (must be a valid time zone ID, see https://developer.citrixonline.com/citrix-rest-api-date-formats-and-time-zones). If this parameter is not passed the timezone of the organizer's profile will be used",
+          "type": "string"
         }
       },
       "required": [
@@ -1821,58 +1821,6 @@
         ]
       }
     },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/registrants/fields": {
-      "get": {
-        "description": "Retrieve required, optional registration, and custom questions for a specified webinar.",
-        "operationId": "getRegistrationFields",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RegistrationFields"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        },
-        "summary": "Get registration fields",
-        "tags": [
-          "Registrants"
-        ]
-      }
-    },
     "/organizers/{organizerKey}/webinars/{webinarKey}/registrants/{registrantKey}": {
       "delete": {
         "description": "Removes a webinar registrant from current registrations for the specified webinar. The webinar must be a scheduled, future webinar.",
@@ -1983,6 +1931,58 @@
           }
         },
         "summary": "Get registrant",
+        "tags": [
+          "Registrants"
+        ]
+      }
+    },
+    "/organizers/{organizerKey}/webinars/{webinarKey}/registrants/fields": {
+      "get": {
+        "description": "Retrieve required, optional registration, and custom questions for a specified webinar.",
+        "operationId": "getRegistrationFields",
+        "parameters": [
+          {
+            "description": "Access token",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The key of the organizer",
+            "format": "int64",
+            "in": "path",
+            "name": "organizerKey",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The key of the webinar",
+            "format": "int64",
+            "in": "path",
+            "name": "webinarKey",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RegistrationFields"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "summary": "Get registration fields",
         "tags": [
           "Registrants"
         ]

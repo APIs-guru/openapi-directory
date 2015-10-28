@@ -118,14 +118,14 @@
           ],
           "type": "string"
         },
-        "timeZone": {
-          "format": "int32",
-          "type": "integer"
-        },
         "timeframeMinDate": {
           "description": " (A date in \"YmdHis\" format)",
           "example": "20120203120530",
           "type": "string"
+        },
+        "timeZone": {
+          "format": "int32",
+          "type": "integer"
         },
         "timezonename": {
           "type": "string"
@@ -1829,45 +1829,6 @@
         ]
       }
     },
-    "/account/guests/count": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "parameters": [
-          {
-            "description": "Filter fields by this pattern",
-            "in": "query",
-            "name": "textSearch",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Responses.CountResponce"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "summary": "Retrieve count of guests",
-        "tags": [
-          "Account"
-        ]
-      }
-    },
     "/account/guests/{guestId}": {
       "delete": {
         "consumes": [],
@@ -1994,6 +1955,136 @@
           }
         },
         "summary": "Update a guest",
+        "tags": [
+          "Account"
+        ]
+      }
+    },
+    "/account/guests/{guestId}/{type}/permissions/patch": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "Id of the guest",
+            "format": "int64",
+            "in": "path",
+            "name": "guestId",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "Can be \"datapoint\" or \"group\"",
+            "enum": [
+              "datapoint",
+              "group"
+            ],
+            "in": "path",
+            "name": "type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The patch permission request",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Requests.PermissionPatchRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Change the permission on a shared object",
+        "tags": [
+          "Account"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "Id of the guest",
+            "format": "int64",
+            "in": "path",
+            "name": "guestId",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "Can be \"datapoint\" or \"group\"",
+            "enum": [
+              "datapoint",
+              "group"
+            ],
+            "in": "path",
+            "name": "type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The patch permission request",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Requests.PermissionPatchRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Change the permission on a shared object",
         "tags": [
           "Account"
         ]
@@ -2156,44 +2247,17 @@
         ]
       }
     },
-    "/account/guests/{guestId}/{type}/permissions/patch": {
-      "post": {
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
+    "/account/guests/count": {
+      "get": {
+        "consumes": [],
         "deprecated": false,
         "parameters": [
           {
-            "description": "Id of the guest",
-            "format": "int64",
-            "in": "path",
-            "name": "guestId",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "Can be \"datapoint\" or \"group\"",
-            "enum": [
-              "datapoint",
-              "group"
-            ],
-            "in": "path",
-            "name": "type",
-            "required": true,
+            "description": "Filter fields by this pattern",
+            "in": "query",
+            "name": "textSearch",
+            "required": false,
             "type": "string"
-          },
-          {
-            "description": "The patch permission request",
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Requests.PermissionPatchRequest"
-            }
           }
         ],
         "produces": [
@@ -2206,7 +2270,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
+              "$ref": "#/definitions/Api.Core.Responses.CountResponce"
             }
           },
           "401": {
@@ -2216,71 +2280,7 @@
             "description": "Internal Server Error"
           }
         },
-        "summary": "Change the permission on a shared object",
-        "tags": [
-          "Account"
-        ]
-      },
-      "put": {
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
-        "deprecated": false,
-        "parameters": [
-          {
-            "description": "Id of the guest",
-            "format": "int64",
-            "in": "path",
-            "name": "guestId",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "Can be \"datapoint\" or \"group\"",
-            "enum": [
-              "datapoint",
-              "group"
-            ],
-            "in": "path",
-            "name": "type",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The patch permission request",
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Requests.PermissionPatchRequest"
-            }
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Responses.EntityUri[System.Int64]"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "summary": "Change the permission on a shared object",
+        "summary": "Retrieve count of guests",
         "tags": [
           "Account"
         ]
@@ -3234,160 +3234,6 @@
         ]
       }
     },
-    "/conversions/aggregated/list": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "parameters": [
-          {
-            "description": "Timeframe of the request. See list at $timeframeList",
-            "enum": [
-              "today",
-              "yesterday",
-              "last7",
-              "last30",
-              "lastmonth",
-              "currentmonth",
-              "previousmonth",
-              "last90",
-              "last120",
-              "last180",
-              "last12months",
-              "lastyear",
-              "currentyear",
-              "beginning",
-              "custom"
-            ],
-            "in": "query",
-            "name": "timeFrame",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "in": "query",
-            "name": "fromDay",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "in": "query",
-            "name": "toDay",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Status of conversion (\"deleted\"/\"active\")",
-            "enum": [
-              "deleted",
-              "active"
-            ],
-            "in": "query",
-            "name": "status",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "The temporal entity you want to group by (\"week\"/\"month\"). If unspecified is \"day\".",
-            "enum": [
-              "week",
-              "month"
-            ],
-            "in": "query",
-            "name": "groupBy",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "summary": "Retrieve statistics about this customer for a timeframe related to a subset of conversions grouped by some temporal entity (day/week/month)",
-        "tags": [
-          "Conversions"
-        ]
-      }
-    },
-    "/conversions/count": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "parameters": [
-          {
-            "description": "Status of conversion (\"deleted\"/\"active\")",
-            "enum": [
-              "deleted",
-              "active"
-            ],
-            "in": "query",
-            "name": "status",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Filter fields by this pattern",
-            "in": "query",
-            "name": "textSearch",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Exclude conversions created before this date (YYYYMMDD)",
-            "in": "query",
-            "name": "createdAfter",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Exclude conversions created after this date (YYYYMMDD)",
-            "in": "query",
-            "name": "createdBefore",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Responses.CountResponce"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "summary": "Retrieve a count of conversions",
-        "tags": [
-          "Conversions"
-        ]
-      }
-    },
     "/conversions/{conversionId}": {
       "delete": {
         "consumes": [],
@@ -4287,6 +4133,160 @@
         ]
       }
     },
+    "/conversions/aggregated/list": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "Timeframe of the request. See list at $timeframeList",
+            "enum": [
+              "today",
+              "yesterday",
+              "last7",
+              "last30",
+              "lastmonth",
+              "currentmonth",
+              "previousmonth",
+              "last90",
+              "last120",
+              "last180",
+              "last12months",
+              "lastyear",
+              "currentyear",
+              "beginning",
+              "custom"
+            ],
+            "in": "query",
+            "name": "timeFrame",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
+            "in": "query",
+            "name": "fromDay",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
+            "in": "query",
+            "name": "toDay",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Status of conversion (\"deleted\"/\"active\")",
+            "enum": [
+              "deleted",
+              "active"
+            ],
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "The temporal entity you want to group by (\"week\"/\"month\"). If unspecified is \"day\".",
+            "enum": [
+              "week",
+              "month"
+            ],
+            "in": "query",
+            "name": "groupBy",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Retrieve statistics about this customer for a timeframe related to a subset of conversions grouped by some temporal entity (day/week/month)",
+        "tags": [
+          "Conversions"
+        ]
+      }
+    },
+    "/conversions/count": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "Status of conversion (\"deleted\"/\"active\")",
+            "enum": [
+              "deleted",
+              "active"
+            ],
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Filter fields by this pattern",
+            "in": "query",
+            "name": "textSearch",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Exclude conversions created before this date (YYYYMMDD)",
+            "in": "query",
+            "name": "createdAfter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Exclude conversions created after this date (YYYYMMDD)",
+            "in": "query",
+            "name": "createdBefore",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.CountResponce"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Retrieve a count of conversions",
+        "tags": [
+          "Conversions"
+        ]
+      }
+    },
     "/datapoints": {
       "get": {
         "consumes": [],
@@ -4459,464 +4459,6 @@
           }
         },
         "summary": "Create a datapoint",
-        "tags": [
-          "DataPoints"
-        ]
-      }
-    },
-    "/datapoints/aggregated": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "parameters": [
-          {
-            "description": "Timeframe of the request. See list at $timeframeList",
-            "enum": [
-              "today",
-              "yesterday",
-              "last7",
-              "last30",
-              "lastmonth",
-              "currentmonth",
-              "previousmonth",
-              "last90",
-              "last120",
-              "last180",
-              "last12months",
-              "lastyear",
-              "currentyear",
-              "beginning",
-              "custom"
-            ],
-            "in": "query",
-            "name": "timeFrame",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Type of datapoint (\"tl\"/\"tp\")",
-            "enum": [
-              "tp",
-              "tl"
-            ],
-            "in": "query",
-            "name": "type",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "in": "query",
-            "name": "fromDay",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "in": "query",
-            "name": "toDay",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "If using \"yesterday\" or \"today\" timeframe you can ask for the hourly detail",
-            "in": "query",
-            "name": "hourly",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "description": "Status of datapoint (\"deleted\"/\"active\"/\"paused\"/\"spam\")",
-            "enum": [
-              "deleted",
-              "active",
-              "paused",
-              "spam"
-            ],
-            "in": "query",
-            "name": "status",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "A comma separated list of tags you want to filter with.",
-            "in": "query",
-            "name": "tag",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Is the datapoint is marked as favourite",
-            "in": "query",
-            "name": "favourite",
-            "required": false,
-            "type": "boolean"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Dto.Aggregated.AggregatedResult"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "summary": "Retrieve statistics about this customer for a timeframe by groups",
-        "tags": [
-          "DataPoints"
-        ]
-      }
-    },
-    "/datapoints/aggregated/list": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "parameters": [
-          {
-            "description": "Type of datapoint (\"tl\"/\"tp\")",
-            "enum": [
-              "tp",
-              "tl"
-            ],
-            "in": "query",
-            "name": "type",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Timeframe of the request. See list at $timeframeList",
-            "enum": [
-              "today",
-              "yesterday",
-              "last7",
-              "last30",
-              "lastmonth",
-              "currentmonth",
-              "previousmonth",
-              "last90",
-              "last120",
-              "last180",
-              "last12months",
-              "lastyear",
-              "currentyear",
-              "beginning",
-              "custom"
-            ],
-            "in": "query",
-            "name": "timeFrame",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "in": "query",
-            "name": "fromDay",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "in": "query",
-            "name": "toDay",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Status of datapoint (\"deleted\"/\"active\"/\"paused\"/\"spam\")",
-            "enum": [
-              "deleted",
-              "active",
-              "paused",
-              "spam"
-            ],
-            "in": "query",
-            "name": "status",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "A comma separated list of tags you want to filter with.",
-            "in": "query",
-            "name": "tag",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Is the datapoint is marked as favourite",
-            "in": "query",
-            "name": "favourite",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "description": "The temporal entity you want to group by (\"week\"/\"month\"). If unspecified is \"day\".",
-            "enum": [
-              "week",
-              "month"
-            ],
-            "in": "query",
-            "name": "groupBy",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "summary": "Retrieve statistics about all datapoints of this customer for a timeframe grouped by some temporal entity (day/week/month)",
-        "tags": [
-          "DataPoints"
-        ]
-      }
-    },
-    "/datapoints/batch": {
-      "delete": {
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "deprecated": false,
-        "parameters": [
-          {
-            "description": "A json containing the datapoints to delete.",
-            "in": "body",
-            "name": "batch",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Requests.DeleteBatch"
-            }
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Responses.ModifyBatchItemResponce[Api.Core.Dto.Datapoints.Datapoint,System.Int64]"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "summary": "Delete multiple datapoints",
-        "tags": [
-          "DataPoints"
-        ]
-      },
-      "post": {
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "deprecated": false,
-        "parameters": [
-          {
-            "description": "A json containing the datapoints to update.",
-            "in": "body",
-            "name": "batch",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Requests.DatapointsBatch"
-            }
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Responses.ModifyBatchItemResponce[Api.Core.Dto.Datapoints.Datapoint,System.Int64]"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "summary": "Update multiple datapoints",
-        "tags": [
-          "DataPoints"
-        ]
-      },
-      "put": {
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "deprecated": false,
-        "parameters": [
-          {
-            "description": "A json containing the datapoints to create.",
-            "in": "body",
-            "name": "batch",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Requests.DatapointsBatch"
-            }
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Responses.ModifyBatchItemResponce[Api.Core.Dto.Datapoints.Datapoint,System.Int64]"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "summary": "Create multiple datapoints",
-        "tags": [
-          "DataPoints"
-        ]
-      }
-    },
-    "/datapoints/count": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "parameters": [
-          {
-            "description": "Type of the datapoint (\"tp\"/\"tl\")",
-            "enum": [
-              "tp",
-              "tl"
-            ],
-            "in": "query",
-            "name": "type",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Status of the datapoint",
-            "enum": [
-              "deleted",
-              "active",
-              "paused",
-              "spam"
-            ],
-            "in": "query",
-            "name": "status",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "A comma separated list of tags you want to filter with.",
-            "in": "query",
-            "name": "tags",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Filter fields by this pattern",
-            "in": "query",
-            "name": "textSearch",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Filter fields by favourite status",
-            "in": "query",
-            "name": "onlyFavorites",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "description": "Exclude datapoints created before this date (YYYYMMDD)",
-            "in": "query",
-            "name": "createdAfter",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Exclude datapoints created after this date (YYYYMMDD)",
-            "in": "query",
-            "name": "createdBefore",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Responses.CountResponce"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "summary": "Count the datapoints associated to the user",
         "tags": [
           "DataPoints"
         ]
@@ -5534,6 +5076,464 @@
         ]
       }
     },
+    "/datapoints/aggregated": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "Timeframe of the request. See list at $timeframeList",
+            "enum": [
+              "today",
+              "yesterday",
+              "last7",
+              "last30",
+              "lastmonth",
+              "currentmonth",
+              "previousmonth",
+              "last90",
+              "last120",
+              "last180",
+              "last12months",
+              "lastyear",
+              "currentyear",
+              "beginning",
+              "custom"
+            ],
+            "in": "query",
+            "name": "timeFrame",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Type of datapoint (\"tl\"/\"tp\")",
+            "enum": [
+              "tp",
+              "tl"
+            ],
+            "in": "query",
+            "name": "type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
+            "in": "query",
+            "name": "fromDay",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
+            "in": "query",
+            "name": "toDay",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "If using \"yesterday\" or \"today\" timeframe you can ask for the hourly detail",
+            "in": "query",
+            "name": "hourly",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "description": "Status of datapoint (\"deleted\"/\"active\"/\"paused\"/\"spam\")",
+            "enum": [
+              "deleted",
+              "active",
+              "paused",
+              "spam"
+            ],
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "A comma separated list of tags you want to filter with.",
+            "in": "query",
+            "name": "tag",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Is the datapoint is marked as favourite",
+            "in": "query",
+            "name": "favourite",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Dto.Aggregated.AggregatedResult"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Retrieve statistics about this customer for a timeframe by groups",
+        "tags": [
+          "DataPoints"
+        ]
+      }
+    },
+    "/datapoints/aggregated/list": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "Type of datapoint (\"tl\"/\"tp\")",
+            "enum": [
+              "tp",
+              "tl"
+            ],
+            "in": "query",
+            "name": "type",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Timeframe of the request. See list at $timeframeList",
+            "enum": [
+              "today",
+              "yesterday",
+              "last7",
+              "last30",
+              "lastmonth",
+              "currentmonth",
+              "previousmonth",
+              "last90",
+              "last120",
+              "last180",
+              "last12months",
+              "lastyear",
+              "currentyear",
+              "beginning",
+              "custom"
+            ],
+            "in": "query",
+            "name": "timeFrame",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
+            "in": "query",
+            "name": "fromDay",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
+            "in": "query",
+            "name": "toDay",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Status of datapoint (\"deleted\"/\"active\"/\"paused\"/\"spam\")",
+            "enum": [
+              "deleted",
+              "active",
+              "paused",
+              "spam"
+            ],
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "A comma separated list of tags you want to filter with.",
+            "in": "query",
+            "name": "tag",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Is the datapoint is marked as favourite",
+            "in": "query",
+            "name": "favourite",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "description": "The temporal entity you want to group by (\"week\"/\"month\"). If unspecified is \"day\".",
+            "enum": [
+              "week",
+              "month"
+            ],
+            "in": "query",
+            "name": "groupBy",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Retrieve statistics about all datapoints of this customer for a timeframe grouped by some temporal entity (day/week/month)",
+        "tags": [
+          "DataPoints"
+        ]
+      }
+    },
+    "/datapoints/batch": {
+      "delete": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "A json containing the datapoints to delete.",
+            "in": "body",
+            "name": "batch",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Requests.DeleteBatch"
+            }
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.ModifyBatchItemResponce[Api.Core.Dto.Datapoints.Datapoint,System.Int64]"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Delete multiple datapoints",
+        "tags": [
+          "DataPoints"
+        ]
+      },
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "A json containing the datapoints to update.",
+            "in": "body",
+            "name": "batch",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Requests.DatapointsBatch"
+            }
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.ModifyBatchItemResponce[Api.Core.Dto.Datapoints.Datapoint,System.Int64]"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Update multiple datapoints",
+        "tags": [
+          "DataPoints"
+        ]
+      },
+      "put": {
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "A json containing the datapoints to create.",
+            "in": "body",
+            "name": "batch",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Requests.DatapointsBatch"
+            }
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.ModifyBatchItemResponce[Api.Core.Dto.Datapoints.Datapoint,System.Int64]"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Create multiple datapoints",
+        "tags": [
+          "DataPoints"
+        ]
+      }
+    },
+    "/datapoints/count": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "Type of the datapoint (\"tp\"/\"tl\")",
+            "enum": [
+              "tp",
+              "tl"
+            ],
+            "in": "query",
+            "name": "type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Status of the datapoint",
+            "enum": [
+              "deleted",
+              "active",
+              "paused",
+              "spam"
+            ],
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "A comma separated list of tags you want to filter with.",
+            "in": "query",
+            "name": "tags",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Filter fields by this pattern",
+            "in": "query",
+            "name": "textSearch",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Filter fields by favourite status",
+            "in": "query",
+            "name": "onlyFavorites",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "description": "Exclude datapoints created before this date (YYYYMMDD)",
+            "in": "query",
+            "name": "createdAfter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Exclude datapoints created after this date (YYYYMMDD)",
+            "in": "query",
+            "name": "createdBefore",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.CountResponce"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Count the datapoints associated to the user",
+        "tags": [
+          "DataPoints"
+        ]
+      }
+    },
     "/domains": {
       "get": {
         "consumes": [],
@@ -5644,59 +5644,6 @@
           }
         },
         "summary": "Create a domain",
-        "tags": [
-          "Domains"
-        ]
-      }
-    },
-    "/domains/count": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "parameters": [
-          {
-            "default": "system",
-            "description": "Type of domain (\"system\"/\"go\"/\"personal\"/\"dedicated\"). If not specified default is \"system\"",
-            "enum": [
-              "system",
-              "go",
-              "personal",
-              "dedicated"
-            ],
-            "in": "query",
-            "name": "type",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Filter domains with this anmen",
-            "in": "query",
-            "name": "name",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Responses.CountResponce"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "summary": "Retrieve count of domains",
         "tags": [
           "Domains"
         ]
@@ -5828,6 +5775,59 @@
           }
         },
         "summary": "Update a domain",
+        "tags": [
+          "Domains"
+        ]
+      }
+    },
+    "/domains/count": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "parameters": [
+          {
+            "default": "system",
+            "description": "Type of domain (\"system\"/\"go\"/\"personal\"/\"dedicated\"). If not specified default is \"system\"",
+            "enum": [
+              "system",
+              "go",
+              "personal",
+              "dedicated"
+            ],
+            "in": "query",
+            "name": "type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Filter domains with this anmen",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.CountResponce"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Retrieve count of domains",
         "tags": [
           "Domains"
         ]
@@ -5974,287 +5974,6 @@
           }
         },
         "summary": "Create a group",
-        "tags": [
-          "Groups"
-        ]
-      }
-    },
-    "/groups/aggregated": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "parameters": [
-          {
-            "description": "Timeframe of the request. See list at $timeframeList",
-            "enum": [
-              "today",
-              "yesterday",
-              "last7",
-              "last30",
-              "lastmonth",
-              "currentmonth",
-              "previousmonth",
-              "last90",
-              "last120",
-              "last180",
-              "last12months",
-              "lastyear",
-              "currentyear",
-              "beginning",
-              "custom"
-            ],
-            "in": "query",
-            "name": "timeFrame",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "in": "query",
-            "name": "fromDay",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "in": "query",
-            "name": "toDay",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "If using \"yesterday\" or \"today\" timeframe you can ask for the hourly detail",
-            "in": "query",
-            "name": "hourly",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "description": "Status of group (\"deleted\"/\"active\")",
-            "enum": [
-              "deleted",
-              "active"
-            ],
-            "in": "query",
-            "name": "status",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "A comma separated list of tags you want to filter with.",
-            "in": "query",
-            "name": "tag",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Is the group is marked as favourite",
-            "in": "query",
-            "name": "favourite",
-            "required": false,
-            "type": "boolean"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Dto.Aggregated.AggregatedResult"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "summary": "Retrieve statistics about this customer for a timeframe by groups",
-        "tags": [
-          "Groups"
-        ]
-      }
-    },
-    "/groups/aggregated/list": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "parameters": [
-          {
-            "description": "Timeframe of the request. See list at $timeframeList",
-            "enum": [
-              "today",
-              "yesterday",
-              "last7",
-              "last30",
-              "lastmonth",
-              "currentmonth",
-              "previousmonth",
-              "last90",
-              "last120",
-              "last180",
-              "last12months",
-              "lastyear",
-              "currentyear",
-              "beginning",
-              "custom"
-            ],
-            "in": "query",
-            "name": "timeFrame",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
-            "in": "query",
-            "name": "fromDay",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
-            "in": "query",
-            "name": "toDay",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Status of group (\"deleted\"/\"active\")",
-            "in": "query",
-            "name": "status",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "A comma separated list of tags you want to filter with.",
-            "in": "query",
-            "name": "tag",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Is the group is marked as favourite",
-            "in": "query",
-            "name": "favourite",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "description": "The temporal entity you want to group by (\"week\"/\"month\"). If unspecified is \"day\".",
-            "enum": [
-              "deleted",
-              "active"
-            ],
-            "in": "query",
-            "name": "groupBy",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "summary": "Retrieve statistics about all groups of this customer for a timeframe grouped by some temporal entity (day/week/month)",
-        "tags": [
-          "Groups"
-        ]
-      }
-    },
-    "/groups/count": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "parameters": [
-          {
-            "description": "Status of the datapoint",
-            "enum": [
-              "deleted",
-              "active"
-            ],
-            "in": "query",
-            "name": "status",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "A comma separated list of tags you want to filter with.",
-            "in": "query",
-            "name": "tags",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Filter fields by this pattern",
-            "in": "query",
-            "name": "textSearch",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Exclude groups created before this date (YYYYMMDD)",
-            "in": "query",
-            "name": "createdAfter",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Exclude groups created after this date (YYYYMMDD)",
-            "in": "query",
-            "name": "createdBefore",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Write permission",
-            "in": "query",
-            "name": "write",
-            "required": false,
-            "type": "boolean"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Responses.CountResponce"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "summary": "Count the groups associated to the user.",
         "tags": [
           "Groups"
         ]
@@ -7336,6 +7055,287 @@
         ]
       }
     },
+    "/groups/aggregated": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "Timeframe of the request. See list at $timeframeList",
+            "enum": [
+              "today",
+              "yesterday",
+              "last7",
+              "last30",
+              "lastmonth",
+              "currentmonth",
+              "previousmonth",
+              "last90",
+              "last120",
+              "last180",
+              "last12months",
+              "lastyear",
+              "currentyear",
+              "beginning",
+              "custom"
+            ],
+            "in": "query",
+            "name": "timeFrame",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
+            "in": "query",
+            "name": "fromDay",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
+            "in": "query",
+            "name": "toDay",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "If using \"yesterday\" or \"today\" timeframe you can ask for the hourly detail",
+            "in": "query",
+            "name": "hourly",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "description": "Status of group (\"deleted\"/\"active\")",
+            "enum": [
+              "deleted",
+              "active"
+            ],
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "A comma separated list of tags you want to filter with.",
+            "in": "query",
+            "name": "tag",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Is the group is marked as favourite",
+            "in": "query",
+            "name": "favourite",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Dto.Aggregated.AggregatedResult"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Retrieve statistics about this customer for a timeframe by groups",
+        "tags": [
+          "Groups"
+        ]
+      }
+    },
+    "/groups/aggregated/list": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "Timeframe of the request. See list at $timeframeList",
+            "enum": [
+              "today",
+              "yesterday",
+              "last7",
+              "last30",
+              "lastmonth",
+              "currentmonth",
+              "previousmonth",
+              "last90",
+              "last120",
+              "last180",
+              "last12months",
+              "lastyear",
+              "currentyear",
+              "beginning",
+              "custom"
+            ],
+            "in": "query",
+            "name": "timeFrame",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "If using a \"custom\" timeFrame you can specify the starting day (YYYYMMDD)",
+            "in": "query",
+            "name": "fromDay",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "If using a \"custom\" timeFrame you can specify the ending day (YYYYMMDD)",
+            "in": "query",
+            "name": "toDay",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Status of group (\"deleted\"/\"active\")",
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "A comma separated list of tags you want to filter with.",
+            "in": "query",
+            "name": "tag",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Is the group is marked as favourite",
+            "in": "query",
+            "name": "favourite",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "description": "The temporal entity you want to group by (\"week\"/\"month\"). If unspecified is \"day\".",
+            "enum": [
+              "deleted",
+              "active"
+            ],
+            "in": "query",
+            "name": "groupBy",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.EntitiesResponse[Api.Core.Dto.Aggregated.AggregatedResult]"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Retrieve statistics about all groups of this customer for a timeframe grouped by some temporal entity (day/week/month)",
+        "tags": [
+          "Groups"
+        ]
+      }
+    },
+    "/groups/count": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "Status of the datapoint",
+            "enum": [
+              "deleted",
+              "active"
+            ],
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "A comma separated list of tags you want to filter with.",
+            "in": "query",
+            "name": "tags",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Filter fields by this pattern",
+            "in": "query",
+            "name": "textSearch",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Exclude groups created before this date (YYYYMMDD)",
+            "in": "query",
+            "name": "createdAfter",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Exclude groups created after this date (YYYYMMDD)",
+            "in": "query",
+            "name": "createdBefore",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Write permission",
+            "in": "query",
+            "name": "write",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.CountResponce"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Count the groups associated to the user.",
+        "tags": [
+          "Groups"
+        ]
+      }
+    },
     "/hits": {
       "get": {
         "consumes": [],
@@ -7710,36 +7710,6 @@
         ]
       }
     },
-    "/retargeting/count": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Api.Core.Responses.CountResponce"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "summary": "Retrieve count of retargeting scripts",
-        "tags": [
-          "Retargeting"
-        ]
-      }
-    },
     "/retargeting/{id}": {
       "delete": {
         "consumes": [],
@@ -8099,6 +8069,36 @@
         ]
       }
     },
+    "/retargeting/count": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Api.Core.Responses.CountResponce"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "Retrieve count of retargeting scripts",
+        "tags": [
+          "Retargeting"
+        ]
+      }
+    },
     "/tags": {
       "get": {
         "consumes": [],
@@ -8228,73 +8228,6 @@
           }
         },
         "summary": "Create a tag",
-        "tags": [
-          "Tags"
-        ]
-      }
-    },
-    "/tags/count": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "parameters": [
-          {
-            "description": "Name of the tag",
-            "in": "query",
-            "name": "name",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Comma separated list of datapoints id to filter by",
-            "in": "query",
-            "name": "datapoints",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Comma separated list of groups id to filter by",
-            "in": "query",
-            "name": "groups",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Type of entity related to the tag",
-            "enum": [
-              "tp",
-              "tl",
-              "dp",
-              "gr"
-            ],
-            "in": "query",
-            "name": "type",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/System.Object"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        },
-        "summary": "List of all the groups associated to the user filtered by this tag.",
         "tags": [
           "Tags"
         ]
@@ -8980,6 +8913,73 @@
           }
         },
         "summary": "Fast patch a tag name",
+        "tags": [
+          "Tags"
+        ]
+      }
+    },
+    "/tags/count": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "Name of the tag",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Comma separated list of datapoints id to filter by",
+            "in": "query",
+            "name": "datapoints",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Comma separated list of groups id to filter by",
+            "in": "query",
+            "name": "groups",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Type of entity related to the tag",
+            "enum": [
+              "tp",
+              "tl",
+              "dp",
+              "gr"
+            ],
+            "in": "query",
+            "name": "type",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/System.Object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "summary": "List of all the groups associated to the user filtered by this tag.",
         "tags": [
           "Tags"
         ]

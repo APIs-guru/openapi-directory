@@ -114,36 +114,6 @@
       },
       "type": "object"
     },
-    "AddressList": {
-      "description": "Contains a list of address resources.",
-      "properties": {
-        "id": {
-          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
-          "type": "string"
-        },
-        "items": {
-          "description": "[Output Only] A list of Address resources.",
-          "items": {
-            "$ref": "#/definitions/Address"
-          },
-          "type": "array"
-        },
-        "kind": {
-          "default": "compute#addressList",
-          "description": "[Output Only] Type of resource. Always compute#addressList for lists of addresses.",
-          "type": "string"
-        },
-        "nextPageToken": {
-          "description": "[Output Only] A token used to continue a truncated list request.",
-          "type": "string"
-        },
-        "selfLink": {
-          "description": "[Output Only] Server-defined URL for the resource.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "AddressesScopedList": {
       "properties": {
         "addresses": {
@@ -199,6 +169,36 @@
             }
           },
           "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "AddressList": {
+      "description": "Contains a list of address resources.",
+      "properties": {
+        "id": {
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
+          "type": "string"
+        },
+        "items": {
+          "description": "[Output Only] A list of Address resources.",
+          "items": {
+            "$ref": "#/definitions/Address"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "compute#addressList",
+          "description": "[Output Only] Type of resource. Always compute#addressList for lists of addresses.",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "[Output Only] A token used to continue a truncated list request.",
+          "type": "string"
+        },
+        "selfLink": {
+          "description": "[Output Only] Server-defined URL for the resource.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -901,6 +901,65 @@
       },
       "type": "object"
     },
+    "DisksScopedList": {
+      "properties": {
+        "disks": {
+          "description": "[Output Only] List of disks contained in this scope.",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          },
+          "type": "array"
+        },
+        "warning": {
+          "description": "[Output Only] Informational warning which replaces the list of disks when the list is empty.",
+          "properties": {
+            "code": {
+              "description": "[Output Only] The warning type identifier for this warning.",
+              "enum": [
+                "DEPRECATED_RESOURCE_USED",
+                "DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+                "INJECTED_KERNELS_DEPRECATED",
+                "NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+                "NEXT_HOP_CANNOT_IP_FORWARD",
+                "NEXT_HOP_INSTANCE_NOT_FOUND",
+                "NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+                "NEXT_HOP_NOT_RUNNING",
+                "NOT_CRITICAL_ERROR",
+                "NO_RESULTS_ON_PAGE",
+                "REQUIRED_TOS_AGREEMENT",
+                "RESOURCE_NOT_DELETED",
+                "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+                "UNREACHABLE"
+              ],
+              "type": "string"
+            },
+            "data": {
+              "description": "[Output Only] Metadata for this warning in key: value format.",
+              "items": {
+                "properties": {
+                  "key": {
+                    "description": "[Output Only] A key for the warning data.",
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "[Output Only] A warning data value corresponding to the key.",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "message": {
+              "description": "[Output Only] Optional human-readable details for this warning.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
     "DiskType": {
       "description": "A disk type resource.",
       "properties": {
@@ -1070,65 +1129,6 @@
       },
       "type": "object"
     },
-    "DisksScopedList": {
-      "properties": {
-        "disks": {
-          "description": "[Output Only] List of disks contained in this scope.",
-          "items": {
-            "$ref": "#/definitions/Disk"
-          },
-          "type": "array"
-        },
-        "warning": {
-          "description": "[Output Only] Informational warning which replaces the list of disks when the list is empty.",
-          "properties": {
-            "code": {
-              "description": "[Output Only] The warning type identifier for this warning.",
-              "enum": [
-                "DEPRECATED_RESOURCE_USED",
-                "DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
-                "INJECTED_KERNELS_DEPRECATED",
-                "NEXT_HOP_ADDRESS_NOT_ASSIGNED",
-                "NEXT_HOP_CANNOT_IP_FORWARD",
-                "NEXT_HOP_INSTANCE_NOT_FOUND",
-                "NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
-                "NEXT_HOP_NOT_RUNNING",
-                "NOT_CRITICAL_ERROR",
-                "NO_RESULTS_ON_PAGE",
-                "REQUIRED_TOS_AGREEMENT",
-                "RESOURCE_NOT_DELETED",
-                "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
-                "UNREACHABLE"
-              ],
-              "type": "string"
-            },
-            "data": {
-              "description": "[Output Only] Metadata for this warning in key: value format.",
-              "items": {
-                "properties": {
-                  "key": {
-                    "description": "[Output Only] A key for the warning data.",
-                    "type": "string"
-                  },
-                  "value": {
-                    "description": "[Output Only] A warning data value corresponding to the key.",
-                    "type": "string"
-                  }
-                },
-                "type": "object"
-              },
-              "type": "array"
-            },
-            "message": {
-              "description": "[Output Only] Optional human-readable details for this warning.",
-              "type": "string"
-            }
-          },
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
     "Firewall": {
       "description": "A Firewall resource.",
       "properties": {
@@ -1240,6 +1240,19 @@
     "ForwardingRule": {
       "description": "A ForwardingRule resource. A ForwardingRule resource specifies which pool of target virtual machines to forward a packet to if it matches the given [IPAddress, IPProtocol, portRange] tuple.",
       "properties": {
+        "creationTimestamp": {
+          "description": "[Output Only] Creation timestamp in RFC3339 text format.",
+          "type": "string"
+        },
+        "description": {
+          "description": "An optional textual description of the resource; provided by the client when the resource is created.",
+          "type": "string"
+        },
+        "id": {
+          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
+          "format": "uint64",
+          "type": "string"
+        },
         "IPAddress": {
           "description": "Value of the reserved IP address that this forwarding rule is serving on behalf of. For global forwarding rules, the address must be a global IP; for regional forwarding rules, the address must live in the same region as the forwarding rule. If left empty (default value), an ephemeral IP from the same scope (global or regional) will be assigned.",
           "type": "string"
@@ -1253,19 +1266,6 @@
             "TCP",
             "UDP"
           ],
-          "type": "string"
-        },
-        "creationTimestamp": {
-          "description": "[Output Only] Creation timestamp in RFC3339 text format.",
-          "type": "string"
-        },
-        "description": {
-          "description": "An optional textual description of the resource; provided by the client when the resource is created.",
-          "type": "string"
-        },
-        "id": {
-          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
-          "format": "uint64",
           "type": "string"
         },
         "kind": {
@@ -2589,6 +2589,65 @@
       },
       "type": "object"
     },
+    "InstancesScopedList": {
+      "properties": {
+        "instances": {
+          "description": "[Output Only] List of instances contained in this scope.",
+          "items": {
+            "$ref": "#/definitions/Instance"
+          },
+          "type": "array"
+        },
+        "warning": {
+          "description": "[Output Only] Informational warning which replaces the list of instances when the list is empty.",
+          "properties": {
+            "code": {
+              "description": "[Output Only] The warning type identifier for this warning.",
+              "enum": [
+                "DEPRECATED_RESOURCE_USED",
+                "DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
+                "INJECTED_KERNELS_DEPRECATED",
+                "NEXT_HOP_ADDRESS_NOT_ASSIGNED",
+                "NEXT_HOP_CANNOT_IP_FORWARD",
+                "NEXT_HOP_INSTANCE_NOT_FOUND",
+                "NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
+                "NEXT_HOP_NOT_RUNNING",
+                "NOT_CRITICAL_ERROR",
+                "NO_RESULTS_ON_PAGE",
+                "REQUIRED_TOS_AGREEMENT",
+                "RESOURCE_NOT_DELETED",
+                "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
+                "UNREACHABLE"
+              ],
+              "type": "string"
+            },
+            "data": {
+              "description": "[Output Only] Metadata for this warning in key: value format.",
+              "items": {
+                "properties": {
+                  "key": {
+                    "description": "[Output Only] A key for the warning data.",
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "[Output Only] A warning data value corresponding to the key.",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "message": {
+              "description": "[Output Only] Optional human-readable details for this warning.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
     "InstanceTemplate": {
       "description": "An Instance Template resource.",
       "properties": {
@@ -2682,65 +2741,6 @@
             "TERMINATED"
           ],
           "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "InstancesScopedList": {
-      "properties": {
-        "instances": {
-          "description": "[Output Only] List of instances contained in this scope.",
-          "items": {
-            "$ref": "#/definitions/Instance"
-          },
-          "type": "array"
-        },
-        "warning": {
-          "description": "[Output Only] Informational warning which replaces the list of instances when the list is empty.",
-          "properties": {
-            "code": {
-              "description": "[Output Only] The warning type identifier for this warning.",
-              "enum": [
-                "DEPRECATED_RESOURCE_USED",
-                "DISK_SIZE_LARGER_THAN_IMAGE_SIZE",
-                "INJECTED_KERNELS_DEPRECATED",
-                "NEXT_HOP_ADDRESS_NOT_ASSIGNED",
-                "NEXT_HOP_CANNOT_IP_FORWARD",
-                "NEXT_HOP_INSTANCE_NOT_FOUND",
-                "NEXT_HOP_INSTANCE_NOT_ON_NETWORK",
-                "NEXT_HOP_NOT_RUNNING",
-                "NOT_CRITICAL_ERROR",
-                "NO_RESULTS_ON_PAGE",
-                "REQUIRED_TOS_AGREEMENT",
-                "RESOURCE_NOT_DELETED",
-                "SINGLE_INSTANCE_PROPERTY_TEMPLATE",
-                "UNREACHABLE"
-              ],
-              "type": "string"
-            },
-            "data": {
-              "description": "[Output Only] Metadata for this warning in key: value format.",
-              "items": {
-                "properties": {
-                  "key": {
-                    "description": "[Output Only] A key for the warning data.",
-                    "type": "string"
-                  },
-                  "value": {
-                    "description": "[Output Only] A warning data value corresponding to the key.",
-                    "type": "string"
-                  }
-                },
-                "type": "object"
-              },
-              "type": "array"
-            },
-            "message": {
-              "description": "[Output Only] Optional human-readable details for this warning.",
-              "type": "string"
-            }
-          },
-          "type": "object"
         }
       },
       "type": "object"
@@ -3097,11 +3097,6 @@
     "Network": {
       "description": "A network resource.",
       "properties": {
-        "IPv4Range": {
-          "description": "The range of internal addresses that are legal on this network. This range is a CIDR specification, for example: 192.168.0.0/16. Provided by the client when the network is created.",
-          "pattern": "[0-9]{1,3}(?:\\.[0-9]{1,3}){3}/[0-9]{1,2}",
-          "type": "string"
-        },
         "creationTimestamp": {
           "description": "[Output Only] Creation timestamp in RFC3339 text format.",
           "type": "string"
@@ -3118,6 +3113,11 @@
         "id": {
           "description": "[Output Only] Unique identifier for the resource. Defined by the server.",
           "format": "uint64",
+          "type": "string"
+        },
+        "IPv4Range": {
+          "description": "The range of internal addresses that are legal on this network. This range is a CIDR specification, for example: 192.168.0.0/16. Provided by the client when the network is created.",
+          "pattern": "[0-9]{1,3}(?:\\.[0-9]{1,3}){3}/[0-9]{1,2}",
           "type": "string"
         },
         "kind": {
@@ -5012,6 +5012,23 @@
       },
       "type": "object"
     },
+    "UrlMapsValidateRequest": {
+      "properties": {
+        "resource": {
+          "$ref": "#/definitions/UrlMap",
+          "description": "Content of the UrlMap to be validated."
+        }
+      },
+      "type": "object"
+    },
+    "UrlMapsValidateResponse": {
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/UrlMapValidationResult"
+        }
+      },
+      "type": "object"
+    },
     "UrlMapTest": {
       "description": "Message for the expected URL mappings.",
       "properties": {
@@ -5056,23 +5073,6 @@
         "testPassed": {
           "description": "If successfully loaded, this field indicates whether the test passed. If false, 'testFailures's indicate the reason of failure.",
           "type": "boolean"
-        }
-      },
-      "type": "object"
-    },
-    "UrlMapsValidateRequest": {
-      "properties": {
-        "resource": {
-          "$ref": "#/definitions/UrlMap",
-          "description": "Content of the UrlMap to be validated."
-        }
-      },
-      "type": "object"
-    },
-    "UrlMapsValidateResponse": {
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/UrlMapValidationResult"
         }
       },
       "type": "object"
@@ -5685,85 +5685,6 @@
         }
       ]
     },
-    "/{project}/aggregated/diskTypes": {
-      "get": {
-        "description": "Retrieves the list of disk type resources grouped by scope.",
-        "operationId": "compute.diskTypes.aggregatedList",
-        "parameters": [
-          {
-            "description": "Project ID for this request.",
-            "in": "path",
-            "name": "project",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.\n\nThe FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.\n\nFor example, filter=name ne example-instance.",
-            "in": "query",
-            "name": "filter",
-            "type": "string"
-          },
-          {
-            "default": 500,
-            "description": "Maximum count of results to be returned.",
-            "in": "query",
-            "maximum": 500,
-            "minimum": 0,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "description": "Specifies a page token to use. Use this parameter if you want to list the next page of results. Set pageToken to the nextPageToken returned by a previous list request.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/DiskTypeAggregatedList"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/compute",
-              "https://www.googleapis.com/auth/compute.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "diskTypes"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
     "/{project}/aggregated/disks": {
       "get": {
         "description": "Retrieves the list of disks grouped by scope.",
@@ -5817,6 +5738,85 @@
         ],
         "tags": [
           "disks"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{project}/aggregated/diskTypes": {
+      "get": {
+        "description": "Retrieves the list of disk type resources grouped by scope.",
+        "operationId": "compute.diskTypes.aggregatedList",
+        "parameters": [
+          {
+            "description": "Project ID for this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.\n\nThe FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.\n\nFor example, filter=name ne example-instance.",
+            "in": "query",
+            "name": "filter",
+            "type": "string"
+          },
+          {
+            "default": 500,
+            "description": "Maximum count of results to be returned.",
+            "in": "query",
+            "maximum": 500,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "Specifies a page token to use. Use this parameter if you want to list the next page of results. Set pageToken to the nextPageToken returned by a previous list request.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/DiskTypeAggregatedList"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute",
+              "https://www.googleapis.com/auth/compute.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "diskTypes"
         ]
       },
       "parameters": [
@@ -14030,164 +14030,6 @@
         }
       ]
     },
-    "/{project}/zones/{zone}/diskTypes": {
-      "get": {
-        "description": "Retrieves the list of disk type resources available to the specified project.",
-        "operationId": "compute.diskTypes.list",
-        "parameters": [
-          {
-            "description": "Project ID for this request.",
-            "in": "path",
-            "name": "project",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The name of the zone for this request.",
-            "in": "path",
-            "name": "zone",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.\n\nThe FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.\n\nFor example, filter=name ne example-instance.",
-            "in": "query",
-            "name": "filter",
-            "type": "string"
-          },
-          {
-            "default": 500,
-            "description": "Maximum count of results to be returned.",
-            "in": "query",
-            "maximum": 500,
-            "minimum": 0,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "description": "Specifies a page token to use. Use this parameter if you want to list the next page of results. Set pageToken to the nextPageToken returned by a previous list request.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/DiskTypeList"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/compute",
-              "https://www.googleapis.com/auth/compute.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "diskTypes"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/{project}/zones/{zone}/diskTypes/{diskType}": {
-      "get": {
-        "description": "Returns the specified disk type resource.",
-        "operationId": "compute.diskTypes.get",
-        "parameters": [
-          {
-            "description": "Project ID for this request.",
-            "in": "path",
-            "name": "project",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The name of the zone for this request.",
-            "in": "path",
-            "name": "zone",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Name of the disk type resource to return.",
-            "in": "path",
-            "name": "diskType",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/DiskType"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/compute",
-              "https://www.googleapis.com/auth/compute.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "diskTypes"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
     "/{project}/zones/{zone}/disks": {
       "get": {
         "description": "Retrieves the list of persistent disks contained within the specified zone.",
@@ -14521,6 +14363,164 @@
           "disks"
         ]
       }
+    },
+    "/{project}/zones/{zone}/diskTypes": {
+      "get": {
+        "description": "Retrieves the list of disk type resources available to the specified project.",
+        "operationId": "compute.diskTypes.list",
+        "parameters": [
+          {
+            "description": "Project ID for this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The name of the zone for this request.",
+            "in": "path",
+            "name": "zone",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Sets a filter expression for filtering listed resources, in the form filter={expression}. Your {expression} must be in the format: FIELD_NAME COMPARISON_STRING LITERAL_STRING.\n\nThe FIELD_NAME is the name of the field you want to compare. Only atomic field types are supported (string, number, boolean). The COMPARISON_STRING must be either eq (equals) or ne (not equals). The LITERAL_STRING is the string value to filter to. The literal value must be valid for the type of field (string, number, boolean). For string fields, the literal value is interpreted as a regular expression using RE2 syntax. The literal value must match the entire field.\n\nFor example, filter=name ne example-instance.",
+            "in": "query",
+            "name": "filter",
+            "type": "string"
+          },
+          {
+            "default": 500,
+            "description": "Maximum count of results to be returned.",
+            "in": "query",
+            "maximum": 500,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "Specifies a page token to use. Use this parameter if you want to list the next page of results. Set pageToken to the nextPageToken returned by a previous list request.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/DiskTypeList"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute",
+              "https://www.googleapis.com/auth/compute.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "diskTypes"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/{project}/zones/{zone}/diskTypes/{diskType}": {
+      "get": {
+        "description": "Returns the specified disk type resource.",
+        "operationId": "compute.diskTypes.get",
+        "parameters": [
+          {
+            "description": "Project ID for this request.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The name of the zone for this request.",
+            "in": "path",
+            "name": "zone",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Name of the disk type resource to return.",
+            "in": "path",
+            "name": "diskType",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/DiskType"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/compute",
+              "https://www.googleapis.com/auth/compute.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "diskTypes"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     },
     "/{project}/zones/{zone}/instanceGroupManagers": {
       "get": {

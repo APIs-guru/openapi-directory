@@ -1158,49 +1158,6 @@
         ]
       }
     },
-    "/v1/backup_instances/{backup_instance_id}/backups/active": {
-      "get": {
-        "description": "Only backups belonging to backup_instances you have permission to access can be retrieved",
-        "parameters": [
-          {
-            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "ID of the backup_instance the requested backup belongs to",
-            "format": "int64",
-            "in": "path",
-            "name": "backup_instance_id",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success - The specified active backup for the specified backup_instance was successfully retrieved. The response body is the requested backup.",
-            "schema": {
-              "$ref": "#/definitions/backup"
-            }
-          },
-          "204": {
-            "description": "No Content - The specified backup_instance was found but there is not currently a backup in progress. The response body contains no content."
-          },
-          "401": {
-            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
-          },
-          "404": {
-            "description": "Not found - The requested backup_instance could not be found. See error message for specific details."
-          }
-        },
-        "summary": "Retrieve the active backup for the specified backup_instance if one exists",
-        "tags": [
-          "backups"
-        ]
-      }
-    },
     "/v1/backup_instances/{backup_instance_id}/backups/{backup_id}": {
       "get": {
         "description": "Only backups belonging to backup_instances you have permission to access can be retrieved",
@@ -1244,6 +1201,49 @@
           }
         },
         "summary": "Retrieve the specified backup for the specified backup_instance",
+        "tags": [
+          "backups"
+        ]
+      }
+    },
+    "/v1/backup_instances/{backup_instance_id}/backups/active": {
+      "get": {
+        "description": "Only backups belonging to backup_instances you have permission to access can be retrieved",
+        "parameters": [
+          {
+            "description": "Bearer Access Token granted from client credentials authorizing vendor to perform action",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "ID of the backup_instance the requested backup belongs to",
+            "format": "int64",
+            "in": "path",
+            "name": "backup_instance_id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success - The specified active backup for the specified backup_instance was successfully retrieved. The response body is the requested backup.",
+            "schema": {
+              "$ref": "#/definitions/backup"
+            }
+          },
+          "204": {
+            "description": "No Content - The specified backup_instance was found but there is not currently a backup in progress. The response body contains no content."
+          },
+          "401": {
+            "description": "Unauthorized - The Access Token provided is either invalid or does not have rights to perform the requested action"
+          },
+          "404": {
+            "description": "Not found - The requested backup_instance could not be found. See error message for specific details."
+          }
+        },
+        "summary": "Retrieve the active backup for the specified backup_instance if one exists",
         "tags": [
           "backups"
         ]

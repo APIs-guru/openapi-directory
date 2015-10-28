@@ -882,11 +882,6 @@
           "description": "Configuration specific to read replica instances. Indicates whether database flags for crash-safe replication are enabled.",
           "type": "boolean"
         },
-        "dataDiskSizeGb": {
-          "description": "The size of data disk for the performance instance, specified in GB. Setting this value for non-performance instances will result in an error.",
-          "format": "int64",
-          "type": "string"
-        },
         "databaseFlags": {
           "description": "The database flags passed to the instance at startup.",
           "items": {
@@ -897,6 +892,11 @@
         "databaseReplicationEnabled": {
           "description": "Configuration specific to read replica instances. Indicates whether replication is enabled or not.",
           "type": "boolean"
+        },
+        "dataDiskSizeGb": {
+          "description": "The size of data disk for the performance instance, specified in GB. Setting this value for non-performance instances will result in an error.",
+          "format": "int64",
+          "type": "string"
         },
         "ipConfiguration": {
           "$ref": "#/definitions/IpConfiguration",
@@ -1055,14 +1055,14 @@
           "format": "int64",
           "type": "string"
         },
-        "RAM": {
-          "description": "The maximum RAM usage of this tier in bytes.",
-          "format": "int64",
-          "type": "string"
-        },
         "kind": {
           "default": "sql#tier",
           "description": "This is always sql#tier.",
+          "type": "string"
+        },
+        "RAM": {
+          "description": "The maximum RAM usage of this tier in bytes.",
+          "format": "int64",
           "type": "string"
         },
         "region": {

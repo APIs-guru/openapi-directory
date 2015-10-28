@@ -130,6 +130,23 @@
         }
       }
     },
+    "application_response": {
+      "properties": {
+        "remaining_count": {
+          "type": "integer"
+        },
+        "reports": {
+          "$ref": "#/definitions/report_info"
+        },
+        "total_reports_count": {
+          "type": "integer"
+        },
+        "total_reports_done": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
     "Application_Status": {
       "properties": {
         "data": {
@@ -174,6 +191,23 @@
         }
       }
     },
+    "create_tweet_response": {
+      "properties": {
+        "aggregate_report_hash": {
+          "type": "string"
+        },
+        "daily_report_hash": {
+          "type": "string"
+        },
+        "monthly_report_hash": {
+          "type": "string"
+        },
+        "weekly_report_hash": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Create_Twitter": {
       "properties": {
         "data": {
@@ -204,6 +238,14 @@
         }
       }
     },
+    "custom_create_response": {
+      "properties": {
+        "report_hash": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Custom_Generate": {
       "properties": {
         "data": {
@@ -219,6 +261,14 @@
         }
       }
     },
+    "custom_generate_response": {
+      "properties": {
+        "upload_hash": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Custom_Insert": {
       "properties": {
         "data": {
@@ -233,6 +283,17 @@
           "type": "string"
         }
       }
+    },
+    "custom_insert_response": {
+      "properties": {
+        "distinct_relations": {
+          "type": "integer"
+        },
+        "total_relations": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
     },
     "Female": {
       "properties": {
@@ -253,6 +314,14 @@
         },
         "value": {
           "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "follower_create_response": {
+      "properties": {
+        "report_hash": {
+          "type": "string"
         }
       },
       "type": "object"
@@ -298,6 +367,34 @@
         }
       }
     },
+    "report_info": {
+      "properties": {
+        "created": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "report_type": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "report_response": {
+      "properties": {
+        "Combined Age": {
+          "$ref": "#/definitions/Combined_Age"
+        },
+        "Sex": {
+          "$ref": "#/definitions/Sex"
+        }
+      },
+      "type": "object"
+    },
     "Report_Status": {
       "properties": {
         "msg": {
@@ -332,103 +429,6 @@
         },
         "Male": {
           "$ref": "#/definitions/Male"
-        }
-      },
-      "type": "object"
-    },
-    "application_response": {
-      "properties": {
-        "remaining_count": {
-          "type": "integer"
-        },
-        "reports": {
-          "$ref": "#/definitions/report_info"
-        },
-        "total_reports_count": {
-          "type": "integer"
-        },
-        "total_reports_done": {
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
-    "create_tweet_response": {
-      "properties": {
-        "aggregate_report_hash": {
-          "type": "string"
-        },
-        "daily_report_hash": {
-          "type": "string"
-        },
-        "monthly_report_hash": {
-          "type": "string"
-        },
-        "weekly_report_hash": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "custom_create_response": {
-      "properties": {
-        "report_hash": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "custom_generate_response": {
-      "properties": {
-        "upload_hash": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "custom_insert_response": {
-      "properties": {
-        "distinct_relations": {
-          "type": "integer"
-        },
-        "total_relations": {
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
-    "follower_create_response": {
-      "properties": {
-        "report_hash": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "report_info": {
-      "properties": {
-        "created": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "report_type": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "report_response": {
-      "properties": {
-        "Combined Age": {
-          "$ref": "#/definitions/Combined_Age"
-        },
-        "Sex": {
-          "$ref": "#/definitions/Sex"
         }
       },
       "type": "object"

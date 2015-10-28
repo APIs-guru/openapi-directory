@@ -451,17 +451,6 @@
         }
       }
     },
-    "DeviceCSR": {
-      "properties": {
-        "csr": {
-          "description": "The PEM-encoded Certificate Signing Request (CSR).",
-          "type": "string"
-        }
-      },
-      "required": [
-        "csr"
-      ]
-    },
     "DeviceCapability": {
       "properties": {
         "association": {
@@ -551,6 +540,17 @@
       "required": [
         "name",
         "app_id"
+      ]
+    },
+    "DeviceCSR": {
+      "properties": {
+        "csr": {
+          "description": "The PEM-encoded Certificate Signing Request (CSR).",
+          "type": "string"
+        }
+      },
+      "required": [
+        "csr"
       ]
     },
     "DeviceTag": {
@@ -724,18 +724,6 @@
         "created_on"
       ]
     },
-    "FileUpdate": {
-      "properties": {
-        "description": {
-          "description": "A description for the file.",
-          "type": "string"
-        },
-        "metadata": {
-          "description": "A metadata for the file.",
-          "type": "object"
-        }
-      }
-    },
     "FilesInfo": {
       "properties": {
         "created_on": {
@@ -785,6 +773,18 @@
         "size",
         "created_on"
       ]
+    },
+    "FileUpdate": {
+      "properties": {
+        "description": {
+          "description": "A description for the file.",
+          "type": "string"
+        },
+        "metadata": {
+          "description": "A metadata for the file.",
+          "type": "object"
+        }
+      }
     },
     "Firehose": {
       "properties": {
@@ -4230,32 +4230,6 @@
         ]
       }
     },
-    "/users/id/{email}": {
-      "get": {
-        "description": "Get the user id in the format of universally unique identifier (UUID) by providing the user email address.\n",
-        "parameters": [
-          {
-            "description": "The email address of the user.",
-            "in": "path",
-            "name": "email",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "type": "string"
-            }
-          }
-        },
-        "summary": "Get the user id",
-        "tags": [
-          "users"
-        ]
-      }
-    },
     "/users/{id}": {
       "get": {
         "description": "Read a user using its universally unique identifier (UUID). The user.read capability is required to perform this action.\n",
@@ -4523,6 +4497,32 @@
           }
         },
         "summary": "Add a tag to a user",
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/users/id/{email}": {
+      "get": {
+        "description": "Get the user id in the format of universally unique identifier (UUID) by providing the user email address.\n",
+        "parameters": [
+          {
+            "description": "The email address of the user.",
+            "in": "path",
+            "name": "email",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "summary": "Get the user id",
         "tags": [
           "users"
         ]

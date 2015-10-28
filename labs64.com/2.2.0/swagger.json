@@ -1,6 +1,35 @@
 {
   "basePath": "/core/v2/rest",
   "definitions": {
+    "discount": {
+      "properties": {
+        "amountPercent": {
+          "type": "string"
+        },
+        "currency": {
+          "type": "string"
+        },
+        "totalPrice": {
+          "format": "double",
+          "type": "number"
+        }
+      },
+      "type": "object",
+      "xml": {
+        "name": "discount"
+      }
+    },
+    "infos": {
+      "xml": {
+        "name": "infos"
+      }
+    },
+    "items": {
+      "properties": {},
+      "xml": {
+        "name": "items"
+      }
+    },
     "License": {
       "properties": {
         "active": {
@@ -32,6 +61,22 @@
       "type": "object",
       "xml": {
         "name": "license"
+      }
+    },
+    "Licensee": {
+      "properties": {
+        "active": {
+          "description": "If set to false, the licensee is disabled. Licensee can not obtain new licenses, and validation is disabled.",
+          "type": "boolean"
+        },
+        "number": {
+          "description": "Unique number (across all products of a vendor) that identifies the licensee. Vendor can assign this number when creating a licensee or let NetLicensing generate one. Read-only after creation of the first license for the licensee.",
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "xml": {
+        "name": "licensee"
       }
     },
     "LicenseTemplate": {
@@ -83,20 +128,28 @@
         "name": "licensetemplate"
       }
     },
-    "Licensee": {
+    "licensingModel": {
       "properties": {
-        "active": {
-          "description": "If set to false, the licensee is disabled. Licensee can not obtain new licenses, and validation is disabled.",
-          "type": "boolean"
-        },
-        "number": {
-          "description": "Unique number (across all products of a vendor) that identifies the licensee. Vendor can assign this number when creating a licensee or let NetLicensing generate one. Read-only after creation of the first license for the licensee.",
+        "name": {
           "type": "string"
         }
       },
       "type": "object",
       "xml": {
-        "name": "licensee"
+        "name": "licensingModel"
+      }
+    },
+    "netlicensing": {
+      "properties": {
+        "infos": {
+          "$ref": "#/definitions/infos"
+        },
+        "items": {
+          "$ref": "#/definitions/items"
+        }
+      },
+      "xml": {
+        "name": "netlicensing"
       }
     },
     "PaymentMethod": {
@@ -223,59 +276,6 @@
       "type": "object",
       "xml": {
         "name": "transaction"
-      }
-    },
-    "discount": {
-      "properties": {
-        "amountPercent": {
-          "type": "string"
-        },
-        "currency": {
-          "type": "string"
-        },
-        "totalPrice": {
-          "format": "double",
-          "type": "number"
-        }
-      },
-      "type": "object",
-      "xml": {
-        "name": "discount"
-      }
-    },
-    "infos": {
-      "xml": {
-        "name": "infos"
-      }
-    },
-    "items": {
-      "properties": {},
-      "xml": {
-        "name": "items"
-      }
-    },
-    "licensingModel": {
-      "properties": {
-        "name": {
-          "type": "string"
-        }
-      },
-      "type": "object",
-      "xml": {
-        "name": "licensingModel"
-      }
-    },
-    "netlicensing": {
-      "properties": {
-        "infos": {
-          "$ref": "#/definitions/infos"
-        },
-        "items": {
-          "$ref": "#/definitions/items"
-        }
-      },
-      "xml": {
-        "name": "netlicensing"
       }
     }
   },

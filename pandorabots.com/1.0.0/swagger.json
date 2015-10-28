@@ -231,45 +231,6 @@
         ]
       }
     },
-    "/bot/{app_id}/{botname}/verify": {
-      "get": {
-        "description": "A bot personality is created by uploading AIML and other file types to Pandorabots. The files must compile correctly in order for the bot to run. By issuing a call to this API, Pandorabots will compile the bot, updating any changes that have been made to the files.<p>Compiling the bot makes its most recent version available for talk. A 400 error means that we were unable to compile your bot (you should check your files for syntax issues) or the botname was not found. </p><p>You can see any thrown errors in the results field of the returned JSON object:</p><p><pre class='prettyprint'>curl -v  -X GET 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME/verify?user_key=USER_KEY'</pre></p>",
-        "operationId": "compileBot",
-        "parameters": [
-          {
-            "description": "Your Application ID",
-            "in": "path",
-            "name": "app_id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Your bot's name",
-            "in": "path",
-            "name": "botname",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Your application's user key.",
-            "in": "query",
-            "name": "user_key",
-            "required": true,
-            "type": "string",
-            "x-data-threescale-name": "user_keys"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Compile a bot",
-        "tags": [
-          "pandorabots_api_swagger_1_3"
-        ]
-      }
-    },
     "/bot/{app_id}/{botname}/{file-kind}": {
       "delete": {
         "description": "Delete pdefaults or properties bot file.<p>For malformed file-kind, a 404 error is returned. For invalid botname, a 412 error is returned.</p><pre><p>curl -v -X DELETE 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME/FILE-KIND?user_key=USER_KEY'</p></pre>",
@@ -578,6 +539,45 @@
           }
         },
         "summary": "Upload a bot file (AIML, set, substitution, map)",
+        "tags": [
+          "pandorabots_api_swagger_1_3"
+        ]
+      }
+    },
+    "/bot/{app_id}/{botname}/verify": {
+      "get": {
+        "description": "A bot personality is created by uploading AIML and other file types to Pandorabots. The files must compile correctly in order for the bot to run. By issuing a call to this API, Pandorabots will compile the bot, updating any changes that have been made to the files.<p>Compiling the bot makes its most recent version available for talk. A 400 error means that we were unable to compile your bot (you should check your files for syntax issues) or the botname was not found. </p><p>You can see any thrown errors in the results field of the returned JSON object:</p><p><pre class='prettyprint'>curl -v  -X GET 'https://aiaas.pandorabots.com/bot/APP_ID/BOTNAME/verify?user_key=USER_KEY'</pre></p>",
+        "operationId": "compileBot",
+        "parameters": [
+          {
+            "description": "Your Application ID",
+            "in": "path",
+            "name": "app_id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Your bot's name",
+            "in": "path",
+            "name": "botname",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Your application's user key.",
+            "in": "query",
+            "name": "user_key",
+            "required": true,
+            "type": "string",
+            "x-data-threescale-name": "user_keys"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Compile a bot",
         "tags": [
           "pandorabots_api_swagger_1_3"
         ]

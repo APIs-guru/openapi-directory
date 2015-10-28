@@ -18,59 +18,6 @@
     "x-providerName": "instagram.com"
   },
   "paths": {
-    "/locations/search": {
-      "get": {
-        "description": "Search for a location by name and geographic coordinate.",
-        "externalDocs": {
-          "url": "http://instagr.am/developer/endpoints/locations/#get_locations_search"
-        },
-        "parameters": [
-          {
-            "description": "Latitude of the center search coordinate. If used, lng is required.",
-            "in": "query",
-            "name": "lat",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Longitude of the center search coordinate. If used, lat is required.",
-            "in": "query",
-            "name": "lng",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Returns a location mapped off of a foursquare v1 api location id. If used, you are not required to use lat and lng. Note that this method is deprecated; you should use the new foursquare IDs with V2 of their API.",
-            "in": "query",
-            "name": "foursquare_id",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Returns a location mapped off of a foursquare v2 api location id. If used, you are not required to use lat and lng.",
-            "in": "query",
-            "name": "foursquare_v2_id",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "default": 1000,
-            "description": "Search distance, in meters. Default is 1km (distance=1000), max distance is 5km (5000)",
-            "in": "query",
-            "minimum": 1,
-            "name": "distance",
-            "required": false,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response"
-          }
-        }
-      },
-      "parameters": []
-    },
     "/locations/{location-id}": {
       "get": {
         "description": "Get information about a location.",
@@ -149,25 +96,11 @@
         }
       ]
     },
-    "/media/popular": {
+    "/locations/search": {
       "get": {
-        "description": "Get a list of what media is most popular at the moment.",
+        "description": "Search for a location by name and geographic coordinate.",
         "externalDocs": {
-          "url": "http://instagr.am/developer/endpoints/media/#get_media_popular"
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response"
-          }
-        }
-      },
-      "parameters": []
-    },
-    "/media/search": {
-      "get": {
-        "description": "Get information about a media object.",
-        "externalDocs": {
-          "url": "http://instagr.am/developer/endpoints/media/#get_media_search"
+          "url": "http://instagr.am/developer/endpoints/locations/#get_locations_search"
         },
         "parameters": [
           {
@@ -175,32 +108,28 @@
             "in": "query",
             "name": "lat",
             "required": false,
-            "type": "number"
+            "type": "string"
           },
           {
             "description": "Longitude of the center search coordinate. If used, lat is required.",
             "in": "query",
             "name": "lng",
             "required": false,
-            "type": "number"
+            "type": "string"
           },
           {
-            "description": "A unix timestamp. All media returned will be taken earlier than this timestamp.",
+            "description": "Returns a location mapped off of a foursquare v1 api location id. If used, you are not required to use lat and lng. Note that this method is deprecated; you should use the new foursquare IDs with V2 of their API.",
             "in": "query",
-            "maximum": 9223372036854776000,
-            "minimum": -9223372036854776000,
-            "name": "max_timestamp",
+            "name": "foursquare_id",
             "required": false,
-            "type": "integer"
+            "type": "string"
           },
           {
-            "description": "A unix timestamp. All media returned will be taken later than this timestamp.",
+            "description": "Returns a location mapped off of a foursquare v2 api location id. If used, you are not required to use lat and lng.",
             "in": "query",
-            "maximum": 9223372036854776000,
-            "minimum": -9223372036854776000,
-            "name": "min_timestamp",
+            "name": "foursquare_v2_id",
             "required": false,
-            "type": "integer"
+            "type": "string"
           },
           {
             "default": 1000,
@@ -349,6 +278,77 @@
         }
       }
     },
+    "/media/popular": {
+      "get": {
+        "description": "Get a list of what media is most popular at the moment.",
+        "externalDocs": {
+          "url": "http://instagr.am/developer/endpoints/media/#get_media_popular"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          }
+        }
+      },
+      "parameters": []
+    },
+    "/media/search": {
+      "get": {
+        "description": "Get information about a media object.",
+        "externalDocs": {
+          "url": "http://instagr.am/developer/endpoints/media/#get_media_search"
+        },
+        "parameters": [
+          {
+            "description": "Latitude of the center search coordinate. If used, lng is required.",
+            "in": "query",
+            "name": "lat",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Longitude of the center search coordinate. If used, lat is required.",
+            "in": "query",
+            "name": "lng",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "A unix timestamp. All media returned will be taken earlier than this timestamp.",
+            "in": "query",
+            "maximum": 9223372036854776000,
+            "minimum": -9223372036854776000,
+            "name": "max_timestamp",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "A unix timestamp. All media returned will be taken later than this timestamp.",
+            "in": "query",
+            "maximum": 9223372036854776000,
+            "minimum": -9223372036854776000,
+            "name": "min_timestamp",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "default": 1000,
+            "description": "Search distance, in meters. Default is 1km (distance=1000), max distance is 5km (5000)",
+            "in": "query",
+            "minimum": 1,
+            "name": "distance",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          }
+        }
+      },
+      "parameters": []
+    },
     "/subscriptions": {
       "delete": {
         "description": "Deletes a subscription by object type or ID.",
@@ -460,29 +460,6 @@
         }
       }
     },
-    "/tags/search": {
-      "get": {
-        "description": "Search for tags by name.",
-        "externalDocs": {
-          "url": "http://instagr.am/developer/endpoints/tags/#get_tags_search"
-        },
-        "parameters": [
-          {
-            "description": "Valid tag name without a leading #. (eg. snow, nofilter)",
-            "in": "query",
-            "name": "q",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response"
-          }
-        }
-      },
-      "parameters": []
-    },
     "/tags/{tag-name}": {
       "get": {
         "description": "Get information about a tag object.",
@@ -543,112 +520,21 @@
         }
       ]
     },
-    "/users/search": {
+    "/tags/search": {
       "get": {
-        "description": "Search for a user by name.",
+        "description": "Search for tags by name.",
         "externalDocs": {
-          "url": "http://instagr.am/developer/endpoints/users/#get_users_search"
+          "url": "http://instagr.am/developer/endpoints/tags/#get_tags_search"
         },
         "parameters": [
           {
-            "description": "A query string.",
+            "description": "Valid tag name without a leading #. (eg. snow, nofilter)",
             "in": "query",
             "name": "q",
             "required": true,
             "type": "string"
-          },
-          {
-            "description": "Number of users to return",
-            "in": "query",
-            "minimum": 1,
-            "name": "count",
-            "required": false,
-            "type": "integer"
           }
         ],
-        "responses": {
-          "200": {
-            "description": "Successful Response"
-          }
-        }
-      },
-      "parameters": []
-    },
-    "/users/self/feed": {
-      "get": {
-        "description": "See the authenticated user's feed.",
-        "externalDocs": {
-          "url": "http://instagr.am/developer/endpoints/users/#get_users_feed"
-        },
-        "parameters": [
-          {
-            "description": "Return media earlier than this max_id",
-            "in": "query",
-            "name": "max_id",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Return media later than this min_id",
-            "in": "query",
-            "name": "min_id",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Count of media to return",
-            "in": "query",
-            "minimum": 1,
-            "name": "count",
-            "required": false,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response"
-          }
-        }
-      },
-      "parameters": []
-    },
-    "/users/self/media/liked": {
-      "get": {
-        "description": "See the authenticated user's list of media they've liked.",
-        "externalDocs": {
-          "url": "http://instagr.am/developer/endpoints/users/#get_users_liked_feed"
-        },
-        "parameters": [
-          {
-            "description": "Return media liked before this id",
-            "in": "query",
-            "name": "max_like_id",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Count of media to return",
-            "in": "query",
-            "minimum": 1,
-            "name": "count",
-            "required": false,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response"
-          }
-        }
-      },
-      "parameters": []
-    },
-    "/users/self/requested-by": {
-      "get": {
-        "description": "List the users who have requested this user's permission to follow. Required scope: relationships",
-        "externalDocs": {
-          "url": "http://instagr.am/developer/endpoints/relationships/#get_incoming_requests"
-        },
         "responses": {
           "200": {
             "description": "Successful Response"
@@ -820,6 +706,120 @@
           }
         }
       }
+    },
+    "/users/search": {
+      "get": {
+        "description": "Search for a user by name.",
+        "externalDocs": {
+          "url": "http://instagr.am/developer/endpoints/users/#get_users_search"
+        },
+        "parameters": [
+          {
+            "description": "A query string.",
+            "in": "query",
+            "name": "q",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Number of users to return",
+            "in": "query",
+            "minimum": 1,
+            "name": "count",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          }
+        }
+      },
+      "parameters": []
+    },
+    "/users/self/feed": {
+      "get": {
+        "description": "See the authenticated user's feed.",
+        "externalDocs": {
+          "url": "http://instagr.am/developer/endpoints/users/#get_users_feed"
+        },
+        "parameters": [
+          {
+            "description": "Return media earlier than this max_id",
+            "in": "query",
+            "name": "max_id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Return media later than this min_id",
+            "in": "query",
+            "name": "min_id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Count of media to return",
+            "in": "query",
+            "minimum": 1,
+            "name": "count",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          }
+        }
+      },
+      "parameters": []
+    },
+    "/users/self/media/liked": {
+      "get": {
+        "description": "See the authenticated user's list of media they've liked.",
+        "externalDocs": {
+          "url": "http://instagr.am/developer/endpoints/users/#get_users_liked_feed"
+        },
+        "parameters": [
+          {
+            "description": "Return media liked before this id",
+            "in": "query",
+            "name": "max_like_id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Count of media to return",
+            "in": "query",
+            "minimum": 1,
+            "name": "count",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          }
+        }
+      },
+      "parameters": []
+    },
+    "/users/self/requested-by": {
+      "get": {
+        "description": "List the users who have requested this user's permission to follow. Required scope: relationships",
+        "externalDocs": {
+          "url": "http://instagr.am/developer/endpoints/relationships/#get_incoming_requests"
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response"
+          }
+        }
+      },
+      "parameters": []
     }
   },
   "schemes": [

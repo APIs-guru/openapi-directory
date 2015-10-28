@@ -405,32 +405,6 @@
         ]
       }
     },
-    "/pods/{podId}/ping": {
-      "get": {
-        "description": "Returns the ping response from your server.",
-        "parameters": [
-          {
-            "description": "Id of the pod you want to ping check",
-            "in": "path",
-            "name": "podId",
-            "required": true,
-            "type": "number"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Ping your specified pod",
-        "tags": [
-          "pods"
-        ]
-      }
-    },
     "/pods/{podId}/{action}": {
       "get": {
         "description": "Allowed actions are reboot, shutdown, boot",
@@ -459,6 +433,32 @@
           }
         },
         "summary": "Perform action on a specific pod",
+        "tags": [
+          "pods"
+        ]
+      }
+    },
+    "/pods/{podId}/ping": {
+      "get": {
+        "description": "Returns the ping response from your server.",
+        "parameters": [
+          {
+            "description": "Id of the pod you want to ping check",
+            "in": "path",
+            "name": "podId",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Ping your specified pod",
         "tags": [
           "pods"
         ]

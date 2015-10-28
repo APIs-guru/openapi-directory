@@ -16,52 +16,6 @@
     "x-providerName": "yunbi.com"
   },
   "paths": {
-    "/v2/deposit.json": {
-      "get": {
-        "operationId": "GET--version-deposit---format-",
-        "parameters": [
-          {
-            "description": "Access key.",
-            "in": "query",
-            "name": "access_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
-            "in": "query",
-            "name": "tonce",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The signature of your request payload, generated using your secret key.",
-            "in": "query",
-            "name": "signature",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "txid",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Get details of specific deposit.",
-        "tags": [
-          "deposit"
-        ]
-      }
-    },
     "/v2/deposit_address.json": {
       "get": {
         "operationId": "GET--version-deposit_address---format-",
@@ -106,6 +60,52 @@
         "summary": "Where to deposit. The address field could be empty when a new address is generating (e.g. for bitcoin), you should try again later in that case.",
         "tags": [
           "deposit_address"
+        ]
+      }
+    },
+    "/v2/deposit.json": {
+      "get": {
+        "operationId": "GET--version-deposit---format-",
+        "parameters": [
+          {
+            "description": "Access key.",
+            "in": "query",
+            "name": "access_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Tonce is an integer represents the milliseconds elapsed since Unix epoch.",
+            "in": "query",
+            "name": "tonce",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "The signature of your request payload, generated using your secret key.",
+            "in": "query",
+            "name": "signature",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "txid",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Get details of specific deposit.",
+        "tags": [
+          "deposit"
         ]
       }
     },
@@ -202,53 +202,6 @@
         ]
       }
     },
-    "/v2/k.json": {
-      "get": {
-        "operationId": "GET--version-k---format-",
-        "parameters": [
-          {
-            "description": "Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.",
-            "in": "query",
-            "name": "market",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Limit the number of returned data points, default to 30.",
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "description": "Time period of K line, default to 1. You can choose between 1, 5, 15, 30, 60, 120, 240, 360, 720, 1440, 4320, 10080",
-            "in": "query",
-            "name": "period",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "description": "An integer represents the seconds elapsed since Unix epoch. If set, only k-line data after that time will be returned.",
-            "in": "query",
-            "name": "timestamp",
-            "required": false,
-            "type": "integer"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Get OHLC(k line) of specific market.",
-        "tags": [
-          "k"
-        ]
-      }
-    },
     "/v2/k_with_pending_trades.json": {
       "get": {
         "operationId": "GET--version-k_with_pending_trades---format-",
@@ -300,6 +253,53 @@
         "summary": "Get K data with pending trades, which are the trades not included in K data yet, because there's delay between trade generated and processed by K data generator.",
         "tags": [
           "k_with_pending_trades"
+        ]
+      }
+    },
+    "/v2/k.json": {
+      "get": {
+        "operationId": "GET--version-k---format-",
+        "parameters": [
+          {
+            "description": "Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.",
+            "in": "query",
+            "name": "market",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Limit the number of returned data points, default to 30.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Time period of K line, default to 1. You can choose between 1, 5, 15, 30, 60, 120, 240, 360, 720, 1440, 4320, 10080",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "An integer represents the seconds elapsed since Unix epoch. If set, only k-line data after that time will be returned.",
+            "in": "query",
+            "name": "timestamp",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Get OHLC(k line) of specific market.",
+        "tags": [
+          "k"
         ]
       }
     },
@@ -357,6 +357,46 @@
         "summary": "Get your profile and accounts info.",
         "tags": [
           "members"
+        ]
+      }
+    },
+    "/v2/order_book.json": {
+      "get": {
+        "operationId": "GET--version-order_book---format-",
+        "parameters": [
+          {
+            "description": "Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.",
+            "in": "query",
+            "name": "market",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Limit the number of returned sell orders. Default to 20.",
+            "in": "query",
+            "name": "asks_limit",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Limit the number of returned buy orders. Default to 20.",
+            "in": "query",
+            "name": "bids_limit",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Get the order book of specified market.",
+        "tags": [
+          "order_book"
         ]
       }
     },
@@ -451,46 +491,6 @@
         "summary": "Cancel an order.",
         "tags": [
           "order"
-        ]
-      }
-    },
-    "/v2/order_book.json": {
-      "get": {
-        "operationId": "GET--version-order_book---format-",
-        "parameters": [
-          {
-            "description": "Unique market id. It's always in the form of xxxyyy, where xxx is the base currency code, yyy is the quote currency code, e.g. 'btccny'. All available markets can be found at /api/v2/markets.",
-            "in": "query",
-            "name": "market",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Limit the number of returned sell orders. Default to 20.",
-            "in": "query",
-            "name": "asks_limit",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "description": "Limit the number of returned buy orders. Default to 20.",
-            "in": "query",
-            "name": "bids_limit",
-            "required": false,
-            "type": "integer"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Get the order book of specified market.",
-        "tags": [
-          "order_book"
         ]
       }
     },

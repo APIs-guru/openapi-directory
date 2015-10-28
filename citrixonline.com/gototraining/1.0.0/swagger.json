@@ -386,16 +386,16 @@
           "$ref": "#/definitions/RegistrationSettings",
           "description": "Training settings, namely web registration and confirmation emails to the training registrants"
         },
-        "timeZone": {
-          "description": "The time zone where the training takes place",
-          "type": "string"
-        },
         "times": {
           "description": "Array with startDate and endDate for the training sessions",
           "items": {
             "$ref": "#/definitions/DateTimeRange"
           },
           "type": "array"
+        },
+        "timeZone": {
+          "description": "The time zone where the training takes place",
+          "type": "string"
         },
         "trainingId": {
           "description": "The 9-digit training's ID",
@@ -476,16 +476,16 @@
           "$ref": "#/definitions/RegistrationSettings",
           "description": "Training settings, namely web registration and confirmation emails to the training registrants"
         },
-        "timeZone": {
-          "description": "Time zone of the training. (Must be a valid time zone ID, see https://developer.citrixonline.com/citrix-rest-api-date-formats-and-time-zones)",
-          "type": "string"
-        },
         "times": {
           "description": "Array with startDate and endDate for the training sessions",
           "items": {
             "$ref": "#/definitions/DateTimeRange"
           },
           "type": "array"
+        },
+        "timeZone": {
+          "description": "Time zone of the training. (Must be a valid time zone ID, see https://developer.citrixonline.com/citrix-rest-api-date-formats-and-time-zones)",
+          "type": "string"
         }
       },
       "required": [
@@ -505,16 +505,16 @@
           "description": "Notify trainers via email of change to training. Default is true",
           "type": "boolean"
         },
-        "timeZone": {
-          "description": "Time zone of the training. Must be a valid time zone ID, see https://developer.citrixonline.com/citrix-rest-api-date-formats-and-time-zones",
-          "type": "string"
-        },
         "times": {
           "description": "Start and end times for the training sessions",
           "items": {
             "$ref": "#/definitions/DateTimeRange"
           },
           "type": "array"
+        },
+        "timeZone": {
+          "description": "Time zone of the training. Must be a valid time zone ID, see https://developer.citrixonline.com/citrix-rest-api-date-formats-and-time-zones",
+          "type": "string"
         }
       },
       "required": [

@@ -368,6 +368,29 @@
       },
       "type": "object"
     },
+    "ReplicasDeleteRequest": {
+      "properties": {
+        "abandonInstance": {
+          "description": "Whether the instance resource represented by this replica should be deleted or abandoned. If abandoned, the replica will be deleted but the virtual machine instance will remain. By default, this is set to false and the instance will be deleted along with the replica.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "ReplicasListResponse": {
+      "properties": {
+        "nextPageToken": {
+          "type": "string"
+        },
+        "resources": {
+          "items": {
+            "$ref": "#/definitions/Replica"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "ReplicaStatus": {
       "description": "The current status of a Replica.",
       "properties": {
@@ -390,29 +413,6 @@
         "vmStartTime": {
           "description": "[Output Only] The time that this Replica got to the RUNNING state, in RFC 3339 format. If the start time is unknown, UNKNOWN is returned.",
           "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ReplicasDeleteRequest": {
-      "properties": {
-        "abandonInstance": {
-          "description": "Whether the instance resource represented by this replica should be deleted or abandoned. If abandoned, the replica will be deleted but the virtual machine instance will remain. By default, this is set to false and the instance will be deleted along with the replica.",
-          "type": "boolean"
-        }
-      },
-      "type": "object"
-    },
-    "ReplicasListResponse": {
-      "properties": {
-        "nextPageToken": {
-          "type": "string"
-        },
-        "resources": {
-          "items": {
-            "$ref": "#/definitions/Replica"
-          },
-          "type": "array"
         }
       },
       "type": "object"

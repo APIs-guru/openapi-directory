@@ -78,14 +78,14 @@
           "format": "int32",
           "type": "integer"
         },
-        "organizerKey": {
-          "description": "The key of the meeting organizer",
-          "type": "string"
-        },
         "organizerkey": {
           "description": "The key of the meeting organizer. Field retained for backwards compatibility reasons",
           "format": "int64",
           "type": "integer"
+        },
+        "organizerKey": {
+          "description": "The key of the meeting organizer",
+          "type": "string"
         },
         "startTime": {
           "description": "The time the meeting instance started",
@@ -623,14 +623,14 @@
           "format": "int32",
           "type": "integer"
         },
-        "organizerKey": {
-          "description": "The key of the meeting organizer",
-          "type": "string"
-        },
         "organizerkey": {
           "description": "The key of the meeting organizer. Field retained for backwards compatibility reasons",
           "format": "int64",
           "type": "integer"
+        },
+        "organizerKey": {
+          "description": "The key of the meeting organizer",
+          "type": "string"
         },
         "startTime": {
           "description": "The time this meeting instance started",
@@ -771,6 +771,11 @@
           "format": "int32",
           "type": "integer"
         },
+        "meetingid": {
+          "description": "The meeting ID",
+          "format": "int64",
+          "type": "integer"
+        },
         "meetingType": {
           "description": "The meeting type",
           "enum": [
@@ -779,11 +784,6 @@
             "scheduled"
           ],
           "type": "string"
-        },
-        "meetingid": {
-          "description": "The meeting ID",
-          "format": "int64",
-          "type": "integer"
         },
         "passwordRequired": {
           "description": "Indicates whether a password is required to join the meeting",
@@ -936,12 +936,12 @@
           "format": "int32",
           "type": "integer"
         },
-        "organizerKey": {
-          "description": "The key of the meeting organizer",
-          "type": "string"
-        },
         "organizerkey": {
           "description": "The key of the meeting organizer. Field retained for backwards compatibility reasons",
+          "type": "string"
+        },
+        "organizerKey": {
+          "description": "The key of the meeting organizer",
           "type": "string"
         },
         "passwordRequired": {
@@ -1118,6 +1118,11 @@
           "format": "int32",
           "type": "integer"
         },
+        "meetingid": {
+          "description": "The meeting ID.",
+          "format": "int64",
+          "type": "integer"
+        },
         "meetingType": {
           "description": "The meeting type",
           "enum": [
@@ -1126,11 +1131,6 @@
             "scheduled"
           ],
           "type": "string"
-        },
-        "meetingid": {
-          "description": "The meeting ID.",
-          "format": "int64",
-          "type": "integer"
         },
         "passwordRequired": {
           "description": "Indicates whether a password is required to join the meeting.",
@@ -1416,14 +1416,14 @@
           ],
           "type": "string"
         },
-        "organizerKey": {
-          "description": "The key of the meeting organizer.",
-          "type": "string"
-        },
         "organizerkey": {
           "description": "The key of the meeting organizer. Field retained for backwards compatibility reasons.",
           "format": "int64",
           "type": "integer"
+        },
+        "organizerKey": {
+          "description": "The key of the meeting organizer.",
+          "type": "string"
         },
         "passwordRequired": {
           "description": "Indicates whether a password is required to join the meeting.",

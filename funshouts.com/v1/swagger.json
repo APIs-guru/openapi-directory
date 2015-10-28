@@ -94,10 +94,18 @@
         ]
       }
     },
-    "/api/shouts/top": {
+    "/api/shouts/{Handle}": {
       "get": {
         "consumes": [],
         "deprecated": false,
+        "parameters": [
+          {
+            "in": "path",
+            "name": "Handle",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "produces": [
           "application/json",
           "text/json",
@@ -117,18 +125,10 @@
         ]
       }
     },
-    "/api/shouts/{Handle}": {
+    "/api/shouts/top": {
       "get": {
         "consumes": [],
         "deprecated": false,
-        "parameters": [
-          {
-            "in": "path",
-            "name": "Handle",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "produces": [
           "application/json",
           "text/json",

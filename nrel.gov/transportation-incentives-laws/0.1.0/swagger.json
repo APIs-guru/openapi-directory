@@ -240,6 +240,30 @@
         "result"
       ]
     },
+    "LawsResponse": {
+      "properties": {
+        "inputs": {
+          "$ref": "#/definitions/Inputs",
+          "description": "The parameters that were passed to the api call"
+        },
+        "metadata": {
+          "$ref": "#/definitions/Metadata",
+          "description": "The api version number, and the count of laws returned"
+        },
+        "result": {
+          "description": "The array of laws returned",
+          "items": {
+            "$ref": "#/definitions/Law"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "metadata",
+        "inputs",
+        "result"
+      ]
+    },
     "LawTopics": {
       "description": "For local incentive/regulation descriptions, the category that the incentive/regulation falls under, described below: Infrastructure Requirements, Vehicle Purchase and Infrastructure Development Incentives, Fuel Use Incentives, Parking Incentives, Technical Assistance, Vehicle Acquisition Requirements, Promotion Initiatives, Idle Reduction Requirements, Renewable Fuels Mandates and Standards",
       "properties": {
@@ -282,30 +306,6 @@
         "id",
         "title",
         "code"
-      ]
-    },
-    "LawsResponse": {
-      "properties": {
-        "inputs": {
-          "$ref": "#/definitions/Inputs",
-          "description": "The parameters that were passed to the api call"
-        },
-        "metadata": {
-          "$ref": "#/definitions/Metadata",
-          "description": "The api version number, and the count of laws returned"
-        },
-        "result": {
-          "description": "The array of laws returned",
-          "items": {
-            "$ref": "#/definitions/Law"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "metadata",
-        "inputs",
-        "result"
       ]
     },
     "Metadata": {
@@ -523,6 +523,58 @@
         ]
       }
     },
+    "/v1/{id}.{output_format}": {
+      "get": {
+        "parameters": [
+          {
+            "default": "json",
+            "description": "Response format",
+            "enum": [
+              "json",
+              "xml"
+            ],
+            "in": "path",
+            "name": "output_format",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": "DEMO_KEY",
+            "description": "API Key",
+            "in": "query",
+            "name": "api_key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The id of the law that you are searching",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "default": false,
+            "description": "Include points of contacts in the return value.",
+            "in": "query",
+            "name": "poc",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "$ref": "#/definitions/LawResult"
+            }
+          }
+        },
+        "summary": "Fetch the details of a specific law given the law's ID.",
+        "tags": [
+          "v1"
+        ]
+      }
+    },
     "/v1/category-list.{output_format}": {
       "get": {
         "parameters": [
@@ -613,58 +665,6 @@
           }
         },
         "summary": "Get the points of contact for a given jurisdiction.",
-        "tags": [
-          "v1"
-        ]
-      }
-    },
-    "/v1/{id}.{output_format}": {
-      "get": {
-        "parameters": [
-          {
-            "default": "json",
-            "description": "Response format",
-            "enum": [
-              "json",
-              "xml"
-            ],
-            "in": "path",
-            "name": "output_format",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "default": "DEMO_KEY",
-            "description": "API Key",
-            "in": "query",
-            "name": "api_key",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The id of the law that you are searching",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "default": false,
-            "description": "Include points of contacts in the return value.",
-            "in": "query",
-            "name": "poc",
-            "type": "boolean"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/LawResult"
-            }
-          }
-        },
-        "summary": "Fetch the details of a specific law given the law's ID.",
         "tags": [
           "v1"
         ]

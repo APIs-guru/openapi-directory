@@ -162,10 +162,6 @@
     "Creative": {
       "description": "A creative and its classification data.",
       "properties": {
-        "HTMLSnippet": {
-          "description": "The HTML snippet that displays the ad when inserted in the web page. If set, videoURL should not be set.",
-          "type": "string"
-        },
         "accountId": {
           "description": "Account id.",
           "format": "int32",
@@ -285,6 +281,10 @@
           "description": "Ad height.",
           "format": "int32",
           "type": "integer"
+        },
+        "HTMLSnippet": {
+          "description": "The HTML snippet that displays the ad when inserted in the web page. If set, videoURL should not be set.",
+          "type": "string"
         },
         "impressionTrackingUrl": {
           "description": "The set of urls to be called to record an impression.",

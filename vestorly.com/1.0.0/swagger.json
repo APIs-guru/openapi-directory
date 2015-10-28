@@ -321,6 +321,13 @@
         }
       }
     },
+    "Eventcreateresponse": {
+      "properties": {
+        "meta": {
+          "$ref": "#/definitions/Meta"
+        }
+      }
+    },
     "EventInput": {
       "properties": {
         "advisor_id": {
@@ -381,13 +388,6 @@
         "original_url",
         "subject_email"
       ]
-    },
-    "Eventcreateresponse": {
-      "properties": {
-        "meta": {
-          "$ref": "#/definitions/Meta"
-        }
-      }
     },
     "Eventresponse": {
       "properties": {
@@ -846,6 +846,23 @@
         }
       }
     },
+    "Newsletterresponse": {
+      "properties": {
+        "newsletter": {
+          "$ref": "#/definitions/Newsletter"
+        }
+      }
+    },
+    "Newsletters": {
+      "properties": {
+        "newsletters": {
+          "items": {
+            "$ref": "#/definitions/Newsletter"
+          },
+          "type": "array"
+        }
+      }
+    },
     "NewsletterSetting": {
       "properties": {
         "_id": {
@@ -979,6 +996,13 @@
         "_id"
       ]
     },
+    "Newslettersettingresponse": {
+      "properties": {
+        "newsletter_setting": {
+          "$ref": "#/definitions/NewsletterSetting"
+        }
+      }
+    },
     "NewsletterSettings": {
       "properties": {
         "newsletter_settings": {
@@ -990,30 +1014,6 @@
       }
     },
     "NewsletterSettingsInput": {
-      "properties": {
-        "newsletter_setting": {
-          "$ref": "#/definitions/NewsletterSetting"
-        }
-      }
-    },
-    "Newsletterresponse": {
-      "properties": {
-        "newsletter": {
-          "$ref": "#/definitions/Newsletter"
-        }
-      }
-    },
-    "Newsletters": {
-      "properties": {
-        "newsletters": {
-          "items": {
-            "$ref": "#/definitions/Newsletter"
-          },
-          "type": "array"
-        }
-      }
-    },
-    "Newslettersettingresponse": {
       "properties": {
         "newsletter_setting": {
           "$ref": "#/definitions/NewsletterSetting"

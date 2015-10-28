@@ -1404,94 +1404,6 @@
         ]
       }
     },
-    "/calendars/{calendarId}/acl/watch": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Watch for changes to ACL resources.",
-        "operationId": "calendar.acl.watch",
-        "parameters": [
-          {
-            "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword.",
-            "in": "path",
-            "name": "calendarId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.",
-            "in": "query",
-            "minimum": 1,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "description": "Token specifying which result page to return. Optional.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          },
-          {
-            "description": "Whether to include deleted ACLs in the result. Deleted ACLs are represented by role equal to \"none\". Deleted ACLs will always be included if syncToken is provided. Optional. The default is False.",
-            "in": "query",
-            "name": "showDeleted",
-            "type": "boolean"
-          },
-          {
-            "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All entries deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries.",
-            "in": "query",
-            "name": "syncToken",
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "resource",
-            "schema": {
-              "$ref": "#/definitions/Channel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Channel"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/calendar"
-            ]
-          }
-        ],
-        "tags": [
-          "acl"
-        ]
-      }
-    },
     "/calendars/{calendarId}/acl/{ruleId}": {
       "delete": {
         "description": "Deletes an access control rule.",
@@ -1666,6 +1578,94 @@
             "description": "Successful response",
             "schema": {
               "$ref": "#/definitions/AclRule"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
+          }
+        ],
+        "tags": [
+          "acl"
+        ]
+      }
+    },
+    "/calendars/{calendarId}/acl/watch": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Watch for changes to ACL resources.",
+        "operationId": "calendar.acl.watch",
+        "parameters": [
+          {
+            "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword.",
+            "in": "path",
+            "name": "calendarId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.",
+            "in": "query",
+            "minimum": 1,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "Token specifying which result page to return. Optional.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          },
+          {
+            "description": "Whether to include deleted ACLs in the result. Deleted ACLs are represented by role equal to \"none\". Deleted ACLs will always be included if syncToken is provided. Optional. The default is False.",
+            "in": "query",
+            "name": "showDeleted",
+            "type": "boolean"
+          },
+          {
+            "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All entries deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries.",
+            "in": "query",
+            "name": "syncToken",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "resource",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Channel"
             }
           }
         },
@@ -1956,324 +1956,6 @@
           {
             "Oauth2": [
               "https://www.googleapis.com/auth/calendar"
-            ]
-          }
-        ],
-        "tags": [
-          "events"
-        ]
-      }
-    },
-    "/calendars/{calendarId}/events/import": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Imports an event. This operation is used to add a private copy of an existing event to a calendar.",
-        "operationId": "calendar.events.import",
-        "parameters": [
-          {
-            "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword.",
-            "in": "path",
-            "name": "calendarId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Whether API client performing operation supports event attachments. Optional. The default is False.",
-            "in": "query",
-            "name": "supportsAttachments",
-            "type": "boolean"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/Event"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Event"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/calendar"
-            ]
-          }
-        ],
-        "tags": [
-          "events"
-        ]
-      }
-    },
-    "/calendars/{calendarId}/events/quickAdd": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Creates an event based on a simple text string.",
-        "operationId": "calendar.events.quickAdd",
-        "parameters": [
-          {
-            "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword.",
-            "in": "path",
-            "name": "calendarId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The text describing the event to be created.",
-            "in": "query",
-            "name": "text",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Whether to send notifications about the creation of the event. Optional. The default is False.",
-            "in": "query",
-            "name": "sendNotifications",
-            "type": "boolean"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Event"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/calendar"
-            ]
-          }
-        ],
-        "tags": [
-          "events"
-        ]
-      }
-    },
-    "/calendars/{calendarId}/events/watch": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Watch for changes to Events resources.",
-        "operationId": "calendar.events.watch",
-        "parameters": [
-          {
-            "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword.",
-            "in": "path",
-            "name": "calendarId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
-            "in": "query",
-            "name": "alwaysIncludeEmail",
-            "type": "boolean"
-          },
-          {
-            "description": "Specifies event ID in the iCalendar format to be included in the response. Optional.",
-            "in": "query",
-            "name": "iCalUID",
-            "type": "string"
-          },
-          {
-            "description": "The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.",
-            "in": "query",
-            "minimum": 1,
-            "name": "maxAttendees",
-            "type": "integer"
-          },
-          {
-            "description": "Maximum number of events returned on one result page. By default the value is 250 events. The page size can never be larger than 2500 events. Optional.",
-            "in": "query",
-            "minimum": 1,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "description": "The order of the events returned in the result. Optional. The default is an unspecified, stable order.",
-            "enum": [
-              "startTime",
-              "updated"
-            ],
-            "in": "query",
-            "name": "orderBy",
-            "type": "string"
-          },
-          {
-            "description": "Token specifying which result page to return. Optional.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          },
-          {
-            "collectionFormat": "multi",
-            "description": "Extended properties constraint specified as propertyName=value. Matches only private properties. This parameter might be repeated multiple times to return events that match all given constraints.",
-            "in": "query",
-            "items": {
-              "type": "string"
-            },
-            "name": "privateExtendedProperty",
-            "type": "array"
-          },
-          {
-            "description": "Free text search terms to find events that match these terms in any field, except for extended properties. Optional.",
-            "in": "query",
-            "name": "q",
-            "type": "string"
-          },
-          {
-            "collectionFormat": "multi",
-            "description": "Extended properties constraint specified as propertyName=value. Matches only shared properties. This parameter might be repeated multiple times to return events that match all given constraints.",
-            "in": "query",
-            "items": {
-              "type": "string"
-            },
-            "name": "sharedExtendedProperty",
-            "type": "array"
-          },
-          {
-            "description": "Whether to include deleted events (with status equals \"cancelled\") in the result. Cancelled instances of recurring events (but not the underlying recurring event) will still be included if showDeleted and singleEvents are both False. If showDeleted and singleEvents are both True, only single instances of deleted events (but not the underlying recurring events) are returned. Optional. The default is False.",
-            "in": "query",
-            "name": "showDeleted",
-            "type": "boolean"
-          },
-          {
-            "description": "Whether to include hidden invitations in the result. Optional. The default is False.",
-            "in": "query",
-            "name": "showHiddenInvitations",
-            "type": "boolean"
-          },
-          {
-            "description": "Whether to expand recurring events into instances and only return single one-off events and instances of recurring events, but not the underlying recurring events themselves. Optional. The default is False.",
-            "in": "query",
-            "name": "singleEvents",
-            "type": "boolean"
-          },
-          {
-            "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All events deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.\nThere are several query parameters that cannot be specified together with nextSyncToken to ensure consistency of the client state.\n\nThese are: \n- iCalUID \n- orderBy \n- privateExtendedProperty \n- q \n- sharedExtendedProperty \n- timeMin \n- timeMax \n- updatedMin If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries.",
-            "in": "query",
-            "name": "syncToken",
-            "type": "string"
-          },
-          {
-            "description": "Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.",
-            "in": "query",
-            "name": "timeMax",
-            "type": "string"
-          },
-          {
-            "description": "Lower bound (inclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.",
-            "in": "query",
-            "name": "timeMin",
-            "type": "string"
-          },
-          {
-            "description": "Time zone used in the response. Optional. The default is the time zone of the calendar.",
-            "in": "query",
-            "name": "timeZone",
-            "type": "string"
-          },
-          {
-            "description": "Lower bound for an event's last modification time (as a RFC3339 timestamp) to filter by. When specified, entries deleted since this time will always be included regardless of showDeleted. Optional. The default is not to filter by last modification time.",
-            "in": "query",
-            "name": "updatedMin",
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "resource",
-            "schema": {
-              "$ref": "#/definitions/Channel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Channel"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/calendar",
-              "https://www.googleapis.com/auth/calendar.readonly"
             ]
           }
         ],
@@ -2742,6 +2424,324 @@
         ]
       }
     },
+    "/calendars/{calendarId}/events/import": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Imports an event. This operation is used to add a private copy of an existing event to a calendar.",
+        "operationId": "calendar.events.import",
+        "parameters": [
+          {
+            "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword.",
+            "in": "path",
+            "name": "calendarId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Whether API client performing operation supports event attachments. Optional. The default is False.",
+            "in": "query",
+            "name": "supportsAttachments",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
+          }
+        ],
+        "tags": [
+          "events"
+        ]
+      }
+    },
+    "/calendars/{calendarId}/events/quickAdd": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates an event based on a simple text string.",
+        "operationId": "calendar.events.quickAdd",
+        "parameters": [
+          {
+            "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword.",
+            "in": "path",
+            "name": "calendarId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The text describing the event to be created.",
+            "in": "query",
+            "name": "text",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Whether to send notifications about the creation of the event. Optional. The default is False.",
+            "in": "query",
+            "name": "sendNotifications",
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Event"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar"
+            ]
+          }
+        ],
+        "tags": [
+          "events"
+        ]
+      }
+    },
+    "/calendars/{calendarId}/events/watch": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Watch for changes to Events resources.",
+        "operationId": "calendar.events.watch",
+        "parameters": [
+          {
+            "description": "Calendar identifier. To retrieve calendar IDs call the calendarList.list method. If you want to access the primary calendar of the currently logged in user, use the \"primary\" keyword.",
+            "in": "path",
+            "name": "calendarId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Whether to always include a value in the email field for the organizer, creator and attendees, even if no real email is available (i.e. a generated, non-working value will be provided). The use of this option is discouraged and should only be used by clients which cannot handle the absence of an email address value in the mentioned places. Optional. The default is False.",
+            "in": "query",
+            "name": "alwaysIncludeEmail",
+            "type": "boolean"
+          },
+          {
+            "description": "Specifies event ID in the iCalendar format to be included in the response. Optional.",
+            "in": "query",
+            "name": "iCalUID",
+            "type": "string"
+          },
+          {
+            "description": "The maximum number of attendees to include in the response. If there are more than the specified number of attendees, only the participant is returned. Optional.",
+            "in": "query",
+            "minimum": 1,
+            "name": "maxAttendees",
+            "type": "integer"
+          },
+          {
+            "description": "Maximum number of events returned on one result page. By default the value is 250 events. The page size can never be larger than 2500 events. Optional.",
+            "in": "query",
+            "minimum": 1,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "The order of the events returned in the result. Optional. The default is an unspecified, stable order.",
+            "enum": [
+              "startTime",
+              "updated"
+            ],
+            "in": "query",
+            "name": "orderBy",
+            "type": "string"
+          },
+          {
+            "description": "Token specifying which result page to return. Optional.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Extended properties constraint specified as propertyName=value. Matches only private properties. This parameter might be repeated multiple times to return events that match all given constraints.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "privateExtendedProperty",
+            "type": "array"
+          },
+          {
+            "description": "Free text search terms to find events that match these terms in any field, except for extended properties. Optional.",
+            "in": "query",
+            "name": "q",
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Extended properties constraint specified as propertyName=value. Matches only shared properties. This parameter might be repeated multiple times to return events that match all given constraints.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "sharedExtendedProperty",
+            "type": "array"
+          },
+          {
+            "description": "Whether to include deleted events (with status equals \"cancelled\") in the result. Cancelled instances of recurring events (but not the underlying recurring event) will still be included if showDeleted and singleEvents are both False. If showDeleted and singleEvents are both True, only single instances of deleted events (but not the underlying recurring events) are returned. Optional. The default is False.",
+            "in": "query",
+            "name": "showDeleted",
+            "type": "boolean"
+          },
+          {
+            "description": "Whether to include hidden invitations in the result. Optional. The default is False.",
+            "in": "query",
+            "name": "showHiddenInvitations",
+            "type": "boolean"
+          },
+          {
+            "description": "Whether to expand recurring events into instances and only return single one-off events and instances of recurring events, but not the underlying recurring events themselves. Optional. The default is False.",
+            "in": "query",
+            "name": "singleEvents",
+            "type": "boolean"
+          },
+          {
+            "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. All events deleted since the previous list request will always be in the result set and it is not allowed to set showDeleted to False.\nThere are several query parameters that cannot be specified together with nextSyncToken to ensure consistency of the client state.\n\nThese are: \n- iCalUID \n- orderBy \n- privateExtendedProperty \n- q \n- sharedExtendedProperty \n- timeMin \n- timeMax \n- updatedMin If the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries.",
+            "in": "query",
+            "name": "syncToken",
+            "type": "string"
+          },
+          {
+            "description": "Upper bound (exclusive) for an event's start time to filter by. Optional. The default is not to filter by start time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.",
+            "in": "query",
+            "name": "timeMax",
+            "type": "string"
+          },
+          {
+            "description": "Lower bound (inclusive) for an event's end time to filter by. Optional. The default is not to filter by end time. Must be an RFC3339 timestamp with mandatory time zone offset, e.g., 2011-06-03T10:00:00-07:00, 2011-06-03T10:00:00Z. Milliseconds may be provided but will be ignored.",
+            "in": "query",
+            "name": "timeMin",
+            "type": "string"
+          },
+          {
+            "description": "Time zone used in the response. Optional. The default is the time zone of the calendar.",
+            "in": "query",
+            "name": "timeZone",
+            "type": "string"
+          },
+          {
+            "description": "Lower bound for an event's last modification time (as a RFC3339 timestamp) to filter by. When specified, entries deleted since this time will always be included regardless of showDeleted. Optional. The default is not to filter by last modification time.",
+            "in": "query",
+            "name": "updatedMin",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "resource",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar",
+              "https://www.googleapis.com/auth/calendar.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "events"
+        ]
+      }
+    },
     "/channels/stop": {
       "parameters": [
         {
@@ -3031,106 +3031,6 @@
         ]
       }
     },
-    "/users/me/calendarList/watch": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Watch for changes to CalendarList resources.",
-        "operationId": "calendar.calendarList.watch",
-        "parameters": [
-          {
-            "description": "Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.",
-            "in": "query",
-            "minimum": 1,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "description": "The minimum access role for the user in the returned entries. Optional. The default is no restriction.",
-            "enum": [
-              "freeBusyReader",
-              "owner",
-              "reader",
-              "writer"
-            ],
-            "in": "query",
-            "name": "minAccessRole",
-            "type": "string"
-          },
-          {
-            "description": "Token specifying which result page to return. Optional.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          },
-          {
-            "description": "Whether to include deleted calendar list entries in the result. Optional. The default is False.",
-            "in": "query",
-            "name": "showDeleted",
-            "type": "boolean"
-          },
-          {
-            "description": "Whether to show hidden entries. Optional. The default is False.",
-            "in": "query",
-            "name": "showHidden",
-            "type": "boolean"
-          },
-          {
-            "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. If only read-only fields such as calendar properties or ACLs have changed, the entry won't be returned. All entries deleted and hidden since the previous list request will always be in the result set and it is not allowed to set showDeleted neither showHidden to False.\nTo ensure client state consistency minAccessRole query parameter cannot be specified together with nextSyncToken.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries.",
-            "in": "query",
-            "name": "syncToken",
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "resource",
-            "schema": {
-              "$ref": "#/definitions/Channel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Channel"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/calendar",
-              "https://www.googleapis.com/auth/calendar.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "calendarList"
-        ]
-      }
-    },
     "/users/me/calendarList/{calendarId}": {
       "delete": {
         "description": "Deletes an entry on the user's calendar list.",
@@ -3304,6 +3204,106 @@
         ]
       }
     },
+    "/users/me/calendarList/watch": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Watch for changes to CalendarList resources.",
+        "operationId": "calendar.calendarList.watch",
+        "parameters": [
+          {
+            "description": "Maximum number of entries returned on one result page. By default the value is 100 entries. The page size can never be larger than 250 entries. Optional.",
+            "in": "query",
+            "minimum": 1,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "The minimum access role for the user in the returned entries. Optional. The default is no restriction.",
+            "enum": [
+              "freeBusyReader",
+              "owner",
+              "reader",
+              "writer"
+            ],
+            "in": "query",
+            "name": "minAccessRole",
+            "type": "string"
+          },
+          {
+            "description": "Token specifying which result page to return. Optional.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          },
+          {
+            "description": "Whether to include deleted calendar list entries in the result. Optional. The default is False.",
+            "in": "query",
+            "name": "showDeleted",
+            "type": "boolean"
+          },
+          {
+            "description": "Whether to show hidden entries. Optional. The default is False.",
+            "in": "query",
+            "name": "showHidden",
+            "type": "boolean"
+          },
+          {
+            "description": "Token obtained from the nextSyncToken field returned on the last page of results from the previous list request. It makes the result of this list request contain only entries that have changed since then. If only read-only fields such as calendar properties or ACLs have changed, the entry won't be returned. All entries deleted and hidden since the previous list request will always be in the result set and it is not allowed to set showDeleted neither showHidden to False.\nTo ensure client state consistency minAccessRole query parameter cannot be specified together with nextSyncToken.\nIf the syncToken expires, the server will respond with a 410 GONE response code and the client should clear its storage and perform a full synchronization without any syncToken.\nLearn more about incremental synchronization.\nOptional. The default is to return all entries.",
+            "in": "query",
+            "name": "syncToken",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "resource",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar",
+              "https://www.googleapis.com/auth/calendar.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "calendarList"
+        ]
+      }
+    },
     "/users/me/settings": {
       "get": {
         "description": "Returns all user settings for the authenticated user.",
@@ -3334,6 +3334,63 @@
             "description": "Successful response",
             "schema": {
               "$ref": "#/definitions/Settings"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/calendar",
+              "https://www.googleapis.com/auth/calendar.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "settings"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/users/me/settings/{setting}": {
+      "get": {
+        "description": "Returns a single user setting.",
+        "operationId": "calendar.settings.get",
+        "parameters": [
+          {
+            "description": "The id of the user setting.",
+            "in": "path",
+            "name": "setting",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Setting"
             }
           }
         },
@@ -3448,63 +3505,6 @@
           "settings"
         ]
       }
-    },
-    "/users/me/settings/{setting}": {
-      "get": {
-        "description": "Returns a single user setting.",
-        "operationId": "calendar.settings.get",
-        "parameters": [
-          {
-            "description": "The id of the user setting.",
-            "in": "path",
-            "name": "setting",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Setting"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/calendar",
-              "https://www.googleapis.com/auth/calendar.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "settings"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
     }
   },
   "schemes": [

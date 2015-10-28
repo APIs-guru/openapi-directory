@@ -133,14 +133,14 @@
           "description": "The curreny code string. Only used for CURRENCY format type.",
           "type": "string"
         },
+        "numberFormatType": {
+          "description": "The formatting for the number.\nPossible values are:  \n- \"NUMERIC\" - Numbers are formatted to have no digits or a fixed number of digits after the decimal point according to locale. An optional custom unit can be added.\n- \"TIME_DURATION\" - Numbers are formatted to hours, minutes and seconds.\n- \"CURRENCY\" - Numbers are formatted to currency according to locale.",
+          "type": "string"
+        },
         "numDecimalPlaces": {
           "description": "The number of decimal places for number. Only used for NUMERIC format type.",
           "format": "int32",
           "type": "integer"
-        },
-        "numberFormatType": {
-          "description": "The formatting for the number.\nPossible values are:  \n- \"NUMERIC\" - Numbers are formatted to have no digits or a fixed number of digits after the decimal point according to locale. An optional custom unit can be added.\n- \"TIME_DURATION\" - Numbers are formatted to hours, minutes and seconds.\n- \"CURRENCY\" - Numbers are formatted to currency according to locale.",
-          "type": "string"
         },
         "suffix": {
           "$ref": "#/definitions/GamesNumberAffixConfiguration",

@@ -418,6 +418,19 @@
       },
       "type": "object"
     },
+    "ListAccountsResponse": {
+      "description": "List Accounts Response.",
+      "properties": {
+        "accounts": {
+          "description": "List of GTM Accounts that a user has access to.",
+          "items": {
+            "$ref": "#/definitions/Account"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "ListAccountUsersResponse": {
       "description": "List AccountUsers Response.",
       "properties": {
@@ -431,13 +444,13 @@
       },
       "type": "object"
     },
-    "ListAccountsResponse": {
-      "description": "List Accounts Response.",
+    "ListContainersResponse": {
+      "description": "List Containers Response.",
       "properties": {
-        "accounts": {
-          "description": "List of GTM Accounts that a user has access to.",
+        "containers": {
+          "description": "All Containers of a GTM Account.",
           "items": {
-            "$ref": "#/definitions/Account"
+            "$ref": "#/definitions/Container"
           },
           "type": "array"
         }
@@ -458,19 +471,6 @@
           "description": "All container version headers of a GTM Container.",
           "items": {
             "$ref": "#/definitions/ContainerVersionHeader"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "ListContainersResponse": {
-      "description": "List Containers Response.",
-      "properties": {
-        "containers": {
-          "description": "All Containers of a GTM Account.",
-          "items": {
-            "$ref": "#/definitions/Container"
           },
           "type": "array"
         }

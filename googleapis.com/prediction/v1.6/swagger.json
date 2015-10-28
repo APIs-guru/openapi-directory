@@ -275,12 +275,12 @@
         "modelInfo": {
           "description": "Model metadata.",
           "properties": {
-            "classWeightedAccuracy": {
-              "description": "Estimated accuracy of model taking utility weights into account (Categorical models only).",
-              "type": "string"
-            },
             "classificationAccuracy": {
               "description": "A number between 0.0 and 1.0, where 1.0 is 100% accurate. This is an estimate, based on the amount and quality of the training data, of the estimated prediction accuracy. You can use this is a guide to decide whether the results are accurate enough for your needs. This estimate will be more reliable if your real input data is similar to your training data (Categorical models only).",
+              "type": "string"
+            },
+            "classWeightedAccuracy": {
+              "description": "Estimated accuracy of model taking utility weights into account (Categorical models only).",
               "type": "string"
             },
             "meanSquaredError": {
@@ -633,75 +633,6 @@
         ]
       }
     },
-    "/{project}/trainedmodels/list": {
-      "get": {
-        "description": "List available models.",
-        "operationId": "prediction.trainedmodels.list",
-        "parameters": [
-          {
-            "description": "The project associated with the model.",
-            "in": "path",
-            "name": "project",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Maximum number of results to return.",
-            "in": "query",
-            "minimum": 0,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "description": "Pagination token.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/List"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/prediction"
-            ]
-          }
-        ],
-        "tags": [
-          "trainedmodels"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
     "/{project}/trainedmodels/{id}": {
       "delete": {
         "description": "Delete a trained model.",
@@ -977,6 +908,75 @@
           "trainedmodels"
         ]
       }
+    },
+    "/{project}/trainedmodels/list": {
+      "get": {
+        "description": "List available models.",
+        "operationId": "prediction.trainedmodels.list",
+        "parameters": [
+          {
+            "description": "The project associated with the model.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Maximum number of results to return.",
+            "in": "query",
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "Pagination token.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/List"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/prediction"
+            ]
+          }
+        ],
+        "tags": [
+          "trainedmodels"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     }
   },
   "schemes": [

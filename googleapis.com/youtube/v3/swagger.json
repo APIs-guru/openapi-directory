@@ -1519,6 +1519,18 @@
           ],
           "type": "string"
         },
+        "catvfrRating": {
+          "description": "The video's rating from the Canadian Radio-Television and Telecommunications Commission (CRTC) for Canadian French-language broadcasts. For more information, see the Canadian Broadcast Standards Council website.",
+          "enum": [
+            "catvfr13plus",
+            "catvfr16plus",
+            "catvfr18plus",
+            "catvfr8plus",
+            "catvfrG",
+            "catvfrUnrated"
+          ],
+          "type": "string"
+        },
         "catvRating": {
           "description": "Rating system for Canadian TV - Canadian TV Classification System The video's rating from the Canadian Radio-Television and Telecommunications Commission (CRTC) for Canadian English-language broadcasts. For more information, see the Canadian Broadcast Standards Council website.",
           "enum": [
@@ -1529,18 +1541,6 @@
             "catvG",
             "catvPg",
             "catvUnrated"
-          ],
-          "type": "string"
-        },
-        "catvfrRating": {
-          "description": "The video's rating from the Canadian Radio-Television and Telecommunications Commission (CRTC) for Canadian French-language broadcasts. For more information, see the Canadian Broadcast Standards Council website.",
-          "enum": [
-            "catvfr13plus",
-            "catvfr16plus",
-            "catvfr18plus",
-            "catvfr8plus",
-            "catvfrG",
-            "catvfrUnrated"
           ],
           "type": "string"
         },
@@ -2059,6 +2059,18 @@
           ],
           "type": "string"
         },
+        "nbcplRating": {
+          "description": "The video's rating in Poland.",
+          "enum": [
+            "nbcpl18plus",
+            "nbcplI",
+            "nbcplIi",
+            "nbcplIii",
+            "nbcplIv",
+            "nbcplUnrated"
+          ],
+          "type": "string"
+        },
         "nbcRating": {
           "description": "The video's rating from the Maldives National Bureau of Classification.",
           "enum": [
@@ -2070,18 +2082,6 @@
             "nbcPg",
             "nbcPu",
             "nbcUnrated"
-          ],
-          "type": "string"
-        },
-        "nbcplRating": {
-          "description": "The video's rating in Poland.",
-          "enum": [
-            "nbcpl18plus",
-            "nbcplI",
-            "nbcplIi",
-            "nbcplIii",
-            "nbcplIv",
-            "nbcplUnrated"
           ],
           "type": "string"
         },
@@ -5757,6 +5757,175 @@
         ]
       }
     },
+    "/channels": {
+      "get": {
+        "description": "Returns a collection of zero or more channel resources that match the request criteria.",
+        "operationId": "youtube.channels.list",
+        "parameters": [
+          {
+            "description": "The part parameter specifies a comma-separated list of one or more channel resource properties that the API response will include.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a channel resource, the contentDetails property contains other properties, such as the uploads properties. As such, if you set part=contentDetails, the API response will also contain all of those nested properties.",
+            "in": "query",
+            "name": "part",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The categoryId parameter specifies a YouTube guide category, thereby requesting YouTube channels associated with that category.",
+            "in": "query",
+            "name": "categoryId",
+            "type": "string"
+          },
+          {
+            "description": "The forUsername parameter specifies a YouTube username, thereby requesting the channel associated with that username.",
+            "in": "query",
+            "name": "forUsername",
+            "type": "string"
+          },
+          {
+            "description": "The hl parameter should be used for filter out the properties that are not in the given language. Used for the brandingSettings part.",
+            "in": "query",
+            "name": "hl",
+            "type": "string"
+          },
+          {
+            "description": "The id parameter specifies a comma-separated list of the YouTube channel ID(s) for the resource(s) that are being retrieved. In a channel resource, the id property specifies the channel's YouTube channel ID.",
+            "in": "query",
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nSet this parameter's value to true to instruct the API to only return channels managed by the content owner that the onBehalfOfContentOwner parameter specifies. The user must be authenticated as a CMS account linked to the specified content owner and onBehalfOfContentOwner must be provided.",
+            "in": "query",
+            "name": "managedByMe",
+            "type": "boolean"
+          },
+          {
+            "default": 5,
+            "description": "The maxResults parameter specifies the maximum number of items that should be returned in the result set.",
+            "in": "query",
+            "maximum": 50,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "Set this parameter's value to true to instruct the API to only return channels owned by the authenticated user.",
+            "in": "query",
+            "name": "mine",
+            "type": "boolean"
+          },
+          {
+            "description": "Use the subscriptions.list method and its mySubscribers parameter to retrieve a list of subscribers to the authenticated user's channel.",
+            "in": "query",
+            "name": "mySubscribers",
+            "type": "boolean"
+          },
+          {
+            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
+            "in": "query",
+            "name": "onBehalfOfContentOwner",
+            "type": "string"
+          },
+          {
+            "description": "The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ChannelListResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/youtube",
+              "https://www.googleapis.com/auth/youtube.force-ssl",
+              "https://www.googleapis.com/auth/youtube.readonly",
+              "https://www.googleapis.com/auth/youtubepartner",
+              "https://www.googleapis.com/auth/youtubepartner-channel-audit"
+            ]
+          }
+        ],
+        "tags": [
+          "channels"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "put": {
+        "description": "Updates a channel's metadata. Note that this method currently only supports updates to the channel resource's brandingSettings and invideoPromotion objects and their child properties.",
+        "operationId": "youtube.channels.update",
+        "parameters": [
+          {
+            "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe API currently only allows the parameter value to be set to either brandingSettings or invideoPromotion. (You cannot update both of those parts with a single request.)\n\nNote that this method overrides the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies.",
+            "in": "query",
+            "name": "part",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The onBehalfOfContentOwner parameter indicates that the authenticated user is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with needs to be linked to the specified YouTube content owner.",
+            "in": "query",
+            "name": "onBehalfOfContentOwner",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Channel"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/youtube",
+              "https://www.googleapis.com/auth/youtube.force-ssl",
+              "https://www.googleapis.com/auth/youtubepartner"
+            ]
+          }
+        ],
+        "tags": [
+          "channels"
+        ]
+      }
+    },
     "/channelSections": {
       "delete": {
         "description": "Deletes a channelSection.",
@@ -5977,385 +6146,6 @@
         ],
         "tags": [
           "channelSections"
-        ]
-      }
-    },
-    "/channels": {
-      "get": {
-        "description": "Returns a collection of zero or more channel resources that match the request criteria.",
-        "operationId": "youtube.channels.list",
-        "parameters": [
-          {
-            "description": "The part parameter specifies a comma-separated list of one or more channel resource properties that the API response will include.\n\nIf the parameter identifies a property that contains child properties, the child properties will be included in the response. For example, in a channel resource, the contentDetails property contains other properties, such as the uploads properties. As such, if you set part=contentDetails, the API response will also contain all of those nested properties.",
-            "in": "query",
-            "name": "part",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The categoryId parameter specifies a YouTube guide category, thereby requesting YouTube channels associated with that category.",
-            "in": "query",
-            "name": "categoryId",
-            "type": "string"
-          },
-          {
-            "description": "The forUsername parameter specifies a YouTube username, thereby requesting the channel associated with that username.",
-            "in": "query",
-            "name": "forUsername",
-            "type": "string"
-          },
-          {
-            "description": "The hl parameter should be used for filter out the properties that are not in the given language. Used for the brandingSettings part.",
-            "in": "query",
-            "name": "hl",
-            "type": "string"
-          },
-          {
-            "description": "The id parameter specifies a comma-separated list of the YouTube channel ID(s) for the resource(s) that are being retrieved. In a channel resource, the id property specifies the channel's YouTube channel ID.",
-            "in": "query",
-            "name": "id",
-            "type": "string"
-          },
-          {
-            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nSet this parameter's value to true to instruct the API to only return channels managed by the content owner that the onBehalfOfContentOwner parameter specifies. The user must be authenticated as a CMS account linked to the specified content owner and onBehalfOfContentOwner must be provided.",
-            "in": "query",
-            "name": "managedByMe",
-            "type": "boolean"
-          },
-          {
-            "default": 5,
-            "description": "The maxResults parameter specifies the maximum number of items that should be returned in the result set.",
-            "in": "query",
-            "maximum": 50,
-            "minimum": 0,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "description": "Set this parameter's value to true to instruct the API to only return channels owned by the authenticated user.",
-            "in": "query",
-            "name": "mine",
-            "type": "boolean"
-          },
-          {
-            "description": "Use the subscriptions.list method and its mySubscribers parameter to retrieve a list of subscribers to the authenticated user's channel.",
-            "in": "query",
-            "name": "mySubscribers",
-            "type": "boolean"
-          },
-          {
-            "description": "Note: This parameter is intended exclusively for YouTube content partners.\n\nThe onBehalfOfContentOwner parameter indicates that the request's authorization credentials identify a YouTube CMS user who is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The CMS account that the user authenticates with must be linked to the specified YouTube content owner.",
-            "in": "query",
-            "name": "onBehalfOfContentOwner",
-            "type": "string"
-          },
-          {
-            "description": "The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken and prevPageToken properties identify other pages that could be retrieved.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/ChannelListResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/youtube",
-              "https://www.googleapis.com/auth/youtube.force-ssl",
-              "https://www.googleapis.com/auth/youtube.readonly",
-              "https://www.googleapis.com/auth/youtubepartner",
-              "https://www.googleapis.com/auth/youtubepartner-channel-audit"
-            ]
-          }
-        ],
-        "tags": [
-          "channels"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "put": {
-        "description": "Updates a channel's metadata. Note that this method currently only supports updates to the channel resource's brandingSettings and invideoPromotion objects and their child properties.",
-        "operationId": "youtube.channels.update",
-        "parameters": [
-          {
-            "description": "The part parameter serves two purposes in this operation. It identifies the properties that the write operation will set as well as the properties that the API response will include.\n\nThe API currently only allows the parameter value to be set to either brandingSettings or invideoPromotion. (You cannot update both of those parts with a single request.)\n\nNote that this method overrides the existing values for all of the mutable properties that are contained in any parts that the parameter value specifies.",
-            "in": "query",
-            "name": "part",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The onBehalfOfContentOwner parameter indicates that the authenticated user is acting on behalf of the content owner specified in the parameter value. This parameter is intended for YouTube content partners that own and manage many different YouTube channels. It allows content owners to authenticate once and get access to all their video and channel data, without having to provide authentication credentials for each individual channel. The actual CMS account that the user authenticates with needs to be linked to the specified YouTube content owner.",
-            "in": "query",
-            "name": "onBehalfOfContentOwner",
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/Channel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Channel"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/youtube",
-              "https://www.googleapis.com/auth/youtube.force-ssl",
-              "https://www.googleapis.com/auth/youtubepartner"
-            ]
-          }
-        ],
-        "tags": [
-          "channels"
-        ]
-      }
-    },
-    "/commentThreads": {
-      "get": {
-        "description": "Returns a list of comment threads that match the API request parameters.",
-        "operationId": "youtube.commentThreads.list",
-        "parameters": [
-          {
-            "description": "The part parameter specifies a comma-separated list of one or more commentThread resource properties that the API response will include.",
-            "in": "query",
-            "name": "part",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The allThreadsRelatedToChannelId parameter instructs the API to return all comment threads associated with the specified channel. The response can include comments about the channel or about the channel's videos.",
-            "in": "query",
-            "name": "allThreadsRelatedToChannelId",
-            "type": "string"
-          },
-          {
-            "description": "The channelId parameter instructs the API to return comment threads containing comments about the specified channel. (The response will not include comments left on videos that the channel uploaded.)",
-            "in": "query",
-            "name": "channelId",
-            "type": "string"
-          },
-          {
-            "description": "The id parameter specifies a comma-separated list of comment thread IDs for the resources that should be retrieved.",
-            "in": "query",
-            "name": "id",
-            "type": "string"
-          },
-          {
-            "default": 20,
-            "description": "The maxResults parameter specifies the maximum number of items that should be returned in the result set.\n\nNote: This parameter is not supported for use in conjunction with the id parameter.",
-            "in": "query",
-            "maximum": 100,
-            "minimum": 1,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "default": "published",
-            "description": "Set this parameter to limit the returned comment threads to a particular moderation state.\n\nNote: This parameter is not supported for use in conjunction with the id parameter.",
-            "enum": [
-              "heldForReview",
-              "likelySpam",
-              "published"
-            ],
-            "in": "query",
-            "name": "moderationStatus",
-            "type": "string"
-          },
-          {
-            "description": "The order parameter specifies the order in which the API response should list comment threads. Valid values are: \n- time - Comment threads are ordered by time. This is the default behavior.\n- relevance - Comment threads are ordered by relevance.Note: This parameter is not supported for use in conjunction with the id parameter.",
-            "enum": [
-              "relevance",
-              "time"
-            ],
-            "in": "query",
-            "name": "order",
-            "type": "string"
-          },
-          {
-            "description": "The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identifies the next page of the result that can be retrieved.\n\nNote: This parameter is not supported for use in conjunction with the id parameter.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          },
-          {
-            "description": "The searchTerms parameter instructs the API to limit the API response to only contain comments that contain the specified search terms.\n\nNote: This parameter is not supported for use in conjunction with the id parameter.",
-            "in": "query",
-            "name": "searchTerms",
-            "type": "string"
-          },
-          {
-            "default": "html",
-            "description": "Set this parameter's value to html or plainText to instruct the API to return the comments left by users in html formatted or in plain text.",
-            "enum": [
-              "html",
-              "plainText"
-            ],
-            "in": "query",
-            "name": "textFormat",
-            "type": "string"
-          },
-          {
-            "description": "The videoId parameter instructs the API to return comment threads associated with the specified video ID.",
-            "in": "query",
-            "name": "videoId",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/CommentThreadListResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/youtube.force-ssl"
-            ]
-          }
-        ],
-        "tags": [
-          "commentThreads"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Creates a new top-level comment. To add a reply to an existing comment, use the comments.insert method instead.",
-        "operationId": "youtube.commentThreads.insert",
-        "parameters": [
-          {
-            "description": "The part parameter identifies the properties that the API response will include. Set the parameter value to snippet. The snippet part has a quota cost of 2 units.",
-            "in": "query",
-            "name": "part",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/CommentThread"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/CommentThread"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/youtube.force-ssl"
-            ]
-          }
-        ],
-        "tags": [
-          "commentThreads"
-        ]
-      },
-      "put": {
-        "description": "Modifies the top-level comment in a comment thread.",
-        "operationId": "youtube.commentThreads.update",
-        "parameters": [
-          {
-            "description": "The part parameter specifies a comma-separated list of commentThread resource properties that the API response will include. You must at least include the snippet part in the parameter value since that part contains all of the properties that the API request can update.",
-            "in": "query",
-            "name": "part",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/CommentThread"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/CommentThread"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/youtube.force-ssl"
-            ]
-          }
-        ],
-        "tags": [
-          "commentThreads"
         ]
       }
     },
@@ -6679,6 +6469,216 @@
         ],
         "tags": [
           "comments"
+        ]
+      }
+    },
+    "/commentThreads": {
+      "get": {
+        "description": "Returns a list of comment threads that match the API request parameters.",
+        "operationId": "youtube.commentThreads.list",
+        "parameters": [
+          {
+            "description": "The part parameter specifies a comma-separated list of one or more commentThread resource properties that the API response will include.",
+            "in": "query",
+            "name": "part",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The allThreadsRelatedToChannelId parameter instructs the API to return all comment threads associated with the specified channel. The response can include comments about the channel or about the channel's videos.",
+            "in": "query",
+            "name": "allThreadsRelatedToChannelId",
+            "type": "string"
+          },
+          {
+            "description": "The channelId parameter instructs the API to return comment threads containing comments about the specified channel. (The response will not include comments left on videos that the channel uploaded.)",
+            "in": "query",
+            "name": "channelId",
+            "type": "string"
+          },
+          {
+            "description": "The id parameter specifies a comma-separated list of comment thread IDs for the resources that should be retrieved.",
+            "in": "query",
+            "name": "id",
+            "type": "string"
+          },
+          {
+            "default": 20,
+            "description": "The maxResults parameter specifies the maximum number of items that should be returned in the result set.\n\nNote: This parameter is not supported for use in conjunction with the id parameter.",
+            "in": "query",
+            "maximum": 100,
+            "minimum": 1,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "default": "published",
+            "description": "Set this parameter to limit the returned comment threads to a particular moderation state.\n\nNote: This parameter is not supported for use in conjunction with the id parameter.",
+            "enum": [
+              "heldForReview",
+              "likelySpam",
+              "published"
+            ],
+            "in": "query",
+            "name": "moderationStatus",
+            "type": "string"
+          },
+          {
+            "description": "The order parameter specifies the order in which the API response should list comment threads. Valid values are: \n- time - Comment threads are ordered by time. This is the default behavior.\n- relevance - Comment threads are ordered by relevance.Note: This parameter is not supported for use in conjunction with the id parameter.",
+            "enum": [
+              "relevance",
+              "time"
+            ],
+            "in": "query",
+            "name": "order",
+            "type": "string"
+          },
+          {
+            "description": "The pageToken parameter identifies a specific page in the result set that should be returned. In an API response, the nextPageToken property identifies the next page of the result that can be retrieved.\n\nNote: This parameter is not supported for use in conjunction with the id parameter.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          },
+          {
+            "description": "The searchTerms parameter instructs the API to limit the API response to only contain comments that contain the specified search terms.\n\nNote: This parameter is not supported for use in conjunction with the id parameter.",
+            "in": "query",
+            "name": "searchTerms",
+            "type": "string"
+          },
+          {
+            "default": "html",
+            "description": "Set this parameter's value to html or plainText to instruct the API to return the comments left by users in html formatted or in plain text.",
+            "enum": [
+              "html",
+              "plainText"
+            ],
+            "in": "query",
+            "name": "textFormat",
+            "type": "string"
+          },
+          {
+            "description": "The videoId parameter instructs the API to return comment threads associated with the specified video ID.",
+            "in": "query",
+            "name": "videoId",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/CommentThreadListResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/youtube.force-ssl"
+            ]
+          }
+        ],
+        "tags": [
+          "commentThreads"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates a new top-level comment. To add a reply to an existing comment, use the comments.insert method instead.",
+        "operationId": "youtube.commentThreads.insert",
+        "parameters": [
+          {
+            "description": "The part parameter identifies the properties that the API response will include. Set the parameter value to snippet. The snippet part has a quota cost of 2 units.",
+            "in": "query",
+            "name": "part",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/CommentThread"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/CommentThread"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/youtube.force-ssl"
+            ]
+          }
+        ],
+        "tags": [
+          "commentThreads"
+        ]
+      },
+      "put": {
+        "description": "Modifies the top-level comment in a comment thread.",
+        "operationId": "youtube.commentThreads.update",
+        "parameters": [
+          {
+            "description": "The part parameter specifies a comma-separated list of commentThread resource properties that the API response will include. You must at least include the snippet part in the parameter value since that part contains all of the properties that the API request can update.",
+            "in": "query",
+            "name": "part",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/CommentThread"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/CommentThread"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/youtube.force-ssl"
+            ]
+          }
+        ],
+        "tags": [
+          "commentThreads"
         ]
       }
     },

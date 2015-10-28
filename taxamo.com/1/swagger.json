@@ -1,48 +1,6 @@
 {
   "basePath": "/",
   "definitions": {
-    "C": {
-      "properties": {
-        "day": {
-          "description": "Date for stats in yyyy-MM-dd format.",
-          "type": "string"
-        },
-        "day_raw": {
-          "description": "Date for stats in yyyy-MM-dd'T'hh:mm:ss'Z' format.",
-          "type": "string"
-        },
-        "status": {
-          "description": "Transaction status (C or N).",
-          "type": "string"
-        },
-        "value": {
-          "description": "Transaction count.",
-          "type": "number"
-        }
-      },
-      "type": "object"
-    },
-    "N": {
-      "properties": {
-        "day": {
-          "description": "Date for stats in yyyy-MM-dd format.",
-          "type": "string"
-        },
-        "day_raw": {
-          "description": "Date for stats in yyyy-MM-dd'T'hh:mm:ss'Z' format.",
-          "type": "string"
-        },
-        "status": {
-          "description": "Transaction status (C or N).",
-          "type": "string"
-        },
-        "value": {
-          "description": "Transaction count.",
-          "type": "number"
-        }
-      },
-      "type": "object"
-    },
     "additional_currencies": {
       "properties": {
         "invoice": {
@@ -137,6 +95,27 @@
         },
         "transactions_count": {
           "description": "Total number of transactions",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "C": {
+      "properties": {
+        "day": {
+          "description": "Date for stats in yyyy-MM-dd format.",
+          "type": "string"
+        },
+        "day_raw": {
+          "description": "Date for stats in yyyy-MM-dd'T'hh:mm:ss'Z' format.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Transaction status (C or N).",
+          "type": "string"
+        },
+        "value": {
+          "description": "Transaction count.",
           "type": "number"
         }
       },
@@ -1642,6 +1621,27 @@
       },
       "type": "object"
     },
+    "N": {
+      "properties": {
+        "day": {
+          "description": "Date for stats in yyyy-MM-dd format.",
+          "type": "string"
+        },
+        "day_raw": {
+          "description": "Date for stats in yyyy-MM-dd'T'hh:mm:ss'Z' format.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Transaction status (C or N).",
+          "type": "string"
+        },
+        "value": {
+          "description": "Transaction count.",
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
     "payments": {
       "properties": {
         "amount": {
@@ -2756,6 +2756,100 @@
         ]
       }
     },
+    "/api/v1/settlement/{quarter}": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "getSettlement",
+        "parameters": [
+          {
+            "description": "Output format. 'csv' value is accepted as well",
+            "in": "query",
+            "name": "format",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "MOSS country code, used to determine currency/region. If ommited, merchant default setting is used. Deprecated: please use tax-country-code.",
+            "in": "query",
+            "name": "moss_country_code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Tax entity country code, used to determine currency/region. ",
+            "in": "query",
+            "name": "tax_country_code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "ISO 3-letter currency code, e.g. EUR or USD. If provided, all amounts will be coerced for this currency. Defaults to region's currency code.",
+            "in": "query",
+            "name": "currency_code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id.",
+            "in": "query",
+            "name": "moss_tax_id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id.",
+            "in": "query",
+            "name": "tax_id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Period start month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.",
+            "in": "query",
+            "name": "start_month",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Period end month in yyyy-MM-dd format. Either quarter or start-month and end-month have to be provided.",
+            "in": "query",
+            "name": "end_month",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Quarter in yyyy-MM format. If start-date and end-date are provided, quarter is ignored and should be set to 'range'.",
+            "in": "path",
+            "name": "quarter",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/getSettlementOut"
+            }
+          },
+          "400": {
+            "description": "Validation failed, see JSON body response for details."
+          },
+          "401": {
+            "description": "Incorrect token"
+          }
+        },
+        "summary": "Fetch settlement",
+        "tags": [
+          "settlement"
+        ]
+      }
+    },
     "/api/v1/settlement/refunds": {
       "get": {
         "consumes": [
@@ -2876,100 +2970,6 @@
           }
         },
         "summary": "Fetch summary",
-        "tags": [
-          "settlement"
-        ]
-      }
-    },
-    "/api/v1/settlement/{quarter}": {
-      "get": {
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "getSettlement",
-        "parameters": [
-          {
-            "description": "Output format. 'csv' value is accepted as well",
-            "in": "query",
-            "name": "format",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "MOSS country code, used to determine currency/region. If ommited, merchant default setting is used. Deprecated: please use tax-country-code.",
-            "in": "query",
-            "name": "moss_country_code",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Tax entity country code, used to determine currency/region. ",
-            "in": "query",
-            "name": "tax_country_code",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "ISO 3-letter currency code, e.g. EUR or USD. If provided, all amounts will be coerced for this currency. Defaults to region's currency code.",
-            "in": "query",
-            "name": "currency_code",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id.",
-            "in": "query",
-            "name": "moss_tax_id",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "MOSS-assigned tax ID - if not provided, merchant's national tax number will be used. Deprecated, please use tax-id.",
-            "in": "query",
-            "name": "tax_id",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Period start month in yyyy-MM format. Either quarter or start-month and end-month have to be provided.",
-            "in": "query",
-            "name": "start_month",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Period end month in yyyy-MM-dd format. Either quarter or start-month and end-month have to be provided.",
-            "in": "query",
-            "name": "end_month",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Quarter in yyyy-MM format. If start-date and end-date are provided, quarter is ignored and should be set to 'range'.",
-            "in": "path",
-            "name": "quarter",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/getSettlementOut"
-            }
-          },
-          "400": {
-            "description": "Validation failed, see JSON body response for details."
-          },
-          "401": {
-            "description": "Incorrect token"
-          }
-        },
-        "summary": "Fetch settlement",
         "tags": [
           "settlement"
         ]

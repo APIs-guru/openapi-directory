@@ -88,13 +88,13 @@
         "modelInfo": {
           "description": "Model metadata.",
           "properties": {
-            "classWeightedAccuracy": {
-              "description": "Estimated accuracy of model taking utility weights into account [Categorical models only].",
+            "classificationAccuracy": {
+              "description": "A number between 0.0 and 1.0, where 1.0 is 100% accurate. This is an estimate, based on the amount and quality of the training data, of the estimated prediction accuracy. You can use this is a guide to decide whether the results are accurate enough for your needs. This estimate will be more reliable if your real input data is similar to your training data [Categorical models only].",
               "format": "double",
               "type": "number"
             },
-            "classificationAccuracy": {
-              "description": "A number between 0.0 and 1.0, where 1.0 is 100% accurate. This is an estimate, based on the amount and quality of the training data, of the estimated prediction accuracy. You can use this is a guide to decide whether the results are accurate enough for your needs. This estimate will be more reliable if your real input data is similar to your training data [Categorical models only].",
+            "classWeightedAccuracy": {
+              "description": "Estimated accuracy of model taking utility weights into account [Categorical models only].",
               "format": "double",
               "type": "number"
             },

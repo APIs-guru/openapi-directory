@@ -391,6 +391,117 @@
     }
   },
   "paths": {
+    "/achievements/{achievementId}/reset": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Resets the achievement with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.",
+        "operationId": "gamesManagement.achievements.reset",
+        "parameters": [
+          {
+            "description": "The ID of the achievement used by this method.",
+            "in": "path",
+            "name": "achievementId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AchievementResetResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ],
+        "tags": [
+          "achievements"
+        ]
+      }
+    },
+    "/achievements/{achievementId}/resetForAllPlayers": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Resets the achievement with the given ID for all players. This method is only available to user accounts for your developer console. Only draft achievements can be reset.",
+        "operationId": "gamesManagement.achievements.resetForAllPlayers",
+        "parameters": [
+          {
+            "description": "The ID of the achievement used by this method.",
+            "in": "path",
+            "name": "achievementId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ],
+        "tags": [
+          "achievements"
+        ]
+      }
+    },
     "/achievements/reset": {
       "parameters": [
         {
@@ -518,117 +629,6 @@
             "schema": {
               "$ref": "#/definitions/AchievementResetMultipleForAllRequest"
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/games",
-              "https://www.googleapis.com/auth/plus.login"
-            ]
-          }
-        ],
-        "tags": [
-          "achievements"
-        ]
-      }
-    },
-    "/achievements/{achievementId}/reset": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Resets the achievement with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.",
-        "operationId": "gamesManagement.achievements.reset",
-        "parameters": [
-          {
-            "description": "The ID of the achievement used by this method.",
-            "in": "path",
-            "name": "achievementId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AchievementResetResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/games",
-              "https://www.googleapis.com/auth/plus.login"
-            ]
-          }
-        ],
-        "tags": [
-          "achievements"
-        ]
-      }
-    },
-    "/achievements/{achievementId}/resetForAllPlayers": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Resets the achievement with the given ID for all players. This method is only available to user accounts for your developer console. Only draft achievements can be reset.",
-        "operationId": "gamesManagement.achievements.resetForAllPlayers",
-        "parameters": [
-          {
-            "description": "The ID of the achievement used by this method.",
-            "in": "path",
-            "name": "achievementId",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -817,6 +817,114 @@
         ]
       }
     },
+    "/events/{eventId}/reset": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Resets all player progress on the event with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application. All quests for this player that use the event will also be reset.",
+        "operationId": "gamesManagement.events.reset",
+        "parameters": [
+          {
+            "description": "The ID of the event.",
+            "in": "path",
+            "name": "eventId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ],
+        "tags": [
+          "events"
+        ]
+      }
+    },
+    "/events/{eventId}/resetForAllPlayers": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Resets the event with the given ID for all players. This method is only available to user accounts for your developer console. Only draft events can be reset. All quests that use the event will also be reset.",
+        "operationId": "gamesManagement.events.resetForAllPlayers",
+        "parameters": [
+          {
+            "description": "The ID of the event.",
+            "in": "path",
+            "name": "eventId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ],
+        "tags": [
+          "events"
+        ]
+      }
+    },
     "/events/reset": {
       "parameters": [
         {
@@ -961,114 +1069,6 @@
         ]
       }
     },
-    "/events/{eventId}/reset": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Resets all player progress on the event with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application. All quests for this player that use the event will also be reset.",
-        "operationId": "gamesManagement.events.reset",
-        "parameters": [
-          {
-            "description": "The ID of the event.",
-            "in": "path",
-            "name": "eventId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/games",
-              "https://www.googleapis.com/auth/plus.login"
-            ]
-          }
-        ],
-        "tags": [
-          "events"
-        ]
-      }
-    },
-    "/events/{eventId}/resetForAllPlayers": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Resets the event with the given ID for all players. This method is only available to user accounts for your developer console. Only draft events can be reset. All quests that use the event will also be reset.",
-        "operationId": "gamesManagement.events.resetForAllPlayers",
-        "parameters": [
-          {
-            "description": "The ID of the event.",
-            "in": "path",
-            "name": "eventId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/games",
-              "https://www.googleapis.com/auth/plus.login"
-            ]
-          }
-        ],
-        "tags": [
-          "events"
-        ]
-      }
-    },
     "/leaderboards/{leaderboardId}/scores/reset": {
       "parameters": [
         {
@@ -1177,6 +1177,114 @@
         ],
         "tags": [
           "scores"
+        ]
+      }
+    },
+    "/quests/{questId}/reset": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Resets all player progress on the quest with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.",
+        "operationId": "gamesManagement.quests.reset",
+        "parameters": [
+          {
+            "description": "The ID of the quest.",
+            "in": "path",
+            "name": "questId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ],
+        "tags": [
+          "quests"
+        ]
+      }
+    },
+    "/quests/{questId}/resetForAllPlayers": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Resets all player progress on the quest with the given ID for all players. This method is only available to user accounts for your developer console. Only draft quests can be reset.",
+        "operationId": "gamesManagement.quests.resetForAllPlayers",
+        "parameters": [
+          {
+            "description": "The ID of the quest.",
+            "in": "path",
+            "name": "questId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/games",
+              "https://www.googleapis.com/auth/plus.login"
+            ]
+          }
+        ],
+        "tags": [
+          "quests"
         ]
       }
     },
@@ -1304,114 +1412,6 @@
             "schema": {
               "$ref": "#/definitions/QuestsResetMultipleForAllRequest"
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/games",
-              "https://www.googleapis.com/auth/plus.login"
-            ]
-          }
-        ],
-        "tags": [
-          "quests"
-        ]
-      }
-    },
-    "/quests/{questId}/reset": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Resets all player progress on the quest with the given ID for the currently authenticated player. This method is only accessible to whitelisted tester accounts for your application.",
-        "operationId": "gamesManagement.quests.reset",
-        "parameters": [
-          {
-            "description": "The ID of the quest.",
-            "in": "path",
-            "name": "questId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/games",
-              "https://www.googleapis.com/auth/plus.login"
-            ]
-          }
-        ],
-        "tags": [
-          "quests"
-        ]
-      }
-    },
-    "/quests/{questId}/resetForAllPlayers": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Resets all player progress on the quest with the given ID for all players. This method is only available to user accounts for your developer console. Only draft quests can be reset.",
-        "operationId": "gamesManagement.quests.resetForAllPlayers",
-        "parameters": [
-          {
-            "description": "The ID of the quest.",
-            "in": "path",
-            "name": "questId",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {

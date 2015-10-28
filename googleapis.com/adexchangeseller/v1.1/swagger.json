@@ -1602,70 +1602,6 @@
         }
       ]
     },
-    "/reports/saved": {
-      "get": {
-        "description": "List all saved reports in this Ad Exchange account.",
-        "operationId": "adexchangeseller.reports.saved.list",
-        "parameters": [
-          {
-            "description": "The maximum number of saved reports to include in the response, used for paging.",
-            "in": "query",
-            "maximum": 100,
-            "minimum": 0,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "description": "A continuation token, used to page through saved reports. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/SavedReports"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/adexchange.seller",
-              "https://www.googleapis.com/auth/adexchange.seller.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "reports"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
     "/reports/{savedReportId}": {
       "get": {
         "description": "Generate an Ad Exchange report based on the saved report ID sent in the query parameters.",
@@ -1706,6 +1642,70 @@
             "description": "Successful response",
             "schema": {
               "$ref": "#/definitions/Report"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/adexchange.seller",
+              "https://www.googleapis.com/auth/adexchange.seller.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "reports"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/reports/saved": {
+      "get": {
+        "description": "List all saved reports in this Ad Exchange account.",
+        "operationId": "adexchangeseller.reports.saved.list",
+        "parameters": [
+          {
+            "description": "The maximum number of saved reports to include in the response, used for paging.",
+            "in": "query",
+            "maximum": 100,
+            "minimum": 0,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "A continuation token, used to page through saved reports. To retrieve the next page, set this parameter to the value of \"nextPageToken\" from the previous response.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/SavedReports"
             }
           }
         },

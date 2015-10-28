@@ -54,23 +54,6 @@
       },
       "type": "object"
     },
-    "ApplicationTransferParam": {
-      "description": "Template for application transfer parameters.",
-      "properties": {
-        "key": {
-          "description": "The type of the transfer parameter. eg: 'PRIVACY_LEVEL'",
-          "type": "string"
-        },
-        "value": {
-          "description": "The value of the coressponding transfer parameter. eg: 'PRIVATE' or 'SHARED'",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
     "ApplicationsListResponse": {
       "description": "Template for a collection of Applications.",
       "properties": {
@@ -93,6 +76,23 @@
         "nextPageToken": {
           "description": "Continuation token which will be used to specify next page in list API.",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ApplicationTransferParam": {
+      "description": "Template for application transfer parameters.",
+      "properties": {
+        "key": {
+          "description": "The type of the transfer parameter. eg: 'PRIVACY_LEVEL'",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of the coressponding transfer parameter. eg: 'PRIVATE' or 'SHARED'",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "type": "object"

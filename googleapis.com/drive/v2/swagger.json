@@ -1988,6 +1988,69 @@
         }
       ]
     },
+    "/changes/{changeId}": {
+      "get": {
+        "description": "Gets a specific change.",
+        "operationId": "drive.changes.get",
+        "parameters": [
+          {
+            "description": "The ID of the change.",
+            "in": "path",
+            "name": "changeId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Change"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.apps.readonly",
+              "https://www.googleapis.com/auth/drive.file",
+              "https://www.googleapis.com/auth/drive.metadata",
+              "https://www.googleapis.com/auth/drive.metadata.readonly",
+              "https://www.googleapis.com/auth/drive.photos.readonly",
+              "https://www.googleapis.com/auth/drive.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "changes"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/changes/watch": {
       "parameters": [
         {
@@ -2090,69 +2153,6 @@
           "changes"
         ]
       }
-    },
-    "/changes/{changeId}": {
-      "get": {
-        "description": "Gets a specific change.",
-        "operationId": "drive.changes.get",
-        "parameters": [
-          {
-            "description": "The ID of the change.",
-            "in": "path",
-            "name": "changeId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Change"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/drive",
-              "https://www.googleapis.com/auth/drive.appdata",
-              "https://www.googleapis.com/auth/drive.apps.readonly",
-              "https://www.googleapis.com/auth/drive.file",
-              "https://www.googleapis.com/auth/drive.metadata",
-              "https://www.googleapis.com/auth/drive.metadata.readonly",
-              "https://www.googleapis.com/auth/drive.photos.readonly",
-              "https://www.googleapis.com/auth/drive.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "changes"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
     },
     "/channels/stop": {
       "parameters": [
@@ -2415,117 +2415,6 @@
           "files"
         ]
       }
-    },
-    "/files/generateIds": {
-      "get": {
-        "description": "Generates a set of file IDs which can be provided in insert requests.",
-        "operationId": "drive.files.generateIds",
-        "parameters": [
-          {
-            "default": 10,
-            "description": "Maximum number of IDs to return.",
-            "in": "query",
-            "maximum": 1000,
-            "minimum": 1,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "default": "drive",
-            "description": "The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'.",
-            "in": "query",
-            "name": "space",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/GeneratedIds"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/drive",
-              "https://www.googleapis.com/auth/drive.appdata",
-              "https://www.googleapis.com/auth/drive.file"
-            ]
-          }
-        ],
-        "tags": [
-          "files"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/files/trash": {
-      "delete": {
-        "description": "Permanently deletes all of the user's trashed files.",
-        "operationId": "drive.files.emptyTrash",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/drive"
-            ]
-          }
-        ],
-        "tags": [
-          "files"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
     },
     "/files/{fileId}": {
       "delete": {
@@ -5439,6 +5328,117 @@
         ],
         "tags": [
           "children"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/files/generateIds": {
+      "get": {
+        "description": "Generates a set of file IDs which can be provided in insert requests.",
+        "operationId": "drive.files.generateIds",
+        "parameters": [
+          {
+            "default": 10,
+            "description": "Maximum number of IDs to return.",
+            "in": "query",
+            "maximum": 1000,
+            "minimum": 1,
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "default": "drive",
+            "description": "The space in which the IDs can be used to create new files. Supported values are 'drive' and 'appDataFolder'.",
+            "in": "query",
+            "name": "space",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/GeneratedIds"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive",
+              "https://www.googleapis.com/auth/drive.appdata",
+              "https://www.googleapis.com/auth/drive.file"
+            ]
+          }
+        ],
+        "tags": [
+          "files"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/files/trash": {
+      "delete": {
+        "description": "Permanently deletes all of the user's trashed files.",
+        "operationId": "drive.files.emptyTrash",
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/drive"
+            ]
+          }
+        ],
+        "tags": [
+          "files"
         ]
       },
       "parameters": [

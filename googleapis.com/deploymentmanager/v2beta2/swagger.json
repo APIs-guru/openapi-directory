@@ -53,23 +53,6 @@
       },
       "type": "object"
     },
-    "DeploymentUpdate": {
-      "description": "",
-      "properties": {
-        "errors": {
-          "description": "[Output Only] List of all errors encountered while trying to enact the update.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "manifest": {
-          "description": "[Output Only] URL of the manifest representing the update configuration of this deployment.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "DeploymentsListResponse": {
       "description": "A response containing a partial list of deployments and a page token used to build the next request if the request has been truncated.",
       "properties": {
@@ -82,6 +65,23 @@
         },
         "nextPageToken": {
           "description": "[Output Only] A token used to continue a truncated list request.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "DeploymentUpdate": {
+      "description": "",
+      "properties": {
+        "errors": {
+          "description": "[Output Only] List of all errors encountered while trying to enact the update.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "manifest": {
+          "description": "[Output Only] URL of the manifest representing the update configuration of this deployment.",
           "type": "string"
         }
       },
@@ -376,6 +376,23 @@
       },
       "type": "object"
     },
+    "ResourcesListResponse": {
+      "description": "A response containing a partial list of resources and a page token used to build the next request if the request has been truncated.",
+      "properties": {
+        "nextPageToken": {
+          "description": "A token used to continue a truncated list request.",
+          "type": "string"
+        },
+        "resources": {
+          "description": "Resources contained in this list response.",
+          "items": {
+            "$ref": "#/definitions/Resource"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "ResourceUpdate": {
       "description": "",
       "properties": {
@@ -405,23 +422,6 @@
         "state": {
           "description": "[Output Only] The state of the resource.",
           "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ResourcesListResponse": {
-      "description": "A response containing a partial list of resources and a page token used to build the next request if the request has been truncated.",
-      "properties": {
-        "nextPageToken": {
-          "description": "A token used to continue a truncated list request.",
-          "type": "string"
-        },
-        "resources": {
-          "description": "Resources contained in this list response.",
-          "items": {
-            "$ref": "#/definitions/Resource"
-          },
-          "type": "array"
         }
       },
       "type": "object"

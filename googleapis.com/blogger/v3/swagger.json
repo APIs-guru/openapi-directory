@@ -836,74 +836,6 @@
     }
   },
   "paths": {
-    "/blogs/byurl": {
-      "get": {
-        "description": "Retrieve a Blog by URL.",
-        "operationId": "blogger.blogs.getByUrl",
-        "parameters": [
-          {
-            "description": "The URL of the blog to retrieve.",
-            "in": "query",
-            "name": "url",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Access level with which to view the blog. Note that some fields require elevated access.",
-            "enum": [
-              "ADMIN",
-              "AUTHOR",
-              "READER"
-            ],
-            "in": "query",
-            "name": "view",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Blog"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger",
-              "https://www.googleapis.com/auth/blogger.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "blogs"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
     "/blogs/{blogId}": {
       "get": {
         "description": "Gets one blog by ID.",
@@ -1836,169 +1768,6 @@
         ]
       }
     },
-    "/blogs/{blogId}/posts/bypath": {
-      "get": {
-        "description": "Retrieve a Post by Path.",
-        "operationId": "blogger.posts.getByPath",
-        "parameters": [
-          {
-            "description": "ID of the blog to fetch the post from.",
-            "in": "path",
-            "name": "blogId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Path of the Post to retrieve.",
-            "in": "query",
-            "name": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Maximum number of comments to pull back on a post.",
-            "in": "query",
-            "name": "maxComments",
-            "type": "integer"
-          },
-          {
-            "description": "Access level with which to view the returned result. Note that some fields require elevated access.",
-            "enum": [
-              "ADMIN",
-              "AUTHOR",
-              "READER"
-            ],
-            "in": "query",
-            "name": "view",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Post"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger",
-              "https://www.googleapis.com/auth/blogger.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "posts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/blogs/{blogId}/posts/search": {
-      "get": {
-        "description": "Search for a post.",
-        "operationId": "blogger.posts.search",
-        "parameters": [
-          {
-            "description": "ID of the blog to fetch the post from.",
-            "in": "path",
-            "name": "blogId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Query terms to search this blog for matching posts.",
-            "in": "query",
-            "name": "q",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "default": true,
-            "description": "Whether the body content of posts is included (default: true). This should be set to false when the post bodies are not required, to help minimize traffic.",
-            "in": "query",
-            "name": "fetchBodies",
-            "type": "boolean"
-          },
-          {
-            "default": "published",
-            "description": "Sort search results",
-            "enum": [
-              "published",
-              "updated"
-            ],
-            "in": "query",
-            "name": "orderBy",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/PostList"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/blogger",
-              "https://www.googleapis.com/auth/blogger.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "posts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
     "/blogs/{blogId}/posts/{postId}": {
       "delete": {
         "description": "Delete a post by ID.",
@@ -2865,6 +2634,237 @@
           "posts"
         ]
       }
+    },
+    "/blogs/{blogId}/posts/bypath": {
+      "get": {
+        "description": "Retrieve a Post by Path.",
+        "operationId": "blogger.posts.getByPath",
+        "parameters": [
+          {
+            "description": "ID of the blog to fetch the post from.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Path of the Post to retrieve.",
+            "in": "query",
+            "name": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Maximum number of comments to pull back on a post.",
+            "in": "query",
+            "name": "maxComments",
+            "type": "integer"
+          },
+          {
+            "description": "Access level with which to view the returned result. Note that some fields require elevated access.",
+            "enum": [
+              "ADMIN",
+              "AUTHOR",
+              "READER"
+            ],
+            "in": "query",
+            "name": "view",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Post"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "posts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/blogs/{blogId}/posts/search": {
+      "get": {
+        "description": "Search for a post.",
+        "operationId": "blogger.posts.search",
+        "parameters": [
+          {
+            "description": "ID of the blog to fetch the post from.",
+            "in": "path",
+            "name": "blogId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Query terms to search this blog for matching posts.",
+            "in": "query",
+            "name": "q",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": true,
+            "description": "Whether the body content of posts is included (default: true). This should be set to false when the post bodies are not required, to help minimize traffic.",
+            "in": "query",
+            "name": "fetchBodies",
+            "type": "boolean"
+          },
+          {
+            "default": "published",
+            "description": "Sort search results",
+            "enum": [
+              "published",
+              "updated"
+            ],
+            "in": "query",
+            "name": "orderBy",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/PostList"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "posts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/blogs/byurl": {
+      "get": {
+        "description": "Retrieve a Blog by URL.",
+        "operationId": "blogger.blogs.getByUrl",
+        "parameters": [
+          {
+            "description": "The URL of the blog to retrieve.",
+            "in": "query",
+            "name": "url",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Access level with which to view the blog. Note that some fields require elevated access.",
+            "enum": [
+              "ADMIN",
+              "AUTHOR",
+              "READER"
+            ],
+            "in": "query",
+            "name": "view",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Blog"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/blogger",
+              "https://www.googleapis.com/auth/blogger.readonly"
+            ]
+          }
+        ],
+        "tags": [
+          "blogs"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
     },
     "/users/{userId}": {
       "get": {

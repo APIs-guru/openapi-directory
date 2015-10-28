@@ -705,75 +705,6 @@
         ]
       }
     },
-    "/{userId}/drafts/send": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "consumes": [
-          "message/rfc822"
-        ],
-        "description": "Sends the specified, existing draft to the recipients in the To, Cc, and Bcc headers.",
-        "operationId": "gmail.users.drafts.send",
-        "parameters": [
-          {
-            "default": "me",
-            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
-            "in": "path",
-            "name": "userId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/Draft"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Message"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://mail.google.com/",
-              "https://www.googleapis.com/auth/gmail.compose",
-              "https://www.googleapis.com/auth/gmail.modify"
-            ]
-          }
-        ],
-        "tags": [
-          "users"
-        ]
-      }
-    },
     "/{userId}/drafts/{id}": {
       "delete": {
         "description": "Immediately and permanently deletes the specified draft. Does not simply trash it.",
@@ -926,6 +857,75 @@
             "description": "Successful response",
             "schema": {
               "$ref": "#/definitions/Draft"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.compose",
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/{userId}/drafts/send": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "consumes": [
+          "message/rfc822"
+        ],
+        "description": "Sends the specified, existing draft to the recipients in the To, Cc, and Bcc headers.",
+        "operationId": "gmail.users.drafts.send",
+        "parameters": [
+          {
+            "default": "me",
+            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Draft"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Message"
             }
           }
         },
@@ -1486,177 +1486,6 @@
         ]
       }
     },
-    "/{userId}/messages/import": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "consumes": [
-          "message/rfc822"
-        ],
-        "description": "Imports a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP. Does not send a message.",
-        "operationId": "gmail.users.messages.import",
-        "parameters": [
-          {
-            "default": "me",
-            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
-            "in": "path",
-            "name": "userId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "default": false,
-            "description": "Mark the email as permanently deleted (not TRASH) and only visible in Google Apps Vault to a Vault administrator. Only used for Google Apps for Work accounts.",
-            "in": "query",
-            "name": "deleted",
-            "type": "boolean"
-          },
-          {
-            "default": "dateHeader",
-            "description": "Source for Gmail's internal date of the message.",
-            "enum": [
-              "dateHeader",
-              "receivedTime"
-            ],
-            "in": "query",
-            "name": "internalDateSource",
-            "type": "string"
-          },
-          {
-            "default": false,
-            "description": "Ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox.",
-            "in": "query",
-            "name": "neverMarkSpam",
-            "type": "boolean"
-          },
-          {
-            "default": false,
-            "description": "Process calendar invites in the email and add any extracted meetings to the Google Calendar for this user.",
-            "in": "query",
-            "name": "processForCalendar",
-            "type": "boolean"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/Message"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Message"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://mail.google.com/",
-              "https://www.googleapis.com/auth/gmail.insert",
-              "https://www.googleapis.com/auth/gmail.modify"
-            ]
-          }
-        ],
-        "tags": [
-          "users"
-        ]
-      }
-    },
-    "/{userId}/messages/send": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "consumes": [
-          "message/rfc822"
-        ],
-        "description": "Sends the specified message to the recipients in the To, Cc, and Bcc headers.",
-        "operationId": "gmail.users.messages.send",
-        "parameters": [
-          {
-            "default": "me",
-            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
-            "in": "path",
-            "name": "userId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/Message"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Message"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://mail.google.com/",
-              "https://www.googleapis.com/auth/gmail.compose",
-              "https://www.googleapis.com/auth/gmail.modify",
-              "https://www.googleapis.com/auth/gmail.send"
-            ]
-          }
-        ],
-        "tags": [
-          "users"
-        ]
-      }
-    },
     "/{userId}/messages/{id}": {
       "delete": {
         "description": "Immediately and permanently deletes the specified message. This operation cannot be undone. Prefer messages.trash instead.",
@@ -2056,6 +1885,177 @@
           "$ref": "#/parameters/userIp"
         }
       ]
+    },
+    "/{userId}/messages/import": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "consumes": [
+          "message/rfc822"
+        ],
+        "description": "Imports a message into only this user's mailbox, with standard email delivery scanning and classification similar to receiving via SMTP. Does not send a message.",
+        "operationId": "gmail.users.messages.import",
+        "parameters": [
+          {
+            "default": "me",
+            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "default": false,
+            "description": "Mark the email as permanently deleted (not TRASH) and only visible in Google Apps Vault to a Vault administrator. Only used for Google Apps for Work accounts.",
+            "in": "query",
+            "name": "deleted",
+            "type": "boolean"
+          },
+          {
+            "default": "dateHeader",
+            "description": "Source for Gmail's internal date of the message.",
+            "enum": [
+              "dateHeader",
+              "receivedTime"
+            ],
+            "in": "query",
+            "name": "internalDateSource",
+            "type": "string"
+          },
+          {
+            "default": false,
+            "description": "Ignore the Gmail spam classifier decision and never mark this email as SPAM in the mailbox.",
+            "in": "query",
+            "name": "neverMarkSpam",
+            "type": "boolean"
+          },
+          {
+            "default": false,
+            "description": "Process calendar invites in the email and add any extracted meetings to the Google Calendar for this user.",
+            "in": "query",
+            "name": "processForCalendar",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.insert",
+              "https://www.googleapis.com/auth/gmail.modify"
+            ]
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      }
+    },
+    "/{userId}/messages/send": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "consumes": [
+          "message/rfc822"
+        ],
+        "description": "Sends the specified message to the recipients in the To, Cc, and Bcc headers.",
+        "operationId": "gmail.users.messages.send",
+        "parameters": [
+          {
+            "default": "me",
+            "description": "The user's email address. The special value me can be used to indicate the authenticated user.",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://mail.google.com/",
+              "https://www.googleapis.com/auth/gmail.compose",
+              "https://www.googleapis.com/auth/gmail.modify",
+              "https://www.googleapis.com/auth/gmail.send"
+            ]
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      }
     },
     "/{userId}/profile": {
       "get": {

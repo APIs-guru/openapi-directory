@@ -271,33 +271,6 @@
         ]
       }
     },
-    "/items/type": {
-      "get": {
-        "description": "",
-        "operationId": "getItemTypes",
-        "parameters": [
-          {
-            "description": "oauth token",
-            "in": "query",
-            "name": "oauth_token",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "400": {
-            "description": "Invalid parameters"
-          }
-        },
-        "summary": "get item type",
-        "tags": [
-          "oauth items"
-        ]
-      }
-    },
     "/items/{itemId}": {
       "get": {
         "description": "",
@@ -334,6 +307,33 @@
           }
         },
         "summary": "get item",
+        "tags": [
+          "oauth items"
+        ]
+      }
+    },
+    "/items/type": {
+      "get": {
+        "description": "",
+        "operationId": "getItemTypes",
+        "parameters": [
+          {
+            "description": "oauth token",
+            "in": "query",
+            "name": "oauth_token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid parameters"
+          }
+        },
+        "summary": "get item type",
         "tags": [
           "oauth items"
         ]

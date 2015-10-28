@@ -43,6 +43,19 @@
       },
       "type": "object"
     },
+    "Traces": {
+      "description": "A list of traces for the PatchTraces method.",
+      "properties": {
+        "traces": {
+          "description": "A list of traces.",
+          "items": {
+            "$ref": "#/definitions/Trace"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "TraceSpan": {
       "description": "A span is the data recorded with a single span.",
       "properties": {
@@ -83,19 +96,6 @@
         "startTime": {
           "description": "The start time of the span in nanoseconds from the UNIX epoch.",
           "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Traces": {
-      "description": "A list of traces for the PatchTraces method.",
-      "properties": {
-        "traces": {
-          "description": "A list of traces.",
-          "items": {
-            "$ref": "#/definitions/Trace"
-          },
-          "type": "array"
         }
       },
       "type": "object"
@@ -198,16 +198,16 @@
       "name": "quotaUser",
       "type": "string"
     },
-    "uploadType": {
-      "description": "Legacy upload protocol for media (e.g. \"media\", \"multipart\").",
-      "in": "query",
-      "name": "uploadType",
-      "type": "string"
-    },
     "upload_protocol": {
       "description": "Upload protocol for media (e.g. \"raw\", \"multipart\").",
       "in": "query",
       "name": "upload_protocol",
+      "type": "string"
+    },
+    "uploadType": {
+      "description": "Legacy upload protocol for media (e.g. \"media\", \"multipart\").",
+      "in": "query",
+      "name": "uploadType",
       "type": "string"
     }
   },

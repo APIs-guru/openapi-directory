@@ -8,10 +8,10 @@
         "APP_VERSION_NAME": {
           "type": "string"
         },
-        "AVAILABLE_MEM_SIZE": {
+        "AppKey": {
           "type": "string"
         },
-        "AppKey": {
+        "AVAILABLE_MEM_SIZE": {
           "type": "string"
         },
         "BRAND": {
@@ -56,16 +56,19 @@
         "PRODUCT": {
           "type": "string"
         },
+        "report_id": {
+          "type": "string"
+        },
         "SHARED_PREFERENCES": {
           "type": "string"
         },
         "STACK_TRACE": {
           "type": "string"
         },
-        "SystemSettings": {
+        "Systemsecure": {
           "type": "string"
         },
-        "Systemsecure": {
+        "SystemSettings": {
           "type": "string"
         },
         "THREAD_DETAILS": {
@@ -78,9 +81,6 @@
           "type": "string"
         },
         "USER_CRASH_DATE": {
-          "type": "string"
-        },
-        "report_id": {
           "type": "string"
         }
       },
@@ -166,9 +166,19 @@
         "Email": {
           "type": "string"
         },
+        "frameworkId": {
+          "format": "int32",
+          "type": "integer"
+        },
         "InstallDate": {
           "format": "date-time",
           "type": "string"
+        },
+        "installerPackage": {
+          "type": "string"
+        },
+        "isLicensed": {
+          "type": "boolean"
         },
         "MessageId": {
           "type": "string"
@@ -179,23 +189,13 @@
         "OSVersion": {
           "type": "string"
         },
+        "platform": {
+          "type": "string"
+        },
         "Preferences": {
           "$ref": "#/definitions/Object"
         },
         "Store": {
-          "type": "string"
-        },
-        "frameworkId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "installerPackage": {
-          "type": "string"
-        },
-        "isLicensed": {
-          "type": "boolean"
-        },
-        "platform": {
           "type": "string"
         }
       },
@@ -339,7 +339,7 @@
         ]
       }
     },
-    "/api/Analytics/user/UpdatePreferences": {
+    "/api/Analytics/user/registerUser": {
       "post": {
         "consumes": [
           "application/json",
@@ -347,14 +347,14 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "User_UpdatePreferences",
+        "operationId": "User_registerUser",
         "parameters": [
           {
             "in": "body",
-            "name": "userPreferences",
+            "name": "model",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PreferencesModel"
+              "$ref": "#/definitions/UserModel"
             }
           }
         ],
@@ -375,7 +375,7 @@
         ]
       }
     },
-    "/api/Analytics/user/registerUser": {
+    "/api/Analytics/user/UpdatePreferences": {
       "post": {
         "consumes": [
           "application/json",
@@ -383,14 +383,14 @@
           "application/x-www-form-urlencoded"
         ],
         "deprecated": false,
-        "operationId": "User_registerUser",
+        "operationId": "User_UpdatePreferences",
         "parameters": [
           {
             "in": "body",
-            "name": "model",
+            "name": "userPreferences",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserModel"
+              "$ref": "#/definitions/PreferencesModel"
             }
           }
         ],

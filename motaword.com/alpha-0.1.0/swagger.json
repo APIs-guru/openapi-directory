@@ -1214,60 +1214,6 @@
         ]
       }
     },
-    "/projects/{id}/package/check": {
-      "get": {
-        "description": "This request will tell you the current progress of the translation packaging. You will use the 'key' provided by the /package call.",
-        "operationId": "trackPackage",
-        "parameters": [
-          {
-            "description": "Project ID",
-            "format": "int64",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "This is the package tracking key provided in the response of a /package call.",
-            "in": "query",
-            "name": "key",
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Current status of packaging process.",
-            "schema": {
-              "$ref": "#/definitions/PackageStatus"
-            }
-          },
-          "402": {
-            "description": "ProjectNotLaunchedYet",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          },
-          "404": {
-            "description": "PackagingStatusMissing",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "security": [
-          {
-            "client_credentials": []
-          }
-        ],
-        "summary": "Track the status of translation packaging.",
-        "tags": [
-          "Project"
-        ]
-      }
-    },
     "/projects/{id}/package/{language}": {
       "post": {
         "description": "Package the translation project, make it ready to be downloaded.",
@@ -1331,6 +1277,60 @@
           }
         ],
         "summary": "Package the project to be downloaded.",
+        "tags": [
+          "Project"
+        ]
+      }
+    },
+    "/projects/{id}/package/check": {
+      "get": {
+        "description": "This request will tell you the current progress of the translation packaging. You will use the 'key' provided by the /package call.",
+        "operationId": "trackPackage",
+        "parameters": [
+          {
+            "description": "Project ID",
+            "format": "int64",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "This is the package tracking key provided in the response of a /package call.",
+            "in": "query",
+            "name": "key",
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Current status of packaging process.",
+            "schema": {
+              "$ref": "#/definitions/PackageStatus"
+            }
+          },
+          "402": {
+            "description": "ProjectNotLaunchedYet",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          },
+          "404": {
+            "description": "PackagingStatusMissing",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "security": [
+          {
+            "client_credentials": []
+          }
+        ],
+        "summary": "Track the status of translation packaging.",
         "tags": [
           "Project"
         ]

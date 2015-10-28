@@ -216,12 +216,12 @@
           "description": "the user's street address",
           "type": "string"
         },
-        "userState": {
-          "description": "the user's account status",
-          "type": "string"
-        },
         "username": {
           "description": "the user login",
+          "type": "string"
+        },
+        "userState": {
+          "description": "the user's account status",
           "type": "string"
         }
       }
@@ -695,63 +695,6 @@
     "x-providerName": "plenigo.com"
   },
   "paths": {
-    "/access/app/token/{customerId}": {
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "description": "Returns the app access token and the customer id necessary for requesting an customer app id",
-        "operationId": "requestAppAccessToken",
-        "parameters": [
-          {
-            "description": "Unique Id of the customer to get products for",
-            "in": "path",
-            "name": "customerId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "App access token request data",
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AppAccessTokenRequest"
-            }
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Correct parameters",
-            "schema": {
-              "$ref": "#/definitions/AppAccessToken"
-            }
-          },
-          "400": {
-            "description": "If the given parameters were incorrect"
-          },
-          "401": {
-            "description": "If the provided company secret and/or company Id is incorrect"
-          },
-          "412": {
-            "description": "If product is not owned by the user"
-          },
-          "423": {
-            "description": "If the user has reached the limit of parallel app accesses"
-          },
-          "500": {
-            "description": "Server error"
-          }
-        },
-        "summary": "Request an app access token",
-        "tags": [
-          "app management"
-        ]
-      }
-    },
     "/access/app/{customerId}": {
       "get": {
         "description": "Returns all customer apps",
@@ -1008,41 +951,29 @@
         ]
       }
     },
-    "/access/mobileSecret/verify": {
-      "get": {
+    "/access/app/token/{customerId}": {
+      "post": {
         "consumes": [
           "application/json"
         ],
-        "description": "",
-        "operationId": "verifyMobileSecret",
+        "description": "Returns the app access token and the customer id necessary for requesting an customer app id",
+        "operationId": "requestAppAccessToken",
         "parameters": [
           {
-            "description": "Unique Id of the company, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "companyId",
+            "description": "Unique Id of the customer to get products for",
+            "in": "path",
+            "name": "customerId",
             "required": true,
             "type": "string"
           },
           {
-            "description": "Company secret, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "secret",
+            "description": "App access token request data",
+            "in": "body",
+            "name": "body",
             "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Email of the user",
-            "in": "query",
-            "name": "email",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Mobile secret entered by user",
-            "in": "query",
-            "name": "mobileSecret",
-            "required": true,
-            "type": "string"
+            "schema": {
+              "$ref": "#/definitions/AppAccessTokenRequest"
+            }
           }
         ],
         "produces": [
@@ -1050,9 +981,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Mobile secret is correct",
+            "description": "Correct parameters",
             "schema": {
-              "$ref": "#/definitions/MobileSecretVerificationResult"
+              "$ref": "#/definitions/AppAccessToken"
             }
           },
           "400": {
@@ -1061,16 +992,19 @@
           "401": {
             "description": "If the provided company secret and/or company Id is incorrect"
           },
-          "403": {
-            "description": "Mobile secret is not correct"
+          "412": {
+            "description": "If product is not owned by the user"
+          },
+          "423": {
+            "description": "If the user has reached the limit of parallel app accesses"
           },
           "500": {
             "description": "Server error"
           }
         },
-        "summary": "Test if user mobile secret is correct.",
+        "summary": "Request an app access token",
         "tags": [
-          "mobile secret"
+          "app management"
         ]
       }
     },
@@ -1225,6 +1159,72 @@
           }
         },
         "summary": "Create or recreate mobile secret",
+        "tags": [
+          "mobile secret"
+        ]
+      }
+    },
+    "/access/mobileSecret/verify": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "",
+        "operationId": "verifyMobileSecret",
+        "parameters": [
+          {
+            "description": "Unique Id of the company, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Company secret, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "secret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Email of the user",
+            "in": "query",
+            "name": "email",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Mobile secret entered by user",
+            "in": "query",
+            "name": "mobileSecret",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Mobile secret is correct",
+            "schema": {
+              "$ref": "#/definitions/MobileSecretVerificationResult"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "403": {
+            "description": "Mobile secret is not correct"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Test if user mobile secret is correct.",
         "tags": [
           "mobile secret"
         ]
@@ -1765,6 +1765,66 @@
         ]
       }
     },
+    "/user/{customerId}/products": {
+      "get": {
+        "description": "Returns the products the user has bought only including active subscriptions",
+        "operationId": "getProductsBought",
+        "parameters": [
+          {
+            "description": "Unique Id of the customer to get products for",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Unique Id of the company, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "companyId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Company secret, it can be retrieved from the company administration area",
+            "in": "query",
+            "name": "secret",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Flag indicating if products from test mode should be returned",
+            "in": "query",
+            "name": "testMode",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Correct parameters",
+            "schema": {
+              "$ref": "#/definitions/CustomerProductsList"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Get products a user has bought",
+        "tags": [
+          "user"
+        ]
+      }
+    },
     "/user/product": {
       "get": {
         "consumes": [
@@ -1880,66 +1940,6 @@
           }
         },
         "summary": "Get user profile information",
-        "tags": [
-          "user"
-        ]
-      }
-    },
-    "/user/{customerId}/products": {
-      "get": {
-        "description": "Returns the products the user has bought only including active subscriptions",
-        "operationId": "getProductsBought",
-        "parameters": [
-          {
-            "description": "Unique Id of the customer to get products for",
-            "in": "path",
-            "name": "customerId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Unique Id of the company, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "companyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Company secret, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "secret",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Flag indicating if products from test mode should be returned",
-            "in": "query",
-            "name": "testMode",
-            "required": true,
-            "type": "boolean"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Correct parameters",
-            "schema": {
-              "$ref": "#/definitions/CustomerProductsList"
-            }
-          },
-          "400": {
-            "description": "If the given parameters were incorrect"
-          },
-          "401": {
-            "description": "If the provided company secret and/or company Id is incorrect"
-          },
-          "500": {
-            "description": "Server error"
-          }
-        },
-        "summary": "Get products a user has bought",
         "tags": [
           "user"
         ]

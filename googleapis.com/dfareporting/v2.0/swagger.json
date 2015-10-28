@@ -246,6 +246,28 @@
       },
       "type": "object"
     },
+    "AccountsListResponse": {
+      "description": "Account List Response",
+      "properties": {
+        "accounts": {
+          "description": "Account collection.",
+          "items": {
+            "$ref": "#/definitions/Account"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "dfareporting#accountsListResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#accountsListResponse\".",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "Pagination token to be used for the next list operation.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "AccountUserProfile": {
       "description": "AccountUserProfiles contains properties of a DCM user profile. This resource is specifically for managing user profiles, whereas UserProfiles is for accessing the API.",
       "properties": {
@@ -344,28 +366,6 @@
         "kind": {
           "default": "dfareporting#accountUserProfilesListResponse",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#accountUserProfilesListResponse\".",
-          "type": "string"
-        },
-        "nextPageToken": {
-          "description": "Pagination token to be used for the next list operation.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AccountsListResponse": {
-      "description": "Account List Response",
-      "properties": {
-        "accounts": {
-          "description": "Account collection.",
-          "items": {
-            "$ref": "#/definitions/Account"
-          },
-          "type": "array"
-        },
-        "kind": {
-          "default": "dfareporting#accountsListResponse",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#accountsListResponse\".",
           "type": "string"
         },
         "nextPageToken": {
@@ -2471,6 +2471,28 @@
       },
       "type": "object"
     },
+    "CreativeFieldsListResponse": {
+      "description": "Creative Field List Response",
+      "properties": {
+        "creativeFields": {
+          "description": "Creative field collection.",
+          "items": {
+            "$ref": "#/definitions/CreativeField"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "dfareporting#creativeFieldsListResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#creativeFieldsListResponse\".",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "Pagination token to be used for the next list operation.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "CreativeFieldValue": {
       "description": "Contains properties of a creative field value.",
       "properties": {
@@ -2504,28 +2526,6 @@
         "kind": {
           "default": "dfareporting#creativeFieldValuesListResponse",
           "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#creativeFieldValuesListResponse\".",
-          "type": "string"
-        },
-        "nextPageToken": {
-          "description": "Pagination token to be used for the next list operation.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "CreativeFieldsListResponse": {
-      "description": "Creative Field List Response",
-      "properties": {
-        "creativeFields": {
-          "description": "Creative field collection.",
-          "items": {
-            "$ref": "#/definitions/CreativeField"
-          },
-          "type": "array"
-        },
-        "kind": {
-          "default": "dfareporting#creativeFieldsListResponse",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#creativeFieldsListResponse\".",
           "type": "string"
         },
         "nextPageToken": {
@@ -2928,12 +2928,12 @@
           "description": "Whether this directory site accepts programmatic placements.",
           "type": "boolean"
         },
-        "pubPaidPlacementAccepted": {
-          "description": "Whether this directory site accepts publisher-paid tags.",
-          "type": "boolean"
-        },
         "publisherPortalOnly": {
           "description": "Whether this directory site is available only via DoubleClick Publisher Portal.",
+          "type": "boolean"
+        },
+        "pubPaidPlacementAccepted": {
+          "description": "Whether this directory site accepts publisher-paid tags.",
           "type": "boolean"
         }
       },
@@ -4420,6 +4420,24 @@
       },
       "type": "object"
     },
+    "OperatingSystemsListResponse": {
+      "description": "Operating System List Response",
+      "properties": {
+        "kind": {
+          "default": "dfareporting#operatingSystemsListResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#operatingSystemsListResponse\".",
+          "type": "string"
+        },
+        "operatingSystems": {
+          "description": "Operating system collection.",
+          "items": {
+            "$ref": "#/definitions/OperatingSystem"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "OperatingSystemVersion": {
       "description": "Contains information about a particular version of an operating system that can be targeted by ads.",
       "properties": {
@@ -4464,24 +4482,6 @@
           "description": "Operating system version collection.",
           "items": {
             "$ref": "#/definitions/OperatingSystemVersion"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "OperatingSystemsListResponse": {
-      "description": "Operating System List Response",
-      "properties": {
-        "kind": {
-          "default": "dfareporting#operatingSystemsListResponse",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#operatingSystemsListResponse\".",
-          "type": "string"
-        },
-        "operatingSystems": {
-          "description": "Operating system collection.",
-          "items": {
-            "$ref": "#/definitions/OperatingSystem"
           },
           "type": "array"
         }
@@ -4928,6 +4928,46 @@
       },
       "type": "object"
     },
+    "PlacementsGenerateTagsResponse": {
+      "description": "Placement GenerateTags Response",
+      "properties": {
+        "kind": {
+          "default": "dfareporting#placementsGenerateTagsResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#placementsGenerateTagsResponse\".",
+          "type": "string"
+        },
+        "placementTags": {
+          "description": "Set of generated tags for the specified placements.",
+          "items": {
+            "$ref": "#/definitions/PlacementTag"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "PlacementsListResponse": {
+      "description": "Placement List Response",
+      "properties": {
+        "kind": {
+          "default": "dfareporting#placementsListResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#placementsListResponse\".",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "Pagination token to be used for the next list operation.",
+          "type": "string"
+        },
+        "placements": {
+          "description": "Placement collection.",
+          "items": {
+            "$ref": "#/definitions/Placement"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "PlacementStrategiesListResponse": {
       "description": "Placement Strategy List Response",
       "properties": {
@@ -4987,46 +5027,6 @@
           "description": "Tags generated for this placement.",
           "items": {
             "$ref": "#/definitions/TagData"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "PlacementsGenerateTagsResponse": {
-      "description": "Placement GenerateTags Response",
-      "properties": {
-        "kind": {
-          "default": "dfareporting#placementsGenerateTagsResponse",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#placementsGenerateTagsResponse\".",
-          "type": "string"
-        },
-        "placementTags": {
-          "description": "Set of generated tags for the specified placements.",
-          "items": {
-            "$ref": "#/definitions/PlacementTag"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "PlacementsListResponse": {
-      "description": "Placement List Response",
-      "properties": {
-        "kind": {
-          "default": "dfareporting#placementsListResponse",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"dfareporting#placementsListResponse\".",
-          "type": "string"
-        },
-        "nextPageToken": {
-          "description": "Pagination token to be used for the next list operation.",
-          "type": "string"
-        },
-        "placements": {
-          "description": "Placement collection.",
-          "items": {
-            "$ref": "#/definitions/Placement"
           },
           "type": "array"
         }
@@ -6367,17 +6367,17 @@
           },
           "type": "array"
         },
-        "operatingSystemVersions": {
-          "description": "Operating system versions that this ad targets. To target all versions, use operatingSystems. For each operating system version, only id is required. The other fields are populated automatically when the ad is inserted or updated. If targeting an operating system version, do not set targeting for the corresponding operating system in operatingSystems.",
-          "items": {
-            "$ref": "#/definitions/OperatingSystemVersion"
-          },
-          "type": "array"
-        },
         "operatingSystems": {
           "description": "Operating systems that this ad targets. To target specific versions, use operatingSystemVersions. For each operating system only dartId is required. The other fields are populated automatically when the ad is inserted or updated. If targeting an operating system, do not set targeting for operating system versions for the same operating system.",
           "items": {
             "$ref": "#/definitions/OperatingSystem"
+          },
+          "type": "array"
+        },
+        "operatingSystemVersions": {
+          "description": "Operating system versions that this ad targets. To target all versions, use operatingSystems. For each operating system version, only id is required. The other fields are populated automatically when the ad is inserted or updated. If targeting an operating system version, do not set targeting for the corresponding operating system in operatingSystems.",
+          "items": {
+            "$ref": "#/definitions/OperatingSystemVersion"
           },
           "type": "array"
         },
@@ -7239,6 +7239,262 @@
         }
       ]
     },
+    "/userprofiles/{profileId}/accounts": {
+      "get": {
+        "description": "Retrieves the list of accounts, possibly filtered.",
+        "operationId": "dfareporting.accounts.list",
+        "parameters": [
+          {
+            "description": "User profile ID associated with this request.",
+            "in": "path",
+            "name": "profileId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Select only active accounts. Don't set this field to select both active and non-active accounts.",
+            "in": "query",
+            "name": "active",
+            "type": "boolean"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Select only accounts with these IDs.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "ids",
+            "type": "array"
+          },
+          {
+            "description": "Maximum number of results to return.",
+            "in": "query",
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "Value of the nextPageToken from the previous result page.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          },
+          {
+            "description": "Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, \"account*2015\" will return objects with names like \"account June 2015\", \"account April 2015\", or simply \"account 2015\". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of \"account\" will match objects with name \"my account\", \"account 2015\", or simply \"account\".",
+            "in": "query",
+            "name": "searchString",
+            "type": "string"
+          },
+          {
+            "description": "Field by which to sort the list.",
+            "enum": [
+              "ID",
+              "NAME"
+            ],
+            "in": "query",
+            "name": "sortField",
+            "type": "string"
+          },
+          {
+            "description": "Order of sorted results, default is ASCENDING.",
+            "enum": [
+              "ASCENDING",
+              "DESCENDING"
+            ],
+            "in": "query",
+            "name": "sortOrder",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AccountsListResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "patch": {
+        "description": "Updates an existing account. This method supports patch semantics.",
+        "operationId": "dfareporting.accounts.patch",
+        "parameters": [
+          {
+            "description": "User profile ID associated with this request.",
+            "in": "path",
+            "name": "profileId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Account ID.",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      },
+      "put": {
+        "description": "Updates an existing account.",
+        "operationId": "dfareporting.accounts.update",
+        "parameters": [
+          {
+            "description": "User profile ID associated with this request.",
+            "in": "path",
+            "name": "profileId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      }
+    },
+    "/userprofiles/{profileId}/accounts/{id}": {
+      "get": {
+        "description": "Gets one account by ID.",
+        "operationId": "dfareporting.accounts.get",
+        "parameters": [
+          {
+            "description": "User profile ID associated with this request.",
+            "in": "path",
+            "name": "profileId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Account ID.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/userprofiles/{profileId}/accountUserProfiles": {
       "get": {
         "description": "Retrieves a list of account user profiles, possibly filtered.",
@@ -7481,262 +7737,6 @@
         ],
         "tags": [
           "accountUserProfiles"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/userprofiles/{profileId}/accounts": {
-      "get": {
-        "description": "Retrieves the list of accounts, possibly filtered.",
-        "operationId": "dfareporting.accounts.list",
-        "parameters": [
-          {
-            "description": "User profile ID associated with this request.",
-            "in": "path",
-            "name": "profileId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Select only active accounts. Don't set this field to select both active and non-active accounts.",
-            "in": "query",
-            "name": "active",
-            "type": "boolean"
-          },
-          {
-            "collectionFormat": "multi",
-            "description": "Select only accounts with these IDs.",
-            "in": "query",
-            "items": {
-              "type": "string"
-            },
-            "name": "ids",
-            "type": "array"
-          },
-          {
-            "description": "Maximum number of results to return.",
-            "in": "query",
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "description": "Value of the nextPageToken from the previous result page.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          },
-          {
-            "description": "Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, \"account*2015\" will return objects with names like \"account June 2015\", \"account April 2015\", or simply \"account 2015\". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of \"account\" will match objects with name \"my account\", \"account 2015\", or simply \"account\".",
-            "in": "query",
-            "name": "searchString",
-            "type": "string"
-          },
-          {
-            "description": "Field by which to sort the list.",
-            "enum": [
-              "ID",
-              "NAME"
-            ],
-            "in": "query",
-            "name": "sortField",
-            "type": "string"
-          },
-          {
-            "description": "Order of sorted results, default is ASCENDING.",
-            "enum": [
-              "ASCENDING",
-              "DESCENDING"
-            ],
-            "in": "query",
-            "name": "sortOrder",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AccountsListResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/dfatrafficking"
-            ]
-          }
-        ],
-        "tags": [
-          "accounts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "patch": {
-        "description": "Updates an existing account. This method supports patch semantics.",
-        "operationId": "dfareporting.accounts.patch",
-        "parameters": [
-          {
-            "description": "User profile ID associated with this request.",
-            "in": "path",
-            "name": "profileId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Account ID.",
-            "in": "query",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/Account"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Account"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/dfatrafficking"
-            ]
-          }
-        ],
-        "tags": [
-          "accounts"
-        ]
-      },
-      "put": {
-        "description": "Updates an existing account.",
-        "operationId": "dfareporting.accounts.update",
-        "parameters": [
-          {
-            "description": "User profile ID associated with this request.",
-            "in": "path",
-            "name": "profileId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/Account"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Account"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/dfatrafficking"
-            ]
-          }
-        ],
-        "tags": [
-          "accounts"
-        ]
-      }
-    },
-    "/userprofiles/{profileId}/accounts/{id}": {
-      "get": {
-        "description": "Gets one account by ID.",
-        "operationId": "dfareporting.accounts.get",
-        "parameters": [
-          {
-            "description": "User profile ID associated with this request.",
-            "in": "path",
-            "name": "profileId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Account ID.",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Account"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/dfatrafficking"
-            ]
-          }
-        ],
-        "tags": [
-          "accounts"
         ]
       },
       "parameters": [
@@ -13257,68 +13257,6 @@
         ]
       }
     },
-    "/userprofiles/{profileId}/floodlightActivities/generatetag": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Generates a tag for a floodlight activity.",
-        "operationId": "dfareporting.floodlightActivities.generatetag",
-        "parameters": [
-          {
-            "description": "User profile ID associated with this request.",
-            "in": "path",
-            "name": "profileId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Floodlight activity ID for which we want to generate a tag.",
-            "in": "query",
-            "name": "floodlightActivityId",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/FloodlightActivitiesGenerateTagResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/dfatrafficking"
-            ]
-          }
-        ],
-        "tags": [
-          "floodlightActivities"
-        ]
-      }
-    },
     "/userprofiles/{profileId}/floodlightActivities/{id}": {
       "delete": {
         "description": "Deletes an existing floodlight activity.",
@@ -13416,6 +13354,68 @@
           "$ref": "#/parameters/userIp"
         }
       ]
+    },
+    "/userprofiles/{profileId}/floodlightActivities/generatetag": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Generates a tag for a floodlight activity.",
+        "operationId": "dfareporting.floodlightActivities.generatetag",
+        "parameters": [
+          {
+            "description": "User profile ID associated with this request.",
+            "in": "path",
+            "name": "profileId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Floodlight activity ID for which we want to generate a tag.",
+            "in": "query",
+            "name": "floodlightActivityId",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/FloodlightActivitiesGenerateTagResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "floodlightActivities"
+        ]
+      }
     },
     "/userprofiles/{profileId}/floodlightActivityGroups": {
       "get": {
@@ -14086,62 +14086,6 @@
         }
       ]
     },
-    "/userprofiles/{profileId}/operatingSystemVersions": {
-      "get": {
-        "description": "Retrieves a list of operating system versions.",
-        "operationId": "dfareporting.operatingSystemVersions.list",
-        "parameters": [
-          {
-            "description": "User profile ID associated with this request.",
-            "in": "path",
-            "name": "profileId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/OperatingSystemVersionsListResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/dfatrafficking"
-            ]
-          }
-        ],
-        "tags": [
-          "operatingSystemVersions"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
     "/userprofiles/{profileId}/operatingSystems": {
       "get": {
         "description": "Retrieves a list of operating systems.",
@@ -14172,6 +14116,62 @@
         ],
         "tags": [
           "operatingSystems"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/userprofiles/{profileId}/operatingSystemVersions": {
+      "get": {
+        "description": "Retrieves a list of operating system versions.",
+        "operationId": "dfareporting.operatingSystemVersions.list",
+        "parameters": [
+          {
+            "description": "User profile ID associated with this request.",
+            "in": "path",
+            "name": "profileId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OperatingSystemVersionsListResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "operatingSystemVersions"
         ]
       },
       "parameters": [
@@ -14579,329 +14579,6 @@
         }
       ]
     },
-    "/userprofiles/{profileId}/placementStrategies": {
-      "get": {
-        "description": "Retrieves a list of placement strategies, possibly filtered.",
-        "operationId": "dfareporting.placementStrategies.list",
-        "parameters": [
-          {
-            "description": "User profile ID associated with this request.",
-            "in": "path",
-            "name": "profileId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "collectionFormat": "multi",
-            "description": "Select only placement strategies with these IDs.",
-            "in": "query",
-            "items": {
-              "type": "string"
-            },
-            "name": "ids",
-            "type": "array"
-          },
-          {
-            "description": "Maximum number of results to return.",
-            "in": "query",
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "description": "Value of the nextPageToken from the previous result page.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          },
-          {
-            "description": "Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, \"placementstrategy*2015\" will return objects with names like \"placementstrategy June 2015\", \"placementstrategy April 2015\", or simply \"placementstrategy 2015\". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of \"placementstrategy\" will match objects with name \"my placementstrategy\", \"placementstrategy 2015\", or simply \"placementstrategy\".",
-            "in": "query",
-            "name": "searchString",
-            "type": "string"
-          },
-          {
-            "description": "Field by which to sort the list.",
-            "enum": [
-              "ID",
-              "NAME"
-            ],
-            "in": "query",
-            "name": "sortField",
-            "type": "string"
-          },
-          {
-            "description": "Order of sorted results, default is ASCENDING.",
-            "enum": [
-              "ASCENDING",
-              "DESCENDING"
-            ],
-            "in": "query",
-            "name": "sortOrder",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/PlacementStrategiesListResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/dfatrafficking"
-            ]
-          }
-        ],
-        "tags": [
-          "placementStrategies"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "patch": {
-        "description": "Updates an existing placement strategy. This method supports patch semantics.",
-        "operationId": "dfareporting.placementStrategies.patch",
-        "parameters": [
-          {
-            "description": "User profile ID associated with this request.",
-            "in": "path",
-            "name": "profileId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Placement strategy ID.",
-            "in": "query",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/PlacementStrategy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/PlacementStrategy"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/dfatrafficking"
-            ]
-          }
-        ],
-        "tags": [
-          "placementStrategies"
-        ]
-      },
-      "post": {
-        "description": "Inserts a new placement strategy.",
-        "operationId": "dfareporting.placementStrategies.insert",
-        "parameters": [
-          {
-            "description": "User profile ID associated with this request.",
-            "in": "path",
-            "name": "profileId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/PlacementStrategy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/PlacementStrategy"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/dfatrafficking"
-            ]
-          }
-        ],
-        "tags": [
-          "placementStrategies"
-        ]
-      },
-      "put": {
-        "description": "Updates an existing placement strategy.",
-        "operationId": "dfareporting.placementStrategies.update",
-        "parameters": [
-          {
-            "description": "User profile ID associated with this request.",
-            "in": "path",
-            "name": "profileId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/PlacementStrategy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/PlacementStrategy"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/dfatrafficking"
-            ]
-          }
-        ],
-        "tags": [
-          "placementStrategies"
-        ]
-      }
-    },
-    "/userprofiles/{profileId}/placementStrategies/{id}": {
-      "delete": {
-        "description": "Deletes an existing placement strategy.",
-        "operationId": "dfareporting.placementStrategies.delete",
-        "parameters": [
-          {
-            "description": "User profile ID associated with this request.",
-            "in": "path",
-            "name": "profileId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Placement strategy ID.",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/dfatrafficking"
-            ]
-          }
-        ],
-        "tags": [
-          "placementStrategies"
-        ]
-      },
-      "get": {
-        "description": "Gets one placement strategy by ID.",
-        "operationId": "dfareporting.placementStrategies.get",
-        "parameters": [
-          {
-            "description": "User profile ID associated with this request.",
-            "in": "path",
-            "name": "profileId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Placement strategy ID.",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/PlacementStrategy"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/dfatrafficking"
-            ]
-          }
-        ],
-        "tags": [
-          "placementStrategies"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
     "/userprofiles/{profileId}/placements": {
       "get": {
         "description": "Retrieves a list of placements, possibly filtered.",
@@ -15257,6 +14934,69 @@
         ]
       }
     },
+    "/userprofiles/{profileId}/placements/{id}": {
+      "get": {
+        "description": "Gets one placement by ID.",
+        "operationId": "dfareporting.placements.get",
+        "parameters": [
+          {
+            "description": "User profile ID associated with this request.",
+            "in": "path",
+            "name": "profileId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Placement ID.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/Placement"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "placements"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/userprofiles/{profileId}/placements/generatetags": {
       "parameters": [
         {
@@ -15359,10 +15099,10 @@
         ]
       }
     },
-    "/userprofiles/{profileId}/placements/{id}": {
+    "/userprofiles/{profileId}/placementStrategies": {
       "get": {
-        "description": "Gets one placement by ID.",
-        "operationId": "dfareporting.placements.get",
+        "description": "Retrieves a list of placement strategies, possibly filtered.",
+        "operationId": "dfareporting.placementStrategies.list",
         "parameters": [
           {
             "description": "User profile ID associated with this request.",
@@ -15372,10 +15112,51 @@
             "type": "string"
           },
           {
-            "description": "Placement ID.",
-            "in": "path",
-            "name": "id",
-            "required": true,
+            "collectionFormat": "multi",
+            "description": "Select only placement strategies with these IDs.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "ids",
+            "type": "array"
+          },
+          {
+            "description": "Maximum number of results to return.",
+            "in": "query",
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "description": "Value of the nextPageToken from the previous result page.",
+            "in": "query",
+            "name": "pageToken",
+            "type": "string"
+          },
+          {
+            "description": "Allows searching for objects by name or ID. Wildcards (*) are allowed. For example, \"placementstrategy*2015\" will return objects with names like \"placementstrategy June 2015\", \"placementstrategy April 2015\", or simply \"placementstrategy 2015\". Most of the searches also add wildcards implicitly at the start and the end of the search string. For example, a search string of \"placementstrategy\" will match objects with name \"my placementstrategy\", \"placementstrategy 2015\", or simply \"placementstrategy\".",
+            "in": "query",
+            "name": "searchString",
+            "type": "string"
+          },
+          {
+            "description": "Field by which to sort the list.",
+            "enum": [
+              "ID",
+              "NAME"
+            ],
+            "in": "query",
+            "name": "sortField",
+            "type": "string"
+          },
+          {
+            "description": "Order of sorted results, default is ASCENDING.",
+            "enum": [
+              "ASCENDING",
+              "DESCENDING"
+            ],
+            "in": "query",
+            "name": "sortOrder",
             "type": "string"
           }
         ],
@@ -15383,7 +15164,7 @@
           "200": {
             "description": "Successful response",
             "schema": {
-              "$ref": "#/definitions/Placement"
+              "$ref": "#/definitions/PlacementStrategiesListResponse"
             }
           }
         },
@@ -15395,7 +15176,226 @@
           }
         ],
         "tags": [
-          "placements"
+          "placementStrategies"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "patch": {
+        "description": "Updates an existing placement strategy. This method supports patch semantics.",
+        "operationId": "dfareporting.placementStrategies.patch",
+        "parameters": [
+          {
+            "description": "User profile ID associated with this request.",
+            "in": "path",
+            "name": "profileId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Placement strategy ID.",
+            "in": "query",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/PlacementStrategy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/PlacementStrategy"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "placementStrategies"
+        ]
+      },
+      "post": {
+        "description": "Inserts a new placement strategy.",
+        "operationId": "dfareporting.placementStrategies.insert",
+        "parameters": [
+          {
+            "description": "User profile ID associated with this request.",
+            "in": "path",
+            "name": "profileId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/PlacementStrategy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/PlacementStrategy"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "placementStrategies"
+        ]
+      },
+      "put": {
+        "description": "Updates an existing placement strategy.",
+        "operationId": "dfareporting.placementStrategies.update",
+        "parameters": [
+          {
+            "description": "User profile ID associated with this request.",
+            "in": "path",
+            "name": "profileId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/PlacementStrategy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/PlacementStrategy"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "placementStrategies"
+        ]
+      }
+    },
+    "/userprofiles/{profileId}/placementStrategies/{id}": {
+      "delete": {
+        "description": "Deletes an existing placement strategy.",
+        "operationId": "dfareporting.placementStrategies.delete",
+        "parameters": [
+          {
+            "description": "User profile ID associated with this request.",
+            "in": "path",
+            "name": "profileId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Placement strategy ID.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response"
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "placementStrategies"
+        ]
+      },
+      "get": {
+        "description": "Gets one placement strategy by ID.",
+        "operationId": "dfareporting.placementStrategies.get",
+        "parameters": [
+          {
+            "description": "User profile ID associated with this request.",
+            "in": "path",
+            "name": "profileId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Placement strategy ID.",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/PlacementStrategy"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfatrafficking"
+            ]
+          }
+        ],
+        "tags": [
+          "placementStrategies"
         ]
       },
       "parameters": [
@@ -15717,69 +15717,6 @@
             "description": "Successful response",
             "schema": {
               "$ref": "#/definitions/Report"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/dfareporting"
-            ]
-          }
-        ],
-        "tags": [
-          "reports"
-        ]
-      }
-    },
-    "/userprofiles/{profileId}/reports/compatiblefields/query": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Returns the fields that are compatible to be selected in the respective sections of a report criteria, given the fields already selected in the input report and user permissions.",
-        "operationId": "dfareporting.reports.compatibleFields.query",
-        "parameters": [
-          {
-            "description": "The DFA user profile ID.",
-            "in": "path",
-            "name": "profileId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/Report"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/CompatibleFields"
             }
           }
         },
@@ -16206,6 +16143,69 @@
             "description": "Successful response",
             "schema": {
               "$ref": "#/definitions/File"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/dfareporting"
+            ]
+          }
+        ],
+        "tags": [
+          "reports"
+        ]
+      }
+    },
+    "/userprofiles/{profileId}/reports/compatiblefields/query": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Returns the fields that are compatible to be selected in the respective sections of a report criteria, given the fields already selected in the input report and user permissions.",
+        "operationId": "dfareporting.reports.compatibleFields.query",
+        "parameters": [
+          {
+            "description": "The DFA user profile ID.",
+            "in": "path",
+            "name": "profileId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/CompatibleFields"
             }
           }
         },

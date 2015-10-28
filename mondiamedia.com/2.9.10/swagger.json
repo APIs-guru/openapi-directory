@@ -78,19 +78,6 @@
         "date"
       ]
     },
-    "ArticleStreaming": {
-      "properties": {
-        "articleId": {
-          "type": "number"
-        },
-        "preview": {
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "articleId"
-      ]
-    },
     "Articles": {
       "properties": {
         "ids": {
@@ -103,6 +90,19 @@
       },
       "required": [
         "ids"
+      ]
+    },
+    "ArticleStreaming": {
+      "properties": {
+        "articleId": {
+          "type": "number"
+        },
+        "preview": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "articleId"
       ]
     },
     "Binary": {
@@ -158,6 +158,22 @@
         "articleId"
       ]
     },
+    "null": {
+      "properties": {
+        "content": {},
+        "key": {
+          "type": "string"
+        },
+        "pageType": {
+          "type": "string"
+        },
+        "titles": {}
+      },
+      "required": [
+        "key",
+        "pageType"
+      ]
+    },
     "PersonalPlaylistIds": {
       "properties": {
         "items": {
@@ -165,6 +181,40 @@
             "$ref": "#/definitions/Article"
           },
           "type": "array"
+        }
+      }
+    },
+    "playlist": {
+      "properties": {
+        "coverUrl": {
+          "type": "string"
+        },
+        "entities": {
+          "items": {
+            "$ref": "#/definitions/playlistEntity"
+          },
+          "type": "array"
+        },
+        "playlistDescription": {
+          "type": "string"
+        },
+        "playlistKey": {
+          "type": "string"
+        },
+        "playlistName": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "playlistKey",
+        "playlistName"
+      ]
+    },
+    "playlistEntity": {
+      "properties": {
+        "song": {},
+        "type": {
+          "type": "string"
         }
       }
     },
@@ -219,56 +269,6 @@
       "required": [
         "articleId"
       ]
-    },
-    "null": {
-      "properties": {
-        "content": {},
-        "key": {
-          "type": "string"
-        },
-        "pageType": {
-          "type": "string"
-        },
-        "titles": {}
-      },
-      "required": [
-        "key",
-        "pageType"
-      ]
-    },
-    "playlist": {
-      "properties": {
-        "coverUrl": {
-          "type": "string"
-        },
-        "entities": {
-          "items": {
-            "$ref": "#/definitions/playlistEntity"
-          },
-          "type": "array"
-        },
-        "playlistDescription": {
-          "type": "string"
-        },
-        "playlistKey": {
-          "type": "string"
-        },
-        "playlistName": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "playlistKey",
-        "playlistName"
-      ]
-    },
-    "playlistEntity": {
-      "properties": {
-        "song": {},
-        "type": {
-          "type": "string"
-        }
-      }
     }
   },
   "host": "queen.mondiamedia.com",
@@ -734,6 +734,28 @@
         ]
       }
     },
+    "/api/v3/mmplaylist/user/playlist/{playlistKey}": {
+      "post": {
+        "description": "This call post a complete playlist to the personal playlist for the current user.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "playlistKey",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "(User-Token) Add a complete playlist to the personal playlist",
+        "tags": [
+          "api"
+        ]
+      }
+    },
     "/api/v3/mmplaylist/user/playlist/article": {
       "post": {
         "description": "This call post a new article to the personal playlist for the current user.",
@@ -800,28 +822,6 @@
           }
         },
         "summary": "(User-Token) Add articles to the personal playlist",
-        "tags": [
-          "api"
-        ]
-      }
-    },
-    "/api/v3/mmplaylist/user/playlist/{playlistKey}": {
-      "post": {
-        "description": "This call post a complete playlist to the personal playlist for the current user.",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "playlistKey",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "(User-Token) Add a complete playlist to the personal playlist",
         "tags": [
           "api"
         ]
@@ -1133,6 +1133,26 @@
         ]
       }
     },
+    "/mmplaylist/user/playlist/{playlistKey}": {
+      "post": {
+        "parameters": [
+          {
+            "in": "path",
+            "name": "playlistKey",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "tags": [
+          "mmplaylist"
+        ]
+      }
+    },
     "/mmplaylist/user/playlist/article": {
       "post": {
         "parameters": [
@@ -1164,26 +1184,6 @@
             "name": "id",
             "required": true,
             "type": "number"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "tags": [
-          "mmplaylist"
-        ]
-      }
-    },
-    "/mmplaylist/user/playlist/{playlistKey}": {
-      "post": {
-        "parameters": [
-          {
-            "in": "path",
-            "name": "playlistKey",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {

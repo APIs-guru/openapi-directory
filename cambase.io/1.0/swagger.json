@@ -199,128 +199,6 @@
         ]
       }
     },
-    "/api/v1/models/search.json": {
-      "get": {
-        "parameters": [
-          {
-            "description": "Page number",
-            "in": "query",
-            "name": "page",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "description": "Model",
-            "in": "query",
-            "name": "q[model_cont]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Vendor",
-            "in": "query",
-            "name": "q[manufacturer_name_cont]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Shape",
-            "in": "query",
-            "name": "q[shape_eq]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Resolution",
-            "in": "query",
-            "name": "q[resolution_eq]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "ONVIF",
-            "in": "query",
-            "name": "q[onvif_true]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "PSIA",
-            "in": "query",
-            "name": "q[psia_true]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "PTZ",
-            "in": "query",
-            "name": "q[ptz_true]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Infrared",
-            "in": "query",
-            "name": "q[infrared_true]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Varifocal",
-            "in": "query",
-            "name": "q[varifocal_true]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "SD Card",
-            "in": "query",
-            "name": "q[sd_card_true]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "UPnP",
-            "in": "query",
-            "name": "q[upnp_true]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Audio In",
-            "in": "query",
-            "name": "q[audio_in_true]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Audio Out",
-            "in": "query",
-            "name": "q[audio_out_true]",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "406": {
-            "description": "The request you made is not acceptable"
-          },
-          "416": {
-            "description": "Requested Range Not Satisfiable"
-          }
-        },
-        "summary": "Searches all Models",
-        "tags": [
-          "models"
-        ]
-      }
-    },
     "/api/v1/models/{id}.json": {
       "get": {
         "parameters": [
@@ -662,6 +540,128 @@
         ]
       }
     },
+    "/api/v1/models/search.json": {
+      "get": {
+        "parameters": [
+          {
+            "description": "Page number",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Model",
+            "in": "query",
+            "name": "q[model_cont]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Vendor",
+            "in": "query",
+            "name": "q[manufacturer_name_cont]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Shape",
+            "in": "query",
+            "name": "q[shape_eq]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Resolution",
+            "in": "query",
+            "name": "q[resolution_eq]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "ONVIF",
+            "in": "query",
+            "name": "q[onvif_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "PSIA",
+            "in": "query",
+            "name": "q[psia_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "PTZ",
+            "in": "query",
+            "name": "q[ptz_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Infrared",
+            "in": "query",
+            "name": "q[infrared_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Varifocal",
+            "in": "query",
+            "name": "q[varifocal_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "SD Card",
+            "in": "query",
+            "name": "q[sd_card_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "UPnP",
+            "in": "query",
+            "name": "q[upnp_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Audio In",
+            "in": "query",
+            "name": "q[audio_in_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Audio Out",
+            "in": "query",
+            "name": "q[audio_out_true]",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "406": {
+            "description": "The request you made is not acceptable"
+          },
+          "416": {
+            "description": "Requested Range Not Satisfiable"
+          }
+        },
+        "summary": "Searches all Models",
+        "tags": [
+          "models"
+        ]
+      }
+    },
     "/api/v1/recorders.json": {
       "get": {
         "parameters": [
@@ -938,163 +938,6 @@
           }
         },
         "summary": "Creates a new Recorder",
-        "tags": [
-          "recorders"
-        ]
-      }
-    },
-    "/api/v1/recorders/search.json": {
-      "get": {
-        "parameters": [
-          {
-            "description": "Page number",
-            "in": "query",
-            "name": "page",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "description": "Model",
-            "in": "query",
-            "name": "q[model_cont]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Vendor",
-            "in": "query",
-            "name": "q[vendor_name_cont]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "SD Card (GB)",
-            "in": "query",
-            "name": "q[sdhc_eq]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Type",
-            "in": "query",
-            "name": "q[type_eq]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Resolution",
-            "in": "query",
-            "name": "q[resolution_eq]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Input Channels",
-            "in": "query",
-            "name": "q[input_channels_eq]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Playback Channels",
-            "in": "query",
-            "name": "q[playback_channels_eq]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "ONVIF",
-            "in": "query",
-            "name": "q[onvif_true]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "PSIA",
-            "in": "query",
-            "name": "q[psia_true]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "PTZ",
-            "in": "query",
-            "name": "q[ptz_true]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "SD Card",
-            "in": "query",
-            "name": "q[sd_card_true]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "UPnP",
-            "in": "query",
-            "name": "q[upnp_true]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Audio In",
-            "in": "query",
-            "name": "q[audio_in_true]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Audio Out",
-            "in": "query",
-            "name": "q[audio_out_true]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "HDMI Support",
-            "in": "query",
-            "name": "q[hdmi_true]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Hot Swap",
-            "in": "query",
-            "name": "q[hot_swap_true]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "3rd pparty Camera Support",
-            "in": "query",
-            "name": "q[support_3rdparty_true]",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Digital I/O",
-            "in": "query",
-            "name": "q[digital_io_true]",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "406": {
-            "description": "The request you made is not acceptable"
-          },
-          "416": {
-            "description": "Requested Range Not Satisfiable"
-          }
-        },
-        "summary": "Searches all Recorders",
         "tags": [
           "recorders"
         ]
@@ -1632,6 +1475,163 @@
           }
         },
         "summary": "Updates an existing Recorder",
+        "tags": [
+          "recorders"
+        ]
+      }
+    },
+    "/api/v1/recorders/search.json": {
+      "get": {
+        "parameters": [
+          {
+            "description": "Page number",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Model",
+            "in": "query",
+            "name": "q[model_cont]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Vendor",
+            "in": "query",
+            "name": "q[vendor_name_cont]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "SD Card (GB)",
+            "in": "query",
+            "name": "q[sdhc_eq]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Type",
+            "in": "query",
+            "name": "q[type_eq]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Resolution",
+            "in": "query",
+            "name": "q[resolution_eq]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Input Channels",
+            "in": "query",
+            "name": "q[input_channels_eq]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Playback Channels",
+            "in": "query",
+            "name": "q[playback_channels_eq]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "ONVIF",
+            "in": "query",
+            "name": "q[onvif_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "PSIA",
+            "in": "query",
+            "name": "q[psia_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "PTZ",
+            "in": "query",
+            "name": "q[ptz_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "SD Card",
+            "in": "query",
+            "name": "q[sd_card_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "UPnP",
+            "in": "query",
+            "name": "q[upnp_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Audio In",
+            "in": "query",
+            "name": "q[audio_in_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Audio Out",
+            "in": "query",
+            "name": "q[audio_out_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "HDMI Support",
+            "in": "query",
+            "name": "q[hdmi_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Hot Swap",
+            "in": "query",
+            "name": "q[hot_swap_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "3rd pparty Camera Support",
+            "in": "query",
+            "name": "q[support_3rdparty_true]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Digital I/O",
+            "in": "query",
+            "name": "q[digital_io_true]",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "406": {
+            "description": "The request you made is not acceptable"
+          },
+          "416": {
+            "description": "Requested Range Not Satisfiable"
+          }
+        },
+        "summary": "Searches all Recorders",
         "tags": [
           "recorders"
         ]

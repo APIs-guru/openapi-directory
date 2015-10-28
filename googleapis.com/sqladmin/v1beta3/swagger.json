@@ -410,16 +410,6 @@
       },
       "type": "object"
     },
-    "InstanceSetRootPasswordRequest": {
-      "description": "Database instance set root password request.",
-      "properties": {
-        "setRootPasswordContext": {
-          "$ref": "#/definitions/SetRootPasswordContext",
-          "description": "Set Root Password Context."
-        }
-      },
-      "type": "object"
-    },
     "InstancesCloneRequest": {
       "description": "Database instance clone request.",
       "properties": {
@@ -456,6 +446,16 @@
         "operation": {
           "description": "An identifier that uniquely identifies the operation. You can use this identifier to retrieve the Operations resource that has information about the operation.",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "InstanceSetRootPasswordRequest": {
+      "description": "Database instance set root password request.",
+      "properties": {
+        "setRootPasswordContext": {
+          "$ref": "#/definitions/SetRootPasswordContext",
+          "description": "Set Root Password Context."
         }
       },
       "type": "object"
@@ -939,14 +939,14 @@
           "format": "int64",
           "type": "string"
         },
-        "RAM": {
-          "description": "The maximum RAM usage of this tier in bytes.",
-          "format": "int64",
-          "type": "string"
-        },
         "kind": {
           "default": "sql#tier",
           "description": "This is always sql#tier.",
+          "type": "string"
+        },
+        "RAM": {
+          "description": "The maximum RAM usage of this tier in bytes.",
+          "format": "int64",
           "type": "string"
         },
         "region": {
@@ -1199,70 +1199,6 @@
             "description": "Successful response",
             "schema": {
               "$ref": "#/definitions/InstancesInsertResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/sqlservice.admin"
-            ]
-          }
-        ],
-        "tags": [
-          "instances"
-        ]
-      }
-    },
-    "/projects/{project}/instances/clone": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Creates a Cloud SQL instance as a clone of a source instance.",
-        "operationId": "sql.instances.clone",
-        "parameters": [
-          {
-            "description": "Project ID of the source as well as the clone Cloud SQL instance.",
-            "in": "path",
-            "name": "project",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/InstancesCloneRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/InstancesCloneResponse"
             }
           }
         },
@@ -2489,6 +2425,70 @@
           "$ref": "#/parameters/userIp"
         }
       ]
+    },
+    "/projects/{project}/instances/clone": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Creates a Cloud SQL instance as a clone of a source instance.",
+        "operationId": "sql.instances.clone",
+        "parameters": [
+          {
+            "description": "Project ID of the source as well as the clone Cloud SQL instance.",
+            "in": "path",
+            "name": "project",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/InstancesCloneRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/InstancesCloneResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/cloud-platform",
+              "https://www.googleapis.com/auth/sqlservice.admin"
+            ]
+          }
+        ],
+        "tags": [
+          "instances"
+        ]
+      }
     },
     "/projects/{project}/tiers": {
       "get": {

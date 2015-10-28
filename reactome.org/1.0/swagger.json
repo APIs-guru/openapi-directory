@@ -1921,6 +1921,73 @@
         ]
       }
     },
+    "/token/{token}/reactions/{pathway}": {
+      "get": {
+        "consumes": [
+          "text/plain"
+        ],
+        "deprecated": false,
+        "description": "For a given pathway it returns the identifiers (dbId) of the reactions in the pathway that have been hit with the sample taking into account their participating molecules.",
+        "parameters": [
+          {
+            "description": "The token associated with the data to query",
+            "in": "path",
+            "name": "token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The database identifier of the pathway of interest",
+            "format": "int64",
+            "in": "path",
+            "name": "pathway",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "default": "TOTAL",
+            "description": "the resource to sort",
+            "enum": [
+              "TOTAL",
+              "UNIPROT",
+              "ENSEMBL",
+              "CHEBI",
+              "MIRBASE",
+              "NCBI_PROTEIN",
+              "EMBL",
+              "COMPOUND"
+            ],
+            "in": "query",
+            "name": "resource",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified",
+            "schema": {
+              "items": {},
+              "type": "array",
+              "uniqueItems": true
+            }
+          },
+          "404": {
+            "description": "No result corresponding to the token was found"
+          },
+          "410": {
+            "description": "Result deleted due to a new data release"
+          }
+        },
+        "summary": "Returns the reaction ids of the provided pathway id that are present in the original result",
+        "tags": [
+          "token"
+        ]
+      }
+    },
     "/token/{token}/reactions/pathways": {
       "post": {
         "consumes": [
@@ -1984,73 +2051,6 @@
           }
         },
         "summary": "Returns the reaction ids of the pathway ids sent by post that are present in the original result",
-        "tags": [
-          "token"
-        ]
-      }
-    },
-    "/token/{token}/reactions/{pathway}": {
-      "get": {
-        "consumes": [
-          "text/plain"
-        ],
-        "deprecated": false,
-        "description": "For a given pathway it returns the identifiers (dbId) of the reactions in the pathway that have been hit with the sample taking into account their participating molecules.",
-        "parameters": [
-          {
-            "description": "The token associated with the data to query",
-            "in": "path",
-            "name": "token",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The database identifier of the pathway of interest",
-            "format": "int64",
-            "in": "path",
-            "name": "pathway",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "default": "TOTAL",
-            "description": "the resource to sort",
-            "enum": [
-              "TOTAL",
-              "UNIPROT",
-              "ENSEMBL",
-              "CHEBI",
-              "MIRBASE",
-              "NCBI_PROTEIN",
-              "EMBL",
-              "COMPOUND"
-            ],
-            "in": "query",
-            "name": "resource",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "items": {},
-              "type": "array",
-              "uniqueItems": true
-            }
-          },
-          "404": {
-            "description": "No result corresponding to the token was found"
-          },
-          "410": {
-            "description": "Result deleted due to a new data release"
-          }
-        },
-        "summary": "Returns the reaction ids of the provided pathway id that are present in the original result",
         "tags": [
           "token"
         ]

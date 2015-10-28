@@ -25,28 +25,6 @@
     "x-providerName": "figure.nz"
   },
   "paths": {
-    "/chart/list": {
-      "get": {
-        "description": "**Charts** are visualisations of data found in one or more tables.\n\nBy default, only the first 20 charts are returned. You can control which charts are returned using the GET parameters `per_page` and `start`.",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "schema": {
-              "format": "email",
-              "type": "string"
-            }
-          }
-        },
-        "security": [],
-        "summary": "Returns a list of charts",
-        "tags": [
-          "charts"
-        ]
-      }
-    },
     "/chart/{chart_token}": {
       "get": {
         "description": "Returns information about a particular chart, identified by `{chart_token}`.\n\nChart tokens may be found by using the `/chart/list` API endpoint.",
@@ -119,9 +97,9 @@
         ]
       }
     },
-    "/source/list": {
+    "/chart/list": {
       "get": {
-        "description": "**Sources** are places that have provided data to Figure.NZ. This endpoint lists them.\n\nBy default, only the first 20 sources are returned. You can control which sources are returned using the GET parameters `per_page` and `start`.",
+        "description": "**Charts** are visualisations of data found in one or more tables.\n\nBy default, only the first 20 charts are returned. You can control which charts are returned using the GET parameters `per_page` and `start`.",
         "produces": [
           "application/json"
         ],
@@ -135,9 +113,9 @@
           }
         },
         "security": [],
-        "summary": "Returns a list of sources",
+        "summary": "Returns a list of charts",
         "tags": [
-          "sources"
+          "charts"
         ]
       }
     },
@@ -232,9 +210,9 @@
         ]
       }
     },
-    "/table/list": {
+    "/source/list": {
       "get": {
-        "description": "**Tables** are a set of related data that has been provided by a Source, then standardised and stored with Figure.NZ.\n\nBy default, only the first 20 tables are returned. You can control which tables are returned using the GET parameters `per_page` and `start`.",
+        "description": "**Sources** are places that have provided data to Figure.NZ. This endpoint lists them.\n\nBy default, only the first 20 sources are returned. You can control which sources are returned using the GET parameters `per_page` and `start`.",
         "produces": [
           "application/json"
         ],
@@ -248,9 +226,9 @@
           }
         },
         "security": [],
-        "summary": "Returns a list of tables",
+        "summary": "Returns a list of sources",
         "tags": [
-          "tables"
+          "sources"
         ]
       }
     },
@@ -339,6 +317,28 @@
         },
         "security": [],
         "summary": "Downloads a table in JSON format",
+        "tags": [
+          "tables"
+        ]
+      }
+    },
+    "/table/list": {
+      "get": {
+        "description": "**Tables** are a set of related data that has been provided by a Source, then standardised and stored with Figure.NZ.\n\nBy default, only the first 20 tables are returned. You can control which tables are returned using the GET parameters `per_page` and `start`.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "format": "email",
+              "type": "string"
+            }
+          }
+        },
+        "security": [],
+        "summary": "Returns a list of tables",
         "tags": [
           "tables"
         ]

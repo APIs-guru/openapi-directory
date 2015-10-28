@@ -209,6 +209,37 @@
       },
       "type": "object"
     },
+    "Dataset": {
+      "description": "A dataset represents a projection container for data points. They do not carry any info of their own. Datasets represent a set of data points from a particular data source. A data point can be found in more than one dataset.",
+      "properties": {
+        "dataSourceId": {
+          "description": "The data stream ID of the data source that created the points in this dataset.",
+          "type": "string"
+        },
+        "maxEndTimeNs": {
+          "description": "The largest end time of all data points in this possibly partial representation of the dataset. Time is in nanoseconds from epoch. This should also match the first part of the dataset identifier.",
+          "format": "int64",
+          "type": "string"
+        },
+        "minStartTimeNs": {
+          "description": "The smallest start time of all data points in this possibly partial representation of the dataset. Time is in nanoseconds from epoch. This should also match the first part of the dataset identifier.",
+          "format": "int64",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "This token will be set when a dataset is received in response to a GET request and the dataset is too large to be included in a single response. Provide this value in a subsequent GET request to return the next page of data points within this dataset.",
+          "type": "string"
+        },
+        "point": {
+          "description": "A partial list of data points contained in the dataset, ordered by largest endTimeNanos first. This list is considered complete when retrieving a small dataset and partial when patching a dataset or retrieving a dataset that is too large to include in a single response.",
+          "items": {
+            "$ref": "#/definitions/DataPoint"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "DataSource": {
       "description": "Definition of a unique source of sensor data. Data sources can expose raw data coming from hardware sensors on local or companion devices. They can also expose derived data, created by transforming or merging other data sources. Multiple data sources can exist for the same data type. Every data point inserted into or read from this service has an associated data source.\n\nThe data source contains enough information to uniquely identify its data, including the hardware device and the application that collected and/or transformed the data. It also holds useful metadata, such as the hardware and application versions, and the device type.\n\nEach data source produces a unique stream of data, with a unique identifier. Not all changes to data source affect the stream identifier, so that data collected by updated versions of the same application/device can still be considered to belong to the same data stream.",
       "properties": {
@@ -286,37 +317,6 @@
         },
         "optional": {
           "type": "boolean"
-        }
-      },
-      "type": "object"
-    },
-    "Dataset": {
-      "description": "A dataset represents a projection container for data points. They do not carry any info of their own. Datasets represent a set of data points from a particular data source. A data point can be found in more than one dataset.",
-      "properties": {
-        "dataSourceId": {
-          "description": "The data stream ID of the data source that created the points in this dataset.",
-          "type": "string"
-        },
-        "maxEndTimeNs": {
-          "description": "The largest end time of all data points in this possibly partial representation of the dataset. Time is in nanoseconds from epoch. This should also match the first part of the dataset identifier.",
-          "format": "int64",
-          "type": "string"
-        },
-        "minStartTimeNs": {
-          "description": "The smallest start time of all data points in this possibly partial representation of the dataset. Time is in nanoseconds from epoch. This should also match the first part of the dataset identifier.",
-          "format": "int64",
-          "type": "string"
-        },
-        "nextPageToken": {
-          "description": "This token will be set when a dataset is received in response to a GET request and the dataset is too large to be included in a single response. Provide this value in a subsequent GET request to return the next page of data points within this dataset.",
-          "type": "string"
-        },
-        "point": {
-          "description": "A partial list of data points contained in the dataset, ordered by largest endTimeNanos first. This list is considered complete when retrieving a small dataset and partial when patching a dataset or retrieving a dataset that is too large to include in a single response.",
-          "items": {
-            "$ref": "#/definitions/DataPoint"
-          },
-          "type": "array"
         }
       },
       "type": "object"
@@ -564,6 +564,74 @@
     }
   },
   "paths": {
+    "/{userId}/dataset:aggregate": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Aggregates data of a certain type or stream into buckets divided by a given type of boundary. Multiple data sets of multiple types and from multiple sources can be aggreated into exactly one bucket type per request.",
+        "operationId": "fitness.users.dataset.aggregate",
+        "parameters": [
+          {
+            "description": "Aggregate data for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AggregateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AggregateResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/fitness.activity.read",
+              "https://www.googleapis.com/auth/fitness.activity.write",
+              "https://www.googleapis.com/auth/fitness.body.read",
+              "https://www.googleapis.com/auth/fitness.body.write",
+              "https://www.googleapis.com/auth/fitness.location.read",
+              "https://www.googleapis.com/auth/fitness.location.write"
+            ]
+          }
+        ],
+        "tags": [
+          "users"
+        ]
+      }
+    },
     "/{userId}/dataSources": {
       "get": {
         "description": "Lists all data sources that are visible to the developer, using the OAuth scopes provided. The list is not exhaustive: the user may have private data sources that are only visible to other developers or calls using other scopes.",
@@ -1071,74 +1139,6 @@
             "Oauth2": [
               "https://www.googleapis.com/auth/fitness.activity.write",
               "https://www.googleapis.com/auth/fitness.body.write",
-              "https://www.googleapis.com/auth/fitness.location.write"
-            ]
-          }
-        ],
-        "tags": [
-          "users"
-        ]
-      }
-    },
-    "/{userId}/dataset:aggregate": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Aggregates data of a certain type or stream into buckets divided by a given type of boundary. Multiple data sets of multiple types and from multiple sources can be aggreated into exactly one bucket type per request.",
-        "operationId": "fitness.users.dataset.aggregate",
-        "parameters": [
-          {
-            "description": "Aggregate data for the person identified. Use me to indicate the authenticated user. Only me is supported at this time.",
-            "in": "path",
-            "name": "userId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/AggregateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AggregateResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/fitness.activity.read",
-              "https://www.googleapis.com/auth/fitness.activity.write",
-              "https://www.googleapis.com/auth/fitness.body.read",
-              "https://www.googleapis.com/auth/fitness.body.write",
-              "https://www.googleapis.com/auth/fitness.location.read",
               "https://www.googleapis.com/auth/fitness.location.write"
             ]
           }

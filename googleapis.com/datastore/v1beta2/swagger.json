@@ -564,6 +564,13 @@
           "format": "byte",
           "type": "string"
         },
+        "entityResults": {
+          "description": "The results for this batch.",
+          "items": {
+            "$ref": "#/definitions/EntityResult"
+          },
+          "type": "array"
+        },
         "entityResultType": {
           "description": "The result type for every entity in entityResults. full for full entities, projection for entities with only projected properties, keyOnly for entities with only a key.",
           "enum": [
@@ -572,13 +579,6 @@
             "PROJECTION"
           ],
           "type": "string"
-        },
-        "entityResults": {
-          "description": "The results for this batch.",
-          "items": {
-            "$ref": "#/definitions/EntityResult"
-          },
-          "type": "array"
         },
         "moreResults": {
           "description": "The state of the query after the current batch. One of notFinished, moreResultsAfterLimit, noMoreResults.",

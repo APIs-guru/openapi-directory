@@ -339,12 +339,12 @@
           "description": "The project which owns the job.",
           "type": "string"
         },
-        "replaceJobId": {
-          "description": "If this job is an update of an existing job, this field will be the ID of the job it replaced. When sending a CreateJobRequest, you can update a job by specifying it here. The job named here will be stopped, and its intermediate state transferred to this job.",
-          "type": "string"
-        },
         "replacedByJobId": {
           "description": "If another job is an update of this job (and thus, this job is in JOB_STATE_UPDATED), this field will contain the ID of that job.",
+          "type": "string"
+        },
+        "replaceJobId": {
+          "description": "If this job is an update of an existing job, this field will be the ID of the job it replaced. When sending a CreateJobRequest, you can update a job by specifying it here. The job named here will be stopped, and its intermediate state transferred to this job.",
           "type": "string"
         },
         "requestedState": {
@@ -445,16 +445,16 @@
     "JobMetrics": {
       "description": "JobMetrics contains a collection of metrics descibing the detailed progress of a Dataflow job. Metrics correspond to user-defined and system-defined metrics in the job. This resource captures only the most recent values of each metric; time-series data can be queried for them (under the same metric names) from Cloud Monitoring.",
       "properties": {
-        "metricTime": {
-          "description": "Timestamp as of which metric values are current.",
-          "type": "string"
-        },
         "metrics": {
           "description": "All metrics for this job.",
           "items": {
             "$ref": "#/definitions/MetricUpdate"
           },
           "type": "array"
+        },
+        "metricTime": {
+          "description": "Timestamp as of which metric values are current.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -514,13 +514,6 @@
           "description": "The initial lease period.",
           "type": "string"
         },
-        "workItemTypes": {
-          "description": "Filter for WorkItem type.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
         "workerCapabilities": {
           "description": "Worker capabilities. WorkItems might be limited to workers with specific capabilities.",
           "items": {
@@ -531,6 +524,13 @@
         "workerId": {
           "description": "Identifies the worker leasing work -- typically the ID of the virtual machine running the worker.",
           "type": "string"
+        },
+        "workItemTypes": {
+          "description": "Filter for WorkItem type.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -695,42 +695,6 @@
       },
       "type": "object"
     },
-    "ParDoInstruction": {
-      "description": "An instruction that does a ParDo operation. Takes one main input and zero or more side inputs, and produces zero or more outputs. Runs user code.",
-      "properties": {
-        "input": {
-          "$ref": "#/definitions/InstructionInput",
-          "description": "The input."
-        },
-        "multiOutputInfos": {
-          "description": "Information about each of the outputs, if user_fn is a MultiDoFn.",
-          "items": {
-            "$ref": "#/definitions/MultiOutputInfo"
-          },
-          "type": "array"
-        },
-        "numOutputs": {
-          "description": "The number of outputs.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "sideInputs": {
-          "description": "Zero or more side inputs.",
-          "items": {
-            "$ref": "#/definitions/SideInputInfo"
-          },
-          "type": "array"
-        },
-        "userFn": {
-          "additionalProperties": {
-            "description": "Properties of the object."
-          },
-          "description": "The user function to invoke.",
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
     "ParallelInstruction": {
       "description": "Describes a particular operation comprising a MapTask.",
       "properties": {
@@ -768,6 +732,42 @@
         "write": {
           "$ref": "#/definitions/WriteInstruction",
           "description": "Additional information for Write instructions."
+        }
+      },
+      "type": "object"
+    },
+    "ParDoInstruction": {
+      "description": "An instruction that does a ParDo operation. Takes one main input and zero or more side inputs, and produces zero or more outputs. Runs user code.",
+      "properties": {
+        "input": {
+          "$ref": "#/definitions/InstructionInput",
+          "description": "The input."
+        },
+        "multiOutputInfos": {
+          "description": "Information about each of the outputs, if user_fn is a MultiDoFn.",
+          "items": {
+            "$ref": "#/definitions/MultiOutputInfo"
+          },
+          "type": "array"
+        },
+        "numOutputs": {
+          "description": "The number of outputs.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "sideInputs": {
+          "description": "Zero or more side inputs.",
+          "items": {
+            "$ref": "#/definitions/SideInputInfo"
+          },
+          "type": "array"
+        },
+        "userFn": {
+          "additionalProperties": {
+            "description": "Properties of the object."
+          },
+          "description": "The user function to invoke.",
+          "type": "object"
         }
       },
       "type": "object"
@@ -875,16 +875,16 @@
           "description": "The current timestamp at the worker.",
           "type": "string"
         },
+        "workerId": {
+          "description": "The ID of the worker reporting the WorkItem status. If this does not match the ID of the worker which the Dataflow service believes currently has the lease on the WorkItem, the report will be dropped (with an error response).",
+          "type": "string"
+        },
         "workItemStatuses": {
           "description": "The order is unimportant, except that the order of the WorkItemServiceState messages in the ReportWorkItemStatusResponse corresponds to the order of WorkItemStatus messages here.",
           "items": {
             "$ref": "#/definitions/WorkItemStatus"
           },
           "type": "array"
-        },
-        "workerId": {
-          "description": "The ID of the worker reporting the WorkItem status. If this does not match the ID of the worker which the Dataflow service believes currently has the lease on the WorkItem, the report will be dropped (with an error response).",
-          "type": "string"
         }
       },
       "type": "object"
@@ -1280,28 +1280,6 @@
       },
       "type": "object"
     },
-    "StreamLocation": {
-      "description": "Describes a stream of data, either as input to be processed or as output of a streaming Dataflow job.",
-      "properties": {
-        "customSourceLocation": {
-          "$ref": "#/definitions/CustomSourceLocation",
-          "description": "The stream is a custom source."
-        },
-        "pubsubLocation": {
-          "$ref": "#/definitions/PubsubLocation",
-          "description": "The stream is a pubsub stream."
-        },
-        "sideInputLocation": {
-          "$ref": "#/definitions/StreamingSideInputLocation",
-          "description": "The stream is a streaming side input."
-        },
-        "streamingStageLocation": {
-          "$ref": "#/definitions/StreamingStageLocation",
-          "description": "The stream is part of another computation within the current streaming Dataflow job."
-        }
-      },
-      "type": "object"
-    },
     "StreamingComputationRanges": {
       "description": "Describes full or partial data disk assignment information of the computation ranges.",
       "properties": {
@@ -1388,6 +1366,28 @@
         "streamId": {
           "description": "Identifies the particular stream within the streaming Dataflow job.",
           "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "StreamLocation": {
+      "description": "Describes a stream of data, either as input to be processed or as output of a streaming Dataflow job.",
+      "properties": {
+        "customSourceLocation": {
+          "$ref": "#/definitions/CustomSourceLocation",
+          "description": "The stream is a custom source."
+        },
+        "pubsubLocation": {
+          "$ref": "#/definitions/PubsubLocation",
+          "description": "The stream is a pubsub stream."
+        },
+        "sideInputLocation": {
+          "$ref": "#/definitions/StreamingSideInputLocation",
+          "description": "The stream is a streaming side input."
+        },
+        "streamingStageLocation": {
+          "$ref": "#/definitions/StreamingStageLocation",
+          "description": "The stream is part of another computation within the current streaming Dataflow job."
         }
       },
       "type": "object"
@@ -1500,6 +1500,136 @@
           },
           "description": "Maps user stage names to stable computation names.",
           "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "WorkerPool": {
+      "description": "Describes one particular pool of Dataflow workers to be instantiated by the Dataflow service in order to perform the computations required by a job. Note that a workflow job may use multiple pools, in order to match the various computational requirements of the various stages of the job.",
+      "properties": {
+        "autoscalingSettings": {
+          "$ref": "#/definitions/AutoscalingSettings",
+          "description": "Settings for autoscaling of this WorkerPool."
+        },
+        "dataDisks": {
+          "description": "Data disks that are used by a VM in this workflow.",
+          "items": {
+            "$ref": "#/definitions/Disk"
+          },
+          "type": "array"
+        },
+        "defaultPackageSet": {
+          "description": "The default package set to install. This allows the service to select a default set of packages which are useful to worker harnesses written in a particular language.",
+          "enum": [
+            "DEFAULT_PACKAGE_SET_UNKNOWN",
+            "DEFAULT_PACKAGE_SET_NONE",
+            "DEFAULT_PACKAGE_SET_JAVA",
+            "DEFAULT_PACKAGE_SET_PYTHON"
+          ],
+          "type": "string"
+        },
+        "diskSizeGb": {
+          "description": "Size of root disk for VMs, in GB. If zero or unspecified, the service will attempt to choose a reasonable default.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "diskSourceImage": {
+          "description": "Fully qualified source image for disks.",
+          "type": "string"
+        },
+        "diskType": {
+          "description": "Type of root disk for VMs. If empty or unspecified, the service will attempt to choose a reasonable default.",
+          "type": "string"
+        },
+        "kind": {
+          "description": "The kind of the worker pool; currently only 'harness' and 'shuffle' are supported.",
+          "type": "string"
+        },
+        "machineType": {
+          "description": "Machine type (e.g. \"n1-standard-1\"). If empty or unspecified, the service will attempt to choose a reasonable default.",
+          "type": "string"
+        },
+        "metadata": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Metadata to set on the Google Compute Engine VMs.",
+          "type": "object"
+        },
+        "network": {
+          "description": "Network to which VMs will be assigned. If empty or unspecified, the service will use the network \"default\".",
+          "type": "string"
+        },
+        "numWorkers": {
+          "description": "Number of Google Compute Engine workers in this pool needed to execute the job. If zero or unspecified, the service will attempt to choose a reasonable default.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "onHostMaintenance": {
+          "description": "The action to take on host maintenance, as defined by the Google Compute Engine API.",
+          "type": "string"
+        },
+        "packages": {
+          "description": "Packages to be installed on workers.",
+          "items": {
+            "$ref": "#/definitions/Package"
+          },
+          "type": "array"
+        },
+        "poolArgs": {
+          "additionalProperties": {
+            "description": "Properties of the object. Contains field @ype with type URL."
+          },
+          "description": "Extra arguments for this worker pool.",
+          "type": "object"
+        },
+        "taskrunnerSettings": {
+          "$ref": "#/definitions/TaskRunnerSettings",
+          "description": "Settings passed through to Google Compute Engine workers when using the standard Dataflow task runner. Users should ignore this field."
+        },
+        "teardownPolicy": {
+          "description": "Sets the policy for determining when to turndown worker pool. Allowed values are: TEARDOWN_ALWAYS, TEARDOWN_ON_SUCCESS, and TEARDOWN_NEVER. TEARDOWN_ALWAYS means workers are always torn down regardless of whether the job succeeds. TEARDOWN_ON_SUCCESS means workers are torn down if the job succeeds. TEARDOWN_NEVER means the workers are never torn down. If the workers are not torn down by the service, they will continue to run and use Google Compute Engine VM resources in the user's project until they are explicitly terminated by the user. Because of this, Google recommends using the TEARDOWN_ALWAYS policy except for small, manually supervised test jobs. If unknown or unspecified, the service will attempt to choose a reasonable default.",
+          "enum": [
+            "TEARDOWN_POLICY_UNKNOWN",
+            "TEARDOWN_ALWAYS",
+            "TEARDOWN_ON_SUCCESS",
+            "TEARDOWN_NEVER"
+          ],
+          "type": "string"
+        },
+        "zone": {
+          "description": "Zone to run the worker pools in (e.g. \"us-central1-b\"). If empty or unspecified, the service will attempt to choose a reasonable default.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "WorkerSettings": {
+      "description": "Provides data to pass through to the worker harness.",
+      "properties": {
+        "baseUrl": {
+          "description": "The base URL for accessing Google Cloud APIs. When workers access Google Cloud APIs, they logically do so via relative URLs. If this field is specified, it supplies the base URL to use for resolving these relative URLs. The normative algorithm used is defined by RFC 1808, \"Relative Uniform Resource Locators\". If not specified, the default value is \"http://www.googleapis.com/\"",
+          "type": "string"
+        },
+        "reportingEnabled": {
+          "description": "Send work progress updates to service.",
+          "type": "boolean"
+        },
+        "servicePath": {
+          "description": "The Dataflow service path relative to the root URL, for example, \"dataflow/v1b3/projects\".",
+          "type": "string"
+        },
+        "shuffleServicePath": {
+          "description": "The Shuffle service path relative to the root URL, for example, \"shuffle/v1beta1\".",
+          "type": "string"
+        },
+        "tempStoragePrefix": {
+          "description": "The prefix of the resources the system should use for temporary storage. The supported resource type is: Google Cloud Storage: storage.googleapis.com/{bucket}/{object} bucket.storage.googleapis.com/{object}",
+          "type": "string"
+        },
+        "workerId": {
+          "description": "ID of the worker running this pipeline.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -1662,136 +1792,6 @@
       },
       "type": "object"
     },
-    "WorkerPool": {
-      "description": "Describes one particular pool of Dataflow workers to be instantiated by the Dataflow service in order to perform the computations required by a job. Note that a workflow job may use multiple pools, in order to match the various computational requirements of the various stages of the job.",
-      "properties": {
-        "autoscalingSettings": {
-          "$ref": "#/definitions/AutoscalingSettings",
-          "description": "Settings for autoscaling of this WorkerPool."
-        },
-        "dataDisks": {
-          "description": "Data disks that are used by a VM in this workflow.",
-          "items": {
-            "$ref": "#/definitions/Disk"
-          },
-          "type": "array"
-        },
-        "defaultPackageSet": {
-          "description": "The default package set to install. This allows the service to select a default set of packages which are useful to worker harnesses written in a particular language.",
-          "enum": [
-            "DEFAULT_PACKAGE_SET_UNKNOWN",
-            "DEFAULT_PACKAGE_SET_NONE",
-            "DEFAULT_PACKAGE_SET_JAVA",
-            "DEFAULT_PACKAGE_SET_PYTHON"
-          ],
-          "type": "string"
-        },
-        "diskSizeGb": {
-          "description": "Size of root disk for VMs, in GB. If zero or unspecified, the service will attempt to choose a reasonable default.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "diskSourceImage": {
-          "description": "Fully qualified source image for disks.",
-          "type": "string"
-        },
-        "diskType": {
-          "description": "Type of root disk for VMs. If empty or unspecified, the service will attempt to choose a reasonable default.",
-          "type": "string"
-        },
-        "kind": {
-          "description": "The kind of the worker pool; currently only 'harness' and 'shuffle' are supported.",
-          "type": "string"
-        },
-        "machineType": {
-          "description": "Machine type (e.g. \"n1-standard-1\"). If empty or unspecified, the service will attempt to choose a reasonable default.",
-          "type": "string"
-        },
-        "metadata": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Metadata to set on the Google Compute Engine VMs.",
-          "type": "object"
-        },
-        "network": {
-          "description": "Network to which VMs will be assigned. If empty or unspecified, the service will use the network \"default\".",
-          "type": "string"
-        },
-        "numWorkers": {
-          "description": "Number of Google Compute Engine workers in this pool needed to execute the job. If zero or unspecified, the service will attempt to choose a reasonable default.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "onHostMaintenance": {
-          "description": "The action to take on host maintenance, as defined by the Google Compute Engine API.",
-          "type": "string"
-        },
-        "packages": {
-          "description": "Packages to be installed on workers.",
-          "items": {
-            "$ref": "#/definitions/Package"
-          },
-          "type": "array"
-        },
-        "poolArgs": {
-          "additionalProperties": {
-            "description": "Properties of the object. Contains field @ype with type URL."
-          },
-          "description": "Extra arguments for this worker pool.",
-          "type": "object"
-        },
-        "taskrunnerSettings": {
-          "$ref": "#/definitions/TaskRunnerSettings",
-          "description": "Settings passed through to Google Compute Engine workers when using the standard Dataflow task runner. Users should ignore this field."
-        },
-        "teardownPolicy": {
-          "description": "Sets the policy for determining when to turndown worker pool. Allowed values are: TEARDOWN_ALWAYS, TEARDOWN_ON_SUCCESS, and TEARDOWN_NEVER. TEARDOWN_ALWAYS means workers are always torn down regardless of whether the job succeeds. TEARDOWN_ON_SUCCESS means workers are torn down if the job succeeds. TEARDOWN_NEVER means the workers are never torn down. If the workers are not torn down by the service, they will continue to run and use Google Compute Engine VM resources in the user's project until they are explicitly terminated by the user. Because of this, Google recommends using the TEARDOWN_ALWAYS policy except for small, manually supervised test jobs. If unknown or unspecified, the service will attempt to choose a reasonable default.",
-          "enum": [
-            "TEARDOWN_POLICY_UNKNOWN",
-            "TEARDOWN_ALWAYS",
-            "TEARDOWN_ON_SUCCESS",
-            "TEARDOWN_NEVER"
-          ],
-          "type": "string"
-        },
-        "zone": {
-          "description": "Zone to run the worker pools in (e.g. \"us-central1-b\"). If empty or unspecified, the service will attempt to choose a reasonable default.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "WorkerSettings": {
-      "description": "Provides data to pass through to the worker harness.",
-      "properties": {
-        "baseUrl": {
-          "description": "The base URL for accessing Google Cloud APIs. When workers access Google Cloud APIs, they logically do so via relative URLs. If this field is specified, it supplies the base URL to use for resolving these relative URLs. The normative algorithm used is defined by RFC 1808, \"Relative Uniform Resource Locators\". If not specified, the default value is \"http://www.googleapis.com/\"",
-          "type": "string"
-        },
-        "reportingEnabled": {
-          "description": "Send work progress updates to service.",
-          "type": "boolean"
-        },
-        "servicePath": {
-          "description": "The Dataflow service path relative to the root URL, for example, \"dataflow/v1b3/projects\".",
-          "type": "string"
-        },
-        "shuffleServicePath": {
-          "description": "The Shuffle service path relative to the root URL, for example, \"shuffle/v1beta1\".",
-          "type": "string"
-        },
-        "tempStoragePrefix": {
-          "description": "The prefix of the resources the system should use for temporary storage. The supported resource type is: Google Cloud Storage: storage.googleapis.com/{bucket}/{object} bucket.storage.googleapis.com/{object}",
-          "type": "string"
-        },
-        "workerId": {
-          "description": "ID of the worker running this pipeline.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "WriteInstruction": {
       "description": "An instruction that writes records. Takes one input, produces no outputs.",
       "properties": {
@@ -1904,16 +1904,16 @@
       "name": "quotaUser",
       "type": "string"
     },
-    "uploadType": {
-      "description": "Legacy upload protocol for media (e.g. \"media\", \"multipart\").",
-      "in": "query",
-      "name": "uploadType",
-      "type": "string"
-    },
     "upload_protocol": {
       "description": "Upload protocol for media (e.g. \"raw\", \"multipart\").",
       "in": "query",
       "name": "upload_protocol",
+      "type": "string"
+    },
+    "uploadType": {
+      "description": "Legacy upload protocol for media (e.g. \"media\", \"multipart\").",
+      "in": "query",
+      "name": "uploadType",
       "type": "string"
     }
   },

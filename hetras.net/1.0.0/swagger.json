@@ -1,29 +1,6 @@
 {
   "basePath": "/",
   "definitions": {
-    "KeyValuePair[String,link_object]": {
-      "properties": {
-        "Key": {
-          "type": "string"
-        },
-        "Value": {
-          "$ref": "#/definitions/link_object"
-        }
-      },
-      "type": "object"
-    },
-    "SimpleAttribute": {
-      "description": "Represents a simple attribute",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "accepted_guarantee_types": {
       "properties": {
         "accepted": {
@@ -548,6 +525,17 @@
         "path",
         "value"
       ],
+      "type": "object"
+    },
+    "KeyValuePair[String,link_object]": {
+      "properties": {
+        "Key": {
+          "type": "string"
+        },
+        "Value": {
+          "$ref": "#/definitions/link_object"
+        }
+      },
       "type": "object"
     },
     "link_object": {
@@ -1307,6 +1295,18 @@
         "rate": {
           "format": "double",
           "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "SimpleAttribute": {
+      "description": "Represents a simple attribute",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
         }
       },
       "type": "object"

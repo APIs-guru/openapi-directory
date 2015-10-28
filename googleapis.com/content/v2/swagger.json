@@ -80,6 +80,104 @@
       },
       "type": "object"
     },
+    "AccountsAuthInfoResponse": {
+      "properties": {
+        "accountIdentifiers": {
+          "description": "The account identifiers corresponding to the authenticated user.\n- For an individual account: only the merchant ID is defined\n- For an aggregator: only the aggregator ID is defined\n- For a subaccount of an MCA: both the merchant ID and the aggregator ID are defined.",
+          "items": {
+            "$ref": "#/definitions/AccountIdentifier"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "content#accountsAuthInfoResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#accountsAuthInfoResponse\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AccountsCustomBatchRequest": {
+      "properties": {
+        "entries": {
+          "description": "The request entries to be processed in the batch.",
+          "items": {
+            "$ref": "#/definitions/AccountsCustomBatchRequestEntry"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "AccountsCustomBatchRequestEntry": {
+      "description": "A batch entry encoding a single non-batch accounts request.",
+      "properties": {
+        "account": {
+          "$ref": "#/definitions/Account",
+          "description": "The account to create or update. Only defined if the method is insert or update."
+        },
+        "accountId": {
+          "description": "The ID of the account to get or delete. Only defined if the method is get or delete.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "batchId": {
+          "description": "An entry ID, unique within the batch request.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "merchantId": {
+          "description": "The ID of the managing account.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AccountsCustomBatchResponse": {
+      "properties": {
+        "entries": {
+          "description": "The result of the execution of the batch requests.",
+          "items": {
+            "$ref": "#/definitions/AccountsCustomBatchResponseEntry"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "content#accountsCustomBatchResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#accountsCustomBatchResponse\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AccountsCustomBatchResponseEntry": {
+      "description": "A batch entry encoding a single non-batch accounts response.",
+      "properties": {
+        "account": {
+          "$ref": "#/definitions/Account",
+          "description": "The retrieved, created, or updated account. Not defined if the method was delete."
+        },
+        "batchId": {
+          "description": "The ID of the request entry this entry responds to.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "errors": {
+          "$ref": "#/definitions/Errors",
+          "description": "A list of errors defined if and only if the request failed."
+        },
+        "kind": {
+          "default": "content#accountsCustomBatchResponseEntry",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#accountsCustomBatchResponseEntry\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "AccountShipping": {
       "description": "The shipping settings of a merchant account.",
       "properties": {
@@ -188,6 +286,107 @@
         "weightMax": {
           "$ref": "#/definitions/Weight",
           "description": "Maximum shipping weight. Forms an interval between the maximum of smaller weight (exclusive) and this weight (inclusive)."
+        }
+      },
+      "type": "object"
+    },
+    "AccountshippingCustomBatchRequest": {
+      "properties": {
+        "entries": {
+          "description": "The request entries to be processed in the batch.",
+          "items": {
+            "$ref": "#/definitions/AccountshippingCustomBatchRequestEntry"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "AccountshippingCustomBatchRequestEntry": {
+      "description": "A batch entry encoding a single non-batch accountshipping request.",
+      "properties": {
+        "accountId": {
+          "description": "The ID of the account for which to get/update account shipping settings.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "accountShipping": {
+          "$ref": "#/definitions/AccountShipping",
+          "description": "The account shipping settings to update. Only defined if the method is update."
+        },
+        "batchId": {
+          "description": "An entry ID, unique within the batch request.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "merchantId": {
+          "description": "The ID of the managing account.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AccountshippingCustomBatchResponse": {
+      "properties": {
+        "entries": {
+          "description": "The result of the execution of the batch requests.",
+          "items": {
+            "$ref": "#/definitions/AccountshippingCustomBatchResponseEntry"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "content#accountshippingCustomBatchResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#accountshippingCustomBatchResponse\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AccountshippingCustomBatchResponseEntry": {
+      "description": "A batch entry encoding a single non-batch accountshipping response.",
+      "properties": {
+        "accountShipping": {
+          "$ref": "#/definitions/AccountShipping",
+          "description": "The retrieved or updated account shipping settings."
+        },
+        "batchId": {
+          "description": "The ID of the request entry this entry responds to.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "errors": {
+          "$ref": "#/definitions/Errors",
+          "description": "A list of errors defined if and only if the request failed."
+        },
+        "kind": {
+          "default": "content#accountshippingCustomBatchResponseEntry",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#accountshippingCustomBatchResponseEntry\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AccountshippingListResponse": {
+      "properties": {
+        "kind": {
+          "default": "content#accountshippingListResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#accountshippingListResponse\".",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "The token for the retrieval of the next page of account shipping settings.",
+          "type": "string"
+        },
+        "resources": {
+          "items": {
+            "$ref": "#/definitions/AccountShipping"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -349,6 +548,26 @@
       },
       "type": "object"
     },
+    "AccountsListResponse": {
+      "properties": {
+        "kind": {
+          "default": "content#accountsListResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#accountsListResponse\".",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "The token for the retrieval of the next page of accounts.",
+          "type": "string"
+        },
+        "resources": {
+          "items": {
+            "$ref": "#/definitions/Account"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "AccountStatus": {
       "description": "The status of an account, i.e., information about its products, which is computed offline and not returned immediately at insertion time.",
       "properties": {
@@ -408,314 +627,6 @@
         "submittedValue": {
           "description": "Submitted value that causes the issue.",
           "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AccountStatusExampleItem": {
-      "description": "An example of an item that has poor data quality. An item value on the landing page differs from what is submitted, or conflicts with a policy.",
-      "properties": {
-        "itemId": {
-          "description": "Unique item ID as specified in the uploaded product data.",
-          "type": "string"
-        },
-        "link": {
-          "description": "Landing page of the item.",
-          "type": "string"
-        },
-        "submittedValue": {
-          "description": "The item value that was submitted.",
-          "type": "string"
-        },
-        "title": {
-          "description": "Title of the item.",
-          "type": "string"
-        },
-        "valueOnLandingPage": {
-          "description": "The actual value on the landing page.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AccountTax": {
-      "description": "The tax settings of a merchant account.",
-      "properties": {
-        "accountId": {
-          "description": "The ID of the account to which these account tax settings belong.",
-          "format": "uint64",
-          "type": "string"
-        },
-        "kind": {
-          "default": "content#accountTax",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#accountTax\".",
-          "type": "string"
-        },
-        "rules": {
-          "description": "Tax rules. Updating the tax rules will enable US taxes (not reversible). Defining no rules is equivalent to not charging tax at all.",
-          "items": {
-            "$ref": "#/definitions/AccountTaxTaxRule"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "AccountTaxTaxRule": {
-      "description": "Tax calculation rule to apply in a state or province (USA only).",
-      "properties": {
-        "country": {
-          "description": "Country code in which tax is applicable.",
-          "type": "string"
-        },
-        "locationId": {
-          "description": "State (or province) is which the tax is applicable, described by its location id (also called criteria id).",
-          "format": "uint64",
-          "type": "string"
-        },
-        "ratePercent": {
-          "description": "Explicit tax rate in percent, represented as a floating point number without the percentage character. Must not be negative.",
-          "type": "string"
-        },
-        "shippingTaxed": {
-          "description": "If true, shipping charges are also taxed.",
-          "type": "boolean"
-        },
-        "useGlobalRate": {
-          "description": "Whether the tax rate is taken from a global tax table or specified explicitly.",
-          "type": "boolean"
-        }
-      },
-      "type": "object"
-    },
-    "AccountUser": {
-      "properties": {
-        "admin": {
-          "description": "Whether user is an admin.",
-          "type": "boolean"
-        },
-        "emailAddress": {
-          "description": "User's email address.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AccountsAuthInfoResponse": {
-      "properties": {
-        "accountIdentifiers": {
-          "description": "The account identifiers corresponding to the authenticated user.\n- For an individual account: only the merchant ID is defined\n- For an aggregator: only the aggregator ID is defined\n- For a subaccount of an MCA: both the merchant ID and the aggregator ID are defined.",
-          "items": {
-            "$ref": "#/definitions/AccountIdentifier"
-          },
-          "type": "array"
-        },
-        "kind": {
-          "default": "content#accountsAuthInfoResponse",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#accountsAuthInfoResponse\".",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AccountsCustomBatchRequest": {
-      "properties": {
-        "entries": {
-          "description": "The request entries to be processed in the batch.",
-          "items": {
-            "$ref": "#/definitions/AccountsCustomBatchRequestEntry"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "AccountsCustomBatchRequestEntry": {
-      "description": "A batch entry encoding a single non-batch accounts request.",
-      "properties": {
-        "account": {
-          "$ref": "#/definitions/Account",
-          "description": "The account to create or update. Only defined if the method is insert or update."
-        },
-        "accountId": {
-          "description": "The ID of the account to get or delete. Only defined if the method is get or delete.",
-          "format": "uint64",
-          "type": "string"
-        },
-        "batchId": {
-          "description": "An entry ID, unique within the batch request.",
-          "format": "uint32",
-          "type": "integer"
-        },
-        "merchantId": {
-          "description": "The ID of the managing account.",
-          "format": "uint64",
-          "type": "string"
-        },
-        "method": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AccountsCustomBatchResponse": {
-      "properties": {
-        "entries": {
-          "description": "The result of the execution of the batch requests.",
-          "items": {
-            "$ref": "#/definitions/AccountsCustomBatchResponseEntry"
-          },
-          "type": "array"
-        },
-        "kind": {
-          "default": "content#accountsCustomBatchResponse",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#accountsCustomBatchResponse\".",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AccountsCustomBatchResponseEntry": {
-      "description": "A batch entry encoding a single non-batch accounts response.",
-      "properties": {
-        "account": {
-          "$ref": "#/definitions/Account",
-          "description": "The retrieved, created, or updated account. Not defined if the method was delete."
-        },
-        "batchId": {
-          "description": "The ID of the request entry this entry responds to.",
-          "format": "uint32",
-          "type": "integer"
-        },
-        "errors": {
-          "$ref": "#/definitions/Errors",
-          "description": "A list of errors defined if and only if the request failed."
-        },
-        "kind": {
-          "default": "content#accountsCustomBatchResponseEntry",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#accountsCustomBatchResponseEntry\".",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AccountsListResponse": {
-      "properties": {
-        "kind": {
-          "default": "content#accountsListResponse",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#accountsListResponse\".",
-          "type": "string"
-        },
-        "nextPageToken": {
-          "description": "The token for the retrieval of the next page of accounts.",
-          "type": "string"
-        },
-        "resources": {
-          "items": {
-            "$ref": "#/definitions/Account"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "AccountshippingCustomBatchRequest": {
-      "properties": {
-        "entries": {
-          "description": "The request entries to be processed in the batch.",
-          "items": {
-            "$ref": "#/definitions/AccountshippingCustomBatchRequestEntry"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "AccountshippingCustomBatchRequestEntry": {
-      "description": "A batch entry encoding a single non-batch accountshipping request.",
-      "properties": {
-        "accountId": {
-          "description": "The ID of the account for which to get/update account shipping settings.",
-          "format": "uint64",
-          "type": "string"
-        },
-        "accountShipping": {
-          "$ref": "#/definitions/AccountShipping",
-          "description": "The account shipping settings to update. Only defined if the method is update."
-        },
-        "batchId": {
-          "description": "An entry ID, unique within the batch request.",
-          "format": "uint32",
-          "type": "integer"
-        },
-        "merchantId": {
-          "description": "The ID of the managing account.",
-          "format": "uint64",
-          "type": "string"
-        },
-        "method": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AccountshippingCustomBatchResponse": {
-      "properties": {
-        "entries": {
-          "description": "The result of the execution of the batch requests.",
-          "items": {
-            "$ref": "#/definitions/AccountshippingCustomBatchResponseEntry"
-          },
-          "type": "array"
-        },
-        "kind": {
-          "default": "content#accountshippingCustomBatchResponse",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#accountshippingCustomBatchResponse\".",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AccountshippingCustomBatchResponseEntry": {
-      "description": "A batch entry encoding a single non-batch accountshipping response.",
-      "properties": {
-        "accountShipping": {
-          "$ref": "#/definitions/AccountShipping",
-          "description": "The retrieved or updated account shipping settings."
-        },
-        "batchId": {
-          "description": "The ID of the request entry this entry responds to.",
-          "format": "uint32",
-          "type": "integer"
-        },
-        "errors": {
-          "$ref": "#/definitions/Errors",
-          "description": "A list of errors defined if and only if the request failed."
-        },
-        "kind": {
-          "default": "content#accountshippingCustomBatchResponseEntry",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#accountshippingCustomBatchResponseEntry\".",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AccountshippingListResponse": {
-      "properties": {
-        "kind": {
-          "default": "content#accountshippingListResponse",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#accountshippingListResponse\".",
-          "type": "string"
-        },
-        "nextPageToken": {
-          "description": "The token for the retrieval of the next page of account shipping settings.",
-          "type": "string"
-        },
-        "resources": {
-          "items": {
-            "$ref": "#/definitions/AccountShipping"
-          },
-          "type": "array"
         }
       },
       "type": "object"
@@ -807,6 +718,55 @@
         "resources": {
           "items": {
             "$ref": "#/definitions/AccountStatus"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "AccountStatusExampleItem": {
+      "description": "An example of an item that has poor data quality. An item value on the landing page differs from what is submitted, or conflicts with a policy.",
+      "properties": {
+        "itemId": {
+          "description": "Unique item ID as specified in the uploaded product data.",
+          "type": "string"
+        },
+        "link": {
+          "description": "Landing page of the item.",
+          "type": "string"
+        },
+        "submittedValue": {
+          "description": "The item value that was submitted.",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title of the item.",
+          "type": "string"
+        },
+        "valueOnLandingPage": {
+          "description": "The actual value on the landing page.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "AccountTax": {
+      "description": "The tax settings of a merchant account.",
+      "properties": {
+        "accountId": {
+          "description": "The ID of the account to which these account tax settings belong.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "kind": {
+          "default": "content#accountTax",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#accountTax\".",
+          "type": "string"
+        },
+        "rules": {
+          "description": "Tax rules. Updating the tax rules will enable US taxes (not reversible). Defining no rules is equivalent to not charging tax at all.",
+          "items": {
+            "$ref": "#/definitions/AccountTaxTaxRule"
           },
           "type": "array"
         }
@@ -910,6 +870,46 @@
             "$ref": "#/definitions/AccountTax"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "AccountTaxTaxRule": {
+      "description": "Tax calculation rule to apply in a state or province (USA only).",
+      "properties": {
+        "country": {
+          "description": "Country code in which tax is applicable.",
+          "type": "string"
+        },
+        "locationId": {
+          "description": "State (or province) is which the tax is applicable, described by its location id (also called criteria id).",
+          "format": "uint64",
+          "type": "string"
+        },
+        "ratePercent": {
+          "description": "Explicit tax rate in percent, represented as a floating point number without the percentage character. Must not be negative.",
+          "type": "string"
+        },
+        "shippingTaxed": {
+          "description": "If true, shipping charges are also taxed.",
+          "type": "boolean"
+        },
+        "useGlobalRate": {
+          "description": "Whether the tax rate is taken from a global tax table or specified explicitly.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "AccountUser": {
+      "properties": {
+        "admin": {
+          "description": "Whether user is an admin.",
+          "type": "boolean"
+        },
+        "emailAddress": {
+          "description": "User's email address.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -1022,99 +1022,6 @@
       },
       "type": "object"
     },
-    "DatafeedStatus": {
-      "description": "The status of a datafeed, i.e., the result of the last retrieval of the datafeed computed asynchronously when the feed processing is finished.",
-      "properties": {
-        "datafeedId": {
-          "description": "The ID of the feed for which the status is reported.",
-          "format": "uint64",
-          "type": "string"
-        },
-        "errors": {
-          "description": "The list of errors occurring in the feed.",
-          "items": {
-            "$ref": "#/definitions/DatafeedStatusError"
-          },
-          "type": "array"
-        },
-        "itemsTotal": {
-          "description": "The number of items in the feed that were processed.",
-          "format": "uint64",
-          "type": "string"
-        },
-        "itemsValid": {
-          "description": "The number of items in the feed that were valid.",
-          "format": "uint64",
-          "type": "string"
-        },
-        "kind": {
-          "default": "content#datafeedStatus",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#datafeedStatus\".",
-          "type": "string"
-        },
-        "lastUploadDate": {
-          "description": "The last date at which the feed was uploaded.",
-          "type": "string"
-        },
-        "processingStatus": {
-          "description": "The processing status of the feed.",
-          "type": "string"
-        },
-        "warnings": {
-          "description": "The list of errors occurring in the feed.",
-          "items": {
-            "$ref": "#/definitions/DatafeedStatusError"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "DatafeedStatusError": {
-      "description": "An error occurring in the feed, like \"invalid price\".",
-      "properties": {
-        "code": {
-          "description": "The code of the error, e.g., \"validation/invalid_value\".",
-          "type": "string"
-        },
-        "count": {
-          "description": "The number of occurrences of the error in the feed.",
-          "format": "uint64",
-          "type": "string"
-        },
-        "examples": {
-          "description": "A list of example occurrences of the error, grouped by product.",
-          "items": {
-            "$ref": "#/definitions/DatafeedStatusExample"
-          },
-          "type": "array"
-        },
-        "message": {
-          "description": "The error message, e.g., \"Invalid price\".",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "DatafeedStatusExample": {
-      "description": "An example occurrence for a particular error.",
-      "properties": {
-        "itemId": {
-          "description": "The ID of the example item.",
-          "type": "string"
-        },
-        "lineNumber": {
-          "description": "Line number in the data feed where the example is found.",
-          "format": "uint64",
-          "type": "string"
-        },
-        "value": {
-          "description": "The problematic value.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
     "DatafeedsCustomBatchRequest": {
       "properties": {
         "entries": {
@@ -1211,6 +1118,80 @@
       },
       "type": "object"
     },
+    "DatafeedStatus": {
+      "description": "The status of a datafeed, i.e., the result of the last retrieval of the datafeed computed asynchronously when the feed processing is finished.",
+      "properties": {
+        "datafeedId": {
+          "description": "The ID of the feed for which the status is reported.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "errors": {
+          "description": "The list of errors occurring in the feed.",
+          "items": {
+            "$ref": "#/definitions/DatafeedStatusError"
+          },
+          "type": "array"
+        },
+        "itemsTotal": {
+          "description": "The number of items in the feed that were processed.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "itemsValid": {
+          "description": "The number of items in the feed that were valid.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "kind": {
+          "default": "content#datafeedStatus",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#datafeedStatus\".",
+          "type": "string"
+        },
+        "lastUploadDate": {
+          "description": "The last date at which the feed was uploaded.",
+          "type": "string"
+        },
+        "processingStatus": {
+          "description": "The processing status of the feed.",
+          "type": "string"
+        },
+        "warnings": {
+          "description": "The list of errors occurring in the feed.",
+          "items": {
+            "$ref": "#/definitions/DatafeedStatusError"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "DatafeedStatusError": {
+      "description": "An error occurring in the feed, like \"invalid price\".",
+      "properties": {
+        "code": {
+          "description": "The code of the error, e.g., \"validation/invalid_value\".",
+          "type": "string"
+        },
+        "count": {
+          "description": "The number of occurrences of the error in the feed.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "examples": {
+          "description": "A list of example occurrences of the error, grouped by product.",
+          "items": {
+            "$ref": "#/definitions/DatafeedStatusExample"
+          },
+          "type": "array"
+        },
+        "message": {
+          "description": "The error message, e.g., \"Invalid price\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "DatafeedstatusesCustomBatchRequest": {
       "properties": {
         "entries": {
@@ -1299,6 +1280,25 @@
             "$ref": "#/definitions/DatafeedStatus"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "DatafeedStatusExample": {
+      "description": "An example occurrence for a particular error.",
+      "properties": {
+        "itemId": {
+          "description": "The ID of the example item.",
+          "type": "string"
+        },
+        "lineNumber": {
+          "description": "Line number in the data feed where the example is found.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "value": {
+          "description": "The problematic value.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -1996,56 +1996,6 @@
       },
       "type": "object"
     },
-    "OrderShipment": {
-      "properties": {
-        "carrier": {
-          "description": "The carrier handling the shipment.",
-          "type": "string"
-        },
-        "creationDate": {
-          "description": "Date on which the shipment has been created, in ISO 8601 format.",
-          "type": "string"
-        },
-        "deliveryDate": {
-          "description": "Date on which the shipment has been delivered, in ISO 8601 format. Present only if status is delievered",
-          "type": "string"
-        },
-        "id": {
-          "description": "The id of the shipment.",
-          "type": "string"
-        },
-        "lineItems": {
-          "description": "The line items that are shipped.",
-          "items": {
-            "$ref": "#/definitions/OrderShipmentLineItemShipment"
-          },
-          "type": "array"
-        },
-        "status": {
-          "description": "The status of the shipment.",
-          "type": "string"
-        },
-        "trackingId": {
-          "description": "The tracking id for the shipment.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "OrderShipmentLineItemShipment": {
-      "properties": {
-        "lineItemId": {
-          "description": "The id of the line item that is shipped.",
-          "type": "string"
-        },
-        "quantity": {
-          "description": "The quantity that is shipped.",
-          "format": "uint32",
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
     "OrdersAcknowledgeRequest": {
       "properties": {
         "operationId": {
@@ -2431,6 +2381,56 @@
         "template": {
           "$ref": "#/definitions/TestOrder",
           "description": "The requested test order template."
+        }
+      },
+      "type": "object"
+    },
+    "OrderShipment": {
+      "properties": {
+        "carrier": {
+          "description": "The carrier handling the shipment.",
+          "type": "string"
+        },
+        "creationDate": {
+          "description": "Date on which the shipment has been created, in ISO 8601 format.",
+          "type": "string"
+        },
+        "deliveryDate": {
+          "description": "Date on which the shipment has been delivered, in ISO 8601 format. Present only if status is delievered",
+          "type": "string"
+        },
+        "id": {
+          "description": "The id of the shipment.",
+          "type": "string"
+        },
+        "lineItems": {
+          "description": "The line items that are shipped.",
+          "items": {
+            "$ref": "#/definitions/OrderShipmentLineItemShipment"
+          },
+          "type": "array"
+        },
+        "status": {
+          "description": "The status of the shipment.",
+          "type": "string"
+        },
+        "trackingId": {
+          "description": "The tracking id for the shipment.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "OrderShipmentLineItemShipment": {
+      "properties": {
+        "lineItemId": {
+          "description": "The id of the line item that is shipped.",
+          "type": "string"
+        },
+        "quantity": {
+          "description": "The quantity that is shipped.",
+          "format": "uint32",
+          "type": "integer"
         }
       },
       "type": "object"
@@ -2922,6 +2922,13 @@
           "$ref": "#/definitions/ProductShippingDimension",
           "description": "Width of the item for shipping."
         },
+        "sizes": {
+          "description": "Size of the item.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "sizeSystem": {
           "description": "System in which the size is specified. Recommended for apparel items.",
           "type": "string"
@@ -2929,13 +2936,6 @@
         "sizeType": {
           "description": "The cut of the item. Recommended for apparel items.",
           "type": "string"
-        },
-        "sizes": {
-          "description": "Size of the item.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
         },
         "targetCountry": {
           "description": "The CLDR territory code for the item.",
@@ -3058,6 +3058,86 @@
       },
       "type": "object"
     },
+    "ProductsCustomBatchRequest": {
+      "properties": {
+        "entries": {
+          "description": "The request entries to be processed in the batch.",
+          "items": {
+            "$ref": "#/definitions/ProductsCustomBatchRequestEntry"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ProductsCustomBatchRequestEntry": {
+      "description": "A batch entry encoding a single non-batch products request.",
+      "properties": {
+        "batchId": {
+          "description": "An entry ID, unique within the batch request.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "merchantId": {
+          "description": "The ID of the managing account.",
+          "format": "uint64",
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        },
+        "product": {
+          "$ref": "#/definitions/Product",
+          "description": "The product to insert. Only required if the method is insert."
+        },
+        "productId": {
+          "description": "The ID of the product to get or delete. Only defined if the method is get or delete.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ProductsCustomBatchResponse": {
+      "properties": {
+        "entries": {
+          "description": "The result of the execution of the batch requests.",
+          "items": {
+            "$ref": "#/definitions/ProductsCustomBatchResponseEntry"
+          },
+          "type": "array"
+        },
+        "kind": {
+          "default": "content#productsCustomBatchResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#productsCustomBatchResponse\".",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ProductsCustomBatchResponseEntry": {
+      "description": "A batch entry encoding a single non-batch products response.",
+      "properties": {
+        "batchId": {
+          "description": "The ID of the request entry this entry responds to.",
+          "format": "uint32",
+          "type": "integer"
+        },
+        "errors": {
+          "$ref": "#/definitions/Errors",
+          "description": "A list of errors defined if and only if the request failed."
+        },
+        "kind": {
+          "default": "content#productsCustomBatchResponseEntry",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#productsCustomBatchResponseEntry\".",
+          "type": "string"
+        },
+        "product": {
+          "$ref": "#/definitions/Product",
+          "description": "The inserted product. Only defined if the method is insert and if the request was successful."
+        }
+      },
+      "type": "object"
+    },
     "ProductShipping": {
       "properties": {
         "country": {
@@ -3116,6 +3196,26 @@
           "description": "The weight of the product used to calculate the shipping cost of the item.",
           "format": "double",
           "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "ProductsListResponse": {
+      "properties": {
+        "kind": {
+          "default": "content#productsListResponse",
+          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#productsListResponse\".",
+          "type": "string"
+        },
+        "nextPageToken": {
+          "description": "The token for the retrieval of the next page of products.",
+          "type": "string"
+        },
+        "resources": {
+          "items": {
+            "$ref": "#/definitions/Product"
+          },
+          "type": "array"
         }
       },
       "type": "object"
@@ -3223,165 +3323,6 @@
       },
       "type": "object"
     },
-    "ProductTax": {
-      "properties": {
-        "country": {
-          "description": "The country within which the item is taxed, specified as a CLDR territory code.",
-          "type": "string"
-        },
-        "locationId": {
-          "description": "The numeric id of a location that the tax rate applies to as defined in the AdWords API.",
-          "format": "int64",
-          "type": "string"
-        },
-        "postalCode": {
-          "description": "The postal code range that the tax rate applies to, represented by a ZIP code, a ZIP code prefix using * wildcard, a range between two ZIP codes or two ZIP code prefixes of equal length. Examples: 94114, 94*, 94002-95460, 94*-95*.",
-          "type": "string"
-        },
-        "rate": {
-          "description": "The percentage of tax rate that applies to the item price.",
-          "format": "double",
-          "type": "number"
-        },
-        "region": {
-          "description": "The geographic region to which the tax rate applies.",
-          "type": "string"
-        },
-        "taxShip": {
-          "description": "Set to true if tax is charged on shipping.",
-          "type": "boolean"
-        }
-      },
-      "type": "object"
-    },
-    "ProductUnitPricingBaseMeasure": {
-      "properties": {
-        "unit": {
-          "description": "The unit of the denominator.",
-          "type": "string"
-        },
-        "value": {
-          "description": "The denominator of the unit price.",
-          "format": "int64",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ProductUnitPricingMeasure": {
-      "properties": {
-        "unit": {
-          "description": "The unit of the measure.",
-          "type": "string"
-        },
-        "value": {
-          "description": "The measure of an item.",
-          "format": "double",
-          "type": "number"
-        }
-      },
-      "type": "object"
-    },
-    "ProductsCustomBatchRequest": {
-      "properties": {
-        "entries": {
-          "description": "The request entries to be processed in the batch.",
-          "items": {
-            "$ref": "#/definitions/ProductsCustomBatchRequestEntry"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "ProductsCustomBatchRequestEntry": {
-      "description": "A batch entry encoding a single non-batch products request.",
-      "properties": {
-        "batchId": {
-          "description": "An entry ID, unique within the batch request.",
-          "format": "uint32",
-          "type": "integer"
-        },
-        "merchantId": {
-          "description": "The ID of the managing account.",
-          "format": "uint64",
-          "type": "string"
-        },
-        "method": {
-          "type": "string"
-        },
-        "product": {
-          "$ref": "#/definitions/Product",
-          "description": "The product to insert. Only required if the method is insert."
-        },
-        "productId": {
-          "description": "The ID of the product to get or delete. Only defined if the method is get or delete.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ProductsCustomBatchResponse": {
-      "properties": {
-        "entries": {
-          "description": "The result of the execution of the batch requests.",
-          "items": {
-            "$ref": "#/definitions/ProductsCustomBatchResponseEntry"
-          },
-          "type": "array"
-        },
-        "kind": {
-          "default": "content#productsCustomBatchResponse",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#productsCustomBatchResponse\".",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ProductsCustomBatchResponseEntry": {
-      "description": "A batch entry encoding a single non-batch products response.",
-      "properties": {
-        "batchId": {
-          "description": "The ID of the request entry this entry responds to.",
-          "format": "uint32",
-          "type": "integer"
-        },
-        "errors": {
-          "$ref": "#/definitions/Errors",
-          "description": "A list of errors defined if and only if the request failed."
-        },
-        "kind": {
-          "default": "content#productsCustomBatchResponseEntry",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#productsCustomBatchResponseEntry\".",
-          "type": "string"
-        },
-        "product": {
-          "$ref": "#/definitions/Product",
-          "description": "The inserted product. Only defined if the method is insert and if the request was successful."
-        }
-      },
-      "type": "object"
-    },
-    "ProductsListResponse": {
-      "properties": {
-        "kind": {
-          "default": "content#productsListResponse",
-          "description": "Identifies what kind of resource this is. Value: the fixed string \"content#productsListResponse\".",
-          "type": "string"
-        },
-        "nextPageToken": {
-          "description": "The token for the retrieval of the next page of products.",
-          "type": "string"
-        },
-        "resources": {
-          "items": {
-            "$ref": "#/definitions/Product"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
     "ProductstatusesCustomBatchRequest": {
       "properties": {
         "entries": {
@@ -3474,6 +3415,65 @@
             "$ref": "#/definitions/ProductStatus"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ProductTax": {
+      "properties": {
+        "country": {
+          "description": "The country within which the item is taxed, specified as a CLDR territory code.",
+          "type": "string"
+        },
+        "locationId": {
+          "description": "The numeric id of a location that the tax rate applies to as defined in the AdWords API.",
+          "format": "int64",
+          "type": "string"
+        },
+        "postalCode": {
+          "description": "The postal code range that the tax rate applies to, represented by a ZIP code, a ZIP code prefix using * wildcard, a range between two ZIP codes or two ZIP code prefixes of equal length. Examples: 94114, 94*, 94002-95460, 94*-95*.",
+          "type": "string"
+        },
+        "rate": {
+          "description": "The percentage of tax rate that applies to the item price.",
+          "format": "double",
+          "type": "number"
+        },
+        "region": {
+          "description": "The geographic region to which the tax rate applies.",
+          "type": "string"
+        },
+        "taxShip": {
+          "description": "Set to true if tax is charged on shipping.",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "ProductUnitPricingBaseMeasure": {
+      "properties": {
+        "unit": {
+          "description": "The unit of the denominator.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The denominator of the unit price.",
+          "format": "int64",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ProductUnitPricingMeasure": {
+      "properties": {
+        "unit": {
+          "description": "The unit of the measure.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The measure of an item.",
+          "format": "double",
+          "type": "number"
         }
       },
       "type": "object"
@@ -3740,646 +3740,6 @@
     }
   },
   "paths": {
-    "/accounts/authinfo": {
-      "get": {
-        "description": "Returns information about the authenticated user.",
-        "operationId": "content.accounts.authinfo",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AccountsAuthInfoResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/content"
-            ]
-          }
-        ],
-        "tags": [
-          "accounts"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/accounts/batch": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Retrieves, inserts, updates, and deletes multiple Merchant Center (sub-)accounts in a single request.",
-        "operationId": "content.accounts.custombatch",
-        "parameters": [
-          {
-            "description": "Flag to run the request in dry-run mode.",
-            "in": "query",
-            "name": "dryRun",
-            "type": "boolean"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/AccountsCustomBatchRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AccountsCustomBatchResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/content"
-            ]
-          }
-        ],
-        "tags": [
-          "accounts"
-        ]
-      }
-    },
-    "/accountshipping/batch": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Retrieves and updates the shipping settings of multiple accounts in a single request.",
-        "operationId": "content.accountshipping.custombatch",
-        "parameters": [
-          {
-            "description": "Flag to run the request in dry-run mode.",
-            "in": "query",
-            "name": "dryRun",
-            "type": "boolean"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/AccountshippingCustomBatchRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AccountshippingCustomBatchResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/content"
-            ]
-          }
-        ],
-        "tags": [
-          "accountshipping"
-        ]
-      }
-    },
-    "/accountstatuses/batch": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "operationId": "content.accountstatuses.custombatch",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/AccountstatusesCustomBatchRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AccountstatusesCustomBatchResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/content"
-            ]
-          }
-        ],
-        "tags": [
-          "accountstatuses"
-        ]
-      }
-    },
-    "/accounttax/batch": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Retrieves and updates tax settings of multiple accounts in a single request.",
-        "operationId": "content.accounttax.custombatch",
-        "parameters": [
-          {
-            "description": "Flag to run the request in dry-run mode.",
-            "in": "query",
-            "name": "dryRun",
-            "type": "boolean"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/AccounttaxCustomBatchRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AccounttaxCustomBatchResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/content"
-            ]
-          }
-        ],
-        "tags": [
-          "accounttax"
-        ]
-      }
-    },
-    "/datafeeds/batch": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "operationId": "content.datafeeds.custombatch",
-        "parameters": [
-          {
-            "description": "Flag to run the request in dry-run mode.",
-            "in": "query",
-            "name": "dryRun",
-            "type": "boolean"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/DatafeedsCustomBatchRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/DatafeedsCustomBatchResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/content"
-            ]
-          }
-        ],
-        "tags": [
-          "datafeeds"
-        ]
-      }
-    },
-    "/datafeedstatuses/batch": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "operationId": "content.datafeedstatuses.custombatch",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/DatafeedstatusesCustomBatchRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/DatafeedstatusesCustomBatchResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/content"
-            ]
-          }
-        ],
-        "tags": [
-          "datafeedstatuses"
-        ]
-      }
-    },
-    "/inventory/batch": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Updates price and availability for multiple products or stores in a single request. This operation does not update the expiration date of the products.",
-        "operationId": "content.inventory.custombatch",
-        "parameters": [
-          {
-            "description": "Flag to run the request in dry-run mode.",
-            "in": "query",
-            "name": "dryRun",
-            "type": "boolean"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/InventoryCustomBatchRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/InventoryCustomBatchResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/content"
-            ]
-          }
-        ],
-        "tags": [
-          "inventory"
-        ]
-      }
-    },
-    "/orders/batch": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Retrieves or modifies multiple orders in a single request.",
-        "operationId": "content.orders.custombatch",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/OrdersCustomBatchRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/OrdersCustomBatchResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/content"
-            ]
-          }
-        ],
-        "tags": [
-          "orders"
-        ]
-      }
-    },
-    "/products/batch": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Retrieves, inserts, and deletes multiple products in a single request.",
-        "operationId": "content.products.custombatch",
-        "parameters": [
-          {
-            "description": "Flag to run the request in dry-run mode.",
-            "in": "query",
-            "name": "dryRun",
-            "type": "boolean"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/ProductsCustomBatchRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/ProductsCustomBatchResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/content"
-            ]
-          }
-        ],
-        "tags": [
-          "products"
-        ]
-      }
-    },
-    "/productstatuses/batch": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Gets the statuses of multiple products in a single request.",
-        "operationId": "content.productstatuses.custombatch",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/ProductstatusesCustomBatchRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/ProductstatusesCustomBatchResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/content"
-            ]
-          }
-        ],
-        "tags": [
-          "productstatuses"
-        ]
-      }
-    },
     "/{merchantId}/accounts": {
       "get": {
         "description": "Lists the sub-accounts in your Merchant Center account.",
@@ -7160,6 +6520,646 @@
           "$ref": "#/parameters/userIp"
         }
       ]
+    },
+    "/accounts/authinfo": {
+      "get": {
+        "description": "Returns information about the authenticated user.",
+        "operationId": "content.accounts.authinfo",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AccountsAuthInfoResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
+    "/accounts/batch": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Retrieves, inserts, updates, and deletes multiple Merchant Center (sub-)accounts in a single request.",
+        "operationId": "content.accounts.custombatch",
+        "parameters": [
+          {
+            "description": "Flag to run the request in dry-run mode.",
+            "in": "query",
+            "name": "dryRun",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AccountsCustomBatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AccountsCustomBatchResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "accounts"
+        ]
+      }
+    },
+    "/accountshipping/batch": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Retrieves and updates the shipping settings of multiple accounts in a single request.",
+        "operationId": "content.accountshipping.custombatch",
+        "parameters": [
+          {
+            "description": "Flag to run the request in dry-run mode.",
+            "in": "query",
+            "name": "dryRun",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AccountshippingCustomBatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AccountshippingCustomBatchResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "accountshipping"
+        ]
+      }
+    },
+    "/accountstatuses/batch": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "operationId": "content.accountstatuses.custombatch",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AccountstatusesCustomBatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AccountstatusesCustomBatchResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "accountstatuses"
+        ]
+      }
+    },
+    "/accounttax/batch": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Retrieves and updates tax settings of multiple accounts in a single request.",
+        "operationId": "content.accounttax.custombatch",
+        "parameters": [
+          {
+            "description": "Flag to run the request in dry-run mode.",
+            "in": "query",
+            "name": "dryRun",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AccounttaxCustomBatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/AccounttaxCustomBatchResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "accounttax"
+        ]
+      }
+    },
+    "/datafeeds/batch": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "operationId": "content.datafeeds.custombatch",
+        "parameters": [
+          {
+            "description": "Flag to run the request in dry-run mode.",
+            "in": "query",
+            "name": "dryRun",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DatafeedsCustomBatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/DatafeedsCustomBatchResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "datafeeds"
+        ]
+      }
+    },
+    "/datafeedstatuses/batch": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "operationId": "content.datafeedstatuses.custombatch",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DatafeedstatusesCustomBatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/DatafeedstatusesCustomBatchResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "datafeedstatuses"
+        ]
+      }
+    },
+    "/inventory/batch": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Updates price and availability for multiple products or stores in a single request. This operation does not update the expiration date of the products.",
+        "operationId": "content.inventory.custombatch",
+        "parameters": [
+          {
+            "description": "Flag to run the request in dry-run mode.",
+            "in": "query",
+            "name": "dryRun",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/InventoryCustomBatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/InventoryCustomBatchResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "inventory"
+        ]
+      }
+    },
+    "/orders/batch": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Retrieves or modifies multiple orders in a single request.",
+        "operationId": "content.orders.custombatch",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/OrdersCustomBatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/OrdersCustomBatchResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "orders"
+        ]
+      }
+    },
+    "/products/batch": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Retrieves, inserts, and deletes multiple products in a single request.",
+        "operationId": "content.products.custombatch",
+        "parameters": [
+          {
+            "description": "Flag to run the request in dry-run mode.",
+            "in": "query",
+            "name": "dryRun",
+            "type": "boolean"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ProductsCustomBatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ProductsCustomBatchResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "products"
+        ]
+      }
+    },
+    "/productstatuses/batch": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Gets the statuses of multiple products in a single request.",
+        "operationId": "content.productstatuses.custombatch",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ProductstatusesCustomBatchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ProductstatusesCustomBatchResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "Oauth2": [
+              "https://www.googleapis.com/auth/content"
+            ]
+          }
+        ],
+        "tags": [
+          "productstatuses"
+        ]
+      }
     }
   },
   "schemes": [
