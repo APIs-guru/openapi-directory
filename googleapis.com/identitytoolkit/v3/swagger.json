@@ -28,6 +28,10 @@
         "registered": {
           "description": "Whether the user is registered if the identifier is an email.",
           "type": "boolean"
+        },
+        "sessionId": {
+          "description": "Session ID which should be passed in the following verifyAssertion request.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -212,6 +216,31 @@
       },
       "type": "object"
     },
+    "IdentitytoolkitRelyingpartyGetProjectConfigResponse": {
+      "description": "Response of getting the project configuration.",
+      "properties": {
+        "allowPasswordUser": {
+          "description": "Whether to allow password user sign in or sign up.",
+          "type": "boolean"
+        },
+        "apiKey": {
+          "description": "Browser API key, needed when making http request to Apiary.",
+          "type": "string"
+        },
+        "idpConfig": {
+          "description": "OAuth2 provider configuration.",
+          "items": {
+            "$ref": "#/definitions/IdpConfig"
+          },
+          "type": "array"
+        },
+        "projectId": {
+          "description": "Project ID of the relying party.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "IdentitytoolkitRelyingpartyGetPublicKeysResponse": {
       "additionalProperties": {
         "type": "string"
@@ -303,6 +332,37 @@
       },
       "type": "object"
     },
+    "IdentitytoolkitRelyingpartySetProjectConfigRequest": {
+      "description": "Request to set the project configuration.",
+      "properties": {
+        "allowPasswordUser": {
+          "description": "Whether to allow password user sign in or sign up.",
+          "type": "boolean"
+        },
+        "apiKey": {
+          "description": "Browser API key, needed when making http request to Apiary.",
+          "type": "string"
+        },
+        "idpConfig": {
+          "description": "Oauth2 provider configuration.",
+          "items": {
+            "$ref": "#/definitions/IdpConfig"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "IdentitytoolkitRelyingpartySetProjectConfigResponse": {
+      "description": "Response of setting the project configuration.",
+      "properties": {
+        "projectId": {
+          "description": "Project ID of the relying party.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "IdentitytoolkitRelyingpartyUploadAccountRequest": {
       "description": "Request to upload user account in batch.",
       "properties": {
@@ -358,6 +418,10 @@
         "returnRefreshToken": {
           "description": "Whether to return refresh tokens.",
           "type": "boolean"
+        },
+        "sessionId": {
+          "description": "Session ID, which should match the one in previous createAuthUri request.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -383,6 +447,33 @@
         },
         "pendingIdToken": {
           "description": "The GITKit token for the non-trusted IDP, which is to be confirmed by the user.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "IdpConfig": {
+      "description": "Template for a single idp configuration.",
+      "properties": {
+        "clientId": {
+          "description": "OAuth2 client ID.",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Whether this IDP is enabled.",
+          "type": "boolean"
+        },
+        "experimentPercent": {
+          "description": "Percent of users who will be prompted/redirected federated login for this IDP.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "provider": {
+          "description": "OAuth2 provider.",
+          "type": "string"
+        },
+        "secret": {
+          "description": "OAuth2 client secret.",
           "type": "string"
         }
       },
@@ -1105,6 +1196,46 @@
         ]
       }
     },
+    "/getProjectConfig": {
+      "get": {
+        "description": "Get project configuration.",
+        "operationId": "identitytoolkit.relyingparty.getProjectConfig",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/IdentitytoolkitRelyingpartyGetProjectConfigResponse"
+            }
+          }
+        },
+        "tags": [
+          "relyingparty"
+        ]
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ]
+    },
     "/getRecaptchaParam": {
       "get": {
         "description": "Get recaptcha secure param.",
@@ -1275,6 +1406,55 @@
             "description": "Successful response",
             "schema": {
               "$ref": "#/definitions/SetAccountInfoResponse"
+            }
+          }
+        },
+        "tags": [
+          "relyingparty"
+        ]
+      }
+    },
+    "/setProjectConfig": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/alt"
+        },
+        {
+          "$ref": "#/parameters/fields"
+        },
+        {
+          "$ref": "#/parameters/key"
+        },
+        {
+          "$ref": "#/parameters/oauth_token"
+        },
+        {
+          "$ref": "#/parameters/prettyPrint"
+        },
+        {
+          "$ref": "#/parameters/quotaUser"
+        },
+        {
+          "$ref": "#/parameters/userIp"
+        }
+      ],
+      "post": {
+        "description": "Set project configuration.",
+        "operationId": "identitytoolkit.relyingparty.setProjectConfig",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/IdentitytoolkitRelyingpartySetProjectConfigRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/IdentitytoolkitRelyingpartySetProjectConfigResponse"
             }
           }
         },

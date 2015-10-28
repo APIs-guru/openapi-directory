@@ -18891,6 +18891,179 @@
         ]
       }
     },
+    "/repository/search/type/type_census_acs": {
+      "get": {
+        "description": "API to search for entries of type US Census ACS Data",
+        "operationId": "search_type_census_acs",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Fields to get",
+            "in": "query",
+            "name": "search.type_census_acs.get_value",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "For",
+            "in": "query",
+            "name": "search.type_census_acs.for_type",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "In",
+            "in": "query",
+            "name": "search.type_census_acs.in_type",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'US Census ACS Data' entry type",
+        "tags": [
+          "type_census_acs"
+        ]
+      }
+    },
     "/repository/search/type/type_db_table": {
       "get": {
         "description": "API to search for entries of type Database Table",
@@ -30098,10 +30271,10 @@
         ]
       }
     },
-    "/repository/search/type/type_usda_arms": {
+    "/repository/search/type/type_usda_arms_crop": {
       "get": {
-        "description": "API to search for entries of type USDA ARMS Data",
-        "operationId": "search_type_usda_arms",
+        "description": "API to search for entries of type USDA ARMS Crop Data",
+        "operationId": "search_type_usda_arms_crop",
         "parameters": [
           {
             "description": "Search text",
@@ -30235,21 +30408,21 @@
           {
             "description": "Report",
             "in": "query",
-            "name": "search.type_usda_arms.report",
+            "name": "search.type_usda_arms_crop.report",
             "required": false,
             "type": "string"
           },
           {
             "description": "Subject",
             "in": "query",
-            "name": "search.type_usda_arms.subject",
+            "name": "search.type_usda_arms_crop.subject",
             "required": false,
             "type": "string"
           },
           {
             "description": "State",
             "in": "query",
-            "name": "search.type_usda_arms.state",
+            "name": "search.type_usda_arms_crop.state",
             "required": false,
             "type": "string"
           }
@@ -30265,9 +30438,182 @@
             "description": "No response was specified"
           }
         },
-        "summary": "Search API for 'USDA ARMS Data' entry type",
+        "summary": "Search API for 'USDA ARMS Crop Data' entry type",
         "tags": [
-          "type_usda_arms"
+          "type_usda_arms_crop"
+        ]
+      }
+    },
+    "/repository/search/type/type_usda_arms_finance": {
+      "get": {
+        "description": "API to search for entries of type USDA ARMS Finance Data",
+        "operationId": "search_type_usda_arms_finance",
+        "parameters": [
+          {
+            "description": "Search text",
+            "in": "query",
+            "name": "text",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Search description",
+            "in": "query",
+            "name": "description",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "From date",
+            "format": "date-time",
+            "in": "query",
+            "name": "fromdate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "To date",
+            "format": "date-time",
+            "in": "query",
+            "name": "todate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive create date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "createdate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date from",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Archive change date to",
+            "format": "date-time",
+            "in": "query",
+            "name": "changedate.to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Parent entry",
+            "in": "query",
+            "name": "group",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "File suffix",
+            "in": "query",
+            "name": "filesuffix",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Northern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Western bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Southern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "minlatitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Eastern bounds of search",
+            "format": "float",
+            "in": "query",
+            "name": "maxlongitude",
+            "required": false,
+            "type": "number"
+          },
+          {
+            "description": "Max number of results",
+            "in": "query",
+            "name": "max",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Number to skip",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Report",
+            "in": "query",
+            "name": "search.type_usda_arms_finance.report",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Subject",
+            "in": "query",
+            "name": "search.type_usda_arms_finance.subject",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "State",
+            "in": "query",
+            "name": "search.type_usda_arms_finance.state",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/xml",
+          "text/plain",
+          "text/html"
+        ],
+        "responses": {
+          "200": {
+            "description": "No response was specified"
+          }
+        },
+        "summary": "Search API for 'USDA ARMS Finance Data' entry type",
+        "tags": [
+          "type_usda_arms_finance"
         ]
       }
     },
@@ -31668,6 +32014,10 @@
       "name": "bio_taxonomy"
     },
     {
+      "description": "Search API for 'US Census ACS Data' entry type",
+      "name": "type_census_acs"
+    },
+    {
       "description": "Search API for 'Before and After Images' entry type",
       "name": "beforeafter"
     },
@@ -32248,6 +32598,18 @@
       "name": "slack_team"
     },
     {
+      "description": "Search API for 'USDA ARMS Crop Data' entry type",
+      "name": "type_usda_arms_crop"
+    },
+    {
+      "description": "Search API for 'USDA ARMS Finance Data' entry type",
+      "name": "type_usda_arms_finance"
+    },
+    {
+      "description": "Search API for 'USDA NASS Data' entry type",
+      "name": "type_usda_nass"
+    },
+    {
       "description": "Search API for 'CODATA Fundamental Physical Constants' entry type",
       "name": "type_nist_constant"
     },
@@ -32282,14 +32644,6 @@
     {
       "description": "Search API for 'SOCRATA Series' entry type",
       "name": "type_socrata_series"
-    },
-    {
-      "description": "Search API for 'USDA ARMS Data' entry type",
-      "name": "type_usda_arms"
-    },
-    {
-      "description": "Search API for 'USDA NASS Data' entry type",
-      "name": "type_usda_nass"
     },
     {
       "description": "Search API for 'Exercise' entry type",
