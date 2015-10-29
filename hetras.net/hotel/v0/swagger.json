@@ -1,0 +1,1156 @@
+{
+  "basePath": "/",
+  "definitions": {
+    "EmbeddedReservation": {
+      "description": "Represents basic information about a reservation",
+      "properties": {
+        "_links": {
+          "additionalProperties": {
+            "$ref": "#/definitions/LinkObject"
+          },
+          "description": "Collection of links to the full representation of the reservation and other related resources",
+          "type": "object"
+        },
+        "arrival_date": {
+          "description": "Reservation arrival date",
+          "format": "date-time",
+          "type": "string"
+        },
+        "confirmation_id": {
+          "description": "Confirmation Identifier for the reservation",
+          "type": "string"
+        },
+        "departure_date": {
+          "description": "Reservation departure date",
+          "format": "date-time",
+          "type": "string"
+        },
+        "reservation_number": {
+          "description": "Number of the reservation",
+          "format": "int32",
+          "type": "integer"
+        },
+        "reservation_status": {
+          "description": "Current reservation status",
+          "enum": [
+            "Tentative",
+            "Waitlisted",
+            "OnRequest",
+            "NonGuaranteed",
+            "Guaranteed",
+            "InHouse",
+            "CheckedOut",
+            "NoShow",
+            "Denied",
+            "Cancelled",
+            "Released",
+            "Walked",
+            "Expired",
+            "WalkIn",
+            "Registered"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "confirmation_id",
+        "reservation_number",
+        "reservation_status",
+        "arrival_date",
+        "departure_date"
+      ],
+      "type": "object"
+    },
+    "EmbeddedRoomType": {
+      "description": "Represents a short version of room type. To get the full version\r\n            please follow the self link from the links collection.",
+      "properties": {
+        "_links": {
+          "additionalProperties": {
+            "$ref": "#/definitions/LinkObject"
+          },
+          "description": "Collection of links to related resources.",
+          "type": "object"
+        },
+        "code": {
+          "description": "Code of the room type.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the room type.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the room type.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EmbeddedRoomWithStatus": {
+      "properties": {
+        "_links": {
+          "additionalProperties": {
+            "$ref": "#/definitions/LinkObject"
+          },
+          "description": "Collection of links to related resources.",
+          "type": "object"
+        },
+        "description": {
+          "description": "Description of the room.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the room.",
+          "type": "string"
+        },
+        "number": {
+          "description": "Number of the room.",
+          "type": "string"
+        },
+        "room_type": {
+          "$ref": "#/definitions/EmbeddedRoomType",
+          "description": "Room type of the room.\r\n            \r\n            Contains only the basic properties of the room type."
+        },
+        "status": {
+          "$ref": "#/definitions/RoomStatus",
+          "description": "Contains information about room status."
+        }
+      },
+      "type": "object"
+    },
+    "Hotel": {
+      "properties": {
+        "city": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "desc": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "fax": {
+          "type": "string"
+        },
+        "hotel_id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "latitude": {
+          "format": "double",
+          "type": "number"
+        },
+        "longitude": {
+          "format": "double",
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "postal_code": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "street": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "LinkObject": {
+      "description": "A Link Object represents a hyperlink from the containing resource to a URI.",
+      "properties": {
+        "deprecation": {
+          "description": "<para>The \"deprecation\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its presence indicates that the link is to be deprecated (i.e.\r\n            removed) at a future date.  Its value is a URL that SHOULD provide\r\n            further information about the deprecation.\r\n            A client SHOULD provide some notification (for example, by logging a\r\n            warning message) whenever it traverses over a link that has this\r\n            property.  The notification SHOULD include the deprecation property's\r\n            value so that a client maintainer can easily find information about\r\n            the deprecation.</para>",
+          "type": "string"
+        },
+        "href": {
+          "description": "<para>The \"href\" property is REQUIRED.</para>\r\n<para> </para>\r\n<para>Its value is either a URI [RFC3986] or a URI Template [RFC6570].\r\n            If the value is a URI Template then the Link Object SHOULD have a\r\n            \"templated\" attribute whose value is true.</para>",
+          "type": "string"
+        },
+        "hreflang": {
+          "description": "<para>The \"hreflang\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its value is a string and is intended for indicating the language of\r\n            the target resource (as defined by [RFC5988]).</para>",
+          "type": "string"
+        },
+        "name": {
+          "description": "<para>The \"name\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its value MAY be used as a secondary key for selecting Link Objects\r\n            which share the same relation type.</para>",
+          "type": "string"
+        },
+        "profile": {
+          "description": "<para>The \"profile\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its value is a string which is a URI that hints about the profile.</para>",
+          "type": "string"
+        },
+        "templated": {
+          "description": "<para>The \"templated\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its value is boolean and SHOULD be true when the Link Object's \"href\"\r\n            property is a URI Template.\r\n            Its value SHOULD be considered false if it is undefined or any other\r\n            value than true.</para>",
+          "type": "boolean"
+        },
+        "title": {
+          "description": "<para>The \"title\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its value is a string and is intended for labelling the link with a\r\n            human-readable identifier (as defined by [RFC5988]).</para>",
+          "type": "string"
+        },
+        "type": {
+          "description": "<para>The \"type\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its value is a string used as a hint to indicate the media type\r\n            expected when dereferencing the target resource.</para>",
+          "type": "string"
+        }
+      },
+      "required": [
+        "href"
+      ],
+      "type": "object"
+    },
+    "Room": {
+      "description": "Represents a room for a property.",
+      "properties": {
+        "amenities": {
+          "description": "Provides a collection of amenities for the room.",
+          "items": {
+            "$ref": "#/definitions/SimpleAttribute"
+          },
+          "type": "array"
+        },
+        "beddings": {
+          "description": "Provides information about available beds in the room.",
+          "items": {
+            "$ref": "#/definitions/RoomBedding"
+          },
+          "type": "array"
+        },
+        "description": {
+          "description": "Description of the room.",
+          "type": "string"
+        },
+        "expected_occupancy": {
+          "description": "The usual amount of persons for the room.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "extra_bed_allowed": {
+          "description": "Extra bed allowed in the room.",
+          "type": "boolean"
+        },
+        "floor": {
+          "description": "Floor of the room.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "locations": {
+          "description": "Provides a collection of locations for the room.",
+          "items": {
+            "$ref": "#/definitions/SimpleAttribute"
+          },
+          "type": "array"
+        },
+        "max_persons": {
+          "description": "Maximum number of allowed persons in the room.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "min_persons": {
+          "description": "Minimum number of allowed persons in the room.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "description": "Name of the room.",
+          "type": "string"
+        },
+        "number": {
+          "description": "Number of the room.",
+          "type": "string"
+        },
+        "reservations": {
+          "description": "Current reservation(s) for the room",
+          "items": {
+            "$ref": "#/definitions/EmbeddedReservation"
+          },
+          "type": "array"
+        },
+        "room_type": {
+          "$ref": "#/definitions/EmbeddedRoomType",
+          "description": "Room type of the room.\r\n            \r\n            Contains only the basic properties of the room type."
+        },
+        "status": {
+          "$ref": "#/definitions/RoomStatus",
+          "description": "Contains information about room status."
+        },
+        "views": {
+          "description": "Provides a collection of views for the room.",
+          "items": {
+            "$ref": "#/definitions/SimpleAttribute"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "number",
+        "room_type",
+        "status",
+        "min_persons",
+        "max_persons",
+        "expected_occupancy",
+        "floor"
+      ],
+      "type": "object"
+    },
+    "RoomBedding": {
+      "description": "Represent information about room bedding",
+      "properties": {
+        "count": {
+          "description": "Amount of available beds of the specified bedding type",
+          "format": "int32",
+          "type": "integer"
+        },
+        "type": {
+          "description": "The type of bed for the room type",
+          "enum": [
+            "NotDefined",
+            "Double",
+            "Futon",
+            "King",
+            "MurphyBed",
+            "Queen",
+            "SofaBed",
+            "TatamiMats",
+            "Twin",
+            "Single"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RoomListResponse": {
+      "properties": {
+        "_count": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "_links": {
+          "additionalProperties": {
+            "$ref": "#/definitions/LinkObject"
+          },
+          "type": "object"
+        },
+        "rooms": {
+          "items": {
+            "$ref": "#/definitions/EmbeddedRoomWithStatus"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "rooms"
+      ],
+      "type": "object"
+    },
+    "RoomMaintenance": {
+      "properties": {
+        "from": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string"
+        },
+        "value": {
+          "enum": [
+            "NotSet",
+            "None",
+            "OutOfInventory",
+            "OutOfOrder",
+            "OutOfService"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "RoomStatus": {
+      "description": "Represents current room status data.",
+      "properties": {
+        "condition": {
+          "description": "Room Condition status.",
+          "enum": [
+            "CleanNotInspected",
+            "Clean",
+            "Dirty"
+          ],
+          "type": "string"
+        },
+        "frontdesk_occupancy": {
+          "description": "FrontDesk occupancy status.",
+          "enum": [
+            "Occupied",
+            "Vacant"
+          ],
+          "type": "string"
+        },
+        "housekeeping_occupancy": {
+          "description": "Housekeeping occupancy status.",
+          "enum": [
+            "Occupied",
+            "Vacant"
+          ],
+          "type": "string"
+        },
+        "maintenance": {
+          "$ref": "#/definitions/RoomMaintenance",
+          "description": "Provides information about current room maintenance status."
+        }
+      },
+      "type": "object"
+    },
+    "RoomType": {
+      "description": "Represent a room type for a property",
+      "properties": {
+        "amenities": {
+          "description": "Provides a collection of amenities for the room type",
+          "items": {
+            "$ref": "#/definitions/SimpleAttribute"
+          },
+          "type": "array"
+        },
+        "bedding_type": {
+          "description": "The type of bed for the room type",
+          "enum": [
+            "NotDefined",
+            "Double",
+            "Futon",
+            "King",
+            "MurphyBed",
+            "Queen",
+            "SofaBed",
+            "TatamiMats",
+            "Twin",
+            "Single"
+          ],
+          "type": "string"
+        },
+        "code": {
+          "description": "Code of the room type",
+          "type": "string"
+        },
+        "description": {
+          "description": "Provides a description of the room type",
+          "type": "string"
+        },
+        "expected_occupancy": {
+          "description": "The usual amount of persons for the room type",
+          "format": "int32",
+          "type": "integer"
+        },
+        "facilities": {
+          "description": "Provides a collection of facilities for the room type",
+          "items": {
+            "$ref": "#/definitions/SimpleAttribute"
+          },
+          "type": "array"
+        },
+        "max_persons": {
+          "description": "The maximum amount of persons for the room type",
+          "format": "int32",
+          "type": "integer"
+        },
+        "min_persons": {
+          "description": "The minimum amount of persons for the room type",
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "description": "Name of the room type",
+          "type": "string"
+        },
+        "views": {
+          "description": "Provides a collection of views for the room type",
+          "items": {
+            "$ref": "#/definitions/SimpleAttribute"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "SimpleAttribute": {
+      "description": "Represents a simple attribute",
+      "properties": {
+        "code": {
+          "description": "The code of the attribute",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the attribute",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "TotalCountResponse": {
+      "properties": {
+        "_count": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "_count"
+      ],
+      "type": "object"
+    }
+  },
+  "host": "api-certification.hetras.net",
+  "info": {
+    "title": "hetras hotel API v0",
+    "version": "v0",
+    "x-logo": {
+      "url": "https://hetras.zendesk.com/hc/logo"
+    },
+    "x-origin": {
+      "format": "swagger",
+      "url": "https://developer.hetras.com/swagger/spec/HotelAPIv0.json",
+      "version": "2.0"
+    },
+    "x-providerName": "hetras.net",
+    "x-serviceName": "hotel"
+  },
+  "paths": {
+    "/api/hotel/v0/hotels": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "Application identifier",
+            "in": "header",
+            "name": "App-Id",
+            "required": true,
+            "type": "string",
+            "x-data-threescale-name": "app_ids"
+          },
+          {
+            "description": "Application key.",
+            "in": "header",
+            "name": "App-Key",
+            "required": true,
+            "type": "string",
+            "x-data-threescale-name": "app_keys"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of hotels for each of the hotels listed in the hetras-hotels parameter.",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Hotel"
+              },
+              "type": "array"
+            }
+          },
+          "403": {
+            "description": "You are not authorized to access this resource or the data for the specified hotels."
+          },
+          "404": {
+            "description": "Not Found. The server has not found anything matching the Request-URI."
+          },
+          "500": {
+            "description": "We couldn't return the representation due to an internal server error."
+          }
+        },
+        "summary": "Get a list with the details of all the hotels specified.",
+        "tags": [
+          "Hotel"
+        ]
+      }
+    },
+    "/api/hotel/v0/hotels/{hotelId}": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "description": "Based on the url parameter hotelId the API evaluates if the client making the request is allowed to access the data and \r\n            returns 403 if the client is not subscribed to that hotel.",
+        "parameters": [
+          {
+            "description": "Application identifier",
+            "in": "header",
+            "name": "App-Id",
+            "required": true,
+            "type": "string",
+            "x-data-threescale-name": "app_ids"
+          },
+          {
+            "description": "Application key.",
+            "in": "header",
+            "name": "App-Key",
+            "required": true,
+            "type": "string",
+            "x-data-threescale-name": "app_keys"
+          },
+          {
+            "description": "Specifies the hotel id to process.",
+            "format": "int32",
+            "in": "path",
+            "name": "hotelId",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Hotel details for the hotel with the id specified in the URL.",
+            "schema": {
+              "$ref": "#/definitions/Hotel"
+            }
+          },
+          "403": {
+            "description": "You are not authorized to access this resource or the data for the specified hotels."
+          },
+          "404": {
+            "description": "Not Found. The server has not found anything matching the Request-URI."
+          },
+          "500": {
+            "description": "We couldn't return the representation due to an internal server error."
+          }
+        },
+        "summary": "Get the details for the specified hotel id.",
+        "tags": [
+          "Hotel"
+        ]
+      }
+    },
+    "/api/hotel/v0/hotels/{hotelId}/room_types": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "Application identifier",
+            "in": "header",
+            "name": "App-Id",
+            "required": true,
+            "type": "string",
+            "x-data-threescale-name": "app_ids"
+          },
+          {
+            "description": "Application key.",
+            "in": "header",
+            "name": "App-Key",
+            "required": true,
+            "type": "string",
+            "x-data-threescale-name": "app_keys"
+          },
+          {
+            "description": "Specifies the hotel id to process.",
+            "format": "int32",
+            "in": "path",
+            "name": "hotelId",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Room type details for the hotel with the id specified in the URL.",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/RoomType"
+              },
+              "type": "array"
+            }
+          },
+          "500": {
+            "description": "We couldn't return the representation due to an internal server error."
+          },
+          "503": {
+            "description": "The server is currently unavailable. Please try later."
+          }
+        },
+        "summary": "Get a list with the details of all room types for for the specified hotel id",
+        "tags": [
+          "RoomType"
+        ]
+      }
+    },
+    "/api/hotel/v0/hotels/{hotelId}/room_types/{code}": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "Application identifier",
+            "in": "header",
+            "name": "App-Id",
+            "required": true,
+            "type": "string",
+            "x-data-threescale-name": "app_ids"
+          },
+          {
+            "description": "Application key.",
+            "in": "header",
+            "name": "App-Key",
+            "required": true,
+            "type": "string",
+            "x-data-threescale-name": "app_keys"
+          },
+          {
+            "description": "Specifies the hotel id to process.",
+            "format": "int32",
+            "in": "path",
+            "name": "hotelId",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "Specifies the room type code to process.",
+            "in": "path",
+            "name": "code",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Room type details for the hotel with the id specified in the URL.",
+            "schema": {
+              "$ref": "#/definitions/RoomType"
+            }
+          },
+          "500": {
+            "description": "We couldn't return the representation due to an internal server error."
+          },
+          "503": {
+            "description": "The server is currently unavailable. Please try later."
+          }
+        },
+        "summary": "Get a requested room type for for the specified hotel id",
+        "tags": [
+          "RoomType"
+        ]
+      }
+    },
+    "/api/hotel/v0/hotels/{hotelId}/rooms": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "Application identifier",
+            "in": "header",
+            "name": "App-Id",
+            "required": true,
+            "type": "string",
+            "x-data-threescale-name": "app_ids"
+          },
+          {
+            "description": "Application key.",
+            "in": "header",
+            "name": "App-Key",
+            "required": true,
+            "type": "string",
+            "x-data-threescale-name": "app_keys"
+          },
+          {
+            "description": "Specifies the hotel id to process.",
+            "format": "int32",
+            "in": "path",
+            "name": "hotelId",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "Amount of rooms to skip.",
+            "format": "int32",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Amount of rooms to select.",
+            "format": "int32",
+            "in": "query",
+            "name": "top",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Return total amount of rooms for a given filter criteria.",
+            "enum": [
+              "None",
+              "AllPages"
+            ],
+            "in": "query",
+            "name": "inlinecount",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Return a list of rooms that only have the given room type.\r\n            Allows to pass a comma-separated list of room types.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "roomType",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Return a list of rooms that only have the given ocuppancy status.\r\n            Allows to pass a comma-separated list of occupancy statuses.",
+            "in": "query",
+            "items": {
+              "enum": [
+                "Occupied",
+                "Vacant"
+              ],
+              "type": "string"
+            },
+            "name": "occupancy",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Return a list of rooms that only have the given room condition status.\r\n            Allows to pass a comma-separated list of room condition statuses.",
+            "in": "query",
+            "items": {
+              "enum": [
+                "CleanNotInspected",
+                "Clean",
+                "Dirty"
+              ],
+              "type": "string"
+            },
+            "name": "condition",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Return a list of rooms that only have the given maintenance status.\r\n            Allows to pass a comma-separated list of room maintenance statuses.",
+            "in": "query",
+            "items": {
+              "enum": [
+                "NotSet",
+                "None",
+                "OutOfInventory",
+                "OutOfOrder",
+                "OutOfService"
+              ],
+              "type": "string"
+            },
+            "name": "maintenance",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Return a list of rooms that only have the given amenity.\r\n            Allows to pass a comma-separated list of amenities.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "amenity",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Return a list of rooms that only have the given view.\r\n            Allows to pass a comma-separated list of views.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "view",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Return a list of rooms that only have the given location.\r\n            Allows to pass a comma-separated list of locations.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "location",
+            "required": false,
+            "type": "array"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of room for the hotel with the id specified in the URL.",
+            "schema": {
+              "$ref": "#/definitions/RoomListResponse"
+            }
+          },
+          "204": {
+            "description": "There are no rooms found for the given combination of filtering and pagination criteria.",
+            "schema": {
+              "$ref": "#/definitions/RoomListResponse"
+            }
+          },
+          "500": {
+            "description": "We couldn't return the representation due to an internal server error."
+          },
+          "503": {
+            "description": "The server is currently unavailable. Please try later."
+          }
+        },
+        "summary": "Get a list of rooms using provided filtering and pagination criteria.",
+        "tags": [
+          "Room"
+        ]
+      }
+    },
+    "/api/hotel/v0/hotels/{hotelId}/rooms/{roomNumber}": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "Application identifier",
+            "in": "header",
+            "name": "App-Id",
+            "required": true,
+            "type": "string",
+            "x-data-threescale-name": "app_ids"
+          },
+          {
+            "description": "Application key.",
+            "in": "header",
+            "name": "App-Key",
+            "required": true,
+            "type": "string",
+            "x-data-threescale-name": "app_keys"
+          },
+          {
+            "description": "Specifies the hotel id to process.",
+            "format": "int32",
+            "in": "path",
+            "name": "hotelId",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "Specifies the room number to process.",
+            "in": "path",
+            "name": "roomNumber",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Room details for the hotel with the id specified in the URL.",
+            "schema": {
+              "$ref": "#/definitions/Room"
+            }
+          },
+          "404": {
+            "description": "Requested room could not be found."
+          },
+          "500": {
+            "description": "We couldn't return the representation due to an internal server error."
+          },
+          "503": {
+            "description": "The server is currently unavailable. Please try later."
+          }
+        },
+        "summary": "Get a specific room with all the details for the specified hotel id.",
+        "tags": [
+          "Room"
+        ]
+      }
+    },
+    "/api/hotel/v0/hotels/{hotelId}/rooms/$count": {
+      "get": {
+        "consumes": [],
+        "deprecated": false,
+        "parameters": [
+          {
+            "description": "Application identifier",
+            "in": "header",
+            "name": "App-Id",
+            "required": true,
+            "type": "string",
+            "x-data-threescale-name": "app_ids"
+          },
+          {
+            "description": "Application key.",
+            "in": "header",
+            "name": "App-Key",
+            "required": true,
+            "type": "string",
+            "x-data-threescale-name": "app_keys"
+          },
+          {
+            "description": "Specifies the hotel id to process.",
+            "format": "int32",
+            "in": "path",
+            "name": "hotelId",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Return a coun of rooms that only have the given room type.\r\n            Allows to pass a comma-separated list of room types.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "roomType",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Return a count of rooms that only have the given ocuppancy status.\r\n            Allows to pass a comma-separated list of occupancy statuses.",
+            "in": "query",
+            "items": {
+              "enum": [
+                "Occupied",
+                "Vacant"
+              ],
+              "type": "string"
+            },
+            "name": "occupancy",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Return a count of rooms that only have the given room condition status.\r\n            Allows to pass a comma-separated list of room condition statuses.",
+            "in": "query",
+            "items": {
+              "enum": [
+                "CleanNotInspected",
+                "Clean",
+                "Dirty"
+              ],
+              "type": "string"
+            },
+            "name": "condition",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Return a count of rooms that only have the given maintenance status.\r\n            Allows to pass a comma-separated list of room maintenance statuses.",
+            "in": "query",
+            "items": {
+              "enum": [
+                "NotSet",
+                "None",
+                "OutOfInventory",
+                "OutOfOrder",
+                "OutOfService"
+              ],
+              "type": "string"
+            },
+            "name": "maintenance",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Return count of rooms that only have the given amenity.\r\n            Allows to pass a comma-separated list of amenities.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "amenity",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Return a count of rooms that only have the given view.\r\n            Allows to pass a comma-separated list of views.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "view",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "collectionFormat": "multi",
+            "description": "Return a count of rooms that only have the given location.\r\n            Allows to pass a comma-separated list of locations.",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "location",
+            "required": false,
+            "type": "array"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The total room count for a given filter criteria.",
+            "schema": {
+              "$ref": "#/definitions/TotalCountResponse"
+            }
+          },
+          "500": {
+            "description": "We couldn't return the representation due to an internal server error."
+          },
+          "503": {
+            "description": "The server is currently unavailable. Please try later."
+          }
+        },
+        "summary": "Get total rooms count that match the given filter criteria.",
+        "tags": [
+          "Room"
+        ]
+      }
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0"
+}
