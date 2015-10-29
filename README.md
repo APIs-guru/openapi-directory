@@ -41,4 +41,5 @@ https://apis-guru.github.io/api-models/apis.json
 
 Existing integrations:
  - https://any-api.com - Documentation and Test Consoles for Public APIs
+ - https://sdks.io/ - Explore Automatically Generated SDKs
 [logo]: https://apis-guru.github.io/api-models/branding/logo_horizontal.svg "APIs.guru"
