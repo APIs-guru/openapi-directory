@@ -2732,5 +2732,46 @@
   "schemes": [
     "https"
   ],
+  "securityDefinitions": {
+    "oauth_2_0_accessCode": {
+      "authorizationUrl": "https://accounts.spotify.com/authorize",
+      "description": "Spotify supports OAuth 2.0 for authenticating all API requests.\n",
+      "flow": "accessCode",
+      "scopes": {
+        "playlist-modify-private": "",
+        "playlist-modify-public": "",
+        "playlist-read-collaborative": "",
+        "playlist-read-private": "",
+        "user-follow-modify": "",
+        "user-follow-read": "",
+        "user-library-modify": "",
+        "user-library-read": "",
+        "user-read-birthdate": "",
+        "user-read-email": "",
+        "user-read-private": ""
+      },
+      "tokenUrl": "https://accounts.spotify.com/api/token",
+      "type": "oauth2"
+    },
+    "oauth_2_0_implicit": {
+      "authorizationUrl": "https://accounts.spotify.com/authorize",
+      "description": "Spotify supports OAuth 2.0 for authenticating all API requests.\n",
+      "flow": "implicit",
+      "scopes": {
+        "playlist-modify-private": "",
+        "playlist-modify-public": "",
+        "playlist-read-collaborative": "",
+        "playlist-read-private": "",
+        "user-follow-modify": "",
+        "user-follow-read": "",
+        "user-library-modify": "",
+        "user-library-read": "",
+        "user-read-birthdate": "",
+        "user-read-email": "",
+        "user-read-private": ""
+      },
+      "type": "oauth2"
+    }
+  },
   "swagger": "2.0"
 }
