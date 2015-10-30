@@ -1317,6 +1317,13 @@
         "query": {
           "description": "[Required] A query that BigQuery executes when the view is referenced.",
           "type": "string"
+        },
+        "userDefinedFunctionResources": {
+          "description": "[Experimental] Describes user-defined function resources used in the query.",
+          "items": {
+            "$ref": "#/definitions/UserDefinedFunctionResource"
+          },
+          "type": "array"
         }
       },
       "type": "object"
