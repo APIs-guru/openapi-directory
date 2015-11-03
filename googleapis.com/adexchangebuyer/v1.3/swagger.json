@@ -139,7 +139,7 @@
           "type": "string"
         },
         "budgetAmount": {
-          "description": "The budget amount to apply for the billingId provided. This is required for update requests.",
+          "description": "The daily budget amount in unit amount of the account currency to apply for the billingId provided. This is required for update requests.",
           "format": "int64",
           "type": "string"
         },
@@ -184,7 +184,7 @@
           "format": "int64",
           "type": "string"
         },
-        "api_upload_timestamp": {
+        "apiUploadTimestamp": {
           "description": "The last upload timestamp of this creative if it was uploaded via API. Read-only. The value of this field is generated, and will be ignored for uploads. (formatted RFC 3339 timestamp).",
           "format": "date-time",
           "type": "string"
@@ -483,6 +483,10 @@
         },
         "currencyCode": {
           "description": "The currency code that applies to the fixed_cpm value. If not set then assumed to be USD.",
+          "type": "string"
+        },
+        "dealTier": {
+          "description": "The deal type such as programmatic reservation or fixed price and so on.",
           "type": "string"
         },
         "endTime": {
