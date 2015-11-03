@@ -68,7 +68,6 @@
         },
         "instanceId": {
           "description": "An opaque identifier for the instance that handled the request.",
-          "format": "byte",
           "type": "string"
         },
         "instanceIndex": {
@@ -117,8 +116,7 @@
           "type": "string"
         },
         "requestId": {
-          "description": "Globally unique identifier for a request, based on request start time. Request IDs for requests which started later will compare greater as binary strings than those for requests which started earlier.",
-          "format": "byte",
+          "description": "Globally unique identifier for a request, based on request start time. Request IDs for requests which started later will compare greater as strings than those for requests which started earlier.",
           "type": "string"
         },
         "resource": {
@@ -220,7 +218,7 @@
       "name": "Google",
       "url": "https://google.com"
     },
-    "description": "Google Cloud Logging API lets you create logs, ingest log entries, and manage log sinks.",
+    "description": "The Google Cloud Logging API lets you write log entries and manage your logs, log sinks and logs-based metrics.",
     "title": "Google Cloud Logging API",
     "version": "v2beta1",
     "x-apiClientRegistration": {

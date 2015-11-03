@@ -90,6 +90,10 @@
     "GetOobConfirmationCodeResponse": {
       "description": "Response of getting a code for user confirmation (reset password, change email etc.).",
       "properties": {
+        "email": {
+          "description": "The email address that the email is sent to.",
+          "type": "string"
+        },
         "kind": {
           "default": "identitytoolkit#GetOobConfirmationCodeResponse",
           "description": "The fixed string \"identitytoolkit#GetOobConfirmationCodeResponse\".",

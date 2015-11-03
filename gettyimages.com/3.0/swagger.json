@@ -447,6 +447,24 @@
       },
       "type": "object"
     },
+    "download_requirements": {
+      "properties": {
+        "is_note_required": {
+          "type": "boolean"
+        },
+        "is_project_code_required": {
+          "type": "boolean"
+        },
+        "project_codes": {
+          "description": "Only users who have been set up with a project code by Getty Images Sales need to use this field.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
     "download_size": {
       "properties": {
         "bit_depth": {
@@ -1300,24 +1318,6 @@
       },
       "type": "object"
     },
-    "premium_access_download_requirements": {
-      "properties": {
-        "is_note_required": {
-          "type": "boolean"
-        },
-        "is_project_code_required": {
-          "type": "boolean"
-        },
-        "project_codes": {
-          "description": "Only users who have been set up with a project code by Getty Images Sales need to use this field.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
     "PremiumAccessDownloadData": {
       "properties": {
         "download_notes": {
@@ -1384,6 +1384,10 @@
           "format": "date-time",
           "type": "string"
         },
+        "download_requirements": {
+          "$ref": "#/definitions/download_requirements",
+          "description": "Provides standard download requirements for clients of the Getty Images Public API."
+        },
         "downloads_remaining": {
           "format": "int32",
           "type": "integer"
@@ -1400,7 +1404,8 @@
           "type": "string"
         },
         "premium_access_download_requirements": {
-          "$ref": "#/definitions/premium_access_download_requirements"
+          "$ref": "#/definitions/download_requirements",
+          "description": "Provides legacy download requirements for select clients of the Getty Images Public API."
         },
         "status": {
           "enum": [

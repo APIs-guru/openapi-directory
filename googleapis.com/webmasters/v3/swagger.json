@@ -130,7 +130,7 @@
       "description": "List of sites with access level information.",
       "properties": {
         "siteEntry": {
-          "description": "Contains permission level information about a Webmaster Tools site. For more information, see Permissions in Webmaster Tools.",
+          "description": "Contains permission level information about a Search Console site. For more information, see Permissions in Search Console.",
           "items": {
             "$ref": "#/definitions/WmxSite"
           },
@@ -252,7 +252,7 @@
       "type": "object"
     },
     "WmxSite": {
-      "description": "Contains permission level information about a Webmaster Tools site. For more information, see  Permissions in Webmaster Tools.",
+      "description": "Contains permission level information about a Search Console site. For more information, see  Permissions in Search Console.",
       "properties": {
         "permissionLevel": {
           "description": "The user's permission level for the site.",
@@ -414,7 +414,7 @@
   "paths": {
     "/sites": {
       "get": {
-        "description": "Lists the user's Webmaster Tools sites.",
+        "description": "Lists the user's Search Console sites.",
         "operationId": "webmasters.sites.list",
         "responses": {
           "200": {
@@ -462,7 +462,7 @@
     },
     "/sites/{siteUrl}": {
       "delete": {
-        "description": "Removes a site from the set of the user's Webmaster Tools sites.",
+        "description": "Removes a site from the set of the user's Search Console sites.",
         "operationId": "webmasters.sites.delete",
         "parameters": [
           {
@@ -545,7 +545,7 @@
         }
       ],
       "put": {
-        "description": "Adds a site to the set of the user's sites in Webmaster Tools.",
+        "description": "Adds a site to the set of the user's sites in Search Console.",
         "operationId": "webmasters.sites.add",
         "parameters": [
           {

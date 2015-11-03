@@ -624,6 +624,30 @@
       },
       "type": "object"
     },
+    "MaintenanceWindow": {
+      "description": "Maintenance window. This specifies when a v2 Cloud SQL instance should preferably be restarted for system maintenance puruposes.",
+      "properties": {
+        "day": {
+          "description": "day of week (1-7), starting on Monday.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "hour": {
+          "description": "hour of day - 0 to 23.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "kind": {
+          "default": "sql#maintenanceWindow",
+          "description": "This is always sql#maintenanceWindow.",
+          "type": "string"
+        },
+        "updateTrack": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "MySqlReplicaConfiguration": {
       "description": "Read-replica configuration specific to MySQL databases.",
       "properties": {
@@ -894,7 +918,7 @@
           "type": "boolean"
         },
         "dataDiskSizeGb": {
-          "description": "The size of data disk for the performance instance, specified in GB. Setting this value for non-performance instances will result in an error.",
+          "description": "The size of data disk, in GB. Only supported for 2nd Generation instances. The data disk size minimum is 10GB.",
           "format": "int64",
           "type": "string"
         },
@@ -910,6 +934,10 @@
         "locationPreference": {
           "$ref": "#/definitions/LocationPreference",
           "description": "The location preference settings. This allows the instance to be located as near as possible to either an App Engine app or GCE zone for better performance."
+        },
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "The maintenance window for this instance. This specifies when the instance may be restarted for maintenance purposes."
         },
         "pricingPlan": {
           "description": "The pricing plan for this instance. This can be either PER_USE or PACKAGE.",

@@ -17,29 +17,6 @@
         }
       }
     },
-    "Classification": {
-      "properties": {
-        "class": {
-          "description": "The full scientific name of the class in which the taxon is classified.",
-          "type": "string"
-        },
-        "family": {
-          "type": "string"
-        },
-        "genus": {
-          "type": "string"
-        },
-        "kingdom": {
-          "type": "string"
-        },
-        "order": {
-          "type": "string"
-        },
-        "phylum": {
-          "type": "string"
-        }
-      }
-    },
     "ClientStatus": {
       "properties": {
         "checklistId": {
@@ -52,6 +29,19 @@
         },
         "statusMessage": {
           "description": "Status of the request, possible values are 'ok', 'timeout', 'interrupted', 'unsupported search mode'.",
+          "type": "string"
+        }
+      }
+    },
+    "HigherClassificationElement": {
+      "properties": {
+        "rank": {
+          "type": "string"
+        },
+        "scientificName": {
+          "type": "string"
+        },
+        "taxonID": {
           "type": "string"
         }
       }
@@ -249,8 +239,11 @@
           "description": "The reference to the source in which the specific taxon concept circumscription is defined or implied - traditionally signified by the Latin 'sensu' or 'sec.' (from secundum, meaning 'according to').",
           "type": "string"
         },
-        "classification": {
-          "$ref": "#/definitions/Classification"
+        "higherClassification": {
+          "items": {
+            "$ref": "#/definitions/HigherClassificationElement"
+          },
+          "type": "array"
         },
         "identifier": {
           "type": "string"
@@ -286,15 +279,15 @@
           "description": "Canonical name string consisting of only nomenclatural information, i.e. no authorship or taxonomic hierarchy information with the exception of the necessary placements within Genus or Species.",
           "type": "string"
         },
-        "fullName": {
-          "description": "The full scientific name, with authorship, publication date information and potentially further taxonomic information.",
-          "type": "string"
-        },
         "nomenclaturalReference": {
           "description": "A reference for the publication in which the scientificName was originally established under the rules of the associated nomenclaturalCode.",
           "type": "string"
         },
         "rank": {
+          "type": "string"
+        },
+        "scientificName": {
+          "description": "The full scientific name, with authorship, publication date information and potentially further taxonomic information.",
           "type": "string"
         }
       }

@@ -1699,7 +1699,7 @@
     },
     "/groups/{groupKey}/attendees": {
       "get": {
-        "description": "Returns all attendees for all meetings within specified date range held by organizers within the specified group. This API call is only available to users with the admin role.",
+        "description": "Returns all attendees for all meetings within specified date range held by organizers within the specified group. This API call is only available to users with the admin role. This API call can be used only for groups with maximum 50 organizers.",
         "parameters": [
           {
             "description": "Access token",
@@ -1709,7 +1709,7 @@
             "type": "string"
           },
           {
-            "description": "The key of the group",
+            "description": "The key of the group. Only groups with maximum 50 organizers are supported",
             "format": "int64",
             "in": "path",
             "name": "groupKey",
@@ -1753,7 +1753,7 @@
     },
     "/groups/{groupKey}/historicalMeetings": {
       "get": {
-        "description": "Get historical meetings for a specified group within a specified date range. This API call is only available to users with the admin role.",
+        "description": "Get historical meetings for a specified group within a specified date range. This API call is only available to users with the admin role. This API call can be used only for groups with maximum 50 organizers.",
         "parameters": [
           {
             "description": "Access token",
@@ -1763,7 +1763,7 @@
             "type": "string"
           },
           {
-            "description": "The key of the group",
+            "description": "The key of the group. Only groups with maximum 50 organizers are supported",
             "format": "int64",
             "in": "path",
             "name": "groupKey",
@@ -1975,7 +1975,7 @@
     },
     "/groups/{groupKey}/upcomingMeetings": {
       "get": {
-        "description": "Get upcoming meetings for a specified group. This API call is only available to users with the admin role.",
+        "description": "Get upcoming meetings for a specified group. This API call is only available to users with the admin role. This API call can be used only for groups with maximum 50 organizers.",
         "parameters": [
           {
             "description": "Access token",
@@ -1985,7 +1985,7 @@
             "type": "string"
           },
           {
-            "description": "The key of the group",
+            "description": "The key of the group. Only groups with maximum 50 organizers are supported",
             "format": "int64",
             "in": "path",
             "name": "groupKey",

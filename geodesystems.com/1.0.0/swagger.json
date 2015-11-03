@@ -19028,7 +19028,7 @@
           {
             "description": "Fields to get",
             "in": "query",
-            "name": "search.type_census_acs.get_value",
+            "name": "search.type_census_acs.fields",
             "required": false,
             "type": "string"
           },
@@ -19042,7 +19042,14 @@
           {
             "description": "In",
             "in": "query",
-            "name": "search.type_census_acs.in_type",
+            "name": "search.type_census_acs.in_type1",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "In #2",
+            "in": "query",
+            "name": "search.type_census_acs.in_type2",
             "required": false,
             "type": "string"
           }
