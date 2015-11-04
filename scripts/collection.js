@@ -135,10 +135,9 @@ function cacheResources(specRootUrl) {
       return;
 
     var url = swagger.info['x-logo'].url;
-    new Request({ method: 'GET', url: url, encoding: null, gzip: true}, function(err, response, data) {
-      assert(!err, 'Can not GET "' + url +'": ' + err);
-      assert(response.statusCode === 200, 'Can not GET "' + url +'": ' + response.statusMessage);
-      console.log(url);
+    getResource(url, {encoding: null, gzip: true}, function(err, response, data) {
+      assert(!err, err);
+
       var mime = response.headers['content-type'];
       assert(mime.match('image/'));
       var extension = MIME.extension(mime);
@@ -153,6 +152,24 @@ function cacheResources(specRootUrl) {
       swagger.info['x-logo'].url = specRootUrl + logoFile + fragment;
       saveJson(filename, swagger);
     });
+  });
+}
+
+function getResource(url, options, callback) {
+  if (_.isFunction(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options.method = 'GET';
+  options.url = url;
+  new Request(options, function(err, response, data) {
+    if (err)
+      return callback(new Error('Can not GET "' + url +'": ' + err));
+    if (response.statusCode !== 200)
+      return callback(new Error('Can not GET "' + url +'": ' + response.statusMessage));
+    console.log(url);
+    callback(null, response, data);
   });
 }
 
@@ -395,9 +412,8 @@ function saveFixup(swagger, editedSwagger) {
 function updateGoogle() {
   var knownSpecs = _.mapKeys(getSpecs(), getOriginUrl);
 
-  new Request('https://www.googleapis.com/discovery/v1/apis', function(err, response, data) {
-    assert(!err);
-    assert(response.statusCode === 200, 'Can not GET API list: ' + response.statusMessage);
+  getResource('https://www.googleapis.com/discovery/v1/apis', function(err, response, data) {
+    assert(!err, err);
 
     data = JSON.parse(data);
     assert.equal(data.kind, 'discovery#directoryList');
