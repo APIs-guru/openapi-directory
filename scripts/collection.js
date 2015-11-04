@@ -119,9 +119,13 @@ function updateCollection(dir) {
         return logError(error, result);
 
       var newFilename = getSwaggerPath(result.swagger);
-      assert(newFilename === filename, "Spec was moved to new location");
+      if (newFilename !== filename)
+        asyncCb(Error("Spec was moved to new location"));
       asyncCb(null);
     });
+  }, function (error) {
+    if (error)
+      throw error;
   });
 }
 
