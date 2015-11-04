@@ -73,13 +73,9 @@
     "400_Error": {
       "properties": {
         "error_code_msg": {
-          "default": "API_INVALID_PARAMS",
           "type": "string"
         },
         "msg": {
-          "type": "string"
-        },
-        "parameters_missing": {
           "type": "string"
         },
         "success": {
@@ -89,6 +85,20 @@
       }
     },
     "401_Error": {
+      "properties": {
+        "error_code_msg": {
+          "type": "string"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "success": {
+          "default": "false",
+          "type": "string"
+        }
+      }
+    },
+    "403_Error": {
       "properties": {
         "error_code_msg": {
           "type": "string"
@@ -540,7 +550,7 @@
             }
           },
           "400": {
-            "description": "Invalid params",
+            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
@@ -549,6 +559,18 @@
             "description": "Invalid API key",
             "schema": {
               "$ref": "#/definitions/401_Error"
+            }
+          },
+          "403": {
+            "description": "You are going too fast",
+            "schema": {
+              "$ref": "#/definitions/403_Error"
+            }
+          },
+          "500": {
+            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error'",
+            "schema": {
+              "$ref": "#/definitions/500_Error"
             }
           }
         },
@@ -576,7 +598,7 @@
             }
           },
           "400": {
-            "description": "Invalid params",
+            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
@@ -585,6 +607,18 @@
             "description": "Invalid API key",
             "schema": {
               "$ref": "#/definitions/401_Error"
+            }
+          },
+          "403": {
+            "description": "You are going too fast",
+            "schema": {
+              "$ref": "#/definitions/403_Error"
+            }
+          },
+          "500": {
+            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error'",
+            "schema": {
+              "$ref": "#/definitions/500_Error"
             }
           }
         },
@@ -618,6 +652,14 @@
             "name": "report_date",
             "required": false,
             "type": "integer"
+          },
+          {
+            "default": 1,
+            "description": "Sample report indicator",
+            "in": "query",
+            "name": "sample",
+            "required": true,
+            "type": "integer"
           }
         ],
         "responses": {
@@ -627,16 +669,34 @@
               "$ref": "#/definitions/Report_Success"
             }
           },
+          "400": {
+            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter','Invalid or non-existent baseline supplied','Invalid report_date parameter value. Must be an integer'",
+            "schema": {
+              "$ref": "#/definitions/400_Error"
+            }
+          },
           "401": {
             "description": "Invalid API key",
             "schema": {
               "$ref": "#/definitions/401_Error"
             }
           },
+          "403": {
+            "description": "You are going too fast",
+            "schema": {
+              "$ref": "#/definitions/403_Error"
+            }
+          },
           "404": {
             "description": "Error retrieving report",
             "schema": {
               "$ref": "#/definitions/404_Error"
+            }
+          },
+          "500": {
+            "description": "Possible reasons include: 'Report has no data', 'Internal database error', 'Error getting application's credentials'",
+            "schema": {
+              "$ref": "#/definitions/500_Error"
             }
           }
         },
@@ -685,16 +745,34 @@
               "$ref": "#/definitions/Report_Success"
             }
           },
+          "400": {
+            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter', 'Invalid or non-existent baseline supplied','Invalid report_date parameter value. Must be an integer'",
+            "schema": {
+              "$ref": "#/definitions/400_Error"
+            }
+          },
           "401": {
             "description": "Invalid API key",
             "schema": {
               "$ref": "#/definitions/401_Error"
             }
           },
+          "403": {
+            "description": "You are going too fast",
+            "schema": {
+              "$ref": "#/definitions/403_Error"
+            }
+          },
           "404": {
             "description": "Error retrieving report",
             "schema": {
               "$ref": "#/definitions/404_Error"
+            }
+          },
+          "500": {
+            "description": "Possible reasons include: 'Report has no data', 'Internal database error', 'Error getting application's credentials'",
+            "schema": {
+              "$ref": "#/definitions/500_Error"
             }
           }
         },
@@ -724,7 +802,7 @@
             }
           },
           "400": {
-            "description": "Invalid params",
+            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
@@ -733,6 +811,24 @@
             "description": "Invalid API key",
             "schema": {
               "$ref": "#/definitions/401_Error"
+            }
+          },
+          "403": {
+            "description": "You are going too fast",
+            "schema": {
+              "$ref": "#/definitions/403_Error"
+            }
+          },
+          "404": {
+            "description": "The upload hash provided does not exist",
+            "schema": {
+              "$ref": "#/definitions/404_Error"
+            }
+          },
+          "500": {
+            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error', 'Report has no data'",
+            "schema": {
+              "$ref": "#/definitions/500_Error"
             }
           }
         },
@@ -760,7 +856,7 @@
             }
           },
           "400": {
-            "description": "Invalid params",
+            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
@@ -769,6 +865,24 @@
             "description": "Invalid API key",
             "schema": {
               "$ref": "#/definitions/401_Error"
+            }
+          },
+          "403": {
+            "description": "You are going too fast",
+            "schema": {
+              "$ref": "#/definitions/403_Error"
+            }
+          },
+          "404": {
+            "description": "The upload hash provided does not exist",
+            "schema": {
+              "$ref": "#/definitions/404_Error"
+            }
+          },
+          "500": {
+            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error', 'Report has no data'",
+            "schema": {
+              "$ref": "#/definitions/500_Error"
             }
           }
         },
@@ -798,7 +912,7 @@
             }
           },
           "400": {
-            "description": "Invalid params",
+            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
@@ -807,6 +921,18 @@
             "description": "Invalid API key",
             "schema": {
               "$ref": "#/definitions/401_Error"
+            }
+          },
+          "403": {
+            "description": "Possible reasons include: 'You are going too fast', 'Not enough tokens remaining under your application'",
+            "schema": {
+              "$ref": "#/definitions/403_Error"
+            }
+          },
+          "500": {
+            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error'",
+            "schema": {
+              "$ref": "#/definitions/500_Error"
             }
           }
         },
@@ -834,7 +960,7 @@
             }
           },
           "400": {
-            "description": "Invalid params",
+            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
@@ -843,6 +969,18 @@
             "description": "Invalid API key",
             "schema": {
               "$ref": "#/definitions/401_Error"
+            }
+          },
+          "403": {
+            "description": "Possible reasons include: 'You are going too fast', 'Not enough tokens remaining under your application'",
+            "schema": {
+              "$ref": "#/definitions/403_Error"
+            }
+          },
+          "500": {
+            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error'",
+            "schema": {
+              "$ref": "#/definitions/500_Error"
             }
           }
         },
@@ -880,7 +1018,7 @@
             }
           },
           "400": {
-            "description": "Invalid params",
+            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter', 'IDS array is too long or in an incorrect format'",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
@@ -889,6 +1027,24 @@
             "description": "Invalid API key",
             "schema": {
               "$ref": "#/definitions/401_Error"
+            }
+          },
+          "403": {
+            "description": "Possible reasons include: 'You are going too fast', 'Not enough tokens remaining under your application'",
+            "schema": {
+              "$ref": "#/definitions/403_Error"
+            }
+          },
+          "404": {
+            "description": "The upload hash provided does not exist",
+            "schema": {
+              "$ref": "#/definitions/404_Error"
+            }
+          },
+          "500": {
+            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error', 'Error trying to insert relations to custom'",
+            "schema": {
+              "$ref": "#/definitions/500_Error"
             }
           }
         },
@@ -924,7 +1080,7 @@
             }
           },
           "400": {
-            "description": "Invalid params",
+            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter' 'IDS array is too long or in an incorrect format'",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
@@ -933,6 +1089,24 @@
             "description": "Invalid API key",
             "schema": {
               "$ref": "#/definitions/401_Error"
+            }
+          },
+          "403": {
+            "description": "Possible reasons include: 'You are going too fast', 'Not enough tokens remaining under your application'",
+            "schema": {
+              "$ref": "#/definitions/403_Error"
+            }
+          },
+          "404": {
+            "description": "The upload hash provided does not exist",
+            "schema": {
+              "$ref": "#/definitions/404_Error"
+            }
+          },
+          "500": {
+            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error', 'Error trying to insert relations to custom'",
+            "schema": {
+              "$ref": "#/definitions/500_Error"
             }
           }
         },
@@ -962,7 +1136,7 @@
             }
           },
           "400": {
-            "description": "Invalid params",
+            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
@@ -971,6 +1145,24 @@
             "description": "Invalid API key",
             "schema": {
               "$ref": "#/definitions/401_Error"
+            }
+          },
+          "403": {
+            "description": "You are going too fast",
+            "schema": {
+              "$ref": "#/definitions/403_Error"
+            }
+          },
+          "404": {
+            "description": "Error retrieving report",
+            "schema": {
+              "$ref": "#/definitions/404_Error"
+            }
+          },
+          "500": {
+            "description": "Possible reasons include: 'Report has no data', 'Internal database error', 'Error getting application's credentials'",
+            "schema": {
+              "$ref": "#/definitions/500_Error"
             }
           }
         },
@@ -998,7 +1190,7 @@
             }
           },
           "400": {
-            "description": "Invalid params",
+            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
@@ -1007,6 +1199,24 @@
             "description": "Invalid API key",
             "schema": {
               "$ref": "#/definitions/401_Error"
+            }
+          },
+          "403": {
+            "description": "You are going too fast",
+            "schema": {
+              "$ref": "#/definitions/403_Error"
+            }
+          },
+          "404": {
+            "description": "Error retrieving report",
+            "schema": {
+              "$ref": "#/definitions/404_Error"
+            }
+          },
+          "500": {
+            "description": "Possible reasons include: 'Report has no data', 'Internal database error', 'Error getting application's credentials'",
+            "schema": {
+              "$ref": "#/definitions/500_Error"
             }
           }
         },
@@ -1036,7 +1246,7 @@
             }
           },
           "400": {
-            "description": "Invalid params",
+            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
@@ -1045,6 +1255,18 @@
             "description": "Invalid API key",
             "schema": {
               "$ref": "#/definitions/401_Error"
+            }
+          },
+          "403": {
+            "description": "You are going too fast",
+            "schema": {
+              "$ref": "#/definitions/403_Error"
+            }
+          },
+          "500": {
+            "description": "Possible reasons include: 'Report has no data', 'Internal database error'",
+            "schema": {
+              "$ref": "#/definitions/500_Error"
             }
           }
         },
@@ -1072,7 +1294,7 @@
             }
           },
           "400": {
-            "description": "Invalid params",
+            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
@@ -1081,6 +1303,18 @@
             "description": "Invalid API key",
             "schema": {
               "$ref": "#/definitions/401_Error"
+            }
+          },
+          "403": {
+            "description": "You are going too fast",
+            "schema": {
+              "$ref": "#/definitions/403_Error"
+            }
+          },
+          "500": {
+            "description": "Possible reasons include: 'Report has no data', 'Internal database error'",
+            "schema": {
+              "$ref": "#/definitions/500_Error"
             }
           }
         },
@@ -1131,7 +1365,7 @@
             }
           },
           "400": {
-            "description": "Invalid params",
+            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
@@ -1140,6 +1374,18 @@
             "description": "Invalid API key",
             "schema": {
               "$ref": "#/definitions/401_Error"
+            }
+          },
+          "403": {
+            "description": "Possible reasons include: 'You are going too fast', 'Not enough tokens remaining under your application'",
+            "schema": {
+              "$ref": "#/definitions/403_Error"
+            }
+          },
+          "500": {
+            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error'",
+            "schema": {
+              "$ref": "#/definitions/500_Error"
             }
           }
         },
@@ -1188,7 +1434,7 @@
             }
           },
           "400": {
-            "description": "Invalid params",
+            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
@@ -1197,6 +1443,18 @@
             "description": "Invalid API key",
             "schema": {
               "$ref": "#/definitions/401_Error"
+            }
+          },
+          "403": {
+            "description": "Possible reasons include: 'You are going too fast', 'Not enough tokens remaining under your application'",
+            "schema": {
+              "$ref": "#/definitions/403_Error"
+            }
+          },
+          "500": {
+            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error'",
+            "schema": {
+              "$ref": "#/definitions/500_Error"
             }
           }
         },
@@ -1233,19 +1491,25 @@
             }
           },
           "400": {
-            "description": "Invalid params",
+            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter', 'The twitter account provided has no audience', 'IDS array is too long or in an incorrect format'",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
           },
           "401": {
-            "description": "Invalid API key",
+            "description": "Possible reasons include: 'Invalid API key', 'The twitter account provided is private'",
             "schema": {
               "$ref": "#/definitions/401_Error"
             }
           },
+          "403": {
+            "description": "Possible reasons include: 'You are going too fast', 'Not enough tokens remaining under your application'",
+            "schema": {
+              "$ref": "#/definitions/403_Error"
+            }
+          },
           "500": {
-            "description": "Error creating twitter account",
+            "description": "Possible reasons include: 'Error requesting twitter info', 'Error inserting new twitter report', 'Error getting application's credentials', 'Internal database error'",
             "schema": {
               "$ref": "#/definitions/500_Error"
             }
@@ -1282,19 +1546,25 @@
             }
           },
           "400": {
-            "description": "Invalid params",
+            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter', 'The twitter account provided has no audience', 'IDS array is too long or in an incorrect format'",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
           },
           "401": {
-            "description": "Invalid API key",
+            "description": "Possible reasons include: 'Invalid API key', 'The twitter account provided is private'",
             "schema": {
               "$ref": "#/definitions/401_Error"
             }
           },
+          "403": {
+            "description": "Possible reasons include: 'You are going too fast', 'Not enough tokens remaining under your application'",
+            "schema": {
+              "$ref": "#/definitions/403_Error"
+            }
+          },
           "500": {
-            "description": "Error creating twitter account",
+            "description": "Possible reasons include: 'Error requesting twitter info', 'Error inserting new twitter report', 'Error getting application's credentials', 'Internal database error'",
             "schema": {
               "$ref": "#/definitions/500_Error"
             }
