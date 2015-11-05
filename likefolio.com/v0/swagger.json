@@ -16,56 +16,6 @@
     "x-providerName": "likefolio.com"
   },
   "paths": {
-    "/v0/brands/bei.json": {
-      "get": {
-        "operationId": "GET--version-brands-bei---format-",
-        "parameters": [
-          {
-            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
-            "in": "query",
-            "name": "apiKey",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "tags": [
-          "brands"
-        ]
-      }
-    },
-    "/v0/brands/beiList.json": {
-      "get": {
-        "operationId": "GET--version-brands-beiList---format-",
-        "parameters": [
-          {
-            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
-            "in": "query",
-            "name": "apiKey",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "tags": [
-          "brands"
-        ]
-      }
-    },
     "/v0/brands/mentionQty.json": {
       "get": {
         "operationId": "GET--version-brands-mentionQty---format-",
@@ -319,46 +269,6 @@
         ]
       }
     },
-    "/v0/companies/ceiList.json": {
-      "get": {
-        "operationId": "GET--version-companies-ceiList---format-",
-        "parameters": [
-          {
-            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
-            "in": "query",
-            "name": "apiKey",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Order of the results",
-            "in": "query",
-            "name": "sort",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Quantity of records to return",
-            "in": "query",
-            "name": "qty",
-            "required": false,
-            "type": "integer"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Returns the CEI values of the companies",
-        "tags": [
-          "companies"
-        ]
-      }
-    },
     "/v0/companies/csi.json": {
       "get": {
         "operationId": "GET--version-companies-csi---format-",
@@ -403,46 +313,6 @@
           }
         },
         "summary": "Returns a list of CSI values for a single company on a given period.",
-        "tags": [
-          "companies"
-        ]
-      }
-    },
-    "/v0/companies/csiList.json": {
-      "get": {
-        "operationId": "GET--version-companies-csiList---format-",
-        "parameters": [
-          {
-            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
-            "in": "query",
-            "name": "apiKey",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Order of the results",
-            "in": "query",
-            "name": "sort",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Quantity of records to return",
-            "in": "query",
-            "name": "qty",
-            "required": false,
-            "type": "integer"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Returns the CSI values of the companies.",
         "tags": [
           "companies"
         ]
@@ -1067,6 +937,13 @@
         "operationId": "GET--version-tags-cashtags-mentionQty---format-",
         "parameters": [
           {
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "in": "query",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
             "description": "Text of the cashtag.",
             "in": "query",
             "name": "text",
@@ -1109,6 +986,13 @@
         "operationId": "GET--version-tags-match---format-",
         "parameters": [
           {
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "in": "query",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
+          {
             "description": "Text to match agains tags.",
             "in": "query",
             "name": "text",
@@ -1132,6 +1016,13 @@
       "post": {
         "operationId": "POST--version-tags-match---format-",
         "parameters": [
+          {
+            "description": "Api token granted to call the rest of the endpoints. You must call sessions/create to obtain a token and it will be valid for 15 minutes. After that, you must create another session.",
+            "in": "formData",
+            "name": "apiKey",
+            "required": true,
+            "type": "string"
+          },
           {
             "description": "Text to match agains tags.",
             "in": "formData",
