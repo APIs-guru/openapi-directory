@@ -639,7 +639,7 @@ function errorToString(errors, context) {
     if (_.isArray(errors))
       result += Json2String(errors);
     else
-      result += errors + '\n';
+      result += errors.stack + '\n';
   }
 
   if (warnings) {
