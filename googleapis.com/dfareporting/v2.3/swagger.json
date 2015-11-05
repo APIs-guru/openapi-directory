@@ -1,5 +1,5 @@
 {
-  "basePath": "/dfareporting/v2.2",
+  "basePath": "/dfareporting/v2.3",
   "definitions": {
     "Account": {
       "description": "Contains properties of a DCM account.",
@@ -1535,6 +1535,15 @@
           ],
           "type": "string"
         },
+        "authoringSource": {
+          "description": "Source application where creative was authored. Presently, only DBM authored creatives will have this field set. Applicable to all creative types.",
+          "enum": [
+            "CREATIVE_AUTHORING_SOURCE_DBM",
+            "CREATIVE_AUTHORING_SOURCE_DCM",
+            "CREATIVE_AUTHORING_SOURCE_STUDIO"
+          ],
+          "type": "string"
+        },
         "authoringTool": {
           "description": "Authoring tool for HTML5 banner creatives. This is a read-only field. Applicable to the following creative types: HTML5_BANNER.",
           "enum": [
@@ -1749,8 +1758,16 @@
           "description": "Name of the creative. This is a required field and must be less than 256 characters long. Applicable to all creative types.",
           "type": "string"
         },
+        "obaIcon": {
+          "$ref": "#/definitions/ObaIcon",
+          "description": "Online behavioral advertising icon to be added to the creative. Applicable to the following creative types: all INSTREAM_VIDEO."
+        },
         "overrideCss": {
           "description": "Override CSS value for rich media creatives. Applicable to the following creative types: all RICH_MEDIA.",
+          "type": "string"
+        },
+        "progressOffset": {
+          "description": "Amount of time to play the video before counting a view. Applicable to the following creative types: all INSTREAM_VIDEO.",
           "type": "string"
         },
         "redirectUrl": {
@@ -1778,6 +1795,10 @@
         "size": {
           "$ref": "#/definitions/Size",
           "description": "Size associated with this creative. When inserting or updating a creative either the size ID field or size width and height fields can be used. This is a required field when applicable; however for IMAGE and FLASH_INPAGE creatives, if left blank, this field will be automatically set using the actual size of the associated image assets. Applicable to the following creative types: ENHANCED_BANNER, ENHANCED_IMAGE, FLASH_INPAGE, HTML5_BANNER, IMAGE, and all RICH_MEDIA."
+        },
+        "skipOffset": {
+          "description": "Amount of time to play the video before the skip button appears. Applicable to the following creative types: all INSTREAM_VIDEO.",
+          "type": "string"
         },
         "skippable": {
           "description": "Whether the user can choose to skip the creative. Applicable to the following creative types: all INSTREAM_VIDEO and all VPAID.",
@@ -1850,6 +1871,7 @@
             "HTML5_BANNER",
             "IMAGE",
             "INSTREAM_VIDEO",
+            "INSTREAM_VIDEO_REDIRECT",
             "INTERNAL_REDIRECT",
             "INTERSTITIAL_INTERNAL_REDIRECT",
             "REDIRECT",
@@ -1862,7 +1884,6 @@
             "RICH_MEDIA_MULTI_FLOATING",
             "RICH_MEDIA_PEEL_DOWN",
             "TRACKING_TEXT",
-            "VAST_REDIRECT",
             "VPAID_LINEAR",
             "VPAID_NON_LINEAR"
           ],
@@ -2426,6 +2447,11 @@
     "CreativeCustomEvent": {
       "description": "Creative Custom Event.",
       "properties": {
+        "advertiserCustomEventId": {
+          "description": "Unique ID of this event used by DDM Reporting and Data Transfer. This is a read-only field.",
+          "format": "int64",
+          "type": "string"
+        },
         "advertiserCustomEventName": {
           "description": "User-entered name for the event.",
           "type": "string"
@@ -4055,10 +4081,6 @@
           "$ref": "#/definitions/OmnitureSettings",
           "description": "Settings for DCM Omniture integration."
         },
-        "sslRequired": {
-          "description": "Whether floodlight activities owned by this configuration are required to be SSL-compliant.",
-          "type": "boolean"
-        },
         "standardVariableTypes": {
           "description": "List of standard variables enabled for this configuration.\n\nAcceptable values are:\n- \"ORD\"\n- \"NUM\"",
           "items": {
@@ -4659,6 +4681,36 @@
             "$ref": "#/definitions/MobileCarrier"
           },
           "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "ObaIcon": {
+      "description": "Online Behavioral Advertiser icon.",
+      "properties": {
+        "iconClickThroughUrl": {
+          "description": "URL to redirect to when an OBA icon is clicked.",
+          "type": "string"
+        },
+        "program": {
+          "description": "Identifies the industry initiative that the icon supports. For example, AdChoices.",
+          "type": "string"
+        },
+        "resourceUrl": {
+          "description": "OBA icon resource script URL. DCM only supports image, JavaScript, and Flash icons. Learn more",
+          "type": "string"
+        },
+        "size": {
+          "$ref": "#/definitions/Size",
+          "description": "OBA icon size."
+        },
+        "xPosition": {
+          "description": "OBA icon x coordinate position.",
+          "type": "string"
+        },
+        "yPosition": {
+          "description": "OBA icon y coordinate position.",
+          "type": "string"
         }
       },
       "type": "object"
@@ -6982,6 +7034,10 @@
         "tagSetting": {
           "$ref": "#/definitions/TagSetting",
           "description": "Configuration settings for dynamic and image floodlight tags."
+        },
+        "videoActiveViewOptOut": {
+          "description": "Whether Verification and ActiveView are disabled for in-stream video creatives on this site. The same setting videoActiveViewOptOut exists on the directory site level -- the opt out occurs if either of these settings are true. These settings are distinct from DirectorySites.settings.activeViewOptOut or Sites.siteSettings.activeViewOptOut which only apply to display ads. However, Accounts.activeViewOptOut opts out both video traffic, as well as display ads, from Verification and ActiveView.",
+          "type": "boolean"
         }
       },
       "type": "object"
@@ -7707,7 +7763,7 @@
     },
     "description": "Manage your DoubleClick Campaign Manager ad campaigns and reports.",
     "title": "DCM/DFA Reporting And Trafficking API",
-    "version": "v2.2",
+    "version": "v2.3",
     "x-apiClientRegistration": {
       "url": "https://console.developers.google.com"
     },
@@ -7716,10 +7772,10 @@
     },
     "x-origin": {
       "format": "google",
-      "url": "https://www.googleapis.com/discovery/v1/apis/dfareporting/v2.2/rest",
+      "url": "https://www.googleapis.com/discovery/v1/apis/dfareporting/v2.3/rest",
       "version": "v1"
     },
-    "x-preferred": false,
+    "x-preferred": true,
     "x-providerName": "googleapis.com",
     "x-serviceName": "dfareporting"
   },
@@ -8899,6 +8955,7 @@
               "HTML5_BANNER",
               "IMAGE",
               "INSTREAM_VIDEO",
+              "INSTREAM_VIDEO_REDIRECT",
               "INTERNAL_REDIRECT",
               "INTERSTITIAL_INTERNAL_REDIRECT",
               "REDIRECT",
@@ -8911,7 +8968,6 @@
               "RICH_MEDIA_MULTI_FLOATING",
               "RICH_MEDIA_PEEL_DOWN",
               "TRACKING_TEXT",
-              "VAST_REDIRECT",
               "VPAID_LINEAR",
               "VPAID_NON_LINEAR"
             ],
@@ -12914,6 +12970,7 @@
                 "HTML5_BANNER",
                 "IMAGE",
                 "INSTREAM_VIDEO",
+                "INSTREAM_VIDEO_REDIRECT",
                 "INTERNAL_REDIRECT",
                 "INTERSTITIAL_INTERNAL_REDIRECT",
                 "REDIRECT",
@@ -12926,7 +12983,6 @@
                 "RICH_MEDIA_MULTI_FLOATING",
                 "RICH_MEDIA_PEEL_DOWN",
                 "TRACKING_TEXT",
-                "VAST_REDIRECT",
                 "VPAID_LINEAR",
                 "VPAID_NON_LINEAR"
               ],
@@ -14807,41 +14863,6 @@
       }
     },
     "/userprofiles/{profileId}/floodlightActivityGroups/{id}": {
-      "delete": {
-        "description": "Deletes an existing floodlight activity group.",
-        "operationId": "dfareporting.floodlightActivityGroups.delete",
-        "parameters": [
-          {
-            "description": "User profile ID associated with this request.",
-            "in": "path",
-            "name": "profileId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Floodlight activity Group ID.",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/dfatrafficking"
-            ]
-          }
-        ],
-        "tags": [
-          "floodlightActivityGroups"
-        ]
-      },
       "get": {
         "description": "Gets one floodlight activity group by ID.",
         "operationId": "dfareporting.floodlightActivityGroups.get",
