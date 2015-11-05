@@ -213,21 +213,6 @@
         }
       }
     },
-    "CreateProfileResponse": {
-      "properties": {
-        "code": {
-          "format": "integer",
-          "type": "number"
-        },
-        "customer_code": {
-          "description": "the ID of the payment profile. You need to keep track of this value.",
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        }
-      }
-    },
     "Criteria": {
       "properties": {
         "field": {
@@ -620,6 +605,21 @@
         "card_id"
       ]
     },
+    "ProfileResponse": {
+      "properties": {
+        "code": {
+          "format": "integer",
+          "type": "number"
+        },
+        "customer_code": {
+          "description": "the ID of the payment profile. You need to keep track of this value.",
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
     "ProfileToken": {
       "properties": {
         "code": {
@@ -887,6 +887,55 @@
         "name"
       ]
     },
+    "TokenRequest": {
+      "properties": {
+        "cvd": {
+          "description": "a 3 to 4 digit representation of CVD/CDD. This is the number usually found on the back of the credit card.",
+          "type": "string"
+        },
+        "expiry_month": {
+          "description": "a 2 digit representation of the expiry month. For example March is 03.",
+          "type": "string"
+        },
+        "expiry_year": {
+          "description": "a 2 digit representation of the expiry year. For example 2016 is 16.",
+          "type": "string"
+        },
+        "number": {
+          "description": "The credit card number",
+          "type": "string"
+        }
+      },
+      "required": [
+        "number",
+        "expiry_month",
+        "expiry_year",
+        "cvd"
+      ]
+    },
+    "TokenResponse": {
+      "properties": {
+        "code": {
+          "description": "Response code for the message. It can be ignored.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Response message with any hints as to what might have gone wrong, if something went wrong.",
+          "type": "string"
+        },
+        "token": {
+          "description": "The token representing the credit card number that you will send to Beanstream for purchases. You will always receive a token, even if the request data is wrong or the card is invalid.",
+          "type": "string"
+        },
+        "version": {
+          "description": "Message version number. Can be ignored.",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "token"
+      ]
+    },
     "Transaction": {
       "properties": {
         "adjusted_by": {
@@ -1001,7 +1050,7 @@
   "info": {
     "description": "https://www.beanstream.com/api/v1",
     "title": "Beanstream Payments API",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "x-logo": {
       "url": "http://46k5aj426sp830ztvffig15w.wpengine.netdna-cdn.com/wp-content/uploads/2015/08/Beanstream-logo.png"
     },
@@ -1367,7 +1416,7 @@
           "200": {
             "description": "The Profile.",
             "schema": {
-              "$ref": "#/definitions/CreateProfileResponse"
+              "$ref": "#/definitions/ProfileResponse"
             }
           },
           "400": {
@@ -1429,7 +1478,7 @@
           "200": {
             "description": "The Profile.",
             "schema": {
-              "$ref": "#/definitions/PaymentProfile"
+              "$ref": "#/definitions/ProfileResponse"
             }
           },
           "400": {
@@ -1557,7 +1606,7 @@
           "200": {
             "description": "The Profile.",
             "schema": {
-              "$ref": "#/definitions/CreateProfileResponse"
+              "$ref": "#/definitions/ProfileResponse"
             }
           },
           "400": {
@@ -1688,7 +1737,7 @@
           "200": {
             "description": "The Profile.",
             "schema": {
-              "$ref": "#/definitions/ProfileGetCards"
+              "$ref": "#/definitions/ProfileResponse"
             }
           },
           "400": {
@@ -1758,7 +1807,7 @@
           "200": {
             "description": "The Profile.",
             "schema": {
-              "$ref": "#/definitions/ProfileGetCards"
+              "$ref": "#/definitions/ProfileResponse"
             }
           },
           "400": {
@@ -1835,7 +1884,7 @@
           "200": {
             "description": "The Profile.",
             "schema": {
-              "$ref": "#/definitions/ProfileGetCards"
+              "$ref": "#/definitions/ProfileResponse"
             }
           },
           "400": {
@@ -1940,6 +1989,32 @@
         "summary": "Search Query",
         "tags": [
           "Reporting"
+        ]
+      }
+    },
+    "/scripts/tokenization/tokens": {
+      "post": {
+        "description": "NOTE that the full URL for this API call is https://www.beanstream.com/scripts/tokenization/tokens. Turn a credit card into a token using this service. This helps lessen your PCI scope by not passing the credit card information to your server. Instead you turn the card number into a token in the client app, then send the token to the server. When you send the token to Beanstream to make a payment, Beanstream then looks up the card number from that token and makes the payment. Tokens can also be used to create payment profiles.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "token_request",
+            "schema": {
+              "$ref": "#/definitions/TokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Token response object. One will always be returned even if the data or card was invalid. The validity of the card is not checked with this API call.",
+            "schema": {
+              "$ref": "#/definitions/TokenResponse"
+            }
+          }
+        },
+        "summary": "Tokenize credit card",
+        "tags": [
+          "Tokenization"
         ]
       }
     }
