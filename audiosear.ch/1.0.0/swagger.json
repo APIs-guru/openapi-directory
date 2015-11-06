@@ -1,0 +1,1773 @@
+{
+  "basePath": "/api",
+  "consumes": [
+    "application/json"
+  ],
+  "definitions": {
+    "all_shows": {
+      "properties": {
+        "categories": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "xml": {
+            "name": "category",
+            "wrapped": true
+          }
+        },
+        "created_at": {
+          "description": "Date and time the show was created",
+          "format": "date-time",
+          "type": "string"
+        },
+        "deleted_at": {
+          "description": "Date and time the show was deleted",
+          "format": "date-time",
+          "type": "string"
+        },
+        "description": {
+          "description": "Show description",
+          "type": "string"
+        },
+        "extra": {
+          "description": "additional information",
+          "properties": {
+            "itunes_url": {
+              "description": "Link to show on iTunes",
+              "type": "string"
+            },
+            "sc_feed": {
+              "description": "Link to SoundCloud user page",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "id": {
+          "description": "Unique identifier for the show",
+          "type": "integer"
+        },
+        "title": {
+          "description": "Show title",
+          "type": "string"
+        },
+        "updated_at": {
+          "description": "Date and time the show was last updated",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "created_at",
+        "id",
+        "title",
+        "updated_at"
+      ]
+    },
+    "audio_file": {
+      "properties": {
+        "current_status": {
+          "description": "Status of audio file processing in Audiosear.ch",
+          "type": "string"
+        },
+        "duration": {
+          "description": "Length of audio file",
+          "type": "integer"
+        },
+        "filename": {
+          "description": "Audio file name",
+          "type": "string"
+        },
+        "id": {
+          "description": "Unique identifier for the show's audio file",
+          "type": "integer"
+        },
+        "url": {
+          "description": "Absolute paths to audio files",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "xml": {
+            "name": "url",
+            "wrapped": true
+          }
+        }
+      },
+      "required": [
+        "id",
+        "filename",
+        "duration",
+        "current_status",
+        "url"
+      ]
+    },
+    "category": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parent_id": {
+          "description": "ID for parent category",
+          "type": "integer"
+        }
+      }
+    },
+    "contribution": {
+      "properties": {
+        "episode": {
+          "$ref": "#/definitions/episode_brief",
+          "type": "object"
+        },
+        "role": {
+          "description": "the Role the Person played in the Episode",
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "episode"
+      ]
+    },
+    "entity": {
+      "properties": {
+        "category": {
+          "description": "Entity category",
+          "type": "string"
+        },
+        "extra": {
+          "description": "Additional information about the entity",
+          "items": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "id": {
+          "description": "Unique identifier for the entity",
+          "type": "integer"
+        },
+        "identifier": {
+          "description": "OpenCalais link",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the entity",
+          "type": "string"
+        },
+        "score": {
+          "description": "Entity confidence",
+          "type": "integer"
+        },
+        "type": {
+          "description": "Entity type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "score",
+        "category"
+      ]
+    },
+    "episode": {
+      "properties": {
+        "audio_files": {
+          "items": {
+            "$ref": "#/definitions/audio_file",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "categories": {
+          "description": "Categories",
+          "items": {
+            "$ref": "#/definitions/category"
+          },
+          "type": "array"
+        },
+        "date_added": {
+          "description": "Date and time episode was incorporated into Audiosear.ch",
+          "format": "date-time",
+          "type": "string"
+        },
+        "date_created": {
+          "description": "Date show originally aired",
+          "format": "date-time",
+          "type": "string"
+        },
+        "description": {
+          "description": "Show description",
+          "type": "string"
+        },
+        "digital_location": {
+          "description": "URL for episode page",
+          "type": "string"
+        },
+        "duration": {
+          "description": "Length of audio file in seconds",
+          "type": "integer"
+        },
+        "entities": {
+          "items": {
+            "$ref": "#/definitions/entity",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "extra": {
+          "description": "additional resource information",
+          "type": "object"
+        },
+        "highlights": {
+          "type": "object"
+        },
+        "id": {
+          "description": "Unique identifier for the show",
+          "type": "integer"
+        },
+        "identifier": {
+          "description": "URL for source audio file",
+          "type": "string"
+        },
+        "image_files": {
+          "items": {
+            "$ref": "#/definitions/image_file",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "physical_location": {
+          "description": "Source of episode (e.g., SoundCloud, iTunes",
+          "type": "string"
+        },
+        "show_id": {
+          "description": "ID of parent show",
+          "type": "integer"
+        },
+        "show_title": {
+          "description": "Title of parent show",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tags",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "title": {
+          "description": "Show title",
+          "type": "string"
+        },
+        "updated_at": {
+          "description": "Date and time item was last updated",
+          "format": "date-time",
+          "type": "string"
+        },
+        "urls": {
+          "$ref": "#/definitions/urls",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "date_added",
+        "show_id",
+        "show_title"
+      ]
+    },
+    "episode_brief": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the Episode",
+          "type": "integer"
+        },
+        "title": {
+          "description": "Episode title",
+          "type": "string"
+        },
+        "urls": {
+          "properties": {
+            "self": {
+              "description": "URI to Episode API response",
+              "type": "string"
+            },
+            "ui": {
+              "description": "URI to Episode human response",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "urls"
+      ]
+    },
+    "episode_tastemaker": {
+      "properties": {
+        "audio_files": {
+          "items": {
+            "$ref": "#/definitions/audio_file"
+          },
+          "type": "array"
+        },
+        "categories": {
+          "description": "Categories",
+          "items": {
+            "$ref": "#/definitions/category"
+          },
+          "type": "array"
+        },
+        "id": {
+          "description": "Unique identifier for the show",
+          "type": "integer"
+        },
+        "image_urls": {
+          "$ref": "#/definitions/image_urls",
+          "type": "object"
+        },
+        "network": {
+          "description": "Network that produces show",
+          "type": "string"
+        },
+        "show_id": {
+          "description": "ID of parent show",
+          "type": "integer"
+        },
+        "show_title": {
+          "description": "Title of parent show",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tags",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "title": {
+          "description": "Show title",
+          "type": "string"
+        },
+        "urls": {
+          "$ref": "#/definitions/urls",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "show_id",
+        "show_title"
+      ]
+    },
+    "excerpt": {
+      "properties": {
+        "end_time": {
+          "type": "string"
+        },
+        "start_time": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "highlight_transcript": {
+      "properties": {
+        "end_time": {
+          "description": "End time of highlight",
+          "type": "string"
+        },
+        "start_time": {
+          "description": "Start time of highlight",
+          "type": "string"
+        },
+        "text": {
+          "description": "Highlight text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "start_time",
+        "end_time"
+      ]
+    },
+    "highlights": {
+      "properties": {
+        "id": {
+          "description": "Audio file id",
+          "type": "integer"
+        },
+        "transcript": {
+          "items": {
+            "$ref": "#/definitions/highlight_transcript",
+            "type": "object"
+          },
+          "type": "array",
+          "xml": {
+            "name": "highlight",
+            "wrapped": true
+          }
+        },
+        "url": {
+          "description": "File url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "url",
+        "id",
+        "transcript"
+      ]
+    },
+    "image_file": {
+      "properties": {
+        "url": {
+          "description": "Absolute paths to image files",
+          "items": {
+            "type": "string"
+          },
+          "type": "object",
+          "xml": {
+            "name": "url",
+            "wrapped": true
+          }
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "image_urls": {
+      "properties": {
+        "full": {
+          "description": "URL for full-size image",
+          "type": "string"
+        },
+        "thumb": {
+          "description": "URL for thumbail image",
+          "type": "string"
+        }
+      }
+    },
+    "person": {
+      "properties": {
+        "episodes": {
+          "items": {
+            "$ref": "#/definitions/contribution",
+            "type": "object"
+          },
+          "type": "array",
+          "xml": {
+            "name": "episode",
+            "wrapped": true
+          }
+        },
+        "extra": {
+          "description": "additional resource information",
+          "type": "object"
+        },
+        "id": {
+          "description": "Unique identifier for the person",
+          "type": "integer"
+        },
+        "name": {
+          "description": "Person name",
+          "type": "string"
+        },
+        "shows": {
+          "items": {
+            "$ref": "#/definitions/show",
+            "type": "object"
+          },
+          "type": "array",
+          "xml": {
+            "name": "show",
+            "wrapped": true
+          }
+        },
+        "slug": {
+          "description": "URI-safe Person name",
+          "type": "string"
+        },
+        "urls": {
+          "properties": {
+            "self": {
+              "description": "URI to Person API response",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "person_search_result": {
+      "properties": {
+        "episodes": {
+          "items": {
+            "$ref": "#/definitions/contribution",
+            "type": "object"
+          },
+          "type": "array",
+          "xml": {
+            "name": "episode",
+            "wrapped": true
+          }
+        },
+        "id": {
+          "description": "ID for the Person",
+          "type": "integer"
+        },
+        "name": {
+          "description": "Person's name",
+          "type": "string"
+        },
+        "shows": {
+          "items": {
+            "$ref": "#/definitions/show_contribution",
+            "type": "object"
+          },
+          "type": "array",
+          "xml": {
+            "name": "show",
+            "wrapped": true
+          }
+        },
+        "slug": {
+          "description": "URI-safe Person's name",
+          "type": "string"
+        },
+        "urls": {
+          "properties": {
+            "self": {
+              "description": "URI to Person API response",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "person_search_results": {
+      "properties": {
+        "page": {
+          "type": "integer"
+        },
+        "query": {
+          "type": "string"
+        },
+        "results": {
+          "items": {
+            "$ref": "#/definitions/person_search_result",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "results_per_page": {
+          "type": "integer"
+        },
+        "total_results": {
+          "type": "integer"
+        }
+      }
+    },
+    "recent_episode": {
+      "properties": {
+        "file_name": {
+          "description": "Audio file name",
+          "type": "string"
+        },
+        "file_status": {
+          "description": "Episode processing status",
+          "type": "string"
+        },
+        "item_id": {
+          "description": "Episode unique id",
+          "type": "integer"
+        },
+        "item_name": {
+          "description": "Episode name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "item_name",
+        "item_id",
+        "file_status"
+      ]
+    },
+    "related_result": {
+      "properties": {
+        "audio_files": {
+          "description": "Array of audio files attributes",
+          "items": {
+            "$ref": "#/definitions/audio_file"
+          },
+          "type": "array"
+        },
+        "categories": {
+          "description": "Categories",
+          "items": {
+            "$ref": "#/definitions/category"
+          },
+          "type": "array"
+        },
+        "date_added": {
+          "description": "Date added to Audiosear.ch",
+          "type": "string"
+        },
+        "date_created": {
+          "description": "Created date for the item",
+          "type": "string"
+        },
+        "digital_location": {
+          "description": "External item page of source material",
+          "type": "string"
+        },
+        "duration": {
+          "description": "Length of audio file",
+          "type": "integer"
+        },
+        "entities": {
+          "description": "Array of entites related to the item",
+          "items": {
+            "$ref": "#/definitions/entity"
+          },
+          "type": "array"
+        },
+        "id": {
+          "description": "ID for the item",
+          "type": "integer"
+        },
+        "identifier": {
+          "description": "Link to external permanent url",
+          "type": "string"
+        },
+        "image_urls": {
+          "$ref": "#/definitions/image_urls",
+          "type": "object"
+        },
+        "network": {
+          "description": "The Show network",
+          "type": "string"
+        },
+        "physical_location": {
+          "description": "Episode import source",
+          "type": "string"
+        },
+        "show_id": {
+          "description": "Show ID that the returned item belongs to",
+          "type": "integer"
+        },
+        "show_title": {
+          "description": "Show title associated with the returned item",
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "title": {
+          "description": "Title for the item",
+          "type": "string"
+        },
+        "topics": {
+          "description": "Array of topics related to the item",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "updated_at": {
+          "description": "Date and time the show was last updated",
+          "type": "integer"
+        },
+        "urls": {
+          "$ref": "#/definitions/urls",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "date_added",
+        "show_id",
+        "show_title"
+      ]
+    },
+    "results": {
+      "properties": {
+        "page": {
+          "type": "integer"
+        },
+        "query": {
+          "type": "string"
+        },
+        "results": {
+          "$ref": "#/definitions/search_result",
+          "type": "array"
+        },
+        "results_per_page": {
+          "type": "integer"
+        },
+        "total_results": {
+          "type": "integer"
+        }
+      }
+    },
+    "search_result": {
+      "properties": {
+        "audio_files": {
+          "description": "Array of audio files attributes",
+          "items": {
+            "$ref": "#/definitions/audio_file"
+          },
+          "type": "array"
+        },
+        "categories": {
+          "description": "Categories",
+          "items": {
+            "$ref": "#/definitions/category"
+          },
+          "type": "array"
+        },
+        "date_added": {
+          "description": "Date added to Audiosear.ch",
+          "type": "string"
+        },
+        "date_created": {
+          "description": "Created date for the item",
+          "type": "string"
+        },
+        "description": {
+          "description": "description of the audio file",
+          "type": "string"
+        },
+        "digital_location": {
+          "description": "External item page of source material",
+          "type": "string"
+        },
+        "duration": {
+          "description": "Length of audio file",
+          "type": "integer"
+        },
+        "entities": {
+          "description": "Array of entites related to the item",
+          "items": {
+            "$ref": "#/definitions/entity"
+          },
+          "type": "array"
+        },
+        "excerpts": {
+          "items": {
+            "$ref": "#/definitions/excerpt",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "highlights": {
+          "items": {
+            "$ref": "#/definitions/highlights"
+          },
+          "type": "array"
+        },
+        "id": {
+          "description": "ID for the item",
+          "type": "integer"
+        },
+        "identifier": {
+          "description": "Link to external permanent url",
+          "type": "string"
+        },
+        "image_urls": {
+          "$ref": "#/definitions/image_urls",
+          "type": "object"
+        },
+        "locations": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "network": {
+          "description": "The Show network",
+          "type": "string"
+        },
+        "physical_location": {
+          "description": "Episode import source",
+          "type": "string"
+        },
+        "show_id": {
+          "description": "Show ID that the returned item belongs to",
+          "type": "integer"
+        },
+        "show_title": {
+          "description": "Show title associated with the returned item",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title for the item",
+          "type": "string"
+        },
+        "topics": {
+          "description": "Array of topics related to the item",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "updated_at": {
+          "description": "Date and time the show was last updated",
+          "type": "integer"
+        },
+        "urls": {
+          "$ref": "#/definitions/urls",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "date_added",
+        "show_id",
+        "show_title"
+      ]
+    },
+    "show": {
+      "properties": {
+        "categories": {
+          "items": {
+            "$ref": "#/definitions/category",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "description": {
+          "description": "description of the show",
+          "type": "string"
+        },
+        "episode_ids": {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array",
+          "xml": {
+            "name": "episode_id",
+            "wrapped": true
+          }
+        },
+        "id": {
+          "description": "unique identifier for the show",
+          "type": "integer"
+        },
+        "image_files": {
+          "items": {
+            "$ref": "#/definitions/image_file",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "network": {
+          "type": "string"
+        },
+        "number_of_episodes": {
+          "description": "Number of episodes available for this show",
+          "type": "integer"
+        },
+        "recent_episodes": {
+          "items": {
+            "$ref": "#/definitions/recent_episode",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "sc_feed": {
+          "description": "SoundCloud URL",
+          "type": "string"
+        },
+        "title": {
+          "description": "title of the show",
+          "type": "string"
+        },
+        "urls": {
+          "description": "Relative URL to api endpoint",
+          "items": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "web_profiles": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "title"
+      ]
+    },
+    "show_brief": {
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the Show",
+          "type": "integer"
+        },
+        "title": {
+          "description": "Show title",
+          "type": "string"
+        },
+        "urls": {
+          "properties": {
+            "self": {
+              "description": "URI to Show API response",
+              "type": "string"
+            },
+            "ui": {
+              "description": "URI to Show human response",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "urls"
+      ]
+    },
+    "show_contribution": {
+      "properties": {
+        "role": {
+          "description": "the Role the Person played in the Show",
+          "type": "string"
+        },
+        "show": {
+          "$ref": "#/definitions/show_brief",
+          "type": "object"
+        }
+      },
+      "required": [
+        "role",
+        "show"
+      ]
+    },
+    "show_results": {
+      "properties": {
+        "page": {
+          "type": "integer"
+        },
+        "query": {
+          "type": "string"
+        },
+        "results": {
+          "$ref": "#/definitions/show_search_result",
+          "type": "array"
+        },
+        "results_per_page": {
+          "type": "integer"
+        },
+        "total_results": {
+          "type": "integer"
+        }
+      }
+    },
+    "show_search_result": {
+      "properties": {
+        "categories": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "description": {
+          "description": "description of the show",
+          "type": "string"
+        },
+        "id": {
+          "description": "unique identifier for the show",
+          "type": "integer"
+        },
+        "image_files": {
+          "items": {
+            "$ref": "#/definitions/image_file",
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "network": {
+          "description": "Distribution network for show",
+          "type": "string"
+        },
+        "sc_feed": {
+          "description": "SoundCloud URL",
+          "type": "string"
+        },
+        "title": {
+          "description": "title of the show",
+          "type": "string"
+        },
+        "web_profiles": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "title"
+      ]
+    },
+    "shows": {
+      "properties": {
+        "page": {
+          "type": "integer"
+        },
+        "query": {
+          "type": "string"
+        },
+        "results": {
+          "$ref": "#/definitions/show",
+          "type": "array"
+        },
+        "results_per_page": {
+          "type": "integer"
+        },
+        "total_results": {
+          "type": "integer"
+        }
+      }
+    },
+    "simple_search_result": {
+      "properties": {
+        "audio_files": {
+          "description": "Array of audio files attributes",
+          "items": {
+            "$ref": "#/definitions/audio_file"
+          },
+          "type": "array"
+        },
+        "categories": {
+          "description": "Categories",
+          "items": {
+            "$ref": "#/definitions/category"
+          },
+          "type": "array"
+        },
+        "id": {
+          "description": "ID for the item",
+          "type": "integer"
+        },
+        "image_urls": {
+          "$ref": "#/definitions/image_urls",
+          "type": "object"
+        },
+        "network": {
+          "description": "The Show network",
+          "type": "string"
+        },
+        "show_id": {
+          "description": "Show ID that the returned item belongs to",
+          "type": "integer"
+        },
+        "show_title": {
+          "description": "Show title associated with the returned item",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title for the item",
+          "type": "string"
+        },
+        "urls": {
+          "$ref": "#/definitions/urls",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "title"
+      ]
+    },
+    "snippet": {
+      "properties": {
+        "end_time": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "start_time": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "source_episode_tastemaker": {},
+    "trending": {
+      "properties": {
+        "related_episodes": {
+          "$ref": "#/definitions/simple_search_result",
+          "type": "array"
+        },
+        "trend": {
+          "description": "Name of trend",
+          "type": "string"
+        },
+        "twitter_url": {
+          "description": "Link to Twitter search results for the trend",
+          "type": "string"
+        }
+      },
+      "required": [
+        "trend",
+        "twitter_url"
+      ]
+    },
+    "urls": {
+      "properties": {
+        "self": {
+          "description": "API URL",
+          "type": "string"
+        },
+        "ui": {
+          "description": "Audiosear.ch URL",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "host": "www.audiosear.ch",
+  "info": {
+    "contact": {
+      "email": "info@audiosear.ch",
+      "name": "Audiosear.ch"
+    },
+    "description": "The Audiosear.ch API requires OAuth, which you can manage at <a href='/oauth/applications'>OAuth Applications</a>.<br/>API SDK clients available in <a href='https://github.com/popuparchive/audiosearch-client-python' target='_blank'>Python</a>, <a href='https://github.com/popuparchive/audiosearch-client-ruby' target='_blank'>Ruby</a>, <a href='https://github.com/popuparchive/audiosearch-client-php' target='_blank'>PHP</a>, and <a href='https://github.com/popuparchive/audiosearch-client-node' target='_blank'>Node</a>.<br/>Read the <a href='https://github.com/popuparchive/audiosearch-cookbook/wiki'>API Cookbook</a> for easy copy-and-paste recipes.",
+    "termsOfService": "https://www.auidosear.ch/terms_of_use",
+    "title": "Audiosear.ch API",
+    "version": "1.0.0",
+    "x-origin": {
+      "format": "swagger",
+      "url": "https://www.audiosear.ch/developer/api-docs/v1/api-docs.json",
+      "version": "2.0"
+    },
+    "x-providerName": "audiosear.ch"
+  },
+  "paths": {
+    "/episodes/{id}": {
+      "get": {
+        "description": "Gets a single episode record by ID",
+        "parameters": [
+          {
+            "description": "ID of episode to fetch",
+            "format": "integer",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns an individual episode",
+            "schema": {
+              "$ref": "#/definitions/episode"
+            }
+          }
+        },
+        "tags": [
+          "episodes"
+        ]
+      }
+    },
+    "/episodes/{id}/related": {
+      "get": {
+        "description": "Returns episodes related to a given episode",
+        "parameters": [
+          {
+            "description": "ID of episode for which to get related episodes",
+            "format": "int64",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "Number of episodes to be returned. Must be paired with <b>from</b>.",
+            "format": "int64",
+            "in": "query",
+            "name": "size",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Offset of result from which to start (zero-based). Must be paired with <b>size</b>.",
+            "format": "int64",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of episodes",
+            "schema": {
+              "$ref": "#/definitions/related_result"
+            }
+          }
+        },
+        "tags": [
+          "episodes"
+        ]
+      }
+    },
+    "/episodes/{id}/snippet/{time_in_secs}": {
+      "get": {
+        "description": "Returns a specific moment from an episode with two lines of context.",
+        "parameters": [
+          {
+            "description": "ID of episode for which to get related episodes",
+            "format": "int64",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "description": "Timestamp of moment in audio in seconds.",
+            "format": "int64",
+            "in": "path",
+            "name": "time_in_secs",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of episodes",
+            "schema": {
+              "$ref": "#/definitions/snippet"
+            }
+          }
+        },
+        "tags": [
+          "episodes"
+        ]
+      }
+    },
+    "/people/{id}": {
+      "get": {
+        "description": "This endpoint will return the metadata for a single person.",
+        "parameters": [
+          {
+            "description": "ID of person to fetch",
+            "format": "int64",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "person id response",
+            "schema": {
+              "$ref": "#/definitions/person"
+            }
+          }
+        },
+        "tags": [
+          "people"
+        ]
+      }
+    },
+    "/search/episodes/{query}": {
+      "get": {
+        "description": "Returns search results",
+        "parameters": [
+          {
+            "description": "Thing you would like to search for",
+            "in": "path",
+            "name": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Limit a search by any field value. This example uses <b>network</b> but any field name could be used. E.g. <b>filters[physical_location]=popuparchive</b> or <b>filters[network]=NPR</b> or <b>filters[categories.name]=Talk%20Show</b>. Use <b>filters[with_transcript]</b> to filter out episodes with no transcript.",
+            "in": "query",
+            "name": "filters[network]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Sort results by any field value. The default is by the relevancy score (<b>_score</b>). Must be paired with <b>sort_order</b>.",
+            "in": "query",
+            "name": "sort_by",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Sort direction. Must be either <b>asc</b> or <b>desc</b>. Must be paired with <b>sort_by</b>.",
+            "in": "query",
+            "name": "sort_order",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Shortcut for specifying sort_by and sort_order in a single value. E.g. <b>date_created desc</b>.",
+            "in": "query",
+            "name": "s",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "The number of results in a single page. Default is <b>10</b>. If present, must be paired with <b>from</b>.",
+            "in": "query",
+            "name": "size",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Offset when doing manual pagination. Must be paired with <b>size</b>.",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "The page number of results. Default is <b>1</b>.",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Set to positive integer to include an array of N related episodes for each search result",
+            "in": "query",
+            "name": "related",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns search results",
+            "schema": {
+              "$ref": "#/definitions/results"
+            }
+          }
+        },
+        "tags": [
+          "episodes",
+          "episode search"
+        ]
+      }
+    },
+    "/search/people/{query}": {
+      "get": {
+        "description": "This endpoint returns search results for People",
+        "parameters": [
+          {
+            "description": "Thing you would like to search for",
+            "in": "path",
+            "name": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Limit a search by any field value. This example uses <b>shows.id</b> but any field name could be used. E.g. <b>filters[shows.id]=123</b> or <b>filters[episode.id]=456</b>.",
+            "in": "query",
+            "name": "filters[shows.id]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Sort results by any field value. The default is by the relevancy score (<b>_score</b>). Must be paired with <b>sort_order</b>.",
+            "in": "query",
+            "name": "sort_by",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Sort direction. Must be either <b>asc</b> or <b>desc</b>. Must be paired with <b>sort_by</b>.",
+            "in": "query",
+            "name": "sort_order",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Shortcut for specifying sort_by and sort_order in a single value. E.g. <b>name desc</b>.",
+            "in": "query",
+            "name": "s",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "The number of results in a single page. Default is <b>10</b>. If present, must be paired with <b>from</b>.",
+            "in": "query",
+            "name": "size",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Offset when doing manual pagination. Must be paired with <b>size</b>.",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "The page number of results. Default is <b>1</b>.",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns search results",
+            "schema": {
+              "$ref": "#/definitions/person_search_results"
+            }
+          }
+        },
+        "tags": [
+          "people",
+          "people search"
+        ]
+      }
+    },
+    "/search/shows/{query}": {
+      "get": {
+        "description": "This endpoint returns search results for Shows",
+        "parameters": [
+          {
+            "description": "Thing you would like to search for",
+            "in": "path",
+            "name": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Limit a search by any field value. This example uses <b>network</b> but any field name could be used. E.g. <b>filters[network]=NPR</b> or <b>filters[categories.name]=Talk%20Show</b>.",
+            "in": "query",
+            "name": "filters[network]",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Sort results by any field value. The default is by the relevancy score (<b>_score</b>). Must be paired with <b>sort_order</b>.",
+            "in": "query",
+            "name": "sort_by",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Sort direction. Must be either <b>asc</b> or <b>desc</b>. Must be paired with <b>sort_by</b>.",
+            "in": "query",
+            "name": "sort_order",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Shortcut for specifying sort_by and sort_order in a single value. E.g. <b>date_created desc</b>.",
+            "in": "query",
+            "name": "s",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "The number of results in a single page. Default is <b>10</b>. If present, must be paired with <b>from</b>.",
+            "in": "query",
+            "name": "size",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Offset when doing manual pagination. Must be paired with <b>size</b>.",
+            "in": "query",
+            "name": "from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "The page number of results. Default is <b>1</b>.",
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns search results",
+            "schema": {
+              "$ref": "#/definitions/show_results"
+            }
+          }
+        },
+        "tags": [
+          "shows",
+          "show search"
+        ]
+      }
+    },
+    "/shows/{id}": {
+      "get": {
+        "description": "This endpoint will return the medatdata for a single show.",
+        "parameters": [
+          {
+            "description": "ID of show to fetch",
+            "format": "int64",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "show id response",
+            "schema": {
+              "$ref": "#/definitions/shows"
+            }
+          }
+        },
+        "tags": [
+          "shows"
+        ]
+      }
+    },
+    "/shows/{id}/related": {
+      "get": {
+        "description": "Returns shows related to the supplied show.",
+        "parameters": [
+          {
+            "description": "ID of show to fetch",
+            "format": "int64",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "related show response",
+            "schema": {
+              "$ref": "#/definitions/show_search_result"
+            }
+          }
+        },
+        "tags": [
+          "shows"
+        ]
+      }
+    },
+    "/tastemakers/episodes/{n}": {
+      "get": {
+        "description": "Returns search results based on what podcast tastemakers are talking about.",
+        "parameters": [
+          {
+            "default": 10,
+            "description": "Number of results to fetch",
+            "format": "int64",
+            "in": "path",
+            "name": "n",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "tastemakers episodes response",
+            "schema": {
+              "$ref": "#/definitions/episode_tastemaker"
+            }
+          }
+        },
+        "tags": [
+          "episodes"
+        ]
+      }
+    },
+    "/tastemakers/episodes/source/{tastemaker_id}/{n}": {
+      "get": {
+        "description": "Returns search results based on what podcast tastemakers are talking about filtered by tastemaker source.",
+        "parameters": [
+          {
+            "description": "Recommendation source",
+            "format": "int64",
+            "in": "path",
+            "name": "tastemaker_id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "default": 10,
+            "description": "Number of results to fetch",
+            "format": "int64",
+            "in": "path",
+            "name": "n",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "tastemakers episodes response",
+            "schema": {
+              "$ref": "#/definitions/episode_tastemaker"
+            }
+          }
+        },
+        "tags": [
+          "episodes"
+        ]
+      }
+    },
+    "/tastemakers/shows/{n}": {
+      "get": {
+        "description": "This endpoint returns search results based on what tastemakers are talking about.",
+        "parameters": [
+          {
+            "default": 10,
+            "description": "Number of results to fetch",
+            "format": "int64",
+            "in": "path",
+            "name": "n",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "tastemakers shows response",
+            "schema": {
+              "$ref": "#/definitions/shows"
+            }
+          }
+        },
+        "tags": [
+          "shows"
+        ]
+      }
+    },
+    "/trending": {
+      "get": {
+        "description": "Returns episodes related to trending terms from Twitter",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of episodes",
+            "schema": {
+              "$ref": "#/definitions/trending"
+            }
+          }
+        },
+        "tags": [
+          "episodes"
+        ]
+      }
+    }
+  },
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0",
+  "tags": [
+    {
+      "description": "Podcast series",
+      "name": "shows"
+    },
+    {
+      "description": "Podcast episodes",
+      "name": "episodes"
+    },
+    {
+      "description": "Search podcast episodes",
+      "name": "episode search"
+    },
+    {
+      "description": "Search podcast series",
+      "name": "show search"
+    },
+    {
+      "description": "Search people who contributed to a podcast",
+      "name": "people search"
+    },
+    {
+      "description": "People who contributed to a podcast",
+      "name": "people"
+    }
+  ]
+}
