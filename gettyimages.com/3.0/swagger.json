@@ -1445,10 +1445,6 @@
           "description": "Specifies the name of Getty Images product.",
           "type": "string"
         },
-        "premium_access_download_requirements": {
-          "$ref": "#/definitions/download_requirements",
-          "description": "Specifies the download requirements a company can apply on its users."
-        },
         "status": {
           "description": "Specifies if product status is active or inactive.",
           "enum": [
@@ -2330,7 +2326,7 @@
             "type": "string"
           },
           {
-            "description": "If specified, select assets downloaded on or after this date. Dates should be submitted in ISO\r\n                8601 format (i.e., YYYY-MM-DD).",
+            "description": "If specified, select assets downloaded on or after this date. Dates should be submitted in ISO\r\n                8601 format (i.e., YYYY-MM-DD hh:mm:ss.sss). If time is omitted, midnight is assumed. Date/times are UTC.",
             "format": "date-time",
             "in": "query",
             "name": "date_from",
@@ -2338,7 +2334,7 @@
             "type": "string"
           },
           {
-            "description": "If specified, select assets downloaded on or before this date. Dates should be submitted in ISO\r\n                8601 format (i.e., YYYY-MM-DD).",
+            "description": "If specified, select assets downloaded on or before this date. Dates should be submitted in ISO\r\n                8601 format (i.e., YYYY-MM-DD hh:mm:ss.sss). If time is omitted, midnight is assumed. Date/times are UTC.",
             "format": "date-time",
             "in": "query",
             "name": "date_to",
@@ -3567,7 +3563,7 @@
             "type": "string"
           },
           {
-            "description": "Specifies fields to return. Defaults to 'summary_set'.",
+            "description": "Specifies fields to return. Default set is 'id','name','start_date'.",
             "enum": [
               "id",
               "child_event_count",

@@ -373,7 +373,7 @@
             "type": "string"
           },
           {
-            "default": "pesi,bgbm-cdm-server[col]",
+            "default": "pesi,eunis,bgbm-cdm-server[col]",
             "description": "A list of provider id strings concatenated by comma characters. The default : \"pesi,bgbm-cdm-server[col]\" will be used if this parameter is not set. A list of all available provider ids can be obtained from the '/capabilities' service end point. Providers can be nested, that is a parent provider can have sub providers. If the id of the parent provider is supplied all subproviders will be queried. The query can also be restriced to one or more subproviders by using the following syntax: parent-id[sub-id-1,sub-id2,...]",
             "in": "query",
             "name": "providers",

@@ -28,6 +28,12 @@
         },
         "summary": {
           "$ref": "#/definitions/AnalysisSummary"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         }
       }
     },
@@ -968,6 +974,9 @@
               "$ref": "#/definitions/AnalysisResult"
             }
           },
+          "400": {
+            "description": "Bad request"
+          },
           "413": {
             "description": "The file size is larger than the maximum configured size (10MB)"
           },
@@ -1073,6 +1082,9 @@
             "schema": {
               "$ref": "#/definitions/AnalysisResult"
             }
+          },
+          "400": {
+            "description": "Bad request"
           },
           "413": {
             "description": "The file size is larger than the maximum configured size (10MB)"
@@ -1287,6 +1299,9 @@
               "$ref": "#/definitions/AnalysisResult"
             }
           },
+          "400": {
+            "description": "Bad request"
+          },
           "413": {
             "description": "The file size is larger than the maximum configured size (10MB)"
           },
@@ -1397,6 +1412,9 @@
             "schema": {
               "$ref": "#/definitions/AnalysisResult"
             }
+          },
+          "400": {
+            "description": "Bad request"
           },
           "413": {
             "description": "The file size is larger than the maximum configured size (10MB)"
