@@ -912,25 +912,25 @@
             }
           },
           "400": {
-            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
           },
           "401": {
-            "description": "Invalid API key",
+            "description": "{success: 0, msg: Invalid API key, error_code_msg: API_INVALID_KEY}",
             "schema": {
               "$ref": "#/definitions/401_Error"
             }
           },
           "403": {
-            "description": "Possible reasons include: 'You are going too fast', 'Not enough tokens remaining under your application'",
+            "description": "Possible reasons include:<br>{success: 0, msg: you are going too fast}<br>{success: 0, msg: Not enough tokens remaining under your application, error_code_msg: API_INSUFFICIENT_TOKENS_REMAINING}",
             "schema": {
               "$ref": "#/definitions/403_Error"
             }
           },
           "500": {
-            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}",
             "schema": {
               "$ref": "#/definitions/500_Error"
             }
@@ -960,25 +960,25 @@
             }
           },
           "400": {
-            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
           },
           "401": {
-            "description": "Invalid API key",
+            "description": "{success: 0, msg: Invalid API key, error_code_msg: API_INVALID_KEY}",
             "schema": {
               "$ref": "#/definitions/401_Error"
             }
           },
           "403": {
-            "description": "Possible reasons include: 'You are going too fast', 'Not enough tokens remaining under your application'",
+            "description": "Possible reasons include:<br>{success: 0, msg: you are going too fast}<br>{success: 0, msg: Not enough tokens remaining under your application, error_code_msg: API_INSUFFICIENT_TOKENS_REMAINING}",
             "schema": {
               "$ref": "#/definitions/403_Error"
             }
           },
           "500": {
-            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}",
             "schema": {
               "$ref": "#/definitions/500_Error"
             }
@@ -1491,25 +1491,25 @@
             }
           },
           "400": {
-            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter', 'The twitter account provided has no audience', 'IDS array is too long or in an incorrect format'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: The twitter account provided has no audience, error_code_msg: API_TWITTER_ERROR_INSUFFICIENT_COUNT}",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
           },
           "401": {
-            "description": "Possible reasons include: 'Invalid API key', 'The twitter account provided is private'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API key, error_code_msg: API_INVALID_KEY}<br>{success: 0, msg: The twitter account provided is private, error_code_msg: API_TWITTER_ERROR_PRIVATE}",
             "schema": {
               "$ref": "#/definitions/401_Error"
             }
           },
           "403": {
-            "description": "Possible reasons include: 'You are going too fast', 'Not enough tokens remaining under your application'",
+            "description": "Possible reasons include:<br>{success: 0, msg: you are going too fast}<br>{success: 0, msg: Not enough tokens remaining under your application, error_code_msg: API_INSUFFICIENT_TOKENS_REMAINING}",
             "schema": {
               "$ref": "#/definitions/403_Error"
             }
           },
           "500": {
-            "description": "Possible reasons include: 'Error requesting twitter info', 'Error inserting new twitter report', 'Error getting application's credentials', 'Internal database error'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Error requesting twitter info, error_code_msg: API_TWITTER_ERROR}<br>{success: 0, msg: Error inserting new twitter report, error_code_msg: API_ERROR_CREATING_TWITTER_ACCOUNT}<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}",
             "schema": {
               "$ref": "#/definitions/500_Error"
             }
@@ -1546,25 +1546,25 @@
             }
           },
           "400": {
-            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter', 'The twitter account provided has no audience', 'IDS array is too long or in an incorrect format'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: The twitter account provided has no audience, error_code_msg: API_TWITTER_ERROR_INSUFFICIENT_COUNT}",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
           },
           "401": {
-            "description": "Possible reasons include: 'Invalid API key', 'The twitter account provided is private'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API key, error_code_msg: API_INVALID_KEY}<br>{success: 0, msg: The twitter account provided is private, error_code_msg: API_TWITTER_ERROR_PRIVATE}",
             "schema": {
               "$ref": "#/definitions/401_Error"
             }
           },
           "403": {
-            "description": "Possible reasons include: 'You are going too fast', 'Not enough tokens remaining under your application'",
+            "description": "Possible reasons include:<br>{success: 0, msg: you are going too fast}<br>{success: 0, msg: Not enough tokens remaining under your application, error_code_msg: API_INSUFFICIENT_TOKENS_REMAINING}",
             "schema": {
               "$ref": "#/definitions/403_Error"
             }
           },
           "500": {
-            "description": "Possible reasons include: 'Error requesting twitter info', 'Error inserting new twitter report', 'Error getting application's credentials', 'Internal database error'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Error requesting twitter info, error_code_msg: API_TWITTER_ERROR}<br>{success: 0, msg: Error inserting new twitter report, error_code_msg: API_ERROR_CREATING_TWITTER_ACCOUNT}<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}",
             "schema": {
               "$ref": "#/definitions/500_Error"
             }
