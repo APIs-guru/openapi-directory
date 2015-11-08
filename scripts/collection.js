@@ -788,7 +788,10 @@ function getPathComponents(swagger) {
     path.push(serviceName);
   path.push(swagger.info.version);
 
-  return path;
+  return _.map(path, function (str) {
+    //replace slash with Unicode slash
+    return str.replace('/', '∕');
+  });
 }
 
 function getSwaggerPath(swagger, filename) {
