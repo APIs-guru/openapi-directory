@@ -678,6 +678,10 @@ function getSpecs(dir) {
 function patchSwagger(swagger, exPatch) {
   removeEmpty(swagger.info);
 
+  //use 1.0.0 as default version
+  if (_.isUndefined(swagger.info.version))
+    swagger.info.version = '1.0.0';
+
   var patch = exPatch;
   var pathComponents = getPathComponents(swagger);
 
