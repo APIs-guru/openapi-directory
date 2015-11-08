@@ -590,18 +590,31 @@ function fixSpec(swagger, errors) {
       case 'ENUM_MISMATCH':
       case 'INVALID_FORMAT':
       case 'INVALID_TYPE':
-        if (_.last(error.path) !== 'default')
+        if (_.last(error.path) === 'default') {
+          var type = parentValue.type;
+          if (_.isString(value) && !_.isUndefined(type) && type !== 'string') {
+            try {
+              newValue = JSON.parse(value);
+            }
+            catch (e) {}
+          }
+          delete parentValue.default;
+          //TODO: add warning
           break;
-        var type = parentValue.type;
-        if (_.isString(value) && !_.isUndefined(type) && type !== 'string') {
+        }
+
+        var match = error.message.match(/^Expected type (\w+) but found type (\w+)$/);
+        if (match && match[2] === 'string') {
           try {
-            newValue = JSON.parse(value);
+            var tmp = JSON.parse(value);
+            if (typeof tmp === match[1]) {
+              newValue = tmp;
+              fixed = true;
+              break;
+            }
           }
           catch (e) {}
         }
-        delete parentValue.default;
-        //TODO: add warning
-        break;
     }
     if (!_.isUndefined(newValue)) {
       jp(swagger, path, newValue);
