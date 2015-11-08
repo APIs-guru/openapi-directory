@@ -539,7 +539,7 @@ function fixSpec(swagger, errors) {
 
     switch(error.code) {
       case 'MISSING_PATH_PARAMETER_DEFINITION':
-        var field = error.message.match(': (.+)$')[1];
+        var field = error.message.match(/: (.+)$/)[1];
         newValue = _.clone(value);
         newValue.parameters = value.parameters || [];
         newValue.parameters.push({
