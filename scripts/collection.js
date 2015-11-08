@@ -504,7 +504,7 @@ function writeSpec(source, type, exPatch, callback) {
         if (warnings)
           logJson(warnings);
 
-        var filename = saveSwagger(swagger);
+        saveSwagger(swagger);
         callback(null, result);
       }
 
@@ -805,7 +805,6 @@ function saveFile(path, data) {
 function saveSwagger(swagger) {
   var path = getSwaggerPath(swagger);
   saveJson(path, swagger);
-  return path;
 }
 
 //code is taken from 'json-merge-patch' package and simplify to allow only adding props
