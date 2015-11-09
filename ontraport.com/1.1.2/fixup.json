@@ -21,24 +21,7 @@
           "getHTML",
           0,
           0
-        ],
-        "parameters": {
-          "0": [
-            {
-              "$ref": "#/parameters/idParam",
-              "required": true
-            }
-          ],
-          "_0": [
-            {
-              "$ref": "#/parameters/idParam",
-              "required": true
-            },
-            0,
-            0
-          ],
-          "_t": "a"
-        }
+        ]
       }
     },
     "/landingPage/getHostedURL": {
@@ -66,24 +49,7 @@
           "getMessage",
           0,
           0
-        ],
-        "parameters": {
-          "0": [
-            {
-              "$ref": "#/parameters/idParam",
-              "required": true
-            }
-          ],
-          "_0": [
-            {
-              "$ref": "#/parameters/idParam",
-              "required": true
-            },
-            0,
-            0
-          ],
-          "_t": "a"
-        }
+        ]
       }
     },
     "/object": {
@@ -97,38 +63,7 @@
           "getOne",
           0,
           0
-        ],
-        "parameters": {
-          "0": [
-            {
-              "$ref": "#/parameters/objectIdParam",
-              "required": true
-            }
-          ],
-          "1": [
-            {
-              "$ref": "#/parameters/idParam",
-              "required": true
-            }
-          ],
-          "_0": [
-            {
-              "$ref": "#/parameters/objectIdParam",
-              "required": true
-            },
-            0,
-            0
-          ],
-          "_1": [
-            {
-              "$ref": "#/parameters/idParam",
-              "required": true
-            },
-            0,
-            0
-          ],
-          "_t": "a"
-        }
+        ]
       }
     },
     "/objects": {
@@ -142,230 +77,14 @@
           "getList",
           0,
           0
-        ],
-        "parameters": {
-          "0": [
-            {
-              "$ref": "#/parameters/objectIdParam",
-              "required": true
-            }
-          ],
-          "1": [
-            {
-              "$ref": "#/parameters/idsParam",
-              "required": false
-            }
-          ],
-          "2": [
-            {
-              "$ref": "#/parameters/performAllParam",
-              "required": false
-            }
-          ],
-          "3": [
-            {
-              "$ref": "#/parameters/startParam",
-              "required": false
-            }
-          ],
-          "4": [
-            {
-              "$ref": "#/parameters/rangeParam",
-              "required": false
-            }
-          ],
-          "5": [
-            {
-              "$ref": "#/parameters/sortParam",
-              "required": false
-            }
-          ],
-          "6": [
-            {
-              "$ref": "#/parameters/sortDirParam",
-              "required": false
-            }
-          ],
-          "7": [
-            {
-              "$ref": "#/parameters/conditionParam",
-              "required": false
-            }
-          ],
-          "8": [
-            {
-              "$ref": "#/parameters/searchParam",
-              "required": false
-            }
-          ],
-          "9": [
-            {
-              "$ref": "#/parameters/searchNotesParam",
-              "required": false
-            }
-          ],
-          "10": [
-            {
-              "$ref": "#/parameters/date_rangeParam",
-              "required": false
-            }
-          ],
-          "11": [
-            {
-              "$ref": "#/parameters/group_idsParam",
-              "required": false
-            }
-          ],
-          "12": [
-            {
-              "$ref": "#/parameters/externsParam",
-              "required": false
-            }
-          ],
-          "13": [
-            {
-              "$ref": "#/parameters/listFieldsParam",
-              "required": false
-            }
-          ],
-          "_0": [
-            {
-              "$ref": "#/parameters/objectIdParam",
-              "required": true
-            },
-            0,
-            0
-          ],
-          "_1": [
-            {
-              "$ref": "#/parameters/idsParam",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_10": [
-            {
-              "$ref": "#/parameters/date_rangeParam",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_11": [
-            {
-              "$ref": "#/parameters/group_idsParam",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_12": [
-            {
-              "$ref": "#/parameters/externsParam",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_13": [
-            {
-              "$ref": "#/parameters/listFieldsParam",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_2": [
-            {
-              "$ref": "#/parameters/performAllParam",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_3": [
-            {
-              "$ref": "#/parameters/startParam",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_4": [
-            {
-              "$ref": "#/parameters/rangeParam",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_5": [
-            {
-              "$ref": "#/parameters/sortParam",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_6": [
-            {
-              "$ref": "#/parameters/sortDirParam",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_7": [
-            {
-              "$ref": "#/parameters/conditionParam",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_8": [
-            {
-              "$ref": "#/parameters/searchParam",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_9": [
-            {
-              "$ref": "#/parameters/searchNotesParam",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_t": "a"
-        }
+        ]
       },
       "post": {
         "controllerMethod": [
           "save",
           0,
           0
-        ],
-        "parameters": {
-          "0": [
-            {
-              "$ref": "#/parameters/objectIdParamFormData",
-              "required": true
-            }
-          ],
-          "_0": [
-            {
-              "$ref": "#/parameters/objectIdParamFormData",
-              "required": true
-            },
-            0,
-            0
-          ],
-          "_t": "a"
-        }
+        ]
       },
       "put": {
         "controllerMethod": [
@@ -377,38 +96,7 @@
           "POST",
           0,
           0
-        ],
-        "parameters": {
-          "0": [
-            {
-              "$ref": "#/parameters/objectIdParamFormData",
-              "required": true
-            }
-          ],
-          "1": [
-            {
-              "$ref": "#/parameters/idParamFormData",
-              "required": true
-            }
-          ],
-          "_0": [
-            {
-              "$ref": "#/parameters/objectIdParamFormData",
-              "required": true
-            },
-            0,
-            0
-          ],
-          "_1": [
-            {
-              "$ref": "#/parameters/idParamFormData",
-              "required": true
-            },
-            0,
-            0
-          ],
-          "_t": "a"
-        }
+        ]
       }
     },
     "/objects/meta": {
@@ -422,24 +110,7 @@
           "getList",
           0,
           0
-        ],
-        "parameters": {
-          "1": [
-            {
-              "$ref": "#/parameters/objectIdParam",
-              "required": false
-            }
-          ],
-          "_1": [
-            {
-              "$ref": "#/parameters/objectIdParam",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_t": "a"
-        }
+        ]
       }
     },
     "/objects/tag": {
@@ -458,220 +129,7 @@
           "POST",
           0,
           0
-        ],
-        "parameters": {
-          "0": [
-            {
-              "$ref": "#/parameters/objectIdParamFormData",
-              "required": true
-            }
-          ],
-          "1": [
-            {
-              "$ref": "#/parameters/removeListParamFormData",
-              "required": true
-            }
-          ],
-          "2": [
-            {
-              "$ref": "#/parameters/idsParamFormData",
-              "required": false
-            }
-          ],
-          "3": [
-            {
-              "$ref": "#/parameters/performAllParamFormData",
-              "required": false
-            }
-          ],
-          "4": [
-            {
-              "$ref": "#/parameters/startParamFormData",
-              "required": false
-            }
-          ],
-          "5": [
-            {
-              "$ref": "#/parameters/rangeParamFormData",
-              "required": false
-            }
-          ],
-          "6": [
-            {
-              "$ref": "#/parameters/sortParamFormData",
-              "required": false
-            }
-          ],
-          "7": [
-            {
-              "$ref": "#/parameters/sortDirParamFormData",
-              "required": false
-            }
-          ],
-          "8": [
-            {
-              "$ref": "#/parameters/conditionParamFormData",
-              "required": false
-            }
-          ],
-          "9": [
-            {
-              "$ref": "#/parameters/searchParamFormData",
-              "required": false
-            }
-          ],
-          "10": [
-            {
-              "$ref": "#/parameters/searchNotesParamFormData",
-              "required": false
-            }
-          ],
-          "11": [
-            {
-              "$ref": "#/parameters/date_rangeParamFormData",
-              "required": false
-            }
-          ],
-          "12": [
-            {
-              "$ref": "#/parameters/group_idsParamFormData",
-              "required": false
-            }
-          ],
-          "13": [
-            {
-              "$ref": "#/parameters/externsParamFormData",
-              "required": false
-            }
-          ],
-          "14": [
-            {
-              "$ref": "#/parameters/listFieldsParamFormData",
-              "required": false
-            }
-          ],
-          "_0": [
-            {
-              "$ref": "#/parameters/objectIdParamFormData",
-              "required": true
-            },
-            0,
-            0
-          ],
-          "_1": [
-            {
-              "$ref": "#/parameters/removeListParamFormData",
-              "required": true
-            },
-            0,
-            0
-          ],
-          "_10": [
-            {
-              "$ref": "#/parameters/searchNotesParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_11": [
-            {
-              "$ref": "#/parameters/date_rangeParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_12": [
-            {
-              "$ref": "#/parameters/group_idsParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_13": [
-            {
-              "$ref": "#/parameters/externsParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_14": [
-            {
-              "$ref": "#/parameters/listFieldsParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_2": [
-            {
-              "$ref": "#/parameters/idsParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_3": [
-            {
-              "$ref": "#/parameters/performAllParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_4": [
-            {
-              "$ref": "#/parameters/startParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_5": [
-            {
-              "$ref": "#/parameters/rangeParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_6": [
-            {
-              "$ref": "#/parameters/sortParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_7": [
-            {
-              "$ref": "#/parameters/sortDirParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_8": [
-            {
-              "$ref": "#/parameters/conditionParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_9": [
-            {
-              "$ref": "#/parameters/searchParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_t": "a"
-        }
+        ]
       },
       "put": {
         "controllerMethod": [
@@ -683,220 +141,7 @@
           "POST",
           0,
           0
-        ],
-        "parameters": {
-          "0": [
-            {
-              "$ref": "#/parameters/objectIdParamFormData",
-              "required": true
-            }
-          ],
-          "1": [
-            {
-              "$ref": "#/parameters/addListParamFormData",
-              "required": true
-            }
-          ],
-          "2": [
-            {
-              "$ref": "#/parameters/idsParamFormData",
-              "required": false
-            }
-          ],
-          "3": [
-            {
-              "$ref": "#/parameters/performAllParamFormData",
-              "required": false
-            }
-          ],
-          "4": [
-            {
-              "$ref": "#/parameters/startParamFormData",
-              "required": false
-            }
-          ],
-          "5": [
-            {
-              "$ref": "#/parameters/rangeParamFormData",
-              "required": false
-            }
-          ],
-          "6": [
-            {
-              "$ref": "#/parameters/sortParamFormData",
-              "required": false
-            }
-          ],
-          "7": [
-            {
-              "$ref": "#/parameters/sortDirParamFormData",
-              "required": false
-            }
-          ],
-          "8": [
-            {
-              "$ref": "#/parameters/conditionParamFormData",
-              "required": false
-            }
-          ],
-          "9": [
-            {
-              "$ref": "#/parameters/searchParamFormData",
-              "required": false
-            }
-          ],
-          "10": [
-            {
-              "$ref": "#/parameters/searchNotesParamFormData",
-              "required": false
-            }
-          ],
-          "11": [
-            {
-              "$ref": "#/parameters/date_rangeParamFormData",
-              "required": false
-            }
-          ],
-          "12": [
-            {
-              "$ref": "#/parameters/group_idsParamFormData",
-              "required": false
-            }
-          ],
-          "13": [
-            {
-              "$ref": "#/parameters/externsParamFormData",
-              "required": false
-            }
-          ],
-          "14": [
-            {
-              "$ref": "#/parameters/listFieldsParamFormData",
-              "required": false
-            }
-          ],
-          "_0": [
-            {
-              "$ref": "#/parameters/objectIdParamFormData",
-              "required": true
-            },
-            0,
-            0
-          ],
-          "_1": [
-            {
-              "$ref": "#/parameters/addListParamFormData",
-              "required": true
-            },
-            0,
-            0
-          ],
-          "_10": [
-            {
-              "$ref": "#/parameters/searchNotesParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_11": [
-            {
-              "$ref": "#/parameters/date_rangeParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_12": [
-            {
-              "$ref": "#/parameters/group_idsParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_13": [
-            {
-              "$ref": "#/parameters/externsParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_14": [
-            {
-              "$ref": "#/parameters/listFieldsParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_2": [
-            {
-              "$ref": "#/parameters/idsParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_3": [
-            {
-              "$ref": "#/parameters/performAllParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_4": [
-            {
-              "$ref": "#/parameters/startParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_5": [
-            {
-              "$ref": "#/parameters/rangeParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_6": [
-            {
-              "$ref": "#/parameters/sortParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_7": [
-            {
-              "$ref": "#/parameters/sortDirParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_8": [
-            {
-              "$ref": "#/parameters/conditionParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_9": [
-            {
-              "$ref": "#/parameters/searchParamFormData",
-              "required": false
-            },
-            0,
-            0
-          ],
-          "_t": "a"
-        }
+        ]
       }
     },
     "/task/cancel": {
@@ -943,24 +188,7 @@
           "POST",
           0,
           0
-        ],
-        "parameters": {
-          "0": [
-            {
-              "$ref": "#/parameters/idParamFormData",
-              "required": true
-            }
-          ],
-          "_0": [
-            {
-              "$ref": "#/parameters/idParamFormData",
-              "required": true
-            },
-            0,
-            0
-          ],
-          "_t": "a"
-        }
+        ]
       }
     },
     "/transaction/convertToDecline": {
@@ -979,24 +207,7 @@
           "POST",
           0,
           0
-        ],
-        "parameters": {
-          "0": [
-            {
-              "$ref": "#/parameters/idParamFormData",
-              "required": true
-            }
-          ],
-          "_0": [
-            {
-              "$ref": "#/parameters/idParamFormData",
-              "required": true
-            },
-            0,
-            0
-          ],
-          "_t": "a"
-        }
+        ]
       }
     },
     "/transaction/markPaid": {
@@ -1015,24 +226,7 @@
           "POST",
           0,
           0
-        ],
-        "parameters": {
-          "0": [
-            {
-              "$ref": "#/parameters/idParamFormData",
-              "required": true
-            }
-          ],
-          "_0": [
-            {
-              "$ref": "#/parameters/idParamFormData",
-              "required": true
-            },
-            0,
-            0
-          ],
-          "_t": "a"
-        }
+        ]
       }
     },
     "/transaction/order": {
@@ -1186,24 +380,7 @@
           "POST",
           0,
           0
-        ],
-        "parameters": {
-          "0": [
-            {
-              "$ref": "#/parameters/idParamFormData",
-              "required": true
-            }
-          ],
-          "_0": [
-            {
-              "$ref": "#/parameters/idParamFormData",
-              "required": true
-            },
-            0,
-            0
-          ],
-          "_t": "a"
-        }
+        ]
       }
     },
     "/transaction/writeOff": {
@@ -1222,24 +399,7 @@
           "POST",
           0,
           0
-        ],
-        "parameters": {
-          "0": [
-            {
-              "$ref": "#/parameters/idParamFormData",
-              "required": true
-            }
-          ],
-          "_0": [
-            {
-              "$ref": "#/parameters/idParamFormData",
-              "required": true
-            },
-            0,
-            0
-          ],
-          "_t": "a"
-        }
+        ]
       }
     }
   }
