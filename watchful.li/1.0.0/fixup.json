@@ -1,0 +1,71 @@
+{
+  "definitions": {
+    "Audits": [
+      {
+        "items": {
+          "$ref": "#/definitions/Audit"
+        },
+        "type": "array"
+      }
+    ],
+    "Monitor": [
+      {}
+    ],
+    "Reports": [
+      {}
+    ],
+    "Uptime": [
+      {}
+    ],
+    "Version": [
+      {}
+    ]
+  },
+  "paths": {
+    "/sites": {
+      "get": {
+        "parameters": {
+          "6": [
+            {
+              "description": "canUpdate",
+              "enum": [
+                1,
+                0
+              ],
+              "in": "query",
+              "name": "canUpdate",
+              "type": "integer"
+            }
+          ],
+          "_6": [
+            {
+              "description": "canUpdate",
+              "enum": [
+                1,
+                0
+              ],
+              "in": "query",
+              "name": "jUpdate",
+              "type": "integer"
+            },
+            0,
+            0
+          ],
+          "_t": "a"
+        }
+      }
+    },
+    "/sites/{id}/extensions": {
+      "post": {
+        "parameters": {
+          "1": {
+            "in": [
+              "query"
+            ]
+          },
+          "_t": "a"
+        }
+      }
+    }
+  }
+}

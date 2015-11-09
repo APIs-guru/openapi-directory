@@ -1,0 +1,38 @@
+{
+  "definitions": {
+    "Episode": {
+      "properties": {
+        "dvdEpisodeNumber": {
+          "type": [
+            "float",
+            "number"
+          ]
+        },
+        "siteRating": {
+          "type": [
+            "float",
+            "number"
+          ]
+        }
+      }
+    },
+    "Series": {
+      "properties": {
+        "siteRating": {
+          "type": [
+            "float",
+            "number"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {
+    "itemTypeNR": {
+      "in": [
+        "path",
+        "query"
+      ]
+    }
+  }
+}
