@@ -135,7 +135,7 @@ function cacheResources(specRootUrl) {
       return;
 
     var url = swagger.info['x-logo'].url;
-    getResource(url, {encoding: null, gzip: true}, function(err, response, data) {
+    getResource(url, {encoding: null}, function(err, response, data) {
       assert(!err, err);
 
       var mime = response.headers['content-type'];
@@ -162,6 +162,7 @@ function getResource(url, options, callback) {
   }
 
   options.method = 'GET';
+  options.gzip = true;
   options.url = url;
   new Request(options, function(err, response, data) {
     if (err)
