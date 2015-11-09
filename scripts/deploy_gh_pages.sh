@@ -20,6 +20,9 @@ set -o pipefail
   ./scripts/collection.js apisjson https://apis-guru.github.io/api-models/
   git add ./apis.json
 
+  ./scripts/collection.js banner
+  git add ./apis_in_collection_banner.svg
+
   git commit -m 'Generate API'
 
   git push --force "https://${GH_TOKEN}@${GH_REF}" HEAD:gh-pages

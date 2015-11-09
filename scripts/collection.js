@@ -87,6 +87,11 @@ program
   .action(generateAPIsJSON);
 
 program
+  .command('banner')
+  .description('generate "APIs in collection" banner')
+  .action(generateBanner);
+
+program
   .command('add')
   .description('add new spec')
   .option('-f, --fixup', 'try to fix spec')
@@ -317,6 +322,15 @@ function generateAPIsJSON(specRootUrl) {
   });
 
   saveJson('apis.json', collection);
+}
+
+function generateBanner() {
+  var size = _.size(generateList());
+  var url = 'https://img.shields.io/badge/APIs_in_collection-' + size + '-orange.svg';
+  getResource(url, {encoding: null}, function(err, response, data) {
+    assert(!err, err);
+    saveFile('apis_in_collection_banner.svg', data);
+  });
 }
 
 function gitLogDate(options, filename) {
