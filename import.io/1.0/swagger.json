@@ -155,6 +155,95 @@
       },
       "type": "object"
     },
+    "Configuration": {
+      "description": "General-purpose configuration",
+      "properties": {
+        "configuration": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "configurationType": {
+          "type": "string"
+        },
+        "connectorGuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "guid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "description": "The configuration's name",
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "guid",
+        "name",
+        "type",
+        "configurationType"
+      ],
+      "type": "object"
+    },
+    "ConfigurationSearch": {
+      "properties": {
+        "hits": {
+          "properties": {
+            "hits": {
+              "items": {
+                "properties": {
+                  "_id": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "_score": {
+                    "type": "number"
+                  },
+                  "fields": {
+                    "$ref": "#/definitions/Configuration"
+                  }
+                },
+                "required": [
+                  "_id",
+                  "_score",
+                  "fields"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "max_score": {
+              "type": "number"
+            },
+            "total": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "total",
+            "max_score",
+            "hits"
+          ],
+          "type": "object"
+        },
+        "timed_out": {
+          "type": "boolean"
+        },
+        "took": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "took",
+        "timed_out",
+        "hits"
+      ],
+      "type": "object"
+    },
     "Connector": {
       "properties": {
         "_meta": {
@@ -1688,7 +1777,7 @@
       "type": "object"
     },
     "Run": {
-      "description": "Encapsulates and asynchronous run.",
+      "description": "Encapsulates an asynchronous run.",
       "properties": {
         "apiGuid": {
           "format": "uuid",
@@ -1718,8 +1807,8 @@
           ],
           "type": "string"
         },
-        "failedNrUrls": {
-          "description": "Number of urls with successful queries",
+        "failedUrlCount": {
+          "description": "Number of urls with failed queries",
           "type": "integer"
         },
         "guid": {
@@ -1732,13 +1821,17 @@
         },
         "result": {
           "$ref": "#/definitions/Attachment",
-          "description": "New line separated JSON concatenation of results."
+          "description": "Newline separated JSON concatenation of results."
+        },
+        "resultSize": {
+          "$ref": "#/definitions/Attachment",
+          "description": "Size in bytes"
         },
         "startedAt": {
           "format": "utc-millisec",
           "type": "integer"
         },
-        "state": {
+        "status": {
           "enum": [
             "INITIAL",
             "QUEUED",
@@ -1749,11 +1842,11 @@
           ],
           "type": "string"
         },
-        "successNrUrls": {
+        "successUrlCount": {
           "description": "Number of urls with successful queries",
           "type": "integer"
         },
-        "totalNrUrls": {
+        "totalUrlCount": {
           "description": "The total number of URLs in the run.",
           "type": "integer"
         },
@@ -1765,8 +1858,62 @@
       "required": [
         "guid",
         "apiGuid",
-        "configurationGuid",
-        "state"
+        "configurationGuid"
+      ],
+      "type": "object"
+    },
+    "RunSearch": {
+      "properties": {
+        "hits": {
+          "properties": {
+            "hits": {
+              "items": {
+                "properties": {
+                  "_id": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "_score": {
+                    "type": "number"
+                  },
+                  "fields": {
+                    "$ref": "#/definitions/Run"
+                  }
+                },
+                "required": [
+                  "_id",
+                  "_score",
+                  "fields"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "max_score": {
+              "type": "number"
+            },
+            "total": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "total",
+            "max_score",
+            "hits"
+          ],
+          "type": "object"
+        },
+        "timed_out": {
+          "type": "boolean"
+        },
+        "took": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "took",
+        "timed_out",
+        "hits"
       ],
       "type": "object"
     },

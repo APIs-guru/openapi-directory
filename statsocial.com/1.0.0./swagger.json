@@ -550,25 +550,25 @@
             }
           },
           "400": {
-            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
           },
           "401": {
-            "description": "Invalid API key",
+            "description": "{success: 0, msg: Invalid API key, error_code_msg: API_INVALID_KEY}",
             "schema": {
               "$ref": "#/definitions/401_Error"
             }
           },
           "403": {
-            "description": "You are going too fast",
+            "description": "{success: 0, msg: you are going too fast}",
             "schema": {
               "$ref": "#/definitions/403_Error"
             }
           },
           "500": {
-            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}",
             "schema": {
               "$ref": "#/definitions/500_Error"
             }
@@ -598,25 +598,25 @@
             }
           },
           "400": {
-            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
           },
           "401": {
-            "description": "Invalid API key",
+            "description": "{success: 0, msg: Invalid API key, error_code_msg: API_INVALID_KEY}",
             "schema": {
               "$ref": "#/definitions/401_Error"
             }
           },
           "403": {
-            "description": "You are going too fast",
+            "description": "{success: 0, msg: you are going too fast}",
             "schema": {
               "$ref": "#/definitions/403_Error"
             }
           },
           "500": {
-            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}",
             "schema": {
               "$ref": "#/definitions/500_Error"
             }
@@ -670,7 +670,7 @@
             }
           },
           "400": {
-            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: Invalid or non-existent baseline supplied, error_code_msg: Invalid or non-existent baseline supplied}<br>{success: 0, msg: Invalid report_date parameter value. Must be an integer, error_code_msg: INVALID_REPORT_DATE}",
+            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: Invalid or non-existent baseline supplied, error_code_msg: INVALID_BASELINE}<br>{success: 0, msg: Invalid report_date parameter value. Must be an integer, error_code_msg: INVALID_REPORT_DATE}",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
@@ -746,7 +746,7 @@
             }
           },
           "400": {
-            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: Invalid or non-existent baseline supplied, error_code_msg: Invalid or non-existent baseline supplied}<br>{success: 0, msg: Invalid report_date parameter value. Must be an integer, error_code_msg: INVALID_REPORT_DATE}",
+            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: Invalid or non-existent baseline supplied, error_code_msg: INVALID_BASELINE}<br>{success: 0, msg: Invalid report_date parameter value. Must be an integer, error_code_msg: INVALID_REPORT_DATE}",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
@@ -802,31 +802,31 @@
             }
           },
           "400": {
-            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
           },
           "401": {
-            "description": "Invalid API key",
+            "description": "{success: 0, msg: Invalid API key, error_code_msg: API_INVALID_KEY}",
             "schema": {
               "$ref": "#/definitions/401_Error"
             }
           },
           "403": {
-            "description": "You are going too fast",
+            "description": "{success: 0, msg: you are going too fast}",
             "schema": {
               "$ref": "#/definitions/403_Error"
             }
           },
           "404": {
-            "description": "The upload hash provided does not exist",
+            "description": "{success: 0, msg: The upload hash provided does not exist, error_code_msg: UPLOAD_HASH_DOES_NOT_EXIST}",
             "schema": {
               "$ref": "#/definitions/404_Error"
             }
           },
           "500": {
-            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error', 'Report has no data'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}",
             "schema": {
               "$ref": "#/definitions/500_Error"
             }
@@ -856,31 +856,31 @@
             }
           },
           "400": {
-            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
           },
           "401": {
-            "description": "Invalid API key",
+            "description": "{success: 0, msg: Invalid API key, error_code_msg: API_INVALID_KEY}",
             "schema": {
               "$ref": "#/definitions/401_Error"
             }
           },
           "403": {
-            "description": "You are going too fast",
+            "description": "{success: 0, msg: you are going too fast}",
             "schema": {
               "$ref": "#/definitions/403_Error"
             }
           },
           "404": {
-            "description": "The upload hash provided does not exist",
+            "description": "{success: 0, msg: The upload hash provided does not exist, error_code_msg: UPLOAD_HASH_DOES_NOT_EXIST}",
             "schema": {
               "$ref": "#/definitions/404_Error"
             }
           },
           "500": {
-            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error', 'Report has no data'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}",
             "schema": {
               "$ref": "#/definitions/500_Error"
             }
@@ -930,7 +930,7 @@
             }
           },
           "500": {
-            "description": "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}",
+            "description": "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}",
             "schema": {
               "$ref": "#/definitions/500_Error"
             }
@@ -978,7 +978,7 @@
             }
           },
           "500": {
-            "description": "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}",
+            "description": "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}",
             "schema": {
               "$ref": "#/definitions/500_Error"
             }
@@ -1018,31 +1018,31 @@
             }
           },
           "400": {
-            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter', 'IDS array is too long or in an incorrect format'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: IDS array is too long or in an incorrect format, error_code_msg: API_INVALID_IDS}",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
           },
           "401": {
-            "description": "Invalid API key",
+            "description": "{success: 0, msg: Invalid API key, error_code_msg: API_INVALID_KEY}",
             "schema": {
               "$ref": "#/definitions/401_Error"
             }
           },
           "403": {
-            "description": "Possible reasons include: 'You are going too fast', 'Not enough tokens remaining under your application'",
+            "description": "Possible reasons include:<br>{success: 0, msg: you are going too fast}<br>{success: 0, msg: Not enough tokens remaining under your application, error_code_msg: API_INSUFFICIENT_TOKENS_REMAINING}",
             "schema": {
               "$ref": "#/definitions/403_Error"
             }
           },
           "404": {
-            "description": "The upload hash provided does not exist",
+            "description": "{success: 0, msg: The upload hash provided does not exist, error_code_msg: UPLOAD_HASH_DOES_NOT_EXIST}",
             "schema": {
               "$ref": "#/definitions/404_Error"
             }
           },
           "500": {
-            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error', 'Error trying to insert relations to custom'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Error trying to insert relations to custom, error_code_msg: API_ERROR_INSERTING_TO_CUSTOM}",
             "schema": {
               "$ref": "#/definitions/500_Error"
             }
@@ -1080,31 +1080,31 @@
             }
           },
           "400": {
-            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter' 'IDS array is too long or in an incorrect format'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}<br>{success: 0, msg: IDS array is too long or in an incorrect format, error_code_msg: API_INVALID_IDS}",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
           },
           "401": {
-            "description": "Invalid API key",
+            "description": "{success: 0, msg: Invalid API key, error_code_msg: API_INVALID_KEY}",
             "schema": {
               "$ref": "#/definitions/401_Error"
             }
           },
           "403": {
-            "description": "Possible reasons include: 'You are going too fast', 'Not enough tokens remaining under your application'",
+            "description": "Possible reasons include:<br>{success: 0, msg: you are going too fast}<br>{success: 0, msg: Not enough tokens remaining under your application, error_code_msg: API_INSUFFICIENT_TOKENS_REMAINING}",
             "schema": {
               "$ref": "#/definitions/403_Error"
             }
           },
           "404": {
-            "description": "The upload hash provided does not exist",
+            "description": "{success: 0, msg: The upload hash provided does not exist, error_code_msg: UPLOAD_HASH_DOES_NOT_EXIST}",
             "schema": {
               "$ref": "#/definitions/404_Error"
             }
           },
           "500": {
-            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error', 'Error trying to insert relations to custom'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Error trying to insert relations to custom, error_code_msg: API_ERROR_INSERTING_TO_CUSTOM}",
             "schema": {
               "$ref": "#/definitions/500_Error"
             }
@@ -1246,25 +1246,25 @@
             }
           },
           "400": {
-            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
           },
           "401": {
-            "description": "Invalid API key",
+            "description": "{success: 0, msg: Invalid API key, error_code_msg: API_INVALID_KEY}",
             "schema": {
               "$ref": "#/definitions/401_Error"
             }
           },
           "403": {
-            "description": "You are going too fast",
+            "description": "{success: 0, msg: you are going too fast}",
             "schema": {
               "$ref": "#/definitions/403_Error"
             }
           },
           "500": {
-            "description": "Possible reasons include: 'Report has no data', 'Internal database error'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}",
             "schema": {
               "$ref": "#/definitions/500_Error"
             }
@@ -1294,25 +1294,25 @@
             }
           },
           "400": {
-            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
           },
           "401": {
-            "description": "Invalid API key",
+            "description": "{success: 0, msg: Invalid API key, error_code_msg: API_INVALID_KEY}",
             "schema": {
               "$ref": "#/definitions/401_Error"
             }
           },
           "403": {
-            "description": "You are going too fast",
+            "description": "{success: 0, msg: you are going too fast}",
             "schema": {
               "$ref": "#/definitions/403_Error"
             }
           },
           "500": {
-            "description": "Possible reasons include: 'Report has no data', 'Internal database error'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}<br>{success: 0, msg: Report has no data, error_code_msg: API_ERROR_EMPTY_REPORT}",
             "schema": {
               "$ref": "#/definitions/500_Error"
             }
@@ -1365,25 +1365,25 @@
             }
           },
           "400": {
-            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
           },
           "401": {
-            "description": "Invalid API key",
+            "description": "{success: 0, msg: Invalid API key, error_code_msg: API_INVALID_KEY}",
             "schema": {
               "$ref": "#/definitions/401_Error"
             }
           },
           "403": {
-            "description": "Possible reasons include: 'You are going too fast', 'Not enough tokens remaining under your application'",
+            "description": "Possible reasons include:<br>{success: 0, msg: you are going too fast}<br>{success: 0, msg: Not enough tokens remaining under your application, error_code_msg: API_INSUFFICIENT_TOKENS_REMAINING}",
             "schema": {
               "$ref": "#/definitions/403_Error"
             }
           },
           "500": {
-            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}",
             "schema": {
               "$ref": "#/definitions/500_Error"
             }
@@ -1434,25 +1434,25 @@
             }
           },
           "400": {
-            "description": "Possible reasons include: 'Invalid API parameters', 'Error please include the 'action' parameter'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Invalid API parameters, error_code_msg: API_INVALID_PARAMS}<br>{success: 0, msg: Error please include the 'action' parameter, error_code_msg: API_MISSING_ACTION_PARAMETER}",
             "schema": {
               "$ref": "#/definitions/400_Error"
             }
           },
           "401": {
-            "description": "Invalid API key",
+            "description": "{success: 0, msg: Invalid API key, error_code_msg: API_INVALID_KEY}",
             "schema": {
               "$ref": "#/definitions/401_Error"
             }
           },
           "403": {
-            "description": "Possible reasons include: 'You are going too fast', 'Not enough tokens remaining under your application'",
+            "description": "Possible reasons include:<br>{success: 0, msg: you are going too fast}<br>{success: 0, msg: Not enough tokens remaining under your application, error_code_msg: API_INSUFFICIENT_TOKENS_REMAINING}",
             "schema": {
               "$ref": "#/definitions/403_Error"
             }
           },
           "500": {
-            "description": "Possible reasons include: 'Error getting application's credentials', 'Internal database error'",
+            "description": "Possible reasons include:<br>{success: 0, msg: Error getting application's credentials, error_code_msg: API_ERROR_GETTING_APPLICATION_INFO}<br>{success: 0, msg: Internal database error, error_code_msg: API_ERROR_DATABASE_INITIATION_ERROR}",
             "schema": {
               "$ref": "#/definitions/500_Error"
             }

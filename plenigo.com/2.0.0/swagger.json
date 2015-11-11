@@ -1,5 +1,5 @@
 {
-  "basePath": "/api/v1",
+  "basePath": "/api/v2",
   "definitions": {
     "AppAccessData": {
       "properties": {
@@ -38,14 +38,6 @@
           "description": "Access token requested before",
           "type": "string"
         },
-        "companyId": {
-          "description": "Unique Id of the company, it can be retrieved from the company administration area",
-          "type": "string"
-        },
-        "secret": {
-          "description": "Company secret, it can be retrieved from the company administration area",
-          "type": "string"
-        },
         "testMode": {
           "description": "Flag indicating if test mode should be used",
           "type": "boolean"
@@ -66,20 +58,12 @@
     },
     "AppAccessTokenRequest": {
       "properties": {
-        "companyId": {
-          "description": "Unique Id of the company, it can be retrieved from the company administration area",
-          "type": "string"
-        },
         "description": {
           "description": "Description for the user to identify app later",
           "type": "string"
         },
         "productId": {
           "description": "Product access should be granted to",
-          "type": "string"
-        },
-        "secret": {
-          "description": "Company secret, it can be retrieved from the company administration area",
           "type": "string"
         },
         "testMode": {
@@ -249,18 +233,18 @@
     },
     "CreateMobileSecretRequest": {
       "properties": {
-        "companyId": {
-          "description": "Unique Id of the company, it can be retrieved from the company administration area",
-          "type": "string"
-        },
-        "secret": {
-          "description": "Company secret, it can be retrieved from the company administration area",
-          "type": "string"
-        },
         "size": {
           "description": "Size of the company secret to generate",
           "format": "int32",
           "type": "integer"
+        }
+      }
+    },
+    "CustomerId": {
+      "properties": {
+        "customerId": {
+          "description": "Id of the created customer.",
+          "type": "string"
         }
       }
     },
@@ -315,6 +299,103 @@
         "title": {
           "description": "Title of the subscription",
           "type": "string"
+        }
+      }
+    },
+    "EmailData": {
+      "properties": {
+        "email": {
+          "description": "New email address of user",
+          "type": "string"
+        }
+      }
+    },
+    "ExternalCustomerAccessControlRequest": {
+      "properties": {
+        "customerId": {
+          "description": "Customer id to check access for",
+          "type": "string"
+        },
+        "yourFirstIdentifier": {
+          "description": "Your identifier for the customer",
+          "type": "string"
+        },
+        "yourForthIdentifier": {
+          "description": "Your identifier for the customer",
+          "type": "string"
+        },
+        "yourSecondIdentifier": {
+          "description": "Your identifier for the customer",
+          "type": "string"
+        },
+        "yourThirdIdentifier": {
+          "description": "Your identifier for the customer",
+          "type": "string"
+        }
+      }
+    },
+    "ExternalLoginToken": {
+      "properties": {
+        "loginToken": {
+          "description": "One time token used to create a valid user session",
+          "type": "string"
+        }
+      }
+    },
+    "ExternalUserRegistration": {
+      "properties": {
+        "email": {
+          "description": "Email address of the user to register",
+          "type": "string"
+        },
+        "language": {
+          "description": "Language of the user as two digit ISO code",
+          "type": "string"
+        }
+      }
+    },
+    "FailedPaymentItem": {
+      "properties": {
+        "customerId": {
+          "description": "Customer Id",
+          "type": "string"
+        },
+        "date": {
+          "description": "Failed Payment Date",
+          "type": "string"
+        },
+        "productId": {
+          "description": "Product Id",
+          "type": "string"
+        },
+        "status": {
+          "description": "Failed Payment Status",
+          "type": "string"
+        },
+        "title": {
+          "description": "Title",
+          "type": "string"
+        }
+      }
+    },
+    "FailedPaymentList": {
+      "properties": {
+        "elements": {
+          "description": "Array of failed payment items",
+          "items": {
+            "$ref": "#/definitions/FailedPaymentItem"
+          },
+          "type": "array"
+        },
+        "page": {
+          "description": "Page number",
+          "format": "int32",
+          "type": "integer"
+        },
+        "size": {
+          "description": "Page size",
+          "format": "int32",
+          "type": "integer"
         }
       }
     },
@@ -406,6 +487,10 @@
           "description": "Currency as ISO 4217, e.g. EUR",
           "type": "string"
         },
+        "customInfo": {
+          "description": "Custom information",
+          "type": "string"
+        },
         "description": {
           "description": "Description of the product",
           "type": "string"
@@ -420,6 +505,11 @@
             "$ref": "#/definitions/Image"
           },
           "type": "array"
+        },
+        "maxParallelAppAccess": {
+          "description": "Max parallel app access",
+          "format": "int32",
+          "type": "number"
         },
         "price": {
           "description": "Price of the product in format ##.##",
@@ -661,8 +751,40 @@
     },
     "User": {
       "properties": {
+        "additionalAddressInfo": {
+          "description": "Additional address information of the user",
+          "type": "string"
+        },
+        "city": {
+          "description": "City of the user",
+          "type": "string"
+        },
+        "country": {
+          "description": "Country of the user in ISO 3166 Alpha 3 format (http://en.wikipedia.org/wiki/ISO_3166-1_alpha-3#Officially_assigned_code_elements)",
+          "type": "string"
+        },
         "email": {
           "description": "Email of the user",
+          "type": "string"
+        },
+        "firstName": {
+          "description": "First name of the user",
+          "type": "string"
+        },
+        "gender": {
+          "description": "Gender of the user",
+          "type": "string"
+        },
+        "name": {
+          "description": "Surname of the user",
+          "type": "string"
+        },
+        "postCode": {
+          "description": "Postcode of the user",
+          "type": "string"
+        },
+        "street": {
+          "description": "Street of the user",
           "type": "string"
         },
         "userId": {
@@ -683,7 +805,7 @@
   "info": {
     "description": "This is the API Documentation for the public plenigo server interfaces",
     "title": "Plenigo API Documentation",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "x-logo": {
       "url": "https://static.plenigo.com/assets/logo.png"
     },
@@ -701,23 +823,19 @@
         "operationId": "getCustomerApps",
         "parameters": [
           {
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
+            "required": true,
+            "type": "string"
+          },
+          {
             "description": "Unique Id of the customer to get products for",
             "in": "path",
             "name": "customerId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Unique Id of the company, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "companyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Company secret, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "secret",
             "required": true,
             "type": "string"
           },
@@ -761,6 +879,16 @@
         "description": "Returns the customer app id",
         "operationId": "requestCustomerAppId",
         "parameters": [
+          {
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
+            "required": true,
+            "type": "string"
+          },
           {
             "description": "Unique Id of the customer to get products for",
             "in": "path",
@@ -819,23 +947,19 @@
         "operationId": "deleteCustomerApp",
         "parameters": [
           {
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
+            "required": true,
+            "type": "string"
+          },
+          {
             "description": "Unique Id of the customer to delete app id for",
             "in": "path",
             "name": "customerId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Unique Id of the company, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "companyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Company secret, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "secret",
             "required": true,
             "type": "string"
           },
@@ -883,23 +1007,19 @@
         "operationId": "verifyCustomerAppAccess",
         "parameters": [
           {
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
+            "required": true,
+            "type": "string"
+          },
+          {
             "description": "Unique Id of the customer to verify app access for",
             "in": "path",
             "name": "customerId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Unique Id of the company, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "companyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Company secret, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "secret",
             "required": true,
             "type": "string"
           },
@@ -960,6 +1080,16 @@
         "operationId": "requestAppAccessToken",
         "parameters": [
           {
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
+            "required": true,
+            "type": "string"
+          },
+          {
             "description": "Unique Id of the customer to get products for",
             "in": "path",
             "name": "customerId",
@@ -1017,23 +1147,19 @@
         "operationId": "deleteMobileSecret",
         "parameters": [
           {
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
+            "required": true,
+            "type": "string"
+          },
+          {
             "description": "Unique Id of the customer to delete mobile secret for",
             "in": "path",
             "name": "customerId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Unique Id of the company, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "companyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Company secret, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "secret",
             "required": true,
             "type": "string"
           }
@@ -1065,23 +1191,19 @@
         "operationId": "getMobileSecret",
         "parameters": [
           {
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
+            "required": true,
+            "type": "string"
+          },
+          {
             "description": "Unique Id of the customer to get mobile secret for",
             "in": "path",
             "name": "customerId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Unique Id of the company, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "companyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Company secret, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "secret",
             "required": true,
             "type": "string"
           }
@@ -1121,6 +1243,16 @@
         "description": "Returns the mobile secret",
         "operationId": "createMobileSecret",
         "parameters": [
+          {
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
+            "required": true,
+            "type": "string"
+          },
           {
             "description": "Unique Id of the customer to create mobile secret for",
             "in": "path",
@@ -1173,16 +1305,12 @@
         "operationId": "verifyMobileSecret",
         "parameters": [
           {
-            "description": "Unique Id of the company, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "companyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Company secret, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "secret",
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
             "required": true,
             "type": "string"
           },
@@ -1236,16 +1364,12 @@
         "operationId": "getCategories",
         "parameters": [
           {
-            "description": "Unique Id of the company, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "companyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Company secret can be retrieved from the company administration area.",
-            "in": "query",
-            "name": "secret",
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
             "required": true,
             "type": "string"
           },
@@ -1290,16 +1414,12 @@
         "operationId": "getCategory",
         "parameters": [
           {
-            "description": "Unique Id of the company, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "companyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Company secret, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "secret",
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
             "required": true,
             "type": "string"
           },
@@ -1328,7 +1448,7 @@
             "description": "If the provided company secret and/or company Id is incorrect"
           },
           "404": {
-            "description": "If product Id is not valid"
+            "description": "If category Id is not valid"
           }
         },
         "summary": "Find category by Id",
@@ -1343,16 +1463,12 @@
         "operationId": "getCompanyUsers",
         "parameters": [
           {
-            "description": "Unique Id of the company, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "companyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Company secret can be retrieved from the company administration area.",
-            "in": "query",
-            "name": "secret",
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
             "required": true,
             "type": "string"
           },
@@ -1400,7 +1516,331 @@
         },
         "summary": "Query company users",
         "tags": [
-          "user"
+          "company"
+        ]
+      }
+    },
+    "/company/users/failed/payments": {
+      "get": {
+        "description": "Returns a list of failed payments of the specified company",
+        "operationId": "getCompanyFailedPayments",
+        "parameters": [
+          {
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Start date range of the transaction, must be in the following format: YYYY-MM-DD (Date range must not exceed 6 months).",
+            "format": "date",
+            "in": "query",
+            "name": "startDate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "End date range of the transaction, must be in the following format: YYYY-MM-DD (Date range must not exceed 6 months).",
+            "format": "date",
+            "in": "query",
+            "name": "endDate",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Payment status where the failed payment is.",
+            "enum": [
+              "FAILED",
+              "FIXED",
+              "FIXED_MANUALLY"
+            ],
+            "in": "query",
+            "name": "failedPaymentStatus",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "default": 10,
+            "description": "Size of the page - must be between 10 and 100",
+            "format": "int32",
+            "in": "query",
+            "maximum": 100,
+            "minimum": 10,
+            "name": "size",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "default": 0,
+            "description": "Number of the page",
+            "format": "int32",
+            "in": "query",
+            "minimum": 0,
+            "name": "page",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Failed Payments queried",
+            "schema": {
+              "$ref": "#/definitions/FailedPaymentList"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Query failed payments",
+        "tags": [
+          "company"
+        ]
+      }
+    },
+    "/externalUser/{customerId}/changeEmail": {
+      "put": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Change email address of an existing user. This functionality is only available for companies with closed user groups.",
+        "operationId": "changeExternalUserEmail",
+        "parameters": [
+          {
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Customer id of the user to change email address for",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "New User email data",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmailData"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "Email address changed"
+          },
+          "400": {
+            "description": "If the given parameters were incorrect or email address already exists"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "403": {
+            "description": "If company is not qualified for a closed user group"
+          },
+          "404": {
+            "description": "If a user for the provided customer id does not exist"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Change email address of a user",
+        "tags": [
+          "external user management"
+        ]
+      }
+    },
+    "/externalUser/{customerId}/createLoginToken": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Create a login token for an existing user. This functionality is only available for companies with closed user groups.",
+        "operationId": "createLoginToken",
+        "parameters": [
+          {
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Customer id of the user to create login token for",
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Login token successful created",
+            "schema": {
+              "$ref": "#/definitions/ExternalLoginToken"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "403": {
+            "description": "If company is not qualified for a closed user group"
+          },
+          "404": {
+            "description": "If a user for the provided customer id does not exist"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Create a login token for a user",
+        "tags": [
+          "external user management"
+        ]
+      }
+    },
+    "/externalUser/register": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Registers a new user bound to the company that registers the user. This functionality is only available for companies with closed user groups.",
+        "operationId": "registerExternalUser",
+        "parameters": [
+          {
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "User registration data",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExternalUserRegistration"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Id of the customer created",
+            "schema": {
+              "$ref": "#/definitions/CustomerId"
+            }
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "403": {
+            "description": "If company is not qualified for a closed user group"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Registers a new user",
+        "tags": [
+          "external user management"
+        ]
+      }
+    },
+    "/import/customerAccess": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Import an external customer access data. With this data your entered web service will be asked if the customer has access to the content",
+        "operationId": "importExternalCustomerAccess",
+        "parameters": [
+          {
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Customer identification data",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExternalCustomerAccessControlRequest"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Customer access data added."
+          },
+          "400": {
+            "description": "If the given parameters were incorrect"
+          },
+          "401": {
+            "description": "If the provided company secret and/or company Id is incorrect"
+          },
+          "404": {
+            "description": "If customer does not exist"
+          },
+          "500": {
+            "description": "Server error"
+          }
+        },
+        "summary": "Import external customer access",
+        "tags": [
+          "import customer access"
         ]
       }
     },
@@ -1410,16 +1850,12 @@
         "operationId": "isPaywallEnabled",
         "parameters": [
           {
-            "description": "Unique Id of the company, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "companyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Company secret, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "secret",
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
             "required": true,
             "type": "string"
           }
@@ -1453,16 +1889,12 @@
         "operationId": "getProduct",
         "parameters": [
           {
-            "description": "Unique Id of the company, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "companyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Company secret, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "secret",
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
             "required": true,
             "type": "string"
           },
@@ -1506,16 +1938,12 @@
         "operationId": "getProducts",
         "parameters": [
           {
-            "description": "Unique Id of the company, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "companyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Company secret can be retrieved from the company administration area.",
-            "in": "query",
-            "name": "secret",
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
             "required": true,
             "type": "string"
           },
@@ -1560,16 +1988,12 @@
         "operationId": "getSubscriptions",
         "parameters": [
           {
-            "description": "Unique Id of the company, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "companyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Company secret can be retrieved from the company administration area.",
-            "in": "query",
-            "name": "secret",
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
             "required": true,
             "type": "string"
           },
@@ -1659,16 +2083,12 @@
         "operationId": "getTransactions",
         "parameters": [
           {
-            "description": "Unique Id of the company, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "companyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Company secret can be retrieved from the company administration area.",
-            "in": "query",
-            "name": "secret",
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
             "required": true,
             "type": "string"
           },
@@ -1771,23 +2191,19 @@
         "operationId": "getProductsBought",
         "parameters": [
           {
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
+            "required": true,
+            "type": "string"
+          },
+          {
             "description": "Unique Id of the customer to get products for",
             "in": "path",
             "name": "customerId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Unique Id of the company, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "companyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Company secret, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "secret",
             "required": true,
             "type": "string"
           },
@@ -1834,16 +2250,12 @@
         "operationId": "hasBoughtProduct",
         "parameters": [
           {
-            "description": "Unique Id of the company, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "companyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Company secret, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "secret",
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
             "required": true,
             "type": "string"
           },
@@ -1888,7 +2300,7 @@
         },
         "summary": "Find out if a product is accessible for a specified customer",
         "tags": [
-          "product"
+          "user"
         ]
       }
     },
@@ -1898,16 +2310,12 @@
         "operationId": "getUserProfile",
         "parameters": [
           {
-            "description": "Unique Id of the company, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "companyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Company secret, it can be retrieved from the company administration area",
-            "in": "query",
-            "name": "secret",
+            "description": "Plenigo authentication token",
+            "enum": [
+              "JWT"
+            ],
+            "in": "header",
+            "name": "plenigoToken",
             "required": true,
             "type": "string"
           },

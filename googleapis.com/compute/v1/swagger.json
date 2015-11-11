@@ -604,7 +604,7 @@
           "type": "string"
         },
         "healthChecks": {
-          "description": "The list of URLs to the HttpHealthCheck resource for health checking this BackendService. Currently at most one health check can be specified, and a health check is required.",
+          "description": "The list of URLs to the HttpHealthCheck or HttpsHealthCheck resource for health checking this BackendService. Currently at most one health check can be specified, and a health check is required.",
           "items": {
             "type": "string"
           },
@@ -7801,7 +7801,7 @@
         }
       ],
       "post": {
-        "description": "Changes target url for forwarding rule.",
+        "description": "Changes target url for forwarding rule. The new target should be of the same type as the old target.",
         "operationId": "compute.globalForwardingRules.setTarget",
         "parameters": [
           {
@@ -11713,7 +11713,7 @@
         }
       ],
       "post": {
-        "description": "Changes target url for forwarding rule.",
+        "description": "Changes target url for forwarding rule. The new target should be of the same type as the old target.",
         "operationId": "compute.forwardingRules.setTarget",
         "parameters": [
           {
