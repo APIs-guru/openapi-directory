@@ -4,9 +4,9 @@ set -o pipefail
   set -e
   set -x
 
-  mkdir deploy
-  find -name swagger.json | grep -v deploy | cpio -pdm deploy
-  cd deploy
+  mkdir deploy_gh_pages
+  find -name swagger.json | grep -v deploy_gh_pages | cpio -pdm deploy_gh_pages
+  cd deploy_gh_pages
 
   git init
   git config user.name "APIs-GuruBot"
