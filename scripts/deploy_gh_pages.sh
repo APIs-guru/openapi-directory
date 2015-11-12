@@ -6,6 +6,7 @@ set -o pipefail
 
   mkdir deploy_gh_pages
   find -name swagger.json | grep -v deploy_gh_pages | cpio -pdm deploy_gh_pages
+  cp -R ./branding/ deploy_gh_pages
   cd deploy_gh_pages
 
   git init
