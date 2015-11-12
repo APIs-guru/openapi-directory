@@ -18,17 +18,14 @@ set -o pipefail
   #FIXME: remove
   export NODE_TLS_REJECT_UNAUTHORIZED=0
   ../scripts/collection.js cache https://apis-guru.github.io/api-models/
-  git add ./cache
 
   ../scripts/collection.js api https://apis-guru.github.io/api-models/
-  git add ./api/v1/list.json
 
   ../scripts/collection.js apisjson https://apis-guru.github.io/api-models/
-  git add ./apis.json
 
   ../scripts/collection.js banner
-  git add ./apis_in_collection_banner.svg
 
+  git add .
   git commit -m 'Deployed to Github Pages'
 
   git push --force "https://${GH_TOKEN}@${GH_REF}" master:gh-pages
