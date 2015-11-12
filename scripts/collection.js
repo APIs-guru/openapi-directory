@@ -334,7 +334,7 @@ function generateBanner() {
 }
 
 function gitLogDate(options, filename) {
-  var result = exec('git log --format=%aD ' + options + ' -- \'' + filename + '\'');
+  var result = exec('git -C .. log --format=%aD ' + options + ' -- \'' + filename + '\'');
   result = result.toString();
   return new Date(result);
 }
