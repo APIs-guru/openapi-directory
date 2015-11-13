@@ -1,6 +1,6 @@
 ![logo]
 
-[![APIs in collection](https://apis-guru.github.io/api-models/apis_in_collection_banner.svg)]()[![Join the chat at https://gitter.im/APIs-guru/api-models](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/APIs-guru/api-models?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)<BR>
+[![APIs in collection](https://apis-guru.github.io/api-models/apis_in_collection_banner.svg)](./APIs)[![Join the chat at https://gitter.im/APIs-guru/api-models](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/APIs-guru/api-models?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)<BR>
 Repository for API models in Swagger 2.0 format
 
 Our goal is to create a machine-readable Wikipedia for REST APIs, with the following principals:
