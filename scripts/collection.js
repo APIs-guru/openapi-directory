@@ -4,6 +4,7 @@
 var assert = require('assert');
 var _ = require('lodash');
 var fs = require('fs');
+var path = require('path');
 var exec = require('child_process').execSync;
 var Path = require('path');
 var jp = require('json-pointer');
@@ -22,6 +23,7 @@ var MimeLookup = require('mime-lookup');
 var MIME = new MimeLookup(require('mime-db'));
 var URI = require('urijs');
 var csvStringify = require('csv-stringify');
+var YAML = require('js-yaml');
 
 var jsondiffpatch = require('jsondiffpatch').create({
   arrays: {
@@ -147,7 +149,8 @@ function cacheResources(specRootUrl) {
       assert(mime.match('image/'));
       var extension = MIME.extension(mime);
       assert(extension);
-      var logoFile = 'cache/' + filename.replace(/swagger.json$/, 'logo.' + extension);
+      var dirname = path.dirname(filename);
+      var logoFile = 'cache/' + dirname + '/logo.' + extension;
       saveFile(logoFile, data);
 
       var fragment = URI(url).fragment();
@@ -155,7 +158,7 @@ function cacheResources(specRootUrl) {
         fragment = '#' + fragment;
 
       swagger.info['x-logo'].url = specRootUrl + logoFile + fragment;
-      saveJson(filename, swagger);
+      saveYaml(filename, swagger);
     });
   });
 }
@@ -228,9 +231,12 @@ function generateAPI(specRootUrl) {
     };
     _.each(api.versions, function (swagger, version) {
       var filename = dir + '/' + version + '/swagger.json';
+      var swaggerJsonPath = getSwaggerPath(swagger, 'swagger.json');
+      saveJson(swaggerJsonPath, swagger);
 
       var versionObj = list[id].versions[version] = {
-        swaggerUrl: specRootUrl + getSwaggerPath(swagger),
+        swaggerUrl: specRootUrl + swaggerJsonPath,
+        swaggerYamlUrl: specRootUrl + getSwaggerPath(swagger),
         info: swagger.info,
         added: gitLogDate('--follow --diff-filter=A -1', filename),
         updated: gitLogDate('-1', filename)
@@ -357,9 +363,9 @@ function validateCollection() {
     validateSwagger(swagger, function (errors, warnings) {
       foundErrors = !_.isEmpty(errors) || foundErrors;
       if (errors)
-        logJson(errors);
+        logYaml(errors);
       if (warnings)
-        logJson(warnings);
+        logYaml(warnings);
     });
     asyncCb(null);
   }, function () {
@@ -393,7 +399,7 @@ function addToCollection(type, url, command) {
         process.exitCode = errExitCode;
         return;
       }
-      var editedSwagger = JSON.parse(match[1]);
+      var editedSwagger = YAML.safeLoad(match[1]);
       saveFixup(result.swagger, editedSwagger);
     });
   });
@@ -412,16 +418,16 @@ function editFile(data, cb) {
 }
 
 function saveFixup(swagger, editedSwagger) {
-  var fixupPath = getSwaggerPath(swagger, 'fixup.json');
+  var fixupPath = getSwaggerPath(swagger, 'fixup.yaml');
 
   //Before diff we need to unpatch, it's a way to appeand changes
-  var fixup = readJson(fixupPath);
+  var fixup = readYaml(fixupPath);
   if (fixup)
     jsondiffpatch.unpatch(swagger, fixup);
 
   var diff = jsondiffpatch.diff(swagger, editedSwagger);
   if (diff)
-    saveJson(fixupPath, diff);
+    saveYaml(fixupPath, diff);
 }
 
 function updateGoogle() {
@@ -486,12 +492,12 @@ function updateGoogle() {
 }
 
 function mergePatch(swagger, addPatch) {
-  var path = getSwaggerPath(swagger, 'patch.json');
-  var patch = readJson(path);
+  var path = getSwaggerPath(swagger, 'patch.yaml');
+  var patch = readYaml(path);
   var newPatch = jsonPatch.merge(patch, addPatch);
 
   if (!_.isEqual(patch, newPatch))
-    saveJson(path, newPatch);
+    saveYaml(path, newPatch);
 }
 
 function writeSpec(source, type, exPatch, callback) {
@@ -517,7 +523,7 @@ function writeSpec(source, type, exPatch, callback) {
           return callback(errors, result);
 
         if (warnings)
-          logJson(warnings);
+          logYaml(warnings);
 
         saveSwagger(swagger);
         callback(null, result);
@@ -652,39 +658,38 @@ function errorToString(errors, context) {
 
   var result = '++++++++++++++++++++++++++ Begin ' + url + ' +++++++++++++++++++++++++\n';
   if (spec.type !== 'swagger_2' || _.isUndefined(swagger)) {
-    result += Json2String(spec.spec);
+    result += Yaml2String(spec.spec);
     if (spec.subResources)
-      result += Json2String(spec.subResources);
+      result += Yaml2String(spec.subResources);
   }
 
   if (!_.isUndefined(swagger)) {
     result += '???????????????????? Swagger ' + url + ' ????????????????????????????\n';
-    result += Json2String(swagger);
+    result += Yaml2String(swagger);
   }
 
   if (errors) {
     result += '!!!!!!!!!!!!!!!!!!!! Errors ' + url + ' !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n';
     if (_.isArray(errors))
-      result += Json2String(errors);
+      result += Yaml2String(errors);
     else
       result += errors.stack + '\n';
   }
 
   if (warnings) {
     result += '******************** Warnings ' + url + ' ******************************\n';
-    result += Json2String(warnings);
+    result += Yaml2String(warnings);
   }
   result += '------------------------- End ' + url + ' ----------------------------\n';
   return result;
 }
 
-function Json2String(json) {
-  json = sortobject(json);
-  return JSON.stringify(json, null, 2) + '\n';
+function Yaml2String(data) {
+  return YAML.safeDump(data, {sortKeys: true, indent: 2});
 }
 
-function logJson(json) {
-  console.error(Json2String(json));
+function logYaml(json) {
+  console.error(Yaml2String(json));
 }
 
 function validateSwagger(swagger, callback) {
@@ -697,9 +702,9 @@ function validateSwagger(swagger, callback) {
 
 function getSpecs(dir) {
   dir = dir || '';
-  var files = glob.sync(dir + '**/swagger.json');
+  var files = glob.sync(dir + '**/swagger.yaml');
   return _.transform(files, function (result, filename) {
-    result[filename] = readJson(filename);
+    result[filename] = readYaml(filename);
   }, {});
 }
 
@@ -716,7 +721,7 @@ function patchSwagger(swagger, exPatch) {
   var path = '';
   _.each(pathComponents, function (dir) {
     path += dir + '/';
-    var subPatch = readJson(path + 'patch.json');
+    var subPatch = readYaml(path + 'patch.yaml');
 
     if (!_.isUndefined(subPatch))
       patch = jsonPatch.merge(patch, subPatch);
@@ -728,7 +733,7 @@ function patchSwagger(swagger, exPatch) {
 
   applyMergePatch(swagger, patch);
 
-  var fixup = readJson(getSwaggerPath(swagger, 'fixup.json'));
+  var fixup = readYaml(getSwaggerPath(swagger, 'fixup.yaml'));
   swagger = jsondiffpatch.patch(swagger, fixup);
 }
 
@@ -779,14 +784,13 @@ function parseHost(swagger) {
   return host;
 }
 
-function readJson(filename) {
+function readYaml(filename) {
   if (!fs.existsSync(filename))
     return;
 
   var data = fs.readFileSync(filename, 'utf-8');
-  return JSON.parse(data);
+  return YAML.safeLoad(data, {filename: filename});
 }
-
 
 function getOrigin(swagger) {
   return swagger.info['x-origin'];
@@ -823,12 +827,17 @@ function getPathComponents(swagger) {
 }
 
 function getSwaggerPath(swagger, filename) {
-  filename = filename || 'swagger.json';
+  filename = filename || 'swagger.yaml';
   return getPathComponents(swagger).join('/') + '/' + filename;
 }
 
 function saveJson(path, json) {
-  saveFile(path, Json2String(json));
+  json = sortobject(json);
+  saveFile(path, JSON.stringify(json, null, 2) + '\n');
+}
+
+function saveYaml(path, json) {
+  saveFile(path, Yaml2String(json));
 }
 
 function saveFile(path, data) {
@@ -839,7 +848,7 @@ function saveFile(path, data) {
 
 function saveSwagger(swagger) {
   var path = getSwaggerPath(swagger);
-  saveJson(path, swagger);
+  saveYaml(path, swagger);
 }
 
 //code is taken from 'json-merge-patch' package and simplify to allow only adding props

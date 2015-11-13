@@ -5,7 +5,7 @@ set -o pipefail
   set -x
 
   mkdir deploy_gh_pages
-  find APIs -name swagger.json | cpio -pdm deploy_gh_pages
+  cp -R APIs/* deploy_gh_pages
   cp -R ./branding/ deploy_gh_pages
   cd deploy_gh_pages
 
