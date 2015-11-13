@@ -1,207 +1,141 @@
-{
-  "basePath": "/email/v2/users",
-  "definitions": {
-    "MailItem": {
-      "description": "JSON template for MailItem object in Email Migration API.",
-      "properties": {
-        "isDeleted": {
-          "description": "Boolean indicating if the mail is deleted (used in Vault)",
-          "type": "boolean"
-        },
-        "isDraft": {
-          "description": "Boolean indicating if the mail is draft",
-          "type": "boolean"
-        },
-        "isInbox": {
-          "description": "Boolean indicating if the mail is in inbox",
-          "type": "boolean"
-        },
-        "isSent": {
-          "description": "Boolean indicating if the mail is in 'sent mails'",
-          "type": "boolean"
-        },
-        "isStarred": {
-          "description": "Boolean indicating if the mail is starred",
-          "type": "boolean"
-        },
-        "isTrash": {
-          "description": "Boolean indicating if the mail is in trash",
-          "type": "boolean"
-        },
-        "isUnread": {
-          "description": "Boolean indicating if the mail is unread",
-          "type": "boolean"
-        },
-        "kind": {
-          "default": "mailItem",
-          "description": "Kind of resource this is.",
-          "type": "string"
-        },
-        "labels": {
-          "description": "List of labels (strings)",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    }
-  },
-  "externalDocs": {
-    "url": "https://developers.google.com/admin-sdk/email-migration/v2/"
-  },
-  "host": "www.googleapis.com",
-  "info": {
-    "contact": {
-      "name": "Google",
-      "url": "https://google.com"
-    },
-    "description": "Email Migration API lets you migrate emails of users to Google backends.",
-    "title": "Email Migration API v2",
-    "version": "email_migration_v2",
-    "x-apiClientRegistration": {
-      "url": "https://console.developers.google.com"
-    },
-    "x-logo": {
-      "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
-    },
-    "x-origin": {
-      "format": "google",
-      "url": "https://www.googleapis.com/discovery/v1/apis/admin/email_migration_v2/rest",
-      "version": "v1"
-    },
-    "x-preferred": false,
-    "x-providerName": "googleapis.com",
-    "x-serviceName": "admin"
-  },
-  "parameters": {
-    "alt": {
-      "default": "json",
-      "description": "Data format for the response.",
-      "enum": [
-        "json"
-      ],
-      "in": "query",
-      "name": "alt",
-      "type": "string"
-    },
-    "fields": {
-      "description": "Selector specifying which fields to include in a partial response.",
-      "in": "query",
-      "name": "fields",
-      "type": "string"
-    },
-    "key": {
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "in": "query",
-      "name": "key",
-      "type": "string"
-    },
-    "oauth_token": {
-      "description": "OAuth 2.0 token for the current user.",
-      "in": "query",
-      "name": "oauth_token",
-      "type": "string"
-    },
-    "prettyPrint": {
-      "default": true,
-      "description": "Returns response with indentations and line breaks.",
-      "in": "query",
-      "name": "prettyPrint",
-      "type": "boolean"
-    },
-    "quotaUser": {
-      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
-      "in": "query",
-      "name": "quotaUser",
-      "type": "string"
-    },
-    "userIp": {
-      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
-      "in": "query",
-      "name": "userIp",
-      "type": "string"
-    }
-  },
-  "paths": {
-    "/{userKey}/mail": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "consumes": [
-          "message/rfc822"
-        ],
-        "description": "Insert Mail into Google's Gmail backends",
-        "operationId": "emailMigration.mail.insert",
-        "parameters": [
-          {
-            "description": "The email or immutable id of the user",
-            "in": "path",
-            "name": "userKey",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/MailItem"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/email.migration"
-            ]
-          }
-        ],
-        "tags": [
-          "mail"
-        ]
-      }
-    }
-  },
-  "schemes": [
-    "https"
-  ],
-  "securityDefinitions": {
-    "Oauth2": {
-      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
-      "description": "Oauth 2.0 authentication",
-      "flow": "implicit",
-      "scopes": {
-        "https://www.googleapis.com/auth/email.migration": "Manage email messages of users on your domain"
-      },
-      "type": "oauth2"
-    }
-  },
-  "swagger": "2.0"
-}
+basePath: /email/v2/users
+definitions:
+  MailItem:
+    description: JSON template for MailItem object in Email Migration API.
+    properties:
+      isDeleted:
+        description: Boolean indicating if the mail is deleted (used in Vault)
+        type: boolean
+      isDraft:
+        description: Boolean indicating if the mail is draft
+        type: boolean
+      isInbox:
+        description: Boolean indicating if the mail is in inbox
+        type: boolean
+      isSent:
+        description: "Boolean indicating if the mail is in 'sent mails'"
+        type: boolean
+      isStarred:
+        description: Boolean indicating if the mail is starred
+        type: boolean
+      isTrash:
+        description: Boolean indicating if the mail is in trash
+        type: boolean
+      isUnread:
+        description: Boolean indicating if the mail is unread
+        type: boolean
+      kind:
+        default: mailItem
+        description: Kind of resource this is.
+        type: string
+      labels:
+        description: List of labels (strings)
+        items:
+          type: string
+        type: array
+    type: object
+externalDocs:
+  url: 'https://developers.google.com/admin-sdk/email-migration/v2/'
+host: www.googleapis.com
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Email Migration API lets you migrate emails of users to Google backends.
+  title: Email Migration API v2
+  version: email_migration_v2
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/admin/email_migration_v2/rest'
+    version: v1
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: admin
+parameters:
+  alt:
+    default: json
+    description: Data format for the response.
+    enum:
+      - json
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  '/{userKey}/mail':
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      consumes:
+        - message/rfc822
+      description: "Insert Mail into Google's Gmail backends"
+      operationId: emailMigration.mail.insert
+      parameters:
+        - description: The email or immutable id of the user
+          in: path
+          name: userKey
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/MailItem'
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/email.migration'
+      tags:
+        - mail
+schemes:
+  - https
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/email.migration': Manage email messages of users on your domain
+    type: oauth2
+swagger: '2.0'

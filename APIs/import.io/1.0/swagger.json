@@ -1,3313 +1,2383 @@
-{
-  "basePath": "/",
-  "definitions": {
-    "ApiKey": {
-      "properties": {
-        "apiKey": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Attachment": {
-      "properties": {
-        "_meta": {
-          "$ref": "#/definitions/Meta",
-          "readOnly": true
-        },
-        "bucketGuid": {
-          "description": "Internal type identifier",
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "field": {
-          "description": "Owning object field",
-          "readOnly": true,
-          "type": "string"
-        },
-        "objectGuid": {
-          "description": "Owning object id",
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "size": {
-          "description": "Size in bytes",
-          "readOnly": true,
-          "type": "integer"
-        }
-      },
-      "required": [
-        "bucketGuid",
-        "objectGuid",
-        "field",
-        "size"
-      ],
-      "type": "object"
-    },
-    "AttachmentSearch": {
-      "properties": {
-        "hits": {
-          "properties": {
-            "hits": {
-              "items": {
-                "properties": {
-                  "_id": {
-                    "format": "uuid",
-                    "type": "string"
-                  },
-                  "_score": {
-                    "type": "number"
-                  },
-                  "fields": {
-                    "$ref": "#/definitions/Attachment"
-                  }
-                },
-                "required": [
-                  "_id",
-                  "_score",
-                  "fields"
-                ],
-                "type": "object"
-              },
-              "type": "array"
-            },
-            "max_score": {
-              "type": "number"
-            },
-            "total": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "total",
-            "max_score",
-            "hits"
-          ],
-          "type": "object"
-        },
-        "timed_out": {
-          "type": "boolean"
-        },
-        "took": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "took",
-        "timed_out",
-        "hits"
-      ],
-      "type": "object"
-    },
-    "BrowserAction": {
-      "properties": {
-        "domain": {
-          "type": "string"
-        },
-        "element": {
-          "$ref": "#/definitions/Element"
-        },
-        "format": {
-          "type": "string"
-        },
-        "input": {
-          "type": "string"
-        },
-        "inputType": {
-          "$ref": "#/definitions/Type"
-        },
-        "type": {
-          "$ref": "#/definitions/Type"
-        },
-        "value": {
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
-    "CheckResults": {
-      "properties": {
-        "results": {
-          "items": {
-            "$ref": "#/definitions/CheckTestResult"
-          },
-          "type": "array"
-        },
-        "status": {
-          "$ref": "#/definitions/Status"
-        },
-        "thrownException": {
-          "$ref": "#/definitions/PublishingError"
-        }
-      },
-      "type": "object"
-    },
-    "CheckTestResult": {
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/ConnectorTestResult"
-        },
-        "test": {
-          "$ref": "#/definitions/TestQuery"
-        }
-      },
-      "type": "object"
-    },
-    "Configuration": {
-      "description": "General-purpose configuration",
-      "properties": {
-        "configuration": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "configurationType": {
-          "type": "string"
-        },
-        "connectorGuid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "guid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "name": {
-          "description": "The configuration's name",
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "guid",
-        "name",
-        "type",
-        "configurationType"
-      ],
-      "type": "object"
-    },
-    "ConfigurationSearch": {
-      "properties": {
-        "hits": {
-          "properties": {
-            "hits": {
-              "items": {
-                "properties": {
-                  "_id": {
-                    "format": "uuid",
-                    "type": "string"
-                  },
-                  "_score": {
-                    "type": "number"
-                  },
-                  "fields": {
-                    "$ref": "#/definitions/Configuration"
-                  }
-                },
-                "required": [
-                  "_id",
-                  "_score",
-                  "fields"
-                ],
-                "type": "object"
-              },
-              "type": "array"
-            },
-            "max_score": {
-              "type": "number"
-            },
-            "total": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "total",
-            "max_score",
-            "hits"
-          ],
-          "type": "object"
-        },
-        "timed_out": {
-          "type": "boolean"
-        },
-        "took": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "took",
-        "timed_out",
-        "hits"
-      ],
-      "type": "object"
-    },
-    "Connector": {
-      "properties": {
-        "_meta": {
-          "$ref": "#/definitions/Meta",
-          "readOnly": true
-        },
-        "authenticated": {
-          "description": "Is this an authenticated connector?",
-          "type": "boolean"
-        },
-        "extension": {
-          "description": "This field is a code to indicate the application to be used when editing this connector",
-          "type": "string"
-        },
-        "forkedFromGuid": {
-          "description": "What connector this was forked from",
-          "format": "uuid",
-          "type": "string"
-        },
-        "headline": {
-          "description": "A short description of the connector",
-          "type": "string"
-        },
-        "lastCheckedAt": {
-          "description": "The last date this connector was checked at",
-          "format": "utc-millisec",
-          "readOnly": true,
-          "type": "integer"
-        },
-        "lastModifiedAt": {
-          "description": "The date of the last snapshot upload or publish",
-          "format": "utc-millisec",
-          "readOnly": true,
-          "type": "integer"
-        },
-        "lastPublishRequestGuid": {
-          "description": "The GUID of the publish request that last completed",
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "latestVersion": {
-          "description": "The date of the latest version of the connector",
-          "format": "utc-millisec",
-          "readOnly": true,
-          "type": "integer"
-        },
-        "latestVersionGuid": {
-          "description": "The id of the latest version of the connector",
-          "format": "uuid",
-          "type": "string"
-        },
-        "name": {
-          "description": "The connector's name",
-          "minLength": 1,
-          "type": "string"
-        },
-        "pagePattern": {
-          "description": "The URL pattern that this connector can process",
-          "type": "string"
-        },
-        "parentGuid": {
-          "description": "What connector this is linked to",
-          "format": "uuid",
-          "type": "string"
-        },
-        "pendingPublishRequestGuid": {
-          "description": "The GUID of the currently pending publish request",
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "publishRequest": {
-          "description": "The JSON for the last publish (save)",
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "publishRequestGuid": {
-          "description": "The GUID of the publish request that has been successful",
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "publishSnapshot": {
-          "description": "The snapshot JSON for the last publish (save)",
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "reversedDomain": {
-          "description": "The reversed domain, e.g. com.importio.api",
-          "readOnly": true,
-          "type": "string"
-        },
-        "settings": {
-          "description": "Secondary settings JSON",
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "snapshot": {
-          "description": "The snapshot JSON",
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "source": {
-          "description": "The source of the data from the connector",
-          "format": "uri",
-          "pattern": "^https?://",
-          "type": "string"
-        },
-        "status": {
-          "description": "The current status of this connector",
-          "enum": [
-            "NOT_WORKING",
-            "TOO_MUCH_CPU",
-            "UNSURE",
-            "NO_TESTS",
-            "TIMEOUT",
-            "WORKING"
-          ],
-          "readOnly": true,
-          "type": "string"
-        },
-        "tags": {
-          "description": "The tags for this connector, a maximum of 10",
-          "items": {
-            "pattern": "^[A-Z_]{3,50}$",
-            "type": "string"
-          },
-          "maxItems": 10,
-          "type": "array"
-        },
-        "testResults": {
-          "description": "Test results",
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "type": {
-          "description": "The connector type.",
-          "enum": [
-            "LIVE_WEB",
-            "STATIC",
-            "CRAWLED_WEB",
-            "API",
-            "MAGIC",
-            "EXTRACTOR",
-            "DATASET"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "type": "object"
-    },
-    "ConnectorSearch": {
-      "properties": {
-        "hits": {
-          "properties": {
-            "hits": {
-              "items": {
-                "properties": {
-                  "_id": {
-                    "format": "uuid",
-                    "type": "string"
-                  },
-                  "_score": {
-                    "type": "number"
-                  },
-                  "fields": {
-                    "$ref": "#/definitions/Connector"
-                  }
-                },
-                "required": [
-                  "_id",
-                  "_score",
-                  "fields"
-                ],
-                "type": "object"
-              },
-              "type": "array"
-            },
-            "max_score": {
-              "type": "number"
-            },
-            "total": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "total",
-            "max_score",
-            "hits"
-          ],
-          "type": "object"
-        },
-        "timed_out": {
-          "type": "boolean"
-        },
-        "took": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "took",
-        "timed_out",
-        "hits"
-      ],
-      "type": "object"
-    },
-    "ConnectorTestError": {
-      "properties": {
-        "exceptionType": {
-          "enum": [
-            "ExpectedResultsSchemaException",
-            "ExpectedResultsDifferentException",
-            "ResponseTimeoutException",
-            "ConnectorVersionNotEfficientException",
-            "PageError",
-            "Unexpected"
-          ],
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ConnectorTestResult": {
-      "properties": {
-        "actualFields": {
-          "type": "integer"
-        },
-        "actualPages": {
-          "type": "integer"
-        },
-        "actualResults": {
-          "type": "integer"
-        },
-        "actualTotalResults": {
-          "type": "integer"
-        },
-        "cpuMilliseconds": {
-          "type": "integer"
-        },
-        "expectedFields": {
-          "type": "integer"
-        },
-        "expectedPages": {
-          "type": "integer"
-        },
-        "expectedResults": {
-          "type": "integer"
-        },
-        "expectedTotalResults": {
-          "type": "integer"
-        },
-        "input": {
-          "type": "object"
-        },
-        "name": {
-          "type": "string"
-        },
-        "renderedHTML": {
-          "type": "string"
-        },
-        "responseMilliseconds": {
-          "type": "integer"
-        },
-        "runAt": {
-          "format": "utc-millisec",
-          "type": "integer"
-        },
-        "status": {
-          "$ref": "#/definitions/Status"
-        },
-        "testFailureException": {
-          "$ref": "#/definitions/ConnectorTestError"
-        }
-      },
-      "type": "object"
-    },
-    "ConnectorVersion": {
-      "properties": {
-        "guid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "publishRequestGuid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "runtimeConfiguration": {
-          "$ref": "#/definitions/ConnectorVersionRuntimeConfiguration"
-        },
-        "schema": {
-          "$ref": "#/definitions/Schema"
-        },
-        "tests": {
-          "$ref": "#/definitions/ConnectorVersionTests"
-        }
-      },
-      "type": "object"
-    },
-    "ConnectorVersionRuntimeConfiguration": {
-      "properties": {
-        "configuration": {
-          "$ref": "#/definitions/WebQueryConfiguration"
-        },
-        "guid": {
-          "format": "uuid",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ConnectorVersionTests": {
-      "properties": {
-        "guid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "testQueries": {
-          "items": {
-            "$ref": "#/definitions/TestQuery"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "Count": {
-      "properties": {
-        "count": {
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
-    "DataPackageRequestResponse": {
-      "properties": {
-        "results": {
-          "items": {
-            "$ref": "#/definitions/DataPackageRequestResponseUrl"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "DataPackageRequestResponseUrl": {
-      "properties": {
-        "guid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "result": {
-          "enum": [
-            "ADDED",
-            "FAILED"
-          ],
-          "type": "string"
-        },
-        "url": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "DataPackageSnapshotExcludedSource": {
-      "properties": {
-        "reason": {
-          "type": "string"
-        },
-        "sourceId": {
-          "format": "uuid",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "DataPackageSnapshotResponse": {
-      "properties": {
-        "excludedSources": {
-          "items": {
-            "$ref": "#/definitions/DataPackageSnapshotExcludedSource"
-          },
-          "type": "array"
-        },
-        "guid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "includedSourceIds": {
-          "items": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "packageId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "previousSnapshotAt": {
-          "format": "utc-millisec",
-          "type": "integer"
-        },
-        "snapshotAt": {
-          "format": "utc-millisec",
-          "type": "integer"
-        },
-        "snapshotBuildCompletedAt": {
-          "format": "utc-millisec",
-          "type": "integer"
-        },
-        "snapshotBuildStartedAt": {
-          "format": "utc-millisec",
-          "type": "integer"
-        },
-        "totalObjects": {
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
-    "DataPackageSubscription": {
-      "properties": {
-        "expires": {
-          "format": "utc-millisec",
-          "readOnly": true,
-          "type": "integer"
-        },
-        "packageGuid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "packageName": {
-          "type": "string"
-        },
-        "packageSchemaName": {
-          "type": "string"
-        },
-        "scheduleDaysOfWeek": {
-          "type": "string"
-        },
-        "scheduleEffectiveOn": {
-          "format": "utc-millisec",
-          "readOnly": true,
-          "type": "integer"
-        },
-        "scheduleTimesOfDay": {
-          "type": "string"
-        },
-        "status": {
-          "enum": [
-            "ACTIVE",
-            "SUSPENDED"
-          ],
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "DataPackageSubscriptions": {
-      "properties": {
-        "subscriptions": {
-          "items": {
-            "$ref": "#/definitions/DataPackageSubscription"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "DataSource": {
-      "properties": {
-        "_meta": {
-          "$ref": "#/definitions/Meta",
-          "readOnly": true
-        },
-        "deprecated": {
-          "type": "boolean"
-        },
-        "firstReadyAt": {
-          "format": "utc-millisec",
-          "type": "integer"
-        },
-        "instructions": {
-          "type": "string"
-        },
-        "lastRunSuccessAt": {
-          "format": "utc-millisec",
-          "type": "integer"
-        },
-        "lastSuccessfulRunGuid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "name": {
-          "minLength": 1,
-          "type": "string"
-        },
-        "note": {
-          "type": "string"
-        },
-        "producerGuid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "reviewerGuid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "schema": {
-          "type": "string"
-        },
-        "status": {
-          "enum": [
-            "REQUESTED",
-            "BUILDING",
-            "TEST_READY",
-            "PENDING_QOD",
-            "PENDING_TEST_QOD",
-            "QOD_IN_PROGRESS",
-            "TEST_QOD_IN_PROGRESS",
-            "READY",
-            "PENDING",
-            "RUNNING",
-            "PENDING_TEST",
-            "RUNNING_TEST",
-            "PASSED_QOD",
-            "UPDATING_DATASTORE",
-            "FOR_REVIEW",
-            "IN_REVIEW",
-            "ERROR",
-            "FAILED",
-            "TEST_REVIEW"
-          ],
-          "type": "string"
-        },
-        "statusAsOf": {
-          "format": "utc-millisec",
-          "type": "integer"
-        },
-        "tags": {
-          "items": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "testerGuid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "type": {
-          "enum": [
-            "PointOfInterest"
-          ],
-          "type": "string"
-        },
-        "url": {
-          "format": "uri",
-          "minLength": 1,
-          "type": "string"
-        },
-        "working": {
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "url",
-        "name",
-        "status"
-      ],
-      "type": "object"
-    },
-    "DataSourceConfig": {
-      "properties": {
-        "guidUniqueFields": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "lastRunGuid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "nextRunAt": {
-          "format": "utc-millisec",
-          "type": "integer"
-        },
-        "periodMinutes": {
-          "type": "integer"
-        },
-        "strategy": {
-          "enum": [
-            "CRAWLER"
-          ],
-          "type": "string"
-        },
-        "strategyConfiguration": {
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
-    "DataSourceConfigCrawlerStrategy": {
-      "properties": {
-        "crawlerConfig": {
-          "properties": {
-            "advancedMode": {
-              "type": "boolean"
-            },
-            "connections": {
-              "type": "integer"
-            },
-            "connectorGuid": {
-              "format": "uuid",
-              "type": "string"
-            },
-            "cookiesEnabled": {
-              "type": "boolean"
-            },
-            "crawlTemplate": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "dataTemplate": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            },
-            "destination": {
-              "type": "string"
-            },
-            "local": {
-              "type": "boolean"
-            },
-            "maxDepth": {
-              "type": "integer"
-            },
-            "pause": {
-              "type": "integer"
-            },
-            "startUrls": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
-          },
-          "type": "object"
-        },
-        "inRunExtractionConfig": {
-          "items": {
-            "properties": {
-              "apiGuid": {
-                "format": "uuid",
-                "type": "string"
-              },
-              "type": {
-                "enum": [
-                  "EXTRACTOR"
-                ],
-                "type": "string"
-              },
-              "urlPattern": {
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "preCrawlExtractionConfig": {
-          "items": {
-            "properties": {
-              "query": {
-                "properties": {
-                  "connectorGuids": {
-                    "items": {
-                      "format": "uuid",
-                      "type": "string"
-                    },
-                    "type": "array"
-                  },
-                  "input": {
-                    "additionalProperties": {
-                      "type": "object"
-                    },
-                    "type": "object"
-                  },
-                  "loginOnly": {
-                    "type": "boolean"
-                  },
-                  "maxPages": {
-                    "type": "integer"
-                  },
-                  "proxyHost": {
-                    "type": "string"
-                  },
-                  "proxyPassword": {
-                    "type": "string"
-                  },
-                  "proxyPort": {
-                    "type": "integer"
-                  },
-                  "proxyUsername": {
-                    "type": "string"
-                  },
-                  "requestId": {
-                    "type": "string"
-                  },
-                  "startPage": {
-                    "type": "integer"
-                  }
-                },
-                "type": "object"
-              }
-            },
-            "type": "object"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "DataSourceConfigDelegatedExtractionStrategy": {
-      "properties": {
-        "configuration": {
-          "type": "object"
-        },
-        "systemId": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "DataSourceRun": {
-      "properties": {
-        "_meta": {
-          "$ref": "#/definitions/Meta",
-          "readOnly": true
-        },
-        "completedAt": {
-          "format": "utc-millisec",
-          "type": "integer"
-        },
-        "data": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "dataSourceGuid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "diff": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "note": {
-          "type": "string"
-        },
-        "previousSuccessfulRunGuid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "progress": {
-          "properties": {
-            "convert": {
-              "type": "integer"
-            },
-            "error": {
-              "type": "integer"
-            },
-            "failedConvert": {
-              "type": "integer"
-            },
-            "failedFetch": {
-              "type": "integer"
-            },
-            "fetch": {
-              "type": "integer"
-            },
-            "queue": {
-              "type": "integer"
-            },
-            "robots": {
-              "type": "integer"
-            },
-            "rows": {
-              "type": "integer"
-            }
-          },
-          "type": "object"
-        },
-        "runIndex": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "sampleData": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "startedAt": {
-          "format": "utc-millisec",
-          "type": "integer"
-        },
-        "status": {
-          "enum": [
-            "QUEUED",
-            "DELEGATED_RUN_REQUESTED",
-            "RUNNING",
-            "SUCCESS",
-            "FAILED",
-            "REQUESTED_CANCELLATION",
-            "CANCELLED"
-          ],
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "DataSourceRunSearch": {
-      "properties": {
-        "hits": {
-          "properties": {
-            "hits": {
-              "items": {
-                "properties": {
-                  "_id": {
-                    "format": "uuid",
-                    "type": "string"
-                  },
-                  "_score": {
-                    "type": "number"
-                  },
-                  "fields": {
-                    "$ref": "#/definitions/DataSourceRun"
-                  }
-                },
-                "required": [
-                  "_id",
-                  "_score",
-                  "fields"
-                ],
-                "type": "object"
-              },
-              "type": "array"
-            },
-            "max_score": {
-              "type": "number"
-            },
-            "total": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "total",
-            "max_score",
-            "hits"
-          ],
-          "type": "object"
-        },
-        "timed_out": {
-          "type": "boolean"
-        },
-        "took": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "took",
-        "timed_out",
-        "hits"
-      ],
-      "type": "object"
-    },
-    "DataSourceSearch": {
-      "properties": {
-        "hits": {
-          "properties": {
-            "hits": {
-              "items": {
-                "properties": {
-                  "_id": {
-                    "format": "uuid",
-                    "type": "string"
-                  },
-                  "_score": {
-                    "type": "number"
-                  },
-                  "fields": {
-                    "$ref": "#/definitions/DataSource"
-                  }
-                },
-                "required": [
-                  "_id",
-                  "_score",
-                  "fields"
-                ],
-                "type": "object"
-              },
-              "type": "array"
-            },
-            "max_score": {
-              "type": "number"
-            },
-            "total": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "total",
-            "max_score",
-            "hits"
-          ],
-          "type": "object"
-        },
-        "timed_out": {
-          "type": "boolean"
-        },
-        "took": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "took",
-        "timed_out",
-        "hits"
-      ],
-      "type": "object"
-    },
-    "DataTile": {
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "results": {
-          "items": {
-            "$ref": "#/definitions/QueryResult"
-          },
-          "type": "array"
-        },
-        "schemas": {
-          "type": "object"
-        },
-        "settings": {
-          "type": "object"
-        },
-        "type": {
-          "enum": [
-            "EXTRACTOR",
-            "CONNECTOR",
-            "CRAWLER",
-            "MIX",
-            "STATIC",
-            "DATASET",
-            "API"
-          ],
-          "type": "string"
-        },
-        "unlocked": {
-          "type": "boolean"
-        }
-      },
-      "type": "object"
-    },
-    "DataView": {
-      "properties": {
-        "tiles": {
-          "items": {
-            "$ref": "#/definitions/DataTile"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "Element": {
-      "properties": {
-        "formId": {
-          "type": "string"
-        },
-        "formName": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "xpaths": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "ErrorModel": {
-      "description": "Encapsulates a non-2xx response",
-      "properties": {
-        "code": {
-          "description": "An error code representing the type of error",
-          "type": "string"
-        },
-        "data": {
-          "description": "Supplementary data about the error",
-          "type": "object"
-        },
-        "error": {
-          "description": "Human-readable description of the error",
-          "type": "string"
-        }
-      },
-      "required": [
-        "code"
-      ],
-      "type": "object"
-    },
-    "IO": {
-      "properties": {
-        "defaultValue": {
-          "type": "object"
-        },
-        "domain": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "$ref": "#/definitions/Type"
-        }
-      },
-      "type": "object"
-    },
-    "Labels": {
-      "items": {
-        "properties": {
-          "guid": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "label": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "guid",
-          "label"
-        ],
-        "type": "object"
-      },
-      "type": "array"
-    },
-    "MagicTables": {
-      "properties": {
-        "tables": {
-          "$ref": "#/definitions/Page",
-          "description": "Data tables or lists found on the page"
-        }
-      },
-      "type": "object"
-    },
-    "Meta": {
-      "properties": {
-        "creationTimestamp": {
-          "format": "utc-millisec",
-          "readOnly": true,
-          "type": "integer"
-        },
-        "creatorGuid": {
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "lastEditorGuid": {
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "objectGuid": {
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "orgGuid": {
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "ownerGuid": {
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "patchTimestamp": {
-          "format": "utc-millisec",
-          "readOnly": true,
-          "type": "integer"
-        },
-        "timestamp": {
-          "format": "utc-millisec",
-          "readOnly": true,
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
-    "PackageUrlRequest": {
-      "properties": {
-        "guid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "note": {
-          "type": "string"
-        },
-        "status": {
-          "enum": [
-            "PENDING",
-            "DONE",
-            "REJECTED"
-          ],
-          "type": "string"
-        },
-        "url": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Page": {
-      "properties": {
-        "connectorGuid": {
-          "description": "The id of the Connector that owns the ConnectorVersion that created this Page",
-          "format": "uuid",
-          "type": "string"
-        },
-        "connectorVersionGuid": {
-          "description": "The id of the ConnectorVersion that created this Page",
-          "format": "uuid",
-          "type": "string"
-        },
-        "cookies": {
-          "description": "Contents of the cookie jar",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "data": {
-          "description": "Global data or meta-data",
-          "type": "object"
-        },
-        "error": {
-          "description": "Error description",
-          "type": "string"
-        },
-        "errorType": {
-          "description": "The type of error (if there is an error)",
-          "enum": [
-            "TimeoutException",
-            "UnauthorizedException",
-            "NotFoundException",
-            "ServerErrorException",
-            "UnexpectedErrorException",
-            "SearchException",
-            "TooMuchCpuRequiredException",
-            "TooMuchMemoryRequiredException",
-            "DefinitionError",
-            "InputException"
-          ],
-          "type": "string"
-        },
-        "outputProperties": {
-          "description": "The declared schema for the results",
-          "items": {
-            "$ref": "#/definitions/Property"
-          },
-          "type": "array"
-        },
-        "pageUrl": {
-          "description": "The URL that represents the source of the data",
-          "type": "string"
-        },
-        "pagination": {
-          "$ref": "#/definitions/Pagination",
-          "description": "Pagination information if requested"
-        },
-        "results": {
-          "description": "An object whose keys are determined by the output schema for this Connector",
-          "items": {
-            "$ref": "#/definitions/Result"
-          },
-          "type": "array"
-        },
-        "totalResults": {
-          "description": "The total results in the result set",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "pageUrl",
-        "cookies",
-        "connectorGuid",
-        "connectorVersionGuid",
-        "outputProperties"
-      ],
-      "type": "object"
-    },
-    "Pagination": {
-      "properties": {
-        "currentPageNum": {
-          "description": "The page number for this Page",
-          "type": "integer"
-        },
-        "next": {
-          "description": "URL of the next page",
-          "type": "string"
-        },
-        "pattern": {
-          "description": "The URL pattern for pagination",
-          "type": "string"
-        },
-        "previous": {
-          "description": "URL of the previous page",
-          "type": "string"
-        }
-      },
-      "required": [
-        "pattern",
-        "currentPageNum"
-      ],
-      "type": "object"
-    },
-    "PipelineStageConfig": {
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/StageType"
-        }
-      },
-      "type": "object"
-    },
-    "Playback": {
-      "properties": {
-        "browserActions": {
-          "items": {
-            "$ref": "#/definitions/BrowserAction"
-          },
-          "type": "array"
-        },
-        "contentType": {
-          "type": "string"
-        },
-        "crawler": {
-          "type": "boolean"
-        },
-        "fixHtml": {
-          "type": "boolean"
-        },
-        "http10": {
-          "type": "boolean"
-        },
-        "infiniteScrollPages": {
-          "type": "integer"
-        },
-        "javascriptDisabled": {
-          "type": "boolean"
-        },
-        "javascriptDisabledForLastAction": {
-          "type": "boolean"
-        },
-        "javascriptDisabledForLogin": {
-          "type": "boolean"
-        },
-        "javascriptWhitelist": {
-          "type": "string"
-        },
-        "loginBrowserActions": {
-          "items": {
-            "$ref": "#/definitions/BrowserAction"
-          },
-          "type": "array"
-        },
-        "maxPages": {
-          "type": "integer"
-        },
-        "paginationRequests": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "paginationXPaths": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "prerendered": {
-          "type": "boolean"
-        },
-        "prerequests": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "privileged": {
-          "type": "boolean"
-        },
-        "type": {
-          "$ref": "#/definitions/QueryType"
-        },
-        "url": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Property": {
-      "description": "A data property (or field) definition",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "$ref": "#/definitions/Type"
-        }
-      },
-      "required": [
-        "name",
-        "type"
-      ],
-      "type": "object"
-    },
-    "PublishingError": {
-      "properties": {
-        "exceptionType": {
-          "enum": [
-            "PublishJobRetrievalException",
-            "TestsNotStartedException",
-            "TestsFailureException",
-            "PublishSaveException"
-          ],
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "PublishRequest": {
-      "properties": {
-        "basedOnPublishRequestGuid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "connectorVersion": {
-          "$ref": "#/definitions/ConnectorVersion"
-        },
-        "forkedFromConnectorGuid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "guid": {
-          "format": "uuid",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "PublishResult": {
-      "properties": {
-        "_meta": {
-          "$ref": "#/definitions/Meta",
-          "readOnly": true
-        },
-        "connectorGuid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "cpuTime": {
-          "type": "integer"
-        },
-        "guid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "responseTime": {
-          "type": "integer"
-        },
-        "result": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "status": {
-          "format": "uuid",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Query": {
-      "properties": {
-        "connectorVersionGuid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "cookies": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "format": {
-          "default": "JSON",
-          "enum": [
-            "JSON",
-            "JSON_HASH",
-            "XML",
-            "XML_HASH",
-            "HTML"
-          ],
-          "type": "string"
-        },
-        "input": {
-          "additionalProperties": {
-            "type": "object"
-          },
-          "description": "The query input",
-          "type": "object"
-        },
-        "page": {
-          "type": "integer"
-        },
-        "proxyHost": {
-          "type": "string"
-        },
-        "proxyPassword": {
-          "type": "string"
-        },
-        "proxyPort": {
-          "type": "integer"
-        },
-        "proxyUsername": {
-          "type": "string"
-        },
-        "returnPaginationSuggestions": {
-          "type": "boolean"
-        },
-        "userAgent": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "input"
-      ],
-      "type": "object"
-    },
-    "QueryLoginInput": {
-      "properties": {
-        "password": {
-          "type": "string"
-        },
-        "username": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "username",
-        "password"
-      ],
-      "type": "object"
-    },
-    "QueryResult": {
-      "properties": {
-        "enabled": {
-          "type": "boolean"
-        },
-        "name": {
-          "type": "string"
-        },
-        "pages": {
-          "items": {
-            "$ref": "#/definitions/Page"
-          },
-          "type": "array"
-        },
-        "query": {
-          "$ref": "#/definitions/Query"
-        }
-      },
-      "type": "object"
-    },
-    "QueryType": {
-      "enum": [
-        "HTML",
-        "JSON",
-        "JSON_HASH",
-        "XML",
-        "XML_HASH"
-      ]
-    },
-    "Result": {
-      "additionalProperties": {
-        "type": "object"
-      },
-      "type": "object"
-    },
-    "Run": {
-      "description": "Encapsulates an asynchronous run.",
-      "properties": {
-        "apiGuid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "completedAt": {
-          "format": "utc-millisec",
-          "type": "integer"
-        },
-        "configurationGuid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "error": {
-          "description": "Message related to the error.",
-          "type": "string"
-        },
-        "errorType": {
-          "enum": [
-            "UnauthorizedException",
-            "NotFoundException",
-            "ServerErrorException",
-            "UnexpectedErrorException",
-            "DefinitionError",
-            "InputException",
-            "TooManyUrls"
-          ],
-          "type": "string"
-        },
-        "failedUrlCount": {
-          "description": "Number of urls with failed queries",
-          "type": "integer"
-        },
-        "guid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "message": {
-          "description": "Any messages regarding the run",
-          "type": "string"
-        },
-        "result": {
-          "$ref": "#/definitions/Attachment",
-          "description": "Newline separated JSON concatenation of results."
-        },
-        "resultSize": {
-          "$ref": "#/definitions/Attachment",
-          "description": "Size in bytes"
-        },
-        "startedAt": {
-          "format": "utc-millisec",
-          "type": "integer"
-        },
-        "status": {
-          "enum": [
-            "INITIAL",
-            "QUEUED",
-            "PROCESSING",
-            "CANCELLED",
-            "FINISHED",
-            "FAILED"
-          ],
-          "type": "string"
-        },
-        "successUrlCount": {
-          "description": "Number of urls with successful queries",
-          "type": "integer"
-        },
-        "totalUrlCount": {
-          "description": "The total number of URLs in the run.",
-          "type": "integer"
-        },
-        "userGuid": {
-          "format": "uuid",
-          "type": "string"
-        }
-      },
-      "required": [
-        "guid",
-        "apiGuid",
-        "configurationGuid"
-      ],
-      "type": "object"
-    },
-    "RunSearch": {
-      "properties": {
-        "hits": {
-          "properties": {
-            "hits": {
-              "items": {
-                "properties": {
-                  "_id": {
-                    "format": "uuid",
-                    "type": "string"
-                  },
-                  "_score": {
-                    "type": "number"
-                  },
-                  "fields": {
-                    "$ref": "#/definitions/Run"
-                  }
-                },
-                "required": [
-                  "_id",
-                  "_score",
-                  "fields"
-                ],
-                "type": "object"
-              },
-              "type": "array"
-            },
-            "max_score": {
-              "type": "number"
-            },
-            "total": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "total",
-            "max_score",
-            "hits"
-          ],
-          "type": "object"
-        },
-        "timed_out": {
-          "type": "boolean"
-        },
-        "took": {
-          "type": "integer"
-        }
-      },
-      "required": [
-        "took",
-        "timed_out",
-        "hits"
-      ],
-      "type": "object"
-    },
-    "Schema": {
-      "properties": {
-        "guid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "inputProperties": {
-          "items": {
-            "$ref": "#/definitions/IO"
-          },
-          "type": "array"
-        },
-        "outputProperties": {
-          "items": {
-            "$ref": "#/definitions/IO"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "Scraper": {
-      "properties": {
-        "errorRegexp": {
-          "type": "string"
-        },
-        "errorXPaths": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "ignoreFirst": {
-          "type": "integer"
-        },
-        "namespaces": {
-          "description": "XPath prefix => XML namespaces",
-          "type": "object"
-        },
-        "noResultsRegExp": {
-          "type": "string"
-        },
-        "noResultsXPaths": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "resultPipeline": {
-          "items": {
-            "$ref": "#/definitions/PipelineStageConfig"
-          },
-          "type": "array"
-        },
-        "resultRegexp": {
-          "type": "string"
-        },
-        "resultXPaths": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "singleResultPipeline": {
-          "items": {
-            "$ref": "#/definitions/PipelineStageConfig"
-          },
-          "type": "array"
-        },
-        "totalResultsRegExp": {
-          "type": "string"
-        },
-        "totalResultsXPaths": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "Snapshots": {
-      "properties": {
-        "snapshots": {
-          "items": {
-            "$ref": "#/definitions/DataPackageSnapshotResponse"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "StageType": {
-      "enum": [
-        "SIMPLE",
-        "DYNAMIC"
-      ]
-    },
-    "Status": {
-      "enum": [
-        "NOT_WORKING",
-        "TOO_MUCH_CPU",
-        "UNSURE",
-        "NO_TESTS",
-        "TIMEOUT",
-        "WORKING"
-      ],
-      "type": "string"
-    },
-    "StatusResponse": {
-      "properties": {
-        "status": {
-          "enum": [
-            "OK"
-          ],
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "TestQuery": {
-      "properties": {
-        "expectedFields": {
-          "type": "integer"
-        },
-        "expectedPages": {
-          "type": "integer"
-        },
-        "expectedResults": {
-          "type": "integer"
-        },
-        "expectedTotalResults": {
-          "type": "integer"
-        },
-        "guid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "pageExamples": {
-          "items": {
-            "$ref": "#/definitions/Page"
-          },
-          "type": "array"
-        },
-        "proxyHost": {
-          "type": "string"
-        },
-        "proxyPassword": {
-          "type": "string"
-        },
-        "proxyPort": {
-          "type": "integer"
-        },
-        "proxyUsername": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Type": {
-      "enum": [
-        "STRING",
-        "DATE",
-        "INT",
-        "DOUBLE",
-        "FLOAT",
-        "LANG",
-        "COUNTRY",
-        "BOOLEAN",
-        "URL",
-        "IMAGE",
-        "HTML",
-        "CURRENCY",
-        "MAP"
-      ],
-      "type": "string"
-    },
-    "User": {
-      "properties": {
-        "_meta": {
-          "$ref": "#/definitions/Meta",
-          "readOnly": true
-        },
-        "email": {
-          "pattern": "^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$",
-          "type": "string"
-        },
-        "guid": {
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "orgGuid": {
-          "format": "uuid",
-          "readOnly": true,
-          "type": "string"
-        },
-        "roles": {
-          "items": {
-            "maxLength": 15,
-            "pattern": "^[A-Z0-9_]{3,30}$",
-            "type": "string"
-          },
-          "maxItems": 10,
-          "type": "array"
-        },
-        "username": {
-          "pattern": "^[a-z0-9]{4,}$",
-          "type": "string"
-        }
-      },
-      "required": [
-        "guid",
-        "orgGuid",
-        "email",
-        "username",
-        "roles"
-      ],
-      "type": "object"
-    },
-    "WebQueryConfiguration": {
-      "properties": {
-        "extraction": {
-          "$ref": "#/definitions/Scraper"
-        },
-        "http404TheSameAsNoResults": {
-          "type": "boolean"
-        },
-        "playback": {
-          "$ref": "#/definitions/Playback"
-        },
-        "queryType": {
-          "$ref": "#/definitions/QueryType"
-        },
-        "urlProperties": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "version": {
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    }
-  },
-  "externalDocs": {
-    "url": "http://api.docs.import.io/"
-  },
-  "host": "api.import.io",
-  "info": {
-    "description": "## Introduction\n\nThe import.io API is a [REST](http://en.wikipedia.org/wiki/Representational_state_transfer)ful API. It is designed as much as possible to have resource-oriented URLs and to use HTTP status codes to indicate API status.\n\nWe use standard HTTP which can be understood by any HTTP client, and we support [CORS](http://enable-cors.org/) to allow you to interact with our API from a client-side web application. Remember, you should never expose your secret API key in any public client-side code.\n\nJSON is always returned from the API, including errors.\n\nimport.io uses conventional HTTP response codes to indicate success or failure of an API request. In general, codes in the 2xx range indicate success, codes in the 4xx range indicate an error that resulted from the provided information (e.g. a required parameter was missing), and codes in the 5xx range indicate an error with our servers.\n\nAll API requests *should* be made over HTTPS to `https://api.import.io/`\n\n\n\n## API Authentication\n\nYou authenticate to the import.io API by providing your API key as URL query string parameter `_apikey`. You can manage your API key from [your account](https://import.io/data/account/). In the My Settings page, the API in not URL encoded. To prevent a Base64 error, make sure to use a URI encode function for your query. You can also get an encoded API Key from the GET API or POST API tab in the application. Your API key allows unrestricted privileges your account, so keep it secret!\n\nWhen you are logged in, *submit your password in this page header* to see the API key in the API explorer below.\n\n## Quick Start\n\n### Basic concepts\n\n* import.io lets you publish dynamic APIs and Data Sets to its platform (object class `Connector`).\n  * To disambiguate between dynamic API created on the platform, and static APIs such as this, we use the term `Connector` within the import.io APIs to refer to a API or Data Set published to import.io.\n  * Extractors, Crawlers and Data Sets are just specializations of Connector.\n* You can create these via UI tooling, or by using the APIs detailed here.\n* The dynamic API definition for a Connector is versioned (object class `ConnectorVersion`); querying a connector by default queries the most recent version, whose id can be found on the `Connector` object (`latestVersionGuid`).\n* Each `ConnectorVersion` has a schema (object class `Schema`) defining its input and output properties.\n* All objects are accessible via the REST API.\n* The output properties are returned with the query data.\n  * Extra meta-data may be passed back depending on a output property [type](#data-types). \n  * All fields _may_ be multi-valued (i.e. arrays).\n\n### Convert a URL into data\n\nYou can use import.io magic to convert a URL into data tables over our API instantly.\n\n[Try it yourself!](?magic#!/Magic_Methods/magic)\n\n### Query a custom API\n\nCreate an API in the UI, do a query.\n\n[Try it yourself!](?query#!/Query_Methods/queryGet)\n\n## Data Types\n\nFor most output property types we also return `myvar/_source` with the original textual data. \n\n| Type  |  Returns |  Notes | \n| ---   |  ---     |  ---   |\n|   `STRING` | myvar  |  We normalize whitespace from text, and don't return empty strings | \n|  `CURRENCY` |  myvar, myvar/_currency, myvar/_source |  The ISO currency code is returned as `myvar/_currency`, the numeric value in `myvar` |  \n|  `INT` |  myvar, myvar/_source | 64 bit integer (`long`) | \n|  `DOUBLE` |  myvar, myvar/_source |  64 bit float | \n|  `LANG` |  myvar, myvar/_source |  3 letter ISO code | \n|  `COUNTRY` |  myvar, myvar/_source |  3 letter ISO code | \n|  `BOOLEAN` |  myvar, myvar/_source |  true if 1, yes, on, active, true, y | \n|  `URL` |  myvar, myvar/_text, myvar/_title, myvar/_source |  `myvar/_text` is the normalized text content of the anchor | \n|  `IMAGE` |  myvar,  myvar/_alt, myvar/_title, myvar/_source |   | \n|  `HTML` |  myvar | Raw HTML as well-formed XML  | \n|  `MAP` |  myvar |  JSON compatible map | ",
-    "title": "API Documentation",
-    "version": "1.0",
-    "x-logo": {
-      "url": "https://d3sgt82prjfpwv.cloudfront.net/website2/271/img/import-logo-new-carmine.svg"
-    },
-    "x-origin": {
-      "format": "swagger",
-      "url": "http://api.docs.import.io/swagger.json",
-      "version": "2.0"
-    },
-    "x-providerName": "import.io"
-  },
-  "paths": {
-    "/auth/apikeyadmin": {
-      "get": {
-        "operationId": "getApiKey",
-        "parameters": [
-          {
-            "description": "Optional and not required for regular users.",
-            "format": "password",
-            "in": "query",
-            "name": "password",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/ApiKey"
-            }
-          },
-          "default": {
-            "description": "error payload",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "summary": "Get API key",
-        "tags": [
-          "Authentication methods"
-        ]
-      },
-      "post": {
-        "operationId": "newApiKey",
-        "parameters": [
-          {
-            "description": "Optional and not required for regular users.",
-            "format": "password",
-            "in": "query",
-            "name": "password",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/ApiKey"
-            }
-          },
-          "default": {
-            "description": "error payload",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "summary": "New API key",
-        "tags": [
-          "Authentication methods"
-        ]
-      }
-    },
-    "/auth/currentuser": {
-      "get": {
-        "operationId": "currentUser",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          },
-          "default": {
-            "description": "error payload",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "summary": "Get session user",
-        "tags": [
-          "Authentication methods"
-        ]
-      }
-    },
-    "/store/connector/_magic": {
-      "get": {
-        "description": "This is the simplest way to convert a URL into data using the import.io platform.\n\nThis will magically generate up to 3 different `ConnectorVersion` configurations, and return a `Page` object for each representing lists or tables on the page at that URL.\n\nIf pagination is detected on the page, the `pagination` property will be included, containing suggestions for the previous and next page URLs. Clients can then make additional separate requests to extract data over multiple pages. As these URLs are just suggestions, clients themselves need to determine whether the last page has been reached, e.g. by checking whether the `results` being returned is empty or is showing the same contents as the previous page.\n\nJavascript and infinite scroll support in beta.\n\nYou can select the region to process using a keyword contained within it.\n\nIf you wish to repeatedly extract the same table from many URLs, you can use the `connectorVersionGuid` returned in the table in the Magic versioned method below, or the standard query methods (although these do not support js/infinite scroll currently).\n\n",
-        "operationId": "magic",
-        "parameters": [
-          {
-            "description": "URL you wish to process",
-            "in": "query",
-            "name": "url",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "default": "JSON",
-            "description": "The output response format. JSON_HASH will add an additional field '_hash' to the result that is a hash of the result fields.",
-            "enum": [
-              "JSON",
-              "JSON_HASH"
-            ],
-            "in": "query",
-            "name": "format",
-            "type": "string"
-          },
-          {
-            "default": false,
-            "description": "Whether to process with javascript on (slower)",
-            "in": "query",
-            "name": "js",
-            "type": "boolean"
-          },
-          {
-            "description": "How many times to load infinite scroll - requires js=true",
-            "in": "query",
-            "name": "infiniteScrollPages",
-            "type": "integer"
-          },
-          {
-            "description": "Process the area that contains this phrase",
-            "in": "query",
-            "name": "regionText",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/MagicTables"
-            }
-          },
-          "default": {
-            "description": "error payload",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "summary": "Magically get data",
-        "tags": [
-          "Magic Methods"
-        ]
-      }
-    },
-    "/store/connector/_magic/{connectorVersionGuid}": {
-      "get": {
-        "description": "This will re-run a specific `ConnectorVersion` that generated a table via the regular magic call.\n\nUse this if you want to use the same table extraction for many URLs.\n\n",
-        "operationId": "magicTable",
-        "parameters": [
-          {
-            "description": "The id of the ConnectorVersion for that table you want",
-            "in": "path",
-            "name": "connectorVersionGuid",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "URL you wish to process",
-            "in": "query",
-            "name": "url",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "default": "JSON",
-            "description": "The output response format. The _HASH variants will add an additional field '_hash' to the result that is a hash of the result fields.",
-            "enum": [
-              "JSON",
-              "JSON_HASH",
-              "XML",
-              "XML_HASH",
-              "HTML"
-            ],
-            "in": "query",
-            "name": "format",
-            "type": "string"
-          },
-          {
-            "default": false,
-            "description": "Whether to process with javascript on (slower)",
-            "in": "query",
-            "name": "js",
-            "type": "boolean"
-          },
-          {
-            "description": "How many times to load infinite scroll - requires js=true",
-            "in": "query",
-            "name": "infiniteScrollPages",
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Page"
-            }
-          },
-          "default": {
-            "description": "error payload",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "summary": "Re-run table",
-        "tags": [
-          "Magic Methods"
-        ]
-      }
-    },
-    "/store/connector/_search": {
-      "get": {
-        "description": "Search your connectors - or all Connectors if you are an administrator of an organization.",
-        "operationId": "searchConnectors",
-        "parameters": [
-          {
-            "description": "An elasticsearch [query string](http://www.elastic.co/guide/en/elasticsearch/reference/1.x/query-dsl-query-string-query.html#query-string-syntax)",
-            "in": "query",
-            "name": "q",
-            "type": "string"
-          },
-          {
-            "description": "The page to return",
-            "in": "query",
-            "name": "_page",
-            "type": "integer"
-          },
-          {
-            "default": 20,
-            "description": "Up to 100",
-            "in": "query",
-            "name": "_perpage",
-            "type": "integer"
-          },
-          {
-            "description": "The field to sort upon, e.g. _meta.creationTimestamp",
-            "in": "query",
-            "name": "_sort",
-            "type": "string"
-          },
-          {
-            "default": "DESC",
-            "description": "Direction of sort; ASC or DESC",
-            "enum": [
-              "ASC",
-              "DESC"
-            ],
-            "in": "query",
-            "name": "_sortDirection",
-            "type": "string"
-          },
-          {
-            "collectionFormat": "multi",
-            "description": "Required fields (multi-valued)",
-            "in": "query",
-            "items": {
-              "type": "string"
-            },
-            "name": "_exists",
-            "type": "array"
-          },
-          {
-            "collectionFormat": "multi",
-            "description": "Fields that must be null (multi-valued)",
-            "in": "query",
-            "items": {
-              "type": "string"
-            },
-            "name": "_missing",
-            "type": "array"
-          },
-          {
-            "collectionFormat": "multi",
-            "description": "Fields that should have facets produced (multi-valued)",
-            "in": "query",
-            "items": {
-              "enum": [
-                "type",
-                "status",
-                "tags"
-              ],
-              "type": "string"
-            },
-            "name": "_facet",
-            "type": "array"
-          },
-          {
-            "description": "Field to operate on",
-            "in": "query",
-            "name": "_field",
-            "type": "string"
-          },
-          {
-            "default": "query_string",
-            "description": "The type of search",
-            "enum": [
-              "query_string",
-              "match_phrase",
-              "term"
-            ],
-            "in": "query",
-            "name": "_type",
-            "type": "string"
-          },
-          {
-            "default": "OR",
-            "description": "Operator a space character represents.",
-            "enum": [
-              "OR",
-              "AND"
-            ],
-            "in": "query",
-            "name": "_default_operator",
-            "type": "string"
-          },
-          {
-            "default": false,
-            "description": "Restrict to just the objects you own",
-            "in": "query",
-            "name": "_mine",
-            "type": "boolean"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "examples": {
-              "application/json": {
-                "hits": {
-                  "hits": [
-                    {
-                      "_id": "b409c071-5e09-4346-be9c-1f00097e419b",
-                      "_score": 1,
-                      "_type": "Connector",
-                      "fields": {
-                        "_meta": {
-                          "creationTimestamp": 1428050602319,
-                          "creatorGuid": "f7841145-ab7f-4461-8ffe-ff160535d56a",
-                          "lastEditorGuid": "84920b9e-9578-3948-0174-5f15b344d094",
-                          "ownerGuid": "f7841145-ab7f-4461-8ffe-ff160535d56a",
-                          "timestamp": 1428050603218
-                        },
-                        "guid": "017b4da8-ce99-4bfa-b882-a4a107e47293",
-                        "headline": "Headline",
-                        "lastCheckedAt": 1428050602915,
-                        "lastModifiedAt": 1428050602626,
-                        "lastPublishRequestGuid": "5522a505-4169-4a2f-9917-020ab93ad8f1",
-                        "latestVersion": 1428050602915,
-                        "latestVersionGuid": "1ef446f1-5669-4769-ae80-5407a8b01753",
-                        "name": "Test Connector - 79dwdl3504",
-                        "publishRequest": "5522a505-4169-4a2f-9917-020ab93ad8f1",
-                        "publishRequestGuid": "5522a505-4169-4a2f-9917-020ab93ad8f1",
-                        "source": "http://site.com",
-                        "status": "WORKING",
-                        "testResults": "6bf627a2-ad31-4c70-ad1e-b13dd205de63",
-                        "type": "API"
-                      }
-                    }
-                  ],
-                  "max_score": 1,
-                  "total": 1
-                },
-                "timed_out": false,
-                "took": 145
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/ConnectorSearch"
-            }
-          },
-          "default": {
-            "description": "error payload",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "summary": "Search Connectors",
-        "tags": [
-          "Connector Methods"
-        ]
-      }
-    },
-    "/store/connector/{id}": {
-      "get": {
-        "operationId": "getConnector",
-        "parameters": [
-          {
-            "description": "ID of the object",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "examples": {
-              "application/json": {
-                "_meta": {
-                  "creationTimestamp": 1428050602319,
-                  "creatorGuid": "f7841145-ab7f-4461-8ffe-ff160535d56a",
-                  "lastEditorGuid": "84920b9e-9578-3948-0174-5f15b344d094",
-                  "ownerGuid": "f7841145-ab7f-4461-8ffe-ff160535d56a",
-                  "timestamp": 1428050603218
-                },
-                "guid": "017b4da8-ce99-4bfa-b882-a4a107e47293",
-                "headline": "Headline",
-                "lastCheckedAt": 1428050602915,
-                "lastModifiedAt": 1428050602626,
-                "lastPublishRequestGuid": "5522a505-4169-4a2f-9917-020ab93ad8f1",
-                "latestVersion": 1428050602915,
-                "latestVersionGuid": "1ef446f1-5669-4769-ae80-5407a8b01753",
-                "name": "Test Connector - 79dwdl3504",
-                "publishRequest": "5522a505-4169-4a2f-9917-020ab93ad8f1",
-                "publishRequestGuid": "5522a505-4169-4a2f-9917-020ab93ad8f1",
-                "source": "http://site.com",
-                "status": "WORKING",
-                "testResults": "6bf627a2-ad31-4c70-ad1e-b13dd205de63",
-                "type": "API"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Connector"
-            }
-          },
-          "default": {
-            "description": "error payload",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "summary": "Get Connector",
-        "tags": [
-          "Connector Methods"
-        ]
-      },
-      "patch": {
-        "description": "Overwrites supplied fields. Declared fields with `null` values will be nullified in the store.",
-        "operationId": "updateConnector",
-        "parameters": [
-          {
-            "description": "GUID of the Data Source",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Required timestamp of the object",
-            "in": "query",
-            "name": "timestamp",
-            "type": "string"
-          },
-          {
-            "description": "Class of the object",
-            "in": "body",
-            "name": "connector",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Connector"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "examples": {
-              "application/json": {
-                "_meta": {
-                  "lastEditorGuid": "58e092b4-4f13-4674-9258-6f1b1d34234c",
-                  "patchTimestamp": 1428050603218,
-                  "timestamp": 1428100396593
-                },
-                "guid": "017b4da8-ce99-4bfa-b882-a4a107e47293",
-                "tags": [
-                  "TAG"
-                ]
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Connector"
-            }
-          },
-          "default": {
-            "description": "error payload",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "summary": "Update Connector",
-        "tags": [
-          "Connector Methods"
-        ]
-      }
-    },
-    "/store/connector/{id}/_attachment/{field}/_history": {
-      "get": {
-        "parameters": [
-          {
-            "description": "ID of the Object",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The page to return",
-            "in": "query",
-            "name": "_page",
-            "type": "integer"
-          },
-          {
-            "description": "The field name of the attachment in the object",
-            "enum": [
-              "settings",
-              "snapshot",
-              "publishSnapshot",
-              "testResults",
-              "publishRequest"
-            ],
-            "in": "path",
-            "name": "field",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "examples": {
-              "application/json": {
-                "hits": {
-                  "hits": [
-                    {
-                      "_id": "fe465046e-6af8-40ce-90ce-7b34b26ba66c",
-                      "_score": 1,
-                      "_type": "Attachment",
-                      "fields": {
-                        "_meta": {
-                          "creationTimestamp": 1408116739909,
-                          "creatorGuid": "1396ebdb-e59d-4db1-b3a0-32db31a3e634",
-                          "lastEditorGuid": "1396ebdb-e59d-4db1-b3a0-32db31a3e634",
-                          "ownerGuid": "1396ebdb-e59d-4db1-b3a0-32db31a3e634",
-                          "timestamp": 1408116739909
-                        },
-                        "bucketGuid": "edf21d7e-cb36-4e82-10dd-d3dfaeca6fbf",
-                        "field": "settings",
-                        "objectGuid": "2300189f-b35a-4139-a10c-4cc21e238019",
-                        "size": 48
-                      }
-                    }
-                  ],
-                  "max_score": 1,
-                  "total": 1
-                },
-                "timed_out": false,
-                "took": 483
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/AttachmentSearch"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "summary": "Attachment Version History",
-        "tags": [
-          "Connector Methods"
-        ]
-      }
-    },
-    "/store/connector/{id}/_attachment/publishSnapshot/{publishSnapshot}": {
-      "get": {
-        "description": "Returns the static data from training a Connector.",
-        "operationId": "getPublishStaticData",
-        "parameters": [
-          {
-            "description": "ID of the Object",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Value of the `publishSnapshot` field in the `Connector`",
-            "in": "path",
-            "name": "publishSnapshot",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/DataView"
-            }
-          },
-          "default": {
-            "description": "error payload",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "summary": "Get Publish Snapshot",
-        "tags": [
-          "Connector Methods"
-        ]
-      }
-    },
-    "/store/connector/{id}/_attachment/settings/{settings}": {
-      "get": {
-        "description": "Returns crawl - or other - additional settings.",
-        "operationId": "getSettings",
-        "parameters": [
-          {
-            "description": "ID of the Object",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Value of the `settings` field in the `Connector`",
-            "in": "path",
-            "name": "settings",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "examples": {},
-            "headers": {}
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "summary": "Get Extra Settings",
-        "tags": [
-          "Connector Methods"
-        ]
-      }
-    },
-    "/store/connector/{id}/_attachment/snapshot/{snapshot}": {
-      "get": {
-        "description": "Returns uploaded snapshots: crawls or data set data",
-        "operationId": "getDataSnapshot",
-        "parameters": [
-          {
-            "description": "ID of the Object",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Value of the `snapshot` field in the `Connector`",
-            "in": "path",
-            "name": "snapshot",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/DataView"
-            }
-          },
-          "default": {
-            "description": "error payload",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "summary": "Get Data Snapshot",
-        "tags": [
-          "Connector Methods"
-        ]
-      }
-    },
-    "/store/connector/{id}/_attachment/testResults/{testResults}": {
-      "get": {
-        "operationId": "getCheckResults",
-        "parameters": [
-          {
-            "description": "ID of the Object",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Value of the `testResults` field in the `Connector`",
-            "in": "path",
-            "name": "testResults",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/CheckResults"
-            }
-          },
-          "default": {
-            "description": "error payload",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "summary": "Get Test Results",
-        "tags": [
-          "Connector Methods"
-        ]
-      }
-    },
-    "/store/connector/{id}/_disown": {
-      "post": {
-        "description": "Make myself no longer the owner of a connector, removing it from My Data.\n\nConnectors cannot be deleted.",
-        "operationId": "disownConnector",
-        "parameters": [
-          {
-            "description": "ID of the object",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "examples": {
-              "application/json": {
-                "status": "OK"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/StatusResponse"
-            }
-          },
-          "default": {
-            "description": "error payload",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "summary": "Disown Connector",
-        "tags": [
-          "Connector Methods"
-        ]
-      }
-    },
-    "/store/connector/{id}/_login": {
-      "post": {
-        "description": "This API logs into the target site for an authenticated API. Pass the cookies back through a POST query to use the authenticated session.\n\n",
-        "operationId": "queryLogin",
-        "parameters": [
-          {
-            "description": "id of the Connector you are querying.",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Login input",
-            "in": "body",
-            "name": "input",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/QueryLoginInput"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response (will have no results)",
-            "schema": {
-              "$ref": "#/definitions/Page"
-            }
-          },
-          "default": {
-            "description": "error payload",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "summary": "Query Login",
-        "tags": [
-          "Query Methods"
-        ]
-      }
-    },
-    "/store/connector/{id}/_query": {
-      "get": {
-        "description": "This is the simplest way to make a query onto the import.io platform.\n\nSpecify your inputs as `input={name}:{value}` named query string parameters, for example:\n\n```html\n/store/connector/d50aff7b-ad19-4f64-ab1a-1e8f9a1bb249/_query?\n    input=webpage/url:http%3A%2F%2Fcdn.import.io%2Ftest%2Fpages%2Fbasic%2Findex.html\n```\n\nThere can be default values for inputs, e.g. the URL you extracted data from for `webpage/url`. You can see the defaults in the `Schema` of the `ConnectorVersion`.\n\n",
-        "operationId": "queryGet",
-        "parameters": [
-          {
-            "description": "ID of the Connector you are querying.",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "default": "JSON",
-            "description": "The output response format. The _HASH variants will add an additional field '_hash' to the result that is a hash of the result fields.",
-            "enum": [
-              "JSON",
-              "JSON_HASH",
-              "XML",
-              "XML_HASH",
-              "HTML"
-            ],
-            "in": "query",
-            "name": "format",
-            "type": "string"
-          },
-          {
-            "description": "The page you require (if supported by the Connector)",
-            "in": "query",
-            "name": "page",
-            "type": "integer"
-          },
-          {
-            "description": "The specific ConnectorVersion you want to query if not the latest",
-            "in": "query",
-            "name": "version",
-            "type": "string"
-          },
-          {
-            "collectionFormat": "multi",
-            "description": "The inputs in the format {name}:{value} (multiple unique keys and their input values as query parameters accepted)",
-            "in": "query",
-            "items": {
-              "type": "string"
-            },
-            "name": "input",
-            "type": "array"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Page"
-            }
-          },
-          "default": {
-            "description": "error payload",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "summary": "Simple Query",
-        "tags": [
-          "Query Methods"
-        ]
-      },
-      "post": {
-        "consumes": [
-          "application/json; charset=utf-8"
-        ],
-        "description": "You can pass up cookies to use for a query in the input object optionally. This is shown in the example.\n\nThis feature is required if you are using authenticated APIs and maintaining a session between calls.",
-        "operationId": "queryPost",
-        "parameters": [
-          {
-            "description": "ID of the Connector you are querying.",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The query to execute.",
-            "in": "body",
-            "name": "query",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Query"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Page"
-            }
-          },
-          "default": {
-            "description": "error payload",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "summary": "Advanced Query",
-        "tags": [
-          "Query Methods"
-        ]
-      }
-    },
-    "/store/connectorversion/{id}/schema": {
-      "get": {
-        "operationId": "getConnectorVersionSchema",
-        "parameters": [
-          {
-            "description": "ID of the ConnectorVersion",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "examples": {
-              "application/json": {
-                "_meta": {
-                  "creationTimestamp": 1427729022748,
-                  "creatorGuid": "84920b9e-9578-3948-0174-5f15b344d094",
-                  "lastEditorGuid": "84920b9e-9578-3948-0174-5f15b344d094",
-                  "ownerGuid": "9e7f165e-a8c2-481e-9f02-6bbe05ec68af",
-                  "timestamp": 1427729022748
-                },
-                "guid": "68b858b3-e6b3-bd24-5a5e-36b0e4f13d0d",
-                "inputProperties": [
-                  {
-                    "defaultValue": "http://site.com/page.html",
-                    "name": "webpage/url",
-                    "type": "URL"
-                  }
-                ],
-                "outputProperties": [
-                  {
-                    "name": "no_number",
-                    "type": "DOUBLE"
-                  },
-                  {
-                    "name": "competition_value",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "competition_value_numbers",
-                    "type": "DOUBLE"
-                  },
-                  {
-                    "name": "john_value",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "adam_value",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "robert_value",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "paul_value",
-                    "type": "STRING"
-                  },
-                  {
-                    "name": "piccy_image",
-                    "type": "IMAGE"
-                  },
-                  {
-                    "name": "cost_price",
-                    "type": "CURRENCY"
-                  }
-                ]
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Schema"
-            }
-          },
-          "default": {
-            "description": "error payload",
-            "schema": {
-              "$ref": "#/definitions/ErrorModel"
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": []
-          }
-        ],
-        "summary": "Get ConnectorVersion Schema",
-        "tags": [
-          "Connector Methods"
-        ]
-      }
-    }
-  },
-  "produces": [
-    "application/json"
-  ],
-  "schemes": [
-    "https"
-  ],
-  "security": [
-    {
-      "api_key": []
-    }
-  ],
-  "securityDefinitions": {
-    "api_key": {
-      "in": "query",
-      "name": "_apikey",
-      "type": "apiKey"
-    }
-  },
-  "swagger": "2.0"
-}
+basePath: /
+definitions:
+  ApiKey:
+    properties:
+      apiKey:
+        type: string
+    type: object
+  Attachment:
+    properties:
+      _meta:
+        $ref: '#/definitions/Meta'
+        readOnly: true
+      bucketGuid:
+        description: Internal type identifier
+        format: uuid
+        readOnly: true
+        type: string
+      field:
+        description: Owning object field
+        readOnly: true
+        type: string
+      objectGuid:
+        description: Owning object id
+        format: uuid
+        readOnly: true
+        type: string
+      size:
+        description: Size in bytes
+        readOnly: true
+        type: integer
+    required:
+      - bucketGuid
+      - objectGuid
+      - field
+      - size
+    type: object
+  AttachmentSearch:
+    properties:
+      hits:
+        properties:
+          hits:
+            items:
+              properties:
+                _id:
+                  format: uuid
+                  type: string
+                _score:
+                  type: number
+                fields:
+                  $ref: '#/definitions/Attachment'
+              required:
+                - _id
+                - _score
+                - fields
+              type: object
+            type: array
+          max_score:
+            type: number
+          total:
+            type: integer
+        required:
+          - total
+          - max_score
+          - hits
+        type: object
+      timed_out:
+        type: boolean
+      took:
+        type: integer
+    required:
+      - took
+      - timed_out
+      - hits
+    type: object
+  BrowserAction:
+    properties:
+      domain:
+        type: string
+      element:
+        $ref: '#/definitions/Element'
+      format:
+        type: string
+      input:
+        type: string
+      inputType:
+        $ref: '#/definitions/Type'
+      type:
+        $ref: '#/definitions/Type'
+      value:
+        type: object
+    type: object
+  CheckResults:
+    properties:
+      results:
+        items:
+          $ref: '#/definitions/CheckTestResult'
+        type: array
+      status:
+        $ref: '#/definitions/Status'
+      thrownException:
+        $ref: '#/definitions/PublishingError'
+    type: object
+  CheckTestResult:
+    properties:
+      result:
+        $ref: '#/definitions/ConnectorTestResult'
+      test:
+        $ref: '#/definitions/TestQuery'
+    type: object
+  Configuration:
+    description: General-purpose configuration
+    properties:
+      configuration:
+        format: uuid
+        type: string
+      configurationType:
+        type: string
+      connectorGuid:
+        format: uuid
+        type: string
+      guid:
+        format: uuid
+        type: string
+      name:
+        description: "The configuration's name"
+        type: string
+      type:
+        type: string
+    required:
+      - guid
+      - name
+      - type
+      - configurationType
+    type: object
+  ConfigurationSearch:
+    properties:
+      hits:
+        properties:
+          hits:
+            items:
+              properties:
+                _id:
+                  format: uuid
+                  type: string
+                _score:
+                  type: number
+                fields:
+                  $ref: '#/definitions/Configuration'
+              required:
+                - _id
+                - _score
+                - fields
+              type: object
+            type: array
+          max_score:
+            type: number
+          total:
+            type: integer
+        required:
+          - total
+          - max_score
+          - hits
+        type: object
+      timed_out:
+        type: boolean
+      took:
+        type: integer
+    required:
+      - took
+      - timed_out
+      - hits
+    type: object
+  Connector:
+    properties:
+      _meta:
+        $ref: '#/definitions/Meta'
+        readOnly: true
+      authenticated:
+        description: Is this an authenticated connector?
+        type: boolean
+      extension:
+        description: This field is a code to indicate the application to be used when editing this connector
+        type: string
+      forkedFromGuid:
+        description: What connector this was forked from
+        format: uuid
+        type: string
+      headline:
+        description: A short description of the connector
+        type: string
+      lastCheckedAt:
+        description: The last date this connector was checked at
+        format: utc-millisec
+        readOnly: true
+        type: integer
+      lastModifiedAt:
+        description: The date of the last snapshot upload or publish
+        format: utc-millisec
+        readOnly: true
+        type: integer
+      lastPublishRequestGuid:
+        description: The GUID of the publish request that last completed
+        format: uuid
+        readOnly: true
+        type: string
+      latestVersion:
+        description: The date of the latest version of the connector
+        format: utc-millisec
+        readOnly: true
+        type: integer
+      latestVersionGuid:
+        description: The id of the latest version of the connector
+        format: uuid
+        type: string
+      name:
+        description: "The connector's name"
+        minLength: 1
+        type: string
+      pagePattern:
+        description: The URL pattern that this connector can process
+        type: string
+      parentGuid:
+        description: What connector this is linked to
+        format: uuid
+        type: string
+      pendingPublishRequestGuid:
+        description: The GUID of the currently pending publish request
+        format: uuid
+        readOnly: true
+        type: string
+      publishRequest:
+        description: The JSON for the last publish (save)
+        format: uuid
+        readOnly: true
+        type: string
+      publishRequestGuid:
+        description: The GUID of the publish request that has been successful
+        format: uuid
+        readOnly: true
+        type: string
+      publishSnapshot:
+        description: The snapshot JSON for the last publish (save)
+        format: uuid
+        readOnly: true
+        type: string
+      reversedDomain:
+        description: 'The reversed domain, e.g. com.importio.api'
+        readOnly: true
+        type: string
+      settings:
+        description: Secondary settings JSON
+        format: uuid
+        readOnly: true
+        type: string
+      snapshot:
+        description: The snapshot JSON
+        format: uuid
+        readOnly: true
+        type: string
+      source:
+        description: The source of the data from the connector
+        format: uri
+        pattern: '^https?://'
+        type: string
+      status:
+        description: The current status of this connector
+        enum:
+          - NOT_WORKING
+          - TOO_MUCH_CPU
+          - UNSURE
+          - NO_TESTS
+          - TIMEOUT
+          - WORKING
+        readOnly: true
+        type: string
+      tags:
+        description: 'The tags for this connector, a maximum of 10'
+        items:
+          pattern: '^[A-Z_]{3,50}$'
+          type: string
+        maxItems: 10
+        type: array
+      testResults:
+        description: Test results
+        format: uuid
+        readOnly: true
+        type: string
+      type:
+        description: The connector type.
+        enum:
+          - LIVE_WEB
+          - STATIC
+          - CRAWLED_WEB
+          - API
+          - MAGIC
+          - EXTRACTOR
+          - DATASET
+        type: string
+    required:
+      - name
+    type: object
+  ConnectorSearch:
+    properties:
+      hits:
+        properties:
+          hits:
+            items:
+              properties:
+                _id:
+                  format: uuid
+                  type: string
+                _score:
+                  type: number
+                fields:
+                  $ref: '#/definitions/Connector'
+              required:
+                - _id
+                - _score
+                - fields
+              type: object
+            type: array
+          max_score:
+            type: number
+          total:
+            type: integer
+        required:
+          - total
+          - max_score
+          - hits
+        type: object
+      timed_out:
+        type: boolean
+      took:
+        type: integer
+    required:
+      - took
+      - timed_out
+      - hits
+    type: object
+  ConnectorTestError:
+    properties:
+      exceptionType:
+        enum:
+          - ExpectedResultsSchemaException
+          - ExpectedResultsDifferentException
+          - ResponseTimeoutException
+          - ConnectorVersionNotEfficientException
+          - PageError
+          - Unexpected
+        type: string
+      message:
+        type: string
+    type: object
+  ConnectorTestResult:
+    properties:
+      actualFields:
+        type: integer
+      actualPages:
+        type: integer
+      actualResults:
+        type: integer
+      actualTotalResults:
+        type: integer
+      cpuMilliseconds:
+        type: integer
+      expectedFields:
+        type: integer
+      expectedPages:
+        type: integer
+      expectedResults:
+        type: integer
+      expectedTotalResults:
+        type: integer
+      input:
+        type: object
+      name:
+        type: string
+      renderedHTML:
+        type: string
+      responseMilliseconds:
+        type: integer
+      runAt:
+        format: utc-millisec
+        type: integer
+      status:
+        $ref: '#/definitions/Status'
+      testFailureException:
+        $ref: '#/definitions/ConnectorTestError'
+    type: object
+  ConnectorVersion:
+    properties:
+      guid:
+        format: uuid
+        type: string
+      publishRequestGuid:
+        format: uuid
+        type: string
+      runtimeConfiguration:
+        $ref: '#/definitions/ConnectorVersionRuntimeConfiguration'
+      schema:
+        $ref: '#/definitions/Schema'
+      tests:
+        $ref: '#/definitions/ConnectorVersionTests'
+    type: object
+  ConnectorVersionRuntimeConfiguration:
+    properties:
+      configuration:
+        $ref: '#/definitions/WebQueryConfiguration'
+      guid:
+        format: uuid
+        type: string
+    type: object
+  ConnectorVersionTests:
+    properties:
+      guid:
+        format: uuid
+        type: string
+      testQueries:
+        items:
+          $ref: '#/definitions/TestQuery'
+        type: array
+    type: object
+  Count:
+    properties:
+      count:
+        type: integer
+    type: object
+  DataPackageRequestResponse:
+    properties:
+      results:
+        items:
+          $ref: '#/definitions/DataPackageRequestResponseUrl'
+        type: array
+    type: object
+  DataPackageRequestResponseUrl:
+    properties:
+      guid:
+        format: uuid
+        type: string
+      message:
+        type: string
+      result:
+        enum:
+          - ADDED
+          - FAILED
+        type: string
+      url:
+        type: string
+    type: object
+  DataPackageSnapshotExcludedSource:
+    properties:
+      reason:
+        type: string
+      sourceId:
+        format: uuid
+        type: string
+    type: object
+  DataPackageSnapshotResponse:
+    properties:
+      excludedSources:
+        items:
+          $ref: '#/definitions/DataPackageSnapshotExcludedSource'
+        type: array
+      guid:
+        format: uuid
+        type: string
+      includedSourceIds:
+        items:
+          format: uuid
+          type: string
+        type: array
+      packageId:
+        format: uuid
+        type: string
+      previousSnapshotAt:
+        format: utc-millisec
+        type: integer
+      snapshotAt:
+        format: utc-millisec
+        type: integer
+      snapshotBuildCompletedAt:
+        format: utc-millisec
+        type: integer
+      snapshotBuildStartedAt:
+        format: utc-millisec
+        type: integer
+      totalObjects:
+        type: integer
+    type: object
+  DataPackageSubscription:
+    properties:
+      expires:
+        format: utc-millisec
+        readOnly: true
+        type: integer
+      packageGuid:
+        format: uuid
+        type: string
+      packageName:
+        type: string
+      packageSchemaName:
+        type: string
+      scheduleDaysOfWeek:
+        type: string
+      scheduleEffectiveOn:
+        format: utc-millisec
+        readOnly: true
+        type: integer
+      scheduleTimesOfDay:
+        type: string
+      status:
+        enum:
+          - ACTIVE
+          - SUSPENDED
+        type: string
+    type: object
+  DataPackageSubscriptions:
+    properties:
+      subscriptions:
+        items:
+          $ref: '#/definitions/DataPackageSubscription'
+        type: array
+    type: object
+  DataSource:
+    properties:
+      _meta:
+        $ref: '#/definitions/Meta'
+        readOnly: true
+      deprecated:
+        type: boolean
+      firstReadyAt:
+        format: utc-millisec
+        type: integer
+      instructions:
+        type: string
+      lastRunSuccessAt:
+        format: utc-millisec
+        type: integer
+      lastSuccessfulRunGuid:
+        format: uuid
+        type: string
+      name:
+        minLength: 1
+        type: string
+      note:
+        type: string
+      producerGuid:
+        format: uuid
+        type: string
+      reviewerGuid:
+        format: uuid
+        type: string
+      schema:
+        type: string
+      status:
+        enum:
+          - REQUESTED
+          - BUILDING
+          - TEST_READY
+          - PENDING_QOD
+          - PENDING_TEST_QOD
+          - QOD_IN_PROGRESS
+          - TEST_QOD_IN_PROGRESS
+          - READY
+          - PENDING
+          - RUNNING
+          - PENDING_TEST
+          - RUNNING_TEST
+          - PASSED_QOD
+          - UPDATING_DATASTORE
+          - FOR_REVIEW
+          - IN_REVIEW
+          - ERROR
+          - FAILED
+          - TEST_REVIEW
+        type: string
+      statusAsOf:
+        format: utc-millisec
+        type: integer
+      tags:
+        items:
+          format: uuid
+          type: string
+        type: array
+        uniqueItems: true
+      testerGuid:
+        format: uuid
+        type: string
+      type:
+        enum:
+          - PointOfInterest
+        type: string
+      url:
+        format: uri
+        minLength: 1
+        type: string
+      working:
+        type: boolean
+    required:
+      - url
+      - name
+      - status
+    type: object
+  DataSourceConfig:
+    properties:
+      guidUniqueFields:
+        items:
+          type: string
+        type: array
+      lastRunGuid:
+        format: uuid
+        type: string
+      nextRunAt:
+        format: utc-millisec
+        type: integer
+      periodMinutes:
+        type: integer
+      strategy:
+        enum:
+          - CRAWLER
+        type: string
+      strategyConfiguration:
+        type: object
+    type: object
+  DataSourceConfigCrawlerStrategy:
+    properties:
+      crawlerConfig:
+        properties:
+          advancedMode:
+            type: boolean
+          connections:
+            type: integer
+          connectorGuid:
+            format: uuid
+            type: string
+          cookiesEnabled:
+            type: boolean
+          crawlTemplate:
+            items:
+              type: string
+            type: array
+          dataTemplate:
+            items:
+              type: string
+            type: array
+          destination:
+            type: string
+          local:
+            type: boolean
+          maxDepth:
+            type: integer
+          pause:
+            type: integer
+          startUrls:
+            items:
+              type: string
+            type: array
+        type: object
+      inRunExtractionConfig:
+        items:
+          properties:
+            apiGuid:
+              format: uuid
+              type: string
+            type:
+              enum:
+                - EXTRACTOR
+              type: string
+            urlPattern:
+              type: string
+          type: object
+        type: array
+      preCrawlExtractionConfig:
+        items:
+          properties:
+            query:
+              properties:
+                connectorGuids:
+                  items:
+                    format: uuid
+                    type: string
+                  type: array
+                input:
+                  additionalProperties:
+                    type: object
+                  type: object
+                loginOnly:
+                  type: boolean
+                maxPages:
+                  type: integer
+                proxyHost:
+                  type: string
+                proxyPassword:
+                  type: string
+                proxyPort:
+                  type: integer
+                proxyUsername:
+                  type: string
+                requestId:
+                  type: string
+                startPage:
+                  type: integer
+              type: object
+          type: object
+        type: array
+    type: object
+  DataSourceConfigDelegatedExtractionStrategy:
+    properties:
+      configuration:
+        type: object
+      systemId:
+        type: string
+    type: object
+  DataSourceRun:
+    properties:
+      _meta:
+        $ref: '#/definitions/Meta'
+        readOnly: true
+      completedAt:
+        format: utc-millisec
+        type: integer
+      data:
+        format: uuid
+        type: string
+      dataSourceGuid:
+        format: uuid
+        type: string
+      diff:
+        format: uuid
+        type: string
+      note:
+        type: string
+      previousSuccessfulRunGuid:
+        format: uuid
+        type: string
+      progress:
+        properties:
+          convert:
+            type: integer
+          error:
+            type: integer
+          failedConvert:
+            type: integer
+          failedFetch:
+            type: integer
+          fetch:
+            type: integer
+          queue:
+            type: integer
+          robots:
+            type: integer
+          rows:
+            type: integer
+        type: object
+      runIndex:
+        format: uuid
+        type: string
+      sampleData:
+        format: uuid
+        type: string
+      startedAt:
+        format: utc-millisec
+        type: integer
+      status:
+        enum:
+          - QUEUED
+          - DELEGATED_RUN_REQUESTED
+          - RUNNING
+          - SUCCESS
+          - FAILED
+          - REQUESTED_CANCELLATION
+          - CANCELLED
+        type: string
+    type: object
+  DataSourceRunSearch:
+    properties:
+      hits:
+        properties:
+          hits:
+            items:
+              properties:
+                _id:
+                  format: uuid
+                  type: string
+                _score:
+                  type: number
+                fields:
+                  $ref: '#/definitions/DataSourceRun'
+              required:
+                - _id
+                - _score
+                - fields
+              type: object
+            type: array
+          max_score:
+            type: number
+          total:
+            type: integer
+        required:
+          - total
+          - max_score
+          - hits
+        type: object
+      timed_out:
+        type: boolean
+      took:
+        type: integer
+    required:
+      - took
+      - timed_out
+      - hits
+    type: object
+  DataSourceSearch:
+    properties:
+      hits:
+        properties:
+          hits:
+            items:
+              properties:
+                _id:
+                  format: uuid
+                  type: string
+                _score:
+                  type: number
+                fields:
+                  $ref: '#/definitions/DataSource'
+              required:
+                - _id
+                - _score
+                - fields
+              type: object
+            type: array
+          max_score:
+            type: number
+          total:
+            type: integer
+        required:
+          - total
+          - max_score
+          - hits
+        type: object
+      timed_out:
+        type: boolean
+      took:
+        type: integer
+    required:
+      - took
+      - timed_out
+      - hits
+    type: object
+  DataTile:
+    properties:
+      name:
+        type: string
+      results:
+        items:
+          $ref: '#/definitions/QueryResult'
+        type: array
+      schemas:
+        type: object
+      settings:
+        type: object
+      type:
+        enum:
+          - EXTRACTOR
+          - CONNECTOR
+          - CRAWLER
+          - MIX
+          - STATIC
+          - DATASET
+          - API
+        type: string
+      unlocked:
+        type: boolean
+    type: object
+  DataView:
+    properties:
+      tiles:
+        items:
+          $ref: '#/definitions/DataTile'
+        type: array
+    type: object
+  Element:
+    properties:
+      formId:
+        type: string
+      formName:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      xpaths:
+        items:
+          type: string
+        type: array
+    type: object
+  ErrorModel:
+    description: Encapsulates a non-2xx response
+    properties:
+      code:
+        description: An error code representing the type of error
+        type: string
+      data:
+        description: Supplementary data about the error
+        type: object
+      error:
+        description: Human-readable description of the error
+        type: string
+    required:
+      - code
+    type: object
+  IO:
+    properties:
+      defaultValue:
+        type: object
+      domain:
+        type: string
+      name:
+        type: string
+      type:
+        $ref: '#/definitions/Type'
+    type: object
+  Labels:
+    items:
+      properties:
+        guid:
+          format: uuid
+          type: string
+        label:
+          type: string
+      required:
+        - guid
+        - label
+      type: object
+    type: array
+  MagicTables:
+    properties:
+      tables:
+        $ref: '#/definitions/Page'
+        description: Data tables or lists found on the page
+    type: object
+  Meta:
+    properties:
+      creationTimestamp:
+        format: utc-millisec
+        readOnly: true
+        type: integer
+      creatorGuid:
+        format: uuid
+        readOnly: true
+        type: string
+      lastEditorGuid:
+        format: uuid
+        readOnly: true
+        type: string
+      objectGuid:
+        format: uuid
+        readOnly: true
+        type: string
+      orgGuid:
+        format: uuid
+        readOnly: true
+        type: string
+      ownerGuid:
+        format: uuid
+        readOnly: true
+        type: string
+      patchTimestamp:
+        format: utc-millisec
+        readOnly: true
+        type: integer
+      timestamp:
+        format: utc-millisec
+        readOnly: true
+        type: integer
+    type: object
+  PackageUrlRequest:
+    properties:
+      guid:
+        format: uuid
+        type: string
+      note:
+        type: string
+      status:
+        enum:
+          - PENDING
+          - DONE
+          - REJECTED
+        type: string
+      url:
+        type: string
+    type: object
+  Page:
+    properties:
+      connectorGuid:
+        description: The id of the Connector that owns the ConnectorVersion that created this Page
+        format: uuid
+        type: string
+      connectorVersionGuid:
+        description: The id of the ConnectorVersion that created this Page
+        format: uuid
+        type: string
+      cookies:
+        description: Contents of the cookie jar
+        items:
+          type: string
+        type: array
+      data:
+        description: Global data or meta-data
+        type: object
+      error:
+        description: Error description
+        type: string
+      errorType:
+        description: The type of error (if there is an error)
+        enum:
+          - TimeoutException
+          - UnauthorizedException
+          - NotFoundException
+          - ServerErrorException
+          - UnexpectedErrorException
+          - SearchException
+          - TooMuchCpuRequiredException
+          - TooMuchMemoryRequiredException
+          - DefinitionError
+          - InputException
+        type: string
+      outputProperties:
+        description: The declared schema for the results
+        items:
+          $ref: '#/definitions/Property'
+        type: array
+      pageUrl:
+        description: The URL that represents the source of the data
+        type: string
+      pagination:
+        $ref: '#/definitions/Pagination'
+        description: Pagination information if requested
+      results:
+        description: An object whose keys are determined by the output schema for this Connector
+        items:
+          $ref: '#/definitions/Result'
+        type: array
+      totalResults:
+        description: The total results in the result set
+        type: integer
+    required:
+      - pageUrl
+      - cookies
+      - connectorGuid
+      - connectorVersionGuid
+      - outputProperties
+    type: object
+  Pagination:
+    properties:
+      currentPageNum:
+        description: The page number for this Page
+        type: integer
+      next:
+        description: URL of the next page
+        type: string
+      pattern:
+        description: The URL pattern for pagination
+        type: string
+      previous:
+        description: URL of the previous page
+        type: string
+    required:
+      - pattern
+      - currentPageNum
+    type: object
+  PipelineStageConfig:
+    properties:
+      type:
+        $ref: '#/definitions/StageType'
+    type: object
+  Playback:
+    properties:
+      browserActions:
+        items:
+          $ref: '#/definitions/BrowserAction'
+        type: array
+      contentType:
+        type: string
+      crawler:
+        type: boolean
+      fixHtml:
+        type: boolean
+      http10:
+        type: boolean
+      infiniteScrollPages:
+        type: integer
+      javascriptDisabled:
+        type: boolean
+      javascriptDisabledForLastAction:
+        type: boolean
+      javascriptDisabledForLogin:
+        type: boolean
+      javascriptWhitelist:
+        type: string
+      loginBrowserActions:
+        items:
+          $ref: '#/definitions/BrowserAction'
+        type: array
+      maxPages:
+        type: integer
+      paginationRequests:
+        items:
+          type: string
+        type: array
+      paginationXPaths:
+        items:
+          type: string
+        type: array
+      prerendered:
+        type: boolean
+      prerequests:
+        items:
+          type: string
+        type: array
+      privileged:
+        type: boolean
+      type:
+        $ref: '#/definitions/QueryType'
+      url:
+        type: string
+    type: object
+  Property:
+    description: A data property (or field) definition
+    properties:
+      name:
+        type: string
+      type:
+        $ref: '#/definitions/Type'
+    required:
+      - name
+      - type
+    type: object
+  PublishRequest:
+    properties:
+      basedOnPublishRequestGuid:
+        format: uuid
+        type: string
+      connectorVersion:
+        $ref: '#/definitions/ConnectorVersion'
+      forkedFromConnectorGuid:
+        format: uuid
+        type: string
+      guid:
+        format: uuid
+        type: string
+    type: object
+  PublishResult:
+    properties:
+      _meta:
+        $ref: '#/definitions/Meta'
+        readOnly: true
+      connectorGuid:
+        format: uuid
+        type: string
+      cpuTime:
+        type: integer
+      guid:
+        format: uuid
+        type: string
+      responseTime:
+        type: integer
+      result:
+        format: uuid
+        type: string
+      status:
+        format: uuid
+        type: string
+    type: object
+  PublishingError:
+    properties:
+      exceptionType:
+        enum:
+          - PublishJobRetrievalException
+          - TestsNotStartedException
+          - TestsFailureException
+          - PublishSaveException
+        type: string
+      message:
+        type: string
+    type: object
+  Query:
+    properties:
+      connectorVersionGuid:
+        format: uuid
+        type: string
+      cookies:
+        items:
+          type: string
+        type: array
+      format:
+        default: JSON
+        enum:
+          - JSON
+          - JSON_HASH
+          - XML
+          - XML_HASH
+          - HTML
+        type: string
+      input:
+        additionalProperties:
+          type: object
+        description: The query input
+        type: object
+      page:
+        type: integer
+      proxyHost:
+        type: string
+      proxyPassword:
+        type: string
+      proxyPort:
+        type: integer
+      proxyUsername:
+        type: string
+      returnPaginationSuggestions:
+        type: boolean
+      userAgent:
+        type: string
+    required:
+      - input
+    type: object
+  QueryLoginInput:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    required:
+      - username
+      - password
+    type: object
+  QueryResult:
+    properties:
+      enabled:
+        type: boolean
+      name:
+        type: string
+      pages:
+        items:
+          $ref: '#/definitions/Page'
+        type: array
+      query:
+        $ref: '#/definitions/Query'
+    type: object
+  QueryType:
+    enum:
+      - HTML
+      - JSON
+      - JSON_HASH
+      - XML
+      - XML_HASH
+  Result:
+    additionalProperties:
+      type: object
+    type: object
+  Run:
+    description: Encapsulates an asynchronous run.
+    properties:
+      apiGuid:
+        format: uuid
+        type: string
+      completedAt:
+        format: utc-millisec
+        type: integer
+      configurationGuid:
+        format: uuid
+        type: string
+      error:
+        description: Message related to the error.
+        type: string
+      errorType:
+        enum:
+          - UnauthorizedException
+          - NotFoundException
+          - ServerErrorException
+          - UnexpectedErrorException
+          - DefinitionError
+          - InputException
+          - TooManyUrls
+        type: string
+      failedUrlCount:
+        description: Number of urls with failed queries
+        type: integer
+      guid:
+        format: uuid
+        type: string
+      message:
+        description: Any messages regarding the run
+        type: string
+      result:
+        $ref: '#/definitions/Attachment'
+        description: Newline separated JSON concatenation of results.
+      resultSize:
+        $ref: '#/definitions/Attachment'
+        description: Size in bytes
+      startedAt:
+        format: utc-millisec
+        type: integer
+      status:
+        enum:
+          - INITIAL
+          - QUEUED
+          - PROCESSING
+          - CANCELLED
+          - FINISHED
+          - FAILED
+        type: string
+      successUrlCount:
+        description: Number of urls with successful queries
+        type: integer
+      totalUrlCount:
+        description: The total number of URLs in the run.
+        type: integer
+      userGuid:
+        format: uuid
+        type: string
+    required:
+      - guid
+      - apiGuid
+      - configurationGuid
+    type: object
+  RunSearch:
+    properties:
+      hits:
+        properties:
+          hits:
+            items:
+              properties:
+                _id:
+                  format: uuid
+                  type: string
+                _score:
+                  type: number
+                fields:
+                  $ref: '#/definitions/Run'
+              required:
+                - _id
+                - _score
+                - fields
+              type: object
+            type: array
+          max_score:
+            type: number
+          total:
+            type: integer
+        required:
+          - total
+          - max_score
+          - hits
+        type: object
+      timed_out:
+        type: boolean
+      took:
+        type: integer
+    required:
+      - took
+      - timed_out
+      - hits
+    type: object
+  Schema:
+    properties:
+      guid:
+        format: uuid
+        type: string
+      inputProperties:
+        items:
+          $ref: '#/definitions/IO'
+        type: array
+      outputProperties:
+        items:
+          $ref: '#/definitions/IO'
+        type: array
+    type: object
+  Scraper:
+    properties:
+      errorRegexp:
+        type: string
+      errorXPaths:
+        items:
+          type: string
+        type: array
+      ignoreFirst:
+        type: integer
+      namespaces:
+        description: 'XPath prefix => XML namespaces'
+        type: object
+      noResultsRegExp:
+        type: string
+      noResultsXPaths:
+        items:
+          type: string
+        type: array
+      resultPipeline:
+        items:
+          $ref: '#/definitions/PipelineStageConfig'
+        type: array
+      resultRegexp:
+        type: string
+      resultXPaths:
+        items:
+          type: string
+        type: array
+      singleResultPipeline:
+        items:
+          $ref: '#/definitions/PipelineStageConfig'
+        type: array
+      totalResultsRegExp:
+        type: string
+      totalResultsXPaths:
+        items:
+          type: string
+        type: array
+    type: object
+  Snapshots:
+    properties:
+      snapshots:
+        items:
+          $ref: '#/definitions/DataPackageSnapshotResponse'
+        type: array
+    type: object
+  StageType:
+    enum:
+      - SIMPLE
+      - DYNAMIC
+  Status:
+    enum:
+      - NOT_WORKING
+      - TOO_MUCH_CPU
+      - UNSURE
+      - NO_TESTS
+      - TIMEOUT
+      - WORKING
+    type: string
+  StatusResponse:
+    properties:
+      status:
+        enum:
+          - OK
+        type: string
+    type: object
+  TestQuery:
+    properties:
+      expectedFields:
+        type: integer
+      expectedPages:
+        type: integer
+      expectedResults:
+        type: integer
+      expectedTotalResults:
+        type: integer
+      guid:
+        format: uuid
+        type: string
+      name:
+        type: string
+      pageExamples:
+        items:
+          $ref: '#/definitions/Page'
+        type: array
+      proxyHost:
+        type: string
+      proxyPassword:
+        type: string
+      proxyPort:
+        type: integer
+      proxyUsername:
+        type: string
+    type: object
+  Type:
+    enum:
+      - STRING
+      - DATE
+      - INT
+      - DOUBLE
+      - FLOAT
+      - LANG
+      - COUNTRY
+      - BOOLEAN
+      - URL
+      - IMAGE
+      - HTML
+      - CURRENCY
+      - MAP
+    type: string
+  User:
+    properties:
+      _meta:
+        $ref: '#/definitions/Meta'
+        readOnly: true
+      email:
+        pattern: "^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"
+        type: string
+      guid:
+        format: uuid
+        readOnly: true
+        type: string
+      orgGuid:
+        format: uuid
+        readOnly: true
+        type: string
+      roles:
+        items:
+          maxLength: 15
+          pattern: '^[A-Z0-9_]{3,30}$'
+          type: string
+        maxItems: 10
+        type: array
+      username:
+        pattern: '^[a-z0-9]{4,}$'
+        type: string
+    required:
+      - guid
+      - orgGuid
+      - email
+      - username
+      - roles
+    type: object
+  WebQueryConfiguration:
+    properties:
+      extraction:
+        $ref: '#/definitions/Scraper'
+      http404TheSameAsNoResults:
+        type: boolean
+      playback:
+        $ref: '#/definitions/Playback'
+      queryType:
+        $ref: '#/definitions/QueryType'
+      urlProperties:
+        items:
+          type: string
+        type: array
+      version:
+        type: integer
+    type: object
+externalDocs:
+  url: 'http://api.docs.import.io/'
+host: api.import.io
+info:
+  description: "## Introduction\n\nThe import.io API is a [REST](http://en.wikipedia.org/wiki/Representational_state_transfer)ful API. It is designed as much as possible to have resource-oriented URLs and to use HTTP status codes to indicate API status.\n\nWe use standard HTTP which can be understood by any HTTP client, and we support [CORS](http://enable-cors.org/) to allow you to interact with our API from a client-side web application. Remember, you should never expose your secret API key in any public client-side code.\n\nJSON is always returned from the API, including errors.\n\nimport.io uses conventional HTTP response codes to indicate success or failure of an API request. In general, codes in the 2xx range indicate success, codes in the 4xx range indicate an error that resulted from the provided information (e.g. a required parameter was missing), and codes in the 5xx range indicate an error with our servers.\n\nAll API requests *should* be made over HTTPS to `https://api.import.io/`\n\n\n\n## API Authentication\n\nYou authenticate to the import.io API by providing your API key as URL query string parameter `_apikey`. You can manage your API key from [your account](https://import.io/data/account/). In the My Settings page, the API in not URL encoded. To prevent a Base64 error, make sure to use a URI encode function for your query. You can also get an encoded API Key from the GET API or POST API tab in the application. Your API key allows unrestricted privileges your account, so keep it secret!\n\nWhen you are logged in, *submit your password in this page header* to see the API key in the API explorer below.\n\n## Quick Start\n\n### Basic concepts\n\n* import.io lets you publish dynamic APIs and Data Sets to its platform (object class `Connector`).\n  * To disambiguate between dynamic API created on the platform, and static APIs such as this, we use the term `Connector` within the import.io APIs to refer to a API or Data Set published to import.io.\n  * Extractors, Crawlers and Data Sets are just specializations of Connector.\n* You can create these via UI tooling, or by using the APIs detailed here.\n* The dynamic API definition for a Connector is versioned (object class `ConnectorVersion`); querying a connector by default queries the most recent version, whose id can be found on the `Connector` object (`latestVersionGuid`).\n* Each `ConnectorVersion` has a schema (object class `Schema`) defining its input and output properties.\n* All objects are accessible via the REST API.\n* The output properties are returned with the query data.\n  * Extra meta-data may be passed back depending on a output property [type](#data-types). \n  * All fields _may_ be multi-valued (i.e. arrays).\n\n### Convert a URL into data\n\nYou can use import.io magic to convert a URL into data tables over our API instantly.\n\n[Try it yourself!](?magic#!/Magic_Methods/magic)\n\n### Query a custom API\n\nCreate an API in the UI, do a query.\n\n[Try it yourself!](?query#!/Query_Methods/queryGet)\n\n## Data Types\n\nFor most output property types we also return `myvar/_source` with the original textual data. \n\n| Type  |  Returns |  Notes | \n| ---   |  ---     |  ---   |\n|   `STRING` | myvar  |  We normalize whitespace from text, and don't return empty strings | \n|  `CURRENCY` |  myvar, myvar/_currency, myvar/_source |  The ISO currency code is returned as `myvar/_currency`, the numeric value in `myvar` |  \n|  `INT` |  myvar, myvar/_source | 64 bit integer (`long`) | \n|  `DOUBLE` |  myvar, myvar/_source |  64 bit float | \n|  `LANG` |  myvar, myvar/_source |  3 letter ISO code | \n|  `COUNTRY` |  myvar, myvar/_source |  3 letter ISO code | \n|  `BOOLEAN` |  myvar, myvar/_source |  true if 1, yes, on, active, true, y | \n|  `URL` |  myvar, myvar/_text, myvar/_title, myvar/_source |  `myvar/_text` is the normalized text content of the anchor | \n|  `IMAGE` |  myvar,  myvar/_alt, myvar/_title, myvar/_source |   | \n|  `HTML` |  myvar | Raw HTML as well-formed XML  | \n|  `MAP` |  myvar |  JSON compatible map | "
+  title: API Documentation
+  version: '1.0'
+  x-logo:
+    url: 'https://d3sgt82prjfpwv.cloudfront.net/website2/271/img/import-logo-new-carmine.svg'
+  x-origin:
+    format: swagger
+    url: 'http://api.docs.import.io/swagger.json'
+    version: '2.0'
+  x-providerName: import.io
+paths:
+  /auth/apikeyadmin:
+    get:
+      operationId: getApiKey
+      parameters:
+        - description: Optional and not required for regular users.
+          format: password
+          in: query
+          name: password
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ApiKey'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+        - api_key: []
+      summary: Get API key
+      tags:
+        - Authentication methods
+    post:
+      operationId: newApiKey
+      parameters:
+        - description: Optional and not required for regular users.
+          format: password
+          in: query
+          name: password
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ApiKey'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+        - api_key: []
+      summary: New API key
+      tags:
+        - Authentication methods
+  /auth/currentuser:
+    get:
+      operationId: currentUser
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/User'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+        - api_key: []
+      summary: Get session user
+      tags:
+        - Authentication methods
+  /store/connector/_magic:
+    get:
+      description: >+
+        This is the simplest way to convert a URL into data using the import.io
+        platform.
+
+
+
+        This will magically generate up to 3 different `ConnectorVersion`
+        configurations, and return a `Page` object for each representing lists or
+        tables on the page at that URL.
+
+
+
+        If pagination is detected on the page, the `pagination` property will be
+        included, containing suggestions for the previous and next page URLs.
+        Clients can then make additional separate requests to extract data over
+        multiple pages. As these URLs are just suggestions, clients themselves
+        need to determine whether the last page has been reached, e.g. by
+        checking whether the `results` being returned is empty or is showing the
+        same contents as the previous page.
+
+
+
+        Javascript and infinite scroll support in beta.
+
+
+
+        You can select the region to process using a keyword contained within
+        it.
+
+
+
+        If you wish to repeatedly extract the same table from many URLs, you can
+        use the `connectorVersionGuid` returned in the table in the Magic
+        versioned method below, or the standard query methods (although these do
+        not support js/infinite scroll currently).
+
+
+      operationId: magic
+      parameters:
+        - description: URL you wish to process
+          in: query
+          name: url
+          required: true
+          type: string
+        - default: JSON
+          description: "The output response format. JSON_HASH will add an additional field '_hash' to the result that is a hash of the result fields."
+          enum:
+            - JSON
+            - JSON_HASH
+          in: query
+          name: format
+          type: string
+        - default: false
+          description: Whether to process with javascript on (slower)
+          in: query
+          name: js
+          type: boolean
+        - description: How many times to load infinite scroll - requires js=true
+          in: query
+          name: infiniteScrollPages
+          type: integer
+        - description: Process the area that contains this phrase
+          in: query
+          name: regionText
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/MagicTables'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+        - api_key: []
+      summary: Magically get data
+      tags:
+        - Magic Methods
+  '/store/connector/_magic/{connectorVersionGuid}':
+    get:
+      description: >+
+        This will re-run a specific `ConnectorVersion` that generated a table via
+        the regular magic call.
+
+
+
+        Use this if you want to use the same table extraction for many URLs.
+
+
+      operationId: magicTable
+      parameters:
+        - description: The id of the ConnectorVersion for that table you want
+          in: path
+          name: connectorVersionGuid
+          required: true
+          type: string
+        - description: URL you wish to process
+          in: query
+          name: url
+          required: true
+          type: string
+        - default: JSON
+          description: "The output response format. The _HASH variants will add an additional field '_hash' to the result that is a hash of the result fields."
+          enum:
+            - JSON
+            - JSON_HASH
+            - XML
+            - XML_HASH
+            - HTML
+          in: query
+          name: format
+          type: string
+        - default: false
+          description: Whether to process with javascript on (slower)
+          in: query
+          name: js
+          type: boolean
+        - description: How many times to load infinite scroll - requires js=true
+          in: query
+          name: infiniteScrollPages
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Page'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+        - api_key: []
+      summary: Re-run table
+      tags:
+        - Magic Methods
+  /store/connector/_search:
+    get:
+      description: Search your connectors - or all Connectors if you are an administrator of an organization.
+      operationId: searchConnectors
+      parameters:
+        - description: 'An elasticsearch [query string](http://www.elastic.co/guide/en/elasticsearch/reference/1.x/query-dsl-query-string-query.html#query-string-syntax)'
+          in: query
+          name: q
+          type: string
+        - description: The page to return
+          in: query
+          name: _page
+          type: integer
+        - default: 20
+          description: Up to 100
+          in: query
+          name: _perpage
+          type: integer
+        - description: 'The field to sort upon, e.g. _meta.creationTimestamp'
+          in: query
+          name: _sort
+          type: string
+        - default: DESC
+          description: Direction of sort; ASC or DESC
+          enum:
+            - ASC
+            - DESC
+          in: query
+          name: _sortDirection
+          type: string
+        - collectionFormat: multi
+          description: Required fields (multi-valued)
+          in: query
+          items:
+            type: string
+          name: _exists
+          type: array
+        - collectionFormat: multi
+          description: Fields that must be null (multi-valued)
+          in: query
+          items:
+            type: string
+          name: _missing
+          type: array
+        - collectionFormat: multi
+          description: Fields that should have facets produced (multi-valued)
+          in: query
+          items:
+            enum:
+              - type
+              - status
+              - tags
+            type: string
+          name: _facet
+          type: array
+        - description: Field to operate on
+          in: query
+          name: _field
+          type: string
+        - default: query_string
+          description: The type of search
+          enum:
+            - query_string
+            - match_phrase
+            - term
+          in: query
+          name: _type
+          type: string
+        - default: OR
+          description: Operator a space character represents.
+          enum:
+            - OR
+            - AND
+          in: query
+          name: _default_operator
+          type: string
+        - default: false
+          description: Restrict to just the objects you own
+          in: query
+          name: _mine
+          type: boolean
+      responses:
+        '200':
+          description: Successful response
+          examples:
+            application/json:
+              hits:
+                hits:
+                  - _id: b409c071-5e09-4346-be9c-1f00097e419b
+                    _score: 1
+                    _type: Connector
+                    fields:
+                      _meta:
+                        creationTimestamp: 1428050602319
+                        creatorGuid: f7841145-ab7f-4461-8ffe-ff160535d56a
+                        lastEditorGuid: 84920b9e-9578-3948-0174-5f15b344d094
+                        ownerGuid: f7841145-ab7f-4461-8ffe-ff160535d56a
+                        timestamp: 1428050603218
+                      guid: 017b4da8-ce99-4bfa-b882-a4a107e47293
+                      headline: Headline
+                      lastCheckedAt: 1428050602915
+                      lastModifiedAt: 1428050602626
+                      lastPublishRequestGuid: 5522a505-4169-4a2f-9917-020ab93ad8f1
+                      latestVersion: 1428050602915
+                      latestVersionGuid: 1ef446f1-5669-4769-ae80-5407a8b01753
+                      name: Test Connector - 79dwdl3504
+                      publishRequest: 5522a505-4169-4a2f-9917-020ab93ad8f1
+                      publishRequestGuid: 5522a505-4169-4a2f-9917-020ab93ad8f1
+                      source: 'http://site.com'
+                      status: WORKING
+                      testResults: 6bf627a2-ad31-4c70-ad1e-b13dd205de63
+                      type: API
+                max_score: 1
+                total: 1
+              timed_out: false
+              took: 145
+          schema:
+            $ref: '#/definitions/ConnectorSearch'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+        - api_key: []
+      summary: Search Connectors
+      tags:
+        - Connector Methods
+  '/store/connector/{id}':
+    get:
+      operationId: getConnector
+      parameters:
+        - description: ID of the object
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          examples:
+            application/json:
+              _meta:
+                creationTimestamp: 1428050602319
+                creatorGuid: f7841145-ab7f-4461-8ffe-ff160535d56a
+                lastEditorGuid: 84920b9e-9578-3948-0174-5f15b344d094
+                ownerGuid: f7841145-ab7f-4461-8ffe-ff160535d56a
+                timestamp: 1428050603218
+              guid: 017b4da8-ce99-4bfa-b882-a4a107e47293
+              headline: Headline
+              lastCheckedAt: 1428050602915
+              lastModifiedAt: 1428050602626
+              lastPublishRequestGuid: 5522a505-4169-4a2f-9917-020ab93ad8f1
+              latestVersion: 1428050602915
+              latestVersionGuid: 1ef446f1-5669-4769-ae80-5407a8b01753
+              name: Test Connector - 79dwdl3504
+              publishRequest: 5522a505-4169-4a2f-9917-020ab93ad8f1
+              publishRequestGuid: 5522a505-4169-4a2f-9917-020ab93ad8f1
+              source: 'http://site.com'
+              status: WORKING
+              testResults: 6bf627a2-ad31-4c70-ad1e-b13dd205de63
+              type: API
+          schema:
+            $ref: '#/definitions/Connector'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+        - api_key: []
+      summary: Get Connector
+      tags:
+        - Connector Methods
+    patch:
+      description: Overwrites supplied fields. Declared fields with `null` values will be nullified in the store.
+      operationId: updateConnector
+      parameters:
+        - description: GUID of the Data Source
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Required timestamp of the object
+          in: query
+          name: timestamp
+          type: string
+        - description: Class of the object
+          in: body
+          name: connector
+          required: true
+          schema:
+            $ref: '#/definitions/Connector'
+      responses:
+        '200':
+          description: Successful response
+          examples:
+            application/json:
+              _meta:
+                lastEditorGuid: 58e092b4-4f13-4674-9258-6f1b1d34234c
+                patchTimestamp: 1428050603218
+                timestamp: 1428100396593
+              guid: 017b4da8-ce99-4bfa-b882-a4a107e47293
+              tags:
+                - TAG
+          schema:
+            $ref: '#/definitions/Connector'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+        - api_key: []
+      summary: Update Connector
+      tags:
+        - Connector Methods
+  '/store/connector/{id}/_attachment/publishSnapshot/{publishSnapshot}':
+    get:
+      description: Returns the static data from training a Connector.
+      operationId: getPublishStaticData
+      parameters:
+        - description: ID of the Object
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Value of the `publishSnapshot` field in the `Connector`
+          in: path
+          name: publishSnapshot
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DataView'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+        - api_key: []
+      summary: Get Publish Snapshot
+      tags:
+        - Connector Methods
+  '/store/connector/{id}/_attachment/settings/{settings}':
+    get:
+      description: Returns crawl - or other - additional settings.
+      operationId: getSettings
+      parameters:
+        - description: ID of the Object
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Value of the `settings` field in the `Connector`
+          in: path
+          name: settings
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples: {}
+          headers: {}
+      security:
+        - api_key: []
+      summary: Get Extra Settings
+      tags:
+        - Connector Methods
+  '/store/connector/{id}/_attachment/snapshot/{snapshot}':
+    get:
+      description: 'Returns uploaded snapshots: crawls or data set data'
+      operationId: getDataSnapshot
+      parameters:
+        - description: ID of the Object
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Value of the `snapshot` field in the `Connector`
+          in: path
+          name: snapshot
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/DataView'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+        - api_key: []
+      summary: Get Data Snapshot
+      tags:
+        - Connector Methods
+  '/store/connector/{id}/_attachment/testResults/{testResults}':
+    get:
+      operationId: getCheckResults
+      parameters:
+        - description: ID of the Object
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Value of the `testResults` field in the `Connector`
+          in: path
+          name: testResults
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/CheckResults'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+        - api_key: []
+      summary: Get Test Results
+      tags:
+        - Connector Methods
+  '/store/connector/{id}/_attachment/{field}/_history':
+    get:
+      parameters:
+        - description: ID of the Object
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The page to return
+          in: query
+          name: _page
+          type: integer
+        - description: The field name of the attachment in the object
+          enum:
+            - settings
+            - snapshot
+            - publishSnapshot
+            - testResults
+            - publishRequest
+          in: path
+          name: field
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          examples:
+            application/json:
+              hits:
+                hits:
+                  - _id: fe465046e-6af8-40ce-90ce-7b34b26ba66c
+                    _score: 1
+                    _type: Attachment
+                    fields:
+                      _meta:
+                        creationTimestamp: 1408116739909
+                        creatorGuid: 1396ebdb-e59d-4db1-b3a0-32db31a3e634
+                        lastEditorGuid: 1396ebdb-e59d-4db1-b3a0-32db31a3e634
+                        ownerGuid: 1396ebdb-e59d-4db1-b3a0-32db31a3e634
+                        timestamp: 1408116739909
+                      bucketGuid: edf21d7e-cb36-4e82-10dd-d3dfaeca6fbf
+                      field: settings
+                      objectGuid: 2300189f-b35a-4139-a10c-4cc21e238019
+                      size: 48
+                max_score: 1
+                total: 1
+              timed_out: false
+              took: 483
+          schema:
+            $ref: '#/definitions/AttachmentSearch'
+      security:
+        - api_key: []
+      summary: Attachment Version History
+      tags:
+        - Connector Methods
+  '/store/connector/{id}/_disown':
+    post:
+      description: >-
+        Make myself no longer the owner of a connector, removing it from My
+        Data.
+
+
+
+        Connectors cannot be deleted.
+      operationId: disownConnector
+      parameters:
+        - description: ID of the object
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          examples:
+            application/json:
+              status: OK
+          schema:
+            $ref: '#/definitions/StatusResponse'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+        - api_key: []
+      summary: Disown Connector
+      tags:
+        - Connector Methods
+  '/store/connector/{id}/_login':
+    post:
+      description: >+
+        This API logs into the target site for an authenticated API. Pass the
+        cookies back through a POST query to use the authenticated session.
+
+
+      operationId: queryLogin
+      parameters:
+        - description: id of the Connector you are querying.
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: Login input
+          in: body
+          name: input
+          required: true
+          schema:
+            $ref: '#/definitions/QueryLoginInput'
+      responses:
+        '200':
+          description: Successful response (will have no results)
+          schema:
+            $ref: '#/definitions/Page'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+        - api_key: []
+      summary: Query Login
+      tags:
+        - Query Methods
+  '/store/connector/{id}/_query':
+    get:
+      description: >+
+        This is the simplest way to make a query onto the import.io platform.
+
+
+
+        Specify your inputs as `input={name}:{value}` named query string
+        parameters, for example:
+
+
+
+        ```html
+
+        /store/connector/d50aff7b-ad19-4f64-ab1a-1e8f9a1bb249/_query?
+
+            input=webpage/url:http%3A%2F%2Fcdn.import.io%2Ftest%2Fpages%2Fbasic%2Findex.html
+
+        ```
+
+
+
+        There can be default values for inputs, e.g. the URL you extracted data
+        from for `webpage/url`. You can see the defaults in the `Schema` of the
+        `ConnectorVersion`.
+
+
+      operationId: queryGet
+      parameters:
+        - description: ID of the Connector you are querying.
+          in: path
+          name: id
+          required: true
+          type: string
+        - default: JSON
+          description: "The output response format. The _HASH variants will add an additional field '_hash' to the result that is a hash of the result fields."
+          enum:
+            - JSON
+            - JSON_HASH
+            - XML
+            - XML_HASH
+            - HTML
+          in: query
+          name: format
+          type: string
+        - description: The page you require (if supported by the Connector)
+          in: query
+          name: page
+          type: integer
+        - description: The specific ConnectorVersion you want to query if not the latest
+          in: query
+          name: version
+          type: string
+        - collectionFormat: multi
+          description: 'The inputs in the format {name}:{value} (multiple unique keys and their input values as query parameters accepted)'
+          in: query
+          items:
+            type: string
+          name: input
+          type: array
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Page'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+        - api_key: []
+      summary: Simple Query
+      tags:
+        - Query Methods
+    post:
+      consumes:
+        - application/json; charset=utf-8
+      description: >-
+        You can pass up cookies to use for a query in the input object
+        optionally. This is shown in the example.
+
+
+
+        This feature is required if you are using authenticated APIs and
+        maintaining a session between calls.
+      operationId: queryPost
+      parameters:
+        - description: ID of the Connector you are querying.
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The query to execute.
+          in: body
+          name: query
+          required: true
+          schema:
+            $ref: '#/definitions/Query'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Page'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+        - api_key: []
+      summary: Advanced Query
+      tags:
+        - Query Methods
+  '/store/connectorversion/{id}/schema':
+    get:
+      operationId: getConnectorVersionSchema
+      parameters:
+        - description: ID of the ConnectorVersion
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          examples:
+            application/json:
+              _meta:
+                creationTimestamp: 1427729022748
+                creatorGuid: 84920b9e-9578-3948-0174-5f15b344d094
+                lastEditorGuid: 84920b9e-9578-3948-0174-5f15b344d094
+                ownerGuid: 9e7f165e-a8c2-481e-9f02-6bbe05ec68af
+                timestamp: 1427729022748
+              guid: 68b858b3-e6b3-bd24-5a5e-36b0e4f13d0d
+              inputProperties:
+                - defaultValue: 'http://site.com/page.html'
+                  name: webpage/url
+                  type: URL
+              outputProperties:
+                - name: no_number
+                  type: DOUBLE
+                - name: competition_value
+                  type: STRING
+                - name: competition_value_numbers
+                  type: DOUBLE
+                - name: john_value
+                  type: STRING
+                - name: adam_value
+                  type: STRING
+                - name: robert_value
+                  type: STRING
+                - name: paul_value
+                  type: STRING
+                - name: piccy_image
+                  type: IMAGE
+                - name: cost_price
+                  type: CURRENCY
+          schema:
+            $ref: '#/definitions/Schema'
+        default:
+          description: error payload
+          schema:
+            $ref: '#/definitions/ErrorModel'
+      security:
+        - api_key: []
+      summary: Get ConnectorVersion Schema
+      tags:
+        - Connector Methods
+produces:
+  - application/json
+schemes:
+  - https
+security:
+  - api_key: []
+securityDefinitions:
+  api_key:
+    in: query
+    name: _apikey
+    type: apiKey
+swagger: '2.0'

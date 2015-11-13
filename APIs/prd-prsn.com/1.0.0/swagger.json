@@ -1,238 +1,154 @@
-{
-  "basePath": "/",
-  "definitions": {
-    "DeliveryBean": {
-      "properties": {
-        "uri": {
-          "$ref": "#/definitions/URI"
-        },
-        "uris": {
-          "additionalProperties": {
-            "items": {
-              "$ref": "#/definitions/URI"
-            },
-            "type": "array"
-          }
-        }
-      }
-    },
-    "InstitutionBean": {
-      "properties": {
-        "config": {
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "delivery": {
-          "$ref": "#/definitions/DeliveryBean"
-        },
-        "enabled": {
-          "type": "boolean"
-        },
-        "filestoreId": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "secondaryUrls": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": true
-        },
-        "timeZone": {
-          "type": "string"
-        },
-        "uniqueId": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "url": {
-          "type": "string"
-        }
-      }
-    },
-    "URI": {
-      "properties": {
-        "absolute": {
-          "type": "boolean"
-        },
-        "authority": {
-          "type": "string"
-        },
-        "fragment": {
-          "type": "string"
-        },
-        "host": {
-          "type": "string"
-        },
-        "opaque": {
-          "type": "boolean"
-        },
-        "path": {
-          "type": "string"
-        },
-        "port": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "query": {
-          "type": "string"
-        },
-        "rawAuthority": {
-          "type": "string"
-        },
-        "rawFragment": {
-          "type": "string"
-        },
-        "rawPath": {
-          "type": "string"
-        },
-        "rawQuery": {
-          "type": "string"
-        },
-        "rawSchemeSpecificPart": {
-          "type": "string"
-        },
-        "rawUserInfo": {
-          "type": "string"
-        },
-        "scheme": {
-          "type": "string"
-        },
-        "schemeSpecificPart": {
-          "type": "string"
-        },
-        "userInfo": {
-          "type": "string"
-        }
-      }
-    }
-  },
-  "host": "epscass.prd-prsn.com",
-  "info": {
-    "description": "Access to the Pearson OpenClass API",
-    "title": "OpenClass API",
-    "version": "1.0.0",
-    "x-logo": {
-      "url": "https://www.pearson.com/content/corporate/global/pearson-dot-com/en/news/logos-and-style-guides/_jcr_content/par-main/column_control/par0/column_control/par0/image.img.jpg/1414446637540.jpg"
-    },
-    "x-origin": {
-      "format": "swagger",
-      "url": "http://epscass.prd-prsn.com/api/resources",
-      "version": "1.2"
-    },
-    "x-providerName": "prd-prsn.com"
-  },
-  "paths": {
-    "/api/institution": {
-      "get": {
-        "operationId": "getInstitutions",
-        "produces": [
-          "application/json;charset=UTF-8"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/InstitutionBean"
-              }
-            }
-          }
-        },
-        "summary": "List institution",
-        "tags": [
-          "institution"
-        ]
-      }
-    },
-    "/api/institution/{uniqueId}": {
-      "get": {
-        "operationId": "getInstitution",
-        "parameters": [
-          {
-            "description": "The intitution unique id",
-            "format": "int64",
-            "in": "path",
-            "name": "uniqueId",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "produces": [
-          "application/json;charset=UTF-8"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/InstitutionBean"
-            }
-          }
-        },
-        "summary": "Get an institution",
-        "tags": [
-          "institution"
-        ]
-      }
-    },
-    "/api/version/": {
-      "get": {
-        "operationId": "version",
-        "produces": [
-          "application/json;charset=UTF-8"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Get the server version",
-        "tags": [
-          "version"
-        ]
-      }
-    },
-    "/health/": {
-      "get": {
-        "operationId": "health",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Get health",
-        "tags": [
-          "health"
-        ]
-      }
-    }
-  },
-  "schemes": [
-    "http"
-  ],
-  "swagger": "2.0",
-  "tags": [
-    {
-      "description": "institution",
-      "name": "institution"
-    },
-    {
-      "description": "Version",
-      "name": "version"
-    },
-    {
-      "description": "Health check",
-      "name": "health"
-    }
-  ]
-}
+basePath: /
+definitions:
+  DeliveryBean:
+    properties:
+      uri:
+        $ref: '#/definitions/URI'
+      uris:
+        additionalProperties:
+          items:
+            $ref: '#/definitions/URI'
+          type: array
+  InstitutionBean:
+    properties:
+      config:
+        additionalProperties:
+          type: string
+      delivery:
+        $ref: '#/definitions/DeliveryBean'
+      enabled:
+        type: boolean
+      filestoreId:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      secondaryUrls:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      timeZone:
+        type: string
+      uniqueId:
+        format: int64
+        type: integer
+      url:
+        type: string
+  URI:
+    properties:
+      absolute:
+        type: boolean
+      authority:
+        type: string
+      fragment:
+        type: string
+      host:
+        type: string
+      opaque:
+        type: boolean
+      path:
+        type: string
+      port:
+        format: int32
+        type: integer
+      query:
+        type: string
+      rawAuthority:
+        type: string
+      rawFragment:
+        type: string
+      rawPath:
+        type: string
+      rawQuery:
+        type: string
+      rawSchemeSpecificPart:
+        type: string
+      rawUserInfo:
+        type: string
+      scheme:
+        type: string
+      schemeSpecificPart:
+        type: string
+      userInfo:
+        type: string
+host: epscass.prd-prsn.com
+info:
+  description: Access to the Pearson OpenClass API
+  title: OpenClass API
+  version: 1.0.0
+  x-logo:
+    url: 'https://www.pearson.com/content/corporate/global/pearson-dot-com/en/news/logos-and-style-guides/_jcr_content/par-main/column_control/par0/column_control/par0/image.img.jpg/1414446637540.jpg'
+  x-origin:
+    format: swagger
+    url: 'http://epscass.prd-prsn.com/api/resources'
+    version: '1.2'
+  x-providerName: prd-prsn.com
+paths:
+  /api/institution:
+    get:
+      operationId: getInstitutions
+      produces:
+        - application/json;charset=UTF-8
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            items:
+              $ref: '#/definitions/InstitutionBean'
+      summary: List institution
+      tags:
+        - institution
+  '/api/institution/{uniqueId}':
+    get:
+      operationId: getInstitution
+      parameters:
+        - description: The intitution unique id
+          format: int64
+          in: path
+          name: uniqueId
+          required: true
+          type: integer
+      produces:
+        - application/json;charset=UTF-8
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/InstitutionBean'
+      summary: Get an institution
+      tags:
+        - institution
+  /api/version/:
+    get:
+      operationId: version
+      produces:
+        - application/json;charset=UTF-8
+      responses:
+        '200':
+          description: No response was specified
+      summary: Get the server version
+      tags:
+        - version
+  /health/:
+    get:
+      operationId: health
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+      summary: Get health
+      tags:
+        - health
+schemes:
+  - http
+swagger: '2.0'
+tags:
+  - description: institution
+    name: institution
+  - description: Version
+    name: version
+  - description: Health check
+    name: health

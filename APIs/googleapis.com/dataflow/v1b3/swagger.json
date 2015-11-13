@@ -1,2624 +1,1814 @@
-{
-  "basePath": "/",
-  "definitions": {
-    "ApproximateProgress": {
-      "description": "A progress measurement of a WorkItem by a worker.",
-      "properties": {
-        "percentComplete": {
-          "description": "Completion as percentage of the work, from 0.0 (beginning, nothing complete), to 1.0 (end of the work range, entire WorkItem complete).",
-          "format": "float",
-          "type": "number"
-        },
-        "position": {
-          "$ref": "#/definitions/Position",
-          "description": "A Position within the work to represent a progress."
-        },
-        "remainingTime": {
-          "description": "Completion as an estimated time remaining.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AutoscalingSettings": {
-      "description": "Settings for WorkerPool autoscaling.",
-      "properties": {
-        "algorithm": {
-          "description": "The algorithm to use for autoscaling.",
-          "enum": [
-            "AUTOSCALING_ALGORITHM_UNKNOWN",
-            "AUTOSCALING_ALGORITHM_NONE",
-            "AUTOSCALING_ALGORITHM_BASIC"
-          ],
-          "type": "string"
-        },
-        "maxNumWorkers": {
-          "description": "The maximum number of workers to cap scaling at.",
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
-    "ComputationTopology": {
-      "description": "All configuration data for a particular Computation.",
-      "properties": {
-        "computationId": {
-          "description": "The ID of the computation.",
-          "type": "string"
-        },
-        "inputs": {
-          "description": "The inputs to the computation.",
-          "items": {
-            "$ref": "#/definitions/StreamLocation"
-          },
-          "type": "array"
-        },
-        "keyRanges": {
-          "description": "The key ranges processed by the computation.",
-          "items": {
-            "$ref": "#/definitions/KeyRangeLocation"
-          },
-          "type": "array"
-        },
-        "outputs": {
-          "description": "The outputs from the computation.",
-          "items": {
-            "$ref": "#/definitions/StreamLocation"
-          },
-          "type": "array"
-        },
-        "stateFamilies": {
-          "description": "The state family values.",
-          "items": {
-            "$ref": "#/definitions/StateFamilyConfig"
-          },
-          "type": "array"
-        },
-        "systemStageName": {
-          "description": "The system stage name.",
-          "type": "string"
-        },
-        "userStageName": {
-          "description": "The user stage name.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ConcatPosition": {
-      "description": "A position that encapsulates an inner position and an index for the inner position. A ConcatPosition can be used by a reader of a source that encapsulates a set of other sources.",
-      "properties": {
-        "index": {
-          "description": "Index of the inner source.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "position": {
-          "$ref": "#/definitions/Position",
-          "description": "Position within the inner source."
-        }
-      },
-      "type": "object"
-    },
-    "CustomSourceLocation": {
-      "description": "Identifies the location of a custom souce.",
-      "properties": {
-        "stateful": {
-          "description": "Whether this source is stateful.",
-          "type": "boolean"
-        }
-      },
-      "type": "object"
-    },
-    "DataDiskAssignment": {
-      "description": "Data disk assignment for a given VM instance.",
-      "properties": {
-        "dataDisks": {
-          "description": "Mounted data disks. The order is important a data disk's 0-based index in this list defines which persistent directory the disk is mounted to, for example the list of { \"myproject-1014-104817-4c2-harness-0-disk-0\" }, { \"myproject-1014-104817-4c2-harness-0-disk-1\" }.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "vmInstance": {
-          "description": "VM instance name the data disks mounted to, for example \"myproject-1014-104817-4c2-harness-0\".",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "DerivedSource": {
-      "description": "Specification of one of the bundles produced as a result of splitting a Source (e.g. when executing a SourceSplitRequest, or when splitting an active task using WorkItemStatus.dynamic_source_split), relative to the source being split.",
-      "properties": {
-        "derivationMode": {
-          "description": "What source to base the produced source on (if any).",
-          "enum": [
-            "SOURCE_DERIVATION_MODE_UNKNOWN",
-            "SOURCE_DERIVATION_MODE_INDEPENDENT",
-            "SOURCE_DERIVATION_MODE_CHILD_OF_CURRENT",
-            "SOURCE_DERIVATION_MODE_SIBLING_OF_CURRENT"
-          ],
-          "type": "string"
-        },
-        "source": {
-          "$ref": "#/definitions/Source",
-          "description": "Specification of the source."
-        }
-      },
-      "type": "object"
-    },
-    "Disk": {
-      "description": "Describes the data disk used by a workflow job.",
-      "properties": {
-        "diskType": {
-          "description": "Disk storage type, as defined by Google Compute Engine. This must be a disk type appropriate to the project and zone in which the workers will run. If unknown or unspecified, the service will attempt to choose a reasonable default. For example, the standard persistent disk type is a resource name typically ending in \"pd-standard\". If SSD persistent disks are available, the resource name typically ends with \"pd-ssd\". The actual valid values are defined the Google Compute Engine API, not by the Dataflow API; consult the Google Compute Engine documentation for more information about determining the set of available disk types for a particular project and zone. Google Compute Engine Disk types are local to a particular project in a particular zone, and so the resource name will typically look something like this: compute.googleapis.com/projects/\n/zones//diskTypes/pd-standard",
-          "type": "string"
-        },
-        "mountPoint": {
-          "description": "Directory in a VM where disk is mounted.",
-          "type": "string"
-        },
-        "sizeGb": {
-          "description": "Size of disk in GB. If zero or unspecified, the service will attempt to choose a reasonable default.",
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
-    "DynamicSourceSplit": {
-      "description": "When a task splits using WorkItemStatus.dynamic_source_split, this message describes the two parts of the split relative to the description of the current task's input.",
-      "properties": {
-        "primary": {
-          "$ref": "#/definitions/DerivedSource",
-          "description": "Primary part (continued to be processed by worker). Specified relative to the previously-current source. Becomes current."
-        },
-        "residual": {
-          "$ref": "#/definitions/DerivedSource",
-          "description": "Residual part (returned to the pool of work). Specified relative to the previously-current source."
-        }
-      },
-      "type": "object"
-    },
-    "Environment": {
-      "description": "Describes the environment in which a Dataflow Job runs.",
-      "properties": {
-        "clusterManagerApiService": {
-          "description": "The type of cluster manager API to use. If unknown or unspecified, the service will attempt to choose a reasonable default. This should be in the form of the API service name, e.g. \"compute.googleapis.com\".",
-          "type": "string"
-        },
-        "dataset": {
-          "description": "The dataset for the current project where various workflow related tables are stored. The supported resource type is: Google BigQuery: bigquery.googleapis.com/{dataset}",
-          "type": "string"
-        },
-        "experiments": {
-          "description": "The list of experiments to enable.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "internalExperiments": {
-          "additionalProperties": {
-            "description": "Properties of the object. Contains field @ype with type URL."
-          },
-          "description": "Experimental settings.",
-          "type": "object"
-        },
-        "sdkPipelineOptions": {
-          "additionalProperties": {
-            "description": "Properties of the object."
-          },
-          "description": "The Dataflow SDK pipeline options specified by the user. These options are passed through the service and are used to recreate the SDK pipeline options on the worker in a language agnostic and platform independent way.",
-          "type": "object"
-        },
-        "tempStoragePrefix": {
-          "description": "The prefix of the resources the system should use for temporary storage. The system will append the suffix \"/temp-{JOBNAME} to this resource prefix, where {JOBNAME} is the value of the job_name field. The resulting bucket and object prefix is used as the prefix of the resources used to store temporary data needed during the job execution. NOTE: This will override the value in taskrunner_settings. The supported resource type is: Google Cloud Storage: storage.googleapis.com/{bucket}/{object} bucket.storage.googleapis.com/{object}",
-          "type": "string"
-        },
-        "userAgent": {
-          "additionalProperties": {
-            "description": "Properties of the object."
-          },
-          "description": "A description of the process that generated the request.",
-          "type": "object"
-        },
-        "version": {
-          "additionalProperties": {
-            "description": "Properties of the object."
-          },
-          "description": "A structure describing which components and their versions of the service are required in order to run the job.",
-          "type": "object"
-        },
-        "workerPools": {
-          "description": "Worker pools. At least one \"harness\" worker pool must be specified in order for the job to have workers.",
-          "items": {
-            "$ref": "#/definitions/WorkerPool"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "FlattenInstruction": {
-      "description": "An instruction that copies its inputs (zero or more) to its (single) output.",
-      "properties": {
-        "inputs": {
-          "description": "Describes the inputs to the flatten instruction.",
-          "items": {
-            "$ref": "#/definitions/InstructionInput"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "InstructionInput": {
-      "description": "An input of an instruction, as a reference to an output of a producer instruction.",
-      "properties": {
-        "outputNum": {
-          "description": "The output index (origin zero) within the producer.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "producerInstructionIndex": {
-          "description": "The index (origin zero) of the parallel instruction that produces the output to be consumed by this input. This index is relative to the list of instructions in this input's instruction's containing MapTask.",
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
-    "InstructionOutput": {
-      "description": "An output of an instruction.",
-      "properties": {
-        "codec": {
-          "additionalProperties": {
-            "description": "Properties of the object."
-          },
-          "description": "The codec to use to encode data being written via this output.",
-          "type": "object"
-        },
-        "name": {
-          "description": "The user-provided name of this output.",
-          "type": "string"
-        },
-        "systemName": {
-          "description": "System-defined name of this output. Unique across the workflow.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Job": {
-      "description": "Defines a job to be run by the Dataflow service.",
-      "properties": {
-        "clientRequestId": {
-          "description": "Client's unique identifier of the job, re-used by SDK across retried attempts. If this field is set, the service will ensure its uniqueness. That is, the request to create a job will fail if the service has knowledge of a previously submitted job with the same client's id and job name. The caller may, for example, use this field to ensure idempotence of job creation across retried attempts to create a job. By default, the field is empty and, in that case, the service ignores it.",
-          "type": "string"
-        },
-        "createTime": {
-          "description": "Timestamp when job was initially created. Immutable, set by the Dataflow service.",
-          "type": "string"
-        },
-        "currentState": {
-          "description": "The current state of the job. Jobs are created in the JOB_STATE_STOPPED state unless otherwise specified. A job in the JOB_STATE_RUNNING state may asynchronously enter a terminal state. Once a job has reached a terminal state, no further state updates may be made. This field may be mutated by the Dataflow service; callers cannot mutate it.",
-          "enum": [
-            "JOB_STATE_UNKNOWN",
-            "JOB_STATE_STOPPED",
-            "JOB_STATE_RUNNING",
-            "JOB_STATE_DONE",
-            "JOB_STATE_FAILED",
-            "JOB_STATE_CANCELLED",
-            "JOB_STATE_UPDATED"
-          ],
-          "type": "string"
-        },
-        "currentStateTime": {
-          "description": "The timestamp associated with the current state.",
-          "type": "string"
-        },
-        "environment": {
-          "$ref": "#/definitions/Environment",
-          "description": "Environment for the job."
-        },
-        "executionInfo": {
-          "$ref": "#/definitions/JobExecutionInfo",
-          "description": "Information about how the Dataflow service will actually run the job."
-        },
-        "id": {
-          "description": "The unique ID of this job. This field is set by the Dataflow service when the Job is created, and is immutable for the life of the Job.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The user-specified Dataflow job name. Only one Job with a given name may exist in a project at any given time. If a caller attempts to create a Job with the same name as an already-existing Job, the attempt will return the existing Job. The name must match the regular expression [a-z]([-a-z0-9]{0,38}[a-z0-9])?",
-          "type": "string"
-        },
-        "projectId": {
-          "description": "The project which owns the job.",
-          "type": "string"
-        },
-        "replacedByJobId": {
-          "description": "If another job is an update of this job (and thus, this job is in JOB_STATE_UPDATED), this field will contain the ID of that job.",
-          "type": "string"
-        },
-        "replaceJobId": {
-          "description": "If this job is an update of an existing job, this field will be the ID of the job it replaced. When sending a CreateJobRequest, you can update a job by specifying it here. The job named here will be stopped, and its intermediate state transferred to this job.",
-          "type": "string"
-        },
-        "requestedState": {
-          "description": "The job's requested state. UpdateJob may be used to switch between the JOB_STATE_STOPPED and JOB_STATE_RUNNING states, by setting requested_state. UpdateJob may also be used to directly set a job's requested state to JOB_STATE_CANCELLED or JOB_STATE_DONE, irrevocably terminating the job if it has not already reached a terminal state.",
-          "enum": [
-            "JOB_STATE_UNKNOWN",
-            "JOB_STATE_STOPPED",
-            "JOB_STATE_RUNNING",
-            "JOB_STATE_DONE",
-            "JOB_STATE_FAILED",
-            "JOB_STATE_CANCELLED",
-            "JOB_STATE_UPDATED"
-          ],
-          "type": "string"
-        },
-        "steps": {
-          "description": "The top-level steps that constitute the entire job.",
-          "items": {
-            "$ref": "#/definitions/Step"
-          },
-          "type": "array"
-        },
-        "tempFiles": {
-          "description": "A set of files the system should be aware of that are used for temporary storage. These temporary files will be removed on job completion. No duplicates are allowed. No file patterns are supported. The supported files are: Google Cloud Storage: storage.googleapis.com/{bucket}/{object} bucket.storage.googleapis.com/{object}",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "transformNameMapping": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Map of transform name prefixes of the job to be replaced to the corresponding name prefixes of the new job.",
-          "type": "object"
-        },
-        "type": {
-          "description": "The type of dataflow job.",
-          "enum": [
-            "JOB_TYPE_UNKNOWN",
-            "JOB_TYPE_BATCH",
-            "JOB_TYPE_STREAMING"
-          ],
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "JobExecutionInfo": {
-      "description": "Additional information about how a Dataflow job will be executed which isn’t contained in the submitted job.",
-      "properties": {
-        "stages": {
-          "additionalProperties": {
-            "$ref": "#/definitions/JobExecutionStageInfo"
-          },
-          "description": "A mapping from each stage to the information about that stage.",
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
-    "JobExecutionStageInfo": {
-      "description": "Contains information about how a particular google.dataflow.v1beta3.Step will be executed.",
-      "properties": {
-        "stepName": {
-          "description": "The steps associated with the execution stage. Note that stages may have several steps, and that a given step might be run by more than one stage.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "JobMessage": {
-      "description": "A particular message pertaining to a Dataflow job.",
-      "properties": {
-        "id": {
-          "description": "Identifies the message. This is automatically generated by the service; the caller should treat it as an opaque string.",
-          "type": "string"
-        },
-        "messageImportance": {
-          "description": "Importance level of the message.",
-          "enum": [
-            "JOB_MESSAGE_IMPORTANCE_UNKNOWN",
-            "JOB_MESSAGE_DEBUG",
-            "JOB_MESSAGE_DETAILED",
-            "JOB_MESSAGE_BASIC",
-            "JOB_MESSAGE_WARNING",
-            "JOB_MESSAGE_ERROR"
-          ],
-          "type": "string"
-        },
-        "messageText": {
-          "description": "The text of the message.",
-          "type": "string"
-        },
-        "time": {
-          "description": "The timestamp of the message.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "JobMetrics": {
-      "description": "JobMetrics contains a collection of metrics descibing the detailed progress of a Dataflow job. Metrics correspond to user-defined and system-defined metrics in the job. This resource captures only the most recent values of each metric; time-series data can be queried for them (under the same metric names) from Cloud Monitoring.",
-      "properties": {
-        "metrics": {
-          "description": "All metrics for this job.",
-          "items": {
-            "$ref": "#/definitions/MetricUpdate"
-          },
-          "type": "array"
-        },
-        "metricTime": {
-          "description": "Timestamp as of which metric values are current.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "KeyRangeDataDiskAssignment": {
-      "description": "Data disk assignment information for a specific key-range of a sharded computation. Currently we only support UTF-8 character splits to simplify encoding into JSON.",
-      "properties": {
-        "dataDisk": {
-          "description": "The name of the data disk where data for this range is stored. This name is local to the Google Cloud Platform project and uniquely identifies the disk within that project, for example \"myproject-1014-104817-4c2-harness-0-disk-1\".",
-          "type": "string"
-        },
-        "end": {
-          "description": "The end (exclusive) of the key range.",
-          "type": "string"
-        },
-        "start": {
-          "description": "The start (inclusive) of the key range.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "KeyRangeLocation": {
-      "description": "Location information for a specific key-range of a sharded computation. Currently we only support UTF-8 character splits to simplify encoding into JSON.",
-      "properties": {
-        "dataDisk": {
-          "description": "The name of the data disk where data for this range is stored. This name is local to the Google Cloud Platform project and uniquely identifies the disk within that project, for example \"myproject-1014-104817-4c2-harness-0-disk-1\".",
-          "type": "string"
-        },
-        "deliveryEndpoint": {
-          "description": "The physical location of this range assignment to be used for streaming computation cross-worker message delivery.",
-          "type": "string"
-        },
-        "end": {
-          "description": "The end (exclusive) of the key range.",
-          "type": "string"
-        },
-        "persistentDirectory": {
-          "description": "The location of the persistent state for this range, as a persistent directory in the worker local filesystem.",
-          "type": "string"
-        },
-        "start": {
-          "description": "The start (inclusive) of the key range.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "LeaseWorkItemRequest": {
-      "description": "Request to lease WorkItems.",
-      "properties": {
-        "currentWorkerTime": {
-          "description": "The current timestamp at the worker.",
-          "type": "string"
-        },
-        "requestedLeaseDuration": {
-          "description": "The initial lease period.",
-          "type": "string"
-        },
-        "workerCapabilities": {
-          "description": "Worker capabilities. WorkItems might be limited to workers with specific capabilities.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "workerId": {
-          "description": "Identifies the worker leasing work -- typically the ID of the virtual machine running the worker.",
-          "type": "string"
-        },
-        "workItemTypes": {
-          "description": "Filter for WorkItem type.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "LeaseWorkItemResponse": {
-      "description": "Response to a request to lease WorkItems.",
-      "properties": {
-        "workItems": {
-          "description": "A list of the leased WorkItems.",
-          "items": {
-            "$ref": "#/definitions/WorkItem"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "ListJobMessagesResponse": {
-      "description": "Response to a request to list job messages.",
-      "properties": {
-        "jobMessages": {
-          "description": "Messages in ascending timestamp order.",
-          "items": {
-            "$ref": "#/definitions/JobMessage"
-          },
-          "type": "array"
-        },
-        "nextPageToken": {
-          "description": "The token to obtain the next page of results if there are more.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ListJobsResponse": {
-      "description": "Response to a request to list Dataflow jobs. This may be a partial response, depending on the page size in the ListJobsRequest.",
-      "properties": {
-        "jobs": {
-          "description": "A subset of the requested job information.",
-          "items": {
-            "$ref": "#/definitions/Job"
-          },
-          "type": "array"
-        },
-        "nextPageToken": {
-          "description": "Set if there may be more results than fit in this response.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "MapTask": {
-      "description": "MapTask consists of an ordered set of instructions, each of which describes one particular low-level operation for the worker to perform in order to accomplish the MapTask's WorkItem. Each instruction must appear in the list before any instructions which depends on its output.",
-      "properties": {
-        "instructions": {
-          "description": "The instructions in the MapTask.",
-          "items": {
-            "$ref": "#/definitions/ParallelInstruction"
-          },
-          "type": "array"
-        },
-        "stageName": {
-          "description": "System-defined name of the stage containing this MapTask. Unique across the workflow.",
-          "type": "string"
-        },
-        "systemName": {
-          "description": "System-defined name of this MapTask. Unique across the workflow.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "MetricStructuredName": {
-      "description": "Identifies a metric, by describing the source which generated the metric.",
-      "properties": {
-        "context": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Zero or more labeled fields which identify the part of the job this metric is associated with, such as the name of a step or collection. For example, built-in counters associated with steps will have context['step'] = . Counters associated with PCollections in the SDK will have context['pcollection'] =\n.",
-          "type": "object"
-        },
-        "name": {
-          "description": "Worker-defined metric name.",
-          "type": "string"
-        },
-        "origin": {
-          "description": "Origin (namespace) of metric name. May be blank for user-define metrics; will be \"dataflow\" for metrics defined by the Dataflow service or SDK.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "MetricUpdate": {
-      "description": "Describes the state of a metric.",
-      "properties": {
-        "cumulative": {
-          "description": "True if this metric is reported as the total cumulative aggregate value accumulated since the worker started working on this WorkItem. By default this is false, indicating that this metric is reported as a delta that is not associated with any WorkItem.",
-          "type": "boolean"
-        },
-        "internal": {
-          "description": "Worker-computed aggregate value for internal use by the Dataflow service."
-        },
-        "kind": {
-          "description": "Metric aggregation kind. The possible metric aggregation kinds are \"Sum\", \"Max\", \"Min\", \"Mean\", \"Set\", \"And\", and \"Or\". The specified aggregation kind is case-insensitive. If omitted, this is not an aggregated value but instead a single metric sample value.",
-          "type": "string"
-        },
-        "meanCount": {
-          "description": "Worker-computed aggregate value for the \"Mean\" aggregation kind. This holds the count of the aggregated values and is used in combination with mean_sum above to obtain the actual mean aggregate value. The only possible value type is Long."
-        },
-        "meanSum": {
-          "description": "Worker-computed aggregate value for the \"Mean\" aggregation kind. This holds the sum of the aggregated values and is used in combination with mean_count below to obtain the actual mean aggregate value. The only possible value types are Long and Double."
-        },
-        "name": {
-          "$ref": "#/definitions/MetricStructuredName",
-          "description": "Name of the metric."
-        },
-        "scalar": {
-          "description": "Worker-computed aggregate value for aggregation kinds \"Sum\", \"Max\", \"Min\", \"And\", and \"Or\". The possible value types are Long, Double, and Boolean."
-        },
-        "set": {
-          "description": "Worker-computed aggregate value for the \"Set\" aggregation kind. The only possible value type is a list of Values whose type can be Long, Double, or String, according to the metric's type. All Values in the list must be of the same type."
-        },
-        "updateTime": {
-          "description": "Timestamp associated with the metric value. Optional when workers are reporting work progress; it will be filled in responses from the metrics API.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "MountedDataDisk": {
-      "description": "Describes mounted data disk.",
-      "properties": {
-        "dataDisk": {
-          "description": "The name of the data disk. This name is local to the Google Cloud Platform project and uniquely identifies the disk within that project, for example \"myproject-1014-104817-4c2-harness-0-disk-1\".",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "MultiOutputInfo": {
-      "description": "Information about an output of a multi-output DoFn.",
-      "properties": {
-        "tag": {
-          "description": "The id of the tag the user code will emit to this output by; this should correspond to the tag of some SideInputInfo.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Package": {
-      "description": "Packages that need to be installed in order for a worker to run the steps of the Dataflow job which will be assigned to its worker pool. This is the mechanism by which the SDK causes code to be loaded onto the workers. For example, the Dataflow Java SDK might use this to install jars containing the user's code and all of the various dependencies (libraries, data files, etc) required in order for that code to run.",
-      "properties": {
-        "location": {
-          "description": "The resource to read the package from. The supported resource type is: Google Cloud Storage: storage.googleapis.com/{bucket} bucket.storage.googleapis.com/",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the package.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ParallelInstruction": {
-      "description": "Describes a particular operation comprising a MapTask.",
-      "properties": {
-        "flatten": {
-          "$ref": "#/definitions/FlattenInstruction",
-          "description": "Additional information for Flatten instructions."
-        },
-        "name": {
-          "description": "User-provided name of this operation.",
-          "type": "string"
-        },
-        "outputs": {
-          "description": "Describes the outputs of the instruction.",
-          "items": {
-            "$ref": "#/definitions/InstructionOutput"
-          },
-          "type": "array"
-        },
-        "parDo": {
-          "$ref": "#/definitions/ParDoInstruction",
-          "description": "Additional information for ParDo instructions."
-        },
-        "partialGroupByKey": {
-          "$ref": "#/definitions/PartialGroupByKeyInstruction",
-          "description": "Additional information for PartialGroupByKey instructions."
-        },
-        "read": {
-          "$ref": "#/definitions/ReadInstruction",
-          "description": "Additional information for Read instructions."
-        },
-        "systemName": {
-          "description": "System-defined name of this operation. Unique across the workflow.",
-          "type": "string"
-        },
-        "write": {
-          "$ref": "#/definitions/WriteInstruction",
-          "description": "Additional information for Write instructions."
-        }
-      },
-      "type": "object"
-    },
-    "ParDoInstruction": {
-      "description": "An instruction that does a ParDo operation. Takes one main input and zero or more side inputs, and produces zero or more outputs. Runs user code.",
-      "properties": {
-        "input": {
-          "$ref": "#/definitions/InstructionInput",
-          "description": "The input."
-        },
-        "multiOutputInfos": {
-          "description": "Information about each of the outputs, if user_fn is a MultiDoFn.",
-          "items": {
-            "$ref": "#/definitions/MultiOutputInfo"
-          },
-          "type": "array"
-        },
-        "numOutputs": {
-          "description": "The number of outputs.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "sideInputs": {
-          "description": "Zero or more side inputs.",
-          "items": {
-            "$ref": "#/definitions/SideInputInfo"
-          },
-          "type": "array"
-        },
-        "userFn": {
-          "additionalProperties": {
-            "description": "Properties of the object."
-          },
-          "description": "The user function to invoke.",
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
-    "PartialGroupByKeyInstruction": {
-      "description": "An instruction that does a partial group-by-key. One input and one output.",
-      "properties": {
-        "input": {
-          "$ref": "#/definitions/InstructionInput",
-          "description": "Describes the input to the partial group-by-key instruction."
-        },
-        "inputElementCodec": {
-          "additionalProperties": {
-            "description": "Properties of the object."
-          },
-          "description": "The codec to use for interpreting an element in the input PTable.",
-          "type": "object"
-        },
-        "valueCombiningFn": {
-          "additionalProperties": {
-            "description": "Properties of the object."
-          },
-          "description": "The value combining function to invoke.",
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
-    "Position": {
-      "description": "Position defines a position within a collection of data. The value can be either the end position, a key (used with ordered collections), a byte offset, or a record index.",
-      "properties": {
-        "byteOffset": {
-          "description": "Position is a byte offset.",
-          "format": "int64",
-          "type": "string"
-        },
-        "concatPosition": {
-          "$ref": "#/definitions/ConcatPosition",
-          "description": "CloudPosition is a concat position."
-        },
-        "end": {
-          "description": "Position is past all other positions. Also useful for the end position of an unbounded range.",
-          "type": "boolean"
-        },
-        "key": {
-          "description": "Position is a string key, ordered lexicographically.",
-          "type": "string"
-        },
-        "recordIndex": {
-          "description": "Position is a record index.",
-          "format": "int64",
-          "type": "string"
-        },
-        "shufflePosition": {
-          "description": "CloudPosition is a base64 encoded BatchShufflePosition (with FIXED sharding).",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "PubsubLocation": {
-      "description": "Identifies a pubsub location to use for transferring data into or out of a streaming Dataflow job.",
-      "properties": {
-        "dropLateData": {
-          "description": "Indicates whether the pipeline allows late-arriving data.",
-          "type": "boolean"
-        },
-        "idLabel": {
-          "description": "If set, contains a pubsub label from which to extract record ids. If left empty, record deduplication will be strictly best effort.",
-          "type": "string"
-        },
-        "subscription": {
-          "description": "A pubsub subscription, in the form of \"pubsub.googleapis.com/subscriptions/\n/\"",
-          "type": "string"
-        },
-        "timestampLabel": {
-          "description": "If set, contains a pubsub label from which to extract record timestamps. If left empty, record timestamps will be generated upon arrival.",
-          "type": "string"
-        },
-        "topic": {
-          "description": "A pubsub topic, in the form of \"pubsub.googleapis.com/topics/\n/\"",
-          "type": "string"
-        },
-        "trackingSubscription": {
-          "description": "If set, specifies the pubsub subscription that will be used for tracking custom time timestamps for watermark estimation.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ReadInstruction": {
-      "description": "An instruction that reads records. Takes no inputs, produces one output.",
-      "properties": {
-        "source": {
-          "$ref": "#/definitions/Source",
-          "description": "The source to read from."
-        }
-      },
-      "type": "object"
-    },
-    "ReportWorkItemStatusRequest": {
-      "description": "Request to report the status of WorkItems.",
-      "properties": {
-        "currentWorkerTime": {
-          "description": "The current timestamp at the worker.",
-          "type": "string"
-        },
-        "workerId": {
-          "description": "The ID of the worker reporting the WorkItem status. If this does not match the ID of the worker which the Dataflow service believes currently has the lease on the WorkItem, the report will be dropped (with an error response).",
-          "type": "string"
-        },
-        "workItemStatuses": {
-          "description": "The order is unimportant, except that the order of the WorkItemServiceState messages in the ReportWorkItemStatusResponse corresponds to the order of WorkItemStatus messages here.",
-          "items": {
-            "$ref": "#/definitions/WorkItemStatus"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "ReportWorkItemStatusResponse": {
-      "description": "Response from a request to report the status of WorkItems.",
-      "properties": {
-        "workItemServiceStates": {
-          "description": "A set of messages indicating the service-side state for each WorkItem whose status was reported, in the same order as the WorkItemStatus messages in the ReportWorkItemStatusRequest which resulting in this response.",
-          "items": {
-            "$ref": "#/definitions/WorkItemServiceState"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "SeqMapTask": {
-      "description": "Describes a particular function to invoke.",
-      "properties": {
-        "inputs": {
-          "description": "Information about each of the inputs.",
-          "items": {
-            "$ref": "#/definitions/SideInputInfo"
-          },
-          "type": "array"
-        },
-        "name": {
-          "description": "The user-provided name of the SeqDo operation.",
-          "type": "string"
-        },
-        "outputInfos": {
-          "description": "Information about each of the outputs.",
-          "items": {
-            "$ref": "#/definitions/SeqMapTaskOutputInfo"
-          },
-          "type": "array"
-        },
-        "stageName": {
-          "description": "System-defined name of the stage containing the SeqDo operation. Unique across the workflow.",
-          "type": "string"
-        },
-        "systemName": {
-          "description": "System-defined name of the SeqDo operation. Unique across the workflow.",
-          "type": "string"
-        },
-        "userFn": {
-          "additionalProperties": {
-            "description": "Properties of the object."
-          },
-          "description": "The user function to invoke.",
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
-    "SeqMapTaskOutputInfo": {
-      "description": "Information about an output of a SeqMapTask.",
-      "properties": {
-        "sink": {
-          "$ref": "#/definitions/Sink",
-          "description": "The sink to write the output value to."
-        },
-        "tag": {
-          "description": "The id of the TupleTag the user code will tag the output value by.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ShellTask": {
-      "description": "A task which consists of a shell command for the worker to execute.",
-      "properties": {
-        "command": {
-          "description": "The shell command to run.",
-          "type": "string"
-        },
-        "exitCode": {
-          "description": "Exit code for the task.",
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
-    "SideInputInfo": {
-      "description": "Information about a side input of a DoFn or an input of a SeqDoFn.",
-      "properties": {
-        "kind": {
-          "additionalProperties": {
-            "description": "Properties of the object."
-          },
-          "description": "How to interpret the source element(s) as a side input value.",
-          "type": "object"
-        },
-        "sources": {
-          "description": "The source(s) to read element(s) from to get the value of this side input. If more than one source, then the elements are taken from the sources, in the specified order if order matters. At least one source is required.",
-          "items": {
-            "$ref": "#/definitions/Source"
-          },
-          "type": "array"
-        },
-        "tag": {
-          "description": "The id of the tag the user code will access this side input by; this should correspond to the tag of some MultiOutputInfo.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Sink": {
-      "description": "A sink that records can be encoded and written to.",
-      "properties": {
-        "codec": {
-          "additionalProperties": {
-            "description": "Properties of the object."
-          },
-          "description": "The codec to use to encode data written to the sink.",
-          "type": "object"
-        },
-        "spec": {
-          "additionalProperties": {
-            "description": "Properties of the object."
-          },
-          "description": "The sink to write to, plus its parameters.",
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
-    "Source": {
-      "description": "A source that records can be read and decoded from.",
-      "properties": {
-        "baseSpecs": {
-          "description": "While splitting, sources may specify the produced bundles as differences against another source, in order to save backend-side memory and allow bigger jobs. For details, see SourceSplitRequest. To support this use case, the full set of parameters of the source is logically obtained by taking the latest explicitly specified value of each parameter in the order: base_specs (later items win), spec (overrides anything in base_specs).",
-          "items": {
-            "additionalProperties": {
-              "description": "Properties of the object."
-            },
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "codec": {
-          "additionalProperties": {
-            "description": "Properties of the object."
-          },
-          "description": "The codec to use to decode data read from the source.",
-          "type": "object"
-        },
-        "doesNotNeedSplitting": {
-          "description": "Setting this value to true hints to the framework that the source doesn't need splitting, and using SourceSplitRequest on it would yield SOURCE_SPLIT_OUTCOME_USE_CURRENT. E.g. a file splitter may set this to true when splitting a single file into a set of byte ranges of appropriate size, and set this to false when splitting a filepattern into individual files. However, for efficiency, a file splitter may decide to produce file subranges directly from the filepattern to avoid a splitting round-trip. See SourceSplitRequest for an overview of the splitting process. This field is meaningful only in the Source objects populated by the user (e.g. when filling in a DerivedSource). Source objects supplied by the framework to the user don't have this field populated.",
-          "type": "boolean"
-        },
-        "metadata": {
-          "$ref": "#/definitions/SourceMetadata",
-          "description": "Optionally, metadata for this source can be supplied right away, avoiding a SourceGetMetadataOperation roundtrip (see SourceOperationRequest). This field is meaningful only in the Source objects populated by the user (e.g. when filling in a DerivedSource). Source objects supplied by the framework to the user don't have this field populated."
-        },
-        "spec": {
-          "additionalProperties": {
-            "description": "Properties of the object."
-          },
-          "description": "The source to read from, plus its parameters.",
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
-    "SourceFork": {
-      "description": "DEPRECATED in favor of DynamicSourceSplit.",
-      "properties": {
-        "primary": {
-          "$ref": "#/definitions/SourceSplitShard",
-          "description": "DEPRECATED"
-        },
-        "primarySource": {
-          "$ref": "#/definitions/DerivedSource",
-          "description": "DEPRECATED"
-        },
-        "residual": {
-          "$ref": "#/definitions/SourceSplitShard",
-          "description": "DEPRECATED"
-        },
-        "residualSource": {
-          "$ref": "#/definitions/DerivedSource",
-          "description": "DEPRECATED"
-        }
-      },
-      "type": "object"
-    },
-    "SourceGetMetadataRequest": {
-      "description": "A request to compute the SourceMetadata of a Source.",
-      "properties": {
-        "source": {
-          "$ref": "#/definitions/Source",
-          "description": "Specification of the source whose metadata should be computed."
-        }
-      },
-      "type": "object"
-    },
-    "SourceGetMetadataResponse": {
-      "description": "The result of a SourceGetMetadataOperation.",
-      "properties": {
-        "metadata": {
-          "$ref": "#/definitions/SourceMetadata",
-          "description": "The computed metadata."
-        }
-      },
-      "type": "object"
-    },
-    "SourceMetadata": {
-      "description": "Metadata about a Source useful for automatically optimizing and tuning the pipeline, etc.",
-      "properties": {
-        "estimatedSizeBytes": {
-          "description": "An estimate of the total size (in bytes) of the data that would be read from this source. This estimate is in terms of external storage size, before any decompression or other processing done by the reader.",
-          "format": "int64",
-          "type": "string"
-        },
-        "infinite": {
-          "description": "Specifies that the size of this source is known to be infinite (this is a streaming source).",
-          "type": "boolean"
-        },
-        "producesSortedKeys": {
-          "description": "Whether this source is known to produce key/value pairs with the (encoded) keys in lexicographically sorted order.",
-          "type": "boolean"
-        }
-      },
-      "type": "object"
-    },
-    "SourceOperationRequest": {
-      "description": "A work item that represents the different operations that can be performed on a user-defined Source specification.",
-      "properties": {
-        "getMetadata": {
-          "$ref": "#/definitions/SourceGetMetadataRequest",
-          "description": "Information about a request to get metadata about a source."
-        },
-        "split": {
-          "$ref": "#/definitions/SourceSplitRequest",
-          "description": "Information about a request to split a source."
-        }
-      },
-      "type": "object"
-    },
-    "SourceOperationResponse": {
-      "description": "The result of a SourceOperationRequest, specified in ReportWorkItemStatusRequest.source_operation when the work item is completed.",
-      "properties": {
-        "getMetadata": {
-          "$ref": "#/definitions/SourceGetMetadataResponse",
-          "description": "A response to a request to get metadata about a source."
-        },
-        "split": {
-          "$ref": "#/definitions/SourceSplitResponse",
-          "description": "A response to a request to split a source."
-        }
-      },
-      "type": "object"
-    },
-    "SourceSplitOptions": {
-      "description": "Hints for splitting a Source into bundles (parts for parallel processing) using SourceSplitRequest.",
-      "properties": {
-        "desiredBundleSizeBytes": {
-          "description": "The source should be split into a set of bundles where the estimated size of each is approximately this many bytes.",
-          "format": "int64",
-          "type": "string"
-        },
-        "desiredShardSizeBytes": {
-          "description": "DEPRECATED in favor of desired_bundle_size_bytes.",
-          "format": "int64",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "SourceSplitRequest": {
-      "description": "Represents the operation to split a high-level Source specification into bundles (parts for parallel processing). At a high level, splitting of a source into bundles happens as follows: SourceSplitRequest is applied to the source. If it returns SOURCE_SPLIT_OUTCOME_USE_CURRENT, no further splitting happens and the source is used \"as is\". Otherwise, splitting is applied recursively to each produced DerivedSource. As an optimization, for any Source, if its does_not_need_splitting is true, the framework assumes that splitting this source would return SOURCE_SPLIT_OUTCOME_USE_CURRENT, and doesn't initiate a SourceSplitRequest. This applies both to the initial source being split and to bundles produced from it.",
-      "properties": {
-        "options": {
-          "$ref": "#/definitions/SourceSplitOptions",
-          "description": "Hints for tuning the splitting process."
-        },
-        "source": {
-          "$ref": "#/definitions/Source",
-          "description": "Specification of the source to be split."
-        }
-      },
-      "type": "object"
-    },
-    "SourceSplitResponse": {
-      "description": "The response to a SourceSplitRequest.",
-      "properties": {
-        "bundles": {
-          "description": "If outcome is SPLITTING_HAPPENED, then this is a list of bundles into which the source was split. Otherwise this field is ignored. This list can be empty, which means the source represents an empty input.",
-          "items": {
-            "$ref": "#/definitions/DerivedSource"
-          },
-          "type": "array"
-        },
-        "outcome": {
-          "description": "Indicates whether splitting happened and produced a list of bundles. If this is USE_CURRENT_SOURCE_AS_IS, the current source should be processed \"as is\" without splitting. \"bundles\" is ignored in this case. If this is SPLITTING_HAPPENED, then \"bundles\" contains a list of bundles into which the source was split.",
-          "enum": [
-            "SOURCE_SPLIT_OUTCOME_UNKNOWN",
-            "SOURCE_SPLIT_OUTCOME_USE_CURRENT",
-            "SOURCE_SPLIT_OUTCOME_SPLITTING_HAPPENED"
-          ],
-          "type": "string"
-        },
-        "shards": {
-          "description": "DEPRECATED in favor of bundles.",
-          "items": {
-            "$ref": "#/definitions/SourceSplitShard"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "SourceSplitShard": {
-      "description": "DEPRECATED in favor of DerivedSource.",
-      "properties": {
-        "derivationMode": {
-          "description": "DEPRECATED",
-          "enum": [
-            "SOURCE_DERIVATION_MODE_UNKNOWN",
-            "SOURCE_DERIVATION_MODE_INDEPENDENT",
-            "SOURCE_DERIVATION_MODE_CHILD_OF_CURRENT",
-            "SOURCE_DERIVATION_MODE_SIBLING_OF_CURRENT"
-          ],
-          "type": "string"
-        },
-        "source": {
-          "$ref": "#/definitions/Source",
-          "description": "DEPRECATED"
-        }
-      },
-      "type": "object"
-    },
-    "StateFamilyConfig": {
-      "description": "State family configuration.",
-      "properties": {
-        "isRead": {
-          "description": "If true, this family corresponds to a read operation.",
-          "type": "boolean"
-        },
-        "stateFamily": {
-          "description": "The state family value.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Status": {
-      "description": "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be: - Simple to use and understand for most users - Flexible enough to meet unexpected needs # Overview The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed. The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` which can be used for common error conditions. # Language mapping The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C. # Other uses The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments. Example uses of this error model include: - Partial errors. If a service needs to return partial errors to the client, it may embed the `Status` in the normal response to indicate the partial errors. - Workflow errors. A typical workflow has multiple steps. Each step may have a `Status` message for error reporting purpose. - Batch operations. If a client uses batch request and batch response, the `Status` message should be used directly inside batch response, one for each error sub-response. - Asynchronous operations. If an API call embeds asynchronous operation results in its response, the status of those operations should be represented directly using the `Status` message. - Logging. If some API errors are stored in logs, the message `Status` could be used directly after any stripping needed for security/privacy reasons.",
-      "properties": {
-        "code": {
-          "description": "The status code, which should be an enum value of google.rpc.Code.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "details": {
-          "description": "A list of messages that carry the error details. There will be a common set of message types for APIs to use.",
-          "items": {
-            "additionalProperties": {
-              "description": "Properties of the object. Contains field @ype with type URL."
-            },
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "message": {
-          "description": "A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Step": {
-      "description": "Defines a particular step within a Dataflow job. A job consists of multiple steps, each of which performs some specific operation as part of the overall job. Data is typically passed from one step to another as part of the job. Here's an example of a sequence of steps which together implement a Map-Reduce job: * Read a collection of data from some source, parsing the collection's elements. * Validate the elements. * Apply a user-defined function to map each element to some value and extract an element-specific key value. * Group elements with the same key into a single element with that key, transforming a multiply-keyed collection into a uniquely-keyed collection. * Write the elements out to some data sink. (Note that the Dataflow service may be used to run many different types of jobs, not just Map-Reduce).",
-      "properties": {
-        "kind": {
-          "description": "The kind of step in the dataflow Job.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name identifying the step. This must be unique for each step with respect to all other steps in the dataflow Job.",
-          "type": "string"
-        },
-        "properties": {
-          "additionalProperties": {
-            "description": "Properties of the object."
-          },
-          "description": "Named properties associated with the step. Each kind of predefined step has its own required set of properties.",
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
-    "StreamingComputationRanges": {
-      "description": "Describes full or partial data disk assignment information of the computation ranges.",
-      "properties": {
-        "computationId": {
-          "description": "The ID of the computation.",
-          "type": "string"
-        },
-        "rangeAssignments": {
-          "description": "Data disk assignments for ranges from this computation.",
-          "items": {
-            "$ref": "#/definitions/KeyRangeDataDiskAssignment"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "StreamingComputationTask": {
-      "description": "A task which describes what action should be performed for the specified streaming computation ranges.",
-      "properties": {
-        "computationRanges": {
-          "description": "Contains ranges of a streaming computation this task should apply to.",
-          "items": {
-            "$ref": "#/definitions/StreamingComputationRanges"
-          },
-          "type": "array"
-        },
-        "dataDisks": {
-          "description": "Describes the set of data disks this task should apply to.",
-          "items": {
-            "$ref": "#/definitions/MountedDataDisk"
-          },
-          "type": "array"
-        },
-        "taskType": {
-          "description": "A type of streaming computation task.",
-          "enum": [
-            "STREAMING_COMPUTATION_TASK_UNKNOWN",
-            "STREAMING_COMPUTATION_TASK_STOP",
-            "STREAMING_COMPUTATION_TASK_START"
-          ],
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "StreamingSetupTask": {
-      "description": "A task which initializes part of a streaming Dataflow job.",
-      "properties": {
-        "receiveWorkPort": {
-          "description": "The TCP port on which the worker should listen for messages from other streaming computation workers.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "streamingComputationTopology": {
-          "$ref": "#/definitions/TopologyConfig",
-          "description": "The global topology of the streaming Dataflow job."
-        },
-        "workerHarnessPort": {
-          "description": "The TCP port used by the worker to communicate with the Dataflow worker harness.",
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
-    "StreamingSideInputLocation": {
-      "description": "Identifies the location of a streaming side input.",
-      "properties": {
-        "stateFamily": {
-          "description": "Identifies the state family where this side input is stored.",
-          "type": "string"
-        },
-        "tag": {
-          "description": "Identifies the particular side input within the streaming Dataflow job.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "StreamingStageLocation": {
-      "description": "Identifies the location of a streaming computation stage, for stage-to-stage communication.",
-      "properties": {
-        "streamId": {
-          "description": "Identifies the particular stream within the streaming Dataflow job.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "StreamLocation": {
-      "description": "Describes a stream of data, either as input to be processed or as output of a streaming Dataflow job.",
-      "properties": {
-        "customSourceLocation": {
-          "$ref": "#/definitions/CustomSourceLocation",
-          "description": "The stream is a custom source."
-        },
-        "pubsubLocation": {
-          "$ref": "#/definitions/PubsubLocation",
-          "description": "The stream is a pubsub stream."
-        },
-        "sideInputLocation": {
-          "$ref": "#/definitions/StreamingSideInputLocation",
-          "description": "The stream is a streaming side input."
-        },
-        "streamingStageLocation": {
-          "$ref": "#/definitions/StreamingStageLocation",
-          "description": "The stream is part of another computation within the current streaming Dataflow job."
-        }
-      },
-      "type": "object"
-    },
-    "TaskRunnerSettings": {
-      "description": "Taskrunner configuration settings.",
-      "properties": {
-        "alsologtostderr": {
-          "description": "Also send taskrunner log info to stderr?",
-          "type": "boolean"
-        },
-        "baseTaskDir": {
-          "description": "Location on the worker for task-specific subdirectories.",
-          "type": "string"
-        },
-        "baseUrl": {
-          "description": "The base URL for the taskrunner to use when accessing Google Cloud APIs. When workers access Google Cloud APIs, they logically do so via relative URLs. If this field is specified, it supplies the base URL to use for resolving these relative URLs. The normative algorithm used is defined by RFC 1808, \"Relative Uniform Resource Locators\". If not specified, the default value is \"http://www.googleapis.com/\"",
-          "type": "string"
-        },
-        "commandlinesFileName": {
-          "description": "Store preprocessing commands in this file.",
-          "type": "string"
-        },
-        "continueOnException": {
-          "description": "Do we continue taskrunner if an exception is hit?",
-          "type": "boolean"
-        },
-        "dataflowApiVersion": {
-          "description": "API version of endpoint, e.g. \"v1b3\"",
-          "type": "string"
-        },
-        "harnessCommand": {
-          "description": "Command to launch the worker harness.",
-          "type": "string"
-        },
-        "languageHint": {
-          "description": "Suggested backend language.",
-          "type": "string"
-        },
-        "logDir": {
-          "description": "Directory on the VM to store logs.",
-          "type": "string"
-        },
-        "logToSerialconsole": {
-          "description": "Send taskrunner log into to Google Compute Engine VM serial console?",
-          "type": "boolean"
-        },
-        "logUploadLocation": {
-          "description": "Indicates where to put logs. If this is not specified, the logs will not be uploaded. The supported resource type is: Google Cloud Storage: storage.googleapis.com/{bucket}/{object} bucket.storage.googleapis.com/{object}",
-          "type": "string"
-        },
-        "oauthScopes": {
-          "description": "OAuth2 scopes to be requested by the taskrunner in order to access the dataflow API.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "parallelWorkerSettings": {
-          "$ref": "#/definitions/WorkerSettings",
-          "description": "Settings to pass to the parallel worker harness."
-        },
-        "streamingWorkerMainClass": {
-          "description": "Streaming worker main class name.",
-          "type": "string"
-        },
-        "taskGroup": {
-          "description": "The UNIX group ID on the worker VM to use for tasks launched by taskrunner; e.g. \"wheel\".",
-          "type": "string"
-        },
-        "taskUser": {
-          "description": "The UNIX user ID on the worker VM to use for tasks launched by taskrunner; e.g. \"root\".",
-          "type": "string"
-        },
-        "tempStoragePrefix": {
-          "description": "The prefix of the resources the taskrunner should use for temporary storage. The supported resource type is: Google Cloud Storage: storage.googleapis.com/{bucket}/{object} bucket.storage.googleapis.com/{object}",
-          "type": "string"
-        },
-        "vmId": {
-          "description": "ID string of VM.",
-          "type": "string"
-        },
-        "workflowFileName": {
-          "description": "Store the workflow in this file.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "TopologyConfig": {
-      "description": "Global topology of the streaming Dataflow job, including all computations and their sharded locations.",
-      "properties": {
-        "computations": {
-          "description": "The computations associated with a streaming Dataflow job.",
-          "items": {
-            "$ref": "#/definitions/ComputationTopology"
-          },
-          "type": "array"
-        },
-        "dataDiskAssignments": {
-          "description": "The disks assigned to a streaming Dataflow job.",
-          "items": {
-            "$ref": "#/definitions/DataDiskAssignment"
-          },
-          "type": "array"
-        },
-        "userStageToComputationNameMap": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Maps user stage names to stable computation names.",
-          "type": "object"
-        }
-      },
-      "type": "object"
-    },
-    "WorkerPool": {
-      "description": "Describes one particular pool of Dataflow workers to be instantiated by the Dataflow service in order to perform the computations required by a job. Note that a workflow job may use multiple pools, in order to match the various computational requirements of the various stages of the job.",
-      "properties": {
-        "autoscalingSettings": {
-          "$ref": "#/definitions/AutoscalingSettings",
-          "description": "Settings for autoscaling of this WorkerPool."
-        },
-        "dataDisks": {
-          "description": "Data disks that are used by a VM in this workflow.",
-          "items": {
-            "$ref": "#/definitions/Disk"
-          },
-          "type": "array"
-        },
-        "defaultPackageSet": {
-          "description": "The default package set to install. This allows the service to select a default set of packages which are useful to worker harnesses written in a particular language.",
-          "enum": [
-            "DEFAULT_PACKAGE_SET_UNKNOWN",
-            "DEFAULT_PACKAGE_SET_NONE",
-            "DEFAULT_PACKAGE_SET_JAVA",
-            "DEFAULT_PACKAGE_SET_PYTHON"
-          ],
-          "type": "string"
-        },
-        "diskSizeGb": {
-          "description": "Size of root disk for VMs, in GB. If zero or unspecified, the service will attempt to choose a reasonable default.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "diskSourceImage": {
-          "description": "Fully qualified source image for disks.",
-          "type": "string"
-        },
-        "diskType": {
-          "description": "Type of root disk for VMs. If empty or unspecified, the service will attempt to choose a reasonable default.",
-          "type": "string"
-        },
-        "kind": {
-          "description": "The kind of the worker pool; currently only 'harness' and 'shuffle' are supported.",
-          "type": "string"
-        },
-        "machineType": {
-          "description": "Machine type (e.g. \"n1-standard-1\"). If empty or unspecified, the service will attempt to choose a reasonable default.",
-          "type": "string"
-        },
-        "metadata": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Metadata to set on the Google Compute Engine VMs.",
-          "type": "object"
-        },
-        "network": {
-          "description": "Network to which VMs will be assigned. If empty or unspecified, the service will use the network \"default\".",
-          "type": "string"
-        },
-        "numWorkers": {
-          "description": "Number of Google Compute Engine workers in this pool needed to execute the job. If zero or unspecified, the service will attempt to choose a reasonable default.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "onHostMaintenance": {
-          "description": "The action to take on host maintenance, as defined by the Google Compute Engine API.",
-          "type": "string"
-        },
-        "packages": {
-          "description": "Packages to be installed on workers.",
-          "items": {
-            "$ref": "#/definitions/Package"
-          },
-          "type": "array"
-        },
-        "poolArgs": {
-          "additionalProperties": {
-            "description": "Properties of the object. Contains field @ype with type URL."
-          },
-          "description": "Extra arguments for this worker pool.",
-          "type": "object"
-        },
-        "taskrunnerSettings": {
-          "$ref": "#/definitions/TaskRunnerSettings",
-          "description": "Settings passed through to Google Compute Engine workers when using the standard Dataflow task runner. Users should ignore this field."
-        },
-        "teardownPolicy": {
-          "description": "Sets the policy for determining when to turndown worker pool. Allowed values are: TEARDOWN_ALWAYS, TEARDOWN_ON_SUCCESS, and TEARDOWN_NEVER. TEARDOWN_ALWAYS means workers are always torn down regardless of whether the job succeeds. TEARDOWN_ON_SUCCESS means workers are torn down if the job succeeds. TEARDOWN_NEVER means the workers are never torn down. If the workers are not torn down by the service, they will continue to run and use Google Compute Engine VM resources in the user's project until they are explicitly terminated by the user. Because of this, Google recommends using the TEARDOWN_ALWAYS policy except for small, manually supervised test jobs. If unknown or unspecified, the service will attempt to choose a reasonable default.",
-          "enum": [
-            "TEARDOWN_POLICY_UNKNOWN",
-            "TEARDOWN_ALWAYS",
-            "TEARDOWN_ON_SUCCESS",
-            "TEARDOWN_NEVER"
-          ],
-          "type": "string"
-        },
-        "zone": {
-          "description": "Zone to run the worker pools in (e.g. \"us-central1-b\"). If empty or unspecified, the service will attempt to choose a reasonable default.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "WorkerSettings": {
-      "description": "Provides data to pass through to the worker harness.",
-      "properties": {
-        "baseUrl": {
-          "description": "The base URL for accessing Google Cloud APIs. When workers access Google Cloud APIs, they logically do so via relative URLs. If this field is specified, it supplies the base URL to use for resolving these relative URLs. The normative algorithm used is defined by RFC 1808, \"Relative Uniform Resource Locators\". If not specified, the default value is \"http://www.googleapis.com/\"",
-          "type": "string"
-        },
-        "reportingEnabled": {
-          "description": "Send work progress updates to service.",
-          "type": "boolean"
-        },
-        "servicePath": {
-          "description": "The Dataflow service path relative to the root URL, for example, \"dataflow/v1b3/projects\".",
-          "type": "string"
-        },
-        "shuffleServicePath": {
-          "description": "The Shuffle service path relative to the root URL, for example, \"shuffle/v1beta1\".",
-          "type": "string"
-        },
-        "tempStoragePrefix": {
-          "description": "The prefix of the resources the system should use for temporary storage. The supported resource type is: Google Cloud Storage: storage.googleapis.com/{bucket}/{object} bucket.storage.googleapis.com/{object}",
-          "type": "string"
-        },
-        "workerId": {
-          "description": "ID of the worker running this pipeline.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "WorkItem": {
-      "description": "WorkItem represents basic information about a WorkItem to be executed in the cloud.",
-      "properties": {
-        "configuration": {
-          "description": "Work item-specific configuration as an opaque blob.",
-          "type": "string"
-        },
-        "id": {
-          "description": "Identifies this WorkItem.",
-          "format": "int64",
-          "type": "string"
-        },
-        "initialReportIndex": {
-          "description": "The initial index to use when reporting the status of the WorkItem.",
-          "format": "int64",
-          "type": "string"
-        },
-        "jobId": {
-          "description": "Identifies the workflow job this WorkItem belongs to.",
-          "type": "string"
-        },
-        "leaseExpireTime": {
-          "description": "Time when the lease on this Work will expire.",
-          "type": "string"
-        },
-        "mapTask": {
-          "$ref": "#/definitions/MapTask",
-          "description": "Additional information for MapTask WorkItems."
-        },
-        "packages": {
-          "description": "Any required packages that need to be fetched in order to execute this WorkItem.",
-          "items": {
-            "$ref": "#/definitions/Package"
-          },
-          "type": "array"
-        },
-        "projectId": {
-          "description": "Identifies the cloud project this WorkItem belongs to.",
-          "type": "string"
-        },
-        "reportStatusInterval": {
-          "description": "Recommended reporting interval.",
-          "type": "string"
-        },
-        "seqMapTask": {
-          "$ref": "#/definitions/SeqMapTask",
-          "description": "Additional information for SeqMapTask WorkItems."
-        },
-        "shellTask": {
-          "$ref": "#/definitions/ShellTask",
-          "description": "Additional information for ShellTask WorkItems."
-        },
-        "sourceOperationTask": {
-          "$ref": "#/definitions/SourceOperationRequest",
-          "description": "Additional information for source operation WorkItems."
-        },
-        "streamingComputationTask": {
-          "$ref": "#/definitions/StreamingComputationTask",
-          "description": "Additional information for StreamingComputationTask WorkItems."
-        },
-        "streamingSetupTask": {
-          "$ref": "#/definitions/StreamingSetupTask",
-          "description": "Additional information for StreamingSetupTask WorkItems."
-        }
-      },
-      "type": "object"
-    },
-    "WorkItemServiceState": {
-      "description": "The Dataflow service's idea of the current state of a WorkItem being processed by a worker.",
-      "properties": {
-        "harnessData": {
-          "additionalProperties": {
-            "description": "Properties of the object."
-          },
-          "description": "Other data returned by the service, specific to the particular worker harness.",
-          "type": "object"
-        },
-        "leaseExpireTime": {
-          "description": "Time at which the current lease will expire.",
-          "type": "string"
-        },
-        "nextReportIndex": {
-          "description": "The index value to use for the next report sent by the worker. Note: If the report call fails for whatever reason, the worker should reuse this index for subsequent report attempts.",
-          "format": "int64",
-          "type": "string"
-        },
-        "reportStatusInterval": {
-          "description": "New recommended reporting interval.",
-          "type": "string"
-        },
-        "suggestedStopPoint": {
-          "$ref": "#/definitions/ApproximateProgress",
-          "description": "The progress point in the WorkItem where the Dataflow service suggests that the worker truncate the task."
-        },
-        "suggestedStopPosition": {
-          "$ref": "#/definitions/Position",
-          "description": "Obsolete, always empty."
-        }
-      },
-      "type": "object"
-    },
-    "WorkItemStatus": {
-      "description": "Conveys a worker's progress through the work described by a WorkItem.",
-      "properties": {
-        "completed": {
-          "description": "True if the WorkItem was completed (successfully or unsuccessfully).",
-          "type": "boolean"
-        },
-        "dynamicSourceSplit": {
-          "$ref": "#/definitions/DynamicSourceSplit",
-          "description": "See documentation of stop_position."
-        },
-        "errors": {
-          "description": "Specifies errors which occurred during processing. If errors are provided, and completed = true, then the WorkItem is considered to have failed.",
-          "items": {
-            "$ref": "#/definitions/Status"
-          },
-          "type": "array"
-        },
-        "metricUpdates": {
-          "description": "Worker output metrics (counters) for this WorkItem.",
-          "items": {
-            "$ref": "#/definitions/MetricUpdate"
-          },
-          "type": "array"
-        },
-        "progress": {
-          "$ref": "#/definitions/ApproximateProgress",
-          "description": "The WorkItem's approximate progress."
-        },
-        "reportIndex": {
-          "description": "The report index. When a WorkItem is leased, the lease will contain an initial report index. When a WorkItem's status is reported to the system, the report should be sent with that report index, and the response will contain the index the worker should use for the next report. Reports received with unexpected index values will be rejected by the service. In order to preserve idempotency, the worker should not alter the contents of a report, even if the worker must submit the same report multiple times before getting back a response. The worker should not submit a subsequent report until the response for the previous report had been received from the service.",
-          "format": "int64",
-          "type": "string"
-        },
-        "requestedLeaseDuration": {
-          "description": "Amount of time the worker requests for its lease.",
-          "type": "string"
-        },
-        "sourceFork": {
-          "$ref": "#/definitions/SourceFork",
-          "description": "DEPRECATED in favor of dynamic_source_split."
-        },
-        "sourceOperationResponse": {
-          "$ref": "#/definitions/SourceOperationResponse",
-          "description": "If the work item represented a SourceOperationRequest, and the work is completed, contains the result of the operation."
-        },
-        "stopPosition": {
-          "$ref": "#/definitions/Position",
-          "description": "A worker may split an active map task in two parts, \"primary\" and \"residual\", continuing to process the primary part and returning the residual part into the pool of available work. This event is called a \"dynamic split\" and is critical to the dynamic work rebalancing feature. The two obtained sub-tasks are called \"parts\" of the split. The parts, if concatenated, must represent the same input as would be read by the current task if the split did not happen. The exact way in which the original task is decomposed into the two parts is specified either as a position demarcating them (stop_position), or explicitly as two DerivedSources, if this task consumes a user-defined source type (dynamic_source_split). The \"current\" task is adjusted as a result of the split: after a task with range [A, B) sends a stop_position update at C, its range is considered to be [A, C), e.g.: * Progress should be interpreted relative to the new range, e.g. \"75% completed\" means \"75% of [A, C) completed\" * The worker should interpret proposed_stop_position relative to the new range, e.g. \"split at 68%\" should be interpreted as \"split at 68% of [A, C)\". * If the worker chooses to split again using stop_position, only stop_positions in [A, C) will be accepted. * Etc. dynamic_source_split has similar semantics: e.g., if a task with source S splits using dynamic_source_split into {P, R} (where P and R must be together equivalent to S), then subsequent progress and proposed_stop_position should be interpreted relative to P, and in a potential subsequent dynamic_source_split into {P', R'}, P' and R' must be together equivalent to P, etc."
-        },
-        "workItemId": {
-          "description": "Identifies the WorkItem.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "WriteInstruction": {
-      "description": "An instruction that writes records. Takes one input, produces no outputs.",
-      "properties": {
-        "input": {
-          "$ref": "#/definitions/InstructionInput",
-          "description": "The input."
-        },
-        "sink": {
-          "$ref": "#/definitions/Sink",
-          "description": "The sink to write to."
-        }
-      },
-      "type": "object"
-    }
-  },
-  "externalDocs": {
-    "url": "https://cloud.google.com/dataflow"
-  },
-  "host": "dataflow.googleapis.com",
-  "info": {
-    "contact": {
-      "name": "Google",
-      "url": "https://google.com"
-    },
-    "description": "Google Dataflow API.",
-    "title": "Google Dataflow API",
-    "version": "v1b3",
-    "x-apiClientRegistration": {
-      "url": "https://console.developers.google.com"
-    },
-    "x-logo": {
-      "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
-    },
-    "x-origin": {
-      "format": "google",
-      "url": "https://www.googleapis.com/discovery/v1/apis/dataflow/v1b3/rest",
-      "version": "v1"
-    },
-    "x-preferred": true,
-    "x-providerName": "googleapis.com",
-    "x-serviceName": "dataflow"
-  },
-  "parameters": {
-    "$.xgafv": {
-      "description": "V1 error format.",
-      "in": "query",
-      "name": "$.xgafv",
-      "type": "string"
-    },
-    "access_token": {
-      "description": "OAuth access token.",
-      "in": "query",
-      "name": "access_token",
-      "type": "string"
-    },
-    "alt": {
-      "default": "json",
-      "description": "Data format for response.",
-      "in": "query",
-      "name": "alt",
-      "type": "string"
-    },
-    "bearer_token": {
-      "description": "OAuth bearer token.",
-      "in": "query",
-      "name": "bearer_token",
-      "type": "string"
-    },
-    "callback": {
-      "description": "JSONP",
-      "in": "query",
-      "name": "callback",
-      "type": "string"
-    },
-    "fields": {
-      "description": "Selector specifying which fields to include in a partial response.",
-      "in": "query",
-      "name": "fields",
-      "type": "string"
-    },
-    "key": {
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "in": "query",
-      "name": "key",
-      "type": "string"
-    },
-    "oauth_token": {
-      "description": "OAuth 2.0 token for the current user.",
-      "in": "query",
-      "name": "oauth_token",
-      "type": "string"
-    },
-    "pp": {
-      "default": true,
-      "description": "Pretty-print response.",
-      "in": "query",
-      "name": "pp",
-      "type": "boolean"
-    },
-    "prettyPrint": {
-      "default": true,
-      "description": "Returns response with indentations and line breaks.",
-      "in": "query",
-      "name": "prettyPrint",
-      "type": "boolean"
-    },
-    "quotaUser": {
-      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.",
-      "in": "query",
-      "name": "quotaUser",
-      "type": "string"
-    },
-    "upload_protocol": {
-      "description": "Upload protocol for media (e.g. \"raw\", \"multipart\").",
-      "in": "query",
-      "name": "upload_protocol",
-      "type": "string"
-    },
-    "uploadType": {
-      "description": "Legacy upload protocol for media (e.g. \"media\", \"multipart\").",
-      "in": "query",
-      "name": "uploadType",
-      "type": "string"
-    }
-  },
-  "paths": {
-    "/v1b3/projects/{projectId}/jobs": {
-      "get": {
-        "description": "List the jobs of a project",
-        "operationId": "dataflow.projects.jobs.list",
-        "parameters": [
-          {
-            "description": "The project which owns the jobs.",
-            "in": "path",
-            "name": "projectId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Level of information requested in response. Default is SUMMARY.",
-            "enum": [
-              "JOB_VIEW_UNKNOWN",
-              "JOB_VIEW_SUMMARY",
-              "JOB_VIEW_ALL"
-            ],
-            "in": "query",
-            "name": "view",
-            "type": "string"
-          },
-          {
-            "description": "If there are many jobs, limit response to at most this many. The actual number of jobs returned will be the lesser of max_responses and an unspecified server-defined limit.",
-            "in": "query",
-            "name": "pageSize",
-            "type": "integer"
-          },
-          {
-            "description": "Set this to the 'next_page_token' field of a previous response to request additional results in a long list.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/ListJobsResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/userinfo.email"
-            ]
-          }
-        ],
-        "tags": [
-          "projects"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/access_token"
-        },
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/bearer_token"
-        },
-        {
-          "$ref": "#/parameters/callback"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/pp"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/upload_protocol"
-        },
-        {
-          "$ref": "#/parameters/uploadType"
-        },
-        {
-          "$ref": "#/parameters/$.xgafv"
-        }
-      ],
-      "post": {
-        "description": "Creates a dataflow job.",
-        "operationId": "dataflow.projects.jobs.create",
-        "parameters": [
-          {
-            "description": "The project which owns the job.",
-            "in": "path",
-            "name": "projectId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Level of information requested in response.",
-            "enum": [
-              "JOB_VIEW_UNKNOWN",
-              "JOB_VIEW_SUMMARY",
-              "JOB_VIEW_ALL"
-            ],
-            "in": "query",
-            "name": "view",
-            "type": "string"
-          },
-          {
-            "description": "DEPRECATED. This field is now on the Job message.",
-            "in": "query",
-            "name": "replaceJobId",
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/Job"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Job"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/userinfo.email"
-            ]
-          }
-        ],
-        "tags": [
-          "projects"
-        ]
-      }
-    },
-    "/v1b3/projects/{projectId}/jobs/{jobId}": {
-      "get": {
-        "description": "Gets the state of the specified dataflow job.",
-        "operationId": "dataflow.projects.jobs.get",
-        "parameters": [
-          {
-            "description": "The project which owns the job.",
-            "in": "path",
-            "name": "projectId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Identifies a single job.",
-            "in": "path",
-            "name": "jobId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Level of information requested in response.",
-            "enum": [
-              "JOB_VIEW_UNKNOWN",
-              "JOB_VIEW_SUMMARY",
-              "JOB_VIEW_ALL"
-            ],
-            "in": "query",
-            "name": "view",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Job"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/userinfo.email"
-            ]
-          }
-        ],
-        "tags": [
-          "projects"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/access_token"
-        },
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/bearer_token"
-        },
-        {
-          "$ref": "#/parameters/callback"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/pp"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/upload_protocol"
-        },
-        {
-          "$ref": "#/parameters/uploadType"
-        },
-        {
-          "$ref": "#/parameters/$.xgafv"
-        }
-      ],
-      "put": {
-        "description": "Updates the state of an existing dataflow job.",
-        "operationId": "dataflow.projects.jobs.update",
-        "parameters": [
-          {
-            "description": "The project which owns the job.",
-            "in": "path",
-            "name": "projectId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Identifies a single job.",
-            "in": "path",
-            "name": "jobId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/Job"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Job"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/userinfo.email"
-            ]
-          }
-        ],
-        "tags": [
-          "projects"
-        ]
-      }
-    },
-    "/v1b3/projects/{projectId}/jobs/{jobId}/messages": {
-      "get": {
-        "description": "Request the job status.",
-        "operationId": "dataflow.projects.jobs.messages.list",
-        "parameters": [
-          {
-            "description": "A project id.",
-            "in": "path",
-            "name": "projectId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The job to get messages about.",
-            "in": "path",
-            "name": "jobId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Filter to only get messages with importance >= level",
-            "enum": [
-              "JOB_MESSAGE_IMPORTANCE_UNKNOWN",
-              "JOB_MESSAGE_DEBUG",
-              "JOB_MESSAGE_DETAILED",
-              "JOB_MESSAGE_BASIC",
-              "JOB_MESSAGE_WARNING",
-              "JOB_MESSAGE_ERROR"
-            ],
-            "in": "query",
-            "name": "minimumImportance",
-            "type": "string"
-          },
-          {
-            "description": "If specified, determines the maximum number of messages to return. If unspecified, the service may choose an appropriate default, or may return an arbitrarily large number of results.",
-            "in": "query",
-            "name": "pageSize",
-            "type": "integer"
-          },
-          {
-            "description": "If supplied, this should be the value of next_page_token returned by an earlier call. This will cause the next page of results to be returned.",
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          },
-          {
-            "description": "If specified, return only messages with timestamps >= start_time. The default is the job creation time (i.e. beginning of messages).",
-            "in": "query",
-            "name": "startTime",
-            "type": "string"
-          },
-          {
-            "description": "Return only messages with timestamps < end_time. The default is now (i.e. return up to the latest messages available).",
-            "in": "query",
-            "name": "endTime",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/ListJobMessagesResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/userinfo.email"
-            ]
-          }
-        ],
-        "tags": [
-          "projects"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/access_token"
-        },
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/bearer_token"
-        },
-        {
-          "$ref": "#/parameters/callback"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/pp"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/upload_protocol"
-        },
-        {
-          "$ref": "#/parameters/uploadType"
-        },
-        {
-          "$ref": "#/parameters/$.xgafv"
-        }
-      ]
-    },
-    "/v1b3/projects/{projectId}/jobs/{jobId}/metrics": {
-      "get": {
-        "description": "Request the job status.",
-        "operationId": "dataflow.projects.jobs.getMetrics",
-        "parameters": [
-          {
-            "description": "A project id.",
-            "in": "path",
-            "name": "projectId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The job to get messages for.",
-            "in": "path",
-            "name": "jobId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Return only metric data that has changed since this time. Default is to return all information about all metrics for the job.",
-            "in": "query",
-            "name": "startTime",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/JobMetrics"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/userinfo.email"
-            ]
-          }
-        ],
-        "tags": [
-          "projects"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/access_token"
-        },
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/bearer_token"
-        },
-        {
-          "$ref": "#/parameters/callback"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/pp"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/upload_protocol"
-        },
-        {
-          "$ref": "#/parameters/uploadType"
-        },
-        {
-          "$ref": "#/parameters/$.xgafv"
-        }
-      ]
-    },
-    "/v1b3/projects/{projectId}/jobs/{jobId}/workItems:lease": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/access_token"
-        },
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/bearer_token"
-        },
-        {
-          "$ref": "#/parameters/callback"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/pp"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/upload_protocol"
-        },
-        {
-          "$ref": "#/parameters/uploadType"
-        },
-        {
-          "$ref": "#/parameters/$.xgafv"
-        }
-      ],
-      "post": {
-        "description": "Leases a dataflow WorkItem to run.",
-        "operationId": "dataflow.projects.jobs.workItems.lease",
-        "parameters": [
-          {
-            "description": "Identifies the project this worker belongs to.",
-            "in": "path",
-            "name": "projectId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Identifies the workflow job this worker belongs to.",
-            "in": "path",
-            "name": "jobId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/LeaseWorkItemRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/LeaseWorkItemResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/userinfo.email"
-            ]
-          }
-        ],
-        "tags": [
-          "projects"
-        ]
-      }
-    },
-    "/v1b3/projects/{projectId}/jobs/{jobId}/workItems:reportStatus": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/access_token"
-        },
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/bearer_token"
-        },
-        {
-          "$ref": "#/parameters/callback"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/pp"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/upload_protocol"
-        },
-        {
-          "$ref": "#/parameters/uploadType"
-        },
-        {
-          "$ref": "#/parameters/$.xgafv"
-        }
-      ],
-      "post": {
-        "description": "Reports the status of dataflow WorkItems leased by a worker.",
-        "operationId": "dataflow.projects.jobs.workItems.reportStatus",
-        "parameters": [
-          {
-            "description": "The project which owns the WorkItem's job.",
-            "in": "path",
-            "name": "projectId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The job which the WorkItem is part of.",
-            "in": "path",
-            "name": "jobId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/ReportWorkItemStatusRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/ReportWorkItemStatusResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/cloud-platform",
-              "https://www.googleapis.com/auth/userinfo.email"
-            ]
-          }
-        ],
-        "tags": [
-          "projects"
-        ]
-      }
-    }
-  },
-  "schemes": [
-    "https"
-  ],
-  "securityDefinitions": {
-    "Oauth2": {
-      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
-      "description": "Oauth 2.0 authentication",
-      "flow": "implicit",
-      "scopes": {
-        "https://www.googleapis.com/auth/cloud-platform": "View and manage your data across Google Cloud Platform services",
-        "https://www.googleapis.com/auth/userinfo.email": "View your email address"
-      },
-      "type": "oauth2"
-    }
-  },
-  "swagger": "2.0"
-}
+basePath: /
+definitions:
+  ApproximateProgress:
+    description: A progress measurement of a WorkItem by a worker.
+    properties:
+      percentComplete:
+        description: 'Completion as percentage of the work, from 0.0 (beginning, nothing complete), to 1.0 (end of the work range, entire WorkItem complete).'
+        format: float
+        type: number
+      position:
+        $ref: '#/definitions/Position'
+        description: A Position within the work to represent a progress.
+      remainingTime:
+        description: Completion as an estimated time remaining.
+        type: string
+    type: object
+  AutoscalingSettings:
+    description: Settings for WorkerPool autoscaling.
+    properties:
+      algorithm:
+        description: The algorithm to use for autoscaling.
+        enum:
+          - AUTOSCALING_ALGORITHM_UNKNOWN
+          - AUTOSCALING_ALGORITHM_NONE
+          - AUTOSCALING_ALGORITHM_BASIC
+        type: string
+      maxNumWorkers:
+        description: The maximum number of workers to cap scaling at.
+        format: int32
+        type: integer
+    type: object
+  ComputationTopology:
+    description: All configuration data for a particular Computation.
+    properties:
+      computationId:
+        description: The ID of the computation.
+        type: string
+      inputs:
+        description: The inputs to the computation.
+        items:
+          $ref: '#/definitions/StreamLocation'
+        type: array
+      keyRanges:
+        description: The key ranges processed by the computation.
+        items:
+          $ref: '#/definitions/KeyRangeLocation'
+        type: array
+      outputs:
+        description: The outputs from the computation.
+        items:
+          $ref: '#/definitions/StreamLocation'
+        type: array
+      stateFamilies:
+        description: The state family values.
+        items:
+          $ref: '#/definitions/StateFamilyConfig'
+        type: array
+      systemStageName:
+        description: The system stage name.
+        type: string
+      userStageName:
+        description: The user stage name.
+        type: string
+    type: object
+  ConcatPosition:
+    description: A position that encapsulates an inner position and an index for the inner position. A ConcatPosition can be used by a reader of a source that encapsulates a set of other sources.
+    properties:
+      index:
+        description: Index of the inner source.
+        format: int32
+        type: integer
+      position:
+        $ref: '#/definitions/Position'
+        description: Position within the inner source.
+    type: object
+  CustomSourceLocation:
+    description: Identifies the location of a custom souce.
+    properties:
+      stateful:
+        description: Whether this source is stateful.
+        type: boolean
+    type: object
+  DataDiskAssignment:
+    description: Data disk assignment for a given VM instance.
+    properties:
+      dataDisks:
+        description: "Mounted data disks. The order is important a data disk's 0-based index in this list defines which persistent directory the disk is mounted to, for example the list of { \"myproject-1014-104817-4c2-harness-0-disk-0\" }, { \"myproject-1014-104817-4c2-harness-0-disk-1\" }."
+        items:
+          type: string
+        type: array
+      vmInstance:
+        description: 'VM instance name the data disks mounted to, for example "myproject-1014-104817-4c2-harness-0".'
+        type: string
+    type: object
+  DerivedSource:
+    description: 'Specification of one of the bundles produced as a result of splitting a Source (e.g. when executing a SourceSplitRequest, or when splitting an active task using WorkItemStatus.dynamic_source_split), relative to the source being split.'
+    properties:
+      derivationMode:
+        description: What source to base the produced source on (if any).
+        enum:
+          - SOURCE_DERIVATION_MODE_UNKNOWN
+          - SOURCE_DERIVATION_MODE_INDEPENDENT
+          - SOURCE_DERIVATION_MODE_CHILD_OF_CURRENT
+          - SOURCE_DERIVATION_MODE_SIBLING_OF_CURRENT
+        type: string
+      source:
+        $ref: '#/definitions/Source'
+        description: Specification of the source.
+    type: object
+  Disk:
+    description: Describes the data disk used by a workflow job.
+    properties:
+      diskType:
+        description: >-
+          Disk storage type, as defined by Google Compute Engine. This must be
+          a disk type appropriate to the project and zone in which the workers
+          will run. If unknown or unspecified, the service will attempt to choose
+          a reasonable default. For example, the standard persistent disk type is
+          a resource name typically ending in "pd-standard". If SSD persistent
+          disks are available, the resource name typically ends with "pd-ssd".
+          The actual valid values are defined the Google Compute Engine API, not
+          by the Dataflow API; consult the Google Compute Engine documentation
+          for more information about determining the set of available disk types
+          for a particular project and zone. Google Compute Engine Disk types are
+          local to a particular project in a particular zone, and so the resource
+          name will typically look something like this:
+          compute.googleapis.com/projects/
+
+          /zones//diskTypes/pd-standard
+        type: string
+      mountPoint:
+        description: Directory in a VM where disk is mounted.
+        type: string
+      sizeGb:
+        description: 'Size of disk in GB. If zero or unspecified, the service will attempt to choose a reasonable default.'
+        format: int32
+        type: integer
+    type: object
+  DynamicSourceSplit:
+    description: "When a task splits using WorkItemStatus.dynamic_source_split, this message describes the two parts of the split relative to the description of the current task's input."
+    properties:
+      primary:
+        $ref: '#/definitions/DerivedSource'
+        description: Primary part (continued to be processed by worker). Specified relative to the previously-current source. Becomes current.
+      residual:
+        $ref: '#/definitions/DerivedSource'
+        description: Residual part (returned to the pool of work). Specified relative to the previously-current source.
+    type: object
+  Environment:
+    description: Describes the environment in which a Dataflow Job runs.
+    properties:
+      clusterManagerApiService:
+        description: 'The type of cluster manager API to use. If unknown or unspecified, the service will attempt to choose a reasonable default. This should be in the form of the API service name, e.g. "compute.googleapis.com".'
+        type: string
+      dataset:
+        description: 'The dataset for the current project where various workflow related tables are stored. The supported resource type is: Google BigQuery: bigquery.googleapis.com/{dataset}'
+        type: string
+      experiments:
+        description: The list of experiments to enable.
+        items:
+          type: string
+        type: array
+      internalExperiments:
+        additionalProperties:
+          description: Properties of the object. Contains field @ype with type URL.
+        description: Experimental settings.
+        type: object
+      sdkPipelineOptions:
+        additionalProperties:
+          description: Properties of the object.
+        description: The Dataflow SDK pipeline options specified by the user. These options are passed through the service and are used to recreate the SDK pipeline options on the worker in a language agnostic and platform independent way.
+        type: object
+      tempStoragePrefix:
+        description: 'The prefix of the resources the system should use for temporary storage. The system will append the suffix "/temp-{JOBNAME} to this resource prefix, where {JOBNAME} is the value of the job_name field. The resulting bucket and object prefix is used as the prefix of the resources used to store temporary data needed during the job execution. NOTE: This will override the value in taskrunner_settings. The supported resource type is: Google Cloud Storage: storage.googleapis.com/{bucket}/{object} bucket.storage.googleapis.com/{object}'
+        type: string
+      userAgent:
+        additionalProperties:
+          description: Properties of the object.
+        description: A description of the process that generated the request.
+        type: object
+      version:
+        additionalProperties:
+          description: Properties of the object.
+        description: A structure describing which components and their versions of the service are required in order to run the job.
+        type: object
+      workerPools:
+        description: 'Worker pools. At least one "harness" worker pool must be specified in order for the job to have workers.'
+        items:
+          $ref: '#/definitions/WorkerPool'
+        type: array
+    type: object
+  FlattenInstruction:
+    description: An instruction that copies its inputs (zero or more) to its (single) output.
+    properties:
+      inputs:
+        description: Describes the inputs to the flatten instruction.
+        items:
+          $ref: '#/definitions/InstructionInput'
+        type: array
+    type: object
+  InstructionInput:
+    description: 'An input of an instruction, as a reference to an output of a producer instruction.'
+    properties:
+      outputNum:
+        description: The output index (origin zero) within the producer.
+        format: int32
+        type: integer
+      producerInstructionIndex:
+        description: "The index (origin zero) of the parallel instruction that produces the output to be consumed by this input. This index is relative to the list of instructions in this input's instruction's containing MapTask."
+        format: int32
+        type: integer
+    type: object
+  InstructionOutput:
+    description: An output of an instruction.
+    properties:
+      codec:
+        additionalProperties:
+          description: Properties of the object.
+        description: The codec to use to encode data being written via this output.
+        type: object
+      name:
+        description: The user-provided name of this output.
+        type: string
+      systemName:
+        description: System-defined name of this output. Unique across the workflow.
+        type: string
+    type: object
+  Job:
+    description: Defines a job to be run by the Dataflow service.
+    properties:
+      clientRequestId:
+        description: "Client's unique identifier of the job, re-used by SDK across retried attempts. If this field is set, the service will ensure its uniqueness. That is, the request to create a job will fail if the service has knowledge of a previously submitted job with the same client's id and job name. The caller may, for example, use this field to ensure idempotence of job creation across retried attempts to create a job. By default, the field is empty and, in that case, the service ignores it."
+        type: string
+      createTime:
+        description: 'Timestamp when job was initially created. Immutable, set by the Dataflow service.'
+        type: string
+      currentState:
+        description: 'The current state of the job. Jobs are created in the JOB_STATE_STOPPED state unless otherwise specified. A job in the JOB_STATE_RUNNING state may asynchronously enter a terminal state. Once a job has reached a terminal state, no further state updates may be made. This field may be mutated by the Dataflow service; callers cannot mutate it.'
+        enum:
+          - JOB_STATE_UNKNOWN
+          - JOB_STATE_STOPPED
+          - JOB_STATE_RUNNING
+          - JOB_STATE_DONE
+          - JOB_STATE_FAILED
+          - JOB_STATE_CANCELLED
+          - JOB_STATE_UPDATED
+        type: string
+      currentStateTime:
+        description: The timestamp associated with the current state.
+        type: string
+      environment:
+        $ref: '#/definitions/Environment'
+        description: Environment for the job.
+      executionInfo:
+        $ref: '#/definitions/JobExecutionInfo'
+        description: Information about how the Dataflow service will actually run the job.
+      id:
+        description: 'The unique ID of this job. This field is set by the Dataflow service when the Job is created, and is immutable for the life of the Job.'
+        type: string
+      name:
+        description: 'The user-specified Dataflow job name. Only one Job with a given name may exist in a project at any given time. If a caller attempts to create a Job with the same name as an already-existing Job, the attempt will return the existing Job. The name must match the regular expression [a-z]([-a-z0-9]{0,38}[a-z0-9])?'
+        type: string
+      projectId:
+        description: The project which owns the job.
+        type: string
+      replaceJobId:
+        description: 'If this job is an update of an existing job, this field will be the ID of the job it replaced. When sending a CreateJobRequest, you can update a job by specifying it here. The job named here will be stopped, and its intermediate state transferred to this job.'
+        type: string
+      replacedByJobId:
+        description: 'If another job is an update of this job (and thus, this job is in JOB_STATE_UPDATED), this field will contain the ID of that job.'
+        type: string
+      requestedState:
+        description: "The job's requested state. UpdateJob may be used to switch between the JOB_STATE_STOPPED and JOB_STATE_RUNNING states, by setting requested_state. UpdateJob may also be used to directly set a job's requested state to JOB_STATE_CANCELLED or JOB_STATE_DONE, irrevocably terminating the job if it has not already reached a terminal state."
+        enum:
+          - JOB_STATE_UNKNOWN
+          - JOB_STATE_STOPPED
+          - JOB_STATE_RUNNING
+          - JOB_STATE_DONE
+          - JOB_STATE_FAILED
+          - JOB_STATE_CANCELLED
+          - JOB_STATE_UPDATED
+        type: string
+      steps:
+        description: The top-level steps that constitute the entire job.
+        items:
+          $ref: '#/definitions/Step'
+        type: array
+      tempFiles:
+        description: 'A set of files the system should be aware of that are used for temporary storage. These temporary files will be removed on job completion. No duplicates are allowed. No file patterns are supported. The supported files are: Google Cloud Storage: storage.googleapis.com/{bucket}/{object} bucket.storage.googleapis.com/{object}'
+        items:
+          type: string
+        type: array
+      transformNameMapping:
+        additionalProperties:
+          type: string
+        description: Map of transform name prefixes of the job to be replaced to the corresponding name prefixes of the new job.
+        type: object
+      type:
+        description: The type of dataflow job.
+        enum:
+          - JOB_TYPE_UNKNOWN
+          - JOB_TYPE_BATCH
+          - JOB_TYPE_STREAMING
+        type: string
+    type: object
+  JobExecutionInfo:
+    description: Additional information about how a Dataflow job will be executed which isn’t contained in the submitted job.
+    properties:
+      stages:
+        additionalProperties:
+          $ref: '#/definitions/JobExecutionStageInfo'
+        description: A mapping from each stage to the information about that stage.
+        type: object
+    type: object
+  JobExecutionStageInfo:
+    description: Contains information about how a particular google.dataflow.v1beta3.Step will be executed.
+    properties:
+      stepName:
+        description: 'The steps associated with the execution stage. Note that stages may have several steps, and that a given step might be run by more than one stage.'
+        items:
+          type: string
+        type: array
+    type: object
+  JobMessage:
+    description: A particular message pertaining to a Dataflow job.
+    properties:
+      id:
+        description: Identifies the message. This is automatically generated by the service; the caller should treat it as an opaque string.
+        type: string
+      messageImportance:
+        description: Importance level of the message.
+        enum:
+          - JOB_MESSAGE_IMPORTANCE_UNKNOWN
+          - JOB_MESSAGE_DEBUG
+          - JOB_MESSAGE_DETAILED
+          - JOB_MESSAGE_BASIC
+          - JOB_MESSAGE_WARNING
+          - JOB_MESSAGE_ERROR
+        type: string
+      messageText:
+        description: The text of the message.
+        type: string
+      time:
+        description: The timestamp of the message.
+        type: string
+    type: object
+  JobMetrics:
+    description: JobMetrics contains a collection of metrics descibing the detailed progress of a Dataflow job. Metrics correspond to user-defined and system-defined metrics in the job. This resource captures only the most recent values of each metric; time-series data can be queried for them (under the same metric names) from Cloud Monitoring.
+    properties:
+      metricTime:
+        description: Timestamp as of which metric values are current.
+        type: string
+      metrics:
+        description: All metrics for this job.
+        items:
+          $ref: '#/definitions/MetricUpdate'
+        type: array
+    type: object
+  KeyRangeDataDiskAssignment:
+    description: Data disk assignment information for a specific key-range of a sharded computation. Currently we only support UTF-8 character splits to simplify encoding into JSON.
+    properties:
+      dataDisk:
+        description: 'The name of the data disk where data for this range is stored. This name is local to the Google Cloud Platform project and uniquely identifies the disk within that project, for example "myproject-1014-104817-4c2-harness-0-disk-1".'
+        type: string
+      end:
+        description: The end (exclusive) of the key range.
+        type: string
+      start:
+        description: The start (inclusive) of the key range.
+        type: string
+    type: object
+  KeyRangeLocation:
+    description: Location information for a specific key-range of a sharded computation. Currently we only support UTF-8 character splits to simplify encoding into JSON.
+    properties:
+      dataDisk:
+        description: 'The name of the data disk where data for this range is stored. This name is local to the Google Cloud Platform project and uniquely identifies the disk within that project, for example "myproject-1014-104817-4c2-harness-0-disk-1".'
+        type: string
+      deliveryEndpoint:
+        description: The physical location of this range assignment to be used for streaming computation cross-worker message delivery.
+        type: string
+      end:
+        description: The end (exclusive) of the key range.
+        type: string
+      persistentDirectory:
+        description: 'The location of the persistent state for this range, as a persistent directory in the worker local filesystem.'
+        type: string
+      start:
+        description: The start (inclusive) of the key range.
+        type: string
+    type: object
+  LeaseWorkItemRequest:
+    description: Request to lease WorkItems.
+    properties:
+      currentWorkerTime:
+        description: The current timestamp at the worker.
+        type: string
+      requestedLeaseDuration:
+        description: The initial lease period.
+        type: string
+      workItemTypes:
+        description: Filter for WorkItem type.
+        items:
+          type: string
+        type: array
+      workerCapabilities:
+        description: Worker capabilities. WorkItems might be limited to workers with specific capabilities.
+        items:
+          type: string
+        type: array
+      workerId:
+        description: Identifies the worker leasing work -- typically the ID of the virtual machine running the worker.
+        type: string
+    type: object
+  LeaseWorkItemResponse:
+    description: Response to a request to lease WorkItems.
+    properties:
+      workItems:
+        description: A list of the leased WorkItems.
+        items:
+          $ref: '#/definitions/WorkItem'
+        type: array
+    type: object
+  ListJobMessagesResponse:
+    description: Response to a request to list job messages.
+    properties:
+      jobMessages:
+        description: Messages in ascending timestamp order.
+        items:
+          $ref: '#/definitions/JobMessage'
+        type: array
+      nextPageToken:
+        description: The token to obtain the next page of results if there are more.
+        type: string
+    type: object
+  ListJobsResponse:
+    description: 'Response to a request to list Dataflow jobs. This may be a partial response, depending on the page size in the ListJobsRequest.'
+    properties:
+      jobs:
+        description: A subset of the requested job information.
+        items:
+          $ref: '#/definitions/Job'
+        type: array
+      nextPageToken:
+        description: Set if there may be more results than fit in this response.
+        type: string
+    type: object
+  MapTask:
+    description: "MapTask consists of an ordered set of instructions, each of which describes one particular low-level operation for the worker to perform in order to accomplish the MapTask's WorkItem. Each instruction must appear in the list before any instructions which depends on its output."
+    properties:
+      instructions:
+        description: The instructions in the MapTask.
+        items:
+          $ref: '#/definitions/ParallelInstruction'
+        type: array
+      stageName:
+        description: System-defined name of the stage containing this MapTask. Unique across the workflow.
+        type: string
+      systemName:
+        description: System-defined name of this MapTask. Unique across the workflow.
+        type: string
+    type: object
+  MetricStructuredName:
+    description: 'Identifies a metric, by describing the source which generated the metric.'
+    properties:
+      context:
+        additionalProperties:
+          type: string
+        description: >-
+          Zero or more labeled fields which identify the part of the job this
+          metric is associated with, such as the name of a step or collection.
+          For example, built-in counters associated with steps will have
+          context['step'] = . Counters associated with PCollections in the SDK
+          will have context['pcollection'] =
+
+          .
+        type: object
+      name:
+        description: Worker-defined metric name.
+        type: string
+      origin:
+        description: 'Origin (namespace) of metric name. May be blank for user-define metrics; will be "dataflow" for metrics defined by the Dataflow service or SDK.'
+        type: string
+    type: object
+  MetricUpdate:
+    description: Describes the state of a metric.
+    properties:
+      cumulative:
+        description: 'True if this metric is reported as the total cumulative aggregate value accumulated since the worker started working on this WorkItem. By default this is false, indicating that this metric is reported as a delta that is not associated with any WorkItem.'
+        type: boolean
+      internal:
+        description: Worker-computed aggregate value for internal use by the Dataflow service.
+      kind:
+        description: 'Metric aggregation kind. The possible metric aggregation kinds are "Sum", "Max", "Min", "Mean", "Set", "And", and "Or". The specified aggregation kind is case-insensitive. If omitted, this is not an aggregated value but instead a single metric sample value.'
+        type: string
+      meanCount:
+        description: 'Worker-computed aggregate value for the "Mean" aggregation kind. This holds the count of the aggregated values and is used in combination with mean_sum above to obtain the actual mean aggregate value. The only possible value type is Long.'
+      meanSum:
+        description: 'Worker-computed aggregate value for the "Mean" aggregation kind. This holds the sum of the aggregated values and is used in combination with mean_count below to obtain the actual mean aggregate value. The only possible value types are Long and Double.'
+      name:
+        $ref: '#/definitions/MetricStructuredName'
+        description: Name of the metric.
+      scalar:
+        description: 'Worker-computed aggregate value for aggregation kinds "Sum", "Max", "Min", "And", and "Or". The possible value types are Long, Double, and Boolean.'
+      set:
+        description: "Worker-computed aggregate value for the \"Set\" aggregation kind. The only possible value type is a list of Values whose type can be Long, Double, or String, according to the metric's type. All Values in the list must be of the same type."
+      updateTime:
+        description: Timestamp associated with the metric value. Optional when workers are reporting work progress; it will be filled in responses from the metrics API.
+        type: string
+    type: object
+  MountedDataDisk:
+    description: Describes mounted data disk.
+    properties:
+      dataDisk:
+        description: 'The name of the data disk. This name is local to the Google Cloud Platform project and uniquely identifies the disk within that project, for example "myproject-1014-104817-4c2-harness-0-disk-1".'
+        type: string
+    type: object
+  MultiOutputInfo:
+    description: Information about an output of a multi-output DoFn.
+    properties:
+      tag:
+        description: The id of the tag the user code will emit to this output by; this should correspond to the tag of some SideInputInfo.
+        type: string
+    type: object
+  Package:
+    description: "Packages that need to be installed in order for a worker to run the steps of the Dataflow job which will be assigned to its worker pool. This is the mechanism by which the SDK causes code to be loaded onto the workers. For example, the Dataflow Java SDK might use this to install jars containing the user's code and all of the various dependencies (libraries, data files, etc) required in order for that code to run."
+    properties:
+      location:
+        description: 'The resource to read the package from. The supported resource type is: Google Cloud Storage: storage.googleapis.com/{bucket} bucket.storage.googleapis.com/'
+        type: string
+      name:
+        description: The name of the package.
+        type: string
+    type: object
+  ParDoInstruction:
+    description: 'An instruction that does a ParDo operation. Takes one main input and zero or more side inputs, and produces zero or more outputs. Runs user code.'
+    properties:
+      input:
+        $ref: '#/definitions/InstructionInput'
+        description: The input.
+      multiOutputInfos:
+        description: 'Information about each of the outputs, if user_fn is a MultiDoFn.'
+        items:
+          $ref: '#/definitions/MultiOutputInfo'
+        type: array
+      numOutputs:
+        description: The number of outputs.
+        format: int32
+        type: integer
+      sideInputs:
+        description: Zero or more side inputs.
+        items:
+          $ref: '#/definitions/SideInputInfo'
+        type: array
+      userFn:
+        additionalProperties:
+          description: Properties of the object.
+        description: The user function to invoke.
+        type: object
+    type: object
+  ParallelInstruction:
+    description: Describes a particular operation comprising a MapTask.
+    properties:
+      flatten:
+        $ref: '#/definitions/FlattenInstruction'
+        description: Additional information for Flatten instructions.
+      name:
+        description: User-provided name of this operation.
+        type: string
+      outputs:
+        description: Describes the outputs of the instruction.
+        items:
+          $ref: '#/definitions/InstructionOutput'
+        type: array
+      parDo:
+        $ref: '#/definitions/ParDoInstruction'
+        description: Additional information for ParDo instructions.
+      partialGroupByKey:
+        $ref: '#/definitions/PartialGroupByKeyInstruction'
+        description: Additional information for PartialGroupByKey instructions.
+      read:
+        $ref: '#/definitions/ReadInstruction'
+        description: Additional information for Read instructions.
+      systemName:
+        description: System-defined name of this operation. Unique across the workflow.
+        type: string
+      write:
+        $ref: '#/definitions/WriteInstruction'
+        description: Additional information for Write instructions.
+    type: object
+  PartialGroupByKeyInstruction:
+    description: An instruction that does a partial group-by-key. One input and one output.
+    properties:
+      input:
+        $ref: '#/definitions/InstructionInput'
+        description: Describes the input to the partial group-by-key instruction.
+      inputElementCodec:
+        additionalProperties:
+          description: Properties of the object.
+        description: The codec to use for interpreting an element in the input PTable.
+        type: object
+      valueCombiningFn:
+        additionalProperties:
+          description: Properties of the object.
+        description: The value combining function to invoke.
+        type: object
+    type: object
+  Position:
+    description: 'Position defines a position within a collection of data. The value can be either the end position, a key (used with ordered collections), a byte offset, or a record index.'
+    properties:
+      byteOffset:
+        description: Position is a byte offset.
+        format: int64
+        type: string
+      concatPosition:
+        $ref: '#/definitions/ConcatPosition'
+        description: CloudPosition is a concat position.
+      end:
+        description: Position is past all other positions. Also useful for the end position of an unbounded range.
+        type: boolean
+      key:
+        description: 'Position is a string key, ordered lexicographically.'
+        type: string
+      recordIndex:
+        description: Position is a record index.
+        format: int64
+        type: string
+      shufflePosition:
+        description: CloudPosition is a base64 encoded BatchShufflePosition (with FIXED sharding).
+        type: string
+    type: object
+  PubsubLocation:
+    description: Identifies a pubsub location to use for transferring data into or out of a streaming Dataflow job.
+    properties:
+      dropLateData:
+        description: Indicates whether the pipeline allows late-arriving data.
+        type: boolean
+      idLabel:
+        description: 'If set, contains a pubsub label from which to extract record ids. If left empty, record deduplication will be strictly best effort.'
+        type: string
+      subscription:
+        description: >-
+          A pubsub subscription, in the form of
+          "pubsub.googleapis.com/subscriptions/
+
+          /"
+        type: string
+      timestampLabel:
+        description: 'If set, contains a pubsub label from which to extract record timestamps. If left empty, record timestamps will be generated upon arrival.'
+        type: string
+      topic:
+        description: |-
+          A pubsub topic, in the form of "pubsub.googleapis.com/topics/
+          /"
+        type: string
+      trackingSubscription:
+        description: 'If set, specifies the pubsub subscription that will be used for tracking custom time timestamps for watermark estimation.'
+        type: string
+    type: object
+  ReadInstruction:
+    description: 'An instruction that reads records. Takes no inputs, produces one output.'
+    properties:
+      source:
+        $ref: '#/definitions/Source'
+        description: The source to read from.
+    type: object
+  ReportWorkItemStatusRequest:
+    description: Request to report the status of WorkItems.
+    properties:
+      currentWorkerTime:
+        description: The current timestamp at the worker.
+        type: string
+      workItemStatuses:
+        description: 'The order is unimportant, except that the order of the WorkItemServiceState messages in the ReportWorkItemStatusResponse corresponds to the order of WorkItemStatus messages here.'
+        items:
+          $ref: '#/definitions/WorkItemStatus'
+        type: array
+      workerId:
+        description: 'The ID of the worker reporting the WorkItem status. If this does not match the ID of the worker which the Dataflow service believes currently has the lease on the WorkItem, the report will be dropped (with an error response).'
+        type: string
+    type: object
+  ReportWorkItemStatusResponse:
+    description: Response from a request to report the status of WorkItems.
+    properties:
+      workItemServiceStates:
+        description: 'A set of messages indicating the service-side state for each WorkItem whose status was reported, in the same order as the WorkItemStatus messages in the ReportWorkItemStatusRequest which resulting in this response.'
+        items:
+          $ref: '#/definitions/WorkItemServiceState'
+        type: array
+    type: object
+  SeqMapTask:
+    description: Describes a particular function to invoke.
+    properties:
+      inputs:
+        description: Information about each of the inputs.
+        items:
+          $ref: '#/definitions/SideInputInfo'
+        type: array
+      name:
+        description: The user-provided name of the SeqDo operation.
+        type: string
+      outputInfos:
+        description: Information about each of the outputs.
+        items:
+          $ref: '#/definitions/SeqMapTaskOutputInfo'
+        type: array
+      stageName:
+        description: System-defined name of the stage containing the SeqDo operation. Unique across the workflow.
+        type: string
+      systemName:
+        description: System-defined name of the SeqDo operation. Unique across the workflow.
+        type: string
+      userFn:
+        additionalProperties:
+          description: Properties of the object.
+        description: The user function to invoke.
+        type: object
+    type: object
+  SeqMapTaskOutputInfo:
+    description: Information about an output of a SeqMapTask.
+    properties:
+      sink:
+        $ref: '#/definitions/Sink'
+        description: The sink to write the output value to.
+      tag:
+        description: The id of the TupleTag the user code will tag the output value by.
+        type: string
+    type: object
+  ShellTask:
+    description: A task which consists of a shell command for the worker to execute.
+    properties:
+      command:
+        description: The shell command to run.
+        type: string
+      exitCode:
+        description: Exit code for the task.
+        format: int32
+        type: integer
+    type: object
+  SideInputInfo:
+    description: Information about a side input of a DoFn or an input of a SeqDoFn.
+    properties:
+      kind:
+        additionalProperties:
+          description: Properties of the object.
+        description: How to interpret the source element(s) as a side input value.
+        type: object
+      sources:
+        description: 'The source(s) to read element(s) from to get the value of this side input. If more than one source, then the elements are taken from the sources, in the specified order if order matters. At least one source is required.'
+        items:
+          $ref: '#/definitions/Source'
+        type: array
+      tag:
+        description: The id of the tag the user code will access this side input by; this should correspond to the tag of some MultiOutputInfo.
+        type: string
+    type: object
+  Sink:
+    description: A sink that records can be encoded and written to.
+    properties:
+      codec:
+        additionalProperties:
+          description: Properties of the object.
+        description: The codec to use to encode data written to the sink.
+        type: object
+      spec:
+        additionalProperties:
+          description: Properties of the object.
+        description: 'The sink to write to, plus its parameters.'
+        type: object
+    type: object
+  Source:
+    description: A source that records can be read and decoded from.
+    properties:
+      baseSpecs:
+        description: 'While splitting, sources may specify the produced bundles as differences against another source, in order to save backend-side memory and allow bigger jobs. For details, see SourceSplitRequest. To support this use case, the full set of parameters of the source is logically obtained by taking the latest explicitly specified value of each parameter in the order: base_specs (later items win), spec (overrides anything in base_specs).'
+        items:
+          additionalProperties:
+            description: Properties of the object.
+          type: object
+        type: array
+      codec:
+        additionalProperties:
+          description: Properties of the object.
+        description: The codec to use to decode data read from the source.
+        type: object
+      doesNotNeedSplitting:
+        description: "Setting this value to true hints to the framework that the source doesn't need splitting, and using SourceSplitRequest on it would yield SOURCE_SPLIT_OUTCOME_USE_CURRENT. E.g. a file splitter may set this to true when splitting a single file into a set of byte ranges of appropriate size, and set this to false when splitting a filepattern into individual files. However, for efficiency, a file splitter may decide to produce file subranges directly from the filepattern to avoid a splitting round-trip. See SourceSplitRequest for an overview of the splitting process. This field is meaningful only in the Source objects populated by the user (e.g. when filling in a DerivedSource). Source objects supplied by the framework to the user don't have this field populated."
+        type: boolean
+      metadata:
+        $ref: '#/definitions/SourceMetadata'
+        description: "Optionally, metadata for this source can be supplied right away, avoiding a SourceGetMetadataOperation roundtrip (see SourceOperationRequest). This field is meaningful only in the Source objects populated by the user (e.g. when filling in a DerivedSource). Source objects supplied by the framework to the user don't have this field populated."
+      spec:
+        additionalProperties:
+          description: Properties of the object.
+        description: 'The source to read from, plus its parameters.'
+        type: object
+    type: object
+  SourceFork:
+    description: DEPRECATED in favor of DynamicSourceSplit.
+    properties:
+      primary:
+        $ref: '#/definitions/SourceSplitShard'
+        description: DEPRECATED
+      primarySource:
+        $ref: '#/definitions/DerivedSource'
+        description: DEPRECATED
+      residual:
+        $ref: '#/definitions/SourceSplitShard'
+        description: DEPRECATED
+      residualSource:
+        $ref: '#/definitions/DerivedSource'
+        description: DEPRECATED
+    type: object
+  SourceGetMetadataRequest:
+    description: A request to compute the SourceMetadata of a Source.
+    properties:
+      source:
+        $ref: '#/definitions/Source'
+        description: Specification of the source whose metadata should be computed.
+    type: object
+  SourceGetMetadataResponse:
+    description: The result of a SourceGetMetadataOperation.
+    properties:
+      metadata:
+        $ref: '#/definitions/SourceMetadata'
+        description: The computed metadata.
+    type: object
+  SourceMetadata:
+    description: 'Metadata about a Source useful for automatically optimizing and tuning the pipeline, etc.'
+    properties:
+      estimatedSizeBytes:
+        description: 'An estimate of the total size (in bytes) of the data that would be read from this source. This estimate is in terms of external storage size, before any decompression or other processing done by the reader.'
+        format: int64
+        type: string
+      infinite:
+        description: Specifies that the size of this source is known to be infinite (this is a streaming source).
+        type: boolean
+      producesSortedKeys:
+        description: Whether this source is known to produce key/value pairs with the (encoded) keys in lexicographically sorted order.
+        type: boolean
+    type: object
+  SourceOperationRequest:
+    description: A work item that represents the different operations that can be performed on a user-defined Source specification.
+    properties:
+      getMetadata:
+        $ref: '#/definitions/SourceGetMetadataRequest'
+        description: Information about a request to get metadata about a source.
+      split:
+        $ref: '#/definitions/SourceSplitRequest'
+        description: Information about a request to split a source.
+    type: object
+  SourceOperationResponse:
+    description: 'The result of a SourceOperationRequest, specified in ReportWorkItemStatusRequest.source_operation when the work item is completed.'
+    properties:
+      getMetadata:
+        $ref: '#/definitions/SourceGetMetadataResponse'
+        description: A response to a request to get metadata about a source.
+      split:
+        $ref: '#/definitions/SourceSplitResponse'
+        description: A response to a request to split a source.
+    type: object
+  SourceSplitOptions:
+    description: Hints for splitting a Source into bundles (parts for parallel processing) using SourceSplitRequest.
+    properties:
+      desiredBundleSizeBytes:
+        description: The source should be split into a set of bundles where the estimated size of each is approximately this many bytes.
+        format: int64
+        type: string
+      desiredShardSizeBytes:
+        description: DEPRECATED in favor of desired_bundle_size_bytes.
+        format: int64
+        type: string
+    type: object
+  SourceSplitRequest:
+    description: "Represents the operation to split a high-level Source specification into bundles (parts for parallel processing). At a high level, splitting of a source into bundles happens as follows: SourceSplitRequest is applied to the source. If it returns SOURCE_SPLIT_OUTCOME_USE_CURRENT, no further splitting happens and the source is used \"as is\". Otherwise, splitting is applied recursively to each produced DerivedSource. As an optimization, for any Source, if its does_not_need_splitting is true, the framework assumes that splitting this source would return SOURCE_SPLIT_OUTCOME_USE_CURRENT, and doesn't initiate a SourceSplitRequest. This applies both to the initial source being split and to bundles produced from it."
+    properties:
+      options:
+        $ref: '#/definitions/SourceSplitOptions'
+        description: Hints for tuning the splitting process.
+      source:
+        $ref: '#/definitions/Source'
+        description: Specification of the source to be split.
+    type: object
+  SourceSplitResponse:
+    description: The response to a SourceSplitRequest.
+    properties:
+      bundles:
+        description: 'If outcome is SPLITTING_HAPPENED, then this is a list of bundles into which the source was split. Otherwise this field is ignored. This list can be empty, which means the source represents an empty input.'
+        items:
+          $ref: '#/definitions/DerivedSource'
+        type: array
+      outcome:
+        description: 'Indicates whether splitting happened and produced a list of bundles. If this is USE_CURRENT_SOURCE_AS_IS, the current source should be processed "as is" without splitting. "bundles" is ignored in this case. If this is SPLITTING_HAPPENED, then "bundles" contains a list of bundles into which the source was split.'
+        enum:
+          - SOURCE_SPLIT_OUTCOME_UNKNOWN
+          - SOURCE_SPLIT_OUTCOME_USE_CURRENT
+          - SOURCE_SPLIT_OUTCOME_SPLITTING_HAPPENED
+        type: string
+      shards:
+        description: DEPRECATED in favor of bundles.
+        items:
+          $ref: '#/definitions/SourceSplitShard'
+        type: array
+    type: object
+  SourceSplitShard:
+    description: DEPRECATED in favor of DerivedSource.
+    properties:
+      derivationMode:
+        description: DEPRECATED
+        enum:
+          - SOURCE_DERIVATION_MODE_UNKNOWN
+          - SOURCE_DERIVATION_MODE_INDEPENDENT
+          - SOURCE_DERIVATION_MODE_CHILD_OF_CURRENT
+          - SOURCE_DERIVATION_MODE_SIBLING_OF_CURRENT
+        type: string
+      source:
+        $ref: '#/definitions/Source'
+        description: DEPRECATED
+    type: object
+  StateFamilyConfig:
+    description: State family configuration.
+    properties:
+      isRead:
+        description: 'If true, this family corresponds to a read operation.'
+        type: boolean
+      stateFamily:
+        description: The state family value.
+        type: string
+    type: object
+  Status:
+    description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). The error model is designed to be: - Simple to use and understand for most users - Flexible enough to meet unexpected needs # Overview The `Status` message contains three pieces of data: error code, error message, and error details. The error code should be an enum value of google.rpc.Code, but it may accept additional error codes if needed. The error message should be a developer-facing English message that helps developers *understand* and *resolve* the error. If a localized user-facing error message is needed, put the localized message in the error details or localize it in the client. The optional error details may contain arbitrary information about the error. There is a predefined set of error detail types in the package `google.rpc` which can be used for common error conditions. # Language mapping The `Status` message is the logical representation of the error model, but it is not necessarily the actual wire format. When the `Status` message is exposed in different client libraries and different wire protocols, it can be mapped differently. For example, it will likely be mapped to some exceptions in Java, but more likely mapped to some error codes in C. # Other uses The error model and the `Status` message can be used in a variety of environments, either with or without APIs, to provide a consistent developer experience across different environments. Example uses of this error model include: - Partial errors. If a service needs to return partial errors to the client, it may embed the `Status` in the normal response to indicate the partial errors. - Workflow errors. A typical workflow has multiple steps. Each step may have a `Status` message for error reporting purpose. - Batch operations. If a client uses batch request and batch response, the `Status` message should be used directly inside batch response, one for each error sub-response. - Asynchronous operations. If an API call embeds asynchronous operation results in its response, the status of those operations should be represented directly using the `Status` message. - Logging. If some API errors are stored in logs, the message `Status` could be used directly after any stripping needed for security/privacy reasons.'
+    properties:
+      code:
+        description: 'The status code, which should be an enum value of google.rpc.Code.'
+        format: int32
+        type: integer
+      details:
+        description: A list of messages that carry the error details. There will be a common set of message types for APIs to use.
+        items:
+          additionalProperties:
+            description: Properties of the object. Contains field @ype with type URL.
+          type: object
+        type: array
+      message:
+        description: 'A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the google.rpc.Status.details field, or localized by the client.'
+        type: string
+    type: object
+  Step:
+    description: "Defines a particular step within a Dataflow job. A job consists of multiple steps, each of which performs some specific operation as part of the overall job. Data is typically passed from one step to another as part of the job. Here's an example of a sequence of steps which together implement a Map-Reduce job: * Read a collection of data from some source, parsing the collection's elements. * Validate the elements. * Apply a user-defined function to map each element to some value and extract an element-specific key value. * Group elements with the same key into a single element with that key, transforming a multiply-keyed collection into a uniquely-keyed collection. * Write the elements out to some data sink. (Note that the Dataflow service may be used to run many different types of jobs, not just Map-Reduce)."
+    properties:
+      kind:
+        description: The kind of step in the dataflow Job.
+        type: string
+      name:
+        description: Name identifying the step. This must be unique for each step with respect to all other steps in the dataflow Job.
+        type: string
+      properties:
+        additionalProperties:
+          description: Properties of the object.
+        description: Named properties associated with the step. Each kind of predefined step has its own required set of properties.
+        type: object
+    type: object
+  StreamLocation:
+    description: 'Describes a stream of data, either as input to be processed or as output of a streaming Dataflow job.'
+    properties:
+      customSourceLocation:
+        $ref: '#/definitions/CustomSourceLocation'
+        description: The stream is a custom source.
+      pubsubLocation:
+        $ref: '#/definitions/PubsubLocation'
+        description: The stream is a pubsub stream.
+      sideInputLocation:
+        $ref: '#/definitions/StreamingSideInputLocation'
+        description: The stream is a streaming side input.
+      streamingStageLocation:
+        $ref: '#/definitions/StreamingStageLocation'
+        description: The stream is part of another computation within the current streaming Dataflow job.
+    type: object
+  StreamingComputationRanges:
+    description: Describes full or partial data disk assignment information of the computation ranges.
+    properties:
+      computationId:
+        description: The ID of the computation.
+        type: string
+      rangeAssignments:
+        description: Data disk assignments for ranges from this computation.
+        items:
+          $ref: '#/definitions/KeyRangeDataDiskAssignment'
+        type: array
+    type: object
+  StreamingComputationTask:
+    description: A task which describes what action should be performed for the specified streaming computation ranges.
+    properties:
+      computationRanges:
+        description: Contains ranges of a streaming computation this task should apply to.
+        items:
+          $ref: '#/definitions/StreamingComputationRanges'
+        type: array
+      dataDisks:
+        description: Describes the set of data disks this task should apply to.
+        items:
+          $ref: '#/definitions/MountedDataDisk'
+        type: array
+      taskType:
+        description: A type of streaming computation task.
+        enum:
+          - STREAMING_COMPUTATION_TASK_UNKNOWN
+          - STREAMING_COMPUTATION_TASK_STOP
+          - STREAMING_COMPUTATION_TASK_START
+        type: string
+    type: object
+  StreamingSetupTask:
+    description: A task which initializes part of a streaming Dataflow job.
+    properties:
+      receiveWorkPort:
+        description: The TCP port on which the worker should listen for messages from other streaming computation workers.
+        format: int32
+        type: integer
+      streamingComputationTopology:
+        $ref: '#/definitions/TopologyConfig'
+        description: The global topology of the streaming Dataflow job.
+      workerHarnessPort:
+        description: The TCP port used by the worker to communicate with the Dataflow worker harness.
+        format: int32
+        type: integer
+    type: object
+  StreamingSideInputLocation:
+    description: Identifies the location of a streaming side input.
+    properties:
+      stateFamily:
+        description: Identifies the state family where this side input is stored.
+        type: string
+      tag:
+        description: Identifies the particular side input within the streaming Dataflow job.
+        type: string
+    type: object
+  StreamingStageLocation:
+    description: 'Identifies the location of a streaming computation stage, for stage-to-stage communication.'
+    properties:
+      streamId:
+        description: Identifies the particular stream within the streaming Dataflow job.
+        type: string
+    type: object
+  TaskRunnerSettings:
+    description: Taskrunner configuration settings.
+    properties:
+      alsologtostderr:
+        description: Also send taskrunner log info to stderr?
+        type: boolean
+      baseTaskDir:
+        description: Location on the worker for task-specific subdirectories.
+        type: string
+      baseUrl:
+        description: 'The base URL for the taskrunner to use when accessing Google Cloud APIs. When workers access Google Cloud APIs, they logically do so via relative URLs. If this field is specified, it supplies the base URL to use for resolving these relative URLs. The normative algorithm used is defined by RFC 1808, "Relative Uniform Resource Locators". If not specified, the default value is "http://www.googleapis.com/"'
+        type: string
+      commandlinesFileName:
+        description: Store preprocessing commands in this file.
+        type: string
+      continueOnException:
+        description: Do we continue taskrunner if an exception is hit?
+        type: boolean
+      dataflowApiVersion:
+        description: 'API version of endpoint, e.g. "v1b3"'
+        type: string
+      harnessCommand:
+        description: Command to launch the worker harness.
+        type: string
+      languageHint:
+        description: Suggested backend language.
+        type: string
+      logDir:
+        description: Directory on the VM to store logs.
+        type: string
+      logToSerialconsole:
+        description: Send taskrunner log into to Google Compute Engine VM serial console?
+        type: boolean
+      logUploadLocation:
+        description: 'Indicates where to put logs. If this is not specified, the logs will not be uploaded. The supported resource type is: Google Cloud Storage: storage.googleapis.com/{bucket}/{object} bucket.storage.googleapis.com/{object}'
+        type: string
+      oauthScopes:
+        description: OAuth2 scopes to be requested by the taskrunner in order to access the dataflow API.
+        items:
+          type: string
+        type: array
+      parallelWorkerSettings:
+        $ref: '#/definitions/WorkerSettings'
+        description: Settings to pass to the parallel worker harness.
+      streamingWorkerMainClass:
+        description: Streaming worker main class name.
+        type: string
+      taskGroup:
+        description: 'The UNIX group ID on the worker VM to use for tasks launched by taskrunner; e.g. "wheel".'
+        type: string
+      taskUser:
+        description: 'The UNIX user ID on the worker VM to use for tasks launched by taskrunner; e.g. "root".'
+        type: string
+      tempStoragePrefix:
+        description: 'The prefix of the resources the taskrunner should use for temporary storage. The supported resource type is: Google Cloud Storage: storage.googleapis.com/{bucket}/{object} bucket.storage.googleapis.com/{object}'
+        type: string
+      vmId:
+        description: ID string of VM.
+        type: string
+      workflowFileName:
+        description: Store the workflow in this file.
+        type: string
+    type: object
+  TopologyConfig:
+    description: 'Global topology of the streaming Dataflow job, including all computations and their sharded locations.'
+    properties:
+      computations:
+        description: The computations associated with a streaming Dataflow job.
+        items:
+          $ref: '#/definitions/ComputationTopology'
+        type: array
+      dataDiskAssignments:
+        description: The disks assigned to a streaming Dataflow job.
+        items:
+          $ref: '#/definitions/DataDiskAssignment'
+        type: array
+      userStageToComputationNameMap:
+        additionalProperties:
+          type: string
+        description: Maps user stage names to stable computation names.
+        type: object
+    type: object
+  WorkItem:
+    description: WorkItem represents basic information about a WorkItem to be executed in the cloud.
+    properties:
+      configuration:
+        description: Work item-specific configuration as an opaque blob.
+        type: string
+      id:
+        description: Identifies this WorkItem.
+        format: int64
+        type: string
+      initialReportIndex:
+        description: The initial index to use when reporting the status of the WorkItem.
+        format: int64
+        type: string
+      jobId:
+        description: Identifies the workflow job this WorkItem belongs to.
+        type: string
+      leaseExpireTime:
+        description: Time when the lease on this Work will expire.
+        type: string
+      mapTask:
+        $ref: '#/definitions/MapTask'
+        description: Additional information for MapTask WorkItems.
+      packages:
+        description: Any required packages that need to be fetched in order to execute this WorkItem.
+        items:
+          $ref: '#/definitions/Package'
+        type: array
+      projectId:
+        description: Identifies the cloud project this WorkItem belongs to.
+        type: string
+      reportStatusInterval:
+        description: Recommended reporting interval.
+        type: string
+      seqMapTask:
+        $ref: '#/definitions/SeqMapTask'
+        description: Additional information for SeqMapTask WorkItems.
+      shellTask:
+        $ref: '#/definitions/ShellTask'
+        description: Additional information for ShellTask WorkItems.
+      sourceOperationTask:
+        $ref: '#/definitions/SourceOperationRequest'
+        description: Additional information for source operation WorkItems.
+      streamingComputationTask:
+        $ref: '#/definitions/StreamingComputationTask'
+        description: Additional information for StreamingComputationTask WorkItems.
+      streamingSetupTask:
+        $ref: '#/definitions/StreamingSetupTask'
+        description: Additional information for StreamingSetupTask WorkItems.
+    type: object
+  WorkItemServiceState:
+    description: "The Dataflow service's idea of the current state of a WorkItem being processed by a worker."
+    properties:
+      harnessData:
+        additionalProperties:
+          description: Properties of the object.
+        description: 'Other data returned by the service, specific to the particular worker harness.'
+        type: object
+      leaseExpireTime:
+        description: Time at which the current lease will expire.
+        type: string
+      nextReportIndex:
+        description: 'The index value to use for the next report sent by the worker. Note: If the report call fails for whatever reason, the worker should reuse this index for subsequent report attempts.'
+        format: int64
+        type: string
+      reportStatusInterval:
+        description: New recommended reporting interval.
+        type: string
+      suggestedStopPoint:
+        $ref: '#/definitions/ApproximateProgress'
+        description: The progress point in the WorkItem where the Dataflow service suggests that the worker truncate the task.
+      suggestedStopPosition:
+        $ref: '#/definitions/Position'
+        description: 'Obsolete, always empty.'
+    type: object
+  WorkItemStatus:
+    description: "Conveys a worker's progress through the work described by a WorkItem."
+    properties:
+      completed:
+        description: True if the WorkItem was completed (successfully or unsuccessfully).
+        type: boolean
+      dynamicSourceSplit:
+        $ref: '#/definitions/DynamicSourceSplit'
+        description: See documentation of stop_position.
+      errors:
+        description: 'Specifies errors which occurred during processing. If errors are provided, and completed = true, then the WorkItem is considered to have failed.'
+        items:
+          $ref: '#/definitions/Status'
+        type: array
+      metricUpdates:
+        description: Worker output metrics (counters) for this WorkItem.
+        items:
+          $ref: '#/definitions/MetricUpdate'
+        type: array
+      progress:
+        $ref: '#/definitions/ApproximateProgress'
+        description: "The WorkItem's approximate progress."
+      reportIndex:
+        description: "The report index. When a WorkItem is leased, the lease will contain an initial report index. When a WorkItem's status is reported to the system, the report should be sent with that report index, and the response will contain the index the worker should use for the next report. Reports received with unexpected index values will be rejected by the service. In order to preserve idempotency, the worker should not alter the contents of a report, even if the worker must submit the same report multiple times before getting back a response. The worker should not submit a subsequent report until the response for the previous report had been received from the service."
+        format: int64
+        type: string
+      requestedLeaseDuration:
+        description: Amount of time the worker requests for its lease.
+        type: string
+      sourceFork:
+        $ref: '#/definitions/SourceFork'
+        description: DEPRECATED in favor of dynamic_source_split.
+      sourceOperationResponse:
+        $ref: '#/definitions/SourceOperationResponse'
+        description: 'If the work item represented a SourceOperationRequest, and the work is completed, contains the result of the operation.'
+      stopPosition:
+        $ref: '#/definitions/Position'
+        description: "A worker may split an active map task in two parts, \"primary\" and \"residual\", continuing to process the primary part and returning the residual part into the pool of available work. This event is called a \"dynamic split\" and is critical to the dynamic work rebalancing feature. The two obtained sub-tasks are called \"parts\" of the split. The parts, if concatenated, must represent the same input as would be read by the current task if the split did not happen. The exact way in which the original task is decomposed into the two parts is specified either as a position demarcating them (stop_position), or explicitly as two DerivedSources, if this task consumes a user-defined source type (dynamic_source_split). The \"current\" task is adjusted as a result of the split: after a task with range [A, B) sends a stop_position update at C, its range is considered to be [A, C), e.g.: * Progress should be interpreted relative to the new range, e.g. \"75% completed\" means \"75% of [A, C) completed\" * The worker should interpret proposed_stop_position relative to the new range, e.g. \"split at 68%\" should be interpreted as \"split at 68% of [A, C)\". * If the worker chooses to split again using stop_position, only stop_positions in [A, C) will be accepted. * Etc. dynamic_source_split has similar semantics: e.g., if a task with source S splits using dynamic_source_split into {P, R} (where P and R must be together equivalent to S), then subsequent progress and proposed_stop_position should be interpreted relative to P, and in a potential subsequent dynamic_source_split into {P', R'}, P' and R' must be together equivalent to P, etc."
+      workItemId:
+        description: Identifies the WorkItem.
+        type: string
+    type: object
+  WorkerPool:
+    description: 'Describes one particular pool of Dataflow workers to be instantiated by the Dataflow service in order to perform the computations required by a job. Note that a workflow job may use multiple pools, in order to match the various computational requirements of the various stages of the job.'
+    properties:
+      autoscalingSettings:
+        $ref: '#/definitions/AutoscalingSettings'
+        description: Settings for autoscaling of this WorkerPool.
+      dataDisks:
+        description: Data disks that are used by a VM in this workflow.
+        items:
+          $ref: '#/definitions/Disk'
+        type: array
+      defaultPackageSet:
+        description: The default package set to install. This allows the service to select a default set of packages which are useful to worker harnesses written in a particular language.
+        enum:
+          - DEFAULT_PACKAGE_SET_UNKNOWN
+          - DEFAULT_PACKAGE_SET_NONE
+          - DEFAULT_PACKAGE_SET_JAVA
+          - DEFAULT_PACKAGE_SET_PYTHON
+        type: string
+      diskSizeGb:
+        description: 'Size of root disk for VMs, in GB. If zero or unspecified, the service will attempt to choose a reasonable default.'
+        format: int32
+        type: integer
+      diskSourceImage:
+        description: Fully qualified source image for disks.
+        type: string
+      diskType:
+        description: 'Type of root disk for VMs. If empty or unspecified, the service will attempt to choose a reasonable default.'
+        type: string
+      kind:
+        description: "The kind of the worker pool; currently only 'harness' and 'shuffle' are supported."
+        type: string
+      machineType:
+        description: 'Machine type (e.g. "n1-standard-1"). If empty or unspecified, the service will attempt to choose a reasonable default.'
+        type: string
+      metadata:
+        additionalProperties:
+          type: string
+        description: Metadata to set on the Google Compute Engine VMs.
+        type: object
+      network:
+        description: 'Network to which VMs will be assigned. If empty or unspecified, the service will use the network "default".'
+        type: string
+      numWorkers:
+        description: 'Number of Google Compute Engine workers in this pool needed to execute the job. If zero or unspecified, the service will attempt to choose a reasonable default.'
+        format: int32
+        type: integer
+      onHostMaintenance:
+        description: 'The action to take on host maintenance, as defined by the Google Compute Engine API.'
+        type: string
+      packages:
+        description: Packages to be installed on workers.
+        items:
+          $ref: '#/definitions/Package'
+        type: array
+      poolArgs:
+        additionalProperties:
+          description: Properties of the object. Contains field @ype with type URL.
+        description: Extra arguments for this worker pool.
+        type: object
+      taskrunnerSettings:
+        $ref: '#/definitions/TaskRunnerSettings'
+        description: Settings passed through to Google Compute Engine workers when using the standard Dataflow task runner. Users should ignore this field.
+      teardownPolicy:
+        description: "Sets the policy for determining when to turndown worker pool. Allowed values are: TEARDOWN_ALWAYS, TEARDOWN_ON_SUCCESS, and TEARDOWN_NEVER. TEARDOWN_ALWAYS means workers are always torn down regardless of whether the job succeeds. TEARDOWN_ON_SUCCESS means workers are torn down if the job succeeds. TEARDOWN_NEVER means the workers are never torn down. If the workers are not torn down by the service, they will continue to run and use Google Compute Engine VM resources in the user's project until they are explicitly terminated by the user. Because of this, Google recommends using the TEARDOWN_ALWAYS policy except for small, manually supervised test jobs. If unknown or unspecified, the service will attempt to choose a reasonable default."
+        enum:
+          - TEARDOWN_POLICY_UNKNOWN
+          - TEARDOWN_ALWAYS
+          - TEARDOWN_ON_SUCCESS
+          - TEARDOWN_NEVER
+        type: string
+      zone:
+        description: 'Zone to run the worker pools in (e.g. "us-central1-b"). If empty or unspecified, the service will attempt to choose a reasonable default.'
+        type: string
+    type: object
+  WorkerSettings:
+    description: Provides data to pass through to the worker harness.
+    properties:
+      baseUrl:
+        description: 'The base URL for accessing Google Cloud APIs. When workers access Google Cloud APIs, they logically do so via relative URLs. If this field is specified, it supplies the base URL to use for resolving these relative URLs. The normative algorithm used is defined by RFC 1808, "Relative Uniform Resource Locators". If not specified, the default value is "http://www.googleapis.com/"'
+        type: string
+      reportingEnabled:
+        description: Send work progress updates to service.
+        type: boolean
+      servicePath:
+        description: 'The Dataflow service path relative to the root URL, for example, "dataflow/v1b3/projects".'
+        type: string
+      shuffleServicePath:
+        description: 'The Shuffle service path relative to the root URL, for example, "shuffle/v1beta1".'
+        type: string
+      tempStoragePrefix:
+        description: 'The prefix of the resources the system should use for temporary storage. The supported resource type is: Google Cloud Storage: storage.googleapis.com/{bucket}/{object} bucket.storage.googleapis.com/{object}'
+        type: string
+      workerId:
+        description: ID of the worker running this pipeline.
+        type: string
+    type: object
+  WriteInstruction:
+    description: 'An instruction that writes records. Takes one input, produces no outputs.'
+    properties:
+      input:
+        $ref: '#/definitions/InstructionInput'
+        description: The input.
+      sink:
+        $ref: '#/definitions/Sink'
+        description: The sink to write to.
+    type: object
+externalDocs:
+  url: 'https://cloud.google.com/dataflow'
+host: dataflow.googleapis.com
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: Google Dataflow API.
+  title: Google Dataflow API
+  version: v1b3
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/dataflow/v1b3/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: dataflow
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    in: query
+    name: alt
+    type: string
+  bearer_token:
+    description: OAuth bearer token.
+    in: query
+    name: bearer_token
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  pp:
+    default: true
+    description: Pretty-print response.
+    in: query
+    name: pp
+    type: boolean
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+paths:
+  '/v1b3/projects/{projectId}/jobs':
+    get:
+      description: List the jobs of a project
+      operationId: dataflow.projects.jobs.list
+      parameters:
+        - description: The project which owns the jobs.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Level of information requested in response. Default is SUMMARY.
+          enum:
+            - JOB_VIEW_UNKNOWN
+            - JOB_VIEW_SUMMARY
+            - JOB_VIEW_ALL
+          in: query
+          name: view
+          type: string
+        - description: 'If there are many jobs, limit response to at most this many. The actual number of jobs returned will be the lesser of max_responses and an unspecified server-defined limit.'
+          in: query
+          name: pageSize
+          type: integer
+        - description: "Set this to the 'next_page_token' field of a previous response to request additional results in a long list."
+          in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListJobsResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: Creates a dataflow job.
+      operationId: dataflow.projects.jobs.create
+      parameters:
+        - description: The project which owns the job.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Level of information requested in response.
+          enum:
+            - JOB_VIEW_UNKNOWN
+            - JOB_VIEW_SUMMARY
+            - JOB_VIEW_ALL
+          in: query
+          name: view
+          type: string
+        - description: DEPRECATED. This field is now on the Job message.
+          in: query
+          name: replaceJobId
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Job'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Job'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+  '/v1b3/projects/{projectId}/jobs/{jobId}':
+    get:
+      description: Gets the state of the specified dataflow job.
+      operationId: dataflow.projects.jobs.get
+      parameters:
+        - description: The project which owns the job.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Identifies a single job.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - description: Level of information requested in response.
+          enum:
+            - JOB_VIEW_UNKNOWN
+            - JOB_VIEW_SUMMARY
+            - JOB_VIEW_ALL
+          in: query
+          name: view
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Job'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    put:
+      description: Updates the state of an existing dataflow job.
+      operationId: dataflow.projects.jobs.update
+      parameters:
+        - description: The project which owns the job.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Identifies a single job.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Job'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Job'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+  '/v1b3/projects/{projectId}/jobs/{jobId}/messages':
+    get:
+      description: Request the job status.
+      operationId: dataflow.projects.jobs.messages.list
+      parameters:
+        - description: A project id.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: The job to get messages about.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - description: 'Filter to only get messages with importance >= level'
+          enum:
+            - JOB_MESSAGE_IMPORTANCE_UNKNOWN
+            - JOB_MESSAGE_DEBUG
+            - JOB_MESSAGE_DETAILED
+            - JOB_MESSAGE_BASIC
+            - JOB_MESSAGE_WARNING
+            - JOB_MESSAGE_ERROR
+          in: query
+          name: minimumImportance
+          type: string
+        - description: 'If specified, determines the maximum number of messages to return. If unspecified, the service may choose an appropriate default, or may return an arbitrarily large number of results.'
+          in: query
+          name: pageSize
+          type: integer
+        - description: 'If supplied, this should be the value of next_page_token returned by an earlier call. This will cause the next page of results to be returned.'
+          in: query
+          name: pageToken
+          type: string
+        - description: 'If specified, return only messages with timestamps >= start_time. The default is the job creation time (i.e. beginning of messages).'
+          in: query
+          name: startTime
+          type: string
+        - description: Return only messages with timestamps < end_time. The default is now (i.e. return up to the latest messages available).
+          in: query
+          name: endTime
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ListJobMessagesResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v1b3/projects/{projectId}/jobs/{jobId}/metrics':
+    get:
+      description: Request the job status.
+      operationId: dataflow.projects.jobs.getMetrics
+      parameters:
+        - description: A project id.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: The job to get messages for.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - description: Return only metric data that has changed since this time. Default is to return all information about all metrics for the job.
+          in: query
+          name: startTime
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/JobMetrics'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+  '/v1b3/projects/{projectId}/jobs/{jobId}/workItems:lease':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: Leases a dataflow WorkItem to run.
+      operationId: dataflow.projects.jobs.workItems.lease
+      parameters:
+        - description: Identifies the project this worker belongs to.
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: Identifies the workflow job this worker belongs to.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/LeaseWorkItemRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/LeaseWorkItemResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+  '/v1b3/projects/{projectId}/jobs/{jobId}/workItems:reportStatus':
+    parameters:
+      - $ref: '#/parameters/access_token'
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/bearer_token'
+      - $ref: '#/parameters/callback'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/pp'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/upload_protocol'
+      - $ref: '#/parameters/uploadType'
+      - $ref: '#/parameters/$.xgafv'
+    post:
+      description: Reports the status of dataflow WorkItems leased by a worker.
+      operationId: dataflow.projects.jobs.workItems.reportStatus
+      parameters:
+        - description: "The project which owns the WorkItem's job."
+          in: path
+          name: projectId
+          required: true
+          type: string
+        - description: The job which the WorkItem is part of.
+          in: path
+          name: jobId
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ReportWorkItemStatusRequest'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ReportWorkItemStatusResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/userinfo.email'
+      tags:
+        - projects
+schemes:
+  - https
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/userinfo.email': View your email address
+    type: oauth2
+swagger: '2.0'

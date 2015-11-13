@@ -1,537 +1,385 @@
-{
-  "basePath": "/",
-  "definitions": {
-    "DailyPeriod": {
-      "properties": {
-        "birch": {
-          "$ref": "#/definitions/PollenDailyPeriod",
-          "description": "Average counts of birch pollen along this day and level of pollen calculated from counts"
-        },
-        "combined": {
-          "$ref": "#/definitions/PollenDailyPeriod",
-          "description": "Average sum of all pollens along this day and level of pollen calculated from counts"
-        },
-        "day": {
-          "description": "RESERVED",
-          "type": "string"
-        },
-        "grass": {
-          "$ref": "#/definitions/PollenDailyPeriod",
-          "description": "Average counts of grass pollen along this day and level of pollen calculated from counts"
-        },
-        "link": {
-          "description": "RESERVED",
-          "type": "string"
-        },
-        "olive": {
-          "$ref": "#/definitions/PollenDailyPeriod",
-          "description": "Average counts of olive pollen along this day and level of pollen calculated from counts"
-        },
-        "ragweed": {
-          "$ref": "#/definitions/PollenDailyPeriod",
-          "description": "Average counts of ragweed pollen along this day and level of pollen calculated from counts"
-        },
-        "time": {
-          "description": "Initial time of this forecast period (day)",
-          "format": "date-time",
-          "type": "string"
-        },
-        "timestamp": {
-          "description": "Initial time of this period as unix timestamp (milliseconds from 1/1/1970)",
-          "type": "number"
-        }
-      },
-      "required": [
-        "time",
-        "timestamp",
-        "combined",
-        "olive",
-        "grass",
-        "birch",
-        "ragweed"
-      ]
-    },
-    "ForecastDailyFacade": {
-      "properties": {
-        "active": {
-          "default": true,
-          "description": "RESERVED",
-          "type": "boolean"
-        },
-        "creationTime": {
-          "description": "Creation time of this forecast",
-          "format": "date-time",
-          "type": "string"
-        },
-        "interval": {
-          "default": "daily",
-          "description": "Time interval for this forecast",
-          "enum": [
-            "hourly",
-            "daily"
-          ],
-          "type": "string"
-        },
-        "location": {
-          "$ref": "#/definitions/LocationFacade"
-        },
-        "periods": {
-          "description": "You get a Period for every single day with forecast (4 days).",
-          "items": {
-            "$ref": "#/definitions/DailyPeriod"
-          },
-          "type": "array"
-        },
-        "woeid": {
-          "description": "Where On Earth ID (WOEID) as defined by Yahoo [https://developer.yahoo.com/geo/geoplanet/guide/concepts.html#woeids]",
-          "type": "number"
-        }
-      },
-      "required": [
-        "woeid",
-        "creationTime",
-        "location",
-        "interval"
-      ]
-    },
-    "ForecastHourlyFacade": {
-      "properties": {
-        "active": {
-          "default": true,
-          "description": "RESERVED",
-          "type": "boolean"
-        },
-        "creationTime": {
-          "description": "Creation time of this forecast",
-          "format": "date-time",
-          "type": "string"
-        },
-        "interval": {
-          "default": "hourly",
-          "description": "Time interval for this forecast",
-          "enum": [
-            "hourly",
-            "daily"
-          ],
-          "type": "string"
-        },
-        "location": {
-          "$ref": "#/definitions/LocationFacade"
-        },
-        "periods": {
-          "description": "You get a Period for every hour with instant forecast (one every 6 hours).",
-          "items": {
-            "$ref": "#/definitions/HourlyPeriod"
-          },
-          "type": "array"
-        },
-        "woeid": {
-          "description": "Where On Earth ID (WOEID) as defined by Yahoo [https://developer.yahoo.com/geo/geoplanet/guide/concepts.html#woeids]",
-          "type": "number"
-        }
-      },
-      "required": [
-        "woeid",
-        "creationTime",
-        "location",
-        "interval"
-      ]
-    },
-    "HourlyPeriod": {
-      "properties": {
-        "birch": {
-          "$ref": "#/definitions/PollenHourlyPeriod",
-          "description": "Count of grains and level of grass pollen. Counter of grains is not accurate  when is higher of 50 grains/m3"
-        },
-        "combined": {
-          "$ref": "#/definitions/PollenHourlyPeriod",
-          "description": "Sum of all type of pollens counts and level combined of pollens"
-        },
-        "grass": {
-          "$ref": "#/definitions/PollenHourlyPeriod",
-          "description": "Count of grains and level of grass pollen. Counter of grains is not accurate  when is higher of 50 grains/m3"
-        },
-        "link": {
-          "description": "RESERVED",
-          "type": "string"
-        },
-        "olive": {
-          "$ref": "#/definitions/PollenHourlyPeriod",
-          "description": "Count of grains and level of olive pollen. Counter of grains is not accurate  when is higher of 200 grains/m3"
-        },
-        "ragweed": {
-          "$ref": "#/definitions/PollenHourlyPeriod",
-          "description": "Count of grains and level of grass pollen. Counter of grains is not accurate  when is higher of 50 grains/m3"
-        },
-        "time": {
-          "description": "Initial time of this forecast period (hour)",
-          "format": "date-time",
-          "type": "string"
-        },
-        "timestamp": {
-          "description": "Initial time of this forecast as unix timestamp (milliseconds from 1/1/1970)",
-          "type": "number"
-        }
-      },
-      "required": [
-        "time",
-        "timestamp",
-        "combined",
-        "olive",
-        "grass",
-        "birch",
-        "ragweed"
-      ]
-    },
-    "Location": {
-      "properties": {
-        "active": {
-          "description": "RESERVED",
-          "type": "boolean"
-        },
-        "country": {
-          "description": "Country of this location",
-          "type": "string"
-        },
-        "latitude": {
-          "description": "latitude of centroid of this location",
-          "type": "string"
-        },
-        "longitude": {
-          "description": "longitude of centroid of this location",
-          "type": "string"
-        },
-        "name": {
-          "description": "this location name",
-          "type": "string"
-        },
-        "priority": {
-          "description": "RESERVED",
-          "type": "number"
-        },
-        "region": {
-          "description": "Region/Station/Province of this location",
-          "type": "string"
-        },
-        "timeZone": {
-          "description": "Time zone of this location as show in [http://en.wikipedia.org/wiki/List_of_tz_database_time_zones]",
-          "type": "string"
-        },
-        "woeid": {
-          "description": "Where On Earth ID (WOEID) as defined by Yahoo.",
-          "type": "number"
-        }
-      }
-    },
-    "LocationFacade": {
-      "properties": {
-        "country": {
-          "description": "Country of this forecast location",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the forecast location (city or town)",
-          "type": "string"
-        },
-        "region": {
-          "description": "Region/State/Province of this forecast location",
-          "type": "string"
-        },
-        "timeZone": {
-          "description": "Time zone of this forecast location as show in [http://en.wikipedia.org/wiki/List_of_tz_database_time_zones]",
-          "type": "string"
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
-    "PollenDailyPeriod": {
-      "properties": {
-        "avgCounter": {
-          "description": "Average count of pollen grains in this period",
-          "minimum": 0,
-          "type": "number"
-        },
-        "avgLevel": {
-          "description": "Average level of pollen from count of grains and allergenic power of pollen",
-          "enum": [
-            "very_low",
-            "low",
-            "medium",
-            "high"
-          ],
-          "type": "string"
-        },
-        "maxCounter": {
-          "description": "Maximum count of pollen grains in this period",
-          "minimum": 0,
-          "type": "number"
-        },
-        "maxLevel": {
-          "description": "Maximum level of pollen from count of grains and allergenic power of pollen",
-          "enum": [
-            "very_low",
-            "low",
-            "medium",
-            "high"
-          ],
-          "type": "string"
-        },
-        "minCounter": {
-          "description": "Minimum count of pollen grains in this period",
-          "type": "number"
-        },
-        "minLevel": {
-          "description": "Minimum level of pollen from count of grains and allergenic power of pollen",
-          "enum": [
-            "very_low",
-            "low",
-            "medium",
-            "high"
-          ],
-          "minimum": 0,
-          "type": "string"
-        }
-      },
-      "required": [
-        "avgCounter",
-        "avgLevel",
-        "minCounter",
-        "minLevel",
-        "maxCounter",
-        "maxLevel"
-      ]
-    },
-    "PollenHourlyPeriod": {
-      "properties": {
-        "counter": {
-          "description": "Count of pollen grains (grains/m3) in this period",
-          "minimum": 0,
-          "type": "number"
-        },
-        "level": {
-          "description": "Level of pollen from count of grains and allergenic power of pollen",
-          "enum": [
-            "very_low",
-            "low",
-            "medium",
-            "high"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "counter",
-        "level"
-      ]
-    }
-  },
-  "host": "www.pollencheck.eu",
-  "info": {
-    "description": "PollenCheck provide pollen forecasts in Europe. This page show you how to use public API of PollenCheck.",
-    "title": "PollenCheck",
-    "version": "1.0.0",
-    "x-logo": {
-      "backgroundColor": "#000000",
-      "url": "http://www.pollencheck.eu/public/images/ico/pofo_logo_bw2.png"
-    },
-    "x-origin": {
-      "format": "swagger",
-      "url": "http://www.pollencheck.eu/docs/api-docs.json",
-      "version": "1.2"
-    },
-    "x-providerName": "pollencheck.eu"
-  },
-  "paths": {
-    "/api/1/forecasts/{woeid}": {
-      "get": {
-        "description": "\nThere is one daily forecast for every registered Location. \nThis forecast contains average pollen grain counts and average pollen level. \nThis forecast changes every day and shows pollen forecasts in next 4 days (including today). \nIn this moment the pollen types for forecasts are grass, olive, birch and ragweed.\n",
-        "operationId": "findDailyForecastByWoeid",
-        "parameters": [
-          {
-            "description": "code WOEID from Location",
-            "in": "path",
-            "name": "woeid",
-            "required": true,
-            "type": "number"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A daily forecast was found for this location",
-            "schema": {
-              "$ref": "#/definitions/ForecastDailyFacade"
-            }
-          },
-          "401": {
-            "description": "Unauthorized - missing or invalid auth token header"
-          },
-          "404": {
-            "description": "Location not found"
-          },
-          "500": {
-            "description": "Internal error"
-          }
-        },
-        "summary": "Get daily forecast for a location",
-        "tags": [
-          "forecasts"
-        ]
-      }
-    },
-    "/api/1/forecasts/{woeid}/hourly": {
-      "get": {
-        "description": "\nThere is one hourly forecast for every registered Location. \nThis forecast contains instant pollen grain counts and instant pollen levels. \nThis forecast changes every day and shows pollen forecasts every 6 hour. \nIn this moment the pollen types for forecasts are grass, olive, birch and ragweed. \n",
-        "operationId": "findHourlyForecastByWoeid",
-        "parameters": [
-          {
-            "description": "Where On Earth ID (WOEID) as defined by Yahoo. All location must be Town in Europe.",
-            "in": "path",
-            "name": "woeid",
-            "required": true,
-            "type": "number"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Forecasts found",
-            "schema": {
-              "$ref": "#/definitions/ForecastHourlyFacade"
-            }
-          },
-          "401": {
-            "description": "Unauthorized - missing or invalid auth token header"
-          },
-          "404": {
-            "description": "Location not found"
-          },
-          "500": {
-            "description": "Internal error"
-          }
-        },
-        "summary": "Get a hourly forecast for a location",
-        "tags": [
-          "forecasts"
-        ]
-      }
-    },
-    "/api/1/locations": {
-      "get": {
-        "description": "\nA Location identify a city or town. \nAll Location have a Where On Earth ID (WOEID) as defined by Yahoo [https://developer.yahoo.com/geo/geoplanet/guide/concepts.html#woeids].\nTo find a location you can use this endpoint or you can query Yahoo services [https://developer.yahoo.com/geo/geoplanet/],   \nie you can execute a YQL query like this (for Madrid): \n  https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text%3D%22Madrid%22&format=json\n",
-        "operationId": "searchLocationByName",
-        "parameters": [
-          {
-            "description": "Query to search cities/towns by name in Europe",
-            "in": "query",
-            "name": "q",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Locations found",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/Location"
-              },
-              "type": "array"
-            }
-          },
-          "401": {
-            "description": "Unauthorized - missing or invalid auth token header"
-          },
-          "500": {
-            "description": "Internal error"
-          }
-        },
-        "summary": "Search Location by name",
-        "tags": [
-          "locations"
-        ]
-      }
-    },
-    "/api/1/locations/{woeid}": {
-      "get": {
-        "description": "\nA Location identify a city or town. \nAll Location have a Where On Earth ID (WOEID) as defined by Yahoo [https://developer.yahoo.com/geo/geoplanet/guide/concepts.html#woeids].\n",
-        "operationId": "getLocationByWoeid",
-        "parameters": [
-          {
-            "description": "Where On Earth ID (WOEID) as defined by Yahoo",
-            "in": "path",
-            "name": "woeid",
-            "required": true,
-            "type": "number"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Location found",
-            "schema": {
-              "$ref": "#/definitions/Location"
-            }
-          },
-          "401": {
-            "description": "Unauthorized - missing or invalid auth token header"
-          },
-          "404": {
-            "description": "Location not found"
-          },
-          "500": {
-            "description": "Internal error"
-          }
-        },
-        "summary": "Get a Location",
-        "tags": [
-          "locations"
-        ]
-      },
-      "put": {
-        "description": "\nA Location identify a city or town. \nAll Location have a Where On Earth ID (WOEID) as defined by Yahoo [https://developer.yahoo.com/geo/geoplanet/guide/concepts.html#woeids]. \nAll location must have WOEID of type Town in Europe.\nWhen a location is registered the forecasts are not generated. The pollen forecasts for this new location will be available \nin the next forecasts generation (next day)\n",
-        "operationId": "registerLocationByWoeid",
-        "parameters": [
-          {
-            "description": "Where On Earth ID (WOEID) as defined by Yahoo",
-            "in": "path",
-            "name": "woeid",
-            "required": true,
-            "type": "number"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Location registered",
-            "schema": {
-              "$ref": "#/definitions/Location"
-            }
-          },
-          "401": {
-            "description": "Unauthorized - missing or invalid auth token header"
-          },
-          "500": {
-            "description": "Internal error"
-          }
-        },
-        "summary": "Register a new Location",
-        "tags": [
-          "locations"
-        ]
-      }
-    }
-  },
-  "schemes": [
-    "http"
-  ],
-  "swagger": "2.0",
-  "tags": [
-    {
-      "description": "Operations about Locations",
-      "name": "locations"
-    },
-    {
-      "description": "Get Pollen Forecasts",
-      "name": "forecasts"
-    }
-  ]
-}
+basePath: /
+definitions:
+  DailyPeriod:
+    properties:
+      birch:
+        $ref: '#/definitions/PollenDailyPeriod'
+        description: Average counts of birch pollen along this day and level of pollen calculated from counts
+      combined:
+        $ref: '#/definitions/PollenDailyPeriod'
+        description: Average sum of all pollens along this day and level of pollen calculated from counts
+      day:
+        description: RESERVED
+        type: string
+      grass:
+        $ref: '#/definitions/PollenDailyPeriod'
+        description: Average counts of grass pollen along this day and level of pollen calculated from counts
+      link:
+        description: RESERVED
+        type: string
+      olive:
+        $ref: '#/definitions/PollenDailyPeriod'
+        description: Average counts of olive pollen along this day and level of pollen calculated from counts
+      ragweed:
+        $ref: '#/definitions/PollenDailyPeriod'
+        description: Average counts of ragweed pollen along this day and level of pollen calculated from counts
+      time:
+        description: Initial time of this forecast period (day)
+        format: date-time
+        type: string
+      timestamp:
+        description: Initial time of this period as unix timestamp (milliseconds from 1/1/1970)
+        type: number
+    required:
+      - time
+      - timestamp
+      - combined
+      - olive
+      - grass
+      - birch
+      - ragweed
+  ForecastDailyFacade:
+    properties:
+      active:
+        default: true
+        description: RESERVED
+        type: boolean
+      creationTime:
+        description: Creation time of this forecast
+        format: date-time
+        type: string
+      interval:
+        default: daily
+        description: Time interval for this forecast
+        enum:
+          - hourly
+          - daily
+        type: string
+      location:
+        $ref: '#/definitions/LocationFacade'
+      periods:
+        description: You get a Period for every single day with forecast (4 days).
+        items:
+          $ref: '#/definitions/DailyPeriod'
+        type: array
+      woeid:
+        description: 'Where On Earth ID (WOEID) as defined by Yahoo [https://developer.yahoo.com/geo/geoplanet/guide/concepts.html#woeids]'
+        type: number
+    required:
+      - woeid
+      - creationTime
+      - location
+      - interval
+  ForecastHourlyFacade:
+    properties:
+      active:
+        default: true
+        description: RESERVED
+        type: boolean
+      creationTime:
+        description: Creation time of this forecast
+        format: date-time
+        type: string
+      interval:
+        default: hourly
+        description: Time interval for this forecast
+        enum:
+          - hourly
+          - daily
+        type: string
+      location:
+        $ref: '#/definitions/LocationFacade'
+      periods:
+        description: You get a Period for every hour with instant forecast (one every 6 hours).
+        items:
+          $ref: '#/definitions/HourlyPeriod'
+        type: array
+      woeid:
+        description: 'Where On Earth ID (WOEID) as defined by Yahoo [https://developer.yahoo.com/geo/geoplanet/guide/concepts.html#woeids]'
+        type: number
+    required:
+      - woeid
+      - creationTime
+      - location
+      - interval
+  HourlyPeriod:
+    properties:
+      birch:
+        $ref: '#/definitions/PollenHourlyPeriod'
+        description: Count of grains and level of grass pollen. Counter of grains is not accurate  when is higher of 50 grains/m3
+      combined:
+        $ref: '#/definitions/PollenHourlyPeriod'
+        description: Sum of all type of pollens counts and level combined of pollens
+      grass:
+        $ref: '#/definitions/PollenHourlyPeriod'
+        description: Count of grains and level of grass pollen. Counter of grains is not accurate  when is higher of 50 grains/m3
+      link:
+        description: RESERVED
+        type: string
+      olive:
+        $ref: '#/definitions/PollenHourlyPeriod'
+        description: Count of grains and level of olive pollen. Counter of grains is not accurate  when is higher of 200 grains/m3
+      ragweed:
+        $ref: '#/definitions/PollenHourlyPeriod'
+        description: Count of grains and level of grass pollen. Counter of grains is not accurate  when is higher of 50 grains/m3
+      time:
+        description: Initial time of this forecast period (hour)
+        format: date-time
+        type: string
+      timestamp:
+        description: Initial time of this forecast as unix timestamp (milliseconds from 1/1/1970)
+        type: number
+    required:
+      - time
+      - timestamp
+      - combined
+      - olive
+      - grass
+      - birch
+      - ragweed
+  Location:
+    properties:
+      active:
+        description: RESERVED
+        type: boolean
+      country:
+        description: Country of this location
+        type: string
+      latitude:
+        description: latitude of centroid of this location
+        type: string
+      longitude:
+        description: longitude of centroid of this location
+        type: string
+      name:
+        description: this location name
+        type: string
+      priority:
+        description: RESERVED
+        type: number
+      region:
+        description: Region/Station/Province of this location
+        type: string
+      timeZone:
+        description: 'Time zone of this location as show in [http://en.wikipedia.org/wiki/List_of_tz_database_time_zones]'
+        type: string
+      woeid:
+        description: Where On Earth ID (WOEID) as defined by Yahoo.
+        type: number
+  LocationFacade:
+    properties:
+      country:
+        description: Country of this forecast location
+        type: string
+      name:
+        description: Name of the forecast location (city or town)
+        type: string
+      region:
+        description: Region/State/Province of this forecast location
+        type: string
+      timeZone:
+        description: 'Time zone of this forecast location as show in [http://en.wikipedia.org/wiki/List_of_tz_database_time_zones]'
+        type: string
+    required:
+      - name
+  PollenDailyPeriod:
+    properties:
+      avgCounter:
+        description: Average count of pollen grains in this period
+        minimum: 0
+        type: number
+      avgLevel:
+        description: Average level of pollen from count of grains and allergenic power of pollen
+        enum:
+          - very_low
+          - low
+          - medium
+          - high
+        type: string
+      maxCounter:
+        description: Maximum count of pollen grains in this period
+        minimum: 0
+        type: number
+      maxLevel:
+        description: Maximum level of pollen from count of grains and allergenic power of pollen
+        enum:
+          - very_low
+          - low
+          - medium
+          - high
+        type: string
+      minCounter:
+        description: Minimum count of pollen grains in this period
+        type: number
+      minLevel:
+        description: Minimum level of pollen from count of grains and allergenic power of pollen
+        enum:
+          - very_low
+          - low
+          - medium
+          - high
+        minimum: 0
+        type: string
+    required:
+      - avgCounter
+      - avgLevel
+      - minCounter
+      - minLevel
+      - maxCounter
+      - maxLevel
+  PollenHourlyPeriod:
+    properties:
+      counter:
+        description: Count of pollen grains (grains/m3) in this period
+        minimum: 0
+        type: number
+      level:
+        description: Level of pollen from count of grains and allergenic power of pollen
+        enum:
+          - very_low
+          - low
+          - medium
+          - high
+        type: string
+    required:
+      - counter
+      - level
+host: www.pollencheck.eu
+info:
+  description: PollenCheck provide pollen forecasts in Europe. This page show you how to use public API of PollenCheck.
+  title: PollenCheck
+  version: 1.0.0
+  x-logo:
+    backgroundColor: '#000000'
+    url: 'http://www.pollencheck.eu/public/images/ico/pofo_logo_bw2.png'
+  x-origin:
+    format: swagger
+    url: 'http://www.pollencheck.eu/docs/api-docs.json'
+    version: '1.2'
+  x-providerName: pollencheck.eu
+paths:
+  '/api/1/forecasts/{woeid}':
+    get:
+      description: "\nThere is one daily forecast for every registered Location. \nThis forecast contains average pollen grain counts and average pollen level. \nThis forecast changes every day and shows pollen forecasts in next 4 days (including today). \nIn this moment the pollen types for forecasts are grass, olive, birch and ragweed.\n"
+      operationId: findDailyForecastByWoeid
+      parameters:
+        - description: code WOEID from Location
+          in: path
+          name: woeid
+          required: true
+          type: number
+      responses:
+        '200':
+          description: A daily forecast was found for this location
+          schema:
+            $ref: '#/definitions/ForecastDailyFacade'
+        '401':
+          description: Unauthorized - missing or invalid auth token header
+        '404':
+          description: Location not found
+        '500':
+          description: Internal error
+      summary: Get daily forecast for a location
+      tags:
+        - forecasts
+  '/api/1/forecasts/{woeid}/hourly':
+    get:
+      description: "\nThere is one hourly forecast for every registered Location. \nThis forecast contains instant pollen grain counts and instant pollen levels. \nThis forecast changes every day and shows pollen forecasts every 6 hour. \nIn this moment the pollen types for forecasts are grass, olive, birch and ragweed. \n"
+      operationId: findHourlyForecastByWoeid
+      parameters:
+        - description: Where On Earth ID (WOEID) as defined by Yahoo. All location must be Town in Europe.
+          in: path
+          name: woeid
+          required: true
+          type: number
+      responses:
+        '200':
+          description: Forecasts found
+          schema:
+            $ref: '#/definitions/ForecastHourlyFacade'
+        '401':
+          description: Unauthorized - missing or invalid auth token header
+        '404':
+          description: Location not found
+        '500':
+          description: Internal error
+      summary: Get a hourly forecast for a location
+      tags:
+        - forecasts
+  /api/1/locations:
+    get:
+      description: "\nA Location identify a city or town. \nAll Location have a Where On Earth ID (WOEID) as defined by Yahoo [https://developer.yahoo.com/geo/geoplanet/guide/concepts.html#woeids].\nTo find a location you can use this endpoint or you can query Yahoo services [https://developer.yahoo.com/geo/geoplanet/],   \nie you can execute a YQL query like this (for Madrid): \n  https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text%3D%22Madrid%22&format=json\n"
+      operationId: searchLocationByName
+      parameters:
+        - description: Query to search cities/towns by name in Europe
+          in: query
+          name: q
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Locations found
+          schema:
+            items:
+              $ref: '#/definitions/Location'
+            type: array
+        '401':
+          description: Unauthorized - missing or invalid auth token header
+        '500':
+          description: Internal error
+      summary: Search Location by name
+      tags:
+        - locations
+  '/api/1/locations/{woeid}':
+    get:
+      description: "\nA Location identify a city or town. \nAll Location have a Where On Earth ID (WOEID) as defined by Yahoo [https://developer.yahoo.com/geo/geoplanet/guide/concepts.html#woeids].\n"
+      operationId: getLocationByWoeid
+      parameters:
+        - description: Where On Earth ID (WOEID) as defined by Yahoo
+          in: path
+          name: woeid
+          required: true
+          type: number
+      responses:
+        '200':
+          description: Location found
+          schema:
+            $ref: '#/definitions/Location'
+        '401':
+          description: Unauthorized - missing or invalid auth token header
+        '404':
+          description: Location not found
+        '500':
+          description: Internal error
+      summary: Get a Location
+      tags:
+        - locations
+    put:
+      description: "\nA Location identify a city or town. \nAll Location have a Where On Earth ID (WOEID) as defined by Yahoo [https://developer.yahoo.com/geo/geoplanet/guide/concepts.html#woeids]. \nAll location must have WOEID of type Town in Europe.\nWhen a location is registered the forecasts are not generated. The pollen forecasts for this new location will be available \nin the next forecasts generation (next day)\n"
+      operationId: registerLocationByWoeid
+      parameters:
+        - description: Where On Earth ID (WOEID) as defined by Yahoo
+          in: path
+          name: woeid
+          required: true
+          type: number
+      responses:
+        '200':
+          description: Location registered
+          schema:
+            $ref: '#/definitions/Location'
+        '401':
+          description: Unauthorized - missing or invalid auth token header
+        '500':
+          description: Internal error
+      summary: Register a new Location
+      tags:
+        - locations
+schemes:
+  - http
+swagger: '2.0'
+tags:
+  - description: Operations about Locations
+    name: locations
+  - description: Get Pollen Forecasts
+    name: forecasts

@@ -1,231 +1,149 @@
-{
-  "basePath": "/rest",
-  "definitions": {
-    "SVSTradingAccountDTO": {
-      "properties": {
-        "country": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "forename": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "phoneNumber": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        }
-      }
-    },
-    "TradingAccount": {
-      "properties": {
-        "brokerServer": {
-          "type": "string"
-        },
-        "magickUsername": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "username": {
-          "type": "string"
-        }
-      }
-    },
-    "UserDTO": {
-      "properties": {
-        "email": {
-          "type": "string"
-        },
-        "firstName": {
-          "type": "string"
-        },
-        "lastName": {
-          "type": "string"
-        },
-        "password": {
-          "type": "string"
-        },
-        "username": {
-          "type": "string"
-        }
-      }
-    }
-  },
-  "host": "devui.magick.nu",
-  "info": {
-    "description": "Authentication is required to access all methods of the API. Enter username and password.\n                Credentials are automatically set as you type.",
-    "title": "API Documentation",
-    "version": "1.0",
-    "x-logo": {
-      "url": "https://www.tradeworks.io/wp-content/uploads/2015/06/logo.png"
-    },
-    "x-origin": {
-      "format": "swagger",
-      "url": "http://devui.magick.nu/api/api-docs",
-      "version": "1.2"
-    },
-    "x-providerName": "magick.nu"
-  },
-  "paths": {
-    "/svstradingAccounts": {
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "postSvstradingAccounts",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SVSTradingAccountDTO"
-            }
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Create a new Trading Account",
-        "tags": [
-          "svstradingAccounts"
-        ]
-      }
-    },
-    "/tradingAccounts": {
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "postTradingAccounts",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TradingAccount"
-            }
-          }
-        ],
-        "produces": [
-          "text/plain"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Add a Trading Account",
-        "tags": [
-          "tradingAccounts"
-        ]
-      }
-    },
-    "/users": {
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "operationId": "postUsers",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UserDTO"
-            }
-          }
-        ],
-        "produces": [
-          "text/plain"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Create a new Tradeworks User",
-        "tags": [
-          "users"
-        ]
-      }
-    },
-    "/users/email/{email}": {
-      "get": {
-        "operationId": "getUsersEmailEmail",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "email",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Check if email is available",
-        "tags": [
-          "users"
-        ]
-      }
-    },
-    "/users/username/{username}": {
-      "get": {
-        "operationId": "getUsersUsernameUsername",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "username",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Check if username is available",
-        "tags": [
-          "users"
-        ]
-      }
-    }
-  },
-  "schemes": [
-    "http"
-  ],
-  "swagger": "2.0",
-  "tags": [
-    {
-      "name": "tradingAccounts"
-    },
-    {
-      "name": "svstradingAccounts"
-    },
-    {
-      "name": "users"
-    }
-  ]
-}
+basePath: /rest
+definitions:
+  SVSTradingAccountDTO:
+    properties:
+      country:
+        type: string
+      email:
+        type: string
+      forename:
+        type: string
+      lastName:
+        type: string
+      password:
+        type: string
+      phoneNumber:
+        type: string
+      title:
+        type: string
+  TradingAccount:
+    properties:
+      brokerServer:
+        type: string
+      magickUsername:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+  UserDTO:
+    properties:
+      email:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+host: devui.magick.nu
+info:
+  description: >-
+    Authentication is required to access all methods of the API. Enter username
+    and password.
+
+                    Credentials are automatically set as you type.
+  title: API Documentation
+  version: '1.0'
+  x-logo:
+    url: 'https://www.tradeworks.io/wp-content/uploads/2015/06/logo.png'
+  x-origin:
+    format: swagger
+    url: 'http://devui.magick.nu/api/api-docs'
+    version: '1.2'
+  x-providerName: magick.nu
+paths:
+  /svstradingAccounts:
+    post:
+      consumes:
+        - application/json
+      operationId: postSvstradingAccounts
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/SVSTradingAccountDTO'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+      summary: Create a new Trading Account
+      tags:
+        - svstradingAccounts
+  /tradingAccounts:
+    post:
+      consumes:
+        - application/json
+      operationId: postTradingAccounts
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/TradingAccount'
+      produces:
+        - text/plain
+      responses:
+        '200':
+          description: No response was specified
+      summary: Add a Trading Account
+      tags:
+        - tradingAccounts
+  /users:
+    post:
+      consumes:
+        - application/json
+      operationId: postUsers
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/UserDTO'
+      produces:
+        - text/plain
+      responses:
+        '200':
+          description: No response was specified
+      summary: Create a new Tradeworks User
+      tags:
+        - users
+  '/users/email/{email}':
+    get:
+      operationId: getUsersEmailEmail
+      parameters:
+        - in: path
+          name: email
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Check if email is available
+      tags:
+        - users
+  '/users/username/{username}':
+    get:
+      operationId: getUsersUsernameUsername
+      parameters:
+        - in: path
+          name: username
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Check if username is available
+      tags:
+        - users
+schemes:
+  - http
+swagger: '2.0'
+tags:
+  - name: tradingAccounts
+  - name: svstradingAccounts
+  - name: users

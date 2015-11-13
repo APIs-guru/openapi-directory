@@ -1,1742 +1,1283 @@
-{
-  "basePath": "/",
-  "definitions": {
-    "AcceptedGuaranteeTypes": {
-      "properties": {
-        "accepted": {
-          "description": "In this list you find all the accepted guarantee types for this offer. They are sorted from in ascending\r\n            order.",
-          "items": {
-            "enum": [
-              "PM4Hold",
-              "PM6Hold",
-              "GuaranteeToCreditCard",
-              "GuaranteeToGuestAccount",
-              "GuaranteeByTravelAgent",
-              "GuaranteeByCompany",
-              "Deposit",
-              "Voucher",
-              "Prepayment",
-              "NonGuaranteed",
-              "Tentative",
-              "Waitlist"
-            ],
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "minimum": {
-          "description": "Based on the rateplan a reservation does need to have a minimum guarantee. When you create a new booking you\r\n            can always use a higher guarantee type starting from the minimum.",
-          "enum": [
-            "PM4Hold",
-            "PM6Hold",
-            "GuaranteeToCreditCard",
-            "GuaranteeToGuestAccount",
-            "GuaranteeByTravelAgent",
-            "GuaranteeByCompany",
-            "Deposit",
-            "Voucher",
-            "Prepayment",
-            "NonGuaranteed",
-            "Tentative",
-            "Waitlist"
-          ],
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AddonOffer": {
-      "properties": {
-        "code": {
-          "description": "The code of the addon service",
-          "type": "string"
-        },
-        "daily_rates": {
-          "description": "In this collection you will get an entry with prize information for every day the addon service will be charged\r\n            on the reservation when the addon service will be booked.",
-          "items": {
-            "$ref": "#/definitions/AddonOfferDailyRate"
-          },
-          "type": "array"
-        },
-        "description": {
-          "description": "The description of the addon service",
-          "type": "string"
-        },
-        "frequency": {
-          "description": "The frequency this addon service will be charged to the reservation. This field is a string that can be displayed,\r\n            but is not supposed to be used for computation",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the addon service",
-          "type": "string"
-        },
-        "total_stay": {
-          "$ref": "#/definitions/AddonOfferRate",
-          "description": "This object gives you the prize information if this addon service is booked for the total stay defined in your\r\n            request by arrivalDate and departureDate"
-        }
-      },
-      "type": "object"
-    },
-    "AddonOfferDailyRate": {
-      "properties": {
-        "currency": {
-          "description": "The currency the addon service will be charged in.",
-          "type": "string"
-        },
-        "end_date": {
-          "description": "The date the addon service will be active booked until",
-          "format": "date-time",
-          "type": "string"
-        },
-        "included_tax": {
-          "description": "The amount of taxes already included in the gross rate of the addon service also calculated for all rooms and\r\n            all persons.",
-          "format": "double",
-          "type": "number"
-        },
-        "rate": {
-          "description": "The gross rate of the addon service. It is the prize calculated for all rooms and all persons.",
-          "format": "double",
-          "type": "number"
-        },
-        "start_date": {
-          "description": "The date the addon service will be active booked from",
-          "format": "date-time",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AddonOfferRate": {
-      "properties": {
-        "currency": {
-          "description": "The currency the addon service will be charged in.",
-          "type": "string"
-        },
-        "included_tax": {
-          "description": "The amount of taxes already included in the gross rate of the addon service also calculated for all rooms and\r\n            all persons.",
-          "format": "double",
-          "type": "number"
-        },
-        "rate": {
-          "description": "The gross rate of the addon service. It is the prize calculated for all rooms and all persons.",
-          "format": "double",
-          "type": "number"
-        }
-      },
-      "type": "object"
-    },
-    "Addons": {
-      "properties": {
-        "addon_services": {
-          "description": "A collection of offers for addon services.",
-          "items": {
-            "$ref": "#/definitions/AddonOffer"
-          },
-          "type": "array"
-        },
-        "adults": {
-          "description": "The number of adults per room the addon offers are requested for. The rates will then already reflects this.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "arrival_date": {
-          "description": "The arrival date of the reservation the addon offers are supposed to be booked on.",
-          "format": "date-time",
-          "type": "string"
-        },
-        "departure_date": {
-          "description": "The departure date of the reservation the addon offers are supposed to be booked on.",
-          "format": "date-time",
-          "type": "string"
-        },
-        "hotel_id": {
-          "description": "The id of the hotel the addon offers will be valid for",
-          "format": "int32",
-          "type": "integer"
-        },
-        "hotel_name": {
-          "description": "The name of the hotel the addon offers will be valid for",
-          "type": "string"
-        },
-        "rate_plan": {
-          "$ref": "#/definitions/RatePlan",
-          "description": "The rate plan all the addon offers are valid for. The reservation you want to book this addons for needs\r\n            to have the same rate plan otherwise you might see different prizes on the target reservation."
-        },
-        "room": {
-          "$ref": "#/definitions/ReservationRoom",
-          "description": "The room type all the addon offers are valid for. The reservation you want to book this addons for needs\r\n            to have the same room type otherwise you might see different prizes on the target reservation."
-        },
-        "rooms": {
-          "description": "The number of rooms the addon offers are requested for. The rates will then already reflects this.",
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
-    "BaseResponse": {
-      "properties": {
-        "_warnings": {
-          "description": "Warnings that came up when your request was processed. Your request will still be processed successfull when\r\n            you see such warnings in your response",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "CancellationPolicy": {
-      "properties": {
-        "description": {
-          "description": "Description of the cancellation policy suitable for displaying to customers",
-          "type": "string"
-        },
-        "fee": {
-          "description": "The fee a guest has to pay when cancelling the reservation",
-          "format": "double",
-          "type": "number"
-        },
-        "fee_date": {
-          "description": "The date and time in UTC from when the fee has to be paid in case of cancellation",
-          "format": "date-time",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "CancellationResponse": {
-      "description": "Result of cancel operation",
-      "properties": {
-        "_warnings": {
-          "description": "Warnings that came up when your request was processed. Your request will still be processed successfull when\r\n            you see such warnings in your response",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "balance": {
-          "description": "The current balance on the reservations folio without the cancellation fee",
-          "format": "double",
-          "type": "number"
-        },
-        "cancellation_fee": {
-          "description": "The fee that might be charged to the folio of the reservation. The cancelled reservation will\r\n            show up in the cancellation and no show processing screen and the hotel staff will either charge\r\n            the fee or waive it.",
-          "format": "double",
-          "type": "number"
-        },
-        "cancellation_id": {
-          "description": "The id of the successful cancellation",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Company": {
-      "properties": {
-        "company_id": {
-          "description": "The id of a company profile. The id is build out of the Supplier Code a dash and the profile id\r\n            shown in the hetras UI. An example id on the API for a profile with id 12345 on the level of supplier ABC \r\n            would be ABC-12345",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Contact": {
-      "properties": {
-        "customer_id": {
-          "description": "The id of a customer profile. The id is build out of the Supplier Code a dash and the profile id\r\n            shown in the hetras UI. An example id on the API for a profile with id 12345 on the level of supplier ABC \r\n            would be ABC-12345",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "CreditCard": {
-      "properties": {
-        "card_holder_name": {
-          "description": "name of the card holder",
-          "type": "string"
-        },
-        "card_number": {
-          "description": "Credit card number",
-          "type": "string"
-        },
-        "card_type": {
-          "description": "One of the allowed values for a credit card type. If omitted it will be set to Others",
-          "type": "string"
-        },
-        "cvv_code": {
-          "description": "credit card verification value",
-          "type": "string"
-        },
-        "expiration_month": {
-          "description": "month of expiration",
-          "format": "int32",
-          "type": "integer"
-        },
-        "expiration_year": {
-          "description": "year of expiration",
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
-    "DailyRate": {
-      "properties": {
-        "addon_services": {
-          "description": "List of addon services with additional prize information.",
-          "items": {
-            "$ref": "#/definitions/ServiceRate"
-          },
-          "type": "array"
-        },
-        "date": {
-          "description": "Date the room rate will be charged to the folio",
-          "format": "date-time",
-          "type": "string"
-        },
-        "excluded_tax": {
-          "description": "The amount of extra taxes also calculated for all rooms and all persons.",
-          "format": "double",
-          "type": "number"
-        },
-        "included_services": {
-          "description": "List of codes for all services already included in the gross rate",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "included_tax": {
-          "description": "The amount of taxes already included in the gross rate also calculated for all rooms and\r\n            all persons.",
-          "format": "double",
-          "type": "number"
-        },
-        "rate": {
-          "description": "The gross rate. It is the prize calculated for all rooms and all persons.",
-          "format": "double",
-          "type": "number"
-        },
-        "room_type": {
-          "description": "Code of the room type which is booked for that day",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "DepositPolicy": {
-      "properties": {
-        "amount": {
-          "description": "Deposit amount that has to be paid",
-          "format": "double",
-          "type": "number"
-        },
-        "description": {
-          "description": "Description of the deposit policy suitable for displaying to customers",
-          "type": "string"
-        },
-        "due_date": {
-          "description": "Date the deposit amount has to be paid latest",
-          "format": "date-time",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "EmbeddedRoom": {
-      "description": "Represents a short version of room information. To get the full version\r\n            please follow the self link from the links collection.",
-      "properties": {
-        "_links": {
-          "additionalProperties": {
-            "$ref": "#/definitions/LinkObject"
-          },
-          "description": "Collection of links to related resources.",
-          "type": "object"
-        },
-        "description": {
-          "description": "Description of the room.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the room.",
-          "type": "string"
-        },
-        "number": {
-          "description": "Number of the room.",
-          "type": "string"
-        },
-        "room_type": {
-          "$ref": "#/definitions/EmbeddedRoomType",
-          "description": "Room type of the room.\r\n            \r\n            Contains only the basic properties of the room type."
-        }
-      },
-      "type": "object"
-    },
-    "EmbeddedRoomType": {
-      "description": "Represents a short version of room type. To get the full version\r\n            please follow the self link from the links collection.",
-      "properties": {
-        "_links": {
-          "additionalProperties": {
-            "$ref": "#/definitions/LinkObject"
-          },
-          "description": "Collection of links to related resources.",
-          "type": "object"
-        },
-        "code": {
-          "description": "Code of the room type.",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of the room type.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the room type.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "GeneralPolicy": {
-      "properties": {
-        "description": {
-          "description": "Description of the general policy suitable for displaying to customers",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the general policy",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Guarantee": {
-      "properties": {
-        "credit_card": {
-          "$ref": "#/definitions/CreditCard",
-          "description": "The credit card to be used for capturing the reservations amount or to guarantee for the reservation"
-        },
-        "guarantee_type": {
-          "description": "One of the accepted guarantee types from the offer you selected out of the rates response",
-          "enum": [
-            "PM4Hold",
-            "PM6Hold",
-            "GuaranteeToCreditCard",
-            "GuaranteeToGuestAccount",
-            "GuaranteeByTravelAgent",
-            "GuaranteeByCompany",
-            "Deposit",
-            "Voucher",
-            "Prepayment",
-            "NonGuaranteed",
-            "Tentative",
-            "Waitlist"
-          ],
-          "type": "string"
-        },
-        "token": {
-          "$ref": "#/definitions/Token",
-          "description": "The token to be used for capturing the reservations amount or to guarantee for the reservation"
-        }
-      },
-      "type": "object"
-    },
-    "GuaranteeResponse": {
-      "properties": {
-        "guarantee_type": {
-          "description": "The guarantee type of the reservation",
-          "enum": [
-            "PM4Hold",
-            "PM6Hold",
-            "GuaranteeToCreditCard",
-            "GuaranteeToGuestAccount",
-            "GuaranteeByTravelAgent",
-            "GuaranteeByCompany",
-            "Deposit",
-            "Voucher",
-            "Prepayment",
-            "NonGuaranteed",
-            "Tentative",
-            "Waitlist"
-          ],
-          "type": "string"
-        },
-        "valid_token": {
-          "description": "Tells you if there is a valid token on the reservation that can be used to capture the\r\n            reservations amount of to guarantee for the reservation",
-          "type": "boolean"
-        }
-      },
-      "type": "object"
-    },
-    "Guest": {
-      "properties": {
-        "customer_id": {
-          "description": "The id of a customer profile. The id is build out of the Supplier Code a dash and the profile id\r\n            shown in the hetras UI. An example id on the API for a profile with id 12345 on the level of supplier ABC \r\n            would be ABC-12345",
-          "type": "string"
-        },
-        "email": {
-          "description": "The primary email address of the guest",
-          "type": "string"
-        },
-        "first_name": {
-          "description": "First name of the guest",
-          "type": "string"
-        },
-        "last_name": {
-          "description": "Last name of the guest",
-          "type": "string"
-        },
-        "mailing_address": {
-          "$ref": "#/definitions/MailingAddress",
-          "description": "The home mailing address of the guest or if no home mailing address is specified it will\r\n            give you the first address found on the guest profile."
-        },
-        "nationality": {
-          "description": "The nationality of the guest in ISO 3166-1 alpha-2 format\r\n            (see: http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm)",
-          "type": "string"
-        },
-        "phone": {
-          "description": "The primary phone number of the guest",
-          "type": "string"
-        },
-        "title": {
-          "description": "Title of the guest. Needs to be taken from the available titles defined in the codes",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "JsonPatchOperationRequest": {
-      "description": "Represents JSON Patch request",
-      "properties": {
-        "op": {
-          "enum": [
-            "Add",
-            "Remove",
-            "Replace",
-            "Move",
-            "Copy",
-            "Test"
-          ],
-          "type": "string"
-        },
-        "path": {
-          "type": "string"
-        },
-        "value": {
-          "$ref": "#/definitions/Object"
-        }
-      },
-      "required": [
-        "op",
-        "path",
-        "value"
-      ],
-      "type": "object"
-    },
-    "LinkObject": {
-      "description": "A Link Object represents a hyperlink from the containing resource to a URI.",
-      "properties": {
-        "deprecation": {
-          "description": "<para>The \"deprecation\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its presence indicates that the link is to be deprecated (i.e.\r\n            removed) at a future date.  Its value is a URL that SHOULD provide\r\n            further information about the deprecation.\r\n            A client SHOULD provide some notification (for example, by logging a\r\n            warning message) whenever it traverses over a link that has this\r\n            property.  The notification SHOULD include the deprecation property's\r\n            value so that a client maintainer can easily find information about\r\n            the deprecation.</para>",
-          "type": "string"
-        },
-        "href": {
-          "description": "<para>The \"href\" property is REQUIRED.</para>\r\n<para> </para>\r\n<para>Its value is either a URI [RFC3986] or a URI Template [RFC6570].\r\n            If the value is a URI Template then the Link Object SHOULD have a\r\n            \"templated\" attribute whose value is true.</para>",
-          "type": "string"
-        },
-        "hreflang": {
-          "description": "<para>The \"hreflang\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its value is a string and is intended for indicating the language of\r\n            the target resource (as defined by [RFC5988]).</para>",
-          "type": "string"
-        },
-        "name": {
-          "description": "<para>The \"name\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its value MAY be used as a secondary key for selecting Link Objects\r\n            which share the same relation type.</para>",
-          "type": "string"
-        },
-        "profile": {
-          "description": "<para>The \"profile\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its value is a string which is a URI that hints about the profile.</para>",
-          "type": "string"
-        },
-        "templated": {
-          "description": "<para>The \"templated\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its value is boolean and SHOULD be true when the Link Object's \"href\"\r\n            property is a URI Template.\r\n            Its value SHOULD be considered false if it is undefined or any other\r\n            value than true.</para>",
-          "type": "boolean"
-        },
-        "title": {
-          "description": "<para>The \"title\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its value is a string and is intended for labelling the link with a\r\n            human-readable identifier (as defined by [RFC5988]).</para>",
-          "type": "string"
-        },
-        "type": {
-          "description": "<para>The \"type\" property is OPTIONAL.</para>\r\n<para> </para>\r\n<para>Its value is a string used as a hint to indicate the media type\r\n            expected when dereferencing the target resource.</para>",
-          "type": "string"
-        }
-      },
-      "required": [
-        "href"
-      ],
-      "type": "object"
-    },
-    "MailingAddress": {
-      "properties": {
-        "address": {
-          "description": "The address details like street, number, and other in free format",
-          "type": "string"
-        },
-        "address_type": {
-          "description": "One of the values from the enumeration of allowed address types",
-          "enum": [
-            "Home",
-            "Business",
-            "Billing",
-            "Other"
-          ],
-          "type": "string"
-        },
-        "city": {
-          "description": "The city name for this address",
-          "type": "string"
-        },
-        "country": {
-          "description": "The country code for this address in ISO 3166-1 alpha-2 format\r\n            (see: http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm)",
-          "type": "string"
-        },
-        "postal_code": {
-          "description": "The postal code for this address",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "NoShowPolicy": {
-      "properties": {
-        "description": {
-          "description": "Description of the noshow policy suitable for displaying to customers",
-          "type": "string"
-        },
-        "fee": {
-          "description": "The fee that will be charged to the reservations folio in case the guest does not show up",
-          "format": "double",
-          "type": "number"
-        }
-      },
-      "type": "object"
-    },
-    "Object": {
-      "properties": {},
-      "type": "object"
-    },
-    "Offer": {
-      "properties": {
-        "_links": {
-          "additionalProperties": {
-            "$ref": "#/definitions/LinkObject"
-          },
-          "description": "Link to request addon offers for this stay",
-          "type": "object"
-        },
-        "adults": {
-          "description": "Number of adults the offer is calculated for",
-          "format": "int32",
-          "type": "integer"
-        },
-        "available_rooms": {
-          "description": "Number of currently available rooms for that specific offer",
-          "format": "int32",
-          "type": "integer"
-        },
-        "cancellation_policies": {
-          "description": "List of cancellation policies defined for that rate",
-          "items": {
-            "$ref": "#/definitions/CancellationPolicy"
-          },
-          "type": "array"
-        },
-        "currency": {
-          "description": "The amounts of this offer are always in this currency",
-          "type": "string"
-        },
-        "deposit_policies": {
-          "description": "List of Deposit policies defined for that rate",
-          "items": {
-            "$ref": "#/definitions/DepositPolicy"
-          },
-          "type": "array"
-        },
-        "general_policies": {
-          "description": "List of general policies defined for that rate",
-          "items": {
-            "$ref": "#/definitions/GeneralPolicy"
-          },
-          "type": "array"
-        },
-        "guarantee_types": {
-          "$ref": "#/definitions/AcceptedGuaranteeTypes",
-          "description": "Accepted guarantee types and the minimum guarantee type defined for that rate"
-        },
-        "included_services": {
-          "description": "A list of  of services included already in the rate for this offer",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "noshow_policy": {
-          "$ref": "#/definitions/NoShowPolicy",
-          "description": "No Show policy defined for that rate"
-        },
-        "rate_plan_code": {
-          "description": "The code of the rate plan for this offer",
-          "type": "string"
-        },
-        "total_stay": {
-          "$ref": "#/definitions/Rate",
-          "description": "The total stay amounts for this offer"
-        }
-      },
-      "type": "object"
-    },
-    "PreCheckInRequest": {
-      "description": "With this request you can execute a precheckin on a reservation",
-      "properties": {
-        "device_id": {
-          "description": "The device id that will be put on the reservation",
-          "type": "string"
-        }
-      },
-      "required": [
-        "device_id"
-      ],
-      "type": "object"
-    },
-    "Rate": {
-      "properties": {
-        "addon_services": {
-          "description": "List of addon services with additional prize information.",
-          "items": {
-            "$ref": "#/definitions/ServiceRate"
-          },
-          "type": "array"
-        },
-        "excluded_tax": {
-          "description": "The amount of extra taxes also calculated for all rooms and all persons.",
-          "format": "double",
-          "type": "number"
-        },
-        "included_services": {
-          "description": "List of codes for all services already included in the gross rate",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "included_tax": {
-          "description": "The amount of taxes already included in the gross rate also calculated for all rooms and\r\n            all persons.",
-          "format": "double",
-          "type": "number"
-        },
-        "rate": {
-          "description": "The gross rate. It is the prize calculated for all rooms and all persons.",
-          "format": "double",
-          "type": "number"
-        }
-      },
-      "type": "object"
-    },
-    "RatePlan": {
-      "properties": {
-        "code": {
-          "description": "Code of the rate plan",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of the rate plan suitable for being displayed to customers",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the rate plan",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Rates": {
-      "properties": {
-        "arrival_date": {
-          "description": "The arrival date of the guest for this rate offer",
-          "format": "date-time",
-          "type": "string"
-        },
-        "departure_date": {
-          "description": "The departure date of the guest for this rate offer",
-          "format": "date-time",
-          "type": "string"
-        },
-        "hotel_id": {
-          "description": "The id of the hotel the rate offers will be valid for",
-          "format": "int32",
-          "type": "integer"
-        },
-        "hotel_name": {
-          "description": "The name of the hotel the rate offers will be valid for",
-          "type": "string"
-        },
-        "rate_plans": {
-          "description": "List of rate plans details for rates you can find offers in the room_offers",
-          "items": {
-            "$ref": "#/definitions/RatePlan"
-          },
-          "type": "array"
-        },
-        "room_offers": {
-          "description": "List of room types with available rate offers ordered from ascending",
-          "items": {
-            "$ref": "#/definitions/RoomOffer"
-          },
-          "type": "array"
-        },
-        "rooms": {
-          "description": "List of room type details for room types you can find offers in the room_offers",
-          "items": {
-            "$ref": "#/definitions/ReservationRoom"
-          },
-          "type": "array"
-        },
-        "services": {
-          "description": "List of service details for included services in offers you can find in the room_offers",
-          "items": {
-            "$ref": "#/definitions/Service"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "Reservation": {
-      "properties": {
-        "addons": {
-          "description": "A list of addon service codes that should be booked for all reservations of this booking",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "adults": {
-          "description": "The number of adults per room",
-          "format": "int32",
-          "type": "integer"
-        },
-        "arrival_date": {
-          "description": "The arrival date of the guests",
-          "format": "date-time",
-          "type": "string"
-        },
-        "channel_code": {
-          "description": "The channel code for this reservation. You can find available channels in the codes for the hotel.",
-          "type": "string"
-        },
-        "comment": {
-          "description": "The comment you want to add for this reservation",
-          "type": "string"
-        },
-        "company": {
-          "$ref": "#/definitions/Company",
-          "description": "The company that will be linked to this reservation"
-        },
-        "contact": {
-          "$ref": "#/definitions/Contact",
-          "description": "The contact that will be linked to this reservation"
-        },
-        "currency": {
-          "description": "The currency all amounts of this reservation will be shown in",
-          "type": "string"
-        },
-        "departure_date": {
-          "description": "The departure date of the guests",
-          "format": "date-time",
-          "type": "string"
-        },
-        "external_id": {
-          "description": "The external id for this reservation. You can put here your own id used by you or the external system\r\n            you integrate hetras with",
-          "type": "string"
-        },
-        "guarantee": {
-          "$ref": "#/definitions/Guarantee",
-          "description": "The guarantee for this reservation"
-        },
-        "guests": {
-          "description": "A list of guests with some basic guest details",
-          "items": {
-            "$ref": "#/definitions/Guest"
-          },
-          "type": "array"
-        },
-        "hotel_id": {
-          "description": "The id of the hotel this reservation is valid for",
-          "format": "int32",
-          "type": "integer"
-        },
-        "payment_method": {
-          "description": "The payment method for this reservation",
-          "enum": [
-            "None",
-            "Cash",
-            "CreditCard",
-            "WireTransfer",
-            "ChargeToCompany",
-            "Check",
-            "Voucher",
-            "DebitCard",
-            "Token"
-          ],
-          "type": "string"
-        },
-        "rate_plan": {
-          "description": "The rate plan code this reservation is related to",
-          "type": "string"
-        },
-        "room_type": {
-          "description": "The room type code this reservation is related to",
-          "type": "string"
-        },
-        "rooms": {
-          "description": "The number of rooms this reservation is for. After a multi-room booking is done there will be \r\n            one reservation in hetras for all rooms. The hotel staff then will split this reservation into\r\n            one reservation per room to be able to check in the guests",
-          "format": "int32",
-          "type": "integer"
-        },
-        "total_amount": {
-          "description": "This attribute is obsolete and not used. It is deprecated and will be removed for version 1 of the booking API",
-          "format": "double",
-          "type": "number"
-        }
-      },
-      "type": "object"
-    },
-    "ReservationResponse": {
-      "properties": {
-        "_warnings": {
-          "description": "Warnings that came up when your request was processed. Your request will still be processed successfull when\r\n            you see such warnings in your response",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "addon_services": {
-          "description": "A list of addon service codes that are currently booked on the reservation. Services which are charged\r\n            once per stay are only visible before and on the day they are booked for.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "adults": {
-          "description": "The number of adults per room",
-          "format": "int32",
-          "type": "integer"
-        },
-        "arrival_date": {
-          "description": "The arrival date of the guests",
-          "format": "date-time",
-          "type": "string"
-        },
-        "balance": {
-          "description": "The balance for all folios of this reservartion. It is calculated by all already charged room and service\r\n            rates plus manual charges or charges from other systems like POS minus all payments. A negative balance\r\n            indicates the reservation is overpaid, a positive balance that the guest owes the hotel money",
-          "format": "double",
-          "type": "number"
-        },
-        "cancellation_policies": {
-          "description": "The cancellation policies that were applicable on the date the booking was done",
-          "items": {
-            "$ref": "#/definitions/CancellationPolicy"
-          },
-          "type": "array"
-        },
-        "channel_code": {
-          "description": "The code of the channel that was used when the booking has been created",
-          "type": "string"
-        },
-        "comment": {
-          "description": "The comment for this reservation",
-          "type": "string"
-        },
-        "company": {
-          "$ref": "#/definitions/Company",
-          "description": "The company linked to this reservation"
-        },
-        "confirmation_id": {
-          "description": "The confirmation id for the booking which the guest can use to check in on the kiosk, add the\r\n            booking to the mobile app etc. It is used as identifier for all reservations done with the same\r\n            booking request",
-          "type": "string"
-        },
-        "contact": {
-          "$ref": "#/definitions/Contact",
-          "description": "The contact linked to this reservation"
-        },
-        "currency": {
-          "description": "The currency all amounts of this reservation will be shown in",
-          "type": "string"
-        },
-        "departure_date": {
-          "description": "The departure date of the guests",
-          "format": "date-time",
-          "type": "string"
-        },
-        "external_id": {
-          "description": "The external id for this reservation",
-          "type": "string"
-        },
-        "general_policies": {
-          "description": "The general policies that were applicable on the date the booking was done",
-          "items": {
-            "$ref": "#/definitions/GeneralPolicy"
-          },
-          "type": "array"
-        },
-        "guarantee": {
-          "$ref": "#/definitions/GuaranteeResponse",
-          "description": "The guarantee for this reservation"
-        },
-        "guests": {
-          "description": "A list of guest details for this reservation",
-          "items": {
-            "$ref": "#/definitions/Guest"
-          },
-          "type": "array"
-        },
-        "hotel_id": {
-          "description": "The id of the hotel this reservation is valid for",
-          "format": "int32",
-          "type": "integer"
-        },
-        "noshow_policy": {
-          "$ref": "#/definitions/NoShowPolicy",
-          "description": "The noshow policy that were applicable on the date the booking was done"
-        },
-        "payment_method": {
-          "description": "The payment method for this reservation",
-          "enum": [
-            "None",
-            "Cash",
-            "CreditCard",
-            "WireTransfer",
-            "ChargeToCompany",
-            "Check",
-            "Voucher",
-            "DebitCard",
-            "Token"
-          ],
-          "type": "string"
-        },
-        "rate_plan": {
-          "$ref": "#/definitions/RatePlan",
-          "description": "The rate plan details this reservation is related to"
-        },
-        "reservation_number": {
-          "description": "The reservation number of the reservation",
-          "format": "int32",
-          "type": "integer"
-        },
-        "reservation_status": {
-          "description": "The current status of this reservation",
-          "enum": [
-            "Tentative",
-            "Waitlisted",
-            "OnRequest",
-            "NonGuaranteed",
-            "Guaranteed",
-            "InHouse",
-            "CheckedOut",
-            "NoShow",
-            "Denied",
-            "Cancelled",
-            "Released",
-            "Walked",
-            "Expired",
-            "WalkIn",
-            "Registered"
-          ],
-          "type": "string"
-        },
-        "room": {
-          "$ref": "#/definitions/EmbeddedRoom",
-          "description": "The room type this reservation is related to and if applicable the already assigned specific room for \r\n            this reservation"
-        },
-        "room_rates": {
-          "description": "The breakdown for all daily room rates and service charges for this reservation",
-          "items": {
-            "$ref": "#/definitions/DailyRate"
-          },
-          "type": "array"
-        },
-        "rooms": {
-          "description": "The number of rooms this reservation is valid for. After a multi-room booking is done there will be \r\n            one reservation in hetras for this booking for all rooms. The hotel staff then will split this reservation into\r\n            one reservation per room to be able to check in the guests",
-          "format": "int32",
-          "type": "integer"
-        },
-        "services": {
-          "description": "A list of details for all services included and addon service booked on this reservation",
-          "items": {
-            "$ref": "#/definitions/Service"
-          },
-          "type": "array"
-        },
-        "total_stay": {
-          "$ref": "#/definitions/Rate",
-          "description": "The total stay amounts for this reservation"
-        }
-      },
-      "type": "object"
-    },
-    "ReservationRoom": {
-      "properties": {
-        "description": {
-          "description": "The description of the room type",
-          "type": "string"
-        },
-        "name": {
-          "description": "The name of the room type",
-          "type": "string"
-        },
-        "room_number": {
-          "description": "The room number of the assigned room",
-          "format": "int32",
-          "type": "integer"
-        },
-        "type": {
-          "description": "The code of the room type",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ReservationsResponse": {
-      "description": "Reservation collection response model",
-      "properties": {
-        "reservations": {
-          "description": "All reservations for the requested booking",
-          "items": {
-            "$ref": "#/definitions/ReservationResponse"
-          },
-          "type": "array"
-        }
-      },
-      "type": "object"
-    },
-    "RoomAssignmentResponse": {
-      "description": "Defines the response for room assignment operation",
-      "properties": {
-        "_warnings": {
-          "description": "Warnings that came up when your request was processed. Your request will still be processed successfull when\r\n            you see such warnings in your response",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "room_number": {
-          "description": "The room number assigned",
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
-    "RoomOffer": {
-      "properties": {
-        "offers": {
-          "description": "A list of rate offers for the appropriate room type ordered by amount ascending",
-          "items": {
-            "$ref": "#/definitions/Offer"
-          },
-          "type": "array"
-        },
-        "room_type": {
-          "description": "The room type all offers will be valid for",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Service": {
-      "properties": {
-        "code": {
-          "description": "The code of the service",
-          "type": "string"
-        },
-        "description": {
-          "description": "The description of the service which is suitable for displaying to customers",
-          "type": "string"
-        },
-        "frequency": {
-          "description": "The frequency the service will be charged to the guests folio. It is a free text and only suitable for \r\n            displaying to customers",
-          "type": "string"
-        },
-        "is_addon": {
-          "description": "This flag indicates if a service is an addon or is included already in the room rate",
-          "type": "boolean"
-        },
-        "name": {
-          "description": "The name of the service",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ServiceRate": {
-      "properties": {
-        "code": {
-          "description": "The code of the service",
-          "type": "string"
-        },
-        "included_tax": {
-          "description": "The included taxes in the gross rate of the service calculated for all rooms and all persons",
-          "format": "double",
-          "type": "number"
-        },
-        "rate": {
-          "description": "The gross rate of the service calculated for all rooms and all persons",
-          "format": "double",
-          "type": "number"
-        }
-      },
-      "type": "object"
-    },
-    "Token": {
-      "properties": {
-        "authorization_expiry_date": {
-          "description": "The authorization expiry date you got back from the payment service provider",
-          "format": "date-time",
-          "type": "string"
-        },
-        "authorization_reference": {
-          "description": "The authorization reference. This value is specific for different payment service providers. There will be\r\n            a page on the developer portal explaining the pattern on how to fill this value for the payment service\r\n            provider hetras is integrated with",
-          "type": "string"
-        },
-        "authorization_status": {
-          "description": "The authorization status you got back from the payment service provider",
-          "enum": [
-            "Authorized",
-            "Refused",
-            "Error",
-            "Canceled",
-            "Consumed",
-            "AuthorizedWithZeroAmount"
-          ],
-          "type": "string"
-        },
-        "authorized_amount": {
-          "description": "The authorized amount",
-          "format": "double",
-          "type": "number"
-        },
-        "merchant_reference": {
-          "description": "The merchant reference you used when requesting the token from the payment service provider",
-          "type": "string"
-        },
-        "shopper_email": {
-          "description": "The shopper email you used when requesting the token from the payment service provider",
-          "type": "string"
-        },
-        "shopper_reference": {
-          "description": "The shopper reference you used when requesting the token from the payment service provider. It can\r\n            be the same as the merchant reference",
-          "type": "string"
-        },
-        "token_id": {
-          "description": "The token id you get from the payment service provider",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    }
-  },
-  "host": "api.hetras-certification.net",
-  "info": {
-    "title": "hetras booking API v0",
-    "version": "v0",
-    "x-logo": {
-      "url": "https://hetras.zendesk.com/hc/logo"
-    },
-    "x-origin": {
-      "format": "swagger",
-      "url": "https://developer.hetras.com/swagger/spec/BookingAPIv0.json",
-      "version": "2.0"
-    },
-    "x-providerName": "hetras-certification.net",
-    "x-serviceName": "booking"
-  },
-  "paths": {
-    "/api/booking/v0/addons": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "description": "The booking addons endpoint gives the client all service addon\r\n             combinations for the given rate plan, room type, timeframe, for the given number of adults and\r\n             number of children per room",
-        "parameters": [
-          {
-            "description": "Application identifier",
-            "in": "header",
-            "name": "App-Id",
-            "required": true,
-            "type": "string",
-            "x-data-threescale-name": "app_ids"
-          },
-          {
-            "description": "Application key.",
-            "in": "header",
-            "name": "App-Key",
-            "required": true,
-            "type": "string",
-            "x-data-threescale-name": "app_keys"
-          },
-          {
-            "description": "Specifies the hotel id to process.",
-            "format": "int32",
-            "in": "query",
-            "name": "hotelId",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "Date of arrival for the guest in the ISO-8601 format \"YYYY-MM-DD\".",
-            "format": "date-time",
-            "in": "query",
-            "name": "arrivalDate",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Date of departure for the guest in the ISO-8601 format \"YYYY-MM-DD\".",
-            "format": "date-time",
-            "in": "query",
-            "name": "departureDate",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Channel Code the rate plan needs to be configured for.",
-            "in": "query",
-            "name": "channelCode",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Number of adults per room.",
-            "format": "byte",
-            "in": "query",
-            "name": "adults",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Number of rooms.",
-            "format": "byte",
-            "in": "query",
-            "name": "rooms",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Only return offers with rates for the specified room type code.",
-            "in": "query",
-            "name": "roomType",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Only return offers for the specified room type code.",
-            "in": "query",
-            "name": "ratePlanCode",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "An array of offers for each of the hotels listed in the hetras-hotels\r\n            header. Only hotels with availability for the specified criteria are in the\r\n            list. If the list is empty none of the specified hotels offer available rooms.",
-            "schema": {
-              "$ref": "#/definitions/Addons"
-            }
-          },
-          "400": {
-            "description": "Some request parameters are invalid"
-          },
-          "403": {
-            "description": "You are not authorized to access this resource or the data for the specified hotels."
-          },
-          "404": {
-            "description": "Not Found. The server has not found anything matching the Request-URI."
-          },
-          "422": {
-            "description": "Missing a mandatory parameter."
-          },
-          "500": {
-            "description": "We couldn't return the representation due to an internal server error."
-          }
-        },
-        "summary": "Get a list of addon offers for the requested hotel identifier.",
-        "tags": [
-          "Addons"
-        ]
-      }
-    },
-    "/api/booking/v0/bookings": {
-      "post": {
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "deprecated": false,
-        "description": "Create a reservation based on the payload. If the client making the request is not subscribed to the hotel specified in the request\r\n            the API will return 403.",
-        "parameters": [
-          {
-            "description": "Application identifier",
-            "in": "header",
-            "name": "App-Id",
-            "required": true,
-            "type": "string",
-            "x-data-threescale-name": "app_ids"
-          },
-          {
-            "description": "Application key.",
-            "in": "header",
-            "name": "App-Key",
-            "required": true,
-            "type": "string",
-            "x-data-threescale-name": "app_keys"
-          },
-          {
-            "description": "Specifies the reservation payload.",
-            "in": "body",
-            "name": "reservationRequest",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Reservation"
-            }
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "201": {
-            "description": "Return the newly created reservation after successful creation.",
-            "schema": {
-              "$ref": "#/definitions/BaseResponse"
-            }
-          },
-          "401": {
-            "description": "You are not authorized to access this resource or the data for the specified hotels."
-          },
-          "404": {
-            "description": "Not Found. The server has not found anything matching the Request-URI."
-          },
-          "422": {
-            "description": "The validation of the payload wasn´t successful."
-          },
-          "500": {
-            "description": "We couldn't return the representation due to an internal server error."
-          }
-        },
-        "summary": "Create a reservation.",
-        "tags": [
-          "Reservation"
-        ]
-      }
-    },
-    "/api/booking/v0/bookings/{confirmationId}": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "parameters": [
-          {
-            "description": "Application identifier",
-            "in": "header",
-            "name": "App-Id",
-            "required": true,
-            "type": "string",
-            "x-data-threescale-name": "app_ids"
-          },
-          {
-            "description": "Application key.",
-            "in": "header",
-            "name": "App-Key",
-            "required": true,
-            "type": "string",
-            "x-data-threescale-name": "app_keys"
-          },
-          {
-            "description": "Specifies the booking confirmation id to process.",
-            "in": "path",
-            "name": "confirmationId",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "The details of the reservation specified.",
-            "schema": {
-              "$ref": "#/definitions/ReservationsResponse"
-            }
-          },
-          "403": {
-            "description": "You are not authorized to access this resource or the data for the specified hotels."
-          },
-          "404": {
-            "description": "Not Found. The server has not found anything matching the Request-URI."
-          },
-          "500": {
-            "description": "We couldn't return the representation due to an internal server error."
-          }
-        },
-        "summary": "Get reservations by confirmation id",
-        "tags": [
-          "Reservation"
-        ]
-      }
-    },
-    "/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "parameters": [
-          {
-            "description": "Application identifier",
-            "in": "header",
-            "name": "App-Id",
-            "required": true,
-            "type": "string",
-            "x-data-threescale-name": "app_ids"
-          },
-          {
-            "description": "Application key.",
-            "in": "header",
-            "name": "App-Key",
-            "required": true,
-            "type": "string",
-            "x-data-threescale-name": "app_keys"
-          },
-          {
-            "description": "Specifies the booking confirmation id to process.",
-            "in": "path",
-            "name": "confirmationId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Specifies the reservation id to use for all further operations.",
-            "format": "int32",
-            "in": "path",
-            "name": "reservationNumber",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "The details of the reservation specified.",
-            "schema": {
-              "$ref": "#/definitions/ReservationResponse"
-            }
-          },
-          "403": {
-            "description": "You are not authorized to access this resource or the data for the specified hotels."
-          },
-          "404": {
-            "description": "Not Found. The server has not found anything matching the Request-URI."
-          },
-          "500": {
-            "description": "We couldn't return the representation due to an internal server error."
-          }
-        },
-        "summary": "Get a reservation",
-        "tags": [
-          "Reservation"
-        ]
-      }
-    },
-    "/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/cancel": {
-      "post": {
-        "consumes": [],
-        "deprecated": false,
-        "parameters": [
-          {
-            "description": "Application identifier",
-            "in": "header",
-            "name": "App-Id",
-            "required": true,
-            "type": "string",
-            "x-data-threescale-name": "app_ids"
-          },
-          {
-            "description": "Application key.",
-            "in": "header",
-            "name": "App-Key",
-            "required": true,
-            "type": "string",
-            "x-data-threescale-name": "app_keys"
-          },
-          {
-            "description": "Specifies the booking confirmation id to process.",
-            "in": "path",
-            "name": "confirmationId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Specifies the reservation id to use for all further operations.",
-            "format": "int32",
-            "in": "path",
-            "name": "reservationNumber",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CancellationResponse"
-            }
-          }
-        },
-        "summary": "Cancels reservation",
-        "tags": [
-          "Reservation"
-        ]
-      }
-    },
-    "/api/booking/v0/rates": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "description": "The booking availability endpoint gives the client all room and rate\r\n             combinations for the given timeframe, for the given number of adults and\r\n             number of children per room. The resultset can be further reduced by\r\n             specifying a channel, rate plan or room type.",
-        "parameters": [
-          {
-            "description": "Application identifier",
-            "in": "header",
-            "name": "App-Id",
-            "required": true,
-            "type": "string",
-            "x-data-threescale-name": "app_ids"
-          },
-          {
-            "description": "Application key.",
-            "in": "header",
-            "name": "App-Key",
-            "required": true,
-            "type": "string",
-            "x-data-threescale-name": "app_keys"
-          },
-          {
-            "description": "Specifies the hotel id to process.",
-            "format": "int32",
-            "in": "query",
-            "name": "hotelId",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "Date of arrival for the guest in the ISO-8601 format \"YYYY-MM-DD\".",
-            "format": "date-time",
-            "in": "query",
-            "name": "arrivalDate",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Date of departure for the guest in the ISO-8601 format \"YYYY-MM-DD\".",
-            "format": "date-time",
-            "in": "query",
-            "name": "departureDate",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Channel Code the rate plan needs to be configured for.",
-            "in": "query",
-            "name": "channelCode",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Number of adults per room.",
-            "format": "byte",
-            "in": "query",
-            "name": "adults",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Number of rooms (default is 1).",
-            "format": "byte",
-            "in": "query",
-            "name": "rooms",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Only return offers with rates for the specified room type code.",
-            "in": "query",
-            "name": "roomType",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Only return offers for the specified room type code.",
-            "in": "query",
-            "name": "ratePlanCode",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "An array of offers for each of the hotels listed in the hetras-hotels\r\n            header. Only hotels with availability for the specified criteria are in the\r\n            list. If the list is empty none of the specified hotels offer available rooms.",
-            "schema": {
-              "$ref": "#/definitions/Rates"
-            }
-          },
-          "400": {
-            "description": "Some request parameters are invalid"
-          },
-          "403": {
-            "description": "You are not authorized to access this resource or the data for the specified hotels."
-          },
-          "404": {
-            "description": "Not Found. The server has not found anything matching the Request-URI."
-          },
-          "422": {
-            "description": "Missing a mandatory parameter."
-          },
-          "500": {
-            "description": "We couldn't return the representation due to an internal server error."
-          }
-        },
-        "summary": "Get a list of offers for the requested hotel identifier.",
-        "tags": [
-          "Rates"
-        ]
-      }
-    }
-  },
-  "schemes": [
-    "https"
-  ],
-  "swagger": "2.0"
-}
+basePath: /
+definitions:
+  AcceptedGuaranteeTypes:
+    properties:
+      accepted:
+        description: "In this list you find all the accepted guarantee types for this offer. They are sorted from in ascending\r\n            order."
+        items:
+          enum:
+            - PM4Hold
+            - PM6Hold
+            - GuaranteeToCreditCard
+            - GuaranteeToGuestAccount
+            - GuaranteeByTravelAgent
+            - GuaranteeByCompany
+            - Deposit
+            - Voucher
+            - Prepayment
+            - NonGuaranteed
+            - Tentative
+            - Waitlist
+          type: string
+        type: array
+      minimum:
+        description: "Based on the rateplan a reservation does need to have a minimum guarantee. When you create a new booking you\r\n            can always use a higher guarantee type starting from the minimum."
+        enum:
+          - PM4Hold
+          - PM6Hold
+          - GuaranteeToCreditCard
+          - GuaranteeToGuestAccount
+          - GuaranteeByTravelAgent
+          - GuaranteeByCompany
+          - Deposit
+          - Voucher
+          - Prepayment
+          - NonGuaranteed
+          - Tentative
+          - Waitlist
+        type: string
+    type: object
+  AddonOffer:
+    properties:
+      code:
+        description: The code of the addon service
+        type: string
+      daily_rates:
+        description: "In this collection you will get an entry with prize information for every day the addon service will be charged\r\n            on the reservation when the addon service will be booked."
+        items:
+          $ref: '#/definitions/AddonOfferDailyRate'
+        type: array
+      description:
+        description: The description of the addon service
+        type: string
+      frequency:
+        description: "The frequency this addon service will be charged to the reservation. This field is a string that can be displayed,\r\n            but is not supposed to be used for computation"
+        type: string
+      name:
+        description: The name of the addon service
+        type: string
+      total_stay:
+        $ref: '#/definitions/AddonOfferRate'
+        description: "This object gives you the prize information if this addon service is booked for the total stay defined in your\r\n            request by arrivalDate and departureDate"
+    type: object
+  AddonOfferDailyRate:
+    properties:
+      currency:
+        description: The currency the addon service will be charged in.
+        type: string
+      end_date:
+        description: The date the addon service will be active booked until
+        format: date-time
+        type: string
+      included_tax:
+        description: "The amount of taxes already included in the gross rate of the addon service also calculated for all rooms and\r\n            all persons."
+        format: double
+        type: number
+      rate:
+        description: The gross rate of the addon service. It is the prize calculated for all rooms and all persons.
+        format: double
+        type: number
+      start_date:
+        description: The date the addon service will be active booked from
+        format: date-time
+        type: string
+    type: object
+  AddonOfferRate:
+    properties:
+      currency:
+        description: The currency the addon service will be charged in.
+        type: string
+      included_tax:
+        description: "The amount of taxes already included in the gross rate of the addon service also calculated for all rooms and\r\n            all persons."
+        format: double
+        type: number
+      rate:
+        description: The gross rate of the addon service. It is the prize calculated for all rooms and all persons.
+        format: double
+        type: number
+    type: object
+  Addons:
+    properties:
+      addon_services:
+        description: A collection of offers for addon services.
+        items:
+          $ref: '#/definitions/AddonOffer'
+        type: array
+      adults:
+        description: The number of adults per room the addon offers are requested for. The rates will then already reflects this.
+        format: int32
+        type: integer
+      arrival_date:
+        description: The arrival date of the reservation the addon offers are supposed to be booked on.
+        format: date-time
+        type: string
+      departure_date:
+        description: The departure date of the reservation the addon offers are supposed to be booked on.
+        format: date-time
+        type: string
+      hotel_id:
+        description: The id of the hotel the addon offers will be valid for
+        format: int32
+        type: integer
+      hotel_name:
+        description: The name of the hotel the addon offers will be valid for
+        type: string
+      rate_plan:
+        $ref: '#/definitions/RatePlan'
+        description: "The rate plan all the addon offers are valid for. The reservation you want to book this addons for needs\r\n            to have the same rate plan otherwise you might see different prizes on the target reservation."
+      room:
+        $ref: '#/definitions/ReservationRoom'
+        description: "The room type all the addon offers are valid for. The reservation you want to book this addons for needs\r\n            to have the same room type otherwise you might see different prizes on the target reservation."
+      rooms:
+        description: The number of rooms the addon offers are requested for. The rates will then already reflects this.
+        format: int32
+        type: integer
+    type: object
+  BaseResponse:
+    properties:
+      _warnings:
+        description: "Warnings that came up when your request was processed. Your request will still be processed successfull when\r\n            you see such warnings in your response"
+        items:
+          type: string
+        type: array
+    type: object
+  CancellationPolicy:
+    properties:
+      description:
+        description: Description of the cancellation policy suitable for displaying to customers
+        type: string
+      fee:
+        description: The fee a guest has to pay when cancelling the reservation
+        format: double
+        type: number
+      fee_date:
+        description: The date and time in UTC from when the fee has to be paid in case of cancellation
+        format: date-time
+        type: string
+    type: object
+  CancellationResponse:
+    description: Result of cancel operation
+    properties:
+      _warnings:
+        description: "Warnings that came up when your request was processed. Your request will still be processed successfull when\r\n            you see such warnings in your response"
+        items:
+          type: string
+        type: array
+      balance:
+        description: The current balance on the reservations folio without the cancellation fee
+        format: double
+        type: number
+      cancellation_fee:
+        description: "The fee that might be charged to the folio of the reservation. The cancelled reservation will\r\n            show up in the cancellation and no show processing screen and the hotel staff will either charge\r\n            the fee or waive it."
+        format: double
+        type: number
+      cancellation_id:
+        description: The id of the successful cancellation
+        type: string
+    type: object
+  Company:
+    properties:
+      company_id:
+        description: "The id of a company profile. The id is build out of the Supplier Code a dash and the profile id\r\n            shown in the hetras UI. An example id on the API for a profile with id 12345 on the level of supplier ABC \r\n            would be ABC-12345"
+        type: string
+    type: object
+  Contact:
+    properties:
+      customer_id:
+        description: "The id of a customer profile. The id is build out of the Supplier Code a dash and the profile id\r\n            shown in the hetras UI. An example id on the API for a profile with id 12345 on the level of supplier ABC \r\n            would be ABC-12345"
+        type: string
+    type: object
+  CreditCard:
+    properties:
+      card_holder_name:
+        description: name of the card holder
+        type: string
+      card_number:
+        description: Credit card number
+        type: string
+      card_type:
+        description: One of the allowed values for a credit card type. If omitted it will be set to Others
+        type: string
+      cvv_code:
+        description: credit card verification value
+        type: string
+      expiration_month:
+        description: month of expiration
+        format: int32
+        type: integer
+      expiration_year:
+        description: year of expiration
+        format: int32
+        type: integer
+    type: object
+  DailyRate:
+    properties:
+      addon_services:
+        description: List of addon services with additional prize information.
+        items:
+          $ref: '#/definitions/ServiceRate'
+        type: array
+      date:
+        description: Date the room rate will be charged to the folio
+        format: date-time
+        type: string
+      excluded_tax:
+        description: The amount of extra taxes also calculated for all rooms and all persons.
+        format: double
+        type: number
+      included_services:
+        description: List of codes for all services already included in the gross rate
+        items:
+          type: string
+        type: array
+      included_tax:
+        description: "The amount of taxes already included in the gross rate also calculated for all rooms and\r\n            all persons."
+        format: double
+        type: number
+      rate:
+        description: The gross rate. It is the prize calculated for all rooms and all persons.
+        format: double
+        type: number
+      room_type:
+        description: Code of the room type which is booked for that day
+        type: string
+    type: object
+  DepositPolicy:
+    properties:
+      amount:
+        description: Deposit amount that has to be paid
+        format: double
+        type: number
+      description:
+        description: Description of the deposit policy suitable for displaying to customers
+        type: string
+      due_date:
+        description: Date the deposit amount has to be paid latest
+        format: date-time
+        type: string
+    type: object
+  EmbeddedRoom:
+    description: "Represents a short version of room information. To get the full version\r\n            please follow the self link from the links collection."
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources.
+        type: object
+      description:
+        description: Description of the room.
+        type: string
+      name:
+        description: Name of the room.
+        type: string
+      number:
+        description: Number of the room.
+        type: string
+      room_type:
+        $ref: '#/definitions/EmbeddedRoomType'
+        description: "Room type of the room.\r\n            \r\n            Contains only the basic properties of the room type."
+    type: object
+  EmbeddedRoomType:
+    description: "Represents a short version of room type. To get the full version\r\n            please follow the self link from the links collection."
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources.
+        type: object
+      code:
+        description: Code of the room type.
+        type: string
+      description:
+        description: Description of the room type.
+        type: string
+      name:
+        description: Name of the room type.
+        type: string
+    type: object
+  GeneralPolicy:
+    properties:
+      description:
+        description: Description of the general policy suitable for displaying to customers
+        type: string
+      name:
+        description: Name of the general policy
+        type: string
+    type: object
+  Guarantee:
+    properties:
+      credit_card:
+        $ref: '#/definitions/CreditCard'
+        description: The credit card to be used for capturing the reservations amount or to guarantee for the reservation
+      guarantee_type:
+        description: One of the accepted guarantee types from the offer you selected out of the rates response
+        enum:
+          - PM4Hold
+          - PM6Hold
+          - GuaranteeToCreditCard
+          - GuaranteeToGuestAccount
+          - GuaranteeByTravelAgent
+          - GuaranteeByCompany
+          - Deposit
+          - Voucher
+          - Prepayment
+          - NonGuaranteed
+          - Tentative
+          - Waitlist
+        type: string
+      token:
+        $ref: '#/definitions/Token'
+        description: The token to be used for capturing the reservations amount or to guarantee for the reservation
+    type: object
+  GuaranteeResponse:
+    properties:
+      guarantee_type:
+        description: The guarantee type of the reservation
+        enum:
+          - PM4Hold
+          - PM6Hold
+          - GuaranteeToCreditCard
+          - GuaranteeToGuestAccount
+          - GuaranteeByTravelAgent
+          - GuaranteeByCompany
+          - Deposit
+          - Voucher
+          - Prepayment
+          - NonGuaranteed
+          - Tentative
+          - Waitlist
+        type: string
+      valid_token:
+        description: "Tells you if there is a valid token on the reservation that can be used to capture the\r\n            reservations amount of to guarantee for the reservation"
+        type: boolean
+    type: object
+  Guest:
+    properties:
+      customer_id:
+        description: "The id of a customer profile. The id is build out of the Supplier Code a dash and the profile id\r\n            shown in the hetras UI. An example id on the API for a profile with id 12345 on the level of supplier ABC \r\n            would be ABC-12345"
+        type: string
+      email:
+        description: The primary email address of the guest
+        type: string
+      first_name:
+        description: First name of the guest
+        type: string
+      last_name:
+        description: Last name of the guest
+        type: string
+      mailing_address:
+        $ref: '#/definitions/MailingAddress'
+        description: "The home mailing address of the guest or if no home mailing address is specified it will\r\n            give you the first address found on the guest profile."
+      nationality:
+        description: "The nationality of the guest in ISO 3166-1 alpha-2 format\r\n            (see: http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm)"
+        type: string
+      phone:
+        description: The primary phone number of the guest
+        type: string
+      title:
+        description: Title of the guest. Needs to be taken from the available titles defined in the codes
+        type: string
+    type: object
+  JsonPatchOperationRequest:
+    description: Represents JSON Patch request
+    properties:
+      op:
+        enum:
+          - Add
+          - Remove
+          - Replace
+          - Move
+          - Copy
+          - Test
+        type: string
+      path:
+        type: string
+      value:
+        $ref: '#/definitions/Object'
+    required:
+      - op
+      - path
+      - value
+    type: object
+  LinkObject:
+    description: A Link Object represents a hyperlink from the containing resource to a URI.
+    properties:
+      deprecation:
+        description: "<para>The \"deprecation\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its presence indicates that the link is to be deprecated (i.e.\r\n            removed) at a future date.  Its value is a URL that SHOULD provide\r\n            further information about the deprecation.\r\n            A client SHOULD provide some notification (for example, by logging a\r\n            warning message) whenever it traverses over a link that has this\r\n            property.  The notification SHOULD include the deprecation property's\r\n            value so that a client maintainer can easily find information about\r\n            the deprecation.</para>"
+        type: string
+      href:
+        description: "<para>The \"href\" property is REQUIRED.</para>\r\n<para>\_</para>\r\n<para>Its value is either a URI [RFC3986] or a URI Template [RFC6570].\r\n            If the value is a URI Template then the Link Object SHOULD have a\r\n            \"templated\" attribute whose value is true.</para>"
+        type: string
+      hreflang:
+        description: "<para>The \"hreflang\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is a string and is intended for indicating the language of\r\n            the target resource (as defined by [RFC5988]).</para>"
+        type: string
+      name:
+        description: "<para>The \"name\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value MAY be used as a secondary key for selecting Link Objects\r\n            which share the same relation type.</para>"
+        type: string
+      profile:
+        description: "<para>The \"profile\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is a string which is a URI that hints about the profile.</para>"
+        type: string
+      templated:
+        description: "<para>The \"templated\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is boolean and SHOULD be true when the Link Object's \"href\"\r\n            property is a URI Template.\r\n            Its value SHOULD be considered false if it is undefined or any other\r\n            value than true.</para>"
+        type: boolean
+      title:
+        description: "<para>The \"title\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is a string and is intended for labelling the link with a\r\n            human-readable identifier (as defined by [RFC5988]).</para>"
+        type: string
+      type:
+        description: "<para>The \"type\" property is OPTIONAL.</para>\r\n<para>\_</para>\r\n<para>Its value is a string used as a hint to indicate the media type\r\n            expected when dereferencing the target resource.</para>"
+        type: string
+    required:
+      - href
+    type: object
+  MailingAddress:
+    properties:
+      address:
+        description: 'The address details like street, number, and other in free format'
+        type: string
+      address_type:
+        description: One of the values from the enumeration of allowed address types
+        enum:
+          - Home
+          - Business
+          - Billing
+          - Other
+        type: string
+      city:
+        description: The city name for this address
+        type: string
+      country:
+        description: "The country code for this address in ISO 3166-1 alpha-2 format\r\n            (see: http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm)"
+        type: string
+      postal_code:
+        description: The postal code for this address
+        type: string
+    type: object
+  NoShowPolicy:
+    properties:
+      description:
+        description: Description of the noshow policy suitable for displaying to customers
+        type: string
+      fee:
+        description: The fee that will be charged to the reservations folio in case the guest does not show up
+        format: double
+        type: number
+    type: object
+  Object:
+    properties: {}
+    type: object
+  Offer:
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Link to request addon offers for this stay
+        type: object
+      adults:
+        description: Number of adults the offer is calculated for
+        format: int32
+        type: integer
+      available_rooms:
+        description: Number of currently available rooms for that specific offer
+        format: int32
+        type: integer
+      cancellation_policies:
+        description: List of cancellation policies defined for that rate
+        items:
+          $ref: '#/definitions/CancellationPolicy'
+        type: array
+      currency:
+        description: The amounts of this offer are always in this currency
+        type: string
+      deposit_policies:
+        description: List of Deposit policies defined for that rate
+        items:
+          $ref: '#/definitions/DepositPolicy'
+        type: array
+      general_policies:
+        description: List of general policies defined for that rate
+        items:
+          $ref: '#/definitions/GeneralPolicy'
+        type: array
+      guarantee_types:
+        $ref: '#/definitions/AcceptedGuaranteeTypes'
+        description: Accepted guarantee types and the minimum guarantee type defined for that rate
+      included_services:
+        description: A list of  of services included already in the rate for this offer
+        items:
+          type: string
+        type: array
+      noshow_policy:
+        $ref: '#/definitions/NoShowPolicy'
+        description: No Show policy defined for that rate
+      rate_plan_code:
+        description: The code of the rate plan for this offer
+        type: string
+      total_stay:
+        $ref: '#/definitions/Rate'
+        description: The total stay amounts for this offer
+    type: object
+  PreCheckInRequest:
+    description: With this request you can execute a precheckin on a reservation
+    properties:
+      device_id:
+        description: The device id that will be put on the reservation
+        type: string
+    required:
+      - device_id
+    type: object
+  Rate:
+    properties:
+      addon_services:
+        description: List of addon services with additional prize information.
+        items:
+          $ref: '#/definitions/ServiceRate'
+        type: array
+      excluded_tax:
+        description: The amount of extra taxes also calculated for all rooms and all persons.
+        format: double
+        type: number
+      included_services:
+        description: List of codes for all services already included in the gross rate
+        items:
+          type: string
+        type: array
+      included_tax:
+        description: "The amount of taxes already included in the gross rate also calculated for all rooms and\r\n            all persons."
+        format: double
+        type: number
+      rate:
+        description: The gross rate. It is the prize calculated for all rooms and all persons.
+        format: double
+        type: number
+    type: object
+  RatePlan:
+    properties:
+      code:
+        description: Code of the rate plan
+        type: string
+      description:
+        description: Description of the rate plan suitable for being displayed to customers
+        type: string
+      name:
+        description: Name of the rate plan
+        type: string
+    type: object
+  Rates:
+    properties:
+      arrival_date:
+        description: The arrival date of the guest for this rate offer
+        format: date-time
+        type: string
+      departure_date:
+        description: The departure date of the guest for this rate offer
+        format: date-time
+        type: string
+      hotel_id:
+        description: The id of the hotel the rate offers will be valid for
+        format: int32
+        type: integer
+      hotel_name:
+        description: The name of the hotel the rate offers will be valid for
+        type: string
+      rate_plans:
+        description: List of rate plans details for rates you can find offers in the room_offers
+        items:
+          $ref: '#/definitions/RatePlan'
+        type: array
+      room_offers:
+        description: List of room types with available rate offers ordered from ascending
+        items:
+          $ref: '#/definitions/RoomOffer'
+        type: array
+      rooms:
+        description: List of room type details for room types you can find offers in the room_offers
+        items:
+          $ref: '#/definitions/ReservationRoom'
+        type: array
+      services:
+        description: List of service details for included services in offers you can find in the room_offers
+        items:
+          $ref: '#/definitions/Service'
+        type: array
+    type: object
+  Reservation:
+    properties:
+      addons:
+        description: A list of addon service codes that should be booked for all reservations of this booking
+        items:
+          type: string
+        type: array
+      adults:
+        description: The number of adults per room
+        format: int32
+        type: integer
+      arrival_date:
+        description: The arrival date of the guests
+        format: date-time
+        type: string
+      channel_code:
+        description: The channel code for this reservation. You can find available channels in the codes for the hotel.
+        type: string
+      comment:
+        description: The comment you want to add for this reservation
+        type: string
+      company:
+        $ref: '#/definitions/Company'
+        description: The company that will be linked to this reservation
+      contact:
+        $ref: '#/definitions/Contact'
+        description: The contact that will be linked to this reservation
+      currency:
+        description: The currency all amounts of this reservation will be shown in
+        type: string
+      departure_date:
+        description: The departure date of the guests
+        format: date-time
+        type: string
+      external_id:
+        description: "The external id for this reservation. You can put here your own id used by you or the external system\r\n            you integrate hetras with"
+        type: string
+      guarantee:
+        $ref: '#/definitions/Guarantee'
+        description: The guarantee for this reservation
+      guests:
+        description: A list of guests with some basic guest details
+        items:
+          $ref: '#/definitions/Guest'
+        type: array
+      hotel_id:
+        description: The id of the hotel this reservation is valid for
+        format: int32
+        type: integer
+      payment_method:
+        description: The payment method for this reservation
+        enum:
+          - None
+          - Cash
+          - CreditCard
+          - WireTransfer
+          - ChargeToCompany
+          - Check
+          - Voucher
+          - DebitCard
+          - Token
+        type: string
+      rate_plan:
+        description: The rate plan code this reservation is related to
+        type: string
+      room_type:
+        description: The room type code this reservation is related to
+        type: string
+      rooms:
+        description: "The number of rooms this reservation is for. After a multi-room booking is done there will be \r\n            one reservation in hetras for all rooms. The hotel staff then will split this reservation into\r\n            one reservation per room to be able to check in the guests"
+        format: int32
+        type: integer
+      total_amount:
+        description: This attribute is obsolete and not used. It is deprecated and will be removed for version 1 of the booking API
+        format: double
+        type: number
+    type: object
+  ReservationResponse:
+    properties:
+      _warnings:
+        description: "Warnings that came up when your request was processed. Your request will still be processed successfull when\r\n            you see such warnings in your response"
+        items:
+          type: string
+        type: array
+      addon_services:
+        description: "A list of addon service codes that are currently booked on the reservation. Services which are charged\r\n            once per stay are only visible before and on the day they are booked for."
+        items:
+          type: string
+        type: array
+      adults:
+        description: The number of adults per room
+        format: int32
+        type: integer
+      arrival_date:
+        description: The arrival date of the guests
+        format: date-time
+        type: string
+      balance:
+        description: "The balance for all folios of this reservartion. It is calculated by all already charged room and service\r\n            rates plus manual charges or charges from other systems like POS minus all payments. A negative balance\r\n            indicates the reservation is overpaid, a positive balance that the guest owes the hotel money"
+        format: double
+        type: number
+      cancellation_policies:
+        description: The cancellation policies that were applicable on the date the booking was done
+        items:
+          $ref: '#/definitions/CancellationPolicy'
+        type: array
+      channel_code:
+        description: The code of the channel that was used when the booking has been created
+        type: string
+      comment:
+        description: The comment for this reservation
+        type: string
+      company:
+        $ref: '#/definitions/Company'
+        description: The company linked to this reservation
+      confirmation_id:
+        description: "The confirmation id for the booking which the guest can use to check in on the kiosk, add the\r\n            booking to the mobile app etc. It is used as identifier for all reservations done with the same\r\n            booking request"
+        type: string
+      contact:
+        $ref: '#/definitions/Contact'
+        description: The contact linked to this reservation
+      currency:
+        description: The currency all amounts of this reservation will be shown in
+        type: string
+      departure_date:
+        description: The departure date of the guests
+        format: date-time
+        type: string
+      external_id:
+        description: The external id for this reservation
+        type: string
+      general_policies:
+        description: The general policies that were applicable on the date the booking was done
+        items:
+          $ref: '#/definitions/GeneralPolicy'
+        type: array
+      guarantee:
+        $ref: '#/definitions/GuaranteeResponse'
+        description: The guarantee for this reservation
+      guests:
+        description: A list of guest details for this reservation
+        items:
+          $ref: '#/definitions/Guest'
+        type: array
+      hotel_id:
+        description: The id of the hotel this reservation is valid for
+        format: int32
+        type: integer
+      noshow_policy:
+        $ref: '#/definitions/NoShowPolicy'
+        description: The noshow policy that were applicable on the date the booking was done
+      payment_method:
+        description: The payment method for this reservation
+        enum:
+          - None
+          - Cash
+          - CreditCard
+          - WireTransfer
+          - ChargeToCompany
+          - Check
+          - Voucher
+          - DebitCard
+          - Token
+        type: string
+      rate_plan:
+        $ref: '#/definitions/RatePlan'
+        description: The rate plan details this reservation is related to
+      reservation_number:
+        description: The reservation number of the reservation
+        format: int32
+        type: integer
+      reservation_status:
+        description: The current status of this reservation
+        enum:
+          - Tentative
+          - Waitlisted
+          - OnRequest
+          - NonGuaranteed
+          - Guaranteed
+          - InHouse
+          - CheckedOut
+          - NoShow
+          - Denied
+          - Cancelled
+          - Released
+          - Walked
+          - Expired
+          - WalkIn
+          - Registered
+        type: string
+      room:
+        $ref: '#/definitions/EmbeddedRoom'
+        description: "The room type this reservation is related to and if applicable the already assigned specific room for \r\n            this reservation"
+      room_rates:
+        description: The breakdown for all daily room rates and service charges for this reservation
+        items:
+          $ref: '#/definitions/DailyRate'
+        type: array
+      rooms:
+        description: "The number of rooms this reservation is valid for. After a multi-room booking is done there will be \r\n            one reservation in hetras for this booking for all rooms. The hotel staff then will split this reservation into\r\n            one reservation per room to be able to check in the guests"
+        format: int32
+        type: integer
+      services:
+        description: A list of details for all services included and addon service booked on this reservation
+        items:
+          $ref: '#/definitions/Service'
+        type: array
+      total_stay:
+        $ref: '#/definitions/Rate'
+        description: The total stay amounts for this reservation
+    type: object
+  ReservationRoom:
+    properties:
+      description:
+        description: The description of the room type
+        type: string
+      name:
+        description: The name of the room type
+        type: string
+      room_number:
+        description: The room number of the assigned room
+        format: int32
+        type: integer
+      type:
+        description: The code of the room type
+        type: string
+    type: object
+  ReservationsResponse:
+    description: Reservation collection response model
+    properties:
+      reservations:
+        description: All reservations for the requested booking
+        items:
+          $ref: '#/definitions/ReservationResponse'
+        type: array
+    type: object
+  RoomAssignmentResponse:
+    description: Defines the response for room assignment operation
+    properties:
+      _warnings:
+        description: "Warnings that came up when your request was processed. Your request will still be processed successfull when\r\n            you see such warnings in your response"
+        items:
+          type: string
+        type: array
+      room_number:
+        description: The room number assigned
+        format: int32
+        type: integer
+    type: object
+  RoomOffer:
+    properties:
+      offers:
+        description: A list of rate offers for the appropriate room type ordered by amount ascending
+        items:
+          $ref: '#/definitions/Offer'
+        type: array
+      room_type:
+        description: The room type all offers will be valid for
+        type: string
+    type: object
+  Service:
+    properties:
+      code:
+        description: The code of the service
+        type: string
+      description:
+        description: The description of the service which is suitable for displaying to customers
+        type: string
+      frequency:
+        description: "The frequency the service will be charged to the guests folio. It is a free text and only suitable for \r\n            displaying to customers"
+        type: string
+      is_addon:
+        description: This flag indicates if a service is an addon or is included already in the room rate
+        type: boolean
+      name:
+        description: The name of the service
+        type: string
+    type: object
+  ServiceRate:
+    properties:
+      code:
+        description: The code of the service
+        type: string
+      included_tax:
+        description: The included taxes in the gross rate of the service calculated for all rooms and all persons
+        format: double
+        type: number
+      rate:
+        description: The gross rate of the service calculated for all rooms and all persons
+        format: double
+        type: number
+    type: object
+  Token:
+    properties:
+      authorization_expiry_date:
+        description: The authorization expiry date you got back from the payment service provider
+        format: date-time
+        type: string
+      authorization_reference:
+        description: "The authorization reference. This value is specific for different payment service providers. There will be\r\n            a page on the developer portal explaining the pattern on how to fill this value for the payment service\r\n            provider hetras is integrated with"
+        type: string
+      authorization_status:
+        description: The authorization status you got back from the payment service provider
+        enum:
+          - Authorized
+          - Refused
+          - Error
+          - Canceled
+          - Consumed
+          - AuthorizedWithZeroAmount
+        type: string
+      authorized_amount:
+        description: The authorized amount
+        format: double
+        type: number
+      merchant_reference:
+        description: The merchant reference you used when requesting the token from the payment service provider
+        type: string
+      shopper_email:
+        description: The shopper email you used when requesting the token from the payment service provider
+        type: string
+      shopper_reference:
+        description: "The shopper reference you used when requesting the token from the payment service provider. It can\r\n            be the same as the merchant reference"
+        type: string
+      token_id:
+        description: The token id you get from the payment service provider
+        type: string
+    type: object
+host: api.hetras-certification.net
+info:
+  title: hetras booking API v0
+  version: v0
+  x-logo:
+    url: 'https://hetras.zendesk.com/hc/logo'
+  x-origin:
+    format: swagger
+    url: 'https://developer.hetras.com/swagger/spec/BookingAPIv0.json'
+    version: '2.0'
+  x-providerName: hetras-certification.net
+  x-serviceName: booking
+paths:
+  /api/booking/v0/addons:
+    get:
+      consumes: []
+      deprecated: false
+      description: "The booking addons endpoint gives the client all service addon\r\n             combinations for the given rate plan, room type, timeframe, for the given number of adults and\r\n             number of children per room"
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: Specifies the hotel id to process.
+          format: int32
+          in: query
+          name: hotelId
+          required: true
+          type: integer
+        - description: 'Date of arrival for the guest in the ISO-8601 format "YYYY-MM-DD".'
+          format: date-time
+          in: query
+          name: arrivalDate
+          required: true
+          type: string
+        - description: 'Date of departure for the guest in the ISO-8601 format "YYYY-MM-DD".'
+          format: date-time
+          in: query
+          name: departureDate
+          required: true
+          type: string
+        - description: Channel Code the rate plan needs to be configured for.
+          in: query
+          name: channelCode
+          required: true
+          type: string
+        - description: Number of adults per room.
+          format: byte
+          in: query
+          name: adults
+          required: true
+          type: string
+        - description: Number of rooms.
+          format: byte
+          in: query
+          name: rooms
+          required: true
+          type: string
+        - description: Only return offers with rates for the specified room type code.
+          in: query
+          name: roomType
+          required: true
+          type: string
+        - description: Only return offers for the specified room type code.
+          in: query
+          name: ratePlanCode
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: "An array of offers for each of the hotels listed in the hetras-hotels\r\n            header. Only hotels with availability for the specified criteria are in the\r\n            list. If the list is empty none of the specified hotels offer available rooms."
+          schema:
+            $ref: '#/definitions/Addons'
+        '400':
+          description: Some request parameters are invalid
+        '403':
+          description: You are not authorized to access this resource or the data for the specified hotels.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: Missing a mandatory parameter.
+        '500':
+          description: "We couldn't return the representation due to an internal server error."
+      summary: Get a list of addon offers for the requested hotel identifier.
+      tags:
+        - Addons
+  /api/booking/v0/bookings:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: "Create a reservation based on the payload. If the client making the request is not subscribed to the hotel specified in the request\r\n            the API will return 403."
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: Specifies the reservation payload.
+          in: body
+          name: reservationRequest
+          required: true
+          schema:
+            $ref: '#/definitions/Reservation'
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '201':
+          description: Return the newly created reservation after successful creation.
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        '401':
+          description: You are not authorized to access this resource or the data for the specified hotels.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: The validation of the payload wasn´t successful.
+        '500':
+          description: "We couldn't return the representation due to an internal server error."
+      summary: Create a reservation.
+      tags:
+        - Reservation
+  '/api/booking/v0/bookings/{confirmationId}':
+    get:
+      consumes: []
+      deprecated: false
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: Specifies the booking confirmation id to process.
+          in: path
+          name: confirmationId
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: The details of the reservation specified.
+          schema:
+            $ref: '#/definitions/ReservationsResponse'
+        '403':
+          description: You are not authorized to access this resource or the data for the specified hotels.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '500':
+          description: "We couldn't return the representation due to an internal server error."
+      summary: Get reservations by confirmation id
+      tags:
+        - Reservation
+  '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}':
+    get:
+      consumes: []
+      deprecated: false
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: Specifies the booking confirmation id to process.
+          in: path
+          name: confirmationId
+          required: true
+          type: string
+        - description: Specifies the reservation id to use for all further operations.
+          format: int32
+          in: path
+          name: reservationNumber
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: The details of the reservation specified.
+          schema:
+            $ref: '#/definitions/ReservationResponse'
+        '403':
+          description: You are not authorized to access this resource or the data for the specified hotels.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '500':
+          description: "We couldn't return the representation due to an internal server error."
+      summary: Get a reservation
+      tags:
+        - Reservation
+  '/api/booking/v0/bookings/{confirmationId}/reservations/{reservationNumber}/cancel':
+    post:
+      consumes: []
+      deprecated: false
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: Specifies the booking confirmation id to process.
+          in: path
+          name: confirmationId
+          required: true
+          type: string
+        - description: Specifies the reservation id to use for all further operations.
+          format: int32
+          in: path
+          name: reservationNumber
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/CancellationResponse'
+      summary: Cancels reservation
+      tags:
+        - Reservation
+  /api/booking/v0/rates:
+    get:
+      consumes: []
+      deprecated: false
+      description: "The booking availability endpoint gives the client all room and rate\r\n             combinations for the given timeframe, for the given number of adults and\r\n             number of children per room. The resultset can be further reduced by\r\n             specifying a channel, rate plan or room type."
+      parameters:
+        - description: Application identifier
+          in: header
+          name: App-Id
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application key.
+          in: header
+          name: App-Key
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: Specifies the hotel id to process.
+          format: int32
+          in: query
+          name: hotelId
+          required: true
+          type: integer
+        - description: 'Date of arrival for the guest in the ISO-8601 format "YYYY-MM-DD".'
+          format: date-time
+          in: query
+          name: arrivalDate
+          required: true
+          type: string
+        - description: 'Date of departure for the guest in the ISO-8601 format "YYYY-MM-DD".'
+          format: date-time
+          in: query
+          name: departureDate
+          required: true
+          type: string
+        - description: Channel Code the rate plan needs to be configured for.
+          in: query
+          name: channelCode
+          required: true
+          type: string
+        - description: Number of adults per room.
+          format: byte
+          in: query
+          name: adults
+          required: true
+          type: string
+        - description: Number of rooms (default is 1).
+          format: byte
+          in: query
+          name: rooms
+          required: false
+          type: string
+        - description: Only return offers with rates for the specified room type code.
+          in: query
+          name: roomType
+          required: false
+          type: string
+        - description: Only return offers for the specified room type code.
+          in: query
+          name: ratePlanCode
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: "An array of offers for each of the hotels listed in the hetras-hotels\r\n            header. Only hotels with availability for the specified criteria are in the\r\n            list. If the list is empty none of the specified hotels offer available rooms."
+          schema:
+            $ref: '#/definitions/Rates'
+        '400':
+          description: Some request parameters are invalid
+        '403':
+          description: You are not authorized to access this resource or the data for the specified hotels.
+        '404':
+          description: Not Found. The server has not found anything matching the Request-URI.
+        '422':
+          description: Missing a mandatory parameter.
+        '500':
+          description: "We couldn't return the representation due to an internal server error."
+      summary: Get a list of offers for the requested hotel identifier.
+      tags:
+        - Rates
+schemes:
+  - https
+swagger: '2.0'

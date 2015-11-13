@@ -1,161 +1,102 @@
-{
-  "definitions": {
-    "all_shows": {
-      "properties": {
-        "created_at": {
-          "format": [
-            "date-time"
-          ],
-          "type": [
-            "dateTime",
-            "string"
-          ]
-        },
-        "deleted_at": {
-          "format": [
-            "date-time"
-          ],
-          "type": [
-            "dateTime",
-            "string"
-          ]
-        },
-        "updated_at": {
-          "format": [
-            "date-time"
-          ],
-          "type": [
-            "dateTime",
-            "string"
-          ]
-        }
-      }
-    },
-    "episode": {
-      "properties": {
-        "date_added": {
-          "format": [
-            "date-time"
-          ],
-          "type": [
-            "dateTime",
-            "string"
-          ]
-        },
-        "date_created": {
-          "format": [
-            "date-time"
-          ],
-          "type": [
-            "dateTime",
-            "string"
-          ]
-        },
-        "updated_at": {
-          "format": [
-            "date-time"
-          ],
-          "type": [
-            "dateTime",
-            "string"
-          ]
-        }
-      }
-    },
-    "show": {
-      "properties": {
-        "urls": {
-          "items": {
-            "name": [
-              "self",
-              0,
-              0
-            ]
-          }
-        },
-        "web_profiles": {
-          "items": {
-            "$ref": [
-              "web_profile",
-              0,
-              0
-            ]
-          }
-        }
-      }
-    },
-    "show_search_result": {
-      "properties": {
-        "web_profiles": {
-          "items": {
-            "$ref": [
-              "web_profile",
-              0,
-              0
-            ]
-          }
-        }
-      }
-    },
-    "source_episode_tastemaker": {
-      "extends": [
-        "episode_tastemaker",
-        0,
-        0
-      ]
-    }
-  },
-  "paths": {
-    "/tastemakers/episodes/{n}": {
-      "get": {
-        "parameters": {
-          "0": {
-            "default": [
-              10
-            ],
-            "defaultValue": [
-              10,
-              0,
-              0
-            ]
-          },
-          "_t": "a"
-        }
-      }
-    },
-    "/tastemakers/episodes/source/{tastemaker_id}/{n}": {
-      "get": {
-        "parameters": {
-          "1": {
-            "default": [
-              10
-            ],
-            "defaultValue": [
-              10,
-              0,
-              0
-            ]
-          },
-          "_t": "a"
-        }
-      }
-    },
-    "/tastemakers/shows/{n}": {
-      "get": {
-        "parameters": {
-          "0": {
-            "default": [
-              10
-            ],
-            "defaultValue": [
-              10,
-              0,
-              0
-            ]
-          },
-          "_t": "a"
-        }
-      }
-    }
-  }
-}
+definitions:
+  all_shows:
+    properties:
+      created_at:
+        format:
+          - date-time
+        type:
+          - dateTime
+          - string
+      deleted_at:
+        format:
+          - date-time
+        type:
+          - dateTime
+          - string
+      updated_at:
+        format:
+          - date-time
+        type:
+          - dateTime
+          - string
+  episode:
+    properties:
+      date_added:
+        format:
+          - date-time
+        type:
+          - dateTime
+          - string
+      date_created:
+        format:
+          - date-time
+        type:
+          - dateTime
+          - string
+      updated_at:
+        format:
+          - date-time
+        type:
+          - dateTime
+          - string
+  show:
+    properties:
+      urls:
+        items:
+          name:
+            - self
+            - 0
+            - 0
+      web_profiles:
+        items:
+          $ref:
+            - web_profile
+            - 0
+            - 0
+  show_search_result:
+    properties:
+      web_profiles:
+        items:
+          $ref:
+            - web_profile
+            - 0
+            - 0
+  source_episode_tastemaker:
+    extends:
+      - episode_tastemaker
+      - 0
+      - 0
+paths:
+  '/tastemakers/episodes/source/{tastemaker_id}/{n}':
+    get:
+      parameters:
+        '1':
+          default:
+            - 10
+          defaultValue:
+            - 10
+            - 0
+            - 0
+        _t: a
+  '/tastemakers/episodes/{n}':
+    get:
+      parameters:
+        '0':
+          default:
+            - 10
+          defaultValue:
+            - 10
+            - 0
+            - 0
+        _t: a
+  '/tastemakers/shows/{n}':
+    get:
+      parameters:
+        '0':
+          default:
+            - 10
+          defaultValue:
+            - 10
+            - 0
+            - 0
+        _t: a

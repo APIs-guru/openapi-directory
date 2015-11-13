@@ -1,2728 +1,1958 @@
-{
-  "basePath": "/G2W/rest",
-  "consumes": [
-    "application/json"
-  ],
-  "definitions": {
-    "AnswerToAttendeeQuestion": {
-      "description": "Describes an answer to a question asked by an attendee during a webinar session.",
-      "properties": {
-        "answer": {
-          "description": "An answer given to a question asked by an attendee during a webinar session",
-          "type": "string"
-        },
-        "answeredBy": {
-          "description": "The key of the organizer that answered the attendee's question",
-          "type": "string"
-        }
-      },
-      "required": [
-        "answer",
-        "answeredBy"
-      ]
-    },
-    "Attendance": {
-      "description": "Describes the times the attendee joined and left a webinar session.",
-      "properties": {
-        "joinTime": {
-          "description": "The time the attendee joined a webinar session",
-          "format": "date-time",
-          "type": "string"
-        },
-        "leaveTime": {
-          "description": "The time the attendee left a webinar session",
-          "format": "date-time",
-          "type": "string"
-        }
-      },
-      "required": [
-        "joinTime",
-        "leaveTime"
-      ]
-    },
-    "AttendanceStatistics": {
-      "description": "Describes attendance metrics for a webinar session.",
-      "properties": {
-        "averageAttendanceTimeSeconds": {
-          "description": "Average attendance time in seconds",
-          "format": "float",
-          "type": "number"
-        },
-        "averageAttentiveness": {
-          "description": "Average based on the focus of the attendees Viewer during the webinar session",
-          "format": "float",
-          "type": "number"
-        },
-        "averageInterestRating": {
-          "description": "Numerical value 1-100 (100 being most interested) indicating the average interest rating of the webinar attendees",
-          "format": "float",
-          "type": "number"
-        },
-        "percentageAttendance": {
-          "description": "The percentage of registrants that actually attended the webinar session",
-          "format": "float",
-          "type": "number"
-        },
-        "registrantCount": {
-          "description": "The number of registrations for the webinar",
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "registrantCount",
-        "percentageAttendance",
-        "averageInterestRating",
-        "averageAttentiveness",
-        "averageAttendanceTimeSeconds"
-      ]
-    },
-    "Attendee": {
-      "description": "Describes the attendee of a webinar",
-      "properties": {
-        "attendance": {
-          "description": "The list of times the attendee joined and left the webinar session",
-          "items": {
-            "$ref": "#/definitions/Attendance"
-          },
-          "type": "array"
-        },
-        "attendanceTimeInSeconds": {
-          "description": "The total attendance time in seconds",
-          "format": "int64",
-          "type": "integer"
-        },
-        "email": {
-          "description": "The attendee's email address",
-          "type": "string"
-        },
-        "firstName": {
-          "description": "The attendee's first name",
-          "type": "string"
-        },
-        "lastName": {
-          "description": "The attendee's last name",
-          "type": "string"
-        },
-        "registrantKey": {
-          "description": "The key of the webinar attendee",
-          "format": "int64",
-          "type": "integer"
-        },
-        "sessionKey": {
-          "description": "The unique key of the webinar session",
-          "format": "int64",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "registrantKey",
-        "firstName",
-        "lastName",
-        "email",
-        "attendanceTimeInSeconds",
-        "attendance",
-        "sessionKey"
-      ]
-    },
-    "AttendeeQuestion": {
-      "description": "Describes the question asked by an attendee during a webinar session; includes the answers given to it.",
-      "properties": {
-        "answers": {
-          "description": "Answer to a question of an attendee and key of the organizer that answered",
-          "items": {
-            "$ref": "#/definitions/AnswerToAttendeeQuestion"
-          },
-          "type": "array"
-        },
-        "askedBy": {
-          "description": "The email address of the attendee that asked the question",
-          "type": "string"
-        },
-        "question": {
-          "description": "The question asked by the attendee",
-          "type": "string"
-        }
-      },
-      "required": [
-        "answers",
-        "question",
-        "askedBy"
-      ]
-    },
-    "Coorganizer": {
-      "description": "Describes a webinar coorganizer.",
-      "properties": {
-        "email": {
-          "description": "The coorganizer's email address",
-          "type": "string"
-        },
-        "givenName": {
-          "description": "The coorganizer's first name",
-          "type": "string"
-        },
-        "memberKey": {
-          "description": "The coorganizer's key",
-          "format": "int64",
-          "type": "integer"
-        },
-        "surname": {
-          "description": "The coorganizer's last name",
-          "type": "string"
-        }
-      },
-      "required": [
-        "email",
-        "memberKey",
-        "surname",
-        "givenName"
-      ]
-    },
-    "CreatedWebinar": {
-      "description": "Describes a newly created webinar.",
-      "properties": {
-        "webinarKey": {
-          "description": "The unique key of the webinar.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "webinarKey"
-      ]
-    },
-    "CustomAnswers": {
-      "description": "Answers to custom questions of the registrant",
-      "properties": {
-        "answer": {
-          "description": "Answer to a custom question when registering",
-          "type": "string"
-        },
-        "question": {
-          "description": "Custom question for registering",
-          "type": "string"
-        }
-      },
-      "required": [
-        "answer",
-        "question"
-      ]
-    },
-    "DateTimeRange": {
-      "description": "A pair of DateTime values, the first of which serves as a start time and the second as an end time of an interval.",
-      "properties": {
-        "endTime": {
-          "description": "The ending time of an interval, e.g. 2015-07-13T22:00:00Z",
-          "format": "date-time",
-          "type": "string"
-        },
-        "startTime": {
-          "description": "The starting time of an interval, e.g. 2015-07-13T10:00:00Z",
-          "format": "date-time",
-          "type": "string"
-        }
-      },
-      "required": [
-        "startTime",
-        "endTime"
-      ]
-    },
-    "HistoricalWebinar": {
-      "description": "Describes a completed webinar",
-      "properties": {
-        "description": {
-          "description": "A short description of the webinar",
-          "type": "string"
-        },
-        "organizerKey": {
-          "description": "The key of the webinar organizer",
-          "format": "int64",
-          "type": "integer"
-        },
-        "subject": {
-          "description": "The webinar subject",
-          "type": "string"
-        },
-        "times": {
-          "description": "Array with startTime and endTime for the webinar sessions",
-          "items": {
-            "$ref": "#/definitions/DateTimeRange"
-          },
-          "type": "array"
-        },
-        "timeZone": {
-          "description": "The timezone where the webinar is taking place",
-          "type": "string"
-        },
-        "webinarKey": {
-          "description": "The unique key of the webinar",
-          "format": "int64",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "times",
-        "description",
-        "subject",
-        "organizerKey",
-        "webinarKey",
-        "timeZone"
-      ]
-    },
-    "Panelist": {
-      "description": "Describes a webinar session panelist.",
-      "properties": {
-        "email": {
-          "description": "The panelist's email address",
-          "type": "string"
-        },
-        "firstName": {
-          "description": "The panelist's first name",
-          "type": "string"
-        },
-        "lastName": {
-          "description": "The panelist's last name",
-          "type": "string"
-        },
-        "panelistId": {
-          "description": "The panelist's ID",
-          "format": "int64",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "lastName",
-        "email",
-        "panelistId",
-        "firstName"
-      ]
-    },
-    "Poll": {
-      "description": "A poll or survey launched by an organizer during or after a webinar session; includes the responses given to it by the attendees.",
-      "properties": {
-        "numberOfResponses": {
-          "description": "The total number of responses received for this poll or survey",
-          "format": "int32",
-          "type": "integer"
-        },
-        "question": {
-          "description": "The poll or survey question asked by the webinar organizer",
-          "type": "string"
-        },
-        "responses": {
-          "description": "The responses given by the attendees to the poll or survey",
-          "items": {
-            "$ref": "#/definitions/PollResponse"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "responses",
-        "question",
-        "numberOfResponses"
-      ]
-    },
-    "PollAnswer": {
-      "description": "Describes the answer given by a webinar attendee to a poll or survey launched by an organizer.",
-      "properties": {
-        "answer": {
-          "description": "The answer given to the poll or survey question",
-          "type": "string"
-        },
-        "question": {
-          "description": "The poll or survey question",
-          "type": "string"
-        }
-      },
-      "required": [
-        "answer",
-        "question"
-      ]
-    },
-    "PollResponse": {
-      "description": "One of the potential responses/options to a poll or survey launched by an organizer during a webinar session.",
-      "properties": {
-        "percentage": {
-          "description": "The percentage of responses that favored this particular option",
-          "format": "float",
-          "maximum": 100,
-          "minimum": 0,
-          "type": "number"
-        },
-        "text": {
-          "description": "The text of the response/option to a poll or survey",
-          "type": "string"
-        }
-      },
-      "required": [
-        "text",
-        "percentage"
-      ]
-    },
-    "PollsAndSurveysStatistics": {
-      "description": "Details on the polls and surveys for a webinar session.",
-      "properties": {
-        "percentagePollsCompleted": {
-          "description": "The percentage of polls completed by the attendees",
-          "format": "float",
-          "type": "number"
-        },
-        "percentageSurveysCompleted": {
-          "description": "The percentage of surveys completed by the attendees",
-          "format": "float",
-          "type": "number"
-        },
-        "pollCount": {
-          "description": "The number of polls launched at a webinar session",
-          "format": "int32",
-          "type": "integer"
-        },
-        "questionsAsked": {
-          "description": "The number of questions asked at a webinar session",
-          "format": "int32",
-          "type": "integer"
-        },
-        "surveyCount": {
-          "description": "The percentage of surveys launched at a webinar session",
-          "format": "float",
-          "type": "number"
-        }
-      },
-      "required": [
-        "pollCount",
-        "surveyCount",
-        "questionsAsked",
-        "percentagePollsCompleted",
-        "percentageSurveysCompleted"
-      ]
-    },
-    "Registrant": {
-      "description": "Describes a webinar registrant",
-      "properties": {
-        "email": {
-          "description": "The registrant's email address",
-          "type": "string"
-        },
-        "firstName": {
-          "description": "The registrant's first name",
-          "type": "string"
-        },
-        "joinUrl": {
-          "description": "The URL the registrant will use to join the webinar",
-          "type": "string"
-        },
-        "lastName": {
-          "description": "The registrant's last name",
-          "type": "string"
-        },
-        "registrantKey": {
-          "description": "The registrant's key",
-          "format": "int64",
-          "type": "integer"
-        },
-        "registrationDate": {
-          "description": "The registration date and time",
-          "format": "date-time",
-          "type": "string"
-        },
-        "status": {
-          "description": "The registration status",
-          "enum": [
-            "APPROVED",
-            "DENIED",
-            "WAITING"
-          ],
-          "type": "string"
-        },
-        "timeZone": {
-          "description": "The time zone where the webinar will take place",
-          "type": "string"
-        }
-      },
-      "required": [
-        "lastName",
-        "email",
-        "firstName",
-        "registrantKey",
-        "registrationDate",
-        "status",
-        "joinUrl",
-        "timeZone"
-      ]
-    },
-    "RegistrantCreated": {
-      "description": "Describes a newly created webinar registrant.",
-      "properties": {
-        "joinUrl": {
-          "description": "The URL the registrant will use to join the webinar.",
-          "type": "string"
-        },
-        "registrantKey": {
-          "description": "The registrant's key",
-          "format": "int64",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "registrantKey",
-        "joinUrl"
-      ]
-    },
-    "RegistrantDetailed": {
-      "description": "Detailed description of a webinar registrant with all registration fields.",
-      "properties": {
-        "address": {
-          "description": "The registrant's address",
-          "type": "string"
-        },
-        "city": {
-          "description": "The registrant's city",
-          "type": "string"
-        },
-        "country": {
-          "description": "The registrant's country",
-          "type": "string"
-        },
-        "email": {
-          "description": "The registrant's email address",
-          "type": "string"
-        },
-        "employeeCount": {
-          "description": "The size in employees of the registrant's organization",
-          "type": "string"
-        },
-        "firstName": {
-          "description": "The registrant's first name",
-          "type": "string"
-        },
-        "implementationTimeFrame": {
-          "description": "The time frame within which the product will be purchased",
-          "type": "string"
-        },
-        "industry": {
-          "description": "The type of industry the registrant's organization belongs to",
-          "type": "string"
-        },
-        "jobTitle": {
-          "description": "The registrant's job title",
-          "type": "string"
-        },
-        "joinUrl": {
-          "description": "URL the registrant can join the webinar",
-          "type": "string"
-        },
-        "lastName": {
-          "description": "The registrant's last name",
-          "type": "string"
-        },
-        "numberOfEmployees": {
-          "description": "The size in employees of the registrant's organization",
-          "type": "string"
-        },
-        "organization": {
-          "description": "The registrant's organization",
-          "type": "string"
-        },
-        "phone": {
-          "description": "The registrant's phone",
-          "type": "string"
-        },
-        "purchasingRole": {
-          "description": "The registrant's role in purchasing the product",
-          "type": "string"
-        },
-        "purchasingTimeFrame": {
-          "description": "The time frame within which the product will be purchased",
-          "type": "string"
-        },
-        "questionsAndComments": {
-          "description": "Any questions or comments the registrant made at the time of registration",
-          "type": "string"
-        },
-        "registrantKey": {
-          "description": "The registrant's key",
-          "format": "int64",
-          "type": "integer"
-        },
-        "registrationDate": {
-          "description": "The registration date and time",
-          "format": "date-time",
-          "type": "string"
-        },
-        "responses": {
-          "description": "Responses to custom questions",
-          "items": {
-            "$ref": "#/definitions/CustomAnswers"
-          },
-          "type": "array"
-        },
-        "state": {
-          "description": "The registrant's state (US only)",
-          "type": "string"
-        },
-        "status": {
-          "description": "The registration status",
-          "enum": [
-            "APPROVED",
-            "DENIED",
-            "WAITING"
-          ],
-          "type": "string"
-        },
-        "timeZone": {
-          "description": "The time zone where the webinar will take place",
-          "type": "string"
-        },
-        "type": {
-          "description": "The type is REGULAR for \"One session\" and \"Sequence\" webinars. For webinar series this parameter is not passed",
-          "enum": [
-            "REGULAR"
-          ],
-          "type": "string"
-        },
-        "unsubscribed": {
-          "description": "Indicates whether the registrant opted-out from receiving other emails from this webinar's organizer",
-          "type": "boolean"
-        },
-        "zipCode": {
-          "description": "The registrant's zip (post) code",
-          "type": "string"
-        }
-      },
-      "required": [
-        "firstName",
-        "lastName",
-        "email",
-        "registrantKey",
-        "registrationDate",
-        "status",
-        "joinUrl",
-        "timeZone"
-      ]
-    },
-    "RegistrantFields": {
-      "description": "Detailed description of a all fields to register a registrant for a webinar.",
-      "properties": {
-        "address": {
-          "description": "The registrant's address",
-          "type": "string"
-        },
-        "city": {
-          "description": "The registrant's city",
-          "type": "string"
-        },
-        "country": {
-          "description": "The registrant's country",
-          "type": "string"
-        },
-        "email": {
-          "description": "The registrant's email address",
-          "type": "string"
-        },
-        "firstName": {
-          "description": "The registrant's first name",
-          "type": "string"
-        },
-        "industry": {
-          "description": "The type of industry the registrant's organization belongs to",
-          "type": "string"
-        },
-        "jobTitle": {
-          "description": "The registrant's job title",
-          "type": "string"
-        },
-        "lastName": {
-          "description": "The registrant's last name",
-          "type": "string"
-        },
-        "numberOfEmployees": {
-          "description": "The size in employees of the registrant's organization",
-          "type": "string"
-        },
-        "organization": {
-          "description": "The registrant's organization",
-          "type": "string"
-        },
-        "phone": {
-          "description": "The registrant's phone",
-          "type": "string"
-        },
-        "purchasingRole": {
-          "description": "The registrant's role in purchasing the product",
-          "type": "string"
-        },
-        "purchasingTimeFrame": {
-          "description": "The time frame within which the product will be purchased",
-          "type": "string"
-        },
-        "questionsAndComments": {
-          "description": "Any questions or comments the registrant made at the time of registration",
-          "type": "string"
-        },
-        "responses": {
-          "description": "Set the answers of all questions",
-          "items": {
-            "$ref": "#/definitions/RegistrantQAResponse"
-          },
-          "type": "array"
-        },
-        "state": {
-          "description": "The registrant's state (US only)",
-          "type": "string"
-        },
-        "zipCode": {
-          "description": "The registrant's zip (post) code",
-          "type": "string"
-        }
-      },
-      "required": [
-        "firstName",
-        "lastName",
-        "email"
-      ]
-    },
-    "RegistrantQAResponse": {
-      "description": "Describes a completed registration question for a webinar registrant. If you use \"Multiple choice\" questions the response contains the numeric answerKey, otherwise the answer text. Example:<br />{<br />  \"firstName\": \"First\",<br />  \"lastName\": \"Last\",<br />  \"email\": \"First.Last@example.com\",<br />  \"responses\": [{<br />      \"questionKey\": 17023549,<br />      \"responseText\": \"This is a short answer\"},{<br />      \"questionKey\": 17023550,<br />      \"answerKey\": 17023553}  ]<br />}",
-      "properties": {
-        "answerKey": {
-          "description": "The numeric key of the answer to a multiple-choice question.",
-          "format": "int64",
-          "type": "integer"
-        },
-        "questionKey": {
-          "description": "The unique key of the question",
-          "format": "int64",
-          "type": "integer"
-        },
-        "responseText": {
-          "description": "Answer of the question.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "questionKey"
-      ]
-    },
-    "RegistrationAnswer": {
-      "description": "Describes an answer to a multiple choice custom registration field.",
-      "properties": {
-        "answer": {
-          "description": "The answer value",
-          "type": "string"
-        },
-        "answerKey": {
-          "description": "The answer key",
-          "format": "int64",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "answer",
-        "answerKey"
-      ]
-    },
-    "RegistrationField": {
-      "description": "Describes a field for a webinar registration.",
-      "properties": {
-        "answers": {
-          "description": "List of choices for a multiple choice registration field",
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "field": {
-          "description": "The name of the registration field",
-          "type": "string"
-        },
-        "maxSize": {
-          "description": "The character size of the custom registration field (max 128)",
-          "format": "int32",
-          "type": "integer"
-        },
-        "required": {
-          "description": "Indicates whether the custom registration field is compulsory",
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "field",
-        "required",
-        "maxSize"
-      ]
-    },
-    "RegistrationFields": {
-      "description": "The fields to be completed on the webinar registration form.",
-      "properties": {
-        "fields": {
-          "description": "The default fields the organizer has selected for the webinar registration form",
-          "items": {
-            "$ref": "#/definitions/RegistrationField"
-          },
-          "type": "array"
-        },
-        "questions": {
-          "description": "Custom fields created by the organizer for the webinar registration form",
-          "items": {
-            "$ref": "#/definitions/RegistrationQuestion"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "questions",
-        "fields"
-      ]
-    },
-    "RegistrationQuestion": {
-      "description": "Describes a custom field for a webinar registration.",
-      "properties": {
-        "answers": {
-          "description": "The answers to a multiple choice custom registration field",
-          "items": {
-            "$ref": "#/definitions/RegistrationAnswer"
-          },
-          "type": "array"
-        },
-        "maxSize": {
-          "description": "The character size of the custom registration field (max 1000)",
-          "format": "int32",
-          "type": "integer"
-        },
-        "question": {
-          "description": "The value (text) of the custom registration field",
-          "type": "string"
-        },
-        "questionKey": {
-          "description": "The unique key of the custom registration field",
-          "format": "int64",
-          "type": "integer"
-        },
-        "required": {
-          "description": "Indicates whether the custom registration field is compulsory",
-          "type": "boolean"
-        },
-        "type": {
-          "description": "Indicates whether the custom registration field requires a single short answer or whether it is a multiple choice question",
-          "enum": [
-            "multipleChoice",
-            "shortAnswer"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "questionKey",
-        "question",
-        "required",
-        "type",
-        "maxSize"
-      ]
-    },
-    "Session": {
-      "description": "Describes a completed webinar session.",
-      "properties": {
-        "endTime": {
-          "description": "The ending time of the webinar session",
-          "format": "date-time",
-          "type": "string"
-        },
-        "registrantsAttended": {
-          "description": "The number of registrants who attended the webinar session",
-          "format": "int32",
-          "type": "integer"
-        },
-        "sessionKey": {
-          "description": "The unique key of the webinar session",
-          "format": "int64",
-          "type": "integer"
-        },
-        "startTime": {
-          "description": "The starting time of the webinar session",
-          "format": "date-time",
-          "type": "string"
-        },
-        "webinarKey": {
-          "description": "The unique key of the webinar",
-          "format": "int64",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "startTime",
-        "registrantsAttended",
-        "webinarKey",
-        "sessionKey",
-        "endTime"
-      ]
-    },
-    "SessionPerformance": {
-      "description": "Describes performance details for webinar sessions",
-      "properties": {
-        "attendance": {
-          "$ref": "#/definitions/AttendanceStatistics",
-          "description": "Attendance statistics for a webinar session"
-        },
-        "pollsAndSurveys": {
-          "$ref": "#/definitions/PollsAndSurveysStatistics",
-          "description": "Polls and surveys for a webinar session"
-        }
-      },
-      "required": [
-        "attendance",
-        "pollsAndSurveys"
-      ]
-    },
-    "UpcomingWebinar": {
-      "description": "Describes a scheduled webinar",
-      "properties": {
-        "description": {
-          "description": "A short description of the webinar",
-          "type": "string"
-        },
-        "inSession": {
-          "description": "Indicates whether there is a webinar session currently in progress",
-          "type": "boolean"
-        },
-        "organizerKey": {
-          "description": "The key of the webinar organizer",
-          "format": "int64",
-          "type": "integer"
-        },
-        "registrationUrl": {
-          "description": "The URL the webinar invitees can use to register",
-          "type": "string"
-        },
-        "subject": {
-          "description": "The webinar subject",
-          "type": "string"
-        },
-        "times": {
-          "description": "Array with startTime and endTime for the webinar sessions",
-          "items": {
-            "$ref": "#/definitions/DateTimeRange"
-          },
-          "type": "array"
-        },
-        "timeZone": {
-          "description": "The timezone where the webinar is taking place",
-          "type": "string"
-        },
-        "webinarKey": {
-          "description": "The unique key of the webinar",
-          "format": "int64",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "times",
-        "description",
-        "subject",
-        "inSession",
-        "organizerKey",
-        "webinarKey",
-        "timeZone",
-        "registrationUrl"
-      ]
-    },
-    "Webinar": {
-      "description": "Describes a scheduled webinar",
-      "properties": {
-        "description": {
-          "description": "A short description of the webinar",
-          "type": "string"
-        },
-        "inSession": {
-          "description": "Indicates whether there is a webinar session currently in progress",
-          "type": "boolean"
-        },
-        "numberOfRegistrants": {
-          "description": "The number of registrants at the webinar",
-          "format": "int32",
-          "type": "integer"
-        },
-        "organizerKey": {
-          "description": "The key of the webinar organizer",
-          "format": "int64",
-          "type": "integer"
-        },
-        "registrationUrl": {
-          "description": "The URL the webinar invitees can use to register",
-          "type": "string"
-        },
-        "subject": {
-          "description": "The webinar subject",
-          "type": "string"
-        },
-        "times": {
-          "description": "Array with startTime and endTime for the webinar sessions",
-          "items": {
-            "$ref": "#/definitions/DateTimeRange"
-          },
-          "type": "array"
-        },
-        "timeZone": {
-          "description": "The timezone where the webinar is taking place",
-          "type": "string"
-        },
-        "webinarKey": {
-          "description": "The unique key of the webinar",
-          "format": "int64",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "numberOfRegistrants",
-        "times",
-        "description",
-        "subject",
-        "inSession",
-        "organizerKey",
-        "webinarKey",
-        "timeZone",
-        "registrationUrl"
-      ]
-    },
-    "WebinarByKey": {
-      "description": "Describes a completed webinar",
-      "properties": {
-        "description": {
-          "description": "A short description of the webinar",
-          "type": "string"
-        },
-        "inSession": {
-          "description": "Indicates whether there is a webinar session currently in progress",
-          "type": "boolean"
-        },
-        "numberOfOpenedInvitations": {
-          "description": "The number of recipients who opened the invitation email to register for the webinar",
-          "format": "int32",
-          "type": "integer"
-        },
-        "numberOfRegistrants": {
-          "description": "The number of registrants at the webinar",
-          "format": "int32",
-          "type": "integer"
-        },
-        "numberOfRegistrationLinkClicks": {
-          "description": "The number of recipients who clicked on the link to register for the webinar",
-          "format": "int32",
-          "type": "integer"
-        },
-        "organizerKey": {
-          "description": "The key of the webinar organizer",
-          "format": "int64",
-          "type": "integer"
-        },
-        "registrationUrl": {
-          "description": "The URL the webinar invitees can use to register",
-          "type": "string"
-        },
-        "subject": {
-          "description": "The webinar subject.",
-          "type": "string"
-        },
-        "times": {
-          "description": "Array with startTime and endTime for the webinar sessions",
-          "items": {
-            "$ref": "#/definitions/DateTimeRange"
-          },
-          "type": "array"
-        },
-        "timeZone": {
-          "description": "The timezone where the webinar is taking place",
-          "type": "string"
-        },
-        "webinarKey": {
-          "description": "The unique key of the webinar",
-          "format": "int64",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "numberOfRegistrants",
-        "times",
-        "description",
-        "subject",
-        "inSession",
-        "organizerKey",
-        "webinarKey",
-        "timeZone",
-        "numberOfOpenedInvitations",
-        "registrationUrl",
-        "numberOfRegistrationLinkClicks"
-      ]
-    },
-    "WebinarReqCreate": {
-      "description": "Describes the details used to create a new single session webinar.",
-      "properties": {
-        "description": {
-          "description": "A short description of the webinar (2048 characters maximum)",
-          "type": "string"
-        },
-        "subject": {
-          "description": "The name/subject of the webinar (128 characters maximum)",
-          "type": "string"
-        },
-        "times": {
-          "description": "Array with startTime and endTime for webinar. Since this call creates single session webinars, the array can only contain a single pair of startTime and endTime",
-          "items": {
-            "$ref": "#/definitions/DateTimeRange"
-          },
-          "type": "array"
-        },
-        "timeZone": {
-          "description": "The time zone where the webinar is taking place (must be a valid time zone ID, see https://developer.citrixonline.com/citrix-rest-api-date-formats-and-time-zones). If this parameter is not passed the timezone of the organizer's profile will be used",
-          "type": "string"
-        }
-      },
-      "required": [
-        "subject",
-        "times"
-      ]
-    }
-  },
-  "externalDocs": {
-    "url": "https://developer.citrixonline.com/"
-  },
-  "host": "api.citrixonline.com",
-  "info": {
-    "contact": {
-      "email": "developer-support@citrixonline.com",
-      "name": "Developer Support",
-      "url": "https://developer.citrixonline.com"
-    },
-    "description": "The Citrix GoToWebinar API provides seamless integration of webinar registrant and attendee data into your existing infrastructure or third-party applications. The ability to register participants, as well as pull lists of registrants and attendees for a webinar, allows organizers to manage the flow of information between their primary applications without manual intervention.",
-    "termsOfService": "https://developer.citrixonline.com/terms-use",
-    "title": "GoToWebinar REST API",
-    "version": "1.0.0",
-    "x-logo": {
-      "backgroundColor": "#5F6166",
-      "url": "https://developer.citrixonline.com/sites/all/themes/citrix_responsive/logo.png"
-    },
-    "x-origin": {
-      "format": "swagger",
-      "url": "https://developer.citrixonline.com/sites/default/files/citrix/citrix-apis/gotowebinar.json",
-      "version": "2.0"
-    },
-    "x-providerName": "citrixonline.com",
-    "x-serviceName": "gotowebinar"
-  },
-  "paths": {
-    "/organizers/{organizerKey}/historicalWebinars": {
-      "get": {
-        "description": "Returns details for completed webinars for the specified organizer and completed webinars of other organizers where the specified organizer is a co-organizer.",
-        "operationId": "getHistoricalWebinars",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "A required start of datetime range in ISO8601 UTC format, e.g. 2015-07-13T10:00:00Z",
-            "format": "date-time",
-            "in": "query",
-            "name": "fromTime",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "A required end of datetime range in ISO8601 UTC format, e.g. 2015-07-13T22:00:00Z",
-            "format": "date-time",
-            "in": "query",
-            "name": "toTime",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/HistoricalWebinar"
-              },
-              "type": "array"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "summary": "Get historical webinars",
-        "tags": [
-          "Webinars"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/sessions": {
-      "get": {
-        "description": "Retrieve all completed sessions of all the webinars of a given organizer.",
-        "operationId": "getOrganizerSessions",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "A required start of datetime range in ISO8601 UTC format, e.g. 2015-07-13T10:00:00Z",
-            "format": "date-time",
-            "in": "query",
-            "name": "fromTime",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "A required end of datetime range in ISO8601 UTC format, e.g. 2015-07-13T22:00:00Z",
-            "format": "date-time",
-            "in": "query",
-            "name": "toTime",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/Session"
-              },
-              "type": "array"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "summary": "Get organizer sessions",
-        "tags": [
-          "Sessions"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/upcomingWebinars": {
-      "get": {
-        "description": "Returns webinars scheduled for the future for the specified organizer and webinars of other organizers where the specified organizer is a co-organizer.",
-        "operationId": "getUpcomingWebinars",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/UpcomingWebinar"
-              },
-              "type": "array"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "summary": "Get upcoming webinars",
-        "tags": [
-          "Webinars"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars": {
-      "get": {
-        "description": "Returns webinars scheduled for the future for a specified organizer.",
-        "operationId": "getAllWebinars",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/Webinar"
-              },
-              "type": "array"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "summary": "Get all webinars",
-        "tags": [
-          "Webinars"
-        ]
-      },
-      "post": {
-        "description": "Creates a single session webinar. The call requires an organizer, a webinar subject and description, and a start and end time. The response provides a numeric webinarKey in string format for the new webinar. Once a webinar has been created with this method, you can accept registrations.",
-        "operationId": "createWebinar",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The webinar details",
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/WebinarReqCreate"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/CreatedWebinar"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "summary": "Create webinar",
-        "tags": [
-          "Webinars"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}": {
-      "get": {
-        "description": "Retrieve information on a specific webinar. If the type of the webinar is \"sequence\", a sequence of future times will be provided. Webinars of type \"series\" are treated the same as normal webinars - each session in the webinar series has a different webinarKey. If an organizer cancels a webinar, then a request to get that webinar would return a \"404 Not Found\" error.",
-        "operationId": "getWebinar",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/WebinarByKey"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        },
-        "summary": "Get webinar",
-        "tags": [
-          "Webinars"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/attendees": {
-      "get": {
-        "description": "Returns all attendees for all sessions of the specified webinar.",
-        "operationId": "getAttendeesForAllWebinarSessions",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/Attendee"
-              },
-              "type": "array"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        },
-        "summary": "Get attendees for all webinar sessions",
-        "tags": [
-          "Webinars"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/coorganizers": {
-      "get": {
-        "description": "Gets the coorganizers of a specific webinar.",
-        "operationId": "getCoorganizers",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/Coorganizer"
-              },
-              "type": "array"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        },
-        "summary": "Get webinar coorganizers",
-        "tags": [
-          "Webinars"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/meetingtimes": {
-      "get": {
-        "description": "Retrieves the meeting times for a webinar.",
-        "operationId": "getWebinarMeetingTimes",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/DateTimeRange"
-              },
-              "type": "array"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        },
-        "summary": "Get webinar meeting times",
-        "tags": [
-          "Webinars"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/panelists": {
-      "get": {
-        "description": "Retrieves all the panelists for a specific webinar.",
-        "operationId": "getPanelists",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/Panelist"
-              },
-              "type": "array"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        },
-        "summary": "Get webinar panelists",
-        "tags": [
-          "Webinars"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/performance": {
-      "get": {
-        "description": "Gets performance details for all sessions of a specific webinar.",
-        "operationId": "getPerformanceForAllWebinarSessions",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "additionalProperties": {
-                "$ref": "#/definitions/SessionPerformance"
-              },
-              "description": "Describes performance details for webinars",
-              "type": "object"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        },
-        "summary": "Get performance for all webinar sessions",
-        "tags": [
-          "Webinars"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/registrants": {
-      "get": {
-        "description": "Retrieve registration details for all registrants of a specific webinar. Registrant details will not include all fields captured when creating the registrant. To see all data, use the API call \"Get Registrant\". Registrants can have one of the following states; <br />WAITING - registrant registered and is awaiting approval (where organizer has required approval), <br />APPROVED - registrant registered and is approved, and <br />DENIED - registrant registered and was denied.",
-        "operationId": "getAllRegistrantsForWebinar",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/Registrant"
-              },
-              "type": "array"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        },
-        "summary": "Get registrants",
-        "tags": [
-          "Registrants"
-        ]
-      },
-      "post": {
-        "description": "Register an attendee for a scheduled webinar. The response contains the registrantKey and join URL for the registrant. An email will be sent to the registrant unless the organizer turns off the confirmation email setting from the GoToWebinar website. Please note that you must provide all required fields including custom fields defined during the webinar creation. Use thr API call \"Get registration fields\" to get a list of all fields, if they are required, and their possible values. At this time there are two versions of the \"Create Registrant\" call. The first version only accepts firstName, lastName, and email and ignores all other fields. If you have custom fields or want to capture additional information this version won't work for you. The second version allows you to pass all required and optional fields, including custom fields defined when creating the webinar. To use the second version you must pass the header value \"Accept: application/vnd.citrix.g2wapi-v1.1+json\" instead of \"Accept: application/json\". Leaving this header out results in the first version of the API call.",
-        "operationId": "createRegistrant",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "Set to \"application/vnd.citrix.g2wapi-v1.1+json\" to make a registration using fields (custom or default) additional to the basic ones.",
-            "in": "header",
-            "name": "Accept",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "Indicates whether the confirmation email should be resent when a registrant is re-registered. The default value is false.",
-            "in": "query",
-            "name": "resendConfirmation",
-            "required": false,
-            "type": "boolean"
-          },
-          {
-            "description": "The registrant details. To get all possible values run the API call \"Get registration fields\" which is also part of this documentation.",
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RegistrantFields"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/RegistrantCreated"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        },
-        "summary": "Create registrant",
-        "tags": [
-          "Registrants"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/registrants/{registrantKey}": {
-      "delete": {
-        "description": "Removes a webinar registrant from current registrations for the specified webinar. The webinar must be a scheduled, future webinar.",
-        "operationId": "deleteRegistrant",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the registrant",
-            "format": "int64",
-            "in": "path",
-            "name": "registrantKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No content"
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        },
-        "summary": "Delete registrant",
-        "tags": [
-          "Registrants"
-        ]
-      },
-      "get": {
-        "description": "Retrieve registration details for a specific registrant.",
-        "operationId": "getRegistrant",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the registrant",
-            "format": "int64",
-            "in": "path",
-            "name": "registrantKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RegistrantDetailed"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        },
-        "summary": "Get registrant",
-        "tags": [
-          "Registrants"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/registrants/fields": {
-      "get": {
-        "description": "Retrieve required, optional registration, and custom questions for a specified webinar.",
-        "operationId": "getRegistrationFields",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/RegistrationFields"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        },
-        "summary": "Get registration fields",
-        "tags": [
-          "Registrants"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/sessions": {
-      "get": {
-        "description": "Retrieves details for all past sessions of a specific webinar.",
-        "operationId": "getAllSessions",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/Session"
-              },
-              "type": "array"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "summary": "Get webinar sessions",
-        "tags": [
-          "Sessions"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}": {
-      "get": {
-        "description": "Retrieves attendance details for a specific webinar session that has ended. If attendees attended the session (\"registrantsAttended\"), specific attendance details, such as attendenceTime for a registrant, will also be retrieved.",
-        "operationId": "getWebinarSession",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar session",
-            "format": "int64",
-            "in": "path",
-            "name": "sessionKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/Attendee"
-              },
-              "type": "array"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "summary": "Get webinar session",
-        "tags": [
-          "Sessions"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees": {
-      "get": {
-        "description": "Retrieve details for all attendees of a specific webinar session.",
-        "operationId": "getAttendees",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar session",
-            "format": "int64",
-            "in": "path",
-            "name": "sessionKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/Attendee"
-              },
-              "type": "array"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        },
-        "summary": "Get session attendees",
-        "tags": [
-          "Attendees"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees/{registrantKey}": {
-      "get": {
-        "description": "Retrieve registration details for a particular attendee of a specific webinar session.",
-        "operationId": "getAttendee",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar session",
-            "format": "int64",
-            "in": "path",
-            "name": "sessionKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the registrant",
-            "format": "int64",
-            "in": "path",
-            "name": "registrantKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Registrant"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        },
-        "summary": "Get attendee",
-        "tags": [
-          "Attendees"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees/{registrantKey}/polls": {
-      "get": {
-        "description": "Get poll answers from a particular attendee of a specific webinar session.",
-        "operationId": "getAttendeePollAnswers",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar session",
-            "format": "int64",
-            "in": "path",
-            "name": "sessionKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the registrant",
-            "format": "int64",
-            "in": "path",
-            "name": "registrantKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/PollAnswer"
-              },
-              "type": "array"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        },
-        "summary": "Get attendee poll answers",
-        "tags": [
-          "Attendees"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees/{registrantKey}/questions": {
-      "get": {
-        "description": "Get questions asked by an attendee during a webinar session.",
-        "operationId": "getAttendeeQuestions",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar session",
-            "format": "int64",
-            "in": "path",
-            "name": "sessionKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the registrant",
-            "format": "int64",
-            "in": "path",
-            "name": "registrantKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/AttendeeQuestion"
-              },
-              "type": "array"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        },
-        "summary": "Get attendee questions",
-        "tags": [
-          "Attendees"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees/{registrantKey}/surveys": {
-      "get": {
-        "description": "Retrieve survey answers from a particular attendee during a webinar session.",
-        "operationId": "getAttendeeSurveyAnswers",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar session",
-            "format": "int64",
-            "in": "path",
-            "name": "sessionKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the registrant",
-            "format": "int64",
-            "in": "path",
-            "name": "registrantKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/PollAnswer"
-              },
-              "type": "array"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not found"
-          }
-        },
-        "summary": "Get attendee survey answers",
-        "tags": [
-          "Attendees"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/performance": {
-      "get": {
-        "description": "Get performance details for a session.",
-        "operationId": "getPerformance",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar session",
-            "format": "int64",
-            "in": "path",
-            "name": "sessionKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SessionPerformance"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "summary": "Get session performance",
-        "tags": [
-          "Sessions"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/polls": {
-      "get": {
-        "description": "Retrieve all collated attendee questions and answers for polls from a specific webinar session.",
-        "operationId": "getPolls",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar session",
-            "format": "int64",
-            "in": "path",
-            "name": "sessionKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/Poll"
-              },
-              "type": "array"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "summary": "Get session polls",
-        "tags": [
-          "Sessions"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/questions": {
-      "get": {
-        "description": "Retrieve questions and answers for a past webinar session.",
-        "operationId": "getQuestions",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar session",
-            "format": "int64",
-            "in": "path",
-            "name": "sessionKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/AttendeeQuestion"
-              },
-              "type": "array"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "summary": "Get session questions",
-        "tags": [
-          "Sessions"
-        ]
-      }
-    },
-    "/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/surveys": {
-      "get": {
-        "description": "Retrieve surveys for a past webinar session.",
-        "operationId": "getSurveys",
-        "parameters": [
-          {
-            "description": "Access token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The key of the organizer",
-            "format": "int64",
-            "in": "path",
-            "name": "organizerKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar",
-            "format": "int64",
-            "in": "path",
-            "name": "webinarKey",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "description": "The key of the webinar session",
-            "format": "int64",
-            "in": "path",
-            "name": "sessionKey",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/Poll"
-              },
-              "type": "array"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "summary": "Get session surveys",
-        "tags": [
-          "Sessions"
-        ]
-      }
-    }
-  },
-  "produces": [
-    "application/json"
-  ],
-  "schemes": [
-    "https"
-  ],
-  "swagger": "2.0",
-  "tags": [
-    {
-      "description": "Operations available for webinars of a given organizer.",
-      "name": "Webinars"
-    },
-    {
-      "description": "Operations available for registrants of a given webinar.",
-      "name": "Registrants"
-    },
-    {
-      "description": "Operations available for sessions of a given webinar.",
-      "name": "Sessions"
-    },
-    {
-      "description": "Operations available for attendees of a given webinar session.",
-      "name": "Attendees"
-    }
-  ]
-}
+basePath: /G2W/rest
+consumes:
+  - application/json
+definitions:
+  AnswerToAttendeeQuestion:
+    description: Describes an answer to a question asked by an attendee during a webinar session.
+    properties:
+      answer:
+        description: An answer given to a question asked by an attendee during a webinar session
+        type: string
+      answeredBy:
+        description: "The key of the organizer that answered the attendee's question"
+        type: string
+    required:
+      - answer
+      - answeredBy
+  Attendance:
+    description: Describes the times the attendee joined and left a webinar session.
+    properties:
+      joinTime:
+        description: The time the attendee joined a webinar session
+        format: date-time
+        type: string
+      leaveTime:
+        description: The time the attendee left a webinar session
+        format: date-time
+        type: string
+    required:
+      - joinTime
+      - leaveTime
+  AttendanceStatistics:
+    description: Describes attendance metrics for a webinar session.
+    properties:
+      averageAttendanceTimeSeconds:
+        description: Average attendance time in seconds
+        format: float
+        type: number
+      averageAttentiveness:
+        description: Average based on the focus of the attendees Viewer during the webinar session
+        format: float
+        type: number
+      averageInterestRating:
+        description: Numerical value 1-100 (100 being most interested) indicating the average interest rating of the webinar attendees
+        format: float
+        type: number
+      percentageAttendance:
+        description: The percentage of registrants that actually attended the webinar session
+        format: float
+        type: number
+      registrantCount:
+        description: The number of registrations for the webinar
+        format: int32
+        type: integer
+    required:
+      - registrantCount
+      - percentageAttendance
+      - averageInterestRating
+      - averageAttentiveness
+      - averageAttendanceTimeSeconds
+  Attendee:
+    description: Describes the attendee of a webinar
+    properties:
+      attendance:
+        description: The list of times the attendee joined and left the webinar session
+        items:
+          $ref: '#/definitions/Attendance'
+        type: array
+      attendanceTimeInSeconds:
+        description: The total attendance time in seconds
+        format: int64
+        type: integer
+      email:
+        description: "The attendee's email address"
+        type: string
+      firstName:
+        description: "The attendee's first name"
+        type: string
+      lastName:
+        description: "The attendee's last name"
+        type: string
+      registrantKey:
+        description: The key of the webinar attendee
+        format: int64
+        type: integer
+      sessionKey:
+        description: The unique key of the webinar session
+        format: int64
+        type: integer
+    required:
+      - registrantKey
+      - firstName
+      - lastName
+      - email
+      - attendanceTimeInSeconds
+      - attendance
+      - sessionKey
+  AttendeeQuestion:
+    description: Describes the question asked by an attendee during a webinar session; includes the answers given to it.
+    properties:
+      answers:
+        description: Answer to a question of an attendee and key of the organizer that answered
+        items:
+          $ref: '#/definitions/AnswerToAttendeeQuestion'
+        type: array
+      askedBy:
+        description: The email address of the attendee that asked the question
+        type: string
+      question:
+        description: The question asked by the attendee
+        type: string
+    required:
+      - answers
+      - question
+      - askedBy
+  Coorganizer:
+    description: Describes a webinar coorganizer.
+    properties:
+      email:
+        description: "The coorganizer's email address"
+        type: string
+      givenName:
+        description: "The coorganizer's first name"
+        type: string
+      memberKey:
+        description: "The coorganizer's key"
+        format: int64
+        type: integer
+      surname:
+        description: "The coorganizer's last name"
+        type: string
+    required:
+      - email
+      - memberKey
+      - surname
+      - givenName
+  CreatedWebinar:
+    description: Describes a newly created webinar.
+    properties:
+      webinarKey:
+        description: The unique key of the webinar.
+        type: string
+    required:
+      - webinarKey
+  CustomAnswers:
+    description: Answers to custom questions of the registrant
+    properties:
+      answer:
+        description: Answer to a custom question when registering
+        type: string
+      question:
+        description: Custom question for registering
+        type: string
+    required:
+      - answer
+      - question
+  DateTimeRange:
+    description: 'A pair of DateTime values, the first of which serves as a start time and the second as an end time of an interval.'
+    properties:
+      endTime:
+        description: 'The ending time of an interval, e.g. 2015-07-13T22:00:00Z'
+        format: date-time
+        type: string
+      startTime:
+        description: 'The starting time of an interval, e.g. 2015-07-13T10:00:00Z'
+        format: date-time
+        type: string
+    required:
+      - startTime
+      - endTime
+  HistoricalWebinar:
+    description: Describes a completed webinar
+    properties:
+      description:
+        description: A short description of the webinar
+        type: string
+      organizerKey:
+        description: The key of the webinar organizer
+        format: int64
+        type: integer
+      subject:
+        description: The webinar subject
+        type: string
+      timeZone:
+        description: The timezone where the webinar is taking place
+        type: string
+      times:
+        description: Array with startTime and endTime for the webinar sessions
+        items:
+          $ref: '#/definitions/DateTimeRange'
+        type: array
+      webinarKey:
+        description: The unique key of the webinar
+        format: int64
+        type: integer
+    required:
+      - times
+      - description
+      - subject
+      - organizerKey
+      - webinarKey
+      - timeZone
+  Panelist:
+    description: Describes a webinar session panelist.
+    properties:
+      email:
+        description: "The panelist's email address"
+        type: string
+      firstName:
+        description: "The panelist's first name"
+        type: string
+      lastName:
+        description: "The panelist's last name"
+        type: string
+      panelistId:
+        description: "The panelist's ID"
+        format: int64
+        type: integer
+    required:
+      - lastName
+      - email
+      - panelistId
+      - firstName
+  Poll:
+    description: A poll or survey launched by an organizer during or after a webinar session; includes the responses given to it by the attendees.
+    properties:
+      numberOfResponses:
+        description: The total number of responses received for this poll or survey
+        format: int32
+        type: integer
+      question:
+        description: The poll or survey question asked by the webinar organizer
+        type: string
+      responses:
+        description: The responses given by the attendees to the poll or survey
+        items:
+          $ref: '#/definitions/PollResponse'
+        type: array
+    required:
+      - responses
+      - question
+      - numberOfResponses
+  PollAnswer:
+    description: Describes the answer given by a webinar attendee to a poll or survey launched by an organizer.
+    properties:
+      answer:
+        description: The answer given to the poll or survey question
+        type: string
+      question:
+        description: The poll or survey question
+        type: string
+    required:
+      - answer
+      - question
+  PollResponse:
+    description: One of the potential responses/options to a poll or survey launched by an organizer during a webinar session.
+    properties:
+      percentage:
+        description: The percentage of responses that favored this particular option
+        format: float
+        maximum: 100
+        minimum: 0
+        type: number
+      text:
+        description: The text of the response/option to a poll or survey
+        type: string
+    required:
+      - text
+      - percentage
+  PollsAndSurveysStatistics:
+    description: Details on the polls and surveys for a webinar session.
+    properties:
+      percentagePollsCompleted:
+        description: The percentage of polls completed by the attendees
+        format: float
+        type: number
+      percentageSurveysCompleted:
+        description: The percentage of surveys completed by the attendees
+        format: float
+        type: number
+      pollCount:
+        description: The number of polls launched at a webinar session
+        format: int32
+        type: integer
+      questionsAsked:
+        description: The number of questions asked at a webinar session
+        format: int32
+        type: integer
+      surveyCount:
+        description: The percentage of surveys launched at a webinar session
+        format: float
+        type: number
+    required:
+      - pollCount
+      - surveyCount
+      - questionsAsked
+      - percentagePollsCompleted
+      - percentageSurveysCompleted
+  Registrant:
+    description: Describes a webinar registrant
+    properties:
+      email:
+        description: "The registrant's email address"
+        type: string
+      firstName:
+        description: "The registrant's first name"
+        type: string
+      joinUrl:
+        description: The URL the registrant will use to join the webinar
+        type: string
+      lastName:
+        description: "The registrant's last name"
+        type: string
+      registrantKey:
+        description: "The registrant's key"
+        format: int64
+        type: integer
+      registrationDate:
+        description: The registration date and time
+        format: date-time
+        type: string
+      status:
+        description: The registration status
+        enum:
+          - APPROVED
+          - DENIED
+          - WAITING
+        type: string
+      timeZone:
+        description: The time zone where the webinar will take place
+        type: string
+    required:
+      - lastName
+      - email
+      - firstName
+      - registrantKey
+      - registrationDate
+      - status
+      - joinUrl
+      - timeZone
+  RegistrantCreated:
+    description: Describes a newly created webinar registrant.
+    properties:
+      joinUrl:
+        description: The URL the registrant will use to join the webinar.
+        type: string
+      registrantKey:
+        description: "The registrant's key"
+        format: int64
+        type: integer
+    required:
+      - registrantKey
+      - joinUrl
+  RegistrantDetailed:
+    description: Detailed description of a webinar registrant with all registration fields.
+    properties:
+      address:
+        description: "The registrant's address"
+        type: string
+      city:
+        description: "The registrant's city"
+        type: string
+      country:
+        description: "The registrant's country"
+        type: string
+      email:
+        description: "The registrant's email address"
+        type: string
+      employeeCount:
+        description: "The size in employees of the registrant's organization"
+        type: string
+      firstName:
+        description: "The registrant's first name"
+        type: string
+      implementationTimeFrame:
+        description: The time frame within which the product will be purchased
+        type: string
+      industry:
+        description: "The type of industry the registrant's organization belongs to"
+        type: string
+      jobTitle:
+        description: "The registrant's job title"
+        type: string
+      joinUrl:
+        description: URL the registrant can join the webinar
+        type: string
+      lastName:
+        description: "The registrant's last name"
+        type: string
+      numberOfEmployees:
+        description: "The size in employees of the registrant's organization"
+        type: string
+      organization:
+        description: "The registrant's organization"
+        type: string
+      phone:
+        description: "The registrant's phone"
+        type: string
+      purchasingRole:
+        description: "The registrant's role in purchasing the product"
+        type: string
+      purchasingTimeFrame:
+        description: The time frame within which the product will be purchased
+        type: string
+      questionsAndComments:
+        description: Any questions or comments the registrant made at the time of registration
+        type: string
+      registrantKey:
+        description: "The registrant's key"
+        format: int64
+        type: integer
+      registrationDate:
+        description: The registration date and time
+        format: date-time
+        type: string
+      responses:
+        description: Responses to custom questions
+        items:
+          $ref: '#/definitions/CustomAnswers'
+        type: array
+      state:
+        description: "The registrant's state (US only)"
+        type: string
+      status:
+        description: The registration status
+        enum:
+          - APPROVED
+          - DENIED
+          - WAITING
+        type: string
+      timeZone:
+        description: The time zone where the webinar will take place
+        type: string
+      type:
+        description: 'The type is REGULAR for "One session" and "Sequence" webinars. For webinar series this parameter is not passed'
+        enum:
+          - REGULAR
+        type: string
+      unsubscribed:
+        description: "Indicates whether the registrant opted-out from receiving other emails from this webinar's organizer"
+        type: boolean
+      zipCode:
+        description: "The registrant's zip (post) code"
+        type: string
+    required:
+      - firstName
+      - lastName
+      - email
+      - registrantKey
+      - registrationDate
+      - status
+      - joinUrl
+      - timeZone
+  RegistrantFields:
+    description: Detailed description of a all fields to register a registrant for a webinar.
+    properties:
+      address:
+        description: "The registrant's address"
+        type: string
+      city:
+        description: "The registrant's city"
+        type: string
+      country:
+        description: "The registrant's country"
+        type: string
+      email:
+        description: "The registrant's email address"
+        type: string
+      firstName:
+        description: "The registrant's first name"
+        type: string
+      industry:
+        description: "The type of industry the registrant's organization belongs to"
+        type: string
+      jobTitle:
+        description: "The registrant's job title"
+        type: string
+      lastName:
+        description: "The registrant's last name"
+        type: string
+      numberOfEmployees:
+        description: "The size in employees of the registrant's organization"
+        type: string
+      organization:
+        description: "The registrant's organization"
+        type: string
+      phone:
+        description: "The registrant's phone"
+        type: string
+      purchasingRole:
+        description: "The registrant's role in purchasing the product"
+        type: string
+      purchasingTimeFrame:
+        description: The time frame within which the product will be purchased
+        type: string
+      questionsAndComments:
+        description: Any questions or comments the registrant made at the time of registration
+        type: string
+      responses:
+        description: Set the answers of all questions
+        items:
+          $ref: '#/definitions/RegistrantQAResponse'
+        type: array
+      state:
+        description: "The registrant's state (US only)"
+        type: string
+      zipCode:
+        description: "The registrant's zip (post) code"
+        type: string
+    required:
+      - firstName
+      - lastName
+      - email
+  RegistrantQAResponse:
+    description: 'Describes a completed registration question for a webinar registrant. If you use "Multiple choice" questions the response contains the numeric answerKey, otherwise the answer text. Example:<br />{<br />  "firstName": "First",<br />  "lastName": "Last",<br />  "email": "First.Last@example.com",<br />  "responses": [{<br />      "questionKey": 17023549,<br />      "responseText": "This is a short answer"},{<br />      "questionKey": 17023550,<br />      "answerKey": 17023553}  ]<br />}'
+    properties:
+      answerKey:
+        description: The numeric key of the answer to a multiple-choice question.
+        format: int64
+        type: integer
+      questionKey:
+        description: The unique key of the question
+        format: int64
+        type: integer
+      responseText:
+        description: Answer of the question.
+        type: string
+    required:
+      - questionKey
+  RegistrationAnswer:
+    description: Describes an answer to a multiple choice custom registration field.
+    properties:
+      answer:
+        description: The answer value
+        type: string
+      answerKey:
+        description: The answer key
+        format: int64
+        type: integer
+    required:
+      - answer
+      - answerKey
+  RegistrationField:
+    description: Describes a field for a webinar registration.
+    properties:
+      answers:
+        description: List of choices for a multiple choice registration field
+        items:
+          type: string
+        type: array
+      field:
+        description: The name of the registration field
+        type: string
+      maxSize:
+        description: The character size of the custom registration field (max 128)
+        format: int32
+        type: integer
+      required:
+        description: Indicates whether the custom registration field is compulsory
+        type: boolean
+    required:
+      - field
+      - required
+      - maxSize
+  RegistrationFields:
+    description: The fields to be completed on the webinar registration form.
+    properties:
+      fields:
+        description: The default fields the organizer has selected for the webinar registration form
+        items:
+          $ref: '#/definitions/RegistrationField'
+        type: array
+      questions:
+        description: Custom fields created by the organizer for the webinar registration form
+        items:
+          $ref: '#/definitions/RegistrationQuestion'
+        type: array
+    required:
+      - questions
+      - fields
+  RegistrationQuestion:
+    description: Describes a custom field for a webinar registration.
+    properties:
+      answers:
+        description: The answers to a multiple choice custom registration field
+        items:
+          $ref: '#/definitions/RegistrationAnswer'
+        type: array
+      maxSize:
+        description: The character size of the custom registration field (max 1000)
+        format: int32
+        type: integer
+      question:
+        description: The value (text) of the custom registration field
+        type: string
+      questionKey:
+        description: The unique key of the custom registration field
+        format: int64
+        type: integer
+      required:
+        description: Indicates whether the custom registration field is compulsory
+        type: boolean
+      type:
+        description: Indicates whether the custom registration field requires a single short answer or whether it is a multiple choice question
+        enum:
+          - multipleChoice
+          - shortAnswer
+        type: string
+    required:
+      - questionKey
+      - question
+      - required
+      - type
+      - maxSize
+  Session:
+    description: Describes a completed webinar session.
+    properties:
+      endTime:
+        description: The ending time of the webinar session
+        format: date-time
+        type: string
+      registrantsAttended:
+        description: The number of registrants who attended the webinar session
+        format: int32
+        type: integer
+      sessionKey:
+        description: The unique key of the webinar session
+        format: int64
+        type: integer
+      startTime:
+        description: The starting time of the webinar session
+        format: date-time
+        type: string
+      webinarKey:
+        description: The unique key of the webinar
+        format: int64
+        type: integer
+    required:
+      - startTime
+      - registrantsAttended
+      - webinarKey
+      - sessionKey
+      - endTime
+  SessionPerformance:
+    description: Describes performance details for webinar sessions
+    properties:
+      attendance:
+        $ref: '#/definitions/AttendanceStatistics'
+        description: Attendance statistics for a webinar session
+      pollsAndSurveys:
+        $ref: '#/definitions/PollsAndSurveysStatistics'
+        description: Polls and surveys for a webinar session
+    required:
+      - attendance
+      - pollsAndSurveys
+  UpcomingWebinar:
+    description: Describes a scheduled webinar
+    properties:
+      description:
+        description: A short description of the webinar
+        type: string
+      inSession:
+        description: Indicates whether there is a webinar session currently in progress
+        type: boolean
+      organizerKey:
+        description: The key of the webinar organizer
+        format: int64
+        type: integer
+      registrationUrl:
+        description: The URL the webinar invitees can use to register
+        type: string
+      subject:
+        description: The webinar subject
+        type: string
+      timeZone:
+        description: The timezone where the webinar is taking place
+        type: string
+      times:
+        description: Array with startTime and endTime for the webinar sessions
+        items:
+          $ref: '#/definitions/DateTimeRange'
+        type: array
+      webinarKey:
+        description: The unique key of the webinar
+        format: int64
+        type: integer
+    required:
+      - times
+      - description
+      - subject
+      - inSession
+      - organizerKey
+      - webinarKey
+      - timeZone
+      - registrationUrl
+  Webinar:
+    description: Describes a scheduled webinar
+    properties:
+      description:
+        description: A short description of the webinar
+        type: string
+      inSession:
+        description: Indicates whether there is a webinar session currently in progress
+        type: boolean
+      numberOfRegistrants:
+        description: The number of registrants at the webinar
+        format: int32
+        type: integer
+      organizerKey:
+        description: The key of the webinar organizer
+        format: int64
+        type: integer
+      registrationUrl:
+        description: The URL the webinar invitees can use to register
+        type: string
+      subject:
+        description: The webinar subject
+        type: string
+      timeZone:
+        description: The timezone where the webinar is taking place
+        type: string
+      times:
+        description: Array with startTime and endTime for the webinar sessions
+        items:
+          $ref: '#/definitions/DateTimeRange'
+        type: array
+      webinarKey:
+        description: The unique key of the webinar
+        format: int64
+        type: integer
+    required:
+      - numberOfRegistrants
+      - times
+      - description
+      - subject
+      - inSession
+      - organizerKey
+      - webinarKey
+      - timeZone
+      - registrationUrl
+  WebinarByKey:
+    description: Describes a completed webinar
+    properties:
+      description:
+        description: A short description of the webinar
+        type: string
+      inSession:
+        description: Indicates whether there is a webinar session currently in progress
+        type: boolean
+      numberOfOpenedInvitations:
+        description: The number of recipients who opened the invitation email to register for the webinar
+        format: int32
+        type: integer
+      numberOfRegistrants:
+        description: The number of registrants at the webinar
+        format: int32
+        type: integer
+      numberOfRegistrationLinkClicks:
+        description: The number of recipients who clicked on the link to register for the webinar
+        format: int32
+        type: integer
+      organizerKey:
+        description: The key of the webinar organizer
+        format: int64
+        type: integer
+      registrationUrl:
+        description: The URL the webinar invitees can use to register
+        type: string
+      subject:
+        description: The webinar subject.
+        type: string
+      timeZone:
+        description: The timezone where the webinar is taking place
+        type: string
+      times:
+        description: Array with startTime and endTime for the webinar sessions
+        items:
+          $ref: '#/definitions/DateTimeRange'
+        type: array
+      webinarKey:
+        description: The unique key of the webinar
+        format: int64
+        type: integer
+    required:
+      - numberOfRegistrants
+      - times
+      - description
+      - subject
+      - inSession
+      - organizerKey
+      - webinarKey
+      - timeZone
+      - numberOfOpenedInvitations
+      - registrationUrl
+      - numberOfRegistrationLinkClicks
+  WebinarReqCreate:
+    description: Describes the details used to create a new single session webinar.
+    properties:
+      description:
+        description: A short description of the webinar (2048 characters maximum)
+        type: string
+      subject:
+        description: The name/subject of the webinar (128 characters maximum)
+        type: string
+      timeZone:
+        description: "The time zone where the webinar is taking place (must be a valid time zone ID, see https://developer.citrixonline.com/citrix-rest-api-date-formats-and-time-zones). If this parameter is not passed the timezone of the organizer's profile will be used"
+        type: string
+      times:
+        description: 'Array with startTime and endTime for webinar. Since this call creates single session webinars, the array can only contain a single pair of startTime and endTime'
+        items:
+          $ref: '#/definitions/DateTimeRange'
+        type: array
+    required:
+      - subject
+      - times
+externalDocs:
+  url: 'https://developer.citrixonline.com/'
+host: api.citrixonline.com
+info:
+  contact:
+    email: developer-support@citrixonline.com
+    name: Developer Support
+    url: 'https://developer.citrixonline.com'
+  description: 'The Citrix GoToWebinar API provides seamless integration of webinar registrant and attendee data into your existing infrastructure or third-party applications. The ability to register participants, as well as pull lists of registrants and attendees for a webinar, allows organizers to manage the flow of information between their primary applications without manual intervention.'
+  termsOfService: 'https://developer.citrixonline.com/terms-use'
+  title: GoToWebinar REST API
+  version: 1.0.0
+  x-logo:
+    backgroundColor: '#5F6166'
+    url: 'https://developer.citrixonline.com/sites/all/themes/citrix_responsive/logo.png'
+  x-origin:
+    format: swagger
+    url: 'https://developer.citrixonline.com/sites/default/files/citrix/citrix-apis/gotowebinar.json'
+    version: '2.0'
+  x-providerName: citrixonline.com
+  x-serviceName: gotowebinar
+paths:
+  '/organizers/{organizerKey}/historicalWebinars':
+    get:
+      description: Returns details for completed webinars for the specified organizer and completed webinars of other organizers where the specified organizer is a co-organizer.
+      operationId: getHistoricalWebinars
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: 'A required start of datetime range in ISO8601 UTC format, e.g. 2015-07-13T10:00:00Z'
+          format: date-time
+          in: query
+          name: fromTime
+          required: true
+          type: string
+        - description: 'A required end of datetime range in ISO8601 UTC format, e.g. 2015-07-13T22:00:00Z'
+          format: date-time
+          in: query
+          name: toTime
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/HistoricalWebinar'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+      summary: Get historical webinars
+      tags:
+        - Webinars
+  '/organizers/{organizerKey}/sessions':
+    get:
+      description: Retrieve all completed sessions of all the webinars of a given organizer.
+      operationId: getOrganizerSessions
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: 'A required start of datetime range in ISO8601 UTC format, e.g. 2015-07-13T10:00:00Z'
+          format: date-time
+          in: query
+          name: fromTime
+          required: true
+          type: string
+        - description: 'A required end of datetime range in ISO8601 UTC format, e.g. 2015-07-13T22:00:00Z'
+          format: date-time
+          in: query
+          name: toTime
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Session'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+      summary: Get organizer sessions
+      tags:
+        - Sessions
+  '/organizers/{organizerKey}/upcomingWebinars':
+    get:
+      description: Returns webinars scheduled for the future for the specified organizer and webinars of other organizers where the specified organizer is a co-organizer.
+      operationId: getUpcomingWebinars
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/UpcomingWebinar'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+      summary: Get upcoming webinars
+      tags:
+        - Webinars
+  '/organizers/{organizerKey}/webinars':
+    get:
+      description: Returns webinars scheduled for the future for a specified organizer.
+      operationId: getAllWebinars
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Webinar'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+      summary: Get all webinars
+      tags:
+        - Webinars
+    post:
+      description: 'Creates a single session webinar. The call requires an organizer, a webinar subject and description, and a start and end time. The response provides a numeric webinarKey in string format for the new webinar. Once a webinar has been created with this method, you can accept registrations.'
+      operationId: createWebinar
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The webinar details
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/WebinarReqCreate'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/CreatedWebinar'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+      summary: Create webinar
+      tags:
+        - Webinars
+  '/organizers/{organizerKey}/webinars/{webinarKey}':
+    get:
+      description: 'Retrieve information on a specific webinar. If the type of the webinar is "sequence", a sequence of future times will be provided. Webinars of type "series" are treated the same as normal webinars - each session in the webinar series has a different webinarKey. If an organizer cancels a webinar, then a request to get that webinar would return a "404 Not Found" error.'
+      operationId: getWebinar
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/WebinarByKey'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get webinar
+      tags:
+        - Webinars
+  '/organizers/{organizerKey}/webinars/{webinarKey}/attendees':
+    get:
+      description: Returns all attendees for all sessions of the specified webinar.
+      operationId: getAttendeesForAllWebinarSessions
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Attendee'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get attendees for all webinar sessions
+      tags:
+        - Webinars
+  '/organizers/{organizerKey}/webinars/{webinarKey}/coorganizers':
+    get:
+      description: Gets the coorganizers of a specific webinar.
+      operationId: getCoorganizers
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Coorganizer'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get webinar coorganizers
+      tags:
+        - Webinars
+  '/organizers/{organizerKey}/webinars/{webinarKey}/meetingtimes':
+    get:
+      description: Retrieves the meeting times for a webinar.
+      operationId: getWebinarMeetingTimes
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/DateTimeRange'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get webinar meeting times
+      tags:
+        - Webinars
+  '/organizers/{organizerKey}/webinars/{webinarKey}/panelists':
+    get:
+      description: Retrieves all the panelists for a specific webinar.
+      operationId: getPanelists
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Panelist'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get webinar panelists
+      tags:
+        - Webinars
+  '/organizers/{organizerKey}/webinars/{webinarKey}/performance':
+    get:
+      description: Gets performance details for all sessions of a specific webinar.
+      operationId: getPerformanceForAllWebinarSessions
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            additionalProperties:
+              $ref: '#/definitions/SessionPerformance'
+            description: Describes performance details for webinars
+            type: object
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get performance for all webinar sessions
+      tags:
+        - Webinars
+  '/organizers/{organizerKey}/webinars/{webinarKey}/registrants':
+    get:
+      description: 'Retrieve registration details for all registrants of a specific webinar. Registrant details will not include all fields captured when creating the registrant. To see all data, use the API call "Get Registrant". Registrants can have one of the following states; <br />WAITING - registrant registered and is awaiting approval (where organizer has required approval), <br />APPROVED - registrant registered and is approved, and <br />DENIED - registrant registered and was denied.'
+      operationId: getAllRegistrantsForWebinar
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Registrant'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get registrants
+      tags:
+        - Registrants
+    post:
+      description: "Register an attendee for a scheduled webinar. The response contains the registrantKey and join URL for the registrant. An email will be sent to the registrant unless the organizer turns off the confirmation email setting from the GoToWebinar website. Please note that you must provide all required fields including custom fields defined during the webinar creation. Use thr API call \"Get registration fields\" to get a list of all fields, if they are required, and their possible values. At this time there are two versions of the \"Create Registrant\" call. The first version only accepts firstName, lastName, and email and ignores all other fields. If you have custom fields or want to capture additional information this version won't work for you. The second version allows you to pass all required and optional fields, including custom fields defined when creating the webinar. To use the second version you must pass the header value \"Accept: application/vnd.citrix.g2wapi-v1.1+json\" instead of \"Accept: application/json\". Leaving this header out results in the first version of the API call."
+      operationId: createRegistrant
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+        - description: 'Set to "application/vnd.citrix.g2wapi-v1.1+json" to make a registration using fields (custom or default) additional to the basic ones.'
+          in: header
+          name: Accept
+          required: false
+          type: string
+        - description: Indicates whether the confirmation email should be resent when a registrant is re-registered. The default value is false.
+          in: query
+          name: resendConfirmation
+          required: false
+          type: boolean
+        - description: 'The registrant details. To get all possible values run the API call "Get registration fields" which is also part of this documentation.'
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/RegistrantFields'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/RegistrantCreated'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Create registrant
+      tags:
+        - Registrants
+  '/organizers/{organizerKey}/webinars/{webinarKey}/registrants/fields':
+    get:
+      description: 'Retrieve required, optional registration, and custom questions for a specified webinar.'
+      operationId: getRegistrationFields
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RegistrationFields'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get registration fields
+      tags:
+        - Registrants
+  '/organizers/{organizerKey}/webinars/{webinarKey}/registrants/{registrantKey}':
+    delete:
+      description: 'Removes a webinar registrant from current registrations for the specified webinar. The webinar must be a scheduled, future webinar.'
+      operationId: deleteRegistrant
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+        - description: The key of the registrant
+          format: int64
+          in: path
+          name: registrantKey
+          required: true
+          type: integer
+      responses:
+        '204':
+          description: No content
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Delete registrant
+      tags:
+        - Registrants
+    get:
+      description: Retrieve registration details for a specific registrant.
+      operationId: getRegistrant
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+        - description: The key of the registrant
+          format: int64
+          in: path
+          name: registrantKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/RegistrantDetailed'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get registrant
+      tags:
+        - Registrants
+  '/organizers/{organizerKey}/webinars/{webinarKey}/sessions':
+    get:
+      description: Retrieves details for all past sessions of a specific webinar.
+      operationId: getAllSessions
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Session'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get webinar sessions
+      tags:
+        - Sessions
+  '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}':
+    get:
+      description: 'Retrieves attendance details for a specific webinar session that has ended. If attendees attended the session ("registrantsAttended"), specific attendance details, such as attendenceTime for a registrant, will also be retrieved.'
+      operationId: getWebinarSession
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+        - description: The key of the webinar session
+          format: int64
+          in: path
+          name: sessionKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Attendee'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get webinar session
+      tags:
+        - Sessions
+  '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees':
+    get:
+      description: Retrieve details for all attendees of a specific webinar session.
+      operationId: getAttendees
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+        - description: The key of the webinar session
+          format: int64
+          in: path
+          name: sessionKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Attendee'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get session attendees
+      tags:
+        - Attendees
+  '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees/{registrantKey}':
+    get:
+      description: Retrieve registration details for a particular attendee of a specific webinar session.
+      operationId: getAttendee
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+        - description: The key of the webinar session
+          format: int64
+          in: path
+          name: sessionKey
+          required: true
+          type: integer
+        - description: The key of the registrant
+          format: int64
+          in: path
+          name: registrantKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Registrant'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get attendee
+      tags:
+        - Attendees
+  '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees/{registrantKey}/polls':
+    get:
+      description: Get poll answers from a particular attendee of a specific webinar session.
+      operationId: getAttendeePollAnswers
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+        - description: The key of the webinar session
+          format: int64
+          in: path
+          name: sessionKey
+          required: true
+          type: integer
+        - description: The key of the registrant
+          format: int64
+          in: path
+          name: registrantKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/PollAnswer'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get attendee poll answers
+      tags:
+        - Attendees
+  '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees/{registrantKey}/questions':
+    get:
+      description: Get questions asked by an attendee during a webinar session.
+      operationId: getAttendeeQuestions
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+        - description: The key of the webinar session
+          format: int64
+          in: path
+          name: sessionKey
+          required: true
+          type: integer
+        - description: The key of the registrant
+          format: int64
+          in: path
+          name: registrantKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/AttendeeQuestion'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get attendee questions
+      tags:
+        - Attendees
+  '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/attendees/{registrantKey}/surveys':
+    get:
+      description: Retrieve survey answers from a particular attendee during a webinar session.
+      operationId: getAttendeeSurveyAnswers
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+        - description: The key of the webinar session
+          format: int64
+          in: path
+          name: sessionKey
+          required: true
+          type: integer
+        - description: The key of the registrant
+          format: int64
+          in: path
+          name: registrantKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/PollAnswer'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not found
+      summary: Get attendee survey answers
+      tags:
+        - Attendees
+  '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/performance':
+    get:
+      description: Get performance details for a session.
+      operationId: getPerformance
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+        - description: The key of the webinar session
+          format: int64
+          in: path
+          name: sessionKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/SessionPerformance'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get session performance
+      tags:
+        - Sessions
+  '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/polls':
+    get:
+      description: Retrieve all collated attendee questions and answers for polls from a specific webinar session.
+      operationId: getPolls
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+        - description: The key of the webinar session
+          format: int64
+          in: path
+          name: sessionKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Poll'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get session polls
+      tags:
+        - Sessions
+  '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/questions':
+    get:
+      description: Retrieve questions and answers for a past webinar session.
+      operationId: getQuestions
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+        - description: The key of the webinar session
+          format: int64
+          in: path
+          name: sessionKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/AttendeeQuestion'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get session questions
+      tags:
+        - Sessions
+  '/organizers/{organizerKey}/webinars/{webinarKey}/sessions/{sessionKey}/surveys':
+    get:
+      description: Retrieve surveys for a past webinar session.
+      operationId: getSurveys
+      parameters:
+        - description: Access token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: The key of the organizer
+          format: int64
+          in: path
+          name: organizerKey
+          required: true
+          type: integer
+        - description: The key of the webinar
+          format: int64
+          in: path
+          name: webinarKey
+          required: true
+          type: integer
+        - description: The key of the webinar session
+          format: int64
+          in: path
+          name: sessionKey
+          required: true
+          type: integer
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Poll'
+            type: array
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Get session surveys
+      tags:
+        - Sessions
+produces:
+  - application/json
+schemes:
+  - https
+swagger: '2.0'
+tags:
+  - description: Operations available for webinars of a given organizer.
+    name: Webinars
+  - description: Operations available for registrants of a given webinar.
+    name: Registrants
+  - description: Operations available for sessions of a given webinar.
+    name: Sessions
+  - description: Operations available for attendees of a given webinar session.
+    name: Attendees

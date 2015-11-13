@@ -1,382 +1,256 @@
-{
-  "basePath": "/",
-  "definitions": {
-    "Emotion": {
-      "properties": {
-        "id": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "name": {
-          "type": "string"
-        },
-        "score": {
-          "format": "double",
-          "type": "number"
-        }
-      },
-      "required": [
-        "id",
-        "name",
-        "score"
-      ]
-    },
-    "EmotionIndex": {
-      "properties": {
-        "all": {
-          "items": {
-            "$ref": "#/definitions/Emotion"
-          },
-          "type": "array"
-        },
-        "primary": {
-          "items": {
-            "$ref": "#/definitions/Emotion"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "primary",
-        "all"
-      ]
-    },
-    "Quote": {
-      "properties": {
-        "author": {
-          "type": "string"
-        },
-        "text": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "text",
-        "author"
-      ]
-    },
-    "TextInput": {
-      "properties": {
-        "text": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "text"
-      ]
-    }
-  },
-  "host": "www.glugbot.com",
-  "info": {
-    "contact": {
-      "email": "ayush@glugbot.com"
-    },
-    "description": "Text Processing API for Creative Writing",
-    "license": {
-      "name": "http://glugbot.com/license",
-      "url": "http://glugbot.com/license"
-    },
-    "termsOfService": "http://glugbot.com/terms",
-    "title": "Glugbot API",
-    "version": "1",
-    "x-origin": {
-      "format": "swagger",
-      "url": "http://www.glugbot.com/api-docs",
-      "version": "1.2"
-    },
-    "x-providerName": "glugbot.com"
-  },
-  "paths": {
-    "/api/iris/akin-poem-snippets": {
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "deprecated": false,
-        "description": "Count cannot be more than 20",
-        "operationId": "getAkinPoemSnippets",
-        "parameters": [
-          {
-            "description": "Number of top words to return",
-            "format": "int32",
-            "in": "query",
-            "name": "count",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "description": "The text for which akin poem snippets need to be computed",
-            "in": "body",
-            "name": "textInput",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TextInput"
-            }
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/EmotionIndex"
-            }
-          }
-        },
-        "summary": "Gets snippets from poems which evoke similar emotions",
-        "tags": [
-          "iris"
-        ]
-      }
-    },
-    "/api/iris/akin-quotes": {
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "deprecated": false,
-        "description": "Count cannot be more than 20",
-        "operationId": "getAkinQuotes",
-        "parameters": [
-          {
-            "description": "Number of top words to return",
-            "format": "int32",
-            "in": "query",
-            "name": "count",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "description": "The text for which akin quotes need to be computed",
-            "in": "body",
-            "name": "textInput",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TextInput"
-            }
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/EmotionIndex"
-            }
-          }
-        },
-        "summary": "Gets snippets from quotes which evoke similar emotions",
-        "tags": [
-          "iris"
-        ]
-      }
-    },
-    "/api/iris/akin-song-snippets": {
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "deprecated": false,
-        "description": "Count cannot be more than 20",
-        "operationId": "getAkinSongSnippets",
-        "parameters": [
-          {
-            "description": "Number of top words to return",
-            "format": "int32",
-            "in": "query",
-            "name": "count",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "description": "The text for which akin song snippets need to be computed",
-            "in": "body",
-            "name": "textInput",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TextInput"
-            }
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/EmotionIndex"
-            }
-          }
-        },
-        "summary": "Gets snippets from songs which evoke similar emotions",
-        "tags": [
-          "iris"
-        ]
-      }
-    },
-    "/api/iris/emotions": {
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "deprecated": false,
-        "description": "Gets a 20 point emotional index",
-        "operationId": "getIris",
-        "parameters": [
-          {
-            "description": "The text for which emotional index is to be computed",
-            "in": "body",
-            "name": "textInput",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TextInput"
-            }
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/EmotionIndex"
-            }
-          }
-        },
-        "summary": "Get emotional index for passed text",
-        "tags": [
-          "iris"
-        ]
-      }
-    },
-    "/api/random/feeling-words": {
-      "get": {
-        "consumes": [
-          "application/json"
-        ],
-        "deprecated": false,
-        "description": "Each word returned is a 'feeling word'",
-        "operationId": "getFeelingWords",
-        "parameters": [
-          {
-            "description": "Number of words to return",
-            "format": "int32",
-            "in": "query",
-            "name": "count",
-            "required": false,
-            "type": "integer"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
-          }
-        },
-        "summary": "Get a random set of words which evoke a feeling",
-        "tags": [
-          "random"
-        ]
-      }
-    },
-    "/api/random/quote": {
-      "get": {
-        "consumes": [
-          "application/json"
-        ],
-        "deprecated": false,
-        "operationId": "getRandomQuote",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/Quote"
-            }
-          }
-        },
-        "summary": "Get a random quote",
-        "tags": [
-          "random"
-        ]
-      }
-    },
-    "/api/words/top-words": {
-      "post": {
-        "consumes": [
-          "application/json"
-        ],
-        "deprecated": false,
-        "operationId": "getTopWords",
-        "parameters": [
-          {
-            "description": "Number of top words to return",
-            "format": "int32",
-            "in": "query",
-            "name": "count",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "description": "The text for which akin song snippets need to be computed",
-            "in": "body",
-            "name": "textInput",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TextInput"
-            }
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified",
-            "schema": {
-              "$ref": "#/definitions/EmotionIndex"
-            }
-          }
-        },
-        "summary": "Gets top words in the passed text",
-        "tags": [
-          "words"
-        ]
-      }
-    }
-  },
-  "schemes": [
-    "http"
-  ],
-  "swagger": "2.0",
-  "tags": [
-    {
-      "description": "API for words in creative writing",
-      "name": "words"
-    },
-    {
-      "description": "API based on emotion detection for creative writing",
-      "name": "iris"
-    },
-    {
-      "description": "API for random goodies in creative writing",
-      "name": "random"
-    }
-  ]
-}
+basePath: /
+definitions:
+  Emotion:
+    properties:
+      id:
+        format: int32
+        type: integer
+      name:
+        type: string
+      score:
+        format: double
+        type: number
+    required:
+      - id
+      - name
+      - score
+  EmotionIndex:
+    properties:
+      all:
+        items:
+          $ref: '#/definitions/Emotion'
+        type: array
+      primary:
+        items:
+          $ref: '#/definitions/Emotion'
+        type: array
+    required:
+      - primary
+      - all
+  Quote:
+    properties:
+      author:
+        type: string
+      text:
+        type: string
+    required:
+      - text
+      - author
+  TextInput:
+    properties:
+      text:
+        type: string
+    required:
+      - text
+host: www.glugbot.com
+info:
+  contact:
+    email: ayush@glugbot.com
+  description: Text Processing API for Creative Writing
+  license:
+    name: 'http://glugbot.com/license'
+    url: 'http://glugbot.com/license'
+  termsOfService: 'http://glugbot.com/terms'
+  title: Glugbot API
+  version: '1'
+  x-origin:
+    format: swagger
+    url: 'http://www.glugbot.com/api-docs'
+    version: '1.2'
+  x-providerName: glugbot.com
+paths:
+  /api/iris/akin-poem-snippets:
+    post:
+      consumes:
+        - application/json
+      deprecated: false
+      description: Count cannot be more than 20
+      operationId: getAkinPoemSnippets
+      parameters:
+        - description: Number of top words to return
+          format: int32
+          in: query
+          name: count
+          required: false
+          type: integer
+        - description: The text for which akin poem snippets need to be computed
+          in: body
+          name: textInput
+          required: true
+          schema:
+            $ref: '#/definitions/TextInput'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/EmotionIndex'
+      summary: Gets snippets from poems which evoke similar emotions
+      tags:
+        - iris
+  /api/iris/akin-quotes:
+    post:
+      consumes:
+        - application/json
+      deprecated: false
+      description: Count cannot be more than 20
+      operationId: getAkinQuotes
+      parameters:
+        - description: Number of top words to return
+          format: int32
+          in: query
+          name: count
+          required: false
+          type: integer
+        - description: The text for which akin quotes need to be computed
+          in: body
+          name: textInput
+          required: true
+          schema:
+            $ref: '#/definitions/TextInput'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/EmotionIndex'
+      summary: Gets snippets from quotes which evoke similar emotions
+      tags:
+        - iris
+  /api/iris/akin-song-snippets:
+    post:
+      consumes:
+        - application/json
+      deprecated: false
+      description: Count cannot be more than 20
+      operationId: getAkinSongSnippets
+      parameters:
+        - description: Number of top words to return
+          format: int32
+          in: query
+          name: count
+          required: false
+          type: integer
+        - description: The text for which akin song snippets need to be computed
+          in: body
+          name: textInput
+          required: true
+          schema:
+            $ref: '#/definitions/TextInput'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/EmotionIndex'
+      summary: Gets snippets from songs which evoke similar emotions
+      tags:
+        - iris
+  /api/iris/emotions:
+    post:
+      consumes:
+        - application/json
+      deprecated: false
+      description: Gets a 20 point emotional index
+      operationId: getIris
+      parameters:
+        - description: The text for which emotional index is to be computed
+          in: body
+          name: textInput
+          required: true
+          schema:
+            $ref: '#/definitions/TextInput'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/EmotionIndex'
+      summary: Get emotional index for passed text
+      tags:
+        - iris
+  /api/random/feeling-words:
+    get:
+      consumes:
+        - application/json
+      deprecated: false
+      description: "Each word returned is a 'feeling word'"
+      operationId: getFeelingWords
+      parameters:
+        - description: Number of words to return
+          format: int32
+          in: query
+          name: count
+          required: false
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            items:
+              type: string
+            type: array
+      summary: Get a random set of words which evoke a feeling
+      tags:
+        - random
+  /api/random/quote:
+    get:
+      consumes:
+        - application/json
+      deprecated: false
+      operationId: getRandomQuote
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/Quote'
+      summary: Get a random quote
+      tags:
+        - random
+  /api/words/top-words:
+    post:
+      consumes:
+        - application/json
+      deprecated: false
+      operationId: getTopWords
+      parameters:
+        - description: Number of top words to return
+          format: int32
+          in: query
+          name: count
+          required: false
+          type: integer
+        - description: The text for which akin song snippets need to be computed
+          in: body
+          name: textInput
+          required: true
+          schema:
+            $ref: '#/definitions/TextInput'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: No response was specified
+          schema:
+            $ref: '#/definitions/EmotionIndex'
+      summary: Gets top words in the passed text
+      tags:
+        - words
+schemes:
+  - http
+swagger: '2.0'
+tags:
+  - description: API for words in creative writing
+    name: words
+  - description: API based on emotion detection for creative writing
+    name: iris
+  - description: API for random goodies in creative writing
+    name: random

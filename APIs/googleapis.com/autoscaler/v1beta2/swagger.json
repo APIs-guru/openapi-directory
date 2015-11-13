@@ -1,1093 +1,697 @@
-{
-  "basePath": "/autoscaler/v1beta2",
-  "definitions": {
-    "Autoscaler": {
-      "description": "Cloud Autoscaler resource.",
-      "properties": {
-        "autoscalingPolicy": {
-          "$ref": "#/definitions/AutoscalingPolicy",
-          "description": "Configuration parameters for autoscaling algorithm."
-        },
-        "creationTimestamp": {
-          "description": "[Output Only] Creation timestamp in RFC3339 text format.",
-          "type": "string"
-        },
-        "description": {
-          "description": "An optional textual description of the resource provided by the client.",
-          "type": "string"
-        },
-        "id": {
-          "description": "[Output Only] Unique identifier for the resource; defined by the server.",
-          "format": "uint64",
-          "type": "string"
-        },
-        "kind": {
-          "default": "compute#autoscaler",
-          "description": "Type of resource.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the Autoscaler resource. Must be unique per project and zone.",
-          "type": "string"
-        },
-        "selfLink": {
-          "description": "[Output Only] A self-link to the Autoscaler configuration resource.",
-          "type": "string"
-        },
-        "target": {
-          "description": "URL to the entity which will be autoscaled. Currently the only supported value is ReplicaPool?s URL. Note: it is illegal to specify multiple Autoscalers for the same target.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AutoscalerListResponse": {
-      "properties": {
-        "items": {
-          "description": "Autoscaler resources.",
-          "items": {
-            "$ref": "#/definitions/Autoscaler"
-          },
-          "type": "array"
-        },
-        "kind": {
-          "default": "compute#autoscalerList",
-          "description": "Type of resource.",
-          "type": "string"
-        },
-        "nextPageToken": {
-          "description": "[Output only] A token used to continue a truncated list request.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AutoscalingPolicy": {
-      "description": "Cloud Autoscaler policy.",
-      "properties": {
-        "coolDownPeriodSec": {
-          "description": "The number of seconds that the Autoscaler should wait between two succeeding changes to the number of virtual machines. You should define an interval that is at least as long as the initialization time of a virtual machine and the time it may take for replica pool to create the virtual machine. The default is 60 seconds.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "cpuUtilization": {
-          "$ref": "#/definitions/AutoscalingPolicyCpuUtilization",
-          "description": "Exactly one utilization policy should be provided. Configuration parameters of CPU based autoscaling policy."
-        },
-        "customMetricUtilizations": {
-          "description": "Configuration parameters of autoscaling based on custom metric.",
-          "items": {
-            "$ref": "#/definitions/AutoscalingPolicyCustomMetricUtilization"
-          },
-          "type": "array"
-        },
-        "loadBalancingUtilization": {
-          "$ref": "#/definitions/AutoscalingPolicyLoadBalancingUtilization",
-          "description": "Configuration parameters of autoscaling based on load balancer."
-        },
-        "maxNumReplicas": {
-          "description": "The maximum number of replicas that the Autoscaler can scale up to.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "minNumReplicas": {
-          "description": "The minimum number of replicas that the Autoscaler can scale down to.",
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
-    "AutoscalingPolicyCpuUtilization": {
-      "description": "CPU utilization policy.",
-      "properties": {
-        "utilizationTarget": {
-          "description": "The target utilization that the Autoscaler should maintain. It is represented as a fraction of used cores. For example: 6 cores used in 8-core VM are represented here as 0.75. Must be a float value between (0, 1]. If not defined, the default is 0.8.",
-          "format": "double",
-          "type": "number"
-        }
-      },
-      "type": "object"
-    },
-    "AutoscalingPolicyCustomMetricUtilization": {
-      "description": "Custom utilization metric policy.",
-      "properties": {
-        "metric": {
-          "description": "Identifier of the metric. It should be a Cloud Monitoring metric. The metric can not have negative values. The metric should be an utilization metric (increasing number of VMs handling requests x times should reduce average value of the metric roughly x times). For example you could use: compute.googleapis.com/instance/network/received_bytes_count.",
-          "type": "string"
-        },
-        "utilizationTarget": {
-          "description": "Target value of the metric which Autoscaler should maintain. Must be a positive value.",
-          "format": "double",
-          "type": "number"
-        },
-        "utilizationTargetType": {
-          "description": "Defines type in which utilization_target is expressed.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "AutoscalingPolicyLoadBalancingUtilization": {
-      "description": "Load balancing utilization policy.",
-      "properties": {
-        "utilizationTarget": {
-          "description": "Fraction of backend capacity utilization (set in HTTP load balancing configuration) that Autoscaler should maintain. Must be a positive float value. If not defined, the default is 0.8. For example if your maxRatePerInstance capacity (in HTTP Load Balancing configuration) is set at 10 and you would like to keep number of instances such that each instance receives 7 QPS on average, set this to 0.7.",
-          "format": "double",
-          "type": "number"
-        }
-      },
-      "type": "object"
-    },
-    "DeprecationStatus": {
-      "properties": {
-        "deleted": {
-          "type": "string"
-        },
-        "deprecated": {
-          "type": "string"
-        },
-        "obsolete": {
-          "type": "string"
-        },
-        "replacement": {
-          "type": "string"
-        },
-        "state": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Operation": {
-      "properties": {
-        "clientOperationId": {
-          "type": "string"
-        },
-        "creationTimestamp": {
-          "type": "string"
-        },
-        "endTime": {
-          "type": "string"
-        },
-        "error": {
-          "properties": {
-            "errors": {
-              "items": {
-                "properties": {
-                  "code": {
-                    "type": "string"
-                  },
-                  "location": {
-                    "type": "string"
-                  },
-                  "message": {
-                    "type": "string"
-                  }
-                },
-                "type": "object"
-              },
-              "type": "array"
-            }
-          },
-          "type": "object"
-        },
-        "httpErrorMessage": {
-          "type": "string"
-        },
-        "httpErrorStatusCode": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "id": {
-          "format": "uint64",
-          "type": "string"
-        },
-        "insertTime": {
-          "type": "string"
-        },
-        "kind": {
-          "default": "autoscaler#operation",
-          "description": "[Output Only] Type of the resource. Always compute#Operation for Operation resources.",
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "operationType": {
-          "type": "string"
-        },
-        "progress": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "region": {
-          "type": "string"
-        },
-        "selfLink": {
-          "type": "string"
-        },
-        "startTime": {
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        },
-        "statusMessage": {
-          "type": "string"
-        },
-        "targetId": {
-          "format": "uint64",
-          "type": "string"
-        },
-        "targetLink": {
-          "type": "string"
-        },
-        "user": {
-          "type": "string"
-        },
-        "warnings": {
-          "items": {
-            "properties": {
-              "code": {
-                "type": "string"
-              },
-              "data": {
-                "items": {
-                  "properties": {
-                    "key": {
-                      "type": "string"
-                    },
-                    "value": {
-                      "type": "string"
-                    }
-                  },
-                  "type": "object"
-                },
-                "type": "array"
-              },
-              "message": {
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "zone": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "OperationList": {
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "items": {
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "type": "array"
-        },
-        "kind": {
-          "default": "autoscaler#operationList",
-          "description": "[Output Only] Type of resource. Always compute#operations for Operations resource.",
-          "type": "string"
-        },
-        "nextPageToken": {
-          "type": "string"
-        },
-        "selfLink": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Zone": {
-      "properties": {
-        "creationTimestamp": {
-          "type": "string"
-        },
-        "deprecated": {
-          "$ref": "#/definitions/DeprecationStatus"
-        },
-        "description": {
-          "type": "string"
-        },
-        "id": {
-          "format": "uint64",
-          "type": "string"
-        },
-        "kind": {
-          "default": "autoscaler#zone",
-          "description": "[Output Only] Type of the resource. Always kind#zone for zones.",
-          "type": "string"
-        },
-        "maintenanceWindows": {
-          "items": {
-            "properties": {
-              "beginTime": {
-                "type": "string"
-              },
-              "description": {
-                "type": "string"
-              },
-              "endTime": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "name": {
-          "type": "string"
-        },
-        "region": {
-          "type": "string"
-        },
-        "selfLink": {
-          "description": "[Output Only] Server defined URL for the resource.",
-          "type": "string"
-        },
-        "status": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ZoneList": {
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "items": {
-          "items": {
-            "$ref": "#/definitions/Zone"
-          },
-          "type": "array"
-        },
-        "kind": {
-          "default": "autoscaler#zoneList",
-          "description": "Type of resource.",
-          "type": "string"
-        },
-        "nextPageToken": {
-          "type": "string"
-        },
-        "selfLink": {
-          "description": "Server defined URL for this resource (output only).",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    }
-  },
-  "externalDocs": {
-    "url": "http://developers.google.com/compute/docs/autoscaler"
-  },
-  "host": "www.googleapis.com",
-  "info": {
-    "contact": {
-      "name": "Google",
-      "url": "https://google.com"
-    },
-    "description": "The Google Compute Engine Autoscaler API provides autoscaling for groups of Cloud VMs.",
-    "title": "Google Compute Engine Autoscaler API",
-    "version": "v1beta2",
-    "x-apiClientRegistration": {
-      "url": "https://console.developers.google.com"
-    },
-    "x-logo": {
-      "url": "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
-    },
-    "x-origin": {
-      "format": "google",
-      "url": "https://www.googleapis.com/discovery/v1/apis/autoscaler/v1beta2/rest",
-      "version": "v1"
-    },
-    "x-preferred": true,
-    "x-providerName": "googleapis.com",
-    "x-serviceName": "autoscaler"
-  },
-  "parameters": {
-    "alt": {
-      "default": "json",
-      "description": "Data format for the response.",
-      "enum": [
-        "json"
-      ],
-      "in": "query",
-      "name": "alt",
-      "type": "string"
-    },
-    "fields": {
-      "description": "Selector specifying which fields to include in a partial response.",
-      "in": "query",
-      "name": "fields",
-      "type": "string"
-    },
-    "key": {
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "in": "query",
-      "name": "key",
-      "type": "string"
-    },
-    "oauth_token": {
-      "description": "OAuth 2.0 token for the current user.",
-      "in": "query",
-      "name": "oauth_token",
-      "type": "string"
-    },
-    "prettyPrint": {
-      "default": true,
-      "description": "Returns response with indentations and line breaks.",
-      "in": "query",
-      "name": "prettyPrint",
-      "type": "boolean"
-    },
-    "quotaUser": {
-      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
-      "in": "query",
-      "name": "quotaUser",
-      "type": "string"
-    },
-    "userIp": {
-      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
-      "in": "query",
-      "name": "userIp",
-      "type": "string"
-    }
-  },
-  "paths": {
-    "/{project}/zones": {
-      "get": {
-        "description": "",
-        "operationId": "autoscaler.zones.list",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "project",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "filter",
-            "type": "string"
-          },
-          {
-            "default": 500,
-            "in": "query",
-            "maximum": 500,
-            "minimum": 0,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/ZoneList"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/compute",
-              "https://www.googleapis.com/auth/compute.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "zones"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/{project}/zones/{zone}/operations": {
-      "get": {
-        "description": "Retrieves the list of operation resources contained within the specified zone.",
-        "operationId": "autoscaler.zoneOperations.list",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "project",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "zone",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "filter",
-            "type": "string"
-          },
-          {
-            "default": 500,
-            "in": "query",
-            "maximum": 500,
-            "minimum": 0,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/OperationList"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/compute",
-              "https://www.googleapis.com/auth/compute.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "zoneOperations"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/{project}/zones/{zone}/operations/{operation}": {
-      "delete": {
-        "description": "Deletes the specified zone-specific operation resource.",
-        "operationId": "autoscaler.zoneOperations.delete",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "project",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "zone",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "operation",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/compute"
-            ]
-          }
-        ],
-        "tags": [
-          "zoneOperations"
-        ]
-      },
-      "get": {
-        "description": "Retrieves the specified zone-specific operation resource.",
-        "operationId": "autoscaler.zoneOperations.get",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "project",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "zone",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "operation",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Operation"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/compute",
-              "https://www.googleapis.com/auth/compute.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "zoneOperations"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/projects/{project}/zones/{zone}/autoscalers": {
-      "get": {
-        "description": "Lists all Autoscaler resources in this zone.",
-        "operationId": "autoscaler.autoscalers.list",
-        "parameters": [
-          {
-            "description": "Project ID of Autoscaler resource.",
-            "in": "path",
-            "name": "project",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Zone name of Autoscaler resource.",
-            "in": "path",
-            "name": "zone",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "filter",
-            "type": "string"
-          },
-          {
-            "default": 500,
-            "in": "query",
-            "maximum": 500,
-            "minimum": 0,
-            "name": "maxResults",
-            "type": "integer"
-          },
-          {
-            "in": "query",
-            "name": "pageToken",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/AutoscalerListResponse"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/compute",
-              "https://www.googleapis.com/auth/compute.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "autoscalers"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "post": {
-        "description": "Adds new Autoscaler resource.",
-        "operationId": "autoscaler.autoscalers.insert",
-        "parameters": [
-          {
-            "description": "Project ID of Autoscaler resource.",
-            "in": "path",
-            "name": "project",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Zone name of Autoscaler resource.",
-            "in": "path",
-            "name": "zone",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/Autoscaler"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Operation"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/compute"
-            ]
-          }
-        ],
-        "tags": [
-          "autoscalers"
-        ]
-      }
-    },
-    "/projects/{project}/zones/{zone}/autoscalers/{autoscaler}": {
-      "delete": {
-        "description": "Deletes the specified Autoscaler resource.",
-        "operationId": "autoscaler.autoscalers.delete",
-        "parameters": [
-          {
-            "description": "Project ID of Autoscaler resource.",
-            "in": "path",
-            "name": "project",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Zone name of Autoscaler resource.",
-            "in": "path",
-            "name": "zone",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Name of the Autoscaler resource.",
-            "in": "path",
-            "name": "autoscaler",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Operation"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/compute"
-            ]
-          }
-        ],
-        "tags": [
-          "autoscalers"
-        ]
-      },
-      "get": {
-        "description": "Gets the specified Autoscaler resource.",
-        "operationId": "autoscaler.autoscalers.get",
-        "parameters": [
-          {
-            "description": "Project ID of Autoscaler resource.",
-            "in": "path",
-            "name": "project",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Zone name of Autoscaler resource.",
-            "in": "path",
-            "name": "zone",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Name of the Autoscaler resource.",
-            "in": "path",
-            "name": "autoscaler",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Autoscaler"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/compute",
-              "https://www.googleapis.com/auth/compute.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "autoscalers"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ],
-      "patch": {
-        "description": "Update the entire content of the Autoscaler resource. This method supports patch semantics.",
-        "operationId": "autoscaler.autoscalers.patch",
-        "parameters": [
-          {
-            "description": "Project ID of Autoscaler resource.",
-            "in": "path",
-            "name": "project",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Zone name of Autoscaler resource.",
-            "in": "path",
-            "name": "zone",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Name of the Autoscaler resource.",
-            "in": "path",
-            "name": "autoscaler",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/Autoscaler"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Operation"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/compute"
-            ]
-          }
-        ],
-        "tags": [
-          "autoscalers"
-        ]
-      },
-      "put": {
-        "description": "Update the entire content of the Autoscaler resource.",
-        "operationId": "autoscaler.autoscalers.update",
-        "parameters": [
-          {
-            "description": "Project ID of Autoscaler resource.",
-            "in": "path",
-            "name": "project",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Zone name of Autoscaler resource.",
-            "in": "path",
-            "name": "zone",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Name of the Autoscaler resource.",
-            "in": "path",
-            "name": "autoscaler",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/Autoscaler"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "schema": {
-              "$ref": "#/definitions/Operation"
-            }
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/compute"
-            ]
-          }
-        ],
-        "tags": [
-          "autoscalers"
-        ]
-      }
-    }
-  },
-  "schemes": [
-    "https"
-  ],
-  "securityDefinitions": {
-    "Oauth2": {
-      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
-      "description": "Oauth 2.0 authentication",
-      "flow": "implicit",
-      "scopes": {
-        "https://www.googleapis.com/auth/compute": "View and manage your Google Compute Engine resources",
-        "https://www.googleapis.com/auth/compute.readonly": "View your Google Compute Engine resources"
-      },
-      "type": "oauth2"
-    }
-  },
-  "swagger": "2.0"
-}
+basePath: /autoscaler/v1beta2
+definitions:
+  Autoscaler:
+    description: Cloud Autoscaler resource.
+    properties:
+      autoscalingPolicy:
+        $ref: '#/definitions/AutoscalingPolicy'
+        description: Configuration parameters for autoscaling algorithm.
+      creationTimestamp:
+        description: '[Output Only] Creation timestamp in RFC3339 text format.'
+        type: string
+      description:
+        description: An optional textual description of the resource provided by the client.
+        type: string
+      id:
+        description: '[Output Only] Unique identifier for the resource; defined by the server.'
+        format: uint64
+        type: string
+      kind:
+        default: 'compute#autoscaler'
+        description: Type of resource.
+        type: string
+      name:
+        description: Name of the Autoscaler resource. Must be unique per project and zone.
+        type: string
+      selfLink:
+        description: '[Output Only] A self-link to the Autoscaler configuration resource.'
+        type: string
+      target:
+        description: 'URL to the entity which will be autoscaled. Currently the only supported value is ReplicaPool?s URL. Note: it is illegal to specify multiple Autoscalers for the same target.'
+        type: string
+    type: object
+  AutoscalerListResponse:
+    properties:
+      items:
+        description: Autoscaler resources.
+        items:
+          $ref: '#/definitions/Autoscaler'
+        type: array
+      kind:
+        default: 'compute#autoscalerList'
+        description: Type of resource.
+        type: string
+      nextPageToken:
+        description: '[Output only] A token used to continue a truncated list request.'
+        type: string
+    type: object
+  AutoscalingPolicy:
+    description: Cloud Autoscaler policy.
+    properties:
+      coolDownPeriodSec:
+        description: The number of seconds that the Autoscaler should wait between two succeeding changes to the number of virtual machines. You should define an interval that is at least as long as the initialization time of a virtual machine and the time it may take for replica pool to create the virtual machine. The default is 60 seconds.
+        format: int32
+        type: integer
+      cpuUtilization:
+        $ref: '#/definitions/AutoscalingPolicyCpuUtilization'
+        description: Exactly one utilization policy should be provided. Configuration parameters of CPU based autoscaling policy.
+      customMetricUtilizations:
+        description: Configuration parameters of autoscaling based on custom metric.
+        items:
+          $ref: '#/definitions/AutoscalingPolicyCustomMetricUtilization'
+        type: array
+      loadBalancingUtilization:
+        $ref: '#/definitions/AutoscalingPolicyLoadBalancingUtilization'
+        description: Configuration parameters of autoscaling based on load balancer.
+      maxNumReplicas:
+        description: The maximum number of replicas that the Autoscaler can scale up to.
+        format: int32
+        type: integer
+      minNumReplicas:
+        description: The minimum number of replicas that the Autoscaler can scale down to.
+        format: int32
+        type: integer
+    type: object
+  AutoscalingPolicyCpuUtilization:
+    description: CPU utilization policy.
+    properties:
+      utilizationTarget:
+        description: 'The target utilization that the Autoscaler should maintain. It is represented as a fraction of used cores. For example: 6 cores used in 8-core VM are represented here as 0.75. Must be a float value between (0, 1]. If not defined, the default is 0.8.'
+        format: double
+        type: number
+    type: object
+  AutoscalingPolicyCustomMetricUtilization:
+    description: Custom utilization metric policy.
+    properties:
+      metric:
+        description: 'Identifier of the metric. It should be a Cloud Monitoring metric. The metric can not have negative values. The metric should be an utilization metric (increasing number of VMs handling requests x times should reduce average value of the metric roughly x times). For example you could use: compute.googleapis.com/instance/network/received_bytes_count.'
+        type: string
+      utilizationTarget:
+        description: Target value of the metric which Autoscaler should maintain. Must be a positive value.
+        format: double
+        type: number
+      utilizationTargetType:
+        description: Defines type in which utilization_target is expressed.
+        type: string
+    type: object
+  AutoscalingPolicyLoadBalancingUtilization:
+    description: Load balancing utilization policy.
+    properties:
+      utilizationTarget:
+        description: 'Fraction of backend capacity utilization (set in HTTP load balancing configuration) that Autoscaler should maintain. Must be a positive float value. If not defined, the default is 0.8. For example if your maxRatePerInstance capacity (in HTTP Load Balancing configuration) is set at 10 and you would like to keep number of instances such that each instance receives 7 QPS on average, set this to 0.7.'
+        format: double
+        type: number
+    type: object
+  DeprecationStatus:
+    properties:
+      deleted:
+        type: string
+      deprecated:
+        type: string
+      obsolete:
+        type: string
+      replacement:
+        type: string
+      state:
+        type: string
+    type: object
+  Operation:
+    properties:
+      clientOperationId:
+        type: string
+      creationTimestamp:
+        type: string
+      endTime:
+        type: string
+      error:
+        properties:
+          errors:
+            items:
+              properties:
+                code:
+                  type: string
+                location:
+                  type: string
+                message:
+                  type: string
+              type: object
+            type: array
+        type: object
+      httpErrorMessage:
+        type: string
+      httpErrorStatusCode:
+        format: int32
+        type: integer
+      id:
+        format: uint64
+        type: string
+      insertTime:
+        type: string
+      kind:
+        default: 'autoscaler#operation'
+        description: '[Output Only] Type of the resource. Always compute#Operation for Operation resources.'
+        type: string
+      name:
+        type: string
+      operationType:
+        type: string
+      progress:
+        format: int32
+        type: integer
+      region:
+        type: string
+      selfLink:
+        type: string
+      startTime:
+        type: string
+      status:
+        type: string
+      statusMessage:
+        type: string
+      targetId:
+        format: uint64
+        type: string
+      targetLink:
+        type: string
+      user:
+        type: string
+      warnings:
+        items:
+          properties:
+            code:
+              type: string
+            data:
+              items:
+                properties:
+                  key:
+                    type: string
+                  value:
+                    type: string
+                type: object
+              type: array
+            message:
+              type: string
+          type: object
+        type: array
+      zone:
+        type: string
+    type: object
+  OperationList:
+    properties:
+      id:
+        type: string
+      items:
+        items:
+          $ref: '#/definitions/Operation'
+        type: array
+      kind:
+        default: 'autoscaler#operationList'
+        description: '[Output Only] Type of resource. Always compute#operations for Operations resource.'
+        type: string
+      nextPageToken:
+        type: string
+      selfLink:
+        type: string
+    type: object
+  Zone:
+    properties:
+      creationTimestamp:
+        type: string
+      deprecated:
+        $ref: '#/definitions/DeprecationStatus'
+      description:
+        type: string
+      id:
+        format: uint64
+        type: string
+      kind:
+        default: 'autoscaler#zone'
+        description: '[Output Only] Type of the resource. Always kind#zone for zones.'
+        type: string
+      maintenanceWindows:
+        items:
+          properties:
+            beginTime:
+              type: string
+            description:
+              type: string
+            endTime:
+              type: string
+            name:
+              type: string
+          type: object
+        type: array
+      name:
+        type: string
+      region:
+        type: string
+      selfLink:
+        description: '[Output Only] Server defined URL for the resource.'
+        type: string
+      status:
+        type: string
+    type: object
+  ZoneList:
+    properties:
+      id:
+        type: string
+      items:
+        items:
+          $ref: '#/definitions/Zone'
+        type: array
+      kind:
+        default: 'autoscaler#zoneList'
+        description: Type of resource.
+        type: string
+      nextPageToken:
+        type: string
+      selfLink:
+        description: Server defined URL for this resource (output only).
+        type: string
+    type: object
+externalDocs:
+  url: 'http://developers.google.com/compute/docs/autoscaler'
+host: www.googleapis.com
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: The Google Compute Engine Autoscaler API provides autoscaling for groups of Cloud VMs.
+  title: Google Compute Engine Autoscaler API
+  version: v1beta2
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/autoscaler/v1beta2/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: autoscaler
+parameters:
+  alt:
+    default: json
+    description: Data format for the response.
+    enum:
+      - json
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  '/projects/{project}/zones/{zone}/autoscalers':
+    get:
+      description: Lists all Autoscaler resources in this zone.
+      operationId: autoscaler.autoscalers.list
+      parameters:
+        - description: Project ID of Autoscaler resource.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Zone name of Autoscaler resource.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - in: query
+          name: filter
+          type: string
+        - default: 500
+          in: query
+          maximum: 500
+          minimum: 0
+          name: maxResults
+          type: integer
+        - in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/AutoscalerListResponse'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - autoscalers
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    post:
+      description: Adds new Autoscaler resource.
+      operationId: autoscaler.autoscalers.insert
+      parameters:
+        - description: Project ID of Autoscaler resource.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Zone name of Autoscaler resource.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Autoscaler'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - autoscalers
+  '/projects/{project}/zones/{zone}/autoscalers/{autoscaler}':
+    delete:
+      description: Deletes the specified Autoscaler resource.
+      operationId: autoscaler.autoscalers.delete
+      parameters:
+        - description: Project ID of Autoscaler resource.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Zone name of Autoscaler resource.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: Name of the Autoscaler resource.
+          in: path
+          name: autoscaler
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - autoscalers
+    get:
+      description: Gets the specified Autoscaler resource.
+      operationId: autoscaler.autoscalers.get
+      parameters:
+        - description: Project ID of Autoscaler resource.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Zone name of Autoscaler resource.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: Name of the Autoscaler resource.
+          in: path
+          name: autoscaler
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Autoscaler'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - autoscalers
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+    patch:
+      description: Update the entire content of the Autoscaler resource. This method supports patch semantics.
+      operationId: autoscaler.autoscalers.patch
+      parameters:
+        - description: Project ID of Autoscaler resource.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Zone name of Autoscaler resource.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: Name of the Autoscaler resource.
+          in: path
+          name: autoscaler
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Autoscaler'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - autoscalers
+    put:
+      description: Update the entire content of the Autoscaler resource.
+      operationId: autoscaler.autoscalers.update
+      parameters:
+        - description: Project ID of Autoscaler resource.
+          in: path
+          name: project
+          required: true
+          type: string
+        - description: Zone name of Autoscaler resource.
+          in: path
+          name: zone
+          required: true
+          type: string
+        - description: Name of the Autoscaler resource.
+          in: path
+          name: autoscaler
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/Autoscaler'
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - autoscalers
+  '/{project}/zones':
+    get:
+      description: ''
+      operationId: autoscaler.zones.list
+      parameters:
+        - in: path
+          name: project
+          required: true
+          type: string
+        - in: query
+          name: filter
+          type: string
+        - default: 500
+          in: query
+          maximum: 500
+          minimum: 0
+          name: maxResults
+          type: integer
+        - in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/ZoneList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - zones
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/zones/{zone}/operations':
+    get:
+      description: Retrieves the list of operation resources contained within the specified zone.
+      operationId: autoscaler.zoneOperations.list
+      parameters:
+        - in: path
+          name: project
+          required: true
+          type: string
+        - in: path
+          name: zone
+          required: true
+          type: string
+        - in: query
+          name: filter
+          type: string
+        - default: 500
+          in: query
+          maximum: 500
+          minimum: 0
+          name: maxResults
+          type: integer
+        - in: query
+          name: pageToken
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/OperationList'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - zoneOperations
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/{project}/zones/{zone}/operations/{operation}':
+    delete:
+      description: Deletes the specified zone-specific operation resource.
+      operationId: autoscaler.zoneOperations.delete
+      parameters:
+        - in: path
+          name: project
+          required: true
+          type: string
+        - in: path
+          name: zone
+          required: true
+          type: string
+        - in: path
+          name: operation
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+      tags:
+        - zoneOperations
+    get:
+      description: Retrieves the specified zone-specific operation resource.
+      operationId: autoscaler.zoneOperations.get
+      parameters:
+        - in: path
+          name: project
+          required: true
+          type: string
+        - in: path
+          name: zone
+          required: true
+          type: string
+        - in: path
+          name: operation
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Successful response
+          schema:
+            $ref: '#/definitions/Operation'
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/compute'
+            - 'https://www.googleapis.com/auth/compute.readonly'
+      tags:
+        - zoneOperations
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+schemes:
+  - https
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/compute': View and manage your Google Compute Engine resources
+      'https://www.googleapis.com/auth/compute.readonly': View your Google Compute Engine resources
+    type: oauth2
+swagger: '2.0'

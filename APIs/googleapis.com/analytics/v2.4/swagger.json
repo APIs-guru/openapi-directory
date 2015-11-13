@@ -1,551 +1,327 @@
-{
-  "basePath": "/analytics/v2.4",
-  "externalDocs": {
-    "url": "https://developers.google.com/analytics/"
-  },
-  "host": "www.googleapis.com",
-  "info": {
-    "contact": {
-      "name": "Google",
-      "url": "https://google.com"
-    },
-    "description": "View and manage your Google Analytics data",
-    "title": "Google Analytics API",
-    "version": "v2.4",
-    "x-apiClientRegistration": {
-      "url": "https://console.developers.google.com"
-    },
-    "x-logo": {
-      "url": "https://www.gstatic.com/images/icons/material/product/2x/analytics_64dp.png"
-    },
-    "x-origin": {
-      "format": "google",
-      "url": "https://www.googleapis.com/discovery/v1/apis/analytics/v2.4/rest",
-      "version": "v1"
-    },
-    "x-preferred": false,
-    "x-providerName": "googleapis.com",
-    "x-serviceName": "analytics"
-  },
-  "parameters": {
-    "alt": {
-      "default": "atom",
-      "description": "Data format for the response.",
-      "enum": [
-        "atom"
-      ],
-      "in": "query",
-      "name": "alt",
-      "type": "string"
-    },
-    "fields": {
-      "description": "Selector specifying which fields to include in a partial response.",
-      "in": "query",
-      "name": "fields",
-      "type": "string"
-    },
-    "key": {
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "in": "query",
-      "name": "key",
-      "type": "string"
-    },
-    "oauth_token": {
-      "description": "OAuth 2.0 token for the current user.",
-      "in": "query",
-      "name": "oauth_token",
-      "type": "string"
-    },
-    "prettyPrint": {
-      "default": false,
-      "description": "Returns response with indentations and line breaks.",
-      "in": "query",
-      "name": "prettyPrint",
-      "type": "boolean"
-    },
-    "quotaUser": {
-      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
-      "in": "query",
-      "name": "quotaUser",
-      "type": "string"
-    },
-    "userIp": {
-      "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
-      "in": "query",
-      "name": "userIp",
-      "type": "string"
-    }
-  },
-  "paths": {
-    "/data": {
-      "get": {
-        "description": "Returns Analytics report data for a view (profile).",
-        "operationId": "analytics.data.get",
-        "parameters": [
-          {
-            "description": "Unique table ID for retrieving report data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.",
-            "in": "query",
-            "name": "ids",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Start date for fetching report data. All requests should specify a start date formatted as YYYY-MM-DD.",
-            "in": "query",
-            "name": "start-date",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "End date for fetching report data. All requests should specify an end date formatted as YYYY-MM-DD.",
-            "in": "query",
-            "name": "end-date",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "A comma-separated list of Analytics metrics. E.g., 'ga:sessions,ga:pageviews'. At least one metric must be specified to retrieve a valid Analytics report.",
-            "in": "query",
-            "name": "metrics",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "A comma-separated list of Analytics dimensions. E.g., 'ga:browser,ga:city'.",
-            "in": "query",
-            "name": "dimensions",
-            "type": "string"
-          },
-          {
-            "description": "A comma-separated list of dimension or metric filters to be applied to the report data.",
-            "in": "query",
-            "name": "filters",
-            "type": "string"
-          },
-          {
-            "description": "The maximum number of entries to include in this feed.",
-            "in": "query",
-            "name": "max-results",
-            "type": "integer"
-          },
-          {
-            "description": "An Analytics advanced segment to be applied to the report data.",
-            "in": "query",
-            "name": "segment",
-            "type": "string"
-          },
-          {
-            "description": "A comma-separated list of dimensions or metrics that determine the sort order for the report data.",
-            "in": "query",
-            "name": "sort",
-            "type": "string"
-          },
-          {
-            "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
-            "in": "query",
-            "minimum": 1,
-            "name": "start-index",
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/analytics",
-              "https://www.googleapis.com/auth/analytics.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "data"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/management/accounts": {
-      "get": {
-        "description": "Lists all accounts to which the user has access.",
-        "operationId": "analytics.management.accounts.list",
-        "parameters": [
-          {
-            "description": "The maximum number of accounts to include in this response.",
-            "in": "query",
-            "name": "max-results",
-            "type": "integer"
-          },
-          {
-            "description": "An index of the first account to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
-            "in": "query",
-            "minimum": 1,
-            "name": "start-index",
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/analytics",
-              "https://www.googleapis.com/auth/analytics.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "management"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/management/accounts/{accountId}/webproperties": {
-      "get": {
-        "description": "Lists web properties to which the user has access.",
-        "operationId": "analytics.management.webproperties.list",
-        "parameters": [
-          {
-            "description": "Account ID to retrieve web properties for. Can either be a specific account ID or '~all', which refers to all the accounts that user has access to.",
-            "in": "path",
-            "name": "accountId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The maximum number of web properties to include in this response.",
-            "in": "query",
-            "name": "max-results",
-            "type": "integer"
-          },
-          {
-            "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
-            "in": "query",
-            "minimum": 1,
-            "name": "start-index",
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/analytics",
-              "https://www.googleapis.com/auth/analytics.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "management"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles": {
-      "get": {
-        "description": "Lists views (profiles) to which the user has access.",
-        "operationId": "analytics.management.profiles.list",
-        "parameters": [
-          {
-            "description": "Account ID for the views (profiles) to retrieve. Can either be a specific account ID or '~all', which refers to all the accounts to which the user has access.",
-            "in": "path",
-            "name": "accountId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Web property ID for the views (profiles) to retrieve. Can either be a specific web property ID or '~all', which refers to all the web properties to which the user has access.",
-            "in": "path",
-            "name": "webPropertyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The maximum number of views (profiles) to include in this response.",
-            "in": "query",
-            "name": "max-results",
-            "type": "integer"
-          },
-          {
-            "description": "An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
-            "in": "query",
-            "minimum": 1,
-            "name": "start-index",
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/analytics",
-              "https://www.googleapis.com/auth/analytics.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "management"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/goals": {
-      "get": {
-        "description": "Lists goals to which the user has access.",
-        "operationId": "analytics.management.goals.list",
-        "parameters": [
-          {
-            "description": "Account ID to retrieve goals for. Can either be a specific account ID or '~all', which refers to all the accounts that user has access to.",
-            "in": "path",
-            "name": "accountId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Web property ID to retrieve goals for. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to.",
-            "in": "path",
-            "name": "webPropertyId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "View (Profile) ID to retrieve goals for. Can either be a specific view (profile) ID or '~all', which refers to all the views (profiles) that user has access to.",
-            "in": "path",
-            "name": "profileId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The maximum number of goals to include in this response.",
-            "in": "query",
-            "name": "max-results",
-            "type": "integer"
-          },
-          {
-            "description": "An index of the first goal to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
-            "in": "query",
-            "minimum": 1,
-            "name": "start-index",
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/analytics",
-              "https://www.googleapis.com/auth/analytics.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "management"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    },
-    "/management/segments": {
-      "get": {
-        "description": "Lists advanced segments to which the user has access.",
-        "operationId": "analytics.management.segments.list",
-        "parameters": [
-          {
-            "description": "The maximum number of advanced segments to include in this response.",
-            "in": "query",
-            "name": "max-results",
-            "type": "integer"
-          },
-          {
-            "description": "An index of the first advanced segment to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.",
-            "in": "query",
-            "minimum": 1,
-            "name": "start-index",
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          }
-        },
-        "security": [
-          {
-            "Oauth2": [
-              "https://www.googleapis.com/auth/analytics",
-              "https://www.googleapis.com/auth/analytics.readonly"
-            ]
-          }
-        ],
-        "tags": [
-          "management"
-        ]
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/alt"
-        },
-        {
-          "$ref": "#/parameters/fields"
-        },
-        {
-          "$ref": "#/parameters/key"
-        },
-        {
-          "$ref": "#/parameters/oauth_token"
-        },
-        {
-          "$ref": "#/parameters/prettyPrint"
-        },
-        {
-          "$ref": "#/parameters/quotaUser"
-        },
-        {
-          "$ref": "#/parameters/userIp"
-        }
-      ]
-    }
-  },
-  "schemes": [
-    "https"
-  ],
-  "securityDefinitions": {
-    "Oauth2": {
-      "authorizationUrl": "https://accounts.google.com/o/oauth2/auth",
-      "description": "Oauth 2.0 authentication",
-      "flow": "implicit",
-      "scopes": {
-        "https://www.googleapis.com/auth/analytics": "View and manage your Google Analytics data",
-        "https://www.googleapis.com/auth/analytics.readonly": "View your Google Analytics data"
-      },
-      "type": "oauth2"
-    }
-  },
-  "swagger": "2.0"
-}
+basePath: /analytics/v2.4
+externalDocs:
+  url: 'https://developers.google.com/analytics/'
+host: www.googleapis.com
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: View and manage your Google Analytics data
+  title: Google Analytics API
+  version: v2.4
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://www.gstatic.com/images/icons/material/product/2x/analytics_64dp.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/analytics/v2.4/rest'
+    version: v1
+  x-preferred: false
+  x-providerName: googleapis.com
+  x-serviceName: analytics
+parameters:
+  alt:
+    default: atom
+    description: Data format for the response.
+    enum:
+      - atom
+    in: query
+    name: alt
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  prettyPrint:
+    default: false
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.'
+    in: query
+    name: quotaUser
+    type: string
+  userIp:
+    description: IP address of the site where the request originates. Use this if you want to enforce per-user limits.
+    in: query
+    name: userIp
+    type: string
+paths:
+  /data:
+    get:
+      description: Returns Analytics report data for a view (profile).
+      operationId: analytics.data.get
+      parameters:
+        - description: 'Unique table ID for retrieving report data. Table ID is of the form ga:XXXX, where XXXX is the Analytics view (profile) ID.'
+          in: query
+          name: ids
+          required: true
+          type: string
+        - description: Start date for fetching report data. All requests should specify a start date formatted as YYYY-MM-DD.
+          in: query
+          name: start-date
+          required: true
+          type: string
+        - description: End date for fetching report data. All requests should specify an end date formatted as YYYY-MM-DD.
+          in: query
+          name: end-date
+          required: true
+          type: string
+        - description: "A comma-separated list of Analytics metrics. E.g., 'ga:sessions,ga:pageviews'. At least one metric must be specified to retrieve a valid Analytics report."
+          in: query
+          name: metrics
+          required: true
+          type: string
+        - description: "A comma-separated list of Analytics dimensions. E.g., 'ga:browser,ga:city'."
+          in: query
+          name: dimensions
+          type: string
+        - description: A comma-separated list of dimension or metric filters to be applied to the report data.
+          in: query
+          name: filters
+          type: string
+        - description: The maximum number of entries to include in this feed.
+          in: query
+          name: max-results
+          type: integer
+        - description: An Analytics advanced segment to be applied to the report data.
+          in: query
+          name: segment
+          type: string
+        - description: A comma-separated list of dimensions or metrics that determine the sort order for the report data.
+          in: query
+          name: sort
+          type: string
+        - description: An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+          in: query
+          minimum: 1
+          name: start-index
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics'
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+      tags:
+        - data
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /management/accounts:
+    get:
+      description: Lists all accounts to which the user has access.
+      operationId: analytics.management.accounts.list
+      parameters:
+        - description: The maximum number of accounts to include in this response.
+          in: query
+          name: max-results
+          type: integer
+        - description: An index of the first account to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+          in: query
+          minimum: 1
+          name: start-index
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics'
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+      tags:
+        - management
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/management/accounts/{accountId}/webproperties':
+    get:
+      description: Lists web properties to which the user has access.
+      operationId: analytics.management.webproperties.list
+      parameters:
+        - description: "Account ID to retrieve web properties for. Can either be a specific account ID or '~all', which refers to all the accounts that user has access to."
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: The maximum number of web properties to include in this response.
+          in: query
+          name: max-results
+          type: integer
+        - description: An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+          in: query
+          minimum: 1
+          name: start-index
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics'
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+      tags:
+        - management
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles':
+    get:
+      description: Lists views (profiles) to which the user has access.
+      operationId: analytics.management.profiles.list
+      parameters:
+        - description: "Account ID for the views (profiles) to retrieve. Can either be a specific account ID or '~all', which refers to all the accounts to which the user has access."
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: "Web property ID for the views (profiles) to retrieve. Can either be a specific web property ID or '~all', which refers to all the web properties to which the user has access."
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
+        - description: The maximum number of views (profiles) to include in this response.
+          in: query
+          name: max-results
+          type: integer
+        - description: An index of the first entity to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+          in: query
+          minimum: 1
+          name: start-index
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics'
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+      tags:
+        - management
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  '/management/accounts/{accountId}/webproperties/{webPropertyId}/profiles/{profileId}/goals':
+    get:
+      description: Lists goals to which the user has access.
+      operationId: analytics.management.goals.list
+      parameters:
+        - description: "Account ID to retrieve goals for. Can either be a specific account ID or '~all', which refers to all the accounts that user has access to."
+          in: path
+          name: accountId
+          required: true
+          type: string
+        - description: "Web property ID to retrieve goals for. Can either be a specific web property ID or '~all', which refers to all the web properties that user has access to."
+          in: path
+          name: webPropertyId
+          required: true
+          type: string
+        - description: "View (Profile) ID to retrieve goals for. Can either be a specific view (profile) ID or '~all', which refers to all the views (profiles) that user has access to."
+          in: path
+          name: profileId
+          required: true
+          type: string
+        - description: The maximum number of goals to include in this response.
+          in: query
+          name: max-results
+          type: integer
+        - description: An index of the first goal to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+          in: query
+          minimum: 1
+          name: start-index
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics'
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+      tags:
+        - management
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+  /management/segments:
+    get:
+      description: Lists advanced segments to which the user has access.
+      operationId: analytics.management.segments.list
+      parameters:
+        - description: The maximum number of advanced segments to include in this response.
+          in: query
+          name: max-results
+          type: integer
+        - description: An index of the first advanced segment to retrieve. Use this parameter as a pagination mechanism along with the max-results parameter.
+          in: query
+          minimum: 1
+          name: start-index
+          type: integer
+      responses:
+        '200':
+          description: Successful response
+      security:
+        - Oauth2:
+            - 'https://www.googleapis.com/auth/analytics'
+            - 'https://www.googleapis.com/auth/analytics.readonly'
+      tags:
+        - management
+    parameters:
+      - $ref: '#/parameters/alt'
+      - $ref: '#/parameters/fields'
+      - $ref: '#/parameters/key'
+      - $ref: '#/parameters/oauth_token'
+      - $ref: '#/parameters/prettyPrint'
+      - $ref: '#/parameters/quotaUser'
+      - $ref: '#/parameters/userIp'
+schemes:
+  - https
+securityDefinitions:
+  Oauth2:
+    authorizationUrl: 'https://accounts.google.com/o/oauth2/auth'
+    description: Oauth 2.0 authentication
+    flow: implicit
+    scopes:
+      'https://www.googleapis.com/auth/analytics': View and manage your Google Analytics data
+      'https://www.googleapis.com/auth/analytics.readonly': View your Google Analytics data
+    type: oauth2
+swagger: '2.0'

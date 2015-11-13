@@ -1,406 +1,280 @@
-{
-  "basePath": "/api/v2",
-  "definitions": {
-    "RegisterUserRequest": {
-      "properties": {
-        "appId": {
-          "description": "Application identifier. This never changes",
-          "type": "string"
-        },
-        "appSecret": {
-          "description": "Application Secret. This should never be shared and should be done from server only",
-          "type": "string"
-        },
-        "callbackUrl": {
-          "description": "The URL address I Am Real will call once the end user's score is calculated",
-          "type": "string"
-        },
-        "clientProof": {
-          "description": "A string that will be sent back with the analysis to prove that the response is sent from I Am Real servers",
-          "type": "string"
-        },
-        "token": {
-          "description": "Social network access token of the end user",
-          "type": "string"
-        }
-      },
-      "required": [
-        "token",
-        "appId",
-        "appSecret"
-      ]
-    },
-    "SmsValidationResponse": {
-      "properties": {
-        "validated": {
-          "description": "True if codes are identical, false if not",
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "validated"
-      ]
-    },
-    "UserValidationResponse": {
-      "properties": {
-        "score": {
-          "description": "User Score (0-100)",
-          "type": "string"
-        },
-        "significance": {
-          "description": "User Significance (0-100)",
-          "type": "string"
-        },
-        "userId": {
-          "description": "User Id given by provider (e.g. Facebook Id)",
-          "type": "string"
-        }
-      },
-      "required": [
-        "userId",
-        "score",
-        "significance"
-      ]
-    },
-    "VideoValidationRequest": {
-      "properties": {
-        "appId": {
-          "description": "Application identifier. This never changes",
-          "type": "string"
-        },
-        "appSecret": {
-          "description": "Application Secret. This should never be shared and should be done from server only",
-          "type": "string"
-        },
-        "callbackUrl": {
-          "description": "The URL address I Am Real will call with Video Validation result",
-          "type": "string"
-        },
-        "clientProof": {
-          "description": "A string that will be sent back with the validation to prove that the response is sent from I Am Real servers",
-          "type": "string"
-        },
-        "photoUrl": {
-          "description": "Url of photo to compare with live video. Link should be to an image that the user cannot modify",
-          "type": "string"
-        },
-        "userId": {
-          "description": "User Identifier (e.g. Facebook User Id or email address",
-          "type": "string"
-        }
-      },
-      "required": [
-        "appId",
-        "appSecret",
-        "userId",
-        "photoUrl"
-      ]
-    },
-    "VideoValidationResponse": {
-      "properties": {
-        "guid": {
-          "description": "Global unique identifier (guid) to launch widget with",
-          "type": "string"
-        },
-        "statusCode": {
-          "description": "status code (201 - Created)",
-          "type": "string"
-        }
-      },
-      "required": [
-        "statusCode",
-        "guid"
-      ]
-    }
-  },
-  "host": "api.iamreal.me",
-  "info": {
-    "description": "Use I Am Real's patented technology to perform social, video, and SMS validation on your users.",
-    "title": "I Am Real",
-    "version": "1.0.0",
-    "x-logo": {
-      "url": "https://developers.iamreal.me/images/iamreal_logo.png"
-    },
-    "x-origin": {
-      "format": "swagger",
-      "url": "https://developers.iamreal.me/swagger/spec.json",
-      "version": "1.2"
-    },
-    "x-providerName": "iamreal.me"
-  },
-  "paths": {
-    "/sms/check/{userId}/": {
-      "get": {
-        "operationId": "GET VALIDATION",
-        "parameters": [
-          {
-            "description": "The user Id",
-            "in": "path",
-            "name": "userId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Application Id",
-            "in": "query",
-            "name": "appId",
-            "required": true,
-            "type": "string",
-            "x-data-threescale-name": "app_ids"
-          },
-          {
-            "description": "Application Secret",
-            "in": "query",
-            "name": "appSecret",
-            "required": true,
-            "type": "string",
-            "x-data-threescale-name": "app_keys"
-          },
-          {
-            "description": "Phone number provided by the user",
-            "in": "query",
-            "name": "phoneNumber",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The validation code the user filled in",
-            "in": "query",
-            "name": "validationCode",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Description was not specified",
-            "schema": {
-              "$ref": "#/definitions/SmsValidationResponse"
-            }
-          },
-          "400": {
-            "description": "Description was not specified"
-          },
-          "401": {
-            "description": "Description was not specified"
-          }
-        },
-        "summary": "Validate that the code typed by user and the code sent are identical",
-        "tags": [
-          "sms"
-        ]
-      }
-    },
-    "/sms/verify": {
-      "post": {
-        "operationId": "POST VERIFY",
-        "parameters": [
-          {
-            "description": "Application identifier. This never changes.",
-            "in": "query",
-            "name": "appId",
-            "required": true,
-            "type": "string",
-            "x-data-threescale-name": "app_ids"
-          },
-          {
-            "description": "Application Secret. This should never be shared and should be done from server only.",
-            "in": "query",
-            "name": "appSecret",
-            "required": true,
-            "type": "string",
-            "x-data-threescale-name": "app_keys"
-          },
-          {
-            "description": "User Id",
-            "in": "query",
-            "name": "userId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Phone number provided by the user",
-            "in": "query",
-            "name": "phoneNumber",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Your brand name, which will appear in the SMS message ",
-            "in": "query",
-            "name": "brand",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          },
-          "202": {
-            "description": "Description was not specified"
-          },
-          "400": {
-            "description": "Description was not specified"
-          },
-          "401": {
-            "description": "Description was not specified"
-          }
-        },
-        "summary": "Post sms validation request",
-        "tags": [
-          "sms"
-        ]
-      }
-    },
-    "/users/{userId}/": {
-      "get": {
-        "operationId": "GET USER",
-        "parameters": [
-          {
-            "description": "User Id given by provider (e.g. Facebook Id)",
-            "in": "path",
-            "name": "userId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "Application Id received when registered",
-            "in": "query",
-            "name": "appId",
-            "required": true,
-            "type": "string",
-            "x-data-threescale-name": "app_ids"
-          },
-          {
-            "description": "\nApplication secret received when registered",
-            "in": "query",
-            "name": "appSecret",
-            "required": true,
-            "type": "string",
-            "x-data-threescale-name": "app_keys"
-          },
-          {
-            "description": "Social network user token",
-            "in": "query",
-            "name": "token",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Description was not specified",
-            "schema": {
-              "$ref": "#/definitions/UserValidationResponse"
-            }
-          },
-          "401": {
-            "description": "Description was not specified"
-          },
-          "404": {
-            "description": "Description was not specified"
-          }
-        },
-        "summary": "Get Score and Significance for existing user",
-        "tags": [
-          "social"
-        ]
-      },
-      "post": {
-        "operationId": "POST User",
-        "parameters": [
-          {
-            "description": "User Id given by provider (e.g. Facebook Id)",
-            "in": "path",
-            "name": "userId",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "User Request Details",
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RegisterUserRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          },
-          "202": {
-            "description": "Description was not specified"
-          },
-          "401": {
-            "description": "Description was not specified"
-          },
-          "404": {
-            "description": "Description was not specified"
-          }
-        },
-        "summary": "Post a new / existing user for validation",
-        "tags": [
-          "social"
-        ]
-      }
-    },
-    "/vfv": {
-      "post": {
-        "operationId": "POST Video Validation request",
-        "parameters": [
-          {
-            "description": "User Request Details",
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VideoValidationRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Description was not specified",
-            "schema": {
-              "$ref": "#/definitions/UserValidationResponse"
-            }
-          },
-          "400": {
-            "description": "Description was not specified"
-          },
-          "401": {
-            "description": "Description was not specified"
-          },
-          "500": {
-            "description": "Description was not specified"
-          }
-        },
-        "summary": "Setup video validation for specific user, and get global unique identifier (guid) to launch widget with",
-        "tags": [
-          "video"
-        ]
-      }
-    }
-  },
-  "schemes": [
-    "http"
-  ],
-  "swagger": "2.0",
-  "tags": [
-    {
-      "description": "Validate a user's Social Network profile",
-      "name": "social"
-    },
-    {
-      "description": "Validate users by comparing live video of user with profile picture",
-      "name": "video"
-    },
-    {
-      "description": "Validate users phone number via SMS",
-      "name": "sms"
-    }
-  ]
-}
+basePath: /api/v2
+definitions:
+  RegisterUserRequest:
+    properties:
+      appId:
+        description: Application identifier. This never changes
+        type: string
+      appSecret:
+        description: Application Secret. This should never be shared and should be done from server only
+        type: string
+      callbackUrl:
+        description: "The URL address I Am Real will call once the end user's score is calculated"
+        type: string
+      clientProof:
+        description: A string that will be sent back with the analysis to prove that the response is sent from I Am Real servers
+        type: string
+      token:
+        description: Social network access token of the end user
+        type: string
+    required:
+      - token
+      - appId
+      - appSecret
+  SmsValidationResponse:
+    properties:
+      validated:
+        description: 'True if codes are identical, false if not'
+        type: boolean
+    required:
+      - validated
+  UserValidationResponse:
+    properties:
+      score:
+        description: User Score (0-100)
+        type: string
+      significance:
+        description: User Significance (0-100)
+        type: string
+      userId:
+        description: User Id given by provider (e.g. Facebook Id)
+        type: string
+    required:
+      - userId
+      - score
+      - significance
+  VideoValidationRequest:
+    properties:
+      appId:
+        description: Application identifier. This never changes
+        type: string
+      appSecret:
+        description: Application Secret. This should never be shared and should be done from server only
+        type: string
+      callbackUrl:
+        description: The URL address I Am Real will call with Video Validation result
+        type: string
+      clientProof:
+        description: A string that will be sent back with the validation to prove that the response is sent from I Am Real servers
+        type: string
+      photoUrl:
+        description: Url of photo to compare with live video. Link should be to an image that the user cannot modify
+        type: string
+      userId:
+        description: User Identifier (e.g. Facebook User Id or email address
+        type: string
+    required:
+      - appId
+      - appSecret
+      - userId
+      - photoUrl
+  VideoValidationResponse:
+    properties:
+      guid:
+        description: Global unique identifier (guid) to launch widget with
+        type: string
+      statusCode:
+        description: status code (201 - Created)
+        type: string
+    required:
+      - statusCode
+      - guid
+host: api.iamreal.me
+info:
+  description: "Use I Am Real's patented technology to perform social, video, and SMS validation on your users."
+  title: I Am Real
+  version: 1.0.0
+  x-logo:
+    url: 'https://developers.iamreal.me/images/iamreal_logo.png'
+  x-origin:
+    format: swagger
+    url: 'https://developers.iamreal.me/swagger/spec.json'
+    version: '1.2'
+  x-providerName: iamreal.me
+paths:
+  '/sms/check/{userId}/':
+    get:
+      operationId: GET VALIDATION
+      parameters:
+        - description: The user Id
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: Application Id
+          in: query
+          name: appId
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application Secret
+          in: query
+          name: appSecret
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: Phone number provided by the user
+          in: query
+          name: phoneNumber
+          required: true
+          type: string
+        - description: The validation code the user filled in
+          in: query
+          name: validationCode
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            $ref: '#/definitions/SmsValidationResponse'
+        '400':
+          description: Description was not specified
+        '401':
+          description: Description was not specified
+      summary: Validate that the code typed by user and the code sent are identical
+      tags:
+        - sms
+  /sms/verify:
+    post:
+      operationId: POST VERIFY
+      parameters:
+        - description: Application identifier. This never changes.
+          in: query
+          name: appId
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: Application Secret. This should never be shared and should be done from server only.
+          in: query
+          name: appSecret
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: User Id
+          in: query
+          name: userId
+          required: true
+          type: string
+        - description: Phone number provided by the user
+          in: query
+          name: phoneNumber
+          required: true
+          type: string
+        - description: 'Your brand name, which will appear in the SMS message '
+          in: query
+          name: brand
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+        '202':
+          description: Description was not specified
+        '400':
+          description: Description was not specified
+        '401':
+          description: Description was not specified
+      summary: Post sms validation request
+      tags:
+        - sms
+  '/users/{userId}/':
+    get:
+      operationId: GET USER
+      parameters:
+        - description: User Id given by provider (e.g. Facebook Id)
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: Application Id received when registered
+          in: query
+          name: appId
+          required: true
+          type: string
+          x-data-threescale-name: app_ids
+        - description: |-
+
+            Application secret received when registered
+          in: query
+          name: appSecret
+          required: true
+          type: string
+          x-data-threescale-name: app_keys
+        - description: Social network user token
+          in: query
+          name: token
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            $ref: '#/definitions/UserValidationResponse'
+        '401':
+          description: Description was not specified
+        '404':
+          description: Description was not specified
+      summary: Get Score and Significance for existing user
+      tags:
+        - social
+    post:
+      operationId: POST User
+      parameters:
+        - description: User Id given by provider (e.g. Facebook Id)
+          in: path
+          name: userId
+          required: true
+          type: string
+        - description: User Request Details
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/RegisterUserRequest'
+      responses:
+        '200':
+          description: No response was specified
+        '202':
+          description: Description was not specified
+        '401':
+          description: Description was not specified
+        '404':
+          description: Description was not specified
+      summary: Post a new / existing user for validation
+      tags:
+        - social
+  /vfv:
+    post:
+      operationId: POST Video Validation request
+      parameters:
+        - description: User Request Details
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/VideoValidationRequest'
+      responses:
+        '200':
+          description: Description was not specified
+          schema:
+            $ref: '#/definitions/UserValidationResponse'
+        '400':
+          description: Description was not specified
+        '401':
+          description: Description was not specified
+        '500':
+          description: Description was not specified
+      summary: 'Setup video validation for specific user, and get global unique identifier (guid) to launch widget with'
+      tags:
+        - video
+schemes:
+  - http
+swagger: '2.0'
+tags:
+  - description: "Validate a user's Social Network profile"
+    name: social
+  - description: Validate users by comparing live video of user with profile picture
+    name: video
+  - description: Validate users phone number via SMS
+    name: sms

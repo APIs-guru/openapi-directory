@@ -1,371 +1,304 @@
-{
-  "basePath": "/",
-  "externalDocs": {
-    "description": "Where the main API documentation is made available.",
-    "url": "https://figure.nz/api/"
-  },
-  "host": "api.figure.nz",
-  "info": {
-    "contact": {
-      "email": "api@figure.nz"
-    },
-    "description": "This API allows you to retrieve and use the published data available on [figure.nz](http://figure.nz). This is an early preview release, and is free to use.",
-    "termsOfService": "http://figure.nz/learn-about-us/our-terms",
-    "title": "Figure.NZ API",
-    "version": "1",
-    "x-logo": {
-      "backgroundColor": "#721C71",
-      "url": "https://figure.nz/cdn/img/figurenz-logo.2a990688ae0f.png"
-    },
-    "x-origin": {
-      "format": "swagger",
-      "url": "https://api.figure.nz/v1/swagger.json",
-      "version": "2.0"
-    },
-    "x-providerName": "figure.nz"
-  },
-  "paths": {
-    "/chart/{chart_token}": {
-      "get": {
-        "description": "Returns information about a particular chart, identified by `{chart_token}`.\n\nChart tokens may be found by using the `/chart/list` API endpoint.",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "chart_token",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "schema": {
-              "format": "email",
-              "type": "string"
-            }
-          }
-        },
-        "security": [],
-        "summary": "Returns information about a given chart",
-        "tags": [
-          "charts"
-        ]
-      }
-    },
-    "/chart/{chart_token}/{chart_format}/{chart_size}": {
-      "get": {
-        "description": "Renders a chart in the format and size chosen.\n\nThe two formats allowed are `png` or `svg`. The four sizes allowed are `thumb`, `small`, `medium` or `large`.\n\nNote that `thumb` renders of charts are \"simplified\", in that they do not include axis labelling or a legend. The PNG thumbs render at a high resolution, to allow their use on devices with a high DPI (e.g. retina displays). Where possible, it is suggested that you use the SVG format, as it provides much smaller file sizes, and crisp rendering even when zoomed.",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "chart_token",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "chart_format",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "chart_size",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "schema": {
-              "format": "email",
-              "type": "string"
-            }
-          }
-        },
-        "security": [],
-        "summary": "Renders a chart to PNG or SVG",
-        "tags": [
-          "charts"
-        ]
-      }
-    },
-    "/chart/list": {
-      "get": {
-        "description": "**Charts** are visualisations of data found in one or more tables.\n\nBy default, only the first 20 charts are returned. You can control which charts are returned using the GET parameters `per_page` and `start`.",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "schema": {
-              "format": "email",
-              "type": "string"
-            }
-          }
-        },
-        "security": [],
-        "summary": "Returns a list of charts",
-        "tags": [
-          "charts"
-        ]
-      }
-    },
-    "/source/{source_token}": {
-      "get": {
-        "description": "Returns information about a particular source, identified by `{source_token}`.\n\nSource tokens may be found by using the `/source/list` API endpoint.",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "source_token",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "schema": {
-              "format": "email",
-              "type": "string"
-            }
-          }
-        },
-        "security": [],
-        "summary": "Returns information about a given source",
-        "tags": [
-          "sources"
-        ]
-      }
-    },
-    "/source/{source_token}/logo": {
-      "get": {
-        "description": "Serves a logo for the given source.",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "source_token",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "schema": {
-              "format": "email",
-              "type": "string"
-            }
-          }
-        },
-        "security": [],
-        "summary": "Serves a logo for the given source",
-        "tags": [
-          "sources"
-        ]
-      }
-    },
-    "/source/{source_token}/tables": {
-      "get": {
-        "description": "Returns a list of all tables that have been created from data obtained from a given source.",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "source_token",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "schema": {
-              "format": "email",
-              "type": "string"
-            }
-          }
-        },
-        "security": [],
-        "summary": "Lists tables for a source",
-        "tags": [
-          "sources",
-          "tables"
-        ]
-      }
-    },
-    "/source/list": {
-      "get": {
-        "description": "**Sources** are places that have provided data to Figure.NZ. This endpoint lists them.\n\nBy default, only the first 20 sources are returned. You can control which sources are returned using the GET parameters `per_page` and `start`.",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "schema": {
-              "format": "email",
-              "type": "string"
-            }
-          }
-        },
-        "security": [],
-        "summary": "Returns a list of sources",
-        "tags": [
-          "sources"
-        ]
-      }
-    },
-    "/table/{table_token}": {
-      "get": {
-        "description": "Returns information about a particular table, identified by `{table_token}`.\n\nTable tokens may be found by using the `/table/list` API endpoint.",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "table_token",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "schema": {
-              "format": "email",
-              "type": "string"
-            }
-          }
-        },
-        "security": [],
-        "summary": "Returns information about a given table",
-        "tags": [
-          "tables"
-        ]
-      }
-    },
-    "/table/{table_token}.csv": {
-      "get": {
-        "description": "Downloads the data for a table in CSV form.\n\nThe CSV format does not contain any information about data types, however is a simple format to read.",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "table_token",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "schema": {
-              "format": "email",
-              "type": "string"
-            }
-          }
-        },
-        "security": [],
-        "summary": "Downloads a table in CSV format",
-        "tags": [
-          "tables"
-        ]
-      }
-    },
-    "/table/{table_token}.json": {
-      "get": {
-        "description": "Downloads the data for a table in JSON form.\n\nUnlike the CSV and XLSX downloads, the JSON format for table downloads includes information about the type of data that each data point is. To get information about the data types of the keys, use the `/table/{table_token}` endpoint.",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "table_token",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "schema": {
-              "format": "email",
-              "type": "string"
-            }
-          }
-        },
-        "security": [],
-        "summary": "Downloads a table in JSON format",
-        "tags": [
-          "tables"
-        ]
-      }
-    },
-    "/table/list": {
-      "get": {
-        "description": "**Tables** are a set of related data that has been provided by a Source, then standardised and stored with Figure.NZ.\n\nBy default, only the first 20 tables are returned. You can control which tables are returned using the GET parameters `per_page` and `start`.",
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Response",
-            "schema": {
-              "format": "email",
-              "type": "string"
-            }
-          }
-        },
-        "security": [],
-        "summary": "Returns a list of tables",
-        "tags": [
-          "tables"
-        ]
-      }
-    }
-  },
-  "schemes": [
-    "https"
-  ],
-  "securityDefinitions": {},
-  "swagger": "2.0",
-  "tags": [
-    {
-      "description": "Get information about the organisations that provide the data.",
-      "name": "sources"
-    },
-    {
-      "description": "Retrieve information and metadata on the documents containing the data that is put into tables.",
-      "name": "source-documents"
-    },
-    {
-      "description": "Retrieve information about, and download, tables of data.",
-      "name": "tables"
-    },
-    {
-      "description": "Retrieve information about, and download, charts made from published tables.",
-      "name": "charts"
-    }
-  ]
-}
+basePath: /
+externalDocs:
+  description: Where the main API documentation is made available.
+  url: 'https://figure.nz/api/'
+host: api.figure.nz
+info:
+  contact:
+    email: api@figure.nz
+  description: 'This API allows you to retrieve and use the published data available on [figure.nz](http://figure.nz). This is an early preview release, and is free to use.'
+  termsOfService: 'http://figure.nz/learn-about-us/our-terms'
+  title: Figure.NZ API
+  version: '1'
+  x-logo:
+    backgroundColor: '#721C71'
+    url: 'https://figure.nz/cdn/img/figurenz-logo.2a990688ae0f.png'
+  x-origin:
+    format: swagger
+    url: 'https://api.figure.nz/v1/swagger.json'
+    version: '2.0'
+  x-providerName: figure.nz
+paths:
+  /chart/list:
+    get:
+      description: |-
+        **Charts** are visualisations of data found in one or more tables.
+
+        By default, only the first 20 charts are returned. You can control which charts are returned using the GET parameters `per_page` and `start`.
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Response
+          schema:
+            format: email
+            type: string
+      security: []
+      summary: Returns a list of charts
+      tags:
+        - charts
+  '/chart/{chart_token}':
+    get:
+      description: >-
+        Returns information about a particular chart, identified by
+        `{chart_token}`.
+
+
+
+        Chart tokens may be found by using the `/chart/list` API endpoint.
+      parameters:
+        - in: path
+          name: chart_token
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Response
+          schema:
+            format: email
+            type: string
+      security: []
+      summary: Returns information about a given chart
+      tags:
+        - charts
+  '/chart/{chart_token}/{chart_format}/{chart_size}':
+    get:
+      description: >-
+        Renders a chart in the format and size chosen.
+
+
+
+        The two formats allowed are `png` or `svg`. The four sizes allowed are
+        `thumb`, `small`, `medium` or `large`.
+
+
+
+        Note that `thumb` renders of charts are "simplified", in that they do not
+        include axis labelling or a legend. The PNG thumbs render at a high
+        resolution, to allow their use on devices with a high DPI (e.g. retina
+        displays). Where possible, it is suggested that you use the SVG format,
+        as it provides much smaller file sizes, and crisp rendering even when
+        zoomed.
+      parameters:
+        - in: path
+          name: chart_token
+          required: true
+          type: string
+        - in: path
+          name: chart_format
+          required: true
+          type: string
+        - in: path
+          name: chart_size
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Response
+          schema:
+            format: email
+            type: string
+      security: []
+      summary: Renders a chart to PNG or SVG
+      tags:
+        - charts
+  /source/list:
+    get:
+      description: >-
+        **Sources** are places that have provided data to Figure.NZ. This
+        endpoint lists them.
+
+
+
+        By default, only the first 20 sources are returned. You can control which
+        sources are returned using the GET parameters `per_page` and `start`.
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Response
+          schema:
+            format: email
+            type: string
+      security: []
+      summary: Returns a list of sources
+      tags:
+        - sources
+  '/source/{source_token}':
+    get:
+      description: >-
+        Returns information about a particular source, identified by
+        `{source_token}`.
+
+
+
+        Source tokens may be found by using the `/source/list` API endpoint.
+      parameters:
+        - in: path
+          name: source_token
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Response
+          schema:
+            format: email
+            type: string
+      security: []
+      summary: Returns information about a given source
+      tags:
+        - sources
+  '/source/{source_token}/logo':
+    get:
+      description: Serves a logo for the given source.
+      parameters:
+        - in: path
+          name: source_token
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Response
+          schema:
+            format: email
+            type: string
+      security: []
+      summary: Serves a logo for the given source
+      tags:
+        - sources
+  '/source/{source_token}/tables':
+    get:
+      description: Returns a list of all tables that have been created from data obtained from a given source.
+      parameters:
+        - in: path
+          name: source_token
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Response
+          schema:
+            format: email
+            type: string
+      security: []
+      summary: Lists tables for a source
+      tags:
+        - sources
+        - tables
+  /table/list:
+    get:
+      description: >-
+        **Tables** are a set of related data that has been provided by a Source,
+        then standardised and stored with Figure.NZ.
+
+
+
+        By default, only the first 20 tables are returned. You can control which
+        tables are returned using the GET parameters `per_page` and `start`.
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Response
+          schema:
+            format: email
+            type: string
+      security: []
+      summary: Returns a list of tables
+      tags:
+        - tables
+  '/table/{table_token}':
+    get:
+      description: >-
+        Returns information about a particular table, identified by
+        `{table_token}`.
+
+
+
+        Table tokens may be found by using the `/table/list` API endpoint.
+      parameters:
+        - in: path
+          name: table_token
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Response
+          schema:
+            format: email
+            type: string
+      security: []
+      summary: Returns information about a given table
+      tags:
+        - tables
+  '/table/{table_token}.csv':
+    get:
+      description: |-
+        Downloads the data for a table in CSV form.
+
+        The CSV format does not contain any information about data types, however is a simple format to read.
+      parameters:
+        - in: path
+          name: table_token
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Response
+          schema:
+            format: email
+            type: string
+      security: []
+      summary: Downloads a table in CSV format
+      tags:
+        - tables
+  '/table/{table_token}.json':
+    get:
+      description: |-
+        Downloads the data for a table in JSON form.
+
+        Unlike the CSV and XLSX downloads, the JSON format for table downloads includes information about the type of data that each data point is. To get information about the data types of the keys, use the `/table/{table_token}` endpoint.
+      parameters:
+        - in: path
+          name: table_token
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Response
+          schema:
+            format: email
+            type: string
+      security: []
+      summary: Downloads a table in JSON format
+      tags:
+        - tables
+schemes:
+  - https
+securityDefinitions: {}
+swagger: '2.0'
+tags:
+  - description: Get information about the organisations that provide the data.
+    name: sources
+  - description: Retrieve information and metadata on the documents containing the data that is put into tables.
+    name: source-documents
+  - description: 'Retrieve information about, and download, tables of data.'
+    name: tables
+  - description: 'Retrieve information about, and download, charts made from published tables.'
+    name: charts

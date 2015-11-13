@@ -1,449 +1,333 @@
-{
-  "definitions": {
-    "Device": {
-      "description": "Container Class for the Web API",
-      "properties": {
-        "ActivePower": {
-          "description": "The Actvie Power or current flow rate",
-          "format": "double",
-          "type": "number"
-        },
-        "ActviePowerUnit": {
-          "description": "The Unit of the Active Power Value",
-          "type": "string"
-        },
-        "CounterReading": {
-          "description": "The Meter Counter Reading (Total Energy used)",
-          "format": "double",
-          "type": "number"
-        },
-        "CounterReadingT1": {
-          "description": "The Meter Counter Reading Tariff 1",
-          "format": "double",
-          "type": "number"
-        },
-        "CounterReadingT2": {
-          "description": "The Meter Counter Reading Tariff 2",
-          "format": "double",
-          "type": "number"
-        },
-        "CounterReadingUnit": {
-          "description": "The Unit of the Counter Reading",
-          "type": "string"
-        },
-        "Current": {
-          "description": "The Current (in A)",
-          "format": "double",
-          "type": "number"
-        },
-        "DeviceEnergyType": {
-          "description": "The Energy Type of this device",
-          "enum": [
-            "MeterTypeUnknown",
-            "MeterTypeElectricity",
-            "MeterTypeWater",
-            "MeterTypeGas",
-            "MeterTypeHeat",
-            "MeterTypeHCA",
-            "MeterTypeAllMeters",
-            "MeterTypeTemperature",
-            "MeterTypeMBusGateway"
-          ],
-          "type": "string"
-        },
-        "FamilyType": {
-          "description": "The Family Type of the device.",
-          "enum": [
-            "MeterFamilyTypeUnknown",
-            "MeterFamilyTypeSmartMeConnectV1",
-            "MeterFamiliyTypeSmartMeMeter",
-            "MeterFamiliyTypeSmartMeMeterWithSwitch",
-            "MeterFamilyTypeMBusGatewayV1",
-            "MeterFamilyTypeRestApiMeter"
-          ],
-          "type": "string"
-        },
-        "Id": {
-          "description": "The ID of the device",
-          "type": "string"
-        },
-        "Name": {
-          "description": "The Name of the Device",
-          "type": "string"
-        },
-        "PowerFactor": {
-          "description": "The Power Factor (cos phi). Range: 0 - 1",
-          "format": "double",
-          "type": "number"
-        },
-        "Serial": {
-          "description": "The Serial number",
-          "format": "int64",
-          "type": "integer"
-        },
-        "SwitchOn": {
-          "description": "Flag if the Switch is on on this device.",
-          "type": "boolean"
-        },
-        "Temperature": {
-          "description": "The Temperature (in degree celsius)",
-          "format": "double",
-          "type": "number"
-        },
-        "ValueDate": {
-          "description": "Time of last successful connection the the smart-me Cloud.",
-          "format": "date-time",
-          "type": "string"
-        },
-        "Voltage": {
-          "description": "The Voltage (in V)",
-          "format": "double",
-          "type": "number"
-        }
-      },
-      "type": "object"
-    },
-    "DeviceToPost": {
-      "description": "Container Class for the Web API",
-      "properties": {
-        "ActivePower": {
-          "description": "The Active Power or current flow rate. In kW or m3/h",
-          "format": "double",
-          "type": "number"
-        },
-        "CounterReading": {
-          "description": "The Meter Counter Reading (Total Energy used) in kWh or m3.",
-          "format": "double",
-          "type": "number"
-        },
-        "CounterReadingT1": {
-          "description": "The Meter Counter Reading Tariff 1 in kWh or m3.",
-          "format": "double",
-          "type": "number"
-        },
-        "CounterReadingT2": {
-          "description": "The Meter Counter Reading Tariff 2 in kWh or m3.",
-          "format": "double",
-          "type": "number"
-        },
-        "DeviceEnergyType": {
-          "description": "The Energy Type of this device",
-          "enum": [
-            "MeterTypeUnknown",
-            "MeterTypeElectricity",
-            "MeterTypeWater",
-            "MeterTypeGas",
-            "MeterTypeHeat",
-            "MeterTypeHCA",
-            "MeterTypeAllMeters",
-            "MeterTypeTemperature",
-            "MeterTypeMBusGateway"
-          ],
-          "type": "string"
-        },
-        "Id": {
-          "description": "The ID of the device",
-          "type": "string"
-        },
-        "Name": {
-          "description": "The Name of the Device",
-          "type": "string"
-        },
-        "Serial": {
-          "description": "The Serial number",
-          "format": "int64",
-          "type": "integer"
-        },
-        "Temperature": {
-          "description": "The Temperature (in degree celsius)",
-          "format": "double",
-          "type": "number"
-        },
-        "ValueDate": {
-          "description": "The Date of the Value (in UTC). If this is null the Server Time is used.",
-          "format": "date-time",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "MBusData": {
-      "properties": {
-        "Date": {
-          "description": "The Date of the M-BUS Telegram Readout (in UTC). If this is null the Server Time is used.",
-          "format": "date-time",
-          "type": "string"
-        },
-        "Telegram": {
-          "description": "The M-BUS Telegram as Hex string. \r\n            Example: 68 1F 1F 68 08 02 72 78 56 34 12 24 40 01 07 55 00 00 00 03 13 15 31 00 DA 02 3B 13 01 8B 60 04 37 18 02 18 16",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "Object": {
-      "properties": {},
-      "type": "object"
-    }
-  },
-  "host": "smart-me.com:443",
-  "info": {
-    "description": "With the smart-me REST API you get Access to all your devices in the smart-me Cloud and you can add your own devices. So it's a easy way to add the smart-me Cloud support to your Hardware or Software Product.",
-    "title": "smart-me",
-    "version": "v1",
-    "x-logo": {
-      "url": "http://smart-me.com/Images/bootstrap/logo.png"
-    },
-    "x-origin": {
-      "format": "swagger",
-      "url": "https://smart-me.com/swagger/docs/v1",
-      "version": "2.0"
-    },
-    "x-providerName": "smart-me.com"
-  },
-  "paths": {
-    "/api/DeviceBySerial": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "description": "Gets a Device by it's Serial Number. The Serial is the part before the \"-\".",
-        "parameters": [
-          {
-            "description": "The Serial Number of the device",
-            "format": "int64",
-            "in": "query",
-            "name": "serial",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Device"
-            }
-          }
-        },
-        "summary": "Gets a Device by it's Serial Number. The Serial is the part before the \"-\".",
-        "tags": [
-          "DeviceBySerial"
-        ]
-      }
-    },
-    "/api/Devices": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "description": "Gets all Devices",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/Device"
-              },
-              "type": "array"
-            }
-          }
-        },
-        "summary": "Gets all Devices",
-        "tags": [
-          "Devices"
-        ]
-      },
-      "post": {
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
-        "deprecated": false,
-        "description": "Creates or updates a Device or updates it's values. \r\n            For a new device leave the ID empty. To create a device you have to set the DeviceEnergyType.\r\n            To update values, add the ID of the device and the values you like to set.  (See the Data Type Model for more Information)",
-        "parameters": [
-          {
-            "description": "Device object with all the data",
-            "in": "body",
-            "name": "newDevice",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeviceToPost"
-            }
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/DeviceToPost"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        },
-        "summary": "Creates or updates a Device or updates it's values.",
-        "tags": [
-          "Devices"
-        ]
-      }
-    },
-    "/api/Devices/{id}": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "description": "Gets a Device by it's ID",
-        "parameters": [
-          {
-            "description": "The ID of the device",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Device"
-            }
-          }
-        },
-        "summary": "Gets a Device by it's ID",
-        "tags": [
-          "Devices"
-        ]
-      },
-      "put": {
-        "consumes": [],
-        "deprecated": false,
-        "description": "Updates the On/Off Switch on a device",
-        "parameters": [
-          {
-            "description": "The ID of the device",
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "The new state of the switch",
-            "in": "query",
-            "name": "switchState",
-            "required": true,
-            "type": "boolean"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "405": {
-            "description": "MethodNotAllowed"
-          }
-        },
-        "summary": "Updates the On/Off Switch on a device.",
-        "tags": [
-          "Devices"
-        ]
-      }
-    },
-    "/api/MBus": {
-      "post": {
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
-        "deprecated": false,
-        "description": "M-BUS API: Adds data of a M-BUS Meter to the smart-me Cloud.\r\n            Just send us the M-BUS Telegram (RSP_UD) and we will do the Rest.",
-        "parameters": [
-          {
-            "description": "The M-BUS Telegram",
-            "in": "body",
-            "name": "mbusData",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MBusData"
-            }
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          },
-          "400": {
-            "description": "BadRequest"
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        },
-        "summary": "M-BUS API: Adds data of a M-BUS Meter to the smart-me Cloud.\r\n            Just send us the M-BUS Telegram (RSP_UD) and we will do the Rest.",
-        "tags": [
-          "MBus"
-        ]
-      }
-    }
-  },
-  "schemes": [
-    "https"
-  ],
-  "securityDefinitions": {
-    "basic": {
-      "description": "Basic HTTP Authentication",
-      "type": "basic"
-    }
-  },
-  "swagger": "2.0"
-}
+definitions:
+  Device:
+    description: Container Class for the Web API
+    properties:
+      ActivePower:
+        description: The Actvie Power or current flow rate
+        format: double
+        type: number
+      ActviePowerUnit:
+        description: The Unit of the Active Power Value
+        type: string
+      CounterReading:
+        description: The Meter Counter Reading (Total Energy used)
+        format: double
+        type: number
+      CounterReadingT1:
+        description: The Meter Counter Reading Tariff 1
+        format: double
+        type: number
+      CounterReadingT2:
+        description: The Meter Counter Reading Tariff 2
+        format: double
+        type: number
+      CounterReadingUnit:
+        description: The Unit of the Counter Reading
+        type: string
+      Current:
+        description: The Current (in A)
+        format: double
+        type: number
+      DeviceEnergyType:
+        description: The Energy Type of this device
+        enum:
+          - MeterTypeUnknown
+          - MeterTypeElectricity
+          - MeterTypeWater
+          - MeterTypeGas
+          - MeterTypeHeat
+          - MeterTypeHCA
+          - MeterTypeAllMeters
+          - MeterTypeTemperature
+          - MeterTypeMBusGateway
+        type: string
+      FamilyType:
+        description: The Family Type of the device.
+        enum:
+          - MeterFamilyTypeUnknown
+          - MeterFamilyTypeSmartMeConnectV1
+          - MeterFamiliyTypeSmartMeMeter
+          - MeterFamiliyTypeSmartMeMeterWithSwitch
+          - MeterFamilyTypeMBusGatewayV1
+          - MeterFamilyTypeRestApiMeter
+        type: string
+      Id:
+        description: The ID of the device
+        type: string
+      Name:
+        description: The Name of the Device
+        type: string
+      PowerFactor:
+        description: 'The Power Factor (cos phi). Range: 0 - 1'
+        format: double
+        type: number
+      Serial:
+        description: The Serial number
+        format: int64
+        type: integer
+      SwitchOn:
+        description: Flag if the Switch is on on this device.
+        type: boolean
+      Temperature:
+        description: The Temperature (in degree celsius)
+        format: double
+        type: number
+      ValueDate:
+        description: Time of last successful connection the the smart-me Cloud.
+        format: date-time
+        type: string
+      Voltage:
+        description: The Voltage (in V)
+        format: double
+        type: number
+    type: object
+  DeviceToPost:
+    description: Container Class for the Web API
+    properties:
+      ActivePower:
+        description: The Active Power or current flow rate. In kW or m3/h
+        format: double
+        type: number
+      CounterReading:
+        description: The Meter Counter Reading (Total Energy used) in kWh or m3.
+        format: double
+        type: number
+      CounterReadingT1:
+        description: The Meter Counter Reading Tariff 1 in kWh or m3.
+        format: double
+        type: number
+      CounterReadingT2:
+        description: The Meter Counter Reading Tariff 2 in kWh or m3.
+        format: double
+        type: number
+      DeviceEnergyType:
+        description: The Energy Type of this device
+        enum:
+          - MeterTypeUnknown
+          - MeterTypeElectricity
+          - MeterTypeWater
+          - MeterTypeGas
+          - MeterTypeHeat
+          - MeterTypeHCA
+          - MeterTypeAllMeters
+          - MeterTypeTemperature
+          - MeterTypeMBusGateway
+        type: string
+      Id:
+        description: The ID of the device
+        type: string
+      Name:
+        description: The Name of the Device
+        type: string
+      Serial:
+        description: The Serial number
+        format: int64
+        type: integer
+      Temperature:
+        description: The Temperature (in degree celsius)
+        format: double
+        type: number
+      ValueDate:
+        description: The Date of the Value (in UTC). If this is null the Server Time is used.
+        format: date-time
+        type: string
+    type: object
+  MBusData:
+    properties:
+      Date:
+        description: The Date of the M-BUS Telegram Readout (in UTC). If this is null the Server Time is used.
+        format: date-time
+        type: string
+      Telegram:
+        description: "The M-BUS Telegram as Hex string. \r\n            Example: 68 1F 1F 68 08 02 72 78 56 34 12 24 40 01 07 55 00 00 00 03 13 15 31 00 DA 02 3B 13 01 8B 60 04 37 18 02 18 16"
+        type: string
+    type: object
+  Object:
+    properties: {}
+    type: object
+host: 'smart-me.com:443'
+info:
+  description: "With the smart-me REST API you get Access to all your devices in the smart-me Cloud and you can add your own devices. So it's a easy way to add the smart-me Cloud support to your Hardware or Software Product."
+  title: smart-me
+  version: v1
+  x-logo:
+    url: 'http://smart-me.com/Images/bootstrap/logo.png'
+  x-origin:
+    format: swagger
+    url: 'https://smart-me.com/swagger/docs/v1'
+    version: '2.0'
+  x-providerName: smart-me.com
+paths:
+  /api/DeviceBySerial:
+    get:
+      consumes: []
+      deprecated: false
+      description: "Gets a Device by it's Serial Number. The Serial is the part before the \"-\"."
+      parameters:
+        - description: The Serial Number of the device
+          format: int64
+          in: query
+          name: serial
+          required: true
+          type: integer
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Device'
+      summary: "Gets a Device by it's Serial Number. The Serial is the part before the \"-\"."
+      tags:
+        - DeviceBySerial
+  /api/Devices:
+    get:
+      consumes: []
+      deprecated: false
+      description: Gets all Devices
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/Device'
+            type: array
+      summary: Gets all Devices
+      tags:
+        - Devices
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: "Creates or updates a Device or updates it's values. \r\n            For a new device leave the ID empty. To create a device you have to set the DeviceEnergyType.\r\n            To update values, add the ID of the device and the values you like to set.  (See the Data Type Model for more Information)"
+      parameters:
+        - description: Device object with all the data
+          in: body
+          name: newDevice
+          required: true
+          schema:
+            $ref: '#/definitions/DeviceToPost'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/DeviceToPost'
+        '401':
+          description: Unauthorized
+      summary: "Creates or updates a Device or updates it's values."
+      tags:
+        - Devices
+  '/api/Devices/{id}':
+    get:
+      consumes: []
+      deprecated: false
+      description: "Gets a Device by it's ID"
+      parameters:
+        - description: The ID of the device
+          in: path
+          name: id
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Device'
+      summary: "Gets a Device by it's ID"
+      tags:
+        - Devices
+    put:
+      consumes: []
+      deprecated: false
+      description: Updates the On/Off Switch on a device
+      parameters:
+        - description: The ID of the device
+          in: path
+          name: id
+          required: true
+          type: string
+        - description: The new state of the switch
+          in: query
+          name: switchState
+          required: true
+          type: boolean
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+        '401':
+          description: Unauthorized
+        '405':
+          description: MethodNotAllowed
+      summary: Updates the On/Off Switch on a device.
+      tags:
+        - Devices
+  /api/MBus:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      deprecated: false
+      description: "M-BUS API: Adds data of a M-BUS Meter to the smart-me Cloud.\r\n            Just send us the M-BUS Telegram (RSP_UD) and we will do the Rest."
+      parameters:
+        - description: The M-BUS Telegram
+          in: body
+          name: mbusData
+          required: true
+          schema:
+            $ref: '#/definitions/MBusData'
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+        '400':
+          description: BadRequest
+        '401':
+          description: Unauthorized
+      summary: "M-BUS API: Adds data of a M-BUS Meter to the smart-me Cloud.\r\n            Just send us the M-BUS Telegram (RSP_UD) and we will do the Rest."
+      tags:
+        - MBus
+schemes:
+  - https
+securityDefinitions:
+  basic:
+    description: Basic HTTP Authentication
+    type: basic
+swagger: '2.0'

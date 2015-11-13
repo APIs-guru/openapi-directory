@@ -1,235 +1,164 @@
-{
-  "basePath": "/",
-  "host": "api.oceandrivers.com",
-  "info": {
-    "contact": {
-      "email": "matiasbonet@oceandrivers.com"
-    },
-    "description": "This is the api to access the ODWeather API information",
-    "title": "ODWeather API Documentation",
-    "version": "1.0",
-    "x-logo": {
-      "url": "http://www.oceandrivers.com/wp-content/uploads/2014/11/OceanDrivers_WEB.jpg"
-    },
-    "x-origin": {
-      "format": "swagger",
-      "url": "http://api.oceandrivers.com/static/resources.json",
-      "version": "1.2"
-    },
-    "x-providerName": "oceandrivers.com"
-  },
-  "paths": {
-    "/v1.0/compareStation/{stationName}/": {
-      "get": {
-        "description": "Get forecast and realtime information for known points<br/>None",
-        "operationId": "compareStation",
-        "parameters": [
-          {
-            "default": "cnarenal",
-            "description": "Weather station to compare",
-            "in": "path",
-            "name": "stationName",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/html"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/v1.0/getForecastPoints/{yatchclubid}/language/{language}": {
-      "get": {
-        "description": "Get forecast points of a yatchclub<br/>None",
-        "operationId": "getForecastPoints",
-        "parameters": [
-          {
-            "default": "cnarenal",
-            "description": "base URL for the the",
-            "in": "path",
-            "name": "yatchclubid",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "language",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/html"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/v1.0/getForecastTimeSeries/{latitude}/{longitude}/": {
-      "get": {
-        "description": "Get timeseries forecast information<br/>None",
-        "operationId": "getForecastTimeSeries",
-        "parameters": [
-          {
-            "default": 39.49,
-            "description": "latitude for the forecast",
-            "format": "float",
-            "in": "path",
-            "name": "latitude",
-            "required": true,
-            "type": "number"
-          },
-          {
-            "default": 2.74,
-            "description": "longitude for the forecast",
-            "format": "float",
-            "in": "path",
-            "name": "longitude",
-            "required": true,
-            "type": "number"
-          },
-          {
-            "description": "initial date for the forecast ISO string YYYY-MM-DDTHH:mm:SS.SZ",
-            "in": "query",
-            "name": "inittime",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "end date for the forecast ISO string YYYY-MM-DDTHH:mm:SS.SZ",
-            "in": "query",
-            "name": "endtime",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "optional number of days in string. Will be added to init forecast date",
-            "format": "int32",
-            "in": "query",
-            "name": "days",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "description": "optional number of hours in string. Will be added to init forecast date",
-            "format": "int32",
-            "in": "query",
-            "name": "hours",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "description": " Comma separated values for the weather parameteres temperature,rain,wind_u,wind_v,gust,pressure,cloud,humidity&wave=height,direction,period",
-            "in": "query",
-            "name": "weather",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": " Comma separated values for the wave parameteres height,direction,period",
-            "in": "query",
-            "name": "wave",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/html"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/v1.0/getSocibWeatherStation/{period}/": {
-      "get": {
-        "description": "Get data from the socib bahia de palma buoy<br/>None",
-        "operationId": "getSocibWeatherStation",
-        "parameters": [
-          {
-            "default": "lastdata",
-            "description": "Period of time to get the data",
-            "in": "path",
-            "name": "period",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/html"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/v1.0/getWeatherDisplay/{stationName}/": {
-      "get": {
-        "description": "Get data from the weather display software<br/>None",
-        "operationId": "getWeatherDisplay",
-        "parameters": [
-          {
-            "default": "cnarenal",
-            "description": "base URL for the the",
-            "in": "path",
-            "name": "stationName",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "default": "latest",
-            "description": "Period of time to get the data",
-            "in": "query",
-            "name": "period",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/html"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    },
-    "/v1.0/getWebCams/": {
-      "get": {
-        "description": "Get forecast and realtime information for known points<br/>None",
-        "operationId": "getWebCams",
-        "produces": [
-          "application/json",
-          "text/html"
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        }
-      }
-    }
-  },
-  "schemes": [
-    "http"
-  ],
-  "swagger": "2.0"
-}
+basePath: /
+host: api.oceandrivers.com
+info:
+  contact:
+    email: matiasbonet@oceandrivers.com
+  description: This is the api to access the ODWeather API information
+  title: ODWeather API Documentation
+  version: '1.0'
+  x-logo:
+    url: 'http://www.oceandrivers.com/wp-content/uploads/2014/11/OceanDrivers_WEB.jpg'
+  x-origin:
+    format: swagger
+    url: 'http://api.oceandrivers.com/static/resources.json'
+    version: '1.2'
+  x-providerName: oceandrivers.com
+paths:
+  '/v1.0/compareStation/{stationName}/':
+    get:
+      description: 'Get forecast and realtime information for known points<br/>None'
+      operationId: compareStation
+      parameters:
+        - default: cnarenal
+          description: Weather station to compare
+          in: path
+          name: stationName
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+  '/v1.0/getForecastPoints/{yatchclubid}/language/{language}':
+    get:
+      description: 'Get forecast points of a yatchclub<br/>None'
+      operationId: getForecastPoints
+      parameters:
+        - default: cnarenal
+          description: base URL for the the
+          in: path
+          name: yatchclubid
+          required: true
+          type: string
+        - in: path
+          name: language
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+  '/v1.0/getForecastTimeSeries/{latitude}/{longitude}/':
+    get:
+      description: 'Get timeseries forecast information<br/>None'
+      operationId: getForecastTimeSeries
+      parameters:
+        - default: 39.49
+          description: latitude for the forecast
+          format: float
+          in: path
+          name: latitude
+          required: true
+          type: number
+        - default: 2.74
+          description: longitude for the forecast
+          format: float
+          in: path
+          name: longitude
+          required: true
+          type: number
+        - description: 'initial date for the forecast ISO string YYYY-MM-DDTHH:mm:SS.SZ'
+          in: query
+          name: inittime
+          required: false
+          type: string
+        - description: 'end date for the forecast ISO string YYYY-MM-DDTHH:mm:SS.SZ'
+          in: query
+          name: endtime
+          required: false
+          type: string
+        - description: optional number of days in string. Will be added to init forecast date
+          format: int32
+          in: query
+          name: days
+          required: false
+          type: integer
+        - description: optional number of hours in string. Will be added to init forecast date
+          format: int32
+          in: query
+          name: hours
+          required: false
+          type: integer
+        - description: ' Comma separated values for the weather parameteres temperature,rain,wind_u,wind_v,gust,pressure,cloud,humidity&wave=height,direction,period'
+          in: query
+          name: weather
+          required: true
+          type: string
+        - description: ' Comma separated values for the wave parameteres height,direction,period'
+          in: query
+          name: wave
+          required: false
+          type: string
+      produces:
+        - application/json
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+  '/v1.0/getSocibWeatherStation/{period}/':
+    get:
+      description: 'Get data from the socib bahia de palma buoy<br/>None'
+      operationId: getSocibWeatherStation
+      parameters:
+        - default: lastdata
+          description: Period of time to get the data
+          in: path
+          name: period
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+  '/v1.0/getWeatherDisplay/{stationName}/':
+    get:
+      description: 'Get data from the weather display software<br/>None'
+      operationId: getWeatherDisplay
+      parameters:
+        - default: cnarenal
+          description: base URL for the the
+          in: path
+          name: stationName
+          required: true
+          type: string
+        - default: latest
+          description: Period of time to get the data
+          in: query
+          name: period
+          required: true
+          type: string
+      produces:
+        - application/json
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+  /v1.0/getWebCams/:
+    get:
+      description: 'Get forecast and realtime information for known points<br/>None'
+      operationId: getWebCams
+      produces:
+        - application/json
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+schemes:
+  - http
+swagger: '2.0'

@@ -1,455 +1,306 @@
-{
-  "definitions": {
-    "ErrorReportModel": {
-      "properties": {
-        "APP_VERSION_CODE": {
-          "type": "string"
-        },
-        "APP_VERSION_NAME": {
-          "type": "string"
-        },
-        "AppKey": {
-          "type": "string"
-        },
-        "AVAILABLE_MEM_SIZE": {
-          "type": "string"
-        },
-        "BRAND": {
-          "type": "string"
-        },
-        "Build": {
-          "type": "string"
-        },
-        "CustomData": {
-          "type": "string"
-        },
-        "DEVICE_ID": {
-          "type": "string"
-        },
-        "DISPLAY": {
-          "type": "string"
-        },
-        "ERROR_LINE": {
-          "type": "string"
-        },
-        "ERROR_MSG": {
-          "type": "string"
-        },
-        "EVENTSLOG": {
-          "type": "string"
-        },
-        "FILE_PATH": {
-          "type": "string"
-        },
-        "LOGCAT": {
-          "type": "string"
-        },
-        "OSVERSION": {
-          "type": "string"
-        },
-        "PACKAGE_NAME": {
-          "type": "string"
-        },
-        "PHONE_MODEL": {
-          "type": "string"
-        },
-        "PRODUCT": {
-          "type": "string"
-        },
-        "report_id": {
-          "type": "string"
-        },
-        "SHARED_PREFERENCES": {
-          "type": "string"
-        },
-        "STACK_TRACE": {
-          "type": "string"
-        },
-        "Systemsecure": {
-          "type": "string"
-        },
-        "SystemSettings": {
-          "type": "string"
-        },
-        "THREAD_DETAILS": {
-          "type": "string"
-        },
-        "TOTAL_MEM_SIZE": {
-          "type": "string"
-        },
-        "USER_APP_START_DATE": {
-          "type": "string"
-        },
-        "USER_CRASH_DATE": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "AppKey"
-      ],
-      "type": "object"
-    },
-    "EventsModel": {
-      "properties": {
-        "AppKey": {
-          "type": "string"
-        },
-        "AppVersion": {
-          "type": "string"
-        },
-        "Details": {
-          "type": "string"
-        },
-        "DeviceId": {
-          "type": "string"
-        },
-        "EDate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "Event": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "AppKey",
-        "DeviceId"
-      ],
-      "type": "object"
-    },
-    "Object": {
-      "properties": {},
-      "type": "object"
-    },
-    "PreferencesModel": {
-      "properties": {
-        "AppKey": {
-          "type": "string"
-        },
-        "DeviceID": {
-          "type": "string"
-        },
-        "Email": {
-          "type": "string"
-        },
-        "Preferences": {
-          "$ref": "#/definitions/Object"
-        }
-      },
-      "required": [
-        "AppKey",
-        "DeviceID"
-      ],
-      "type": "object"
-    },
-    "UserModel": {
-      "properties": {
-        "AppKey": {
-          "type": "string"
-        },
-        "AppRevision": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "AppVersion": {
-          "type": "string"
-        },
-        "Brand": {
-          "type": "string"
-        },
-        "Country": {
-          "type": "string"
-        },
-        "DeviceID": {
-          "type": "string"
-        },
-        "Email": {
-          "type": "string"
-        },
-        "frameworkId": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "InstallDate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "installerPackage": {
-          "type": "string"
-        },
-        "isLicensed": {
-          "type": "boolean"
-        },
-        "MessageId": {
-          "type": "string"
-        },
-        "Model": {
-          "type": "string"
-        },
-        "OSVersion": {
-          "type": "string"
-        },
-        "platform": {
-          "type": "string"
-        },
-        "Preferences": {
-          "$ref": "#/definitions/Object"
-        },
-        "Store": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "AppKey",
-        "DeviceID"
-      ],
-      "type": "object"
-    }
-  },
-  "host": "ingress.quixxi.com",
-  "info": {
-    "description": "With the Quixxi Analytics API you will be able to have a high level picture of the progress of your application, interact with your users and much more.",
-    "title": "IngressAPI",
-    "version": "v1",
-    "x-logo": {
-      "backgroundColor": "#222222",
-      "url": "http://quixxi.com/img/logo-dark.png"
-    },
-    "x-origin": {
-      "format": "swagger",
-      "url": "http://ingress.quixxi.com/swagger/docs/v1",
-      "version": "2.0"
-    },
-    "x-providerName": "quixxi.com"
-  },
-  "paths": {
-    "/api/Analytics/ErrorReport/logError": {
-      "post": {
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "deprecated": false,
-        "operationId": "ErrorReport_logError",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "Data",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ErrorReportModel"
-            }
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "tags": [
-          "ErrorReport"
-        ]
-      }
-    },
-    "/api/Analytics/ErrorReport/testNotifi": {
-      "get": {
-        "consumes": [],
-        "deprecated": false,
-        "operationId": "ErrorReport_testNotifi",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "tags": [
-          "ErrorReport"
-        ]
-      }
-    },
-    "/api/Analytics/event/logEvent": {
-      "post": {
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "deprecated": false,
-        "operationId": "Event_logEvent",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "Data",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EventsModel"
-            }
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "tags": [
-          "Event"
-        ]
-      }
-    },
-    "/api/Analytics/uploads/logFileUpload": {
-      "post": {
-        "consumes": [],
-        "deprecated": false,
-        "operationId": "Uploads_logFileUpload",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "tags": [
-          "Uploads"
-        ]
-      }
-    },
-    "/api/Analytics/user/registerUser": {
-      "post": {
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "deprecated": false,
-        "operationId": "User_registerUser",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "model",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UserModel"
-            }
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "tags": [
-          "User"
-        ]
-      }
-    },
-    "/api/Analytics/user/UpdatePreferences": {
-      "post": {
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "deprecated": false,
-        "operationId": "User_UpdatePreferences",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "userPreferences",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PreferencesModel"
-            }
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "tags": [
-          "User"
-        ]
-      }
-    },
-    "/api/device/register": {
-      "post": {
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/x-www-form-urlencoded"
-        ],
-        "deprecated": false,
-        "operationId": "device_register",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "devicemodel",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UserModel"
-            }
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Object"
-            }
-          }
-        },
-        "tags": [
-          "device"
-        ]
-      }
-    }
-  },
-  "schemes": [
-    "http"
-  ],
-  "swagger": "2.0"
-}
+definitions:
+  ErrorReportModel:
+    properties:
+      APP_VERSION_CODE:
+        type: string
+      APP_VERSION_NAME:
+        type: string
+      AVAILABLE_MEM_SIZE:
+        type: string
+      AppKey:
+        type: string
+      BRAND:
+        type: string
+      Build:
+        type: string
+      CustomData:
+        type: string
+      DEVICE_ID:
+        type: string
+      DISPLAY:
+        type: string
+      ERROR_LINE:
+        type: string
+      ERROR_MSG:
+        type: string
+      EVENTSLOG:
+        type: string
+      FILE_PATH:
+        type: string
+      LOGCAT:
+        type: string
+      OSVERSION:
+        type: string
+      PACKAGE_NAME:
+        type: string
+      PHONE_MODEL:
+        type: string
+      PRODUCT:
+        type: string
+      SHARED_PREFERENCES:
+        type: string
+      STACK_TRACE:
+        type: string
+      SystemSettings:
+        type: string
+      Systemsecure:
+        type: string
+      THREAD_DETAILS:
+        type: string
+      TOTAL_MEM_SIZE:
+        type: string
+      USER_APP_START_DATE:
+        type: string
+      USER_CRASH_DATE:
+        type: string
+      report_id:
+        type: string
+    required:
+      - AppKey
+    type: object
+  EventsModel:
+    properties:
+      AppKey:
+        type: string
+      AppVersion:
+        type: string
+      Details:
+        type: string
+      DeviceId:
+        type: string
+      EDate:
+        format: date-time
+        type: string
+      Event:
+        type: string
+    required:
+      - AppKey
+      - DeviceId
+    type: object
+  Object:
+    properties: {}
+    type: object
+  PreferencesModel:
+    properties:
+      AppKey:
+        type: string
+      DeviceID:
+        type: string
+      Email:
+        type: string
+      Preferences:
+        $ref: '#/definitions/Object'
+    required:
+      - AppKey
+      - DeviceID
+    type: object
+  UserModel:
+    properties:
+      AppKey:
+        type: string
+      AppRevision:
+        format: int32
+        type: integer
+      AppVersion:
+        type: string
+      Brand:
+        type: string
+      Country:
+        type: string
+      DeviceID:
+        type: string
+      Email:
+        type: string
+      InstallDate:
+        format: date-time
+        type: string
+      MessageId:
+        type: string
+      Model:
+        type: string
+      OSVersion:
+        type: string
+      Preferences:
+        $ref: '#/definitions/Object'
+      Store:
+        type: string
+      frameworkId:
+        format: int32
+        type: integer
+      installerPackage:
+        type: string
+      isLicensed:
+        type: boolean
+      platform:
+        type: string
+    required:
+      - AppKey
+      - DeviceID
+    type: object
+host: ingress.quixxi.com
+info:
+  description: 'With the Quixxi Analytics API you will be able to have a high level picture of the progress of your application, interact with your users and much more.'
+  title: IngressAPI
+  version: v1
+  x-logo:
+    backgroundColor: '#222222'
+    url: 'http://quixxi.com/img/logo-dark.png'
+  x-origin:
+    format: swagger
+    url: 'http://ingress.quixxi.com/swagger/docs/v1'
+    version: '2.0'
+  x-providerName: quixxi.com
+paths:
+  /api/Analytics/ErrorReport/logError:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: ErrorReport_logError
+      parameters:
+        - in: body
+          name: Data
+          required: true
+          schema:
+            $ref: '#/definitions/ErrorReportModel'
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      tags:
+        - ErrorReport
+  /api/Analytics/ErrorReport/testNotifi:
+    get:
+      consumes: []
+      deprecated: false
+      operationId: ErrorReport_testNotifi
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      tags:
+        - ErrorReport
+  /api/Analytics/event/logEvent:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: Event_logEvent
+      parameters:
+        - in: body
+          name: Data
+          required: true
+          schema:
+            $ref: '#/definitions/EventsModel'
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      tags:
+        - Event
+  /api/Analytics/uploads/logFileUpload:
+    post:
+      consumes: []
+      deprecated: false
+      operationId: Uploads_logFileUpload
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      tags:
+        - Uploads
+  /api/Analytics/user/UpdatePreferences:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: User_UpdatePreferences
+      parameters:
+        - in: body
+          name: userPreferences
+          required: true
+          schema:
+            $ref: '#/definitions/PreferencesModel'
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      tags:
+        - User
+  /api/Analytics/user/registerUser:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: User_registerUser
+      parameters:
+        - in: body
+          name: model
+          required: true
+          schema:
+            $ref: '#/definitions/UserModel'
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      tags:
+        - User
+  /api/device/register:
+    post:
+      consumes:
+        - application/json
+        - text/json
+        - application/x-www-form-urlencoded
+      deprecated: false
+      operationId: device_register
+      parameters:
+        - in: body
+          name: devicemodel
+          required: true
+          schema:
+            $ref: '#/definitions/UserModel'
+      produces:
+        - application/json
+        - text/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Object'
+      tags:
+        - device
+schemes:
+  - http
+swagger: '2.0'

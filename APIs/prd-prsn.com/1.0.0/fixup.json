@@ -1,25 +1,13 @@
-{
-  "definitions": {
-    "DeliveryBean": {
-      "properties": {
-        "uris": {
-          "additionalProperties": {
-            "$ref": [
-              "#/definitions/java.util.Collection<java.net.URI>",
-              0,
-              0
-            ],
-            "items": [
-              {
-                "$ref": "#/definitions/URI"
-              }
-            ],
-            "type": [
-              "array"
-            ]
-          }
-        }
-      }
-    }
-  }
-}
+definitions:
+  DeliveryBean:
+    properties:
+      uris:
+        additionalProperties:
+          $ref:
+            - '#/definitions/java.util.Collection<java.net.URI>'
+            - 0
+            - 0
+          items:
+            - $ref: '#/definitions/URI'
+          type:
+            - array

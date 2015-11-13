@@ -1,28 +1,17 @@
-{
-  "definitions": {
-    "TopicsRequest": {
-      "properties": {
-        "synonyms": {
-          "$ref": [
-            "#/definitions/array of array",
-            0,
-            0
-          ],
-          "items": {
-            "$ref": [
-              "#/definitions/Synonymlist"
-            ],
-            "type": [
-              "string",
-              0,
-              0
-            ]
-          },
-          "type": [
-            "array"
-          ]
-        }
-      }
-    }
-  }
-}
+definitions:
+  TopicsRequest:
+    properties:
+      synonyms:
+        $ref:
+          - '#/definitions/array of array'
+          - 0
+          - 0
+        items:
+          $ref:
+            - '#/definitions/Synonymlist'
+          type:
+            - string
+            - 0
+            - 0
+        type:
+          - array

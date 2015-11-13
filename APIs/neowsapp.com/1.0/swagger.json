@@ -1,370 +1,248 @@
-{
-  "basePath": "/",
-  "definitions": {
-    "CloseApproachData": {
-      "properties": {
-        "close_approach_date": {
-          "type": "string"
-        },
-        "epoch_date_close_approach": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "miss_distance": {
-          "$ref": "#/definitions/MissDistance"
-        },
-        "orbiting_body": {
-          "type": "string"
-        },
-        "relative_velocity": {
-          "$ref": "#/definitions/relativeVelocity"
-        }
-      }
-    },
-    "EstimatedDiameter": {
-      "properties": {
-        "estimated_diameter_max": {
-          "description": "An estimate of the maximum size of the Asteroid - bases on the abosolute magnitude",
-          "format": "double",
-          "type": "number"
-        },
-        "estimated_diameter_min": {
-          "description": "An estimate of the minimum size of the Asteroid - bases on the abosolute magnitude",
-          "format": "double",
-          "type": "number"
-        }
-      }
-    },
-    "EstimatedDiameterContainer": {
-      "properties": {
-        "feet": {
-          "$ref": "#/definitions/EstimatedDiameter"
-        },
-        "kilometers": {
-          "$ref": "#/definitions/EstimatedDiameter"
-        },
-        "meters": {
-          "$ref": "#/definitions/EstimatedDiameter"
-        },
-        "miles": {
-          "$ref": "#/definitions/EstimatedDiameter"
-        }
-      }
-    },
-    "HashMap«string,List«NearEarthObjectFeedDto»»": {},
-    "MissDistance": {
-      "properties": {
-        "astronomical": {
-          "type": "string"
-        },
-        "kilometers": {
-          "type": "string"
-        },
-        "lunar": {
-          "type": "string"
-        },
-        "miles": {
-          "type": "string"
-        }
-      }
-    },
-    "NearEarthObject": {
-      "properties": {
-        "element_count": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "links": {
-          "type": "object"
-        },
-        "near_earth_objects": {
-          "$ref": "#/definitions/HashMap«string,List«NearEarthObjectFeedDto»»"
-        }
-      }
-    },
-    "NearEarthObjectFeedDto": {
-      "properties": {
-        "absolute_magnitude_h": {
-          "description": "Is a measure of an asteroids brightness",
-          "format": "double",
-          "type": "number"
-        },
-        "close_approach_data": {
-          "description": "Close approach information of the Asteroid",
-          "items": {
-            "$ref": "#/definitions/CloseApproachData"
-          },
-          "type": "array"
-        },
-        "estimated_diameter": {
-          "$ref": "#/definitions/EstimatedDiameterContainer"
-        },
-        "is_potentially_hazardous_asteroid": {
-          "type": "boolean"
-        },
-        "name": {
-          "type": "string"
-        },
-        "nasa_jpl_url": {
-          "description": "A Link to the NASA JPL Small-Body Database website",
-          "type": "string"
-        },
-        "neo_reference_id": {
-          "description": "The reference ID of the Asteroid - This correlates to the SPK ID for the JPL NEO data",
-          "type": "string"
-        },
-        "orbital_data": {
-          "$ref": "#/definitions/OrbitalData",
-          "description": "Orbital information of the asteroid"
-        }
-      }
-    },
-    "OrbitalData": {
-      "properties": {
-        "aphelion_distance": {
-          "type": "string"
-        },
-        "ascending_node_longitude": {
-          "type": "string"
-        },
-        "eccentricity": {
-          "type": "string"
-        },
-        "epoch_osculation": {
-          "type": "string"
-        },
-        "equinox": {
-          "type": "string"
-        },
-        "inclination": {
-          "type": "string"
-        },
-        "jupiter_tisserand_invariant": {
-          "type": "string"
-        },
-        "mean_anomaly": {
-          "type": "string"
-        },
-        "mean_motion": {
-          "type": "string"
-        },
-        "minimum_orbit_intersection": {
-          "type": "string"
-        },
-        "orbit_determination_date": {
-          "type": "string"
-        },
-        "orbit_id": {
-          "type": "string"
-        },
-        "orbit_uncertainty": {
-          "type": "string"
-        },
-        "orbital_period": {
-          "type": "string"
-        },
-        "perihelion_argument": {
-          "type": "string"
-        },
-        "perihelion_distance": {
-          "type": "string"
-        },
-        "perihelion_time": {
-          "type": "string"
-        },
-        "semi_major_axis": {
-          "type": "string"
-        }
-      }
-    },
-    "relativeVelocity": {
-      "properties": {
-        "kilometers_per_hour": {
-          "type": "string"
-        },
-        "miles_per_hour": {
-          "type": "string"
-        }
-      }
-    }
-  },
-  "host": "www.neowsapp.com",
-  "info": {
-    "description": "A web service for near earth objects. All the data is from the  <a href=\"http://neo.jpl.nasa.gov/\" target=\"_blank\">NASA JPL Asteroid team</a>. \n\n \n\nNeoWs is proud to power AsteroidTracker on <a href=\"https://itunes.apple.com/us/app/asteroid-tracker/id689684901?mt=8\" target=\"_blank\">iOS</a> and <a href=\"https://play.google.com/store/apps/details?id=com.vitruviussoftware.bunifish.asteroidtracker&feature\" target=\"_blank\">Android</a> as well as related apps. \n\n Get <a href=\"http://apps.getpebble.com/en_US/application/55bc4913d1690c372900000f\" target=\"_blank\">Asteroid Today on Pebble</a> \n\nFollow us on <a href=\"http://n.numerousapp.com/m/289c3ktc8fi0\" target=\"_blank\">Numerous</a> \n\nFollow us on <a href=\"https://twitter.com/AsteroidTracker\" target=\"_blank\">Twitter</a>",
-    "license": {
-      "name": "Licence Type",
-      "url": "License URL"
-    },
-    "title": "NeoWs - (Near Earth Object Web Service)",
-    "version": "1.0",
-    "x-origin": {
-      "format": "swagger",
-      "url": "http://www.neowsapp.com/api-docs",
-      "version": "1.2"
-    },
-    "x-providerName": "neowsapp.com"
-  },
-  "paths": {
-    "/rest/v1/feed": {
-      "get": {
-        "consumes": [
-          "application/json"
-        ],
-        "deprecated": false,
-        "description": "Get a list of Near Earth Objects within a date range, The max range in one query is 7 days",
-        "operationId": "retrieveNearEarthObjectFeed",
-        "parameters": [
-          {
-            "description": "Start of date range search, format: yyyy-MM-dd - (ex: 2015-04-28)",
-            "in": "query",
-            "name": "start_date",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "End of date range search, format: yyyy-MM-dd - (ex: 2015-04-28). If left off search will extends 7 days from start_date",
-            "in": "query",
-            "name": "end_date",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/NearEarthObject"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "summary": "Find Near Earth Objects by date",
-        "tags": [
-          "feed"
-        ]
-      }
-    },
-    "/rest/v1/neo/{asteroid_id}": {
-      "get": {
-        "consumes": [
-          "application/json"
-        ],
-        "deprecated": false,
-        "description": "Retieve a Near Earth Objects with a given id",
-        "operationId": "retrieveNearEarthObjectById",
-        "parameters": [
-          {
-            "description": "ID of Near Earth Object - (ex: 3729835)",
-            "in": "path",
-            "name": "asteroid_id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/NearEarthObjectFeedDto"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "summary": "Find Near Earth Objects by id",
-        "tags": [
-          "neo"
-        ]
-      }
-    },
-    "/rest/v1/neo/browse": {
-      "get": {
-        "consumes": [
-          "application/json"
-        ],
-        "deprecated": false,
-        "description": "Retieve a paginated list of Near Earth Objects",
-        "operationId": "browseNearEarthObjects",
-        "parameters": [
-          {
-            "default": 0,
-            "description": "page",
-            "format": "int32",
-            "in": "query",
-            "name": "page",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "default": 20,
-            "description": "size",
-            "format": "int32",
-            "in": "query",
-            "name": "size",
-            "required": false,
-            "type": "integer"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/NearEarthObjectFeedDto"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "summary": "Browse the Near Earth Objects service",
-        "tags": [
-          "neo"
-        ]
-      }
-    }
-  },
-  "schemes": [
-    "http"
-  ],
-  "swagger": "2.0",
-  "tags": [
-    {
-      "description": "Operations with NearEarthObjects",
-      "name": "feed"
-    },
-    {
-      "description": "Operations with NearEarthObjects",
-      "name": "neo"
-    }
-  ]
-}
+basePath: /
+definitions:
+  CloseApproachData:
+    properties:
+      close_approach_date:
+        type: string
+      epoch_date_close_approach:
+        format: int64
+        type: integer
+      miss_distance:
+        $ref: '#/definitions/MissDistance'
+      orbiting_body:
+        type: string
+      relative_velocity:
+        $ref: '#/definitions/relativeVelocity'
+  EstimatedDiameter:
+    properties:
+      estimated_diameter_max:
+        description: An estimate of the maximum size of the Asteroid - bases on the abosolute magnitude
+        format: double
+        type: number
+      estimated_diameter_min:
+        description: An estimate of the minimum size of the Asteroid - bases on the abosolute magnitude
+        format: double
+        type: number
+  EstimatedDiameterContainer:
+    properties:
+      feet:
+        $ref: '#/definitions/EstimatedDiameter'
+      kilometers:
+        $ref: '#/definitions/EstimatedDiameter'
+      meters:
+        $ref: '#/definitions/EstimatedDiameter'
+      miles:
+        $ref: '#/definitions/EstimatedDiameter'
+  'HashMap«string,List«NearEarthObjectFeedDto»»': {}
+  MissDistance:
+    properties:
+      astronomical:
+        type: string
+      kilometers:
+        type: string
+      lunar:
+        type: string
+      miles:
+        type: string
+  NearEarthObject:
+    properties:
+      element_count:
+        format: int32
+        type: integer
+      links:
+        type: object
+      near_earth_objects:
+        $ref: '#/definitions/HashMap«string,List«NearEarthObjectFeedDto»»'
+  NearEarthObjectFeedDto:
+    properties:
+      absolute_magnitude_h:
+        description: Is a measure of an asteroids brightness
+        format: double
+        type: number
+      close_approach_data:
+        description: Close approach information of the Asteroid
+        items:
+          $ref: '#/definitions/CloseApproachData'
+        type: array
+      estimated_diameter:
+        $ref: '#/definitions/EstimatedDiameterContainer'
+      is_potentially_hazardous_asteroid:
+        type: boolean
+      name:
+        type: string
+      nasa_jpl_url:
+        description: A Link to the NASA JPL Small-Body Database website
+        type: string
+      neo_reference_id:
+        description: The reference ID of the Asteroid - This correlates to the SPK ID for the JPL NEO data
+        type: string
+      orbital_data:
+        $ref: '#/definitions/OrbitalData'
+        description: Orbital information of the asteroid
+  OrbitalData:
+    properties:
+      aphelion_distance:
+        type: string
+      ascending_node_longitude:
+        type: string
+      eccentricity:
+        type: string
+      epoch_osculation:
+        type: string
+      equinox:
+        type: string
+      inclination:
+        type: string
+      jupiter_tisserand_invariant:
+        type: string
+      mean_anomaly:
+        type: string
+      mean_motion:
+        type: string
+      minimum_orbit_intersection:
+        type: string
+      orbit_determination_date:
+        type: string
+      orbit_id:
+        type: string
+      orbit_uncertainty:
+        type: string
+      orbital_period:
+        type: string
+      perihelion_argument:
+        type: string
+      perihelion_distance:
+        type: string
+      perihelion_time:
+        type: string
+      semi_major_axis:
+        type: string
+  relativeVelocity:
+    properties:
+      kilometers_per_hour:
+        type: string
+      miles_per_hour:
+        type: string
+host: www.neowsapp.com
+info:
+  description: "A web service for near earth objects. All the data is from the  <a href=\"http://neo.jpl.nasa.gov/\" target=\"_blank\">NASA JPL Asteroid team</a>. \n\n \n\nNeoWs is proud to power AsteroidTracker on <a href=\"https://itunes.apple.com/us/app/asteroid-tracker/id689684901?mt=8\" target=\"_blank\">iOS</a> and <a href=\"https://play.google.com/store/apps/details?id=com.vitruviussoftware.bunifish.asteroidtracker&feature\" target=\"_blank\">Android</a> as well as related apps. \n\n Get <a href=\"http://apps.getpebble.com/en_US/application/55bc4913d1690c372900000f\" target=\"_blank\">Asteroid Today on Pebble</a> \n\nFollow us on <a href=\"http://n.numerousapp.com/m/289c3ktc8fi0\" target=\"_blank\">Numerous</a> \n\nFollow us on <a href=\"https://twitter.com/AsteroidTracker\" target=\"_blank\">Twitter</a>"
+  license:
+    name: Licence Type
+    url: License URL
+  title: NeoWs - (Near Earth Object Web Service)
+  version: '1.0'
+  x-origin:
+    format: swagger
+    url: 'http://www.neowsapp.com/api-docs'
+    version: '1.2'
+  x-providerName: neowsapp.com
+paths:
+  /rest/v1/feed:
+    get:
+      consumes:
+        - application/json
+      deprecated: false
+      description: 'Get a list of Near Earth Objects within a date range, The max range in one query is 7 days'
+      operationId: retrieveNearEarthObjectFeed
+      parameters:
+        - description: 'Start of date range search, format: yyyy-MM-dd - (ex: 2015-04-28)'
+          in: query
+          name: start_date
+          required: false
+          type: string
+        - description: 'End of date range search, format: yyyy-MM-dd - (ex: 2015-04-28). If left off search will extends 7 days from start_date'
+          in: query
+          name: end_date
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NearEarthObject'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Find Near Earth Objects by date
+      tags:
+        - feed
+  /rest/v1/neo/browse:
+    get:
+      consumes:
+        - application/json
+      deprecated: false
+      description: Retieve a paginated list of Near Earth Objects
+      operationId: browseNearEarthObjects
+      parameters:
+        - default: 0
+          description: page
+          format: int32
+          in: query
+          name: page
+          required: false
+          type: integer
+        - default: 20
+          description: size
+          format: int32
+          in: query
+          name: size
+          required: false
+          type: integer
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NearEarthObjectFeedDto'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Browse the Near Earth Objects service
+      tags:
+        - neo
+  '/rest/v1/neo/{asteroid_id}':
+    get:
+      consumes:
+        - application/json
+      deprecated: false
+      description: Retieve a Near Earth Objects with a given id
+      operationId: retrieveNearEarthObjectById
+      parameters:
+        - description: 'ID of Near Earth Object - (ex: 3729835)'
+          in: path
+          name: asteroid_id
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/NearEarthObjectFeedDto'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+      summary: Find Near Earth Objects by id
+      tags:
+        - neo
+schemes:
+  - http
+swagger: '2.0'
+tags:
+  - description: Operations with NearEarthObjects
+    name: feed
+  - description: Operations with NearEarthObjects
+    name: neo

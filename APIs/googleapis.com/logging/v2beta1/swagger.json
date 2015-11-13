@@ -1,327 +1,252 @@
-{
-  "basePath": "/",
-  "definitions": {
-    "LogLine": {
-      "description": "Application log line emitted while processing a request.",
-      "properties": {
-        "logMessage": {
-          "description": "App provided log message.",
-          "type": "string"
-        },
-        "severity": {
-          "description": "Severity of log.",
-          "enum": [
-            "DEFAULT",
-            "DEBUG",
-            "INFO",
-            "NOTICE",
-            "WARNING",
-            "ERROR",
-            "CRITICAL",
-            "ALERT",
-            "EMERGENCY"
-          ],
-          "type": "string"
-        },
-        "sourceLocation": {
-          "$ref": "#/definitions/SourceLocation",
-          "description": "Line of code that generated this log message."
-        },
-        "time": {
-          "description": "Time when log entry was made. May be inaccurate.",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "RequestLog": {
-      "description": "Complete log information about a single request to an application.",
-      "properties": {
-        "appEngineRelease": {
-          "description": "App Engine release version string.",
-          "type": "string"
-        },
-        "appId": {
-          "description": "Identifies the application that handled this request.",
-          "type": "string"
-        },
-        "cost": {
-          "description": "An indication of the relative cost of serving this request.",
-          "format": "double",
-          "type": "number"
-        },
-        "endTime": {
-          "description": "Time at which request was known to end processing.",
-          "type": "string"
-        },
-        "finished": {
-          "description": "If true, represents a finished request. Otherwise, the request is active.",
-          "type": "boolean"
-        },
-        "host": {
-          "description": "The Internet host and port number of the resource being requested.",
-          "type": "string"
-        },
-        "httpVersion": {
-          "description": "HTTP version of request.",
-          "type": "string"
-        },
-        "instanceId": {
-          "description": "An opaque identifier for the instance that handled the request.",
-          "type": "string"
-        },
-        "instanceIndex": {
-          "description": "If the instance that processed this request was individually addressable (i.e. belongs to a manually scaled module), this is the index of the instance.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "ip": {
-          "description": "Origin IP address.",
-          "type": "string"
-        },
-        "latency": {
-          "description": "Latency of the request.",
-          "type": "string"
-        },
-        "line": {
-          "description": "List of log lines emitted by the application while serving this request, if requested.",
-          "items": {
-            "$ref": "#/definitions/LogLine"
-          },
-          "type": "array"
-        },
-        "megaCycles": {
-          "description": "Number of CPU megacycles used to process request.",
-          "format": "int64",
-          "type": "string"
-        },
-        "method": {
-          "description": "Request method, such as `GET`, `HEAD`, `PUT`, `POST`, or `DELETE`.",
-          "type": "string"
-        },
-        "moduleId": {
-          "description": "Identifies the module of the application that handled this request.",
-          "type": "string"
-        },
-        "nickname": {
-          "description": "A string that identifies a logged-in user who made this request, or empty if the user is not logged in. Most likely, this is the part of the user's email before the '@' sign. The field value is the same for different requests from the same user, but different users may have a similar name. This information is also available to the application via Users API. This field will be populated starting with App Engine 1.9.21.",
-          "type": "string"
-        },
-        "pendingTime": {
-          "description": "Time this request spent in the pending request queue, if it was pending at all.",
-          "type": "string"
-        },
-        "referrer": {
-          "description": "Referrer URL of request.",
-          "type": "string"
-        },
-        "requestId": {
-          "description": "Globally unique identifier for a request, based on request start time. Request IDs for requests which started later will compare greater as strings than those for requests which started earlier.",
-          "type": "string"
-        },
-        "resource": {
-          "description": "Contains the path and query portion of the URL that was requested. For example, if the URL was \"http://example.com/app?name=val\", the resource would be \"/app?name=val\". Any trailing fragment (separated by a '#' character) will not be included.",
-          "type": "string"
-        },
-        "responseSize": {
-          "description": "Size in bytes sent back to client by request.",
-          "format": "int64",
-          "type": "string"
-        },
-        "sourceReference": {
-          "description": "Source code for the application that handled this request. There can be more than one source reference per deployed application if source code is distributed among multiple repositories.",
-          "items": {
-            "$ref": "#/definitions/SourceReference"
-          },
-          "type": "array"
-        },
-        "startTime": {
-          "description": "Time at which request was known to have begun processing.",
-          "type": "string"
-        },
-        "status": {
-          "description": "Response status of request.",
-          "format": "int32",
-          "type": "integer"
-        },
-        "taskName": {
-          "description": "Task name of the request (for an offline request).",
-          "type": "string"
-        },
-        "taskQueueName": {
-          "description": "Queue name of the request (for an offline request).",
-          "type": "string"
-        },
-        "traceId": {
-          "description": "Cloud Trace identifier of the trace for this request.",
-          "type": "string"
-        },
-        "urlMapEntry": {
-          "description": "File or class within URL mapping used for request. Useful for tracking down the source code which was responsible for managing request. Especially for multiply mapped handlers.",
-          "type": "string"
-        },
-        "userAgent": {
-          "description": "User agent used for making request.",
-          "type": "string"
-        },
-        "versionId": {
-          "description": "Version of the application that handled this request.",
-          "type": "string"
-        },
-        "wasLoadingRequest": {
-          "description": "Was this request a loading request for this instance?",
-          "type": "boolean"
-        }
-      },
-      "type": "object"
-    },
-    "SourceLocation": {
-      "description": "Specifies a location in a source file.",
-      "properties": {
-        "file": {
-          "description": "Source file name. May or may not be a fully qualified name, depending on the runtime environment.",
-          "type": "string"
-        },
-        "functionName": {
-          "description": "Human-readable name of the function or method being invoked, with optional context such as the class or package name, for use in contexts such as the logs viewer where file:line number is less meaningful. This may vary by language, for example: in Java: qual.if.ied.Class.method in Go: dir/package.func in Python: function ...",
-          "type": "string"
-        },
-        "line": {
-          "description": "Line within the source file.",
-          "format": "int64",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "SourceReference": {
-      "description": "A reference to a particular snapshot of the source tree used to build and deploy an application.",
-      "properties": {
-        "repository": {
-          "description": "Optional. A URI string identifying the repository. Example: \"https://github.com/GoogleCloudPlatform/kubernetes.git\"",
-          "type": "string"
-        },
-        "revisionId": {
-          "description": "The canonical (and persistent) identifier of the deployed revision. Example (git): \"0035781c50ec7aa23385dc841529ce8a4b70db1b\"",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    }
-  },
-  "externalDocs": {
-    "url": "https://cloud.google.com/logging/docs/"
-  },
-  "host": "logging.googleapis.com",
-  "info": {
-    "contact": {
-      "name": "Google",
-      "url": "https://google.com"
-    },
-    "description": "The Google Cloud Logging API lets you write log entries and manage your logs, log sinks and logs-based metrics.",
-    "title": "Google Cloud Logging API",
-    "version": "v2beta1",
-    "x-apiClientRegistration": {
-      "url": "https://console.developers.google.com"
-    },
-    "x-logo": {
-      "url": "https://cloud.google.com/_static/images/new-gcp-logo.png"
-    },
-    "x-origin": {
-      "format": "google",
-      "url": "https://www.googleapis.com/discovery/v1/apis/logging/v2beta1/rest",
-      "version": "v1"
-    },
-    "x-preferred": true,
-    "x-providerName": "googleapis.com",
-    "x-serviceName": "logging"
-  },
-  "parameters": {
-    "$.xgafv": {
-      "description": "V1 error format.",
-      "in": "query",
-      "name": "$.xgafv",
-      "type": "string"
-    },
-    "access_token": {
-      "description": "OAuth access token.",
-      "in": "query",
-      "name": "access_token",
-      "type": "string"
-    },
-    "alt": {
-      "default": "json",
-      "description": "Data format for response.",
-      "in": "query",
-      "name": "alt",
-      "type": "string"
-    },
-    "bearer_token": {
-      "description": "OAuth bearer token.",
-      "in": "query",
-      "name": "bearer_token",
-      "type": "string"
-    },
-    "callback": {
-      "description": "JSONP",
-      "in": "query",
-      "name": "callback",
-      "type": "string"
-    },
-    "fields": {
-      "description": "Selector specifying which fields to include in a partial response.",
-      "in": "query",
-      "name": "fields",
-      "type": "string"
-    },
-    "key": {
-      "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
-      "in": "query",
-      "name": "key",
-      "type": "string"
-    },
-    "oauth_token": {
-      "description": "OAuth 2.0 token for the current user.",
-      "in": "query",
-      "name": "oauth_token",
-      "type": "string"
-    },
-    "pp": {
-      "default": true,
-      "description": "Pretty-print response.",
-      "in": "query",
-      "name": "pp",
-      "type": "boolean"
-    },
-    "prettyPrint": {
-      "default": true,
-      "description": "Returns response with indentations and line breaks.",
-      "in": "query",
-      "name": "prettyPrint",
-      "type": "boolean"
-    },
-    "quotaUser": {
-      "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.",
-      "in": "query",
-      "name": "quotaUser",
-      "type": "string"
-    },
-    "upload_protocol": {
-      "description": "Upload protocol for media (e.g. \"raw\", \"multipart\").",
-      "in": "query",
-      "name": "upload_protocol",
-      "type": "string"
-    },
-    "uploadType": {
-      "description": "Legacy upload protocol for media (e.g. \"media\", \"multipart\").",
-      "in": "query",
-      "name": "uploadType",
-      "type": "string"
-    }
-  },
-  "paths": {},
-  "schemes": [
-    "https"
-  ],
-  "swagger": "2.0"
-}
+basePath: /
+definitions:
+  LogLine:
+    description: Application log line emitted while processing a request.
+    properties:
+      logMessage:
+        description: App provided log message.
+        type: string
+      severity:
+        description: Severity of log.
+        enum:
+          - DEFAULT
+          - DEBUG
+          - INFO
+          - NOTICE
+          - WARNING
+          - ERROR
+          - CRITICAL
+          - ALERT
+          - EMERGENCY
+        type: string
+      sourceLocation:
+        $ref: '#/definitions/SourceLocation'
+        description: Line of code that generated this log message.
+      time:
+        description: Time when log entry was made. May be inaccurate.
+        type: string
+    type: object
+  RequestLog:
+    description: Complete log information about a single request to an application.
+    properties:
+      appEngineRelease:
+        description: App Engine release version string.
+        type: string
+      appId:
+        description: Identifies the application that handled this request.
+        type: string
+      cost:
+        description: An indication of the relative cost of serving this request.
+        format: double
+        type: number
+      endTime:
+        description: Time at which request was known to end processing.
+        type: string
+      finished:
+        description: 'If true, represents a finished request. Otherwise, the request is active.'
+        type: boolean
+      host:
+        description: The Internet host and port number of the resource being requested.
+        type: string
+      httpVersion:
+        description: HTTP version of request.
+        type: string
+      instanceId:
+        description: An opaque identifier for the instance that handled the request.
+        type: string
+      instanceIndex:
+        description: 'If the instance that processed this request was individually addressable (i.e. belongs to a manually scaled module), this is the index of the instance.'
+        format: int32
+        type: integer
+      ip:
+        description: Origin IP address.
+        type: string
+      latency:
+        description: Latency of the request.
+        type: string
+      line:
+        description: 'List of log lines emitted by the application while serving this request, if requested.'
+        items:
+          $ref: '#/definitions/LogLine'
+        type: array
+      megaCycles:
+        description: Number of CPU megacycles used to process request.
+        format: int64
+        type: string
+      method:
+        description: 'Request method, such as `GET`, `HEAD`, `PUT`, `POST`, or `DELETE`.'
+        type: string
+      moduleId:
+        description: Identifies the module of the application that handled this request.
+        type: string
+      nickname:
+        description: "A string that identifies a logged-in user who made this request, or empty if the user is not logged in. Most likely, this is the part of the user's email before the '@' sign. The field value is the same for different requests from the same user, but different users may have a similar name. This information is also available to the application via Users API. This field will be populated starting with App Engine 1.9.21."
+        type: string
+      pendingTime:
+        description: 'Time this request spent in the pending request queue, if it was pending at all.'
+        type: string
+      referrer:
+        description: Referrer URL of request.
+        type: string
+      requestId:
+        description: 'Globally unique identifier for a request, based on request start time. Request IDs for requests which started later will compare greater as strings than those for requests which started earlier.'
+        type: string
+      resource:
+        description: "Contains the path and query portion of the URL that was requested. For example, if the URL was \"http://example.com/app?name=val\", the resource would be \"/app?name=val\". Any trailing fragment (separated by a '#' character) will not be included."
+        type: string
+      responseSize:
+        description: Size in bytes sent back to client by request.
+        format: int64
+        type: string
+      sourceReference:
+        description: Source code for the application that handled this request. There can be more than one source reference per deployed application if source code is distributed among multiple repositories.
+        items:
+          $ref: '#/definitions/SourceReference'
+        type: array
+      startTime:
+        description: Time at which request was known to have begun processing.
+        type: string
+      status:
+        description: Response status of request.
+        format: int32
+        type: integer
+      taskName:
+        description: Task name of the request (for an offline request).
+        type: string
+      taskQueueName:
+        description: Queue name of the request (for an offline request).
+        type: string
+      traceId:
+        description: Cloud Trace identifier of the trace for this request.
+        type: string
+      urlMapEntry:
+        description: File or class within URL mapping used for request. Useful for tracking down the source code which was responsible for managing request. Especially for multiply mapped handlers.
+        type: string
+      userAgent:
+        description: User agent used for making request.
+        type: string
+      versionId:
+        description: Version of the application that handled this request.
+        type: string
+      wasLoadingRequest:
+        description: Was this request a loading request for this instance?
+        type: boolean
+    type: object
+  SourceLocation:
+    description: Specifies a location in a source file.
+    properties:
+      file:
+        description: 'Source file name. May or may not be a fully qualified name, depending on the runtime environment.'
+        type: string
+      functionName:
+        description: 'Human-readable name of the function or method being invoked, with optional context such as the class or package name, for use in contexts such as the logs viewer where file:line number is less meaningful. This may vary by language, for example: in Java: qual.if.ied.Class.method in Go: dir/package.func in Python: function ...'
+        type: string
+      line:
+        description: Line within the source file.
+        format: int64
+        type: string
+    type: object
+  SourceReference:
+    description: A reference to a particular snapshot of the source tree used to build and deploy an application.
+    properties:
+      repository:
+        description: 'Optional. A URI string identifying the repository. Example: "https://github.com/GoogleCloudPlatform/kubernetes.git"'
+        type: string
+      revisionId:
+        description: 'The canonical (and persistent) identifier of the deployed revision. Example (git): "0035781c50ec7aa23385dc841529ce8a4b70db1b"'
+        type: string
+    type: object
+externalDocs:
+  url: 'https://cloud.google.com/logging/docs/'
+host: logging.googleapis.com
+info:
+  contact:
+    name: Google
+    url: 'https://google.com'
+  description: 'The Google Cloud Logging API lets you write log entries and manage your logs, log sinks and logs-based metrics.'
+  title: Google Cloud Logging API
+  version: v2beta1
+  x-apiClientRegistration:
+    url: 'https://console.developers.google.com'
+  x-logo:
+    url: 'https://cloud.google.com/_static/images/new-gcp-logo.png'
+  x-origin:
+    format: google
+    url: 'https://www.googleapis.com/discovery/v1/apis/logging/v2beta1/rest'
+    version: v1
+  x-preferred: true
+  x-providerName: googleapis.com
+  x-serviceName: logging
+parameters:
+  $.xgafv:
+    description: V1 error format.
+    in: query
+    name: $.xgafv
+    type: string
+  access_token:
+    description: OAuth access token.
+    in: query
+    name: access_token
+    type: string
+  alt:
+    default: json
+    description: Data format for response.
+    in: query
+    name: alt
+    type: string
+  bearer_token:
+    description: OAuth bearer token.
+    in: query
+    name: bearer_token
+    type: string
+  callback:
+    description: JSONP
+    in: query
+    name: callback
+    type: string
+  fields:
+    description: Selector specifying which fields to include in a partial response.
+    in: query
+    name: fields
+    type: string
+  key:
+    description: 'API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.'
+    in: query
+    name: key
+    type: string
+  oauth_token:
+    description: OAuth 2.0 token for the current user.
+    in: query
+    name: oauth_token
+    type: string
+  pp:
+    default: true
+    description: Pretty-print response.
+    in: query
+    name: pp
+    type: boolean
+  prettyPrint:
+    default: true
+    description: Returns response with indentations and line breaks.
+    in: query
+    name: prettyPrint
+    type: boolean
+  quotaUser:
+    description: 'Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters.'
+    in: query
+    name: quotaUser
+    type: string
+  uploadType:
+    description: 'Legacy upload protocol for media (e.g. "media", "multipart").'
+    in: query
+    name: uploadType
+    type: string
+  upload_protocol:
+    description: 'Upload protocol for media (e.g. "raw", "multipart").'
+    in: query
+    name: upload_protocol
+    type: string
+paths: {}
+schemes:
+  - https
+swagger: '2.0'

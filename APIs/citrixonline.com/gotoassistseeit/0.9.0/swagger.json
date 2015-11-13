@@ -1,131 +1,90 @@
-{
-  "basePath": "/seeit/v1",
-  "definitions": {
-    "Session": {
-      "properties": {
-        "startUrl": {
-          "description": "The URL that can be used to start the session in a suitable browser.",
-          "format": "url",
-          "type": "string"
-        },
-        "supportKey": {
-          "description": "Human readable support key.",
-          "type": "string"
-        },
-        "uuid": {
-          "description": "Canonical form of the [UUID](http://en.wikipedia.org/wiki/Universally_unique_identifier) uniquely identifying this session.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "uuid",
-        "supportKey",
-        "startUrl"
-      ]
-    }
-  },
-  "externalDocs": {
-    "url": "https://developer.citrixonline.com/"
-  },
-  "host": "api.citrixonline.com",
-  "info": {
-    "description": "<p>Allows you to integrate GoToAssist Seeit into your own solutions.</p>",
-    "title": "GoToAssist Seeit API",
-    "version": "0.9.0",
-    "x-logo": {
-      "backgroundColor": "#5F6166",
-      "url": "https://developer.citrixonline.com/sites/all/themes/citrix_responsive/logo.png"
-    },
-    "x-origin": {
-      "format": "swagger",
-      "url": "https://developer.citrixonline.com/sites/default/files/citrix/citrix-apis/gotoassistseeit.json",
-      "version": "2.0"
-    },
-    "x-providerName": "citrixonline.com",
-    "x-serviceName": "gotoassistseeit"
-  },
-  "paths": {
-    "/sessions": {
-      "post": {
-        "description": "This endpoint allows you to create a GoToAssist Seeit session. The session logically exists but is not started until you open the returned startUrl in a suitable browser.",
-        "parameters": [
-          {
-            "description": "Access Token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The session has been created.",
-            "schema": {
-              "$ref": "#/definitions/Session"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        },
-        "summary": "Create a GoToAssist Seeit session",
-        "tags": [
-          "Sessions"
-        ]
-      }
-    },
-    "/sessions/{uuid}": {
-      "get": {
-        "description": "This endpoint allows you to get an _active_ GoToAssist Seeit session. A session is considered active from creation time until the session has been ended or timed out.",
-        "parameters": [
-          {
-            "description": "Access Token",
-            "in": "header",
-            "name": "Authorization",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "the uuid returned when creating the session.",
-            "format": "uuid",
-            "in": "path",
-            "name": "uuid",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns the information required to start a GoToAssist Seeit session.",
-            "schema": {
-              "$ref": "#/definitions/Session"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "There is no active session with the given uuid."
-          }
-        },
-        "summary": "Get a GoToAssist Seeit session",
-        "tags": [
-          "Sessions"
-        ]
-      }
-    }
-  },
-  "produces": [
-    "application/json"
-  ],
-  "schemes": [
-    "https"
-  ],
-  "swagger": "2.0"
-}
+basePath: /seeit/v1
+definitions:
+  Session:
+    properties:
+      startUrl:
+        description: The URL that can be used to start the session in a suitable browser.
+        format: url
+        type: string
+      supportKey:
+        description: Human readable support key.
+        type: string
+      uuid:
+        description: 'Canonical form of the [UUID](http://en.wikipedia.org/wiki/Universally_unique_identifier) uniquely identifying this session.'
+        type: string
+    required:
+      - uuid
+      - supportKey
+      - startUrl
+externalDocs:
+  url: 'https://developer.citrixonline.com/'
+host: api.citrixonline.com
+info:
+  description: '<p>Allows you to integrate GoToAssist Seeit into your own solutions.</p>'
+  title: GoToAssist Seeit API
+  version: 0.9.0
+  x-logo:
+    backgroundColor: '#5F6166'
+    url: 'https://developer.citrixonline.com/sites/all/themes/citrix_responsive/logo.png'
+  x-origin:
+    format: swagger
+    url: 'https://developer.citrixonline.com/sites/default/files/citrix/citrix-apis/gotoassistseeit.json'
+    version: '2.0'
+  x-providerName: citrixonline.com
+  x-serviceName: gotoassistseeit
+paths:
+  /sessions:
+    post:
+      description: This endpoint allows you to create a GoToAssist Seeit session. The session logically exists but is not started until you open the returned startUrl in a suitable browser.
+      parameters:
+        - description: Access Token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+      responses:
+        '201':
+          description: The session has been created.
+          schema:
+            $ref: '#/definitions/Session'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      summary: Create a GoToAssist Seeit session
+      tags:
+        - Sessions
+  '/sessions/{uuid}':
+    get:
+      description: This endpoint allows you to get an _active_ GoToAssist Seeit session. A session is considered active from creation time until the session has been ended or timed out.
+      parameters:
+        - description: Access Token
+          in: header
+          name: Authorization
+          required: true
+          type: string
+        - description: the uuid returned when creating the session.
+          format: uuid
+          in: path
+          name: uuid
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Returns the information required to start a GoToAssist Seeit session.
+          schema:
+            $ref: '#/definitions/Session'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: There is no active session with the given uuid.
+      summary: Get a GoToAssist Seeit session
+      tags:
+        - Sessions
+produces:
+  - application/json
+schemes:
+  - https
+swagger: '2.0'

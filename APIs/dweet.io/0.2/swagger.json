@@ -1,358 +1,238 @@
-{
-  "basePath": "/",
-  "host": "dweet.io",
-  "info": {
-    "description": "Ridiculously simple messaging (and alerts) for the Internet of Things.",
-    "title": "dweet.io",
-    "version": "0.2",
-    "x-origin": {
-      "format": "swagger",
-      "url": "https://dweet.io/play/definition",
-      "version": "1.2"
-    },
-    "x-providerName": "dweet.io"
-  },
-  "paths": {
-    "/alert/{who}/when/{thing}/{condition}": {
-      "get": {
-        "operationId": "createAlertGET",
-        "parameters": [
-          {
-            "description": "A comma separated list of Email addresses to send the alert to.",
-            "in": "path",
-            "name": "who",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "A unique name of a thing. It is recommended that you use a GUID as to avoid name collisions.",
-            "in": "path",
-            "name": "thing",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "A condition that returns a string or a true value if a condition is met.",
-            "in": "path",
-            "name": "condition",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "A valid key for a locked thing. If the thing is not locked, this can be ignored.",
-            "in": "query",
-            "name": "key",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Create an alert for a thing. A thing must be locked before an alert can be set.",
-        "tags": [
-          "alerts"
-        ]
-      }
-    },
-    "/dweet/for/{thing}": {
-      "post": {
-        "operationId": "postDweet",
-        "parameters": [
-          {
-            "description": "A unique name of a thing. It is recommended that you use a GUID as to avoid name collisions.",
-            "in": "path",
-            "name": "thing",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "A valid key for a locked thing. If the thing is not locked, this can be ignored.",
-            "in": "query",
-            "name": "key",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "The actual content of the string. Can be any valid JSON string.",
-            "in": "body",
-            "name": "content",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Create a dweet for a thing.",
-        "tags": [
-          "dweets"
-        ]
-      }
-    },
-    "/get/alert/for/{thing}": {
-      "get": {
-        "operationId": "getAlert",
-        "parameters": [
-          {
-            "description": "A unique name of a thing.",
-            "in": "path",
-            "name": "thing",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "A valid key for a locked thing. If the thing is not locked, this can be ignored.",
-            "in": "query",
-            "name": "key",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Get the alert attached to a thing.",
-        "tags": [
-          "alerts"
-        ]
-      }
-    },
-    "/get/dweets/for/{thing}": {
-      "get": {
-        "operationId": "getAllDweets",
-        "parameters": [
-          {
-            "description": "A unique name of a thing.",
-            "in": "path",
-            "name": "thing",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "A valid key for a locked thing. If the thing is not locked, this can be ignored.",
-            "in": "query",
-            "name": "key",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Read all of the saved dweets (up to last 500) for a thing.",
-        "tags": [
-          "dweets"
-        ]
-      }
-    },
-    "/get/latest/dweet/for/{thing}": {
-      "get": {
-        "operationId": "getLatestDweet",
-        "parameters": [
-          {
-            "description": "A unique name of a thing.",
-            "in": "path",
-            "name": "thing",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "A valid key for a locked thing. If the thing is not locked, this can be ignored.",
-            "in": "query",
-            "name": "key",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Read the latest dweet for a thing.",
-        "tags": [
-          "dweets"
-        ]
-      }
-    },
-    "/listen/for/dweets/from/{thing}": {
-      "get": {
-        "description": "Sorry, this function uses HTTP chunked responses and cannot be tested here. Try something like: <pre>curl --raw https://dweet.io/listen/for/dweets/from/{thing}</pre>",
-        "operationId": "listenForDweets",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "thing",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Listen for dweets from a thing.",
-        "tags": [
-          "dweets"
-        ]
-      }
-    },
-    "/lock/{thing}": {
-      "get": {
-        "operationId": "lockThing",
-        "parameters": [
-          {
-            "description": "A unique name of a thing.",
-            "in": "path",
-            "name": "thing",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "A valid dweet.io lock.",
-            "in": "query",
-            "name": "lock",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "A valid dweet.io master key.",
-            "in": "query",
-            "name": "key",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Reserve and lock a thing.",
-        "tags": [
-          "locks"
-        ]
-      }
-    },
-    "/remove/alert/for/{thing}": {
-      "get": {
-        "operationId": "removeAlert",
-        "parameters": [
-          {
-            "description": "A unique name of a thing.",
-            "in": "path",
-            "name": "thing",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "A valid key for a locked thing. If the thing is not locked, this can be ignored.",
-            "in": "query",
-            "name": "key",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Remove an alert for a thing.",
-        "tags": [
-          "alerts"
-        ]
-      }
-    },
-    "/remove/lock/{lock}": {
-      "get": {
-        "operationId": "removeLock",
-        "parameters": [
-          {
-            "description": "A valid dweet.io lock.",
-            "in": "path",
-            "name": "lock",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "A valid dweet.io master key.",
-            "in": "query",
-            "name": "key",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Remove a lock from thing.",
-        "tags": [
-          "locks"
-        ]
-      }
-    },
-    "/unlock/{thing}": {
-      "get": {
-        "operationId": "unlockThing",
-        "parameters": [
-          {
-            "description": "A unique name of a thing.",
-            "in": "path",
-            "name": "thing",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "description": "A valid dweet.io master key.",
-            "in": "query",
-            "name": "key",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "No response was specified"
-          }
-        },
-        "summary": "Unlock a thing.",
-        "tags": [
-          "locks"
-        ]
-      }
-    }
-  },
-  "schemes": [
-    "https"
-  ],
-  "swagger": "2.0",
-  "tags": [
-    {
-      "description": "create or read dweets.",
-      "name": "dweets"
-    },
-    {
-      "description": "alerts for things.",
-      "name": "alerts"
-    },
-    {
-      "description": "lock and unlock things.",
-      "name": "locks"
-    }
-  ]
-}
+basePath: /
+host: dweet.io
+info:
+  description: Ridiculously simple messaging (and alerts) for the Internet of Things.
+  title: dweet.io
+  version: '0.2'
+  x-origin:
+    format: swagger
+    url: 'https://dweet.io/play/definition'
+    version: '1.2'
+  x-providerName: dweet.io
+paths:
+  '/alert/{who}/when/{thing}/{condition}':
+    get:
+      operationId: createAlertGET
+      parameters:
+        - description: A comma separated list of Email addresses to send the alert to.
+          in: path
+          name: who
+          required: true
+          type: string
+        - description: A unique name of a thing. It is recommended that you use a GUID as to avoid name collisions.
+          in: path
+          name: thing
+          required: true
+          type: string
+        - description: A condition that returns a string or a true value if a condition is met.
+          in: path
+          name: condition
+          required: true
+          type: string
+        - description: 'A valid key for a locked thing. If the thing is not locked, this can be ignored.'
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Create an alert for a thing. A thing must be locked before an alert can be set.
+      tags:
+        - alerts
+  '/dweet/for/{thing}':
+    post:
+      operationId: postDweet
+      parameters:
+        - description: A unique name of a thing. It is recommended that you use a GUID as to avoid name collisions.
+          in: path
+          name: thing
+          required: true
+          type: string
+        - description: 'A valid key for a locked thing. If the thing is not locked, this can be ignored.'
+          in: query
+          name: key
+          required: false
+          type: string
+        - description: The actual content of the string. Can be any valid JSON string.
+          in: body
+          name: content
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Create a dweet for a thing.
+      tags:
+        - dweets
+  '/get/alert/for/{thing}':
+    get:
+      operationId: getAlert
+      parameters:
+        - description: A unique name of a thing.
+          in: path
+          name: thing
+          required: true
+          type: string
+        - description: 'A valid key for a locked thing. If the thing is not locked, this can be ignored.'
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Get the alert attached to a thing.
+      tags:
+        - alerts
+  '/get/dweets/for/{thing}':
+    get:
+      operationId: getAllDweets
+      parameters:
+        - description: A unique name of a thing.
+          in: path
+          name: thing
+          required: true
+          type: string
+        - description: 'A valid key for a locked thing. If the thing is not locked, this can be ignored.'
+          in: query
+          name: key
+          required: false
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Read all of the saved dweets (up to last 500) for a thing.
+      tags:
+        - dweets
+  '/get/latest/dweet/for/{thing}':
+    get:
+      operationId: getLatestDweet
+      parameters:
+        - description: A unique name of a thing.
+          in: path
+          name: thing
+          required: true
+          type: string
+        - description: 'A valid key for a locked thing. If the thing is not locked, this can be ignored.'
+          in: query
+          name: key
+          required: false
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Read the latest dweet for a thing.
+      tags:
+        - dweets
+  '/listen/for/dweets/from/{thing}':
+    get:
+      description: 'Sorry, this function uses HTTP chunked responses and cannot be tested here. Try something like: <pre>curl --raw https://dweet.io/listen/for/dweets/from/{thing}</pre>'
+      operationId: listenForDweets
+      parameters:
+        - in: path
+          name: thing
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Listen for dweets from a thing.
+      tags:
+        - dweets
+  '/lock/{thing}':
+    get:
+      operationId: lockThing
+      parameters:
+        - description: A unique name of a thing.
+          in: path
+          name: thing
+          required: true
+          type: string
+        - description: A valid dweet.io lock.
+          in: query
+          name: lock
+          required: true
+          type: string
+        - description: A valid dweet.io master key.
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Reserve and lock a thing.
+      tags:
+        - locks
+  '/remove/alert/for/{thing}':
+    get:
+      operationId: removeAlert
+      parameters:
+        - description: A unique name of a thing.
+          in: path
+          name: thing
+          required: true
+          type: string
+        - description: 'A valid key for a locked thing. If the thing is not locked, this can be ignored.'
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Remove an alert for a thing.
+      tags:
+        - alerts
+  '/remove/lock/{lock}':
+    get:
+      operationId: removeLock
+      parameters:
+        - description: A valid dweet.io lock.
+          in: path
+          name: lock
+          required: true
+          type: string
+        - description: A valid dweet.io master key.
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Remove a lock from thing.
+      tags:
+        - locks
+  '/unlock/{thing}':
+    get:
+      operationId: unlockThing
+      parameters:
+        - description: A unique name of a thing.
+          in: path
+          name: thing
+          required: true
+          type: string
+        - description: A valid dweet.io master key.
+          in: query
+          name: key
+          required: true
+          type: string
+      responses:
+        '200':
+          description: No response was specified
+      summary: Unlock a thing.
+      tags:
+        - locks
+schemes:
+  - https
+swagger: '2.0'
+tags:
+  - description: create or read dweets.
+    name: dweets
+  - description: alerts for things.
+    name: alerts
+  - description: lock and unlock things.
+    name: locks
