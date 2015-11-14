@@ -118,7 +118,7 @@ paths:
           name: sort_by
           required: false
           type: string
-      produces: &ref_2
+      produces:
         - application/json
         - text/tab-separated-values
         - text/plain
@@ -126,7 +126,7 @@ paths:
         '200':
           description: No response was specified
       summary: Retrieve all data by genes Gistic2 results.
-      tags: &ref_3
+      tags:
         - Analyses
   /Analyses/CopyNumber/Genes/Amplified:
     get:
@@ -233,12 +233,16 @@ paths:
           name: sort_by
           required: false
           type: string
-      produces: *ref_2
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Retrieve Gistic2 significantly amplified genes results.
-      tags: *ref_3
+      tags:
+        - Analyses
   /Analyses/CopyNumber/Genes/Deleted:
     get:
       description: This service provides access to the Gistic2 del_genes.conf_99.txt output data.  At least 1 gene or cohort must be supplied.
@@ -344,12 +348,16 @@ paths:
           name: sort_by
           required: false
           type: string
-      produces: *ref_2
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Retrieve Gistic2 significantly deleted genes results.
-      tags: *ref_3
+      tags:
+        - Analyses
   /Analyses/CopyNumber/Genes/Focal:
     get:
       description: 'This service provides access to the Gistic2 focal_data_by_genes.txt output data. This output is similar to the all_data_by_genes.txt output, but using only focal events with lengths greater than the  focal length cutoff. This data is a gene-level table of copy number values for all samples. The returned copy number values are in units (copy number - 2) so that no amplification or deletion is 0, genes with amplifications have positive values, and genes with deletions are negative values. The data are converted from marker level to gene level using the extreme method: a gene is assigned the greatest amplification or the least deletion value among the markers it covers. Results may be filtered by cohort, gene, and/or barcode, but at least one gene or barcode must be supplied.'
@@ -456,12 +464,16 @@ paths:
           name: sort_by
           required: false
           type: string
-      produces: *ref_2
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Retrieve focal data by genes Gistic2 results.
-      tags: *ref_3
+      tags:
+        - Analyses
   /Analyses/CopyNumber/Genes/Thresholded:
     get:
       description: 'This service provides access to the Gistic2 all_thresholded_by_genes.txt output data. A gene-level table of discrete amplification and deletion indicators for all samples. A table value of 0 means no amplification or deletion above the threshold. Amplifications are positive numbers: 1 means amplification above the amplification threshold; 2 means amplifications larger to the arm level amplifications observed for the sample. Deletions are represented by negative table values: -1 represents deletion beyond the threshold; -2 means deletions greater than the minimum arm-level deletion observed for the sample. Results maybe filtered by cohort, gene or barcode, but at least one gene or barcode must be supplied.'
@@ -568,12 +580,16 @@ paths:
           name: sort_by
           required: false
           type: string
-      produces: *ref_2
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Retrieve all thresholded by genes Gistic2 results.
-      tags: *ref_3
+      tags:
+        - Analyses
   /Analyses/FeatureTable:
     get:
       description: "This service returns part or all of the so-called <strong>feature table</strong>; which aggregates the most important findings across ALL pipelines in the GDAC Firehose analysis workflow into a single table for simple access.  One feature table is created per disease cohort.  Results may be filtered by date or cohort, but at least 1 cohort must be specified here. For more details please visit the <a href=https://confluence.broadinstitute.org/display/GDAC/Documentation\\#Documentation-FeatureTable>online documentation</a>.  Please note that the service is still undergoing experimental evaluation and does not return JSON format."
@@ -673,12 +689,16 @@ paths:
           name: page_size
           required: false
           type: array
-      produces: *ref_2
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Retrieve aggregated analysis features table.
-      tags: *ref_3
+      tags:
+        - Analyses
   /Analyses/Mutation/MAF:
     get:
       description: 'This service returns selected columns from the MAF generated by MutSig. Results may be filtered by gene, cohort, tool, or barcode, but at least one gene OR barcode OR cohort must be given.'
@@ -806,12 +826,16 @@ paths:
           name: sort_by
           required: false
           type: string
-      produces: *ref_2
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Retrieve MutSig final analysis MAF.
-      tags: *ref_3
+      tags:
+        - Analyses
   /Analyses/Mutation/SMG:
     get:
       description: 'This service provides a list of significantly mutated genes, as scored by MutSig.  It may be filtered by cohort, rank, gene, tool and/or Q-value threshold, but at least one cohort must be supplied.'
@@ -938,12 +962,16 @@ paths:
           name: sort_by
           required: false
           type: string
-      produces: *ref_2
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Retrieve Significantly Mutated Genes (SMG).
-      tags: *ref_3
+      tags:
+        - Analyses
   /Analyses/Reports:
     get:
       description: 'This service returns URLs to the analysis result reports for runs of the Broad Institute GDAC Firehose analysis pipeline. At least one year of run reports are maintained in the database, but the reports from the latest run will be returned by default. The set of <a href="https://confluence.broadinstitute.org/display/GDAC/Nozzle">Nozzle</a> reports returned may be filtered by disease cohort, report type and report name.'
@@ -1140,12 +1168,16 @@ paths:
           name: sort_by
           required: false
           type: string
-      produces: *ref_2
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Retrieve links to summary reports from Firehose analysis runs.
-      tags: *ref_3
+      tags:
+        - Analyses
   /Analyses/mRNASeq/Quartiles:
     get:
       description: 'For a given gene compute quartiles and extrema, suitable e.g. for drawing a boxplot (Tukey 1977).  Results may be filtered by cohort, sample type, patient barcode  or characterization protocol, and are returned sorted by cohort.  Note that samples for which no expression value was recorded (e.g. <a href="http://firebrowse.org/api/v1/Samples/mRNASeq?&gene=egfr&cohort=SKCM&tcga_participant_barcode=TCGA-GN-A262">the melanoma sample TCGA-GN-262</a>) are removed prior to calculation.'
@@ -1256,12 +1288,16 @@ paths:
           name: Exclude
           required: false
           type: array
-      produces: *ref_2
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: 'Returns RNASeq expression quartiles, e.g. suitable for drawing a boxplot.'
-      tags: *ref_3
+      tags:
+        - Analyses
   /Archives/StandardData:
     get:
       description: 'This service returns the archive URLs for our Firehose standard data runs, providing a RESTful interface similar in spirit to the command line <a href="https://confluence.broadinstitute.org/display/GDAC/Download">firehose_get</a> tool. The archives can be filtered based on date, cohort, data type, platform, center, data level, and protocol.'
@@ -1703,7 +1739,7 @@ paths:
           name: center
           required: false
           type: array
-      produces: &ref_4
+      produces:
         - application/json
         - text/tab-separated-values
         - text/plain
@@ -1711,7 +1747,7 @@ paths:
         '200':
           description: No response was specified
       summary: Obtain identities of TCGA consortium member centers.
-      tags: &ref_5
+      tags:
         - Metadata
   /Metadata/ClinicalNames:
     get:
@@ -1728,12 +1764,16 @@ paths:
           name: format
           required: false
           type: string
-      produces: *ref_4
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Retrieve names of all TCGA clinical data elements (CDEs).
-      tags: *ref_5
+      tags:
+        - Metadata
   /Metadata/ClinicalNames_FH:
     get:
       description: 'This service returns the names of patient-level clinical data elements (CDEs) that have been normalized by Firehose for use in analyses, unioned across all disease cohorts. For more information on how these CDEs are processed, see our <a href="https://confluence.broadinstitute.org/display/GDAC/Documentation">pipeline documentation</a>.'
@@ -1749,12 +1789,16 @@ paths:
           name: format
           required: false
           type: string
-      produces: *ref_4
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Retrieve names of CDEs normalized by Firehose and selected for analyses.
-      tags: *ref_5
+      tags:
+        - Metadata
   '/Metadata/Cohort/{cohort}':
     get:
       operationId: Cohort
@@ -1815,12 +1859,16 @@ paths:
           name: cohort
           required: true
           type: array
-      produces: *ref_4
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Retrieve formal disease name(s) for cohort abbreviation(s).
-      tags: *ref_5
+      tags:
+        - Metadata
   /Metadata/Cohorts:
     get:
       description: By default this function returns a table containing all TCGA cohort abbreviations and their corresponding disease names.  A subset of that table may be obtained by explicitly specifying one or more cohort abbreviations.
@@ -1882,12 +1930,16 @@ paths:
           name: cohort
           required: false
           type: array
-      produces: *ref_4
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Translate TCGA cohort abbreviations to full disease names.
-      tags: *ref_5
+      tags:
+        - Metadata
   /Metadata/Counts:
     get:
       description: |-
@@ -2020,12 +2072,16 @@ paths:
           name: totals
           required: false
           type: boolean
-      produces: *ref_4
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Retrieve sample counts.
-      tags: *ref_5
+      tags:
+        - Metadata
   /Metadata/Dates:
     get:
       operationId: Dates
@@ -2040,12 +2096,16 @@ paths:
           name: format
           required: false
           type: string
-      produces: *ref_4
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Retrieve datestamps of all GDAC Firehose standard data and analyses runs that have been ingested into FireBrowse.
-      tags: *ref_5
+      tags:
+        - Metadata
   /Metadata/HeartBeat:
     get:
       description: 'Returns a message to indicate that API (server) is up and running, or times out if not.'
@@ -2061,12 +2121,16 @@ paths:
           name: format
           required: false
           type: string
-      produces: *ref_4
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Simple way to discern whether API server is up and running
-      tags: *ref_5
+      tags:
+        - Metadata
   /Metadata/Patients:
     get:
       description: 'This service returns a list of all TCGA patient barcodes in FireBrowse, optionally filtered by disease cohort.  The barcodes are obtained directy from the clinical data.'
@@ -2157,12 +2221,16 @@ paths:
           name: sort_by
           required: false
           type: string
-      produces: *ref_4
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Retrieve list of all TCGA patients.
-      tags: *ref_5
+      tags:
+        - Metadata
   /Metadata/Platforms:
     get:
       description: By default this function returns a table of all of the technology platforms used to sequence or characterize samples in TCGA--both their short platform codes and full names.  A subset of this table may be obtained by explicitly specifying one or more platform codes.
@@ -2264,12 +2332,16 @@ paths:
           name: platform
           required: false
           type: array
-      produces: *ref_4
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Translate TCGA platform codes to full platform names.
-      tags: *ref_5
+      tags:
+        - Metadata
   '/Metadata/SampleType/Barcode/{TCGA_Barcode}':
     get:
       operationId: Barcode
@@ -2289,12 +2361,16 @@ paths:
           name: TCGA_Barcode
           required: true
           type: string
-      produces: *ref_4
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: 'Given a TCGA barcode, return its short letter sample type code.'
-      tags: *ref_5
+      tags:
+        - Metadata
   '/Metadata/SampleType/Code/{code}':
     get:
       description: 'Convert a TCGA numeric sample type code (e.g. 01, 02) to its corresponding symbolic (short letter) code (e.g. TP, TR).'
@@ -2337,12 +2413,16 @@ paths:
           name: code
           required: true
           type: array
-      produces: *ref_4
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Translate from numeric to symbolic TCGA sample codes.
-      tags: *ref_5
+      tags:
+        - Metadata
   '/Metadata/SampleType/ShortLetterCode/{short_letter_code}':
     get:
       description: "Convert a TCGA sample type code in symbolic form (or 'short letter code' like TP, TR) to its corresponding numeric form (e.g. 01, 02)."
@@ -2385,12 +2465,16 @@ paths:
           name: short_letter_code
           required: true
           type: array
-      produces: *ref_4
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Translate from symbolic to numeric TCGA sample codes.
-      tags: *ref_5
+      tags:
+        - Metadata
   /Metadata/SampleTypes:
     get:
       operationId: SampleTypes
@@ -2405,12 +2489,16 @@ paths:
           name: format
           required: false
           type: string
-      produces: *ref_4
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: 'Return all TCGA sample type codes, both numeric and symbolic.'
-      tags: *ref_5
+      tags:
+        - Metadata
   /Samples/Clinical:
     get:
       description: 'This service returns patient clinical data from TCGA, verbatim. It differs from the Samples/Clinical_FH method by providing access to all TCGA CDEs in their original form, not merely the subset of CDEs normalized by Firehose for analyses.  Results may be selected by disease cohort, patient barcode or CDE name, but at least one cohort, barcode, or CDE must be provided. When filtering by CDE note that only when a patient record contains one or more of the selected CDEs will it be returned. Visit the Metadata/ClinicalNames api function to see the entire list of TCGA CDEs that may be queried via this method. For more information on how clinical data are processed, see our <a href="https://confluence.broadinstitute.org/display/GDAC/Documentation#Documentation-ClinicalPipeline">pipeline documentation</a>.'
@@ -2517,7 +2605,7 @@ paths:
           name: sort_by
           required: false
           type: string
-      produces: &ref_0
+      produces:
         - application/json
         - text/tab-separated-values
         - text/plain
@@ -2525,7 +2613,7 @@ paths:
         '200':
           description: No response was specified
       summary: 'Retrieve TCGA CDEs verbatim, i.e. not normalized by Firehose.'
-      tags: &ref_1
+      tags:
         - Samples
   /Samples/Clinical_FH:
     get:
@@ -2698,12 +2786,16 @@ paths:
           name: sort_by
           required: false
           type: string
-      produces: *ref_0
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Retrieve CDEs normalized by Firehose and selected for analyses.
-      tags: *ref_1
+      tags:
+        - Samples
   /Samples/mRNASeq:
     get:
       description: 'This service returns sample-level log2 mRNASeq expression values. Results may be filtered by gene, cohort, barcode, sample type or characterization protocol, but at least one gene OR barcode must be supplied.'
@@ -2841,12 +2933,16 @@ paths:
           name: sort_by
           required: false
           type: string
-      produces: *ref_0
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Retrieve mRNASeq data.
-      tags: *ref_1
+      tags:
+        - Samples
   /Samples/miRSeq:
     get:
       description: 'This service returns sample-level log2 miRSeq expression values. Results may be filtered by miR, cohort, barcode, sample type or Firehose preprocessing tool, but at least one miR OR barcode must be supplied.'
@@ -2984,12 +3080,16 @@ paths:
           name: sort_by
           required: false
           type: string
-      produces: *ref_0
+      produces:
+        - application/json
+        - text/tab-separated-values
+        - text/plain
       responses:
         '200':
           description: No response was specified
       summary: Retrieve miRSeq data.
-      tags: *ref_1
+      tags:
+        - Samples
 schemes:
   - http
 swagger: '2.0'

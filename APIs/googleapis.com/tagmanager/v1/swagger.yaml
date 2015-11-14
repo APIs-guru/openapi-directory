@@ -1823,6 +1823,11 @@ paths:
           in: query
           name: headers
           type: boolean
+        - default: false
+          description: Also retrieve deleted (archived) versions when true.
+          in: query
+          name: includeDeleted
+          type: boolean
       responses:
         '200':
           description: Successful response

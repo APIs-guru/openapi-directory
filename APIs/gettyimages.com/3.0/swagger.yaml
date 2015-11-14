@@ -2357,6 +2357,7 @@ paths:
           type: string
         - description: "Specifies fields to return. Defaults to 'summary_set'."
           enum:
+            - accessrestriction
             - allowed_use
             - alternative_ids
             - artist
@@ -2394,6 +2395,7 @@ paths:
           in: query
           items:
             enum:
+              - accessrestriction
               - allowed_use
               - alternative_ids
               - artist
@@ -2889,6 +2891,7 @@ paths:
           type: boolean
         - description: "Specifies fields to return. Defaults to 'summary_set'."
           enum:
+            - accessrestriction
             - allowed_use
             - alternative_ids
             - artist
@@ -2926,6 +2929,7 @@ paths:
           in: query
           items:
             enum:
+              - accessrestriction
               - allowed_use
               - alternative_ids
               - artist

@@ -1,0 +1,42 @@
+paths:
+  '/handpicked/{slug}':
+    get:
+      parameters:
+        '12':
+          type:
+            - object
+            - string
+        _t: a
+  /listings:
+    get:
+      parameters:
+        '11':
+          type:
+            - object
+            - string
+        _t: a
+  /listings/all:
+    get:
+      parameters:
+        '11':
+          type:
+            - object
+            - string
+        _t: a
+  /my/follows/search:
+    post:
+      parameters:
+        '0':
+          schema:
+            properties:
+              make:
+                $ref:
+                  - '#/definitions/[String]'
+                  - 0
+                  - 0
+                items:
+                  - type: string
+                type:
+                  - object
+                  - array
+        _t: a

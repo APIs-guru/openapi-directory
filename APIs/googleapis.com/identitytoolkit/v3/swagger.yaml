@@ -245,28 +245,6 @@ definitions:
         format: int64
         type: string
     type: object
-  IdentitytoolkitRelyingpartySetProjectConfigRequest:
-    description: Request to set the project configuration.
-    properties:
-      allowPasswordUser:
-        description: Whether to allow password user sign in or sign up.
-        type: boolean
-      apiKey:
-        description: 'Browser API key, needed when making http request to Apiary.'
-        type: string
-      idpConfig:
-        description: Oauth2 provider configuration.
-        items:
-          $ref: '#/definitions/IdpConfig'
-        type: array
-    type: object
-  IdentitytoolkitRelyingpartySetProjectConfigResponse:
-    description: Response of setting the project configuration.
-    properties:
-      projectId:
-        description: Project ID of the relying party.
-        type: string
-    type: object
   IdentitytoolkitRelyingpartyUploadAccountRequest:
     description: Request to upload user account in batch.
     properties:
@@ -348,9 +326,6 @@ definitions:
         type: integer
       provider:
         description: OAuth2 provider.
-        type: string
-      secret:
-        description: OAuth2 client secret.
         type: string
     type: object
   Relyingparty:
@@ -931,30 +906,6 @@ paths:
           description: Successful response
           schema:
             $ref: '#/definitions/SetAccountInfoResponse'
-      tags:
-        - relyingparty
-  /setProjectConfig:
-    parameters:
-      - $ref: '#/parameters/alt'
-      - $ref: '#/parameters/fields'
-      - $ref: '#/parameters/key'
-      - $ref: '#/parameters/oauth_token'
-      - $ref: '#/parameters/prettyPrint'
-      - $ref: '#/parameters/quotaUser'
-      - $ref: '#/parameters/userIp'
-    post:
-      description: Set project configuration.
-      operationId: identitytoolkit.relyingparty.setProjectConfig
-      parameters:
-        - in: body
-          name: body
-          schema:
-            $ref: '#/definitions/IdentitytoolkitRelyingpartySetProjectConfigRequest'
-      responses:
-        '200':
-          description: Successful response
-          schema:
-            $ref: '#/definitions/IdentitytoolkitRelyingpartySetProjectConfigResponse'
       tags:
         - relyingparty
   /uploadAccount:

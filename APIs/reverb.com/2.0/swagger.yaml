@@ -43,6 +43,9 @@ paths:
               last_name:
                 description: Last Name
                 type: string
+              newsletter_opt_in:
+                description: Subscribe to gear deals by email
+                type: boolean
               password:
                 description: Password (at least 8 characters).
                 type: string
@@ -233,6 +236,34 @@ paths:
       summary: Collection details
       tags:
         - collections
+  /comparison_shopping:
+    get:
+      description: Find comparison shopping pages
+      parameters:
+        - description: Search string to find comparison shopping pages
+          in: query
+          name: query
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Find comparison shopping pages
+      tags:
+        - comparison_shopping
+  '/comparison_shopping/{slug}':
+    get:
+      description: Show comparison shopping page
+      parameters:
+        - in: path
+          name: slug
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Show comparison shopping page
+      tags:
+        - comparison_shopping
   '/conversations/{id}/offer':
     post:
       description: Make an offer to the other participant in the conversation
@@ -331,7 +362,7 @@ paths:
           in: query
           name: item_state
           type: string
-        - description: Make/brand of item (e.g. Fender)
+        - description: Make(s)/brand of item (e.g. Fender). Can take a single value or an array.
           in: query
           name: make
           type: string
@@ -456,7 +487,7 @@ paths:
           in: query
           name: item_state
           type: string
-        - description: Make/brand of item (e.g. Fender)
+        - description: Make(s)/brand of item (e.g. Fender). Can take a single value or an array.
           in: query
           name: make
           type: string
@@ -606,7 +637,7 @@ paths:
                     description: True if you offer local pickup
                     type: boolean
                   rates:
-                    description: List of shipping rates
+                    description: List of shipping rates. Set to null to clear rates.
                     items:
                       properties:
                         rate:
@@ -620,13 +651,13 @@ paths:
                           type: string
                       type: object
                     type: array
-                  us:
-                    description: True if the product ships within the US. International sellers are required to ship to US at this time.
-                    type: boolean
-                  us_rate:
-                    description: Shipping rate to ship within the US in USD
-                    type: string
                 type: object
+              shipping_profile_id:
+                description: "id of a shop's shipping profile"
+                type: string
+              shipping_profile_name:
+                description: Name of a shipping profile
+                type: string
               sku:
                 description: Unique identifier for product
                 type: string
@@ -645,7 +676,7 @@ paths:
           description: Unexpected error
       security:
         - oauth2:
-            - write
+            - update_listings
       summary: Create a listing
       tags:
         - listings
@@ -698,7 +729,7 @@ paths:
           in: query
           name: item_state
           type: string
-        - description: Make/brand of item (e.g. Fender)
+        - description: Make(s)/brand of item (e.g. Fender). Can take a single value or an array.
           in: query
           name: make
           type: string
@@ -934,7 +965,7 @@ paths:
                     description: True if you offer local pickup
                     type: boolean
                   rates:
-                    description: List of shipping rates
+                    description: List of shipping rates. Set to null to clear rates.
                     items:
                       properties:
                         rate:
@@ -948,13 +979,13 @@ paths:
                           type: string
                       type: object
                     type: array
-                  us:
-                    description: True if the product ships within the US. International sellers are required to ship to US at this time.
-                    type: boolean
-                  us_rate:
-                    description: Shipping rate to ship within the US in USD
-                    type: string
                 type: object
+              shipping_profile_id:
+                description: "id of a shop's shipping profile"
+                type: string
+              shipping_profile_name:
+                description: Name of a shipping profile
+                type: string
               sku:
                 description: Unique identifier for product
                 type: string
@@ -971,6 +1002,9 @@ paths:
       responses:
         default:
           description: Unexpected error
+      security:
+        - oauth2:
+            - update_listings
       summary: Update a listing
       tags:
         - listings
@@ -1454,8 +1488,10 @@ paths:
                 description: Type of listing
                 type: string
               make:
-                description: Make/brand of item (e.g. Fender)
-                type: string
+                description: Make(s)/brand of item (e.g. Fender). Can take a single value or an array.
+                items:
+                  type: string
+                type: array
               model:
                 description: Model of item (e.g. Stratocaster)
                 type: string
@@ -2007,6 +2043,20 @@ paths:
       summary: Get payments
       tags:
         - my
+  '/my/payments/selling/{id}':
+    get:
+      description: Get payment
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get payment
+      tags:
+        - my
   /my/viewed_listings:
     get:
       description: Get a list of your recently viewed listings.
@@ -2142,6 +2192,56 @@ paths:
       summary: Search the Price Guide
       tags:
         - priceguide
+  '/priceguide/{id}':
+    get:
+      description: Retrieve a Price Guide
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Retrieve a Price Guide
+      tags:
+        - priceguide
+  '/priceguide/{id}/transactions':
+    get:
+      description: Get a list of paginated transactions for a price guide.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get a list of paginated transactions for a price guide.
+      tags:
+        - priceguide
+  '/priceguide/{id}/transactions/summary':
+    get:
+      description: Get a summary of transactions for a given price guide
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+        - default: 3
+          in: query
+          name: number_of_months
+          type: integer
+        - default: used
+          in: query
+          name: condition
+          type: string
+      responses:
+        default:
+          description: Unexpected error
+      summary: Get a summary of transactions for a given price guide
+      tags:
+        - priceguide
   /shipping/providers:
     get:
       description: List of supported shipping providers
@@ -2209,26 +2309,6 @@ paths:
         default:
           description: Unexpected error
       summary: Update your shop profile
-      tags:
-        - shop
-  /shop/billing/card/braintree:
-    post:
-      description: Create a credit card to be used for billing
-      parameters:
-        - description: the content of the request
-          in: body
-          name: body
-          schema:
-            properties:
-              braintree_payment_method_nonce:
-                type: string
-            required:
-              - braintree_payment_method_nonce
-            type: object
-      responses:
-        default:
-          description: Unexpected error
-      summary: Create a credit card to be used for billing
       tags:
         - shop
   /shop/payment_methods:
@@ -2512,6 +2592,7 @@ securityDefinitions:
     authorizationUrl: 'https://reverb.com/oauth/authorize'
     flow: accessCode
     scopes:
+      update_listings: ''
       write: ''
     tokenUrl: 'https://reverb.com/oauth/token'
     type: oauth2

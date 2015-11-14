@@ -537,6 +537,11 @@ paths:
           name: upload_hash
           required: true
           type: string
+        - description: "Filtering options to be used when creating a filtered report. The options must be in JSON form, example: {'gender':['male'],'ages':['18-24'],'countries':['usa']}"
+          in: query
+          name: filter
+          required: false
+          type: string
       responses:
         '201':
           description: Success
@@ -575,6 +580,11 @@ paths:
           in: query
           name: upload_hash
           required: true
+          type: string
+        - description: "Filtering options to be used when creating a filtered report. The options must be in JSON form, example: {'gender':['male'],'ages':['18-24'],'countries':['usa']}"
+          in: query
+          name: filter
+          required: false
           type: string
       responses:
         '201':
@@ -935,6 +945,11 @@ paths:
           name: terms
           required: true
           type: string
+        - description: "Filtering options to be used when creating a filtered report. The options must be in JSON form, example: {'gender':['male'],'ages':['18-24'],'countries':['usa']}"
+          in: query
+          name: filter
+          required: false
+          type: string
       responses:
         '201':
           description: Success
@@ -985,6 +1000,11 @@ paths:
           name: terms
           required: true
           type: string
+        - description: "Filtering options to be used when creating a filtered report. The options must be in JSON form, example: {'gender':['male'],'ages':['18-24'],'countries':['usa']}"
+          in: query
+          name: filter
+          required: false
+          type: string
       responses:
         '201':
           description: Success
@@ -1026,6 +1046,11 @@ paths:
           name: twitter_handle
           required: false
           type: string
+        - description: "Filtering options to be used when creating a filtered report. The options must be in JSON form, example: {'gender':['male'],'ages':['18-24'],'countries':['usa']}"
+          in: query
+          name: filter
+          required: false
+          type: string
       responses:
         '201':
           description: Success
@@ -1064,6 +1089,11 @@ paths:
         - description: (required if twitter_id is not supplied) twitter_handle must be sent with all client requests. Multiple ids are separated by commas.
           in: query
           name: twitter_handle
+          required: false
+          type: string
+        - description: "Filtering options to be used when creating a filtered report. The options must be in JSON form, example: {'gender':['male'],'ages':['18-24'],'countries':['usa']}"
+          in: query
+          name: filter
           required: false
           type: string
       responses:

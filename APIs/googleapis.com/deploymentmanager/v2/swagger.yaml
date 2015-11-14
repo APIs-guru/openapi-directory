@@ -212,13 +212,13 @@ definitions:
         type: string
       kind:
         default: 'deploymentmanager#operation'
-        description: '[Output Only] Type of the resource. Always compute#Operation for Operation resources.'
+        description: '[Output Only] Type of the resource. Always compute#operation for Operation resources.'
         type: string
       name:
         description: '[Output Only] Name of the resource.'
         type: string
       operationType:
-        description: '[Output Only] Type of the operation, such as insert, update, and delete.'
+        description: '[Output Only] Type of the operation, such as insert, compute.instanceGroups.update, or compute.instanceGroups.delete.'
         type: string
       progress:
         description: '[Output Only] An optional progress indicator that ranges from 0 to 100. There is no requirement that this be linear or support any granularity of operations. This should not be used to guess at when the operation will be complete. This number should monotonically increase as the operation progresses.'
