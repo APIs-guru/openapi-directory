@@ -685,6 +685,9 @@ function errorToString(errors, context) {
 }
 
 function Yaml2String(data) {
+  //FIXME: remove
+  data = JSON.parse(JSON.stringify(data));
+
   return YAML.safeDump(data, {sortKeys: true, indent: 2});
 }
 
