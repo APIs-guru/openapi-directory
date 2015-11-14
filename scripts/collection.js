@@ -393,7 +393,7 @@ function addToCollection(type, url, command) {
         return;
       }
 
-      var match = data.match(/\?+ Swagger.*$((?:.|\n)*?^}$)/m);
+      var match = data.match(/\?+ Swagger.*$((?:.|\n)*?)^[!*-]/m);
       if (!match || !match[1]) {
         console.error('Can not match edited Swagger');
         process.exitCode = errExitCode;
