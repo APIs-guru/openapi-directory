@@ -307,6 +307,14 @@ definitions:
         description: The Spotify URI for the user.
         type: string
     type: object
+  featured-playlists:
+    properties:
+      message:
+        description: A sentence describing the context for the featured playlists.
+        type: string
+      playlists:
+        $ref: '#/definitions/playlist-simple-page'
+    type: object
   followers:
     description: Information about the followers of the artist.
     properties:
@@ -1258,7 +1266,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/playlist-simple-page'
+            $ref: '#/definitions/featured-playlists'
         '429':
           description: >
             API rate limit exceeded. See
