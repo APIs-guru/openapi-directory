@@ -13,6 +13,7 @@ Values have following are objects with following attributes:
     - `added` - Timestamp when this version was added
     - `info` - Copy of `info` section from Swagger spec
     - `swaggerUrl` - URL of Swagger spec
+    - `swaggerYamlUrl` - URL of Swagger spec in YAML format
     - `updated` - Timestamp when this version was updated
  
 For example:
@@ -29,6 +30,7 @@ For example:
           ...
         },
         "swaggerUrl": "https://apis-guru.github.io/api-models/googleapis.com/drive/v1/swagger.json",
+        "swaggerYamlUrl": "https://apis-guru.github.io/api-models/googleapis.com/drive/v1/swagger.yaml",
         "updated": "2015-08-28T20:44:24.000Z"
       },
       "v2": {
