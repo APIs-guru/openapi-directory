@@ -322,7 +322,7 @@ function generateAPIsJSON(specRootUrl) {
       version: info.version,
       properties: [{
         type: 'Swagger',
-        url: specRootUrl + getSwaggerPath(swagger)
+        url: specRootUrl + getSwaggerPath(swagger, 'swagger.json')
       }]
     });
   });
