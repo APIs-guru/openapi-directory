@@ -559,6 +559,9 @@ function fixSpec(swagger, errors) {
     var newValue;
 
     switch(error.code) {
+      case 'EQUIVALENT_PATH':
+        swagger['x-hasEquivalentPaths'] = true;
+        break;
       case 'MISSING_PATH_PARAMETER_DEFINITION':
         var field = error.message.match(/: (.+)$/)[1];
         newValue = _.clone(value);
@@ -699,7 +702,17 @@ function validateSwagger(swagger, callback) {
   //TODO: remove 'getSpec', instead do it when reading file.
   converter.getSpec(swagger, 'swagger_2', function (err, spec) {
     assert(!err, err);
-    spec.validate(callback);
+    spec.validate(function (errors, warnings) {
+      if (errors && swagger['x-hasEquivalentPaths']) {
+        _.remove(errors, function (error) {
+          return (error.code === 'EQUIVALENT_PATH');
+        });
+        if (_.isEmpty(errors))
+          errors = null;
+      }
+
+      callback(errors, warnings);
+    });
   });
 }
 
