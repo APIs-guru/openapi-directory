@@ -141,6 +141,118 @@ definitions:
           type: string
         type: array
     type: object
+  Block:
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources.
+        type: object
+      code:
+        description: Block code
+        type: string
+      count:
+        description: Total number of room night counts across all room types
+        format: int32
+        type: integer
+      first_arrival:
+        description: (Earliest) Arrival date of the block
+        format: date-time
+        type: string
+      group:
+        $ref: '#/definitions/GroupMaster'
+        description: "Block's group master details"
+      hotel:
+        $ref: '#/definitions/HotelSummary'
+        description: "Block's hotel details"
+      last_departure:
+        description: (Latest) Departure date of the block
+        format: date-time
+        type: string
+      name:
+        description: Block name
+        type: string
+      rate_plans:
+        description: Block rate plan
+        items:
+          $ref: '#/definitions/RatePlan'
+        type: array
+      status:
+        description: Block status
+        enum:
+          - NotSet
+          - Cancelled
+          - Tentative
+          - Definite
+        type: string
+    type: object
+  BlockResponse:
+    properties:
+      code:
+        description: Block code
+        type: string
+      count:
+        description: Total number of room night counts across all room types
+        format: int32
+        type: integer
+      first_arrival:
+        description: (Earliest) Arrival date of the block
+        format: date-time
+        type: string
+      group:
+        $ref: '#/definitions/GroupMaster'
+        description: "Block's group master details"
+      hotel:
+        $ref: '#/definitions/HotelSummary'
+        description: "Block's hotel details"
+      last_departure:
+        description: (Latest) Departure date of the block
+        format: date-time
+        type: string
+      name:
+        description: Block name
+        type: string
+      rate_plans:
+        description: Block rate plan
+        items:
+          $ref: '#/definitions/RatePlan'
+        type: array
+      room_type_counts:
+        description: Block room types and their respective room-night counts.
+        items:
+          $ref: '#/definitions/RoomTypeCount'
+        type: array
+      status:
+        description: Block status
+        enum:
+          - NotSet
+          - Cancelled
+          - Tentative
+          - Definite
+        type: string
+    type: object
+  BlockRoomType:
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources.
+        type: object
+      code:
+        description: Room type code
+        type: string
+      name:
+        description: Room type name
+        type: string
+    type: object
+  BlocksResponse:
+    properties:
+      blocks:
+        description: List of blocks
+        items:
+          $ref: '#/definitions/Block'
+        type: array
+    type: object
   CancellationPolicy:
     properties:
       description:
@@ -304,6 +416,15 @@ definitions:
         description: Name of the general policy
         type: string
     type: object
+  GroupMaster:
+    properties:
+      code:
+        description: Room type code
+        type: string
+      name:
+        description: Room type name
+        type: string
+    type: object
   Guarantee:
     properties:
       credit_card:
@@ -376,6 +497,23 @@ definitions:
         type: string
       title:
         description: Title of the guest. Needs to be taken from the available titles defined in the codes
+        type: string
+    type: object
+  HotelSummary:
+    properties:
+      _links:
+        additionalProperties:
+          $ref: '#/definitions/LinkObject'
+        description: Collection of links to related resources.
+        type: object
+      code:
+        description: Hotel code
+        type: string
+      id:
+        description: Hotel Identity
+        type: string
+      name:
+        description: Hotel name
         type: string
     type: object
   JsonPatchOperationRequest:
@@ -849,6 +987,17 @@ definitions:
         format: int32
         type: integer
     type: object
+  RoomNightCount:
+    properties:
+      count:
+        description: Number of rooms defined on the block
+        format: int32
+        type: integer
+      date:
+        description: Date to which the count applies
+        format: date-time
+        type: string
+    type: object
   RoomOffer:
     properties:
       offers:
@@ -859,6 +1008,17 @@ definitions:
       room_type:
         description: The room type all offers will be valid for
         type: string
+    type: object
+  RoomTypeCount:
+    properties:
+      counts:
+        description: 'Room type counts {Hetras.PublicApi.Models.Booking.Blocks.RoomNightCount}'
+        items:
+          $ref: '#/definitions/RoomNightCount'
+        type: array
+      room_type:
+        $ref: '#/definitions/BlockRoomType'
+        description: Room type name
     type: object
   Service:
     properties:
@@ -1255,6 +1415,11 @@ paths:
         - description: Only return offers for the specified room type code.
           in: query
           name: ratePlanCode
+          required: false
+          type: string
+        - description: Only return offers for the specified group code.
+          in: query
+          name: groupCode
           required: false
           type: string
       produces:
