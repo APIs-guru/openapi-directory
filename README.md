@@ -42,4 +42,9 @@ https://apis-guru.github.io/api-models/apis.json
 Existing integrations:
  - https://any-api.com - Documentation and Test Consoles for Public APIs
  - https://sdks.io/ - Explore Automatically Generated SDKs
+
+Also used as test suite in following projects:
+ - [swagger-parser](https://github.com/BigstickCarpet/swagger-parser) - Swagger 2.0 parser and validator for Node and browsers
+ - [SwaggerProvider](https://github.com/sergey-tihon/SwaggerProvider)
+
 [logo]: https://apis-guru.github.io/api-models/branding/logo_horizontal.svg "APIs.guru"
