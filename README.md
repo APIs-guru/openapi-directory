@@ -35,8 +35,9 @@ If you have an API spec in any format (Swagger, RAML, WADL, ...) for any public 
 
 Integration with 3rd-party services
 --------------------------
-You can use our [REST API](API.md).<BR>
-Also we provide our collection in [APIs.json](http://apisjson.org/) format:<BR>
+We discourage you from using Github RAW links or Git directly, repository structure isn't stable and could be changed in future.
+Instead, we strongly recomend you to use our [REST API](API.md).<BR>
+In case if you really need it, we also support [APIs.json](http://apisjson.org/) format:<BR>
 https://apis-guru.github.io/api-models/apis.json
 
 Existing integrations:
