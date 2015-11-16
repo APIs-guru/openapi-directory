@@ -1,0 +1,422 @@
+basePath: /api/1/vrp
+definitions:
+  Activity:
+    properties:
+      arr_time:
+        description: arrival time at this activity in ms
+        format: int64
+        type: integer
+      end_time:
+        description: end time of and thus departure time at this activity
+        format: int64
+        type: integer
+      id:
+        description: 'id referring to the underlying service or shipment, i.e. the shipment or service this activity belongs to'
+        type: string
+      location_id:
+        description: id that refers to address
+        type: string
+      type:
+        description: type of activity
+        enum:
+          - start
+          - end
+          - service
+          - pickupShipment
+          - deliverShipment
+        type: string
+  Address:
+    properties:
+      lat:
+        description: latitude
+        format: double
+        type: number
+      location_id:
+        description: Unique identifier of location
+        type: string
+      lon:
+        description: longitude
+        format: double
+        type: number
+    type: object
+  Algorithm:
+    properties:
+      objective:
+        enum:
+          - transport_time
+          - completion_time
+        type: string
+      problem_type:
+        enum:
+          - min
+          - min-max
+        type: string
+    type: object
+  Break:
+    properties:
+      duration:
+        description: duration of break
+        format: int64
+        type: integer
+      earliest:
+        description: earliest start of break
+        format: int64
+        type: integer
+      latest:
+        description: latest start of break
+        format: int64
+        type: integer
+    type: object
+  JobId:
+    properties:
+      job_id:
+        description: unique id for your job/request with which you can fetch your solution
+        type: string
+  Relation:
+    properties:
+      ids:
+        description: An array of ids that should be related
+        items:
+          description: id of services or special ids of shipments
+          type: string
+        type: array
+      type:
+        description: identifier of relation
+        type: string
+      vehicle_id:
+        description: vehicle id
+        type: string
+    type: object
+  Request:
+    properties:
+      algorithm:
+        $ref: '#/definitions/Algorithm'
+      relations:
+        description: An array of relations
+        items:
+          $ref: '#/definitions/Relation'
+        type: array
+      services:
+        description: An array of services
+        items:
+          $ref: '#/definitions/Service'
+        type: array
+      shipments:
+        description: An array of shipments
+        items:
+          $ref: '#/definitions/Shipment'
+        type: array
+      vehicle_types:
+        description: An array of vehicle types
+        items:
+          $ref: '#/definitions/VehicleType'
+        type: array
+      vehicles:
+        description: An array of vehicles that can be employed
+        items:
+          $ref: '#/definitions/Vehicle'
+        type: array
+  Response:
+    properties:
+      job_id:
+        description: unique identify of job - which you get when posting your request to the large problem solver
+        type: string
+      processing_time:
+        description: 'processing time in ms. if job is still waiting in queue, processing_time is 0'
+        format: int64
+        type: integer
+      solution:
+        $ref: '#/definitions/Solution'
+        description: the solution. only available if status field indicates finished
+      status:
+        description: indicates the current status of the job
+        enum:
+          - waiting_in_queue
+          - processing
+          - finished
+        type: string
+      waiting_in_queue:
+        description: waiting time in ms
+        format: int64
+        type: integer
+  Route:
+    properties:
+      activities:
+        description: array of activities
+        items:
+          $ref: '#/definitions/Activity'
+        type: array
+      vehicle_id:
+        description: id of vehicle that operates route
+        type: string
+  Service:
+    properties:
+      address:
+        $ref: '#/definitions/Address'
+      duration:
+        description: 'duration of service, i.e. time in ms the corresponding activity takes'
+        format: int64
+        type: integer
+      id:
+        description: Unique identifier of service
+        type: string
+      name:
+        description: name of service
+        type: string
+      required_skills:
+        description: array of required skills
+        items:
+          type: string
+        type: array
+      size:
+        description: array of capacity dimensions
+        items:
+          format: int32
+          type: integer
+        type: array
+      time_windows:
+        description: 'array of time windows. currently, only a single time window is allowed'
+        items:
+          $ref: '#/definitions/TimeWindow'
+        type: array
+      type:
+        description: type of service
+        enum:
+          - service
+        type: string
+  Shipment:
+    properties:
+      delivery:
+        $ref: '#/definitions/Stop'
+      id:
+        description: Unique identifier of service
+        type: string
+      name:
+        description: name of shipment
+        type: string
+      pickup:
+        $ref: '#/definitions/Stop'
+      required_skills:
+        description: array of required skills
+        items:
+          type: string
+        type: array
+      size:
+        description: array of capacity dimensions
+        items:
+          format: int32
+          type: integer
+        type: array
+    type: object
+  Solution:
+    properties:
+      costs:
+        description: overall costs of solution
+        format: int32
+        type: integer
+      distance:
+        description: overall travel distance in meters
+        format: int32
+        type: integer
+      no_unassigned:
+        description: number of jobs that could not be assigned to final solution
+        format: int32
+        type: integer
+      routes:
+        description: An array of routes
+        items:
+          $ref: '#/definitions/Route'
+        type: array
+      time:
+        description: overall travel time in ms
+        format: int64
+        type: integer
+      unassigned:
+        properties:
+          services:
+            description: An array of ids of unassigned services
+            items:
+              description: id of unassigned service
+              type: string
+            type: array
+          shipments:
+            description: An array of ids of unassigned shipments
+            items:
+              description: id of unassigned shipments
+              type: string
+            type: array
+        type: object
+  Stop:
+    properties:
+      address:
+        $ref: '#/definitions/Address'
+      duration:
+        description: 'duration of stop, i.e. time in ms the corresponding activity takes'
+        format: int64
+        type: integer
+      time_windows:
+        description: 'array of time windows. currently, only a single time window is allowed'
+        items:
+          $ref: '#/definitions/TimeWindow'
+        type: array
+  TimeWindow:
+    properties:
+      earliest:
+        description: earliest start time of corresponding activity
+        format: int64
+        type: integer
+      latest:
+        description: latest start time of corresponding activity
+        format: int64
+        type: integer
+  Vehicle:
+    properties:
+      break:
+        $ref: '#/definitions/Break'
+      earliest_start:
+        description: earliest start of vehicle at its start location
+        format: int64
+        type: integer
+      end_address:
+        $ref: '#/definitions/Address'
+      latest_end:
+        description: latest end of vehicle at its end location
+        format: int64
+        type: integer
+      return_to_depot:
+        description: 'Indicates whether vehicle should return to start address or not. If not, it can end at any service activity.'
+        type: boolean
+      skills:
+        description: array of skills
+        items:
+          type: string
+        type: array
+      start_address:
+        $ref: '#/definitions/Address'
+      type_id:
+        description: Unique identifier referring to the available vehicle types
+        type: string
+      vehicle_id:
+        description: Unique identifier of vehicle
+        type: string
+  VehicleType:
+    properties:
+      capacity:
+        description: array of capacity dimensions
+        items:
+          format: int32
+          type: integer
+        type: array
+      profile:
+        description: Profile of vehicle type
+        enum:
+          - car
+          - bike
+          - foot
+          - mtb
+          - motorcycle
+          - racingbike
+          - truck
+          - small_truck
+          - bus
+        example: car
+        type: string
+      speed_factor:
+        description: speed_factor of vehicle type
+        format: double
+        type: number
+      type_id:
+        description: Unique identifier for the vehicle type
+        type: string
+host: graphhopper.com
+info:
+  description: 'Our Route Optimization API solves the so called vehicle routing problem fast. It calculates an optimal tour for a set of vehicles, services and constraints'
+  title: Route Optimization API
+  version: '1.0'
+  x-logo:
+    url: 'https://graphhopper.com/img/header.png'
+  x-origin:
+    format: swagger
+    url: 'https://graphhopper.com/api/1/vrp/swagger.json'
+    version: '2.0'
+  x-providerName: graphhopper.com
+paths:
+  /optimize:
+    post:
+      consumes:
+        - application/json
+      description: >
+        This endpoint solves large problems, i.e. traveling salesman or vehicle
+        routing problems, and returns the solution.
+      operationId: postVrp
+      parameters:
+        - description: your API key
+          in: query
+          name: key
+          required: true
+          type: string
+        - description: Request object that contains the problem to be solved
+          in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Request'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A jobId you can use to retrieve your solution from server - see solution endpoint.
+          schema:
+            $ref: '#/definitions/JobId'
+        '400':
+          description: Error occurred when reading client request. Request is invalid.
+        '500':
+          description: Error occurred on server side.
+      summary: Solves large routing problems
+      tags:
+        - vrp
+  '/solution/{jobId}':
+    get:
+      consumes:
+        - application/json
+      description: >
+        This endpoint returns the solution of a large problems. You can fetch it
+        with the job_id, you have been sent.
+      operationId: getSolution
+      parameters:
+        - description: your API key
+          in: query
+          name: key
+          required: true
+          type: string
+        - description: Request solution with jobId
+          in: path
+          name: jobId
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: A response containing the solution
+          schema:
+            $ref: '#/definitions/Response'
+        '400':
+          description: Error occurred on client side such as invalid input.
+        '500':
+          description: Error occurred on server side.
+      summary: Return the solution associated to the jobId
+      tags:
+        - solution
+produces:
+  - application/json
+schemes:
+  - https
+security:
+  - api_key: []
+securityDefinitions:
+  api_key:
+    in: query
+    name: key
+    type: apiKey
+swagger: '2.0'
