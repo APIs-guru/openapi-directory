@@ -230,7 +230,7 @@ function generateAPI(specRootUrl) {
       versions: {}
     };
     _.each(api.versions, function (swagger, version) {
-      var filename = dir + '/' + version + '/swagger.json';
+      var filename = getSwaggerPath(swagger);
       var swaggerJsonPath = getSwaggerPath(swagger, 'swagger.json');
       saveJson(swaggerJsonPath, swagger);
 
@@ -340,8 +340,9 @@ function generateBanner() {
 }
 
 function gitLogDate(options, filename) {
-  var result = exec('git -C .. log --format=%aD ' + options + ' -- \'' + filename + '\'');
+  var result = exec('git -C .. log --format=%aD ' + options + ' -- \'APIs/' + filename + '\'');
   result = result.toString();
+  assert(result && result !== '');
   return new Date(result);
 }
 
