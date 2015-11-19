@@ -2411,6 +2411,10 @@ paths:
           in: query
           name: filters
           type: string
+        - description: 'The response will include empty rows if this parameter is set to true, the default is true'
+          in: query
+          name: include-empty-rows
+          type: boolean
         - description: The maximum number of entries to include in this feed.
           in: query
           name: max-results

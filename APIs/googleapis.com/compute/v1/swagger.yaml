@@ -1646,6 +1646,11 @@ definitions:
         description: 'The name of the managed instance group. The name must be 1-63 characters long, and comply with RFC1035.'
         pattern: '[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?'
         type: string
+      namedPorts:
+        description: Named ports configured for the Instance Groups complementary to this Instance Group Manager.
+        items:
+          $ref: '#/definitions/NamedPort'
+        type: array
       selfLink:
         description: '[Output Only] The URL for this managed instance group. The server defines this URL.'
         type: string
@@ -9499,7 +9504,7 @@ paths:
           name: project
           required: true
           type: string
-        - description: Name of the TargetHttpsProxy resource whose URL map is to be set.
+        - description: Name of the TargetHttpsProxy resource whose SSLCertificate is to be set.
           in: path
           name: targetHttpsProxy
           required: true

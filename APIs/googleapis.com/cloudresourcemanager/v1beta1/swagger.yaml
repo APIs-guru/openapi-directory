@@ -31,10 +31,10 @@ definitions:
         type: array
     type: object
   ListProjectsResponse:
-    description: 'A page of the response received from the [ListProjects][google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.ListProjects] method. A paginated response where more pages are available has `next_page_token` set. This token can be used in a subsequent request to retrieve the next request page.'
+    description: A page of the response received from the ListProjects method. A paginated response where more pages are available has `next_page_token` set. This token can be used in a subsequent request to retrieve the next request page.
     properties:
       nextPageToken:
-        description: 'Pagination token. If the result set is too large to fit in a single response, this token is returned. It encodes the position of the current result cursor. Feeding this value into a new list request with the `page_token` parameter gives the next page of the results. When `next_page_token` is not filled in, there is no next page and the list returned is the last page in the result set. Pagination tokens have a limited lifetime. Note: pagination is not yet supported; the server will not set this field.'
+        description: 'Pagination token. If the result set is too large to fit in a single response, this token is returned. It encodes the position of the current result cursor. Feeding this value into a new list request with the `page_token` parameter gives the next page of the results. When `next_page_token` is not filled in, there is no next page and the list returned is the last page in the result set. Pagination tokens have a limited lifetime.'
         type: string
       projects:
         description: The list of projects that matched the list filter. This list can be paginated.
@@ -45,6 +45,9 @@ definitions:
   Organization:
     description: "The root node in the resource hierarchy to which a particular entity's (e.g., company) resources belong."
     properties:
+      creationTime:
+        description: Timestamp when the Organization was created. Assigned by the server. @OutputOnly
+        type: string
       displayName:
         description: A friendly string to be used to refer to the Organization in the UI. This field is required.
         type: string
@@ -63,7 +66,7 @@ definitions:
         type: string
     type: object
   Policy:
-    description: "Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources. A `Policy` consists of a list of `bindings`. A `Binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM. **Example** ``` { \"bindings\": [ { \"role\": \"roles/owner\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-other-app@appspot.gserviceaccount.com\"] }, { \"role\": \"roles/viewer\", \"members\": [\"user:sean@example.com\"] } ] } ``` For a description of IAM and its features, see the [IAM developer's guide][https://cloud.google.com/iam]."
+    description: "Defines an Identity and Access Management (IAM) policy. It is used to specify access control policies for Cloud Platform resources. A `Policy` consists of a list of `bindings`. A `Binding` binds a list of `members` to a `role`, where the members can be user accounts, Google groups, Google domains, and service accounts. A `role` is a named list of permissions defined by IAM. **Example** { \"bindings\": [ { \"role\": \"roles/owner\", \"members\": [ \"user:mike@example.com\", \"group:admins@example.com\", \"domain:google.com\", \"serviceAccount:my-other-app@appspot.gserviceaccount.com\"] }, { \"role\": \"roles/viewer\", \"members\": [\"user:sean@example.com\"] } ] } For a description of IAM and its features, see the [IAM developer's guide](https://cloud.google.com/iam)."
     properties:
       bindings:
         description: Associates a list of `members` to a `role`. Multiple `bindings` must not be specified for the same `role`. `bindings` with no members will result in an error.
@@ -71,11 +74,11 @@ definitions:
           $ref: '#/definitions/Binding'
         type: array
       etag:
-        description: Can be used to perform a read-modify-write.
+        description: 'The etag is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the etag in the read-modify-write cycle to perform policy updates in order to avoid race conditions. If no etag is provided in the call to SetIamPolicy, then the existing policy is overwritten blindly.'
         format: byte
         type: string
       version:
-        description: Version of the `Policy`. The default version is 0.
+        description: Version of the `Policy`. The default version is 0. 0 = resourcemanager_projects only support legacy roles. 1 = supports non-legacy roles 2 = supports AuditConfig
         format: int32
         type: integer
     type: object
@@ -263,6 +266,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - organizations
     parameters:
@@ -297,6 +301,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - organizations
     parameters:
@@ -355,7 +360,7 @@ paths:
       description: Gets the access control policy for a Organization resource. May be empty if no such policy or resource exists.
       operationId: cloudresourcemanager.organizations.getIamPolicy
       parameters:
-        - description: 'REQUIRED: The resource for which policy is being requested. Resource is usually specified as a path, such as, `projects/{project}`.'
+        - description: 'REQUIRED: The resource for which policy is being requested. `resource` is usually specified as a path, such as, `projects/{project}/zones/{zone}/disks/{disk}`. The format for the path specified in this value is resource specific and is specified in the documentation for the respective GetIamPolicy rpc.'
           in: path
           name: resource
           required: true
@@ -372,6 +377,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - organizations
   '/v1beta1/organizations/{resource}:setIamPolicy':
@@ -393,7 +399,7 @@ paths:
       description: Sets the access control policy on a Organization resource. Replaces any existing policy.
       operationId: cloudresourcemanager.organizations.setIamPolicy
       parameters:
-        - description: 'REQUIRED: The resource for which policy is being specified. `resource` is usually specified as a path, such as, `projects/{project}/zones/{zone}/disks/{disk}`.'
+        - description: 'REQUIRED: The resource for which policy is being specified. `resource` is usually specified as a path, such as, `projects/{project}/zones/{zone}/disks/{disk}`. The format for the path specified in this value is resource specific and is specified in the documentation for the respective SetIamPolicy rpc.'
           in: path
           name: resource
           required: true
@@ -431,7 +437,7 @@ paths:
       description: Returns permissions that a caller has on the specified Organization.
       operationId: cloudresourcemanager.organizations.testIamPermissions
       parameters:
-        - description: 'REQUIRED: The resource for which policy detail is being requested. `resource` is usually specified as a path, such as, `projects/{project}`.'
+        - description: 'REQUIRED: The resource for which policy detail is being requested. `resource` is usually specified as a path, such as, `projects/{project}/zones/{zone}/disks/{disk}`. The format for the path specified in this value is resource specific and is specified in the documentation for the respective TestIamPermissions rpc.'
           in: path
           name: resource
           required: true
@@ -448,6 +454,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - organizations
   /v1beta1/projects:
@@ -455,11 +462,11 @@ paths:
       description: Lists projects that are visible to the user and satisfy the specified filter. This method returns projects in an unspecified order. New projects do not necessarily appear at the end of the list.
       operationId: cloudresourcemanager.projects.list
       parameters:
-        - description: 'A pagination token returned from a previous call to ListProject that indicates from where listing should continue. Note: pagination is not yet supported; the server ignores this field. Optional.'
+        - description: A pagination token returned from a previous call to ListProject that indicates from where listing should continue. Optional.
           in: query
           name: pageToken
           type: string
-        - description: 'The maximum number of Projects to return in the response. The server can return fewer projects than requested. If unspecified, server picks an appropriate default. Note: pagination is not yet supported; the server ignores this field. Optional.'
+        - description: 'The maximum number of Projects to return in the response. The server can return fewer projects than requested. If unspecified, server picks an appropriate default. Optional.'
           in: query
           name: pageSize
           type: integer
@@ -475,6 +482,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
     parameters:
@@ -511,7 +519,7 @@ paths:
         - projects
   '/v1beta1/projects/{projectId}':
     delete:
-      description: "Marks the project identified by the specified `project_id` (for example, `my-project-123`) for deletion. This method will only affect the project if the following criteria are met: + The project does not have a billing account associated with it. + The project has a lifecycle state of [ACTIVE][google.cloudresourcemanager.projects.v1beta1.LifecycleState.ACTIVE]. This method changes the project's lifecycle state from [ACTIVE][google.cloudresourcemanager.projects.v1beta1.LifecycleState.ACTIVE] to [DELETE_REQUESTED] [google.cloudresourcemanager.projects.v1beta1.LifecycleState.DELETE_REQUESTED]. The deletion starts at an unspecified time, at which point the lifecycle state changes to [DELETE_IN_PROGRESS] [google.cloudresourcemanager.projects.v1beta1.LifecycleState.DELETE_IN_PROGRESS]. Until the deletion completes, you can check the lifecycle state checked by retrieving the project with [GetProject] [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.GetProject], and the project remains visible to [ListProjects] [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.ListProjects]. However, you cannot update the project. After the deletion completes, the project is not retrievable by the [GetProject] [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.GetProject] and [ListProjects] [google.cloudresourcemanager.projects.v1beta1.DeveloperProjects.ListProjects] methods. The caller must have modify permissions for this project."
+      description: "Marks the project identified by the specified `project_id` (for example, `my-project-123`) for deletion. This method will only affect the project if the following criteria are met: + The project does not have a billing account associated with it. + The project has a lifecycle state of ACTIVE. This method changes the project's lifecycle state from ACTIVE to DELETE_REQUESTED. The deletion starts at an unspecified time, at which point the lifecycle state changes to DELETE_IN_PROGRESS. Until the deletion completes, you can check the lifecycle state checked by retrieving the project with GetProject, and the project remains visible to ListProjects. However, you cannot update the project. After the deletion completes, the project is not retrievable by the GetProject and ListProjects methods. The caller must have modify permissions for this project."
       operationId: cloudresourcemanager.projects.delete
       parameters:
         - description: 'The project ID (for example, `foo-bar-123`). Required.'
@@ -546,6 +554,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
     parameters:
@@ -601,7 +610,7 @@ paths:
       - $ref: '#/parameters/uploadType'
       - $ref: '#/parameters/$.xgafv'
     post:
-      description: 'Restores the project identified by the specified `project_id` (for example, `my-project-123`). You can only use this method for a project that has a lifecycle state of [DELETE_REQUESTED] [google.cloudresourcemanager.projects.v1beta1.LifecycleState.DELETE_REQUESTED]. After deletion starts, as indicated by a lifecycle state of [DELETE_IN_PROGRESS] [google.cloudresourcemanager.projects.v1beta1.LifecycleState.DELETE_IN_PROGRESS], the project cannot be restored. The caller must have modify permissions for this project.'
+      description: 'Restores the project identified by the specified `project_id` (for example, `my-project-123`). You can only use this method for a project that has a lifecycle state of DELETE_REQUESTED. After deletion starts, as indicated by a lifecycle state of DELETE_IN_PROGRESS, the project cannot be restored. The caller must have modify permissions for this project.'
       operationId: cloudresourcemanager.projects.undelete
       parameters:
         - description: 'The project ID (for example, `foo-bar-123`). Required.'
@@ -638,7 +647,7 @@ paths:
       description: Returns the IAM access control policy for specified project.
       operationId: cloudresourcemanager.projects.getIamPolicy
       parameters:
-        - description: 'REQUIRED: The resource for which policy is being requested. Resource is usually specified as a path, such as, `projects/{project}`.'
+        - description: 'REQUIRED: The resource for which policy is being requested. `resource` is usually specified as a path, such as, `projects/{project}/zones/{zone}/disks/{disk}`. The format for the path specified in this value is resource specific and is specified in the documentation for the respective GetIamPolicy rpc.'
           in: path
           name: resource
           required: true
@@ -655,6 +664,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
   '/v1beta1/projects/{resource}:setIamPolicy':
@@ -676,7 +686,7 @@ paths:
       description: "Sets the IAM access control policy for the specified project. We do not currently support 'domain:' prefixed members in a Binding of a Policy. Calling this method requires enabling the App Engine Admin API."
       operationId: cloudresourcemanager.projects.setIamPolicy
       parameters:
-        - description: 'REQUIRED: The resource for which policy is being specified. `resource` is usually specified as a path, such as, `projects/{project}/zones/{zone}/disks/{disk}`.'
+        - description: 'REQUIRED: The resource for which policy is being specified. `resource` is usually specified as a path, such as, `projects/{project}/zones/{zone}/disks/{disk}`. The format for the path specified in this value is resource specific and is specified in the documentation for the respective SetIamPolicy rpc.'
           in: path
           name: resource
           required: true
@@ -714,7 +724,7 @@ paths:
       description: Tests the specified permissions against the IAM access control policy for the specified project.
       operationId: cloudresourcemanager.projects.testIamPermissions
       parameters:
-        - description: 'REQUIRED: The resource for which policy detail is being requested. `resource` is usually specified as a path, such as, `projects/{project}`.'
+        - description: 'REQUIRED: The resource for which policy detail is being requested. `resource` is usually specified as a path, such as, `projects/{project}/zones/{zone}/disks/{disk}`. The format for the path specified in this value is resource specific and is specified in the documentation for the respective TestIamPermissions rpc.'
           in: path
           name: resource
           required: true
@@ -731,6 +741,7 @@ paths:
       security:
         - Oauth2:
             - 'https://www.googleapis.com/auth/cloud-platform'
+            - 'https://www.googleapis.com/auth/cloud-platform.read-only'
       tags:
         - projects
 schemes:
@@ -742,5 +753,6 @@ securityDefinitions:
     flow: implicit
     scopes:
       'https://www.googleapis.com/auth/cloud-platform': View and manage your data across Google Cloud Platform services
+      'https://www.googleapis.com/auth/cloud-platform.read-only': View your data across Google Cloud Platform services
     type: oauth2
 swagger: '2.0'

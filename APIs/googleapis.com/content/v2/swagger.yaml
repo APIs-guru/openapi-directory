@@ -979,15 +979,31 @@ definitions:
         description: The message of the first error in errors.
         type: string
     type: object
+  Installment:
+    properties:
+      amount:
+        $ref: '#/definitions/Price'
+        description: The amount the buyer has to pay per month.
+      months:
+        description: The number of installments the buyer has to pay.
+        format: int64
+        type: string
+    type: object
   Inventory:
     properties:
       availability:
         description: The availability of the product.
         type: string
+      installment:
+        $ref: '#/definitions/Installment'
+        description: Number and amount of installments to pay for an item. Brazil only.
       kind:
         default: 'content#inventory'
         description: 'Identifies what kind of resource this is. Value: the fixed string "content#inventory".'
         type: string
+      loyaltyPoints:
+        $ref: '#/definitions/LoyaltyPoints'
+        description: Loyalty points that users receive after purchasing the item. Japan only.
       price:
         $ref: '#/definitions/Price'
         description: The price of the product.
@@ -1067,6 +1083,12 @@ definitions:
       availability:
         description: The availability of the product.
         type: string
+      installment:
+        $ref: '#/definitions/Installment'
+        description: Number and amount of installments to pay for an item. Brazil only.
+      loyaltyPoints:
+        $ref: '#/definitions/LoyaltyPoints'
+        description: Loyalty points that users receive after purchasing the item. Japan only.
       price:
         $ref: '#/definitions/Price'
         description: The price of the product.
@@ -2063,7 +2085,7 @@ definitions:
         description: URL of an image of the item.
         type: string
       installment:
-        $ref: '#/definitions/ProductInstallment'
+        $ref: '#/definitions/Installment'
         description: Number and amount of installments to pay for an item. Brazil only.
       isBundle:
         description: Whether the item is a merchant-defined bundle. A bundle is a custom grouping of different products sold by a merchant for a single price.
@@ -2223,16 +2245,6 @@ definitions:
         type: string
       intention:
         description: 'Whether the destination is required, excluded or should be validated.'
-        type: string
-    type: object
-  ProductInstallment:
-    properties:
-      amount:
-        $ref: '#/definitions/Price'
-        description: The amount the buyer has to pay per month.
-      months:
-        description: The number of installments the buyer has to pay.
-        format: int64
         type: string
     type: object
   ProductShipping:
@@ -4318,6 +4330,10 @@ paths:
           name: merchantId
           required: true
           type: string
+        - description: Flag to include the invalid inserted items in the result of the list request. By default the invalid items are not shown (the default value is false).
+          in: query
+          name: includeInvalidInsertedItems
+          type: boolean
         - description: 'The maximum number of products to return in the response, used for paging.'
           in: query
           name: maxResults
@@ -4440,6 +4456,10 @@ paths:
           name: merchantId
           required: true
           type: string
+        - description: Flag to include the invalid inserted items in the result of the list request. By default the invalid items are not shown (the default value is false).
+          in: query
+          name: includeInvalidInsertedItems
+          type: boolean
         - description: 'The maximum number of product statuses to return in the response, used for paging.'
           in: query
           name: maxResults
