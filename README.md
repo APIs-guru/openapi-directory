@@ -48,4 +48,9 @@ Also used as test suite in following projects:
  - [swagger-parser](https://github.com/BigstickCarpet/swagger-parser) - Swagger 2.0 parser and validator for Node and browsers
  - [SwaggerProvider](https://github.com/sergey-tihon/SwaggerProvider) - F# Type Provider for Swagger
 
+Spec sources
+--------------------------
+Some specs are taken from Open Source projects:
+ - [trello-swagger-generator](https://github.com/warehouseman/trello-swagger-generator/) - Swagger spec for Trello API
+
 [logo]: https://apis-guru.github.io/api-models/branding/logo_horizontal.svg "APIs.guru"
