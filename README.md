@@ -46,6 +46,6 @@ Existing integrations:
 
 Also used as test suite in following projects:
  - [swagger-parser](https://github.com/BigstickCarpet/swagger-parser) - Swagger 2.0 parser and validator for Node and browsers
- - [SwaggerProvider](https://github.com/sergey-tihon/SwaggerProvider)
+ - [SwaggerProvider](https://github.com/sergey-tihon/SwaggerProvider) - F# Type Provider for Swagger
 
 [logo]: https://apis-guru.github.io/api-models/branding/logo_horizontal.svg "APIs.guru"
