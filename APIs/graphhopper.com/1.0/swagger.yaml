@@ -25,6 +25,7 @@ definitions:
           - pickupShipment
           - deliverShipment
         type: string
+    type: object
   Address:
     properties:
       lat:
@@ -72,6 +73,7 @@ definitions:
       job_id:
         description: unique id for your job/request with which you can fetch your solution
         type: string
+    type: object
   Relation:
     properties:
       ids:
@@ -116,6 +118,7 @@ definitions:
         items:
           $ref: '#/definitions/Vehicle'
         type: array
+    type: object
   Response:
     properties:
       job_id:
@@ -139,6 +142,7 @@ definitions:
         description: waiting time in ms
         format: int64
         type: integer
+    type: object
   Route:
     properties:
       activities:
@@ -149,6 +153,7 @@ definitions:
       vehicle_id:
         description: id of vehicle that operates route
         type: string
+    type: object
   Service:
     properties:
       address:
@@ -183,7 +188,10 @@ definitions:
         description: type of service
         enum:
           - service
+          - pickup
+          - delivery
         type: string
+    type: object
   Shipment:
     properties:
       delivery:
@@ -246,6 +254,7 @@ definitions:
               type: string
             type: array
         type: object
+    type: object
   Stop:
     properties:
       address:
@@ -259,6 +268,7 @@ definitions:
         items:
           $ref: '#/definitions/TimeWindow'
         type: array
+    type: object
   TimeWindow:
     properties:
       earliest:
@@ -269,6 +279,7 @@ definitions:
         description: latest start time of corresponding activity
         format: int64
         type: integer
+    type: object
   Vehicle:
     properties:
       break:
@@ -299,6 +310,7 @@ definitions:
       vehicle_id:
         description: Unique identifier of vehicle
         type: string
+    type: object
   VehicleType:
     properties:
       capacity:
@@ -328,6 +340,7 @@ definitions:
       type_id:
         description: Unique identifier for the vehicle type
         type: string
+    type: object
 host: graphhopper.com
 info:
   description: 'Our Route Optimization API solves the so called vehicle routing problem fast. It calculates an optimal tour for a set of vehicles, services and constraints'

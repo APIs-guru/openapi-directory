@@ -14,16 +14,6 @@ definitions:
         format: int32
         type: integer
     type: object
-  Object:
-    properties: {}
-    type: object
-  PatchArgs:
-    properties:
-      Enabled:
-        type: boolean
-      Name:
-        type: string
-    type: object
   RequestApplicationExportResultV2:
     properties:
       message:
@@ -36,7 +26,7 @@ definitions:
         type: integer
     type: object
   WebhookResultV2: {}
-host: 'api.slideroom.com:443'
+host: api.slideroom.com
 info:
   description: "SlideRoom provides a RESTful API for exporting data out of your organization's SlideRoom account."
   title: SlideRoom API V2
@@ -53,7 +43,7 @@ paths:
     delete:
       consumes: []
       deprecated: false
-      operationId: Applicant_Delete
+      operationId: Applicant_DeleteAttributesV2
       parameters:
         - description: The email address of the applicant.
           in: query
@@ -86,14 +76,14 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            type: string
       summary: Deletes a custom attribute for an applicant.
       tags:
         - Applicant
     get:
       consumes: []
       deprecated: false
-      operationId: Applicant_Get
+      operationId: Applicant_GetAttributesV2
       parameters:
         - description: The email address of the applicant.
           in: query
@@ -140,7 +130,7 @@ paths:
         - application/x-www-form-urlencoded
       deprecated: false
       description: 'This method only adds or updates attributes. Null values will be updated as nulls, but not deleted. API Import is available in the Advanced Plan.'
-      operationId: Applicant_Post
+      operationId: Applicant_PostAttributesV2
       parameters:
         - description: The email address of the applicant.
           in: query
@@ -179,7 +169,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            type: string
       summary: Updates the custom attributes for an applicant.
       tags:
         - Applicant
@@ -379,7 +369,7 @@ paths:
     delete:
       consumes: []
       deprecated: false
-      operationId: Application_Delete
+      operationId: Application_DeleteAttributesV2
       parameters:
         - description: The ID of the application.
           in: path
@@ -400,14 +390,14 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            type: string
       summary: Deletes a custom attribute for an application.
       tags:
         - Application
     get:
       consumes: []
       deprecated: false
-      operationId: Application_Get
+      operationId: Application_GetAttributesV2
       parameters:
         - description: The ID of the application.
           in: path
@@ -442,7 +432,7 @@ paths:
         - application/x-www-form-urlencoded
       deprecated: false
       description: 'This method only adds or updates attributes. Null values will be updated as nulls, but not deleted.'
-      operationId: Application_Post
+      operationId: Application_PostAttributesV2
       parameters:
         - description: The ID of the application.
           in: path
@@ -469,7 +459,7 @@ paths:
         '200':
           description: OK
           schema:
-            $ref: '#/definitions/Object'
+            type: string
       summary: Updates the custom attributes for an application. API Import is available in the Advanced Plan.
       tags:
         - Application
@@ -662,103 +652,6 @@ paths:
       summary: Gets the status/result of a requested export.
       tags:
         - Export
-  /api/v2/webhook:
-    delete:
-      consumes: []
-      deprecated: false
-      operationId: Webhook_DeleteV2
-      parameters:
-        - in: query
-          name: url
-          required: true
-          type: string
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Object'
-      tags:
-        - Webhook
-    get:
-      consumes: []
-      deprecated: false
-      operationId: Webhook_GetV2
-      parameters: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      responses:
-        '200':
-          description: OK
-          schema:
-            items:
-              $ref: '#/definitions/WebhookResultV2'
-            type: array
-      tags:
-        - Webhook
-    patch:
-      consumes:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-        - application/x-www-form-urlencoded
-      deprecated: false
-      operationId: Webhook_PatchV2
-      parameters:
-        - in: query
-          name: url
-          required: true
-          type: string
-        - in: body
-          name: args
-          required: true
-          schema:
-            $ref: '#/definitions/PatchArgs'
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Object'
-      tags:
-        - Webhook
-    post:
-      consumes: []
-      deprecated: false
-      operationId: Webhook_CreateV2
-      parameters:
-        - in: query
-          name: url
-          required: true
-          type: string
-        - in: query
-          name: name
-          required: true
-          type: string
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      responses:
-        '200':
-          description: OK
-          schema:
-            $ref: '#/definitions/Object'
-      tags:
-        - Webhook
 schemes:
   - https
 swagger: '2.0'

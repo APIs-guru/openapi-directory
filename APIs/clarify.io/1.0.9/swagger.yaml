@@ -473,7 +473,7 @@ host: api.clarify.io
 info:
   description: 'The API to Search and Understand Audio & Video Data.'
   title: Clarify
-  version: 1.0.8
+  version: 1.0.9
   x-logo:
     backgroundColor: '#65A8B5'
     url: 'http://clarify.io/wp-content/themes/clarify/images/clarify-logo.png'
@@ -961,9 +961,10 @@ paths:
           name: bundle_id
           required: true
           type: string
-        - description: 'name of the insight: transcript_r9, spoken_keywords'
+        - description: 'name of the insight: transcript_r9, captions_r9, spoken_keywords'
           enum:
             - transcript_r9
+            - captions_r9
             - spoken_keywords
           in: formData
           name: insight
@@ -989,7 +990,7 @@ paths:
         - bundles
   '/v1/bundles/{bundle_id}/insights/{insight_id}':
     get:
-      description: 'Gets a particular insight for a bundle. Typically, you will hit this endpoint from a link contained in a response to <b>/v1/bundles/{bundle_id}/insights</b><br/><br/>The insight response contains an array of objects called <b>track_data</b>, where the array indexes correspond to the tracks in the bundle. Each object in the array contains insight-specific data related to that insight. For example, in the <b>spoken_words</b> insight, the <b>track_data</b> objects contain the field <b>word_count</b> which is the number of spoken words found in the track.'
+      description: 'Gets a particular insight for a bundle. Typically, you will hit this endpoint from a link contained in a response to <b>/v1/bundles/{bundle_id}/insights</b><br/><br/>The insight response contains an array of objects called <b>track_data</b>, where the array indexes correspond to the tracks in the bundle. Each object in the array contains insight-specific data related to that insight. For example, in the <b>spoken_words</b> insight, the <b>track_data</b> objects contain the field <b>word_count</b> which is the number of spoken words found in the track.<br/><br/>Insights that contain data in different file formats will have one or more link relations in the _links array for the corresponding data. Note that the href URLs in these links have a limited lifespan and should not be stored locally.'
       parameters:
         - description: id of a bundle
           in: path

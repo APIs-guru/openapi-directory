@@ -144,6 +144,72 @@ definitions:
         description: A short error code that summarizes the error.
         type: string
     type: object
+  ExplainQueryStage:
+    properties:
+      computeRatioAvg:
+        description: Relative amount of time the average shard spent on CPU-bound tasks.
+        format: double
+        type: number
+      computeRatioMax:
+        description: Relative amount of time the slowest shard spent on CPU-bound tasks.
+        format: double
+        type: number
+      id:
+        description: Unique ID for stage within plan.
+        format: int64
+        type: string
+      name:
+        description: Human-readable name for stage.
+        type: string
+      readRatioAvg:
+        description: Relative amount of time the average shard spent reading input.
+        format: double
+        type: number
+      readRatioMax:
+        description: Relative amount of time the slowest shard spent reading input.
+        format: double
+        type: number
+      recordsRead:
+        description: Number of records read into the stage.
+        format: int64
+        type: string
+      recordsWritten:
+        description: Number of records written by the stage.
+        format: int64
+        type: string
+      steps:
+        description: List of operations within the stage in dependency order (approximately chronological).
+        items:
+          $ref: '#/definitions/ExplainQueryStep'
+        type: array
+      waitRatioAvg:
+        description: Relative amount of time the average shard spent waiting to be scheduled.
+        format: double
+        type: number
+      waitRatioMax:
+        description: Relative amount of time the slowest shard spent waiting to be scheduled.
+        format: double
+        type: number
+      writeRatioAvg:
+        description: Relative amount of time the average shard spent on writing output.
+        format: double
+        type: number
+      writeRatioMax:
+        description: Relative amount of time the slowest shard spent on writing output.
+        format: double
+        type: number
+    type: object
+  ExplainQueryStep:
+    properties:
+      kind:
+        description: Machine-readable operation type.
+        type: string
+      substeps:
+        description: Human-readable stage descriptions.
+        items:
+          type: string
+        type: array
+    type: object
   ExternalDataConfiguration:
     properties:
       compression:
@@ -540,6 +606,11 @@ definitions:
       cacheHit:
         description: '[Output-only] Whether the query result was fetched from the query cache.'
         type: boolean
+      queryPlan:
+        description: '[Output-only, Experimental] Describes execution plan for the query as a list of stages.'
+        items:
+          $ref: '#/definitions/ExplainQueryStage'
+        type: array
       totalBytesBilled:
         description: '[Output-only] Total bytes billed for the job.'
         format: int64
@@ -820,6 +891,9 @@ definitions:
       skipInvalidRows:
         description: '[Optional] Insert all valid rows of a request, even if invalid rows exist. The default value is false, which causes the entire request to fail if any invalid rows exist.'
         type: boolean
+      templateSuffix:
+        description: '[Experimental] If specified, treats the destination table as a base template, and inserts the rows into an instance table named "". BigQuery will manage creation of the instance table, using the schema of the base template table.'
+        type: string
     type: object
   TableDataInsertAllResponse:
     properties:
