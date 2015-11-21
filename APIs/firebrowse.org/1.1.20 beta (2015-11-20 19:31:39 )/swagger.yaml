@@ -3,7 +3,7 @@ host: firebrowse.org
 info:
   description: A simple and elegant way to explore cancer data
   title: FireBrowse Beta API
-  version: '1.1.19 beta (2015-11-12 21:44:52 )'
+  version: '1.1.20 beta (2015-11-20 19:31:39 )'
   x-logo:
     url: 'http://firebrowse.org/img/beta_smaller.png'
   x-origin:
@@ -654,6 +654,7 @@ paths:
           in: query
           items:
             enum:
+              - '2015_08_21'
               - '2015_04_02'
               - '2014_10_17'
             format: date
@@ -765,7 +766,6 @@ paths:
           items:
             default: MutSig2CV
             enum:
-              - MutSig1.5
               - MutSig2.0
               - MutSig2CV
               - MutSigCV
@@ -902,7 +902,6 @@ paths:
           items:
             default: MutSig2CV
             enum:
-              - MutSig1.5
               - MutSig2.0
               - MutSig2CV
               - MutSigCV
@@ -991,6 +990,7 @@ paths:
           in: query
           items:
             enum:
+              - '2015_08_21'
               - '2015_04_02'
               - '2014_10_17'
               - '2014_07_15'
@@ -1101,6 +1101,9 @@ paths:
               - Mutation_APOBEC
               - Mutation_Assessor
               - Mutation_CHASM
+              - MutSig2.0
+              - MutSig2CV
+              - MutSigCV
               - MutSigNozzleReport1.5
               - MutSigNozzleReport2.0
               - MutSigNozzleReport2CV
