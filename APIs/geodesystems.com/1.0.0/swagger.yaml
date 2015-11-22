@@ -16389,6 +16389,122 @@ paths:
       summary: "Search API for 'FRED Series' entry type"
       tags:
         - type_fred_series
+  /repository/search/type/type_hydro_colorado:
+    get:
+      description: API to search for entries of type Colorado DNR Stream Gage
+      operationId: search_type_hydro_colorado
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Site ID
+          in: query
+          name: search.type_hydro_colorado.site_id
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: "Search API for 'Colorado DNR Stream Gage' entry type"
+      tags:
+        - type_hydro_colorado
   /repository/search/type/type_idv_bundle:
     get:
       description: API to search for entries of type IDV Bundle
@@ -21245,6 +21361,147 @@ paths:
       summary: "Search API for 'PBO Position Time Series' entry type"
       tags:
         - type_point_pbo_position_time_series
+  /repository/search/type/type_point_snotel:
+    get:
+      description: API to search for entries of type SNOTEL Snow Data
+      operationId: search_type_point_snotel
+      parameters:
+        - description: Search text
+          in: query
+          name: text
+          required: false
+          type: string
+        - description: Search name
+          in: query
+          name: name
+          required: false
+          type: string
+        - description: Search description
+          in: query
+          name: description
+          required: false
+          type: string
+        - description: From date
+          format: date-time
+          in: query
+          name: fromdate
+          required: false
+          type: string
+        - description: To date
+          format: date-time
+          in: query
+          name: todate
+          required: false
+          type: string
+        - description: Archive create date from
+          format: date-time
+          in: query
+          name: createdate.from
+          required: false
+          type: string
+        - description: Archive create date to
+          format: date-time
+          in: query
+          name: createdate.to
+          required: false
+          type: string
+        - description: Archive change date from
+          format: date-time
+          in: query
+          name: changedate.from
+          required: false
+          type: string
+        - description: Archive change date to
+          format: date-time
+          in: query
+          name: changedate.to
+          required: false
+          type: string
+        - description: Parent entry
+          in: query
+          name: group
+          required: false
+          type: string
+        - description: File suffix
+          in: query
+          name: filesuffix
+          required: false
+          type: string
+        - description: Northern bounds of search
+          format: float
+          in: query
+          name: maxlatitude
+          required: false
+          type: number
+        - description: Western bounds of search
+          format: float
+          in: query
+          name: minlongitude
+          required: false
+          type: number
+        - description: Southern bounds of search
+          format: float
+          in: query
+          name: minlatitude
+          required: false
+          type: number
+        - description: Eastern bounds of search
+          format: float
+          in: query
+          name: maxlongitude
+          required: false
+          type: number
+        - description: Max number of results
+          in: query
+          name: max
+          required: false
+          type: integer
+        - description: Number to skip
+          in: query
+          name: skip
+          required: false
+          type: integer
+        - description: Site ID
+          in: query
+          name: search.type_point_snotel.site_id
+          required: false
+          type: string
+        - description: Site Number
+          in: query
+          name: search.type_point_snotel.site_number
+          required: false
+          type: string
+        - description: State
+          in: query
+          name: search.type_point_snotel.state
+          required: false
+          type: string
+        - description: Network
+          in: query
+          name: search.type_point_snotel.network
+          required: false
+          type: string
+        - description: HUC Name
+          in: query
+          name: search.type_point_snotel.huc_name
+          required: false
+          type: string
+        - description: HUC ID
+          in: query
+          name: search.type_point_snotel.huc_id
+          required: false
+          type: string
+      produces:
+        - application/json
+        - application/xml
+        - text/plain
+        - text/html
+      responses:
+        '200':
+          description: No response was specified
+      summary: "Search API for 'SNOTEL Snow Data' entry type"
+      tags:
+        - type_point_snotel
   /repository/search/type/type_point_wsbb_ggp:
     get:
       description: API to search for entries of type Global Geodynamics GGP Format
@@ -23845,6 +24102,8 @@ tags:
     name: type_point_gcnet
   - description: "Search API for 'IAGA 2002 Geomagnetism Data' entry type"
     name: type_point_geomag_iaga2002
+  - description: "Search API for 'Colorado DNR Stream Gage' entry type"
+    name: type_hydro_colorado
   - description: "Search API for 'McCords Irmcr2 Data' entry type"
     name: type_point_icebridge_mccords_irmcr2
   - description: "Search API for 'McCords Irmcr3 Data' entry type"
@@ -23875,6 +24134,8 @@ tags:
     name: type_point_ncdc_climate
   - description: "Search API for 'NOAA-ESRL-PSD Monthly Climate Index' entry type"
     name: type_psd_monthly_climate_index
+  - description: "Search API for 'SNOTEL Snow Data' entry type"
+    name: type_point_snotel
   - description: "Search API for 'NetCDF Track Data' entry type"
     name: type_point_ocean_netcdf_track
   - description: "Search API for 'NetCDF Glider Data' entry type"
