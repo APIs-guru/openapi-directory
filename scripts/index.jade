@@ -1,0 +1,19 @@
+html
+  head
+    title APIs.guru specs reference
+    meta(name="description", content="Wikipedia for REST APIs")
+    style.
+      body {
+        padding: 20px;
+        margin: 0;
+      }
+      .links a {
+        display: block;
+        padding: 2px;
+        font-family: monospace;
+      }
+  body
+    h1 APIs.guru specs reference
+    section.links
+      each specPath in specs
+        a(href="#{specRootUrl + specPath}", target="_blank") #{specPath}
