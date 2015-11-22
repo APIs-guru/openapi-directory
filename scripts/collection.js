@@ -432,7 +432,11 @@ function saveFixup(swagger, editedSwagger) {
 }
 
 function updateGoogle() {
-  var knownSpecs = _.mapKeys(getSpecs(), getOriginUrl);
+  var knownSpecs = _(getSpecs()).filter({
+    info: {
+      'x-providerName': 'googleapis.com'
+    }
+  }).mapKeys(getOriginUrl).value();
 
   getResource('https://www.googleapis.com/discovery/v1/apis', function(err, response, data) {
     assert(!err, err);
@@ -443,9 +447,9 @@ function updateGoogle() {
 
     var result = [];
     //FIXME: data.preferred
-    _.each(data.items, function (api) {
+    var googleSpecs = _(data.items).filter(function (api) {
       //blacklist
-      if ([
+      return ([
              //missing API description
              'cloudlatencytest:v2',
              //asterisk in path
@@ -464,18 +468,17 @@ function updateGoogle() {
              //circular reference in MapFolder/MapItem
              'mapsengine:exp2',
              'mapsengine:v1',
-           ].indexOf(api.id) >= 0) {
-          return;
-      }
+           ].indexOf(api.id) === -1);
+    }).indexBy('discoveryRestUrl').mapValues('preferred').value();
 
-      assert(typeof api.preferred === 'boolean');
+    _.each(googleSpecs, function (preferred, url) {
+      assert(typeof preferred === 'boolean');
       var addPath = {
         info: {
-          'x-preferred': api.preferred
+          'x-preferred': preferred
         }
       };
 
-      var url = api.discoveryRestUrl;
       var knownSpec = knownSpecs[url];
       if (!_.isUndefined(knownSpec)) {
         mergePatch(knownSpec, addPath);
@@ -487,8 +490,15 @@ function updateGoogle() {
         if (error)
           return logError(error, result);
         mergePatch(result.swagger, addPath);
+        //FIXME: too update with patch
+        writeSpec(url, 'google', null, _.noop);
       });
     });
+
+    _(knownSpecs).keys().difference(_.keys(googleSpecs)).each(function (url) {
+      var swagger = knownSpecs[url];
+      console.log('!!! Delete ' + getSwaggerPath(swagger, ''));
+    }).value();
   });
 }
 
