@@ -42,7 +42,7 @@ https://apis-guru.github.io/api-models/apis.json
 
 Existing integrations:
  - https://any-api.com - Documentation and Test Consoles for Public APIs
- - [https://sdks.io/](https://sdks.io/Search/FindSDKs?Bridge=APIs.guru) - Explore Automatically Generated SDKs
+ - [https://sdks.io](https://sdks.io/Search/FindSDKs?Bridge=APIs.guru) - Explore Automatically Generated SDKs
  - [https://www.cenit.io](https://www.cenit.io/directory?spec=swagger) - Social Data and Business Integration platform
 
 Also used as test suite in following projects:
